@@ -19,6 +19,7 @@
     "test": "stencil test --spec --e2e",
     "test.unit": "stencil test --spec",
     "test.watch": "stencil test --spec --e2e --watchAll",
+    "prepare": "npm run build",
     "clean": "rm -rf dist doc www"
   },
   "dependencies": {
