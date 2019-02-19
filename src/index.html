@@ -6,6 +6,10 @@
 	<title>Smoothly Tester</title>
 	<script src="/build/smoothly.js"></script>
 	<style>
+		h5 {
+			margin-block-start: .4em;
+			margin-block-end: .2em;
+		}
 		form > *:first-child input {
 			border-top-left-radius: 4px;
 			border-top-right-radius: 4px;
@@ -27,10 +31,15 @@
 	</style>
 </head>
 <body>
-	<form style="position: relative;">
-		<smoothly-input name="name">Name</smoothly-input>
-		<smoothly-input name="street">Street</smoothly-input>
-		<smoothly-submit>Submit</smoothly-submit>
-	</form>
+	<section>
+	<header><h5>Address</h5></header>
+	<main>
+		<form style="position: relative;">
+			<smoothly-input name="name">Name</smoothly-input>
+			<smoothly-input name="street">Street</smoothly-input>
+			<smoothly-submit>Submit</smoothly-submit>
+		</form>
+	</main>
+	</section>
 </body>
 </html>
