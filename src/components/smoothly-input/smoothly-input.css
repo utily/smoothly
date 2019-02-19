@@ -1,45 +1,22 @@
 @import "../../assets/common.css";
-
-.form-group {
+div {
 	position: relative;
-	display: flex;
-	margin: 1em 0;
-	font-size: 110%;
-	font-weight: 400;
 }
-.form-label {
+label {
 	position: absolute;
-	left: 1em;
-	top: 10px;
-	font-size: 1.2em;
-	color: var(--smoothly-text-tint);
-	transition: transform 150ms ease-out, font-size 150ms ease-out;
+	left: .4em;
+	bottom: .2em;
+	color: var(--smoothly-text-color);
 }
-.focused .form-label {
-	transform: translateY(-70%);
-	font-size: .75em;
-	color: var(--smoothly-text-tint);
-}
-.form-input {
-	position: relative;
-	padding: 15px 0px 5px 1em;
-	width: 100%;
-	outline: 0;
+input {
+	padding: 1em .4em .2em .4em;
+	width: calc(100% - 2 * .4em - 2px);
+	background: none;
 	border: 0;
-	box-shadow: 0 1px 0 0 var(--smoothly-medium-color);
-	transition: box-shadow 150ms ease-out;
-	background: transparent;
 }
-.form-input.active{
-	box-shadow: 0 2px 0 0 var(--smoothly-primary-shade);
-}
-.form-input.filled {
-	box-shadow: 0 2px 0 0 var(--smoothly-success-shade);
-}
-object {
-	border: none;
-	margin: 0;
-	padding: 0;
-	width: 56px;
-	height: 40px;
+div.has-content > label,
+div:focus-within > label {
+	top: .3em;
+	left: .4em;
+	font-size: 60%;
 }
