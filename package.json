@@ -1,5 +1,5 @@
 {
-  "name": "@certitrade/smoothly",
+  "name": "smoothly",
   "private": false,
   "version": "0.0.3",
   "description": "Web component library written in Stencil.",
@@ -10,7 +10,7 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
-    "dist/"
+    "dist/**/*"
   ],
   "scripts": {
     "lint": "tslint --project .",
