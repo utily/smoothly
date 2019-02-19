@@ -1,23 +1,24 @@
+@import "../../assets/common.css";
+
 button {
 	width: 100%;
-	border: 2px solid green;
+	border: 2px solid var(--smoothly-success-color);
 	border-radius: 3px;
 	color: white;
 	padding: .5em;
-	font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
 	font-size: 110%;
 	font-weight: 400;
 }
 button:not([processing]) {
-	background: green;
+	background: var(--smoothly-success-color);
 }
 button[processing] {
 	background: lightgray;
 }
 button:active {
-	background: lightgreen;
-	border: 2px lightgreen solid;
+	background: var(--smoothly-success-color-shadow);
+	border: 2px var(--smoothly-success-color-shadow) solid;
 }
 button:focus {
-	border: 2px lightgreen solid;
+	border: 2px var(--smoothly-success-color-shadow) solid;
 }

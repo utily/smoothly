@@ -10,6 +10,7 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
+    "dist/",
     "dist/**/*"
   ],
   "scripts": {

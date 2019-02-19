@@ -1,61 +1,43 @@
-div {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(255, 255, 255, .6);
-}
-div > div {
-	position: absolute;
-	top: calc(50% - 11em / 2);
-	left: calc(50% - 11em / 2);
-}
+@import "../../assets/common.css";
 div:not(.active) {
 	display: none;
 }
-div.active > div {
-	font-size: 10px;
-	text-indent: -9999em;
-	width: 11em;
-	height: 11em;
+div {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--smoothly-background-color);
+	opacity: .8;
+}
+div > div {
+	opacity: 1;
+	position: absolute;
+	left: calc(50% - 5em + 1.1em);
+	top: calc(50% - 5em + 1.1em);
+}
+div.active > div,
+div.active > div:after {
 	border-radius: 50%;
-	background: cyan;
-	background: -moz-linear-gradient(left, cyan 10%, rgba(255, 255, 255, 0) 42%);
-	background: -webkit-linear-gradient(left, cyan 10%, rgba(255, 255, 255, 0) 42%);
-	background: -o-linear-gradient(left, cyan 10%, rgba(255, 255, 255, 0) 42%);
-	background: -ms-linear-gradient(left, cyan 10%, rgba(255, 255, 255, 0) 42%);
-	background: linear-gradient(to right, cyan 10%, rgba(255, 255, 255, 0) 42%);
-	-webkit-animation: load3 1.4s infinite linear;
-	animation: load3 1.4s infinite linear;
+	width: 5em;
+	height: 5em;
+}
+div.active > div {
+	content: "";
+	color: transparent;
+	position: relative;
+	border-top: 1.1em solid var(--smoothly-primary-tint);
+	border-right: 1.1em solid var(--smoothly-primary-tint);
+	border-bottom: 1.1em solid var(--smoothly-primary-tint);
+	border-left: 1.1em solid var(--smoothly-primary-color);
 	-webkit-transform: translateZ(0);
 	-ms-transform: translateZ(0);
 	transform: translateZ(0);
+	-webkit-animation: load8 1.1s infinite linear;
+	animation: load8 1.1s infinite linear;
 }
-div.active > div:before {
-	width: 50%;
-	height: 50%;
-	background: cyan;
-	border-radius: 100% 0 0 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	content: '';
-}
-div.active > div:after {
-	background: white;
-	width: 75%;
-	height: 75%;
-	border-radius: 50%;
-	content: '';
-	margin: auto;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-@-webkit-keyframes load3 {
+@-webkit-keyframes load8 {
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
@@ -65,7 +47,7 @@ div.active > div:after {
 		transform: rotate(360deg);
 	}
 }
-@keyframes load3 {
+@keyframes load8 {
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
