@@ -1,0 +1,36 @@
+{
+  "name": "@certitrade/smoothly",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Web component library written in Stencil.",
+  "license": "MIT",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/ionic.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "tslint --project .",
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.unit": "stencil test --spec",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "clean": "rm -rf dist doc www"
+  },
+  "dependencies": {
+    "@stencil/core": "0.18.0"
+  },
+  "devDependencies": {
+    "@types/jest": "23.3.14",
+    "@types/puppeteer": "1.12.1",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "puppeteer": "1.11.0",
+    "tslint": "^5.12.1",
+    "workbox-build": "3.4.1"
+  }
+}

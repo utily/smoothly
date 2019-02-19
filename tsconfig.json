@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "esnext",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitThis": true,
+		"strictNullChecks": true,
+		"sourceMap": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"plugins": [
+			{
+			"name": "typescript-tslint-plugin",
+			"alwaysShowRuleFailuresAsWarnings": false,
+			"ignoreDefinitionFiles": true,
+			"configFile": "./tslint.json",
+			"suppressWhileTypeErrorsPresent": false,
+			"mockTypeScriptVersion": false
+			}
+		],
+	},
+	"include": [
+		"**/*.ts",
+		"types/jsx.d.ts"
+	],
+	"typeAcquisition": {
+		"enable": true
+	}
+}

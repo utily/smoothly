@@ -1,0 +1,48 @@
+{
+	"extends": "tslint:latest",
+	"rules": {
+		"curly": false,
+		"semicolon": [ true, "never"],
+		"indent": [ true, "tabs" ],
+		"member-access": false,
+		"triple-equals": false,
+		"ordered-imports": [ false ],
+		"object-literal-sort-keys": false,
+		"object-literal-key-quotes": [ false ],
+		"no-console": [ false ],
+		"max-line-length": [ true, 320 ],
+		"arrow-parens": false,
+		"member-ordering": [ false ],
+		"one-line": [ false ],
+		"no-conditional-assignment": false,
+		"array-type": [ false ],
+		"no-empty": false,
+		"radix": false,
+		"interface-name": false,
+		"no-misused-new": false
+	},
+	"jsRules": {
+		"curly": false,
+		"semicolon": [ true, "never"],
+		"indent": [ true, "tabs" ],
+		"member-access": false,
+		"triple-equals": false,
+		"ordered-imports": [ false ],
+		"object-literal-sort-keys": false,
+		"object-literal-key-quotes": [ false ],
+		"no-console": [ false ],
+		"max-line-length": [ true, 320 ],
+		"arrow-parens": false,
+		"member-ordering": [ false ],
+		"one-line": [ false ],
+		"no-conditional-assignment": false,
+		"array-type": [ false ],
+		"no-empty": false,
+		"radix": false
+	},
+	"rulesDirectory": [
+	],
+	"linterOptions": {
+		"exclude": [ "../**/*.json"]
+	}
+}
