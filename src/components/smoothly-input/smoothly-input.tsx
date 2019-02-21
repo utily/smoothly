@@ -3,6 +3,7 @@ import { Component, Prop } from "@stencil/core"
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "smoothly-input.css",
+	shadow: true,
 })
 export class SmoothlyInput {
 	@Prop() name: string
@@ -18,12 +19,15 @@ export class SmoothlyInput {
 			this.value = (e.target as HTMLInputElement).value
 		return true
 	}
+	getData() {
+		return { class: this.value && this.value.length > 0 ? [ "has-content" ] : []}
+	}
 	// Placeholder animation
 	render() {
 		return [
 			<div class={ this.value && this.value.length > 0 ? "has-content" : "" }>
+				<input type={this.type} placeholder={this.placeholder} name={this.name} maxlength={this.maxLength} inputmode={this.inputMode} tabindex={this.tabIndex} value={this.value} onInput={ e => this.onInput(e as UIEvent) }></input>
 				<label htmlFor={this.name}><slot/></label>
-				<input type={this.type} placeholder={this.placeholder} name={this.name} maxlength={this.maxLength} inputmode={this.inputMode} tabindex={this.tabIndex} value={this.value} onInput={ e => this.onInput(e as UIEvent) }/>
 			</div>,
 		]
 	}

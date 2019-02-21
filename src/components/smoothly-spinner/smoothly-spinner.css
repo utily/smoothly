@@ -1,8 +1,8 @@
 @import "../../assets/common.css";
-div:not(.active) {
+:host:not(.active) {
 	display: none;
 }
-div {
+:host {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -11,19 +11,19 @@ div {
 	background: var(--smoothly-background-color);
 	opacity: .8;
 }
-div > div {
+:host > div {
 	opacity: 1;
 	position: absolute;
 	left: calc(50% - 5em + 1.1em);
 	top: calc(50% - 5em + 1.1em);
 }
-div.active > div,
-div.active > div:after {
+:host > div,
+:host > div:after {
 	border-radius: 50%;
 	width: 5em;
 	height: 5em;
 }
-div.active > div {
+:host > div {
 	content: "";
 	color: transparent;
 	position: relative;

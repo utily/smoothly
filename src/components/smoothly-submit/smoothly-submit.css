@@ -4,7 +4,7 @@ button {
 	width: 100%;
 	border: 1px solid var(--smoothly-success-color);
 	border-radius: 3px;
-	color: white;
+	color: var(--smoothly-success-contrast);;
 	padding: .2em;
 	font-size: 110%;
 	font-weight: 400;

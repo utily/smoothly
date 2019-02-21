@@ -3,16 +3,15 @@ import { Component, Event, EventEmitter, State, Prop, Listen } from "@stencil/co
 @Component({
 	tag: "smoothly-submit",
 	styleUrl: "smoothly-submit.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlySubmit {
 	@Prop({ mutable: true }) processing: boolean
-	@Event() submitted: EventEmitter<{ [key: string]: string }>
+	@Event() submit: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {
 		if (!this.processing) {
 			this.processing = true
-			console.log(event)
 			const result: { [key: string]: string } = {}
 			const target = event.target as HTMLButtonElement
 			if (target.form && target.form.elements) {
@@ -24,7 +23,7 @@ export class SmoothlySubmit {
 				}
 			}
 			event.preventDefault()
-			this.processing = !this.submitted.emit(result).returnValue
+			this.processing = !this.submit.emit(result).returnValue
 		}
 	}
 

@@ -1,0 +1,20 @@
+@import "../../assets/common.css";
+:host {
+	position: relative;
+}
+label {
+	display: block;
+	width: calc(100% - 2 * .4em);
+	padding: .2em .4em .2em .4em;
+	color: var(--smoothly-text-tint);
+}
+input[type="radio"] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	-webkit-appearance: none;
+}
+input[type="radio"]:checked ~ label {
+	color: var(--smoothly-primary-color);
+}

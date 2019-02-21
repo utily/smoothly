@@ -1,12 +1,15 @@
 @import "../../assets/common.css";
-div {
+:host {
 	position: relative;
 }
 label {
 	position: absolute;
 	left: .4em;
 	bottom: .2em;
-	color: var(--smoothly-text-color);
+	color: var(--smoothly-text-tint);
+	user-select: none;
+	cursor: inherit;
+	z-index: -1;
 }
 input {
 	padding: 1em .4em .2em .4em;
@@ -19,4 +22,24 @@ div:focus-within > label {
 	top: .3em;
 	left: .4em;
 	font-size: 60%;
+	z-index: 0;
+}
+
+input:focus {
+	outline: none;
+}
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+	-webkit-box-shadow: 0 0 0 30px unset inset !important;
+}
+input:-webkit-autofill {
+	-webkit-text-fill-color: unset !important;
+}
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected {
+	background-color: white !important;
+	background-image: none !important;
+	color: unset !important;
 }

@@ -3,11 +3,14 @@ import { Component, State, Prop } from "@stencil/core"
 @Component({
 	tag: "smoothly-spinner",
 	styleUrl: "smoothly-spinner.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlySpinner {
 	@Prop() active: boolean
+	hostData() {
+		return { class: { active: this.active } }
+	}
 	render() {
-		return <div class={this.active ? "active" : ""}><div>Loading...</div></div>
+		return <div>Loading...</div>
 	}
 }

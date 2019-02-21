@@ -12,6 +12,19 @@ import '@stencil/core';
 
 export namespace Components {
 
+  interface SmoothlyInputRadio {
+    'checked': boolean;
+    'name': string;
+    'tabIndex': number;
+    'value': string;
+  }
+  interface SmoothlyInputRadioAttributes extends StencilHTMLAttributes {
+    'checked'?: boolean;
+    'name'?: string;
+    'tabIndex'?: number;
+    'value'?: string;
+  }
+
   interface SmoothlyInput {
     'inputMode': string;
     'maxLength'?: number;
@@ -42,24 +55,32 @@ export namespace Components {
     'processing': boolean;
   }
   interface SmoothlySubmitAttributes extends StencilHTMLAttributes {
-    'onSubmitted'?: (event: CustomEvent<{ [key: string]: string }>) => void;
+    'onSubmit'?: (event: CustomEvent<{ [key: string]: string }>) => void;
     'processing'?: boolean;
   }
 }
 
 declare global {
   interface StencilElementInterfaces {
+    'SmoothlyInputRadio': Components.SmoothlyInputRadio;
     'SmoothlyInput': Components.SmoothlyInput;
     'SmoothlySpinner': Components.SmoothlySpinner;
     'SmoothlySubmit': Components.SmoothlySubmit;
   }
 
   interface StencilIntrinsicElements {
+    'smoothly-input-radio': Components.SmoothlyInputRadioAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
     'smoothly-spinner': Components.SmoothlySpinnerAttributes;
     'smoothly-submit': Components.SmoothlySubmitAttributes;
   }
 
+
+  interface HTMLSmoothlyInputRadioElement extends Components.SmoothlyInputRadio, HTMLStencilElement {}
+  var HTMLSmoothlyInputRadioElement: {
+    prototype: HTMLSmoothlyInputRadioElement;
+    new (): HTMLSmoothlyInputRadioElement;
+  };
 
   interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {}
   var HTMLSmoothlyInputElement: {
@@ -80,12 +101,14 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
+    'smoothly-input-radio': HTMLSmoothlyInputRadioElement
     'smoothly-input': HTMLSmoothlyInputElement
     'smoothly-spinner': HTMLSmoothlySpinnerElement
     'smoothly-submit': HTMLSmoothlySubmitElement
   }
 
   interface ElementTagNameMap {
+    'smoothly-input-radio': HTMLSmoothlyInputRadioElement;
     'smoothly-input': HTMLSmoothlyInputElement;
     'smoothly-spinner': HTMLSmoothlySpinnerElement;
     'smoothly-submit': HTMLSmoothlySubmitElement;

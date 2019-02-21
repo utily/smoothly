@@ -10,36 +10,40 @@
 			margin-block-start: .4em;
 			margin-block-end: .2em;
 		}
-		form > *:first-child input {
+		main > *:first-child {
 			border-top-left-radius: 4px;
 			border-top-right-radius: 4px;
 		}
-		form > * input {
+		main > * {
 			border-top: 1px solid var(--smoothly-medium-color);
 			border-left: 1px solid var(--smoothly-medium-color);
 			border-right: 1px solid var(--smoothly-medium-color);
 		}
-		form > *:last-of-type input {
+		main > *:last-child {
 			border-bottom: 1px solid var(--smoothly-medium-color);
 			border-bottom-left-radius: 4px;
 			border-bottom-right-radius: 4px;
 		}
-		form > *:last-of-type label,
-		form > *:last-of-type input {
+		main > *:last-child {
 			margin-bottom: .6em;
 		}
 	</style>
 </head>
 <body>
 	<section>
-	<header><h5>Address</h5></header>
-	<main>
 		<form style="position: relative;">
-			<smoothly-input name="name">Name</smoothly-input>
-			<smoothly-input name="street">Street</smoothly-input>
-			<smoothly-submit>Submit</smoothly-submit>
+			<header><h5>Address</h5></header>
+			<main>
+				<smoothly-input type="text" name="name">Name</smoothly-input>
+				<smoothly-input type="text" name="street">Street</smoothly-input>
+				<smoothly-input-radio name="option" value="1">option 1</smoothly-input-radio>
+				<smoothly-input-radio name="option" value="2" checked>option 2</smoothly-input-radio>
+				<smoothly-input-radio name="option" value="3">option 3</smoothly-input-radio>
+			</main>
+			<footer>
+				<smoothly-submit onSubmit="e => console.log(e.detail)">Submit</smoothly-submit>
+			</footer>
 		</form>
-	</main>
 	</section>
 </body>
 </html>
