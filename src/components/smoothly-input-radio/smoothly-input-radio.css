@@ -18,5 +18,6 @@ input[type="radio"] {
 	-webkit-appearance: none;
 }
 input[type="radio"]:checked ~ label {
-	color: var(--smoothly-primary-color);
+	background-color: var(--smoothly-primary-color);
+	color: var(--smoothly-primary-contrast) !important;
 }
