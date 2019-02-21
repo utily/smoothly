@@ -17,8 +17,8 @@ input {
 	background: none;
 	border: 0;
 }
-div.has-content > label,
-div:focus-within > label {
+:host.has-content > label,
+:host:focus-within > label {
 	top: .3em;
 	left: .4em;
 	font-size: 60%;
@@ -33,13 +33,14 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
+	box-shadow: 0 0 0 30px unset inset !important;
 	-webkit-box-shadow: 0 0 0 30px unset inset !important;
 }
 input:-webkit-autofill {
 	-webkit-text-fill-color: unset !important;
 }
 input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected {
-	background-color: white !important;
+	background-color: none !important;
 	background-image: none !important;
 	color: unset !important;
 }
