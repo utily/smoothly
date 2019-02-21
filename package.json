@@ -1,7 +1,7 @@
 {
   "name": "smoothly",
   "private": false,
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Web component library written in Stencil.",
   "license": "MIT",
   "module": "dist/esm/index.js",
