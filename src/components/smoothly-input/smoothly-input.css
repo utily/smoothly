@@ -1,6 +1,9 @@
-@import "../../assets/common.css";
 :host {
+	display: block;
 	position: relative;
+}
+:host[hidden] {
+	display: none;
 }
 label {
 	position: absolute;

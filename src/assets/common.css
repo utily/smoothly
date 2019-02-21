@@ -1,4 +1,4 @@
-:host {
+html {
 	--smoothly-font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
 	--smoothly-background-color: white;
 	--smoothly-text-color: #2e3436;
@@ -51,9 +51,4 @@
 
 	font-family: var(--smoothly-font-family);
 	color: var(--smoothly-text-color);
-
-	display: block;
-}
-:host([hidden]) {
-	display: none;
 }

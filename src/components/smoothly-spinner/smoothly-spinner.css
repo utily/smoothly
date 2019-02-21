@@ -1,4 +1,10 @@
-@import "../../assets/common.css";
+:host {
+	display: block;
+	position: relative;
+}
+:host[hidden] {
+	display: none;
+}
 :host:not([active]) {
 	display: none;
 }

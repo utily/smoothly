@@ -1,5 +1,10 @@
-@import "../../assets/common.css";
-
+:host {
+	display: block;
+	position: relative;
+}
+:host[hidden] {
+	display: none;
+}
 button {
 	width: 100%;
 	border: 1px solid var(--smoothly-success-color);
