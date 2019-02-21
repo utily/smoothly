@@ -1,54 +1,5 @@
 html {
-	--smoothly-font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
-	--smoothly-background-color: white;
-	--smoothly-text-color: #2e3436;
-	--smoothly-text-tint: #555753;
-
-	--smoothly-primary-color: #0db6ff;
-	--smoothly-primary-contrast: #f2f2f2;
-	--smoothly-primary-shade: #0077ab;
-	--smoothly-primary-tint: #8cdcff;
-
-	--smoothly-secondary-color: #00285b;
-	--smoothly-secondary-contrast: #f2f2f2;
-	--smoothly-secondary-shade: #001229;
-	--smoothly-secondary-tint: #0048a3;
-
-	--smoothly-tertiary-color: #00e1e9;
-	--smoothly-tertiary-contrast: #f2f2f2;
-	--smoothly-tertiary-shade: #008488;
-	--smoothly-tertiary-tint: #4ff8ff;
-
-	--smoothly-success-color: #73d216;
-	--smoothly-success-contrast: #ffffff;
-	--smoothly-success-shade: #4e9a06;
-	--smoothly-success-tint: #8ae234;
-
-	--smoothly-warning-color: #edd400;
-	--smoothly-warning-contrast: #f2f2f2;
-	--smoothly-warning-shade: #c4a000;
-	--smoothly-warning-tint: #fce94f;
-
-	--smoothly-danger-color: #cc0000;
-	--smoothly-danger-contrast: #f2f2f2;
-	--smoothly-danger-shade: ##a40000;
-	--smoothly-danger-tint: #ef2929;
-
-	--smoothly-light-color: #d3d7cf;
-	--smoothly-light-contrast: #2e3436;
-	--smoothly-light-shade: #babdb6;
-	--smoothly-light-tint: #eeeeec;
-
-	--smoothly-medium-color: #babdb6;
-	--smoothly-medium-contrast: #2e3436;
-	--smoothly-medium-shade: #888a85;
-	--smoothly-medium-tint: #d3d7cf;
-
-	--smoothly-dark-color: #555753;
-	--smoothly-dark-contrast: #eeeeec;
-	--smoothly-dark-shade: #2e3436;
-	--smoothly-dark-tint: #888a85;
-
 	font-family: var(--smoothly-font-family);
 	color: var(--smoothly-text-color);
+	background: var(--smoothly-background-color);
 }
