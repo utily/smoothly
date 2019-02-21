@@ -1,5 +1,5 @@
 @import "../../assets/common.css";
-:host:not(.active) {
+:host:not([active]) {
 	display: none;
 }
 :host {

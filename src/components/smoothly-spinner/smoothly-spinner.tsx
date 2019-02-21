@@ -6,10 +6,7 @@ import { Component, State, Prop } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlySpinner {
-	@Prop() active: boolean
-	hostData() {
-		return { class: { active: this.active } }
-	}
+	@Prop({ reflectToAttr: true }) active: boolean
 	render() {
 		return <div>Loading...</div>
 	}

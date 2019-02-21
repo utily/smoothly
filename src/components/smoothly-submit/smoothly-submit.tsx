@@ -6,7 +6,7 @@ import { Component, Event, EventEmitter, State, Prop, Listen } from "@stencil/co
 	scoped: true,
 })
 export class SmoothlySubmit {
-	@Prop({ mutable: true }) processing: boolean
+	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
 	@Event() submit: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {

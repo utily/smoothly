@@ -8,7 +8,7 @@ import { Component, Prop } from "@stencil/core"
 export class SmoothlyInputRadio {
 	@Prop() name: string
 	@Prop() value: string
-	@Prop({ mutable: true }) checked: boolean
+	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
 	@Prop() tabIndex: number
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
