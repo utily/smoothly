@@ -22,5 +22,5 @@ input[type="radio"] {
 }
 input[type="radio"]:checked ~ label {
 	background-color: var(--smoothly-primary-color);
-	color: var(--smoothly-primary-contrast) !important;
+	color: var(--smoothly-primary-contrast);
 }
