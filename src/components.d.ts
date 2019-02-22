@@ -29,6 +29,7 @@ export namespace Components {
   }
 
   interface SmoothlyInput {
+    'class': { [name: string]: boolean };
     'inputMode': string;
     'mandatory': boolean;
     'maxLength'?: number;
@@ -40,6 +41,7 @@ export namespace Components {
     'value': string;
   }
   interface SmoothlyInputAttributes extends StencilHTMLAttributes {
+    'class'?: { [name: string]: boolean };
     'inputMode'?: string;
     'mandatory'?: boolean;
     'maxLength'?: number;

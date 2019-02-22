@@ -15,6 +15,7 @@ export class SmoothlyInput {
 	@Prop() placeholder?: string
 	@Prop({ mutable: true, reflectToAttr: true }) valid: boolean
 	@Prop({ mutable: true, reflectToAttr: true }) mandatory: boolean
+	@Prop({ mutable: true, reflectToAttr: true }) class: { [name: string]: boolean }
 	@Event() changed: EventEmitter<SmoothlyInput>
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
@@ -23,7 +24,7 @@ export class SmoothlyInput {
 		}
 	}
 	hostData() {
-		return { class: { "has-content": this.value && this.value.length > 0 } }
+		return { class: { "has-content": this.value && this.value.length > 0, ...this.class } }
 	}
 	// Placeholder animation
 	render() {
