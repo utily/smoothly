@@ -1,11 +1,11 @@
 import { Component, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-input-radio",
-	styleUrl: "smoothly-input-radio.css",
+	tag: "smoothly-radio",
+	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRadio {
+export class SmoothlyRadio {
 	@Prop() name: string
 	@Prop() value: string
 	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
@@ -20,7 +20,7 @@ export class SmoothlyInputRadio {
 	render() {
 		return [
 			<input type="radio" name={this.name} id={this.value} tabindex={this.tabIndex} checked={this.checked} value={this.value} onInput={ e => this.onInput(e as UIEvent) }/>,
-			<label htmlFor={this.value}><slot></slot></label>,
+			<label htmlFor={this.value}><slot /></label>,
 		]
 	}
 }

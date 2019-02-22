@@ -2,7 +2,7 @@ import { Component, State, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-spinner",
-	styleUrl: "smoothly-spinner.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlySpinner {

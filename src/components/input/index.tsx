@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-input",
-	styleUrl: "smoothly-input.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyInput {
@@ -15,7 +15,6 @@ export class SmoothlyInput {
 	@Prop() placeholder?: string
 	@Prop({ mutable: true, reflectToAttr: true }) valid: boolean
 	@Prop({ mutable: true, reflectToAttr: true }) mandatory: boolean
-	@Prop({ mutable: true, reflectToAttr: true }) class: { [name: string]: boolean }
 	@Event() changed: EventEmitter<SmoothlyInput>
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
@@ -24,7 +23,7 @@ export class SmoothlyInput {
 		}
 	}
 	hostData() {
-		return { class: { "has-content": this.value && this.value.length > 0, ...this.class } }
+		return { class: { "has-content": this.value && this.value.length > 0 } }
 	}
 	// Placeholder animation
 	render() {

@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, State, Prop, Listen } from "@stencil/co
 
 @Component({
 	tag: "smoothly-submit",
-	styleUrl: "smoothly-submit.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlySubmit {
