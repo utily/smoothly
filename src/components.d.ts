@@ -8,6 +8,9 @@
 import '@stencil/core';
 
 
+import {
+  EventEmitter,
+} from '@stencil/core';
 
 
 export namespace Components {
@@ -27,20 +30,25 @@ export namespace Components {
 
   interface SmoothlyInput {
     'inputMode': string;
+    'mandatory': boolean;
     'maxLength'?: number;
     'name': string;
     'placeholder'?: string;
     'tabIndex': number;
     'type': "text" | "email";
+    'valid': boolean;
     'value': string;
   }
   interface SmoothlyInputAttributes extends StencilHTMLAttributes {
     'inputMode'?: string;
+    'mandatory'?: boolean;
     'maxLength'?: number;
     'name'?: string;
+    'onChanged'?: (event: CustomEvent<SmoothlyInput>) => void;
     'placeholder'?: string;
     'tabIndex'?: number;
     'type'?: "text" | "email";
+    'valid'?: boolean;
     'value'?: string;
   }
 

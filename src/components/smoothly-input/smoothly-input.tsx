@@ -1,4 +1,4 @@
-import { Component, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-input",
@@ -13,11 +13,14 @@ export class SmoothlyInput {
 	@Prop() inputMode: string
 	@Prop() tabIndex: number
 	@Prop() placeholder?: string
-
-	protected async onInput(e: UIEvent): Promise<boolean> {
-		if (e.target && (e.target as HTMLInputElement).value)
+	@Prop({ mutable: true, reflectToAttr: true }) valid: boolean
+	@Prop({ mutable: true, reflectToAttr: true }) mandatory: boolean
+	@Event() changed: EventEmitter<SmoothlyInput>
+	protected async onInput(e: UIEvent) {
+		if (e.target && (e.target as HTMLInputElement).value) {
 			this.value = (e.target as HTMLInputElement).value
-		return true
+			this.changed.emit(this)
+		}
 	}
 	hostData() {
 		return { class: { "has-content": this.value && this.value.length > 0 } }
