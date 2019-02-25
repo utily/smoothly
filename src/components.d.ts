@@ -17,17 +17,17 @@ export namespace Components {
 
   interface SmoothlyAccordionItem {
     'brand'?: string | string[];
-    'checked'?: boolean;
     'name': string;
+    'open'?: boolean;
   }
   interface SmoothlyAccordionItemAttributes extends StencilHTMLAttributes {
     'brand'?: string | string[];
-    'checked'?: boolean;
     'name'?: string;
     'onSmoothlyAccordionItemDidLoad'?: (event: CustomEvent<void>) => void;
     'onSmoothlyAccordionItemDidUnload'?: (event: CustomEvent<void>) => void;
-    'onSmoothlyDeselect'?: (event: CustomEvent<{ name: string, checked: boolean }>) => void;
-    'onSmoothlySelect'?: (event: CustomEvent<{ name: string, checked: boolean }>) => void;
+    'onSmoothlyDeselect'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
+    'onSmoothlySelect'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
+    'open'?: boolean;
   }
 
   interface SmoothlyAccordion {

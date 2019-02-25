@@ -15,9 +15,9 @@ export class SmoothlyAccordion {
 	}
 	@Listen("smoothlySelect")
 	@Listen("smoothlyDeselect")
-	handleSelect(event: CustomEvent<{ name: string, checked: boolean }>) {
+	handleSelect(event: CustomEvent<{ name: string, open: boolean }>) {
 		console.log(event)
-		if (event.detail.checked)
+		if (event.detail.open)
 			this.value = event.detail.name
 		else if (this.value == event.detail.name)
 			this.value = undefined
@@ -26,7 +26,7 @@ export class SmoothlyAccordion {
 	onAccordionItemDidLoad(ev: Event) {
 		const item = ev.target as HTMLSmoothlyAccordionItemElement
 		this.items.push(item)
-		if (this.value == undefined && item.checked)
+		if (this.value == undefined && item.open)
 			this.value = item.name
 		else
 			this.updateItems()
@@ -41,11 +41,12 @@ export class SmoothlyAccordion {
 		this.updateItems()
 	}
 	private updateItems() {
-		console.log("checked: " + this.value)
+		console.log("open: " + this.value)
 		let hasChecked = false
 		for (const item of this.items)
-			if (item.checked = (!hasChecked && item.name == this.value))
+			if (item.open = (!hasChecked && item.name == this.value))
 				hasChecked = true
+		console.log(this.items)
 	}
 
 	render() {
