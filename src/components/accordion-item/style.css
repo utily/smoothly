@@ -19,6 +19,11 @@ details > summary {
 	padding: .4em;
 	color: var(--smoothly-text-tint)
 }
+details > fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
 :host[selected] > details > summary {
 	color: var(--smoothly-primary-contrast);
 	background: var(--smoothly-primary-color);
