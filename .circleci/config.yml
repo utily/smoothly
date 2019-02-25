@@ -27,14 +27,20 @@ jobs:
           name: Build
           command: npm run build
       - run:
-          name: Run tests
+          name: Test
           command: npm run test
   deploy:
     <<: *default
     steps:
       - prepare
       - run:
-          name: Bump version
+          name: Build
+          command: npm run build
+      - run:
+          name: Test
+          command: npm run test
+      - run:
+          name: Bump Version
           command: |
             git config user.email circleci@circleci
             git config user.name CircleCI
