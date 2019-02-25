@@ -2,7 +2,7 @@ version: 2.1
 default: &default
   working_directory: ~/repo
   docker:
-    - image: circleci/node:10.15
+    - image: circleci/node:10.15-browsers
 commands:
   prepare:
     description: "Prepare working directory"
