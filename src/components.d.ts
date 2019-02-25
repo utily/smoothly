@@ -25,8 +25,8 @@ export namespace Components {
     'name'?: string;
     'onSmoothlyAccordionItemDidLoad'?: (event: CustomEvent<void>) => void;
     'onSmoothlyAccordionItemDidUnload'?: (event: CustomEvent<void>) => void;
-    'onSmoothlyDeselect'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
-    'onSmoothlySelect'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
+    'onSmoothlyClose'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
+    'onSmoothlyOpen'?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
     'open'?: boolean;
   }
 

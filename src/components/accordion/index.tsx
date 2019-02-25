@@ -13,9 +13,9 @@ export class SmoothlyAccordion {
 	valueChanged(value: string | undefined) {
 		this.updateItems()
 	}
-	@Listen("smoothlySelect")
-	@Listen("smoothlyDeselect")
-	handleSelect(event: CustomEvent<{ name: string, open: boolean }>) {
+	@Listen("smoothlyOpen")
+	@Listen("smoothlyClose")
+	handleOpenClose(event: CustomEvent<{ name: string, open: boolean }>) {
 		console.log(event)
 		if (event.detail.open)
 			this.value = event.detail.name

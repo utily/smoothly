@@ -24,7 +24,7 @@ details > fieldset {
 	margin: 0;
 	padding: 0;
 }
-:host[selected] > details > summary {
+:host[open] > details > summary {
 	color: var(--smoothly-primary-contrast);
 	background: var(--smoothly-primary-color);
 }
@@ -37,9 +37,9 @@ details > summary > svg {
 	margin-bottom: -.2em;
 	margin-right: .4em;
 }
-:host[selected] > details > summary > svg {
+:host[open] > details > summary > svg {
 	fill: var(--smoothly-primary-contrast);
 }
-:host:not([selected]) > details > summary > svg {
+:host:not([open]) > details > summary > svg {
 	fill: var(--smoothly-text-tint);
 }

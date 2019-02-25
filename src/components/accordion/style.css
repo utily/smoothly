@@ -13,10 +13,10 @@ smoothly-accordion-item:last-of-type {
 	border-bottom: 1px solid var(--smoothly-dark-color);
 	margin-bottom: .6em;
 }
-smoothly-accordion-item[selected] {
+smoothly-accordion-item[open] {
 	border-color: var(--smoothly-primary-color);
 	border-bottom: 1px solid var(--smoothly-primary-color);
 }
-smoothly-accordion-item[selected] + smoothly-accordion-item {
+smoothly-accordion-item[open] + smoothly-accordion-item {
 	border-top: none;
 }

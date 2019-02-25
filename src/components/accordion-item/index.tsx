@@ -13,13 +13,13 @@ export class SmoothlyAccordionItem {
 	@Element() me: HTMLElement
 	@Event() smoothlyAccordionItemDidLoad!: EventEmitter<void>
 	@Event() smoothlyAccordionItemDidUnload!: EventEmitter<void>
-	@Event() smoothlySelect!: EventEmitter<{ name: string, open: boolean }>
-	@Event() smoothlyDeselect!: EventEmitter<{ name: string, open: boolean }>
+	@Event() smoothlyOpen!: EventEmitter<{ name: string, open: boolean }>
+	@Event() smoothlyClose!: EventEmitter<{ name: string, open: boolean }>
 	@Watch("open")
 	openChanged(isChecked: boolean) {
 		this.open = isChecked
 		if (isChecked) {
-			this.smoothlySelect.emit({
+			this.smoothlyOpen.emit({
 				open: true,
 				name: this.name,
 			})
@@ -30,7 +30,7 @@ export class SmoothlyAccordionItem {
 		if (summary.length > 0) {
 			const onClick = (e: UIEvent) => {
 				if (this.open)
-					this.smoothlyDeselect.emit({ open: this.open, name: this.name })
+					this.smoothlyClose.emit({ open: this.open, name: this.name })
 				else
 					this.open = true
 				e.preventDefault()
