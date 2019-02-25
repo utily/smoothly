@@ -1,0 +1,40 @@
+:host {
+	display: block;
+}
+:host[hidden] {
+	display: none;
+}
+details {
+	padding: 0;
+}
+details > summary > span {
+	float: right;
+	margin: .2em;
+	font-size: 60%;
+}
+details > summary {
+	font-size: 120%;
+	list-style-type: none;
+	cursor: pointer;
+	padding: .4em;
+	color: var(--smoothly-text-tint)
+}
+:host[selected] > details > summary {
+	color: var(--smoothly-primary-contrast);
+	background: var(--smoothly-primary-color);
+}
+details > summary::-webkit-details-marker {
+	display: none;
+}
+details > summary > svg {
+	width: 1em;
+	height: auto;
+	margin-bottom: -.2em;
+	margin-right: .4em;
+}
+:host[selected] > details > summary > svg {
+	fill: var(--smoothly-primary-contrast);
+}
+:host:not([selected]) > details > summary > svg {
+	fill: var(--smoothly-text-tint);
+}

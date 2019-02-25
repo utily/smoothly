@@ -15,6 +15,28 @@ import {
 
 export namespace Components {
 
+  interface SmoothlyAccordionItem {
+    'brand'?: string | string[];
+    'checked'?: boolean;
+    'name': string;
+  }
+  interface SmoothlyAccordionItemAttributes extends StencilHTMLAttributes {
+    'brand'?: string | string[];
+    'checked'?: boolean;
+    'name'?: string;
+    'onSmoothlyAccordionItemDidLoad'?: (event: CustomEvent<void>) => void;
+    'onSmoothlyAccordionItemDidUnload'?: (event: CustomEvent<void>) => void;
+    'onSmoothlyDeselect'?: (event: CustomEvent<{ name: string, checked: boolean }>) => void;
+    'onSmoothlySelect'?: (event: CustomEvent<{ name: string, checked: boolean }>) => void;
+  }
+
+  interface SmoothlyAccordion {
+    'value'?: string;
+  }
+  interface SmoothlyAccordionAttributes extends StencilHTMLAttributes {
+    'value'?: string;
+  }
+
   interface SmoothlyInput {
     'inputMode': string;
     'mandatory': boolean;
@@ -70,6 +92,8 @@ export namespace Components {
 
 declare global {
   interface StencilElementInterfaces {
+    'SmoothlyAccordionItem': Components.SmoothlyAccordionItem;
+    'SmoothlyAccordion': Components.SmoothlyAccordion;
     'SmoothlyInput': Components.SmoothlyInput;
     'SmoothlyRadio': Components.SmoothlyRadio;
     'SmoothlySpinner': Components.SmoothlySpinner;
@@ -77,12 +101,26 @@ declare global {
   }
 
   interface StencilIntrinsicElements {
+    'smoothly-accordion-item': Components.SmoothlyAccordionItemAttributes;
+    'smoothly-accordion': Components.SmoothlyAccordionAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
     'smoothly-radio': Components.SmoothlyRadioAttributes;
     'smoothly-spinner': Components.SmoothlySpinnerAttributes;
     'smoothly-submit': Components.SmoothlySubmitAttributes;
   }
 
+
+  interface HTMLSmoothlyAccordionItemElement extends Components.SmoothlyAccordionItem, HTMLStencilElement {}
+  var HTMLSmoothlyAccordionItemElement: {
+    prototype: HTMLSmoothlyAccordionItemElement;
+    new (): HTMLSmoothlyAccordionItemElement;
+  };
+
+  interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {}
+  var HTMLSmoothlyAccordionElement: {
+    prototype: HTMLSmoothlyAccordionElement;
+    new (): HTMLSmoothlyAccordionElement;
+  };
 
   interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {}
   var HTMLSmoothlyInputElement: {
@@ -109,6 +147,8 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
+    'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement
+    'smoothly-accordion': HTMLSmoothlyAccordionElement
     'smoothly-input': HTMLSmoothlyInputElement
     'smoothly-radio': HTMLSmoothlyRadioElement
     'smoothly-spinner': HTMLSmoothlySpinnerElement
@@ -116,6 +156,8 @@ declare global {
   }
 
   interface ElementTagNameMap {
+    'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement;
+    'smoothly-accordion': HTMLSmoothlyAccordionElement;
     'smoothly-input': HTMLSmoothlyInputElement;
     'smoothly-radio': HTMLSmoothlyRadioElement;
     'smoothly-spinner': HTMLSmoothlySpinnerElement;
