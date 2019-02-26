@@ -16,7 +16,6 @@ export class SmoothlyAccordion {
 	@Listen("smoothlyOpen")
 	@Listen("smoothlyClose")
 	handleOpenClose(event: CustomEvent<{ name: string, open: boolean }>) {
-		console.log(event)
 		if (event.detail.open)
 			this.value = event.detail.name
 		else if (this.value == event.detail.name)
@@ -41,12 +40,10 @@ export class SmoothlyAccordion {
 		this.updateItems()
 	}
 	private updateItems() {
-		console.log("open: " + this.value)
 		let hasChecked = false
 		for (const item of this.items)
 			if (item.open = (!hasChecked && item.name == this.value))
 				hasChecked = true
-		console.log(this.items)
 	}
 
 	render() {
