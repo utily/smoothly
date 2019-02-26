@@ -38,6 +38,7 @@
 			<main>
 				<smoothly-input type="text" name="name">Name</smoothly-input>
 				<smoothly-input type="text" name="street">Street</smoothly-input>
+				<smoothly-input type="text" name="card">Card #</smoothly-input>
 				<smoothly-radio name="option" value="1">option 1</smoothly-radio>
 				<smoothly-radio name="option" value="2" checked>option 2</smoothly-radio>
 				<smoothly-radio name="option" value="3">option 3</smoothly-radio>
@@ -59,5 +60,20 @@
 			</footer>
 		</form>
 	</section>
+	<script>
+		const inputCard = document.querySelector("smoothly-input[name='card']")
+		inputCard.addEventListener("valueChanged", event => {
+			const value = event.detail.value
+			let result = ""
+			let counter = 0
+			for (const character of value)
+				if (character >= "0" && character <= 9) {
+					result += character
+					if (counter++ % 4 == 3)
+						result += " "
+				}
+			event.detail.value = result
+		})
+	</script>
 </body>
 </html>

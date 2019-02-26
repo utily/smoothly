@@ -49,6 +49,7 @@ export namespace Components {
   interface SmoothlyInputAttributes extends StencilHTMLAttributes {
     'autocomplete'?: Autocomplete;
     'name'?: string;
+    'onValueChanged'?: (event: CustomEvent<{ value: string }>) => void;
     'pattern'?: string;
     'placeholder'?: string;
     'required'?: boolean;

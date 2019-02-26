@@ -52,15 +52,40 @@ it("fill out valid", async () => {
 	const page = await newE2EPage()
 	await page.setContent(complete)
 	const input = await page.find("smoothly-input > input")
-	expect(await input.getProperty("validity")).toEqual({})
 	await input.setProperty("value", "")
 	await page.waitForChanges()
 	expect(await input.getProperty("value")).toEqual("")
-	expect(await input.getProperty("validity")).toEqual({})
 	await input.type("1234 ")
 	expect(await input.getProperty("value")).toEqual("1234 ")
-	expect(await input.getProperty("validity")).toEqual({})
 	await input.type("5678")
 	expect(await input.getProperty("value")).toEqual("1234 5678")
-	expect(await input.getProperty("validity")).toEqual({})
+})
+it("fill out valid formated", async () => {
+	const page = await newE2EPage()
+	await page.setContent(`
+<smoothly-input name='name' value='value' type='text' placeholder='xxxx xxxx' autocomplete='tel-extension' required pattern='\d{4}\s\d{4}'>Label</smoothly-input>
+<script>
+const inputCard = document.querySelector("smoothly-input[name='name']")
+inputCard.addEventListener("valueChanged", event => {
+	const value = event.detail.value
+	let result = ""
+	let counter = 0
+	for (const character of value)
+		if (character >= "0" && character <= 9) {
+			result += character
+			if (counter++ % 4 == 3)
+				result += " "
+		}
+	event.detail.value = result
+})
+</script>
+`)
+	const input = await page.find("smoothly-input > input")
+	await input.setProperty("value", "")
+	await page.waitForChanges()
+	expect(await input.getProperty("value")).toEqual("")
+	await input.type("1234")
+	expect(await input.getProperty("value")).toEqual("1234 ")
+	await input.type("5678")
+	expect(await input.getProperty("value")).toEqual("1234 5678 ")
 })

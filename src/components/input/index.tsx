@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop, Watch } from "@stencil/core"
 import { Autocomplete } from "./Autocomplete"
 @Component({
 	tag: "smoothly-input",
@@ -13,15 +13,21 @@ export class SmoothlyInput {
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
 	@Prop({ mutable: true, reflectToAttr: true }) autocomplete: Autocomplete
 	@Prop({ mutable: true, reflectToAttr: true }) pattern?: string
+	@Event() valueChanged: EventEmitter<{ value: string }>
+	@Watch("value")
+	valueChangedWatcher(value: string) {
+		this.valueChanged.emit(this)
+	}
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
 			this.value = (e.target as HTMLInputElement).value
+			if (e.bubbles)
+				e.stopPropagation()
 		}
 	}
 	hostData() {
 		return { class: { "has-content": this.value && this.value.length > 0 } }
 	}
-	// Placeholder animation
 	render() {
 		return [
 			<input
