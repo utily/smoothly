@@ -2,7 +2,7 @@ version: 2.1
 default: &default
   working_directory: ~/repo
   docker:
-    - image: circleci/node:10.15
+    - image: circleci/node:10.15-browsers
 commands:
   prepare:
     description: "Prepare working directory"
@@ -27,14 +27,20 @@ jobs:
           name: Build
           command: npm run build
       - run:
-          name: Run tests
-          command: npm run test
+          name: Test
+          command: npm run test.unit
   deploy:
     <<: *default
     steps:
       - prepare
       - run:
-          name: Bump version
+          name: Build
+          command: npm run build
+      - run:
+          name: Test
+          command: npm run test.unit
+      - run:
+          name: Bump Version
           command: |
             git config user.email circleci@circleci
             git config user.name CircleCI

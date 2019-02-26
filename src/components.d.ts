@@ -9,8 +9,8 @@ import '@stencil/core';
 
 
 import {
-  EventEmitter,
-} from '@stencil/core';
+  Autocomplete,
+} from './components/input/Autocomplete';
 
 
 export namespace Components {
@@ -38,26 +38,22 @@ export namespace Components {
   }
 
   interface SmoothlyInput {
-    'inputMode': string;
-    'mandatory': boolean;
-    'maxLength'?: number;
+    'autocomplete': Autocomplete;
     'name': string;
+    'pattern'?: string;
     'placeholder'?: string;
-    'tabIndex': number;
+    'required': boolean;
     'type': "text" | "email";
-    'valid': boolean;
     'value': string;
   }
   interface SmoothlyInputAttributes extends StencilHTMLAttributes {
-    'inputMode'?: string;
-    'mandatory'?: boolean;
-    'maxLength'?: number;
+    'autocomplete'?: Autocomplete;
     'name'?: string;
-    'onChanged'?: (event: CustomEvent<SmoothlyInput>) => void;
+    'onValueChanged'?: (event: CustomEvent<{ value: string }>) => void;
+    'pattern'?: string;
     'placeholder'?: string;
-    'tabIndex'?: number;
+    'required'?: boolean;
     'type'?: "text" | "email";
-    'valid'?: boolean;
     'value'?: string;
   }
 
