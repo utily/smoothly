@@ -1,54 +1,74 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "build",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "lint",
-      "problemMatcher": [
-        {
-          "pattern":[
-            {
-              "regexp": "^ERROR:\\s([^\\s][^:]*):(\\d+):(\\d+)\\s-\\s(.*)",
-              "file": 1,
-              "line": 2,
-              "column": 3,
-              "message": 4
-            }
-          ],
-          "fileLocation": ["relative", "/"],
-          "owner": "tslint",
-          "severity": "warning",
-          "source": "tslint"
-        }
-      ]
-    },
-    {
-      "type": "npm",
-      "script": "start",
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "test",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "test.watch",
-      "isBackground": true,
-      "problemMatcher": []
-    }
-  ]
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": [
+				{
+					"pattern":[
+						{
+							"regexp": "^ERROR:\\s([^\\s][^:]*):(\\d+):(\\d+)\\s-\\s(.*)",
+							"file": 1,
+							"line": 2,
+							"column": 3,
+							"message": 4
+						}
+					],
+					"fileLocation": ["relative", "/"],
+					"owner": "tslint",
+					"severity": "warning",
+					"source": "tslint"
+				}
+			]
+		},
+		{
+			"type": "npm",
+			"script": "start",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				{
+					"pattern":[
+						{
+							"regexp": "^\\s+at.*\\(([^:]+):(\\d+):(\\d+)\\)$",
+							"file": 1,
+							"line": 2,
+							"column": 3
+						},
+						{
+							"regexp": "^\\s{4}(.*)$",
+							"message": 1
+						}
+					],
+					"severity": "warning"
+				}
+			]
+		},
+		{
+			"type": "npm",
+			"script": "test.watch",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
 }

@@ -1,22 +1,26 @@
 import { Component, Event, EventEmitter, Prop, Watch } from "@stencil/core"
-import { Autocomplete } from "./Autocomplete"
+import { Type } from "./Type"
+import { Autocomplete } from "./browser"
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyInput {
+
 	@Prop() name: string
 	@Prop({ mutable: true }) value: string
-	@Prop() type: "text" | "email" = "text"
-	@Prop() placeholder?: string
+	@Prop({ reflectToAttr: true }) type: string = "text"
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
-	@Prop({ mutable: true, reflectToAttr: true }) autocomplete: Autocomplete
-	@Prop({ mutable: true, reflectToAttr: true }) pattern?: string
-	@Event() valueChanged: EventEmitter<{ value: string }>
+	@Prop({ mutable: true }) minLength: number = 0
+	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
+	@Prop({ mutable: true }) autocomplete: Autocomplete
+	@Prop({ mutable: true }) pattern: RegExp | undefined
+	@Prop({ mutable: true }) placeholder: string | undefined
+	@Event() valueChange: EventEmitter<{ value: string }>
 	@Watch("value")
-	valueChangedWatcher(value: string) {
-		this.valueChanged.emit(this)
+	valueChangeWatcher(value: string) {
+		this.valueChange.emit(this)
 	}
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
@@ -29,16 +33,17 @@ export class SmoothlyInput {
 		return { class: { "has-content": this.value && this.value.length > 0 } }
 	}
 	render() {
+		const type = Type.create(this)
 		return [
 			<input
 				name={this.name}
-				value={this.value}
-				type={this.type}
-				placeholder={this.placeholder}
+				value={type.value}
+				type={type.type}
+				placeholder={type.placeholder}
 				required={this.required}
-				autocomplete={this.autocomplete}
-				pattern={this.pattern}
-				onInput={ e => this.onInput(e as UIEvent) }></input>,
+				autocomplete={type.autocomplete}
+				pattern={ type.pattern && type.pattern.source }
+				onKeyDown={ e => type.onKeyDown(e) }></input>,
 			<label htmlFor={this.name}><slot/></label>,
 		]
 	}
