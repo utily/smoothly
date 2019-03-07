@@ -38,12 +38,12 @@ export class SmoothlyInput {
 	render() {
 		return [
 			<input
-				name={this.name}
-				value={this.typeHandler.value}
-				type={this.typeHandler.type}
-				placeholder={this.typeHandler.placeholder}
-				required={this.required}
-				autocomplete={this.typeHandler.autocomplete}
+				name={ this.name }
+				value={ this.typeHandler.value }
+				type={ this.typeHandler.type }
+				placeholder={ this.typeHandler.placeholder }
+				required={ this.required }
+				autocomplete={ this.typeHandler.autocomplete }
 				pattern={ this.typeHandler.pattern && this.typeHandler.pattern.source }
 				onKeyDown={ e => this.typeHandler.onKeyDown(e) }
 				onClick={ e => this.typeHandler.onClick(e) }></input>,
