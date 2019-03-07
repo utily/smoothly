@@ -7,7 +7,6 @@ import { Autocomplete } from "./browser"
 	scoped: true,
 })
 export class SmoothlyInput {
-
 	@Prop() name: string
 	@Prop({ mutable: true }) value: string
 	@Prop({ reflectToAttr: true }) type: string = "text"
@@ -22,7 +21,10 @@ export class SmoothlyInput {
 	valueChangeWatcher(value: string) {
 		this.valueChange.emit(this)
 	}
-	private typeHandler = TypeHandler.create(this)
+	private typeHandler: TypeHandler
+	componentWillLoad() {
+		this.typeHandler = TypeHandler.create(this)
+	}
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
 			this.value = (e.target as HTMLInputElement).value
@@ -31,7 +33,6 @@ export class SmoothlyInput {
 		}
 	}
 	hostData() {
-		console.log("hostData " + this.value)
 		return { class: { "has-value": this.value && this.value.length > 0 } }
 	}
 	render() {

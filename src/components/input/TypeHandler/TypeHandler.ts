@@ -12,8 +12,16 @@ export abstract class TypeHandler {
 	get autocomplete(): browser.Autocomplete { return this.component.autocomplete }
 	get pattern(): RegExp | undefined { return this.component.pattern }
 	get placeholder(): string | undefined { return this.component.placeholder }
-	private state: State = { value: "", selectionStart: 0, selectionEnd: 0 }
+	private stateValue: State = { value: "", selectionStart: 0, selectionEnd: 0 }
+	private get state(): State {
+		return { ...this.stateValue, value: this.value }
+	}
+	private set state(value: State) {
+		this.stateValue = value
+		this.value = value.value
+	}
 	protected constructor(protected readonly component: Component) {
+		this.state = { value: component.value, selectionStart: component.value.length, selectionEnd: component.value.length }
 	}
 	onKeyDown(event: KeyboardEvent) {
 		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
@@ -40,7 +48,7 @@ export abstract class TypeHandler {
 		TypeHandler.creators[type] = creator
 	}
 	static create(component: Partial<Component>): TypeHandler {
-		const c: Component = { value: "", type: "text", minLength: 0, maxLength: Number.POSITIVE_INFINITY, autocomplete: "on", pattern: undefined, placeholder: undefined, ...component }
+		const c: Component = { value: component.value || "", type: component.type || "text", minLength: component.minLength || 0, maxLength: component.maxLength || Number.POSITIVE_INFINITY, autocomplete: component.autocomplete || "on", pattern: component.pattern, placeholder: component.placeholder }
 		return (TypeHandler.creators[c.type] || TypeHandler.creators.text)(c)
 	}
 }

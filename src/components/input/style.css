@@ -22,7 +22,7 @@ input {
 	background: none;
 	border: 0;
 }
-:host.has-content > label,
+:host.has-value > label,
 :host:focus-within > label {
 	top: .3em;
 	top: .4em;
