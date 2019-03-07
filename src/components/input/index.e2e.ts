@@ -46,10 +46,8 @@ it("fill out", async () => {
 })
 it("fill out valid", async () => {
 	const page = await newE2EPage()
-	await page.setContent(complete)
+	await page.setContent("<smoothly-input name='name' type='text' required>Label</smoothly-input>")
 	const input = await page.find("smoothly-input > input")
-	await input.setProperty("value", "")
-	await page.waitForChanges()
 	expect(await input.getProperty("value")).toEqual("")
 	await input.type("1234 ")
 	expect(await input.getProperty("value")).toEqual("1234 ")
