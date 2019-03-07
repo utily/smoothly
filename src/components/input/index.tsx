@@ -43,7 +43,8 @@ export class SmoothlyInput {
 				required={this.required}
 				autocomplete={type.autocomplete}
 				pattern={ type.pattern && type.pattern.source }
-				onKeyDown={ e => type.onKeyDown(e) }></input>,
+				onKeyDown={ e => type.onKeyDown(e) }
+				onClick={ e => type.onClick(e) }></input>,
 			<label htmlFor={this.name}><slot/></label>,
 		]
 	}

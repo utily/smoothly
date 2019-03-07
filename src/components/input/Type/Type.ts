@@ -12,19 +12,29 @@ export abstract class Type {
 	get autocomplete(): browser.Autocomplete { return this.component.autocomplete }
 	get pattern(): RegExp | undefined { return this.component.pattern }
 	get placeholder(): string | undefined { return this.component.placeholder }
+	private state: State = { value: "", selectionStart: 0, selectionEnd: 0 }
 	protected constructor(protected readonly component: Component) {
 	}
 	onKeyDown(event: KeyboardEvent) {
-		event.preventDefault()
+		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
+			event.preventDefault()
+			const backend = event.target as HTMLInputElement
+			const before = this.state
+			const after = this.keyEventHandler(before, event)
+			if (after.value != before.value)
+				this.value = backend.value = after.value
+			if (after.selectionStart != before.selectionStart)
+				backend.selectionStart = after.selectionStart
+			if (after.selectionEnd != before.selectionEnd)
+				backend.selectionEnd = after.selectionEnd
+			this.state = after
+		}
+	}
+	onClick(event: MouseEvent) {
 		const backend = event.target as HTMLInputElement
-		const before = { value: this.component.value, selectionStart: backend.selectionStart || backend.value.length, selectionEnd: backend.selectionEnd || backend.value.length }
-		const after = this.keyEventHandler(before, event)
-		if (after.value != before.value)
-			this.value = backend.value = after.value
-		if (after.selectionStart != before.selectionStart)
-			backend.selectionStart = after.selectionStart
-		if (after.selectionEnd != before.selectionEnd)
-			backend.selectionEnd = after.selectionEnd
+		this.state = { value: backend.value, selectionStart: backend.selectionStart || backend.value.length, selectionEnd: backend.selectionEnd || backend.value.length }
+		console.log("MouseUp")
+		console.log(this.state)
 	}
 	abstract keyEventHandler(state: State, event?: KeyEvent): State
 	static creators: { [type: string]: (component: Component) => Type } = {}

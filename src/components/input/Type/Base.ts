@@ -63,14 +63,19 @@ export class Base extends Type {
 		return result
 	}
 	keyEventHandler(state: Readonly<State>, event?: KeyEvent): State {
+		console.log("======================================")
+		console.log("before")
+		console.log(state)
 		const result = this.filterState(state)
+		console.log("filtered")
+		console.log(result)
 		if (event) {
 			if (event.key == "ArrowLeft") {
 				result.selectionStart -= result.selectionStart > 0 ? 1 : 0
 				if (!event.shiftKey) // no create or extend selection
 					result.selectionEnd = result.selectionStart
 			} else if (event.key == "ArrowRight") {
-				result.selectionEnd += result.selectionEnd < result.value.length - 1 ? 1 : 0
+				result.selectionEnd += result.selectionEnd < result.value.length ? 1 : 0
 				if (!event.shiftKey) // no create or extend selection
 					result.selectionStart = result.selectionEnd
 			} else if (event.key == "Home") {
@@ -78,44 +83,56 @@ export class Base extends Type {
 				if (!event.shiftKey) // no create or extend selection
 					result.selectionEnd = result.selectionStart
 			} else if (event.key == "End") {
-				result.selectionEnd = result.value.length - 1
+				result.selectionEnd = result.value.length
 				if (!event.shiftKey) // no create or extend selection
 					result.selectionStart = result.selectionEnd
+			} else if (event.ctrlKey) {
+				switch (event.key) {
+					case "a":
+						result.selectionStart = 0
+						result.selectionEnd = result.value.length
+				}
 			} else {
 				if (result.selectionStart != result.selectionEnd) { // selection exists
 					switch (event.key) {
 						case "Delete":
 						case "Backspace":
-							event.key = "None"
+							event = undefined
 							break
 						default:
 							break
 					}
 					result.value = result.value.substring(0, result.selectionStart) + result.value.substring(result.selectionEnd)
 					result.selectionEnd = result.selectionStart
+					console.log("removed selection")
+					console.log(result)
 				}
-				switch (event.key) {
-					case "None": break
-					case "Backspace":
-						if (result.selectionStart > 0) {
-							result.value = result.value.substring(0, result.selectionStart - 1) + result.value.substring(result.selectionStart)
-							result.selectionStart = result.selectionEnd--
-						}
-						break
-					case "Delete":
-						if (result.selectionStart < result.value.length - 1) {
-							result.value = result.value.substring(0, result.selectionStart) + result.value.substring(result.selectionStart + 1)
-							result.selectionStart = result.selectionEnd
-						}
-						break
-					default:
-						if (this.filter(event.key, result.selectionStart, result.value)) {
-							result.value = result.value.substring(0, result.selectionStart) + event.key + result.value.substring(result.selectionStart)
-							result.selectionStart = result.selectionEnd += event.key.length
-						}
-				}
+				if (event)
+					switch (event.key) {
+						case "Unidentified": break
+						case "Backspace":
+							if (result.selectionStart > 0) {
+								result.value = result.value.substring(0, result.selectionStart - 1) + result.value.substring(result.selectionStart)
+								result.selectionStart = --result.selectionEnd
+							}
+							break
+						case "Delete":
+							if (result.selectionStart < result.value.length)
+								result.value = result.value.substring(0, result.selectionStart) + result.value.substring(result.selectionStart + 1)
+							break
+						default:
+							if (this.filter(event.key, result.selectionStart, result.value)) {
+								result.value = result.value.substring(0, result.selectionStart) + event.key + result.value.substring(result.selectionStart)
+								result.selectionStart = result.selectionEnd += event.key.length
+							}
+					}
 			}
 		}
-		return this.formatState(result)
+		console.log("processed")
+		console.log(result)
+		const r = this.formatState(result)
+		console.log("formated")
+		console.log(r)
+		return r
 	}
 }
