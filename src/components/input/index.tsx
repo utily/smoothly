@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Prop, Watch } from "@stencil/core"
-import { Autocomplete } from "./Autocomplete"
+import { TypeHandler } from "./TypeHandler"
+import { Autocomplete } from "./browser"
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
@@ -8,15 +9,21 @@ import { Autocomplete } from "./Autocomplete"
 export class SmoothlyInput {
 	@Prop() name: string
 	@Prop({ mutable: true }) value: string
-	@Prop() type: "text" | "email" = "text"
-	@Prop() placeholder?: string
+	@Prop({ reflectToAttr: true }) type: string = "text"
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
-	@Prop({ mutable: true, reflectToAttr: true }) autocomplete: Autocomplete
-	@Prop({ mutable: true, reflectToAttr: true }) pattern?: string
-	@Event() valueChanged: EventEmitter<{ value: string }>
+	@Prop({ mutable: true }) minLength: number = 0
+	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
+	@Prop({ mutable: true }) autocomplete: Autocomplete
+	@Prop({ mutable: true }) pattern: RegExp | undefined
+	@Prop({ mutable: true }) placeholder: string | undefined
+	@Event() valueChange: EventEmitter<{ value: string }>
 	@Watch("value")
-	valueChangedWatcher(value: string) {
-		this.valueChanged.emit(this)
+	valueChangeWatcher(value: string) {
+		this.valueChange.emit(this)
+	}
+	private typeHandler: TypeHandler
+	componentWillLoad() {
+		this.typeHandler = TypeHandler.create(this)
 	}
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
@@ -26,19 +33,20 @@ export class SmoothlyInput {
 		}
 	}
 	hostData() {
-		return { class: { "has-content": this.value && this.value.length > 0 } }
+		return { class: { "has-value": this.value && this.value.length > 0 } }
 	}
 	render() {
 		return [
 			<input
-				name={this.name}
-				value={this.value}
-				type={this.type}
-				placeholder={this.placeholder}
-				required={this.required}
-				autocomplete={this.autocomplete}
-				pattern={this.pattern}
-				onInput={ e => this.onInput(e as UIEvent) }></input>,
+				name={ this.name }
+				value={ this.typeHandler.value }
+				type={ this.typeHandler.type }
+				placeholder={ this.typeHandler.placeholder }
+				required={ this.required }
+				autocomplete={ this.typeHandler.autocomplete }
+				pattern={ this.typeHandler.pattern && this.typeHandler.pattern.source }
+				onKeyDown={ e => this.typeHandler.onKeyDown(e) }
+				onClick={ e => this.typeHandler.onClick(e) }></input>,
 			<label htmlFor={this.name}><slot/></label>,
 		]
 	}
