@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Prop, Watch } from "@stencil/core"
-import { Type } from "./Type"
+import { TypeHandler } from "./TypeHandler"
 import { Autocomplete } from "./browser"
 @Component({
 	tag: "smoothly-input",
@@ -22,6 +22,7 @@ export class SmoothlyInput {
 	valueChangeWatcher(value: string) {
 		this.valueChange.emit(this)
 	}
+	private typeHandler = TypeHandler.create(this)
 	protected async onInput(e: UIEvent) {
 		if (e.target && (e.target as HTMLInputElement).value) {
 			this.value = (e.target as HTMLInputElement).value
@@ -30,21 +31,21 @@ export class SmoothlyInput {
 		}
 	}
 	hostData() {
-		return { class: { "has-content": this.value && this.value.length > 0 } }
+		console.log("hostData " + this.value)
+		return { class: { "has-value": this.value && this.value.length > 0 } }
 	}
 	render() {
-		const type = Type.create(this)
 		return [
 			<input
 				name={this.name}
-				value={type.value}
-				type={type.type}
-				placeholder={type.placeholder}
+				value={this.typeHandler.value}
+				type={this.typeHandler.type}
+				placeholder={this.typeHandler.placeholder}
 				required={this.required}
-				autocomplete={type.autocomplete}
-				pattern={ type.pattern && type.pattern.source }
-				onKeyDown={ e => type.onKeyDown(e) }
-				onClick={ e => type.onClick(e) }></input>,
+				autocomplete={this.typeHandler.autocomplete}
+				pattern={ this.typeHandler.pattern && this.typeHandler.pattern.source }
+				onKeyDown={ e => this.typeHandler.onKeyDown(e) }
+				onClick={ e => this.typeHandler.onClick(e) }></input>,
 			<label htmlFor={this.name}><slot/></label>,
 		]
 	}

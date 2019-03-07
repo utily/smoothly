@@ -1,9 +1,9 @@
 import { State } from "../State"
 import { KeyEvent } from "../KeyEvent"
-import { Type } from "./Type"
+import { TypeHandler } from "./TypeHandler"
 import { Component } from "../Component"
 
-export class Base extends Type {
+export class Base extends TypeHandler {
 	get value(): string {
 		let result = ""
 		let index = 0
@@ -63,12 +63,7 @@ export class Base extends Type {
 		return result
 	}
 	keyEventHandler(state: Readonly<State>, event?: KeyEvent): State {
-		console.log("======================================")
-		console.log("before")
-		console.log(state)
 		const result = this.filterState(state)
-		console.log("filtered")
-		console.log(result)
 		if (event) {
 			if (event.key == "ArrowLeft") {
 				result.selectionStart -= result.selectionStart > 0 ? 1 : 0
@@ -104,8 +99,6 @@ export class Base extends Type {
 					}
 					result.value = result.value.substring(0, result.selectionStart) + result.value.substring(result.selectionEnd)
 					result.selectionEnd = result.selectionStart
-					console.log("removed selection")
-					console.log(result)
 				}
 				if (event)
 					switch (event.key) {
@@ -128,11 +121,6 @@ export class Base extends Type {
 					}
 			}
 		}
-		console.log("processed")
-		console.log(result)
-		const r = this.formatState(result)
-		console.log("formated")
-		console.log(r)
-		return r
+		return this.formatState(result)
 	}
 }

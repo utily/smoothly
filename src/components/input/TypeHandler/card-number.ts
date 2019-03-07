@@ -2,7 +2,7 @@ import * as browser from "../browser"
 import { Base } from "./Base"
 import { Component } from "../Component"
 import { CardIssuer } from "./CardIssuer"
-import { Type } from "./Type"
+import { TypeHandler } from "./TypeHandler"
 
 class CardNumber extends Base {
 	get type(): browser.Type { return "text" }
@@ -45,4 +45,4 @@ class CardNumber extends Base {
 		visa: { verification: /^4[0-9]{12}(?:[0-9]{3})?$/, identification: /^4[0-9]/, length: 16, icon: "visa" },
 	}
 }
-Type.add("card-number", component => new CardNumber(component))
+TypeHandler.add("card-number", component => new CardNumber(component))

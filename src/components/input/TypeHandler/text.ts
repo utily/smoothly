@@ -1,7 +1,7 @@
 import * as browser from "../browser"
 import { Base } from "./Base"
 import { Component } from "../Component"
-import { Type } from "./Type"
+import { TypeHandler } from "./TypeHandler"
 
 class Text extends Base {
 	get type(): browser.Type { return "text" }
@@ -9,4 +9,4 @@ class Text extends Base {
 		super(component)
 	}
 }
-Type.add("text", component => new Text(component))
+TypeHandler.add("text", component => new Text(component))

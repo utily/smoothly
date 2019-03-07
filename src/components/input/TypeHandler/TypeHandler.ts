@@ -3,7 +3,7 @@ import { State } from "../State"
 import { KeyEvent } from "../KeyEvent"
 import { Component } from "../Component"
 
-export abstract class Type {
+export abstract class TypeHandler {
 	get value(): string { return this.component.value }
 	set value(v: string) { this.component.value = v }
 	get type(): browser.Type { return browser.Type.as(this.component.type) }
@@ -33,16 +33,14 @@ export abstract class Type {
 	onClick(event: MouseEvent) {
 		const backend = event.target as HTMLInputElement
 		this.state = { value: backend.value, selectionStart: backend.selectionStart || backend.value.length, selectionEnd: backend.selectionEnd || backend.value.length }
-		console.log("MouseUp")
-		console.log(this.state)
 	}
 	abstract keyEventHandler(state: State, event?: KeyEvent): State
-	static creators: { [type: string]: (component: Component) => Type } = {}
-	static add(type: string, creator: (component: Component) => Type) {
-		Type.creators[type] = creator
+	static creators: { [type: string]: (component: Component) => TypeHandler } = {}
+	static add(type: string, creator: (component: Component) => TypeHandler) {
+		TypeHandler.creators[type] = creator
 	}
-	static create(component: Partial<Component>): Type {
+	static create(component: Partial<Component>): TypeHandler {
 		const c: Component = { value: "", type: "text", minLength: 0, maxLength: Number.POSITIVE_INFINITY, autocomplete: "on", pattern: undefined, placeholder: undefined, ...component }
-		return (Type.creators[c.type] || Type.creators.text)(c)
+		return (TypeHandler.creators[c.type] || TypeHandler.creators.text)(c)
 	}
 }
