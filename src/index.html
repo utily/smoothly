@@ -29,6 +29,14 @@
 		main > *:last-child {
 			margin-bottom: .6em;
 		}
+		main {
+			display: flex;
+			flex-flow: row;
+			flex-wrap: wrap;
+		}
+		main > * {
+			width: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -39,6 +47,8 @@
 				<smoothly-input type="text" name="name">Name</smoothly-input>
 				<smoothly-input type="text" name="street" value="street">Street</smoothly-input>
 				<smoothly-input type="card-number" name="card">Card #</smoothly-input>
+				<smoothly-input type="card-expires" name="card" style="width: calc(60% - 2px);">Expires</smoothly-input>
+				<smoothly-input type="card-csc" name="card" style="width: calc(40% - 1px); border-left: none;">CVV/CVC</smoothly-input>
 				<smoothly-radio name="option" value="1">option 1</smoothly-radio>
 				<smoothly-radio name="option" value="2" checked>option 2</smoothly-radio>
 				<smoothly-radio name="option" value="3">option 3</smoothly-radio>

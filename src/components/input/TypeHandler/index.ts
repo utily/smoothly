@@ -1,3 +1,5 @@
 export { TypeHandler } from "./TypeHandler"
+import "./card-csc"
+import "./card-expires"
 import "./card-number"
 import "./text"
