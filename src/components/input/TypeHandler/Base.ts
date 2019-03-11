@@ -8,7 +8,7 @@ export class Base extends TypeHandler {
 		let result = ""
 		let index = 0
 		for (const next of super.value)
-			result += this.format(next, index++)
+			result += this.format(next, index++, result)
 		return result
 	}
 	set value(value: string) {
@@ -27,7 +27,7 @@ export class Base extends TypeHandler {
 	filter(character: string, index: number, accumulated: string): boolean {
 		return character.length == 1 && index < this.maxLength
 	}
-	format(character: string, index: number): string {
+	format(character: string, index: number, accumulated: string): string {
 		return character
 	}
 	private filterState(state: Readonly<State>): State {
@@ -52,7 +52,7 @@ export class Base extends TypeHandler {
 		const before = state.value
 		let index = 0
 		for (let next of before) {
-			next = this.format(next, index++)
+			next = this.format(next, index++, result.value)
 			const delta = next.length - 1
 			if (result.selectionStart > result.value.length)
 				result.selectionStart += delta
