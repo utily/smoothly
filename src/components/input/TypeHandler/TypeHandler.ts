@@ -4,8 +4,8 @@ import { KeyEvent } from "../KeyEvent"
 import { Component } from "../Component"
 
 export abstract class TypeHandler {
-	get value(): string { return this.component.value }
-	set value(v: string) { this.component.value = v }
+	get value(): string { return this.getValue() }
+	set value(v: string) { this.setValue(v) }
 	get type(): browser.Type { return browser.Type.as(this.component.type) }
 	get minLength(): number { return this.component.minLength }
 	get maxLength(): number { return this.component.maxLength }
@@ -23,6 +23,8 @@ export abstract class TypeHandler {
 	protected constructor(protected readonly component: Component) {
 		this.state = { value: component.value, selectionStart: component.value.length, selectionEnd: component.value.length }
 	}
+	protected getValue(): string { return this.component.value }
+	protected setValue(value: string) { this.component.value = value }
 	onKeyDown(event: KeyboardEvent) {
 		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
 			event.preventDefault()

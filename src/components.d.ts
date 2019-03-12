@@ -46,19 +46,19 @@ export namespace Components {
     'placeholder': string | undefined;
     'required': boolean;
     'type': string;
-    'value': string;
+    'value': any;
   }
   interface SmoothlyInputAttributes extends StencilHTMLAttributes {
     'autocomplete'?: Autocomplete;
     'maxLength'?: number;
     'minLength'?: number;
     'name'?: string;
-    'onValueChange'?: (event: CustomEvent<{ value: string }>) => void;
+    'onValueChange'?: (event: CustomEvent<{ value: any }>) => void;
     'pattern'?: RegExp | undefined;
     'placeholder'?: string | undefined;
     'required'?: boolean;
     'type'?: string;
-    'value'?: string;
+    'value'?: any;
   }
 
   interface SmoothlyRadio {

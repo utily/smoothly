@@ -8,7 +8,7 @@ import { Autocomplete } from "./browser"
 })
 export class SmoothlyInput {
 	@Prop() name: string
-	@Prop({ mutable: true }) value: string
+	@Prop({ mutable: true }) value: any
 	@Prop({ reflectToAttr: true }) type: string = "text"
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
 	@Prop({ mutable: true }) minLength: number = 0
@@ -16,9 +16,9 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) autocomplete: Autocomplete
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
-	@Event() valueChange: EventEmitter<{ value: string }>
+	@Event() valueChange: EventEmitter<{ value: any }>
 	@Watch("value")
-	valueChangeWatcher(value: string) {
+	valueChangeWatcher(value: any) {
 		this.valueChange.emit(this)
 	}
 	private typeHandler: TypeHandler
