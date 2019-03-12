@@ -13,9 +13,7 @@ export abstract class TypeHandler {
 	get pattern(): RegExp | undefined { return this.component.pattern }
 	get placeholder(): string | undefined { return this.component.placeholder }
 	private stateValue: State = { value: "", selectionStart: 0, selectionEnd: 0 }
-	private get state(): State {
-		return { ...this.stateValue, value: this.value }
-	}
+	private get state(): State { return this.stateValue }
 	private set state(value: State) {
 		this.stateValue = value
 		this.value = value.value

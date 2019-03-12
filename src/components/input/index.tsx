@@ -25,13 +25,6 @@ export class SmoothlyInput {
 	componentWillLoad() {
 		this.typeHandler = TypeHandler.create(this)
 	}
-	protected async onInput(e: UIEvent) {
-		if (e.target && (e.target as HTMLInputElement).value) {
-			this.value = (e.target as HTMLInputElement).value
-			if (e.bubbles)
-				e.stopPropagation()
-		}
-	}
 	hostData() {
 		return { class: { "has-value": this.value && this.value.length > 0 } }
 	}
