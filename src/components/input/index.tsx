@@ -13,7 +13,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
 	@Prop({ mutable: true }) minLength: number = 0
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
-	@Prop({ mutable: true }) autocomplete: Autocomplete
+	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Event() valueChange: EventEmitter<{ value: any }>

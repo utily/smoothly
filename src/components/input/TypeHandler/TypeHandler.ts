@@ -21,9 +21,9 @@ export abstract class TypeHandler {
 		this.value = value.value
 	}
 	protected constructor(protected readonly component: Component) {
-		this.state = { value: component.value, selectionStart: component.value.length, selectionEnd: component.value.length }
+		this.state = { value: this.value, selectionStart: this.value.length, selectionEnd: this.value.length }
 	}
-	protected getValue(): string { return this.component.value }
+	protected getValue(): string { return this.component.value || "" }
 	protected setValue(value: string) { this.component.value = value }
 	onKeyDown(event: KeyboardEvent) {
 		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
@@ -49,8 +49,7 @@ export abstract class TypeHandler {
 	static add(type: string, creator: (component: Component) => TypeHandler) {
 		TypeHandler.creators[type] = creator
 	}
-	static create(component: Partial<Component>): TypeHandler {
-		const c: Component = { value: component.value || "", type: component.type || "text", minLength: component.minLength || 0, maxLength: component.maxLength || Number.POSITIVE_INFINITY, autocomplete: component.autocomplete || "on", pattern: component.pattern, placeholder: component.placeholder }
-		return (TypeHandler.creators[c.type] || TypeHandler.creators.text)(c)
+	static create(component: Component): TypeHandler {
+		return (TypeHandler.creators[component.type] || TypeHandler.creators.text)(component)
 	}
 }
