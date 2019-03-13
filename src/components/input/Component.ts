@@ -1,12 +1,13 @@
 import * as browser from "./browser"
 import { State } from "./State"
 
-export interface Component {
-	value: any
+export interface Component<T> {
 	type: string
-	minLength: number
-	maxLength: number
-	autocomplete: browser.Autocomplete
-	pattern: RegExp | undefined
-	placeholder: string | undefined
+	value?: T
+	minLength?: number
+	maxLength?: number
+	required?: boolean
+	autocomplete?: browser.Autocomplete
+	pattern?: RegExp
+	placeholder?: string
 }

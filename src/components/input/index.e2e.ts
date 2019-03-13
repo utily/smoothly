@@ -42,7 +42,7 @@ it("fill out", async () => {
 	await page.setContent(complete)
 	const input = await page.find("smoothly-input > input")
 	await input.type("1234")
-	expect(await input.getProperty("value")).toEqual("value1234")
+	expect(await input.getProperty("value")).toEqual("1234")
 })
 it("fill out valid", async () => {
 	const page = await newE2EPage()

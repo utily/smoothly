@@ -53,7 +53,7 @@ export namespace Components {
     'maxLength'?: number;
     'minLength'?: number;
     'name'?: string;
-    'onValueChange'?: (event: CustomEvent<{ value: any }>) => void;
+    'onSmoothlyChanged'?: (event: CustomEvent<{ value: any }>) => void;
     'pattern'?: RegExp | undefined;
     'placeholder'?: string | undefined;
     'required'?: boolean;

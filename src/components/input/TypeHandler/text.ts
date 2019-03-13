@@ -4,8 +4,7 @@ import { Component } from "../Component"
 import { TypeHandler } from "./TypeHandler"
 
 class Text extends Base {
-	get type(): browser.Type { return "text" }
-	constructor(component: Component) {
+	constructor(component: Component<any>) {
 		super(component)
 	}
 }

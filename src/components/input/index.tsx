@@ -10,44 +10,46 @@ export class SmoothlyInput {
 	@Prop() name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflectToAttr: true }) type: string = "text"
-	@Prop({ mutable: true, reflectToAttr: true }) required: boolean
+	@Prop({ mutable: true, reflectToAttr: true }) required: boolean = false
 	@Prop({ mutable: true }) minLength: number = 0
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
-	@Prop({ mutable: true }) autocomplete: Autocomplete
+	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
-	@Event() valueChange: EventEmitter<{ value: any }>
+	@Event() smoothlyChanged: EventEmitter<{ value: any }>
 	@Watch("value")
-	valueChangeWatcher(value: any) {
-		this.valueChange.emit(this)
+	valueWatcher(value: any, before: any) {
+		if (this.typeHandler)
+			this.typeHandler.value = value
+		if (value != before)
+			this.smoothlyChanged.emit({ value })
 	}
-	private typeHandler: TypeHandler
+	private typeHandler?: TypeHandler
 	componentWillLoad() {
 		this.typeHandler = TypeHandler.create(this)
 	}
-	protected async onInput(e: UIEvent) {
-		if (e.target && (e.target as HTMLInputElement).value) {
-			this.value = (e.target as HTMLInputElement).value
-			if (e.bubbles)
-				e.stopPropagation()
-		}
-	}
 	hostData() {
-		return { class: { "has-value": this.value && this.value.length > 0 } }
+		return { class: { "has-value": this.typeHandler && this.typeHandler.native.value } }
 	}
 	render() {
-		return [
-			<input
-				name={ this.name }
-				value={ this.typeHandler.value }
-				type={ this.typeHandler.type }
-				placeholder={ this.typeHandler.placeholder }
-				required={ this.required }
-				autocomplete={ this.typeHandler.autocomplete }
-				pattern={ this.typeHandler.pattern && this.typeHandler.pattern.source }
-				onKeyDown={ e => this.typeHandler.onKeyDown(e) }
-				onClick={ e => this.typeHandler.onClick(e) }></input>,
-			<label htmlFor={this.name}><slot/></label>,
-		]
+		let result: any[] = []
+		if (this.typeHandler) {
+			const component = this.typeHandler.native
+			result = [
+				<input
+					name={ this.name }
+					value={ component.value }
+					type={ component.type }
+					placeholder={ component.placeholder }
+					required={ component.required }
+					autocomplete={ component.autocomplete }
+					pattern={ component.pattern && component.pattern.source }
+					onFocus={ e => { if (this.typeHandler) this.typeHandler.onFocus(e) } }
+					onClick={ e => { if (this.typeHandler) this.typeHandler.onClick(e) } }
+					onKeyDown={ e => { if (this.typeHandler) this.typeHandler.onKeyDown(e) } }></input>,
+				<label htmlFor={this.name}><slot/></label>,
+			]
+		}
+		return result
 	}
 }

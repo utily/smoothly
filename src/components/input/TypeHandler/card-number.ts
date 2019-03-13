@@ -5,21 +5,28 @@ import { CardIssuer } from "./CardIssuer"
 import { TypeHandler } from "./TypeHandler"
 
 class CardNumber extends Base {
-	get type(): browser.Type { return "text" }
-	get autocomplete(): browser.Autocomplete { return "cc-number" }
-	get minLength(): number { return this.issuer.length }
-	get maxLength(): number { return this.issuer.length }
-	get pattern(): RegExp | undefined { return this.issuer.verification }
+	get native(): Component<string> {
+		const result = super.native
+		return {
+			...result,
+			type: "text",
+			autocomplete: "cc-number",
+			minLength: this.issuer.length,
+			maxLength: this.maxLength,
+			pattern: this.issuer.verification,
+		}
+	}
+	private get maxLength() { return this.issuer.length + Math.trunc(this.issuer.length / 4) }
 	private issuer: CardIssuer = CardNumber.defaultIssuer
-	constructor(component: Component) {
+	constructor(component: Component<any>) {
 		super(component)
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		this.issuer = this.getIssuer(accumulated) || CardNumber.defaultIssuer
-		return character >= "0" && character <= "9" && super.filter(character, index, accumulated)
+		return character >= "0" && character <= "9" && index < this.issuer.length
 	}
 	format(character: string, index: number): string {
-		return character + (index % 4 == 3 && index + 1 < this.maxLength ? " " : "")
+		return character + (index % 4 == 3 && index + 1 < this.issuer.length ? " " : "")
 	}
 	getIssuer(value: string): CardIssuer & { name: string } | undefined {
 		let result: CardIssuer & { name: string } = CardNumber.defaultIssuer
@@ -34,7 +41,7 @@ class CardNumber extends Base {
 	private static issuers: { [name: string]: Partial<CardIssuer> & { identification: RegExp } } = {
 		amex: { verification: /^3[47][0-9]{13}$/, identification: /^3[47]/, length: 18, icon: "amex"},
 		dankort: { verification: /^(5019)\d+$/, identification: /^(5019)\d+/, length: 19, icon: "generic"},
-		diners: { verification: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/, identification: /^3(?:0[0-5]|[68][0-9])/, length: 19, icon: "diners" },
+		diners: { verification: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/, identification: /^3(?:0[0-5]|[68][0-9])/, length: 14, icon: "diners" },
 		discover: { verification: /^6(?:011|5[0-9]{2})[0-9]{12}$/, identification: /^6(?:011|5[0-9]{2})/, length: 19, icon: "generic" },
 		electron: { verification: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/, identification: /^(4026|417500|4405|4508|4844|4913|4917)/, length: 19, icon: "generic" },
 		interpayment: {verification: /^(636)\d+$/, identification: /^(636)/, length: 19, icon: "generic" },
