@@ -16,23 +16,26 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
-	@Event() valueChange: EventEmitter<{ value: any }>
+	@Event() smoothlyChanged: EventEmitter<{ value: any }>
 	@Watch("value")
-	valueChangeWatcher(value: any) {
-		this.valueChange.emit(this)
+	valueWatcher(value: any, before: any) {
+		// console.log("changed")
+		// console.log(value)
+		// this.typeHandler.onValueChange()
+		// this.smoothlyChanged.emit({ value })
 	}
 	private typeHandler: TypeHandler
 	componentWillLoad() {
 		this.typeHandler = TypeHandler.create(this)
 	}
 	hostData() {
-		return { class: { "has-value": this.value && this.value.length > 0 } }
+		return { class: { "has-value": this.value } }
 	}
 	render() {
 		return [
 			<input
 				name={ this.name }
-				value={ this.typeHandler.value }
+				value={ this.typeHandler.internalValue }
 				type={ this.typeHandler.type }
 				placeholder={ this.typeHandler.placeholder }
 				required={ this.required }

@@ -4,22 +4,22 @@ import { TypeHandler } from "./TypeHandler"
 import { Component } from "../Component"
 
 export class Base extends TypeHandler {
-	get value(): string {
+	get internalValue(): string {
 		let result = ""
 		let index = 0
-		for (const next of super.value)
-			result += this.format(next, index++, result)
-		return result
-	}
-	set value(value: string) {
-		let result = ""
-		let index = 0
-		for (const character of value)
+		for (const character of super.internalValue)
 			if (this.filter(character, index, result)) {
 				result += character
 				index++
 			}
-		super.value = result
+		return result
+	}
+	set internalValue(value: string) {
+		let result = ""
+		let index = 0
+		for (const next of value)
+			result += this.format(next, index++, result)
+		super.internalValue = result
 	}
 	protected constructor(component: Component) {
 		super(component)

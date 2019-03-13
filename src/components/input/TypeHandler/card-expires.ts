@@ -12,11 +12,11 @@ class CardExpires extends Base {
 	constructor(component: Component) {
 		super(component)
 	}
-	protected getValue(): string {
-		const value =  this.component.value
+	protected get componentValue(): string {
+		const value = this.component.value
 		return isExpires(value) ? value[0].toString().padStart(2, "0") + value[1].toString().padStart(2, "0") : ""
 	}
-	protected setValue(value: string) {
+	protected set componentValue(value: string) {
 		this.component.value = value.length == 4 ? [Number.parseInt(value.slice(0, 2)), Number.parseInt(value.slice(2, 4))] : undefined
 	}
 	filter(character: string, index: number, accumulated: string): boolean {

@@ -4,25 +4,45 @@ import { KeyEvent } from "../KeyEvent"
 import { Component } from "../Component"
 
 export abstract class TypeHandler {
-	get value(): string { return this.getValue() }
-	set value(v: string) { this.setValue(v) }
 	get type(): browser.Type { return browser.Type.as(this.component.type) }
 	get minLength(): number { return this.component.minLength }
 	get maxLength(): number { return this.component.maxLength }
 	get autocomplete(): browser.Autocomplete { return this.component.autocomplete }
 	get pattern(): RegExp | undefined { return this.component.pattern }
 	get placeholder(): string | undefined { return this.component.placeholder }
-	private stateValue: State = { value: "", selectionStart: 0, selectionEnd: 0 }
-	private get state(): State { return this.stateValue }
-	private set state(value: State) {
-		this.stateValue = value
-		this.value = value.value
+	get value(): string { return this.state.value }
+	set value(value: string) { this.state = { ...this.state, value } }
+	get internalValue(): string { return this.value }
+	set internalValue(value: string) { this.value = value }
+	private lastInternalValue: string = ""
+	protected get componentValue(): string { return this.component.value || "" }
+	protected set componentValue(value: string) { this.component.value = value }
+	private blockOnValueChange = false
+	private stateValue: Readonly<State> = { value: "", selectionStart: 0, selectionEnd: 0 }
+	private get state(): Readonly<State> { return this.stateValue }
+	private set state(state: Readonly<State>) {
+		const updateComponent = this.stateValue.value != state.value
+		if (updateComponent || this.stateValue.selectionStart != state.selectionStart || this.stateValue.selectionEnd != state.selectionEnd) {
+			this.stateValue = state
+			if (updateComponent) {
+				this.componentValue = this.lastInternalValue = this.internalValue
+				console.log(this.internalValue)
+				console.log(this.component.value)
+			}
+		}
 	}
 	protected constructor(protected readonly component: Component) {
-		this.state = { value: this.value, selectionStart: this.value.length, selectionEnd: this.value.length }
+		this.state = { value: this.componentValue, selectionStart: this.componentValue.length, selectionEnd: this.componentValue.length }
 	}
-	protected getValue(): string { return this.component.value || "" }
-	protected setValue(value: string) { this.component.value = value }
+	onValueChange() {
+		const value = this.componentValue
+		console.log("onValueChange")
+		console.log(this.lastInternalValue)
+		console.log(value)
+		console.log(this.lastInternalValue != value)
+		// if (this.lastInternalValue != value)
+		// 	this.internalValue = value
+	}
 	onKeyDown(event: KeyboardEvent) {
 		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
 			event.preventDefault()
@@ -30,7 +50,7 @@ export abstract class TypeHandler {
 			const before = this.state
 			const after = this.keyEventHandler(before, event)
 			if (after.value != before.value)
-				this.value = backend.value = after.value
+				backend.value = after.value
 			if (after.selectionStart != before.selectionStart)
 				backend.selectionStart = after.selectionStart
 			if (after.selectionEnd != before.selectionEnd)
