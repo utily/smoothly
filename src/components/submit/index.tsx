@@ -1,4 +1,7 @@
-import { Component, Event, EventEmitter, State, Prop, Listen } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop, Listen } from "@stencil/core"
+import { Color } from "../../Color"
+import { Expand } from "../../Expand"
+import { Fill } from "../../Fill"
 
 @Component({
 	tag: "smoothly-submit",
@@ -7,6 +10,9 @@ import { Component, Event, EventEmitter, State, Prop, Listen } from "@stencil/co
 })
 export class SmoothlySubmit {
 	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
+	@Prop({ reflectToAttr: true }) color: Color | undefined
+	@Prop({ reflectToAttr: true }) expand: Expand
+	@Prop({ reflectToAttr: true }) fill: Fill
 	@Event() submit: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {

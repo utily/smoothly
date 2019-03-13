@@ -11,6 +11,15 @@ import '@stencil/core';
 import {
   Autocomplete,
 } from './components/input/browser';
+import {
+  Color,
+} from './Color';
+import {
+  Expand,
+} from './Expand';
+import {
+  Fill,
+} from './Fill';
 
 
 export namespace Components {
@@ -82,9 +91,15 @@ export namespace Components {
   }
 
   interface SmoothlySubmit {
+    'color': Color | undefined;
+    'expand': Expand;
+    'fill': Fill;
     'processing': boolean;
   }
   interface SmoothlySubmitAttributes extends StencilHTMLAttributes {
+    'color'?: Color | undefined;
+    'expand'?: Expand;
+    'fill'?: Fill;
     'onSubmit'?: (event: CustomEvent<{ [key: string]: string }>) => void;
     'processing'?: boolean;
   }
