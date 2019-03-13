@@ -26,7 +26,7 @@ class CardExpires extends Base {
 		super(component)
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
-		return character >= "0" && character <= "9" && super.filter(character, index, accumulated)
+		return character >= "0" && character <= "9" && index < 4
 	}
 	format(character: string, index: number, accumulated: string): string {
 		let result: string

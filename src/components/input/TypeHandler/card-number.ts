@@ -23,10 +23,10 @@ class CardNumber extends Base {
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		this.issuer = this.getIssuer(accumulated) || CardNumber.defaultIssuer
-		return character >= "0" && character <= "9" && super.filter(character, index, accumulated)
+		return character >= "0" && character <= "9" && index < this.issuer.length
 	}
 	format(character: string, index: number): string {
-		return character + (index % 4 == 3 && index + 1 < this.maxLength ? " " : "")
+		return character + (index % 4 == 3 && index + 1 < this.issuer.length ? " " : "")
 	}
 	getIssuer(value: string): CardIssuer & { name: string } | undefined {
 		let result: CardIssuer & { name: string } = CardNumber.defaultIssuer

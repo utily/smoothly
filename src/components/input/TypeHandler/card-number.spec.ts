@@ -2,7 +2,7 @@ import { TypeHandler } from "./"
 import { Component } from "../Component"
 
 describe("card-number", () => {
-	const component: Component<any> = { name: "cardNumber", type: "card-number" }
+	const component: Component<any> = { type: "card-number" }
 	it("exists", () => {
 		expect(TypeHandler.create(component)).toBeTruthy()
 	})
