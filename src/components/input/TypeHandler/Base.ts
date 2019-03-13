@@ -4,28 +4,31 @@ import { TypeHandler } from "./TypeHandler"
 import { Component } from "../Component"
 
 export class Base extends TypeHandler {
-	get internalValue(): string {
+	get value(): any {
+		const value = typeof(super.value) == "string" ? super.value : ""
 		let result = ""
 		let index = 0
-		for (const character of super.internalValue)
+		for (const character of value)
 			if (this.filter(character, index, result)) {
 				result += character
 				index++
 			}
 		return result
 	}
-	set internalValue(value: string) {
+	set value(value: any) {
+		if (typeof(value) != "string")
+			value = ""
 		let result = ""
 		let index = 0
 		for (const next of value)
 			result += this.format(next, index++, result)
-		super.internalValue = result
+		super.value = result
 	}
-	protected constructor(component: Component) {
+	protected constructor(component: Component<any>) {
 		super(component)
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
-		return character.length == 1 && index < this.maxLength
+		return character.length == 1
 	}
 	format(character: string, index: number, accumulated: string): string {
 		return character

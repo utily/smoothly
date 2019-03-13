@@ -19,31 +19,34 @@ export class SmoothlyInput {
 	@Event() smoothlyChanged: EventEmitter<{ value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
-		// console.log("changed")
-		// console.log(value)
-		// this.typeHandler.onValueChange()
-		// this.smoothlyChanged.emit({ value })
+		console.log(this.name + " changed")
+		console.log(value)
+		this.typeHandler.value = value
+		if (value != before)
+			this.smoothlyChanged.emit({ value })
 	}
 	private typeHandler: TypeHandler
 	componentWillLoad() {
 		this.typeHandler = TypeHandler.create(this)
 	}
 	hostData() {
-		return { class: { "has-value": this.value } }
+		return { class: { "has-value": this.typeHandler.native.value } }
 	}
 	render() {
+		const component = this.typeHandler.native
 		return [
 			<input
-				name={ this.name }
-				value={ this.typeHandler.internalValue }
-				type={ this.typeHandler.type }
-				placeholder={ this.typeHandler.placeholder }
-				required={ this.required }
-				autocomplete={ this.typeHandler.autocomplete }
-				pattern={ this.typeHandler.pattern && this.typeHandler.pattern.source }
-				onKeyDown={ e => this.typeHandler.onKeyDown(e) }
-				onClick={ e => this.typeHandler.onClick(e) }></input>,
-			<label htmlFor={this.name}><slot/></label>,
+				name={ component.name }
+				value={ component.value }
+				type={ component.type }
+				placeholder={ component.placeholder }
+				required={ component.required }
+				autocomplete={ component.autocomplete }
+				pattern={ component.pattern && component.pattern.source }
+				onFocus={ e => this.typeHandler.onFocus(e) }
+				onClick={ e => this.typeHandler.onClick(e) }
+				onKeyDown={ e => this.typeHandler.onKeyDown(e) }></input>,
+			<label htmlFor={component.name}><slot/></label>,
 		]
 	}
 }

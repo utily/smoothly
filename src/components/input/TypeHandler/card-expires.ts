@@ -4,20 +4,26 @@ import { Component } from "../Component"
 import { TypeHandler } from "./TypeHandler"
 
 class CardExpires extends Base {
-	get type(): browser.Type { return "text" }
-	get autocomplete(): browser.Autocomplete { return "cc-exp" }
-	get minLength(): number { return 5 }
-	get maxLength(): number { return 7 }
-	get pattern(): RegExp | undefined { return /^[01]\d\s*[-/]\s*\d{2}$/ }
-	constructor(component: Component) {
+	public get value(): any {
+		return super.value.length == 4 ? [Number.parseInt(super.value.slice(0, 2)), Number.parseInt(super.value.slice(2, 4))] :
+			super.value.length > 0 ? [] : undefined
+	}
+	public set value(value: any) {
+		super.value = isExpires(value) ? value[0].toString().padStart(2, "0") + value[1].toString().padStart(2, "0") : ""
+	}
+	get native(): Component<string> {
+		const result = super.native
+		return {
+			...result,
+			type: "text",
+			autocomplete: "cc-exp",
+			minLength: 5,
+			maxLength: 7,
+			pattern: /^[01]\d\s*[-/]\s*\d{2}$/,
+		}
+	}
+	constructor(component: Component<any>) {
 		super(component)
-	}
-	protected get componentValue(): string {
-		const value = this.component.value
-		return isExpires(value) ? value[0].toString().padStart(2, "0") + value[1].toString().padStart(2, "0") : ""
-	}
-	protected set componentValue(value: string) {
-		this.component.value = value.length == 4 ? [Number.parseInt(value.slice(0, 2)), Number.parseInt(value.slice(2, 4))] : undefined
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		return character >= "0" && character <= "9" && super.filter(character, index, accumulated)

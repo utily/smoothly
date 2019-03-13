@@ -4,16 +4,22 @@ import { Component } from "../Component"
 import { TypeHandler } from "./TypeHandler"
 
 class CardCsc extends Base {
-	get type(): browser.Type { return "text" }
-	get autocomplete(): browser.Autocomplete { return "cc-csc" }
-	get minLength(): number { return 3 }
-	get maxLength(): number { return 3 }
-	get pattern(): RegExp | undefined { return /^\d{3}$/ }
-	constructor(component: Component) {
+	get native(): Component<string> {
+		const result = super.native
+		return {
+			...result,
+			type: "text",
+			autocomplete: "cc-csc",
+			minLength: 3,
+			maxLength: 3,
+			pattern: /^\d{3}$/,
+		}
+	}
+	constructor(component: Component<any>) {
 		super(component)
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
-		return character >= "0" && character <= "9" && super.filter(character, index, accumulated)
+		return character >= "0" && character <= "9" && index < 3
 	}
 	format(character: string, index: number, accumulated: string): string {
 		return character
