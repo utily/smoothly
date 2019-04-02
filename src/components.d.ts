@@ -79,6 +79,7 @@ export namespace Components {
   interface SmoothlyRadioAttributes extends StencilHTMLAttributes {
     'checked'?: boolean;
     'name'?: string;
+    'onSmoothlySelected'?: (event: CustomEvent<{ name: string, value: string }>) => void;
     'tabIndex'?: number;
     'value'?: string;
   }

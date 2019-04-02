@@ -1,4 +1,4 @@
-import { Component, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-radio",
@@ -10,16 +10,16 @@ export class SmoothlyRadio {
 	@Prop() value: string
 	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
 	@Prop() tabIndex: number
+	@Event() smoothlySelected!: EventEmitter<{ name: string, value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
-		if (e.target && (e.target as HTMLInputElement).value)
-			this.checked = (e.target as HTMLInputElement).checked
+		if (e.target && (e.target as HTMLInputElement).value && (this.checked = (e.target as HTMLInputElement).checked))
+			this.smoothlySelected.emit({ name: this.name, value: this.value })
 		return true
 	}
-	// Placeholder animation
 	render() {
 		return [
-			<input type="radio" name={this.name} id={this.value} tabindex={this.tabIndex} checked={this.checked} value={this.value} onInput={ e => this.onInput(e as UIEvent) }/>,
+			<input type="radio" name={this.name} id={this.value} tabindex={this.tabIndex} checked={this.checked} value={this.value} onChange={ e => this.onInput(e as UIEvent) }/>,
 			<label htmlFor={this.value}><slot /></label>,
 		]
 	}
