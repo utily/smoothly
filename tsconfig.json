@@ -12,6 +12,8 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"experimentalDecorators": true,
+		"jsx": "react",
+    "jsxFactory": "h",
 		"plugins": [
 			{
 			"name": "typescript-tslint-plugin",

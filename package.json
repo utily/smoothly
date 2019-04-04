@@ -24,15 +24,16 @@
     "clean": "rm -rf dist doc www"
   },
   "dependencies": {
-    "@stencil/core": "0.18.1"
+    "@stencil/core": "0.18.1",
+    "isoly": "0.0.6"
   },
   "devDependencies": {
-    "@types/jest": "23.3.14",
+    "@types/jest": "24.0.11",
     "@types/puppeteer": "1.12.3",
-    "jest": "23.6.0",
-    "jest-cli": "^23.6.0",
-    "puppeteer": "1.11.0",
+    "jest": "24.7.1",
+    "jest-cli": "^24.7.1",
+    "puppeteer": "1.14.0",
     "tslint": "^5.15.0",
-    "workbox-build": "4.1.1"
+    "workbox-build": "4.2.0"
   }
 }
