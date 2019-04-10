@@ -50,6 +50,20 @@ export namespace Components {
     'value'?: string;
   }
 
+  interface SmoothlyCheckbox {
+    'checked': boolean;
+    'name': string;
+    'title': string;
+    'value': string;
+  }
+  interface SmoothlyCheckboxAttributes extends StencilHTMLAttributes {
+    'checked'?: boolean;
+    'name'?: string;
+    'onSmoothlyChecked'?: (event: CustomEvent<{ name: string, value: string }>) => void;
+    'title'?: string;
+    'value'?: string;
+  }
+
   interface SmoothlyDisplayAmount {
     'amount': number;
     'currency': Currency;
@@ -130,6 +144,7 @@ declare global {
   interface StencilElementInterfaces {
     'SmoothlyAccordionItem': Components.SmoothlyAccordionItem;
     'SmoothlyAccordion': Components.SmoothlyAccordion;
+    'SmoothlyCheckbox': Components.SmoothlyCheckbox;
     'SmoothlyDisplayAmount': Components.SmoothlyDisplayAmount;
     'SmoothlyDisplayDateTime': Components.SmoothlyDisplayDateTime;
     'SmoothlyInput': Components.SmoothlyInput;
@@ -141,6 +156,7 @@ declare global {
   interface StencilIntrinsicElements {
     'smoothly-accordion-item': Components.SmoothlyAccordionItemAttributes;
     'smoothly-accordion': Components.SmoothlyAccordionAttributes;
+    'smoothly-checkbox': Components.SmoothlyCheckboxAttributes;
     'smoothly-display-amount': Components.SmoothlyDisplayAmountAttributes;
     'smoothly-display-date-time': Components.SmoothlyDisplayDateTimeAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
@@ -160,6 +176,12 @@ declare global {
   var HTMLSmoothlyAccordionElement: {
     prototype: HTMLSmoothlyAccordionElement;
     new (): HTMLSmoothlyAccordionElement;
+  };
+
+  interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {}
+  var HTMLSmoothlyCheckboxElement: {
+    prototype: HTMLSmoothlyCheckboxElement;
+    new (): HTMLSmoothlyCheckboxElement;
   };
 
   interface HTMLSmoothlyDisplayAmountElement extends Components.SmoothlyDisplayAmount, HTMLStencilElement {}
@@ -201,6 +223,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement
     'smoothly-accordion': HTMLSmoothlyAccordionElement
+    'smoothly-checkbox': HTMLSmoothlyCheckboxElement
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement
     'smoothly-input': HTMLSmoothlyInputElement
@@ -212,6 +235,7 @@ declare global {
   interface ElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement;
     'smoothly-accordion': HTMLSmoothlyAccordionElement;
+    'smoothly-checkbox': HTMLSmoothlyCheckboxElement;
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement;
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement;
     'smoothly-input': HTMLSmoothlyInputElement;
