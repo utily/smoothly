@@ -9,6 +9,10 @@ import '@stencil/core';
 
 
 import {
+  Currency,
+  DateTime,
+} from 'isoly';
+import {
   Autocomplete,
 } from './components/input/browser';
 import {
@@ -44,6 +48,36 @@ export namespace Components {
   }
   interface SmoothlyAccordionAttributes extends StencilHTMLAttributes {
     'value'?: string;
+  }
+
+  interface SmoothlyCheckbox {
+    'checked': boolean;
+    'name': string;
+    'title': string;
+    'value': string;
+  }
+  interface SmoothlyCheckboxAttributes extends StencilHTMLAttributes {
+    'checked'?: boolean;
+    'name'?: string;
+    'onSmoothlyChecked'?: (event: CustomEvent<{ name: string, value: string }>) => void;
+    'title'?: string;
+    'value'?: string;
+  }
+
+  interface SmoothlyDisplayAmount {
+    'amount': number;
+    'currency': Currency;
+  }
+  interface SmoothlyDisplayAmountAttributes extends StencilHTMLAttributes {
+    'amount'?: number;
+    'currency'?: Currency;
+  }
+
+  interface SmoothlyDisplayDateTime {
+    'datetime': DateTime;
+  }
+  interface SmoothlyDisplayDateTimeAttributes extends StencilHTMLAttributes {
+    'datetime'?: DateTime;
   }
 
   interface SmoothlyInput {
@@ -110,6 +144,9 @@ declare global {
   interface StencilElementInterfaces {
     'SmoothlyAccordionItem': Components.SmoothlyAccordionItem;
     'SmoothlyAccordion': Components.SmoothlyAccordion;
+    'SmoothlyCheckbox': Components.SmoothlyCheckbox;
+    'SmoothlyDisplayAmount': Components.SmoothlyDisplayAmount;
+    'SmoothlyDisplayDateTime': Components.SmoothlyDisplayDateTime;
     'SmoothlyInput': Components.SmoothlyInput;
     'SmoothlyRadio': Components.SmoothlyRadio;
     'SmoothlySpinner': Components.SmoothlySpinner;
@@ -119,6 +156,9 @@ declare global {
   interface StencilIntrinsicElements {
     'smoothly-accordion-item': Components.SmoothlyAccordionItemAttributes;
     'smoothly-accordion': Components.SmoothlyAccordionAttributes;
+    'smoothly-checkbox': Components.SmoothlyCheckboxAttributes;
+    'smoothly-display-amount': Components.SmoothlyDisplayAmountAttributes;
+    'smoothly-display-date-time': Components.SmoothlyDisplayDateTimeAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
     'smoothly-radio': Components.SmoothlyRadioAttributes;
     'smoothly-spinner': Components.SmoothlySpinnerAttributes;
@@ -136,6 +176,24 @@ declare global {
   var HTMLSmoothlyAccordionElement: {
     prototype: HTMLSmoothlyAccordionElement;
     new (): HTMLSmoothlyAccordionElement;
+  };
+
+  interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {}
+  var HTMLSmoothlyCheckboxElement: {
+    prototype: HTMLSmoothlyCheckboxElement;
+    new (): HTMLSmoothlyCheckboxElement;
+  };
+
+  interface HTMLSmoothlyDisplayAmountElement extends Components.SmoothlyDisplayAmount, HTMLStencilElement {}
+  var HTMLSmoothlyDisplayAmountElement: {
+    prototype: HTMLSmoothlyDisplayAmountElement;
+    new (): HTMLSmoothlyDisplayAmountElement;
+  };
+
+  interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {}
+  var HTMLSmoothlyDisplayDateTimeElement: {
+    prototype: HTMLSmoothlyDisplayDateTimeElement;
+    new (): HTMLSmoothlyDisplayDateTimeElement;
   };
 
   interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {}
@@ -165,6 +223,9 @@ declare global {
   interface HTMLElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement
     'smoothly-accordion': HTMLSmoothlyAccordionElement
+    'smoothly-checkbox': HTMLSmoothlyCheckboxElement
+    'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement
+    'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement
     'smoothly-input': HTMLSmoothlyInputElement
     'smoothly-radio': HTMLSmoothlyRadioElement
     'smoothly-spinner': HTMLSmoothlySpinnerElement
@@ -174,6 +235,9 @@ declare global {
   interface ElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement;
     'smoothly-accordion': HTMLSmoothlyAccordionElement;
+    'smoothly-checkbox': HTMLSmoothlyCheckboxElement;
+    'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement;
+    'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement;
     'smoothly-input': HTMLSmoothlyInputElement;
     'smoothly-radio': HTMLSmoothlyRadioElement;
     'smoothly-spinner': HTMLSmoothlySpinnerElement;
