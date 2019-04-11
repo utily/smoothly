@@ -1,6 +1,5 @@
-:host {
-	display: block;
-}
+@import "../../assets/common.css";
+
 :host[hidden] {
 	display: none;
 }
@@ -63,6 +62,7 @@ button {
 	--smoothly-submit-shadow: var(--smoothly-dark-shadow);
 }
 :host {
+  	display: block;
 	--smoothly-submit-foreground: var(--smoothly-submit-contrast);
 	--smoothly-submit-background: var(--smoothly-submit-color);
 	--smoothly-submit-border: var(--smoothly-submit-shadow);
