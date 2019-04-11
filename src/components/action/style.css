@@ -1,8 +1,98 @@
-@import "../../assets/common.css";
-
 :host {
 	display: block;
 }
 :host[hidden] {
 	display: none;
+}
+button {
+	border: 1px solid transparent;
+	border-radius: 3px;
+	padding: .2em .3em;
+	font-size: 110%;
+	font-weight: 400;
+}
+:host[processing] > button {
+	color: var(--smoothly-light-contrast);
+	background: var(--smoothly-light-color);
+	border-color: var(--smoothly-light-color);
+}
+:host:not([color])
+:host[color="primary"] {
+	--smoothly-submit-color: var(--smoothly-primary-color);
+	--smoothly-submit-contrast: var(--smoothly-primary-contrast);
+	--smoothly-submit-shadow: var(--smoothly-primary-shadow);
+}
+:host[color="secondary"] {
+	--smoothly-submit-color: var(--smoothly-secondary-color);
+	--smoothly-submit-contrast: var(--smoothly-secondary-contrast);
+	--smoothly-submit-shadow: var(--smoothly-secondary-shadow);
+}
+:host[color="tertiary"] {
+	--smoothly-submit-color: var(--smoothly-tertiary-color);
+	--smoothly-submit-contrast: var(--smoothly-tertiary-contrast);
+	--smoothly-submit-shadow: var(--smoothly-tertiary-shadow);
+}
+:host[color="success"] {
+	--smoothly-submit-color: var(--smoothly-success-color);
+	--smoothly-submit-contrast: var(--smoothly-success-contrast);
+	--smoothly-submit-shadow: var(--smoothly-success-shadow);
+}
+:host[color="warning"] {
+	--smoothly-submit-color: var(--smoothly-warning-color);
+	--smoothly-submit-contrast: var(--smoothly-warning-contrast);
+	--smoothly-submit-shadow: var(--smoothly-warning-shadow);
+}
+:host[color="danger"] {
+	--smoothly-submit-color: var(--smoothly-danger-color);
+	--smoothly-submit-contrast: var(--smoothly-danger-contrast);
+	--smoothly-submit-shadow: var(--smoothly-danger-shadow);
+}
+:host[color="light"] {
+	--smoothly-submit-color: var(--smoothly-light-color);
+	--smoothly-submit-contrast: var(--smoothly-light-contrast);
+	--smoothly-submit-shadow: var(--smoothly-light-shadow);
+}
+:host[color="medium"] {
+	--smoothly-submit-color: var(--smoothly-medium-color);
+	--smoothly-submit-contrast: var(--smoothly-medium-contrast);
+	--smoothly-submit-shadow: var(--smoothly-medium-shadow);
+}
+:host[color="dark"] {
+	--smoothly-submit-color: var(--smoothly-dark-color);
+	--smoothly-submit-contrast: var(--smoothly-dark-contrast);
+	--smoothly-submit-shadow: var(--smoothly-dark-shadow);
+}
+:host {
+	--smoothly-submit-foreground: var(--smoothly-submit-contrast);
+	--smoothly-submit-background: var(--smoothly-submit-color);
+	--smoothly-submit-border: var(--smoothly-submit-shadow);
+}
+:host[fill=clear] {
+	--smoothly-submit-foreground: var(--smoothly-submit-color);
+	--smoothly-submit-background: transparent;
+	--smoothly-submit-border: transparent;
+}
+:host[fill=outline] {
+	--smoothly-submit-foreground: var(--smoothly-submit-color);
+	--smoothly-submit-background: transparent;
+	--smoothly-submit-border: var(--smoothly-submit-color);
+}
+:host:not([processing]) > button {
+	color: var(--smoothly-submit-foreground);
+	background: var(--smoothly-submit-background);
+	border-color: var(--smoothly-submit-background);
+}
+:host[fill=outline]:not([processing]) > button,
+:host:not([processing]):hover > button,
+:host:not([processing]):focus > button,
+:host:not([processing]):active > button {
+	border-color: var(--smoothly-submit-border);
+}
+:host[expand=fill] > button,
+:host[expand=block] > button {
+	width: 100%;
+}
+:host[expand=fill] > button {
+	border-left: none;
+	border-right: none;
 }

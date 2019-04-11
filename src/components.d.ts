@@ -9,13 +9,6 @@ import '@stencil/core';
 
 
 import {
-  Currency,
-  DateTime,
-} from 'isoly';
-import {
-  Autocomplete,
-} from './components/input/browser';
-import {
   Color,
 } from './Color';
 import {
@@ -24,6 +17,13 @@ import {
 import {
   Fill,
 } from './Fill';
+import {
+  Currency,
+  DateTime,
+} from 'isoly';
+import {
+  Autocomplete,
+} from './components/input/browser';
 
 
 export namespace Components {
@@ -48,6 +48,20 @@ export namespace Components {
   }
   interface SmoothlyAccordionAttributes extends StencilHTMLAttributes {
     'value'?: string;
+  }
+
+  interface SmoothlyAction {
+    'color': Color | undefined;
+    'expand': Expand;
+    'fill': Fill;
+    'name': string;
+  }
+  interface SmoothlyActionAttributes extends StencilHTMLAttributes {
+    'color'?: Color | undefined;
+    'expand'?: Expand;
+    'fill'?: Fill;
+    'name'?: string;
+    'onSmoothlyAction'?: (event: CustomEvent) => void;
   }
 
   interface SmoothlyCheckbox {
@@ -144,6 +158,7 @@ declare global {
   interface StencilElementInterfaces {
     'SmoothlyAccordionItem': Components.SmoothlyAccordionItem;
     'SmoothlyAccordion': Components.SmoothlyAccordion;
+    'SmoothlyAction': Components.SmoothlyAction;
     'SmoothlyCheckbox': Components.SmoothlyCheckbox;
     'SmoothlyDisplayAmount': Components.SmoothlyDisplayAmount;
     'SmoothlyDisplayDateTime': Components.SmoothlyDisplayDateTime;
@@ -156,6 +171,7 @@ declare global {
   interface StencilIntrinsicElements {
     'smoothly-accordion-item': Components.SmoothlyAccordionItemAttributes;
     'smoothly-accordion': Components.SmoothlyAccordionAttributes;
+    'smoothly-action': Components.SmoothlyActionAttributes;
     'smoothly-checkbox': Components.SmoothlyCheckboxAttributes;
     'smoothly-display-amount': Components.SmoothlyDisplayAmountAttributes;
     'smoothly-display-date-time': Components.SmoothlyDisplayDateTimeAttributes;
@@ -176,6 +192,12 @@ declare global {
   var HTMLSmoothlyAccordionElement: {
     prototype: HTMLSmoothlyAccordionElement;
     new (): HTMLSmoothlyAccordionElement;
+  };
+
+  interface HTMLSmoothlyActionElement extends Components.SmoothlyAction, HTMLStencilElement {}
+  var HTMLSmoothlyActionElement: {
+    prototype: HTMLSmoothlyActionElement;
+    new (): HTMLSmoothlyActionElement;
   };
 
   interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {}
@@ -223,6 +245,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement
     'smoothly-accordion': HTMLSmoothlyAccordionElement
+    'smoothly-action': HTMLSmoothlyActionElement
     'smoothly-checkbox': HTMLSmoothlyCheckboxElement
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement
@@ -235,6 +258,7 @@ declare global {
   interface ElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement;
     'smoothly-accordion': HTMLSmoothlyAccordionElement;
+    'smoothly-action': HTMLSmoothlyActionElement;
     'smoothly-checkbox': HTMLSmoothlyCheckboxElement;
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement;
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement;
