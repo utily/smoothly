@@ -1,8 +1,98 @@
 @import "../../assets/common.css";
 
-:host {
-	display: block;
-}
 :host[hidden] {
 	display: none;
+}
+button {
+	border: 1px solid transparent;
+	border-radius: 3px;
+	padding: .2em .3em;
+	font-size: 110%;
+	font-weight: 400;
+}
+:host[processing] > button {
+	color: var(--smoothly-light-contrast);
+	background: var(--smoothly-light-color);
+	border-color: var(--smoothly-light-color);
+}
+:host:not([color])
+:host[color="primary"] {
+	--smoothly-action-color: var(--smoothly-primary-color);
+	--smoothly-action-contrast: var(--smoothly-primary-contrast);
+	--smoothly-action-shadow: var(--smoothly-primary-shadow);
+}
+:host[color="secondary"] {
+	--smoothly-action-color: var(--smoothly-secondary-color);
+	--smoothly-action-contrast: var(--smoothly-secondary-contrast);
+	--smoothly-action-shadow: var(--smoothly-secondary-shadow);
+}
+:host[color="tertiary"] {
+	--smoothly-action-color: var(--smoothly-tertiary-color);
+	--smoothly-action-contrast: var(--smoothly-tertiary-contrast);
+	--smoothly-action-shadow: var(--smoothly-tertiary-shadow);
+}
+:host[color="success"] {
+	--smoothly-action-color: var(--smoothly-success-color);
+	--smoothly-action-contrast: var(--smoothly-success-contrast);
+	--smoothly-action-shadow: var(--smoothly-success-shadow);
+}
+:host[color="warning"] {
+	--smoothly-action-color: var(--smoothly-warning-color);
+	--smoothly-action-contrast: var(--smoothly-warning-contrast);
+	--smoothly-action-shadow: var(--smoothly-warning-shadow);
+}
+:host[color="danger"] {
+	--smoothly-action-color: var(--smoothly-danger-color);
+	--smoothly-action-contrast: var(--smoothly-danger-contrast);
+	--smoothly-action-shadow: var(--smoothly-danger-shadow);
+}
+:host[color="light"] {
+	--smoothly-action-color: var(--smoothly-light-color);
+	--smoothly-action-contrast: var(--smoothly-light-contrast);
+	--smoothly-action-shadow: var(--smoothly-light-shadow);
+}
+:host[color="medium"] {
+	--smoothly-action-color: var(--smoothly-medium-color);
+	--smoothly-action-contrast: var(--smoothly-medium-contrast);
+	--smoothly-action-shadow: var(--smoothly-medium-shadow);
+}
+:host[color="dark"] {
+	--smoothly-action-color: var(--smoothly-dark-color);
+	--smoothly-action-contrast: var(--smoothly-dark-contrast);
+	--smoothly-action-shadow: var(--smoothly-dark-shadow);
+}
+:host {
+	display: block;
+	--smoothly-action-foreground: var(--smoothly-action-contrast);
+	--smoothly-action-background: var(--smoothly-action-color);
+	--smoothly-action-border: var(--smoothly-action-shadow);
+}
+:host[fill=clear] {
+	--smoothly-action-foreground: var(--smoothly-action-color);
+	--smoothly-action-background: transparent;
+	--smoothly-action-border: transparent;
+}
+:host[fill=outline] {
+	--smoothly-action-foreground: var(--smoothly-action-color);
+	--smoothly-action-background: transparent;
+	--smoothly-action-border: var(--smoothly-action-color);
+}
+:host:not([processing]) > button {
+	color: var(--smoothly-action-foreground);
+	background: var(--smoothly-action-background);
+	border-color: var(--smoothly-action-background);
+}
+:host[fill=outline]:not([processing]) > button,
+:host:not([processing]):hover > button,
+:host:not([processing]):focus > button,
+:host:not([processing]):active > button {
+	border-color: var(--smoothly-action-border);
+}
+:host[expand=fill] > button,
+:host[expand=block] > button {
+	width: 100%;
+}
+:host[expand=fill] > button {
+	border-left: none;
+	border-right: none;
 }
