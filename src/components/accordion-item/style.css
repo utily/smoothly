@@ -17,7 +17,7 @@ details > summary {
 	list-style-type: none;
 	cursor: pointer;
 	padding: .4em;
-	color: var(--smoothly-text-tint)
+	color: rgb(var(--smoothly-text-tint))
 }
 details > fieldset {
 	border: none;
@@ -25,8 +25,8 @@ details > fieldset {
 	padding: 0;
 }
 :host[open] > details > summary {
-	color: var(--smoothly-primary-contrast);
-	background: var(--smoothly-primary-color);
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
 }
 details > summary::-webkit-details-marker {
 	display: none;
@@ -38,8 +38,8 @@ details > summary > svg {
 	margin-right: .4em;
 }
 :host[open] > details > summary > svg {
-	fill: var(--smoothly-primary-contrast);
+	fill: rgb(var(--smoothly-primary-contrast));
 }
 :host:not([open]) > details > summary > svg {
-	fill: var(--smoothly-text-tint);
+	fill: rgb(var(--smoothly-text-tint));
 }
