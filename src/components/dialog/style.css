@@ -1,0 +1,26 @@
+@import "../../assets/common.css";
+:host {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+:host[hidden] {
+	display: none;
+}
+:host > article {
+	color: rgb(var(--smoothly-text-color));
+	background-color: rgb(var(--smoothly-background-color));
+	border: rgb(var(--smoothly-primary-color)) 1px solid;
+	box-shadow: 0 0 2em lightgrey;
+	border-radius: 8px;
+	max-width: 30em;
+	margin: 1em auto;
+	padding: 1em;
+}
+:host {
+	background: rgb(var(--smoothly-background-color));
+	opacity: .8;
+}

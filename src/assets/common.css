@@ -1,5 +1,5 @@
 html {
 	font-family: var(--smoothly-font-family);
-	color: var(--smoothly-text-color);
-	background: var(--smoothly-background-color);
+	color: rgb(var(--smoothly-text-color));
+	background: rgb(var(--smoothly-background-color));
 }

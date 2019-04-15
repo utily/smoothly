@@ -14,8 +14,7 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: var(--smoothly-background-color);
-	opacity: .8;
+	background: rgba(var(--smoothly-background-color), var(--smoothly-semitransparent));
 }
 :host > div {
 	opacity: 1;
@@ -33,10 +32,10 @@
 	content: "";
 	color: transparent;
 	position: relative;
-	border-top: 1.1em solid var(--smoothly-primary-tint);
-	border-right: 1.1em solid var(--smoothly-primary-tint);
-	border-bottom: 1.1em solid var(--smoothly-primary-tint);
-	border-left: 1.1em solid var(--smoothly-primary-color);
+	border-top: 1.1em solid rgb(var(--smoothly-primary-tint));
+	border-right: 1.1em solid rgb(var(--smoothly-primary-tint));
+	border-bottom: 1.1em solid rgb(var(--smoothly-primary-tint));
+	border-left: 1.1em solid rgb(var(--smoothly-primary-color));
 	-webkit-transform: translateZ(0);
 	-ms-transform: translateZ(0);
 	transform: translateZ(0);

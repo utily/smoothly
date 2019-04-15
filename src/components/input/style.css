@@ -9,7 +9,7 @@ label {
 	position: absolute;
 	left: .4em;
 	top: .6em;
-	color: var(--smoothly-text-tint);
+	color: rgb(var(--smoothly-text-tint));
 	user-select: none;
 	cursor: inherit;
 	z-index: -1;

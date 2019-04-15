@@ -9,7 +9,7 @@ label {
 	display: block;
 	width: calc(100% - 2 * .4em);
 	padding: .2em .4em .2em .4em;
-	color: var(--smoothly-text-tint);
+	color: rgb(var(--smoothly-text-tint));
 }
 input[type="radio"] {
 	position: absolute;
@@ -21,6 +21,6 @@ input[type="radio"] {
 	-webkit-appearance: none;
 }
 input[type="radio"]:checked ~ label {
-	background-color: var(--smoothly-primary-color);
-	color: var(--smoothly-primary-contrast);
+	background-color: rgb(var(--smoothly-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
 }
