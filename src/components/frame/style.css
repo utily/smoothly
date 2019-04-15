@@ -1,0 +1,14 @@
+@import "../../assets/common.css";
+:host {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+:host[hidden] {
+	display: none;
+}
+:host > iframe {
+	border: none;
+	padding: none;
+	margin: none;
+}
