@@ -1,17 +1,17 @@
 import { Component, Listen, Prop } from "@stencil/core"
-import { Action } from "../../Action"
-import { Message } from "../../Message";
+import { Trigger } from "../../Trigger"
+import { Message } from "../../Message"
 
 @Component({
-	tag: "smoothly-action-sink",
+	tag: "smoothly-trigger-sink",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyActionSink {
+export class SmoothlyTriggerSink {
 	@Prop() destination: string
-	@Listen("smoothlyAction")
-	actionListener(event: CustomEvent<Action>) {
-		if (Action.is(event.detail)) {
+	@Listen("smoothlyTrigger")
+	TriggerListener(event: CustomEvent<Trigger>) {
+		if (Trigger.is(event.detail)) {
 			Message.send(this.destination, event.detail, window, window.parent.location.origin)
 			event.preventDefault()
 			event.stopPropagation()

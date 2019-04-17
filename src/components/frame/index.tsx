@@ -1,5 +1,5 @@
-import { Component, Prop, Element, Event, EventEmitter, Listen, Method } from "@stencil/core"
-import { Action } from "../../Action"
+import { Component, Prop, Element, Event, EventEmitter, Method } from "@stencil/core"
+import { Trigger } from "../../Trigger"
 import { Message } from "../../Message"
 
 @Component({
@@ -9,7 +9,7 @@ import { Message } from "../../Message"
 })
 export class SmoothlyFrame {
 	@Prop() url: string
-	@Event() smoothlyAction: EventEmitter<Action>
+	@Event() smoothlyTrigger: EventEmitter<Trigger>
 	@Event() smoothlyMessage: EventEmitter<object>
 	@Element() element?: HTMLElement
 	get contentWindow(): Window | undefined {
@@ -18,18 +18,18 @@ export class SmoothlyFrame {
 	}
 	componentDidLoad() {
 		if (this.contentWindow)
-			Message.listen((destination, content) => {
-				if (destination == "parent")
-					if (Action.is(content))
-						this.smoothlyAction.emit(content)
-					else
-						this.smoothlyMessage.emit({ destination, content })
-			}, this.contentWindow)
+		Message.listen((destination, content) => {
+			if (destination == "parent")
+				if (Trigger.is(content))
+					this.smoothlyTrigger.emit(content)
+				else
+					this.smoothlyMessage.emit({ destination, content })
+		}, this.contentWindow)
 	}
 	send(message: Message<any>): void
-	send(destination: string, content: Action | any): void
+	send(destination: string, content: Trigger | any): void
 	@Method()
-	send(message: string | Message<any>, content?: Action | any): void {
+	send(message: string | Message<any>, content?: Trigger | any): void {
 		if (typeof(message) == "string")
 			Message.send(message, content, this.contentWindow)
 		else if (Message.is(message) && this.contentWindow)

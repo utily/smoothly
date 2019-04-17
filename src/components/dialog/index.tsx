@@ -1,6 +1,6 @@
 import { Component, Prop, Element, Event, EventEmitter, Listen, Method } from "@stencil/core"
 import { Color } from "../../Color"
-import { Action } from "../../Action"
+import { Trigger } from "../../Trigger"
 
 @Component({
 	tag: "smoothly-dialog",
@@ -10,9 +10,9 @@ import { Action } from "../../Action"
 export class SmoothlyDialog {
 	@Prop({ reflectToAttr: true }) color: Color | undefined
 	@Prop({ mutable: true, reflectToAttr: true }) open: boolean = true
-	@Listen("smoothlyAction")
-	actionListener(event: CustomEvent<Action>) {
-		if (Action.is(event.detail) && event.detail.name == "close")
+	@Listen("smoothlyTrigger")
+	TriggerListener(event: CustomEvent<Trigger>) {
+		if (Trigger.is(event.detail) && event.detail.name == "close")
 			this.open = false
 	}
 	hostData() {

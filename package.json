@@ -7,7 +7,7 @@
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
   "unpkg": "dist/smoothly.js",
-  "types": "dist/types/components.d.ts",
+  "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/",
