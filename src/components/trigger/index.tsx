@@ -1,22 +1,24 @@
 import { Component, Prop, Event, EventEmitter, Listen } from "@stencil/core"
+import { Trigger } from "../../Trigger"
 import { Color } from "../../Color"
 import { Expand } from "../../Expand"
 import { Fill } from "../../Fill"
 @Component({
-	tag: "smoothly-action",
+	tag: "smoothly-trigger",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyAction {
+export class SmoothlyTrigger {
 	@Prop({ reflectToAttr: true }) color: Color | undefined
 	@Prop({ reflectToAttr: true }) expand: Expand
 	@Prop({ reflectToAttr: true }) fill: Fill
 	@Prop() name: string
-	@Event() smoothlyAction: EventEmitter
+	@Prop() value?: any
+	@Event() smoothlyTrigger: EventEmitter<Trigger>
 
 	@Listen("click")
 	onClick(e: UIEvent) {
-		this.smoothlyAction.emit({ name: this.name })
+		this.smoothlyTrigger.emit({ name: this.name, value: this.value })
 		e.stopPropagation()
 		e.preventDefault()
 	}

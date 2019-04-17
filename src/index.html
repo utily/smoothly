@@ -5,8 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
 	<title>Smoothly Tester</title>
 	<script src="/build/smoothly.js"></script>
-	<link rel="stylesheet" type="text/css" href="./assets/theme-cyan.css">
-	<link rel="stylesheet" type="text/css" href="./assets/common.css">
+	<link rel="stylesheet" type="text/css" href="/build/smoothly.css">
 	<style>
 		h5 {
 			margin-block-start: .4em;
@@ -70,7 +69,7 @@
 			</main>
 			<footer>
 				<smoothly-submit expand="block" color="success" onSubmit="e => console.log(e.detail)">Submit</smoothly-submit>
-				<smoothly-action expand="block" color="success" onClick="e => console.log(e.detail)">Action</smoothly-action>
+				<smoothly-trigger expand="block" color="success" onClick="e => console.log(e.detail)">Trigger</smoothly-trigger>
 			</footer>
 		</form>
 	</section>
@@ -89,5 +88,9 @@
 			event.detail.value = result
 		})
 	</script>
+	<smoothly-dialog color="primary">
+		<smoothly-trigger name="close">close</smoothly-trigger>
+		<smoothly-frame url="./assets/child.html"></smoothly-frame>
+	</smoothly-dialog>
 </body>
 </html>

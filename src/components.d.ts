@@ -12,18 +12,27 @@ import {
   Color,
 } from './Color';
 import {
+  Currency,
+  DateTime,
+} from 'isoly';
+import {
+  Message,
+} from './Message';
+import {
+  Trigger,
+} from './Trigger';
+import {
+  EventEmitter,
+} from '@stencil/core';
+import {
+  Autocomplete,
+} from './components/input/browser';
+import {
   Expand,
 } from './Expand';
 import {
   Fill,
 } from './Fill';
-import {
-  Currency,
-  DateTime,
-} from 'isoly';
-import {
-  Autocomplete,
-} from './components/input/browser';
 
 
 export namespace Components {
@@ -50,20 +59,6 @@ export namespace Components {
     'value'?: string;
   }
 
-  interface SmoothlyAction {
-    'color': Color | undefined;
-    'expand': Expand;
-    'fill': Fill;
-    'name': string;
-  }
-  interface SmoothlyActionAttributes extends StencilHTMLAttributes {
-    'color'?: Color | undefined;
-    'expand'?: Expand;
-    'fill'?: Fill;
-    'name'?: string;
-    'onSmoothlyAction'?: (event: CustomEvent) => void;
-  }
-
   interface SmoothlyCheckbox {
     'checked': boolean;
     'name': string;
@@ -76,6 +71,15 @@ export namespace Components {
     'onSmoothlyChecked'?: (event: CustomEvent<{ name: string, value: string }>) => void;
     'title'?: string;
     'value'?: string;
+  }
+
+  interface SmoothlyDialog {
+    'color': Color | undefined;
+    'open': boolean;
+  }
+  interface SmoothlyDialogAttributes extends StencilHTMLAttributes {
+    'color'?: Color | undefined;
+    'open'?: boolean;
   }
 
   interface SmoothlyDisplayAmount {
@@ -92,6 +96,16 @@ export namespace Components {
   }
   interface SmoothlyDisplayDateTimeAttributes extends StencilHTMLAttributes {
     'datetime'?: DateTime;
+  }
+
+  interface SmoothlyFrame {
+    'send': (message: string | Message<any>, content?: any) => void;
+    'url': string;
+  }
+  interface SmoothlyFrameAttributes extends StencilHTMLAttributes {
+    'onSmoothlyMessage'?: (event: CustomEvent<object>) => void;
+    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'url'?: string;
   }
 
   interface SmoothlyInput {
@@ -152,33 +166,73 @@ export namespace Components {
     'onSubmit'?: (event: CustomEvent<{ [key: string]: string }>) => void;
     'processing'?: boolean;
   }
+
+  interface SmoothlyTriggerSink {
+    'destination': string;
+  }
+  interface SmoothlyTriggerSinkAttributes extends StencilHTMLAttributes {
+    'destination'?: string;
+  }
+
+  interface SmoothlyTriggerSource {
+    'name': string;
+  }
+  interface SmoothlyTriggerSourceAttributes extends StencilHTMLAttributes {
+    'name'?: string;
+    'onSmoothlyMessage'?: (event: CustomEvent<Message<any>>) => void;
+    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+  }
+
+  interface SmoothlyTrigger {
+    'color': Color | undefined;
+    'expand': Expand;
+    'fill': Fill;
+    'name': string;
+    'value'?: any;
+  }
+  interface SmoothlyTriggerAttributes extends StencilHTMLAttributes {
+    'color'?: Color | undefined;
+    'expand'?: Expand;
+    'fill'?: Fill;
+    'name'?: string;
+    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'value'?: any;
+  }
 }
 
 declare global {
   interface StencilElementInterfaces {
     'SmoothlyAccordionItem': Components.SmoothlyAccordionItem;
     'SmoothlyAccordion': Components.SmoothlyAccordion;
-    'SmoothlyAction': Components.SmoothlyAction;
     'SmoothlyCheckbox': Components.SmoothlyCheckbox;
+    'SmoothlyDialog': Components.SmoothlyDialog;
     'SmoothlyDisplayAmount': Components.SmoothlyDisplayAmount;
     'SmoothlyDisplayDateTime': Components.SmoothlyDisplayDateTime;
+    'SmoothlyFrame': Components.SmoothlyFrame;
     'SmoothlyInput': Components.SmoothlyInput;
     'SmoothlyRadio': Components.SmoothlyRadio;
     'SmoothlySpinner': Components.SmoothlySpinner;
     'SmoothlySubmit': Components.SmoothlySubmit;
+    'SmoothlyTriggerSink': Components.SmoothlyTriggerSink;
+    'SmoothlyTriggerSource': Components.SmoothlyTriggerSource;
+    'SmoothlyTrigger': Components.SmoothlyTrigger;
   }
 
   interface StencilIntrinsicElements {
     'smoothly-accordion-item': Components.SmoothlyAccordionItemAttributes;
     'smoothly-accordion': Components.SmoothlyAccordionAttributes;
-    'smoothly-action': Components.SmoothlyActionAttributes;
     'smoothly-checkbox': Components.SmoothlyCheckboxAttributes;
+    'smoothly-dialog': Components.SmoothlyDialogAttributes;
     'smoothly-display-amount': Components.SmoothlyDisplayAmountAttributes;
     'smoothly-display-date-time': Components.SmoothlyDisplayDateTimeAttributes;
+    'smoothly-frame': Components.SmoothlyFrameAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
     'smoothly-radio': Components.SmoothlyRadioAttributes;
     'smoothly-spinner': Components.SmoothlySpinnerAttributes;
     'smoothly-submit': Components.SmoothlySubmitAttributes;
+    'smoothly-trigger-sink': Components.SmoothlyTriggerSinkAttributes;
+    'smoothly-trigger-source': Components.SmoothlyTriggerSourceAttributes;
+    'smoothly-trigger': Components.SmoothlyTriggerAttributes;
   }
 
 
@@ -194,16 +248,16 @@ declare global {
     new (): HTMLSmoothlyAccordionElement;
   };
 
-  interface HTMLSmoothlyActionElement extends Components.SmoothlyAction, HTMLStencilElement {}
-  var HTMLSmoothlyActionElement: {
-    prototype: HTMLSmoothlyActionElement;
-    new (): HTMLSmoothlyActionElement;
-  };
-
   interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {}
   var HTMLSmoothlyCheckboxElement: {
     prototype: HTMLSmoothlyCheckboxElement;
     new (): HTMLSmoothlyCheckboxElement;
+  };
+
+  interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {}
+  var HTMLSmoothlyDialogElement: {
+    prototype: HTMLSmoothlyDialogElement;
+    new (): HTMLSmoothlyDialogElement;
   };
 
   interface HTMLSmoothlyDisplayAmountElement extends Components.SmoothlyDisplayAmount, HTMLStencilElement {}
@@ -216,6 +270,12 @@ declare global {
   var HTMLSmoothlyDisplayDateTimeElement: {
     prototype: HTMLSmoothlyDisplayDateTimeElement;
     new (): HTMLSmoothlyDisplayDateTimeElement;
+  };
+
+  interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {}
+  var HTMLSmoothlyFrameElement: {
+    prototype: HTMLSmoothlyFrameElement;
+    new (): HTMLSmoothlyFrameElement;
   };
 
   interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {}
@@ -242,30 +302,56 @@ declare global {
     new (): HTMLSmoothlySubmitElement;
   };
 
+  interface HTMLSmoothlyTriggerSinkElement extends Components.SmoothlyTriggerSink, HTMLStencilElement {}
+  var HTMLSmoothlyTriggerSinkElement: {
+    prototype: HTMLSmoothlyTriggerSinkElement;
+    new (): HTMLSmoothlyTriggerSinkElement;
+  };
+
+  interface HTMLSmoothlyTriggerSourceElement extends Components.SmoothlyTriggerSource, HTMLStencilElement {}
+  var HTMLSmoothlyTriggerSourceElement: {
+    prototype: HTMLSmoothlyTriggerSourceElement;
+    new (): HTMLSmoothlyTriggerSourceElement;
+  };
+
+  interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {}
+  var HTMLSmoothlyTriggerElement: {
+    prototype: HTMLSmoothlyTriggerElement;
+    new (): HTMLSmoothlyTriggerElement;
+  };
+
   interface HTMLElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement
     'smoothly-accordion': HTMLSmoothlyAccordionElement
-    'smoothly-action': HTMLSmoothlyActionElement
     'smoothly-checkbox': HTMLSmoothlyCheckboxElement
+    'smoothly-dialog': HTMLSmoothlyDialogElement
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement
+    'smoothly-frame': HTMLSmoothlyFrameElement
     'smoothly-input': HTMLSmoothlyInputElement
     'smoothly-radio': HTMLSmoothlyRadioElement
     'smoothly-spinner': HTMLSmoothlySpinnerElement
     'smoothly-submit': HTMLSmoothlySubmitElement
+    'smoothly-trigger-sink': HTMLSmoothlyTriggerSinkElement
+    'smoothly-trigger-source': HTMLSmoothlyTriggerSourceElement
+    'smoothly-trigger': HTMLSmoothlyTriggerElement
   }
 
   interface ElementTagNameMap {
     'smoothly-accordion-item': HTMLSmoothlyAccordionItemElement;
     'smoothly-accordion': HTMLSmoothlyAccordionElement;
-    'smoothly-action': HTMLSmoothlyActionElement;
     'smoothly-checkbox': HTMLSmoothlyCheckboxElement;
+    'smoothly-dialog': HTMLSmoothlyDialogElement;
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement;
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement;
+    'smoothly-frame': HTMLSmoothlyFrameElement;
     'smoothly-input': HTMLSmoothlyInputElement;
     'smoothly-radio': HTMLSmoothlyRadioElement;
     'smoothly-spinner': HTMLSmoothlySpinnerElement;
     'smoothly-submit': HTMLSmoothlySubmitElement;
+    'smoothly-trigger-sink': HTMLSmoothlyTriggerSinkElement;
+    'smoothly-trigger-source': HTMLSmoothlyTriggerSourceElement;
+    'smoothly-trigger': HTMLSmoothlyTriggerElement;
   }
 
 
