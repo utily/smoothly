@@ -9,7 +9,7 @@ import { Message } from "../../Message"
 })
 export class SmoothlyTriggerSink {
 	@Prop() destination: string
-	@Listen("smoothlyTrigger")
+	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
 		if (Trigger.is(event.detail)) {
 			Message.send(this.destination, event.detail, window, window.parent.location.origin)

@@ -14,11 +14,11 @@ export class SmoothlyTrigger {
 	@Prop({ reflectToAttr: true }) fill: Fill
 	@Prop() name: string
 	@Prop() value?: any
-	@Event() smoothlyTrigger: EventEmitter<Trigger>
+	@Event() trigger: EventEmitter<Trigger>
 
 	@Listen("click")
 	onClick(e: UIEvent) {
-		this.smoothlyTrigger.emit({ name: this.name, value: this.value })
+		this.trigger.emit({ name: this.name, value: this.value })
 		e.stopPropagation()
 		e.preventDefault()
 	}
