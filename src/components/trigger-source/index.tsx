@@ -9,14 +9,14 @@ import { Message } from "../../Message"
 })
 export class SmoothlyTriggerSource {
 	@Prop() name: string
-	@Event() smoothlyTrigger: EventEmitter<Trigger>
+	@Event() trigger: EventEmitter<Trigger>
 	@Event() smoothlyMessage: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	componentDidLoad() {
 		Message.listen((destination, content) => {
 			if (destination == this.name)
 				if (Trigger.is(content))
-					this.smoothlyTrigger.emit(content)
+					this.trigger.emit(content)
 				else
 					this.smoothlyMessage.emit({ destination, content })
 		})

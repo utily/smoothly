@@ -180,7 +180,7 @@ export namespace Components {
   interface SmoothlyTriggerSourceAttributes extends StencilHTMLAttributes {
     'name'?: string;
     'onSmoothlyMessage'?: (event: CustomEvent<Message<any>>) => void;
-    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'onTrigger'?: (event: CustomEvent<Trigger>) => void;
   }
 
   interface SmoothlyTrigger {
@@ -195,7 +195,7 @@ export namespace Components {
     'expand'?: Expand;
     'fill'?: Fill;
     'name'?: string;
-    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'onTrigger'?: (event: CustomEvent<Trigger>) => void;
     'value'?: any;
   }
 }
