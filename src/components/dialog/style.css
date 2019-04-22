@@ -12,9 +12,11 @@
 }
 :host > main {
 	position: relative;
-	color: rgb(var(--smoothly-text-color));
-	background-color: rgb(var(--smoothly-background-color));
-	border: rgb(var(--smoothly-primary-color)) 1px solid;
+	color: rgb(var(--smoothly-default-contrast));
+	background-color: rgb(var(--smoothly-default-color));
+	border-color: rgb(var(--smoothly-color));
+	border-width: 1px;
+	border-style: solid;
 	box-shadow: 0 0 .1em .1em rgba(var(--smoothly-light-color), var(--smoothly-semitransparent));
 	border-radius: 8px;
 	max-width: 40em;
@@ -24,16 +26,10 @@
 	padding: 1em;
 }
 :host {
-	background: rgba(var(--smoothly-background-color), var(--smoothly-semitransparent));
+	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
 :host > main > smoothly-trigger {
 	position: absolute;
 	right: -1.3em;
 	top: -1.2em;
-}
-:host > main > smoothly-trigger svg {
-	width: 1.6em;
-	height: 1.6em;
-	fill: rgb(var(--smoothly-primary-color));
-	background: rgb(var(--smoothly-background-color));
 }

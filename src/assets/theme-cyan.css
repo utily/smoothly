@@ -1,9 +1,11 @@
 :root {
 	--smoothly-font-family: "Open Sans", "Arial Narrow", Arial, sans-serif;
-	--smoothly-background-color: 255, 255, 255;
-	--smoothly-text-color: 46, 52, 54;
-	--smoothly-text-tint: 136, 138, 133;
 	--smoothly-semitransparent: .8;
+
+	--smoothly-default-color: 255, 255, 255;
+	--smoothly-default-contrast: 46, 52, 54;
+	--smoothly-default-shade: 238, 238, 236;
+	--smoothly-default-tint: 136, 138, 133;
 
 	--smoothly-primary-color: 13, 182, 255;
 	--smoothly-primary-contrast: 242, 242, 242;
