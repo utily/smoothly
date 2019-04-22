@@ -29,7 +29,7 @@ export class SmoothlySubmit {
 				}
 			}
 			event.preventDefault()
-			this.processing = !this.submit.emit(result).returnValue
+			this.processing = this.submit.emit(result).returnValue
 		}
 	}
 

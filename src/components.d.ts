@@ -74,10 +74,12 @@ export namespace Components {
   }
 
   interface SmoothlyDialog {
+    'closable': boolean;
     'color': Color | undefined;
     'open': boolean;
   }
   interface SmoothlyDialogAttributes extends StencilHTMLAttributes {
+    'closable'?: boolean;
     'color'?: Color | undefined;
     'open'?: boolean;
   }
@@ -103,8 +105,8 @@ export namespace Components {
     'url': string;
   }
   interface SmoothlyFrameAttributes extends StencilHTMLAttributes {
-    'onSmoothlyMessage'?: (event: CustomEvent<object>) => void;
-    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'onMessage'?: (event: CustomEvent<object>) => void;
+    'onTrigger'?: (event: CustomEvent<Trigger>) => void;
     'url'?: string;
   }
 
@@ -179,7 +181,7 @@ export namespace Components {
   }
   interface SmoothlyTriggerSourceAttributes extends StencilHTMLAttributes {
     'name'?: string;
-    'onSmoothlyMessage'?: (event: CustomEvent<Message<any>>) => void;
+    'onMessage'?: (event: CustomEvent<Message<any>>) => void;
     'onTrigger'?: (event: CustomEvent<Trigger>) => void;
   }
 
