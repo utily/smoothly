@@ -10,9 +10,9 @@ import { Fill } from "../../Fill"
 })
 export class SmoothlySubmit {
 	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
-	@Prop({ reflectToAttr: true }) color: Color | undefined
-	@Prop({ reflectToAttr: true }) expand: Expand
-	@Prop({ reflectToAttr: true }) fill: Fill
+	@Prop({ reflectToAttr: true }) color?: Color
+	@Prop({ reflectToAttr: true }) expand?: Expand
+	@Prop({ reflectToAttr: true }) fill?: Fill
 	@Event() submit: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {
@@ -29,7 +29,7 @@ export class SmoothlySubmit {
 				}
 			}
 			event.preventDefault()
-			this.processing = !this.submit.emit(result).returnValue
+			this.processing = this.submit.emit(result).returnValue
 		}
 	}
 

@@ -25,14 +25,14 @@ import {
   EventEmitter,
 } from '@stencil/core';
 import {
+  Fill,
+} from './Fill';
+import {
   Autocomplete,
 } from './components/input/browser';
 import {
   Expand,
 } from './Expand';
-import {
-  Fill,
-} from './Fill';
 
 
 export namespace Components {
@@ -74,10 +74,12 @@ export namespace Components {
   }
 
   interface SmoothlyDialog {
+    'closable': boolean;
     'color': Color | undefined;
     'open': boolean;
   }
   interface SmoothlyDialogAttributes extends StencilHTMLAttributes {
+    'closable'?: boolean;
     'color'?: Color | undefined;
     'open'?: boolean;
   }
@@ -103,9 +105,22 @@ export namespace Components {
     'url': string;
   }
   interface SmoothlyFrameAttributes extends StencilHTMLAttributes {
-    'onSmoothlyMessage'?: (event: CustomEvent<object>) => void;
-    'onSmoothlyTrigger'?: (event: CustomEvent<Trigger>) => void;
+    'onMessage'?: (event: CustomEvent<object>) => void;
+    'onTrigger'?: (event: CustomEvent<Trigger>) => void;
     'url'?: string;
+  }
+
+  interface SmoothlyIcon {
+    'color': Color;
+    'fill': Fill;
+    'name'?: string;
+    'size': "small" | "medium" | "large";
+  }
+  interface SmoothlyIconAttributes extends StencilHTMLAttributes {
+    'color'?: Color;
+    'fill'?: Fill;
+    'name'?: string;
+    'size'?: "small" | "medium" | "large";
   }
 
   interface SmoothlyInput {
@@ -154,13 +169,13 @@ export namespace Components {
   }
 
   interface SmoothlySubmit {
-    'color': Color | undefined;
-    'expand': Expand;
-    'fill': Fill;
+    'color'?: Color;
+    'expand'?: Expand;
+    'fill'?: Fill;
     'processing': boolean;
   }
   interface SmoothlySubmitAttributes extends StencilHTMLAttributes {
-    'color'?: Color | undefined;
+    'color'?: Color;
     'expand'?: Expand;
     'fill'?: Fill;
     'onSubmit'?: (event: CustomEvent<{ [key: string]: string }>) => void;
@@ -179,7 +194,7 @@ export namespace Components {
   }
   interface SmoothlyTriggerSourceAttributes extends StencilHTMLAttributes {
     'name'?: string;
-    'onSmoothlyMessage'?: (event: CustomEvent<Message<any>>) => void;
+    'onMessage'?: (event: CustomEvent<Message<any>>) => void;
     'onTrigger'?: (event: CustomEvent<Trigger>) => void;
   }
 
@@ -209,6 +224,7 @@ declare global {
     'SmoothlyDisplayAmount': Components.SmoothlyDisplayAmount;
     'SmoothlyDisplayDateTime': Components.SmoothlyDisplayDateTime;
     'SmoothlyFrame': Components.SmoothlyFrame;
+    'SmoothlyIcon': Components.SmoothlyIcon;
     'SmoothlyInput': Components.SmoothlyInput;
     'SmoothlyRadio': Components.SmoothlyRadio;
     'SmoothlySpinner': Components.SmoothlySpinner;
@@ -226,6 +242,7 @@ declare global {
     'smoothly-display-amount': Components.SmoothlyDisplayAmountAttributes;
     'smoothly-display-date-time': Components.SmoothlyDisplayDateTimeAttributes;
     'smoothly-frame': Components.SmoothlyFrameAttributes;
+    'smoothly-icon': Components.SmoothlyIconAttributes;
     'smoothly-input': Components.SmoothlyInputAttributes;
     'smoothly-radio': Components.SmoothlyRadioAttributes;
     'smoothly-spinner': Components.SmoothlySpinnerAttributes;
@@ -278,6 +295,12 @@ declare global {
     new (): HTMLSmoothlyFrameElement;
   };
 
+  interface HTMLSmoothlyIconElement extends Components.SmoothlyIcon, HTMLStencilElement {}
+  var HTMLSmoothlyIconElement: {
+    prototype: HTMLSmoothlyIconElement;
+    new (): HTMLSmoothlyIconElement;
+  };
+
   interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {}
   var HTMLSmoothlyInputElement: {
     prototype: HTMLSmoothlyInputElement;
@@ -328,6 +351,7 @@ declare global {
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement
     'smoothly-frame': HTMLSmoothlyFrameElement
+    'smoothly-icon': HTMLSmoothlyIconElement
     'smoothly-input': HTMLSmoothlyInputElement
     'smoothly-radio': HTMLSmoothlyRadioElement
     'smoothly-spinner': HTMLSmoothlySpinnerElement
@@ -345,6 +369,7 @@ declare global {
     'smoothly-display-amount': HTMLSmoothlyDisplayAmountElement;
     'smoothly-display-date-time': HTMLSmoothlyDisplayDateTimeElement;
     'smoothly-frame': HTMLSmoothlyFrameElement;
+    'smoothly-icon': HTMLSmoothlyIconElement;
     'smoothly-input': HTMLSmoothlyInputElement;
     'smoothly-radio': HTMLSmoothlyRadioElement;
     'smoothly-spinner': HTMLSmoothlySpinnerElement;

@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@stencil/core": "0.18.1",
-    "isoly": "0.0.6"
+    "isoly": "0.0.6",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.14",

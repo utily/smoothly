@@ -14,7 +14,7 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(var(--smoothly-background-color), var(--smoothly-semitransparent));
+	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent));
 }
 :host > div {
 	opacity: 1;

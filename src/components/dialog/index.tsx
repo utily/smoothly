@@ -10,7 +10,8 @@ import { Trigger } from "../../Trigger"
 export class SmoothlyDialog {
 	@Prop({ reflectToAttr: true }) color: Color | undefined
 	@Prop({ mutable: true, reflectToAttr: true }) open: boolean = true
-	@Listen("smoothlyTrigger")
+	@Prop({ reflectToAttr: true}) closable: boolean = false
+	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
 		if (Trigger.is(event.detail) && event.detail.name == "close")
 			this.open = false
@@ -24,7 +25,11 @@ export class SmoothlyDialog {
 	}
 	render() {
 		return [
-			<article><slot></slot></article>,
+			<main>
+				{ this.closable ? <smoothly-trigger fill="clear" name="close"><smoothly-icon name="close-circle" fill="solid" color={ this.color }></smoothly-icon></smoothly-trigger> : [] }
+				<slot></slot>
+			</main>,
 		]
 	}
 }
+//

@@ -9,8 +9,8 @@ import { Message } from "../../Message"
 })
 export class SmoothlyFrame {
 	@Prop() url: string
-	@Event() smoothlyTrigger: EventEmitter<Trigger>
-	@Event() smoothlyMessage: EventEmitter<object>
+	@Event() trigger: EventEmitter<Trigger>
+	@Event() message: EventEmitter<object>
 	@Element() element?: HTMLElement
 	get contentWindow(): Window | undefined {
 		const iframe = this.element && this.element.firstElementChild ? this.element.firstElementChild as HTMLIFrameElement : undefined
@@ -21,9 +21,9 @@ export class SmoothlyFrame {
 		Message.listen((destination, content) => {
 			if (destination == "parent")
 				if (Trigger.is(content))
-					this.smoothlyTrigger.emit(content)
+					this.trigger.emit(content)
 				else
-					this.smoothlyMessage.emit({ destination, content })
+					this.message.emit({ destination, content })
 		}, this.contentWindow)
 	}
 	send(message: Message<any>): void
