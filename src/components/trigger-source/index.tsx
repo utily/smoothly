@@ -8,18 +8,18 @@ import { Message } from "../../Message"
 	scoped: true,
 })
 export class SmoothlyTriggerSource {
-	@Prop() name: string
+	@Prop() listen: string
 	@Event() trigger: EventEmitter<Trigger>
 	@Event() message: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	componentDidLoad() {
-		Message.listen((destination, content) => {
-			if (destination == this.name)
-				if (Trigger.is(content))
-					this.trigger.emit(content)
-				else
-					this.message.emit({ destination, content })
-		})
+		Message.listen(this.listen, (destination, content) => {
+			console.log("trigger-source listen", destination, content, Trigger.is(content))
+			if (Trigger.is(content))
+				this.trigger.emit(content)
+			else
+				this.message.emit({ destination, content })
+		}, window)
 	}
 	render() {
 		return <slot></slot>

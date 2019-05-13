@@ -16,13 +16,13 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
-	@Event() smoothlyChanged: EventEmitter<{ value: any }>
+	@Event() smoothlyChanged: EventEmitter<{ name: string, value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		if (this.typeHandler)
 			this.typeHandler.value = value
 		if (value != before)
-			this.smoothlyChanged.emit({ value })
+			this.smoothlyChanged.emit({ name: this.name, value })
 	}
 	private typeHandler?: TypeHandler
 	componentWillLoad() {

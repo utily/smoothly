@@ -101,10 +101,12 @@ export namespace Components {
   }
 
   interface SmoothlyFrame {
+    'name': string;
     'send': (message: string | Message<any>, content?: any) => void;
     'url': string;
   }
   interface SmoothlyFrameAttributes extends StencilHTMLAttributes {
+    'name'?: string;
     'onMessage'?: (event: CustomEvent<object>) => void;
     'onTrigger'?: (event: CustomEvent<Trigger>) => void;
     'url'?: string;
@@ -139,7 +141,7 @@ export namespace Components {
     'maxLength'?: number;
     'minLength'?: number;
     'name'?: string;
-    'onSmoothlyChanged'?: (event: CustomEvent<{ value: any }>) => void;
+    'onSmoothlyChanged'?: (event: CustomEvent<{ name: string, value: any }>) => void;
     'pattern'?: RegExp | undefined;
     'placeholder'?: string | undefined;
     'required'?: boolean;
@@ -183,17 +185,21 @@ export namespace Components {
   }
 
   interface SmoothlyTriggerSink {
+    'context'?: Window;
     'destination': string;
+    'filter': string;
   }
   interface SmoothlyTriggerSinkAttributes extends StencilHTMLAttributes {
+    'context'?: Window;
     'destination'?: string;
+    'filter'?: string;
   }
 
   interface SmoothlyTriggerSource {
-    'name': string;
+    'listen': string;
   }
   interface SmoothlyTriggerSourceAttributes extends StencilHTMLAttributes {
-    'name'?: string;
+    'listen'?: string;
     'onMessage'?: (event: CustomEvent<Message<any>>) => void;
     'onTrigger'?: (event: CustomEvent<Trigger>) => void;
   }

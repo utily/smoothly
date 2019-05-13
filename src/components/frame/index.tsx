@@ -9,6 +9,7 @@ import { Message } from "../../Message"
 })
 export class SmoothlyFrame {
 	@Prop() url: string
+	@Prop() name: string
 	@Event() trigger: EventEmitter<Trigger>
 	@Event() message: EventEmitter<object>
 	@Element() element?: HTMLElement
@@ -16,26 +17,32 @@ export class SmoothlyFrame {
 		const iframe = this.element && this.element.firstElementChild ? this.element.firstElementChild as HTMLIFrameElement : undefined
 		return iframe && iframe.contentWindow || undefined
 	}
+	get urlOrigin(): string {
+		const match = this.url.match(/^(([a-z]+\+)*[a-z]+:\/\/)?[^\/^\n]+/)
+		return match ? match[0] : "*"
+	}
 	componentDidLoad() {
 		if (this.contentWindow)
-		Message.listen((destination, content) => {
-			if (destination == "parent")
+		Message.listen("*" /*this.urlOrigin*/, (destination: string, content: any) => {
+			console.log("frame.listen", destination, content)
+			if (destination == this.name)
 				if (Trigger.is(content))
 					this.trigger.emit(content)
 				else
 					this.message.emit({ destination, content })
-		}, this.contentWindow)
+		}, window)
 	}
 	send(message: Message<any>): void
 	send(destination: string, content: Trigger | any): void
 	@Method()
 	send(message: string | Message<any>, content?: Trigger | any): void {
+		console.log("frame.submit", message, content, this.urlOrigin)
 		if (typeof(message) == "string")
-			Message.send(message, content, this.contentWindow)
+			Message.send(this.urlOrigin + "#" + message, content, this.contentWindow)
 		else if (Message.is(message) && this.contentWindow)
-			Message.send(message, this.contentWindow)
+			Message.send({ destination: this.urlOrigin + "#" + message.destination, content: message.destination }, this.contentWindow)
 	}
 	render() {
-		return <iframe src={ this.url } height="100%" width="100%"></iframe>
+		return <iframe src={ this.url + "#" + window.location.origin } height="100%" width="100%"></iframe>
 	}
 }

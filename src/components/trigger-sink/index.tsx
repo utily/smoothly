@@ -8,11 +8,20 @@ import { Message } from "../../Message"
 	scoped: true,
 })
 export class SmoothlyTriggerSink {
+	@Prop() context?: Window
 	@Prop() destination: string
+	@Prop() filter: string
+	filtersValue?: string[]
+	get filters(): string[] {
+		if (!this.filtersValue)
+			this.filtersValue = this.filter.split(" ")
+		return this.filtersValue
+	}
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
-		if (Trigger.is(event.detail)) {
-			Message.send(this.destination, event.detail, window, window.parent.location.origin)
+		console.log("trigger-sink", event, this.filters)
+		if (Trigger.is(event.detail) && this.filters.some(f => f == event.detail.name)) {
+			Message.send(this.destination, event.detail, this.context || window)
 			event.preventDefault()
 			event.stopPropagation()
 		}
