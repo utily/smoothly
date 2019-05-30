@@ -28,15 +28,16 @@ export class SmoothlySubmit {
 						result[element.name] = element.value
 				}
 			}
-			event.preventDefault()
-			this.processing = this.submit.emit(result).returnValue
+			if (!this.submit.emit(result).returnValue)
+				event.preventDefault()
+			this.processing = false
 		}
 	}
 
 	render() {
 		return [
 			<smoothly-spinner active={ this.processing }></smoothly-spinner>,
-			<button disabled={ this.processing }><slot></slot></button>,
+		<button type="submit" disabled={ this.processing }><slot></slot></button>,
 		]
 	}
 }

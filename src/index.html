@@ -43,7 +43,7 @@
 	<smoothly-icon name="close-circle"></smoothly-icon>
 	<smoothly-icon name="close-circle" size="large" color="warning"></smoothly-icon>
 	<section>
-		<form style="position: relative;">
+		<form action="done" style="position: relative;">
 			<header><h5>Address</h5></header>
 			<main>
 				<smoothly-input type="text" name="name">Name</smoothly-input>
@@ -71,7 +71,7 @@
 				<smoothly-checkbox name="order" value="12341231"></smoothly-checkbox>
 			</main>
 			<footer>
-				<smoothly-submit expand="block" color="success" onSubmit="e => console.log(e.detail)">Submit</smoothly-submit>
+				<smoothly-submit expand="block" onSubmit="e => alert(e)" color="success">Submit</smoothly-submit>
 				<smoothly-trigger expand="block" color="success" onClick="e => console.log(e.detail)">Trigger</smoothly-trigger>
 			</footer>
 		</form>
