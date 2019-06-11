@@ -3,37 +3,35 @@
   "private": false,
   "version": "0.0.40",
   "description": "Web component library written in Stencil.",
-  "license": "MIT",
-  "module": "dist/index.mjs",
   "main": "dist/index.js",
-  "unpkg": "dist/smoothly.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/smoothly/smoothly.js",
   "files": [
-    "dist/"
+    "dist/",
+    "loader/"
   ],
   "scripts": {
-    "lint": "tslint --project .",
-    "build": "stencil build",
+    "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test.unit": "stencil test --spec",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "prepare": "npm run build",
-    "clean": "rm -rf dist doc www .stencil"
+    "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
-    "@stencil/core": "1.0.2",
     "isoly": "0.0.7",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
+    "@stencil/core": "1.0.2",
+    "@types/jest": "24.0.13",
     "@types/puppeteer": "1.12.4",
     "jest": "24.8.0",
     "jest-cli": "24.8.0",
-    "puppeteer": "1.17.0",
-    "tslint": "^5.17.0",
-    "workbox-build": "4.3.1"
-  }
+    "puppeteer": "1.17.0"
+  },
+  "license": "MIT"
 }

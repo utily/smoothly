@@ -1,4 +1,3 @@
-import * as browser from "../browser"
 import { Base } from "./Base"
 import { Component } from "../Component"
 import { CardIssuer } from "./CardIssuer"
