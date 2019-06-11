@@ -5,3 +5,4 @@ build
 .stencil
 dist
 www
+src/components.d.ts

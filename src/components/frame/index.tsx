@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Event, EventEmitter, Method } from "@stencil/core"
+import { Component, Prop, Element, Event, EventEmitter, Method, h } from "@stencil/core"
 import { Trigger } from "../../Trigger"
 import { Message } from "../../Message"
 
@@ -35,7 +35,7 @@ export class SmoothlyFrame {
 	send(message: Message<any>): void
 	send(destination: string, content: Trigger | any): void
 	@Method()
-	send(message: string | Message<any>, content?: Trigger | any): void {
+	async send(message: string | Message<any>, content?: Trigger | any): Promise<void> {
 		console.log("frame.submit", message, content, this.urlOrigin)
 		if (typeof(message) == "string")
 			Message.send(this.urlOrigin + "#" + message, content, this.contentWindow)

@@ -1,4 +1,4 @@
-import { Component, State, Prop } from "@stencil/core"
+import { Component, Prop, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-spinner",

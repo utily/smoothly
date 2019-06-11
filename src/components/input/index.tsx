@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop, Watch, h } from "@stencil/core"
 import { TypeHandler } from "./TypeHandler"
 import { Autocomplete } from "./browser"
 @Component({

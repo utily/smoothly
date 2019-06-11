@@ -4,14 +4,13 @@
   "version": "0.0.40",
   "description": "Web component library written in Stencil.",
   "license": "MIT",
-  "module": "dist/esm/index.js",
+  "module": "dist/index.mjs",
   "main": "dist/index.js",
   "unpkg": "dist/smoothly.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
-    "dist/",
-    "dist/**/*"
+    "dist/"
   ],
   "scripts": {
     "lint": "tslint --project .",
@@ -24,17 +23,17 @@
     "clean": "rm -rf dist doc www .stencil"
   },
   "dependencies": {
-    "@stencil/core": "0.18.1",
-    "isoly": "0.0.6",
+    "@stencil/core": "1.0.2",
+    "isoly": "0.0.7",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.14",
-    "@types/puppeteer": "1.12.3",
-    "jest": "23.6.0",
-    "jest-cli": "23.6.0",
-    "puppeteer": "1.11.0",
-    "tslint": "^5.15.0",
-    "workbox-build": "4.2.0"
+    "@types/jest": "^24.0.13",
+    "@types/puppeteer": "1.12.4",
+    "jest": "24.8.0",
+    "jest-cli": "24.8.0",
+    "puppeteer": "1.17.0",
+    "tslint": "^5.17.0",
+    "workbox-build": "4.3.1"
   }
 }
