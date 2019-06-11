@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 export class SmoothlyCheckbox {
 	@Prop() name: string
 	@Prop() value: string
-	@Prop() title: string
+	@Prop() label: string
 	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
 	@Event() smoothlyChecked!: EventEmitter<{ name: string, value: string }>
 
@@ -20,7 +20,7 @@ export class SmoothlyCheckbox {
 
 	render() {
 		return [
-			<input type="checkbox" name={ this.name } value={ this.value } title={ this.title } checked={ this.checked } onChange={ e => this.onInput(e as UIEvent) }/>,
+			<input type="checkbox" name={ this.name } value={ this.value } title={ this.label } checked={ this.checked } onChange={ e => this.onInput(e as UIEvent) }/>,
 		]
 	}
 }
