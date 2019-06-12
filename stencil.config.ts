@@ -2,10 +2,14 @@ import { Config } from "@stencil/core"
 
 export const config: Config = {
 	namespace: "smoothly",
-	globalStyle: "src/style.css",
-	globalScript: "src/index.ts",
 	outputTargets: [
-		{ type: "dist" },
+		{
+			type: "dist",
+			esmLoaderPath: "../loader",
+		},
+		{
+			type: "docs-readme",
+		},
 		{
 			type: "www",
 			serviceWorker: null, // disable service workers
@@ -14,4 +18,6 @@ export const config: Config = {
 	devServer: {
 		openBrowser: false,
 	},
+	globalStyle: "src/style.css",
+	globalScript: "src/index.ts",
 }

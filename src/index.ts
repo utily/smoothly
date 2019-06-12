@@ -1,5 +1,4 @@
 import { Color } from "./Color"
-import { Components } from "./components"
 import { Expand } from "./Expand"
 import { Fill } from "./Fill"
 import { Message as MessageInterface } from "./Message"
@@ -10,7 +9,6 @@ type Trigger = TriggerInterface
 
 export {
 	Color,
-	Components,
 	Expand,
 	Fill,
 	Message,

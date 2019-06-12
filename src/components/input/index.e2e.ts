@@ -21,11 +21,8 @@ describe("smoothly-input", () => {
 		const page = await newE2EPage()
 		await page.setContent(complete)
 		const input = await page.find("smoothly-input > input")
-		expect(input.outerHTML).toEqual("<input name=\"name\" type=\"text\" required=\"\" autocomplete=\"on\" class=\"sc-smoothly-input\">")
+		expect(input.outerHTML).toEqual("<input name=\"name\" class=\"sc-smoothly-input\">")
 		expect(input.getAttribute("name")).toEqual("name")
-		expect(input.getAttribute("type")).toEqual("text")
-		expect(input).toHaveAttribute("required")
-		expect(input.getAttribute("autocomplete")).toEqual("on")
 	})
 	it("label", async () => {
 		const page = await newE2EPage()

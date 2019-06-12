@@ -1,5 +1,4 @@
 import * as browser from "./browser"
-import { State } from "./State"
 
 export interface Component<T> {
 	type: string

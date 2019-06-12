@@ -5,3 +5,6 @@ build
 .stencil
 dist
 www
+src/components.d.ts
+loader
+src/components/*/readme.md

@@ -1,4 +1,3 @@
-import * as browser from "../browser"
 import { State } from "../State"
 import { KeyEvent } from "../KeyEvent"
 import { Component } from "../Component"

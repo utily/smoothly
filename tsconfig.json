@@ -1,7 +1,18 @@
 {
 	"compilerOptions": {
-		"target": "es2017",
+		"allowSyntheticDefaultImports": true,
+		"allowUnreachableCode": false,
+		"declaration": false,
+		"experimentalDecorators": true,
+		"lib": [
+			"dom",
+			"es2017"
+		],
+		"moduleResolution": "node",
 		"module": "esnext",
+		"target": "es2017",
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
@@ -9,11 +20,9 @@
 		"noImplicitThis": true,
 		"strictNullChecks": true,
 		"sourceMap": true,
-		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"experimentalDecorators": true,
 		"jsx": "react",
-    "jsxFactory": "h",
+		"jsxFactory": "h",
 		"plugins": [
 			{
 			"name": "typescript-tslint-plugin",
@@ -29,7 +38,7 @@
 		"**/*.ts",
 		"types/jsx.d.ts"
 	],
-	"typeAcquisition": {
-		"enable": true
-	}
+	"exclude": [
+		"node_modules"
+	]
 }
