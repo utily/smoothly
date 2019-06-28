@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Listen, h } from "@stencil/core"
+import { Component, Event, EventEmitter, Prop, Listen, h, Method } from "@stencil/core"
 import { Color } from "../../Color"
 import { Expand } from "../../Expand"
 import { Fill } from "../../Fill"
@@ -9,15 +9,19 @@ import { Fill } from "../../Fill"
 	scoped: true,
 })
 export class SmoothlySubmit {
+	private form?: HTMLFormElement
 	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
 	@Prop({ reflectToAttr: true }) color?: Color
 	@Prop({ reflectToAttr: true }) expand?: Expand
 	@Prop({ reflectToAttr: true }) fill?: Fill
-	@Event() submit: EventEmitter<{ [key: string]: string }>
+	@Prop() prevent?: boolean
+	@Event({ eventName: "submit" }) submitEvent: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {
 		if (!this.processing) {
 			this.processing = true
+			if (this.prevent)
+				event.preventDefault()
 			const result: { [key: string]: string } = {}
 			const target = event.target as HTMLButtonElement
 			if (target.form && target.form.elements) {
@@ -28,16 +32,22 @@ export class SmoothlySubmit {
 						result[element.name] = element.value
 				}
 			}
-			if (!this.submit.emit(result).returnValue)
-				event.preventDefault()
+			const innerEvent = this.submitEvent.emit(result)
+			console.log("smoothly-submit", innerEvent)
 			this.processing = false
 		}
 	}
-
+	@Method()
+	async submit(): Promise<boolean> {
+		let result: boolean
+		if (result = !!this.form)
+			this.form.submit()
+		return result
+	}
 	render() {
 		return [
 			<smoothly-spinner active={ this.processing }></smoothly-spinner>,
-		<button type="submit" disabled={ this.processing }><slot></slot></button>,
+			<button type="submit" disabled={ this.processing } ref={ (element: HTMLButtonElement) => this.form = element && element.form || undefined }><slot></slot></button>,
 		]
 	}
 }

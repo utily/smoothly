@@ -10,11 +10,11 @@ import { Message } from "../../Message"
 export class SmoothlyTriggerSink {
 	@Prop() context?: Window
 	@Prop() destination: string
-	@Prop() filter: string
+	@Prop() filter?: string
 	filtersValue?: string[]
 	get filters(): string[] {
 		if (!this.filtersValue)
-			this.filtersValue = this.filter.split(" ")
+			this.filtersValue = this.filter ? this.filter.split(" ") : []
 		return this.filtersValue
 	}
 	@Listen("trigger")
