@@ -19,5 +19,4 @@ export const config: Config = {
 		openBrowser: false,
 	},
 	globalStyle: "src/style.css",
-	globalScript: "src/index.ts",
 }

@@ -35,7 +35,7 @@
 		],
 	},
 	"include": [
-		"**/*.ts",
+		"src",
 		"types/jsx.d.ts"
 	],
 	"exclude": [
