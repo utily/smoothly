@@ -1,8 +1,6 @@
 import { Component, Prop, Event, EventEmitter, Listen, h } from "@stencil/core"
-import { Trigger } from "../../Trigger"
-import { Color } from "../../Color"
-import { Expand } from "../../Expand"
-import { Fill } from "../../Fill"
+import { Color, Expand, Fill, Trigger } from "smoothly-model"
+
 @Component({
 	tag: "smoothly-trigger",
 	styleUrl: "style.css",
