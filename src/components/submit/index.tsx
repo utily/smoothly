@@ -1,7 +1,5 @@
 import { Component, Event, EventEmitter, Prop, Listen, h, Method } from "@stencil/core"
-import { Color } from "../../Color"
-import { Expand } from "../../Expand"
-import { Fill } from "../../Fill"
+import { Color, Expand, Fill } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-submit",

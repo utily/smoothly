@@ -1,6 +1,5 @@
 import { Component, Prop, Listen, h } from "@stencil/core"
-import { Color } from "../../Color"
-import { Trigger } from "../../Trigger"
+import { Color, Trigger } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-dialog",

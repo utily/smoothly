@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Prop, h } from "@stencil/core"
-import { Trigger } from "../../Trigger"
-import { Message } from "../../Message"
+import { Message, Trigger } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-trigger-source",

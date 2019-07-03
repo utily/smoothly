@@ -1,6 +1,5 @@
 import { Component, State, Prop, Watch } from "@stencil/core"
-import { Color } from "../../Color"
-import { Fill } from "../../Fill"
+import { Color, Fill } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-icon",
