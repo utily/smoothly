@@ -17,11 +17,6 @@ button {
 	background: rgb(var(--smoothly-light-color));
 	border-color: rgb(var(--smoothly-light-color));
 }
-:host:not([processing]) > button {
-	color: var(--smoothly-submit-foreground);
-	background: var(--smoothly-submit-background);
-	border-color: var(--smoothly-submit-background);
-}
 :host:not([processing]):hover > button,
 :host:not([processing]):focus > button,
 :host:not([processing]):active > button {
