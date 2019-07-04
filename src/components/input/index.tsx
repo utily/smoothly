@@ -7,7 +7,7 @@ import { Autocomplete } from "./browser"
 	scoped: true,
 })
 export class SmoothlyInput {
-	@Prop() name: string
+	@Prop({ reflectToAttr: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflectToAttr: true }) type: string = "text"
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean = false

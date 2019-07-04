@@ -1,0 +1,10 @@
+:host {
+	display: block;
+	position: relative;
+}
+:host[hidden] {
+	display: none;
+}
+smoothly-submit {
+	float: right;
+}
