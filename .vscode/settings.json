@@ -1,4 +1,17 @@
 {
 	"javascript.implicitProjectConfig.experimentalDecorators": true,
+	"files.exclude": {
+		".*": true,
+		"*.json": true,
+		"stencil.config.ts": true,
+		"src/components.d.ts": true,
+		"dist": true,
+		"www": true,
+		"loader": true,
+		"README.md": true,
+		"LICENSE": true,
+	},
+	"editor.tabSize": 2,
+	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
 }
