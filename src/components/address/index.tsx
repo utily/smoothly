@@ -1,5 +1,5 @@
 import { Component, Prop, h, State, Listen } from "@stencil/core"
-import { Address } from "smoothly-model"
+import { Address, Addresses } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-address",
@@ -7,7 +7,7 @@ import { Address } from "smoothly-model"
 	scoped: true,
 })
 export class SmoothlyAddress {
-	@Prop() type: string
+	@Prop() type: Addresses.Type = "primary"
 	@Prop() value: string | Address
 	@Prop() editable: boolean
 	@State() mode: "edit" | "display" = "display"
@@ -17,14 +17,15 @@ export class SmoothlyAddress {
 		this.mode = "display"
 	} 
 	render() {
-		let array = this.mode == "edit" ?
+		return this.mode == "edit" ?
 		[
-			<smoothly-address-edit type={ this.type } value={ this.value }></smoothly-address-edit>,
+			<label>{ this.type }</label>,
+			<smoothly-address-edit value={ this.value }></smoothly-address-edit>,
 		] :
 		[
-			<smoothly-submit color="primary" fill="clear" prevent onSubmit={ _ => this.mode = "edit" }>Edit</smoothly-submit>,
-			<smoothly-address-display type={ this.type } value={ this.value }></smoothly-address-display>,
+			<label>{ this.type }</label>,
+			this.editable ? <smoothly-submit color="primary" fill="clear" prevent onSubmit={ _ => this.mode = "edit" }>Edit</smoothly-submit> : [],
+			<smoothly-address-display value={ this.value }></smoothly-address-display>,
 		]
-		return array
 	}
 }

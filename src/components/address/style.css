@@ -8,3 +8,8 @@
 smoothly-submit {
 	float: right;
 }
+label {
+	display: block;
+	margin-block-start: .6em;
+	margin-block-end: .2em;
+}

@@ -71,7 +71,8 @@
 				<smoothly-display-date-time datetime="2019-01-31T20:01:34"></smoothly-display-date-time>
 				<smoothly-checkbox name="order" value="12341231"></smoothly-checkbox>
 				<smoothly-address-display value='{ "countryCode": "SE", "street": "Korkstigen 2", "zipCode": "654 31", "city": "Fejksala" }'></smoothly-address-display>
-				<smoothly-address value='{ "countryCode": "SE", "street": "Stigvägen 34", "zipCode": "123 45", "city": "Hobbiton" }'></smoothly-address>
+				<smoothly-address editable="false" value='{ "countryCode": "SE", "street": "Stigvägen 34", "zipCode": "123 45", "city": "Hobbiton" }'></smoothly-address>
+				<smoothly-addresses editable="true" value='{ "delivery": { "countryCode": "SE", "street": "Merchant Street 18", "zipCode": "12345", "city": "Merchantilium" }, "billing": { "countryCode": "SE", "street": "Rundslingan 3", "zipCode": "987 65", "city": "Klotby" }, "primary": { "countryCode": "SE", "street": "Gångbanan 34", "zipCode": "543 21", "city": "Traskträsk" } }'></smoothly-addresses>
 			</main>
 			<footer>
 				<smoothly-submit expand="block" onSubmit="e => alert(e)" color="success">Submit</smoothly-submit>
