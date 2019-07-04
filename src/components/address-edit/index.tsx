@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Prop, h, Listen } from "@stencil/core"
-import { Address, Addresses } from "smoothly-model"
+import { Address } from "smoothly-model"
 import * as isoly from "isoly"
 import { Trigger } from "smoothly-model"
 
@@ -9,7 +9,6 @@ import { Trigger } from "smoothly-model"
 	scoped: true,
 })
 export class AddressEdit {
-	@Prop() type: string
 	@Prop() value: string | Address
 	get address(): Address { return typeof(this.value) == "string" ? JSON.parse(this.value) as Address : this.value }
 	@Event() change: EventEmitter<Address>
@@ -22,7 +21,6 @@ export class AddressEdit {
 	onSubmit(e: CustomEvent) {
 		e.stopPropagation()
 		const result: Address = { ...e.detail, countryCode: isoly.CountryCode.Name.parse(e.detail.country), country: undefined }
-		console.log("submit", result)
 		this.change.emit(result)
 	}
 	render() {
@@ -39,8 +37,7 @@ export class AddressEdit {
 				</div>
 			</form>,
 		] :
-		Address.is(this.address) ? <p>Unknown address country: { JSON.stringify(this.address) }</p> :
-		Addresses.map(this.address, (type, address) => <smoothly-address-display type={ type } value={ address }></smoothly-address-display>)
+		<p>Unknown address country: { JSON.stringify(this.address) }</p>
 	}
 }
 
