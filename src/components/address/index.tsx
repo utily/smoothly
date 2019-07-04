@@ -19,11 +19,11 @@ export class SmoothlyAddress {
 	render() {
 		let array = this.mode == "edit" ?
 		[
-			<smoothly-address-edit type= { this.type } value= { this.value }></smoothly-address-edit>,
+			<smoothly-address-edit type={ this.type } value={ this.value }></smoothly-address-edit>,
 		] :
 		[
-			<smoothly-submit color="primary" fill="clear" prevent onSubmit= { _ => this.mode = "edit" }>Edit</smoothly-submit>,
-			<smoothly-address-display type= { this.type } value= { this.value }></smoothly-address-display>,
+			<smoothly-submit color="primary" fill="clear" prevent onSubmit={ _ => this.mode = "edit" }>Edit</smoothly-submit>,
+			<smoothly-address-display type={ this.type } value={ this.value }></smoothly-address-display>,
 		]
 		return array
 	}
