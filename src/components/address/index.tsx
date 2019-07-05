@@ -1,4 +1,5 @@
-import { Component, Prop, h, State, Listen } from "@stencil/core"
+// tslint:disable-next-line: no-implicit-dependencies
+import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 import { Address, Addresses } from "smoothly-model"
 
 @Component({
@@ -10,17 +11,19 @@ export class SmoothlyAddress {
 	@Prop() type: Addresses.Type = "primary"
 	@Prop() value: string | Address
 	@Prop() editable: boolean
-	@State() mode: "edit" | "display" = "display"
-	@Listen("change")
+	@Prop({ mutable: true }) mode: "edit" | "display" = "display"
+	@Event() change: EventEmitter<{ type: Addresses.Type } & Address>
 	onChange(event: CustomEvent<Address>) {
+		event.stopPropagation()
 		this.value = event.detail
 		this.mode = "display"
-	} 
+		this.change.emit({ type: this.type, ...this.value })
+	}
 	render() {
 		return this.mode == "edit" ?
 		[
 			<label>{ this.type }</label>,
-			<smoothly-address-edit value={ this.value }></smoothly-address-edit>,
+			<smoothly-address-edit onChange={ (e: CustomEvent<Address>) => this.onChange(e) } value={ this.value }></smoothly-address-edit>,
 		] :
 		[
 			<label>{ this.type }</label>,
