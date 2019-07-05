@@ -1,7 +1,7 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, h, Listen } from "@stencil/core"
-import { Address } from "smoothly-model"
+import { Address, Trigger } from "smoothly-model"
 import * as isoly from "isoly"
-import { Trigger } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-address-edit",
@@ -14,10 +14,10 @@ export class AddressEdit {
 	@Event() change: EventEmitter<Address>
 	@Listen("trigger")
 	onTrigger(e: CustomEvent<Trigger>) {
-		if(e.detail.name == "cancel") {
+		if (e.detail.name == "cancel") {
 			this.change.emit(this.address)
 		}
-	} 
+	}
 	onSubmit(e: CustomEvent) {
 		e.stopPropagation()
 		const result: Address = { ...e.detail, countryCode: isoly.CountryCode.Name.parse(e.detail.country), country: undefined }
@@ -40,4 +40,3 @@ export class AddressEdit {
 		<p>Unknown address country: { JSON.stringify(this.address) }</p>
 	}
 }
-
