@@ -38,13 +38,12 @@ export abstract class TypeHandler {
 		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
 			event.preventDefault()
 			const backend = event.target as HTMLInputElement
-			const before = this.state
-			const after = this.keyEventHandler(before, event)
-			if (after.value != before.value)
+			const after = this.keyEventHandler(this.state, event)
+			if (after.value != backend.value)
 				backend.value = after.value
-			if (after.selectionStart != before.selectionStart)
+			if (after.selectionStart != backend.selectionStart)
 				backend.selectionStart = after.selectionStart
-			if (after.selectionEnd != before.selectionEnd)
+			if (after.selectionEnd != backend.selectionEnd)
 				backend.selectionEnd = after.selectionEnd
 			this.state = after
 		}
