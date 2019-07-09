@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, Listen, h } from "@stencil/core"
 import { Color, Trigger } from "smoothly-model"
 
