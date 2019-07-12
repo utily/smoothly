@@ -1,0 +1,26 @@
+:host {
+	display: block;
+}
+:host[hidden] {
+	display: none;
+}
+smoothly-trigger {
+	float: right;
+}
+aside {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+aside.warning {
+	background-color: rgb(var(--smoothly-warning-tint));
+}
+aside.success {
+	background-color: rgb(var(--smoothly-success-tint));
+}
+aside.danger {
+	background-color: rgb(var(--smoothly-danger-tint));
+}
+aside.default {
+	background-color: rgb(var(--smoothly-primary-tint));
+}
