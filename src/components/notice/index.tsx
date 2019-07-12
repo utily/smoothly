@@ -8,25 +8,23 @@ import { Trigger, Notice } from "smoothly-model"
 	scoped: true,
 })
 export class SmoothlyNotice {
-	@Prop() notice: string | Notice = { type: "warning", message: "An error occured."}
-	@Prop({ mutable: true }) show: boolean = false
+	@Prop() notice: string | Notice | undefined = undefined
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
-		this.show = false
+		this.notice = undefined
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
 		this.notice = event.detail
-		this.show = true
 	}
 	render() {
-		const notice = typeof(this.notice) == "string" ? JSON.parse(this.notice) as Notice : this.notice
-		const noticeColor = notice.type != "default" ? notice.type : "primary"
-		return !this.show ? <slot></slot> :
+		const notice = this.notice ? typeof(this.notice) == "string" ? JSON.parse(this.notice) as Notice : this.notice : undefined
+		const color = notice && notice.type != "default" ? notice.type : "primary"
+		return notice == undefined ? <slot></slot> :
 		[
 			<slot></slot>,
 			<aside class={ notice.type }>
-				<p>{ notice.message }<smoothly-trigger color="dark" fill="clear" name="close"><smoothly-icon name="close-circle" color={ noticeColor }></smoothly-icon></smoothly-trigger></p>
+				<p>{ notice.message }<smoothly-trigger color="dark" fill="clear" name="close"><smoothly-icon name="close-circle" color={ color }></smoothly-icon></smoothly-trigger></p>
 			</aside>,
 		]
 	}
