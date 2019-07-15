@@ -11,7 +11,8 @@ export class SmoothlyNotice {
 	@Prop() notice?: string | Notice
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
-		if (event.detail.name == "close") { this.notice = undefined }
+		if (event.detail.name == "close")
+			this.notice = undefined
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
