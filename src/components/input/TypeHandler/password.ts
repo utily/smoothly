@@ -11,6 +11,7 @@ class Password extends Base {
 		return {
 			...result,
 			type: "password",
+			autocomplete: "current-password",
 		}
 	}
 }
