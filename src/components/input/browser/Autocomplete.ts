@@ -11,7 +11,7 @@ export type Autocomplete =
 	"email" |
 	"username" |
 	"new-password" |
-	"current-pasword" |
+	"current-password" |
 	"organization-title" |
 	"organization" |
 	"street-address" |
