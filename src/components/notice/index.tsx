@@ -8,17 +8,17 @@ import { Trigger, Notice } from "smoothly-model"
 	scoped: true,
 })
 export class SmoothlyNotice {
-	@Prop() notice: string | Notice | undefined = undefined
+	@Prop() notice?: string | Notice
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
-		this.notice = undefined
+		if (event.detail.name == "close") { this.notice = undefined }
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
 		this.notice = event.detail
 	}
 	render() {
-		const notice = this.notice ? typeof(this.notice) == "string" ? JSON.parse(this.notice) as Notice : this.notice : undefined
+		const notice = !this.notice ? undefined : typeof(this.notice) == "string" ? JSON.parse(this.notice) as Notice : this.notice
 		const color = notice && notice.type != "default" ? notice.type : "primary"
 		return notice == undefined ? <slot></slot> :
 		[
