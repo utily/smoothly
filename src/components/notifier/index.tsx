@@ -3,16 +3,18 @@ import { Component, Prop, h, Listen } from "@stencil/core"
 import { Trigger, Notice } from "smoothly-model"
 
 @Component({
-	tag: "smoothly-notice",
+	tag: "smoothly-notifier",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyNotice {
+export class Notifier {
 	@Prop() notice?: string | Notice
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
-		if (event.detail.name == "close")
+		if (event.detail.name == "close") {
+			event.stopPropagation()
 			this.notice = undefined
+		}
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
