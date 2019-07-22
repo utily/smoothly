@@ -22,9 +22,8 @@ class Price extends Base {
 				result = false
 			else {
 				const decimalPosition = accumulated.indexOf(".")
-				const decimals = accumulated.length - decimalPosition - 1
 				const maxDecimals = 2 // TODO: Get from isoly
-				if (index > decimalPosition && decimals >= maxDecimals)
+				if (index > decimalPosition + maxDecimals)
 					result = false
 			}
 		}
@@ -36,6 +35,12 @@ class Price extends Base {
 		if (state.value.includes(".")) {
 			separator = state.value.indexOf(".")
 			beforeSeparator = separator
+			const afterSeparator = state.value.length - separator - 1
+			const maxDecimals = 2 // TODO: Get from isoly
+			state.value = state.value.padEnd(separator + maxDecimals + 1, "0")
+			if (afterSeparator > maxDecimals) {
+				state.value = state.value.substring(0, separator + maxDecimals + 1)
+			}
 		}
 		const spaces = Math.ceil(beforeSeparator / 3) - 1
 		if (spaces > 0) {
