@@ -15,6 +15,16 @@ class Price extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
+	blurHandler(state: State, event: FocusEvent): State {
+		const stateEditor = StateEditor.copy(state)
+		if (!state.value.includes(".")) {
+			stateEditor.insert(".00", state.value.length)
+		}
+		const index = stateEditor.value.indexOf(".")
+		const maxDecimals = 2 // TODO: Get from isoly
+		stateEditor.value = stateEditor.value.padEnd(index + maxDecimals + 1, "0")
+		return stateEditor
+	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		let result = character >= "0" && character <= "9" || character == "."
 		if (accumulated.includes(".")) {
@@ -37,7 +47,6 @@ class Price extends Base {
 			beforeSeparator = separator
 			const afterSeparator = state.value.length - separator - 1
 			const maxDecimals = 2 // TODO: Get from isoly
-			state.value = state.value.padEnd(separator + maxDecimals + 1, "0")
 			if (afterSeparator > maxDecimals) {
 				state.value = state.value.substring(0, separator + maxDecimals + 1)
 			}
