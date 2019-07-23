@@ -28,9 +28,9 @@ export abstract class TypeHandler {
 		this.value = this.component.value
 	}
 	onBlur(event: FocusEvent) {
-		this.state = this.blurHandler(this.state, event)
+		this.state = this.handleBlur(this.state, event)
 	}
-	abstract blurHandler(state: State, event: FocusEvent): State
+	abstract handleBlur(state: State, event: FocusEvent): State
 	onFocus(event: FocusEvent) {
 		this.stateValue = { ...this.state, selectionStart: 0, selectionEnd: this.state.value.length }
 	}

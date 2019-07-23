@@ -28,7 +28,7 @@ export class Base extends TypeHandler {
 	protected constructor(component: Component<any>) {
 		super(component)
 	}
-	blurHandler(state: State, event: FocusEvent): State {
+	handleBlur(state: State, event: FocusEvent): State {
 		return state
 	}
 	filter(character: string, index: number, accumulated: string): boolean {

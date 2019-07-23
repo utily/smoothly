@@ -15,7 +15,7 @@ class Price extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
-	blurHandler(state: State, event: FocusEvent): State {
+	handleBlur(state: State, event: FocusEvent): State {
 		const stateEditor = StateEditor.copy(state)
 		if (!state.value.includes(".")) {
 			stateEditor.insert(".00", state.value.length)
