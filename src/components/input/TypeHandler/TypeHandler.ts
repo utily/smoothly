@@ -29,9 +29,9 @@ export abstract class TypeHandler {
 		this.value = this.component.value
 	}
 	onBlur() {
-		this.state = this.handleBlur(StateEditor.copy(this.state))
+		this.state = this.handleLeaving(StateEditor.copy(this.state))
 	}
-	handleBlur(stateEditor: StateEditor): State {
+	handleLeaving(stateEditor: StateEditor): State {
 		return stateEditor.stateCopy
 	}
 	onFocus(event: FocusEvent) {

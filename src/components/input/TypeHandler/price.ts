@@ -17,13 +17,14 @@ class Price extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
-	handleBlur(stateEditor: StateEditor): State {
+	handleLeaving(stateEditor: StateEditor): State {
 		if (!stateEditor.value.includes(".")) {
 			stateEditor.insert(".", stateEditor.value.length)
 		}
-		const index = stateEditor.value.indexOf(".")
+		let index = stateEditor.value.indexOf(".")
 		if (index == 0) {
 			stateEditor = stateEditor.padStart(stateEditor.value.length + 1, "0")
+			index = stateEditor.value.indexOf(".")
 		}
 		const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : 2) as number
 		return stateEditor.padEnd(index + maxDecimals + 1, "0").stateCopy
