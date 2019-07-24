@@ -1,3 +1,4 @@
+import { Currency } from "isoly"
 import { Base } from "./Base"
 import { Component } from "../Component"
 import { TypeHandler } from "./TypeHandler"
@@ -12,18 +13,19 @@ class Price extends Base {
 			type: "text",
 		}
 	}
+	private currency: Currency = "SEK"
 	constructor(component: Component<any>) {
 		super(component)
 	}
 	handleBlur(stateEditor: StateEditor): State {
 		if (!stateEditor.value.includes(".")) {
-			stateEditor.insert(".00", stateEditor.value.length)
+			stateEditor.insert(".", stateEditor.value.length)
 		}
 		const index = stateEditor.value.indexOf(".")
 		if (index == 0) {
 			stateEditor = stateEditor.padStart(stateEditor.value.length + 1, "0")
 		}
-		const maxDecimals = 2 // TODO: Get from isoly
+		const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : 2) as number
 		return stateEditor.padEnd(index + maxDecimals + 1, "0").stateCopy
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
@@ -33,7 +35,7 @@ class Price extends Base {
 				result = false
 			else {
 				const decimalPosition = accumulated.indexOf(".")
-				const maxDecimals = 2 // TODO: Get from isoly
+				const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : 2) as number
 				if (index > decimalPosition + maxDecimals)
 					result = false
 			}
@@ -47,7 +49,7 @@ class Price extends Base {
 			separator = stateEditor.value.indexOf(".")
 			beforeSeparator = separator
 			const afterSeparator = stateEditor.value.length - separator - 1
-			const maxDecimals = 2 // TODO: Get from isoly
+			const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : 2) as number
 			if (afterSeparator > maxDecimals) {
 				stateEditor.truncate(separator + maxDecimals + 1)
 			}
