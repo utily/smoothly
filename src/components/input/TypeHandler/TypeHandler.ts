@@ -1,6 +1,7 @@
-import { State } from "../State"
-import { KeyEvent } from "../KeyEvent"
 import { Component } from "../Component"
+import { KeyEvent } from "../KeyEvent"
+import { State } from "../State"
+import { StateEditor } from "../StateEditor"
 
 export abstract class TypeHandler {
 	get value(): any { return this.state.value }
@@ -27,10 +28,12 @@ export abstract class TypeHandler {
 	protected constructor(protected readonly component: Component<any>) {
 		this.value = this.component.value
 	}
-	onBlur(event: FocusEvent) {
-		this.state = this.handleBlur(this.state, event)
+	onBlur() {
+		this.state = this.handleBlur(StateEditor.copy(this.state))
 	}
-	abstract handleBlur(state: State, event: FocusEvent): State
+	handleBlur(state: StateEditor): State {
+		return state
+	}
 	onFocus(event: FocusEvent) {
 		this.stateValue = { ...this.state, selectionStart: 0, selectionEnd: this.state.value.length }
 	}

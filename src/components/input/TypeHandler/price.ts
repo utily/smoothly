@@ -15,15 +15,16 @@ class Price extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
-	handleBlur(state: State, event: FocusEvent): State {
-		const stateEditor = StateEditor.copy(state)
+	handleBlur(state: StateEditor): State {
 		if (!state.value.includes(".")) {
-			stateEditor.insert(".00", state.value.length)
+			state.insert(".00", state.value.length)
 		}
-		const index = stateEditor.value.indexOf(".")
+		const index = state.value.indexOf(".")
+		if (index == 0) {
+			state = state.padStart(state.value.length + 1, "0")
+		}
 		const maxDecimals = 2 // TODO: Get from isoly
-		stateEditor.value = stateEditor.value.padEnd(index + maxDecimals + 1, "0")
-		return stateEditor
+		return state.padEnd(index + maxDecimals + 1, "0")
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		let result = character >= "0" && character <= "9" || character == "."
@@ -48,7 +49,7 @@ class Price extends Base {
 			const afterSeparator = state.value.length - separator - 1
 			const maxDecimals = 2 // TODO: Get from isoly
 			if (afterSeparator > maxDecimals) {
-				state.value = state.value.substring(0, separator + maxDecimals + 1)
+				state.truncate(separator + maxDecimals + 1)
 			}
 		}
 		const spaces = Math.ceil(beforeSeparator / 3) - 1
