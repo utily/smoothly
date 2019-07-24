@@ -52,12 +52,13 @@ export class Base extends TypeHandler {
 		return result
 	}
 	formatState(stateEditor: StateEditor): State {
-		let index = 0
-		while (stateEditor.value.length > index) {
-			let next = stateEditor.value[index]
-			next = this.format(next, index, stateEditor.value.substring(0, index))
-			stateEditor.replace(next, index, index + 1)
-			index += next.length
+		let editorIndex = 0
+		let beforeIndex = 0
+		const before = stateEditor.value
+		for (let next of before) {
+			next = this.format(next, beforeIndex++, stateEditor.value.substring(0, editorIndex))
+			stateEditor.replace(next, editorIndex, editorIndex + 1)
+			editorIndex += next.length
 		}
 		return stateEditor.stateCopy
 	}
