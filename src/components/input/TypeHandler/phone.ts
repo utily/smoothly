@@ -20,38 +20,38 @@ class Phone extends Base {
 		const result = character >= "0" && character <= "9"
 		return result
 	}
-	formatState(state: StateEditor): State {
+	formatState(stateEditor: StateEditor): State {
 		for (const prefix of phonePrefix) {
-			if (state.value.startsWith(prefix) && !state.value.includes("-")) {
-				state.insert("-", prefix.length)
+			if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-")) {
+				stateEditor.insert("-", prefix.length)
 			}
 		}
-		if (state.value.includes("-")) {
-			const digitIndex = state.value.indexOf("-") + 1
-			const digitCount = state.value.substring(digitIndex, state.value.length + 1).length
+		if (stateEditor.value.includes("-")) {
+			const digitIndex = stateEditor.value.indexOf("-") + 1
+			const digitCount = stateEditor.value.substring(digitIndex, stateEditor.value.length + 1).length
 			switch (digitCount) {
 				case 4:
-					state.insert(" ", digitIndex + 2)
+					stateEditor.insert(" ", digitIndex + 2)
 					break
 				case 5:
-					state.insert(" ", digitIndex + 3)
+					stateEditor.insert(" ", digitIndex + 3)
 					break
 				case 6:
-					state.insert(" ", digitIndex + 2)
-					state.insert(" ", digitIndex + 5)
+					stateEditor.insert(" ", digitIndex + 2)
+					stateEditor.insert(" ", digitIndex + 5)
 					break
 				case 7:
-					state.insert(" ", digitIndex + 3)
-					state.insert(" ", digitIndex + 6)
+					stateEditor.insert(" ", digitIndex + 3)
+					stateEditor.insert(" ", digitIndex + 6)
 					break
 				case 8:
-					state.insert(" ", digitIndex + 3)
-					state.insert(" ", digitIndex + 7)
+					stateEditor.insert(" ", digitIndex + 3)
+					stateEditor.insert(" ", digitIndex + 7)
 				default:
 					break
 			}
 		}
-		return state
+		return stateEditor.stateCopy
 	}
 }
 TypeHandler.add("phone", component => new Phone(component))

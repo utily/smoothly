@@ -15,16 +15,16 @@ class Price extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
-	handleBlur(state: StateEditor): State {
-		if (!state.value.includes(".")) {
-			state.insert(".00", state.value.length)
+	handleBlur(stateEditor: StateEditor): State {
+		if (!stateEditor.value.includes(".")) {
+			stateEditor.insert(".00", stateEditor.value.length)
 		}
-		const index = state.value.indexOf(".")
+		const index = stateEditor.value.indexOf(".")
 		if (index == 0) {
-			state = state.padStart(state.value.length + 1, "0")
+			stateEditor = stateEditor.padStart(stateEditor.value.length + 1, "0")
 		}
 		const maxDecimals = 2 // TODO: Get from isoly
-		return state.padEnd(index + maxDecimals + 1, "0")
+		return stateEditor.padEnd(index + maxDecimals + 1, "0").stateCopy
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		let result = character >= "0" && character <= "9" || character == "."
@@ -40,27 +40,27 @@ class Price extends Base {
 		}
 		return result
 	}
-	formatState(state: StateEditor): State {
-		let beforeSeparator = state.value.length
+	formatState(stateEditor: StateEditor): State {
+		let beforeSeparator = stateEditor.value.length
 		let separator: number
-		if (state.value.includes(".")) {
-			separator = state.value.indexOf(".")
+		if (stateEditor.value.includes(".")) {
+			separator = stateEditor.value.indexOf(".")
 			beforeSeparator = separator
-			const afterSeparator = state.value.length - separator - 1
+			const afterSeparator = stateEditor.value.length - separator - 1
 			const maxDecimals = 2 // TODO: Get from isoly
 			if (afterSeparator > maxDecimals) {
-				state.truncate(separator + maxDecimals + 1)
+				stateEditor.truncate(separator + maxDecimals + 1)
 			}
 		}
 		const spaces = Math.ceil(beforeSeparator / 3) - 1
 		if (spaces > 0) {
 			for (let i = 0; i < spaces; i++) {
 				const position = beforeSeparator - (spaces - i) * 3
-				state.insert(" ", position)
+				stateEditor.insert(" ", position)
 				beforeSeparator++
 			}
 		}
-		return state
+		return stateEditor.stateCopy
 	}
 }
 TypeHandler.add("price", component => new Price(component))

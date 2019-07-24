@@ -31,8 +31,8 @@ export abstract class TypeHandler {
 	onBlur() {
 		this.state = this.handleBlur(StateEditor.copy(this.state))
 	}
-	handleBlur(state: StateEditor): State {
-		return state
+	handleBlur(stateEditor: StateEditor): State {
+		return stateEditor.stateCopy
 	}
 	onFocus(event: FocusEvent) {
 		this.stateValue = { ...this.state, selectionStart: 0, selectionEnd: this.state.value.length }

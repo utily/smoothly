@@ -1,12 +1,12 @@
 import { State } from "./State"
 
-export class StateEditor implements State {
+export class StateEditor {
 	get value(): string { return this.state.value }
-	set value(value: string) { this.state.value = value }
-	get selectionStart(): number { return this.state.selectionStart }
-	set selectionStart(selectionStart: number) { this.state.selectionStart = selectionStart }
-	get selectionEnd(): number { return this.state.selectionEnd }
-	set selectionEnd(selectionEnd: number) { this.state.selectionEnd = selectionEnd }
+	private get selectionStart(): number { return this.state.selectionStart }
+	private set selectionStart(selectionStart: number) { this.state.selectionStart = selectionStart }
+	private get selectionEnd(): number { return this.state.selectionEnd }
+	private set selectionEnd(selectionEnd: number) { this.state.selectionEnd = selectionEnd }
+	get stateCopy(): State { return { value: this.state.value, selectionStart: this.selectionStart, selectionEnd: this.selectionEnd}}
 
 	private constructor(private state: State) { }
 
@@ -22,7 +22,7 @@ export class StateEditor implements State {
 		return this.value.match(matcher)
 	}
 	replace(value: string, start: number, end: number): StateEditor {
-		this.value = this.value.slice(0, start) + value + this.value.slice(end, this.value.length)
+		this.state.value = this.value.slice(0, start) + value + this.value.slice(end, this.value.length)
 		if (this.selectionStart >= end)
 			this.selectionStart = this.selectionStart + value.length - end + start
 		else if (this.selectionStart > start && this.selectionStart < end)
