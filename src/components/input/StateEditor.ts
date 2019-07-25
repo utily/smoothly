@@ -16,7 +16,6 @@ export class StateEditor {
 		const character = this.get(index)
 		return character >= "0" && character <= "9"
 	}
-	toState(): State {return { value: this.state.value, selectionStart: this.selectionStart, selectionEnd: this.selectionEnd}}
 	match(matcher: { [Symbol.match](string: string): RegExpMatchArray | null }): RegExpMatchArray | null {
 		return this.value.match(matcher)
 	}
@@ -57,6 +56,7 @@ export class StateEditor {
 	padStart(length: number, padding: string): StateEditor {
 		return this.pad(length, padding, 0)
 	}
+	toState(): State {return { value: this.state.value, selectionStart: this.selectionStart, selectionEnd: this.selectionEnd}}
 	static copy(state: Readonly<State>): StateEditor {
 		return new StateEditor({ ...state })
 	}
