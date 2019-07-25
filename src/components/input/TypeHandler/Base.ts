@@ -121,7 +121,6 @@ export class Base extends TypeHandler {
 					}
 			}
 		}
-		const r = this.formatState(StateEditor.copy(result))
-		return { value: r.value, selectionStart: r.selectionStart, selectionEnd: r.selectionEnd }
+		return this.formatState(StateEditor.copy(result))
 	}
 }

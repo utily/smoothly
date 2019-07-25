@@ -45,20 +45,18 @@ export class StateEditor {
 		}
 		return this
 	}
-	private pad(length: number, padding: string, padStart: boolean): StateEditor {
-		while (length > this.value.length + padding.length) {
-			this.insert(padding, padStart ? 0 : this.value.length)
-		}
-		if (length > this.value.length) {
-			this.insert(padding.substring(0, length - this.value.length), padStart ? 0 : this.value.length)
-		}
+	private pad(length: number, padding: string, index: number): StateEditor {
+		while (length > this.value.length + padding.length)
+			this.insert(padding, index)
+		if (length > this.value.length)
+			this.insert(padding.substring(0, length - this.value.length), index)
 		return this
 	}
 	padEnd(length: number, padding: string): StateEditor {
-		return this.pad(length, padding, false)
+		return this.pad(length, padding, this.value.length)
 	}
 	padStart(length: number, padding: string): StateEditor {
-		return this.pad(length, padding, true)
+		return this.pad(length, padding, 0)
 	}
 	static copy(state: Readonly<State>): StateEditor {
 		return new StateEditor({ ...state })
