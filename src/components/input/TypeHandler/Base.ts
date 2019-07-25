@@ -2,6 +2,7 @@ import { State } from "../State"
 import { KeyEvent } from "../KeyEvent"
 import { TypeHandler } from "./TypeHandler"
 import { Component } from "../Component"
+import { StateEditor } from "../StateEditor"
 
 export class Base extends TypeHandler {
 	get value(): any {
@@ -50,20 +51,16 @@ export class Base extends TypeHandler {
 		}
 		return result
 	}
-	private formatState(state: Readonly<State>): State {
-		const result = { ...state, value: "" }
-		const before = state.value
-		let index = 0
+	formatState(stateEditor: StateEditor): State {
+		let editorIndex = 0
+		let beforeIndex = 0
+		const before = stateEditor.value
 		for (let next of before) {
-			next = this.format(next, index++, result.value)
-			const delta = next.length - 1
-			if (result.selectionStart > result.value.length)
-				result.selectionStart += delta
-			if (result.selectionEnd > result.value.length)
-				result.selectionEnd += delta
-			result.value += next
+			next = this.format(next, beforeIndex++, stateEditor.value.substring(0, editorIndex))
+			stateEditor.replace(next, editorIndex, editorIndex + 1)
+			editorIndex += next.length
 		}
-		return result
+		return stateEditor.toState()
 	}
 	keyEventHandler(state: Readonly<State>, event?: KeyEvent): State {
 		const result = this.filterState(state)
@@ -124,6 +121,6 @@ export class Base extends TypeHandler {
 					}
 			}
 		}
-		return this.formatState(result)
+		return this.formatState(StateEditor.copy(result))
 	}
 }
