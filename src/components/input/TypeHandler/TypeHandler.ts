@@ -32,7 +32,7 @@ export abstract class TypeHandler {
 		this.state = this.handleLeaving(StateEditor.copy(this.state))
 	}
 	handleLeaving(stateEditor: StateEditor): State {
-		return stateEditor.stateCopy
+		return stateEditor.toState()
 	}
 	onFocus(event: FocusEvent) {
 		this.stateValue = { ...this.state, selectionStart: 0, selectionEnd: this.state.value.length }

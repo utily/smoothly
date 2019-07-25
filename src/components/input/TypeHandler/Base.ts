@@ -60,7 +60,7 @@ export class Base extends TypeHandler {
 			stateEditor.replace(next, editorIndex, editorIndex + 1)
 			editorIndex += next.length
 		}
-		return stateEditor.stateCopy
+		return stateEditor.toState()
 	}
 	keyEventHandler(state: Readonly<State>, event?: KeyEvent): State {
 		const result = this.filterState(state)

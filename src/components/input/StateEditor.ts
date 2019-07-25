@@ -6,7 +6,6 @@ export class StateEditor {
 	private set selectionStart(selectionStart: number) { this.state.selectionStart = selectionStart }
 	private get selectionEnd(): number { return this.state.selectionEnd }
 	private set selectionEnd(selectionEnd: number) { this.state.selectionEnd = selectionEnd }
-	get stateCopy(): State { return { value: this.state.value, selectionStart: this.selectionStart, selectionEnd: this.selectionEnd}}
 
 	private constructor(private state: State) { }
 
@@ -17,7 +16,7 @@ export class StateEditor {
 		const character = this.get(index)
 		return character >= "0" && character <= "9"
 	}
-
+	toState(): State {return { value: this.state.value, selectionStart: this.selectionStart, selectionEnd: this.selectionEnd}}
 	match(matcher: { [Symbol.match](string: string): RegExpMatchArray | null }): RegExpMatchArray | null {
 		return this.value.match(matcher)
 	}
@@ -45,7 +44,7 @@ export class StateEditor {
 		}
 		return this
 	}
-	private pad(length: number, padding: string, index: number): StateEditor {
+	padAtIndex(length: number, padding: string, index: number): StateEditor {
 		while (length > this.value.length + padding.length)
 			this.insert(padding, index)
 		if (length > this.value.length)
@@ -53,10 +52,10 @@ export class StateEditor {
 		return this
 	}
 	padEnd(length: number, padding: string): StateEditor {
-		return this.pad(length, padding, this.value.length)
+		return this.padAtIndex(length, padding, this.value.length)
 	}
 	padStart(length: number, padding: string): StateEditor {
-		return this.pad(length, padding, 0)
+		return this.padAtIndex(length, padding, 0)
 	}
 	static copy(state: Readonly<State>): StateEditor {
 		return new StateEditor({ ...state })

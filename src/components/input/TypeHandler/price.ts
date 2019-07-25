@@ -27,7 +27,7 @@ class Price extends Base {
 			index = stateEditor.value.indexOf(".")
 		}
 		const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : 2) as number
-		return stateEditor.padEnd(index + maxDecimals + 1, "0").stateCopy
+		return stateEditor.padEnd(index + maxDecimals + 1, "0").toState()
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		let result = character >= "0" && character <= "9" || character == "."
@@ -63,7 +63,7 @@ class Price extends Base {
 				beforeSeparator++
 			}
 		}
-		return stateEditor.stateCopy
+		return stateEditor.toState()
 	}
 }
 TypeHandler.add("price", component => new Price(component))
