@@ -51,7 +51,7 @@ class Phone extends Base {
 					break
 			}
 		}
-		return stateEditor.stateCopy
+		return stateEditor.toState()
 	}
 }
 TypeHandler.add("phone", component => new Phone(component))
