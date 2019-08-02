@@ -7,7 +7,8 @@ import { Color, Expand, Fill } from "smoothly-model"
 	scoped: true,
 })
 export class SmoothlySubmit {
-	private form?: HTMLFormElement
+	private button?: HTMLButtonElement
+	get form(): HTMLFormElement | undefined { return this.button && this.button.form || undefined }
 	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
 	@Prop({ reflectToAttr: true }) color?: Color
 	@Prop({ reflectToAttr: true }) expand?: Expand
@@ -21,9 +22,8 @@ export class SmoothlySubmit {
 			if (this.prevent)
 				event.preventDefault()
 			const result: { [key: string]: string } = {}
-			const target = event.target as HTMLButtonElement
-			if (target.form && target.form.elements) {
-				const elements = target.form.elements
+			if (this.form && this.form.elements) {
+				const elements = this.form.elements
 				for (let i = 0; i < elements.length; i++) {
 					const element = elements.item(i)
 					if (hasNameAndValue(element) && element.name)
@@ -45,7 +45,7 @@ export class SmoothlySubmit {
 	render() {
 		return [
 			<smoothly-spinner active={ this.processing }></smoothly-spinner>,
-			<button type="submit" disabled={ this.processing } ref={ (element: HTMLButtonElement) => this.form = element && element.form || undefined }><slot></slot></button>,
+			<button type="submit" disabled={ this.processing } ref={ (element: HTMLButtonElement) => this.button = element }><slot></slot></button>,
 		]
 	}
 }
