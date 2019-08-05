@@ -20,9 +20,9 @@ export class Notifier {
 	@Watch("notice")
 	onUpdatedNotice(newValue: string | Notice) {
 		if (newValue != undefined)
-			this.timer = window.setInterval(() => { this.notice = undefined }, 5000)
+			this.timer = window.setTimeout(() => { this.notice = undefined }, 5000)
 		else
-			window.clearInterval(this.timer)
+			window.clearTimeout(this.timer)
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
