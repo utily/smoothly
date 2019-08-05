@@ -8,7 +8,7 @@ import { Trigger, Notice } from "smoothly-model"
 	scoped: true,
 })
 export class Notifier {
-	private timer: number
+	private timer?: number
 	@Prop() notice?: string | Notice
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
@@ -19,10 +19,16 @@ export class Notifier {
 	}
 	@Watch("notice")
 	onUpdatedNotice(newValue: string | Notice) {
-		if (newValue != undefined)
-			this.timer = window.setTimeout(() => { this.notice = undefined }, 5000)
-		else
+		if (this.timer) {
 			window.clearTimeout(this.timer)
+			this.timer = undefined
+		}
+		if (newValue != undefined) {
+			this.timer = window.setTimeout(() => {
+				this.notice = undefined
+				this.timer = undefined
+			}, 5000)
+		}
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
