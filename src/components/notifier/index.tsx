@@ -1,5 +1,5 @@
 // tslint:disable-next-line: no-implicit-dependencies
-import { Component, Prop, h, Listen } from "@stencil/core"
+import { Component, Prop, Listen, Watch, h } from "@stencil/core"
 import { Trigger, Notice } from "smoothly-model"
 
 @Component({
@@ -8,6 +8,7 @@ import { Trigger, Notice } from "smoothly-model"
 	scoped: true,
 })
 export class Notifier {
+	private timer: number
 	@Prop() notice?: string | Notice
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
@@ -15,6 +16,13 @@ export class Notifier {
 			event.stopPropagation()
 			this.notice = undefined
 		}
+	}
+	@Watch("notice")
+	onUpdatedNotice(newValue: string | Notice) {
+		if (newValue != undefined)
+			this.timer = window.setInterval(() => { this.notice = undefined }, 5000)
+		else
+			window.clearInterval(this.timer)
 	}
 	@Listen("notice")
 	onNotice(event: CustomEvent<Notice>) {
