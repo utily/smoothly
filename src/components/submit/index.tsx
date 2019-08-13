@@ -22,10 +22,18 @@ export class SmoothlySubmit {
 			if (this.prevent)
 				event.preventDefault()
 			const result: { [key: string]: string } = {}
-			if (this.form && this.form.elements) {
-				const elements = this.form.elements
+			const target = event.target as HTMLButtonElement
+			if (target.form) {
+				const elements = target.form.elements
 				for (let i = 0; i < elements.length; i++) {
 					const element = elements.item(i)
+					if (hasNameAndValue(element) && element.name)
+						result[element.name] = element.value
+				}
+				// Overwrite values with values from smoothly-input
+				const smoothlyInputs = target.form.getElementsByTagName("smoothly-input")
+				for (let i = 0; i < smoothlyInputs.length; i++) {
+					const element = smoothlyInputs.item(i)
 					if (hasNameAndValue(element) && element.name)
 						result[element.name] = element.value
 				}
