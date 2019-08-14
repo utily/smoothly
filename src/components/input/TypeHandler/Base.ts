@@ -34,22 +34,15 @@ export class Base extends TypeHandler {
 	format(character: string, index: number, accumulated: string): string {
 		return character
 	}
-	private filterState(state: Readonly<State>): State {
-		const result = { ...state, value: "" }
-		const before = state.value
+	filterState(stateEditor: StateEditor): State {
 		let index = 0
-		for (const character of before) {
-			if (this.filter(character, index, result.value)) {
-				result.value += character
+		while (index < stateEditor.value.length) {
+			if (!this.filter(stateEditor.value[index], index, stateEditor.value.substring(0, index)))
+				stateEditor.delete(index)
+			else
 				index++
-			} else {
-				if (result.selectionStart > index)
-					result.selectionStart--
-				if (result.selectionEnd > index)
-					result.selectionEnd--
-			}
 		}
-		return result
+		return stateEditor.toState()
 	}
 	formatState(stateEditor: StateEditor): State {
 		let editorIndex = 0
@@ -63,7 +56,7 @@ export class Base extends TypeHandler {
 		return stateEditor.toState()
 	}
 	keyEventHandler(state: Readonly<State>, event?: KeyEvent): State {
-		const result = this.filterState(state)
+		const result = this.filterState(StateEditor.copy(state))
 		if (event) {
 			if (event.key == "ArrowLeft") {
 				result.selectionStart -= result.selectionStart > 0 ? 1 : 0
