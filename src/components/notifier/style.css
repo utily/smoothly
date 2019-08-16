@@ -5,12 +5,15 @@
 	display: none;
 }
 smoothly-trigger {
-	float: right;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1.5em;
 }
 aside {
-	display: inline-block;
 	text-align: center;
+	vertical-align: middle;
 	width: 100%;
+	height: 2.5em;
 }
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
