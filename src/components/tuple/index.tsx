@@ -3,8 +3,6 @@ import { Component, Prop, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tuple",
-	styleUrl: "style.css",
-	scoped: true,
 })
 
 export class SmoothlyTuple {

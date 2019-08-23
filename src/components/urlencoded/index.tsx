@@ -3,8 +3,6 @@ import { Component, Prop, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-urlencoded",
-	styleUrl: "style.css",
-	scoped: true,
 })
 
 export class Urlencoded {
