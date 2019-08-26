@@ -14,13 +14,6 @@ export class Urlencoded {
 			const pair = p.split("=")
 			decoded.push([pair[0], pair[1]])
 		}
-
-		// let dataString = this.data
-		// const decodedData: [string, string][] = []
-		// while (dataString.length > 0) {
-		// 	decodedData.push([dataString.substring(0, dataString.indexOf("=")), dataString.substring(dataString.indexOf("=") + 1, dataString.indexOf("&") >= 0 ? dataString.indexOf("&") : dataString.length)])
-		// 	dataString = dataString.indexOf("&") >= 0 ? dataString.substring(dataString.indexOf("&") + 1) : ""
-		// }
 		return [
 			decoded.map(tuple => <smoothly-tuple tuple={ tuple }></smoothly-tuple>),
 		]
