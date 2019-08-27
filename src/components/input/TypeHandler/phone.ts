@@ -17,14 +17,23 @@ class Phone extends Base {
 		super(component)
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
-		const result = character >= "0" && character <= "9"
+		const result = character >= "0" && character <= "9" || index == 0 && character == "+" && !accumulated.includes("+")
 		return result
 	}
 	formatState(stateEditor: StateEditor): State {
-		for (const prefix of phonePrefix) {
-			if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-")) {
-				stateEditor.insert("-", prefix.length)
-			}
+		if (stateEditor.value.startsWith("+"))
+			for (const country of phonePrefix)
+				if (stateEditor.value.startsWith(country.countryCode))
+					for (let prefix of country.areaCodes) {
+						prefix = prefix.substring(1)
+						if (stateEditor.value.startsWith(country.countryCode + prefix) && !stateEditor.value.includes("-"))
+							stateEditor.insert("-", country.countryCode.length + prefix.length)
+					}
+		else {
+			const sweden = phonePrefix[0] // TODO: Decide how default country should be chosen.
+			for (const prefix of sweden.areaCodes)
+				if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-"))
+					stateEditor.insert("-", prefix.length)
 		}
 		if (stateEditor.value.includes("-")) {
 			const digitIndex = stateEditor.value.indexOf("-") + 1
