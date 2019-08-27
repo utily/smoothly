@@ -1,4 +1,4 @@
-export const phonePrefix = [
+export const phonePrefix = [{ countryCode: "+46", areaCodes: [
 	"011", "0120", "0121", "0122", "0123", "0125", "013", "0140", "0141", "0142", "0143", "0144",
 	"0150", "0151", "0152", "0155", "0156", "0157", "0158", "0159", "016",
 	"0171", "0173", "0174", "0175", "0176", "018", "019", "021", "0220",
@@ -37,4 +37,4 @@ export const phonePrefix = [
 	"0900", "0939", "0944", // Betalsamtal
 	"0969", // Samtal till telefonautomat
 	"099", // Massanrop
-]
+] }]
