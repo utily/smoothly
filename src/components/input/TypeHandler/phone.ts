@@ -21,7 +21,7 @@ class Phone extends Base {
 		return result
 	}
 	formatState(stateEditor: StateEditor): State {
-		if (stateEditor.value.startsWith("+"))
+		if (stateEditor.value.startsWith("+")) {
 			for (const country of phonePrefix)
 				if (stateEditor.value.startsWith(country.countryCode))
 					for (let prefix of country.areaCodes) {
@@ -29,7 +29,7 @@ class Phone extends Base {
 						if (stateEditor.value.startsWith(country.countryCode + prefix) && !stateEditor.value.includes("-"))
 							stateEditor.insert("-", country.countryCode.length + prefix.length)
 					}
-		else {
+		} else {
 			const sweden = phonePrefix[0] // TODO: Decide how default country should be chosen.
 			for (const prefix of sweden.areaCodes)
 				if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-"))
