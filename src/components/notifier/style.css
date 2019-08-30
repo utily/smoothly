@@ -13,7 +13,7 @@ aside {
 	text-align: center;
 	vertical-align: middle;
 	width: 100%;
-	height: 2.5em;
+	height: 2.8em;
 }
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
