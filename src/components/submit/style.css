@@ -1,32 +1,34 @@
 :host {
 	display: block;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
 }
 :host[hidden] {
 	display: none;
 }
 button {
-	border-width: 1px;
-	border-style: solid;
-	border-radius: 3px;
 	padding: .2em .3em;
 	font-size: 110%;
 	font-weight: 400;
 }
+:host[processing] {
+	border-color: rgb(var(--smoothly-light-color));
+}
 :host[processing] > button {
 	color: rgb(var(--smoothly-light-contrast));
 	background: rgb(var(--smoothly-light-color));
-	border-color: rgb(var(--smoothly-light-color));
 }
-:host:not([processing]):hover > button,
-:host:not([processing]):focus > button,
-:host:not([processing]):active > button {
+:host:not([processing]):hover,
+:host:not([processing]):focus,
+:host:not([processing]):active {
 	border-color: rgb(var(--smoothly-submit-border));
 }
 :host[expand=fill] > button,
 :host[expand=block] > button {
 	width: 100%;
 }
-:host[expand=fill] > button {
+:host[expand=fill] {
 	border-left: none;
 	border-right: none;
 }
