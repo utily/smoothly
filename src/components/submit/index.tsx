@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, Listen, h, Method } from "@stencil/core"
 import { Color, Expand, Fill } from "smoothly-model"
 
@@ -9,10 +10,11 @@ import { Color, Expand, Fill } from "smoothly-model"
 export class SmoothlySubmit {
 	private button?: HTMLButtonElement
 	get form(): HTMLFormElement | undefined { return this.button && this.button.form || undefined }
-	@Prop({ mutable: true, reflectToAttr: true }) processing: boolean
-	@Prop({ reflectToAttr: true }) color?: Color
-	@Prop({ reflectToAttr: true }) expand?: Expand
-	@Prop({ reflectToAttr: true }) fill?: Fill
+	@Prop({ mutable: true, reflect: true }) processing: boolean
+	@Prop({ reflect: true }) color?: Color
+	@Prop({ reflect: true }) expand?: Expand
+	@Prop({ reflect: true }) fill?: Fill
+	@Prop({ reflect: true }) disabled: boolean = false
 	@Prop() prevent?: boolean
 	@Event({ eventName: "submit" }) submitEvent: EventEmitter<{ [key: string]: string }>
 	@Listen("click")
@@ -52,7 +54,7 @@ export class SmoothlySubmit {
 	render() {
 		return [
 			<smoothly-spinner active={ this.processing }></smoothly-spinner>,
-			<button type="submit" disabled={ this.processing } ref={ (element: HTMLButtonElement) => this.button = element }><slot></slot></button>,
+			<button type="submit" disabled={ this.disabled || this.processing } ref={ (element: HTMLButtonElement) => this.button = element }><slot></slot></button>,
 		]
 	}
 }

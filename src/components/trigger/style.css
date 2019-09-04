@@ -7,15 +7,18 @@
 :host[hidden] {
 	display: none;
 }
+:host[disabled] {
+	opacity: .5;
+}
 button {
 	border-color: transparent;
 	padding: .2em .3em;
 	font-size: 110%;
 	font-weight: 400;
 }
-:host:not([processing]):hover,
-:host:not([processing]):focus,
-:host:not([processing]):active {
+:host:not([processing]):not([disabled]):hover,
+:host:not([processing]):not([disabled]):focus,
+:host:not([processing]):not([disabled]):active {
 	border-color: var(--smoothly-trigger-border);
 }
 :host[expand=fill] > button,

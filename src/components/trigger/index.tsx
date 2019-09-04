@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, Event, EventEmitter, Listen, h } from "@stencil/core"
 import { Color, Expand, Fill, Trigger } from "smoothly-model"
 
@@ -7,9 +8,10 @@ import { Color, Expand, Fill, Trigger } from "smoothly-model"
 	scoped: true,
 })
 export class SmoothlyTrigger {
-	@Prop({ reflectToAttr: true }) color: Color | undefined
-	@Prop({ reflectToAttr: true }) expand: Expand
-	@Prop({ reflectToAttr: true }) fill: Fill
+	@Prop({ reflect: true }) color: Color | undefined
+	@Prop({ reflect: true }) expand: Expand
+	@Prop({ reflect: true }) fill: Fill
+	@Prop({ reflect: true }) disabled: boolean = false
 	@Prop() name: string
 	@Prop() value?: any
 	@Event() trigger: EventEmitter<Trigger>
@@ -21,6 +23,6 @@ export class SmoothlyTrigger {
 		e.preventDefault()
 	}
 	render() {
-		return <button name={ this.name }><slot></slot></button>
+		return <button disabled={ this.disabled } name={ this.name }><slot></slot></button>
 	}
 }
