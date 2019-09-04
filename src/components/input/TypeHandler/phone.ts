@@ -32,8 +32,11 @@ class Phone extends Base {
 		} else {
 			const sweden = phonePrefix[0] // TODO: Decide how default country should be chosen.
 			for (const prefix of sweden.areaCodes)
-				if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-"))
+				if (stateEditor.value.startsWith(prefix) && !stateEditor.value.includes("-")) {
 					stateEditor.insert("-", prefix.length)
+					stateEditor.delete(0)
+					stateEditor.insert(sweden.countryCode, 0)
+				}
 		}
 		if (stateEditor.value.includes("-")) {
 			const digitIndex = stateEditor.value.indexOf("-") + 1
