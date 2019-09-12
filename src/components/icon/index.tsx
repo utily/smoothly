@@ -16,7 +16,6 @@ export class SmoothlyIcon {
 	async loadDocument() {
 		if (this.name) {
 			const url = `https://ionicons.com/ionicons/svg/md-${ this.name }.svg`
-			console.log(url)
 			const response = await fetch(url)
 			this.document = response.ok ? await response.text() : undefined
 		}
