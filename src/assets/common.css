@@ -5,11 +5,9 @@ button {
 	background-color: inherit;
 	border-color: inherit;
 }
-body {
-	color: rgb(var(--smoothly-default-contrast));
-}
 html {
 	font-family: var(--smoothly-font-family);
+	color: rgb(var(--smoothly-default-contrast));
 }
 html,
 [color=default] {
