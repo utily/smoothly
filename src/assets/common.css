@@ -1,7 +1,7 @@
 @import "~normalize.css/normalize.css";
 input,
 button {
-	color: inherit;
+	color: unset;
 	background-color: inherit;
 	border-color: inherit;
 }
