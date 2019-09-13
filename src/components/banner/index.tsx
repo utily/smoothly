@@ -7,11 +7,11 @@ import { Component, Prop, h } from "@stencil/core"
 })
 
 export class Banner {
-	@Prop() title: string
+	@Prop() heading: string
 	render() {
 		return [
 			<header>
-				<h1>{ this.title }</h1>
+				<h1>{ this.heading }</h1>
 			</header>,
 		]
 	}
