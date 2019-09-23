@@ -24,7 +24,6 @@ export class SmoothlyIcon {
 		await this.loadDocument()
 	}
 	hostData() {
-		console.log(this.document)
 		return {
 			innerHTML: this.document,
 		}
