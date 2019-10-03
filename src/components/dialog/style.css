@@ -10,7 +10,7 @@
 :host[hidden] {
 	display: none;
 }
-:host > main {
+:host > article {
 	position: relative;
 	color: rgb(var(--smoothly-default-contrast));
 	background-color: rgb(var(--smoothly-default-color));
@@ -24,12 +24,11 @@
 	max-height: calc(100vh - 6em - 2px);
 	height: auto;
 	margin: 2em auto;
-	padding: 1em;
 }
 :host {
 	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
-:host > main > smoothly-trigger {
+:host > article > smoothly-trigger {
 	position: absolute;
 	right: -1.3em;
 	top: -1.2em;

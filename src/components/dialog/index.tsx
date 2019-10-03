@@ -25,10 +25,10 @@ export class SmoothlyDialog {
 	}
 	render() {
 		return [
-			<main>
+			<article>
 				{ this.closable ? <smoothly-trigger fill="clear" name="close"><smoothly-icon name="close-circle" fill="solid" color={ this.color }></smoothly-icon></smoothly-trigger> : [] }
 				<slot></slot>
-			</main>,
+			</article>,
 		]
 	}
 }
