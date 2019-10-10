@@ -116,19 +116,4 @@ export class Base extends TypeHandler {
 		}
 		return this.formatState(StateEditor.copy(result))
 	}
-	pasteHandler(state: Readonly<State>, event: ClipboardEvent) {
-		const result = this.filterState(StateEditor.copy(state))
-		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
-		if (result.selectionStart != result.selectionEnd) { // selection exists
-			result.value = result.value.substring(0, result.selectionStart) + result.value.substring(result.selectionEnd)
-			result.selectionEnd = result.selectionStart
-		}
-		for (const letter of pasted) {
-			if (this.filter(letter, result.selectionStart, result.value)) {
-				result.value = result.value.substring(0, result.selectionStart) + letter + result.value.substring(result.selectionStart)
-				result.selectionStart = result.selectionEnd += letter.length
-			}
-		}
-		return this.formatState(StateEditor.copy(result))
-	}
 }
