@@ -42,18 +42,31 @@ export abstract class TypeHandler {
 		this.state = { value: backend.value, selectionStart: backend.selectionStart || backend.value.length, selectionEnd: backend.selectionEnd || backend.value.length }
 	}
 	onKeyDown(event: KeyboardEvent) {
-		if (event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
+		if (!(event.ctrlKey && event.key == "v") &&
+				event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" ||
+				event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
 			event.preventDefault()
 			const backend = event.target as HTMLInputElement
-			const after = this.keyEventHandler(this.state, event)
-			if (after.value != backend.value)
-				backend.value = after.value
-			if (after.selectionStart != backend.selectionStart)
-				backend.selectionStart = after.selectionStart
-			if (after.selectionEnd != backend.selectionEnd)
-				backend.selectionEnd = after.selectionEnd
-			this.state = after
+			this.processKey(event, backend)
 		}
+	}
+	onPaste(event: ClipboardEvent) {
+		event.preventDefault()
+		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
+		const backend = event.target as HTMLInputElement
+		for (const letter of pasted) {
+			this.processKey({ key: letter }, backend)
+		}
+	}
+	private processKey(event: KeyEvent, backend: HTMLInputElement){
+		const after = this.keyEventHandler(this.state, event)
+		if (after.value != backend.value)
+			backend.value = after.value
+		if (after.selectionStart != backend.selectionStart)
+			backend.selectionStart = after.selectionStart
+		if (after.selectionEnd != backend.selectionEnd)
+			backend.selectionEnd = after.selectionEnd
+		this.state = after
 	}
 	abstract keyEventHandler(state: State, event?: KeyEvent): State
 	static creators: { [type: string]: (component: Component<any>) => TypeHandler } = {}
