@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, Watch, h } from "@stencil/core"
 import { TypeHandler } from "./TypeHandler"
 import { Autocomplete } from "./browser"
@@ -47,7 +48,8 @@ export class SmoothlyInput {
 					onFocus={ e => { if (this.typeHandler) this.typeHandler.onFocus(e) } }
 					onClick={ e => { if (this.typeHandler) this.typeHandler.onClick(e) } }
 					onBlur={ e => { if (this.typeHandler) this.typeHandler.onBlur() }}
-					onKeyDown={ e => { if (this.typeHandler) this.typeHandler.onKeyDown(e) } }></input>,
+					onKeyDown={ e => { if (this.typeHandler) this.typeHandler.onKeyDown(e) } }
+					onPaste={ e => { if (this.typeHandler) this.typeHandler.onPaste(e) } }></input>,
 				<label htmlFor={this.name}><slot/></label>,
 			]
 		}
