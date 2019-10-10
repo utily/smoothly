@@ -42,7 +42,9 @@ export abstract class TypeHandler {
 		this.state = { value: backend.value, selectionStart: backend.selectionStart || backend.value.length, selectionEnd: backend.selectionEnd || backend.value.length }
 	}
 	onKeyDown(event: KeyboardEvent) {
-		if (!(event.ctrlKey && event.key == "v") && event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" || event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
+		if (!(event.ctrlKey && event.key == "v") &&
+				event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" ||
+				event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
 			event.preventDefault()
 			const backend = event.target as HTMLInputElement
 			this.processKey(event, backend)
