@@ -57,10 +57,20 @@ class Phone extends Base {
 					stateEditor.insert(" ", digitIndex + 6)
 					break
 				case 8:
+				case 9:
 					stateEditor.insert(" ", digitIndex + 3)
 					stateEditor.insert(" ", digitIndex + 7)
 				default:
 					break
+			}
+			if (digitCount > 9) {
+				const spaces = Math.ceil(digitCount / 3) - 1
+				if (spaces > 0) {
+					for (let i = 0; i < spaces; i++) {
+						const position = i * 3 + 3 + i
+						stateEditor.insert(" ", position + digitIndex)
+					}
+				}
 			}
 		}
 		return stateEditor.toState()
