@@ -47,7 +47,7 @@ export class SmoothlyInput {
 					pattern={ component.pattern && component.pattern.source }
 					onFocus={ e => { if (this.typeHandler) this.typeHandler.onFocus(e) } }
 					onClick={ e => { if (this.typeHandler) this.typeHandler.onClick(e) } }
-					onBlur={ e => { if (this.typeHandler) this.typeHandler.onBlur() }}
+					onBlur={ e => { if (this.typeHandler) this.typeHandler.onBlur(e) }}
 					onKeyDown={ e => { if (this.typeHandler) this.typeHandler.onKeyDown(e) } }
 					onPaste={ e => { if (this.typeHandler) this.typeHandler.onPaste(e) } }></input>,
 				<label htmlFor={this.name}><slot/></label>,
