@@ -17,13 +17,17 @@ aside {
 }
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
+	color: rgb(var(--smoothly-warning-contrast));
 }
 aside.success {
 	background-color: rgb(var(--smoothly-success-tint));
+	color: rgb(var(--smoothly-success-contrast));
 }
 aside.danger {
 	background-color: rgb(var(--smoothly-danger-tint));
+	color: rgb(var(--smoothly-danger-contrast));
 }
 aside.default {
 	background-color: rgb(var(--smoothly-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
 }
