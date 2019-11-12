@@ -14,9 +14,12 @@ export class SmoothlyDisplayAmount {
 	format(amount: string): string {
 		const digitsPerGroup = 3
 		const defaultDecimals = 2
+		const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : defaultDecimals) as number
 		let beforeSeparator = amount.length
 		let separator: number
 		let result = amount
+		if (result == "")
+			result = "0"
 		if (amount.includes(".")) {
 			separator = amount.indexOf(".")
 			if (separator == 0) {
@@ -24,9 +27,12 @@ export class SmoothlyDisplayAmount {
 				separator++
 			}
 			beforeSeparator = separator
-			const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : defaultDecimals) as number
 			result = result.padEnd(separator + maxDecimals + 1, "0")
 			result = result.substring(0, separator + maxDecimals + 1)
+		} else {
+			result = result + "."
+			separator = result.length - 1
+			result = result.padEnd(separator + maxDecimals + 1, "0")
 		}
 		const spaces = Math.ceil(beforeSeparator / digitsPerGroup) - 1
 		if (spaces > 0) {
@@ -36,7 +42,7 @@ export class SmoothlyDisplayAmount {
 				beforeSeparator++
 			}
 		}
-		return result == "" ? "0" : result
+		return result
 	}
 
 	render() {
