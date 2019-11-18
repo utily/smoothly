@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 export class SmoothlyRadio {
 	@Prop() name: string
 	@Prop() value: string
-	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
+	@Prop({ mutable: true, reflect: true }) checked: boolean
 	@Prop() tabIndex: number
 	@Event() smoothlySelected!: EventEmitter<{ name: string, value: string }>
 
@@ -19,8 +19,8 @@ export class SmoothlyRadio {
 	}
 	render() {
 		return [
-			<input type="radio" name={this.name} id={this.value} tabindex={this.tabIndex} checked={this.checked} value={this.value} onChange={ e => this.onInput(e as UIEvent) }/>,
-			<label htmlFor={this.value}><slot /></label>,
+			<input type="radio" name={ this.name } id={ this.value } tabindex={ this.tabIndex } checked={ this.checked } value={ this.value } onChange={ e => this.onInput(e as UIEvent) }/>,
+			<label htmlFor={ this.value }><slot /></label>,
 		]
 	}
 }
