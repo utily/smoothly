@@ -1,6 +1,6 @@
 :host {
 	display: block;
-	border-radius: 100%;
+	background: none !important;
 }
 :host[hidden] {
 	display: none;

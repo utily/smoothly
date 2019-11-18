@@ -12,6 +12,7 @@ export class Banner {
 		return [
 			<header>
 				<h1>{ this.heading }</h1>
+				<slot></slot>
 			</header>,
 		]
 	}

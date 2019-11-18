@@ -1,25 +1,50 @@
-:host {
+smoothly-banner {
 	display: block;
-	position: relative;
+	height: 4em;
 }
-:host[hidden] {
+smoothly-banner[hidden] {
 	display: none;
 }
-body {
-	margin: 0;
-}
-header {
-	padding: 0;
-	background-color: rgb(var(--smoothly-primary-shade));
-  color: rgb(var(--smoothly-default-color));
-  height: 56px;
+smoothly-banner > header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: calc(100vw - 2em);
+	z-index: 1;
+  height: 4em;
+	padding: 0 1em;
+	background-color: rgb(var(--smoothly-primary-color));
+  color: rgb(var(--smoothly-primary-contrast));
   display: flex;
   align-items: center;
   box-shadow: 0 2px 5px 0 rgba(var(--smoothly-dark-shade));
 }
-h1 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: rgb(var(--smoothly-default-color));
-  padding: 0 12px;
+smoothly-banner > header > h1 {
+	flex-grow: 1;
+}
+smoothly-banner > header > nav {
+	display: flex;
+	height: 100%;
+}
+smoothly-banner > header > nav > ul {
+	display: flex;
+	height: 100%;
+	margin: 0;
+}
+smoothly-banner > header > nav > ul > li {
+	display: block;
+	height: 100%;
+}
+smoothly-banner > header > nav > ul > li > a {
+	display: inline-block;
+	line-height: 4em;
+	height: 100%;
+	padding: 0 1em;
+	color: rgb(var(--smoothly-primary-contrast));
+	text-decoration: none;
+	font-weight: bold;
+}
+smoothly-banner > header > nav > ul > li > a:hover {
+	background-color: rgb(var(--smoothly-secondary-color));
+	color: rgb(var(--smoothly-secondary-contrast));
 }
