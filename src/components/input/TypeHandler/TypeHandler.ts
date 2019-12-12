@@ -4,6 +4,9 @@ import { State } from "../State"
 import { StateEditor } from "../StateEditor"
 
 export abstract class TypeHandler {
+	private blockNextSet = false
+	get blockNext(): boolean { return this.blockNextSet }
+	set blockNext(block: boolean) { this.blockNextSet = block }
 	get value(): any { return this.state.value }
 	set value(value: any) {
 		this.state = { ...this.state, value }
@@ -15,8 +18,10 @@ export abstract class TypeHandler {
 		const updateComponent = this.stateValue.value != state.value
 		if (updateComponent || this.stateValue.selectionStart != state.selectionStart || this.stateValue.selectionEnd != state.selectionEnd) {
 			this.stateValue = state
-			if (updateComponent)
+			if (updateComponent) {
+				this.blockNextSet = true
 				this.component.value = this.value
+			}
 		}
 	}
 	protected constructor(protected readonly component: Component<any>) {

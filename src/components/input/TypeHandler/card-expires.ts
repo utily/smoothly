@@ -8,7 +8,10 @@ class CardExpires extends Base {
 			super.value.length > 0 ? [] : undefined
 	}
 	public set value(value: any) {
-		super.value = isExpires(value) ? value[0].toString().padStart(2, "0") + value[1].toString().padStart(2, "0") : ""
+		if (this.blockNext)
+			this.blockNext = false
+		else
+			super.value = isExpires(value) ? value[0].toString().padStart(2, "0") + value[1].toString().padStart(2, "0") : ""
 	}
 	get native(): Component<string> {
 		const result = super.native
