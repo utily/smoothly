@@ -16,6 +16,12 @@ class Phone extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
+	public set value(value: any) {
+		if (this.blockNext)
+			this.blockNext = false
+		else
+			super.value = value
+	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		const result = character >= "0" && character <= "9" || index == 0 && character == "+" && !accumulated.includes("+")
 		return result
