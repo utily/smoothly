@@ -26,13 +26,8 @@ class Phone extends Base {
 	public set value(value: any) {
 		if (this.blockNext)
 			this.blockNext = false
-		else if (value){
-			let filtered = ""
-			for (const c of value.toString())
-				if (this.filter(c, filtered.length, filtered))
-					filtered += c
-			super.value = filtered
-		}
+		else
+			super.value = value
 	}
 	filter(character: string, index: number, accumulated: string): boolean {
 		const result = character >= "0" && character <= "9" || index == 0 && character == "+" && !accumulated.includes("+")
