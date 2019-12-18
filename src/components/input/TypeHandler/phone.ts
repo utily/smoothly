@@ -16,6 +16,13 @@ class Phone extends Base {
 	constructor(component: Component<any>) {
 		super(component)
 	}
+	public get value() {
+		let filtered = ""
+		for (const c of super.value.toString())
+			if (this.filter(c, filtered.length, filtered))
+				filtered += c
+		return filtered
+	}
 	public set value(value: any) {
 		if (this.blockNext)
 			this.blockNext = false
