@@ -17,6 +17,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
+	@Prop({ mutable: true }) disabled: boolean = false
 	@Event() smoothlyChanged: EventEmitter<{ name: string, value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
@@ -44,6 +45,7 @@ export class SmoothlyInput {
 					placeholder={ component.placeholder }
 					required={ component.required }
 					autocomplete={ component.autocomplete }
+					disabled={ this.disabled }
 					pattern={ component.pattern && component.pattern.source }
 					onFocus={ e => { if (this.typeHandler) this.typeHandler.onFocus(e) } }
 					onClick={ e => { if (this.typeHandler) this.typeHandler.onClick(e) } }
