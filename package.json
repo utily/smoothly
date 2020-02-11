@@ -22,9 +22,9 @@
     "clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
   },
   "dependencies": {
-    "isoly": "0.0.10",
+    "isoly": "0.0.11",
     "normalize.css": "^8.0.1",
-    "smoothly-model": "0.0.9"
+    "smoothly-model": "0.0.10"
   },
   "devDependencies": {
     "@stencil/core": "^1.4.0",

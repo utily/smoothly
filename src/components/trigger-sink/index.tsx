@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Listen, Prop, h } from "@stencil/core"
 import { Message, Trigger } from "smoothly-model"
 
@@ -18,7 +19,6 @@ export class SmoothlyTriggerSink {
 	}
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
-		console.log("trigger-sink", event, this.filters)
 		if (Trigger.is(event.detail) && this.filters.some(f => f == event.detail.name)) {
 			Message.send(this.destination, event.detail, this.context || window)
 			event.preventDefault()
