@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, Element, Event, EventEmitter, Method, h } from "@stencil/core"
 import { Message, Trigger } from "smoothly-model"
 
@@ -22,8 +23,7 @@ export class SmoothlyFrame {
 	}
 	componentDidLoad() {
 		if (this.contentWindow)
-		Message.listen("*" /*this.urlOrigin*/, (destination: string, content: any) => {
-			console.log("frame.listen", destination, content)
+		Message.listen(this.urlOrigin, (destination: string, content: any) => {
 			if (destination == this.name)
 				if (Trigger.is(content))
 					this.trigger.emit(content)
@@ -35,7 +35,6 @@ export class SmoothlyFrame {
 	send(destination: string, content: Trigger | any): void
 	@Method()
 	async send(message: string | Message<any>, content?: Trigger | any): Promise<void> {
-		console.log("frame.submit", message, content, this.urlOrigin)
 		if (typeof(message) == "string")
 			Message.send(this.urlOrigin + "#" + message, content, this.contentWindow)
 		else if (Message.is(message) && this.contentWindow)
