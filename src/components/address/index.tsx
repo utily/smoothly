@@ -27,7 +27,7 @@ export class SmoothlyAddress {
 		] :
 		[
 			<label>{ this.type }</label>,
-			this.editable ? <smoothly-submit color="primary" fill="clear" prevent onSubmit={ _ => this.mode = "edit" }>Edit</smoothly-submit> : [],
+			this.editable ? <smoothly-submit color="primary" fill="clear" prevent onSubmit={ () => this.mode = "edit" }>Edit</smoothly-submit> : [],
 			<smoothly-address-display value={ this.value }></smoothly-address-display>,
 		]
 	}
