@@ -32,7 +32,7 @@ export class AddressEdit {
 				<smoothly-input type="text" name="city" value={ this.address.city }>City</smoothly-input>
 				<smoothly-input type="text" name="country" value={ isoly.CountryCode.Name.from("en", this.address.countryCode) }>Country</smoothly-input>
 				<div>
-					<smoothly-submit color="primary" fill="clear" prevent onSubmit={ e => this.onSubmit(e) }>Save</smoothly-submit>
+					<smoothly-submit color="primary" fill="clear" prevent onSubmit={ (e: CustomEvent) => this.onSubmit(e) }>Save</smoothly-submit>
 					<smoothly-trigger color="primary" fill="clear" name="cancel">Cancel</smoothly-trigger>
 				</div>
 			</form>,
