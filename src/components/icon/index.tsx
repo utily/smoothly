@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Component, State, Prop, Watch } from "@stencil/core"
 import { Color, Fill } from "smoothly-model"
 
@@ -15,7 +16,7 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async loadDocument() {
 		if (this.name) {
-			const url = `https://ionicons.com/ionicons/svg/md-${ this.name }.svg`
+			const url = `https://unpkg.com/ionicons@5.0.0/dist/svg/${ this.name }.svg`
 			const response = await fetch(url)
 			this.document = response.ok ? await response.text() : undefined
 		}
@@ -25,7 +26,7 @@ export class SmoothlyIcon {
 	}
 	hostData() {
 		return {
-			innerHTML: this.document,
+			innerHTML: this.document ? this.document.replace(` width="512" height="512"`, "") : undefined,
 		}
 	}
 	render() {
