@@ -1,39 +1,75 @@
 {
-  "name": "smoothly",
-  "version": "0.0.90",
-  "description": "Web component library written in Stencil.",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/components.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/smoothly/smoothly.js",
-  "files": [
-    "dist/",
-    "loader/"
-  ],
-  "scripts": {
-    "build": "stencil build",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
-  },
-  "dependencies": {
-    "isoly": "0.0.11",
-    "normalize.css": "^8.0.1",
-    "smoothly-model": "0.0.10"
-  },
-  "devDependencies": {
-    "@stencil/core": "^1.8.7",
-    "@types/jest": "24.0.20",
-    "@types/puppeteer": "1.19.1",
-    "jest": "24.9.0",
-    "jest-cli": "24.9.0",
-    "puppeteer": "1.19.0"
-  },
-  "author": "PayFunc",
-  "license": "MIT"
+	"name": "smoothly",
+	"version": "0.0.90",
+	"description": "Web component library written in Stencil.",
+	"author": "PayFunc",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/payfunc/smoothly"
+	},
+	"bugs": {
+		"url": "https://github.com/payfunc/smoothly/issues"
+	},
+	"homepage": "https://payfunc.com/open-source/smoothly",
+	"private": false,
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"es2015": "dist/esm/index.mjs",
+	"es2017": "dist/esm/index.mjs",
+	"types": "dist/types/components.d.ts",
+	"typings": "dist/index.d.ts",
+	"collection": "dist/collection/collection-manifest.json",
+	"collection:main": "dist/collection/index.js",
+	"unpkg": "dist/smoothly/smoothly.js",
+	"files": [
+		"dist/",
+		"loader/"
+	],
+	"git": {
+		"tagName": "v${version}"
+	},
+	"github": {
+		"release": true
+	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.test.json"
+			}
+		},
+		"testEnvironment": "node",
+		"testRegex": "((\\.|/)(test|spec))(\\.|\\/.+)(jsx?|tsx?)$",
+		"testPathIgnorePatterns": [
+			"node_modules/",
+			"dist/"
+		],
+		"collectCoverageFrom": [
+			"**/*.{ts,tsx,js,jsx}",
+			"!**/node_modules/**",
+			"!**/dist/**"
+		],
+		"preset": "ts-jest",
+		"testMatch": null
+	},
+	"scripts": {
+		"build": "stencil build",
+		"start": "stencil build --dev --watch --serve",
+		"test": "stencil test --spec --e2e",
+		"test.watch": "stencil test --spec --e2e --watchAll",
+		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
+	},
+	"dependencies": {
+		"isoly": "0.0.11",
+		"normalize.css": "^8.0.1",
+		"smoothly-model": "0.0.10"
+	},
+	"devDependencies": {
+		"@stencil/core": "^1.8.7",
+		"@types/jest": "24.0.20",
+		"@types/puppeteer": "1.19.1",
+		"jest": "24.9.0",
+		"jest-cli": "24.9.0",
+		"puppeteer": "1.19.0"
+	}
 }
