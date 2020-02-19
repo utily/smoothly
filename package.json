@@ -62,7 +62,8 @@
 	"dependencies": {
 		"isoly": "0.0.12",
 		"normalize.css": "^8.0.1",
-		"smoothly-model": "0.0.11"
+		"smoothly-model": "0.0.11",
+		"tidily": "0.0.4"
 	},
 	"devDependencies": {
 		"@stencil/core": "^1.8.9",
