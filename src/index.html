@@ -88,11 +88,11 @@
 				<smoothly-address-display value='{ "countryCode": "SE", "street": "Korkstigen 2", "zipCode": "654 31", "city": "Fejksala" }'></smoothly-address-display>
 				<smoothly-address editable="false" value='{ "countryCode": "SE", "street": "Stigvägen 34", "zipCode": "123 45", "city": "Hobbiton" }'></smoothly-address>
 				<smoothly-addresses allowed="billing delivery visit" editable="true" value='{ "billing": { "countryCode": "SE", "street": "Rundslingan 3", "zipCode": "987 65", "city": "Klotby" }, "visit": { "countryCode": "SE", "street": "Gångbanan 34", "zipCode": "543 21", "city": "Traskträsk" } }'></smoothly-addresses>
-				<smoothly-input type="zip-code" name="zip" style="width: calc(60% - 2px);">ZipCode</smoothly-input>
+				<smoothly-input type="postal-code" name="zip" style="width: calc(60% - 2px);">ZipCode</smoothly-input>
 				<smoothly-input type="text" name="testing">Texttest</smoothly-input>
 				<smoothly-input type="password" name="password">Password</smoothly-input>
 				<smoothly-input type="email" name="email">Email</smoothly-input>
-				<smoothly-input type="price" name="price">Price</smoothly-input>
+				<smoothly-input type="price" currency="SEK" name="price">Price</smoothly-input>
 				<smoothly-input type="phone" name="phone">Phone</smoothly-input>
 				<smoothly-display-date-time datetime="2019-08-15T08:08:17.65Z"></smoothly-display-date-time>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
@@ -119,8 +119,8 @@
 			event.detail.value = result
 		})
 	</script>
-	<smoothly-dialog color="primary" header="Header" closable>
+	<!-- <smoothly-dialog color="primary" header="Header" closable>
 		<smoothly-frame url="./assets/child.html" style="height: 20em;"></smoothly-frame>
-	</smoothly-dialog>
+	</smoothly-dialog> -->
 </body>
 </html>

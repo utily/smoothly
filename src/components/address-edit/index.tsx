@@ -28,7 +28,7 @@ export class AddressEdit {
 		[
 			<form>
 				<smoothly-input type="text" name="street" value={ this.address.street }>Street</smoothly-input>
-				<smoothly-input type="text" name="zipCode" value={ this.address.zipCode }>Zip</smoothly-input>
+				<smoothly-input type="postal-code" name="zipCode" value={ this.address.zipCode }>Zip</smoothly-input>
 				<smoothly-input type="text" name="city" value={ this.address.city }>City</smoothly-input>
 				<smoothly-input type="text" name="country" value={ isoly.CountryCode.Name.from("en", this.address.countryCode) }>Country</smoothly-input>
 				<div>

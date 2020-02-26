@@ -1,6 +1,7 @@
 // tslint:disable-next-line: no-implicit-dependencies
-import { Component, Event, EventEmitter, Prop, Watch, h } from "@stencil/core"
-import { TypeHandler } from "./TypeHandler"
+import { Component, Event, EventEmitter, Prop, Watch, h, State } from "@stencil/core"
+import { Currency } from "isoly"
+import * as tidily from "tidily"
 import { Autocomplete } from "./browser"
 @Component({
 	tag: "smoothly-input",
@@ -9,6 +10,7 @@ import { Autocomplete } from "./browser"
 })
 export class SmoothlyInput {
 	@Prop({ reflectToAttr: true }) name: string
+	private lastValue: any
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflectToAttr: true }) type: string = "text"
 	@Prop({ mutable: true, reflectToAttr: true }) required: boolean = false
@@ -18,43 +20,121 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled: boolean = false
+	@Prop({ reflect: true }) currency?: Currency
+	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	get formatter(): tidily.Formatter & tidily.Converter<any> {
+		let result: tidily.Formatter & tidily.Converter<any> | undefined
+		switch (this.type) {
+			case "price":
+				result = tidily.get("price", this.currency)
+				break
+			default:
+				result = tidily.get(this.type as tidily.Type)
+				break
+			}
+		return result || tidily.get("text")!
+	}
 	@Event() smoothlyChanged: EventEmitter<{ name: string, value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
-		if (this.typeHandler)
-			this.typeHandler.value = value
+		if (this.lastValue != value) {
+			this.lastValue = value
+			this.state = { ...this.state, value: this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ value, selection: this.state.selection })))).value }
+		}
 		if (value != before)
 			this.smoothlyChanged.emit({ name: this.name, value })
 	}
-	private typeHandler?: TypeHandler
 	componentWillLoad() {
-		this.typeHandler = TypeHandler.create(this)
+		const formatter = this.formatter
+		const value = formatter.toString(this.value) || ""
+		const start = value.length
+		this.state = formatter.format(tidily.StateEditor.copy(formatter.unformat(tidily.StateEditor.copy({
+			value,
+			selection: { start, end: start },
+		}))))
 	}
+	onBlur(event: FocusEvent) {
+	}
+	onFocus(event: FocusEvent) {
+		const after = this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state }))))
+		if (event.target)
+			this.updateBackend(after, event.target as HTMLInputElement)
+	}
+	onClick(event: MouseEvent) {
+		const backend = event.target as HTMLInputElement
+		this.state = {
+			...this.state,
+			value: backend.value,
+			selection: {
+				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
+				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+			}
+		}
+		const after = this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state }))))
+		this.updateBackend(after, backend)
+	}
+	onKeyDown(event: KeyboardEvent) {
+		const backend = event.target as HTMLInputElement
+		this.state = {
+			...this.state,
+			value: backend.value,
+			selection: {
+				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
+				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+			}
+		}
+		if (!(event.ctrlKey && event.key == "v") &&
+				event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" ||
+				event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
+			event.preventDefault()
+			this.processKey(event, backend)
+		}
+	}
+	onPaste(event: ClipboardEvent) {
+		event.preventDefault()
+		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
+		const backend = event.target as HTMLInputElement
+		for (const letter of pasted) {
+			this.processKey({ key: letter }, backend)
+		}
+	}
+	private processKey(event: tidily.Action, backend: HTMLInputElement){
+		const after = tidily.Action.apply(this.formatter, this.state, event)
+		this.updateBackend(after, backend)
+	}
+	updateBackend(after: Readonly<tidily.State> & Readonly<tidily.Settings>, backend: HTMLInputElement) {
+		if (after.value != backend.value)
+			backend.value = after.value
+		if (backend.selectionStart != undefined && (after.selection.start != backend.selectionStart)) {
+			backend.selectionStart = after.selection.start
+		}
+		if (backend.selectionEnd != undefined && (after.selection.end != backend.selectionEnd)) {
+			backend.selectionEnd = after.selection.end
+		}
+		this.state = after
+		this.value = this.lastValue = this.formatter.fromString(this.state.value)
+	}
+
 	hostData() {
-		return { class: { "has-value": this.typeHandler && this.typeHandler.native.value } }
+		return { class: { "has-value": this.state?.value } }
 	}
 	render() {
-		let result: any[] = []
-		if (this.typeHandler) {
-			const component = this.typeHandler.native
-			result = [
+		return [
 				<input
 					name={ this.name }
-					value={ component.value }
-					type={ component.type }
-					placeholder={ component.placeholder }
-					required={ component.required }
-					autocomplete={ component.autocomplete }
+					type={ this.state.type }
+					placeholder={ this.placeholder }
+					required={ this.required }
+					autocomplete={ this.state.autocomplete }
 					disabled={ this.disabled }
-					pattern={ component.pattern && component.pattern.source }
-					onFocus={ e => { if (this.typeHandler) this.typeHandler.onFocus(e) } }
-					onClick={ e => { if (this.typeHandler) this.typeHandler.onClick(e) } }
-					onBlur={ e => { if (this.typeHandler) this.typeHandler.onBlur(e) }}
-					onKeyDown={ e => { if (this.typeHandler) this.typeHandler.onKeyDown(e) } }
-					onPaste={ e => { if (this.typeHandler) this.typeHandler.onPaste(e) } }></input>,
+					pattern={ this.state.pattern && this.state.pattern.source }
+					value={ this.state.value }
+					onFocus={ e => this.onFocus(e) }
+					onClick={ e => this.onClick(e) }
+					onBlur={ e => this.onBlur(e) }
+					onKeyDown={ e => this.onKeyDown(e) }
+					onPaste={ e => this.onPaste(e) }></input>,
 				<label htmlFor={this.name}><slot/></label>,
 			]
-		}
-		return result
 	}
 }
