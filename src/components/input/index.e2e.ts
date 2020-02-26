@@ -21,7 +21,7 @@ describe("smoothly-input", () => {
 		const page = await newE2EPage()
 		await page.setContent(complete)
 		const input = await page.find("smoothly-input > input")
-		expect(input.outerHTML).toEqual("<input name=\"name\" class=\"sc-smoothly-input\">")
+		expect(input.outerHTML).toEqual("<input name=\"name\" type=\"text\" required=\"\" class=\"sc-smoothly-input\">")
 		expect(input.getAttribute("name")).toEqual("name")
 	})
 	it("label", async () => {
