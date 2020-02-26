@@ -1,3 +1,4 @@
+import * as isoly from "isoly"
 import * as browser from "./browser"
 
 export interface Component<T> {
@@ -9,4 +10,5 @@ export interface Component<T> {
 	autocomplete?: browser.Autocomplete
 	pattern?: RegExp
 	placeholder?: string
+	currency?: isoly.Currency
 }
