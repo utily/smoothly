@@ -112,7 +112,7 @@ export class SmoothlyInput {
 			backend.selectionEnd = after.selection.end
 		}
 		this.state = after
-		this.value = this.lastValue = this.formatter.fromString(this.state.value)
+		this.value = this.lastValue = this.formatter.fromString(this.formatter.unformat(tidily.StateEditor.copy({...this.state })).value)
 	}
 
 	hostData() {
