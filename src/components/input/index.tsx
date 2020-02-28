@@ -114,7 +114,6 @@ export class SmoothlyInput {
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(this.formatter.unformat(tidily.StateEditor.copy({...this.state })).value)
 	}
-
 	hostData() {
 		return { class: { "has-value": this.state?.value } }
 	}
