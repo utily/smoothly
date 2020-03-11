@@ -20,7 +20,7 @@ aside.warning {
 	color: rgb(var(--smoothly-warning-contrast));
 }
 aside.success {
-	background-color: rgb(var(--smoothly-success-tint));
+	background-color: rgb(var(--smoothly-success-color));
 	color: rgb(var(--smoothly-success-contrast));
 }
 aside.danger {
