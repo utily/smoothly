@@ -1,0 +1,11 @@
+:host {
+	display: block;
+}
+:host[hidden] {
+	display: none;
+}
+select {
+	background-color: inherit;
+	padding: .6em .4em .6em .4em;
+	border: none;
+}
