@@ -1,5 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
+import { Currency } from "isoly"
 
 @Component({
 	tag: "smoothly-select",
@@ -7,15 +8,15 @@ import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlySelect {
-	@Prop() options: string[]
+	@Prop() options: (string | Currency)[]
 	@Event() selectionChanged!: EventEmitter<string>
-	optionSelected(e: CustomEvent<string>) {
-		this.selectionChanged.emit(e.detail)
+	optionSelected() {
+		this.selectionChanged.emit((document.getElementById("select") as HTMLSelectElement)?.value)
 	}
 
 	render() {
 		return [
-			<select onChange={ (e: CustomEvent<string>) => this.optionSelected(e) }>
+			<select id="select" onChange={ () => this.optionSelected() }>
 				{ this.options.map(option => <option value={ option }>{ option }</option>) }
 			</select>
 		]
