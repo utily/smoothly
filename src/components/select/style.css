@@ -9,3 +9,6 @@ select {
 	padding: .4em .4em .4em .4em;
 	border: none;
 }
+select > option {
+	background-color: inherit;
+}
