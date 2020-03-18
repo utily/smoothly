@@ -9,14 +9,15 @@ import { Currency, Language } from "isoly"
 })
 export class SmoothlySelect {
 	@Prop() options: (string | Currency | Language)[]
-	@Event() selectionChanged!: EventEmitter<string>
+	@Prop() identifier: string
+	@Event() selectionChanged!: EventEmitter<{ identifier: string, value: string }>
 	optionSelected() {
-		this.selectionChanged.emit((document.getElementById("select") as HTMLSelectElement)?.value)
+		this.selectionChanged.emit({ identifier: this.identifier, value: (document.getElementById(this.identifier) as HTMLSelectElement)?.value })
 	}
 
 	render() {
 		return [
-			<select id="select" onChange={ () => this.optionSelected() }>
+			<select id={ this.identifier } onChange={ () => this.optionSelected() }>
 				{ this.options.map(option => <option value={ option }>{ option }</option>) }
 			</select>
 		]
