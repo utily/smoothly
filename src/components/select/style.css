@@ -6,7 +6,7 @@
 }
 select {
 	background-color: inherit;
-	padding: .4em .4em .4em .4em;
+	padding: 0;
 	border: none;
 	-webkit-appearance: none;
 	background-color: rgb(var(--smoothly-color));
