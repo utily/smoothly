@@ -74,28 +74,39 @@ export class SmoothlyInput {
 		this.updateBackend(after, backend)
 	}
 	onKeyDown(event: KeyboardEvent) {
-		const backend = event.target as HTMLInputElement
-		this.state = {
-			...this.state,
-			value: backend.value,
-			selection: {
-				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
-				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+		if (event.key) {
+			const backend = event.target as HTMLInputElement
+			this.state = {
+				...this.state,
+				value: backend.value,
+				selection: {
+					start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
+					end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+				}
 			}
-		}
-		if (!(event.ctrlKey && event.key == "v") &&
-				event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" ||
-				event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
-			event.preventDefault()
-			this.processKey(event, backend)
+			if (!(event.ctrlKey && event.key == "v") &&
+					event.key.length == 1 || event.key == "ArrowLeft" || event.key == "ArrowRight" ||
+					event.key == "Delete" || event.key == "Backspace" || event.key == "Home" || event.key == "End") {
+				event.preventDefault()
+				this.processKey(event, backend)
+			}
 		}
 	}
 	onPaste(event: ClipboardEvent) {
 		event.preventDefault()
 		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
-		for (const letter of pasted) {
+		for (const letter of pasted)
 			this.processKey({ key: letter }, backend)
+	}
+	onInput(event: InputEvent) {
+		const backend = event.target as HTMLInputElement
+		const data = event.data ?? backend.value // ff: event.data, chrome: backend.value
+		if (data) {
+			event.preventDefault()
+			this.processKey({ key: "a", ctrlKey: true }, backend)
+			for (const letter of data)
+				this.processKey({ key: letter }, backend)
 		}
 	}
 	private processKey(event: tidily.Action, backend: HTMLInputElement){
@@ -128,6 +139,7 @@ export class SmoothlyInput {
 					disabled={ this.disabled }
 					pattern={ this.state.pattern && this.state.pattern.source }
 					value={ this.state.value }
+					onInput={ (e: InputEvent) => this.onInput(e) }
 					onFocus={ e => this.onFocus(e) }
 					onClick={ e => this.onClick(e) }
 					onBlur={ e => this.onBlur(e) }
