@@ -23,11 +23,11 @@ export class Notifier {
 			window.clearTimeout(this.timer)
 			this.timer = undefined
 		}
-		if (newValue != undefined) {
+		if (newValue != undefined && !(Notice.is(newValue) && newValue.remain)) {
 			this.timer = window.setTimeout(() => {
 				this.notice = undefined
 				this.timer = undefined
-			}, 5000)
+			}, Notice.is(newValue) && newValue.timeout ? newValue.timeout : 5000)
 		}
 	}
 	@Listen("notice")
