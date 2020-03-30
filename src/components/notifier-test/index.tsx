@@ -8,7 +8,7 @@ import { Notice } from "smoothly-model"
 	scoped: true,
 })
 export class NotifierTest {
-	private notice: Notice = { type: "success", message: "This is a success notice." }
+	private notice: Notice = { type: "warning", message: "This is a warning notice." }
 
 	message: string
 	render() {
