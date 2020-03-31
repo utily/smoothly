@@ -3,7 +3,6 @@
 }
 :host[hidden] {
 	display: none;
-	
 }
 smoothly-trigger {
 	display: inline-block;
@@ -17,23 +16,25 @@ aside {
 	padding-right: 1em;
 	border-style: solid;
 	border-width: 1px;
-	border-color:196, 160, 0;
 	border-radius: 5px; 
 }
-
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
+	border-color: rgb(var(--smoothly-warning-shade));
 	color: rgb(var(--smoothly-warning-contrast));
 }
 aside.success {
 	background-color: rgb(var(--smoothly-success-color));
+	border-color: rgb(var(--smoothly-success-shade));
 	color: rgb(var(--smoothly-success-contrast));
 }
 aside.danger {
 	background-color: rgb(var(--smoothly-danger-tint));
+	border-color: rgb(var(--smoothly-danger-shade));
 	color: rgb(var(--smoothly-danger-contrast));
 }
 aside.default {
 	background-color: rgb(var(--smoothly-primary-tint));
+	border-color: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-contrast));
 }
