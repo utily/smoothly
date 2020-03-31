@@ -7,27 +7,34 @@
 smoothly-trigger {
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: 1.5em;
 }
 aside {
 	text-align: center;
 	vertical-align: middle;
-	width: 100%;
-	height: 2.8em;
+	width: 100%-2em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px; 
 }
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
+	border-color: rgb(var(--smoothly-warning-shade));
 	color: rgb(var(--smoothly-warning-contrast));
 }
 aside.success {
 	background-color: rgb(var(--smoothly-success-color));
+	border-color: rgb(var(--smoothly-success-shade));
 	color: rgb(var(--smoothly-success-contrast));
 }
 aside.danger {
 	background-color: rgb(var(--smoothly-danger-tint));
+	border-color: rgb(var(--smoothly-danger-shade));
 	color: rgb(var(--smoothly-danger-contrast));
 }
 aside.default {
 	background-color: rgb(var(--smoothly-primary-tint));
+	border-color: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-contrast));
 }
