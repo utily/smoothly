@@ -41,7 +41,8 @@ export class Notifier {
 		[
 			<slot></slot>,
 			<aside class={ notice.type }>
-				<p>{ notice.message }<smoothly-trigger color={ color } fill="clear" name="close"><smoothly-icon name="close-circle" color={ color }></smoothly-icon></smoothly-trigger></p>
+				<smoothly-trigger color={ color } fill="clear" name="close"><smoothly-icon name="close-circle-outline" color={ color }></smoothly-icon></smoothly-trigger>
+				<p>{ notice.message }</p>
 			</aside>,
 		]
 	}
