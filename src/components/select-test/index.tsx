@@ -1,6 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, Listen, h } from "@stencil/core"
-import { Currency, Language } from "isoly"
+import { Currency } from "isoly"
 
 @Component({
 	tag: "smoothly-select-test",
@@ -9,9 +9,7 @@ import { Currency, Language } from "isoly"
 })
 export class SmoothlySelectTest {
 	private currencies: Currency[] = ["SEK", "EUR"]
-	private languages: Language[] = ["sv", "en"]
 	private currency: Currency = "SEK"
-	private language: Language = "sv"
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string, value: string }>) {
@@ -20,15 +18,9 @@ export class SmoothlySelectTest {
 
 	render() {
 		return [
-			// <smoothly-select identifier="currency" options={ this.currencies } selected={ "EUR" }></smoothly-select>,
-			// <smoothly-select identifier="language" options={ this.languages }></smoothly-select>
 			<smoothly-select identifier="currency">
-				{/* { this.currencies.map(option => <option selected={ option == this.currency } value={ option }>{ option }</option>) } */}
 				{ this.currencies.map(option => this.currency == option ? <option value={ option } selected>{ option }</option> : <option value={ option }>{ option }</option>) }
 			</smoothly-select>,
-			// <smoothly-select identifier="language">
-			// 	{ this.languages.map(option => this.language == option ? <option value={ option } selected>{ option }</option> : <option value={ option }>{ option }</option>) }
-			// </smoothly-select>,
 			<smoothly-select identifier="language">
 				<optgroup label="Nordic">
 					<option value="sv">Swedish</option>
