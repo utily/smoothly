@@ -74,7 +74,7 @@ export class SmoothlyInput {
 		this.updateBackend(after, backend)
 	}
 	onKeyDown(event: KeyboardEvent) {
-		if (event.key) {
+		if (event.key && !(event.key == "Unidentified")) {
 			const backend = event.target as HTMLInputElement
 			this.state = {
 				...this.state,
@@ -101,7 +101,7 @@ export class SmoothlyInput {
 	}
 	onInput(event: InputEvent) {
 		const backend = event.target as HTMLInputElement
-		const data = event.data ?? backend.value // ff: event.data, chrome: backend.value
+		const data = backend.value
 		if (data) {
 			event.preventDefault()
 			this.processKey({ key: "a", ctrlKey: true }, backend)
