@@ -59,9 +59,9 @@
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
 	"dependencies": {
-		"isoly": "0.0.12",
+		"isoly": "0.0.13",
 		"normalize.css": "^8.0.1",
-		"smoothly-model": "0.0.12",
+		"smoothly-model": "0.0.13",
 		"tidily": "0.0.28"
 	},
 	"devDependencies": {
