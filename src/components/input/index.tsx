@@ -2,7 +2,7 @@
 import { Component, Event, EventEmitter, Prop, Watch, h, State } from "@stencil/core"
 import { Currency } from "isoly"
 import * as tidily from "tidily"
-import { Autocomplete } from "./browser"
+import { Autocomplete } from "smoothly-model"
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",

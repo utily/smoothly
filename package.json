@@ -61,7 +61,7 @@
 	"dependencies": {
 		"isoly": "0.0.14",
 		"normalize.css": "^8.0.1",
-		"smoothly-model": "0.0.14",
+		"smoothly-model": "0.0.15",
 		"tidily": "0.0.29"
 	},
 	"devDependencies": {
