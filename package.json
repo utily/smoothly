@@ -17,7 +17,7 @@
 	"module": "dist/index.mjs",
 	"es2015": "dist/esm/index.mjs",
 	"es2017": "dist/esm/index.mjs",
-	"types": "dist/types/components.d.ts",
+	"types": "dist/types/index.d.ts",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
 	"unpkg": "dist/smoothly/smoothly.js",
@@ -66,6 +66,7 @@
 	},
 	"devDependencies": {
 		"@stencil/core": "^1.15.0",
+		"@stencil/router": "^1.0.1",
 		"@types/jest": "26.0.3",
 		"@types/puppeteer": "3.0.1",
 		"jest": "26.1.0",
