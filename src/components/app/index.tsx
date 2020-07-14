@@ -1,4 +1,5 @@
-import { Component, h } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
+import { Color } from "smoothly-model"
 
 @Component({
 	tag: "smoothly-app",
@@ -6,6 +7,7 @@ import { Component, h } from "@stencil/core"
 	scoped: false,
 })
 export class SmoothlyApp {
+	@Prop() color: Color
 	render() {
 		return [
 			<slot></slot>,

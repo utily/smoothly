@@ -4,24 +4,55 @@ smoothly-app {
 smoothly-app[hidden] {
 	display: none;
 }
+smoothly-app[color=default],
+smoothly-app:not([color]) {
+	--smoothly-app-background: var(--smoothly-default-shade);
+	--smoothly-app-color: var(--smoothly-default-contrast);
+	--smoothly-app-hover-background: var(--smoothly-primary-color);
+	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
+	--smoothly-app-shadow: var(--smoothly-default-shadow);
+}
+smoothly-app[color=primary] {
+	--smoothly-app-background: var(--smoothly-primary-shade);
+	--smoothly-app-color: var(--smoothly-primary-contrast);
+	--smoothly-app-hover-background: var(--smoothly-secondary-color);
+	--smoothly-app-hover-color: var(--smoothly-secondary-contrast);
+	--smoothly-app-shadow: var(--smoothly-primary-shadow);
+}
+smoothly-app[color=secondary] {
+	--smoothly-app-background: var(--smoothly-secondary-shade);
+	--smoothly-app-color: var(--smoothly-secondary-contrast);
+	--smoothly-app-hover-background: var(--smoothly-primary-color);
+	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
+	--smoothly-app-shadow: var(--smoothly-secondary-shadow);
+}
+smoothly-app[color=tertiary],
+smoothly-app[color=success],
+smoothly-app[color=warning],
+smoothly-app[color=danger] {
+	--smoothly-app-background: var(--smoothly-color-shade);
+	--smoothly-app-color: var(--smoothly-color-contrast);
+	--smoothly-app-hover-background: var(--smoothly-default-shade);
+	--smoothly-app-hover-color: var(--smoothly-default-contrast);
+	--smoothly-app-shadow: var(--smoothly-color-shadow);
+}
 smoothly-app > header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: calc(100vw - 2em);
+	width: 100vw;
 	z-index: 1;
-  height: 4em;
-	padding: 0 1em;
-	background-color: rgb(var(--smoothly-primary-color));
-  color: rgb(var(--smoothly-primary-contrast));
+  height: 1.6cm;
+	background-color: rgb(var(--smoothly-app-background));
+  color: rgb(var(--smoothly-app-color));
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 5px 0 rgba(var(--smoothly-dark-shade));
+	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
 }
 smoothly-app > header > h1 {
 	flex-grow: 1;
 }
-smoothly-app > header  a {
+smoothly-app > header a {
 	color: inherit;
 	text-decoration: inherit;
 }
@@ -33,21 +64,22 @@ smoothly-app > header > nav > ul,
 	height: 100%;
 	margin: 0;
 }
-smoothly-app > header > h1 > a,
+smoothly-app > header > h1 a,
 smoothly-app > header > nav > ul > li a {
 	display: inline-block;
-	line-height: 4em;
+	line-height: 1.6cm;
 	height: 100%;
-	padding: 0 1em;
+	padding: 0 .4cm;
 	color: rgb(var(--smoothly-primary-contrast));
 	text-decoration: none;
 	font-weight: bold;
 }
-smoothly-app > header > nav > ul > li a:hover {
-	background-color: rgb(var(--smoothly-secondary-color));
-	color: rgb(var(--smoothly-secondary-contrast));
+smoothly-app > header > nav > ul > li a:hover,
+smoothly-app > header > nav > ul > li a.link-active {
+	background-color: rgb(var(--smoothly-app-hover-background));
+	color: rgb(var(--smoothly-app-hover-color));
 }
 smoothly-app > header + * {
 	position: relative;
-	top: 4em;
+	top: 1.6cm;
 }
