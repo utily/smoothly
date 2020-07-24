@@ -1,5 +1,6 @@
 smoothly-app {
 	display: block;
+	scrollbar-width: none;
 }
 smoothly-app[hidden] {
 	display: none;
@@ -40,17 +41,15 @@ smoothly-app > header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
 	z-index: 1;
   height: 1.6cm;
 	background-color: rgb(var(--smoothly-app-background));
   color: rgb(var(--smoothly-app-color));
-  display: flex;
+	display: flex;
+	justify-content: space-between;
   align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
-}
-smoothly-app > header > h1 {
-	flex-grow: 1;
 }
 smoothly-app > header a {
 	color: inherit;
@@ -60,7 +59,7 @@ smoothly-app > header > h1,
 smoothly-app > header > nav,
 smoothly-app > header > nav > ul,
 	smoothly-app > header > nav > ul > li {
-	display: block;
+	display: inline-block;
 	height: 100%;
 	margin: 0;
 }
