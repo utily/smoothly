@@ -3,11 +3,11 @@ import { Component, Listen, h } from "@stencil/core"
 import { Currency } from "isoly"
 
 @Component({
-	tag: "smoothly-select-test",
+	tag: "smoothly-select-demo",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlySelectTest {
+export class SmoothlySelectDemo {
 	private currencies: Currency[] = ["SEK", "EUR"]
 	private currency: Currency = "SEK"
 
