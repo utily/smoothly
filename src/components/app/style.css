@@ -58,7 +58,8 @@ smoothly-app > header a {
 smoothly-app > header > h1,
 smoothly-app > header > nav,
 smoothly-app > header > nav > ul,
-	smoothly-app > header > nav > ul > li {
+smoothly-app > header > nav > ul > li,
+smoothly-app > header > nav > ul > li > *:not(a) {
 	display: inline-block;
 	height: 100%;
 	margin: 0;
@@ -72,6 +73,13 @@ smoothly-app > header > nav > ul > li a {
 	color: rgb(var(--smoothly-primary-contrast));
 	text-decoration: none;
 	font-weight: bold;
+}
+smoothly-app > header > nav > ul > li smoothly-trigger.sc-smoothly-trigger-h {
+	border: 0;
+}
+smoothly-app > header > nav > ul > li a > smoothly-icon {
+	position: relative;
+	top: .2cm;
 }
 smoothly-app > header > nav > ul > li a:hover,
 smoothly-app > header > nav > ul > li a.link-active {

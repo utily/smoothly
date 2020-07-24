@@ -12,6 +12,7 @@ export class SmoothlyTrigger {
 	@Prop({ reflect: true }) expand: Expand
 	@Prop({ reflect: true }) fill: Fill
 	@Prop({ reflect: true }) disabled: boolean = false
+	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop() name: string
 	@Prop() value?: any
 	@Event() trigger: EventEmitter<Trigger>
@@ -23,6 +24,17 @@ export class SmoothlyTrigger {
 		e.preventDefault()
 	}
 	render() {
-		return <button disabled={ this.disabled } name={ this.name }><slot></slot></button>
+		let result: HTMLElement
+		switch (this.type) {
+			case "link":
+				result = this.disabled
+					? <slot></slot>
+					: <a onClick={ e => this.onClick(e) }><slot></slot></a>
+				break
+			case "button":
+				result = <button disabled={ this.disabled } name={ this.name }><slot></slot></button>
+				break
+		}
+		return result
 	}
 }
