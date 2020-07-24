@@ -17,6 +17,7 @@ export class SmoothlyAppDemo {
 						<li><stencil-route-link url="/input">Input</stencil-route-link></li>
 						<li><stencil-route-link url="/display">Display</stencil-route-link></li>
 						<li><stencil-route-link url="/select">Select</stencil-route-link></li>
+						<li><smoothly-trigger type="link" fill="clear" name="logout"><smoothly-icon toolTip={ "Log out" } name="log-out" size="medium" fill="clear" color="light"></smoothly-icon></smoothly-trigger></li>
 					</ul>
 				</nav>
 			</header>
