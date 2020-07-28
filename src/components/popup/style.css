@@ -54,3 +54,6 @@
   height: 15px;
   transform: rotate(45deg);
 }
+:host .pointer {
+	cursor: pointer;
+}

@@ -13,7 +13,7 @@ export class SmoothlyPopup {
 	}
 	render() {
 		return <Host>
-			<content  onClick={ (e: UIEvent) => this.onClick(e) }><slot></slot></content>
+			<content  class="pointer" onClick={ (e: UIEvent) => this.onClick(e) }><slot></slot></content>
 			<div class="background" onClick={ (e: UIEvent) => this.onClick(e) }></div>
 			<aside><div class="arrow" onClick={ (e: UIEvent) => this.onClick(e) }></div><slot name="popup"></slot></aside>
 		</Host>
