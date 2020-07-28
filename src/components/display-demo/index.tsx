@@ -7,6 +7,7 @@ export class SmoothlyDisplayDemo {
 	render() {
 		return [
 			<main>
+				<smoothly-popup><div>Popup, click me</div><div slot="popup">1 line popup</div></smoothly-popup>
 				<smoothly-display-date-time datetime="2019-08-15T08:08:17.65Z"></smoothly-display-date-time>
 				<dl>
 					<dt>text</dt><dd><smoothly-display type="text" value="text"></smoothly-display></dd>
