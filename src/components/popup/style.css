@@ -1,0 +1,59 @@
+:host {
+	display: inline-block;
+	position: relative;
+}
+:host[hidden] {
+	display: none;
+}
+:host:not([visible]) aside {
+	display: none;
+}
+:host aside {
+	display: block;
+	position: absolute;
+	top: 2.2em;
+	left: center;
+	padding: 0.6em;
+	background-color: rgb(var(--smoothly-medium-shade));
+	box-shadow: 6px 5px 9px -9px black,
+	5px 6px 9px -9px black;
+	border-color: rgb(var(--smoothly-light-shade));
+	border-style: solid;
+  border-width: 1px;
+	border-radius: 0.6em;
+	z-index: 3;
+}
+ :host:not([visible]) .background {
+	display: none;
+}
+:host .background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vw;
+	background: rgba(var(--smoothly-dark-shade), 0.8);
+	z-index: 2;
+}
+:host:not([visible]) .arrow {
+	display: none;
+}
+:host .arrow {
+	background-color: rgb(var(--smoothly-medium-shade));
+	border-color: rgb(var(--smoothly-light-shade));
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-left-style: solid;
+	border-left-width: 1px;
+	z-index: 2;
+	content: "";
+  position: absolute;
+  left: 1em;
+  top: -0.45em;
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+}
+:host .pointer {
+	cursor: pointer;
+}
