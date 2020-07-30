@@ -1,5 +1,5 @@
 :host {
-	display: inline-block;
+	display: inline-flex;
 	position: relative;
 }
 :host[hidden] {
@@ -9,17 +9,17 @@
 	display: none;
 }
 :host aside {
-	display: block;
+	display: inline;
 	position: absolute;
 	top: 2.2em;
-	left: center;
-	padding: 0.6em;
-	background-color: rgb(var(--smoothly-medium-shade));
+	left: 1em;
+	padding: 0.3em;
+	background-color:  rgb(238, 238, 238);
 	box-shadow: 6px 5px 9px -9px black,
 	5px 6px 9px -9px black;
-	border-color: rgb(var(--smoothly-light-shade));
+	border-color: rgb(238, 238, 238);
 	border-style: solid;
-  border-width: 1px;
+  border-width: 0.1em;
 	border-radius: 0.6em;
 	z-index: 3;
 }
@@ -32,15 +32,15 @@
 	left: 0;
 	width: 100vw;
 	height: 100vw;
-	background: rgba(var(--smoothly-dark-shade), 0.8);
+	background: rgba(var(--smoothly-dark-shade), 0.5);
 	z-index: 2;
 }
 :host:not([visible]) .arrow {
 	display: none;
 }
 :host .arrow {
-	background-color: rgb(var(--smoothly-medium-shade));
-	border-color: rgb(var(--smoothly-light-shade));
+	background-color:  rgb(238, 238, 238);
+	border-color:  rgb(238, 238, 238);
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-left-style: solid;
@@ -48,10 +48,10 @@
 	z-index: 2;
 	content: "";
   position: absolute;
-  left: 1em;
-  top: -0.45em;
-  width: 15px;
-  height: 15px;
+  left: 1.1em;
+  top: -0.5em;
+  width: 10px;
+  height: 10px;
   transform: rotate(45deg);
 }
 :host .pointer {
