@@ -8,9 +8,14 @@ import { Currency } from "isoly"
 	scoped: true,
 })
 export class SmoothlySelectDemo {
+	private quantityElement?: HTMLSmoothlySelectElement
 	private currencies: Currency[] = ["SEK", "EUR"]
 	private currency: Currency = "SEK"
 
+	private alertf() {
+		console.log(this.quantityElement)
+		alert(this.quantityElement?.value)
+	}
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string, value: string }>) {
 		console.log("selectionChanged", event.detail)
@@ -30,7 +35,13 @@ export class SmoothlySelectDemo {
 				<optgroup label="Other">
 					<option value="en">English</option>
 				</optgroup>
-		</smoothly-select>
+		</smoothly-select>,
+		<smoothly-select identifier="quantity" ref={ e => this.quantityElement = e }>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</smoothly-select>,
+		<button onClick={ () => this.alertf() }>test</button>
 		]
 	}
 }
