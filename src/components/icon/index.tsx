@@ -18,8 +18,12 @@ export class SmoothlyIcon {
 	async loadDocument() {
 		if (this.name) {
 			const url = `https://unpkg.com/ionicons@5.0.0/dist/svg/${ this.name }.svg`
-			const response = await fetch(url)
-			this.document = response.ok ? (await response.text()).replace(/(<title>)[\w\d\s\-]*(<\/title>)/, `<title>${ this.toolTip || "" }</title>`) : undefined
+			this.document = SmoothlyIcon.cache[url]
+			if (!this.document) {
+				const response = await fetch(url)
+				this.document = response.ok ? (await response.text()).replace(/(<title>)[\w\d\s\-]*(<\/title>)/, `<title>${ this.toolTip || "" }</title>`) : undefined
+				SmoothlyIcon.cache[url] = this.document
+			}
 		}
 	}
 	async componentWillLoad() {
@@ -33,4 +37,5 @@ export class SmoothlyIcon {
 	render() {
 		return []
 	}
+	private static cache: { [url: string]: string | undefined } = {}
 }
