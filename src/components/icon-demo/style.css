@@ -1,6 +1,5 @@
 icon-demo {
 	display: block;
-	background: none !important;
 }
 icon-demo[hidden] {
 	display: none;
