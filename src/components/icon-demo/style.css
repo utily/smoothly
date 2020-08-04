@@ -1,0 +1,15 @@
+icon-demo {
+	display: block;
+	background: none !important;
+}
+icon-demo[hidden] {
+	display: none;
+}
+
+icon-demo > content {
+	display: flex;
+	flex-flow: row wrap;
+}
+icon-demo > content > * {
+	margin: 1cm;
+}
