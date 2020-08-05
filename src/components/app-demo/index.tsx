@@ -17,6 +17,7 @@ export class SmoothlyAppDemo {
 						<li><stencil-route-link url="/input">Input</stencil-route-link></li>
 						<li><stencil-route-link url="/display">Display</stencil-route-link></li>
 						<li><stencil-route-link url="/select">Select</stencil-route-link></li>
+						<li><stencil-route-link url="/icon">Icon</stencil-route-link></li>
 						<li><smoothly-trigger type="link" fill="clear" name="logout"><smoothly-icon toolTip={ "Log out" } name="log-out" size="medium" fill="clear" color="light"></smoothly-icon></smoothly-trigger></li>
 					</ul>
 				</nav>
@@ -27,6 +28,7 @@ export class SmoothlyAppDemo {
 					<stencil-route url="/input" component="smoothly-input-demo" />
 					<stencil-route url="/display" component="smoothly-display-demo" />
 					<stencil-route url="/select" component="smoothly-select-demo" />
+					<stencil-route url="/icon" component="smoothly-icon-demo" />
 				</stencil-route-switch>
 			</stencil-router>
 		</smoothly-app>
