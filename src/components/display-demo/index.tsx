@@ -22,6 +22,7 @@ export class SmoothlyDisplayDemo {
 					<dt>card csc</dt><dd><smoothly-display type="card-csc" value="987"></smoothly-display></dd>
 				</dl>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
+				<smoothly-notifier notice={ {type: "warning", message: "This is a test warning notice."} }></smoothly-notifier>
 			</main>
 		]
 	}

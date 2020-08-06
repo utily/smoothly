@@ -7,16 +7,18 @@
 smoothly-trigger {
 	float: right;
 	text-align: right;
-	margin-right: -1em;
+	margin-right: 0.2em;
 }
 aside {
-	position: relative;
+	position: fixed;
+	bottom: 3em;
 	text-align: center;
-	width: calc(100% - 2em);
-	padding: 0 1em;
+	width: 100%;
+	max-width: 90em;
 	border-style: solid;
-	border-width: 1px;
+	border-width: 0px;
 	border-radius: 5px; 
+	z-index: 1;
 }
 aside.warning {
 	background-color: rgb(var(--smoothly-warning-tint));
