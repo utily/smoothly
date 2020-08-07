@@ -11,6 +11,18 @@ import { App } from "../App"
 export class SmoothlyAppDemo {
 	render() {
 		return <App title="Smoothly Demo">
+			<smoothly-select identifier="language" slot="header" background="rgb(var(--smoothly-app-background))">
+				<optgroup label="Nordic">
+					<option value="sv">Swedish</option>
+					<option value="da" selected>Danish</option>
+					<option value="no">Norwegian</option>
+				</optgroup>
+				<optgroup label="Other">
+					<option value="en">English</option>
+				</optgroup>
+			</smoothly-select>
+			<a slot="nav-start" href="/display">Display</a>
+			<smoothly-trigger slot="nav-end" type="link" fill="clear" name="logout"><smoothly-icon toolTip={ "Log out" } name="log-out" size="medium" fill="clear" color="light"></smoothly-icon></smoothly-trigger>
 			<smoothly-room path="/">
 				<smoothly-login />
 			</smoothly-room>
@@ -26,8 +38,6 @@ export class SmoothlyAppDemo {
 			<smoothly-room path="/icon" title="Icon">
 				<smoothly-icon-demo />
 			</smoothly-room>
-			<p slot="center">Center</p>
-			<smoothly-trigger slot="navigation" type="link" fill="clear" name="logout"><smoothly-icon toolTip={ "Log out" } name="log-out" size="medium" fill="clear" color="light"></smoothly-icon></smoothly-trigger>
 		</App>
 	}
 }
