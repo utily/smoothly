@@ -10,7 +10,7 @@ import { App } from "../App"
 })
 export class SmoothlyAppDemo {
 	render() {
-		return <App title="Smoothly Demo">
+		return <App label="Smoothly Demo">
 			<smoothly-select identifier="language" slot="header" background="rgb(var(--smoothly-app-background))">
 				<optgroup label="Nordic">
 					<option value="sv">Swedish</option>
@@ -26,16 +26,16 @@ export class SmoothlyAppDemo {
 			<smoothly-room path="/">
 				<smoothly-login />
 			</smoothly-room>
-			<smoothly-room path="/input" title="Input">
+			<smoothly-room path="/input" label="Input">
 				<smoothly-input-demo />
 			</smoothly-room>
-			<smoothly-room path="/display" title="Display">
+			<smoothly-room path="/display" label="Display">
 				<smoothly-display-demo />
 			</smoothly-room>
-			<smoothly-room path="/select" title="Select">
+			<smoothly-room path="/select" label="Select">
 				<smoothly-select-demo />
 			</smoothly-room>
-			<smoothly-room path="/icon" title="Icon">
+			<smoothly-room path="/icon" label="Icon">
 				<smoothly-icon-demo />
 			</smoothly-room>
 		</App>
