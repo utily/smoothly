@@ -8,7 +8,7 @@ const Router = createStaticRouter()
 export const App: FunctionalComponent<{ label: string }> = (attributes, children, utils) => (
 	<smoothly-app>
 		<header>
-			<h1><a { ...href("/") }>{ attributes.label }</a></h1>
+			<h1><a { ...href(resolve("") ?? "/") }>{ attributes.label }</a></h1>
 			{ children.filter(child => child.$attrs$.slot == "header") }
 			<nav>
 				<ul>
@@ -19,15 +19,20 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, children
 							...children.filter(child => child.$attrs$.slot == "nav-end"),
 						].map(e => {
 							const url = resolve(e.$attrs$.href)
-							return e.$tag$ = "a" && url ? <a { ...href(url) } class={ Router.activePath == url ? "active" : "" }>{ e.$children$ }</a> : <a target="new" { ...e.$attrs$ }>{ e.$children$ }</a>
+							return e.$tag$ != "a"
+								? e
+								: url
+								? <a { ...href(url) } class={ Router.activePath == url ? "active" : "" }>{ e.$children$ }</a>
+								: <a target="new" { ...e.$attrs$ }>{ e.$children$ }</a>
 						}).map(e => <li>{ e }</li>)
 					}
 				</ul>
 			</nav>
 		</header>
 		<content>
+			<p>{ resolve("") }</p>
 			<Router.Switch>
-				{ children.filter(child => child.$attrs$.path).map(child => <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path }>{ child }</Route>) }
+				{ children.filter(child => child.$attrs$.path != undefined).map(child => <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path }>{ child }</Route>) }
 			</Router.Switch>
 		</content>
 	</smoothly-app>
