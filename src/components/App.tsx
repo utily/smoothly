@@ -15,17 +15,28 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, children
 					{
 						[
 							...children.filter(child => child.$attrs$.slot == "nav-start"),
-						...children.map(child => [child.$attrs$.label, child.$attrs$.path]).filter(e => e[0] && e[1]).map(e => <a href={ e[1] }>{ e[0] }</a>),
+							...children.map(child => [child.$attrs$.label, child.$attrs$.path]).filter(e => e[0] && e[1]).map(e => <a href={ e[1] }>{ e[0] }</a>),
 							...children.filter(child => child.$attrs$.slot == "nav-end"),
-						].map(e => e.$tag$ = "a" ? <a { ...href(e.$attrs$.href) } class={ Router.activePath.endsWith(e.$attrs$.href) ? "active" : "" }>{ e.$children$ }</a> : e).map(e => <li>{ e }</li>)
+						].map(e => {
+							const url = resolve(e.$attrs$.href)
+							return e.$tag$ = "a" && url ? <a { ...href(url) } class={ Router.activePath == url ? "active" : "" }>{ e.$children$ }</a> : <a target="new" { ...e.$attrs$ }>{ e.$children$ }</a>
+						}).map(e => <li>{ e }</li>)
 					}
 				</ul>
 			</nav>
 		</header>
 		<content>
 			<Router.Switch>
-				{ children.filter(child => child.$attrs$.path).map(child => <Route path={ child.$attrs$.path }>{ child }</Route>) }
+				{ children.filter(child => child.$attrs$.path).map(child => <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path }>{ child }</Route>) }
 			</Router.Switch>
 		</content>
 	</smoothly-app>
 )
+function resolve(url: string): string | undefined {
+	const u = new URL(url, document.baseURI)
+	return url == ""
+		? new URL(document.baseURI).pathname
+		: u.toString().startsWith(document.baseURI)
+		? u.pathname
+		: undefined
+}

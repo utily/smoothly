@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-implicit-dependencies
 import { Config } from "@stencil/core"
 
 export const config: Config = {
@@ -10,6 +11,7 @@ export const config: Config = {
 		{
 			type: "www",
 			serviceWorker: null, // disable service workers
+			baseUrl: "smoothly"
 		},
 	],
 	devServer: {
