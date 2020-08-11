@@ -30,9 +30,8 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, children
 			</nav>
 		</header>
 		<content>
-			<p>{ resolve("") }</p>
 			<Router.Switch>
-				{ children.filter(child => child.$attrs$.path != undefined).map(child => <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path }>{ child }</Route>) }
+				{ children.filter(child => child.$attrs$.path != undefined).map(child => child.$attrs$.to ? <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path } to={ child.$attrs$.to }></Route> : <Route path={ resolve(child.$attrs$.path) ?? child.$attrs$.path }>{ child }</Route>) }
 			</Router.Switch>
 		</content>
 	</smoothly-app>
