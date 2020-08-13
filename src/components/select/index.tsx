@@ -8,6 +8,7 @@ import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 })
 export class SmoothlySelect {
 	@Prop() identifier: string
+	@Prop({ reflect: true }) background?: string
 	private selectElement?: HTMLSelectElement
 	@Prop({ mutable: true }) value: string
 	@Event() selectionChanged!: EventEmitter<{ identifier: string, value: string }>
@@ -23,7 +24,7 @@ export class SmoothlySelect {
 
 	render() {
 		return [
-			<select ref={ e => this.selectElement = e } id={ this.identifier } onChange={ () => this.optionSelected() }>
+			<select ref={ e => this.selectElement = e } id={ this.identifier } onChange={ () => this.optionSelected() } style={ { background: this.background }}>
 				<slot></slot>
 			</select>
 		]
