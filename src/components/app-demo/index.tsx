@@ -1,7 +1,5 @@
 // tslint:disable-next-line: no-implicit-dependencies
-import { Component, h, Prop } from "@stencil/core"
-// tslint:disable-next-line: no-implicit-dependencies
-import "@stencil/router"
+import { Component, Prop, h } from "@stencil/core"
 
 import { App } from "../App"
 
