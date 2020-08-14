@@ -82,7 +82,7 @@ smoothly-app > header > nav > ul > li a > smoothly-icon {
 	top: .2cm;
 }
 smoothly-app > header > nav > ul > li a:hover,
-smoothly-app > header > nav > ul > li a.link-active {
+smoothly-app > header > nav > ul > li a.active {
 	background-color: rgb(var(--smoothly-app-hover-background));
 	color: rgb(var(--smoothly-app-hover-color));
 }

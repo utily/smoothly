@@ -1,16 +1,16 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, h, Prop } from "@stencil/core"
-import { Color } from "smoothly-model"
-
 
 @Component({
-	tag: "smoothly-app",
-	styleUrl: "style.css",
-	scoped: false,
+	tag: "smoothly-room",
 })
-export class SmoothlyApp {
-	@Prop() color: Color
+export class SmoothlyAppDemo {
+	@Prop() label?: string
+	@Prop() path: string
+	@Prop() to?: string
 	render() {
 		return <slot></slot>
 	}
 }
+
+
