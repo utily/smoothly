@@ -1,2 +1,2 @@
-export * from "./components"
-export * from "./components/App"
+export { Components, JSX } from "./components"
+export { App } from "./components/App"
