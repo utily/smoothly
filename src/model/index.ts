@@ -1,3 +1,4 @@
+export { Autocomplete } from "./Autocomplete"
 export { ClientIdentifier } from "./ClientIdentifier"
 export { Color } from "./Color"
 export { Expand } from "./Expand"
