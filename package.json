@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "0.0.137",
+	"version": "0.1.0",
 	"description": "Web component library written in Stencil.",
 	"author": "PayFunc",
 	"license": "MIT",
@@ -59,11 +59,11 @@
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
 	"dependencies": {
+		"authly": "0.0.40",
 		"isoly": "0.0.15",
 		"normalize.css": "^8.0.1",
-		"smoothly-model": "0.0.15",
-		"tidily": "0.0.30",
-		"stencil-router-v2": "^0.5.1-0"
+		"stencil-router-v2": "^0.5.1-0",
+		"tidily": "0.0.30"
 	},
 	"devDependencies": {
 		"@stencil/core": "^1.17.3",

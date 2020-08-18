@@ -1,6 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, h } from "@stencil/core"
-import { Notice } from "smoothly-model"
+import { Notice } from "../../model"
 
 @Component({
 	tag: "smoothly-notifier-test",

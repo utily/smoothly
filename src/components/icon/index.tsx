@@ -1,6 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, State, Prop, Watch } from "@stencil/core"
-import { Color, Fill } from "smoothly-model"
+import { Color, Fill } from "../../model"
 
 @Component({
 	tag: "smoothly-icon",
