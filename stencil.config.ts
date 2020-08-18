@@ -5,8 +5,7 @@ export const config: Config = {
 	namespace: "smoothly",
 	outputTargets: [
 		{
-			type: "dist",
-			esmLoaderPath: "../loader",
+			type: "dist-custom-elements-bundle",
 		},
 		{
 			type: "www",
