@@ -1,6 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, h, Listen } from "@stencil/core"
-import { Address, Addresses, Trigger } from "smoothly-model"
+import { Address, Addresses, Trigger } from "../../model"
 
 @Component({
 	tag: "smoothly-addresses",
