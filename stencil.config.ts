@@ -3,9 +3,14 @@ import { Config } from "@stencil/core"
 
 export const config: Config = {
 	namespace: "smoothly",
+	taskQueue: "async",
 	outputTargets: [
 		{
-			type: "dist-custom-elements-bundle",
+			type: "dist",
+			esmLoaderPath: "../loader",
+		},
+		{
+			type: "dist-custom-elements-bundle"
 		},
 		{
 			type: "www",
