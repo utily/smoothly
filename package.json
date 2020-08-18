@@ -62,7 +62,8 @@
 		"isoly": "0.0.15",
 		"normalize.css": "^8.0.1",
 		"smoothly-model": "0.0.15",
-		"tidily": "0.0.30"
+		"tidily": "0.0.30",
+		"stencil-router-v2": "^0.5.1-0"
 	},
 	"devDependencies": {
 		"@stencil/core": "^1.17.3",
@@ -71,7 +72,6 @@
 		"jest": "26.4.0",
 		"jest-cli": "26.4.0",
 		"puppeteer": "5.2.1",
-		"stencil-router-v2": "^0.5.1-0",
 		"tslint": "^6.1.3"
 	}
 }
