@@ -10,7 +10,7 @@ export class SmoothlyFrame {
 	@Prop() url: string
 	@Prop() name: string
 	@Event() trigger: EventEmitter<Trigger>
-	@Event() message: EventEmitter<{ destination: string; content: any }>
+	@Event() message: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	get contentWindow(): Window | undefined {
 		const iframe =

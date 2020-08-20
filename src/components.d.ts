@@ -407,7 +407,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFrame {
         "name"?: string;
-        "onMessage"?: (event: CustomEvent<{ destination: string; content: any }>) => void;
+        "onMessage"?: (event: CustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
         "url"?: string;
     }

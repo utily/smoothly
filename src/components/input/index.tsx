@@ -66,6 +66,8 @@ export class SmoothlyInput {
 			)
 		)
 	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	onBlur(event: FocusEvent) {}
 	onFocus(event: FocusEvent) {
 		const after = this.formatter.format(
 			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
