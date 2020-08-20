@@ -11,7 +11,14 @@
 		"README.md": true,
 		"LICENSE": true,
 	},
+	"files.insertFinalNewline": true,
 	"editor.tabSize": 2,
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"eslint.autoFixOnSave": true,
+	},
+	"eslint.format.enable": true,
+	"eslint.lintTask.enable": true,
 }

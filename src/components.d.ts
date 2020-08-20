@@ -367,8 +367,8 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyAccordionItemDidLoad"?: (event: CustomEvent<void>) => void;
         "onSmoothlyAccordionItemDidUnload"?: (event: CustomEvent<void>) => void;
-        "onSmoothlyClose"?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
-        "onSmoothlyOpen"?: (event: CustomEvent<{ name: string, open: boolean }>) => void;
+        "onSmoothlyClose"?: (event: CustomEvent<{ name: string; open: boolean }>) => void;
+        "onSmoothlyOpen"?: (event: CustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;
     }
     interface SmoothlyApp {
@@ -381,7 +381,7 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         "label"?: string;
         "name"?: string;
-        "onSmoothlyChecked"?: (event: CustomEvent<{ name: string, value: string }>) => void;
+        "onSmoothlyChecked"?: (event: CustomEvent<{ name: string; value: string }>) => void;
         "value"?: string;
     }
     interface SmoothlyDialog {
@@ -407,7 +407,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFrame {
         "name"?: string;
-        "onMessage"?: (event: CustomEvent<object>) => void;
+        "onMessage"?: (event: CustomEvent<{ destination: string; content: any }>) => void;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
         "url"?: string;
     }
@@ -427,7 +427,7 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onSmoothlyChanged"?: (event: CustomEvent<{ name: string, value: any }>) => void;
+        "onSmoothlyChanged"?: (event: CustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "required"?: boolean;
@@ -447,7 +447,7 @@ declare namespace LocalJSX {
     interface SmoothlyRadio {
         "checked"?: boolean;
         "name"?: string;
-        "onSmoothlySelected"?: (event: CustomEvent<{ name: string, value: string }>) => void;
+        "onSmoothlySelected"?: (event: CustomEvent<{ name: string; value: string }>) => void;
         "tabIndex"?: number;
         "value"?: string;
     }
@@ -462,7 +462,7 @@ declare namespace LocalJSX {
     interface SmoothlySelect {
         "background"?: string;
         "identifier"?: string;
-        "onSelectionChanged"?: (event: CustomEvent<{ identifier: string, value: string }>) => void;
+        "onSelectionChanged"?: (event: CustomEvent<{ identifier: string; value: string }>) => void;
         "value"?: string;
     }
     interface SmoothlySelectDemo {

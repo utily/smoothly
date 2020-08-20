@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, Event, EventEmitter, Listen, h } from "@stencil/core"
 import { Color, Expand, Fill, Trigger } from "../../model"
 
@@ -11,7 +10,7 @@ export class SmoothlyTrigger {
 	@Prop({ reflect: true }) color: Color | undefined
 	@Prop({ reflect: true }) expand: Expand
 	@Prop({ reflect: true }) fill: Fill
-	@Prop({ reflect: true }) disabled: boolean = false
+	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop() name: string
 	@Prop() value?: any
@@ -27,12 +26,20 @@ export class SmoothlyTrigger {
 		let result: HTMLElement
 		switch (this.type) {
 			case "link":
-				result = this.disabled
-					? <slot></slot>
-					: <a onClick={ e => this.onClick(e) }><slot></slot></a>
+				result = this.disabled ? (
+					<slot></slot>
+				) : (
+					<a onClick={e => this.onClick(e)}>
+						<slot></slot>
+					</a>
+				)
 				break
 			case "button":
-				result = <button disabled={ this.disabled } name={ this.name }><slot></slot></button>
+				result = (
+					<button disabled={this.disabled} name={this.name}>
+						<slot></slot>
+					</button>
+				)
 				break
 		}
 		return result

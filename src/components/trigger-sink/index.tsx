@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Listen, Prop, h } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 

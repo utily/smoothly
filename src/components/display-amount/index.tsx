@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop } from "@stencil/core"
 import { Currency } from "isoly"
 
@@ -14,7 +13,9 @@ export class SmoothlyDisplayAmount {
 	format(amount: string): string {
 		const digitsPerGroup = 3
 		const defaultDecimals = 2
-		const maxDecimals = (Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : defaultDecimals) as number
+		const maxDecimals = (Currency.decimalDigits(this.currency)
+			? Currency.decimalDigits(this.currency)
+			: defaultDecimals) as number
 		let beforeSeparator = amount.length
 		let separator: number
 		let result = amount
@@ -46,7 +47,6 @@ export class SmoothlyDisplayAmount {
 	}
 
 	render() {
-
 		return [
 			typeof this.amount == "number" ? this.format(this.amount.toString()) : this.format(this.amount),
 			" ",

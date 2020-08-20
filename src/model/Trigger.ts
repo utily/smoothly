@@ -4,7 +4,6 @@ export interface Trigger {
 }
 export class Trigger {
 	static is(value: Trigger | any): value is Trigger {
-		return typeof(value) == "object" &&
-			typeof(value.name) == "string"
+		return typeof value == "object" && typeof value.name == "string"
 	}
 }

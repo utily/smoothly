@@ -1,5 +1,1 @@
-export type Fill =
-	"clear" |
-	"default" |
-	"outline" |
-	"solid"
+export type Fill = "clear" | "default" | "outline" | "solid"
