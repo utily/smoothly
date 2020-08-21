@@ -9,6 +9,8 @@ import { Autocomplete, Color, Expand, Fill, Message, Notice, Trigger } from "./m
 import { Type } from "tidily";
 import { CountryCode, Currency, DateTime } from "isoly";
 export namespace Components {
+    interface ReorderGroup {
+    }
     interface SmoothlyAccordion {
         "value"?: string;
     }
@@ -145,6 +147,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLReorderGroupElement extends Components.ReorderGroup, HTMLStencilElement {
+    }
+    var HTMLReorderGroupElement: {
+        prototype: HTMLReorderGroupElement;
+        new (): HTMLReorderGroupElement;
+    };
     interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
     }
     var HTMLSmoothlyAccordionElement: {
@@ -326,6 +334,7 @@ declare global {
         new (): HTMLSmoothlyUrlencodedElement;
     };
     interface HTMLElementTagNameMap {
+        "reorder-group": HTMLReorderGroupElement;
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-app": HTMLSmoothlyAppElement;
@@ -359,6 +368,9 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ReorderGroup {
+        "onReorder"?: (event: CustomEvent<[number, number]>) => void;
+    }
     interface SmoothlyAccordion {
         "value"?: string;
     }
@@ -506,6 +518,7 @@ declare namespace LocalJSX {
         "data"?: string;
     }
     interface IntrinsicElements {
+        "reorder-group": ReorderGroup;
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-app": SmoothlyApp;
@@ -542,6 +555,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "reorder-group": LocalJSX.ReorderGroup & JSXBase.HTMLAttributes<HTMLReorderGroupElement>;
             "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
