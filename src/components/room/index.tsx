@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, h, Prop } from "@stencil/core"
 
 @Component({
@@ -12,5 +11,3 @@ export class SmoothlyAppDemo {
 		return <slot></slot>
 	}
 }
-
-

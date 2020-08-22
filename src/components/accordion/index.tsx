@@ -15,7 +15,7 @@ export class SmoothlyAccordion {
 	}
 	@Listen("smoothlyOpen")
 	@Listen("smoothlyClose")
-	handleOpenClose(event: CustomEvent<{ name: string, open: boolean }>) {
+	handleOpenClose(event: CustomEvent<{ name: string; open: boolean }>) {
 		if (event.detail.open)
 			this.value = event.detail.name
 		else if (this.value == event.detail.name)
@@ -42,13 +42,11 @@ export class SmoothlyAccordion {
 	private updateItems() {
 		let hasChecked = false
 		for (const item of this.items)
-			if (item.open = (!hasChecked && item.name == this.value))
+			if ((item.open = !hasChecked && item.name == this.value))
 				hasChecked = true
 	}
 
 	render() {
-		return [
-			<slot></slot>,
-		]
+		return [<slot></slot>]
 	}
 }

@@ -1,10 +1,8 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-urlencoded",
 })
-
 export class Urlencoded {
 	@Prop() data: string // TODO: Consider using a specific type for this
 	render() {
@@ -14,8 +12,6 @@ export class Urlencoded {
 			const pair = p.split("=")
 			decoded.push([pair[0], pair[1]])
 		}
-		return [
-			decoded.map(tuple => <smoothly-tuple tuple={ tuple }></smoothly-tuple>),
-		]
+		return [decoded.map(tuple => <smoothly-tuple tuple={tuple}></smoothly-tuple>)]
 	}
 }

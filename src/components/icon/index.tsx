@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, State, Prop, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
 
@@ -26,9 +25,9 @@ export class SmoothlyIcon {
 		return {
 			innerHTML: this.document
 				? this.document
-					.replace(` width="512" height="512"`, "")
-					.replace(/(<title>)[\w\d\s\-]*(<\/title>)/, `<title>${ this.toolTip || "" }</title>`)
-					.replace(/stroke:#000;/gi, "")
+						.replace(` width="512" height="512"`, "")
+						.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
+						.replace(/stroke:#000;/gi, "")
 				: undefined,
 		}
 	}
@@ -41,7 +40,7 @@ export class SmoothlyIcon {
 	}
 	private static cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	static async load(name: string): Promise<string | undefined> {
-		const url = `https://unpkg.com/ionicons@5.0.0/dist/svg/${ name }.svg`
+		const url = `https://unpkg.com/ionicons@5.0.0/dist/svg/${name}.svg`
 		return SmoothlyIcon.cache[url] ?? (SmoothlyIcon.cache[url] = SmoothlyIcon.fetch(url))
 	}
 }

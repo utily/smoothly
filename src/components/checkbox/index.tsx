@@ -10,7 +10,7 @@ export class SmoothlyCheckbox {
 	@Prop() value: string
 	@Prop() label: string
 	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
-	@Event() smoothlyChecked!: EventEmitter<{ name: string, value: string }>
+	@Event() smoothlyChecked!: EventEmitter<{ name: string; value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
 		if (e.target && (e.target as HTMLInputElement).value && (this.checked = (e.target as HTMLInputElement).checked))
@@ -20,7 +20,14 @@ export class SmoothlyCheckbox {
 
 	render() {
 		return [
-			<input type="checkbox" name={ this.name } value={ this.value } title={ this.label } checked={ this.checked } onChange={ e => this.onInput(e as UIEvent) }/>,
+			<input
+				type="checkbox"
+				name={this.name}
+				value={this.value}
+				title={this.label}
+				checked={this.checked}
+				onChange={e => this.onInput(e as UIEvent)}
+			/>,
 		]
 	}
 }

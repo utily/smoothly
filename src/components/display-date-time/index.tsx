@@ -10,13 +10,8 @@ export class SmoothlyDisplayDateTime {
 	@Prop() datetime: DateTime
 
 	render() {
-
 		const datetime = this.datetime.split("T")
 
-		return [
-			datetime[0],
-			" ",
-			datetime[1],
-		]
+		return [datetime[0], " ", datetime[1]]
 	}
 }

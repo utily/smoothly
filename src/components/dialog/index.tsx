@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, Listen, h } from "@stencil/core"
 import { Color, Trigger } from "../../model"
 
@@ -9,8 +8,8 @@ import { Color, Trigger } from "../../model"
 })
 export class SmoothlyDialog {
 	@Prop({ reflectToAttr: true }) color: Color | undefined
-	@Prop({ mutable: true, reflectToAttr: true }) open: boolean = true
-	@Prop({ reflectToAttr: true}) closable: boolean = false
+	@Prop({ mutable: true, reflectToAttr: true }) open = true
+	@Prop({ reflectToAttr: true }) closable = false
 	@Prop() header: string | undefined
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
@@ -27,12 +26,18 @@ export class SmoothlyDialog {
 	render() {
 		return [
 			<header>
-				{ this.closable ? <smoothly-trigger fill="clear" name="close"><smoothly-icon name="close-circle" fill="solid" color={ this.color }></smoothly-icon></smoothly-trigger> : [] }
-				{ this.header ? <h1>{ this.header }</h1> : <slot name="header"></slot> }
+				{this.closable ? (
+					<smoothly-trigger fill="clear" name="close">
+						<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
+					</smoothly-trigger>
+				) : (
+					[]
+				)}
+				{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
 			</header>,
 			<main>
 				<slot></slot>
-			</main>
+			</main>,
 		]
 	}
 }

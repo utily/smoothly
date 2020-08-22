@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Listen, Prop, Watch, h } from "@stencil/core"
 import { Trigger, Notice } from "../../model"
 
@@ -24,10 +23,13 @@ export class Notifier {
 			this.timer = undefined
 		}
 		if (newValue != undefined && !(Notice.is(newValue) && newValue.remain)) {
-			this.timer = window.setTimeout(() => {
-				this.notice = undefined
-				this.timer = undefined
-			}, Notice.is(newValue) && newValue.timeout ? newValue.timeout : 5000)
+			this.timer = window.setTimeout(
+				() => {
+					this.notice = undefined
+					this.timer = undefined
+				},
+				Notice.is(newValue) && newValue.timeout ? newValue.timeout : 5000
+			)
 		}
 	}
 	@Listen("notice")
@@ -35,15 +37,24 @@ export class Notifier {
 		this.notice = event.detail
 	}
 	render() {
-		const notice = !this.notice ? undefined : typeof(this.notice) == "string" ? JSON.parse(this.notice) as Notice : this.notice
+		const notice = !this.notice
+			? undefined
+			: typeof this.notice == "string"
+			? (JSON.parse(this.notice) as Notice)
+			: this.notice
 		const color = notice && notice.type != "default" ? notice.type : "primary"
-		return notice == undefined ? <slot></slot> :
-		[
-			<slot></slot>,
-			<aside class={ notice.type }>
-				<smoothly-trigger color={ color } fill="clear" name="close"><smoothly-icon name="close-circle-outline" color={ color }></smoothly-icon></smoothly-trigger>
-				<p>{ notice.message }</p>
-			</aside>,
-		]
+		return notice == undefined ? (
+			<slot></slot>
+		) : (
+			[
+				<slot></slot>,
+				<aside class={notice.type}>
+					<smoothly-trigger color={color} fill="clear" name="close">
+						<smoothly-icon name="close-circle-outline" color={color}></smoothly-icon>
+					</smoothly-trigger>
+					<p>{notice.message}</p>
+				</aside>,
+			]
+		)
 	}
 }

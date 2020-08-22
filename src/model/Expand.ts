@@ -1,3 +1,1 @@
-export type Expand =
-	"block" |
-	"full"
+export type Expand = "block" | "full"
