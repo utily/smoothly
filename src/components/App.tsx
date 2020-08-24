@@ -10,13 +10,16 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		r[entry[0]] = null
 		return r
 	}, {}) as VNode
-	const emptyChild = convertToPublic(emptyNode)[0]
-	function convertToPublic(...nodes: VNode[]): (ChildNode & { node: VNode })[] {
-		const result: (ChildNode & { node: VNode })[] = []
-		utils.forEach(nodes, (child, index) => result.push({ ...child, node: nodes[index] }))
-		return result
+	const emptyChild = nodeToChild(emptyNode)
+	function nodeToChild(node: VNode): ChildNode & { node: VNode } {
+		let result: (ChildNode & { node: VNode }) | undefined
+		utils.forEach([node], (child, index) => (result = { ...child, node: nodes[index] }))
+		return result ?? emptyChild
 	}
-	const children = convertToPublic(...nodes)
+	function childToNode(child: ChildNode): VNode {
+		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
+	}
+	const children = nodes.map(nodeToChild)
 	return (
 		<smoothly-app>
 			<header>
@@ -39,15 +42,8 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 											...emptyChild,
 											vtag: "a",
 											vattrs: { href: child.vattrs.path },
-											vchildren: utils.map([emptyNode], c => ({ ...c, vtext: child.vattrs.label })),
+											vchildren: [childToNode({ vtext: child.vattrs.label })],
 										}
-									console.log(
-										JSON.stringify(
-											{ ...child, vchildren: child.vchildren && convertToPublic(...child.vchildren) },
-											undefined,
-											"  "
-										)
-									)
 									const url = resolve(child.vattrs.href)
 									return child.vtag != "a"
 										? child
@@ -64,7 +60,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 								}
 							)
 							.map(node => {
-								const child = convertToPublic(node)[0]
+								const child = nodeToChild(node)
 								return child.vtag == "a" && !child.vattrs.target ? (
 									<a {...child.vattrs} {...href(child.vattrs.href)}>
 										{child.vchildren}
