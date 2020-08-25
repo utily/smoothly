@@ -41,7 +41,7 @@ export class SmoothlySelectDemo {
 			<option value="2">2</option>
 			<option value="3">3</option>
 		</smoothly-select>,
-		<button onClick={ () => this.alertf() }>test</button>
+		<button onClick={ () => this.alertf() }>press here</button>
 		]
 	}
 }

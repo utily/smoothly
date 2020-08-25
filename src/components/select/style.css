@@ -14,3 +14,6 @@ select {
 select > option {
 	background-color: inherit;
 }
+select:focus {
+	outline: none;
+}
