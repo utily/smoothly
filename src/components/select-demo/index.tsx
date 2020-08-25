@@ -44,13 +44,13 @@ export class SmoothlySelectDemo {
 				<optgroup label="Other">
 					<option value="en">English</option>
 				</optgroup>
-			</smoothly-select>,
-			<smoothly-select identifier="quantity" ref={e => (this.quantityElement = e)}>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</smoothly-select>,
-			<button onClick={() => this.alertf()}>test</button>,
+		</smoothly-select>,
+		<smoothly-select identifier="quantity" ref={ e => this.quantityElement = e }>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</smoothly-select>,
+		<button onClick={ () => this.alertf() }>press here</button>
 		]
 	}
 }
