@@ -11,15 +11,15 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		return r
 	}, {}) as VNode
 	const emptyChild = nodeToChild(emptyNode)
-	function nodeToChild(node: VNode): ChildNode & { node: VNode } {
-		let result: (ChildNode & { node: VNode }) | undefined
-		utils.forEach([node], (child, index) => (result = { ...child, node: nodes[index] }))
+	function nodeToChild(node: VNode): ChildNode {
+		let result: ChildNode | undefined
+		utils.forEach([node], child => (result = child))
 		return result ?? emptyChild
 	}
 	function childToNode(child: ChildNode): VNode {
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
-	const children = nodes.map(nodeToChild)
+	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
 	return (
 		<smoothly-app>
 			<header>
@@ -66,7 +66,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 										{child.vchildren}
 									</a>
 								) : (
-									child.node
+									node
 								)
 							})
 							.map(child => (
