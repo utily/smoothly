@@ -10,11 +10,12 @@ export const config: Config = {
 			esmLoaderPath: "../loader",
 		},
 		{
-			type: "dist-custom-elements-bundle"
+			type: "dist-custom-elements-bundle",
 		},
 		{
 			type: "www",
 			serviceWorker: null, // disable service workers
+			buildDir: "",
 		},
 	],
 	devServer: {

@@ -1,6 +1,7 @@
 import { Identifier } from "authly"
 
 export abstract class ClientIdentifier {
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	private constructor() {}
 	private static valueCache?: string
 	static get value(): string {

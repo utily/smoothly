@@ -1,7 +1,5 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, h, Prop } from "@stencil/core"
 import { Color } from "../../model"
-
 
 @Component({
 	tag: "smoothly-app",

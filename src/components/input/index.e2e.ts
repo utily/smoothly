@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-submodule-imports
 import { newE2EPage } from "@stencil/core/testing"
 
 const complete = "<smoothly-input name='name' value='value' type='text' required>Label</smoothly-input>"
@@ -21,7 +20,7 @@ describe("smoothly-input", () => {
 		const page = await newE2EPage()
 		await page.setContent(complete)
 		const input = await page.find("smoothly-input > input")
-		expect(input.outerHTML).toEqual("<input name=\"name\" type=\"text\" required=\"\" class=\"sc-smoothly-input\">")
+		expect(input.outerHTML).toEqual('<input name="name" type="text" required="" class="sc-smoothly-input">')
 		expect(input.getAttribute("name")).toEqual("name")
 	})
 	it("label", async () => {

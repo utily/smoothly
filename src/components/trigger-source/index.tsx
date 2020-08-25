@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Element, Event, EventEmitter, Prop, h } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 
@@ -13,12 +12,16 @@ export class SmoothlyTriggerSource {
 	@Event() message: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	componentDidLoad() {
-		Message.listen(this.listen, (destination, content) => {
-			if (Trigger.is(content))
-				this.trigger.emit(content)
-			else
-				this.message.emit({ destination, content })
-		}, window)
+		Message.listen(
+			this.listen,
+			(destination, content) => {
+				if (Trigger.is(content))
+					this.trigger.emit(content)
+				else
+					this.message.emit({ destination, content })
+			},
+			window
+		)
 	}
 	render() {
 		return <slot></slot>

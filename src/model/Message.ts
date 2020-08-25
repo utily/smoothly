@@ -4,9 +4,7 @@ export interface Message<T> {
 }
 export class Message<T> {
 	static is(value: Message<any> | any): value is Message<any> {
-		return typeof(value) == "object" &&
-			typeof(value.destination) == "string" &&
-			value.content != undefined
+		return typeof value == "object" && typeof value.destination == "string" && value.content != undefined
 	}
 	static send(message: Message<any>, context?: Window): void
 	static send(destination: string, content: any, context?: Window): void
@@ -18,11 +16,11 @@ export class Message<T> {
 			const destination = message.destination.split("#", 2)
 			message = { destination: destination[1], content: message.content }
 			context.postMessage(message, destination[0])
-		} else if (typeof(context) != "string") {
+		} else if (typeof context != "string") {
 			if (!context)
 				context = window
-			if (typeof(message) == "string")
-			Message.send({ destination: message, content }, context)
+			if (typeof message == "string")
+				Message.send({ destination: message, content }, context)
 		}
 	}
 	static listen(origin: string, handle: (destination: string, content: any) => void, context?: Window): void {
@@ -32,9 +30,13 @@ export class Message<T> {
 			origin = splitted[0]
 			destination = splitted[1]
 		}
-		(context || window).addEventListener("message", (e: MessageEvent) => {
+		;(context || window).addEventListener("message", (e: MessageEvent) => {
 			const message = e.data
-			if (Message.is(message) && (origin == "*" || e.origin == origin) && (destination == "" || message.destination == destination))
+			if (
+				Message.is(message) &&
+				(origin == "*" || e.origin == origin) &&
+				(destination == "" || message.destination == destination)
+			)
 				handle(message.destination, message.content)
 		})
 	}

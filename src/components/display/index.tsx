@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Prop, h } from "@stencil/core"
 import { Currency, CountryCode } from "isoly"
 import { Type, format } from "tidily"
@@ -21,10 +20,10 @@ export class SmoothlyDisplay {
 				result = format(this.value, type)
 				break
 			case "email":
-				result = <a href={ "mailto:" + this.value  }>{ format(this.value, type) }</a>
+				result = <a href={"mailto:" + this.value}>{format(this.value, type)}</a>
 				break
 			case "phone":
-				result = <a href={ "tel:" + this.value }>{ format(this.value, type, this.country) }</a>
+				result = <a href={"tel:" + this.value}>{format(this.value, type, this.country)}</a>
 				break
 			case "postal-code":
 				result = format(this.value, type, this.country)

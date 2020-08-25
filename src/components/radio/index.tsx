@@ -10,7 +10,7 @@ export class SmoothlyRadio {
 	@Prop() value: string
 	@Prop({ mutable: true, reflect: true }) checked: boolean
 	@Prop() tabIndex: number
-	@Event() smoothlySelected!: EventEmitter<{ name: string, value: string }>
+	@Event() smoothlySelected!: EventEmitter<{ name: string; value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
 		if (e.target && (e.target as HTMLInputElement).value && (this.checked = (e.target as HTMLInputElement).checked))
@@ -19,8 +19,18 @@ export class SmoothlyRadio {
 	}
 	render() {
 		return [
-			<input type="radio" name={ this.name } id={ this.value } tabindex={ this.tabIndex } checked={ this.checked } value={ this.value } onChange={ e => this.onInput(e as UIEvent) }/>,
-			<label htmlFor={ this.value }><slot /></label>,
+			<input
+				type="radio"
+				name={this.name}
+				id={this.value}
+				tabindex={this.tabIndex}
+				checked={this.checked}
+				value={this.value}
+				onChange={e => this.onInput(e as UIEvent)}
+			/>,
+			<label htmlFor={this.value}>
+				<slot />
+			</label>,
 		]
 	}
 }

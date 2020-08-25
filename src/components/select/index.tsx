@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
 
 @Component({
@@ -11,22 +10,26 @@ export class SmoothlySelect {
 	@Prop({ reflect: true }) background?: string
 	private selectElement?: HTMLSelectElement
 	@Prop({ mutable: true }) value: string
-	@Event() selectionChanged!: EventEmitter<{ identifier: string, value: string }>
+	@Event() selectionChanged!: EventEmitter<{ identifier: string; value: string }>
 	optionSelected() {
 		if (this.selectElement)
 			this.selectionChanged.emit({ identifier: this.identifier, value: this.value = this.selectElement.value })
 	}
 	componentDidLoad() {
 		if (this.selectElement)
-		this.value = this.selectElement?.value
+			this.value = this.selectElement?.value
 		console.log(this.value)
 	}
 
 	render() {
 		return [
-			<select ref={ e => this.selectElement = e } id={ this.identifier } onChange={ () => this.optionSelected() } style={ { background: this.background }}>
+			<select
+				ref={e => (this.selectElement = e)}
+				id={this.identifier}
+				onChange={() => this.optionSelected()}
+				style={{ background: this.background }}>
 				<slot></slot>
-			</select>
+			</select>,
 		]
 	}
 }

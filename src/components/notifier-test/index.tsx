@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { Component, h } from "@stencil/core"
 import { Notice } from "../../model"
 
@@ -12,8 +11,6 @@ export class NotifierTest {
 
 	message: string
 	render() {
-		return [
-			<smoothly-notifier notice={ this.notice }></smoothly-notifier>
-		]
+		return [<smoothly-notifier notice={this.notice}></smoothly-notifier>]
 	}
 }
