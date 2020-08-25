@@ -1,35 +1,42 @@
 import { Component, Element, Event, EventEmitter } from "@stencil/core"
 
-interface Draggable {
-	element: HTMLElement
-	top: number
-	middle: number
-	bottom: number
-}
-
-interface Dragged extends Draggable {
-	startY: number
-	offsetY: number
-	index: number
-	height: number
-}
-
 @Component({
-	tag: "reorder-group",
+	tag: "smoothly-reorder",
 	styleUrl: "style.css",
 })
-export class ReorderGroup {
+export class SmoothlyReorder {
 	@Event() reorder: EventEmitter<[number, number]>
-	@Element() element: HTMLReorderGroupElement
+	@Element() element: HTMLSmoothlyReorderElement
 	private bounds?: DOMRect
-	private children: Draggable[] = []
+	private childrenCache?: Draggable[]
+	private get children(): Draggable[] {
+		let result: Draggable[] = []
+		if (this.childrenCache)
+			result = this.childrenCache
+		else {
+			for (let index = 0; index < this.element.children.length; index++) {
+				const element = this.element.children[index]
+				if (element instanceof HTMLElement) {
+					const bounds = element.getBoundingClientRect()
+					result.push({
+						top: bounds.top,
+						middle: bounds.top + bounds.height / 2,
+						bottom: bounds.bottom,
+						element: element,
+					})
+				}
+			}
+			this.childrenCache = result
+		}
+		return result
+	}
 	private dragged?: Dragged
 	private move?: { from: number; to: number }
 
-	onMouseDown(event: MouseEvent) {
+	private onMouseDown(event: MouseEvent) {
 		if (!this.move && this.element.children.length > 1) {
 			this.bounds = this.element.getBoundingClientRect()
-			this.children = this.getChildren()
+			this.childrenCache = undefined
 			const index = this.getCurrentIndex(event.clientY)
 			this.dragged = {
 				...this.children[index],
@@ -45,14 +52,14 @@ export class ReorderGroup {
 		}
 	}
 
-	onMouseMove(event: MouseEvent) {
+	private onMouseMove(event: MouseEvent) {
 		if (this.dragged && this.bounds && event.clientY >= this.bounds.top && event.clientY <= this.bounds.bottom) {
 			const currentIndex = this.getCurrentIndex(event.clientY - this.dragged.offsetY)
 			this.translate(this.dragged.index, currentIndex, event.clientY - this.dragged.startY)
 		}
 	}
 
-	onMouseUp(event: MouseEvent) {
+	private onMouseUp(event: MouseEvent) {
 		if (this.dragged) {
 			this.dragged.element.className = this.dragged.element.className.replace(" dragging", "")
 			const index = this.getCurrentIndex(event.clientY - this.dragged.offsetY)
@@ -75,23 +82,6 @@ export class ReorderGroup {
 				}
 			}, 500)
 		}
-	}
-
-	getChildren(): Draggable[] {
-		const result: Draggable[] = []
-		for (let index = 0; index < this.element.children.length; index++) {
-			const element = this.element.children[index]
-			if (element instanceof HTMLElement) {
-				const bounds = element.getBoundingClientRect()
-				result.push({
-					top: bounds.top,
-					middle: bounds.top + bounds.height / 2,
-					bottom: bounds.bottom,
-					element: element,
-				})
-			}
-		}
-		return result
 	}
 
 	private translate(fromIndex: number, toIndex: number, y: number) {

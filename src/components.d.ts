@@ -9,8 +9,6 @@ import { Autocomplete, Color, Expand, Fill, Message, Notice, Trigger } from "./m
 import { Type } from "tidily";
 import { CountryCode, Currency, DateTime } from "isoly";
 export namespace Components {
-    interface ReorderGroup {
-    }
     interface SmoothlyAccordion {
         "value"?: string;
     }
@@ -98,6 +96,8 @@ export namespace Components {
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
+    interface SmoothlyReorder {
+    }
     interface SmoothlyRoom {
         "label"?: string;
         "path": string;
@@ -147,12 +147,6 @@ export namespace Components {
     }
 }
 declare global {
-    interface HTMLReorderGroupElement extends Components.ReorderGroup, HTMLStencilElement {
-    }
-    var HTMLReorderGroupElement: {
-        prototype: HTMLReorderGroupElement;
-        new (): HTMLReorderGroupElement;
-    };
     interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
     }
     var HTMLSmoothlyAccordionElement: {
@@ -273,6 +267,12 @@ declare global {
         prototype: HTMLSmoothlyRadioGroupElement;
         new (): HTMLSmoothlyRadioGroupElement;
     };
+    interface HTMLSmoothlyReorderElement extends Components.SmoothlyReorder, HTMLStencilElement {
+    }
+    var HTMLSmoothlyReorderElement: {
+        prototype: HTMLSmoothlyReorderElement;
+        new (): HTMLSmoothlyReorderElement;
+    };
     interface HTMLSmoothlyRoomElement extends Components.SmoothlyRoom, HTMLStencilElement {
     }
     var HTMLSmoothlyRoomElement: {
@@ -334,7 +334,6 @@ declare global {
         new (): HTMLSmoothlyUrlencodedElement;
     };
     interface HTMLElementTagNameMap {
-        "reorder-group": HTMLReorderGroupElement;
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-app": HTMLSmoothlyAppElement;
@@ -355,6 +354,7 @@ declare global {
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
+        "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-room": HTMLSmoothlyRoomElement;
         "smoothly-select": HTMLSmoothlySelectElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
@@ -368,9 +368,6 @@ declare global {
     }
 }
 declare namespace LocalJSX {
-    interface ReorderGroup {
-        "onReorder"?: (event: CustomEvent<[number, number]>) => void;
-    }
     interface SmoothlyAccordion {
         "value"?: string;
     }
@@ -466,6 +463,9 @@ declare namespace LocalJSX {
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
+    interface SmoothlyReorder {
+        "onReorder"?: (event: CustomEvent<[number, number]>) => void;
+    }
     interface SmoothlyRoom {
         "label"?: string;
         "path"?: string;
@@ -518,7 +518,6 @@ declare namespace LocalJSX {
         "data"?: string;
     }
     interface IntrinsicElements {
-        "reorder-group": ReorderGroup;
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-app": SmoothlyApp;
@@ -539,6 +538,7 @@ declare namespace LocalJSX {
         "smoothly-popup": SmoothlyPopup;
         "smoothly-radio": SmoothlyRadio;
         "smoothly-radio-group": SmoothlyRadioGroup;
+        "smoothly-reorder": SmoothlyReorder;
         "smoothly-room": SmoothlyRoom;
         "smoothly-select": SmoothlySelect;
         "smoothly-select-demo": SmoothlySelectDemo;
@@ -555,7 +555,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "reorder-group": LocalJSX.ReorderGroup & JSXBase.HTMLAttributes<HTMLReorderGroupElement>;
             "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
@@ -576,6 +575,7 @@ declare module "@stencil/core" {
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
+            "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-room": LocalJSX.SmoothlyRoom & JSXBase.HTMLAttributes<HTMLSmoothlyRoomElement>;
             "smoothly-select": LocalJSX.SmoothlySelect & JSXBase.HTMLAttributes<HTMLSmoothlySelectElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
