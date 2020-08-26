@@ -21,4 +21,6 @@
 	},
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
+	"javascript.format.enable": false,
+	"typescript.format.enable": false
 }
