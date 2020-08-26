@@ -19,7 +19,7 @@ export class SmoothlyPopup {
 				</content>
 				<div class="background" onClick={(e: UIEvent) => this.onClick(e)}></div>
 				<div class="arrow" onClick={(e: UIEvent) => this.onClick(e)}></div>
-				<aside>	
+				<aside>
 					<slot name="popup"></slot>
 				</aside>
 			</Host>
