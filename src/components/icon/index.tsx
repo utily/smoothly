@@ -7,10 +7,10 @@ import { Color, Fill } from "../../model"
 	scoped: true,
 })
 export class SmoothlyIcon {
-	@Prop({ reflectToAttr: true }) color: Color
-	@Prop({ reflectToAttr: true }) fill: Fill = "solid"
+	@Prop({ reflect: true }) color: Color
+	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop() name?: string
-	@Prop({ reflectToAttr: true }) size: "small" | "medium" | "large" = "medium"
+	@Prop({ reflect: true }) size: "small" | "medium" | "large" = "medium"
 	@Prop() toolTip?: string
 	@State() document?: string
 	@Watch("name")

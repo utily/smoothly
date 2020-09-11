@@ -7,9 +7,9 @@ import { Color, Trigger } from "../../model"
 	scoped: true,
 })
 export class SmoothlyDialog {
-	@Prop({ reflectToAttr: true }) color: Color | undefined
-	@Prop({ mutable: true, reflectToAttr: true }) open = true
-	@Prop({ reflectToAttr: true }) closable = false
+	@Prop({ reflect: true }) color: Color | undefined
+	@Prop({ mutable: true, reflect: true }) open = true
+	@Prop({ reflect: true }) closable = false
 	@Prop() header: string | undefined
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {

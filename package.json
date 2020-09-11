@@ -13,10 +13,10 @@
 	},
 	"homepage": "https://payfunc.com/open-source/smoothly",
 	"private": false,
-	"main": "dist/index.js",
-	"module": "dist/custom-elements/index.js",
-	"es2015": "dist/esm/index.mjs",
-	"es2017": "dist/esm/index.mjs",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.js",
+	"es2015": "dist/esm/index.js",
+	"es2017": "dist/esm/index.js",
 	"types": "dist/custom-elements/index.d.ts",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
@@ -62,22 +62,23 @@
 	},
 	"dependencies": {
 		"authly": "0.0.40",
-		"eslint-plugin-prettierx": "github:nilssonemma/eslint-plugin-prettierx#master",
 		"isoly": "0.0.15",
 		"normalize.css": "^8.0.1",
-		"prettierx": "github:simonmika/prettierx#newline-before-clause",
 		"stencil-router-v2": "^0.5.1-0",
 		"tidily": "0.0.30"
 	},
 	"devDependencies": {
-		"@stencil/core": "^1.17.3",
+		"@stencil/core": "^2.0.3",
 		"@types/jest": "26.0.9",
 		"@types/puppeteer": "3.0.1",
-		"@typescript-eslint/eslint-plugin": "^3.7.1",
-		"@typescript-eslint/parser": "^3.7.1",
-		"eslint": "^7.6.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.0",
+		"@typescript-eslint/parser": "^4.1.0",
+		"eslint": "^7.7.0",
+		"eslint-plugin-prettierx": "github:nilssonemma/eslint-plugin-prettierx#master",
 		"jest": "26.4.0",
 		"jest-cli": "26.4.0",
-		"puppeteer": "5.2.1"
+		"prettierx": "github:simonmika/prettierx#newline-before-clause",
+		"puppeteer": "5.2.1",
+		"typescript": "^3.9.7"
 	}
 }

@@ -9,7 +9,7 @@ export class SmoothlyCheckbox {
 	@Prop() name: string
 	@Prop() value: string
 	@Prop() label: string
-	@Prop({ mutable: true, reflectToAttr: true }) checked: boolean
+	@Prop({ mutable: true, reflect: true }) checked: boolean
 	@Event() smoothlyChecked!: EventEmitter<{ name: string; value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
