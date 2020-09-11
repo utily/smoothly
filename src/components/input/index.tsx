@@ -8,11 +8,11 @@ import { Autocomplete } from "../../model"
 	scoped: true,
 })
 export class SmoothlyInput {
-	@Prop({ reflectToAttr: true }) name: string
+	@Prop({ reflect: true }) name: string
 	private lastValue: any
 	@Prop({ mutable: true }) value: any
-	@Prop({ reflectToAttr: true }) type = "text"
-	@Prop({ mutable: true, reflectToAttr: true }) required = false
+	@Prop({ reflect: true }) type = "text"
+	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop({ mutable: true }) minLength = 0
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
 	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"

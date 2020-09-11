@@ -2,6 +2,8 @@ export interface Message<T> {
 	destination: string
 	content: T
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class Message<T> {
 	static is(value: Message<any> | any): value is Message<any> {
 		return typeof value == "object" && typeof value.destination == "string" && value.content != undefined

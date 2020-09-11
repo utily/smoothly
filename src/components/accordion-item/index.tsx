@@ -8,7 +8,7 @@ import { Component, Prop, Event, Element, EventEmitter, Watch, h } from "@stenci
 export class SmoothlyAccordionItem {
 	@Prop() name: string
 	@Prop() brand?: string | string[]
-	@Prop({ mutable: true, reflectToAttr: true }) open?: boolean
+	@Prop({ mutable: true, reflect: true }) open?: boolean
 	@Element() me: HTMLElement
 	@Event() smoothlyAccordionItemDidLoad!: EventEmitter<void>
 	@Event() smoothlyAccordionItemDidUnload!: EventEmitter<void>
@@ -39,7 +39,7 @@ export class SmoothlyAccordionItem {
 		}
 		this.smoothlyAccordionItemDidLoad.emit()
 	}
-	componentDidUnload() {
+	disconnectedCallback() {
 		this.smoothlyAccordionItemDidUnload.emit()
 	}
 	render() {

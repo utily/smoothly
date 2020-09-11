@@ -6,7 +6,7 @@ import { Component, Prop, h } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlySpinner {
-	@Prop({ reflectToAttr: true }) active: boolean
+	@Prop({ reflect: true }) active: boolean
 	render() {
 		return <div>Loading...</div>
 	}
