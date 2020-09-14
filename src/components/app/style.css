@@ -37,7 +37,7 @@ smoothly-app[color=danger] {
 	--smoothly-app-hover-color: var(--smoothly-default-contrast);
 	--smoothly-app-shadow: var(--smoothly-color-shadow);
 }
-smoothly-app > header {
+smoothly-app > smoothly-notifier > header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -51,21 +51,21 @@ smoothly-app > header {
   align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
 }
-smoothly-app > header a {
+smoothly-app > smoothly-notifier > header a {
 	color: inherit;
 	text-decoration: inherit;
 }
-smoothly-app > header > h1,
-smoothly-app > header > nav,
-smoothly-app > header > nav > ul,
-smoothly-app > header > nav > ul > li,
-smoothly-app > header > nav > ul > li > *:not(a) {
+smoothly-app > smoothly-notifier > header > h1,
+smoothly-app > smoothly-notifier > header > nav,
+smoothly-app > smoothly-notifier > header > nav > ul,
+smoothly-app > smoothly-notifier > header > nav > ul > li,
+smoothly-app > smoothly-notifier > header > nav > ul > li > *:not(a) {
 	display: inline-block;
 	height: 100%;
 	margin: 0;
 }
-smoothly-app > header > h1 a,
-smoothly-app > header > nav > ul > li a {
+smoothly-app > smoothly-notifier > header > h1 a,
+smoothly-app > smoothly-notifier > header > nav > ul > li a {
 	display: inline-block;
 	line-height: 1.6cm;
 	height: 100%;
@@ -74,19 +74,19 @@ smoothly-app > header > nav > ul > li a {
 	text-decoration: none;
 	font-weight: bold;
 }
-smoothly-app > header > nav > ul > li smoothly-trigger.sc-smoothly-trigger-h {
+smoothly-app > smoothly-notifier > header > nav > ul > li smoothly-trigger.sc-smoothly-trigger-h {
 	border: 0;
 }
-smoothly-app > header > nav > ul > li a > smoothly-icon {
+smoothly-app > smoothly-notifier > header > nav > ul > li a > smoothly-icon {
 	position: relative;
 	top: .2cm;
 }
-smoothly-app > header > nav > ul > li a:hover,
-smoothly-app > header > nav > ul > li a.active {
+smoothly-app > smoothly-notifier > header > nav > ul > li a:hover,
+smoothly-app > smoothly-notifier > header > nav > ul > li a.active {
 	background-color: rgb(var(--smoothly-app-hover-background));
 	color: rgb(var(--smoothly-app-hover-color));
 }
-smoothly-app > header + * {
+smoothly-app > smoothly-notifier > header + * {
 	position: relative;
 	top: 1.6cm;
 }

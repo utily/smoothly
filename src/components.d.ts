@@ -79,10 +79,10 @@ export namespace Components {
     }
     interface SmoothlyInputDemo {
     }
-    interface SmoothlyNotifier {
-        "notice"?: string | Notice;
+    interface SmoothlyNotification {
+        "notice": Notice;
     }
-    interface SmoothlyNotifierTest {
+    interface SmoothlyNotifier {
     }
     interface SmoothlyPopup {
         "visible": boolean;
@@ -237,17 +237,17 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNotificationElement: {
+        prototype: HTMLSmoothlyNotificationElement;
+        new (): HTMLSmoothlyNotificationElement;
+    };
     interface HTMLSmoothlyNotifierElement extends Components.SmoothlyNotifier, HTMLStencilElement {
     }
     var HTMLSmoothlyNotifierElement: {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
-    };
-    interface HTMLSmoothlyNotifierTestElement extends Components.SmoothlyNotifierTest, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNotifierTestElement: {
-        prototype: HTMLSmoothlyNotifierTestElement;
-        new (): HTMLSmoothlyNotifierTestElement;
     };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
@@ -349,8 +349,8 @@ declare global {
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
-        "smoothly-notifier-test": HTMLSmoothlyNotifierTestElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
@@ -413,6 +413,7 @@ declare namespace LocalJSX {
         "datetime"?: DateTime;
     }
     interface SmoothlyDisplayDemo {
+        "onNotice"?: (event: CustomEvent<Notice>) => void;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -445,10 +446,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDemo {
     }
-    interface SmoothlyNotifier {
-        "notice"?: string | Notice;
+    interface SmoothlyNotification {
+        "notice"?: Notice;
+        "onRemove"?: (event: CustomEvent<Notice>) => void;
     }
-    interface SmoothlyNotifierTest {
+    interface SmoothlyNotifier {
     }
     interface SmoothlyPopup {
         "visible"?: boolean;
@@ -533,8 +535,8 @@ declare namespace LocalJSX {
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
-        "smoothly-notifier-test": SmoothlyNotifierTest;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-radio": SmoothlyRadio;
         "smoothly-radio-group": SmoothlyRadioGroup;
@@ -570,8 +572,8 @@ declare module "@stencil/core" {
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
-            "smoothly-notifier-test": LocalJSX.SmoothlyNotifierTest & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierTestElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
