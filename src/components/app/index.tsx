@@ -9,6 +9,10 @@ import { Color } from "../../model"
 export class SmoothlyApp {
 	@Prop() color: Color
 	render() {
-		return <slot></slot>
+		return (
+			<smoothly-notifier>
+				<slot></slot>
+			</smoothly-notifier>
+		)
 	}
 }

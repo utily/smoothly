@@ -1,8 +1,14 @@
-import { Component, h } from "@stencil/core"
+import { Component, Event, EventEmitter, h } from "@stencil/core"
+import { Notice } from "../../model"
 @Component({
 	tag: "smoothly-display-demo",
 })
 export class SmoothlyDisplayDemo {
+	@Event() notice: EventEmitter<Notice>
+	private noticeWarning(notice: Notice) {
+		console.log("emit", notice)
+		this.notice.emit(notice)
+	}
 	render() {
 		return [
 			<main>
@@ -56,7 +62,38 @@ export class SmoothlyDisplayDemo {
 					</dd>
 				</dl>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
-				<smoothly-notifier notice={{ type: "warning", message: "This is a test warning notice." }}></smoothly-notifier>
+				<p>Test of diffrent kinds of notifier:</p>
+				<button onClick={() => this.noticeWarning(Notice.warn("This is a test warning notice."))}>warning</button>
+				<button onClick={() => this.noticeWarning(Notice.succeded("This is a test success notice."))}>success</button>
+				<button onClick={() => this.noticeWarning(Notice.failed("This is a test danger notice."))}>danger</button>
+				<button
+					onClick={() =>
+						this.noticeWarning(
+							Notice.execute(
+								"This is a test execute notice.",
+								() =>
+									new Promise<[boolean, string]>(resolve =>
+										window.setTimeout(() => resolve([true, "This went great"]), 3000)
+									)
+							)
+						)
+					}>
+					execute
+				</button>
+				<button
+					onClick={() =>
+						this.noticeWarning(
+							Notice.delay(
+								"This is a test delay notice.",
+								() =>
+									new Promise<[boolean, string]>(resolve =>
+										window.setTimeout(() => resolve([true, "This went great"]), 3000)
+									)
+							)
+						)
+					}>
+					delay
+				</button>
 			</main>,
 		]
 	}
