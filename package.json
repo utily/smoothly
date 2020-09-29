@@ -65,7 +65,7 @@
 		"isoly": "0.0.15",
 		"normalize.css": "^8.0.1",
 		"stencil-router-v2": "^0.5.1-0",
-		"tidily": "0.0.30"
+		"tidily": "0.0.32"
 	},
 	"devDependencies": {
 		"@stencil/core": "^2.0.3",
