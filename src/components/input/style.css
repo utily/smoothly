@@ -12,7 +12,6 @@ label {
 	color: rgb(var(--smoothly-text-tint));
 	user-select: none;
 	cursor: inherit;
-	z-index: -1;
 	transition: font-size .1s;
 	transition-timing-function: ease;
 }
@@ -21,6 +20,8 @@ input {
 	width: calc(100% - 2 * .4em - 2px);
 	background: none;
 	border: 0;
+	z-index: 1;
+	position: relative;
 }
 :host.has-value > label {
 	top: .3em;
