@@ -18,7 +18,6 @@ export class SmoothlySelect {
 	componentDidLoad() {
 		if (this.selectElement)
 			this.value = this.selectElement?.value
-		console.log(this.value)
 	}
 
 	render() {

@@ -10,13 +10,14 @@ label {
 	left: .4em;
 	top: .6em;
 	color: rgb(var(--smoothly-text-tint));
+	opacity: .8;
 	user-select: none;
 	cursor: inherit;
 	transition: font-size .1s;
 	transition-timing-function: ease;
 }
 input {
-	padding: 1em .4em .2em .4em;
+	padding: 1em .2em .2em .2em;
 	width: calc(100% - 2 * .4em - 2px);
 	background: none;
 	border: 0;
