@@ -86,7 +86,7 @@ smoothly-app > smoothly-notifier > header > nav > ul > li a.active {
 	background-color: rgb(var(--smoothly-app-hover-background));
 	color: rgb(var(--smoothly-app-hover-color));
 }
-smoothly-app > smoothly-notifier > header + * {
+smoothly-app > smoothly-notifier > content {
 	position: relative;
 	top: 1.6cm;
 }
