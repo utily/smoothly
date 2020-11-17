@@ -170,6 +170,7 @@ export class SmoothlyInput {
 				onBlur={e => this.onBlur(e)}
 				onKeyDown={e => this.onKeyDown(e)}
 				onPaste={e => this.onPaste(e)}></input>,
+			<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>,
 			<label htmlFor={this.name}>
 				<slot />
 			</label>,
