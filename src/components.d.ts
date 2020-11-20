@@ -85,6 +85,7 @@ export namespace Components {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPopup {
+        "direction": "up" | "down";
         "visible": boolean;
     }
     interface SmoothlyRadio {
@@ -453,6 +454,7 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPopup {
+        "direction"?: "up" | "down";
         "visible"?: boolean;
     }
     interface SmoothlyRadio {
