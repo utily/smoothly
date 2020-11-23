@@ -11,17 +11,24 @@
 :host aside {
 	display: inline;
 	position: absolute;
-	top: 2.2em;
-	left: 1em;
 	padding: 0.3em;
 	background-color:  rgb(238, 238, 238);
-	box-shadow: 6px 5px 9px -9px black,
-	5px 6px 9px -9px black;
 	border-color: rgb(238, 238, 238);
 	border-style: solid;
   border-width: 0.1em;
 	border-radius: 0.6em;
 	z-index: 3;
+}
+:host[direction=down] aside {
+	top: 2.2em;
+	left: 1em;
+	box-shadow: 6px 5px 9px -9px black,
+	5px 6px 9px -9px black;
+}
+:host[direction=up] aside {
+	bottom: 2.2em;
+	box-shadow: -6px -5px 9px -9px black,
+	-5px -6px 9px -9px black;
 }
  :host:not([visible]) .background {
 	display: none;
@@ -38,21 +45,31 @@
 :host:not([visible]) .arrow {
 	display: none;
 }
-:host .arrow {
+:host .arrow{
 	background-color:  rgb(238, 238, 238);
 	border-color:  rgb(238, 238, 238);
+	z-index: 2;
+	content: "";
+  position: absolute;
+  width: 12px;
+	height: 12px;
+  transform: rotate(45deg);
+}
+:host[direction=down] .arrow {
+	left: 2em;
+	top: 2em;
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-left-style: solid;
 	border-left-width: 1px;
-	z-index: 2;
-	content: "";
-  position: absolute;
-  left: 2em;
-  top: 2em;
-  width: 12px;
-	height: 12px;
-  transform: rotate(45deg);
+}
+:host[direction=up] .arrow {
+	bottom: 2em;
+	left: 1em;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
 }
 :host .pointer {
 	cursor: pointer;

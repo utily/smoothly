@@ -8,6 +8,7 @@ import { Component, Prop, h, Host } from "@stencil/core"
 })
 export class SmoothlyPopup {
 	@Prop({ mutable: true, reflect: true }) visible = false
+	@Prop({ mutable: true, reflect: true }) direction: "up" | "down" = "down"
 	private onClick(event: UIEvent) {
 		this.visible = !this.visible
 	}
