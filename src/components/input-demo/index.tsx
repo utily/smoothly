@@ -13,6 +13,12 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="text" name="name">
 						Name
 					</smoothly-input>
+					<smoothly-input type="date" name="date">
+						Date
+					</smoothly-input>
+					<smoothly-input type="date-time" name="date-time">
+						Date-Time
+					</smoothly-input>
 					<smoothly-input type="text" name="street" value="street">
 						Street
 					</smoothly-input>
