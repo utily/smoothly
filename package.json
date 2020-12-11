@@ -62,10 +62,10 @@
 	},
 	"dependencies": {
 		"authly": "0.0.40",
-		"isoly": "0.0.15",
+		"isoly": "0.0.24",
 		"normalize.css": "^8.0.1",
 		"stencil-router-v2": "^0.5.1-0",
-		"tidily": "0.0.32"
+		"tidily": "0.0.35"
 	},
 	"devDependencies": {
 		"@stencil/core": "^2.0.3",

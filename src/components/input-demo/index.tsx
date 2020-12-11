@@ -19,6 +19,9 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="date-time" name="date-time">
 						Date-Time
 					</smoothly-input>
+					<smoothly-input type="divisor" name="divisor">
+						Divisor
+					</smoothly-input>
 					<smoothly-input type="text" name="street" value="street">
 						Street
 					</smoothly-input>
