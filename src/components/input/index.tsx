@@ -119,26 +119,31 @@ export class SmoothlyInput {
 		event.preventDefault()
 		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
-		if (backend.attributes.getNamedItem("autocomplete")?.value == "cc-exp")
-			pasted = pasted.match(/^20\d\d[.\D]*\d\d$/)
-				? pasted.substring(pasted.length - 2, pasted.length) + pasted.substring(2, 4)
-				: pasted.match(/^(1[3-9]|[2-9]\d)[.\D]*\d\d$/)
-				? pasted.substring(pasted.length - 2, pasted.length) + pasted.substring(0, 2)
-				: pasted.match(/^\d\d[.\D]*20\d\d$/)
-				? pasted.substring(0, 2) + pasted.substring(pasted.length - 2, pasted.length)
-				: pasted
+		pasted = this.expiresAutocompleteFix(backend, pasted)
 		for (const letter of pasted)
 			this.processKey({ key: letter }, backend)
 	}
 	onInput(event: InputEvent) {
 		const backend = event.target as HTMLInputElement
-		const data = backend.value
+		let data = backend.value
 		if (data) {
 			event.preventDefault()
 			this.processKey({ key: "a", ctrlKey: true }, backend)
+			data = this.expiresAutocompleteFix(backend, data)
 			for (const letter of data)
 				this.processKey({ key: letter }, backend)
 		}
+	}
+	private expiresAutocompleteFix(backend: HTMLInputElement, value: string) {
+		if (backend.attributes.getNamedItem("autocomplete")?.value == "cc-exp")
+			value = value.match(/^20\d\d[.\D]*\d\d$/)
+				? value.substring(value.length - 2, value.length) + value.substring(2, 4)
+				: value.match(/^(1[3-9]|[2-9]\d)[.\D]*\d\d$/)
+				? value.substring(value.length - 2, value.length) + value.substring(0, 2)
+				: value.match(/^\d\d[.\D]*20\d\d$/)
+				? value.substring(0, 2) + value.substring(value.length - 2, value.length)
+				: value
+		return value
 	}
 	private processKey(event: tidily.Action, backend: HTMLInputElement) {
 		const after = tidily.Action.apply(this.formatter, this.state, event)
