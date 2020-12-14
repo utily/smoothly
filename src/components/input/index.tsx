@@ -117,8 +117,16 @@ export class SmoothlyInput {
 	}
 	onPaste(event: ClipboardEvent) {
 		event.preventDefault()
-		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
+		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
+		if (backend.attributes.getNamedItem("autocomplete")?.value == "cc-exp")
+			pasted = pasted.match(/^20\d\d[.\D]*\d\d$/)
+				? pasted.substring(pasted.length - 2, pasted.length) + pasted.substring(2, 4)
+				: pasted.match(/^(1[3-9]|[2-9]\d)[.\D]*\d\d$/)
+				? pasted.substring(pasted.length - 2, pasted.length) + pasted.substring(0, 2)
+				: pasted.match(/^\d\d[.\D]*20\d\d$/)
+				? pasted.substring(0, 2) + pasted.substring(pasted.length - 2, pasted.length)
+				: pasted
 		for (const letter of pasted)
 			this.processKey({ key: letter }, backend)
 	}
