@@ -1,4 +1,4 @@
-import { Component, Listen, h } from "@stencil/core"
+import { Component, h, Listen } from "@stencil/core"
 import { Currency } from "isoly"
 
 @Component({

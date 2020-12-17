@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Prop, State, h } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Prop, State } from "@stencil/core"
 import * as langly from "langly"
 import * as translation from "./translation"
 @Component({

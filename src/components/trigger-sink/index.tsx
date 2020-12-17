@@ -1,4 +1,4 @@
-import { Component, Listen, Prop, h } from "@stencil/core"
+import { Component, h, Listen, Prop } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 
 @Component({

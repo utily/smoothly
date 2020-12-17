@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Watch, h, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop, State, Watch } from "@stencil/core"
 import { Currency } from "isoly"
 import * as tidily from "tidily"
 import { Autocomplete } from "../../model"
