@@ -1,33 +1,37 @@
-import { Component, Event, EventEmitter, Prop, h } from "@stencil/core"
-
+import { Component, Element, Event, EventEmitter, Prop, State, h } from "@stencil/core"
+import * as langly from "langly"
+import * as translation from "./translation"
 @Component({
 	tag: "smoothly-checkbox",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyCheckbox {
-	@Prop() name: string
-	@Prop() value: string
-	@Prop() label: string
-	@Prop({ mutable: true, reflect: true }) checked: boolean
-	@Event() smoothlyChecked!: EventEmitter<{ name: string; value: string }>
+	@Element() element: HTMLElement
+	@Prop() selectAll = false
+	@Prop({ mutable: true, reflect: true }) selected: boolean
+	@Event() checked: EventEmitter<{ selected: boolean }>
+	@State() t: langly.Translate
 
-	protected async onInput(e: UIEvent): Promise<boolean> {
-		if (e.target && (e.target as HTMLInputElement).value && (this.checked = (e.target as HTMLInputElement).checked))
-			this.smoothlyChecked.emit({ name: this.name, value: this.value })
-		return true
+	componentWillLoad() {
+		this.t = translation.create(this.element)
 	}
-
+	toggle() {
+		this.selected = !this.selected
+		this.checked.emit({ selected: this.selected })
+	}
 	render() {
 		return [
-			<input
-				type="checkbox"
-				name={this.name}
-				value={this.value}
-				title={this.label}
-				checked={this.checked}
-				onChange={e => this.onInput(e as UIEvent)}
-			/>,
+			<smoothly-icon
+				toolTip={this.t(this.selectAll ? "Deselect all" : "Deselect")}
+				onClick={() => this.toggle()}
+				style={{ display: this.selected ? "" : "none" }}
+				name="checkbox-outline"></smoothly-icon>,
+			<smoothly-icon
+				toolTip={this.t(this.selectAll ? "Select all" : "Select")}
+				onClick={() => this.toggle()}
+				style={{ display: !this.selected ? "" : "none" }}
+				name="square-outline"></smoothly-icon>,
 		]
 	}
 }
