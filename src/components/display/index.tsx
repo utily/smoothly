@@ -1,6 +1,6 @@
-import { Component, Prop, h } from "@stencil/core"
-import { Currency, CountryCode } from "isoly"
-import { Type, format } from "tidily"
+import { Component, h, Prop } from "@stencil/core"
+import { CountryCode, Currency } from "isoly"
+import { format, Type } from "tidily"
 
 @Component({
 	tag: "smoothly-display",

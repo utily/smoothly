@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Listen, Watch, h } from "@stencil/core"
+import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-accordion",

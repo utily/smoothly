@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, h, Host } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-popup",

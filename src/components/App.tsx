@@ -1,6 +1,6 @@
 import { ChildNode, FunctionalComponent, h, VNode } from "@stencil/core"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { createStaticRouter, Route, href } from "stencil-router-v2"
+import { createStaticRouter, href, Route } from "stencil-router-v2"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Router = createStaticRouter()

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, Listen, h, Method } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop } from "@stencil/core"
 import { Color, Expand, Fill } from "../../model"
 
 @Component({

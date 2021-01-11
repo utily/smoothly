@@ -1,5 +1,4 @@
-import { Component, Prop, h } from "@stencil/core"
-
+import { Component, h, Prop } from "@stencil/core"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { App } from "../App"
 
