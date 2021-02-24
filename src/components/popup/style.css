@@ -39,7 +39,7 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(var(--smoothly-dark-shade), 0.5);
+	background: rgba(var(--smoothly-warning-contrast), 0.5);
 	z-index: 2;
 }
 :host:not([visible]) .arrow {
