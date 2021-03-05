@@ -50,6 +50,7 @@ export namespace Components {
     }
     interface SmoothlyFrame {
         "name": string;
+        "origin": string | undefined;
         "send": (message: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
     }
@@ -416,6 +417,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onMessage"?: (event: CustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "origin"?: string | undefined;
         "url"?: string;
     }
     interface SmoothlyIcon {
