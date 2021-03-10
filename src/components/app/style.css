@@ -70,7 +70,6 @@ smoothly-app > smoothly-notifier > header > nav > ul > li a {
 	line-height: 1.6cm;
 	height: 100%;
 	padding: 0 .4cm;
-	color: rgb(var(--smoothly-primary-contrast));
 	text-decoration: none;
 	font-weight: bold;
 }
