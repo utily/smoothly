@@ -19,16 +19,6 @@ commands:
             - node_modules
           key: v2-dependencies-{{ checksum "package.json" }}
 jobs:
-  build:
-    <<: *default
-    steps:
-      - prepare
-      - run:
-          name: Build
-          command: npm run build
-      - run:
-          name: Test
-          command: npm run test
   deploy:
     <<: *default
     steps:
@@ -58,10 +48,6 @@ workflows:
   version: 2.1
   build-flow:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore: master
       - deploy:
           filters:
             branches:
