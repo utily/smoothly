@@ -60,7 +60,7 @@ export class SmoothlyInput {
 				formatter.unformat(
 					tidily.StateEditor.copy({
 						value,
-						selection: { start, end: start },
+						selection: { start, end: start, direction: "none" },
 					})
 				)
 			)
@@ -83,6 +83,7 @@ export class SmoothlyInput {
 			selection: {
 				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
 				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+				direction: backend.selectionDirection ? backend.selectionDirection : "none",
 			},
 		}
 		const after = this.formatter.format(
@@ -99,6 +100,7 @@ export class SmoothlyInput {
 				selection: {
 					start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
 					end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
+					direction: backend.selectionDirection ? backend.selectionDirection : "none",
 				},
 			}
 			if (
@@ -152,12 +154,11 @@ export class SmoothlyInput {
 	updateBackend(after: Readonly<tidily.State> & Readonly<tidily.Settings>, backend: HTMLInputElement) {
 		if (after.value != backend.value)
 			backend.value = after.value
-		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart) {
+		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
 			backend.selectionStart = after.selection.start
-		}
-		if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd) {
+		if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
 			backend.selectionEnd = after.selection.end
-		}
+		backend.selectionDirection = after.selection.direction ? after.selection.direction : backend.selectionDirection
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
 			this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })).value
