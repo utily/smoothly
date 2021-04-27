@@ -1,5 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { Config } from "@stencil/core"
+import { sass } from "@stencil/sass"
 
 export const config: Config = {
 	namespace: "smoothly",
@@ -21,4 +22,5 @@ export const config: Config = {
 	devServer: {
 		openBrowser: false,
 	},
+	plugins: [sass()],
 }

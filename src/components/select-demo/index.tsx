@@ -51,6 +51,19 @@ export class SmoothlySelectDemo {
 				<option value="3">3</option>
 			</smoothly-select>,
 			<button onClick={() => this.alertf()}>press here</button>,
+			<smoothly-menu-options>
+				<smoothly-option name="Dog" value="dog">
+					🐶
+				</smoothly-option>
+				<smoothly-option name="Cat" value="cat">
+					🐱
+				</smoothly-option>
+				<smoothly-option name="Parrot" value="parrot"></smoothly-option>
+				<smoothly-option name="Dragon" value="dragon"></smoothly-option>
+				<smoothly-option name="Unicorn" value="unicorn">
+					🦄
+				</smoothly-option>
+			</smoothly-menu-options>,
 		]
 	}
 }

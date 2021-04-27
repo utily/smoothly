@@ -70,6 +70,7 @@
 	},
 	"devDependencies": {
 		"@stencil/core": "^2.0.3",
+		"@stencil/sass": "^1.4.1",
 		"@types/jest": "26.0.9",
 		"@types/puppeteer": "3.0.1",
 		"@typescript-eslint/eslint-plugin": "^4.1.0",

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency } from "isoly"
 import * as tidily from "tidily"
 import { Autocomplete } from "../../model"
@@ -8,8 +8,12 @@ import { Autocomplete } from "../../model"
 	scoped: true,
 })
 export class SmoothlyInput {
-	@Prop({ reflect: true }) name: string
+	private inputElement: HTMLInputElement
+	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
+	private keepFocusOnReRender = false
 	private lastValue: any
+	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
@@ -20,7 +24,6 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ reflect: true }) currency?: Currency
-	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	get formatter(): tidily.Formatter & tidily.Converter<any> {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
 		switch (this.type) {
@@ -65,6 +68,34 @@ export class SmoothlyInput {
 				)
 			)
 		)
+	}
+	componentDidRender() {
+		if (this.keepFocusOnReRender) {
+			this.inputElement.focus()
+			this.keepFocusOnReRender = false
+		}
+	}
+	@Method()
+	async setKeepFocusOnReRender(keepFocus: boolean) {
+		this.keepFocusOnReRender = keepFocus
+	}
+	@Method()
+	async setSelectionRange(start: number, end: number, direction?: tidily.Direction) {
+		const formatter = this.formatter
+		this.state = formatter.format(
+			tidily.StateEditor.copy(
+				formatter.unformat(
+					tidily.StateEditor.copy({
+						...this.state,
+						selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
+					})
+				)
+			)
+		)
+		const after = this.formatter.format(
+			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
+		)
+		this.updateBackend(after, this.inputElement)
 	}
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onBlur(event: FocusEvent) {}
@@ -114,7 +145,8 @@ export class SmoothlyInput {
 			) {
 				event.preventDefault()
 				this.processKey(event, backend)
-			}
+			} else if (event.key == "ArrowUp" || event.key == "ArrowDown")
+				event.preventDefault()
 		}
 	}
 	onPaste(event: ClipboardEvent) {
@@ -164,30 +196,30 @@ export class SmoothlyInput {
 			this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })).value
 		)
 	}
-	hostData() {
-		return { class: { "has-value": this.state?.value } }
-	}
 	render() {
-		return [
-			<input
-				name={this.name}
-				type={this.state.type}
-				placeholder={this.placeholder}
-				required={this.required}
-				autocomplete={this.state.autocomplete}
-				disabled={this.disabled}
-				pattern={this.state.pattern && this.state.pattern.source}
-				value={this.state.value}
-				onInput={(e: InputEvent) => this.onInput(e)}
-				onFocus={e => this.onFocus(e)}
-				onClick={e => this.onClick(e)}
-				onBlur={e => this.onBlur(e)}
-				onKeyDown={e => this.onKeyDown(e)}
-				onPaste={e => this.onPaste(e)}></input>,
-			<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>,
-			<label htmlFor={this.name}>
-				<slot />
-			</label>,
-		]
+		return (
+			<Host class={{ "has-value": this.state?.value != "" }}>
+				<input
+					name={this.name}
+					type={this.state.type}
+					placeholder={this.placeholder}
+					required={this.required}
+					autocomplete={this.state.autocomplete}
+					disabled={this.disabled}
+					pattern={this.state.pattern && this.state.pattern.source}
+					value={this.state.value}
+					onInput={(e: InputEvent) => this.onInput(e)}
+					onFocus={e => this.onFocus(e)}
+					onClick={e => this.onClick(e)}
+					onBlur={e => this.onBlur(e)}
+					onKeyDown={e => this.onKeyDown(e)}
+					ref={(el: HTMLInputElement) => (this.inputElement = el)}
+					onPaste={e => this.onPaste(e)}></input>
+				<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
+				<label htmlFor={this.name}>
+					<slot />
+				</label>
+			</Host>
+		)
 	}
 }
