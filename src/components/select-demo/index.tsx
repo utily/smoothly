@@ -51,19 +51,40 @@ export class SmoothlySelectDemo {
 				<option value="3">3</option>
 			</smoothly-select>,
 			<button onClick={() => this.alertf()}>press here</button>,
-			<smoothly-menu-options>
-				<smoothly-option name="Dog" value="dog">
-					🐶
-				</smoothly-option>
-				<smoothly-option name="Cat" value="cat">
-					🐱
-				</smoothly-option>
-				<smoothly-option name="Parrot" value="parrot"></smoothly-option>
-				<smoothly-option name="Dragon" value="dragon"></smoothly-option>
-				<smoothly-option name="Unicorn" value="unicorn">
-					🦄
-				</smoothly-option>
-			</smoothly-menu-options>,
+			<smoothly-picker
+				label="filter"
+				multiple={true}
+				options={[
+					{ name: "Dog", value: "dog", aliases: ["WOFF"] },
+					{ name: "Cat", value: "cat", aliases: ["moew"] },
+					{ name: "Pig", value: "pig" },
+					{ name: "Turtle", value: "turtle" },
+					{ name: "Spider", value: "spider" },
+					{ name: "Phoenix", value: "phoenix" },
+					{ name: "Horse", value: "horse" },
+					{ name: "Unicorn", value: "unicorn" },
+					{ name: "Parrot", value: "parrot" },
+					{ name: "Dragon", value: "dragon" },
+					{ name: "Kraken", value: "kraken" },
+				]}></smoothly-picker>,
+			<br />,
+			<smoothly-picker
+				label="filter"
+				multiple={false}
+				max-menu-height="200px"
+				options={[
+					{ name: "Dog", value: "dog", aliases: ["WOFF"], description: "Woof 🐶" },
+					{ name: "Cat", value: "cat", aliases: ["moew"] },
+					{ name: "Pig", value: "pig" },
+					{ name: "Turtle", value: "turtle" },
+					{ name: "Spider", value: "spider" },
+					{ name: "Phoenix", value: "phoenix" },
+					{ name: "Horse", value: "horse" },
+					{ name: "Unicorn", value: "unicorn" },
+					{ name: "Parrot", value: "parrot" },
+					{ name: "Dragon", value: "dragon" },
+					{ name: "Kraken", value: "kraken" },
+				]}></smoothly-picker>,
 		]
 	}
 }

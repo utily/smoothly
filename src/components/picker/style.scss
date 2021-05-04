@@ -1,0 +1,122 @@
+:host {
+	/* 
+		TODO: Move all colors/properties to own scss-file when "mode" is added.
+		style.intergiro.scss ? 
+		style.payfunc.scss ? 
+		style.general.scss ?
+	*/
+	--background-color: var(--smoothly-secondary-tint), 1;
+	--color: var(--smoothly-secondary-contrast), 1;
+	--border-radius: 0;
+	--border-width: 1px;
+	--border-color: var(--smoothly-secondary-contrast), 0.5;
+	--border-highlight-color: var(--smoothly-secondary-contrast), 1;
+
+	--label-color: var(--smoothly-secondary-contrast), 0.8;
+
+	--selected-item-border-radius: 0.25rem;
+	--selected-item-background-color: var(--smoothly-secondary-color), 1;
+	--selected-item-color: 255, 255, 255, 1;
+}
+
+:host {
+	display: block;
+	position: relative;
+	width: 85%;
+	cursor: pointer;
+	--intergiro-transition: all 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition: var(--intergiro-transition);
+}
+
+:host(:focus-within) > ul {
+	border-color: rgba(var(--border-highlight-color));
+}
+ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	list-style-type: none;
+	transition: var(--intergiro-transition);
+	background-color: rgba(var(--background-color));
+	border: var(--border-width) solid rgba(var(--border-color));
+	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	margin: 0;
+	padding: 1em 3.2em 0.2em 0.2em;
+	font-family: var(--smoothly-font-family);
+	li {
+		width: min-content;
+		margin: 0 0.1rem;
+		padding: 0.25rem;
+		align-items: center;
+	}
+	li:not(:last-child) {
+		display: flex;
+		flex-direction: row;
+		background-color: rgba(var(--selected-item-background-color));
+		border-radius: var(--selected-item-border-radius);
+		color: rgba(var(--selected-item-color));
+		fill: rgba(var(--selected-item-color));
+		font-size: small;
+	}
+	li:last-child {
+		flex-grow: 1;
+		min-width: 100px;
+		input {
+			width: 100%;
+			background-color: transparent;
+			outline: none;
+			border: none;
+			cursor: pointer;
+			color: rgba(var(--color));
+			&::placeholder {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+label {
+	position: absolute;
+	top: 1em;
+	left: 0.5rem;
+	color: rgba(var(--label-color));
+	transition: var(--intergiro-transition);
+	font-family: var(--smoothly-font-family);
+}
+:host([has-selection]) label,
+:host(:focus-within) label {
+	transform: translateY(-0.8em);
+	font-size: 70%;
+}
+
+:host > smoothly-icon {
+	stroke: rgba(var(--color));
+	fill: rgba(var(--color));
+	position: absolute;
+	bottom: 0.5rem;
+	&:not([data-arrow]) {
+		right: 1.5rem;
+	}
+	&[data-arrow] {
+		right: 0.1rem;
+	}
+}
+:host(:not([is-open])) > smoothly-icon[data-arrow="up"] {
+	display: none;
+}
+:host([is-open]) > smoothly-icon[data-arrow="down"] {
+	display: none;
+}
+:host(:not([has-selection])) > smoothly-icon:last-of-type {
+	display: none;
+}
+
+:host smoothly-menu-options {
+	position: absolute;
+	z-index: 999;
+}
+:host(:not([is-open])) > smoothly-menu-options {
+	/* hide options by default */
+	display: none;
+}
