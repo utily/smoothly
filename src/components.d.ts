@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Autocomplete, Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
+import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
 import { Direction, Type } from "tidily";
 import { CountryCode, Currency, DateTime } from "isoly";
 export namespace Components {
@@ -64,7 +64,7 @@ export namespace Components {
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
-        "autocomplete": Autocomplete;
+        "autocomplete": boolean;
         "currency"?: Currency;
         "disabled": boolean;
         "maxLength": number;
@@ -86,9 +86,7 @@ export namespace Components {
         "getHighlighted": () => Promise<OptionType | undefined>;
         "maxMenuHeight": "inherit";
         "moveHighlight": (step: number) => Promise<void>;
-        /**
-          * @Prop options: is only needed if ig-options are inserted via slot
-         */
+        "optionStyle": any;
         "options": OptionType[];
         "order": boolean;
         "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
@@ -108,6 +106,7 @@ export namespace Components {
         "label": string;
         "maxMenuHeight": "inherit";
         "multiple": boolean;
+        "optionStyle": any;
         "options": OptionType[];
         "selections": { name: string; value: string }[];
     }
@@ -480,7 +479,7 @@ declare namespace LocalJSX {
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
-        "autocomplete"?: Autocomplete;
+        "autocomplete"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
@@ -498,9 +497,7 @@ declare namespace LocalJSX {
     interface SmoothlyMenuOptions {
         "emptyMenuLabel"?: string;
         "maxMenuHeight"?: "inherit";
-        /**
-          * @Prop options: is only needed if ig-options are inserted via slot
-         */
+        "optionStyle"?: any;
         "options"?: OptionType[];
         "order"?: boolean;
     }
@@ -522,6 +519,7 @@ declare namespace LocalJSX {
         "label"?: string;
         "maxMenuHeight"?: "inherit";
         "multiple"?: boolean;
+        "optionStyle"?: any;
         "options"?: OptionType[];
         "selections"?: { name: string; value: string }[];
     }

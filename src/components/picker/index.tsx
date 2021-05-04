@@ -14,6 +14,7 @@ export class SmoothlyPicker {
 	@State() isOpen: boolean
 	@Prop() maxMenuHeight: "inherit"
 	@Prop({ reflect: true }) multiple = false
+	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[]
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: { name: string; value: string }[] = []
@@ -152,6 +153,7 @@ export class SmoothlyPicker {
 				<smoothly-icon name="close" onClick={(e: MouseEvent) => this.onCrossClick(e)}></smoothly-icon>
 				<smoothly-menu-options
 					style={{ width: "100%" }}
+					optionStyle={this.optionStyle}
 					order={true}
 					max-menu-height={this.maxMenuHeight}
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el)}
