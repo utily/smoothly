@@ -23,6 +23,8 @@ input {
 	border: 0;
 	z-index: 1;
 	position: relative;
+	font-size: 1rem;
+	font-family: var(--smoothly-font-family);
 }
 smoothly-icon {
 	display: none;
