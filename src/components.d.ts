@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Autocomplete, Color, Expand, Fill, Message, Notice, Trigger } from "./model";
+import { Autocomplete, Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
 import { Type } from "tidily";
 import { CountryCode, Currency, DateTime } from "isoly";
 export namespace Components {
@@ -73,15 +73,43 @@ export namespace Components {
         "pattern": RegExp | undefined;
         "placeholder": string | undefined;
         "required": boolean;
+        "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: "forward" | "backward" | "none" | undefined) => Promise<void>;
         "type": string;
         "value": any;
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyMenuOptions {
+        "emptyMenuLabel": string;
+        "filterOptions": (keyword: string, excludeValues?: string[]) => Promise<void>;
+        "getHighlighted": () => Promise<OptionType | undefined>;
+        "maxMenuHeight": "inherit";
+        "moveHighlight": (step: number) => Promise<void>;
+        /**
+          * @Prop options: is only needed if ig-options are inserted via slot
+         */
+        "options": OptionType[];
+        "order": boolean;
+        "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
+    }
     interface SmoothlyNotification {
         "notice": Notice;
     }
     interface SmoothlyNotifier {
+    }
+    interface SmoothlyOption {
+        "aliases": string;
+        "dataHighlight": boolean;
+        "name": string;
+        "value": string;
+    }
+    interface SmoothlyPicker {
+        "label": string;
+        "maxMenuHeight": "inherit";
+        "multiple": boolean;
+        "options": OptionType[];
+        "selections": { name: string; value: string }[];
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -237,6 +265,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyMenuOptionsElement extends Components.SmoothlyMenuOptions, HTMLStencilElement {
+    }
+    var HTMLSmoothlyMenuOptionsElement: {
+        prototype: HTMLSmoothlyMenuOptionsElement;
+        new (): HTMLSmoothlyMenuOptionsElement;
+    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -248,6 +282,18 @@ declare global {
     var HTMLSmoothlyNotifierElement: {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
+    };
+    interface HTMLSmoothlyOptionElement extends Components.SmoothlyOption, HTMLStencilElement {
+    }
+    var HTMLSmoothlyOptionElement: {
+        prototype: HTMLSmoothlyOptionElement;
+        new (): HTMLSmoothlyOptionElement;
+    };
+    interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerElement: {
+        prototype: HTMLSmoothlyPickerElement;
+        new (): HTMLSmoothlyPickerElement;
     };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
@@ -349,8 +395,11 @@ declare global {
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-menu-options": HTMLSmoothlyMenuOptionsElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
+        "smoothly-option": HTMLSmoothlyOptionElement;
+        "smoothly-picker": HTMLSmoothlyPickerElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
@@ -445,11 +494,35 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyMenuOptions {
+        "emptyMenuLabel"?: string;
+        "maxMenuHeight"?: "inherit";
+        /**
+          * @Prop options: is only needed if ig-options are inserted via slot
+         */
+        "options"?: OptionType[];
+        "order"?: boolean;
+    }
     interface SmoothlyNotification {
         "notice"?: Notice;
         "onRemove"?: (event: CustomEvent<Notice>) => void;
     }
     interface SmoothlyNotifier {
+    }
+    interface SmoothlyOption {
+        "aliases"?: string;
+        "dataHighlight"?: boolean;
+        "name"?: string;
+        "onOptionHover"?: (event: CustomEvent<{ value: any; name: string }>) => void;
+        "onOptionSelect"?: (event: CustomEvent<{ value: any; name: string }>) => void;
+        "value"?: string;
+    }
+    interface SmoothlyPicker {
+        "label"?: string;
+        "maxMenuHeight"?: "inherit";
+        "multiple"?: boolean;
+        "options"?: OptionType[];
+        "selections"?: { name: string; value: string }[];
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
@@ -535,8 +608,11 @@ declare namespace LocalJSX {
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-menu-options": SmoothlyMenuOptions;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
+        "smoothly-option": SmoothlyOption;
+        "smoothly-picker": SmoothlyPicker;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-radio": SmoothlyRadio;
         "smoothly-radio-group": SmoothlyRadioGroup;
@@ -572,8 +648,11 @@ declare module "@stencil/core" {
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-menu-options": LocalJSX.SmoothlyMenuOptions & JSXBase.HTMLAttributes<HTMLSmoothlyMenuOptionsElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
+            "smoothly-option": LocalJSX.SmoothlyOption & JSXBase.HTMLAttributes<HTMLSmoothlyOptionElement>;
+            "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
