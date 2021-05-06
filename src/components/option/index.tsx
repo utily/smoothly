@@ -7,11 +7,12 @@ import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil
 })
 export class SmoothlyOption {
 	@Element() element: HTMLElement
+	@Prop({ reflect: true }) aliases: string
 	@Prop({ mutable: true, reflect: true }) dataHighlight = false
 	@Prop({ mutable: true, reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) value: string
-	@Event() optionHover: EventEmitter<{ name: string; value: string }>
-	@Event() optionSelect: EventEmitter<{ name: string; value: string }>
+	@Event() optionHover: EventEmitter<{ value: any; name: string }>
+	@Event() optionSelect: EventEmitter<{ value: any; name: string }>
 	onHover(event: MouseEvent) {
 		this.optionHover.emit({ name: this.name, value: this.value })
 	}

@@ -1,16 +1,14 @@
 :host {
-	display: grid;
-	grid-template-columns: 1rf;
-	grid-template-rows: repeat();
 	max-height: 300px;
-	width: var(--width);
+	width: 85%;
+	max-height: var(--max-menu-height);
 	border: 1px solid black;
 	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-secondary-color));
-	max-height: var(--max-menu-height);
 	overflow-y: auto;
+	cursor: pointer;
 }
-div:last-child {
+div:last-child:not(:empty) {
 	padding: 0.5em 1em;
 	font-style: italic;
 }
