@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency } from "isoly"
-import * as tidily from "tidily"
+import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
 import { Autocomplete } from "../../model"
 @Component({
 	tag: "smoothly-input",
@@ -12,7 +12,7 @@ export class SmoothlyInput {
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
 	private lastValue: any
-	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	private state: Readonly<State> & Readonly<Settings>
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
@@ -24,18 +24,18 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ reflect: true }) currency?: Currency
-	get formatter(): tidily.Formatter & tidily.Converter<any> {
-		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
+	get formatter(): Formatter & Converter<any> {
+		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
 			case "price":
-				result = tidily.get("price", this.currency)
+				result = get("price", this.currency)
 				break
 			default:
-				result = tidily.get(this.type as tidily.Type)
+				result = get(this.type as Type)
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		return result || tidily.get("text")!
+		return result || get("text")!
 	}
 	@Event() smoothlyChanged: EventEmitter<{ name: string; value: any }>
 	@Watch("value")
@@ -45,9 +45,7 @@ export class SmoothlyInput {
 			this.state = {
 				...this.state,
 				value: this.formatter.format(
-					tidily.StateEditor.copy(
-						this.formatter.unformat(tidily.StateEditor.copy({ value, selection: this.state.selection }))
-					)
+					StateEditor.copy(this.formatter.unformat(StateEditor.copy({ value, selection: this.state.selection })))
 				).value,
 			}
 		}
@@ -59,9 +57,9 @@ export class SmoothlyInput {
 		const value = formatter.toString(this.value) || ""
 		const start = value.length
 		this.state = formatter.format(
-			tidily.StateEditor.copy(
+			StateEditor.copy(
 				formatter.unformat(
-					tidily.StateEditor.copy({
+					StateEditor.copy({
 						value,
 						selection: { start, end: start, direction: "none" },
 					})
@@ -80,29 +78,25 @@ export class SmoothlyInput {
 		this.keepFocusOnReRender = keepFocus
 	}
 	@Method()
-	async setSelectionRange(start: number, end: number, direction?: tidily.Direction) {
+	async setSelectionRange(start: number, end: number, direction?: Direction) {
 		const formatter = this.formatter
 		this.state = formatter.format(
-			tidily.StateEditor.copy(
+			StateEditor.copy(
 				formatter.unformat(
-					tidily.StateEditor.copy({
+					StateEditor.copy({
 						...this.state,
 						selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
 					})
 				)
 			)
 		)
-		const after = this.formatter.format(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
-		)
+		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
 	}
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onBlur(event: FocusEvent) {}
 	onFocus(event: FocusEvent) {
-		const after = this.formatter.format(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
-		)
+		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)
 			this.updateBackend(after, event.target as HTMLInputElement)
 	}
@@ -117,9 +111,7 @@ export class SmoothlyInput {
 				direction: backend.selectionDirection ? backend.selectionDirection : "none",
 			},
 		}
-		const after = this.formatter.format(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
-		)
+		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, backend)
 	}
 	onKeyDown(event: KeyboardEvent) {
@@ -179,11 +171,11 @@ export class SmoothlyInput {
 				: value
 		return value
 	}
-	private processKey(event: tidily.Action, backend: HTMLInputElement) {
-		const after = tidily.Action.apply(this.formatter, this.state, event)
+	private processKey(event: Action, backend: HTMLInputElement) {
+		const after = Action.apply(this.formatter, this.state, event)
 		this.updateBackend(after, backend)
 	}
-	updateBackend(after: Readonly<tidily.State> & Readonly<tidily.Settings>, backend: HTMLInputElement) {
+	updateBackend(after: Readonly<State> & Readonly<Settings>, backend: HTMLInputElement) {
 		if (after.value != backend.value)
 			backend.value = after.value
 		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
@@ -193,7 +185,7 @@ export class SmoothlyInput {
 		backend.selectionDirection = after.selection.direction ? after.selection.direction : backend.selectionDirection
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
-			this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })).value
+			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
 		)
 	}
 	render() {

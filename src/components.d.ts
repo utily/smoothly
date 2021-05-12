@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Autocomplete, Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
-import { Type } from "tidily";
+import { Direction, Type } from "tidily";
 import { CountryCode, Currency, DateTime } from "isoly";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -74,7 +74,7 @@ export namespace Components {
         "placeholder": string | undefined;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: "forward" | "backward" | "none" | undefined) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
         "type": string;
         "value": any;
     }
