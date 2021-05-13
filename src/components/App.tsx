@@ -1,9 +1,9 @@
 import { ChildNode, FunctionalComponent, h, VNode } from "@stencil/core"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { createStaticRouter, href, Route } from "stencil-router-v2"
+import { createRouter, href, Route } from "stencil-router-v2"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Router = createStaticRouter()
+const Router = createRouter()
 
 export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, utils) => {
 	const emptyNode = Object.entries(nodes[0]).reduce<{ [property: string]: any }>((r, entry) => {
