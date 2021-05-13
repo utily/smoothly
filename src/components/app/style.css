@@ -46,6 +46,8 @@ smoothly-app > smoothly-notifier > header {
   height: 1.6cm;
 	background-color: rgb(var(--smoothly-app-background));
   color: rgb(var(--smoothly-app-color));
+	fill: rgb(var(--smoothly-app-color));
+	stroke: rgb(var(--smoothly-app-color));
 	display: flex;
 	justify-content: space-between;
   align-items: center;
@@ -55,6 +57,7 @@ smoothly-app > smoothly-notifier > header a {
 	color: inherit;
 	text-decoration: inherit;
 }
+
 smoothly-app > smoothly-notifier > header > h1,
 smoothly-app > smoothly-notifier > header > nav,
 smoothly-app > smoothly-notifier > header > nav > ul,
@@ -84,6 +87,8 @@ smoothly-app > smoothly-notifier > header > nav > ul > li a:hover,
 smoothly-app > smoothly-notifier > header > nav > ul > li a.active {
 	background-color: rgb(var(--smoothly-app-hover-background));
 	color: rgb(var(--smoothly-app-hover-color));
+	stroke: rgb(var(--smoothly-app-hover-color));
+	fill: rgb(var(--smoothly-app-hover-color));
 }
 smoothly-app > smoothly-notifier > content {
 	position: relative;

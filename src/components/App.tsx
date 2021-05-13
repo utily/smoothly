@@ -50,8 +50,6 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 																toolTip: child.vattrs?.label,
 																name: child.vattrs?.icon,
 																size: "medium",
-																fill: "clear",
-																color: "light",
 															},
 													  })
 													: childToNode({ vtext: child.vattrs?.label }),

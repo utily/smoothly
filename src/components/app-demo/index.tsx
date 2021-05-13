@@ -28,8 +28,8 @@ export class SmoothlyAppDemo {
 				<a slot="nav-start" href="https://google.com">
 					External
 				</a>
-				<smoothly-trigger slot="nav-end" type="link" fill="clear" name="logout">
-					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium" fill="clear" color="light"></smoothly-icon>
+				<smoothly-trigger slot="nav-end" type="link" name="logout">
+					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
 				<smoothly-room path="">
 					<smoothly-input type="text">Default</smoothly-input>
