@@ -26,25 +26,38 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<h1>
 					<a {...href(resolve("") ?? "/")}>{attributes.label}</a>
 				</h1>
-				{children.filter(child => child.vattrs.slot == "header").map(child => child.node)}
+				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 				<nav>
 					<ul>
 						{utils
 							.map(
 								[
-									...children.filter(child => child.vattrs.slot == "nav-start"),
-									...children.filter(child => child.vattrs.label && child.vattrs.path),
-									...children.filter(child => child.vattrs.slot == "nav-end"),
+									...children.filter(child => child.vattrs?.slot == "nav-start"),
+									...children.filter(child => child.vattrs?.label && child.vattrs?.path),
+									...children.filter(child => child.vattrs?.slot == "nav-end"),
 								].map(child => child.node),
 								child => {
-									if (child.vattrs.label && child.vattrs.path)
+									if (child.vattrs?.label && child.vattrs?.path)
 										child = {
 											...emptyChild,
 											vtag: "a",
-											vattrs: { href: child.vattrs.path },
-											vchildren: [childToNode({ vtext: child.vattrs.label })],
+											vattrs: { href: child.vattrs?.path },
+											vchildren: [
+												child.vattrs?.icon
+													? childToNode({
+															vtag: "smoothly-icon",
+															vattrs: {
+																toolTip: child.vattrs?.label,
+																name: child.vattrs?.icon,
+																size: "medium",
+																fill: "clear",
+																color: "light",
+															},
+													  })
+													: childToNode({ vtext: child.vattrs?.label }),
+											],
 										}
-									const url = resolve(child.vattrs.href)
+									const url = resolve(child.vattrs?.href)
 									return child.vtag != "a"
 										? child
 										: url
@@ -52,7 +65,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 												...child,
 												vattrs: {
 													...child.vattrs,
-													class: [child.vattrs.class, Router.activePath == url ? "active" : ""].join(" ") || undefined,
+													class: [child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined,
 													href: url,
 												},
 										  }
@@ -61,8 +74,8 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 							)
 							.map(node => {
 								const child = nodeToChild(node)
-								return child.vtag == "a" && !child.vattrs.target ? (
-									<a {...child.vattrs} {...href(child.vattrs.href)}>
+								return child.vtag == "a" && !child.vattrs?.target ? (
+									<a {...child.vattrs} {...href(child.vattrs?.href)}>
 										{child.vchildren}
 									</a>
 								) : (
@@ -78,12 +91,12 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 			<content>
 				<Router.Switch>
 					{children
-						.filter(child => child.vattrs.path != undefined)
+						.filter(child => child.vattrs?.path != undefined)
 						.map(child =>
-							child.vattrs.to ? (
-								<Route path={resolve(child.vattrs.path) ?? child.vattrs.path} to={child.vattrs.to}></Route>
+							child.vattrs?.to ? (
+								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path} to={child.vattrs?.to}></Route>
 							) : (
-								<Route path={resolve(child.vattrs.path) ?? child.vattrs.path}>{child.node}</Route>
+								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path}>{child.node}</Route>
 							)
 						)}
 				</Router.Switch>

@@ -127,6 +127,7 @@ export namespace Components {
     interface SmoothlyReorder {
     }
     interface SmoothlyRoom {
+        "icon"?: string;
         "label"?: string;
         "path": string;
         "to"?: string;
@@ -542,6 +543,7 @@ declare namespace LocalJSX {
         "onReorder"?: (event: CustomEvent<[number, number]>) => void;
     }
     interface SmoothlyRoom {
+        "icon"?: string;
         "label"?: string;
         "path"?: string;
         "to"?: string;
