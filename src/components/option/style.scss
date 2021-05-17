@@ -7,5 +7,14 @@
 }
 
 :host([data-highlight]) {
-	background-color: rgb(var(--smoothly-secondary-tint));
+	background-color: rgb(var(--smoothly-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+	div:last-child {
+		color: rgba(var(--smoothly-primary-contrast), 0.8);
+	}
+}
+
+:host div:last-child {
+	color: rgba(var(--smoothly-default-contrast), 0.8);
+	font-style: italic;
 }

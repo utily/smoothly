@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { OptionType } from "../../model"
 
 @Component({
@@ -14,8 +14,12 @@ export class SmoothlyMenuOptions {
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() order = false
-	/** @Prop options: is only needed if ig-options are inserted via slot */
+	@Prop() optionStyle: any
 	@Prop({ mutable: true, reflect: true }) options: OptionType[] = []
+	@Watch("options")
+	optionsChangeHandler(newOptions: OptionType[]) {
+		this.highlightIndex = 0
+	}
 	@Listen("optionHover")
 	optionHoverHandler(event: CustomEvent<{ value: any; name: string }>) {
 		if (event.detail.value)
@@ -102,6 +106,7 @@ export class SmoothlyMenuOptions {
 				{this.filteredOptions.length > 0 ? (
 					this.filteredOptions.map((option, index) => (
 						<smoothly-option
+							style={this.optionStyle}
 							ref={el => index == 0 && (this.firstOptionsElement = el ?? this.firstOptionsElement)}
 							value={option.value}
 							name={option.name}

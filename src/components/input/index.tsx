@@ -1,7 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
-import { Autocomplete } from "../../model"
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
@@ -19,7 +18,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop({ mutable: true }) minLength = 0
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
-	@Prop({ mutable: true }) autocomplete: Autocomplete = "on"
+	@Prop({ mutable: true }) autocomplete = true
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
@@ -189,6 +188,7 @@ export class SmoothlyInput {
 		)
 	}
 	render() {
+		console.log(this.state)
 		return (
 			<Host class={{ "has-value": this.state?.value != "" }}>
 				<input
@@ -196,7 +196,7 @@ export class SmoothlyInput {
 					type={this.state.type}
 					placeholder={this.placeholder}
 					required={this.required}
-					autocomplete={this.state.autocomplete}
+					autocomplete={this.autocomplete ? this.state.autocomplete : "off"}
 					disabled={this.disabled}
 					pattern={this.state.pattern && this.state.pattern.source}
 					value={this.state.value}
