@@ -525,6 +525,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
+        "onPopup"?: (event: CustomEvent<boolean>) => void;
         "visible"?: boolean;
     }
     interface SmoothlyRadio {
