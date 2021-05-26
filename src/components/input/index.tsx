@@ -188,7 +188,6 @@ export class SmoothlyInput {
 		)
 	}
 	render() {
-		console.log(this.state)
 		return (
 			<Host class={{ "has-value": this.state?.value != "" }}>
 				<input
