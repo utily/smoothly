@@ -104,6 +104,7 @@ export namespace Components {
     }
     interface SmoothlyPicker {
         "label": string;
+        "maxHeight": string;
         "maxMenuHeight": "inherit";
         "multiple": boolean;
         "optionStyle": any;
@@ -517,6 +518,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyPicker {
         "label"?: string;
+        "maxHeight"?: string;
         "maxMenuHeight"?: "inherit";
         "multiple"?: boolean;
         "optionStyle"?: any;

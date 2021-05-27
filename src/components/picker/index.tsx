@@ -13,6 +13,7 @@ export class SmoothlyPicker {
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@Prop() maxMenuHeight: "inherit"
+	@Prop() maxHeight: string
 	@Prop({ reflect: true }) multiple = false
 	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[]
@@ -130,6 +131,7 @@ export class SmoothlyPicker {
 
 		return (
 			<Host
+				style={this?.maxHeight ? { "--max-height": this.maxHeight } : {}}
 				has-selection={this.selections.length > 0}
 				is-open={this.isOpen ? "" : undefined}
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}

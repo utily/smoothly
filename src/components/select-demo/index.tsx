@@ -55,17 +55,17 @@ export class SmoothlySelectDemo {
 				label="filter"
 				multiple={true}
 				options={[
-					{ name: "Dog", value: "dog", aliases: ["WOFF"] },
-					{ name: "Cat", value: "cat", aliases: ["moew"] },
-					{ name: "Pig", value: "pig" },
-					{ name: "Turtle", value: "turtle" },
-					{ name: "Spider", value: "spider" },
-					{ name: "Phoenix", value: "phoenix" },
-					{ name: "Horse", value: "horse" },
-					{ name: "Unicorn", value: "unicorn" },
-					{ name: "Parrot", value: "parrot" },
-					{ name: "Dragon", value: "dragon" },
-					{ name: "Kraken", value: "kraken" },
+					{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
+					{ name: "Cat Stevens", value: "cat", aliases: ["moew"] },
+					{ name: "Noble Pig", value: "pig" },
+					{ name: "Turtle Wax", value: "turtle" },
+					{ name: "Spider Man", value: "spider" },
+					{ name: "Phoenix Order", value: "phoenix" },
+					{ name: "Horse Back", value: "horse" },
+					{ name: "Unicorn Horn", value: "unicorn" },
+					{ name: "Talking Parrot", value: "parrot" },
+					{ name: "Hidden Dragon", value: "dragon" },
+					{ name: "Scary Kraken", value: "kraken" },
 				]}></smoothly-picker>,
 			<br />,
 			<smoothly-picker
