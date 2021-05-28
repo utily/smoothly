@@ -87,6 +87,10 @@ label {
 	transition: var(--intergiro-transition);
 	font-family: var(--smoothly-font-family);
 }
+:host([has-selection]) label {
+	display: var(--label-display);
+}
+
 :host([has-selection]) label,
 :host(:focus-within) label {
 	transform: translateY(-0.8em);
