@@ -32,6 +32,8 @@
 	border-color: rgba(var(--border-highlight-color));
 }
 ul {
+	overflow-y: auto;
+	max-height: var(--max-height);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
@@ -46,11 +48,12 @@ ul {
 	font-family: var(--smoothly-font-family);
 	li {
 		width: min-content;
-		margin: 0 0.1rem;
+		margin: 0.1rem 0.1rem;
 		padding: 0.25rem;
 		align-items: center;
 	}
 	li:not(:last-child) {
+		white-space: nowrap;
 		display: flex;
 		flex-direction: row;
 		background-color: rgba(var(--selected-item-background-color));
@@ -84,6 +87,10 @@ label {
 	transition: var(--intergiro-transition);
 	font-family: var(--smoothly-font-family);
 }
+:host([has-selection]) label {
+	display: var(--label-display);
+}
+
 :host([has-selection]) label,
 :host(:focus-within) label {
 	transform: translateY(-0.8em);
@@ -96,10 +103,10 @@ label {
 	position: absolute;
 	bottom: 0.5rem;
 	&:not([data-arrow]) {
-		right: 1.5rem;
+		right: 1.8rem;
 	}
 	&[data-arrow] {
-		right: 0.1rem;
+		right: 0.5rem;
 	}
 }
 :host(:not([is-open])) > smoothly-icon[data-arrow="up"] {

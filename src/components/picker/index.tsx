@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { OptionType } from "../../model"
 
 @Component({
@@ -13,11 +13,23 @@ export class SmoothlyPicker {
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@Prop() maxMenuHeight: "inherit"
+	@Prop() maxHeight: string
 	@Prop({ reflect: true }) multiple = false
 	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[]
+	@Prop() labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: { name: string; value: string }[] = []
+
+	@Event() menuClose: EventEmitter<{ name: string; value: string }[]>
+
+	@Watch("selections")
+	@Watch("isOpen")
+	isOpenChangeHander() {
+		if (this.isOpen == false) {
+			this.menuClose.emit(this.selections)
+		}
+	}
 
 	componentDidRender() {
 		this.filterOptions()
@@ -113,6 +125,10 @@ export class SmoothlyPicker {
 	}
 
 	render() {
+		const cssVariables = {
+			"--max-height": this.maxHeight ?? "inherit",
+			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
+		}
 		const selectionList = this.multiple
 			? this.selections.map(selection => (
 					<li data-value={selection.value}>
@@ -130,6 +146,7 @@ export class SmoothlyPicker {
 
 		return (
 			<Host
+				style={cssVariables}
 				has-selection={this.selections.length > 0}
 				is-open={this.isOpen ? "" : undefined}
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
