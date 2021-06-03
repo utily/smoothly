@@ -14,6 +14,7 @@ export class SmoothlyPicker {
 	@State() isOpen: boolean
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() maxHeight: string
+	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
 	@Prop({ reflect: true }) multiple = false
 	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[]
@@ -172,6 +173,7 @@ export class SmoothlyPicker {
 					style={{ width: "100%" }}
 					optionStyle={this.optionStyle}
 					order={true}
+					emptyMenuLabel={this.emptyMenuLabel}
 					max-menu-height={this.maxMenuHeight}
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el)}
 					onClick={e => e.stopPropagation()}
