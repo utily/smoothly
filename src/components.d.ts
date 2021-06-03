@@ -103,6 +103,7 @@ export namespace Components {
         "value": string;
     }
     interface SmoothlyPicker {
+        "emptyMenuLabel": string;
         "label": string;
         "labelSetting": "hide" | "default";
         "maxHeight": string;
@@ -518,6 +519,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SmoothlyPicker {
+        "emptyMenuLabel"?: string;
         "label"?: string;
         "labelSetting"?: "hide" | "default";
         "maxHeight"?: string;

@@ -53,6 +53,7 @@ export class SmoothlySelectDemo {
 			<button onClick={() => this.alertf()}>press here</button>,
 			<smoothly-picker
 				label="filter"
+				empty-menu-label="Sorry, we're out of options."
 				multiple={true}
 				options={[
 					{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
