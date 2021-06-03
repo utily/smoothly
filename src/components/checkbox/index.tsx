@@ -10,6 +10,7 @@ export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() selectAll = false
 	@Prop({ mutable: true, reflect: true }) selected: boolean
+	@Prop({ mutable: true, reflect: true }) disabled: boolean
 	@Event() checked: EventEmitter<{ selected: boolean }>
 	@State() t: langly.Translate
 
@@ -17,8 +18,10 @@ export class SmoothlyCheckbox {
 		this.t = translation.create(this.element)
 	}
 	toggle() {
-		this.selected = !this.selected
-		this.checked.emit({ selected: this.selected })
+		if (!this.disabled) {
+			this.selected = !this.selected
+			this.checked.emit({ selected: this.selected })
+		}
 	}
 	render() {
 		return [

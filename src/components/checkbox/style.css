@@ -7,3 +7,6 @@
 smoothly-icon {
 	cursor: pointer;
 }
+:host[disabled] smoothly-icon {
+	stroke: rgba(var(--smoothly-color-contrast), 0.3);
+}

@@ -70,6 +70,7 @@ export class SmoothlyInputDemo {
 					<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>
 					<smoothly-display-date-time datetime="2019-01-31T20:01:34"></smoothly-display-date-time>
 					<smoothly-checkbox></smoothly-checkbox>
+					<smoothly-checkbox disabled={true}></smoothly-checkbox>
 					<smoothly-address-display value='{ "countryCode": "SE", "street": "Korkstigen 2", "zipCode": "654 31", "city": "Fejksala" }'></smoothly-address-display>
 					<smoothly-address
 						editable={false}
