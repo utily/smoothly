@@ -20,9 +20,9 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) options: OptionType[]
 	@Prop() labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
-	@Prop({ mutable: true }) selections: { name: string; value: string }[] = []
+	@Prop({ mutable: true }) selections: OptionType[] = []
 
-	@Event() menuClose: EventEmitter<{ name: string; value: string }[]>
+	@Event() menuClose: EventEmitter<OptionType[]>
 
 	@Watch("selections")
 	@Watch("isOpen")
@@ -40,11 +40,11 @@ export class SmoothlyPicker {
 		}
 	}
 	@Listen("optionSelect")
-	optionSelectHander(event: CustomEvent<{ name: string; value: string }>) {
+	optionSelectHander(event: CustomEvent<OptionType>) {
 		this.select(event.detail)
 		event.stopPropagation()
 	}
-	select(selection: { name: string; value: string }) {
+	select(selection: OptionType) {
 		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
 		if (isNewSelection)
 			this.selections = this.multiple ? [...this.selections, selection] : [selection]
@@ -53,7 +53,7 @@ export class SmoothlyPicker {
 		this.keepFocusOnReRender = true
 		this.isOpen = this.multiple
 	}
-	unselect(selection: { name: string; value: string }) {
+	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
 		if (index != -1) {
 			this.selections = [
@@ -64,7 +64,7 @@ export class SmoothlyPicker {
 		}
 	}
 	selectHighlighted() {
-		this.menuElement?.getHighlighted().then((result: { name: string; value: string } | undefined) => {
+		this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
 			result ? this.select(result) : undefined
 		})
 	}

@@ -112,7 +112,7 @@ export namespace Components {
         "multiple": boolean;
         "optionStyle": any;
         "options": OptionType[];
-        "selections": { name: string; value: string }[];
+        "selections": OptionType[];
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -527,10 +527,10 @@ declare namespace LocalJSX {
         "maxHeight"?: string;
         "maxMenuHeight"?: "inherit";
         "multiple"?: boolean;
-        "onMenuClose"?: (event: CustomEvent<{ name: string; value: string }[]>) => void;
+        "onMenuClose"?: (event: CustomEvent<OptionType[]>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
-        "selections"?: { name: string; value: string }[];
+        "selections"?: OptionType[];
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
