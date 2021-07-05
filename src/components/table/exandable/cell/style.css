@@ -1,0 +1,7 @@
+:host {
+  display: table-cell;
+  padding: .5em;
+}
+:host > tr {
+	display: none;
+}

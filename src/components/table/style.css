@@ -1,0 +1,9 @@
+:host {
+  display: table;
+	text-align: left;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+	box-sizing: border-box;
+  background-color: rgb(var(--smoothly-default-color));
+}

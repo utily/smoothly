@@ -1,0 +1,8 @@
+:host {
+  display: table-row;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+:host:nth-child(even){background-color: #f2f2f2;}
+:host:hover {background-color: #ddd;}
