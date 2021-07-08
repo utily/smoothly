@@ -1,0 +1,8 @@
+:host {
+  display: table-row;
+	border: 1px solid rgb(var(--smoothly-dark-color),0.50);
+	cursor: pointer;
+}
+
+:host:nth-child(even){background-color: rgb(var(--smoothly-default-color));}
+:host:hover {background-color: rgb(var(--smoothly-default-color));}

@@ -154,6 +154,24 @@ export namespace Components {
         "processing": boolean;
         "submit": () => Promise<boolean>;
     }
+    interface SmoothlyTable {
+    }
+    interface SmoothlyTableCell {
+    }
+    interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableExpandableCell {
+        "align": "left" | "center" | "right";
+        "open": boolean;
+    }
+    interface SmoothlyTableExpandableRow {
+    }
+    interface SmoothlyTableHeader {
+        "name": string;
+        "sortDirection"?: "ascending" | "descending";
+    }
+    interface SmoothlyTableRow {
+    }
     interface SmoothlyTrigger {
         "color": Color | undefined;
         "disabled": boolean;
@@ -353,6 +371,48 @@ declare global {
         prototype: HTMLSmoothlySubmitElement;
         new (): HTMLSmoothlySubmitElement;
     };
+    interface HTMLSmoothlyTableElement extends Components.SmoothlyTable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableElement: {
+        prototype: HTMLSmoothlyTableElement;
+        new (): HTMLSmoothlyTableElement;
+    };
+    interface HTMLSmoothlyTableCellElement extends Components.SmoothlyTableCell, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableCellElement: {
+        prototype: HTMLSmoothlyTableCellElement;
+        new (): HTMLSmoothlyTableCellElement;
+    };
+    interface HTMLSmoothlyTableDemoElement extends Components.SmoothlyTableDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoElement: {
+        prototype: HTMLSmoothlyTableDemoElement;
+        new (): HTMLSmoothlyTableDemoElement;
+    };
+    interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableExpandableCellElement: {
+        prototype: HTMLSmoothlyTableExpandableCellElement;
+        new (): HTMLSmoothlyTableExpandableCellElement;
+    };
+    interface HTMLSmoothlyTableExpandableRowElement extends Components.SmoothlyTableExpandableRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableExpandableRowElement: {
+        prototype: HTMLSmoothlyTableExpandableRowElement;
+        new (): HTMLSmoothlyTableExpandableRowElement;
+    };
+    interface HTMLSmoothlyTableHeaderElement extends Components.SmoothlyTableHeader, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableHeaderElement: {
+        prototype: HTMLSmoothlyTableHeaderElement;
+        new (): HTMLSmoothlyTableHeaderElement;
+    };
+    interface HTMLSmoothlyTableRowElement extends Components.SmoothlyTableRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableRowElement: {
+        prototype: HTMLSmoothlyTableRowElement;
+        new (): HTMLSmoothlyTableRowElement;
+    };
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
     }
     var HTMLSmoothlyTriggerElement: {
@@ -413,6 +473,13 @@ declare global {
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
+        "smoothly-table": HTMLSmoothlyTableElement;
+        "smoothly-table-cell": HTMLSmoothlyTableCellElement;
+        "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
+        "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
+        "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
+        "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
+        "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
@@ -576,6 +643,28 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "processing"?: boolean;
     }
+    interface SmoothlyTable {
+        "onLoadMore"?: (event: CustomEvent<void>) => void;
+    }
+    interface SmoothlyTableCell {
+    }
+    interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableExpandableCell {
+        "align"?: "left" | "center" | "right";
+        "onExpansionLoaded"?: (event: CustomEvent<void>) => void;
+        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
+        "open"?: boolean;
+    }
+    interface SmoothlyTableExpandableRow {
+    }
+    interface SmoothlyTableHeader {
+        "name"?: string;
+        "onSort"?: (event: CustomEvent<{ property: string; direction: "ascending" | "descending" }>) => void;
+        "sortDirection"?: "ascending" | "descending";
+    }
+    interface SmoothlyTableRow {
+    }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
         "disabled"?: boolean;
@@ -632,6 +721,13 @@ declare namespace LocalJSX {
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
+        "smoothly-table": SmoothlyTable;
+        "smoothly-table-cell": SmoothlyTableCell;
+        "smoothly-table-demo": SmoothlyTableDemo;
+        "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
+        "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
+        "smoothly-table-header": SmoothlyTableHeader;
+        "smoothly-table-row": SmoothlyTableRow;
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
@@ -672,6 +768,13 @@ declare module "@stencil/core" {
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
+            "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
+            "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
+            "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
+            "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
+            "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
+            "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;

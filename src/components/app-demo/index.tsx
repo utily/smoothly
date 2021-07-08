@@ -40,6 +40,9 @@ export class SmoothlyAppDemo {
 				<smoothly-room path="display" label="Display" icon="eye-outline">
 					<smoothly-display-demo />
 				</smoothly-room>
+				<smoothly-room path="table" label="Table">
+					<smoothly-table-demo />
+				</smoothly-room>
 				<smoothly-room path="select" label="Select">
 					<smoothly-select-demo />
 				</smoothly-room>
