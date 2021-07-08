@@ -10,24 +10,34 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<App label="Smoothly Demo">
-				<smoothly-select identifier="language" slot="header" background="rgb(var(--smoothly-app-background))">
-					<optgroup label="Nordic">
-						<option value="sv">Swedish</option>
-						<option value="da" selected>
-							Danish
-						</option>
-						<option value="no">Norwegian</option>
-					</optgroup>
-					<optgroup label="Other">
-						<option value="en">English</option>
-					</optgroup>
-				</smoothly-select>
 				<a slot="nav-start" href="display">
 					Display
 				</a>
 				<a slot="nav-start" href="https://google.com">
 					External
 				</a>
+				<span slot="header">
+					<smoothly-picker
+						label="Select Merchant"
+						style={{ width: "500px" }}
+						labelSetting="hide"
+						empty-menu-label="Sorry, we're out of options."
+						max-height="58px"
+						multiple={true}
+						options={[
+							{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
+							{ name: "Cat Stevens", value: "cat", aliases: ["moew"] },
+							{ name: "Noble Pig", value: "pig" },
+							{ name: "Turtle Wax", value: "turtle" },
+							{ name: "Spider Man", value: "spider" },
+							{ name: "Phoenix Order Long Wooord", value: "phoenix" },
+							{ name: "Horse Back", value: "horse" },
+							{ name: "Unicorn Horn", value: "unicorn" },
+							{ name: "Talking Parrot Parrot", value: "parrot" },
+							{ name: "Hidden Dragon", value: "dragon" },
+							{ name: "Scary Kraken", value: "kraken" },
+						]}></smoothly-picker>
+				</span>
 				<smoothly-trigger slot="nav-end" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
