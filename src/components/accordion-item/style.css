@@ -9,15 +9,15 @@ details {
 }
 details > summary > span {
 	float: right;
-	margin: .2em;
+	margin: 0.2em;
 	font-size: 60%;
 }
 details > summary {
 	font-size: 120%;
 	list-style-type: none;
 	cursor: pointer;
-	padding: .4em;
-	color: rgb(var(--smoothly-text-tint))
+	padding: 0.4em;
+	color: rgb(var(--smoothly-text-tint));
 }
 details > fieldset {
 	border: none;
@@ -34,8 +34,8 @@ details > summary::-webkit-details-marker {
 details > summary > svg {
 	width: 1em;
 	height: auto;
-	margin-bottom: -.2em;
-	margin-right: .4em;
+	margin-bottom: -0.2em;
+	margin-right: 0.4em;
 }
 :host[open] > details > summary > svg {
 	fill: rgb(var(--smoothly-primary-contrast));

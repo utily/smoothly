@@ -5,7 +5,7 @@ smoothly-app {
 smoothly-app[hidden] {
 	display: none;
 }
-smoothly-app[color="default"],
+smoothly-app[color=default],
 smoothly-app:not([color]) {
 	--smoothly-app-background: var(--smoothly-default-shade);
 	--smoothly-app-color: var(--smoothly-default-contrast);
@@ -13,24 +13,24 @@ smoothly-app:not([color]) {
 	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
 	--smoothly-app-shadow: var(--smoothly-default-shadow);
 }
-smoothly-app[color="primary"] {
+smoothly-app[color=primary] {
 	--smoothly-app-background: var(--smoothly-primary-shade);
 	--smoothly-app-color: var(--smoothly-primary-contrast);
 	--smoothly-app-hover-background: var(--smoothly-secondary-color);
 	--smoothly-app-hover-color: var(--smoothly-secondary-contrast);
 	--smoothly-app-shadow: var(--smoothly-primary-shadow);
 }
-smoothly-app[color="secondary"] {
+smoothly-app[color=secondary] {
 	--smoothly-app-background: var(--smoothly-secondary-shade);
 	--smoothly-app-color: var(--smoothly-secondary-contrast);
 	--smoothly-app-hover-background: var(--smoothly-primary-color);
 	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
 	--smoothly-app-shadow: var(--smoothly-secondary-shadow);
 }
-smoothly-app[color="tertiary"],
-smoothly-app[color="success"],
-smoothly-app[color="warning"],
-smoothly-app[color="danger"] {
+smoothly-app[color=tertiary],
+smoothly-app[color=success],
+smoothly-app[color=warning],
+smoothly-app[color=danger] {
 	--smoothly-app-background: var(--smoothly-color-shade);
 	--smoothly-app-color: var(--smoothly-color-contrast);
 	--smoothly-app-hover-background: var(--smoothly-default-shade);

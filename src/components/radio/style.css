@@ -7,10 +7,10 @@
 }
 label {
 	display: block;
-	width: calc(100% - 2 * .4em);
-	padding: .2em .4em .2em .4em;
+	width: calc(100% - 2 * 0.4em);
+	padding: 0.2em 0.4em 0.2em 0.4em;
 }
-input[type="radio"] {
+input[type=radio] {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -20,12 +20,12 @@ input[type="radio"] {
 	appearance: none;
 	-webkit-appearance: none;
 }
-input[type="radio"] ~ label {
+input[type=radio] ~ label {
 	border: 1px solid rgb(var(--smoothly-color-shade));
 	color: rgb(var(--smoothly-color-tint));
 	background: rgb(var(--smoothly-color-shade));
 }
-input[type="radio"]:checked ~ label {
+input[type=radio]:checked ~ label {
 	background-color: rgb(var(--smoothly-color));
 	color: rgb(var(--smoothly-color-contrast));
 }

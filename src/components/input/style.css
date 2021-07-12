@@ -7,18 +7,18 @@
 }
 label {
 	position: absolute;
-	left: .4em;
-	top: .6em;
+	left: 0.4em;
+	top: 0.6em;
 	color: rgb(var(--smoothly-text-tint));
-	opacity: .8;
+	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;
-	transition: font-size .1s;
+	transition: font-size 0.1s;
 	transition-timing-function: ease;
 }
 input {
-	padding: 1em .2em .2em .2em;
-	width: calc(100% - .4em);
+	padding: 1em 0.2em 0.2em 0.2em;
+	width: calc(100% - 0.4em);
 	background: none;
 	border: 0;
 	z-index: 1;
@@ -29,21 +29,21 @@ input {
 smoothly-icon {
 	display: none;
 	position: absolute;
-	right: .2em;
-	top: .6em;
+	right: 0.2em;
+	top: 0.6em;
 }
-input:invalid+smoothly-icon {
-  display: block;
+input:invalid + smoothly-icon {
+	display: block;
 }
 :host.has-value > label {
-	top: .3em;
-	top: .4em;
+	top: 0.3em;
+	top: 0.4em;
 	font-size: 60%;
 	z-index: 0;
 }
 :host:focus-within > label {
-	top: .3em;
-	top: .4em;
+	top: 0.3em;
+	top: 0.4em;
 	font-size: 60%;
 	z-index: 0;
 }
@@ -55,14 +55,19 @@ input:focus {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active  {
+input:-webkit-autofill:active {
 	box-shadow: 0 0 0 30px unset inset !important;
 	-webkit-box-shadow: 0 0 0 30px unset inset !important;
 }
 input:-webkit-autofill {
 	-webkit-text-fill-color: unset !important;
 }
-input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected {
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected,
+textarea:-internal-autofill-previewed,
+textarea:-internal-autofill-selected,
+select:-internal-autofill-previewed,
+select:-internal-autofill-selected {
 	background-color: none !important;
 	background-image: none !important;
 	color: unset !important;

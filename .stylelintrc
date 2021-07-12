@@ -1,0 +1,16 @@
+{
+	"plugins": [
+		"stylelint-prettier",
+		"stylelint-scss"
+	],
+	"rules": {
+		"prettier/prettier": true,
+		"no-eol-whitespace": true,
+		"max-empty-lines": 1,
+		"selector-attribute-quotes": "never",
+		"indentation": "tab",
+		"function-calc-no-invalid": true,
+		"function-calc-no-unspaced-operator": true,
+		"block-no-empty": true
+	}
+}

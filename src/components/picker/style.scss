@@ -127,10 +127,10 @@ label {
 :host smoothly-icon[data-arrow] {
 	pointer-events: none;
 }
-:host(:not([is-open])) smoothly-icon[data-arrow="up"] {
+:host(:not([is-open])) smoothly-icon[data-arrow=up] {
 	display: none;
 }
-:host([is-open]) smoothly-icon[data-arrow="down"] {
+:host([is-open]) smoothly-icon[data-arrow=down] {
 	display: none;
 }
 :host(:not([has-selection])) smoothly-icon:not([data-arrow]) {
