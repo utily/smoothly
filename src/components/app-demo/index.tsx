@@ -10,7 +10,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<App label="Smoothly Demo">
-				<a slot="nav-start" href="display">
+				<a slot="nav-start" href="display" data-reactive>
 					Display
 				</a>
 				<a slot="nav-start" href="https://google.com" data-reactive>
