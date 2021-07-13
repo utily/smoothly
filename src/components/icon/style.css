@@ -1,5 +1,6 @@
 :host {
 	display: block;
+	/* stylelint-disable-next-line declaration-no-important */
 	background: none !important;
 }
 :host[hidden] {

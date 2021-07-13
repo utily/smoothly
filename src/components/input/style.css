@@ -52,6 +52,7 @@ input:focus {
 	outline: none;
 }
 /* Change the white to any color ;) */
+/* stylelint-disable declaration-no-important */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -68,7 +69,8 @@ textarea:-internal-autofill-previewed,
 textarea:-internal-autofill-selected,
 select:-internal-autofill-previewed,
 select:-internal-autofill-selected {
-	background-color: none !important;
+	background-color: none !important   ;
 	background-image: none !important;
 	color: unset !important;
 }
+/* stylelint-enable declaration-no-important */
