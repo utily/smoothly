@@ -32,7 +32,9 @@
 		padding-left: 0.6em;
 		stroke: rgba(var(--color), 0.4);
 		fill: rgba(var(--color), 0.4);
+		/* stylelint-disable-next-line declaration-no-important */
 		width: 1.5em !important;
+		/* stylelint-disable-next-line declaration-no-important */
 		height: 1.5em !important;
 		&:hover {
 			fill: rgba(var(--color), 1);
@@ -95,9 +97,9 @@
 	pointer-events: none;
 }
 
-:host([label=""]) ul,
+:host([label=]) ul,
 :host:not([label]) ul,
-:host([label-setting="hide"]) ul {
+:host([label-setting=hide]) ul {
 	padding-top: 0.1em;
 	padding-bottom: 0.1em;
 }
