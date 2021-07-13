@@ -1,15 +1,7 @@
 :host {
-	/* 
-		TODO: Move all colors/properties to own scss-file when "mode" is added.
-		style.intergiro.scss ? 
-		style.payfunc.scss ? 
-		style.general.scss ?
-	*/
 	--background-color: var(--smoothly-secondary-tint), 1;
-	--color: var(--smoothly-secondary-contrast), 1;
-	--border-radius: 0;
-	--border-width: 1px;
-	--border-color: var(--smoothly-secondary-contrast), 0.5;
+	--color: var(--smoothly-secondary-contrast);
+	--border-color: var(--smoothly-secondary-contrast), 1;
 	--border-highlight-color: var(--smoothly-secondary-contrast), 1;
 
 	--label-color: var(--smoothly-secondary-contrast), 0.8;
@@ -22,61 +14,92 @@
 :host {
 	display: block;
 	position: relative;
-	width: 85%;
+	width: 100%;
 	cursor: pointer;
 	--intergiro-transition: all 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 	transition: var(--intergiro-transition);
 }
 
-:host(:focus-within) > ul {
-	border-color: rgba(var(--border-highlight-color));
-}
-ul {
-	overflow-y: auto;
-	max-height: var(--max-height);
+:host > div {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
-	list-style-type: none;
-	transition: var(--intergiro-transition);
+	min-height: 3em;
 	background-color: rgba(var(--background-color));
-	border: var(--border-width) solid rgba(var(--border-color));
-	border-radius: var(--border-radius);
-	box-sizing: border-box;
-	margin: 0;
-	padding: 1em 3.2em 0.2em 0.2em;
-	font-family: var(--smoothly-font-family);
-	li {
-		width: min-content;
-		margin: 0.1rem 0.1rem;
-		padding: 0.25rem;
-		align-items: center;
+	align-items: center;
+	border: none;
+	max-height: var(--max-height);
+	.icons > smoothly-icon {
+		flex-shrink: 0;
+		padding-left: 0.6em;
+		stroke: rgba(var(--color), 0.4);
+		fill: rgba(var(--color), 0.4);
+		width: 1.5em !important;
+		height: 1.5em !important;
+		&:hover {
+			fill: rgba(var(--color), 1);
+		}
 	}
-	li:not(:last-child) {
-		white-space: nowrap;
-		display: flex;
-		flex-direction: row;
-		background-color: rgba(var(--selected-item-background-color));
-		border-radius: var(--selected-item-border-radius);
-		color: rgba(var(--selected-item-color));
-		fill: rgba(var(--selected-item-color));
-		font-size: small;
-	}
-	li:last-child {
+	ul {
 		flex-grow: 1;
-		min-width: 100px;
-		input {
-			width: 100%;
-			background-color: transparent;
-			outline: none;
-			border: none;
-			cursor: pointer;
-			color: rgba(var(--color));
-			&::placeholder {
-				opacity: 1;
+		position: relative;
+		overflow-y: auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		height: var(--max-height);
+		box-sizing: border-box;
+		list-style-type: none;
+		transition: var(--intergiro-transition);
+		margin: 0;
+		padding: 1em 0.2em 0.2em 0.2em;
+		font-family: var(--smoothly-font-family);
+		li {
+			margin: 1px 0.1rem;
+			padding: 0.2rem;
+			align-items: center;
+		}
+		li:not(:last-child) {
+			white-space: nowrap;
+			display: flex;
+			flex-direction: row;
+			background-color: rgba(var(--selected-item-background-color));
+			border-radius: var(--selected-item-border-radius);
+			color: rgba(var(--selected-item-color));
+			fill: rgba(var(--selected-item-color));
+			font-size: small;
+		}
+		li:last-child {
+			flex-grow: 1;
+			min-width: 100px;
+			padding: 0 0.2em;
+			input {
+				width: 100%;
+				background-color: transparent;
+				outline: none;
+				border: none;
+				cursor: pointer;
+				color: rgb(var(--color));
+				padding: 0;
+				font-family: var(--smoothly-font-family);
+				font-size: 1.05em;
+				&::placeholder {
+					opacity: 1;
+				}
 			}
 		}
 	}
+}
+
+:host(:not(:focus-within)[multiple]) ul > li:last-child {
+	/* Remove Input out of the CSS flow Layout. This way input takes up no extra space */
+	position: absolute;
+	pointer-events: none;
+}
+
+:host([label=""]) ul,
+:host:not([label]) ul,
+:host([label-setting="hide"]) ul {
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
 }
 
 label {
@@ -86,42 +109,37 @@ label {
 	color: rgba(var(--label-color));
 	transition: var(--intergiro-transition);
 	font-family: var(--smoothly-font-family);
+	pointer-events: none;
 }
 :host([has-selection]) label {
 	display: var(--label-display);
 }
-
 :host([has-selection]) label,
 :host(:focus-within) label {
 	transform: translateY(-0.8em);
 	font-size: 70%;
 }
 
-:host > smoothly-icon {
-	stroke: rgba(var(--color));
-	fill: rgba(var(--color));
-	position: absolute;
-	bottom: 0.5rem;
-	&:not([data-arrow]) {
-		right: 1.8rem;
-	}
-	&[data-arrow] {
-		right: 0.5rem;
-	}
+:host(:hover) smoothly-icon[data-arrow],
+:host(:focus-within) smoothly-icon[data-arrow] {
+	stroke: rgba(var(--color), 1);
 }
-:host(:not([is-open])) > smoothly-icon[data-arrow="up"] {
+:host smoothly-icon[data-arrow] {
+	pointer-events: none;
+}
+:host(:not([is-open])) smoothly-icon[data-arrow="up"] {
 	display: none;
 }
-:host([is-open]) > smoothly-icon[data-arrow="down"] {
+:host([is-open]) smoothly-icon[data-arrow="down"] {
 	display: none;
 }
-:host(:not([has-selection])) > smoothly-icon:last-of-type {
+:host(:not([has-selection])) smoothly-icon:not([data-arrow]) {
 	display: none;
 }
 
 :host smoothly-menu-options {
 	position: absolute;
-	z-index: 999;
+	z-index: 1;
 }
 :host(:not([is-open])) > smoothly-menu-options {
 	/* hide options by default */

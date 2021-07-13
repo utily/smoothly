@@ -52,8 +52,9 @@ export class SmoothlySelectDemo {
 			</smoothly-select>,
 			<button onClick={() => this.alertf()}>press here</button>,
 			<smoothly-picker
-				label="filter"
+				label="Filter"
 				empty-menu-label="Sorry, we're out of options."
+				max-height="58px"
 				multiple={true}
 				options={[
 					{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
@@ -61,10 +62,29 @@ export class SmoothlySelectDemo {
 					{ name: "Noble Pig", value: "pig" },
 					{ name: "Turtle Wax", value: "turtle" },
 					{ name: "Spider Man", value: "spider" },
-					{ name: "Phoenix Order", value: "phoenix" },
+					{ name: "Phoenix Order Long Wooord", value: "phoenix" },
 					{ name: "Horse Back", value: "horse" },
 					{ name: "Unicorn Horn", value: "unicorn" },
-					{ name: "Talking Parrot", value: "parrot" },
+					{ name: "Talking Parrot Parrot", value: "parrot" },
+					{ name: "Hidden Dragon", value: "dragon" },
+					{ name: "Scary Kraken", value: "kraken" },
+				]}></smoothly-picker>,
+			<br />,
+			<smoothly-picker
+				label=""
+				empty-menu-label="Sorry, we're out of options."
+				max-height="58px"
+				multiple={true}
+				options={[
+					{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
+					{ name: "Cat Stevens", value: "cat", aliases: ["moew"] },
+					{ name: "Noble Pig", value: "pig" },
+					{ name: "Turtle Wax", value: "turtle" },
+					{ name: "Spider Man", value: "spider" },
+					{ name: "Phoenix Order Long Wooord", value: "phoenix" },
+					{ name: "Horse Back", value: "horse" },
+					{ name: "Unicorn Horn", value: "unicorn" },
+					{ name: "Talking Parrot Parrot", value: "parrot" },
 					{ name: "Hidden Dragon", value: "dragon" },
 					{ name: "Scary Kraken", value: "kraken" },
 				]}></smoothly-picker>,

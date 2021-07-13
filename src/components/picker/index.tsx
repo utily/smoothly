@@ -18,7 +18,7 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) multiple = false
 	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[]
-	@Prop() labelSetting: "hide" | "default"
+	@Prop({ reflect: true }) labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: OptionType[] = []
 
@@ -152,23 +152,27 @@ export class SmoothlyPicker {
 				is-open={this.isOpen ? "" : undefined}
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
-				<ul>
-					{selectionList}
-					<li>
-						<input
-							type="text"
-							ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
-							onFocus={() => this.highlightDefault()}
-							onBlur={() => this.onBlur()}
-							placeholder={this.multiple ? "" : this.selections.length > 0 ? this.selections[0].name : ""}
-							onKeyDown={e => this.onKeyDown(e)}
-							onInput={(e: UIEvent) => this.onInput(e)}></input>
-					</li>
-				</ul>
-				<label>{this.label}</label>
-				<smoothly-icon name="chevron-up" data-arrow="up"></smoothly-icon>
-				<smoothly-icon name="chevron-down" data-arrow="down"></smoothly-icon>
-				<smoothly-icon name="close" onClick={(e: MouseEvent) => this.onCrossClick(e)}></smoothly-icon>
+				<div>
+					<div class="icons">
+						<smoothly-icon name="close" onClick={(e: MouseEvent) => this.onCrossClick(e)}></smoothly-icon>
+						<smoothly-icon name="chevron-up" data-arrow="up"></smoothly-icon>
+						<smoothly-icon name="chevron-down" data-arrow="down"></smoothly-icon>
+					</div>
+					<ul>
+						{selectionList}
+						<label>{this.label}</label>
+						<li>
+							<input
+								type="text"
+								ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
+								onFocus={() => this.highlightDefault()}
+								onBlur={() => this.onBlur()}
+								placeholder={this.multiple ? "" : this.selections.length > 0 ? this.selections[0].name : ""}
+								onKeyDown={e => this.onKeyDown(e)}
+								onInput={(e: UIEvent) => this.onInput(e)}></input>
+						</li>
+					</ul>
+				</div>
 				<smoothly-menu-options
 					style={{ width: "100%" }}
 					optionStyle={this.optionStyle}
