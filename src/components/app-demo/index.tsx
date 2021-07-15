@@ -10,10 +10,10 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<App label="Smoothly Demo">
-				<a slot="nav-start" href="display">
+				<a slot="nav-start" href="display" data-reactive>
 					Display
 				</a>
-				<a slot="nav-start" href="https://google.com">
+				<a slot="nav-start" href="https://google.com" data-reactive>
 					External
 				</a>
 				<span slot="header">
@@ -38,28 +38,28 @@ export class SmoothlyAppDemo {
 							{ name: "Scary Kraken", value: "kraken" },
 						]}></smoothly-picker>
 				</span>
-				<smoothly-trigger slot="nav-end" type="link" name="logout">
+				<smoothly-trigger slot="nav-end" type="link" name="logout" reactive>
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-room path="">
+				<smoothly-room path="" reactive>
 					<smoothly-input type="text">Default</smoothly-input>
 				</smoothly-room>
-				<smoothly-room path="input" label="Input">
+				<smoothly-room path="input" label="Input" reactive>
 					<smoothly-input-demo />
 				</smoothly-room>
-				<smoothly-room path="display" label="Display" icon="eye-outline">
+				<smoothly-room path="display" label="Display" icon="eye-outline" reactive>
 					<smoothly-display-demo />
 				</smoothly-room>
-				<smoothly-room path="table" label="Table">
+				<smoothly-room path="table" label="Table" reactive>
 					<smoothly-table-demo />
 				</smoothly-room>
-				<smoothly-room path="select" label="Select">
+				<smoothly-room path="select" label="Select" reactive>
 					<smoothly-select-demo />
 				</smoothly-room>
-				<smoothly-room path="icon" label="Icon">
+				<smoothly-room path="icon" label="Icon" reactive>
 					<smoothly-icon-demo />
 				</smoothly-room>
-				<smoothly-room path="old" label="Old" to="select"></smoothly-room>
+				<smoothly-room path="old" label="Old" to="select" reactive></smoothly-room>
 			</App>
 		)
 	}

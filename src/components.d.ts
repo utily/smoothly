@@ -133,6 +133,7 @@ export namespace Components {
         "icon"?: string;
         "label"?: string;
         "path": string;
+        "reactive"?: true;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -178,6 +179,7 @@ export namespace Components {
         "expand": Expand;
         "fill": Fill;
         "name": string;
+        "reactive"?: true;
         "type": "link" | "button";
         "value"?: any;
     }
@@ -194,6 +196,9 @@ export namespace Components {
     }
     interface SmoothlyUrlencoded {
         "data": string;
+    }
+    interface SmoothlyUserMenu {
+        "userName": string;
     }
 }
 declare global {
@@ -443,6 +448,12 @@ declare global {
         prototype: HTMLSmoothlyUrlencodedElement;
         new (): HTMLSmoothlyUrlencodedElement;
     };
+    interface HTMLSmoothlyUserMenuElement extends Components.SmoothlyUserMenu, HTMLStencilElement {
+    }
+    var HTMLSmoothlyUserMenuElement: {
+        prototype: HTMLSmoothlyUserMenuElement;
+        new (): HTMLSmoothlyUserMenuElement;
+    };
     interface HTMLElementTagNameMap {
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
@@ -485,6 +496,7 @@ declare global {
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
         "smoothly-tuple": HTMLSmoothlyTupleElement;
         "smoothly-urlencoded": HTMLSmoothlyUrlencodedElement;
+        "smoothly-user-menu": HTMLSmoothlyUserMenuElement;
     }
 }
 declare namespace LocalJSX {
@@ -621,6 +633,7 @@ declare namespace LocalJSX {
         "icon"?: string;
         "label"?: string;
         "path"?: string;
+        "reactive"?: true;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -672,6 +685,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "name"?: string;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "reactive"?: true;
         "type"?: "link" | "button";
         "value"?: any;
     }
@@ -690,6 +704,10 @@ declare namespace LocalJSX {
     }
     interface SmoothlyUrlencoded {
         "data"?: string;
+    }
+    interface SmoothlyUserMenu {
+        "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "userName"?: string;
     }
     interface IntrinsicElements {
         "smoothly-accordion": SmoothlyAccordion;
@@ -733,6 +751,7 @@ declare namespace LocalJSX {
         "smoothly-trigger-source": SmoothlyTriggerSource;
         "smoothly-tuple": SmoothlyTuple;
         "smoothly-urlencoded": SmoothlyUrlencoded;
+        "smoothly-user-menu": SmoothlyUserMenu;
     }
 }
 export { LocalJSX as JSX };
@@ -780,6 +799,7 @@ declare module "@stencil/core" {
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
             "smoothly-tuple": LocalJSX.SmoothlyTuple & JSXBase.HTMLAttributes<HTMLSmoothlyTupleElement>;
             "smoothly-urlencoded": LocalJSX.SmoothlyUrlencoded & JSXBase.HTMLAttributes<HTMLSmoothlyUrlencodedElement>;
+            "smoothly-user-menu": LocalJSX.SmoothlyUserMenu & JSXBase.HTMLAttributes<HTMLSmoothlyUserMenuElement>;
         }
     }
 }
