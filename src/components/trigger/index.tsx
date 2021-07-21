@@ -12,7 +12,7 @@ export class SmoothlyTrigger {
 	@Prop({ reflect: true }) fill: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
-	@Prop() reactive?: true
+	@Prop() responsive?: true
 	@Prop() name: string
 	@Prop() value?: any
 	@Event() trigger: EventEmitter<Trigger>

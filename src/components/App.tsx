@@ -5,7 +5,11 @@ import { createRouter, href, Route } from "stencil-router-v2"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Router = createRouter()
 
-export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, utils) => {
+export const App: FunctionalComponent<{ label: string; user?: string; responsive?: true }> = (
+	attributes,
+	nodes,
+	utils
+) => {
 	const emptyNode = Object.entries(nodes[0]).reduce<{ [property: string]: any }>((r, entry) => {
 		r[entry[0]] = null
 		return r
@@ -20,7 +24,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
 	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
-	function navigationLinks(menu?: true): HTMLElement[] {
+	function navigationLinks(responsive?: true): HTMLElement[] {
 		return utils
 			.map(
 				[
@@ -33,7 +37,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 						child = {
 							...emptyChild,
 							vtag: "a",
-							vattrs: { href: child.vattrs?.path, reactive: child.vattrs?.reactive },
+							vattrs: { href: child.vattrs?.path, responsive: child.vattrs?.responsive },
 							vchildren: [
 								child.vattrs?.icon
 									? childToNode({
@@ -72,13 +76,22 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 					node
 				)
 			})
-			.map(child => (
-				<li
-					slot={menu ? "small-screen" : undefined}
-					data-reactive={child.$attrs$?.reactive ?? child.$attrs$?.["data-reactive"]}>
-					{child}
-				</li>
-			))
+			.map(child => {
+				console.log("child-responsive", child.$attrs$?.responsive)
+				console.log("data-responsive", child.$attrs$?.["data-responsive"])
+				console.log("responsive", responsive)
+				return (
+					<li
+						slot={
+							(child.$attrs$?.responsive ?? child.$attrs$?.["data-responsive"]) && responsive
+								? "small-screen"
+								: undefined
+						}
+						data-responsive={child.$attrs$?.responsive ?? child.$attrs$?.["data-responsive"]}>
+						{child}
+					</li>
+				)
+			})
 	}
 
 	return (
@@ -91,9 +104,13 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<nav>
 					<ul>
 						{navigationLinks()}
-						<li>
-							<smoothly-user-menu user-name="Test User AB">{navigationLinks(true)}</smoothly-user-menu>
-						</li>
+						{attributes.user ? (
+							<li>
+								<smoothly-user-menu user-name={attributes.user} responsive={attributes.responsive}>
+									{navigationLinks(true)}
+								</smoothly-user-menu>
+							</li>
+						) : undefined}
 					</ul>
 				</nav>
 			</header>

@@ -65,7 +65,7 @@
 }
 
 @media only screen and (max-width: 1250px) {
-	a > smoothly-icon:nth-child(2) {
+	a > smoothly-icon[data-responsive]:nth-child(2) {
 		display: none;
 	}
 }
@@ -77,7 +77,7 @@ a > smoothly-icon:nth-child(1) {
 
 @media only screen and (max-width: 1250px) {
 	div:not(.background) ul::slotted(*), 
-	a > smoothly-icon:nth-child(1) {
+	a > smoothly-icon[data-responsive]:nth-child(1) {
 		display: block;
 	}
 }

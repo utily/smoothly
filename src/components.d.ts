@@ -133,7 +133,7 @@ export namespace Components {
         "icon"?: string;
         "label"?: string;
         "path": string;
-        "reactive"?: true;
+        "responsive"?: true;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -179,7 +179,7 @@ export namespace Components {
         "expand": Expand;
         "fill": Fill;
         "name": string;
-        "reactive"?: true;
+        "responsive"?: true;
         "type": "link" | "button";
         "value"?: any;
     }
@@ -198,6 +198,7 @@ export namespace Components {
         "data": string;
     }
     interface SmoothlyUserMenu {
+        "responsive"?: true;
         "userName": string;
     }
 }
@@ -633,7 +634,7 @@ declare namespace LocalJSX {
         "icon"?: string;
         "label"?: string;
         "path"?: string;
-        "reactive"?: true;
+        "responsive"?: true;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -685,7 +686,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "name"?: string;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
-        "reactive"?: true;
+        "responsive"?: true;
         "type"?: "link" | "button";
         "value"?: any;
     }
@@ -707,6 +708,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyUserMenu {
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "responsive"?: true;
         "userName"?: string;
     }
     interface IntrinsicElements {

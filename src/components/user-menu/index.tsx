@@ -10,6 +10,7 @@ import { Trigger } from "../../model"
 export class SmoothlyUserMenu {
 	@State() isOpen = false
 	@Prop() userName: string
+	@Prop() responsive?: true
 	@Event() trigger: EventEmitter<Trigger>
 	private close() {
 		this.isOpen = false
@@ -25,8 +26,8 @@ export class SmoothlyUserMenu {
 		return (
 			<Host open={this.isOpen}>
 				<a onClick={e => this.toggle()} class={{ active: this.isOpen }}>
-					<smoothly-icon name="reorder-three" size="medium"></smoothly-icon>
-					<smoothly-icon name="person" size="medium"></smoothly-icon>
+					<smoothly-icon name="reorder-three" size="medium" data-responsive={this.responsive}></smoothly-icon>
+					<smoothly-icon name="person" size="medium" data-responsive={this.responsive}></smoothly-icon>
 				</a>
 				<div class="background" onClick={() => this.close()} />
 				<div>
