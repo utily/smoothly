@@ -198,6 +198,7 @@ export namespace Components {
         "data": string;
     }
     interface SmoothlyUserMenu {
+        "isOpen": boolean;
         "userName": string;
     }
 }
@@ -706,6 +707,7 @@ declare namespace LocalJSX {
         "data"?: string;
     }
     interface SmoothlyUserMenu {
+        "isOpen"?: boolean;
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
         "userName"?: string;
     }

@@ -60,7 +60,7 @@
 	}
 }
 
-:host:not([open]) > div {
+:host:not([is-open]) > div {
 	display: none;
 }
 
@@ -80,4 +80,22 @@ a > smoothly-icon:nth-child(1) {
 	a > smoothly-icon:nth-child(1) {
 		display: block;
 	}
+}
+:host[is-open] > div {
+  animation-duration: 0.2s;
+  animation-name: slidein;
+	animation-direction: alternate;
+}
+:host:not([is-open]) > div {
+	display: none;
+}
+
+@keyframes slidein {
+  from {
+    right: -100px;
+  }
+
+  to {
+    right: var(--menu-offset-right);
+  }
 }
