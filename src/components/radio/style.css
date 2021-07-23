@@ -21,11 +21,11 @@ input[type="radio"] {
 	-webkit-appearance: none;
 }
 input[type="radio"] ~ label {
-	border: 1px solid rgb(var(--smoothly-color-shade));
-	color: rgb(var(--smoothly-color-tint));
-	background: rgb(var(--smoothly-color-shade));
+	border: 1px solid rgb(var(--smoothly-default-color));
+	color: rgba(var(--smoothly-default-contrast), .5);
+	background: rgb(var(--smoothly-default-color));
 }
 input[type="radio"]:checked ~ label {
-	background-color: rgb(var(--smoothly-color));
-	color: rgb(var(--smoothly-color-contrast));
+	background-color: rgb(var(--smoothly-default-shade));
+	color: rgb(var(--smoothly-default-contrast));
 }
