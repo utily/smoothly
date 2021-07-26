@@ -84,7 +84,6 @@ a > smoothly-icon:nth-child(1) {
 :host[is-open] > div {
   animation-duration: 0.2s;
   animation-name: slidein;
-	animation-direction: alternate;
 }
 :host:not([is-open]) > div {
 	display: none;
@@ -92,10 +91,12 @@ a > smoothly-icon:nth-child(1) {
 
 @keyframes slidein {
   from {
-    right: -100px;
+		transform: translateX(100%);
+		opacity: 0;
   }
 
   to {
+		opacity: 1;
     right: var(--menu-offset-right);
   }
 }
