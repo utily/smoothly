@@ -6,19 +6,19 @@
 :host[hidden] {
 	display: none;
 }
-:host[size=small] {
+:host[size="small"] {
 	width: 1.4em;
 	height: 1.4em;
 }
-:host[size=medium] {
+:host[size="medium"] {
 	width: 1.8em;
 	height: 1.8em;
 }
-:host[size=large] {
+:host[size="large"] {
 	width: 2.8em;
 	height: 2.8em;
 }
-:host[size=xlarge] {
+:host[size="xlarge"] {
 	width: 4em;
 	height: 4em;
 }

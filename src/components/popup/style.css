@@ -19,12 +19,12 @@
 	border-radius: 0.6em;
 	z-index: 3;
 }
-:host[direction=down] aside {
+:host[direction="down"] aside {
 	top: 2.2em;
 	left: 1em;
 	box-shadow: 6px 5px 9px -9px black, 5px 6px 9px -9px black;
 }
-:host[direction=up] aside {
+:host[direction="up"] aside {
 	bottom: 2.2em;
 	box-shadow: -6px -5px 9px -9px black, -5px -6px 9px -9px black;
 }
@@ -52,7 +52,7 @@
 	height: 12px;
 	transform: rotate(45deg);
 }
-:host[direction=down] .arrow {
+:host[direction="down"] .arrow {
 	left: 2em;
 	top: 2em;
 	border-top-style: solid;
@@ -60,7 +60,7 @@
 	border-left-style: solid;
 	border-left-width: 1px;
 }
-:host[direction=up] .arrow {
+:host[direction="up"] .arrow {
 	bottom: 2em;
 	left: 1em;
 	border-bottom-style: solid;

@@ -3,7 +3,7 @@
 	--menu-offset-right: 0.3em;
 	--item-padding: 0.5em 1em;
 	position: relative;
-	a.active smoothly-icon, 
+	a.active smoothly-icon,
 	a:hover smoothly-icon {
 		fill: rgb(var(--smoothly-default-shade));
 		stroke: rgb(var(--smoothly-default-shade));
@@ -70,13 +70,13 @@
 	}
 }
 
-div:not(.background) ul::slotted(*), 
+div:not(.background) ul::slotted(*),
 a > smoothly-icon:nth-child(1) {
 	display: none;
 }
 
 @media only screen and (max-width: 1250px) {
-	div:not(.background) ul::slotted(*), 
+	div:not(.background) ul::slotted(*),
 	a > smoothly-icon:nth-child(1) {
 		display: block;
 	}

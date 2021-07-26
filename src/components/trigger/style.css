@@ -21,11 +21,11 @@ button {
 :host:not([processing]):not([disabled]):active {
 	border-color: var(--smoothly-trigger-border);
 }
-:host[expand=fill] > button,
-:host[expand=block] > button {
+:host[expand="fill"] > button,
+:host[expand="block"] > button {
 	width: 100%;
 }
-:host[expand=fill] {
+:host[expand="fill"] {
 	border-left: none;
 	border-right: none;
 }

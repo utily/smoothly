@@ -97,9 +97,9 @@
 	pointer-events: none;
 }
 
-:host([label=]) ul,
+:host([label=""]) ul,
 :host:not([label]) ul,
-:host([label-setting=hide]) ul {
+:host([label-setting="hide"]) ul {
 	padding-top: 0.1em;
 	padding-bottom: 0.1em;
 }
@@ -129,10 +129,10 @@ label {
 :host smoothly-icon[data-arrow] {
 	pointer-events: none;
 }
-:host(:not([is-open])) smoothly-icon[data-arrow=up] {
+:host(:not([is-open])) smoothly-icon[data-arrow="up"] {
 	display: none;
 }
-:host([is-open]) smoothly-icon[data-arrow=down] {
+:host([is-open]) smoothly-icon[data-arrow="down"] {
 	display: none;
 }
 :host(:not([has-selection])) smoothly-icon:not([data-arrow]) {
