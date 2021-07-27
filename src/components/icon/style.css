@@ -1,6 +1,8 @@
+:host[size] {
+	background: none;
+}
 :host {
-	display: block;
-	background: none !important;
+	display:block;
 }
 :host[hidden] {
 	display: none;
