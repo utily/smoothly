@@ -1,0 +1,9 @@
+:host {
+	position: relative;
+}
+
+smoothly-calendar {
+	position: relative;
+	top: 1em;
+	border: 1px solid black;
+} 

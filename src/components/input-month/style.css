@@ -1,0 +1,26 @@
+button {
+  border: none;
+	background: none;
+	cursor: pointer;
+  font-size:small;
+}
+
+:host {
+	font-size: large;
+	display: flex;
+	justify-content:space-between;
+	justify-self:center;
+	text-align: center;
+
+}
+smoothly-icon{
+	font-size: smaller;
+}
+
+smoothly-selector:first-child > nav{
+	overflow-y:scroll;
+	white-space: nowrap;
+	width: 120px;
+	height: 500px;
+}
+
