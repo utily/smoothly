@@ -29,8 +29,3 @@ button {
 	border-left: none;
 	border-right: none;
 }
-@media only screen and (max-width: 1250px) {
-	smoothly-app > smoothly-notifier > header > nav > ul *[data-reactive] {
-		display: none;
-	}
-}

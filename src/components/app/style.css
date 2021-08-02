@@ -52,7 +52,6 @@ smoothly-app > smoothly-notifier > header {
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
-	z-index: 5;
 }
 smoothly-app > smoothly-notifier > header a {
 	color: inherit;
@@ -67,7 +66,6 @@ smoothly-app > smoothly-notifier > header > nav > ul > li > *:not(a) {
 	display: inline-block;
 	height: 100%;
 	margin: 0;
-	flex-shrink:0;
 }
 smoothly-app > smoothly-notifier > header > h1 a,
 smoothly-app > smoothly-notifier > header > nav > ul > li a {
@@ -100,10 +98,4 @@ smoothly-app > smoothly-notifier > header > nav > ul > li a.active {
 smoothly-app > smoothly-notifier > content {
 	position: relative;
 	top: 1.6cm;
-}
-
-@media only screen and (max-width: 1250px) {
-	smoothly-app > smoothly-notifier > header > nav > ul > li[data-reactive] {
-		display: none;
-	}
 }
