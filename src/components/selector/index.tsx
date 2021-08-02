@@ -101,8 +101,4 @@ export class Selector {
 			</Host>
 		)
 	}
-	// componentDidRender() {
-	// 	if (!this.opened)
-	// 		this.items.find(item => item == this.selected)?.childNodes.forEach(node => this.element.append(node))
-	// }
 }
