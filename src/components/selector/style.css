@@ -1,0 +1,30 @@
+:host {
+	position: relative;
+	height: 100%;
+}
+:host > main,
+:host > main > * {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+:host > nav {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	z-index: 10;
+}
+:host > aside {
+	position: absolute;
+	top: 0;
+	right: -200%;
+	z-index: 10;
+	background-color: rgb(var(--smoothly-light-color));
+	color: rgb(var(--smoothly-light-contrast));
+	height: 20px;
+	border-radius: 5px;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+}
+

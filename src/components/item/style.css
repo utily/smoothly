@@ -1,0 +1,16 @@
+:host([selected]) {
+	background-color: rgb(var(--smoothly-primary-shade));
+	color: rgb(var(--smoothly-primary-contrast));
+}
+:host {
+	padding: .5em;
+	cursor: pointer;
+	background-color: rgb(var(--smoothly-dark-color));
+	color: rgb(var(--smoothly-dark-contrast));
+	border: rgb(var(--smoothly-dark-shade) solid 1px)
+}
+:host:hover {
+	background-color: rgb(var(--smoothly-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+}
+
