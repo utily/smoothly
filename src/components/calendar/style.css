@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+th,
+td {
+	text-align: center;
+	padding: .4em !important;
+}
+
+td:nth-child(6),
+td:nth-child(7) {
+  color: rgb(var(--smoothly-secondary-tint));
+}
+td:not(.selected):hover {
+  color: rgb(var(--smoothly-primary-contrast));
+  background: rgb(var(--smoothly-primary-tint));
+}
+td.selected {
+  color: rgb(var(--smoothly-primary-contrast));
+  background: rgb(var(--smoothly-primary-color));
+}
+td:not(.selected):not(:hover).today {
+  background: rgb(var(--smoothly-dark-color));
+	color: rgb(var(--smoothly-dark-contrast));
+}
+
+td.dateRange {
+	color: rgb(var(--smoothly-primary-contrast));
+  background: rgb(var(--smoothly-primary-tint));
+}

@@ -1,0 +1,17 @@
+button {
+  border: none;
+	background: none;
+	cursor: pointer;
+  font-size: large;
+}
+
+:host {
+	font-size: large;
+	display: flex;
+	justify-content:space-between;
+	justify-self:center;
+	text-align: center;
+}
+smoothly-icon{
+	font-size: smaller;
+}
