@@ -83,6 +83,11 @@ export namespace Components {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyItem {
+        "filter": (filter: string) => Promise<boolean>;
+        "selected": boolean;
+        "value": any;
+    }
     interface SmoothlyMenuOptions {
         "emptyMenuLabel": string;
         "filterOptions": (keyword: string, excludeValues?: string[]) => Promise<void>;
@@ -145,6 +150,8 @@ export namespace Components {
         "value": string;
     }
     interface SmoothlySelectDemo {
+    }
+    interface SmoothlySelector {
     }
     interface SmoothlySpinner {
         "active": boolean;
@@ -297,6 +304,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
+    }
+    var HTMLSmoothlyItemElement: {
+        prototype: HTMLSmoothlyItemElement;
+        new (): HTMLSmoothlyItemElement;
+    };
     interface HTMLSmoothlyMenuOptionsElement extends Components.SmoothlyMenuOptions, HTMLStencilElement {
     }
     var HTMLSmoothlyMenuOptionsElement: {
@@ -368,6 +381,12 @@ declare global {
     var HTMLSmoothlySelectDemoElement: {
         prototype: HTMLSmoothlySelectDemoElement;
         new (): HTMLSmoothlySelectDemoElement;
+    };
+    interface HTMLSmoothlySelectorElement extends Components.SmoothlySelector, HTMLStencilElement {
+    }
+    var HTMLSmoothlySelectorElement: {
+        prototype: HTMLSmoothlySelectorElement;
+        new (): HTMLSmoothlySelectorElement;
     };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
@@ -470,6 +489,7 @@ declare global {
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-menu-options": HTMLSmoothlyMenuOptionsElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
@@ -482,6 +502,7 @@ declare global {
         "smoothly-room": HTMLSmoothlyRoomElement;
         "smoothly-select": HTMLSmoothlySelectElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
+        "smoothly-selector": HTMLSmoothlySelectorElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-table": HTMLSmoothlyTableElement;
@@ -579,6 +600,12 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyItem {
+        "onItemLoaded"?: (event: CustomEvent<void>) => void;
+        "onItemSelected"?: (event: CustomEvent<void>) => void;
+        "selected"?: boolean;
+        "value"?: any;
+    }
     interface SmoothlyMenuOptions {
         "emptyMenuLabel"?: string;
         "maxMenuHeight"?: "inherit";
@@ -645,6 +672,9 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SmoothlySelectDemo {
+    }
+    interface SmoothlySelector {
+        "onSelected"?: (event: CustomEvent<any>) => void;
     }
     interface SmoothlySpinner {
         "active"?: boolean;
@@ -723,6 +753,7 @@ declare namespace LocalJSX {
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-item": SmoothlyItem;
         "smoothly-menu-options": SmoothlyMenuOptions;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
@@ -735,6 +766,7 @@ declare namespace LocalJSX {
         "smoothly-room": SmoothlyRoom;
         "smoothly-select": SmoothlySelect;
         "smoothly-select-demo": SmoothlySelectDemo;
+        "smoothly-selector": SmoothlySelector;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-table": SmoothlyTable;
@@ -771,6 +803,7 @@ declare module "@stencil/core" {
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-menu-options": LocalJSX.SmoothlyMenuOptions & JSXBase.HTMLAttributes<HTMLSmoothlyMenuOptionsElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
@@ -783,6 +816,7 @@ declare module "@stencil/core" {
             "smoothly-room": LocalJSX.SmoothlyRoom & JSXBase.HTMLAttributes<HTMLSmoothlyRoomElement>;
             "smoothly-select": LocalJSX.SmoothlySelect & JSXBase.HTMLAttributes<HTMLSmoothlySelectElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
+            "smoothly-selector": LocalJSX.SmoothlySelector & JSXBase.HTMLAttributes<HTMLSmoothlySelectorElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
