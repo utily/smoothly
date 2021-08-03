@@ -40,6 +40,7 @@ smoothly-app[color="danger"] {
 smoothly-app > smoothly-notifier > header {
 	position: fixed;
 	top: 0;
+	z-index: 5;
 	left: 0;
 	width: 100%;
 	z-index: 1;
