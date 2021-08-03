@@ -42,7 +42,7 @@ smoothly-app > smoothly-notifier > header {
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 1;
+	z-index: 5;
 	height: 1.6cm;
 	background-color: rgb(var(--smoothly-app-background));
 	color: rgb(var(--smoothly-app-color));
