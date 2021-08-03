@@ -75,7 +75,7 @@ export namespace Components {
         "placeholder": string | undefined;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: any) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
         "type": string;
         "value": any;
     }
