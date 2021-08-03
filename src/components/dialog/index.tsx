@@ -10,7 +10,7 @@ export class SmoothlyDialog {
 	@Prop({ reflect: true }) color: Color | undefined
 	@Prop({ mutable: true, reflect: true }) open = true
 	@Prop({ reflect: true }) closable = false
-	@Prop() header: string | undefined
+	@Prop({ reflect: true }) header: string | undefined
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
 		if (Trigger.is(event.detail) && event.detail.name == "close")

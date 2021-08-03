@@ -34,6 +34,8 @@ export namespace Components {
         "header": string | undefined;
         "open": boolean;
     }
+    interface SmoothlyDialogDemo {
+    }
     interface SmoothlyDisplay {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
@@ -232,6 +234,12 @@ declare global {
     var HTMLSmoothlyDialogElement: {
         prototype: HTMLSmoothlyDialogElement;
         new (): HTMLSmoothlyDialogElement;
+    };
+    interface HTMLSmoothlyDialogDemoElement extends Components.SmoothlyDialogDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDialogDemoElement: {
+        prototype: HTMLSmoothlyDialogDemoElement;
+        new (): HTMLSmoothlyDialogDemoElement;
     };
     interface HTMLSmoothlyDisplayElement extends Components.SmoothlyDisplay, HTMLStencilElement {
     }
@@ -450,6 +458,7 @@ declare global {
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
+        "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
@@ -517,6 +526,8 @@ declare namespace LocalJSX {
         "color"?: Color | undefined;
         "header"?: string | undefined;
         "open"?: boolean;
+    }
+    interface SmoothlyDialogDemo {
     }
     interface SmoothlyDisplay {
         "country"?: CountryCode.Alpha2;
@@ -698,6 +709,7 @@ declare namespace LocalJSX {
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-dialog": SmoothlyDialog;
+        "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
@@ -745,6 +757,7 @@ declare module "@stencil/core" {
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
+            "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
