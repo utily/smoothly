@@ -12,6 +12,8 @@
 	display: inline;
 	position: absolute;
 	padding: 0.3em;
+	left: var(--left);
+	right: var(--right);
 	background-color:  rgb(238, 238, 238);
 	border-color: rgb(238, 238, 238);
 	border-style: solid;
@@ -21,7 +23,6 @@
 }
 :host[direction=down] aside {
 	top: 2.2em;
-	left: 1em;
 	box-shadow: 6px 5px 9px -9px black,
 	5px 6px 9px -9px black;
 }
@@ -53,9 +54,10 @@
   width: 12px;
 	height: 12px;
   transform: rotate(45deg);
+	left: calc(var(--left) + 1em);
+	right: calc(var(--right) + 1em);
 }
 :host[direction=down] .arrow {
-	left: 2em;
 	top: 2em;
 	border-top-style: solid;
 	border-top-width: 1px;
@@ -64,7 +66,6 @@
 }
 :host[direction=up] .arrow {
 	bottom: 2em;
-	left: 1em;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-right-style: solid;
