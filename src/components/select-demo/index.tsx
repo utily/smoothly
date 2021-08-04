@@ -51,9 +51,11 @@ export class SmoothlySelectDemo {
 				<option value="3">3</option>
 			</smoothly-select>,
 			<smoothly-selector>
-				<smoothly-item value="test1"></smoothly-item>
-				<smoothly-item value="test2"></smoothly-item>
-				<smoothly-item value="test3"></smoothly-item>
+				<smoothly-item value="0">Alpha</smoothly-item>
+				<smoothly-item selected value="1">
+					Bravo
+				</smoothly-item>
+				<smoothly-item value="2">Charlie</smoothly-item>
 			</smoothly-selector>,
 			<button onClick={() => this.alertf()}>press here</button>,
 			<smoothly-picker

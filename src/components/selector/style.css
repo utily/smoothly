@@ -19,12 +19,15 @@
 	top: 0;
 	right: -200%;
 	z-index: 10;
-	background-color: rgb(var(--smoothly-light-color));
-	color: rgb(var(--smoothly-light-contrast));
+	background-color: rgb(var(--smoothly-tertiary-color));
+	color: rgb(var(--smoothly-tertiary-contrast));
 	height: 20px;
 	border-radius: 5px;
 	padding: 5px;
 	display: flex;
 	align-items: center;
 }
-
+:host().missing > aside {
+	background-color: rgb(var(--smoothly-warning-color));
+	color: rgb(var(--smoothly-warning-contast));
+}

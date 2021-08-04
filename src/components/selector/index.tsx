@@ -9,7 +9,7 @@ export class Selector {
 	@State() opened = false
 	@State() items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
-	@State() asideError = false
+	@State() missing = false
 	mainElement?: HTMLElement
 	@State() filter = ""
 	@Event() selected: EventEmitter<any>
@@ -27,12 +27,10 @@ export class Selector {
 		value = value.toLowerCase()
 
 		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
-			this.asideError = true
+			this.missing = true
 			this.items.forEach(el => el.filter(""))
-		} else {
-			this.asideError = false
-			console.log("")
-		}
+		} else
+			this.missing = false
 	}
 	@Listen("click")
 	onClick(event: UIEvent) {
@@ -85,14 +83,14 @@ export class Selector {
 	}
 	render() {
 		return (
-			<Host tabIndex={2}>
+			<Host tabIndex={2} class={this.missing ? "missing" : ""}>
 				<main ref={element => (this.mainElement = element)}>(none)</main>
 				{this.filter.length != 0 ? (
-					<aside
-						ref={element => (this.aside = element)}
-						style={this.asideError ? { backgroundColor: "red" } : { backgroundColor: "purple" }}>
+					<aside ref={element => (this.aside = element)}>
 						{this.filter}
-						<button onClick={() => (this.filter = "")}>x</button>
+						<button onClick={() => (this.filter = "")}>
+							<smoothly-icon name="close" size="small"></smoothly-icon>
+						</button>
 					</aside>
 				) : undefined}
 				<nav style={{ display: !this.opened ? "none" : "flex" }}>
