@@ -7,7 +7,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch 
 export class Selector {
 	@Element() element: HTMLSmoothlySelectorElement
 	@State() opened = false
-	@State() items: HTMLSmoothlyItemElement[] = []
+	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
 	@State() missing = false
 	mainElement?: HTMLElement
@@ -25,7 +25,6 @@ export class Selector {
 	@Watch("filter")
 	async onFilterChange(value: string) {
 		value = value.toLowerCase()
-
 		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
 			this.missing = true
 			this.items.forEach(el => el.filter(""))
@@ -37,10 +36,6 @@ export class Selector {
 		event.stopPropagation()
 		this.opened = !this.opened
 	}
-	@Listen("itemLoaded")
-	onItemLoaded(event: Event) {
-		this.items.push(event.target as HTMLSmoothlyItemElement)
-	}
 	@Listen("itemSelected")
 	onItemSelected(event: Event) {
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
@@ -49,36 +44,53 @@ export class Selector {
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
-		console.log("key", event.key)
-		let move = 0
-		switch (event.key) {
-			case "ArrowUp":
-				move = -1
-				break
-			case "ArrowDown":
-				move = 1
-				break
-			case "Escape":
-				this.filter = ""
-				break
-			case "Backspace":
-				this.filter = this.filter.slice(0, -1)
-				break
-			case "Enter":
-				this.selected?.emit(this.selectedElement)
-				break
-			default:
-				if (event.key.length == 1)
-					this.filter += event.key
-				break
-		}
-		if (move) {
+		if (this.opened) {
+			let direction: -1 | 0 | 1 = 0
+			switch (event.key) {
+				case "ArrowUp":
+					direction = -1
+					break
+				case "ArrowDown":
+					direction = 1
+					break
+				case "Escape":
+					this.filter = ""
+					break
+				case "Backspace":
+					this.filter = this.filter.slice(0, -1)
+					break
+				case "Enter":
+					this.items.forEach(element => {
+						if (!element.hidden) {
+							this.selected.emit(element.value)
+							if (this.mainElement && this.selectedElement)
+								this.mainElement.innerHTML = this.selectedElement.innerHTML
+							this.opened = false
+							this.filter = ""
+						}
+					})
+					break
+				default:
+					if (event.key.length == 1)
+						this.filter += event.key
+					break
+			}
+			this.move(direction)
+		} else if (event.key == "Enter")
+			this.opened = true
+	}
+	private move(direction: -1 | 0 | 1): void {
+		if (direction) {
 			let selectedIndex = this.items.findIndex(item => item == this.selectedElement)
-			if (selectedIndex == -1)
-				selectedIndex = 0
-			;(this.selectedElement = this.items[
-				(selectedIndex + move + this.items.length) % this.items.length
-			]).selected = true
+
+			do {
+				if (selectedIndex == -1)
+					selectedIndex = direction == 1 ? 0 : this.items.length - 1
+				else
+					selectedIndex = (selectedIndex + direction + this.items.length) % this.items.length
+			} while (this.items[selectedIndex].hidden)
+			this.selectedElement = this.items[selectedIndex]
+			this.selectedElement.selected = true
 		}
 	}
 	render() {
@@ -93,10 +105,29 @@ export class Selector {
 						</button>
 					</aside>
 				) : undefined}
-				<nav style={{ display: !this.opened ? "none" : "flex" }}>
-					<slot />
-				</nav>
+				<div>
+					<nav style={{ display: !this.opened ? "none" : "flex" }}>
+						<slot />
+					</nav>
+				</div>
 			</Host>
 		)
 	}
+	componentDidRender() {
+		const items: HTMLSmoothlyItemElement[] = []
+		const children = this.element.querySelectorAll("div > nav > smoothly-item")
+		for (let i = 0; i < children.length; i++) {
+			const node = children.item(i)
+			if (isItem(node))
+				items.push(node)
+		}
+		this.items = items
+	}
+}
+function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
+	return (
+		typeof value == "object" &&
+		(typeof value.selected == "boolean" || value.selected == undefined) &&
+		typeof value.filter == "function"
+	)
 }

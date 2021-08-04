@@ -9,14 +9,8 @@ export class Item {
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
-	@Event() itemLoaded: EventEmitter<void>
 	@Event() itemSelected: EventEmitter<void>
 
-	componentDidLoad() {
-		this.itemLoaded.emit()
-		if (this.selected)
-			this.onClick()
-	}
 	@Listen("click")
 	onClick() {
 		this.selected = true

@@ -601,7 +601,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyItem {
-        "onItemLoaded"?: (event: CustomEvent<void>) => void;
         "onItemSelected"?: (event: CustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
