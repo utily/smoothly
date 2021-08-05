@@ -32,3 +32,6 @@
 	background-color: rgb(var(--smoothly-warning-color));
 	color: rgb(var(--smoothly-warning-contast));
 }
+.hidden {
+	display: none;
+}

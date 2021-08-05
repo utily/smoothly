@@ -82,12 +82,9 @@ export class Selector {
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {
 			let selectedIndex = this.items.findIndex(item => item == this.selectedElement)
-
+			console.log("selectedindex", selectedIndex)
 			do {
-				if (selectedIndex == -1)
-					selectedIndex = direction == 1 ? 0 : this.items.length - 1
-				else
-					selectedIndex = (selectedIndex + direction + this.items.length) % this.items.length
+				selectedIndex = (selectedIndex + direction + this.items.length) % this.items.length
 			} while (this.items[selectedIndex].hidden)
 			this.selectedElement = this.items[selectedIndex]
 			this.selectedElement.selected = true
@@ -105,8 +102,8 @@ export class Selector {
 						</button>
 					</aside>
 				) : undefined}
-				<div>
-					<nav style={{ display: !this.opened ? "none" : "flex" }}>
+				<div class={this.opened ? "" : "hidden"}>
+					<nav>
 						<slot />
 					</nav>
 				</div>
