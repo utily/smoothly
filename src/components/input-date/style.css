@@ -4,6 +4,12 @@
 
 smoothly-calendar {
 	position: relative;
-	top: 1em;
-	border: 1px solid black;
+	z-index: 5;
+	
 } 
+:host > div {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 4;
+}

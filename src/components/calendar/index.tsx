@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
 import * as generate from "./generate"
 
@@ -14,14 +14,6 @@ export class Calendar {
 	@Watch("month")
 	onStart(next: Date) {
 		this.dateChanged.emit(next)
-	}
-	@Listen("yearChanged")
-	onyearChanged(event: CustomEvent<Date>) {
-		this.month = event.detail
-	}
-	@Listen("monthChanged")
-	onMonthChanged(event: CustomEvent<Date>) {
-		this.month = event.detail
 	}
 	render() {
 		return [

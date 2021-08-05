@@ -10,8 +10,8 @@ export class InputDate {
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) month?: Date
 	@Prop({ mutable: true }) open: boolean
-
 	@Event() inputChanged: EventEmitter<Date>
+	@Watch("value")
 	@Watch("month")
 	onStart(next: Date) {
 		this.inputChanged.emit(next)
@@ -20,22 +20,16 @@ export class InputDate {
 	onDateChanged(event: CustomEvent<Date>) {
 		this.value = event.detail
 	}
-	@Listen("monthSelected")
-	@Listen("monthChanged")
-	onMonthChanged(event: CustomEvent<Date>) {
+	@Listen("valueChanged")
+	onValueChanged(event: CustomEvent<Date>) {
 		this.month = event.detail
 	}
-	@Listen("click")
-	handleEnter() {
-		this.open = true
-	}
-	@Listen("mouseup", { target: "document" })
-	handleClick(ev: any) {
-		this.open = false
-	}
+
 	render() {
 		return [
+			this.open ? <div onClick={() => ((this.open = false), console.log("?", this.open))}></div> : [],
 			<smoothly-input
+				onClick={() => (this.open = true)}
 				type="date"
 				value={this.value}
 				onChange={e => (this.value = (e.target as HTMLSmoothlyInputElement).value)}>

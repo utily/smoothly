@@ -7,10 +7,8 @@ button {
 
 :host {
 	font-size: large;
-	display: flex;
-	justify-content:space-between;
-	justify-self:center;
-	text-align: center;
+	display: grid;
+	grid-template-columns:repeat(4, 6em);
 }
 smoothly-icon{
 	font-size: smaller;

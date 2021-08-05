@@ -4,7 +4,8 @@
 th,
 td {
 	text-align: center;
-	padding: .4em !important;
+	padding: .5em;
+	min-width: 2em;
 }
 
 td:nth-child(6),
@@ -24,7 +25,3 @@ td:not(.selected):not(:hover).today {
 	color: rgb(var(--smoothly-dark-contrast));
 }
 
-td.dateRange {
-	color: rgb(var(--smoothly-primary-contrast));
-  background: rgb(var(--smoothly-primary-tint));
-}

@@ -50,6 +50,7 @@ export class SmoothlySelectDemo {
 				<option value="2">2</option>
 				<option value="3">3</option>
 			</smoothly-select>,
+			<smoothly-input-date>Date</smoothly-input-date>,
 			<smoothly-selector>
 				<smoothly-item value="0">Alpha</smoothly-item>
 				<smoothly-item selected value="1">
