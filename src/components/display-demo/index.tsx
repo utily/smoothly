@@ -62,6 +62,16 @@ export class SmoothlyDisplayDemo {
 					</dd>
 				</dl>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
+				<div style={{display: "flex", justifyContent: "space-between"}}>
+					<smoothly-popup direction="down">
+						Click for popup
+						<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup stuff that has a lot of text</span>
+					</smoothly-popup>
+					<smoothly-popup direction="down">
+						Click for popup
+						<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup with a bunch of text.</span>
+					</smoothly-popup>
+				</div>
 				<p>Test of diffrent kinds of notifier:</p>
 				<button onClick={() => this.noticeWarning(Notice.warn("This is a test warning notice."))}>warning</button>
 				<button onClick={() => this.noticeWarning(Notice.succeded("This is a test success notice."))}>success</button>
