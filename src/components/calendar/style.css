@@ -1,6 +1,10 @@
 :host {
   display: block;
 }
+:host > smoothly-input-month {
+	width: calc(100% - 1em);
+	padding: .5em .5em 0 .5em;
+}
 th,
 td {
 	text-align: center;
@@ -11,7 +15,7 @@ td {
 
 td:nth-child(6),
 td:nth-child(7) {
-  color: rgb(var(--smoothly-secondary-tint));
+  color: rgb(var(--smoothly-light-shade));
 }
 td:not(.selected):hover {
   color: rgb(var(--smoothly-primary-contrast));

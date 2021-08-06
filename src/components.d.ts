@@ -24,7 +24,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyCalendar {
-        "month": Date;
+        "month"?: Date;
         "value": Date;
     }
     interface SmoothlyCheckbox {
@@ -86,7 +86,6 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputDate {
-        "month"?: Date;
         "open": boolean;
         "value"?: Date;
     }
@@ -573,7 +572,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyCalendar {
         "month"?: Date;
-        "onDateChanged"?: (event: CustomEvent<Date>) => void;
+        "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "value"?: Date;
     }
     interface SmoothlyCheckbox {
@@ -637,8 +636,7 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputDate {
-        "month"?: Date;
-        "onInputChanged"?: (event: CustomEvent<Date>) => void;
+        "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
     }

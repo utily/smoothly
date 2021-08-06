@@ -1,15 +1,14 @@
+:host {
+	display: flex;
+	justify-content: space-between;
+	font-size: large;
+}
 button {
   border: none;
 	background: none;
 	cursor: pointer;
   font-size: large;
 }
-
-:host {
-	font-size: large;
-	display: grid;
-	grid-template-columns:repeat(4, 6em);
-}
-smoothly-icon{
+smoothly-icon {
 	font-size: smaller;
 }

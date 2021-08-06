@@ -16,14 +16,14 @@ export class InputDate {
 	}
 	render() {
 		return [
-			this.open ? <div onClick={() => ((this.open = false), console.log("?", this.open))}></div> : [],
 			<smoothly-input
-				onClick={() => (this.open = true)}
+				onClick={() => (this.open = !this.open)}
 				type="date"
 				value={this.value}
-				onChange={e => (this.value = (e.target as HTMLSmoothlyInputElement).value)}>
+				onSmoothlyChanged={e => (this.value = e.detail.value)}>
 				<slot></slot>
 			</smoothly-input>,
+			this.open ? <div onClick={() => (this.open = false)}></div> : [],
 			this.open ? (
 				<smoothly-calendar
 					value={this.value ?? Date.now()}

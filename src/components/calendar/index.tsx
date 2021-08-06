@@ -9,16 +9,17 @@ import * as generate from "./generate"
 })
 export class Calendar {
 	@Element() element: HTMLTableRowElement
-	@Prop({ mutable: true }) month: Date = Date.now()
+	@Prop({ mutable: true }) month?: Date
 	@Prop({ mutable: true }) value: Date = Date.now()
-	@Event() dateChanged: EventEmitter<Date>
-	@Watch("month")
-	onStart(next: Date) {
-		this.dateChanged.emit(next)
-	}
+	@Event() valueChanged: EventEmitter<Date>
 	render() {
 		return [
-			<smoothly-input-month value={this.month}></smoothly-input-month>,
+			<smoothly-input-month
+				value={this.month ?? this.value}
+				onValueChanged={event => {
+					this.month = event.detail
+					event.stopPropagation()
+				}}></smoothly-input-month>,
 			<table>
 				<thead>
 					<tr>
@@ -27,14 +28,12 @@ export class Calendar {
 						))}
 					</tr>
 				</thead>
-				{generate.month(this.month).map(week => (
+				{generate.month(this.month ?? this.value).map(week => (
 					<tr>
 						{week.map(date => (
 							<td
 								tabindex={1}
-								onClick={() => {
-									this.value = date
-								}}
+								onClick={() => this.valueChanged.emit((this.value = date))}
 								class={(date == this.value ? ["selected"] : [])
 									.concat(...(date == Date.now() ? ["today"] : []), date == this.value ? ["selected"] : [])
 									.join(" ")}>

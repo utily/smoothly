@@ -3,8 +3,12 @@
 }
 
 smoothly-calendar {
-	position: relative;
+	position: absolute;
+	top: 2.5em;
+	left: .5em;
 	z-index: 5;
+	background-color: rgb(var(--smoothly-default-shade));
+	max-width: 22em;
 	
 } 
 :host > div {
