@@ -10,6 +10,7 @@ import * as generate from "./generate"
 export class Calendar {
 	@Element() element: HTMLTableRowElement
 	@Prop({ mutable: true }) month: Date = Date.now()
+	@Prop({ mutable: true }) value: Date = Date.now()
 	@Event() dateChanged: EventEmitter<Date>
 	@Watch("month")
 	onStart(next: Date) {
@@ -32,10 +33,10 @@ export class Calendar {
 							<td
 								tabindex={1}
 								onClick={() => {
-									this.month = date
+									this.value = date
 								}}
-								class={(date == this.month ? ["selected"] : [])
-									.concat(...(date == Date.now() ? ["today"] : []), date == this.month ? ["selected"] : [])
+								class={(date == this.value ? ["selected"] : [])
+									.concat(...(date == Date.now() ? ["today"] : []), date == this.value ? ["selected"] : [])
 									.join(" ")}>
 								{date.substring(8, 10)}
 							</td>

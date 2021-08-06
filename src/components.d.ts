@@ -25,6 +25,7 @@ export namespace Components {
     }
     interface SmoothlyCalendar {
         "month": Date;
+        "value": Date;
     }
     interface SmoothlyCheckbox {
         "disabled": boolean;
@@ -573,6 +574,7 @@ declare namespace LocalJSX {
     interface SmoothlyCalendar {
         "month"?: Date;
         "onDateChanged"?: (event: CustomEvent<Date>) => void;
+        "value"?: Date;
     }
     interface SmoothlyCheckbox {
         "disabled"?: boolean;
