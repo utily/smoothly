@@ -21,8 +21,9 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: OptionType[] = []
-
-	@Event() menuClose: EventEmitter<OptionType[]>
+	@Prop({ mutable: true }) selectNoneName = "Select None"
+	@Event()
+	menuClose: EventEmitter<OptionType[]>
 
 	@Watch("selections")
 	@Watch("isOpen")
@@ -41,7 +42,11 @@ export class SmoothlyPicker {
 	}
 	@Listen("optionSelect")
 	optionSelectHander(event: CustomEvent<OptionType>) {
-		this.select(event.detail)
+		event.detail.value == "select-none"
+			? this.clearSelection()
+			: this.selections?.map(s => s.value).includes(event.detail.value)
+			? this.unselect(event.detail)
+			: this.select(event.detail)
 		event.stopPropagation()
 	}
 	select(selection: OptionType) {
@@ -50,8 +55,11 @@ export class SmoothlyPicker {
 			this.selections = this.multiple ? [...this.selections, selection] : [selection]
 		this.inputElement.value = ""
 		this.filterOptions()
-		this.keepFocusOnReRender = true
+		// this.keepFocusOnReRender = true
 		this.isOpen = this.multiple
+		const optionIndex = this.options.map(s => s.value).indexOf(selection.value)
+		if (optionIndex != -1)
+			this.options[optionIndex].description = "X"
 	}
 	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
@@ -62,10 +70,13 @@ export class SmoothlyPicker {
 			]
 			this.keepFocusOnReRender = true
 		}
+		const optionIndex = this.options.map(s => s.value).indexOf(selection.value)
+		if (optionIndex != -1)
+			this.options[optionIndex].description = ""
 	}
 	selectHighlighted() {
 		this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
-			result ? this.select(result) : undefined
+			result && this.select(result)
 		})
 	}
 	highlightDefault() {
@@ -73,10 +84,7 @@ export class SmoothlyPicker {
 		this.menuElement?.setHighlight(this.multiple || this.selections.length == 0 ? 0 : this.selections[0].value)
 	}
 	filterOptions() {
-		this.menuElement.filterOptions(
-			this.inputElement.value,
-			this.multiple ? this.selections.map(selection => selection.value) : []
-		)
+		this.menuElement.filterOptions(this.inputElement.value, [])
 	}
 
 	onInput(event: UIEvent) {
@@ -116,13 +124,13 @@ export class SmoothlyPicker {
 		this.isOpen = false
 		this.filterOptions()
 	}
-	onCrossClick(event: MouseEvent) {
+	clearSelection() {
 		this.selections = []
-		this.isOpen = false
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
-		/* Stop propagation so host is not clicked */
-		event.stopPropagation()
+		this.options = this.options.map((option: OptionType) => {
+			return { ...option, description: "" } as OptionType
+		})
 	}
 
 	render() {
@@ -130,21 +138,7 @@ export class SmoothlyPicker {
 			"--max-height": this.maxHeight ?? "inherit",
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
-		const selectionList = this.multiple
-			? this.selections.map(selection => (
-					<li data-value={selection.value}>
-						{selection.name}
-						<smoothly-icon
-							onClick={e => {
-								this.unselect(selection)
-								e.stopPropagation()
-							}}
-							name="close"
-							size="small"></smoothly-icon>
-					</li>
-			  ))
-			: null
-
+		const selectionList = this.multiple ? this.selections.map(selection => selection.name).join(", ") : ""
 		return (
 			<Host
 				style={cssVariables}
@@ -153,35 +147,29 @@ export class SmoothlyPicker {
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
 				<div>
-					<div class="icons">
-						<smoothly-icon name="close" onClick={(e: MouseEvent) => this.onCrossClick(e)}></smoothly-icon>
-						<smoothly-icon name="chevron-up" data-arrow="up"></smoothly-icon>
-						<smoothly-icon name="chevron-down" data-arrow="down"></smoothly-icon>
-					</div>
-					<ul>
-						{selectionList}
-						<label>{this.label}</label>
-						<li>
-							<input
-								type="text"
-								ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
-								onFocus={() => this.highlightDefault()}
-								onBlur={() => this.onBlur()}
-								placeholder={this.multiple ? "" : this.selections.length > 0 ? this.selections[0].name : ""}
-								onKeyDown={e => this.onKeyDown(e)}
-								onInput={(e: UIEvent) => this.onInput(e)}></input>
-						</li>
-					</ul>
+					<label>{this.label}</label>
+					<input
+						type="text"
+						ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
+						onFocus={() => this.highlightDefault()}
+						onBlur={() => this.onBlur()}
+						placeholder={this.multiple ? selectionList : this.selections.length > 0 ? this.selections[0].name : ""}
+						onKeyDown={e => this.onKeyDown(e)}
+						onInput={(e: UIEvent) => this.onInput(e)}></input>
 				</div>
 				<smoothly-menu-options
 					style={{ width: "100%" }}
 					optionStyle={this.optionStyle}
-					order={true}
+					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}
 					max-menu-height={this.maxMenuHeight}
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el)}
 					onClick={e => e.stopPropagation()}
-					options={this.options}></smoothly-menu-options>
+					resetHighlightOnOptionsChange={false}
+					options={[
+						{ value: "select-none", name: this.selectNoneName, description: this.selections.length == 0 ? "X" : "" },
+						...this.options,
+					]}></smoothly-menu-options>
 			</Host>
 		)
 	}

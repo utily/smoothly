@@ -92,6 +92,7 @@ export namespace Components {
         "optionStyle": any;
         "options": OptionType[];
         "order": boolean;
+        "resetHighlightOnOptionsChange": boolean;
         "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
     }
     interface SmoothlyNotification {
@@ -114,6 +115,7 @@ export namespace Components {
         "multiple": boolean;
         "optionStyle": any;
         "options": OptionType[];
+        "selectNoneName": string;
         "selections": OptionType[];
     }
     interface SmoothlyPopup {
@@ -583,6 +585,7 @@ declare namespace LocalJSX {
         "optionStyle"?: any;
         "options"?: OptionType[];
         "order"?: boolean;
+        "resetHighlightOnOptionsChange"?: boolean;
     }
     interface SmoothlyNotification {
         "notice"?: Notice;
@@ -608,6 +611,7 @@ declare namespace LocalJSX {
         "onMenuClose"?: (event: CustomEvent<OptionType[]>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
+        "selectNoneName"?: string;
         "selections"?: OptionType[];
     }
     interface SmoothlyPopup {
