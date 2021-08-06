@@ -19,7 +19,6 @@ export class Selector {
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
 		if (old)
 			old.selected = false
-		console.log("selector selected", value?.value)
 		this.selected.emit(value?.value)
 	}
 	@Watch("filter")
