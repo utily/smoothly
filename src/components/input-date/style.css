@@ -2,18 +2,24 @@
 	position: relative;
 }
 
-smoothly-calendar {
+nav {
 	position: absolute;
-	top: 2.5em;
-	left: .5em;
-	z-index: 5;
+	z-index: 10;
+	top: 3.5em;
 	background-color: rgb(var(--smoothly-default-shade));
 	max-width: 22em;
-	
 } 
 :host > div {
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
-	z-index: 4;
+	z-index: 2;
+}
+:host > nav > .arrow {
+	position: absolute;
+	z-index: 9;
+	transform: translate(2em, -.55em) rotate(45deg);
+	width: 1em;
+	height: 1em;
+	background-color: rgb(var(--smoothly-default-shade));
 }

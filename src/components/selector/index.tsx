@@ -101,6 +101,7 @@ export class Selector {
 						</button>
 					</aside>
 				) : undefined}
+				{this.opened ? <section onClick={() => (this.opened = true)}></section> : []}
 				<div class={this.opened ? "" : "hidden"}>
 					<nav>
 						<slot />

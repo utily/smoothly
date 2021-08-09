@@ -25,12 +25,15 @@ export class InputDate {
 			</smoothly-input>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
 			this.open ? (
-				<smoothly-calendar
-					value={this.value ?? Date.now()}
-					onValueChanged={event => {
-						this.value = event.detail
-						event.stopPropagation()
-					}}></smoothly-calendar>
+				<nav>
+					<div class="arrow"></div>
+					<smoothly-calendar
+						value={this.value ?? Date.now()}
+						onValueChanged={event => {
+							this.value = event.detail
+							event.stopPropagation()
+						}}></smoothly-calendar>
+				</nav>
 			) : (
 				[]
 			),

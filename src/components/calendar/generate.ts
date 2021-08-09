@@ -44,8 +44,10 @@ export function months(current: isoly.Date): { date: isoly.Date; name: string; s
 }
 export function years(current: isoly.Date): { date: isoly.Date; name: string; selected?: boolean }[] {
 	const day = new globalThis.Date(current)
+	const start = new Date().getFullYear() - 10
+	const end = new Date().getFullYear() + 10
 	const result: { date: isoly.Date; name: string; selected?: boolean }[] = []
-	for (let i = 2010; i <= 2035; i++) {
+	for (let i = start; i <= end; i++) {
 		day.setFullYear(i)
 		const date = isoly.Date.create(day)
 		result.push({
