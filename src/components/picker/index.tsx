@@ -59,7 +59,15 @@ export class SmoothlyPicker {
 		this.isOpen = this.multiple
 		const optionIndex = this.options.map(s => s.value).indexOf(selection.value)
 		if (optionIndex != -1)
-			this.options[optionIndex].description = "X"
+			this.options[optionIndex].description = this.getCheckmarkHtml()
+	}
+	getCheckmarkHtml(): HTMLElement {
+		return (
+			<smoothly-icon
+				name="checkmark-sharp"
+				size="small"
+				style={{ width: "1em", height: "1em", transform: "scale(1.4)", transformOrigin: "center" }}></smoothly-icon>
+		)
 	}
 	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
@@ -167,7 +175,11 @@ export class SmoothlyPicker {
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
 					options={[
-						{ value: "select-none", name: this.selectNoneName, description: this.selections.length == 0 ? "X" : "" },
+						{
+							value: "select-none",
+							name: this.selectNoneName,
+							description: this.selections.length == 0 ? this.getCheckmarkHtml() : "",
+						},
 						...this.options,
 					]}></smoothly-menu-options>
 			</Host>
