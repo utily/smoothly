@@ -34,7 +34,6 @@ export class SmoothlyMenuOptions {
 	}
 	@Method()
 	async setHighlight(newIndex: number | string, scrollToHighlight = false) {
-		console.log("setHighlight", newIndex)
 		if (typeof newIndex == "number") {
 			this.highlightIndex = newIndex
 			scrollToHighlight && this.scrollTo(this.highlightIndex)

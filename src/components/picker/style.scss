@@ -71,19 +71,19 @@
 label {
 	position: absolute;
 	top: 1em;
-	left: 0.5rem;
+	left: 1em;
 	color: rgba(var(--label-color));
 	transition: var(--intergiro-transition);
 	font-family: var(--smoothly-font-family);
 	pointer-events: none;
+	transform-origin: left;
 }
 :host([has-selection]) label {
 	display: var(--label-display);
 }
 :host([has-selection]) label,
 :host(:focus-within) label {
-	transform: translateY(-0.8em);
-	font-size: 70%;
+	transform: translateY(-1.2em) scale(0.7);
 }
 
 :host(:hover) smoothly-icon[data-arrow],
