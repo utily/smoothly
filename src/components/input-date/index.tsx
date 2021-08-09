@@ -28,6 +28,7 @@ export class InputDate {
 				<nav>
 					<div class="arrow"></div>
 					<smoothly-calendar
+						doubleInput={false}
 						value={this.value ?? Date.now()}
 						onValueChanged={event => {
 							this.value = event.detail

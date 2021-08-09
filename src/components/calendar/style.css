@@ -25,8 +25,11 @@ td.selected {
   color: rgb(var(--smoothly-primary-contrast));
   background: rgb(var(--smoothly-primary-color));
 }
-td:not(.selected):not(:hover).today {
-  background: rgb(var(--smoothly-dark-color));
+td:not(.selected,.dateRange):not(:hover).today {
+  background: rgb(var(--smoothly-dark-tint));
 	color: rgb(var(--smoothly-dark-contrast));
 }
-
+td.dateRange {
+	color: rgb(var(--smoothly-primary-contrast));
+  background: rgb(var(--smoothly-primary-tint));
+}

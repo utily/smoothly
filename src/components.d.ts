@@ -24,7 +24,10 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyCalendar {
+        "doubleInput": boolean;
+        "end"?: Date;
         "month"?: Date;
+        "start"?: Date;
         "value": Date;
     }
     interface SmoothlyCheckbox {
@@ -87,6 +90,12 @@ export namespace Components {
     }
     interface SmoothlyInputDate {
         "open": boolean;
+        "value"?: Date;
+    }
+    interface SmoothlyInputDateRange {
+        "end"?: Date;
+        "open": boolean;
+        "start"?: Date;
         "value"?: Date;
     }
     interface SmoothlyInputDemo {
@@ -321,6 +330,12 @@ declare global {
         prototype: HTMLSmoothlyInputDateElement;
         new (): HTMLSmoothlyInputDateElement;
     };
+    interface HTMLSmoothlyInputDateRangeElement extends Components.SmoothlyInputDateRange, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputDateRangeElement: {
+        prototype: HTMLSmoothlyInputDateRangeElement;
+        new (): HTMLSmoothlyInputDateRangeElement;
+    };
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyInputDemoElement: {
@@ -519,6 +534,7 @@ declare global {
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
+        "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-item": HTMLSmoothlyItemElement;
@@ -571,8 +587,13 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyCalendar {
+        "doubleInput"?: boolean;
+        "end"?: Date;
         "month"?: Date;
+        "onEndChanged"?: (event: CustomEvent<Date>) => void;
+        "onStartChanged"?: (event: CustomEvent<Date>) => void;
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "start"?: Date;
         "value"?: Date;
     }
     interface SmoothlyCheckbox {
@@ -638,6 +659,13 @@ declare namespace LocalJSX {
     interface SmoothlyInputDate {
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
+        "value"?: Date;
+    }
+    interface SmoothlyInputDateRange {
+        "end"?: Date;
+        "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "open"?: boolean;
+        "start"?: Date;
         "value"?: Date;
     }
     interface SmoothlyInputDemo {
@@ -799,6 +827,7 @@ declare namespace LocalJSX {
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-date": SmoothlyInputDate;
+        "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-item": SmoothlyItem;
@@ -852,6 +881,7 @@ declare module "@stencil/core" {
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
+            "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
