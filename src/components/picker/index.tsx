@@ -22,8 +22,7 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: OptionType[] = []
 	@Prop({ mutable: true }) selectNoneName = "Select None"
-	@Event()
-	menuClose: EventEmitter<OptionType[]>
+	@Event() menuClose: EventEmitter<OptionType[]>
 
 	@Watch("selections")
 	@Watch("isOpen")
@@ -32,7 +31,6 @@ export class SmoothlyPicker {
 			this.menuClose.emit(this.selections)
 		}
 	}
-
 	componentDidRender() {
 		this.filterOptions()
 		if (this.keepFocusOnReRender) {
@@ -42,32 +40,21 @@ export class SmoothlyPicker {
 	}
 	@Listen("optionSelect")
 	optionSelectHander(event: CustomEvent<OptionType>) {
-		event.detail.value == "select-none"
-			? this.clearSelection()
-			: this.selections?.map(s => s.value).includes(event.detail.value)
-			? this.unselect(event.detail)
-			: this.select(event.detail)
+		this.toggle(event.detail)
 		event.stopPropagation()
 	}
-	select(selection: OptionType) {
-		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
-		if (isNewSelection)
-			this.selections = this.multiple ? [...this.selections, selection] : [selection]
-		this.inputElement.value = ""
-		this.filterOptions()
-		// this.keepFocusOnReRender = true
-		this.isOpen = this.multiple
-		const optionIndex = this.options.map(s => s.value).indexOf(selection.value)
-		if (optionIndex != -1)
-			this.options[optionIndex].description = this.getCheckmarkHtml()
+	toggle(option: OptionType) {
+		option.value == "select-none"
+			? this.clearSelection()
+			: this.selections.map(s => s.value).includes(option.value)
+			? this.unselect(option)
+			: this.select(option)
 	}
-	getCheckmarkHtml(): HTMLElement {
-		return (
-			<smoothly-icon
-				name="checkmark-sharp"
-				size="small"
-				style={{ width: "1em", height: "1em", transform: "scale(1.4)", transformOrigin: "center" }}></smoothly-icon>
-		)
+	clearSelection() {
+		this.selections = []
+		this.inputElement.focus()
+		this.keepFocusOnReRender = true
+		this.options.forEach(option => (option.description = ""))
 	}
 	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
@@ -82,9 +69,23 @@ export class SmoothlyPicker {
 		if (optionIndex != -1)
 			this.options[optionIndex].description = ""
 	}
-	selectHighlighted() {
+	select(selection: OptionType) {
+		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
+		if (isNewSelection)
+			this.selections = this.multiple ? [...this.selections, selection] : [selection]
+		this.inputElement.value = ""
+		this.filterOptions()
+		this.keepFocusOnReRender = true
+		this.isOpen = this.multiple
+		this.options.forEach(
+			option =>
+				(option.description =
+					option.value == selection.value ? this.getCheckHtml() : this.multiple ? option.description : "")
+		)
+	}
+	toggleHighlighted() {
 		this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
-			result && this.select(result)
+			result && this.toggle(result)
 		})
 	}
 	highlightDefault() {
@@ -94,7 +95,6 @@ export class SmoothlyPicker {
 	filterOptions() {
 		this.menuElement.filterOptions(this.inputElement.value, [])
 	}
-
 	onInput(event: UIEvent) {
 		this.isOpen = this.inputElement.value != "" ? true : this.isOpen
 		this.highlightDefault()
@@ -104,7 +104,7 @@ export class SmoothlyPicker {
 			this.menuElement?.moveHighlight(event.key == "ArrowUp" ? -1 : 1)
 			event.preventDefault()
 		} else if (event.key == "Enter" && this.isOpen)
-			this.selectHighlighted()
+			this.toggleHighlighted()
 		else if (event.key == "Escape") {
 			this.inputElement.value = ""
 			this.isOpen = false
@@ -113,12 +113,6 @@ export class SmoothlyPicker {
 			event.preventDefault()
 			this.isOpen = true
 			this.filterOptions()
-		} else if (
-			(event.key == "Backspace" || event.key == "Delete") &&
-			this.inputElement.value == "" &&
-			this.selections.length > 0
-		) {
-			this.unselect(this.selections[this.selections.length - 1])
 		}
 	}
 	onClick() {
@@ -132,13 +126,12 @@ export class SmoothlyPicker {
 		this.isOpen = false
 		this.filterOptions()
 	}
-	clearSelection() {
-		this.selections = []
-		this.inputElement.focus()
-		this.keepFocusOnReRender = true
-		this.options = this.options.map((option: OptionType) => {
-			return { ...option, description: "" } as OptionType
-		})
+	getCheckHtml(): HTMLElement {
+		return (
+			<smoothly-icon
+				name="checkmark-sharp"
+				style={{ width: "1em", height: "1em", transform: "scale(1.4)", transformOrigin: "center" }}></smoothly-icon>
+		)
 	}
 
 	render() {
@@ -146,7 +139,6 @@ export class SmoothlyPicker {
 			"--max-height": this.maxHeight ?? "inherit",
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
-		const selectionList = this.multiple ? this.selections.map(selection => selection.name).join(", ") : ""
 		return (
 			<Host
 				style={cssVariables}
@@ -161,7 +153,7 @@ export class SmoothlyPicker {
 						ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
 						onFocus={() => this.highlightDefault()}
 						onBlur={() => this.onBlur()}
-						placeholder={this.multiple ? selectionList : this.selections.length > 0 ? this.selections[0].name : ""}
+						placeholder={this.selections.map(selection => selection.name).join(", ")}
 						onKeyDown={e => this.onKeyDown(e)}
 						onInput={(e: UIEvent) => this.onInput(e)}></input>
 				</div>
@@ -178,7 +170,7 @@ export class SmoothlyPicker {
 						{
 							value: "select-none",
 							name: this.selectNoneName,
-							description: this.selections.length == 0 ? this.getCheckmarkHtml() : "",
+							description: this.selections.length == 0 ? this.getCheckHtml() : "",
 						},
 						...this.options,
 					]}></smoothly-menu-options>
