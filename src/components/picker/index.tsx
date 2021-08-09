@@ -127,11 +127,7 @@ export class SmoothlyPicker {
 		this.filterOptions()
 	}
 	getCheckHtml(): HTMLElement {
-		return (
-			<smoothly-icon
-				name="checkmark-sharp"
-				style={{ width: "1em", height: "1em", transform: "scale(1.4)", transformOrigin: "center" }}></smoothly-icon>
-		)
+		return <smoothly-icon name="checkmark-sharp" size="small"></smoothly-icon>
 	}
 
 	render() {
@@ -159,7 +155,7 @@ export class SmoothlyPicker {
 				</div>
 				<smoothly-menu-options
 					style={{ width: "100%" }}
-					optionStyle={this.optionStyle}
+					optionStyle={{ padding: "0 1em", height: "2.5em", ...this.optionStyle }}
 					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}
 					max-menu-height={this.maxMenuHeight}
