@@ -4,7 +4,6 @@ icon-demo {
 icon-demo[hidden] {
 	display: none;
 }
-
 icon-demo > content {
 	display: flex;
 	flex-flow: row wrap;

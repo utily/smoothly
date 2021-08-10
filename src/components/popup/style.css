@@ -14,24 +14,22 @@
 	padding: 0.3em;
 	left: var(--left);
 	right: var(--right);
-	background-color:  rgb(238, 238, 238);
+	background-color: rgb(238, 238, 238);
 	border-color: rgb(238, 238, 238);
 	border-style: solid;
-  border-width: 0.1em;
+	border-width: 0.1em;
 	border-radius: 0.6em;
 	z-index: 3;
 }
 :host[direction=down] aside {
 	top: 2.2em;
-	box-shadow: 6px 5px 9px -9px black,
-	5px 6px 9px -9px black;
+	box-shadow: 6px 5px 9px -9px black, 5px 6px 9px -9px black;
 }
 :host[direction=up] aside {
 	bottom: 2.2em;
-	box-shadow: -6px -5px 9px -9px black,
-	-5px -6px 9px -9px black;
+	box-shadow: -6px -5px 9px -9px black, -5px -6px 9px -9px black;
 }
- :host:not([visible]) .background {
+:host:not([visible]) .background {
 	display: none;
 }
 :host .background {
@@ -45,15 +43,15 @@
 :host:not([visible]) .arrow {
 	display: none;
 }
-:host .arrow{
-	background-color:  rgb(238, 238, 238);
-	border-color:  rgb(238, 238, 238);
+:host .arrow {
+	background-color: rgb(238, 238, 238);
+	border-color: rgb(238, 238, 238);
 	z-index: 2;
 	content: "";
-  position: absolute;
-  width: 12px;
+	position: absolute;
+	width: 12px;
 	height: 12px;
-  transform: rotate(45deg);
+	transform: rotate(45deg);
 	left: calc(var(--left) + 1em);
 	right: calc(var(--right) + 1em);
 }
