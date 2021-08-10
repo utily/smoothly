@@ -9,6 +9,8 @@
 :host([data-highlight]) {
 	background-color: rgb(var(--smoothly-primary-color));
 	color: rgb(var(--smoothly-primary-contrast));
+	stroke: rgb(var(--smoothly-primary-contrast));
+	fill: rgb(var(--smoothly-primary-contrast));
 	div:last-child {
 		color: rgba(var(--smoothly-primary-contrast), 0.8);
 	}

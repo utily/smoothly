@@ -90,7 +90,7 @@ export class SmoothlySelectDemo {
 				]}></smoothly-picker>,
 			<br />,
 			<smoothly-picker
-				label="filter"
+				label="Single select"
 				multiple={false}
 				max-menu-height="200px"
 				options={[

@@ -18,12 +18,13 @@ export class SmoothlyAppDemo {
 				</a>
 				<span slot="header">
 					<smoothly-picker
-						label="Select Merchant"
+						label="All Animals Selected"
 						style={{ width: "500px" }}
 						labelSetting="hide"
 						empty-menu-label="Sorry, we're out of options."
 						max-height="58px"
 						multiple={true}
+						select-none-name="Select All"
 						options={[
 							{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
 							{ name: "Cat Stevens", value: "cat", aliases: ["moew"] },

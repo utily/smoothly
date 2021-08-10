@@ -16,9 +16,10 @@ export class SmoothlyMenuOptions {
 	@Prop() order = false
 	@Prop() optionStyle: any
 	@Prop({ mutable: true, reflect: true }) options: OptionType[] = []
+	@Prop({ mutable: true }) resetHighlightOnOptionsChange = true
 	@Watch("options")
 	optionsChangeHandler(newOptions: OptionType[]) {
-		this.highlightIndex = 0
+		this.highlightIndex = this.resetHighlightOnOptionsChange ? 0 : this.highlightIndex
 	}
 	@Listen("optionHover")
 	optionHoverHandler(event: CustomEvent<{ value: any; name: string }>) {
