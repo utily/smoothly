@@ -55,7 +55,7 @@
 		"build": "stencil build",
 		"start": "stencil build --dev --watch --serve",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
-		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
+		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix; prettier-stylelint --write -q 'src/**/*.{css,scss}'",
 		"test": "stencil test --spec --e2e",
 		"test.watch": "stencil test --spec --e2e --watchAll",
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
@@ -81,8 +81,12 @@
 		"eslint-plugin-simple-import-sort": "^7.0.0",
 		"jest": "26.6.3",
 		"jest-cli": "26.6.3",
+		"prettier": "^1.19.1",
+		"prettier-stylelint": "^0.4.2",
 		"prettierx": "github:simonmika/prettierx#newline-before-clause",
 		"puppeteer": "9.1.1",
+		"stylelint-prettier": "^1.2.0",
+		"stylelint-scss": "^3.19.0",
 		"typescript": "^4.2.4"
 	}
 }
