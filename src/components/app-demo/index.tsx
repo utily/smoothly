@@ -16,10 +16,10 @@ export class SmoothlyAppDemo {
 				<a slot="nav-start" href="https://google.com">
 					External
 				</a>
-				<span slot="header">
+				<span slot="header" style={{ width: "100%", maxWidth: "500px" }}>
 					<smoothly-picker
 						label="All Animals Selected"
-						style={{ width: "500px" }}
+						style={{ minWidth: "100px" }}
 						labelSetting="hide"
 						empty-menu-label="Sorry, we're out of options."
 						max-height="58px"
