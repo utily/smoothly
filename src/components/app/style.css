@@ -58,6 +58,10 @@ smoothly-app > smoothly-notifier > header a {
 	text-decoration: inherit;
 }
 
+smoothly-app > smoothly-notifier > header > nav {
+	flex-shrink: 0;
+}
+
 smoothly-app > smoothly-notifier > header > h1,
 smoothly-app > smoothly-notifier > header > nav,
 smoothly-app > smoothly-notifier > header > nav > ul,
