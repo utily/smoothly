@@ -1,0 +1,35 @@
+:host {
+	position: relative;
+	display: block;
+}
+
+:host > nav {
+	position: absolute;
+	z-index: 10;
+	top: 3.5em;
+	background-color: rgb(var(--smoothly-default-shade));
+	max-width: 22em;
+
+} 
+:host > div {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+}
+:host > nav > .arrow {
+	position: absolute;
+	z-index: 9;
+	transform: translate(10em, -.55em) rotate(45deg);
+	width: 1em;
+	height: 1em;
+	background-color: rgb(var(--smoothly-default-shade));
+}
+:host > section {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+:host > smoothly-input {
+	padding: 0
+}

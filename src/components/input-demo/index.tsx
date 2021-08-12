@@ -100,6 +100,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="phone" name="phone">
 						Phone
 					</smoothly-input>
+					<smoothly-input-date>Date</smoothly-input-date>
 				</main>
 				<footer>
 					<smoothly-submit expand="block" onSubmit={(e: Event) => alert(e)} color="success">

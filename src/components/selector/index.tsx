@@ -14,7 +14,6 @@ export class Selector {
 	@State() filter = ""
 	@Event() selected: EventEmitter<any>
 	aside?: HTMLElement
-
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
 		if (old)
@@ -41,6 +40,7 @@ export class Selector {
 		if (this.mainElement)
 			this.mainElement.innerHTML = this.selectedElement.innerHTML
 	}
+
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		if (this.opened) {
@@ -101,6 +101,7 @@ export class Selector {
 						</button>
 					</aside>
 				) : undefined}
+				{this.opened ? <section onClick={() => (this.opened = true)}></section> : []}
 				<div class={this.opened ? "" : "hidden"}>
 					<nav>
 						<slot />
