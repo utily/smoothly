@@ -1,5 +1,4 @@
-
-smoothly-reorder> * {
+smoothly-reorder > * {
 	cursor: move;
 	transition: transform 0.3s;
 }

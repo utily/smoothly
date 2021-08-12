@@ -1,0 +1,42 @@
+{
+	"plugins": [
+		"stylelint-prettier",
+		"stylelint-scss"
+	],
+	"rules": {
+		"selector-attribute-brackets-space-inside": "never",
+		"selector-attribute-operator-space-before": "never",
+		"selector-attribute-operator-space-after": "never",
+		"selector-attribute-quotes": "never",
+		"selector-list-comma-newline-after": "always",
+		"selector-pseudo-element-colon-notation": "double",
+		"block-opening-brace-space-before": "always",
+		"block-opening-brace-newline-after": "always",
+		"block-closing-brace-newline-before": "always",
+		"block-closing-brace-newline-after": "always",
+		"block-no-empty": true,
+		"declaration-no-important": true,
+		"declaration-block-no-shorthand-property-overrides": true,
+		"declaration-bang-space-before": "always",
+		"declaration-bang-space-after": "never",
+		"declaration-block-semicolon-newline-after": "always",
+		"declaration-block-no-duplicate-properties": true,
+		"indentation": "tab",
+		"no-eol-whitespace": true,
+		"max-empty-lines": 0,
+		"comment-no-empty": true,
+		"string-quotes": "double",
+		"value-list-comma-space-after": "always",
+		"alpha-value-notation": "number",
+		"no-extra-semicolons": true,
+		"at-rule-semicolon-space-before": "never",
+		"at-rule-semicolon-newline-after": "always",
+		"number-leading-zero": "always",
+		"number-no-trailing-zeros": true,
+		"function-calc-no-invalid": true,
+		"function-calc-no-unspaced-operator": true,
+		"function-comma-space-before": "never",
+		"function-comma-space-after": "always",
+		"function-parentheses-space-inside": "never"
+	}
+}

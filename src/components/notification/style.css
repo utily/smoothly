@@ -3,7 +3,7 @@
 	min-width: 32.6%;
 	min-height: 3em;
 	border-radius: 5px;
-	margin: .5em;
+	margin: 0.5em;
 }
 :host[hidden] {
 	display: none;

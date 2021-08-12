@@ -18,6 +18,8 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true,
 		"eslint.autoFixOnSave": true,
+		"source.fixAll.stylelint": true,
+		"stylelint.autoFixOnSave": true,
 	},
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,

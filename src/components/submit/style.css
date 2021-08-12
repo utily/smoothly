@@ -8,10 +8,10 @@
 	display: none;
 }
 :host[disabled] {
-	opacity: .5;
+	opacity: 0.5;
 }
 button {
-	padding: .2em .3em;
+	padding: 0.2em 0.3em;
 	font-size: 110%;
 	font-weight: 400;
 }

@@ -2,7 +2,7 @@
 	background: none;
 }
 :host {
-	display:block;
+	display: block;
 }
 :host[hidden] {
 	display: none;

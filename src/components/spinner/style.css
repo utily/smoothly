@@ -23,7 +23,7 @@
 	top: calc(50% - 5em + 1.1em);
 }
 :host > div,
-:host > div:after {
+:host > div::after {
 	border-radius: 50%;
 	width: 5em;
 	height: 5em;
