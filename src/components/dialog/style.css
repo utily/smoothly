@@ -53,6 +53,7 @@
 	right: -2em;
 	top: -2em;
 	z-index: 1;
+	border-color: transparent;
 }
 :host > * > smoothly-trigger:hover {
 	border-color: transparent;

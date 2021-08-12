@@ -12,6 +12,7 @@
 }
 button {
 	border-color: transparent;
+	background-color: transparent;
 	padding: .2em .3em;
 	font-size: 110%;
 	font-weight: 400;
