@@ -1,0 +1,37 @@
+:host {
+	position: relative;
+	height: 100%;
+}
+:host > main,
+:host > main > * {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+:host > div > nav {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	z-index: 10;
+}
+:host > aside {
+	position: absolute;
+	top: 0;
+	left: 5em;
+	z-index: 10;
+	background-color: rgb(var(--smoothly-tertiary-color));
+	color: rgb(var(--smoothly-tertiary-contrast));
+	height: 20px;
+	border-radius: 5px;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+}
+:host().missing > aside {
+	background-color: rgb(var(--smoothly-warning-color));
+	color: rgb(var(--smoothly-warning-contast));
+}
+.hidden {
+	display: none;
+}

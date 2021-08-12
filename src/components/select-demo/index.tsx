@@ -50,6 +50,27 @@ export class SmoothlySelectDemo {
 				<option value="2">2</option>
 				<option value="3">3</option>
 			</smoothly-select>,
+			<smoothly-selector>
+				<smoothly-item value="0">Alpha</smoothly-item>
+				<smoothly-item selected value="1">
+					Bravo
+				</smoothly-item>
+				<smoothly-item value="2">Charlie</smoothly-item>
+			</smoothly-selector>,
+			<smoothly-selector>
+				<smoothly-item value="1">January</smoothly-item>
+				<smoothly-item value="2">February</smoothly-item>
+				<smoothly-item value="3">March</smoothly-item>
+				<smoothly-item value="4">April</smoothly-item>
+				<smoothly-item value="5">May</smoothly-item>
+				<smoothly-item value="6">June</smoothly-item>
+				<smoothly-item value="7">July</smoothly-item>
+				<smoothly-item value="8">August</smoothly-item>
+				<smoothly-item value="9">September</smoothly-item>
+				<smoothly-item value="10">October</smoothly-item>
+				<smoothly-item value="11">November</smoothly-item>
+				<smoothly-item value="12">December</smoothly-item>
+			</smoothly-selector>,
 			<button onClick={() => this.alertf()}>press here</button>,
 			<smoothly-picker
 				label="Filter"
