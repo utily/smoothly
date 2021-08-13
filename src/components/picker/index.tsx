@@ -93,7 +93,7 @@ export class SmoothlyPicker {
 		this.menuElement?.setHighlight(this.multiple || this.selections.length == 0 ? 0 : this.selections[0].value)
 	}
 	filterOptions() {
-		this.menuElement.filterOptions(this.inputElement.value, [])
+		this.menuElement?.filterOptions(this.inputElement.value, [])
 	}
 	onInput(event: UIEvent) {
 		this.isOpen = this.inputElement.value != "" ? true : this.isOpen
@@ -159,7 +159,7 @@ export class SmoothlyPicker {
 					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}
 					max-menu-height={this.maxMenuHeight}
-					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el)}
+					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
 					options={[
