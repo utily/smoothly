@@ -27,7 +27,10 @@ export class Item {
 	@Method()
 	async filter(filter: string): Promise<boolean> {
 		const result = !(this.element.hidden = filter
-			? !(this.value.toLowerCase().includes(filter) || this.element.innerText.toLowerCase().includes(filter))
+			? !(
+					(typeof this.value === "string" ? this.value : JSON.stringify(this.value)).toLowerCase().includes(filter) ||
+					this.element.innerText.toLowerCase().includes(filter)
+			  )
 			: false)
 		return result
 	}
