@@ -54,7 +54,7 @@ export class SmoothlyPicker {
 		this.selections = []
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
-		this.options.forEach(option => (option.description = ""))
+		this.options?.forEach(option => (option.description = ""))
 	}
 	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
@@ -65,7 +65,7 @@ export class SmoothlyPicker {
 			]
 			this.keepFocusOnReRender = true
 		}
-		const optionIndex = this.options.map(s => s.value).indexOf(selection.value)
+		const optionIndex = this.options?.map(s => s.value).indexOf(selection.value)
 		if (optionIndex != -1)
 			this.options[optionIndex].description = ""
 	}
@@ -77,7 +77,7 @@ export class SmoothlyPicker {
 		this.filterOptions()
 		this.keepFocusOnReRender = true
 		this.isOpen = this.multiple
-		this.options.forEach(
+		this.options?.forEach(
 			option =>
 				(option.description =
 					option.value == selection.value ? this.getCheckHtml() : this.multiple ? option.description : "")
@@ -93,7 +93,7 @@ export class SmoothlyPicker {
 		this.menuElement?.setHighlight(this.multiple || this.selections.length == 0 ? 0 : this.selections[0].value)
 	}
 	filterOptions() {
-		this.menuElement.filterOptions(this.inputElement.value, [])
+		this.menuElement?.filterOptions(this.inputElement.value, [])
 	}
 	onInput(event: UIEvent) {
 		this.isOpen = this.inputElement.value != "" ? true : this.isOpen
@@ -159,7 +159,7 @@ export class SmoothlyPicker {
 					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}
 					max-menu-height={this.maxMenuHeight}
-					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el)}
+					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
 					options={[
@@ -168,7 +168,7 @@ export class SmoothlyPicker {
 							name: this.selectNoneName,
 							description: this.selections.length == 0 ? this.getCheckHtml() : "",
 						},
-						...this.options,
+						...(this.options ?? []),
 					]}></smoothly-menu-options>
 			</Host>
 		)
