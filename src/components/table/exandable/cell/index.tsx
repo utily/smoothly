@@ -28,9 +28,9 @@ export class TableExpandableCell implements ComponentDidLoad {
 	@Watch("open")
 	openChanged(value: boolean) {
 		if (this.expansionElement)
-			if (value)
+			if (value) {
 				this.beginOpen = true
-			else
+			} else
 				this.element.append(this.expansionElement)
 	}
 	@Listen("click")
@@ -51,13 +51,9 @@ export class TableExpandableCell implements ComponentDidLoad {
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
 				<tr ref={e => (this.expansionElement = e)}>
-					{this.open ? (
-						<td colSpan={500}>
-							<slot name="detail"></slot>
-						</td>
-					) : (
-						[]
-					)}
+					<td colSpan={500} class={!this.open ? "hide" : ""}>
+						<slot name="detail"></slot>
+					</td>
 				</tr>
 			</Host>
 		)
