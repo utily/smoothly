@@ -28,9 +28,9 @@ export class TableExpandableCell implements ComponentDidLoad {
 	@Watch("open")
 	openChanged(value: boolean) {
 		if (this.expansionElement)
-			if (value) {
+			if (value)
 				this.beginOpen = true
-			} else
+			else
 				this.element.append(this.expansionElement)
 	}
 	@Listen("click")
