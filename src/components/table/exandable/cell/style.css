@@ -2,6 +2,6 @@
 	display: table-cell;
 	padding: 0.5em;
 }
-:host > tr {
+.hide {
 	display: none;
 }
