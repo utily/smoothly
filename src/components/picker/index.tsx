@@ -54,7 +54,6 @@ export class SmoothlyPicker {
 		this.selections = []
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
-		this.options?.forEach(option => (option.description = ""))
 	}
 	unselect(selection: OptionType) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
@@ -65,9 +64,6 @@ export class SmoothlyPicker {
 			]
 			this.keepFocusOnReRender = true
 		}
-		const optionIndex = this.options?.map(s => s.value).indexOf(selection.value)
-		if (optionIndex != -1)
-			this.options[optionIndex].description = ""
 	}
 	select(selection: OptionType) {
 		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
@@ -77,11 +73,6 @@ export class SmoothlyPicker {
 		this.filterOptions()
 		this.keepFocusOnReRender = true
 		this.isOpen = this.multiple
-		this.options?.forEach(
-			option =>
-				(option.description =
-					option.value == selection.value ? this.getCheckHtml() : this.multiple ? option.description : "")
-		)
 	}
 	toggleHighlighted() {
 		this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
@@ -135,6 +126,17 @@ export class SmoothlyPicker {
 			"--max-height": this.maxHeight ?? "inherit",
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
+		this.options.forEach(o => {
+			o.description = this.selections.map(s => s.value).includes(o.value) ? this.getCheckHtml() : ""
+		})
+		const options = [
+			{
+				value: "select-none",
+				name: this.selectNoneName,
+				description: this.selections.length == 0 ? this.getCheckHtml() : "",
+			},
+			...(this.options ?? []),
+		]
 		return (
 			<Host
 				style={cssVariables}
@@ -162,14 +164,7 @@ export class SmoothlyPicker {
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
-					options={[
-						{
-							value: "select-none",
-							name: this.selectNoneName,
-							description: this.selections.length == 0 ? this.getCheckHtml() : "",
-						},
-						...(this.options ?? []),
-					]}></smoothly-menu-options>
+					options={options}></smoothly-menu-options>
 			</Host>
 		)
 	}
