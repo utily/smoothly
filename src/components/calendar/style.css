@@ -1,5 +1,6 @@
 :host {
   display: block;
+	--other-month-opacity: 0.5;
 }
 :host > smoothly-input-month {
 	width: calc(100% - 1em);
@@ -11,11 +12,20 @@ td {
 	padding: .5em;
 	min-width: 2em;
 	background-color: rgb(var(--smoothly-default-shade));
+	cursor: pointer;
+	user-select: none;
+}
+td:not(.currentMonth) {
+	color: rgba(var(--smoothly-primary-contrast), var(--other-month-opacity));
 }
 
 td:nth-child(6),
 td:nth-child(7) {
-  color: rgb(var(--smoothly-light-shade));
+  color: rgb(var(--smoothly-danger-tint));
+}
+td:nth-child(6):not(.currentMonth),
+td:nth-child(7):not(.currentMonth) {
+  color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
 td:not(.selected):hover {
   color: rgb(var(--smoothly-primary-contrast));
