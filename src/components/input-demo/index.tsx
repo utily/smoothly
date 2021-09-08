@@ -101,6 +101,7 @@ export class SmoothlyInputDemo {
 						Phone
 					</smoothly-input>
 					<smoothly-input-date>Date</smoothly-input-date>
+					<smoothly-input-date-range></smoothly-input-date-range>
 				</main>
 				<footer>
 					<smoothly-submit expand="block" onSubmit={(e: Event) => alert(e)} color="success">
