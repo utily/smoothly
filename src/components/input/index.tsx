@@ -126,7 +126,7 @@ export class SmoothlyInput {
 				},
 			}
 			if (
-				(!(event.ctrlKey && event.key == "v") && event.key.length == 1) ||
+				(!((event.ctrlKey || event.metaKey) && event.key == "v") && event.key.length == 1) ||
 				event.key == "ArrowLeft" ||
 				event.key == "ArrowRight" ||
 				event.key == "Delete" ||
