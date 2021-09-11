@@ -12,14 +12,10 @@ export function month(date: isoly.Date): isoly.Date[][] {
 			d.setDate(day++)
 			r.push(isoly.Date.create(d))
 		}
-		if (row < 5 || getMonth(r[0]) == getMonth(date))
+		if (row < 5 || isoly.Date.firstOfMonth(r[0]) == isoly.Date.firstOfMonth(date))
 			result.push(r)
 	}
 	return result
-}
-/* TODO: Move this function into isoly.Date */
-export function getMonth(date: isoly.Date): number {
-	return Number(date.substr(5, 2))
 }
 
 export function weekdays(): string[] {

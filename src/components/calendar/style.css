@@ -15,8 +15,11 @@ td {
 	cursor: pointer;
 	user-select: none;
 }
+td.currentMonth {
+	color: rgb(var(--smoothly-default-contrast));
+}
 td:not(.currentMonth) {
-	color: rgba(var(--smoothly-primary-contrast), var(--other-month-opacity));
+	color: rgba(var(--smoothly-default-contrast), var(--other-month-opacity));
 }
 
 td:nth-child(6),

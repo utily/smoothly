@@ -62,7 +62,7 @@ export class Calendar {
 								class={(date == this.value ? ["selected"] : [])
 									.concat(
 										...(date == Date.now() ? ["today"] : []),
-										generate.getMonth(this.month ?? this.value) == generate.getMonth(date) ? ["currentMonth"] : [],
+										Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
 										this.doubleInput
 											? Date.parse(date) >= Date.parse(this.start ?? "") &&
 											  Date.parse(date) <= Date.parse(this.end ?? "")
