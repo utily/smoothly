@@ -14,11 +14,16 @@ export class MonthSelector {
 	onValueChanged(next: Date) {
 		this.valueChanged.emit(next)
 	}
+	private adjustMonth(delta: number) {
+		const date = Date.parse(this.value ?? Date.now())
+		date.setMonth(date.getMonth() + delta)
+		this.value = Date.create(date)
+	}
 	render() {
 		return [
-			<button onClick={() => this.adjustMonth(-1)}>
+			<div onClick={() => this.adjustMonth(-1)}>
 				<smoothly-icon name="chevron-back-outline" size="small"></smoothly-icon>
-			</button>,
+			</div>,
 			<smoothly-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.years(this.value ?? Date.now()).map(year => (
 					<smoothly-item value={year.date} selected={year.selected}>
@@ -33,15 +38,9 @@ export class MonthSelector {
 					</smoothly-item>
 				))}
 			</smoothly-selector>,
-			<button onClick={() => this.adjustMonth(1)}>
+			<div onClick={() => this.adjustMonth(1)}>
 				<smoothly-icon name="chevron-forward-outline" size="small"></smoothly-icon>
-			</button>,
+			</div>,
 		]
-	}
-
-	private adjustMonth(delta: number) {
-		const date = Date.parse(this.value ?? Date.now())
-		date.setMonth(date.getMonth() + delta)
-		this.value = Date.create(date)
 	}
 }

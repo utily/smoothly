@@ -1,35 +1,53 @@
 :host {
-  display: block;
+	display: block;
+	--other-month-opacity: 0.5;
 }
 :host > smoothly-input-month {
 	width: calc(100% - 1em);
-	padding: .5em .5em 0 .5em;
+	padding: 0.5em 0.5em 0 0.5em;
 }
 th,
 td {
 	text-align: center;
-	padding: .5em;
+	padding: 0.5em;
 	min-width: 2em;
 	background-color: rgb(var(--smoothly-default-shade));
+	cursor: pointer;
+	user-select: none;
 }
-
+td.currentMonth {
+	color: rgb(var(--smoothly-default-contrast));
+}
+td:not(.currentMonth) {
+	color: rgba(var(--smoothly-default-contrast), var(--other-month-opacity));
+}
+td:nth-child(6):not(.currentMonth).selected,
+td:nth-child(6):not(.currentMonth).dateRange,
+td:nth-child(7):not(.currentMonth).selected,
+td:nth-child(7):not(.currentMonth).dateRange {
+	color: rgba(var(--smoothly-default-contrast));
+}
 td:nth-child(6),
 td:nth-child(7) {
-  color: rgb(var(--smoothly-light-shade));
+	color: rgb(var(--smoothly-danger-tint));
+}
+td:nth-child(6):not(.currentMonth),
+td:nth-child(7):not(.currentMonth) {
+	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
 td:not(.selected):hover {
-  color: rgb(var(--smoothly-primary-contrast));
-  background: rgb(var(--smoothly-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-tint));
 }
 td.selected {
-  color: rgb(var(--smoothly-primary-contrast));
-  background: rgb(var(--smoothly-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
 }
 td:not(.selected,.dateRange):not(:hover).today {
-  background: rgb(var(--smoothly-dark-tint));
+	background: rgb(var(--smoothly-dark-tint));
 	color: rgb(var(--smoothly-dark-contrast));
 }
 td.dateRange {
 	color: rgb(var(--smoothly-primary-contrast));
-  background: rgb(var(--smoothly-primary-tint));
+	background: rgb(var(--smoothly-primary-tint));
 }

@@ -12,7 +12,8 @@ export function month(date: isoly.Date): isoly.Date[][] {
 			d.setDate(day++)
 			r.push(isoly.Date.create(d))
 		}
-		result.push(r)
+		if (row < 5 || isoly.Date.firstOfMonth(r[0]) == isoly.Date.firstOfMonth(date))
+			result.push(r)
 	}
 	return result
 }
