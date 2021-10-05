@@ -96,7 +96,7 @@ export class Selector {
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
 						{this.filter}
-						<button onClick={() => (this.filter = "")}>
+						<button onClick={e => (e.stopPropagation(), (this.filter = ""))}>
 							<smoothly-icon name="close" size="small"></smoothly-icon>
 						</button>
 					</aside>
