@@ -43,6 +43,7 @@ export class Selector {
 
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
+		event.stopPropagation()
 		if (this.opened) {
 			let direction: -1 | 0 | 1 = 0
 			switch (event.key) {
