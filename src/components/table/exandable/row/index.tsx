@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Listen } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-expandable-row",
@@ -7,24 +7,36 @@ import { Component, Element, h, Host, Listen } from "@stencil/core"
 })
 export class TableExpandableRow {
 	@Element() element: HTMLSmoothlyTableExpandableRowElement
-	expansions: HTMLSmoothlyTableExpandableCellElement[] = []
-	@Listen("expansionLoaded")
-	onExpansionLoaded(event: CustomEvent<void>) {
-		this.expansions.push(event.target as HTMLSmoothlyTableExpandableCellElement)
+	expansionElement?: HTMLTableRowElement
+	@Event() expansionOpen: EventEmitter<HTMLElement>
+	@Event() expansionLoaded: EventEmitter<void>
+	@Prop() align: "left" | "center" | "right" = "left"
+	@Prop({ mutable: true, reflect: true }) open: boolean
+	@State() beginOpen: boolean
+	@Watch("open")
+	openChanged(value: boolean) {
+		if (this.expansionElement)
+			this.element.after(this.expansionElement)
 	}
-	@Listen("expansionOpen")
-	onDetailsLoaded(event: CustomEvent<HTMLElement | undefined>) {
-		this.expansions.forEach(cell => {
-			if (cell != event.target)
-				cell.open = false
-		})
-		if (event.detail)
-			this.element.after(event.detail)
+	@Listen("click")
+	onClick(e: UIEvent) {
+		this.open = !this.open
+		console.log(this.open)
+		e.stopPropagation()
+	}
+
+	componentDidRender(): void {
+		this.expansionOpen.emit(this.expansionElement)
 	}
 	render() {
 		return (
-			<Host>
+			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
+				<tr ref={e => (this.expansionElement = e)}>
+					<td colSpan={500} class={!this.open ? "hide" : ""}>
+						<slot name="detail"></slot>
+					</td>
+				</tr>
 			</Host>
 		)
 	}

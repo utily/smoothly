@@ -1,4 +1,4 @@
-import { Component, h, Host } from "@stencil/core"
+import { Component, Element, h, Host, Listen } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-row",
@@ -6,6 +6,16 @@ import { Component, h, Host } from "@stencil/core"
 	scoped: true,
 })
 export class TableRow {
+	@Element() element: HTMLSmoothlyTableRowElement
+	expansions: HTMLTableRowElement[] = []
+
+	@Listen("expansionOpen")
+	onDetailsLoaded(event: CustomEvent<HTMLElement | undefined>) {
+		if (event.detail) {
+			console.log(event.detail)
+			this.element.after(event.detail)
+		}
+	}
 	render() {
 		return (
 			<Host>
