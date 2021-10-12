@@ -9,6 +9,4 @@
 :host:hover {
 	background-color: rgb(var(--smoothly-default-color));
 }
-.hide{
-	display: none;
-}
+
