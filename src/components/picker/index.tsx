@@ -126,7 +126,7 @@ export class SmoothlyPicker {
 			"--max-height": this.maxHeight ?? "inherit",
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
-		this.options.forEach(o => {
+		this.options?.forEach(o => {
 			o.description = this.selections.map(s => s.value).includes(o.value) ? this.getCheckHtml() : ""
 		})
 		const options = [
