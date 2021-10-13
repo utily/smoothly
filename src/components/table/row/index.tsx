@@ -20,12 +20,13 @@ export class TableRow {
 	@Listen("click")
 	onClick(e: UIEvent) {
 		this.open = !this.open
-		console.log(this.open)
 		e.stopPropagation()
 	}
 
 	componentDidRender(): void {
 		this.expansionOpen.emit(this.expansionElement)
+		if (this.expansionElement && this.open)
+			this.element.after(this.expansionElement)
 	}
 	render() {
 		return (
