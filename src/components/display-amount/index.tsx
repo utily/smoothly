@@ -13,9 +13,9 @@ export class SmoothlyDisplayAmount {
 	format(amount: string): string {
 		const digitsPerGroup = 3
 		const defaultDecimals = 2
-		const maxDecimals = (Currency.decimalDigits(this.currency)
-			? Currency.decimalDigits(this.currency)
-			: defaultDecimals) as number
+		const maxDecimals = (
+			Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : defaultDecimals
+		) as number
 		let beforeSeparator = amount.length
 		let separator: number
 		let result = amount

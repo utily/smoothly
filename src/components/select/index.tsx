@@ -13,7 +13,7 @@ export class SmoothlySelect {
 	@Event() selectionChanged!: EventEmitter<{ identifier: string; value: string }>
 	optionSelected() {
 		if (this.selectElement)
-			this.selectionChanged.emit({ identifier: this.identifier, value: this.value = this.selectElement.value })
+			this.selectionChanged.emit({ identifier: this.identifier, value: (this.value = this.selectElement.value) })
 	}
 	componentDidLoad() {
 		if (this.selectElement)
