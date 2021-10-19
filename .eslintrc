@@ -10,8 +10,7 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:prettierx/default",
-		"plugin:prettierx/@typescript-eslint"
+		"plugin:prettierx/default"
 	],
 	"rules": {
 		"prettierx/options": [
@@ -40,30 +39,30 @@
 			{
 				"groups": [
 					[
-            "@stencil/core",
+						"@stencil/core",
 						"cryptly",
-						"flagly", 
-            "gracely",
-						"isoly", 
-            "paramly", 
-            "selectively", 
-            "langly", 
-            "tidily",
-            "uply",
+						"flagly",
+						"gracely",
+						"isoly",
+						"paramly",
+						"selectively",
+						"langly",
+						"tidily",
+						"uply",
 						"authly",
-						"persistly", 
-						"servly", 
-						"servly-azure", 
-						"smoothly", 
-						"@payfunc/model-card", 
-            "@payfunc/model", 
-            "@payfunc/cli-card", 
-            "@payfunc/component", 
-						"@payfunc/service", 
+						"persistly",
+						"servly",
+						"servly-azure",
+						"smoothly",
+						"@payfunc/model-card",
+						"@payfunc/model",
+						"@payfunc/cli-card",
+						"@payfunc/component",
+						"@payfunc/service",
 						"^\\u0000",
 						"^@?\\w",
 						"^",
-            "^\\."
+						"^\\."
 					]
 				]
 			}

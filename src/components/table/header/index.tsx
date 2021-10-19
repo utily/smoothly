@@ -13,7 +13,7 @@ export class TableHeader {
 	onClick(event: MouseEvent) {
 		this.sort.emit({
 			property: this.name,
-			direction: this.sortDirection = this.sortDirection == "ascending" ? "descending" : "ascending",
+			direction: (this.sortDirection = this.sortDirection == "ascending" ? "descending" : "ascending"),
 		})
 		console.log("sort", this.name, this.sortDirection)
 		event.preventDefault()
