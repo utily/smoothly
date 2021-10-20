@@ -113,7 +113,7 @@ export class SmoothlyInput {
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, backend)
 	}
-	onKeyDown(event: KeyboardEvent) {
+	onKeyPress(event: KeyboardEvent) {
 		if (event.key && !(event.key == "Unidentified")) {
 			const backend = event.target as HTMLInputElement
 			this.state = {
@@ -208,7 +208,7 @@ export class SmoothlyInput {
 					onFocus={e => this.onFocus(e)}
 					onClick={e => this.onClick(e)}
 					onBlur={e => this.onBlur(e)}
-					onKeyDown={e => this.onKeyDown(e)}
+					onKeyPress={e => this.onKeyPress(e)}
 					ref={(el: HTMLInputElement) => (this.inputElement = el)}
 					onPaste={e => this.onPaste(e)}></input>
 				<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
