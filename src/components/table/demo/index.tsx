@@ -7,7 +7,7 @@ import { Component, h } from "@stencil/core"
 })
 export class TableDemo {
 	render() {
-		return (
+		return [
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
@@ -42,7 +42,34 @@ export class TableDemo {
 						<div slot="detail">Cost details.</div>
 					</smoothly-table-expandable-cell>
 				</smoothly-table-expandable-row>
-			</smoothly-table>
-		)
+			</smoothly-table>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>Header D</smoothly-table-header>
+					<smoothly-table-header>Header E</smoothly-table-header>
+					<smoothly-table-header>Header F</smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>Value 1A</smoothly-table-cell>
+					<smoothly-table-cell>
+						<smoothly-display type="price" value={20} currency="EUR"></smoothly-display>
+					</smoothly-table-cell>
+					<smoothly-table-cell>
+						<smoothly-display type="price" value={18} currency="EUR"></smoothly-display>
+					</smoothly-table-cell>
+					<div slot="detail">Cost details.</div>
+				</smoothly-table-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>Value 1A</smoothly-table-cell>
+					<smoothly-table-cell>
+						<smoothly-display type="price" value={20} currency="EUR"></smoothly-display>
+					</smoothly-table-cell>
+					<smoothly-table-cell>
+						<smoothly-display type="price" value={18} currency="EUR"></smoothly-display>
+					</smoothly-table-cell>
+					<div slot="detail">Cost details.</div>
+				</smoothly-table-row>
+			</smoothly-table>,
+		]
 	}
 }

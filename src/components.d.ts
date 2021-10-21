@@ -202,6 +202,8 @@ export namespace Components {
         "sortDirection"?: "ascending" | "descending";
     }
     interface SmoothlyTableRow {
+        "align": "left" | "center" | "right";
+        "open": boolean;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -782,6 +784,9 @@ declare namespace LocalJSX {
         "sortDirection"?: "ascending" | "descending";
     }
     interface SmoothlyTableRow {
+        "align"?: "left" | "center" | "right";
+        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
+        "open"?: boolean;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
