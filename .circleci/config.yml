@@ -2,7 +2,7 @@ version: 2.1
 default: &default
   working_directory: ~/repo
   docker:
-    - image: circleci/node:14-browsers
+    - image: circleci/node:12.17-browsers
 commands:
   prepare:
     description: "Prepare working directory"
@@ -10,21 +10,14 @@ commands:
       - checkout
       - restore_cache:
           keys:
-          - v3-dependencies-{{ checksum "package.json" }}
+          - v2-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v3-dependencies-
-      - run:
-          name: Update NPM
-          command: |
-            echo "prefix=~/.npm-global" > ~/.npmrc
-            npm i -g npm
-      - run:
-          name: NPM Install
-          command: npm install
+          - v2-dependencies-
+      - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v3-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
 jobs:
   deploy:
     <<: *default
