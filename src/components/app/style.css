@@ -69,10 +69,16 @@ smoothly-app > smoothly-notifier > header > nav > ul > li > *:not(a) {
 	height: 100%;
 	margin: 0;
 }
+smoothly-app > smoothly-notifier > header > h1 a {
+	overflow: hidden;
+	user-select: none;
+}
+smoothly-app > smoothly-notifier > header > nav > ul > li a {
+	line-height: 1.6cm;
+}
 smoothly-app > smoothly-notifier > header > h1 a,
 smoothly-app > smoothly-notifier > header > nav > ul > li a {
 	display: inline-block;
-	line-height: 1.6cm;
 	height: 100%;
 	padding: 0 0.4cm;
 	text-decoration: none;
