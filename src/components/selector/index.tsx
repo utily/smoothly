@@ -43,6 +43,7 @@ export class Selector {
 
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
+		event.stopPropagation()
 		if (this.opened) {
 			let direction: -1 | 0 | 1 = 0
 			switch (event.key) {
@@ -96,7 +97,11 @@ export class Selector {
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
 						{this.filter}
-						<button onClick={() => (this.filter = "")}>
+						<button
+							onClick={e => {
+								e.stopPropagation()
+								this.filter = ""
+							}}>
 							<smoothly-icon name="close" size="small"></smoothly-icon>
 						</button>
 					</aside>

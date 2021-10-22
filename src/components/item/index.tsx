@@ -20,10 +20,6 @@ export class Item {
 		this.selected = true
 		this.itemSelected.emit()
 	}
-	componentDidLoad() {
-		if (this.selected)
-			this.itemSelected.emit()
-	}
 	@Method()
 	async filter(filter: string): Promise<boolean> {
 		const result = !(this.element.hidden = filter
