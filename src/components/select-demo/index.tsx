@@ -122,6 +122,13 @@ export class SmoothlySelectDemo {
 					{ name: "Dragon", value: "dragon" },
 					{ name: "Kraken", value: "kraken" },
 				]}></smoothly-picker>,
+			<smoothly-tab-switch>
+				<smoothly-tab label="test1" open>
+					Hello world!
+				</smoothly-tab>
+				<smoothly-tab label="test2">this is a test message!</smoothly-tab>
+				<smoothly-tab label="test3">this is a test message again!</smoothly-tab>
+			</smoothly-tab-switch>,
 		]
 	}
 }
