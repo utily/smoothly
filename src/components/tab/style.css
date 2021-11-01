@@ -1,10 +1,10 @@
-:host:not([open]) > label{
+:host:not([open]) > label {
 	background-color: rgb(var(--smoothly-dark-shade));
 }
-.hide{
+.hide {
 	display: none;
 }
-label{
+label {
 	display: block;
   padding: 1em;
 	background-color: rgb(var(--smoothly-default-shade));
@@ -13,8 +13,7 @@ label{
 	width: 100px;
 
 }
-div{
-	height: 20em;
+div {
   background-color: rgb(var(--smoothly-default-shade));
   padding: 1em;
 }
