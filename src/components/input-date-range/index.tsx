@@ -24,8 +24,7 @@ export class InputDateRange {
 	@Watch("end")
 	onClose(open: boolean) {
 		if (open == false && Date.is(this.start) && Date.is(this.end)) {
-			const range = { start: this.start, end: this.end }
-			this.dateRangeSelected.emit(range)
+			this.dateRangeSelected.emit({ start: this.start, end: this.end })
 		}
 	}
 
