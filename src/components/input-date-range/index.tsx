@@ -25,7 +25,6 @@ export class InputDateRange {
 	onClose(open: boolean) {
 		if (open == false && Date.is(this.start) && Date.is(this.end)) {
 			const range = { start: this.start, end: this.end }
-			console.log("emit range", range)
 			this.dateRangeSelected.emit(range)
 		}
 	}
