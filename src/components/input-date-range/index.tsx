@@ -23,9 +23,8 @@ export class InputDateRange {
 	@Watch("start")
 	@Watch("end")
 	onClose(open: boolean) {
-		if (open == false && Date.is(this.start) && Date.is(this.end)) {
+		if (open == false && Date.is(this.start) && Date.is(this.end))
 			this.dateRangeSelected.emit({ start: this.start, end: this.end })
-		}
 	}
 
 	@Listen("startChanged")
