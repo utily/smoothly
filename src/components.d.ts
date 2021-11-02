@@ -685,6 +685,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDateRange {
         "end"?: Date;
+        "onDateRangeSelected"?: (event: CustomEvent<{ start: Date; end: Date }>) => void;
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
         "start"?: Date;
