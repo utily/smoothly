@@ -1,91 +1,91 @@
 {
-	"name": "smoothly",
-	"version": "0.1.77",
-	"description": "Web component library written in Stencil.",
-	"author": "PayFunc",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/payfunc/smoothly"
-	},
-	"bugs": {
-		"url": "https://github.com/payfunc/smoothly/issues"
-	},
-	"homepage": "https://payfunc.com/open-source/smoothly",
-	"private": false,
-	"main": "dist/index.cjs.js",
-	"module": "dist/index.js",
-	"es2015": "dist/esm/index.js",
-	"es2017": "dist/esm/index.js",
-	"types": "dist/custom-elements/index.d.ts",
-	"collection": "dist/collection/collection-manifest.json",
-	"collection:main": "dist/collection/index.js",
-	"unpkg": "dist/smoothly/smoothly.js",
-	"files": [
-		"dist/",
-		"loader/"
-	],
-	"git": {
-		"tagName": "v${version}"
-	},
-	"github": {
-		"release": true
-	},
-	"jest": {
-		"globals": {
-			"ts-jest": {
-				"tsConfig": "tsconfig.test.json"
-			}
-		},
-		"testEnvironment": "node",
-		"testRegex": "((\\.|/)(test|spec))(\\.|\\/.+)(jsx?|tsx?)$",
-		"testPathIgnorePatterns": [
-			"node_modules/",
-			"dist/"
-		],
-		"collectCoverageFrom": [
-			"**/*.{ts,tsx,js,jsx}",
-			"!**/node_modules/**",
-			"!**/dist/**"
-		],
-		"preset": "ts-jest",
-		"testMatch": null
-	},
-	"scripts": {
-		"build": "stencil build",
-		"start": "stencil build --dev --watch --serve",
-		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
-		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix; prettier-stylelint --write -q 'src/**/*.{css,scss}'",
-		"test": "stencil test --spec --e2e",
-		"test.watch": "stencil test --spec --e2e --watchAll",
-		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
-	},
-	"dependencies": {
-		"authly": "0.2.8",
-		"isoly": "0.0.36",
-		"langly": "0.0.14",
-		"normalize.css": "^8.0.1",
-		"stencil-router-v2": "^0.6.0",
-		"tidily": "^0.0.44"
-	},
-	"devDependencies": {
-		"@stencil/core": "^2.10.0",
-		"@stencil/sass": "^1.5.2",
-		"@types/jest": "^26.0.21",
-		"@types/pvutils": "^1.0.1",
-		"@typescript-eslint/eslint-plugin": "^5.3.0",
-		"@typescript-eslint/parser": "^5.3.0",
-		"eslint": "^8.1.0",
-		"eslint-plugin-prettierx": "github:robinnedergard/eslint-plugin-prettierx#master",
-		"eslint-plugin-simple-import-sort": "^7.0.0",
-		"jest": "^27.3.1",
-		"jest-cli": "^27.3.1",
-		"prettier": "^2.4.1",
-		"prettier-stylelint": "^0.4.2",
-		"prettierx": "github:robinnedergard/prettierx#newline-before-clause-sync",
-		"puppeteer": "^10.0.0",
-		"stylelint-prettier": "^1.2.0",
-		"stylelint-scss": "^4.0.0",
-		"typescript": "^4.4.4"
-	}
+  "name": "smoothly",
+  "version": "0.1.77",
+  "description": "Web component library written in Stencil.",
+  "author": "PayFunc",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payfunc/smoothly"
+  },
+  "bugs": {
+    "url": "https://github.com/payfunc/smoothly/issues"
+  },
+  "homepage": "https://payfunc.com/open-source/smoothly",
+  "private": false,
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "types": "dist/custom-elements/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/smoothly/smoothly.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "git": {
+    "tagName": "v${version}"
+  },
+  "github": {
+    "release": true
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
+    },
+    "testEnvironment": "node",
+    "testRegex": "((\\.|/)(test|spec))(\\.|\\/.+)(jsx?|tsx?)$",
+    "testPathIgnorePatterns": [
+      "node_modules/",
+      "dist/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!**/node_modules/**",
+      "!**/dist/**"
+    ],
+    "preset": "ts-jest",
+    "testMatch": null
+  },
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
+    "fix": "eslint 'src/**/*.{js,ts,tsx}' --fix; prettier-stylelint --write -q 'src/**/*.{css,scss}'",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
+  },
+  "dependencies": {
+    "authly": "0.2.8",
+    "isoly": "0.0.36",
+    "langly": "0.0.14",
+    "normalize.css": "^8.0.1",
+    "stencil-router-v2": "^0.6.0",
+    "tidily": "^0.0.44"
+  },
+  "devDependencies": {
+    "@stencil/core": "^2.10.0",
+    "@stencil/sass": "^1.5.2",
+    "@types/jest": "^26.0.21",
+    "@types/pvutils": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.1.0",
+    "eslint-plugin-prettierx": "github:robinnedergard/eslint-plugin-prettierx#master",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
+    "prettier": "^2.4.1",
+    "prettier-stylelint": "^0.4.2",
+    "prettierx": "github:robinnedergard/prettierx#newline-before-clause-sync",
+    "puppeteer": "^10.0.0",
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^4.0.0",
+    "typescript": "^4.4.4"
+  }
 }
