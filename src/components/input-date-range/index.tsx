@@ -12,10 +12,21 @@ export class InputDateRange {
 	@Prop({ mutable: true }) end?: Date
 	@Prop({ mutable: true }) open: boolean
 	@Event() valueChanged: EventEmitter<Date>
+	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
+
 	@Watch("value")
 	onValue(next: Date) {
 		this.valueChanged.emit(next)
 	}
+
+	@Watch("open")
+	@Watch("start")
+	@Watch("end")
+	onClose(open: boolean) {
+		if (open == false && Date.is(this.start) && Date.is(this.end))
+			this.dateRangeSelected.emit({ start: this.start, end: this.end })
+	}
+
 	@Listen("startChanged")
 	onStartChanged(event: CustomEvent<Date>) {
 		this.start = event.detail
