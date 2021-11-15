@@ -126,7 +126,7 @@ export class SmoothlyInput {
 				},
 			}
 			if (
-				(!((event.ctrlKey || event.metaKey) && event.key == "v") && event.key.length == 1) ||
+				(!((event.ctrlKey || event.metaKey) && (event.key == "v" || event.key == "c")) && event.key.length == 1) ||
 				event.key == "ArrowLeft" ||
 				event.key == "ArrowRight" ||
 				event.key == "Delete" ||
@@ -149,14 +149,19 @@ export class SmoothlyInput {
 			this.processKey({ key: letter }, backend)
 	}
 	onInput(event: InputEvent) {
-		const backend = event.target as HTMLInputElement
-		let data = backend.value
-		if (data) {
-			event.preventDefault()
-			this.processKey({ key: "a", ctrlKey: true }, backend)
-			data = this.expiresAutocompleteFix(backend, data)
-			for (const letter of data)
-				this.processKey({ key: letter }, backend)
+		if (event.inputType == "insertReplacementText") {
+			this.processKey({ key: "a", ctrlKey: true }, event.target as HTMLInputElement)
+			;[...(event.data ?? "")].forEach(c => this.processKey({ key: c }, event.target as HTMLInputElement))
+		} else {
+			const backend = event.target as HTMLInputElement
+			let data = backend.value
+			if (data) {
+				event.preventDefault()
+				this.processKey({ key: "a", ctrlKey: true }, backend)
+				data = this.expiresAutocompleteFix(backend, data)
+				for (const letter of data)
+					this.processKey({ key: letter }, backend)
+			}
 		}
 	}
 	private expiresAutocompleteFix(backend: HTMLInputElement, value: string) {
