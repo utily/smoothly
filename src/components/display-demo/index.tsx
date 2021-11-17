@@ -60,6 +60,10 @@ export class SmoothlyDisplayDemo {
 					<dd>
 						<smoothly-display type="card-csc" value="987"></smoothly-display>
 					</dd>
+					<dt>Quiet</dt>
+					<dd>
+						<smoothly-quiet color="dark">-</smoothly-quiet>
+					</dd>
 				</dl>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
 				<div style={{display: "flex", justifyContent: "space-between"}}>
