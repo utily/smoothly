@@ -7,7 +7,6 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class SmoothlyQuiet {
 	@Prop() color: string
-	@Prop() value?: any
 	render() {
 		return (
 			<Host color={this.color}>

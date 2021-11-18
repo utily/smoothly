@@ -149,7 +149,6 @@ export namespace Components {
     }
     interface SmoothlyQuiet {
         "color": string;
-        "value"?: any;
     }
     interface SmoothlyRadio {
         "checked": boolean;
@@ -755,7 +754,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyQuiet {
         "color"?: string;
-        "value"?: any;
     }
     interface SmoothlyRadio {
         "checked"?: boolean;
