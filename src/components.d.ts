@@ -147,6 +147,9 @@ export namespace Components {
         "direction": "up" | "down";
         "visible": boolean;
     }
+    interface SmoothlyQuiet {
+        "color": string;
+    }
     interface SmoothlyRadio {
         "checked": boolean;
         "name": string;
@@ -398,6 +401,12 @@ declare global {
         prototype: HTMLSmoothlyPopupElement;
         new (): HTMLSmoothlyPopupElement;
     };
+    interface HTMLSmoothlyQuietElement extends Components.SmoothlyQuiet, HTMLStencilElement {
+    }
+    var HTMLSmoothlyQuietElement: {
+        prototype: HTMLSmoothlyQuietElement;
+        new (): HTMLSmoothlyQuietElement;
+    };
     interface HTMLSmoothlyRadioElement extends Components.SmoothlyRadio, HTMLStencilElement {
     }
     var HTMLSmoothlyRadioElement: {
@@ -564,6 +573,7 @@ declare global {
         "smoothly-option": HTMLSmoothlyOptionElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
+        "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
@@ -742,6 +752,9 @@ declare namespace LocalJSX {
         "onPopup"?: (event: CustomEvent<boolean>) => void;
         "visible"?: boolean;
     }
+    interface SmoothlyQuiet {
+        "color"?: string;
+    }
     interface SmoothlyRadio {
         "checked"?: boolean;
         "name"?: string;
@@ -870,6 +883,7 @@ declare namespace LocalJSX {
         "smoothly-option": SmoothlyOption;
         "smoothly-picker": SmoothlyPicker;
         "smoothly-popup": SmoothlyPopup;
+        "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
@@ -926,6 +940,7 @@ declare module "@stencil/core" {
             "smoothly-option": LocalJSX.SmoothlyOption & JSXBase.HTMLAttributes<HTMLSmoothlyOptionElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
+            "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
