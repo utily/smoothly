@@ -9,8 +9,8 @@ import { Date } from "isoly"
 export class InputDate {
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
-	@Prop({ mutable: true }) max: string
-	@Prop({ mutable: true }) min: string
+	@Prop({ mutable: true }) max: Date
+	@Prop({ mutable: true }) min: Date
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")
 	onStart(next: Date) {

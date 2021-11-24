@@ -62,22 +62,29 @@ export class Calendar {
 							<td
 								tabindex={1}
 								onClick={
-									!(Date.parse(date) <= Date.parse(this.min ?? "") || Date.parse(date) >= Date.parse(this.max ?? ""))
-										? () => this.onClick(date)
-										: undefined
+									this.min || this.max
+										? !(date < (this.min ?? "") || date > (this.max ?? ""))
+											? () => this.onClick(date)
+											: undefined
+										: () => this.onClick(date)
 								}
 								class={(date == this.value ? ["selected"] : [])
 									.concat(
 										...(date == Date.now() ? ["today"] : []),
 										Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
 										this.doubleInput
-											? Date.parse(date) >= Date.parse(this.start ?? "") &&
-											  Date.parse(date) <= Date.parse(this.end ?? "")
+											? date >= (this.start ?? "") && date <= (this.end ?? "")
 												? ["dateRange"]
 												: []
 											: ""
 									)
-									.concat(...(date <= (this.min ?? "") || date >= (this.max ?? "") ? ["disable"] : []))
+									.concat(
+										...(this.min || this.max
+											? date < (this.min ?? "") || date > (this.max ?? "")
+												? ["disable"]
+												: []
+											: "")
+									)
 									.join(" ")}>
 								{date.substring(8, 10)}
 							</td>

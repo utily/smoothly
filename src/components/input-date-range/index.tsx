@@ -10,6 +10,8 @@ export class InputDateRange {
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
+	@Prop({ mutable: true }) max: Date
+	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) open: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
@@ -63,7 +65,9 @@ export class InputDateRange {
 						onValueChanged={event => {
 							this.value = event.detail
 							event.stopPropagation()
-						}}></smoothly-calendar>
+						}}
+						max={this.max}
+						min={this.min}></smoothly-calendar>
 				</nav>
 			) : (
 				[]

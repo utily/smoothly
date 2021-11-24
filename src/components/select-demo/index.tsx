@@ -53,7 +53,7 @@ export class SmoothlySelectDemo {
 			<smoothly-input-date max="2021-12-30" min="2021-10-10">
 				Date
 			</smoothly-input-date>,
-			<smoothly-input-date-range></smoothly-input-date-range>,
+			<smoothly-input-date-range max="2021-12-30" min="2021-10-10"></smoothly-input-date-range>,
 			<smoothly-selector>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>
