@@ -26,6 +26,8 @@ export namespace Components {
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: Date;
+        "max"?: string;
+        "min"?: string;
         "month"?: Date;
         "start"?: Date;
         "value": Date;
@@ -89,6 +91,8 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputDate {
+        "max": string;
+        "min": string;
         "open": boolean;
         "value"?: Date;
     }
@@ -621,6 +625,8 @@ declare namespace LocalJSX {
     interface SmoothlyCalendar {
         "doubleInput"?: boolean;
         "end"?: Date;
+        "max"?: string;
+        "min"?: string;
         "month"?: Date;
         "onEndChanged"?: (event: CustomEvent<Date>) => void;
         "onStartChanged"?: (event: CustomEvent<Date>) => void;
@@ -689,6 +695,8 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputDate {
+        "max"?: string;
+        "min"?: string;
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;

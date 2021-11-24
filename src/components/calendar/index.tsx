@@ -13,6 +13,8 @@ export class Calendar {
 	@Prop({ mutable: true }) value: Date = Date.now()
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
+	@Prop({ mutable: true }) max?: string
+	@Prop({ mutable: true }) min?: string
 	@Prop({ reflect: true }) doubleInput: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() startChanged: EventEmitter<Date>
@@ -48,15 +50,19 @@ export class Calendar {
 							<td
 								tabindex={1}
 								onClick={() => {
-									this.valueChanged.emit((this.value = date))
-									this.clickCounter += 1
-									if (this.clickCounter % 2 == 1)
-										this.start = this.end = date
-									else {
-										if (this.start && date > this.start)
-											this.end = date
-										else
-											this.start = date
+									if (
+										!(Date.parse(date) <= Date.parse(this.min ?? "") || Date.parse(date) >= Date.parse(this.max ?? ""))
+									) {
+										this.valueChanged.emit((this.value = date))
+										this.clickCounter += 1
+										if (this.clickCounter % 2 == 1)
+											this.start = this.end = date
+										else {
+											if (this.start && date > this.start)
+												this.end = date
+											else
+												this.start = date
+										}
 									}
 								}}
 								class={(date == this.value ? ["selected"] : [])
@@ -69,6 +75,11 @@ export class Calendar {
 												? ["dateRange"]
 												: []
 											: ""
+									)
+									.concat(
+										...(Date.parse(date) <= Date.parse(this.min ?? "") || Date.parse(date) >= Date.parse(this.max ?? "")
+											? ["disable"]
+											: [])
 									)
 									.join(" ")}>
 								{date.substring(8, 10)}

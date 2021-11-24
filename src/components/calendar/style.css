@@ -35,7 +35,7 @@ td:nth-child(6):not(.currentMonth),
 td:nth-child(7):not(.currentMonth) {
 	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
-td:not(.selected):hover {
+td:not(.selected,.disable):hover {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-tint));
 }
@@ -51,3 +51,9 @@ td.dateRange {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-tint));
 }
+td.disable {
+	cursor: not-allowed;
+	background-color: rgb(var(--smoothly-default-tint), 0.5);
+	color: rgb(var(--smoothly-default-contrast), 0.5);
+}
+
