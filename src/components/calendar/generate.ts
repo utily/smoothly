@@ -33,13 +33,14 @@ export function months(current: isoly.Date): { date: isoly.Date; name: string; s
 	const day = new globalThis.Date(current)
 	const result: { date: isoly.Date; name: string; selected?: boolean }[] = []
 	for (let i = 0; i < 12; i++) {
-		day.setMonth(i)
+		day.setMonth(i, 28)
 		const date = isoly.Date.create(day)
 		result.push({
 			date,
 			name: day.toLocaleString(undefined, { month: "long" }),
-			selected: date == current,
+			selected: date.substr(0, 7) == current.substr(0, 7),
 		})
+		console.log("date?", date)
 	}
 	return result
 }
