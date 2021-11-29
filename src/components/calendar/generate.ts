@@ -40,6 +40,7 @@ export function months(current: isoly.Date): { date: isoly.Date; name: string; s
 			name: day.toLocaleString(undefined, { month: "long" }),
 			selected: date.substr(0, 7) == current.substr(0, 7),
 		})
+		console.log("date?", date)
 	}
 	return result
 }
