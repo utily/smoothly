@@ -13,8 +13,8 @@ export class Calendar {
 	@Prop({ mutable: true }) value: Date = Date.now()
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
-	@Prop({ mutable: true }) max?: Date
-	@Prop({ mutable: true }) min?: Date
+	@Prop({ mutable: true }) max: Date
+	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) doubleInput: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() startChanged: EventEmitter<Date>
@@ -63,7 +63,7 @@ export class Calendar {
 								tabindex={1}
 								onClick={
 									this.min || this.max
-										? !(date < (this.min ?? "") || date > (this.max ?? ""))
+										? !(date < this.min || date > this.max)
 											? () => this.onClick(date)
 											: undefined
 										: () => this.onClick(date)
@@ -78,13 +78,7 @@ export class Calendar {
 												: []
 											: ""
 									)
-									.concat(
-										...(this.min || this.max
-											? date < (this.min ?? "") || date > (this.max ?? "")
-												? ["disable"]
-												: []
-											: "")
-									)
+									.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
 									.join(" ")}>
 								{date.substring(8, 10)}
 							</td>
