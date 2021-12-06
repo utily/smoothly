@@ -62,11 +62,7 @@ export class Calendar {
 							<td
 								tabindex={1}
 								onClick={
-									this.min || this.max
-										? !(date < this.min || date > this.max)
-											? () => this.onClick(date)
-											: undefined
-										: () => this.onClick(date)
+									(this.min || this.max) && (date < this.min || date > this.max) ? undefined : () => this.onClick(date)
 								}
 								class={(date == this.value ? ["selected"] : [])
 									.concat(
