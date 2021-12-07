@@ -26,8 +26,8 @@ export namespace Components {
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: Date;
-        "max"?: Date;
-        "min"?: Date;
+        "max": Date;
+        "min": Date;
         "month"?: Date;
         "start"?: Date;
         "value": Date;
