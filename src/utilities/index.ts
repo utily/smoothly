@@ -1,1 +1,1 @@
-export { toCommaRgb } from "./colorTransform"
+export { Cosmetic } from "./Cosmetic"

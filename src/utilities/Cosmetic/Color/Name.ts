@@ -1,4 +1,4 @@
-export const colorNames: { [name: string]: string } = {
+export const Names = <const>{
 	aliceblue: "#f0f8ff",
 	antiquewhite: "#faebd7",
 	aqua: "#00ffff",
@@ -147,4 +147,11 @@ export const colorNames: { [name: string]: string } = {
 	whitesmoke: "#f5f5f5",
 	yellow: "#ffff00",
 	yellowgreen: "#9acd32",
+}
+export type Name = keyof typeof Names
+export namespace Name {
+	export const types = () => Object.keys(Names)
+	export function is(value: any | Name): value is Name {
+		return typeof value == "string" && types().includes(value.toLowerCase())
+	}
 }
