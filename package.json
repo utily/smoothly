@@ -62,11 +62,11 @@
   },
   "dependencies": {
     "authly": "0.2.8",
-    "isoly": "0.0.36",
+    "isoly": "0.0.39",
     "langly": "0.0.14",
     "normalize.css": "^8.0.1",
     "stencil-router-v2": "^0.6.0",
-    "tidily": "0.0.46"
+    "tidily": "qijieye/tidily#date-fromstring"
   },
   "devDependencies": {
     "@stencil/core": "^2.10.0",

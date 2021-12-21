@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
-import { Currency } from "isoly"
+import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
 @Component({
 	tag: "smoothly-input",
@@ -30,11 +30,15 @@ export class SmoothlyInput {
 				result = get("price", this.currency)
 				break
 			default:
-				result = get(this.type as Type)
+				result = get(this.type as Type, getLocale())
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return result || get("text")!
+	}
+	private newState(state: State) {
+		const formatter = this.formatter
+		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
 	@Event() smoothlyChanged: EventEmitter<{ name: string; value: any }>
 	@Watch("value")
@@ -43,28 +47,19 @@ export class SmoothlyInput {
 			this.lastValue = value
 			this.state = {
 				...this.state,
-				value: this.formatter.format(
-					StateEditor.copy(this.formatter.unformat(StateEditor.copy({ value, selection: this.state.selection })))
-				).value,
+				value: this.newState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
 			}
 		}
 		if (value != before)
 			this.smoothlyChanged.emit({ name: this.name, value })
 	}
 	componentWillLoad() {
-		const formatter = this.formatter
-		const value = formatter.toString(this.value) || ""
+		const value = this.formatter.toString(this.value) || ""
 		const start = value.length
-		this.state = formatter.format(
-			StateEditor.copy(
-				formatter.unformat(
-					StateEditor.copy({
-						value,
-						selection: { start, end: start, direction: "none" },
-					})
-				)
-			)
-		)
+		this.state = this.newState({
+			value,
+			selection: { start, end: start, direction: "none" },
+		})
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -78,17 +73,11 @@ export class SmoothlyInput {
 	}
 	@Method()
 	async setSelectionRange(start: number, end: number, direction?: Direction) {
-		const formatter = this.formatter
-		this.state = formatter.format(
-			StateEditor.copy(
-				formatter.unformat(
-					StateEditor.copy({
-						...this.state,
-						selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
-					})
-				)
-			)
-		)
+		this.state = this.newState({
+			...this.state,
+			selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
+		})
+
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
 	}
@@ -110,7 +99,7 @@ export class SmoothlyInput {
 				direction: backend.selectionDirection ? backend.selectionDirection : "none",
 			},
 		}
-		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
+		const after = this.newState({ ...this.state })
 		this.updateBackend(after, backend)
 	}
 	onKeyDown(event: KeyboardEvent) {
@@ -218,4 +207,9 @@ export class SmoothlyInput {
 			</Host>
 		)
 	}
+}
+
+function getLocale(): Locale | undefined {
+	const result = navigator.language
+	return Locale.is(result) ? result : Language.is(result) ? Locale.toLocale(result) : undefined
 }
