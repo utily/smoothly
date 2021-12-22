@@ -66,7 +66,7 @@
     "langly": "0.0.14",
     "normalize.css": "^8.0.1",
     "stencil-router-v2": "^0.6.0",
-    "tidily": "qijieye/tidily#date-fromstring"
+    "tidily": "0.0.47"
   },
   "devDependencies": {
     "@stencil/core": "^2.10.0",
