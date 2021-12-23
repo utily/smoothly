@@ -1,5 +1,5 @@
-import { Component, Element, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
-import { Date } from "isoly"
+import { Component, Element, Event, EventEmitter, h, Prop, State, Watch } from "@stencil/core"
+import { Date, DateRange } from "isoly"
 import * as generate from "./generate"
 
 @Component({
@@ -19,6 +19,10 @@ export class Calendar {
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() startChanged: EventEmitter<Date>
 	@Event() endChanged: EventEmitter<Date>
+	@Event() dateSet: EventEmitter<Date>
+	@Event() dateRangeSet: EventEmitter<DateRange>
+	private frozenDate: Date
+	@State() firstSelected: boolean
 	@Watch("start")
 	onStart(next: Date) {
 		this.startChanged.emit(next)
@@ -31,13 +35,32 @@ export class Calendar {
 	private onClick(date: Date) {
 		this.valueChanged.emit((this.value = date))
 		this.clickCounter += 1
-		if (this.clickCounter % 2 == 1)
-			this.start = this.end = date
-		else {
-			if (this.start && date > this.start)
-				this.end = date
-			else
+		if (this.doubleInput) {
+			if (this.clickCounter % 2 == 1)
+				this.start = this.end = this.frozenDate = date
+			else {
+				if (this.start && date > this.start)
+					this.end = date
+				else
+					this.start = date
+			}
+		}
+		!this.doubleInput && this.dateSet.emit(this.value)
+		this.doubleInput &&
+			this.clickCounter % 2 == 0 &&
+			this.start &&
+			this.end &&
+			this.dateRangeSet.emit({ start: this.start, end: this.end })
+	}
+	private onHover(date: Date) {
+		if (this.doubleInput && this.clickCounter % 2 == 1) {
+			if (date < this.frozenDate) {
 				this.start = date
+				this.end = this.frozenDate
+			} else {
+				this.start = this.frozenDate
+				this.end = date
+			}
 		}
 	}
 	render() {
@@ -61,6 +84,11 @@ export class Calendar {
 						{week.map(date => (
 							<td
 								tabindex={1}
+								onMouseOver={() => {
+									!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
+										? undefined
+										: this.onHover(date)
+								}}
 								onClick={
 									(this.min || this.max) && (date < this.min || date > this.max) ? undefined : () => this.onClick(date)
 								}
@@ -69,7 +97,9 @@ export class Calendar {
 										...(date == Date.now() ? ["today"] : []),
 										Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
 										this.doubleInput
-											? date >= (this.start ?? "") && date <= (this.end ?? "")
+											? this.start == date || this.end == date
+												? ["selected"]
+												: date >= (this.start ?? "") && date <= (this.end ?? "")
 												? ["dateRange"]
 												: []
 											: ""
