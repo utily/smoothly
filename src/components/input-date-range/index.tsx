@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
-import { Date } from "isoly"
+import { Date, DateRange } from "isoly"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -20,15 +20,6 @@ export class InputDateRange {
 	onValue(next: Date) {
 		this.valueChanged.emit(next)
 	}
-
-	@Watch("open")
-	@Watch("start")
-	@Watch("end")
-	onClose(open: boolean) {
-		if (open == false && Date.is(this.start) && Date.is(this.end))
-			this.dateRangeSelected.emit({ start: this.start, end: this.end })
-	}
-
 	@Listen("startChanged")
 	onStartChanged(event: CustomEvent<Date>) {
 		this.start = event.detail
@@ -36,6 +27,13 @@ export class InputDateRange {
 	@Listen("endChanged")
 	onEndChanged(event: CustomEvent<Date>) {
 		this.end = event.detail
+	}
+	@Listen("dateRangeSet")
+	onDateRangeSet(event: CustomEvent<DateRange>) {
+		console.log("dateRangeSet", event.detail)
+		this.open = false
+		event.stopPropagation()
+		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
 	}
 	render() {
 		return [
@@ -66,6 +64,8 @@ export class InputDateRange {
 							this.value = event.detail
 							event.stopPropagation()
 						}}
+						start={this.start}
+						end={this.end}
 						max={this.max}
 						min={this.min}></smoothly-calendar>
 				</nav>

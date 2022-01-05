@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
 
 @Component({
@@ -15,6 +15,11 @@ export class InputDate {
 	@Watch("value")
 	onStart(next: Date) {
 		this.valueChanged.emit(next)
+	}
+	@Listen("dateSet")
+	dateSetHandler(e: CustomEvent<Date>) {
+		this.open = false
+		e.stopPropagation()
 	}
 	render() {
 		return [

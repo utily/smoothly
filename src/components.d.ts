@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
-import { CountryCode, Currency, Date, DateTime } from "isoly";
+import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -630,6 +630,8 @@ declare namespace LocalJSX {
         "max"?: Date;
         "min"?: Date;
         "month"?: Date;
+        "onDateRangeSet"?: (event: CustomEvent<DateRange>) => void;
+        "onDateSet"?: (event: CustomEvent<Date>) => void;
         "onEndChanged"?: (event: CustomEvent<Date>) => void;
         "onStartChanged"?: (event: CustomEvent<Date>) => void;
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
