@@ -183,7 +183,7 @@ export class SmoothlyInput {
 	}
 	render() {
 		return (
-			<Host class={{ "has-value": this.state?.value != undefined }}>
+			<Host class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}>
 				<input
 					name={this.name}
 					type={this.state?.type}
