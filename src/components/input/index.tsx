@@ -47,7 +47,7 @@ export class SmoothlyInput {
 			this.lastValue = value
 			this.state = {
 				...this.state,
-				value: this.newState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
+				value: this.newState({ value: this.formatter.toString(value), selection: this.state?.selection }).value,
 			}
 		}
 		if (value != before)
