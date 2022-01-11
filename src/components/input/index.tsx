@@ -181,9 +181,6 @@ export class SmoothlyInput {
 			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
 		)
 	}
-	componentDidLoad() {
-		console.log("what", this.state?.value)
-	}
 	render() {
 		return (
 			<Host class={{ "has-value": this.state?.value != undefined }}>
