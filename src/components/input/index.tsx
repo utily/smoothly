@@ -183,16 +183,16 @@ export class SmoothlyInput {
 	}
 	render() {
 		return (
-			<Host class={{ "has-value": this.state?.value != "" }}>
+			<Host class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}>
 				<input
 					name={this.name}
-					type={this.state.type}
+					type={this.state?.type}
 					placeholder={this.placeholder}
 					required={this.required}
-					autocomplete={this.autocomplete ? this.state.autocomplete : "off"}
+					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
 					disabled={this.disabled}
-					pattern={this.state.pattern && this.state.pattern.source}
-					value={this.state.value}
+					pattern={this.state?.pattern && this.state?.pattern.source}
+					value={this.state?.value}
 					onInput={(e: InputEvent) => this.onInput(e)}
 					onFocus={e => this.onFocus(e)}
 					onClick={e => this.onClick(e)}
