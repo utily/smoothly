@@ -79,6 +79,7 @@ export namespace Components {
         "autocomplete": boolean;
         "currency"?: Currency;
         "disabled": boolean;
+        "getFormData": (name: string) => Promise<Record<string, any>>;
         "maxLength": number;
         "minLength": number;
         "name": string;
