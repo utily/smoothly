@@ -9,10 +9,6 @@ export class SmoothlyGoogleFont {
 	@Prop() value?: GoogleFont
 
 	render() {
-		return GoogleFont.is(this.value) ? (
-			<style>{`@import url('https://fonts.googleapis.com/css2?family=${this.value}&display=swap');`}</style>
-		) : (
-			""
-		)
+		return GoogleFont.is(this.value) ? <style>{GoogleFont.styleImportString(this.value)}</style> : ""
 	}
 }

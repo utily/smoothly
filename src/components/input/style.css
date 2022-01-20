@@ -1,6 +1,7 @@
 :host {
 	display: block;
 	position: relative;
+	font-weight: var(--smoothly-font-weight);
 }
 :host[hidden] {
 	display: none;

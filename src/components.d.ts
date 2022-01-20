@@ -68,7 +68,7 @@ export namespace Components {
         "url": string;
     }
     interface SmoothlyGoogleFont {
-        "font"?: GoogleFont;
+        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color": Color;
@@ -687,7 +687,7 @@ declare namespace LocalJSX {
         "url"?: string;
     }
     interface SmoothlyGoogleFont {
-        "font"?: GoogleFont;
+        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color"?: Color;
