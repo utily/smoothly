@@ -55,6 +55,9 @@ export class SmoothlyInput {
 		if (value != before)
 			this.smoothlyChanged.emit({ name: this.name, value })
 	}
+	log(message: string) {
+		this.notice.emit(Notice.failed(message))
+	}
 	componentWillLoad() {
 		const value = this.formatter.toString(this.value) || ""
 		const start = value.length
@@ -195,6 +198,7 @@ export class SmoothlyInput {
 	private processKey(event: Action, backend: HTMLInputElement) {
 		// console.log("calling Action apply with state:", this.state)
 		// console.log("calling Action apply with formatter:", this.formatter)
+		this.log(`Value "${this.state.value}"`)
 		const after = Action.apply(this.formatter, this.state, event)
 		this.updateBackend(after, backend)
 	}
