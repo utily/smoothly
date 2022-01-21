@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
+import { Notice } from "../.."
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
@@ -22,6 +23,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
+	@Event() notice: EventEmitter<Notice>
 	@Prop({ reflect: true }) currency?: Currency
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
