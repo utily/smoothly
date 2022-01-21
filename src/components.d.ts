@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
+import { GoogleFont } from "./model/GoogleFont";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -65,6 +66,9 @@ export namespace Components {
         "origin": string | undefined;
         "send": (message: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
+    }
+    interface SmoothlyGoogleFont {
+        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color": Color;
@@ -324,6 +328,12 @@ declare global {
         prototype: HTMLSmoothlyFrameElement;
         new (): HTMLSmoothlyFrameElement;
     };
+    interface HTMLSmoothlyGoogleFontElement extends Components.SmoothlyGoogleFont, HTMLStencilElement {
+    }
+    var HTMLSmoothlyGoogleFontElement: {
+        prototype: HTMLSmoothlyGoogleFontElement;
+        new (): HTMLSmoothlyGoogleFontElement;
+    };
     interface HTMLSmoothlyIconElement extends Components.SmoothlyIcon, HTMLStencilElement {
     }
     var HTMLSmoothlyIconElement: {
@@ -566,6 +576,7 @@ declare global {
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
+        "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
@@ -675,6 +686,9 @@ declare namespace LocalJSX {
         "onTrigger"?: (event: CustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
+    }
+    interface SmoothlyGoogleFont {
+        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color"?: Color;
@@ -884,6 +898,7 @@ declare namespace LocalJSX {
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-frame": SmoothlyFrame;
+        "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
@@ -941,6 +956,7 @@ declare module "@stencil/core" {
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
+            "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
