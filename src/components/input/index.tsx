@@ -193,6 +193,8 @@ export class SmoothlyInput {
 		return value
 	}
 	private processKey(event: Action, backend: HTMLInputElement) {
+		// console.log("calling Action apply with state:", this.state)
+		// console.log("calling Action apply with formatter:", this.formatter)
 		const after = Action.apply(this.formatter, this.state, event)
 		this.updateBackend(after, backend)
 	}
