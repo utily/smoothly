@@ -1,7 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
-import { Notice } from "../.."
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
@@ -23,7 +22,6 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
-	@Event() notice: EventEmitter<Notice>
 	@Prop({ reflect: true }) currency?: Currency
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
@@ -54,9 +52,6 @@ export class SmoothlyInput {
 		}
 		if (value != before)
 			this.smoothlyChanged.emit({ name: this.name, value })
-	}
-	log(message: string) {
-		this.notice.emit(Notice.failed(message))
 	}
 	componentWillLoad() {
 		const value = this.formatter.toString(this.value) || ""
@@ -196,9 +191,6 @@ export class SmoothlyInput {
 		return value
 	}
 	private processKey(event: Action, backend: HTMLInputElement) {
-		// console.log("calling Action apply with state:", this.state)
-		// console.log("calling Action apply with formatter:", this.formatter)
-		this.log(`Value "${this.state.value}"`)
 		const after = Action.apply(this.formatter, this.state, event)
 		this.updateBackend(after, backend)
 	}

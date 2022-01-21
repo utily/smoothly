@@ -9,7 +9,6 @@ import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./mod
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { GoogleFont } from "./model/GoogleFont";
-import { Notice as Notice1 } from ".";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -707,7 +706,6 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onNotice"?: (event: CustomEvent<Notice>) => void;
         "onSmoothlyChanged"?: (event: CustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
