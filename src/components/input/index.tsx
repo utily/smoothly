@@ -68,6 +68,32 @@ export class SmoothlyInput {
 		}
 	}
 	@Method()
+	async getFormData(name: string): Promise<Record<string, any>> {
+		const result: Record<string, any> = {}
+		const form = document.forms.namedItem(name)
+		if (form) {
+			const elements = form.elements
+			for (let i = 0; i < elements.length; i++) {
+				const element = elements.item(i)
+				if (this.hasNameAndValue(element) && element.name)
+					result[element.name] = element.value
+			}
+			// Overwrite values with values from smoothly-input
+			const smoothlyInputs = form.getElementsByTagName("smoothly-input")
+			for (let i = 0; i < smoothlyInputs.length; i++) {
+				const element = smoothlyInputs.item(i)
+				if (this.hasNameAndValue(element) && element.name)
+					result[element.name] = element.value
+			}
+		}
+		return result
+	}
+	hasNameAndValue(element: any): element is { name: string; value: string } {
+		return (
+			typeof (element as { name?: string }).name == "string" && typeof (element as { value?: string }).value == "string"
+		)
+	}
+	@Method()
 	async setKeepFocusOnReRender(keepFocus: boolean) {
 		this.keepFocusOnReRender = keepFocus
 	}
