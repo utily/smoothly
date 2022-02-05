@@ -6,7 +6,7 @@ import { Component, h, Host, Prop, State } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyBacktotop {
-	@Prop() opacity = "0.8"
+	@Prop() opacity = "0.5"
 	@Prop() bottom = "1rem"
 	@Prop() right = "1rem"
 	@State() visible: boolean
