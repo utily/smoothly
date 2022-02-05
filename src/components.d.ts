@@ -24,6 +24,11 @@ export namespace Components {
     interface SmoothlyAppDemo {
         "baseUrl": string;
     }
+    interface SmoothlyBacktotop {
+        "bottom": string;
+        "opacity": string;
+        "right": string;
+    }
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: Date;
@@ -273,6 +278,12 @@ declare global {
     var HTMLSmoothlyAppDemoElement: {
         prototype: HTMLSmoothlyAppDemoElement;
         new (): HTMLSmoothlyAppDemoElement;
+    };
+    interface HTMLSmoothlyBacktotopElement extends Components.SmoothlyBacktotop, HTMLStencilElement {
+    }
+    var HTMLSmoothlyBacktotopElement: {
+        prototype: HTMLSmoothlyBacktotopElement;
+        new (): HTMLSmoothlyBacktotopElement;
     };
     interface HTMLSmoothlyCalendarElement extends Components.SmoothlyCalendar, HTMLStencilElement {
     }
@@ -567,6 +578,7 @@ declare global {
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
+        "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
@@ -635,6 +647,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
+    }
+    interface SmoothlyBacktotop {
+        "bottom"?: string;
+        "opacity"?: string;
+        "right"?: string;
     }
     interface SmoothlyCalendar {
         "doubleInput"?: boolean;
@@ -889,6 +906,7 @@ declare namespace LocalJSX {
         "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
+        "smoothly-backtotop": SmoothlyBacktotop;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-dialog": SmoothlyDialog;
@@ -947,6 +965,7 @@ declare module "@stencil/core" {
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
+            "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;

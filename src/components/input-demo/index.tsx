@@ -4,7 +4,7 @@ import { Component, h } from "@stencil/core"
 })
 export class SmoothlyInputDemo {
 	render() {
-		return (
+		return [
 			<form action="done" style={{ position: "relative" }}>
 				<header>
 					<h5>Address</h5>
@@ -110,7 +110,8 @@ export class SmoothlyInputDemo {
 						Trigger
 					</smoothly-trigger>
 				</footer>
-			</form>
-		)
+			</form>,
+			<smoothly-backtotop></smoothly-backtotop>,
+		]
 	}
 }
