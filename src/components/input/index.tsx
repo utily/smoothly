@@ -53,6 +53,13 @@ export class SmoothlyInput {
 		if (value != before)
 			this.smoothlyChanged.emit({ name: this.name, value })
 	}
+	@Watch("currency")
+	onCurrency() {
+		this.state = {
+			...this.state,
+			value: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).value,
+		}
+	}
 	componentWillLoad() {
 		const value = this.formatter.toString(this.value) || ""
 		const start = value.length
