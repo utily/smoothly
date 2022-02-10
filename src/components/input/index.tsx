@@ -58,6 +58,7 @@ export class SmoothlyInput {
 		this.state = {
 			...this.state,
 			value: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).value,
+			pattern: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).pattern,
 		}
 	}
 	componentWillLoad() {
