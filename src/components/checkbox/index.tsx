@@ -9,6 +9,7 @@ import * as translation from "./translation"
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() selectAll = false
+	@Prop({ mutable: true, reflect: true }) intermediate: boolean
 	@Prop({ mutable: true, reflect: true }) selected: boolean
 	@Prop({ mutable: true, reflect: true }) disabled: boolean
 	@Event() checked: EventEmitter<{ selected: boolean }>
@@ -30,6 +31,12 @@ export class SmoothlyCheckbox {
 				onClick={() => this.toggle()}
 				style={{ display: this.selected ? "" : "none" }}
 				name="checkbox-outline"></smoothly-icon>,
+			<smoothly-icon
+				toolTip={this.t(this.intermediate && !this.selected ? "Deselect all" : "Select all")}
+				onClick={() => this.toggle()}
+				style={{ display: this.intermediate && !this.selected ? "" : "none", position: "absolute", margin: "3px" }}
+				size="small"
+				name="remove-outline"></smoothly-icon>,
 			<smoothly-icon
 				toolTip={this.t(this.selectAll ? "Select all" : "Select")}
 				onClick={() => this.toggle()}
