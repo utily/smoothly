@@ -17,6 +17,7 @@ export class SmoothlyInput {
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop({ mutable: true }) minLength = 0
+	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
 	@Prop({ mutable: true }) autocomplete = true
 	@Prop({ mutable: true }) pattern: RegExp | undefined
@@ -217,27 +218,31 @@ export class SmoothlyInput {
 	}
 	render() {
 		return (
-			<Host class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}>
-				<input
-					name={this.name}
-					type={this.state?.type}
-					placeholder={this.placeholder}
-					required={this.required}
-					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
-					disabled={this.disabled}
-					pattern={this.state?.pattern && this.state?.pattern.source}
-					value={this.state?.value}
-					onInput={(e: InputEvent) => this.onInput(e)}
-					onFocus={e => this.onFocus(e)}
-					onClick={e => this.onClick(e)}
-					onBlur={e => this.onBlur(e)}
-					onKeyDown={e => this.onKeyDown(e)}
-					ref={(el: HTMLInputElement) => (this.inputElement = el)}
-					onPaste={e => this.onPaste(e)}></input>
-				<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
-				<label htmlFor={this.name}>
-					<slot />
-				</label>
+			<Host
+				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				onclick={() => this.inputElement?.focus()}>
+				<div>
+					<input
+						name={this.name}
+						type={this.state?.type}
+						placeholder={this.placeholder}
+						required={this.required}
+						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+						disabled={this.disabled}
+						pattern={this.state?.pattern && this.state?.pattern.source}
+						value={this.state?.value}
+						onInput={(e: InputEvent) => this.onInput(e)}
+						onFocus={e => this.onFocus(e)}
+						onClick={e => this.onClick(e)}
+						onBlur={e => this.onBlur(e)}
+						onKeyDown={e => this.onKeyDown(e)}
+						ref={(el: HTMLInputElement) => (this.inputElement = el)}
+						onPaste={e => this.onPaste(e)}></input>
+					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
+					<label htmlFor={this.name}>
+						<slot />
+					</label>
+				</div>
 			</Host>
 		)
 	}

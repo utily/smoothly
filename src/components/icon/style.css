@@ -7,6 +7,10 @@
 :host[hidden] {
 	display: none;
 }
+:host[size=tiny] {
+	width: 1.2em;
+	height: 1.2em;
+}
 :host[size=small] {
 	width: 1.4em;
 	height: 1.4em;

@@ -3,7 +3,7 @@ import { Date, DateRange } from "isoly"
 
 @Component({
 	tag: "smoothly-input-date-range",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class InputDateRange {
@@ -13,6 +13,7 @@ export class InputDateRange {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) open: boolean
+	@Prop({ reflect: true }) showLabel = true
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
 
@@ -42,12 +43,15 @@ export class InputDateRange {
 					onClick={() => (this.open = !this.open)}
 					type="date"
 					value={this.start}
+					showLabel={this.showLabel}
 					onSmoothlyChanged={e => (this.start = e.detail.value)}>
-					From
+					from
 				</smoothly-input>
+				<span>–</span>
 				<smoothly-input
 					onClick={() => (this.open = !this.open)}
 					type="date"
+					showLabel={this.showLabel}
 					value={this.end}
 					onSmoothlyChanged={e => (this.end = e.detail.value)}>
 					to

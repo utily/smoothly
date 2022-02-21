@@ -80,7 +80,7 @@ export namespace Components {
         "color": Color;
         "fill": Fill;
         "name"?: string;
-        "size": "small" | "medium" | "large";
+        "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
@@ -98,6 +98,7 @@ export namespace Components {
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
+        "showLabel": boolean;
         "type": string;
         "value": any;
     }
@@ -112,6 +113,7 @@ export namespace Components {
         "max": Date;
         "min": Date;
         "open": boolean;
+        "showLabel": boolean;
         "start"?: Date;
         "value"?: Date;
     }
@@ -713,7 +715,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "fill"?: Fill;
         "name"?: string;
-        "size"?: "small" | "medium" | "large";
+        "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
@@ -729,6 +731,7 @@ declare namespace LocalJSX {
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "required"?: boolean;
+        "showLabel"?: boolean;
         "type"?: string;
         "value"?: any;
     }
@@ -746,6 +749,7 @@ declare namespace LocalJSX {
         "onDateRangeSelected"?: (event: CustomEvent<{ start: Date; end: Date }>) => void;
         "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
+        "showLabel"?: boolean;
         "start"?: Date;
         "value"?: Date;
     }
