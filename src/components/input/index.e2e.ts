@@ -19,14 +19,14 @@ describe("smoothly-input", () => {
 	it("input", async () => {
 		const page = await newE2EPage()
 		await page.setContent(complete)
-		const input = await page.find("smoothly-input > input")
+		const input = await page.find("smoothly-input > div > input")
 		expect(input.outerHTML).toEqual('<input name="name" type="text" required="" class="sc-smoothly-input">')
 		expect(input.getAttribute("name")).toEqual("name")
 	})
 	it("label", async () => {
 		const page = await newE2EPage()
 		await page.setContent("<smoothly-input name='name' value='value'>Label</smoothly-input>")
-		const label = await page.find("smoothly-input > label")
+		const label = await page.find("smoothly-input > div > label")
 		expect(label).toBeTruthy()
 		expect(label).toHaveAttribute("for")
 		expect(label.getAttribute("for")).toEqual("name")
@@ -36,14 +36,14 @@ describe("smoothly-input", () => {
 it("fill out", async () => {
 	const page = await newE2EPage()
 	await page.setContent(complete)
-	const input = await page.find("smoothly-input > input")
+	const input = await page.find("smoothly-input > div > input")
 	await input.type("1234")
 	expect(await input.getProperty("value")).toEqual("value1234")
 })
 it("fill out valid", async () => {
 	const page = await newE2EPage()
 	await page.setContent("<smoothly-input name='name' type='text' required>Label</smoothly-input>")
-	const input = await page.find("smoothly-input > input")
+	const input = await page.find("smoothly-input > div > input")
 	expect(await input.getProperty("value")).toEqual("")
 	await input.type("1234 ")
 	expect(await input.getProperty("value")).toEqual("1234 ")
