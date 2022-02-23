@@ -10,7 +10,7 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop() name?: string
-	@Prop({ reflect: true }) size: "small" | "medium" | "large" = "medium"
+	@Prop({ reflect: true }) size: "tiny" | "small" | "medium" | "large" = "medium"
 	@Prop() toolTip?: string
 	@State() document?: string
 	@Watch("name")

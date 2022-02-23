@@ -2,6 +2,7 @@
 	display: block;
 	position: relative;
 	font-weight: var(--smoothly-font-weight);
+	padding: var(--padding);
 }
 :host[hidden] {
 	display: none;
@@ -16,6 +17,12 @@ label {
 	cursor: inherit;
 	transition: font-size 0.1s;
 	transition-timing-function: ease;
+}
+:host:not([show-label]) label {
+	display: none;
+}
+:host:not([show-label]) input {
+	padding: 0.6em 0.2em 0.6em 0.2em;
 }
 input {
 	padding: 1em 0.2em 0.2em 0.2em;
@@ -36,17 +43,20 @@ smoothly-icon {
 input:invalid + smoothly-icon {
 	display: block;
 }
-:host.has-value > label {
-	top: 0.3em;
-	top: 0.4em;
-	font-size: 60%;
-	z-index: 0;
+:host > div {
+	position: relative;
 }
-:host:focus-within > label {
-	top: 0.3em;
+:host > div > label {
+	z-index: 1;
+	pointer-events: none;
+}
+:host.has-value > div > label {
 	top: 0.4em;
 	font-size: 60%;
-	z-index: 0;
+}
+:host:focus-within > div > label {
+	top: 0.4em;
+	font-size: 60%;
 }
 input:focus {
 	outline: none;
