@@ -43,6 +43,7 @@ export namespace Components {
         "intermediate": boolean;
         "selectAll": boolean;
         "selected": boolean;
+        "size": "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyDialog {
         "closable": boolean;
@@ -676,6 +677,7 @@ declare namespace LocalJSX {
         "onChecked"?: (event: CustomEvent<{ selected: boolean }>) => void;
         "selectAll"?: boolean;
         "selected"?: boolean;
+        "size"?: "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
