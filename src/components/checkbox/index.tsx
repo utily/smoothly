@@ -30,17 +30,19 @@ export class SmoothlyCheckbox {
 				toolTip={this.t(this.selectAll ? "Deselect all" : "Deselect")}
 				onClick={() => this.toggle()}
 				style={{ display: this.selected ? "" : "none" }}
+				size="small"
 				name="checkbox-outline"></smoothly-icon>,
 			<smoothly-icon
 				toolTip={this.t(this.intermediate && !this.selected ? "Deselect all" : "Select all")}
 				onClick={() => this.toggle()}
-				style={{ display: this.intermediate && !this.selected ? "" : "none", position: "absolute", margin: "3px" }}
+				style={{ display: this.intermediate && !this.selected ? "" : "none" }}
 				size="small"
 				name="remove-outline"></smoothly-icon>,
 			<smoothly-icon
 				toolTip={this.t(this.selectAll ? "Select all" : "Select")}
 				onClick={() => this.toggle()}
 				style={{ display: !this.selected ? "" : "none" }}
+				size="small"
 				name="square-outline"></smoothly-icon>,
 		]
 	}
