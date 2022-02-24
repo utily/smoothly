@@ -7,6 +7,10 @@
 smoothly-icon {
 	cursor: pointer;
 }
+smoothly-icon:nth-child(2) {
+	position: absolute;
+	transform: scaleX(0.6);
+}
 :host[disabled] smoothly-icon {
 	stroke: rgba(var(--smoothly-color-contrast), 0.3);
 }
