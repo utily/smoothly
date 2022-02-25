@@ -9,7 +9,7 @@ import * as translation from "./translation"
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() selectAll = false
-	@Prop() size: "tiny" | "small" | "medium" | "large" = "medium"
+	@Prop() size: "tiny" | "small" | "medium" | "large" = "small"
 	@Prop({ mutable: true, reflect: true }) intermediate: boolean
 	@Prop({ mutable: true, reflect: true }) selected: boolean
 	@Prop({ mutable: true, reflect: true }) disabled: boolean
