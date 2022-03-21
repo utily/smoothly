@@ -238,10 +238,10 @@ export class SmoothlyInput {
 						onKeyDown={e => this.onKeyDown(e)}
 						ref={(el: HTMLInputElement) => (this.inputElement = el)}
 						onPaste={e => this.onPaste(e)}></input>
-					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 					<label htmlFor={this.name}>
 						<slot />
 					</label>
+					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 				</div>
 			</Host>
 		)
