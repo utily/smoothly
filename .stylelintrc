@@ -33,7 +33,6 @@
 		"at-rule-semicolon-newline-after": "always",
 		"number-leading-zero": "always",
 		"number-no-trailing-zeros": true,
-		"function-calc-no-invalid": true,
 		"function-calc-no-unspaced-operator": true,
 		"function-comma-space-before": "never",
 		"function-comma-space-after": "always",
