@@ -23,7 +23,8 @@ label {
 	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;
-	transition: font-size 0.1s;
+	transition: transform 0.1s;
+	transform-origin: top left;
 	transition-timing-function: ease;
 }
 :host:not([show-label]) label {
@@ -58,13 +59,10 @@ input:invalid + label + smoothly-icon {
 	z-index: 1;
 	pointer-events: none;
 }
-:host.has-value > div > label {
-	top: 0.4em;
-	font-size: 60%;
-}
+:host.has-value > div > label,
 :host:focus-within > div > label {
 	top: 0.4em;
-	font-size: 60%;
+	transform: scale(0.6);
 }
 input:focus {
 	outline: none;
