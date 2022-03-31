@@ -7,6 +7,9 @@ describe("CommaRgb colorTransform", () => {
 		expect(CommaRgb.from("255, 0, 0")).toEqual("255,0,0")
 		expect(CommaRgb.from(" 0,255, 0")).toEqual("0,255,0")
 	})
+	it("commaRgb undefined", () => {
+		expect(CommaRgb.from(undefined)).toEqual(undefined)
+	})
 	it("hexToCommaRgb", () => {
 		expect(CommaRgb.from("#000000")).toEqual("0,0,0")
 		expect(CommaRgb.from(" #ffffff")).toEqual("255,255,255")
