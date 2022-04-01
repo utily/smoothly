@@ -1,0 +1,52 @@
+$time: 1.4s;
+:host:not([active]) {
+	display: none;
+}
+:host[hidden] {
+	display: none;
+}
+:host {
+	display: block;
+	stroke: rgb(var(--spinner-color, var(--smoothly-primary-tint)));
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(var(--background-color, var(--smoothly-default-color)), var(--background-opacity, var(--smoothly-semitransparent, 0.8)));
+	svg {
+		position: absolute;
+		left: calc(50% - var(--size) / 2);
+		top: calc(50% - var(--size) / 2);
+		width: var(--size);
+		animation: SPIN-SVG $time linear infinite;
+		circle {
+			transform-origin: center;
+			animation: SPIN-CIRCLE $time ease-in-out infinite;
+			stroke-dasharray: 187;
+			stroke-dashoffset: 0;
+		}
+	}
+}
+
+@keyframes SPIN-SVG {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(270deg);
+	}
+}
+
+@keyframes SPIN-CIRCLE {
+	0% {
+		stroke-dashoffset: 187;
+	}
+	50% {
+		stroke-dashoffset: 46.75;
+		transform: rotate(135deg);
+	}
+	100% {
+		stroke-dashoffset: 187;
+		transform: rotate(450deg);
+	}
+}
