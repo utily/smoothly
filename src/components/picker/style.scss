@@ -1,7 +1,7 @@
 :host {
-	--background-color: var(--smoothly-secondary-tint), 1;
+	--background-color: var(--smoothly-default-color), 1;
 	--color: var(--smoothly-secondary-contrast);
-	--border-color: var(--smoothly-secondary-contrast), 1;
+	--border-color: var(--smoothly-default-shade), 1;
 	--border-highlight-color: var(--smoothly-secondary-contrast), 1;
 	--label-color: var(--smoothly-secondary-contrast), 0.8;
 	--selected-item-border-radius: 0.25rem;
@@ -15,8 +15,10 @@
 	cursor: pointer;
 	--intergiro-transition: all 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 	transition: var(--intergiro-transition);
+	border: 1px solid rgba(var(--border-color));
 }
 :host > div {
+	border-radius: 0.25rem;
 	display: flex;
 	min-height: 3em;
 	background-color: rgba(var(--background-color));

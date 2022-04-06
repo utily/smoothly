@@ -16,6 +16,28 @@ export class SmoothlyAppDemo {
 				<a slot="nav-start" href="https://google.com">
 					External
 				</a>
+				<smoothly-room path="">
+					<smoothly-input type="text">Default</smoothly-input>
+				</smoothly-room>
+				<smoothly-room path="input" label="Input">
+					<smoothly-input-demo />
+				</smoothly-room>
+				<smoothly-room path="dialog" label="Dialog">
+					<smoothly-dialog-demo />
+				</smoothly-room>
+				<smoothly-room path="display" label="Display" icon="eye-outline">
+					<smoothly-display-demo />
+				</smoothly-room>
+				<smoothly-room path="table" label="Table">
+					<smoothly-table-demo />
+				</smoothly-room>
+				<smoothly-room path="select" label="Select">
+					<smoothly-select-demo />
+				</smoothly-room>
+				<smoothly-room path="icon" label="Icon">
+					<smoothly-icon-demo />
+				</smoothly-room>
+				<smoothly-room path="old" label="Old" to="select"></smoothly-room>
 				<span slot="header" style={{ width: "100%", maxWidth: "500px" }}>
 					<smoothly-picker
 						label="All Animals Selected"
@@ -39,31 +61,9 @@ export class SmoothlyAppDemo {
 							{ name: "Scary Kraken", value: "kraken" },
 						]}></smoothly-picker>
 				</span>
-				<smoothly-trigger slot="nav-end" type="link" name="logout">
+				<smoothly-trigger slot="header" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-room path="">
-					<smoothly-input type="text">Default</smoothly-input>
-				</smoothly-room>
-				<smoothly-room path="input" label="Input">
-					<smoothly-input-demo />
-				</smoothly-room>
-				<smoothly-room path="dialog" label="Dialog">
-					<smoothly-dialog-demo />
-				</smoothly-room>
-				<smoothly-room path="display" label="Display" icon="eye-outline">
-					<smoothly-display-demo />
-				</smoothly-room>
-				<smoothly-room path="table" label="Table">
-					<smoothly-table-demo />
-				</smoothly-room>
-				<smoothly-room path="select" label="Select">
-					<smoothly-select-demo />
-				</smoothly-room>
-				<smoothly-room path="icon" label="Icon">
-					<smoothly-icon-demo />
-				</smoothly-room>
-				<smoothly-room path="old" label="Old" to="select"></smoothly-room>
 			</App>
 		)
 	}
