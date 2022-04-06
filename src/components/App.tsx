@@ -26,7 +26,6 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<h1>
 					<a {...href(resolve("") ?? "/")}>{attributes.label}</a>
 				</h1>
-				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 				<nav>
 					<ul>
 						{utils
@@ -85,6 +84,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 							))}
 					</ul>
 				</nav>
+				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 			</header>
 			<content>
 				<Router.Switch>
