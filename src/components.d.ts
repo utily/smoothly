@@ -148,6 +148,7 @@ export namespace Components {
     interface SmoothlyOption {
         "aliases": string;
         "dataHighlight": boolean;
+        "divider"?: boolean;
         "name": string;
         "value": string;
     }
@@ -161,6 +162,7 @@ export namespace Components {
         "optionStyle": any;
         "options": OptionType[];
         "selectNoneName": string;
+        "selectionName": string;
         "selections": OptionType[];
     }
     interface SmoothlyPopup {
@@ -784,6 +786,7 @@ declare namespace LocalJSX {
     interface SmoothlyOption {
         "aliases"?: string;
         "dataHighlight"?: boolean;
+        "divider"?: boolean;
         "name"?: string;
         "onOptionHover"?: (event: CustomEvent<{ value: any; name: string }>) => void;
         "onOptionSelect"?: (event: CustomEvent<{ value: any; name: string }>) => void;
@@ -800,6 +803,7 @@ declare namespace LocalJSX {
         "optionStyle"?: any;
         "options"?: OptionType[];
         "selectNoneName"?: string;
+        "selectionName"?: string;
         "selections"?: OptionType[];
     }
     interface SmoothlyPopup {

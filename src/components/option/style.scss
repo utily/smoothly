@@ -2,19 +2,39 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
-	padding: 0.5em 1em;
+	justify-content: flex-start;
+	padding: 0.7em 1em;
+	margin-left: 1px;
+	margin-right: 1px;
+	background-color: transparent;
+	position:relative;
 }
 :host([data-highlight]) {
-	background-color: rgb(var(--smoothly-primary-color));
-	color: rgb(var(--smoothly-primary-contrast));
-	stroke: rgb(var(--smoothly-primary-contrast));
-	fill: rgb(var(--smoothly-primary-contrast));
-	div:last-child {
-		color: rgba(var(--smoothly-primary-contrast), 0.8);
-	}
+	background-color: rgb(var(--smoothly-default-shade));
 }
-:host div:last-child {
-	color: rgba(var(--smoothly-default-contrast), 0.8);
+:host>div.middle{
+	padding-left: 0.5em;
+	flex-shrink: 1;
+	width:100%;
+}
+:host div:last-child
+:host div:first-child {
+	color: rgba(var(--smoothly-primary-color), 0.8);
 	font-style: italic;
+}
+:host([divider]) {
+	 margin-bottom: 0.5em;
+ }
+:host>div[slot="right"]{
+	margin-right: 100%;
+	color:rgba(var(--smoothly-primary-color), 0.8);
+}
+:host([divider])::after{
+	position:absolute;
+	height: 1px;
+	width: 100%;
+	left:0;
+	bottom: -0.25em;
+	content: "";
+	background-color: rgba(var(--smoothly-dark-color));
 }
