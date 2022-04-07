@@ -1,5 +1,3 @@
-
-
 :host {
 	display: flex;
 	flex-direction: row;
@@ -11,32 +9,26 @@
 	background-color: transparent;
 	position:relative;
 }
-
 :host([data-highlight]) {
 	background-color: rgb(var(--smoothly-default-shade));
 }
-
 :host>div.middle{
 	padding-left: 0.5em;
 	flex-shrink: 1;
 	width:100%;
 }
-
 :host div:last-child
 :host div:first-child {
 	color: rgba(var(--smoothly-primary-color), 0.8);
 	font-style: italic;
 }
-
 :host([divider]) {
 	 margin-bottom: 0.5em;
  }
-
 :host>div[slot="right"]{
 	margin-right: 100%;
 	color:rgba(var(--smoothly-primary-color), 0.8);
 }
-
 :host([divider])::after{
 	position:absolute;
 	height: 1px;

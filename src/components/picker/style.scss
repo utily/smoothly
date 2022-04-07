@@ -8,7 +8,6 @@
 	--selected-item-background-color: var(--smoothly-secondary-color), 1;
 	--selected-item-color: 255, 255, 255, 1;
 }
-
 :host {
 	display: block;
 	position: relative;
@@ -22,13 +21,11 @@
 	height: 40px;
 	border-radius: 0.25rem;
 }
-
 :host(:focus-within) {
 	border-color: rgb(var(--smoothly-primary-shade));
 	border-width: 2px;
 	margin: 0px;
 }
-
 :host>div {
 	display: flex;
 	background-color: transparent;
@@ -37,7 +34,6 @@
 	align-self: center;
 	border: none;
 	max-height: var(--max-height);
-
 	.icons>smoothly-icon {
 		flex-shrink: 0;
 		padding-left: 0.6em;
@@ -47,12 +43,10 @@
 		width: 1.5em !important;
 		/* stylelint-disable-next-line declaration-no-important */
 		height: 1.5em !important;
-
 		&:hover {
 			fill: rgba(var(--color), 1);
 		}
 	}
-
 	input {
 		width: 100%;
 		background-color: transparent;
@@ -70,17 +64,14 @@
 		}
 	}
 }
-
 :host([is-open])>div input {
 	color: rgb(var(--smoothly-medium-color));
 }
-
 :host(:not(:focus-within)[multiple]) ul>li:last-child {
 	/* Remove Input out of the CSS flow Layout. This way input takes up no extra space */
 	position: absolute;
 	pointer-events: none;
 }
-
 /* stylelint-disable selector-attribute-quotes */
 :host([label=""]) ul,
 /* stylelint-enable selector-attribute-quotes */
@@ -89,7 +80,6 @@
 	padding-top: 0.1em;
 	padding-bottom: 0.1em;
 }
-
 label {
 	padding-left: 0.6em;
 	white-space: nowrap;
@@ -99,42 +89,34 @@ label {
 	pointer-events: none;
 	transform-origin: left;
 }
-
 :host([has-selection]) label {
 	display: var(--label-display);
 }
-
 :host([has-selection]) label,
 :host(:focus-within) label {
 	display: none;
 }
-
 :host(:hover) smoothly-icon[data-arrow],
 :host(:focus-within) smoothly-icon[data-arrow] {
 	stroke: rgba(var(--color), 1);
 }
-
 :host smoothly-icon[data-arrow] {
 	pointer-events: none;
 }
-
 :host smoothly-icon {
 	flex-shrink: 0;
 	width: 1em;
 	height: 1em;
 }
-
 :host(:not([is-open])) smoothly-icon.up,
 :host([is-open]) smoothly-icon.down {
 	display: none;
 }
-
 smoothly-icon.search {
 	display: flex;
 	align-self: center;
 	padding-left: 0.8em;
 }
-
 smoothly-icon.up,
 smoothly-icon.down {
 	display: flex;
@@ -142,7 +124,6 @@ smoothly-icon.down {
 	padding-right: 0.8em;
 	stroke: rgb(var(--smoothly-primary-shade));
 }
-
 :host smoothly-menu-options {
 	margin-top: 0.5em;
 	padding-top: 0.5em;
@@ -150,7 +131,6 @@ smoothly-icon.down {
 	position: absolute;
 	z-index: 1;
 }
-
 :host(:not([is-open]))>smoothly-menu-options {
 	/* hide options by default */
 	display: none;
