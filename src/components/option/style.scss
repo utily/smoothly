@@ -18,6 +18,8 @@
 
 :host>div.middle{
 	padding-left: 0.5em;
+	flex-shrink: 1;
+	width:100%;
 }
 
 :host div:last-child
@@ -29,6 +31,11 @@
 :host([divider]) {
 	 margin-bottom: 0.5em;
  }
+
+:host>div[slot="right"]{
+	margin-right: 100%;
+	color:rgba(var(--smoothly-primary-color), 0.8);
+}
 
 :host([divider])::after{
 	position:absolute;
