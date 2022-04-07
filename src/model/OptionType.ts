@@ -3,4 +3,5 @@ export type OptionType = {
 	name: string
 	aliases?: string[]
 	description?: HTMLElement | string
+	divider?: boolean
 }

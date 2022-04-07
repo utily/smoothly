@@ -11,6 +11,7 @@ export class SmoothlyOption {
 	@Prop({ mutable: true, reflect: true }) dataHighlight = false
 	@Prop({ mutable: true, reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) value: string
+	@Prop({ mutable: true, reflect: true }) divider?: boolean = false
 	@Event() optionHover: EventEmitter<{ value: any; name: string }>
 	@Event() optionSelect: EventEmitter<{ value: any; name: string }>
 	onHover(event: MouseEvent) {
@@ -26,9 +27,12 @@ export class SmoothlyOption {
 	render() {
 		return (
 			<Host onMouseDown={(e: any) => this.onSelect(e)} onMouseOver={(e: MouseEvent) => this.onHover(e)}>
-				<div>{this.name}</div>
 				<div>
-					<slot></slot>
+					<slot name="left"></slot>
+				</div>
+				<div class="middle">{this.name}</div>
+				<div>
+					<slot name="right"></slot>
 				</div>
 			</Host>
 		)

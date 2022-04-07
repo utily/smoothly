@@ -111,6 +111,7 @@ export class SmoothlyMenuOptions {
 							ref={el => index == 0 && (this.firstOptionsElement = el ?? this.firstOptionsElement)}
 							value={option.value}
 							name={option.name}
+							divider={option.divider}
 							data-highlight={this.highlightIndex == index}>
 							{option.description}
 						</smoothly-option>
