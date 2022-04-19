@@ -129,7 +129,7 @@ export class SmoothlySelectDemo {
 				multiple={false}
 				max-menu-height="200px"
 				options={[
-					{ name: "Dog", value: "dog", aliases: ["WOFF"], description: "Woof 🐶" },
+					{ name: "Dog", value: "dog", aliases: ["WOFF"], right: "Woof 🐶" },
 					{ name: "Cat", value: "cat", aliases: ["moew"] },
 					{ name: "Pig", value: "pig" },
 					{ name: "Turtle", value: "turtle" },

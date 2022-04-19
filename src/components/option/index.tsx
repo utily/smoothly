@@ -27,13 +27,9 @@ export class SmoothlyOption {
 	render() {
 		return (
 			<Host onMouseDown={(e: any) => this.onSelect(e)} onMouseOver={(e: MouseEvent) => this.onHover(e)}>
-				<div>
-					<slot name="left"></slot>
-				</div>
+				<slot name="left"></slot>
 				<div class="middle">{this.name}</div>
-				<div>
-					<slot name="right"></slot>
-				</div>
+				<slot name="right"></slot>
 			</Host>
 		)
 	}
