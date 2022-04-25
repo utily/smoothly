@@ -38,9 +38,8 @@ export class InputDateRange {
 	}
 	render() {
 		return [
-			<section>
+			<section onClick={() => (this.open = !this.open)}>
 				<smoothly-input
-					onClick={() => (this.open = !this.open)}
 					type="date"
 					value={this.start}
 					showLabel={this.showLabel}
@@ -49,7 +48,6 @@ export class InputDateRange {
 				</smoothly-input>
 				<span>–</span>
 				<smoothly-input
-					onClick={() => (this.open = !this.open)}
 					type="date"
 					showLabel={this.showLabel}
 					value={this.end}
