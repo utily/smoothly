@@ -40,8 +40,7 @@ export class SmoothlySubmit {
 						result[element.name] = element.value
 				}
 			}
-			const innerEvent = this.submitEvent.emit(result)
-			console.log("smoothly-submit", innerEvent)
+			this.submitEvent.emit(result)
 			this.processing = false
 		}
 	}

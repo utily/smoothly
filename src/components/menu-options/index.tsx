@@ -113,7 +113,8 @@ export class SmoothlyMenuOptions {
 							name={option.name}
 							divider={option.divider}
 							data-highlight={this.highlightIndex == index}>
-							{option.description}
+							{option.left ? <div slot="left">{option.left}</div> : undefined}
+							{option.right ? <div slot="right">{option.right}</div> : undefined}
 						</smoothly-option>
 					))
 				) : (

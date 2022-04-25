@@ -120,9 +120,9 @@ export class SmoothlyPicker {
 	}
 	getCheckHtml(checked: boolean): HTMLElement {
 		return checked ? (
-			<smoothly-icon slot="left" name="checkbox" size="small"></smoothly-icon>
+			<smoothly-icon name="checkbox" size="small"></smoothly-icon>
 		) : (
-			<smoothly-icon slot="left" name="square-outline" size="small"></smoothly-icon>
+			<smoothly-icon name="square-outline" size="small"></smoothly-icon>
 		)
 	}
 
@@ -132,13 +132,13 @@ export class SmoothlyPicker {
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
 		this.options?.forEach(o => {
-			o.description = this.getCheckHtml(this.selections.map(s => s.value).includes(o.value))
+			o.left = this.getCheckHtml(this.selections.map(s => s.value).includes(o.value))
 		})
 		const options = [
 			{
 				value: "select-none",
 				name: this.selectNoneName,
-				description: this.getCheckHtml(this.selections.length == this.options?.length),
+				left: this.getCheckHtml(this.selections.length == this.options?.length),
 				divider: true,
 			},
 			...(this.options ?? []),
