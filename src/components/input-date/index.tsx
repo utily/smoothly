@@ -11,6 +11,7 @@ export class InputDate {
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
+	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")
 	onStart(next: Date) {
@@ -25,28 +26,29 @@ export class InputDate {
 		return [
 			<smoothly-input
 				onClick={() => (this.open = !this.open)}
+				disabled={this.disabled}
 				type="date"
 				value={this.value}
 				onSmoothlyChanged={e => (this.value = e.detail.value)}>
 				<slot></slot>
 			</smoothly-input>,
-			this.open ? <div onClick={() => (this.open = false)}></div> : [],
-			this.open ? (
-				<nav>
-					<div class="arrow"></div>
-					<smoothly-calendar
-						doubleInput={false}
-						value={this.value ?? Date.now()}
-						onValueChanged={event => {
-							this.value = event.detail
-							event.stopPropagation()
-						}}
-						max={this.max}
-						min={this.min}></smoothly-calendar>
-				</nav>
-			) : (
-				[]
-			),
+			this.open && !this.disabled
+				? [
+						<div onClick={() => (this.open = false)}></div>,
+						<nav>
+							<div class="arrow"></div>
+							<smoothly-calendar
+								doubleInput={false}
+								value={this.value ?? Date.now()}
+								onValueChanged={event => {
+									this.value = event.detail
+									event.stopPropagation()
+								}}
+								max={this.max}
+								min={this.min}></smoothly-calendar>
+						</nav>,
+				  ]
+				: [],
 		]
 	}
 }
