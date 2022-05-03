@@ -221,6 +221,8 @@ export namespace Components {
         "submit": () => Promise<boolean>;
     }
     interface SmoothlySvg {
+        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
+        "url": string;
     }
     interface SmoothlyTab {
         "label": string;
@@ -892,6 +894,8 @@ declare namespace LocalJSX {
         "processing"?: boolean;
     }
     interface SmoothlySvg {
+        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
+        "url": string;
     }
     interface SmoothlyTab {
         "label"?: string;
