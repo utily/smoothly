@@ -1,8 +1,8 @@
-import { Component, h, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-svg",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 })
 export class SmoothlySvg {
 	@Prop({ reflect: true }) url!: string
@@ -14,17 +14,24 @@ export class SmoothlySvg {
 		tiny: { height: "5rem", width: "5rem" },
 	}
 	render() {
+		const height = this.size
+			? typeof this.size == "object"
+				? this.size.height
+				: this.defaultSizes[this.size].height
+			: "50em"
+		const width = this.size
+			? typeof this.size == "object"
+				? this.size.width
+				: this.defaultSizes[this.size].width
+			: "50em"
 		return (
-			<object
-				height={
-					this.size ? (typeof this.size == "object" ? this.size.height : this.defaultSizes[this.size].height) : "50em"
-				}
-				width={
-					this.size ? (typeof this.size == "object" ? this.size.width : this.defaultSizes[this.size].width) : "50em"
-				}
-				type="image/svg+xml"
-				data={this.url}
-			/>
+			<Host
+				style={{
+					"--size-height": height,
+					"--size-width": width,
+				}}>
+				<object height={height} width={width} type="image/svg+xml" data={this.url} />
+			</Host>
 		)
 	}
 }
