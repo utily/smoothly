@@ -199,6 +199,14 @@ export namespace Components {
     }
     interface SmoothlySelector {
     }
+    interface SmoothlySkeleton {
+        "align": "left" | "center" | "right";
+        "color": string;
+        "distance": string;
+        "period": number;
+        "width": string;
+        "widths": string[];
+    }
     interface SmoothlySpinner {
         "active": boolean;
         "size": "small" | "medium" | "large";
@@ -485,6 +493,12 @@ declare global {
         prototype: HTMLSmoothlySelectorElement;
         new (): HTMLSmoothlySelectorElement;
     };
+    interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
+    }
+    var HTMLSmoothlySkeletonElement: {
+        prototype: HTMLSmoothlySkeletonElement;
+        new (): HTMLSmoothlySkeletonElement;
+    };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
     var HTMLSmoothlySpinnerElement: {
@@ -619,6 +633,7 @@ declare global {
         "smoothly-select": HTMLSmoothlySelectElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-selector": HTMLSmoothlySelectorElement;
+        "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
@@ -846,6 +861,14 @@ declare namespace LocalJSX {
     interface SmoothlySelector {
         "onSelected"?: (event: CustomEvent<any>) => void;
     }
+    interface SmoothlySkeleton {
+        "align"?: "left" | "center" | "right";
+        "color"?: string;
+        "distance"?: string;
+        "period"?: number;
+        "width"?: string;
+        "widths"?: string[];
+    }
     interface SmoothlySpinner {
         "active"?: boolean;
         "size"?: "small" | "medium" | "large";
@@ -955,6 +978,7 @@ declare namespace LocalJSX {
         "smoothly-select": SmoothlySelect;
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-selector": SmoothlySelector;
+        "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-tab": SmoothlyTab;
@@ -1014,6 +1038,7 @@ declare module "@stencil/core" {
             "smoothly-select": LocalJSX.SmoothlySelect & JSXBase.HTMLAttributes<HTMLSmoothlySelectElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-selector": LocalJSX.SmoothlySelector & JSXBase.HTMLAttributes<HTMLSmoothlySelectorElement>;
+            "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;

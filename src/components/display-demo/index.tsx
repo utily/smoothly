@@ -65,6 +65,18 @@ export class SmoothlyDisplayDemo {
 						<smoothly-quiet color="dark">-</smoothly-quiet>
 					</dd>
 				</dl>
+				<smoothly-skeleton period={3} distance="20rem" width="20rem"></smoothly-skeleton>
+				<smoothly-skeleton period={3} distance="20rem" color="200,200,255"></smoothly-skeleton>
+				<smoothly-skeleton period={3} distance="20rem" color="var(--smoothly-warning-color)"></smoothly-skeleton>
+				<smoothly-skeleton period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="center" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
+				<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="right" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
+				<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
+				<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
 				<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
 				<div style={{display: "flex", justifyContent: "space-between"}}>
 					<smoothly-popup direction="down">
