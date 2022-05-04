@@ -1,0 +1,53 @@
+:host {
+	display: block;
+	height: 1rem;
+}
+:host(::before) {
+	content: "";
+	display: block;
+	width: var(--width);
+	height: 100%;
+	border-radius: 0.4rem;
+	background-image: linear-gradient(90deg, rgb(var(--color, var(--smoothly-dark-color))) 0, transparent 2.5rem, rgb(var(--color, var(--smoothly-dark-color))) 5rem);
+	background-size: calc(var(--distance) + 5rem);
+	animation-duration: var(--period, 1.6s);
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-name: shine-lines-left;
+}
+@keyframes shine-lines-left {
+	0% {
+		background-position: -5rem;
+	}
+	40%,
+	100% {
+		background-position: var(--distance);
+	}
+}
+:host([align=center]::before) {
+	margin: 0 auto;
+	animation-name: shine-lines-center;
+}
+@keyframes shine-lines-center {
+	0% {
+		background-position: calc((var(--width) - var(--distance)) / 2 - 5rem);
+	}
+	40%,
+	100% {
+		background-position: calc(var(--width) + (var(--distance) - var(--width)) / 2);
+	}
+}
+:host([align=right]::before) {
+	margin: 0;
+	margin-left: auto;
+	animation-name: shine-lines-right;
+}
+@keyframes shine-lines-right {
+	0% {
+		background-position: calc(var(--width) - var(--distance) - 5rem);
+	}
+	40%,
+	100% {
+		background-position: var(--width);
+	}
+}
