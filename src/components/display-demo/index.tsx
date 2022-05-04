@@ -123,7 +123,7 @@ export class SmoothlyDisplayDemo {
 				<div style={{position: "relative", height: "10em"}}>Large Spinner<smoothly-spinner active size="large" style={{"--background-color": "255,255,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner></div>
 				<div style={{position: "relative", height: "10em"}}>Medium Spinner<smoothly-spinner active size="medium"></smoothly-spinner></div>
 				<div style={{position: "relative", height: "10em"}}>Small Spinner<smoothly-spinner active size="small"></smoothly-spinner></div>
-				<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/portal-login.svg"></smoothly-svg></div>
+				<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div>
 			</main>,
 		]
 	}
