@@ -220,6 +220,11 @@ export namespace Components {
         "processing": boolean;
         "submit": () => Promise<boolean>;
     }
+    interface SmoothlySvg {
+        "color": string;
+        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
+        "url": string;
+    }
     interface SmoothlyTab {
         "label": string;
         "open": boolean;
@@ -511,6 +516,12 @@ declare global {
         prototype: HTMLSmoothlySubmitElement;
         new (): HTMLSmoothlySubmitElement;
     };
+    interface HTMLSmoothlySvgElement extends Components.SmoothlySvg, HTMLStencilElement {
+    }
+    var HTMLSmoothlySvgElement: {
+        prototype: HTMLSmoothlySvgElement;
+        new (): HTMLSmoothlySvgElement;
+    };
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
     }
     var HTMLSmoothlyTabElement: {
@@ -636,6 +647,7 @@ declare global {
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
+        "smoothly-svg": HTMLSmoothlySvgElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
         "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
@@ -882,6 +894,11 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "processing"?: boolean;
     }
+    interface SmoothlySvg {
+        "color"?: string;
+        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
+        "url": string;
+    }
     interface SmoothlyTab {
         "label"?: string;
         "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
@@ -981,6 +998,7 @@ declare namespace LocalJSX {
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
+        "smoothly-svg": SmoothlySvg;
         "smoothly-tab": SmoothlyTab;
         "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
@@ -1041,6 +1059,7 @@ declare module "@stencil/core" {
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
+            "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
             "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;

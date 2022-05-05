@@ -1,0 +1,11 @@
+:host {
+	display: block;
+	min-width: var(--size-width);
+	min-height: var(--size-height);
+	background-color: rgb(var(--color));
+}
+object {
+	min-width: var(--size-width);
+	min-height: var(--size-height);
+	background-color: rgb(var(--color));
+}
