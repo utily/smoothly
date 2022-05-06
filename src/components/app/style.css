@@ -2,11 +2,9 @@ smoothly-app {
 	display: block;
 	scrollbar-width: none;
 }
-
 smoothly-app[hidden] {
 	display: none;
 }
-
 smoothly-app[color=default],
 smoothly-app:not([color]) {
 	--smoothly-app-background: var(--smoothly-default-color);
@@ -15,7 +13,6 @@ smoothly-app:not([color]) {
 	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
 	--smoothly-app-shadow: var(--smoothly-default-shadow);
 }
-
 smoothly-app[color=primary] {
 	--smoothly-app-background: var(--smoothly-primary-shade);
 	--smoothly-app-color: var(--smoothly-primary-contrast);
@@ -23,7 +20,6 @@ smoothly-app[color=primary] {
 	--smoothly-app-hover-color: var(--smoothly-secondary-contrast);
 	--smoothly-app-shadow: var(--smoothly-primary-shadow);
 }
-
 smoothly-app[color=secondary] {
 	--smoothly-app-background: var(--smoothly-secondary-shade);
 	--smoothly-app-color: var(--smoothly-secondary-contrast);
@@ -31,7 +27,6 @@ smoothly-app[color=secondary] {
 	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
 	--smoothly-app-shadow: var(--smoothly-secondary-shadow);
 }
-
 smoothly-app[color=tertiary],
 smoothly-app[color=success],
 smoothly-app[color=warning],
@@ -42,7 +37,6 @@ smoothly-app[color=danger] {
 	--smoothly-app-hover-color: var(--smoothly-default-contrast);
 	--smoothly-app-shadow: var(--smoothly-color-shadow);
 }
-
 smoothly-app>smoothly-notifier>header {
 	position: fixed;
 	top: 0;
@@ -61,18 +55,14 @@ smoothly-app>smoothly-notifier>header {
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
 	border-bottom: 1px solid rgba(var(--smoothly-dark-color))
 }
-
 smoothly-app>smoothly-notifier>header a {
 	color: inherit;
 	text-decoration: inherit;
 }
-
 smoothly-app>smoothly-notifier>header>nav {
-	flex-shrink: 0;
 	width: 100%;
 	flex-shrink: 2;
 }
-
 smoothly-app>smoothly-notifier>header>h1,
 smoothly-app>smoothly-notifier>header>nav,
 smoothly-app>smoothly-notifier>header>nav>ul,
@@ -82,11 +72,9 @@ smoothly-app>smoothly-notifier>header>nav>ul>li>*:not(a) {
 	height: 100%;
 	margin: 0;
 }
-
 smoothly-app>smoothly-notifier>header>h1 {
 	margin-left: 60px;
 }
-
 smoothly-app>smoothly-notifier>header>h1>a {
 	overflow: hidden;
 	user-select: none;
@@ -96,55 +84,45 @@ smoothly-app>smoothly-notifier>header>h1>a {
 	size: 100%;
 	background-position-y: center;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li a {
 	line-height: 1.6cm;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul {
 	width: 100%;
 }
-
-smoothly-app>smoothly-notifier>header>[slot="header"] {
+smoothly-app>smoothly-notifier>header>[slot=header] {
 	display: flex;
 	margin-right: 34.25px;
 	justify-content: flex-end;
 	border: 0;
 }
-
-smoothly-app>smoothly-notifier>header>[slot="header"]>a {
+smoothly-app>smoothly-notifier>header>[slot=header]>a {
 	display: flex;
 	align-self: center;
 	border-width: 0;
 	align-items: center;
 	margin-right: 62.25px;
 }
-
-smoothly-app>smoothly-notifier>header>[slot="header"]>a>smoothly-icon {
+smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
 	fill: rgb(var(--smoothly-primary-shade));
 	stroke: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-shade));
-
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li a {
 	display: flex;
 	height: 36px;
 	margin: 0 0.4cm;
 	text-decoration: none;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li>a {
 	display: flex;
 	align-items: center;
 	align-self: center;
 	margin-bottom: 2px;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li smoothly-trigger.sc-smoothly-trigger-h {
 	border: 0;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li>a>smoothly-icon>svg {
 	fill: rgb(var(--smoothly-medium-color));
 	stroke: rgb(var(--smoothly-medium-color));
@@ -152,14 +130,12 @@ smoothly-app>smoothly-notifier>header>nav>ul>li>a>smoothly-icon>svg {
 	align-items: center;
 	display: flex;
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li>a:hover>smoothly-icon>svg,
 smoothly-app>smoothly-notifier>header>nav>ul>li>a.active>smoothly-icon>svg {
 	color: rgb(var(--smoothly-app-color));
 	stroke: rgb(var(--smoothly-app-color));
 	fill: rgb(var(--smoothly-app-color));
 }
-
 smoothly-app>smoothly-notifier>header>nav>ul>li>smoothly-trigger.active a>smoothly-icon,
 smoothly-app>smoothly-notifier>header>nav>ul>li>smoothly-trigger:hover a>smoothly-icon,
 smoothly-app>smoothly-notifier>header>nav>ul>li a:hover,
@@ -171,8 +147,7 @@ smoothly-app>smoothly-notifier>header>nav>ul>li a.active {
 	stroke: rgb(var(--smoothly-app-color));
 	fill: rgb(var(--smoothly-app-color));
 }
-
-smoothly-app>smoothly-notifier>content {
+smoothly-app>smoothly-notifier>main {
 	position: relative;
 	top: 90px;
 }
