@@ -60,7 +60,6 @@ smoothly-app>smoothly-notifier>header a {
 	text-decoration: inherit;
 }
 smoothly-app>smoothly-notifier>header>nav {
-	flex-shrink: 0;
 	width: 100%;
 	flex-shrink: 2;
 }
@@ -108,7 +107,6 @@ smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
 	fill: rgb(var(--smoothly-primary-shade));
 	stroke: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-shade));
-
 }
 smoothly-app>smoothly-notifier>header>nav>ul>li a {
 	display: flex;
