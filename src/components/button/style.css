@@ -1,5 +1,11 @@
-:host {
+:host[type=link] {
+	display: inline;
+}
+:host:not([type=link]) {
 	display: block;
+}
+:host {
+	margin: 1em;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 3px;
@@ -10,6 +16,7 @@
 :host[disabled] {
 	opacity: 0.5;
 }
+a,
 button {
 	border-color: transparent;
 	background-color: transparent;
@@ -17,16 +24,26 @@ button {
 	font-size: 110%;
 	font-weight: 400;
 }
+
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
-	border-color: var(--smoothly-trigger-border);
+	border-color: var(--smoothly-button-border);
 }
-:host[expand=fill] > button,
-:host[expand=block] > button {
+:host[type=button] > a {
+	display: block;
+	text-align: center;
+	text-decoration: inherit;
+}
+
+:host[type=button] > a {
+	width: calc(100% - 0.6em);
+}
+:host > button {
 	width: 100%;
 }
 :host[expand=fill] {
+	width: 100%;
 	border-left: none;
 	border-right: none;
 }
