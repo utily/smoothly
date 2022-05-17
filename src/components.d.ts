@@ -711,7 +711,6 @@ declare namespace LocalJSX {
         "expand"?: Expand;
         "fill"?: Fill;
         "link"?: string;
-        "onOnClick"?: (event: CustomEvent<UIEvent>) => void;
         "type"?: "link" | "button";
     }
     interface SmoothlyCalendar {

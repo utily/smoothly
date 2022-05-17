@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 import { Color, Expand, Fill } from "../../model"
 
 @Component({
@@ -14,12 +14,7 @@ export class SmoothlyButton {
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop() link?: string
 	@Prop() download?: boolean
-	@Event() onClick: EventEmitter<UIEvent>
 
-	@Listen("click")
-	clicked(e: UIEvent) {
-		this.onClick.emit(e)
-	}
 	render() {
 		let result: HTMLElement
 		switch (this.type) {
@@ -27,7 +22,7 @@ export class SmoothlyButton {
 				result = this.disabled ? (
 					<slot></slot>
 				) : (
-					<a onClick={e => this.clicked(e)} href={this.link}>
+					<a href={this.link}>
 						<slot></slot>
 					</a>
 				)
