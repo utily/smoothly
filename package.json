@@ -66,7 +66,7 @@
     "langly": "0.0.14",
     "normalize.css": "^8.0.1",
     "stencil-router-v2": "^0.6.0",
-    "tidily": "0.0.50"
+    "tidily": "0.0.51"
   },
   "devDependencies": {
     "@stencil/core": "^2.10.0",
