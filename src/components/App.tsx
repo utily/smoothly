@@ -10,6 +10,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		r[entry[0]] = null
 		return r
 	}, {}) as VNode
+	console.log("emptyNode", emptyNode)
 	const emptyChild = nodeToChild(emptyNode)
 	function nodeToChild(node: VNode): ChildNode {
 		let result: ChildNode | undefined
@@ -19,7 +20,15 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	function childToNode(child: ChildNode): VNode {
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
-	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
+	function filterNavigation(kids: (ChildNode & { node: VNode })[]): VNode[] {
+		return [
+			...kids.filter(child => child.vattrs?.slot == "nav-start"),
+			...kids.filter(child => child.vattrs?.label && child.vattrs?.path),
+			...kids.filter(child => child.vattrs?.slot == "nav-end"),
+		].map(child => child.node)
+	}
+
+	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
 	return (
 		<smoothly-app>
 			<header>
@@ -29,50 +38,26 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<nav>
 					<ul>
 						{utils
-							.map(
-								[
-									...children.filter(child => child.vattrs?.slot == "nav-start"),
-									...children.filter(child => child.vattrs?.label && child.vattrs?.path),
-									...children.filter(child => child.vattrs?.slot == "nav-end"),
-								].map(child => child.node),
-								child => {
-									if (child.vattrs?.label && child.vattrs?.path)
-										child = {
-											...emptyChild,
-											vtag: "a",
-											vattrs: { href: child.vattrs?.path },
-											vchildren: [
-												child.vattrs?.icon
-													? childToNode({
-															vtag: "smoothly-icon",
-															vattrs: {
-																toolTip: child.vattrs?.label,
-																name: child.vattrs?.icon,
-																size: "medium",
-															},
-													  })
-													: childToNode({ vtext: child.vattrs?.label }),
-											],
-										}
-									const url = resolve(child.vattrs?.href)
-									return child.vtag != "a"
-										? child
-										: url
-										? {
-												...child,
-												vattrs: {
-													...child.vattrs,
-													class: [child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined,
-													href: url,
-												},
-										  }
-										: { ...child, vattrs: { ...child.vattrs, target: "new" } }
-								}
-							)
+							.map(filterNavigation(children), c => c)
 							.map(node => {
 								const child = nodeToChild(node)
-								return child.vtag == "a" && !child.vattrs?.target ? (
-									<a {...child.vattrs} {...href(child.vattrs?.href)}>
+								const url = child.vattrs?.href ? resolve(child.vattrs.href) : resolve(child.vattrs?.path)
+								return url && !child.vattrs?.target ? (
+									<a
+										{...child.vattrs}
+										{...href(url)}
+										class={[child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined}>
+										{child?.vattrs.icon ? (
+											<smoothly-icon
+												toolTip={child.vattrs?.label}
+												name={child.vattrs?.icon}
+												size="medium"></smoothly-icon>
+										) : (
+											child.vattrs?.label ?? child.vchildren
+										)}
+									</a>
+								) : child.vtag == "a" ? (
+									<a {...child.vattrs} target="new">
 										{child.vchildren}
 									</a>
 								) : (
@@ -102,6 +87,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		</smoothly-app>
 	)
 }
+
 function resolve(url: string): string | undefined {
 	const u = new URL(url, document.baseURI)
 	return url == ""
