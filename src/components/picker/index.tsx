@@ -135,12 +135,16 @@ export class SmoothlyPicker {
 			o.left = this.getCheckHtml(this.selections.map(s => s.value).includes(o.value))
 		})
 		const options = [
-			{
-				value: "select-none",
-				name: this.selectNoneName,
-				left: this.getCheckHtml(this.selections.length == this.options?.length),
-				divider: true,
-			},
+			...(this.multiple
+				? [
+						{
+							value: "select-none",
+							name: this.selectNoneName,
+							left: this.getCheckHtml(this.selections.length == this.options?.length),
+							divider: true,
+						},
+				  ]
+				: []),
 			...(this.options ?? []),
 		]
 		return (
