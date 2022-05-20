@@ -18,6 +18,24 @@ export class SmoothlyAppDemo {
 				</a>
 				<smoothly-room path="">
 					<smoothly-input type="text">Default</smoothly-input>
+					<div style={{ padding: "1em", maxWidth: "12em" }}>
+						<smoothly-button fill="solid" color="danger" link="https://google.com">
+							open
+						</smoothly-button>
+						<smoothly-button
+							fill="solid"
+							color="danger"
+							link="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+							download={true}>
+							download
+						</smoothly-button>
+						<smoothly-button fill="solid" color="danger" onClick={() => alert("clicked")}>
+							action
+						</smoothly-button>
+						<smoothly-button type="link" fill="clear" color="danger" onClick={() => alert("clicked")}>
+							action link
+						</smoothly-button>
+					</div>
 				</smoothly-room>
 				<smoothly-room path="input" label="Input">
 					<smoothly-input-demo />
