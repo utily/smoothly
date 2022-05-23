@@ -10,15 +10,11 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		r[entry[0]] = null
 		return r
 	}, {}) as VNode
-	console.log("emptyNode", emptyNode)
 	const emptyChild = nodeToChild(emptyNode)
 	function nodeToChild(node: VNode): ChildNode {
 		let result: ChildNode | undefined
 		utils.forEach([node], child => (result = child))
 		return result ?? emptyChild
-	}
-	function childToNode(child: ChildNode): VNode {
-		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
 	function filterNavigation(kids: (ChildNode & { node: VNode })[]): VNode[] {
 		return [
@@ -33,7 +29,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		<smoothly-app>
 			<header>
 				<h1>
-					<a {...href(resolve("") ?? "/")}>{attributes.label}</a>
+					<a {...href(resolveLocalUrl("") ?? "/")}>{attributes.label}</a>
 				</h1>
 				<nav>
 					<ul>
@@ -41,32 +37,35 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 							.map(filterNavigation(children), c => c)
 							.map(node => {
 								const child = nodeToChild(node)
-								const url = child.vattrs?.href ? resolve(child.vattrs.href) : resolve(child.vattrs?.path)
-								return url && !child.vattrs?.target ? (
-									<a
-										{...child.vattrs}
-										{...href(url)}
-										class={[child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined}>
-										{child?.vattrs.icon ? (
-											<smoothly-icon
-												toolTip={child.vattrs?.label}
-												name={child.vattrs?.icon}
-												size="medium"></smoothly-icon>
+								const url = child.vattrs?.href
+									? resolveLocalUrl(child.vattrs.href)
+									: resolveLocalUrl(child.vattrs?.path)
+								return (
+									<li>
+										{url && !child.vattrs?.target ? (
+											<a
+												{...child.vattrs}
+												{...href(url)}
+												class={[child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined}>
+												{child?.vattrs.icon ? (
+													<smoothly-icon
+														toolTip={child.vattrs?.label}
+														name={child.vattrs?.icon}
+														size="medium"></smoothly-icon>
+												) : (
+													child.vattrs?.label ?? child.vchildren
+												)}
+											</a>
+										) : child.vtag == "a" ? (
+											<a {...child.vattrs} target="new">
+												{child.vchildren}
+											</a>
 										) : (
-											child.vattrs?.label ?? child.vchildren
+											node
 										)}
-									</a>
-								) : child.vtag == "a" ? (
-									<a {...child.vattrs} target="new">
-										{child.vchildren}
-									</a>
-								) : (
-									node
+									</li>
 								)
-							})
-							.map(child => (
-								<li>{child}</li>
-							))}
+							})}
 					</ul>
 				</nav>
 				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
@@ -77,9 +76,9 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 						.filter(child => child.vattrs?.path != undefined)
 						.map(child =>
 							child.vattrs?.to ? (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path} to={child.vattrs?.to}></Route>
+								<Route path={resolveLocalUrl(child.vattrs?.path) ?? child.vattrs?.path} to={child.vattrs?.to}></Route>
 							) : (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path}>{child.node}</Route>
+								<Route path={resolveLocalUrl(child.vattrs?.path) ?? child.vattrs?.path}>{child.node}</Route>
 							)
 						)}
 				</Router.Switch>
@@ -88,7 +87,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	)
 }
 
-function resolve(url: string): string | undefined {
+function resolveLocalUrl(url: string): string | undefined {
 	const u = new URL(url, document.baseURI)
 	return url == ""
 		? new URL(document.baseURI).pathname
