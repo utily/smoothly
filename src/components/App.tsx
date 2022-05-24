@@ -16,15 +16,45 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 		utils.forEach([node], child => (result = child))
 		return result ?? emptyChild
 	}
-	function filterNavigation(kids: (ChildNode & { node: VNode })[]): VNode[] {
-		return [
-			...kids.filter(child => child.vattrs?.slot == "nav-start"),
-			...kids.filter(child => child.vattrs?.label && child.vattrs?.path),
-			...kids.filter(child => child.vattrs?.slot == "nav-end"),
-		].map(child => child.node)
-	}
 
 	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
+	function filterNavigation(): VNode[] {
+		return utils.map(
+			[
+				...children.filter(child => child.vattrs?.slot == "nav-start"),
+				...children.filter(child => child.vattrs?.label && child.vattrs?.path),
+				...children.filter(child => child.vattrs?.slot == "nav-end"),
+			].map(child => child.node),
+			c => c
+		)
+	}
+	function nodeToListItem(node: VNode): HTMLLIElement {
+		const child = nodeToChild(node)
+		const url = child.vattrs?.href ? resolveLocalUrl(child.vattrs.href) : resolveLocalUrl(child.vattrs?.path)
+		return (
+			<li>
+				{url && !child.vattrs?.target ? (
+					<a
+						{...child.vattrs}
+						{...href(url)}
+						class={[child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined}>
+						{child?.vattrs.icon ? (
+							<smoothly-icon toolTip={child.vattrs?.label} name={child.vattrs?.icon} size="medium"></smoothly-icon>
+						) : (
+							child.vattrs?.label ?? child.vchildren
+						)}
+					</a>
+				) : child.vtag == "a" ? (
+					<a {...child.vattrs} target="new">
+						{child.vchildren}
+					</a>
+				) : (
+					node
+				)}
+			</li>
+		)
+	}
+
 	return (
 		<smoothly-app>
 			<header>
@@ -32,41 +62,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 					<a {...href(resolveLocalUrl("") ?? "/")}>{attributes.label}</a>
 				</h1>
 				<nav>
-					<ul>
-						{utils
-							.map(filterNavigation(children), c => c)
-							.map(node => {
-								const child = nodeToChild(node)
-								const url = child.vattrs?.href
-									? resolveLocalUrl(child.vattrs.href)
-									: resolveLocalUrl(child.vattrs?.path)
-								return (
-									<li>
-										{url && !child.vattrs?.target ? (
-											<a
-												{...child.vattrs}
-												{...href(url)}
-												class={[child.vattrs?.class, Router.activePath == url ? "active" : ""].join(" ") || undefined}>
-												{child?.vattrs.icon ? (
-													<smoothly-icon
-														toolTip={child.vattrs?.label}
-														name={child.vattrs?.icon}
-														size="medium"></smoothly-icon>
-												) : (
-													child.vattrs?.label ?? child.vchildren
-												)}
-											</a>
-										) : child.vtag == "a" ? (
-											<a {...child.vattrs} target="new">
-												{child.vchildren}
-											</a>
-										) : (
-											node
-										)}
-									</li>
-								)
-							})}
-					</ul>
+					<ul>{filterNavigation().map(nodeToListItem)}</ul>
 				</nav>
 				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 			</header>
