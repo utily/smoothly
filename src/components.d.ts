@@ -254,7 +254,7 @@ export namespace Components {
     }
     interface SmoothlyTableHeader {
         "name": string;
-        "sortDirection"?: "ascending" | "descending";
+        "sortDirection": "ascending" | "descending";
     }
     interface SmoothlyTableRow {
         "align": "left" | "center" | "right";

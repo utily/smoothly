@@ -7,7 +7,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/
 })
 export class TableHeader {
 	@Prop() name: string
-	@Prop({ mutable: true }) sortDirection?: "ascending" | "descending" = "ascending"
+	@Prop({ mutable: true }) sortDirection: "ascending" | "descending" = "ascending"
 	@Event() sort: EventEmitter<{ property: string; direction: "ascending" | "descending" }>
 	@Listen("click")
 	onClick(event: MouseEvent) {
@@ -27,7 +27,7 @@ export class TableHeader {
 		)
 	}
 	private renderSortIcon(): any {
-		let result: any | undefined
+		let result: "ascending" | "descending"
 		switch (this.sortDirection) {
 			case "ascending":
 				result = <ion-icon name="chevron-up-outline" class="sort-icon"></ion-icon>
