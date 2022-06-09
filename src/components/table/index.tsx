@@ -12,7 +12,7 @@ export class Table {
 	@Listen("sort")
 	onSort(event: CustomEvent<{ property: string; direction: "ascending" | "descending" }>) {
 		if (this.sortedOn && this.sortedOn != event.target)
-			this.sortedOn.sortDirection = undefined
+			this.sortedOn.sortDirection = "ascending"
 		this.sortedOn = event.target as HTMLSmoothlyTableHeaderElement
 	}
 	render() {

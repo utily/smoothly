@@ -7,15 +7,14 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/
 })
 export class TableHeader {
 	@Prop() name: string
-	@Prop({ mutable: true }) sortDirection?: "ascending" | "descending"
+	@Prop({ mutable: true }) sortDirection?: "ascending" | "descending" = "ascending"
 	@Event() sort: EventEmitter<{ property: string; direction: "ascending" | "descending" }>
 	@Listen("click")
 	onClick(event: MouseEvent) {
 		this.sort.emit({
 			property: this.name,
-			direction: (this.sortDirection = this.sortDirection == "descending" ? "ascending" : "descending"),
+			direction: (this.sortDirection = this.sortDirection == "ascending" ? "descending" : "ascending"),
 		})
-		console.log("sort", this.name, this.sortDirection)
 		event.preventDefault()
 		event.stopPropagation()
 	}
