@@ -8,9 +8,9 @@ label {
 	display: block;
   padding: 1em;
 	background-color: rgb(var(--smoothly-default-shade));
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	width: 100px;
+	border-top-left-radius: 0.3rem;
+	border-top-right-radius: 0.3rem;
+	width: 6.25rem;
 
 }
 div {

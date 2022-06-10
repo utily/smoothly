@@ -43,13 +43,12 @@ smoothly-app>smoothly-notifier>header {
 	left: 0;
 	width: 100%;
 	z-index: 5;
-	height: 90px;
+	height: 5rem;
 	background-color: rgb(var(--smoothly-app-background));
 	color: rgba(var(--smoothly-medium-color));
 	fill: rgb(var(--smoothly-medium-color));
 	stroke: rgb(var(--smoothly-medium-color));
 	display: flex;
-	font-size: 18px;
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
@@ -73,7 +72,7 @@ smoothly-app>smoothly-notifier>header>nav>ul>li>*:not(a) {
 	margin: 0;
 }
 smoothly-app>smoothly-notifier>header>h1 {
-	margin-left: 60px;
+	margin-left: 3.8rem;
 }
 smoothly-app>smoothly-notifier>header>h1>a {
 	overflow: hidden;
@@ -92,7 +91,7 @@ smoothly-app>smoothly-notifier>header>nav>ul {
 }
 smoothly-app>smoothly-notifier>header>[slot=header] {
 	display: flex;
-	margin-right: 34.25px;
+	margin-right: 2.1rem;
 	justify-content: flex-end;
 	border: 0;
 }
@@ -101,7 +100,7 @@ smoothly-app>smoothly-notifier>header>[slot=header]>a {
 	align-self: center;
 	border-width: 0;
 	align-items: center;
-	margin-right: 62.25px;
+	margin-right: 3.9rem;
 }
 smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
 	fill: rgb(var(--smoothly-primary-shade));
@@ -110,7 +109,7 @@ smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
 }
 smoothly-app>smoothly-notifier>header>nav>ul>li a {
 	display: flex;
-	height: 36px;
+	height: 2.3rem;
 	margin: 0 0.4cm;
 	text-decoration: none;
 }
@@ -149,5 +148,5 @@ smoothly-app>smoothly-notifier>header>nav>ul>li a.active {
 }
 smoothly-app>smoothly-notifier>main {
 	position: relative;
-	top: 90px;
+	top: 5.6rem;
 }
