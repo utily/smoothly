@@ -1,13 +1,9 @@
 :host {
 	display: table-cell;
+	padding: 0.5em;
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
 	background-color: rgb(var(--smoothly-default-color));
 	border: 1px solid rgb(var(--smoothly-dark-color), 0.5);
-	padding: 0.5em;
 	line-height: 2.5rem;
-}
-:host > ion-icon {
-	height: 0.75rem;
-	margin-left: 1.25rem;
 }
