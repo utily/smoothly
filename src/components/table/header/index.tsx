@@ -1,4 +1,4 @@
-import { Component, h, Host } from "@stencil/core"
+import { Component, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-header",
@@ -7,10 +7,6 @@ import { Component, h, Host } from "@stencil/core"
 })
 export class TableHeader {
 	render() {
-		return (
-			<Host>
-				<slot></slot>
-			</Host>
-		)
+		return <slot></slot>
 	}
 }
