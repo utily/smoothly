@@ -60,6 +60,10 @@ export class SmoothlyDisplayDemo {
 					<dd>
 						<smoothly-display type="card-csc" value="987"></smoothly-display>
 					</dd>
+					<dt>date</dt>
+					<dd>
+						<smoothly-display type="date" value="2022-07-07"></smoothly-display>
+					</dd>
 					<dt>Quiet</dt>
 					<dd>
 						<smoothly-quiet color="dark">-</smoothly-quiet>
