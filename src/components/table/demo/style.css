@@ -1,0 +1,7 @@
+:host {
+	display: flex;
+}
+smoothly-table-row[open] smoothly-icon {
+	transform: rotate(90deg);
+	transition: transform 0.2s;
+}

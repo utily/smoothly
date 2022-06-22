@@ -1,7 +1,11 @@
 :host {
 	display: table-cell;
-	padding: 0.5em;
+	padding-left: 0.5em;
+	vertical-align: middle;
 }
 .hide {
 	display: none;
+}
+:host[open] {
+	background-color: rgb(var(--smoothly-color-shade));
 }
