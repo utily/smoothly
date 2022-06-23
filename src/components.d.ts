@@ -251,14 +251,12 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTableExpandableRow {
+        "open": boolean;
     }
     interface SmoothlyTableHeader {
         "name": string;
-        "sortDirection"?: "ascending" | "descending";
     }
     interface SmoothlyTableRow {
-        "align": "left" | "center" | "right";
-        "open": boolean;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -945,16 +943,12 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTableExpandableRow {
+        "open"?: boolean;
     }
     interface SmoothlyTableHeader {
         "name"?: string;
-        "onSort"?: (event: CustomEvent<{ property: string; direction: "ascending" | "descending" }>) => void;
-        "sortDirection"?: "ascending" | "descending";
     }
     interface SmoothlyTableRow {
-        "align"?: "left" | "center" | "right";
-        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
-        "open"?: boolean;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;

@@ -1,5 +1,5 @@
 :host {
-	display: table-row;
+	display: block;
 	border: 1px solid rgb(var(--smoothly-default-color));
 	cursor: pointer;
 }
