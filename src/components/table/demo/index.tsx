@@ -66,7 +66,6 @@ export class TableDemo {
 					<smoothly-table-cell>
 						<smoothly-display type="price" value={18} currency="EUR"></smoothly-display>
 					</smoothly-table-cell>
-					<div slot="detail">Cost details.</div>
 				</smoothly-table-row>
 			</smoothly-table>,
 		]
