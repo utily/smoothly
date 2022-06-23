@@ -9,3 +9,11 @@
 :host[open] {
 	background-color: rgb(var(--smoothly-color-shade));
 }
+.slot-detail {
+	position: relative;
+	background-color: rgb(var(--smoothly-color-shade));
+	width: 108%;
+	left: calc(-54% + 50%);
+	border-left-style: solid;
+	border-left-color: rgb(var(--smoothly-tertiary-color));
+}
