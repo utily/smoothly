@@ -4,4 +4,5 @@
 	background-color: rgb(var(--smoothly-color-shade));
 	border-style: none;
 	padding-left: 0.5em;
+	font-weight: bold;
 }
