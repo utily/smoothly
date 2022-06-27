@@ -8,3 +8,7 @@
 	margin: 1em 9.5%  ;
 	padding-bottom: 0.5em;
 }
+.slot-detail > div {
+	padding: 10em 0;
+	margin-left: 10em;
+}
