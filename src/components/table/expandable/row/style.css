@@ -2,6 +2,7 @@
 	display: table-row;
 	border: 1px solid rgb(var(--smoothly-default-color));
 	cursor: pointer;
+	box-sizing: border-box;
 }
 .hide {
 	display: none;
@@ -33,5 +34,11 @@
 	padding-bottom: 0.5em;
 }
 :host[open] {
-	background-color: rgb(var(--smoothly-color-shade));
+	position: relative;
+	z-index: 3;
+	background-color: rgb(var(--smoothly-default-color));
+	border-style: solid;
+	border-width: 5px;
+	/* border-color: rgb(var(--smoothly-dark-color)); */
+	box-shadow: inset 2px 0px 0px 0px rgb(var(--smoothly-dark-color)), inset 0px 2px 0px 0px rgb(var(--smoothly-dark-color)), inset -2px 0px 0px 0px rgb(var(--smoothly-dark-color)), inset 0px 0px 0px 2px rgb(var(--smoothly-default-color));
 }
