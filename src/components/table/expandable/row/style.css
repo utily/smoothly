@@ -8,14 +8,22 @@
 }
 .slot-detail {
 	position: relative;
-	background-color: rgb(var(--smoothly-color-shade));
-	width: 108%;
-	left: calc(-54% + 50%);
+	background-color: rgb(var(--smoothly-default-color));
+	width: 104%;
+	left: calc(-52% + 50%);
 	border-left-style: solid;
 	border-left-color: rgb(var(--smoothly-tertiary-color));
 	box-shadow: 0px 0px 5px 2px rgb(var(--smoothly-dark-color), 0.5);
 	box-sizing: border-box;
-	padding: 0.5em 4%;
+	padding: 0.5em 2%;
+}
+:host smoothly-icon {
+	width: 0.6em;
+	height: 1em;
+	float: left;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+	padding-bottom: 0.5em;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
