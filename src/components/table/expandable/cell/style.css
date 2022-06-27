@@ -2,6 +2,7 @@
 	display: table-cell;
 	padding-left: 0.5em;
 	vertical-align: middle;
+	line-height: 1.5em;
 }
 .hide {
 	display: none;
@@ -16,4 +17,6 @@
 	left: calc(-54% + 50%);
 	border-left-style: solid;
 	border-left-color: rgb(var(--smoothly-tertiary-color));
+	box-shadow: 0px 0px 5px 2px rgb(var(--smoothly-dark-color), 0.5);
+	padding: 0.5em;
 }

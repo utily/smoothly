@@ -13,14 +13,20 @@
 	left: calc(-54% + 50%);
 	border-left-style: solid;
 	border-left-color: rgb(var(--smoothly-tertiary-color));
+	box-shadow: 0px 0px 5px 2px rgb(var(--smoothly-dark-color), 0.5);
+	padding: 0.5em ;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
 	transition: transform 0.2s;
 }
-/* :host:nth-child(even) {
-	background-color: rgb(var(--smoothly-default-tint));
+:host[open] smoothly-table-cell {
+	padding-bottom: 0.5em;
 }
-:host:hover {
-	background-color: rgb(var(--smoothly-default-color));
-} */
+:host[open] {
+	background-color: rgb(var(--smoothly-color-shade));
+}
+:host:nth-child(2)  smoothly-expandable-cell {
+	padding-top: 5em;
+	line-height: 5em;
+}

@@ -2,7 +2,8 @@
 	display: table-cell;
 	line-height: 2.5rem;
 	background-color: rgb(var(--smoothly-color-shade));
-	border-style: none;
+	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
 	padding-left: 0.5em;
 	font-weight: bold;
+	margin-bottom: 5em;
 }
