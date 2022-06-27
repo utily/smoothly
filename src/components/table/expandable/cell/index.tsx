@@ -50,6 +50,7 @@ export class TableExpandableCell implements ComponentDidLoad {
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
+				<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
 				<tr ref={e => (this.expansionElement = e)}>
 					<td colSpan={500} class={!this.open ? "hide" : ""}>
 						<div class="slot-detail">

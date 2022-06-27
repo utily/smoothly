@@ -27,7 +27,3 @@
 :host[open] {
 	background-color: rgb(var(--smoothly-color-shade));
 }
-:host:nth-child(2)  smoothly-expandable-cell {
-	padding-top: 5em;
-	line-height: 5em;
-}

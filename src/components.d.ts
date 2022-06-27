@@ -251,6 +251,7 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTableExpandableRow {
+        "align": "left" | "center" | "right";
         "open": boolean;
     }
     interface SmoothlyTableHeader {
@@ -943,6 +944,8 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTableExpandableRow {
+        "align"?: "left" | "center" | "right";
+        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTableHeader {
