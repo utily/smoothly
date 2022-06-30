@@ -18,7 +18,6 @@
 	border-style: solid solid none solid;
 	border-width: 2px;
 	border-color: rgb(var(--smoothly-dark-color));
-	/* box-shadow: 0px -4px 5px 2px rgb(var(--smoothly-dark-color), 0.5); */
 }
 .slot-detail {
 	position: relative;

@@ -3,15 +3,6 @@
 	border: 1px solid rgb(var(--smoothly-dark-color), 0.5);
 	cursor: default;
 }
-/* :host:nth-child(even) {
-	background-color: rgb(var(--smoothly-default-color));
-}
-:host:hover {
-	background-color: rgb(var(--smoothly-default-color));
-} */
 .hide {
 	display: none;
 }
-/* :host[open] {
-	background-color: rgb(var(--smoothly-color-shade));
-} */
