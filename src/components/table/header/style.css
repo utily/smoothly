@@ -3,7 +3,7 @@
 	line-height: 2.5rem;
 	background-color: rgb(var(--smoothly-color-shade));
 	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
-	padding-left: 1em;
+	padding-left: 1rem;
 	font-weight: bold;
-	margin-bottom: 5em;
+	margin-bottom: 5rem;
 }
