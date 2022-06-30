@@ -24,7 +24,6 @@ button {
 	font-size: 110%;
 	font-weight: 400;
 }
-
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
@@ -35,7 +34,6 @@ button {
 	text-align: center;
 	text-decoration: inherit;
 }
-
 :host[type=button] > a {
 	width: calc(100% - 0.6em);
 }
