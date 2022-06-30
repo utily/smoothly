@@ -18,7 +18,7 @@ export class TableDemo {
 				</smoothly-table-row>
 				<smoothly-table-row>
 					<smoothly-table-expandable-cell>
-						normal row (exp.cell) 
+						normal row (exp.cell)
 						<div slot="detail">expandable cell 1 content</div>
 					</smoothly-table-expandable-cell>
 					<smoothly-table-expandable-cell>
