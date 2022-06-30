@@ -80,7 +80,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.4.5",
-    "prettier": "^2.6.2",
+    "prettier": "^1.7.0",
     "prettier-stylelint": "^0.4.2",
     "prettierx": "github:utily/eslint-plugin-prettierx#utily-20220323",
     "puppeteer": "^14.1.0",
