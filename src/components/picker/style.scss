@@ -26,7 +26,7 @@
 	border-width: 2px;
 	margin: 0px;
 }
-:host>div {
+:host > div {
 	display: flex;
 	background-color: transparent;
 	min-height: 2.5rem;
@@ -34,7 +34,7 @@
 	align-self: center;
 	border: none;
 	max-height: var(--max-height);
-	.icons>smoothly-icon {
+	.icons > smoothly-icon {
 		flex-shrink: 0;
 		padding-left: 0.6em;
 		stroke: rgba(var(--color), 0.4);
@@ -57,17 +57,16 @@
 		padding: 0 0.6rem;
 		font-family: var(--smoothly-font-family);
 		font-size: 1.05rem;
-
 		&::placeholder {
 			opacity: 1;
 			text-overflow: ellipsis;
 		}
 	}
 }
-:host([is-open])>div input {
+:host([is-open]) > div input {
 	color: rgb(var(--smoothly-medium-color));
 }
-:host(:not(:focus-within)[multiple]) ul>li:last-child {
+:host(:not(:focus-within)[multiple]) ul > li:last-child {
 	/* Remove Input out of the CSS flow Layout. This way input takes up no extra space */
 	position: absolute;
 	pointer-events: none;
@@ -131,7 +130,7 @@ smoothly-icon.down {
 	position: absolute;
 	z-index: 1;
 }
-:host(:not([is-open]))>smoothly-menu-options {
+:host(:not([is-open])) > smoothly-menu-options {
 	/* hide options by default */
 	display: none;
 }

@@ -9,26 +9,21 @@
 	background-color: transparent;
 	position: relative;
 }
-
 :host([data-highlight]) {
 	background-color: rgb(var(--smoothly-default-shade));
 }
-
-:host>div.middle {
+:host > div.middle {
 	padding-left: 0.5em;
 	flex-shrink: 1;
 	width: 100%;
 }
-
 :host([divider]) {
 	margin-bottom: 0.5em;
 }
-
 ::slotted([slot=right]) {
 	font-style: italic;
 	white-space: nowrap;
 }
-
 :host([divider])::after {
 	position: absolute;
 	height: 1px;
