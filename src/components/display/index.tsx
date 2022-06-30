@@ -1,6 +1,6 @@
 import { Component, h, Prop } from "@stencil/core"
-import { CountryCode, Currency } from "isoly"
-import { format, Type } from "tidily"
+import { CountryCode, Currency, Language, Locale } from "isoly"
+import { format, get, Type } from "tidily"
 
 @Component({
 	tag: "smoothly-display",
@@ -13,7 +13,7 @@ export class SmoothlyDisplay {
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
 	render() {
-		let result: string | HTMLElement
+		let result: string | HTMLElement | undefined
 		const type = this.type
 		switch (type) {
 			default:
@@ -31,7 +31,14 @@ export class SmoothlyDisplay {
 			case "price":
 				result = format(this.value, type, this.currency)
 				break
+			case "date":
+				result = get(this.type as Type, getLocale())?.toString(this.value)
+				break
 		}
 		return result
 	}
+}
+function getLocale(): Locale | undefined {
+	const result = navigator.language
+	return Locale.is(result) ? result : Language.is(result) ? Locale.toLocale(result) : undefined
 }
