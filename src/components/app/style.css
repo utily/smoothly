@@ -65,8 +65,8 @@ smoothly-app>smoothly-notifier>header>nav {
 smoothly-app>smoothly-notifier>header>h1,
 smoothly-app>smoothly-notifier>header>nav,
 smoothly-app>smoothly-notifier>header>nav>ul,
-smoothly-app>smoothly-notifier>header>nav>ul>li,
-smoothly-app>smoothly-notifier>header>nav>ul>li>*:not(a) {
+smoothly-app>smoothly-notifier>header>nav>ul li,
+smoothly-app>smoothly-notifier>header>nav>ul li>*:not(a) {
 	display: flex;
 	height: 100%;
 	margin: 0;
@@ -107,38 +107,38 @@ smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
 	stroke: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-shade));
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li a {
+smoothly-app>smoothly-notifier>header>nav>ul li a {
 	display: flex;
 	height: 2.3rem;
 	margin: 0 0.4cm;
 	text-decoration: none;
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li>a {
+smoothly-app>smoothly-notifier>header>nav>ul li>a {
 	display: flex;
 	align-items: center;
 	align-self: center;
 	margin-bottom: 2px;
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li smoothly-trigger.sc-smoothly-trigger-h {
+smoothly-app>smoothly-notifier>header>nav>ul li smoothly-trigger.sc-smoothly-trigger-h {
 	border: 0;
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li>a>smoothly-icon>svg {
+smoothly-app>smoothly-notifier>header>nav>ul li>a>smoothly-icon>svg {
 	fill: rgb(var(--smoothly-medium-color));
 	stroke: rgb(var(--smoothly-medium-color));
 	color: rgb(var(--smoothly-medium-color));
 	align-items: center;
 	display: flex;
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li>a:hover>smoothly-icon>svg,
-smoothly-app>smoothly-notifier>header>nav>ul>li>a.active>smoothly-icon>svg {
+smoothly-app>smoothly-notifier>header>nav>ul li>a:hover>smoothly-icon>svg,
+smoothly-app>smoothly-notifier>header>nav>ul li>a.active>smoothly-icon>svg {
 	color: rgb(var(--smoothly-app-color));
 	stroke: rgb(var(--smoothly-app-color));
 	fill: rgb(var(--smoothly-app-color));
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li>smoothly-trigger.active a>smoothly-icon,
-smoothly-app>smoothly-notifier>header>nav>ul>li>smoothly-trigger:hover a>smoothly-icon,
-smoothly-app>smoothly-notifier>header>nav>ul>li a:hover,
-smoothly-app>smoothly-notifier>header>nav>ul>li a.active {
+smoothly-app>smoothly-notifier>header>nav>ul li>smoothly-trigger.active a>smoothly-icon,
+smoothly-app>smoothly-notifier>header>nav>ul li>smoothly-trigger:hover a>smoothly-icon,
+smoothly-app>smoothly-notifier>header>nav>ul li a:hover,
+smoothly-app>smoothly-notifier>header>nav>ul li a.active {
 	border-bottom: 2px solid rgb(var(--smoothly-app-color));
 	margin-bottom: 0px;
 	border-bottom-width: 2px;
