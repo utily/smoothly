@@ -62,11 +62,11 @@ smoothly-app > smoothly-notifier > header > nav {
 	width: 100%;
 	flex-shrink: 2;
 }
-smoothly-app>smoothly-notifier>header>h1,
-smoothly-app>smoothly-notifier>header>nav,
-smoothly-app>smoothly-notifier>header>nav>ul,
-smoothly-app>smoothly-notifier>header>nav>ul li,
-smoothly-app>smoothly-notifier>header>nav>ul li>*:not(a) {
+smoothly-app > smoothly-notifier > header > h1,
+smoothly-app > smoothly-notifier > header > nav,
+smoothly-app > smoothly-notifier > header > nav > ul,
+smoothly-app > smoothly-notifier > header > nav > ul > li,
+smoothly-app > smoothly-notifier > header > nav > ul > li > *:not(a) {
 	display: flex;
 	height: 100%;
 	margin: 0;
