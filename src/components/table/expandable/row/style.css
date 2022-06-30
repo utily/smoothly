@@ -25,10 +25,10 @@
 	padding-left: 0.2em;
 	padding-right: 0.2em;
 	padding-bottom: 0.5em;
+	transition: transform 0.2s;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
-	transition: transform 0.2s;
 }
 :host[open] smoothly-table-cell {
 	padding-bottom: 0.5em;
