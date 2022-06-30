@@ -52,7 +52,8 @@ export class SmoothlyInput {
 			}
 		}
 		if (value != before) {
-			value = value.trim()
+			if (typeof value == "string")
+				value = value.trim()
 			this.smoothlyChanged.emit({ name: this.name, value })
 		}
 	}
