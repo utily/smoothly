@@ -51,8 +51,11 @@ export class SmoothlyInput {
 				value: this.newState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
 			}
 		}
-		if (value != before)
+		if (value != before) {
+			if (typeof value == "string")
+				value = value.trim()
 			this.smoothlyChanged.emit({ name: this.name, value })
+		}
 	}
 	@Watch("currency")
 	onCurrency() {
