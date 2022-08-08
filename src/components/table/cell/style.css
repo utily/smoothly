@@ -1,4 +1,6 @@
 :host {
 	display: table-cell;
-	padding: 0.5em;
+	vertical-align: middle;
+	line-height: 1.5rem;
+	padding: 0.2rem 0 0.2rem 1rem;
 }

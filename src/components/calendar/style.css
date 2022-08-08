@@ -35,7 +35,7 @@ td:nth-child(6):not(.currentMonth),
 td:nth-child(7):not(.currentMonth) {
 	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
-td:not(.selected,.disable):hover {
+td:not(.selected, .disable):hover {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-tint));
 }
@@ -43,7 +43,7 @@ td.selected {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-color));
 }
-td:not(.selected,.dateRange):not(:hover).today {
+td:not(.selected, .dateRange):not(:hover).today {
 	background: rgb(var(--smoothly-dark-tint));
 	color: rgb(var(--smoothly-dark-contrast));
 }
@@ -56,4 +56,3 @@ td.disable {
 	background-color: rgb(var(--smoothly-default-tint), 0.5);
 	color: rgb(var(--smoothly-default-contrast), 0.5);
 }
-

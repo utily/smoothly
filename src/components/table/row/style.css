@@ -1,14 +1,8 @@
 :host {
 	display: table-row;
 	border: 1px solid rgb(var(--smoothly-dark-color), 0.5);
-	cursor: pointer;
+	cursor: default;
 }
-:host:nth-child(even) {
-	background-color: rgb(var(--smoothly-default-color));
-}
-:host:hover {
-	background-color: rgb(var(--smoothly-default-color));
-}
-.hide{
+.hide {
 	display: none;
 }

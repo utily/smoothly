@@ -3,14 +3,13 @@
 	color: rgb(var(--smoothly-primary-contrast));
 }
 :host {
-	padding: .5em;
+	padding: 0.5em;
 	cursor: pointer;
 	background-color: rgb(var(--smoothly-default-shade));
 	color: rgb(var(--smoothly-default-contrast));
-	border: rgb(var(--smoothly-default-shade) solid 1px)
+	border: rgb(var(--smoothly-default-shade) solid 1px);
 }
 :host:hover {
 	background-color: rgb(var(--smoothly-primary-color));
 	color: rgb(var(--smoothly-primary-contrast));
 }
-

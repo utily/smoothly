@@ -37,7 +37,7 @@ smoothly-app[color=danger] {
 	--smoothly-app-hover-color: var(--smoothly-default-contrast);
 	--smoothly-app-shadow: var(--smoothly-color-shadow);
 }
-smoothly-app>smoothly-notifier>header {
+smoothly-app > smoothly-notifier > header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -52,13 +52,13 @@ smoothly-app>smoothly-notifier>header {
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
-	border-bottom: 1px solid rgba(var(--smoothly-dark-color))
+	border-bottom: 1px solid rgba(var(--smoothly-dark-color));
 }
-smoothly-app>smoothly-notifier>header a {
+smoothly-app > smoothly-notifier > header a {
 	color: inherit;
 	text-decoration: inherit;
 }
-smoothly-app>smoothly-notifier>header>nav {
+smoothly-app > smoothly-notifier > header > nav {
 	width: 100%;
 	flex-shrink: 2;
 }
@@ -71,10 +71,10 @@ smoothly-app>smoothly-notifier>header>nav>ul li>*:not(a) {
 	height: 100%;
 	margin: 0;
 }
-smoothly-app>smoothly-notifier>header>h1 {
+smoothly-app > smoothly-notifier > header > h1 {
 	margin-left: 3.8rem;
 }
-smoothly-app>smoothly-notifier>header>h1>a {
+smoothly-app > smoothly-notifier > header > h1 > a {
 	overflow: hidden;
 	user-select: none;
 	height: 200%;
@@ -83,26 +83,26 @@ smoothly-app>smoothly-notifier>header>h1>a {
 	size: 100%;
 	background-position-y: center;
 }
-smoothly-app>smoothly-notifier>header>nav>ul>li a {
+smoothly-app > smoothly-notifier > header > nav > ul > li a {
 	line-height: 1.6cm;
 }
-smoothly-app>smoothly-notifier>header>nav>ul {
+smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
-smoothly-app>smoothly-notifier>header>[slot=header] {
+smoothly-app > smoothly-notifier > header > [slot=header] {
 	display: flex;
 	margin-right: 2.1rem;
 	justify-content: flex-end;
 	border: 0;
 }
-smoothly-app>smoothly-notifier>header>[slot=header]>a {
+smoothly-app > smoothly-notifier > header > [slot=header] > a {
 	display: flex;
 	align-self: center;
 	border-width: 0;
 	align-items: center;
 	margin-right: 3.9rem;
 }
-smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon {
+smoothly-app > smoothly-notifier > header > [slot=header] > a > smoothly-icon {
 	fill: rgb(var(--smoothly-primary-shade));
 	stroke: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-shade));
@@ -146,7 +146,7 @@ smoothly-app>smoothly-notifier>header>nav>ul li a.active {
 	stroke: rgb(var(--smoothly-app-color));
 	fill: rgb(var(--smoothly-app-color));
 }
-smoothly-app>smoothly-notifier>main {
+smoothly-app > smoothly-notifier > main {
 	position: relative;
 	top: 5.6rem;
 }

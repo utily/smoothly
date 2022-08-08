@@ -1,7 +1,9 @@
 :host {
 	display: table-cell;
-	padding: 0.75rem 0.5rem;
-	background-color: rgb(var(--smoothly-default-color));
-	border: 1px solid rgb(var(--smoothly-dark-color), 0.5);
 	line-height: 2.5rem;
+	background-color: rgb(var(--smoothly-color-shade));
+	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
+	padding-left: 1rem;
+	font-weight: bold;
+	margin-bottom: 5rem;
 }
