@@ -105,6 +105,7 @@ export namespace Components {
         "name": string;
         "pattern": RegExp | undefined;
         "placeholder": string | undefined;
+        "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
@@ -784,9 +785,12 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
+        "onSmoothlyBlur"?: (event: CustomEvent<any>) => void;
         "onSmoothlyChanged"?: (event: CustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyDone"?: (event: CustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
+        "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;
         "type"?: string;

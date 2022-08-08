@@ -10,6 +10,7 @@ export class SmoothlyTabSwitch {
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Listen("expansionOpen")
 	openChanged(event: CustomEvent) {
+		event.stopPropagation()
 		this.selectedElement = event.target as HTMLSmoothlyTabElement
 		this.selectedElement.open = true
 		this.element.after(event.detail)
