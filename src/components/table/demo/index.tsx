@@ -56,6 +56,30 @@ export class TableDemo {
 					<div slot="detail">expandable row content</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>Header A</smoothly-table-header>
+					<smoothly-table-header></smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-expandable-row>
+					A Content
+					<div slot="detail">
+						<smoothly-tab-switch>
+							<smoothly-tab label="1" open={true}>
+								<smoothly-table>
+									<smoothly-table-row>
+										<smoothly-table-header>Header B</smoothly-table-header>
+										<smoothly-table-header></smoothly-table-header>
+									</smoothly-table-row>
+									<smoothly-table-expandable-row>
+										<smoothly-table-cell>B Content</smoothly-table-cell>
+									</smoothly-table-expandable-row>
+								</smoothly-table>
+							</smoothly-tab>
+						</smoothly-tab-switch>
+					</div>
+				</smoothly-table-expandable-row>
+			</smoothly-table>,
 		]
 	}
 }

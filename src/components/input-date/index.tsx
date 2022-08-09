@@ -29,7 +29,7 @@ export class InputDate {
 				disabled={this.disabled}
 				type="date"
 				value={this.value}
-				onSmoothlyChanged={e => (this.value = e.detail.value)}>
+				onSmoothlyInput={e => (this.value = e.detail.value)}>
 				<slot></slot>
 			</smoothly-input>,
 			this.open && !this.disabled

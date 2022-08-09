@@ -10,7 +10,15 @@ export class SmoothlyInputDemo {
 					<h5>Address</h5>
 				</header>
 				<main>
-					<smoothly-input type="text" name="name">
+					<smoothly-input
+						type="text"
+						name="name"
+						readonly={true}
+						value={"Readonly"}
+						onSmoothlyBlur={() => console.log("smoothly blur")}>
+						Readonly
+					</smoothly-input>
+					<smoothly-input type="text" name="name" onSmoothlyChange={e => console.log("smoothly change event")}>
 						Name
 					</smoothly-input>
 					<smoothly-input type="date" name="date">

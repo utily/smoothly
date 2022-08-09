@@ -1,16 +1,4 @@
-import {
-	Component,
-	ComponentDidLoad,
-	Element,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Prop,
-	State,
-	Watch,
-} from "@stencil/core"
+import { Component, ComponentDidLoad, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-expandable-cell",
@@ -21,10 +9,10 @@ export class TableExpandableCell implements ComponentDidLoad {
 	@Element() element: HTMLSmoothlyTableExpandableCellElement
 	expansionElement?: HTMLTableRowElement
 	@Event() expansionOpen: EventEmitter<HTMLElement>
-	@Event() expansionLoaded: EventEmitter<void>
+	@Event() expansionLoad: EventEmitter<void>
 	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
-	@State() beginOpen: boolean
+	private beginOpen: boolean
 	@Watch("open")
 	openChanged(value: boolean) {
 		if (this.expansionElement)
@@ -38,7 +26,7 @@ export class TableExpandableCell implements ComponentDidLoad {
 		this.open = !this.open
 	}
 	componentDidLoad(): void {
-		this.expansionLoaded.emit()
+		this.expansionLoad.emit()
 	}
 	componentDidRender(): void {
 		if (this.beginOpen) {
@@ -52,7 +40,7 @@ export class TableExpandableCell implements ComponentDidLoad {
 				<slot></slot>
 				<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
 				<tr ref={e => (this.expansionElement = e)}>
-					<td colSpan={500} class={!this.open ? "hide" : ""}>
+					<td colSpan={999} class={!this.open ? "hide" : ""}>
 						<div class="slot-detail">
 							<slot name="detail"></slot>
 						</div>

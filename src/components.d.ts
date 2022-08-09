@@ -105,6 +105,7 @@ export namespace Components {
         "name": string;
         "pattern": RegExp | undefined;
         "placeholder": string | undefined;
+        "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
@@ -282,6 +283,106 @@ export namespace Components {
     interface SmoothlyUrlencoded {
         "data": string;
     }
+}
+export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyAccordionItemElement;
+}
+export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyCalendarElement;
+}
+export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyCheckboxElement;
+}
+export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyDisplayDemoElement;
+}
+export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFrameElement;
+}
+export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputElement;
+}
+export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDateElement;
+}
+export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDateRangeElement;
+}
+export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyItemElement;
+}
+export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNotificationElement;
+}
+export interface SmoothlyOptionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyOptionElement;
+}
+export interface SmoothlyPickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyPickerElement;
+}
+export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyPopupElement;
+}
+export interface SmoothlyRadioCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyRadioElement;
+}
+export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyReorderElement;
+}
+export interface SmoothlySelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySelectElement;
+}
+export interface SmoothlySelectorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySelectorElement;
+}
+export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySubmitElement;
+}
+export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTabElement;
+}
+export interface SmoothlyTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableElement;
+}
+export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableExpandableCellElement;
+}
+export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyTriggerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTriggerElement;
+}
+export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTriggerSourceElement;
 }
 declare global {
     interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
@@ -686,10 +787,10 @@ declare namespace LocalJSX {
     interface SmoothlyAccordionItem {
         "brand"?: string | string[];
         "name"?: string;
-        "onSmoothlyAccordionItemDidLoad"?: (event: CustomEvent<void>) => void;
-        "onSmoothlyAccordionItemDidUnload"?: (event: CustomEvent<void>) => void;
-        "onSmoothlyClose"?: (event: CustomEvent<{ name: string; open: boolean }>) => void;
-        "onSmoothlyOpen"?: (event: CustomEvent<{ name: string; open: boolean }>) => void;
+        "onSmoothlyAccordionItemDidLoad"?: (event: SmoothlyAccordionItemCustomEvent<void>) => void;
+        "onSmoothlyAccordionItemDidUnload"?: (event: SmoothlyAccordionItemCustomEvent<void>) => void;
+        "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
+        "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;
     }
     interface SmoothlyApp {
@@ -718,18 +819,18 @@ declare namespace LocalJSX {
         "max"?: Date;
         "min"?: Date;
         "month"?: Date;
-        "onDateRangeSet"?: (event: CustomEvent<DateRange>) => void;
-        "onDateSet"?: (event: CustomEvent<Date>) => void;
-        "onEndChanged"?: (event: CustomEvent<Date>) => void;
-        "onStartChanged"?: (event: CustomEvent<Date>) => void;
-        "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "onDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<DateRange>) => void;
+        "onDateSet"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onEndChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onStartChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onValueChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
         "start"?: Date;
         "value"?: Date;
     }
     interface SmoothlyCheckbox {
         "disabled"?: boolean;
         "intermediate"?: boolean;
-        "onChecked"?: (event: CustomEvent<{ selected: boolean }>) => void;
+        "onChecked"?: (event: SmoothlyCheckboxCustomEvent<{ selected: boolean }>) => void;
         "selectAll"?: boolean;
         "selected"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
@@ -756,12 +857,12 @@ declare namespace LocalJSX {
         "datetime"?: DateTime;
     }
     interface SmoothlyDisplayDemo {
-        "onNotice"?: (event: CustomEvent<Notice>) => void;
+        "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyFrame {
         "name"?: string;
-        "onMessage"?: (event: CustomEvent<Message<any>>) => void;
-        "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "onMessage"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
+        "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
     }
@@ -784,9 +885,12 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onSmoothlyChanged"?: (event: CustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
+        "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;
         "type"?: string;
@@ -796,7 +900,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "max"?: Date;
         "min"?: Date;
-        "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
     }
@@ -804,8 +908,8 @@ declare namespace LocalJSX {
         "end"?: Date;
         "max"?: Date;
         "min"?: Date;
-        "onDateRangeSelected"?: (event: CustomEvent<{ start: Date; end: Date }>) => void;
-        "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
+        "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
         "start"?: Date;
@@ -814,11 +918,11 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputMonth {
-        "onValueChanged"?: (event: CustomEvent<Date>) => void;
+        "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
     }
     interface SmoothlyItem {
-        "onItemSelected"?: (event: CustomEvent<void>) => void;
+        "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
@@ -832,7 +936,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNotification {
         "notice"?: Notice;
-        "onRemove"?: (event: CustomEvent<Notice>) => void;
+        "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
     }
     interface SmoothlyNotifier {
     }
@@ -841,8 +945,8 @@ declare namespace LocalJSX {
         "dataHighlight"?: boolean;
         "divider"?: boolean;
         "name"?: string;
-        "onOptionHover"?: (event: CustomEvent<{ value: any; name: string }>) => void;
-        "onOptionSelect"?: (event: CustomEvent<{ value: any; name: string }>) => void;
+        "onOptionHover"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
+        "onOptionSelect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
         "value"?: string;
     }
     interface SmoothlyPicker {
@@ -852,7 +956,7 @@ declare namespace LocalJSX {
         "maxHeight"?: string;
         "maxMenuHeight"?: "inherit";
         "multiple"?: boolean;
-        "onMenuClose"?: (event: CustomEvent<OptionType[]>) => void;
+        "onMenuClose"?: (event: SmoothlyPickerCustomEvent<OptionType[]>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
         "selectNoneName"?: string;
@@ -861,7 +965,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
-        "onPopup"?: (event: CustomEvent<boolean>) => void;
+        "onPopup"?: (event: SmoothlyPopupCustomEvent<boolean>) => void;
         "visible"?: boolean;
     }
     interface SmoothlyQuiet {
@@ -870,7 +974,7 @@ declare namespace LocalJSX {
     interface SmoothlyRadio {
         "checked"?: boolean;
         "name"?: string;
-        "onSmoothlySelected"?: (event: CustomEvent<{ name: string; value: string }>) => void;
+        "onSmoothlySelected"?: (event: SmoothlyRadioCustomEvent<{ name: string; value: string }>) => void;
         "tabIndex"?: number;
         "value"?: string;
     }
@@ -878,7 +982,7 @@ declare namespace LocalJSX {
         "orientation"?: "horizontal" | "vertical";
     }
     interface SmoothlyReorder {
-        "onReorder"?: (event: CustomEvent<[number, number]>) => void;
+        "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
     interface SmoothlyRoom {
         "icon"?: string;
@@ -889,13 +993,13 @@ declare namespace LocalJSX {
     interface SmoothlySelect {
         "background"?: string;
         "identifier"?: string;
-        "onSelectionChanged"?: (event: CustomEvent<{ identifier: string; value: string }>) => void;
+        "onSelectionChanged"?: (event: SmoothlySelectCustomEvent<{ identifier: string; value: string }>) => void;
         "value"?: string;
     }
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
-        "onSelected"?: (event: CustomEvent<any>) => void;
+        "onSelected"?: (event: SmoothlySelectorCustomEvent<any>) => void;
     }
     interface SmoothlySkeleton {
         "align"?: "left" | "center" | "right";
@@ -914,7 +1018,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: Expand;
         "fill"?: Fill;
-        "onSubmit"?: (event: CustomEvent<{ [key: string]: string }>) => void;
+        "onSubmit"?: (event: SmoothlySubmitCustomEvent<{ [key: string]: string }>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }
@@ -925,13 +1029,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTab {
         "label"?: string;
-        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
+        "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTabSwitch {
     }
     interface SmoothlyTable {
-        "onLoadMore"?: (event: CustomEvent<void>) => void;
+        "onLoadMore"?: (event: SmoothlyTableCustomEvent<void>) => void;
     }
     interface SmoothlyTableCell {
     }
@@ -939,13 +1043,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
-        "onExpansionLoaded"?: (event: CustomEvent<void>) => void;
-        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
+        "onExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
+        "onExpansionOpen"?: (event: SmoothlyTableExpandableCellCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTableExpandableRow {
         "align"?: "left" | "center" | "right";
-        "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
+        "onExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTableHeader {
@@ -959,7 +1063,7 @@ declare namespace LocalJSX {
         "expand"?: Expand;
         "fill"?: Fill;
         "name"?: string;
-        "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "onTrigger"?: (event: SmoothlyTriggerCustomEvent<Trigger>) => void;
         "type"?: "link" | "button";
         "value"?: any;
     }
@@ -970,8 +1074,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTriggerSource {
         "listen"?: string;
-        "onMessage"?: (event: CustomEvent<Message<any>>) => void;
-        "onTrigger"?: (event: CustomEvent<Trigger>) => void;
+        "onMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
+        "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
     interface SmoothlyTuple {
         "tuple"?: [string, string];

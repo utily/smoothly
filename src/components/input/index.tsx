@@ -1,6 +1,7 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
-import { Action, Converter, Direction, Formatter, get, Settings, State, StateEditor, Type } from "tidily"
+import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
@@ -11,7 +12,7 @@ export class SmoothlyInput {
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
 	private lastValue: any
-	private state: Readonly<State> & Readonly<Settings>
+	private state: Readonly<TidilyState> & Readonly<Settings>
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
@@ -23,7 +24,9 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
+	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
+	@State() initialValue?: any
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
@@ -37,11 +40,13 @@ export class SmoothlyInput {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return result || get("text")!
 	}
-	private newState(state: State) {
+	private newState(state: TidilyState) {
 		const formatter = this.formatter
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
-	@Event() smoothlyChanged: EventEmitter<{ name: string; value: any }>
+	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyChange: EventEmitter<{ name: string; value: any }>
+	@Event() smoothlyInput: EventEmitter<{ name: string; value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		if (this.lastValue != value) {
@@ -54,7 +59,7 @@ export class SmoothlyInput {
 		if (value != before) {
 			if (typeof value == "string")
 				value = value.trim()
-			this.smoothlyChanged.emit({ name: this.name, value })
+			this.smoothlyInput.emit({ name: this.name, value })
 		}
 	}
 	@Watch("currency")
@@ -119,9 +124,14 @@ export class SmoothlyInput {
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
 	}
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	onBlur(event: FocusEvent) {}
+	onBlur(event: FocusEvent) {
+		this.smoothlyBlur.emit()
+		if (this.initialValue != this.value)
+			this.smoothlyChange.emit({ name: this.name, value: this.value })
+		this.initialValue = undefined
+	}
 	onFocus(event: FocusEvent) {
+		this.initialValue = this.value
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)
 			this.updateBackend(after, event.target as HTMLInputElement)
@@ -203,10 +213,12 @@ export class SmoothlyInput {
 		return value
 	}
 	private processKey(event: Action, backend: HTMLInputElement) {
-		const after = Action.apply(this.formatter, this.state, event)
-		this.updateBackend(after, backend)
+		if (!this.readonly) {
+			const after = Action.apply(this.formatter, this.state, event)
+			this.updateBackend(after, backend)
+		}
 	}
-	updateBackend(after: Readonly<State> & Readonly<Settings>, backend: HTMLInputElement) {
+	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement) {
 		if (after.value != backend.value)
 			backend.value = after.value
 		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
@@ -232,6 +244,7 @@ export class SmoothlyInput {
 						required={this.required}
 						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
 						disabled={this.disabled}
+						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						value={this.state?.value}
 						onInput={(e: InputEvent) => this.onInput(e)}
