@@ -44,9 +44,9 @@ export class SmoothlyInput {
 		const formatter = this.formatter
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
-	@Event() smoothlyBlur: EventEmitter
-	@Event() smoothlyDone: EventEmitter<{ name: string; value: any }>
-	@Event() smoothlyChanged: EventEmitter<{ name: string; value: any }>
+	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyChange: EventEmitter<{ name: string; value: any }>
+	@Event() smoothlyInput: EventEmitter<{ name: string; value: any }>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		if (this.lastValue != value) {
@@ -59,7 +59,7 @@ export class SmoothlyInput {
 		if (value != before) {
 			if (typeof value == "string")
 				value = value.trim()
-			this.smoothlyChanged.emit({ name: this.name, value })
+			this.smoothlyInput.emit({ name: this.name, value })
 		}
 	}
 	@Watch("currency")
@@ -127,7 +127,7 @@ export class SmoothlyInput {
 	onBlur(event: FocusEvent) {
 		this.smoothlyBlur.emit()
 		if (this.initialValue != this.value)
-			this.smoothlyDone.emit({ name: this.name, value: this.value })
+			this.smoothlyChange.emit({ name: this.name, value: this.value })
 		this.initialValue = undefined
 	}
 	onFocus(event: FocusEvent) {

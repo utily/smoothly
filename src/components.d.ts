@@ -785,9 +785,9 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onSmoothlyBlur"?: (event: CustomEvent<any>) => void;
-        "onSmoothlyChanged"?: (event: CustomEvent<{ name: string; value: any }>) => void;
-        "onSmoothlyDone"?: (event: CustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyBlur"?: (event: CustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: CustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyInput"?: (event: CustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -943,7 +943,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
-        "onExpansionLoaded"?: (event: CustomEvent<void>) => void;
+        "onExpansionLoad"?: (event: CustomEvent<void>) => void;
         "onExpansionOpen"?: (event: CustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
