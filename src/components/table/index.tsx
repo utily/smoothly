@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Listen } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table",
@@ -8,6 +8,11 @@ import { Component, Element, Event, EventEmitter, h } from "@stencil/core"
 export class Table {
 	@Element() element: HTMLSmoothlyTableElement
 	@Event() loadMore: EventEmitter<void>
+	@Listen("expansionLoad")
+	@Listen("expansionOpen")
+	handleEvents(event: Event) {
+		event.stopPropagation()
+	}
 	render() {
 		return [<slot></slot>]
 	}

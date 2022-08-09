@@ -43,7 +43,7 @@ export class InputDateRange {
 					type="date"
 					value={this.start}
 					showLabel={this.showLabel}
-					onSmoothlyChanged={e => (this.start = e.detail.value)}>
+					onSmoothlyInput={e => (this.start = e.detail.value)}>
 					from
 				</smoothly-input>
 				<span>–</span>
@@ -51,7 +51,7 @@ export class InputDateRange {
 					type="date"
 					showLabel={this.showLabel}
 					value={this.end}
-					onSmoothlyChanged={e => (this.end = e.detail.value)}>
+					onSmoothlyInput={e => (this.end = e.detail.value)}>
 					to
 				</smoothly-input>
 			</section>,
