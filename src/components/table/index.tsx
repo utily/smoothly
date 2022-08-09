@@ -8,7 +8,7 @@ import { Component, Element, Event, EventEmitter, h, Listen } from "@stencil/cor
 export class Table {
 	@Element() element: HTMLSmoothlyTableElement
 	@Event() loadMore: EventEmitter<void>
-	@Listen("expansionLoaded")
+	@Listen("expansionLoad")
 	@Listen("expansionOpen")
 	handleEvents(event: Event) {
 		event.stopPropagation()

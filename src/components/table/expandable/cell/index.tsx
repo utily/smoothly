@@ -9,7 +9,7 @@ export class TableExpandableCell implements ComponentDidLoad {
 	@Element() element: HTMLSmoothlyTableExpandableCellElement
 	expansionElement?: HTMLTableRowElement
 	@Event() expansionOpen: EventEmitter<HTMLElement>
-	@Event() expansionLoaded: EventEmitter<void>
+	@Event() expansionLoad: EventEmitter<void>
 	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	private beginOpen: boolean
@@ -26,7 +26,7 @@ export class TableExpandableCell implements ComponentDidLoad {
 		this.open = !this.open
 	}
 	componentDidLoad(): void {
-		this.expansionLoaded.emit()
+		this.expansionLoad.emit()
 	}
 	componentDidRender(): void {
 		if (this.beginOpen) {
