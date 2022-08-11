@@ -51,7 +51,6 @@ export class SmoothlyPicker {
 			: this.selections.map(s => s.value).includes(option.value)
 			? this.unselect(option)
 			: this.select(option)
-		// this.selectNoneName = this.selections.length == this.options.length ? "Select None" : "Select All"
 	}
 	toggleAll() {
 		this.selections = this.selections.length == this.options?.length ? [] : this.options
