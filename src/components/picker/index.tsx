@@ -128,8 +128,6 @@ export class SmoothlyPicker {
 	}
 
 	render() {
-		if (this.label == "")
-			console.log("rendered", this.selections)
 		const cssVariables = {
 			"--max-height": this.maxHeight ?? "inherit",
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
