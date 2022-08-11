@@ -479,7 +479,7 @@ export class SmoothlyIconDemo {
 				]
 					.slice(this.page * 100, 100)
 					.map(name => (
-						<smoothly-icon name={name} toolTip={name}></smoothly-icon>
+						<smoothly-icon name={name} toolTip={name} color="success"></smoothly-icon>
 					))}
 			</content>,
 		]
