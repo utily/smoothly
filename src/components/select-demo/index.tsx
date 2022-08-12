@@ -1,5 +1,6 @@
 import { Component, h, Listen } from "@stencil/core"
 import { Currency } from "isoly"
+import { Notice } from "../../model"
 
 @Component({
 	tag: "smoothly-select-demo",
@@ -137,7 +138,7 @@ export class SmoothlySelectDemo {
 					{ name: "jessie@example.com", value: "jessie@example.com" },
 				]}
 				valueValidator={(email: string) =>
-					email.match(/^\w+@\w+/) ? [true, ""] : [false, "Incorrectly formatted email"]
+					email.match(/^\w+@\w+/) ? [true, undefined] : [false, Notice.failed("Incorrectly formatted email")]
 				}></smoothly-picker>,
 			<br />,
 			<smoothly-picker

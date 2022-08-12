@@ -27,7 +27,7 @@ export class SmoothlyPicker {
 	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Prop({ mutable: true }) newOptionLabel = "Add:"
-	@Prop() valueValidator: (value: any) => [boolean, string] = _ => [true, ""]
+	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
 	@Event() menuClose: EventEmitter<OptionType[]>
 	@Event() notice: EventEmitter<Notice>
 	@Watch("selections")
@@ -52,15 +52,15 @@ export class SmoothlyPicker {
 	@Listen("optionAdd")
 	optionAddHandler(event: CustomEvent<{ name: string; value: string }>) {
 		if (this.mutable) {
-			const [status, information] = this.valueValidator(event.detail.value)
+			const [status, notice] = this.valueValidator(event.detail.value)
 			if (status) {
 				const option = { ...event.detail }
 				this.options = [...this.options, option]
 				this.select(option)
-				if (information)
-					this.notice.emit(Notice.succeded(information))
-			} else if (information)
-				this.notice.emit(Notice.failed(information))
+				if (notice)
+					this.notice.emit(notice)
+			} else if (notice)
+				this.notice.emit(notice)
 		}
 		event.stopPropagation()
 	}
@@ -102,15 +102,15 @@ export class SmoothlyPicker {
 	}
 	toggleHighlighted() {
 		if (this.mutable && this.empty) {
-			const [status, information] = this.valueValidator(this.inputElement.value)
+			const [status, notice] = this.valueValidator(this.inputElement.value)
 			if (status) {
 				const option = { name: this.inputElement.value, value: this.inputElement.value }
 				this.options = [...this.options, option]
 				this.select(option)
-				if (information)
-					this.notice.emit(Notice.succeded(information))
-			} else if (information)
-				this.notice.emit(Notice.failed(information))
+				if (notice)
+					this.notice.emit(notice)
+			} else if (notice)
+				this.notice.emit(notice)
 		} else
 			this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
 				result && this.toggle(result)

@@ -181,7 +181,7 @@ export namespace Components {
         "selectNoneName": string;
         "selectionName": string;
         "selections": OptionType[];
-        "valueValidator": (value: any) => [boolean, string];
+        "valueValidator": (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -878,7 +878,7 @@ declare namespace LocalJSX {
         "selectNoneName"?: string;
         "selectionName"?: string;
         "selections"?: OptionType[];
-        "valueValidator"?: (value: any) => [boolean, string];
+        "valueValidator"?: (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
