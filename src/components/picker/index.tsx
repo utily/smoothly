@@ -32,7 +32,7 @@ export class SmoothlyPicker {
 	@Event() notice: EventEmitter<Notice>
 	@Watch("selections")
 	@Watch("isOpen")
-	isOpenChangeHander() {
+	isOpenChangeHandler() {
 		if (this.isOpen == false) {
 			this.menuClose.emit(this.selections)
 		}
@@ -45,7 +45,7 @@ export class SmoothlyPicker {
 		}
 	}
 	@Listen("optionSelect")
-	optionSelectHander(event: CustomEvent<OptionType>) {
+	optionSelectHandler(event: CustomEvent<OptionType>) {
 		this.toggle(event.detail)
 		event.stopPropagation()
 	}
