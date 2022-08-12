@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { OptionType } from "../../model"
 
 @Component({
@@ -11,12 +11,16 @@ export class SmoothlyMenuOptions {
 	@Element() element: HTMLElement
 	@State() filteredOptions: OptionType[] = []
 	@State() highlightIndex = 0
+	@State() keyword?: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
+	@Prop() newOptionLabel = "Add:"
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() order = false
 	@Prop() optionStyle: any
 	@Prop({ mutable: true, reflect: true }) options: OptionType[] = []
 	@Prop({ mutable: true }) resetHighlightOnOptionsChange = true
+	@Prop() mutable = false
+	@Event() menuEmpty: EventEmitter<boolean>
 	@Watch("options")
 	optionsChangeHandler(newOptions: OptionType[]) {
 		this.highlightIndex = this.resetHighlightOnOptionsChange ? 0 : this.highlightIndex
@@ -59,12 +63,18 @@ export class SmoothlyMenuOptions {
 	}
 	@Method()
 	async filterOptions(keyword: string, excludeValues: string[] = []) {
+		this.keyword = keyword
 		const keywordLowercase = keyword.toLowerCase()
 		this.filteredOptions = []
 		for (const option of this.options) {
 			const names = option.name + (option.aliases ? option.aliases.join(" ") : "")
 			const isVisible = names.toLowerCase().includes(keywordLowercase) && !excludeValues.includes(option.value)
 			isVisible && this.filteredOptions.push(option)
+		}
+		if (!this.filteredOptions.length) {
+			this.menuEmpty.emit(true)
+		} else {
+			this.menuEmpty.emit(false)
 		}
 		this.order && this.sortOptions(keyword)
 	}
@@ -117,6 +127,18 @@ export class SmoothlyMenuOptions {
 							{option.right ? <div slot="right">{option.right}</div> : undefined}
 						</smoothly-option>
 					))
+				) : this.mutable ? (
+					<smoothly-option
+						style={this.optionStyle}
+						ref={el => (this.firstOptionsElement = el ?? this.firstOptionsElement)}
+						value={this.keyword}
+						name={this.keyword}
+						data-highlight={0}
+						new={true}>
+						<div slot="left">
+							<smoothly-icon name="square-outline" size="small"></smoothly-icon> {this.newOptionLabel}
+						</div>
+					</smoothly-option>
 				) : (
 					<div>{this.emptyMenuLabel}</div>
 				)}

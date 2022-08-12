@@ -12,14 +12,19 @@ export class SmoothlyOption {
 	@Prop({ mutable: true, reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) value: string
 	@Prop({ mutable: true, reflect: true }) divider?: boolean = false
+	@Prop() new: boolean
 	@Event() optionHover: EventEmitter<{ value: any; name: string }>
 	@Event() optionSelect: EventEmitter<{ value: any; name: string }>
+	@Event() optionAdd: EventEmitter<{ name: string; value: string }>
 	onHover(event: MouseEvent) {
 		this.optionHover.emit({ name: this.name, value: this.value })
 	}
 	onSelect(event: UIEvent) {
 		if (this.value)
-			this.optionSelect.emit({ name: this.name, value: this.value })
+			if (this.new)
+				this.optionAdd.emit({ name: this.name, value: this.value })
+			else
+				this.optionSelect.emit({ name: this.name, value: this.value })
 		else
 			throw `smoothly-option ${this.element.innerHTML} lacks value-property and can therefore not be selected`
 	}
