@@ -27,7 +27,7 @@ export class SmoothlyPicker {
 	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Prop({ mutable: true }) newOptionLabel = ""
-	@Prop() valueValidator: (value: any) => [boolean, string]
+	@Prop() valueValidator: (value: any) => [boolean, string] = (_: any) => [true, ""]
 	@Event() menuClose: EventEmitter<OptionType[]>
 	@Event() notice: EventEmitter<Notice>
 	@Watch("selections")
