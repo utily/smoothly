@@ -22,6 +22,7 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) label: string
 	@Prop({ mutable: true }) selections: OptionType[] = []
 	@Prop({ mutable: true }) selectNoneName = "Select None"
+	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Event() menuClose: EventEmitter<OptionType[]>
 
@@ -139,7 +140,7 @@ export class SmoothlyPicker {
 				? [
 						{
 							value: "select-none",
-							name: this.selectNoneName,
+							name: this.selections.length == this.options.length ? this.selectNoneName : this.selectAllName,
 							left: this.getCheckHtml(this.selections.length == this.options?.length),
 							divider: true,
 						},
