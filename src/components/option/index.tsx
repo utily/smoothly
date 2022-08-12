@@ -12,7 +12,7 @@ export class SmoothlyOption {
 	@Prop({ mutable: true, reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) value: string
 	@Prop({ mutable: true, reflect: true }) divider?: boolean = false
-	@Prop() new: boolean
+	@Prop() new?: boolean
 	@Event() optionHover: EventEmitter<{ value: any; name: string }>
 	@Event() optionSelect: EventEmitter<{ value: any; name: string }>
 	@Event() optionAdd: EventEmitter<{ name: string; value: string }>

@@ -163,7 +163,7 @@ export namespace Components {
         "dataHighlight": boolean;
         "divider"?: boolean;
         "name": string;
-        "new": boolean;
+        "new"?: boolean;
         "value": string;
     }
     interface SmoothlyPicker {
