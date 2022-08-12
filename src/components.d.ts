@@ -172,6 +172,7 @@ export namespace Components {
         "multiple": boolean;
         "optionStyle": any;
         "options": OptionType[];
+        "selectAllName": string;
         "selectNoneName": string;
         "selectionName": string;
         "selections": OptionType[];
@@ -859,6 +860,7 @@ declare namespace LocalJSX {
         "onMenuClose"?: (event: CustomEvent<OptionType[]>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
+        "selectAllName"?: string;
         "selectNoneName"?: string;
         "selectionName"?: string;
         "selections"?: OptionType[];
