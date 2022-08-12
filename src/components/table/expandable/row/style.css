@@ -14,17 +14,10 @@
 	left: -2%;
 	border-left-style: solid;
 	border-left-color: rgb(var(--smoothly-tertiary-color));
-	box-shadow: 0px 0px 5px 2px rgb(var(--smoothly-dark-color), 1);
+	box-shadow: 0px 0px 5px 2px rgb(var(--smoothly-dark-color), 0.5);
 	box-sizing: border-box;
 	padding: 0.5rem 2%;
 }
-/* .expansion-indicator {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 1rem;
-	height: 1rem;
-} */
 :host smoothly-icon {
 	transition: transform 0.2s;
 }
