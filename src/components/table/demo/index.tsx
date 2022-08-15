@@ -68,9 +68,7 @@ export class TableDemo {
 									<smoothly-table-row>
 										<smoothly-table-header>Header B</smoothly-table-header>
 									</smoothly-table-row>
-									<smoothly-table-expandable-row>
-										<smoothly-table-cell>B Content</smoothly-table-cell>
-									</smoothly-table-expandable-row>
+									<smoothly-table-expandable-row>B Content</smoothly-table-expandable-row>
 								</smoothly-table>
 							</smoothly-tab>
 							<smoothly-tab label="innertable 2">

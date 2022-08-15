@@ -1,6 +1,6 @@
 :host {
 	display: table;
-	text-align: left;
+	border-collapse: collapse;
 	border: 1px solid rgb(var(--smoothly-dark-color));
 	width: var(--table-width, 80%);
 	box-sizing: border-box;
