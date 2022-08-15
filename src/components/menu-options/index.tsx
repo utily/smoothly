@@ -71,11 +71,7 @@ export class SmoothlyMenuOptions {
 			const isVisible = names.toLowerCase().includes(keywordLowercase) && !excludeValues.includes(option.value)
 			isVisible && this.filteredOptions.push(option)
 		}
-		if (!this.filteredOptions.length) {
-			this.menuEmpty.emit(true)
-		} else {
-			this.menuEmpty.emit(false)
-		}
+		this.menuEmpty.emit(!this.filteredOptions.length)
 		this.order && this.sortOptions(keyword)
 	}
 	sortOptions(keyword: string) {
