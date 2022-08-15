@@ -21,10 +21,9 @@ export class SmoothlyOption {
 	}
 	onSelect(event: UIEvent) {
 		if (this.value)
-			if (this.new)
-				this.optionAdd.emit({ name: this.name, value: this.value })
-			else
-				this.optionSelect.emit({ name: this.name, value: this.value })
+			this.new
+				? this.optionAdd.emit({ name: this.name, value: this.value })
+				: this.optionSelect.emit({ name: this.name, value: this.value })
 		else
 			throw `smoothly-option ${this.element.innerHTML} lacks value-property and can therefore not be selected`
 	}
