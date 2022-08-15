@@ -1,5 +1,6 @@
 import { Component, h, Listen } from "@stencil/core"
 import { Currency } from "isoly"
+import { Notice } from "../../model"
 
 @Component({
 	tag: "smoothly-select-demo",
@@ -106,7 +107,7 @@ export class SmoothlySelectDemo {
 				]}></smoothly-picker>,
 			<br />,
 			<smoothly-picker
-				label=""
+				label="Multiple"
 				empty-menu-label="Sorry, we're out of options."
 				max-height="58px"
 				multiple={true}
@@ -123,6 +124,22 @@ export class SmoothlySelectDemo {
 					{ name: "Hidden Dragon", value: "dragon" },
 					{ name: "Scary Kraken", value: "kraken" },
 				]}></smoothly-picker>,
+			<br />,
+			<smoothly-picker
+				label="Multiple mutable"
+				max-height="58px"
+				multiple={true}
+				mutable={true}
+				newOptionLabel="Invite:"
+				options={[
+					{ name: "john@example.com", value: "john@example.com" },
+					{ name: "jane@example.com", value: "jane@example.com" },
+					{ name: "james@example.com", value: "james@example.com" },
+					{ name: "jessie@example.com", value: "jessie@example.com" },
+				]}
+				valueValidator={(email: string) =>
+					email.match(/^\w+@\w+/) ? [true, undefined] : [false, Notice.failed("Incorrectly formatted email")]
+				}></smoothly-picker>,
 			<br />,
 			<smoothly-picker
 				label="Single select"

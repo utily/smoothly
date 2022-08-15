@@ -145,6 +145,8 @@ export namespace Components {
         "getHighlighted": () => Promise<OptionType | undefined>;
         "maxMenuHeight": "inherit";
         "moveHighlight": (step: number) => Promise<void>;
+        "mutable": boolean;
+        "newOptionLabel": string;
         "optionStyle": any;
         "options": OptionType[];
         "order": boolean;
@@ -161,6 +163,7 @@ export namespace Components {
         "dataHighlight": boolean;
         "divider"?: boolean;
         "name": string;
+        "new"?: boolean;
         "value": string;
     }
     interface SmoothlyPicker {
@@ -170,12 +173,15 @@ export namespace Components {
         "maxHeight": string;
         "maxMenuHeight": "inherit";
         "multiple": boolean;
+        "mutable": boolean;
+        "newOptionLabel": string;
         "optionStyle": any;
         "options": OptionType[];
         "selectAllName": string;
         "selectNoneName": string;
         "selectionName": string;
         "selections": OptionType[];
+        "valueValidator": (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -830,6 +836,9 @@ declare namespace LocalJSX {
     interface SmoothlyMenuOptions {
         "emptyMenuLabel"?: string;
         "maxMenuHeight"?: "inherit";
+        "mutable"?: boolean;
+        "newOptionLabel"?: string;
+        "onMenuEmpty"?: (event: CustomEvent<boolean>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
         "order"?: boolean;
@@ -846,6 +855,8 @@ declare namespace LocalJSX {
         "dataHighlight"?: boolean;
         "divider"?: boolean;
         "name"?: string;
+        "new"?: boolean;
+        "onOptionAdd"?: (event: CustomEvent<{ name: string; value: string }>) => void;
         "onOptionHover"?: (event: CustomEvent<{ value: any; name: string }>) => void;
         "onOptionSelect"?: (event: CustomEvent<{ value: any; name: string }>) => void;
         "value"?: string;
@@ -857,13 +868,17 @@ declare namespace LocalJSX {
         "maxHeight"?: string;
         "maxMenuHeight"?: "inherit";
         "multiple"?: boolean;
+        "mutable"?: boolean;
+        "newOptionLabel"?: string;
         "onMenuClose"?: (event: CustomEvent<OptionType[]>) => void;
+        "onNotice"?: (event: CustomEvent<Notice>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
         "selectAllName"?: string;
         "selectNoneName"?: string;
         "selectionName"?: string;
         "selections"?: OptionType[];
+        "valueValidator"?: (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
