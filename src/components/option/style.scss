@@ -33,3 +33,8 @@
 	content: "";
 	background-color: rgba(var(--smoothly-dark-color));
 }
+::slotted([slot=left]) {
+	display: flex;
+	align-items: center;
+	gap: 1ch;
+}

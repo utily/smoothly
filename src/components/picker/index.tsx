@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { OptionType } from "../../model"
+import { Notice, OptionType } from "../../model"
 
 @Component({
 	tag: "smoothly-picker",
@@ -12,10 +12,12 @@ export class SmoothlyPicker {
 	private menuElement: HTMLSmoothlyMenuOptionsElement
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
+	@State() empty: boolean
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() maxHeight: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
 	@Prop({ reflect: true }) multiple = false
+	@Prop() mutable = false
 	@Prop() optionStyle: any
 	@Prop({ reflect: true }) options: OptionType[] = []
 	@Prop({ reflect: true }) labelSetting: "hide" | "default"
@@ -24,11 +26,13 @@ export class SmoothlyPicker {
 	@Prop({ mutable: true }) selectNoneName = "Select None"
 	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
+	@Prop({ mutable: true }) newOptionLabel = "Add:"
+	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
 	@Event() menuClose: EventEmitter<OptionType[]>
-
+	@Event() notice: EventEmitter<Notice>
 	@Watch("selections")
 	@Watch("isOpen")
-	isOpenChangeHander() {
+	isOpenChangeHandler() {
 		if (this.isOpen == false) {
 			this.menuClose.emit(this.selections)
 		}
@@ -41,8 +45,26 @@ export class SmoothlyPicker {
 		}
 	}
 	@Listen("optionSelect")
-	optionSelectHander(event: CustomEvent<OptionType>) {
+	optionSelectHandler(event: CustomEvent<OptionType>) {
 		this.toggle(event.detail)
+		event.stopPropagation()
+	}
+	@Listen("optionAdd")
+	optionAddHandler(event: CustomEvent<{ name: string; value: string }>) {
+		if (this.mutable) {
+			const [status, notice] = this.valueValidator(event.detail.value)
+			if (status) {
+				const option = { ...event.detail }
+				this.options = [...this.options, option]
+				this.select(option)
+			}
+			notice && this.notice.emit(notice)
+		}
+		event.stopPropagation()
+	}
+	@Listen("menuEmpty")
+	emptyHandler(event: CustomEvent<boolean>) {
+		this.empty = event.detail
 		event.stopPropagation()
 	}
 	toggle(option: OptionType) {
@@ -77,9 +99,18 @@ export class SmoothlyPicker {
 		this.isOpen = this.multiple
 	}
 	toggleHighlighted() {
-		this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
-			result && this.toggle(result)
-		})
+		if (this.mutable && this.empty) {
+			const [status, notice] = this.valueValidator(this.inputElement.value)
+			if (status) {
+				const option = { name: this.inputElement.value, value: this.inputElement.value }
+				this.options = [...this.options, option]
+				this.select(option)
+			}
+			notice && this.notice.emit(notice)
+		} else
+			this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
+				result && this.toggle(result)
+			})
 	}
 	highlightDefault() {
 		this.filterOptions()
@@ -178,7 +209,9 @@ export class SmoothlyPicker {
 					optionStyle={{ ...this.optionStyle }}
 					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}
+					newOptionLabel={this.newOptionLabel}
 					max-menu-height={this.maxMenuHeight}
+					mutable={this.mutable}
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
