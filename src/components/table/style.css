@@ -2,13 +2,8 @@
 	display: table;
 	text-align: left;
 	border: 1px solid rgb(var(--smoothly-dark-color));
-	width: 80%;
+	width: var(--table-width, 80%);
 	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-default-color));
-	margin: 1rem 9.5%;
-	padding-bottom: 0.5rem;
-}
-.slot-detail > div {
-	padding: 10rem 0;
-	margin-left: 10rem;
+	margin: auto;
 }

@@ -14,7 +14,6 @@ export class TableDemo {
 					<smoothly-table-header>Header B</smoothly-table-header>
 					<smoothly-table-header>Header C</smoothly-table-header>
 					<smoothly-table-header>Header D</smoothly-table-header>
-					<smoothly-table-header></smoothly-table-header>
 				</smoothly-table-row>
 				<smoothly-table-row>
 					<smoothly-table-expandable-cell>
@@ -59,20 +58,28 @@ export class TableDemo {
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
-					<smoothly-table-header></smoothly-table-header>
 				</smoothly-table-row>
 				<smoothly-table-expandable-row>
-					A Content
+					<smoothly-table-cell>A Content</smoothly-table-cell>
 					<div slot="detail">
 						<smoothly-tab-switch>
-							<smoothly-tab label="1" open={true}>
+							<smoothly-tab label="innertable 1" open={true}>
 								<smoothly-table>
 									<smoothly-table-row>
 										<smoothly-table-header>Header B</smoothly-table-header>
-										<smoothly-table-header></smoothly-table-header>
 									</smoothly-table-row>
 									<smoothly-table-expandable-row>
 										<smoothly-table-cell>B Content</smoothly-table-cell>
+									</smoothly-table-expandable-row>
+								</smoothly-table>
+							</smoothly-tab>
+							<smoothly-tab label="innertable 2">
+								<smoothly-table>
+									<smoothly-table-row>
+										<smoothly-table-header>Header C</smoothly-table-header>
+									</smoothly-table-row>
+									<smoothly-table-expandable-row>
+										<smoothly-table-cell>C Content</smoothly-table-cell>
 									</smoothly-table-expandable-row>
 								</smoothly-table>
 							</smoothly-tab>
