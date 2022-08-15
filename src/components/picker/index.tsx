@@ -57,10 +57,8 @@ export class SmoothlyPicker {
 				const option = { ...event.detail }
 				this.options = [...this.options, option]
 				this.select(option)
-				if (notice)
-					this.notice.emit(notice)
-			} else if (notice)
-				this.notice.emit(notice)
+			} 
+			notice && this.notice.emit(notice)
 		}
 		event.stopPropagation()
 	}
@@ -107,10 +105,8 @@ export class SmoothlyPicker {
 				const option = { name: this.inputElement.value, value: this.inputElement.value }
 				this.options = [...this.options, option]
 				this.select(option)
-				if (notice)
-					this.notice.emit(notice)
-			} else if (notice)
-				this.notice.emit(notice)
+			}
+			notice && this.notice.emit(notice)
 		} else
 			this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
 				result && this.toggle(result)
