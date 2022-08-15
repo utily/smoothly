@@ -57,7 +57,7 @@ export class SmoothlyPicker {
 				const option = { ...event.detail }
 				this.options = [...this.options, option]
 				this.select(option)
-			} 
+			}
 			notice && this.notice.emit(notice)
 		}
 		event.stopPropagation()
