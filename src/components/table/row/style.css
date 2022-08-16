@@ -1,6 +1,7 @@
 :host {
 	display: table-row;
 	cursor: default;
+	line-height: 1.5rem;
 }
 .hide {
 	display: none;

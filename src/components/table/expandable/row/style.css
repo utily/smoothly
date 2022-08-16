@@ -1,6 +1,7 @@
 :host {
 	display: table-row-group;
 	cursor: pointer;
+	line-height: 1.5rem;
 }
 :host[open] {
 	position: relative;
@@ -14,7 +15,7 @@
 	height: 1rem;
 	position: absolute;
 	right: 1rem;
-	top: -1.6rem;
+	top: -1.8rem;
 	transition: transform 0.2s;
 }
 :host[open] smoothly-icon {
