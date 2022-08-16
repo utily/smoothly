@@ -18,6 +18,7 @@
 	box-sizing: border-box;
 	padding: 0.5rem 2%;
 }
+
 :host smoothly-icon {
 	transition: transform 0.2s;
 }
@@ -35,3 +36,4 @@
 	border-width: 5px;
 	box-shadow: inset 2px 0px 0px 0px rgb(var(--smoothly-dark-color)), inset 0px 2px 0px 0px rgb(var(--smoothly-dark-color)), inset -2px 0px 0px 0px rgb(var(--smoothly-dark-color)), inset 0px 0px 0px 2px rgb(var(--smoothly-default-color));
 }
+
