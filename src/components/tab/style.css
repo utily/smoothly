@@ -1,18 +1,14 @@
-:host:not([open]) > label {
-	background-color: rgb(var(--smoothly-dark-shade));
+:host([open]) {
+	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
+	box-sizing: border-box;
+	margin-bottom: -3px;
 }
 .hide {
 	display: none;
 }
 label {
 	display: block;
-	padding: 1em;
-	background-color: rgb(var(--smoothly-default-shade));
-	border-top-left-radius: 0.3rem;
-	border-top-right-radius: 0.3rem;
-	width: 6.25rem;
-}
-div {
-	background-color: rgb(var(--smoothly-default-shade));
-	padding: 1em;
+	padding: .5rem;
+	background-color: transparent;
+	width: auto;
 }

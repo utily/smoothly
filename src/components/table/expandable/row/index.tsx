@@ -32,9 +32,10 @@ export class TableExpandableRow {
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
-				<smoothly-table-cell>
+				<aside>
 					<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
-				</smoothly-table-cell>
+				</aside>
+
 				<tr ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>
 						<div class="slot-detail">

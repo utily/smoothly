@@ -1,7 +1,7 @@
 :host {
 	display: table-row;
-	border: 1px solid rgb(var(--smoothly-dark-color), 0.5);
 	cursor: default;
+	line-height: 1.5rem;
 }
 .hide {
 	display: none;
