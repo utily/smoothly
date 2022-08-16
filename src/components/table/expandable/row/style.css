@@ -1,5 +1,5 @@
 :host {
-	display: table-row-group;
+	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
 }
@@ -13,18 +13,12 @@
 :host smoothly-icon {
 	width: 0.6rem;
 	height: 1rem;
-	position: absolute;
-	right: 1rem;
-	top: -1.8rem;
+	margin-top: -1rem;
+	margin-left: -1rem;
 	transition: transform 0.2s;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
-}
-
-aside {
-	display: table-row;
-	position: relative;
 }
 
 .hide {
@@ -41,4 +35,3 @@ aside {
 	box-sizing: border-box;
 	padding: 0.5rem 2%;
 }
-
