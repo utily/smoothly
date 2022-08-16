@@ -12,9 +12,9 @@
 :host smoothly-icon {
 	width: 0.6rem;
 	height: 1rem;
-  position: absolute;
+	position: absolute;
 	right: 1rem;
-	top: -1rem;
+	top: -1.6rem;
 	transition: transform 0.2s;
 }
 :host[open] smoothly-icon {
@@ -22,6 +22,7 @@
 }
 
 aside {
+	display: table-row;
 	position: relative;
 }
 

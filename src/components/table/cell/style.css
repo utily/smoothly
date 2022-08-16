@@ -1,5 +1,6 @@
 :host {
 	display: table-cell;
 	line-height: 1.5rem;
+	white-space: nowrap;
 	padding: 0.3rem 0 0.3rem 1rem;
 }
