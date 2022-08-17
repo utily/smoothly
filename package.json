@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "authly": "0.2.8",
-    "isoly": "0.0.44",
+    "isoly": "github:utily/isoly#precision-format",
     "langly": "0.1.2",
     "normalize.css": "^8.0.1",
     "stencil-router-v2": "^0.6.0",
