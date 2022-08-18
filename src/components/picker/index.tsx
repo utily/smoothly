@@ -13,6 +13,8 @@ export class SmoothlyPicker {
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@State() empty: boolean
+	@Prop({ reflect: true, attribute: "data-disabled" }) disabled = false
+	@Prop({ reflect: true, attribute: "data-readonly" }) readonly = false
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() maxHeight: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
@@ -140,10 +142,12 @@ export class SmoothlyPicker {
 		}
 	}
 	onClick() {
-		this.isOpen = !this.isOpen
-		this.inputElement.focus()
-		this.highlightDefault()
-		this.filterOptions()
+		if (!(this.readonly || this.disabled)) {
+			this.isOpen = !this.isOpen
+			this.inputElement.focus()
+			this.highlightDefault()
+			this.filterOptions()
+		}
 	}
 	onBlur() {
 		this.inputElement.value = ""
@@ -187,9 +191,11 @@ export class SmoothlyPicker {
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
 				<div>
-					<smoothly-icon class="search" name="search-outline" size="tiny"></smoothly-icon>
+					<smoothly-icon part="search-icon" class="search" name="search-outline" size="tiny"></smoothly-icon>
 					<label>{this.label}</label>
 					<input
+						disabled={this.disabled}
+						readonly={this.readonly}
 						type="text"
 						ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
 						onFocus={() => this.highlightDefault()}
@@ -201,8 +207,8 @@ export class SmoothlyPicker {
 						}
 						onKeyDown={e => this.onKeyDown(e)}
 						onInput={(e: UIEvent) => this.onInput(e)}></input>
-					<smoothly-icon class="down" name="chevron-down" size="tiny"></smoothly-icon>
-					<smoothly-icon class="up" name="chevron-up" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron-icon" class="down" name="chevron-down" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron-icon" class="up" name="chevron-up" size="tiny"></smoothly-icon>
 				</div>
 				<smoothly-menu-options
 					style={{ width: "100%" }}

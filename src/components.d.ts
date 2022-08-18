@@ -167,6 +167,7 @@ export namespace Components {
         "value": string;
     }
     interface SmoothlyPicker {
+        "disabled": boolean;
         "emptyMenuLabel": string;
         "label": string;
         "labelSetting": "hide" | "default";
@@ -177,6 +178,7 @@ export namespace Components {
         "newOptionLabel": string;
         "optionStyle": any;
         "options": OptionType[];
+        "readonly": boolean;
         "selectAllName": string;
         "selectNoneName": string;
         "selectionName": string;
@@ -862,6 +864,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SmoothlyPicker {
+        "disabled"?: boolean;
         "emptyMenuLabel"?: string;
         "label"?: string;
         "labelSetting"?: "hide" | "default";
@@ -874,6 +877,7 @@ declare namespace LocalJSX {
         "onNotice"?: (event: CustomEvent<Notice>) => void;
         "optionStyle"?: any;
         "options"?: OptionType[];
+        "readonly"?: boolean;
         "selectAllName"?: string;
         "selectNoneName"?: string;
         "selectionName"?: string;
