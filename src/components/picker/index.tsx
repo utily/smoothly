@@ -32,7 +32,6 @@ export class SmoothlyPicker {
 	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
 	@Event() menuClose: EventEmitter<OptionType[]>
 	@Event() notice: EventEmitter<Notice>
-	@Watch("selections")
 	@Watch("isOpen")
 	isOpenChangeHandler() {
 		if (this.isOpen == false) {
