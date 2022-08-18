@@ -191,9 +191,10 @@ export class SmoothlyPicker {
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
 				<div>
-					<smoothly-icon part="search-icon" class="search" name="search-outline" size="tiny"></smoothly-icon>
-					<label>{this.label}</label>
+					<smoothly-icon part="search" class="search" name="search-outline" size="tiny"></smoothly-icon>
+					<label part="label-element">{this.label}</label>
 					<input
+						part="input"
 						disabled={this.disabled}
 						readonly={this.readonly}
 						type="text"
@@ -207,10 +208,11 @@ export class SmoothlyPicker {
 						}
 						onKeyDown={e => this.onKeyDown(e)}
 						onInput={(e: UIEvent) => this.onInput(e)}></input>
-					<smoothly-icon part="chevron-icon" class="down" name="chevron-down" size="tiny"></smoothly-icon>
-					<smoothly-icon part="chevron-icon" class="up" name="chevron-up" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron" class="down" name="chevron-down" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron" class="up" name="chevron-up" size="tiny"></smoothly-icon>
 				</div>
 				<smoothly-menu-options
+					part="menu-options"
 					style={{ width: "100%" }}
 					optionStyle={{ ...this.optionStyle }}
 					order={false}
