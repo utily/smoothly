@@ -158,6 +158,12 @@ export class SmoothlySelectDemo {
 					{ name: "Dragon", value: "dragon" },
 					{ name: "Kraken", value: "kraken" },
 				]}></smoothly-picker>,
+			<br />,
+			<smoothly-picker
+				label="readonly"
+				readonly={true}
+				options={[{ name: "readonly", value: "readonly" }]}></smoothly-picker>,
+			<br />,
 			<smoothly-tab-switch>
 				<smoothly-tab label="test1" open>
 					Hello world!
