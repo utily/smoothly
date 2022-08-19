@@ -13,8 +13,8 @@ export class SmoothlyPicker {
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@State() empty: boolean
-	@Prop({ reflect: true, attribute: "data-disabled" }) disabled = false
-	@Prop({ reflect: true, attribute: "data-readonly" }) readonly = false
+	@Prop({ reflect: true }) disabled = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() maxHeight: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
