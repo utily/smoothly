@@ -13,6 +13,8 @@ export class SmoothlyPicker {
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@State() empty: boolean
+	@Prop({ reflect: true }) disabled = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() maxHeight: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
@@ -30,7 +32,6 @@ export class SmoothlyPicker {
 	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
 	@Event() menuClose: EventEmitter<OptionType[]>
 	@Event() notice: EventEmitter<Notice>
-	@Watch("selections")
 	@Watch("isOpen")
 	isOpenChangeHandler() {
 		if (this.isOpen == false) {
@@ -140,10 +141,12 @@ export class SmoothlyPicker {
 		}
 	}
 	onClick() {
-		this.isOpen = !this.isOpen
-		this.inputElement.focus()
-		this.highlightDefault()
-		this.filterOptions()
+		if (!(this.readonly || this.disabled)) {
+			this.isOpen = !this.isOpen
+			this.inputElement.focus()
+			this.highlightDefault()
+			this.filterOptions()
+		}
 	}
 	onBlur() {
 		this.inputElement.value = ""
@@ -187,9 +190,12 @@ export class SmoothlyPicker {
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
 				<div>
-					<smoothly-icon class="search" name="search-outline" size="tiny"></smoothly-icon>
-					<label>{this.label}</label>
+					<smoothly-icon part="search" class="search" name="search-outline" size="tiny"></smoothly-icon>
+					<label part="label-element">{this.label}</label>
 					<input
+						part="input"
+						disabled={this.disabled}
+						readonly={this.readonly}
 						type="text"
 						ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
 						onFocus={() => this.highlightDefault()}
@@ -201,10 +207,11 @@ export class SmoothlyPicker {
 						}
 						onKeyDown={e => this.onKeyDown(e)}
 						onInput={(e: UIEvent) => this.onInput(e)}></input>
-					<smoothly-icon class="down" name="chevron-down" size="tiny"></smoothly-icon>
-					<smoothly-icon class="up" name="chevron-up" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron" class="down" name="chevron-down" size="tiny"></smoothly-icon>
+					<smoothly-icon part="chevron" class="up" name="chevron-up" size="tiny"></smoothly-icon>
 				</div>
 				<smoothly-menu-options
+					part="menu-options"
 					style={{ width: "100%" }}
 					optionStyle={{ ...this.optionStyle }}
 					order={false}
