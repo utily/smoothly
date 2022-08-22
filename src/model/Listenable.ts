@@ -1,11 +1,11 @@
 export class Listenable<T extends Record<string, any>> {
-	#listeners = {} as Record<keyof T, Listener<T>[] | undefined>
-	listen<E extends keyof T>(event: E, listener: Listener<T>): void {
+	#listeners: Listeners<T> = {}
+	listen<K extends keyof T>(this: T & Listenable<T>, event: K, listener: Listener<T[K]>): void {
 		this.#listeners[event]?.push(listener) ?? (this.#listeners[event] = [listener])
-		listener((this as T)[event])
+		listener(this[event])
 	}
 	static load<T>(backend: T): T & Listenable<T> {
-		const result = new Listenable() as T & Listenable<T>
+		const result = new Listenable()
 		for (const property in backend) {
 			if (Object.prototype.hasOwnProperty.call(backend, property)) {
 				Object.defineProperty(result, property, {
@@ -19,8 +19,11 @@ export class Listenable<T extends Record<string, any>> {
 				})
 			}
 		}
-		return result
+		return result as T & Listenable<T>
 	}
 }
 
-export type Listener<T> = (value: T) => void
+export type Listener<V> = (value: V) => void
+export type Listeners<T> = {
+	[K in keyof T]?: Listener<T[K]>[]
+}
