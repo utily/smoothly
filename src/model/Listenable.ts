@@ -1,9 +1,14 @@
 export class Listenable<T extends Record<string, any>> {
 	#listeners: Listeners<T> = {}
-	listen<K extends keyof T>(this: T & Listenable<T>, event: K, listener: Listener<T[K]>): void {
-		this.#listeners[event]?.push(listener) ?? (this.#listeners[event] = [listener])
-		listener(this[event])
+	listen<K extends keyof T>(this: T & Listenable<T>, property: K, listener: Listener<T[K]>): void {
+		this.#listeners[property]?.push(listener) ?? (this.#listeners[property] = [listener])
+		listener(this[property])
 	}
+	removeListener<K extends keyof T>(this: T & Listenable<T>, property: K, listener: Listener<T[K]>): void {
+		const index = this.#listeners[property]?.indexOf(listener)
+		index != undefined && index >= 0 && this.#listeners[property]?.splice(index, 1)
+	}
+
 	static load<T>(backend: T): T & Listenable<T> {
 		const result = new Listenable()
 		for (const property in backend) {
@@ -12,9 +17,9 @@ export class Listenable<T extends Record<string, any>> {
 					get() {
 						return backend[property]
 					},
-					set(v) {
-						backend[property] = v
-						result.#listeners[property]?.forEach(l => l(v))
+					set(value) {
+						backend[property] = value
+						result.#listeners[property]?.forEach(listener => listener(value))
 					},
 				})
 			}
