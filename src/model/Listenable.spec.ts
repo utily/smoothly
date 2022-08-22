@@ -2,13 +2,13 @@ import { Listenable } from "./Listenable"
 
 describe("Listenable", () => {
 	class State {
-		constructor(public disabled = false) {}
+		disabled = false
 	}
 	it("load", () => {
-		const state = Listenable.load({ foo: true })
+		const state = Listenable.load(new State())
 		expect(typeof state.listen).toEqual("function")
 		expect(typeof state.removeListener).toEqual("function")
-		expect(state.foo).toEqual(true)
+		expect(state.disabled).toEqual(false)
 	})
 	it("subscribe", () => {
 		const state = Listenable.load(new State())
