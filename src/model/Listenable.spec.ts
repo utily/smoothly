@@ -7,7 +7,7 @@ describe("Listenable", () => {
 	it("load", () => {
 		const state = Listenable.load(new State())
 		expect(typeof state.listen).toEqual("function")
-		expect(typeof state.removeListener).toEqual("function")
+		expect(typeof state.unlisten).toEqual("function")
 		expect(state.disabled).toEqual(false)
 	})
 	it("subscribe", () => {
@@ -43,7 +43,7 @@ describe("Listenable", () => {
 				state.listen("disabled", this.subscribe)
 			}
 			disconnectedCallback() {
-				state.removeListener("disabled", this.subscribe)
+				state.unlisten("disabled", this.subscribe)
 			}
 		}
 		const component = new FakeComponent()
