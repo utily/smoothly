@@ -4,7 +4,7 @@ export class Listenable<T extends Record<string, any>> {
 		this.#listeners[property]?.push(listener) ?? (this.#listeners[property] = [listener])
 		listener(this[property])
 	}
-	unlisten<K extends keyof T>(this: T & Listenable<T>, property: K, listener: Listener<T[K]>): void {
+	unlisten<K extends keyof T>(property: K, listener: Listener<T[K]>): void {
 		const index = this.#listeners[property]?.indexOf(listener)
 		index != undefined && index >= 0 && this.#listeners[property]?.splice(index, 1)
 	}
