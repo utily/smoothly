@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop } from "@stencil/core"
 import { Color, Expand, Fill } from "../../model"
+import { Data } from "./Data"
 
 @Component({
 	tag: "smoothly-submit",
@@ -40,7 +41,7 @@ export class SmoothlySubmit {
 						result[element.name] = element.value
 				}
 			}
-			this.submitEvent.emit(result)
+			this.submitEvent.emit(Data.deepen(result))
 			this.processing = false
 		}
 	}

@@ -118,6 +118,7 @@ export namespace Components {
         "disabled": boolean;
         "max": Date;
         "min": Date;
+        "name": string;
         "open": boolean;
         "value"?: Date;
     }
@@ -915,7 +916,8 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "max"?: Date;
         "min"?: Date;
-        "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
+        "name"?: string;
+        "onValueChanged"?: (event: CustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
     }
