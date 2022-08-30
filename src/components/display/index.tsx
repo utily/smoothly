@@ -1,5 +1,5 @@
 import { Component, h, Prop } from "@stencil/core"
-import { CountryCode, Currency, Language, Locale } from "isoly"
+import { CountryCode, Currency, DateTime, Language, Locale } from "isoly"
 import { format, get, Type } from "tidily"
 
 @Component({
@@ -12,6 +12,7 @@ export class SmoothlyDisplay {
 	@Prop() value?: any
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
+	@Prop() format?: DateTime.Format
 	render() {
 		let result: string | HTMLElement | undefined
 		const type = this.type
@@ -33,6 +34,11 @@ export class SmoothlyDisplay {
 				break
 			case "date":
 				result = get(this.type as Type, getLocale())?.toString(this.value)
+				break
+			case "date-time":
+				result = this.format
+					? DateTime.localize(this.value, this.format, getLocale())
+					: get(this.type as Type, getLocale())?.toString(this.value)
 				break
 		}
 		return result
