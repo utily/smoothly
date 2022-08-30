@@ -18,9 +18,13 @@ export class SmoothlyInputDemo {
 						onSmoothlyBlur={() => console.log("smoothly blur")}>
 						Readonly
 					</smoothly-input>
-					<smoothly-input type="text" name="name" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
 						Name
 					</smoothly-input>
+					<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
+						Name
+					</smoothly-input>
+					<smoothly-input-date></smoothly-input-date>
 					<smoothly-input type="date" name="date">
 						Date
 					</smoothly-input>

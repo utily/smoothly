@@ -9,6 +9,7 @@ import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./mod
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { GoogleFont } from "./model/GoogleFont";
+import { Data } from "./components/submit/Data";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -118,6 +119,7 @@ export namespace Components {
         "disabled": boolean;
         "max": Date;
         "min": Date;
+        "name": string;
         "open": boolean;
         "value"?: Date;
     }
@@ -915,6 +917,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "max"?: Date;
         "min"?: Date;
+        "name"?: string;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
@@ -1045,7 +1048,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: Expand;
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<{ [key: string]: string }>) => void;
+        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }
