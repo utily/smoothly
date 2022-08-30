@@ -1048,7 +1048,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: Expand;
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<{ [key: string]: Data | string }>) => void;
+        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }

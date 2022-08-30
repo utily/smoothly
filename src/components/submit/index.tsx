@@ -18,7 +18,7 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop() prevent?: boolean
-	@Event({ eventName: "submit" }) submitEvent: EventEmitter<{ [key: string]: Data | string }>
+	@Event({ eventName: "submit" }) submitEvent: EventEmitter<Data>
 	@Listen("click")
 	async handleSubmit(event: UIEvent): Promise<void> {
 		if (!this.processing) {
