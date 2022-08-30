@@ -65,6 +65,7 @@ export namespace Components {
     interface SmoothlyDisplay {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
+        "format"?: DateTime.Format;
         "type": Type;
         "value"?: any;
     }
@@ -859,6 +860,7 @@ declare namespace LocalJSX {
     interface SmoothlyDisplay {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
+        "format"?: DateTime.Format;
         "type"?: Type;
         "value"?: any;
     }
