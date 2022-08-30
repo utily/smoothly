@@ -64,6 +64,28 @@ export class SmoothlyDisplayDemo {
 					<dd>
 						<smoothly-display type="date" value="2022-07-07"></smoothly-display>
 					</dd>
+					<dt>date time</dt>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T02:02:02Z"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "2-digit", month: "long", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit"}} value="2022-07-07T02:02:02Z"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "numeric", month: "2-digit", day: "2-digit", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T12:22:24Z"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T12:22:24Z"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "numeric", month: "short", day: "numeric"}} value="2022-07-07T00:00+02:00"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric"}} value="2022-07-07T00:00+02:00"></smoothly-display>
+					</dd>
+					<dd>
+						<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"+01:00"}} value="2022-07-07T12:15Z"></smoothly-display>
+					</dd>
 					<dt>Quiet</dt>
 					<dd>
 						<smoothly-quiet color="dark">-</smoothly-quiet>
@@ -124,10 +146,10 @@ export class SmoothlyDisplayDemo {
 					}>
 					delay
 				</button>
-				<div style={{position: "relative", height: "10em"}}>Large Spinner<smoothly-spinner active size="large" style={{"--background-color": "255,255,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner></div>
+				{/* <div style={{position: "relative", height: "10em"}}>Large Spinner<smoothly-spinner active size="large" style={{"--background-color": "255,255,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner></div>
 				<div style={{position: "relative", height: "10em"}}>Medium Spinner<smoothly-spinner active size="medium"></smoothly-spinner></div>
 				<div style={{position: "relative", height: "10em"}}>Small Spinner<smoothly-spinner active size="small"></smoothly-spinner></div>
-				<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div>
+				<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div> */}
 			</main>,
 		]
 	}

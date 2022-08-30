@@ -7,6 +7,7 @@ import { Date } from "isoly"
 	scoped: true,
 })
 export class InputDate {
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
@@ -25,6 +26,7 @@ export class InputDate {
 	render() {
 		return [
 			<smoothly-input
+				name={this.name}
 				onClick={() => (this.open = !this.open)}
 				disabled={this.disabled}
 				type="date"
