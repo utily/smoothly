@@ -19,7 +19,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	function childToNode(child: ChildNode): VNode {
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
-	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
+	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
 	return (
 		<smoothly-app>
 			<header>
@@ -32,7 +32,9 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 							.map(
 								[
 									...children.filter(child => child.vattrs?.slot == "nav-start"),
-									...children.filter(child => child.vattrs?.label && child.vattrs?.path),
+									...children.filter(
+										child => child.vattrs?.label && child.vattrs?.path && typeof child.vattrs?.path == "string"
+									),
 									...children.filter(child => child.vattrs?.slot == "nav-end"),
 								].map(child => child.node),
 								child => {
@@ -92,9 +94,22 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 						.filter(child => child.vattrs?.path != undefined)
 						.map(child =>
 							child.vattrs?.to ? (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path} to={child.vattrs?.to}></Route>
+								<Route
+									path={
+										typeof child.vattrs?.path == "string"
+											? resolve(child.vattrs?.path)
+											: child.vattrs?.path ?? child.vattrs?.path
+									}
+									to={child.vattrs?.to}></Route>
 							) : (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path}>{child.node}</Route>
+								<Route
+									path={
+										typeof child.vattrs?.path == "string"
+											? resolve(child.vattrs?.path)
+											: child.vattrs?.path ?? child.vattrs?.path
+									}>
+									{child.node}
+								</Route>
 							)
 						)}
 				</Router.Switch>
