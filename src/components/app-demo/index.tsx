@@ -1,7 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
+import { redirect } from "../../index"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { App } from "../App"
-import { redirect } from "../App"
 
 @Component({
 	tag: "smoothly-app-demo",
