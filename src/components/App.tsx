@@ -96,10 +96,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 					{children
 						.filter(child => child.vattrs?.path != undefined)
 						.map(child => {
-							const path =
-								typeof child.vattrs?.path == "string"
-									? resolve(child.vattrs?.path)
-									: child.vattrs?.path ?? child.vattrs?.path
+							const path = typeof child.vattrs?.path == "string" ? resolve(child.vattrs?.path) : child.vattrs?.path
 							return child.vattrs?.to ? (
 								<Route path={path} to={child.vattrs?.to}></Route>
 							) : (
