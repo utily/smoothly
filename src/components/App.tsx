@@ -4,7 +4,10 @@ import { createRouter, href, Route } from "stencil-router-v2"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Router = createRouter()
-
+export function redirect(url: string) {
+	const destination = resolve(url)
+	destination ? Router.push(destination) : (window.location.href = url)
+}
 export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, utils) => {
 	const emptyNode = Object.entries(nodes[0]).reduce<{ [property: string]: any }>((r, entry) => {
 		r[entry[0]] = null
