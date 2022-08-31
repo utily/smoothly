@@ -95,26 +95,17 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<Router.Switch>
 					{children
 						.filter(child => child.vattrs?.path != undefined)
-						.map(child =>
-							child.vattrs?.to ? (
-								<Route
-									path={
-										typeof child.vattrs?.path == "string"
-											? resolve(child.vattrs?.path)
-											: child.vattrs?.path ?? child.vattrs?.path
-									}
-									to={child.vattrs?.to}></Route>
+						.map(child => {
+							const path =
+								typeof child.vattrs?.path == "string"
+									? resolve(child.vattrs?.path)
+									: child.vattrs?.path ?? child.vattrs?.path
+							return child.vattrs?.to ? (
+								<Route path={path} to={child.vattrs?.to}></Route>
 							) : (
-								<Route
-									path={
-										typeof child.vattrs?.path == "string"
-											? resolve(child.vattrs?.path)
-											: child.vattrs?.path ?? child.vattrs?.path
-									}>
-									{child.node}
-								</Route>
+								<Route path={path}>{child.node}</Route>
 							)
-						)}
+						})}
 				</Router.Switch>
 			</main>
 		</smoothly-app>
