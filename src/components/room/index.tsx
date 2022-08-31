@@ -6,7 +6,7 @@ import { Component, h, Prop } from "@stencil/core"
 export class SmoothlyRoom {
 	@Prop() label?: string
 	@Prop() icon?: string
-	@Prop() path: string
+	@Prop() path: string | RegExp
 	@Prop() to?: string
 	render() {
 		return <slot></slot>

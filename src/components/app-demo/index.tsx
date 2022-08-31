@@ -1,6 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { App } from "../App"
+import { redirect } from "../App"
 
 @Component({
 	tag: "smoothly-app-demo",
@@ -54,6 +55,25 @@ export class SmoothlyAppDemo {
 				</smoothly-room>
 				<smoothly-room path="icon" label="Icon">
 					<smoothly-icon-demo />
+				</smoothly-room>
+				<smoothly-room path="/redirect" label="Redirect">
+					<smoothly-button
+						style={{ "max-width": "300px" }}
+						onClick={() => {
+							redirect("/routing/pathParameter1")
+						}}>
+						Internal
+					</smoothly-button>
+					<smoothly-button
+						style={{ "max-width": "300px" }}
+						onClick={() => {
+							redirect("https://google.com")
+						}}>
+						External
+					</smoothly-button>
+				</smoothly-room>
+				<smoothly-room path={/^\/routing\/\w+\/?/} label="No effect">
+					<h2>Regex routing</h2>
 				</smoothly-room>
 				<smoothly-room path="old" label="Old" to="select"></smoothly-room>
 				<span slot="header" style={{ width: "100%", maxWidth: "500px" }}>

@@ -4,7 +4,10 @@ import { createRouter, href, Route } from "stencil-router-v2"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Router = createRouter()
-
+export function redirect(url: string) {
+	const destination = resolve(url)
+	destination ? Router.push(destination) : (window.location.href = url)
+}
 export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, utils) => {
 	const emptyNode = Object.entries(nodes[0]).reduce<{ [property: string]: any }>((r, entry) => {
 		r[entry[0]] = null
@@ -19,7 +22,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	function childToNode(child: ChildNode): VNode {
 		return utils.map([emptyNode], c => ({ ...c, ...child }))[0]
 	}
-	const children = nodes.map((node, index) => ({ ...nodeToChild(node), node }))
+	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
 	return (
 		<smoothly-app>
 			<header>
@@ -32,7 +35,9 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 							.map(
 								[
 									...children.filter(child => child.vattrs?.slot == "nav-start"),
-									...children.filter(child => child.vattrs?.label && child.vattrs?.path),
+									...children.filter(
+										child => child.vattrs?.label && child.vattrs?.path && typeof child.vattrs?.path == "string"
+									),
 									...children.filter(child => child.vattrs?.slot == "nav-end"),
 								].map(child => child.node),
 								child => {
@@ -90,13 +95,14 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				<Router.Switch>
 					{children
 						.filter(child => child.vattrs?.path != undefined)
-						.map(child =>
-							child.vattrs?.to ? (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path} to={child.vattrs?.to}></Route>
+						.map(child => {
+							const path = typeof child.vattrs?.path == "string" ? resolve(child.vattrs?.path) : child.vattrs?.path
+							return child.vattrs?.to ? (
+								<Route path={path} to={child.vattrs?.to}></Route>
 							) : (
-								<Route path={resolve(child.vattrs?.path) ?? child.vattrs?.path}>{child.node}</Route>
+								<Route path={path}>{child.node}</Route>
 							)
-						)}
+						})}
 				</Router.Switch>
 			</main>
 		</smoothly-app>

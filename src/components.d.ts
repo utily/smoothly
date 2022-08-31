@@ -209,7 +209,7 @@ export namespace Components {
     interface SmoothlyRoom {
         "icon"?: string;
         "label"?: string;
-        "path": string;
+        "path": string | RegExp;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -1017,7 +1017,7 @@ declare namespace LocalJSX {
     interface SmoothlyRoom {
         "icon"?: string;
         "label"?: string;
-        "path"?: string;
+        "path"?: string | RegExp;
         "to"?: string;
     }
     interface SmoothlySelect {
