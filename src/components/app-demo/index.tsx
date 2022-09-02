@@ -87,16 +87,16 @@ export class SmoothlyAppDemo {
 						select-none-name="Select All"
 						options={[
 							{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
-							{ name: "Cat Stevens", value: "cat", aliases: ["moew"], right: "🐈" },
-							{ name: "Noble Pig", value: "pig", right: "🐷" },
-							{ name: "Turtle Wax", value: "turtle", right: "" },
-							{ name: "Spider Man", value: "spider", right: "" },
-							{ name: "Phoenix Order Long Wooord", value: "phoenix", right: "" },
-							{ name: "Horse Back", value: "horse", right: "" },
-							{ name: "Unicorn Horn", value: "unicorn", right: "" },
-							{ name: "Talking Parrot Parrot", value: "parrot", right: "" },
-							{ name: "Hidden Dragon", value: "dragon", right: "" },
-							{ name: "Scary Kraken", value: "kraken", right: "" },
+							{ name: "Cat Stevens", value: "cat", aliases: ["moew"], hint: "moew 🐈" },
+							{ name: "Noble Pig", value: "pig", hint: "🐷" },
+							{ name: "Turtle Wax", value: "turtle" },
+							{ name: "Spider Man", value: "spider" },
+							{ name: "Phoenix Order Long Wooord", value: "phoenix" },
+							{ name: "Horse Back", value: "horse" },
+							{ name: "Unicorn Horn", value: "unicorn" },
+							{ name: "Talking Parrot Parrot", value: "parrot" },
+							{ name: "Hidden Dragon", value: "dragon" },
+							{ name: "Scary Kraken", value: "kraken" },
 						]}></smoothly-picker>
 				</span>
 				<smoothly-trigger slot="header" type="link" name="logout">

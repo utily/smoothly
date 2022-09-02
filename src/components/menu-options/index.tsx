@@ -8,10 +8,12 @@ import { OptionType } from "../../model"
 })
 export class SmoothlyMenuOptions {
 	private firstOptionsElement: HTMLSmoothlyOptionElement
+	private optionElements: HTMLSmoothlyOptionElement[] = []
 	@Element() element: HTMLElement
-	@State() filteredOptions: OptionType[] = []
+	@State() filteredOptions: (OptionType & { checked?: boolean })[] = []
 	@State() highlightIndex = 0
 	@State() keyword?: string
+	@Prop() toggle = false
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
 	@Prop() newOptionLabel = "Add:"
 	@Prop() maxMenuHeight: "inherit"
@@ -114,19 +116,22 @@ export class SmoothlyMenuOptions {
 					this.filteredOptions.map((option, index) => (
 						<smoothly-option
 							style={this.optionStyle}
-							ref={el => index == 0 && (this.firstOptionsElement = el ?? this.firstOptionsElement)}
+							toggle={this.toggle}
+							ref={el => {
+								index == 0 && (this.firstOptionsElement = el ?? this.firstOptionsElement)
+								el && (this.optionElements[index] = el)
+							}}
+							checked={option.checked}
 							value={option.value}
 							name={option.name}
 							divider={option.divider}
 							data-highlight={this.highlightIndex == index}>
-							{option.left ? <div slot="left">{option.left}</div> : undefined}
-							{option.right ? <div slot="right">{option.right}</div> : undefined}
+							{option.hint ? <div slot="hint">{option.hint}</div> : undefined}
 						</smoothly-option>
 					))
 				) : this.mutable ? (
 					<smoothly-option
 						style={this.optionStyle}
-						ref={el => (this.firstOptionsElement = el ?? this.firstOptionsElement)}
 						value={this.keyword}
 						name={this.keyword}
 						data-highlight={0}
