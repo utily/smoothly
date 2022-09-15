@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Notice, OptionType } from "../../model"
+import { Notice, Option } from "../../model"
 
 @Component({
 	tag: "smoothly-picker",
@@ -21,16 +21,16 @@ export class SmoothlyPicker {
 	@Prop({ reflect: true }) multiple = false
 	@Prop() mutable = false
 	@Prop() optionStyle: any
-	@Prop({ reflect: true }) options: (OptionType & { checked?: boolean })[] = []
+	@Prop({ mutable: true, reflect: true }) options: (Option & { checked?: boolean })[] = []
 	@Prop({ reflect: true }) labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
-	@Prop({ mutable: true }) selections: OptionType[] = []
+	@Prop({ mutable: true }) selections: Option[] = []
 	@Prop({ mutable: true }) selectNoneName = "Select None"
 	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Prop({ mutable: true }) newOptionLabel = "Add:"
 	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
-	@Event() menuClose: EventEmitter<OptionType[]>
+	@Event() menuClose: EventEmitter<Option[]>
 	@Event() notice: EventEmitter<Notice>
 	@Watch("isOpen")
 	isOpenChangeHandler() {
@@ -47,7 +47,7 @@ export class SmoothlyPicker {
 	}
 	@Listen("optionSelect")
 	@Listen("optionUnselect")
-	optionSelectHandler(event: CustomEvent<OptionType>) {
+	optionSelectHandler(event: CustomEvent<Option>) {
 		this.toggle(event.detail)
 		event.stopPropagation()
 	}
@@ -69,7 +69,7 @@ export class SmoothlyPicker {
 		this.empty = event.detail
 		event.stopPropagation()
 	}
-	toggle(option: OptionType) {
+	toggle(option: Option) {
 		option.value == "select-none"
 			? this.toggleAll()
 			: this.selections.map(s => s.value).includes(option.value)
@@ -81,7 +81,7 @@ export class SmoothlyPicker {
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
 	}
-	unselect(selection: OptionType) {
+	unselect(selection: Option) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
 		if (index != -1) {
 			this.selections = [
@@ -91,7 +91,7 @@ export class SmoothlyPicker {
 			this.keepFocusOnReRender = true
 		}
 	}
-	select(selection: OptionType) {
+	select(selection: Option) {
 		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
 		if (isNewSelection)
 			this.selections = this.multiple ? [...this.selections, selection] : [selection]
@@ -110,7 +110,7 @@ export class SmoothlyPicker {
 			}
 			notice && this.notice.emit(notice)
 		} else
-			this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
+			this.menuElement?.getHighlighted().then((result: Option | undefined) => {
 				result && this.toggle(result)
 			})
 	}

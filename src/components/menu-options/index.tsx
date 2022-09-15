@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { OptionType } from "../../model"
+import { Option } from "../../model"
 
 @Component({
 	tag: "smoothly-menu-options",
@@ -10,7 +10,7 @@ export class SmoothlyMenuOptions {
 	private firstOptionsElement: HTMLSmoothlyOptionElement
 	private optionElements: HTMLSmoothlyOptionElement[] = []
 	@Element() element: HTMLElement
-	@State() filteredOptions: (OptionType & { checked?: boolean })[] = []
+	@State() filteredOptions: (Option & { checked?: boolean })[] = []
 	@State() highlightIndex = 0
 	@State() keyword?: string
 	@Prop() toggle = false
@@ -19,12 +19,12 @@ export class SmoothlyMenuOptions {
 	@Prop() maxMenuHeight: "inherit"
 	@Prop() order = false
 	@Prop() optionStyle: any
-	@Prop({ mutable: true, reflect: true }) options: OptionType[] = []
+	@Prop({ mutable: true, reflect: true }) options: Option[] = []
 	@Prop({ mutable: true }) resetHighlightOnOptionsChange = true
 	@Prop() mutable = false
 	@Event() menuEmpty: EventEmitter<boolean>
 	@Watch("options")
-	optionsChangeHandler(newOptions: OptionType[]) {
+	optionsChangeHandler() {
 		this.highlightIndex = this.resetHighlightOnOptionsChange ? 0 : this.highlightIndex
 	}
 	@Listen("optionHover")
@@ -57,7 +57,7 @@ export class SmoothlyMenuOptions {
 		}
 	}
 	@Method()
-	async getHighlighted(): Promise<OptionType | undefined> {
+	async getHighlighted(): Promise<Option | undefined> {
 		let result = undefined
 		if (this.highlightIndex != undefined && this.filteredOptions.length > 0)
 			result = this.filteredOptions[this.highlightIndex]
@@ -78,11 +78,11 @@ export class SmoothlyMenuOptions {
 	}
 	sortOptions(keyword: string) {
 		const keywordLowercase = keyword.toLowerCase()
-		this.filteredOptions.sort((a: OptionType, b: OptionType) => {
+		this.filteredOptions.sort((a: Option, b: Option) => {
 			return this.getPriorityScore(a, keywordLowercase) - this.getPriorityScore(b, keywordLowercase)
 		})
 	}
-	getPriorityScore(option: OptionType, keywordLowercase: string) {
+	getPriorityScore(option: Option, keywordLowercase: string) {
 		let result = Number.MAX_SAFE_INTEGER
 		const name = option.name
 		const aliases = option.aliases ? option.aliases.join(" ") : ""

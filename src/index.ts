@@ -10,6 +10,6 @@ export {
 	Message,
 	Notice,
 	Trigger,
-	OptionType,
+	Option,
 } from "./model"
 export { Cosmetic } from "./utilities"
