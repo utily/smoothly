@@ -38,4 +38,5 @@
 	align-items: center;
 	gap: 1ch;
 	font-style: italic;
+	white-space: nowrap;
 }

@@ -15,7 +15,7 @@ export class SmoothlyOption {
 	@Prop() checkbox: boolean
 	@Prop() new?: boolean
 	@Prop() toggle = false
-	@Prop() checked = false
+	@Prop({ mutable: true }) checked = false
 	@Event() optionHover: EventEmitter<{ value: any; name: string }>
 	@Event() optionSelect: EventEmitter<{ value: any; name: string }>
 	@Event() optionUnselect: EventEmitter<{ value: any; name: string }>
