@@ -91,12 +91,13 @@ export class SmoothlySelectDemo {
 				label="Filter"
 				empty-menu-label="Sorry, we're out of options."
 				max-height="58px"
+				maxMenuHeight="20rem"
 				multiple={true}
 				options={[
 					{ name: "Big Dog", value: "dog", aliases: ["WOFF"] },
-					{ name: "Cat Stevens", value: "cat", aliases: ["moew"] },
+					{ name: "Cat Stevens", value: "cat", aliases: ["moew"], hint: "moew" },
 					{ name: "Noble Pig", value: "pig" },
-					{ name: "Turtle Wax", value: "turtle" },
+					{ name: "Turtle Wax", value: "turtle", hint: "slow" },
 					{ name: "Spider Man", value: "spider" },
 					{ name: "Phoenix Order Long Wooord", value: "phoenix" },
 					{ name: "Horse Back", value: "horse" },
@@ -146,7 +147,7 @@ export class SmoothlySelectDemo {
 				multiple={false}
 				max-menu-height="200px"
 				options={[
-					{ name: "Dog", value: "dog", aliases: ["WOFF"], right: "Woof 🐶" },
+					{ name: "Dog", value: "dog", aliases: ["WOFF"], hint: "Woof 🐶" },
 					{ name: "Cat", value: "cat", aliases: ["moew"] },
 					{ name: "Pig", value: "pig" },
 					{ name: "Turtle", value: "turtle" },

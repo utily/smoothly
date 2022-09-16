@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Color, Expand, Fill, Message, Notice, OptionType, Trigger } from "./model";
+import { Color, Expand, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { GoogleFont } from "./model/GoogleFont";
@@ -145,16 +145,17 @@ export namespace Components {
     interface SmoothlyMenuOptions {
         "emptyMenuLabel": string;
         "filterOptions": (keyword: string, excludeValues?: string[]) => Promise<void>;
-        "getHighlighted": () => Promise<OptionType | undefined>;
+        "getHighlighted": () => Promise<Option | undefined>;
         "maxMenuHeight": "inherit";
         "moveHighlight": (step: number) => Promise<void>;
         "mutable": boolean;
         "newOptionLabel": string;
         "optionStyle": any;
-        "options": OptionType[];
+        "options": Option[];
         "order": boolean;
         "resetHighlightOnOptionsChange": boolean;
         "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
+        "toggle": boolean;
     }
     interface SmoothlyNotification {
         "notice": Notice;
@@ -163,10 +164,13 @@ export namespace Components {
     }
     interface SmoothlyOption {
         "aliases": string;
+        "checkbox": boolean;
+        "checked": boolean;
         "dataHighlight": boolean;
         "divider"?: boolean;
         "name": string;
         "new"?: boolean;
+        "toggle": boolean;
         "value": string;
     }
     interface SmoothlyPicker {
@@ -175,17 +179,17 @@ export namespace Components {
         "label": string;
         "labelSetting": "hide" | "default";
         "maxHeight": string;
-        "maxMenuHeight": "inherit";
+        "maxMenuHeight": string;
         "multiple": boolean;
         "mutable": boolean;
         "newOptionLabel": string;
         "optionStyle": any;
-        "options": OptionType[];
+        "options": (Option & { checked?: boolean })[];
         "readonly": boolean;
         "selectAllName": string;
         "selectNoneName": string;
         "selectionName": string;
-        "selections": OptionType[];
+        "selections": Option[];
         "valueValidator": (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {
@@ -951,9 +955,10 @@ declare namespace LocalJSX {
         "newOptionLabel"?: string;
         "onMenuEmpty"?: (event: SmoothlyMenuOptionsCustomEvent<boolean>) => void;
         "optionStyle"?: any;
-        "options"?: OptionType[];
+        "options"?: Option[];
         "order"?: boolean;
         "resetHighlightOnOptionsChange"?: boolean;
+        "toggle"?: boolean;
     }
     interface SmoothlyNotification {
         "notice"?: Notice;
@@ -963,6 +968,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyOption {
         "aliases"?: string;
+        "checkbox"?: boolean;
+        "checked"?: boolean;
         "dataHighlight"?: boolean;
         "divider"?: boolean;
         "name"?: string;
@@ -970,6 +977,8 @@ declare namespace LocalJSX {
         "onOptionAdd"?: (event: SmoothlyOptionCustomEvent<{ name: string; value: string }>) => void;
         "onOptionHover"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
         "onOptionSelect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
+        "onOptionUnselect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
+        "toggle"?: boolean;
         "value"?: string;
     }
     interface SmoothlyPicker {
@@ -978,19 +987,19 @@ declare namespace LocalJSX {
         "label"?: string;
         "labelSetting"?: "hide" | "default";
         "maxHeight"?: string;
-        "maxMenuHeight"?: "inherit";
+        "maxMenuHeight"?: string;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "newOptionLabel"?: string;
-        "onMenuClose"?: (event: SmoothlyPickerCustomEvent<OptionType[]>) => void;
+        "onMenuClose"?: (event: SmoothlyPickerCustomEvent<Option[]>) => void;
         "onNotice"?: (event: SmoothlyPickerCustomEvent<Notice>) => void;
         "optionStyle"?: any;
-        "options"?: OptionType[];
+        "options"?: (Option & { checked?: boolean })[];
         "readonly"?: boolean;
         "selectAllName"?: string;
         "selectNoneName"?: string;
         "selectionName"?: string;
-        "selections"?: OptionType[];
+        "selections"?: Option[];
         "valueValidator"?: (value: any) => [boolean, Notice | undefined];
     }
     interface SmoothlyPopup {

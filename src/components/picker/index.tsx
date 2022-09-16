@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Notice, OptionType } from "../../model"
+import { Notice, Option } from "../../model"
 
 @Component({
 	tag: "smoothly-picker",
@@ -15,22 +15,22 @@ export class SmoothlyPicker {
 	@State() empty: boolean
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) readonly = false
-	@Prop() maxMenuHeight: "inherit"
+	@Prop() maxMenuHeight = "inherit"
 	@Prop() maxHeight: string
 	@Prop({ mutable: true }) emptyMenuLabel = "No Options"
 	@Prop({ reflect: true }) multiple = false
 	@Prop() mutable = false
 	@Prop() optionStyle: any
-	@Prop({ reflect: true }) options: OptionType[] = []
+	@Prop({ mutable: true, reflect: true }) options: (Option & { checked?: boolean })[] = []
 	@Prop({ reflect: true }) labelSetting: "hide" | "default"
 	@Prop({ reflect: true }) label: string
-	@Prop({ mutable: true }) selections: OptionType[] = []
+	@Prop({ mutable: true }) selections: Option[] = []
 	@Prop({ mutable: true }) selectNoneName = "Select None"
 	@Prop({ mutable: true }) selectAllName = "Select All"
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Prop({ mutable: true }) newOptionLabel = "Add:"
 	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
-	@Event() menuClose: EventEmitter<OptionType[]>
+	@Event() menuClose: EventEmitter<Option[]>
 	@Event() notice: EventEmitter<Notice>
 	@Watch("isOpen")
 	isOpenChangeHandler() {
@@ -46,7 +46,8 @@ export class SmoothlyPicker {
 		}
 	}
 	@Listen("optionSelect")
-	optionSelectHandler(event: CustomEvent<OptionType>) {
+	@Listen("optionUnselect")
+	optionSelectHandler(event: CustomEvent<Option>) {
 		this.toggle(event.detail)
 		event.stopPropagation()
 	}
@@ -68,7 +69,7 @@ export class SmoothlyPicker {
 		this.empty = event.detail
 		event.stopPropagation()
 	}
-	toggle(option: OptionType) {
+	toggle(option: Option) {
 		option.value == "select-none"
 			? this.toggleAll()
 			: this.selections.map(s => s.value).includes(option.value)
@@ -80,7 +81,7 @@ export class SmoothlyPicker {
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
 	}
-	unselect(selection: OptionType) {
+	unselect(selection: Option) {
 		const index = this.selections.map(selection => selection.value).indexOf(selection.value)
 		if (index != -1) {
 			this.selections = [
@@ -90,7 +91,7 @@ export class SmoothlyPicker {
 			this.keepFocusOnReRender = true
 		}
 	}
-	select(selection: OptionType) {
+	select(selection: Option) {
 		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
 		if (isNewSelection)
 			this.selections = this.multiple ? [...this.selections, selection] : [selection]
@@ -109,7 +110,7 @@ export class SmoothlyPicker {
 			}
 			notice && this.notice.emit(notice)
 		} else
-			this.menuElement?.getHighlighted().then((result: OptionType | undefined) => {
+			this.menuElement?.getHighlighted().then((result: Option | undefined) => {
 				result && this.toggle(result)
 			})
 	}
@@ -153,13 +154,6 @@ export class SmoothlyPicker {
 		this.isOpen = false
 		this.filterOptions()
 	}
-	getCheckHtml(checked: boolean): HTMLElement {
-		return checked ? (
-			<smoothly-icon name="checkbox" size="small"></smoothly-icon>
-		) : (
-			<smoothly-icon name="square-outline" size="small"></smoothly-icon>
-		)
-	}
 
 	render() {
 		const cssVariables = {
@@ -167,7 +161,7 @@ export class SmoothlyPicker {
 			"--label-display": this.labelSetting == "hide" ? "none" : "absolute",
 		}
 		this.options?.forEach(o => {
-			o.left = this.getCheckHtml(this.selections.map(s => s.value).includes(o.value))
+			o.checked = this.selections.map(s => s.value).includes(o.value)
 		})
 		const options = [
 			...(this.multiple
@@ -175,7 +169,7 @@ export class SmoothlyPicker {
 						{
 							value: "select-none",
 							name: this.selections.length == this.options.length ? this.selectNoneName : this.selectAllName,
-							left: this.getCheckHtml(this.selections.length == this.options?.length),
+							checked: this.selections.length == this.options.length,
 							divider: true,
 						},
 				  ]
@@ -213,6 +207,7 @@ export class SmoothlyPicker {
 				<smoothly-menu-options
 					part="menu-options"
 					style={{ width: "100%" }}
+					toggle={true}
 					optionStyle={{ ...this.optionStyle }}
 					order={false}
 					emptyMenuLabel={this.emptyMenuLabel}

@@ -7,7 +7,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class SmoothlySkeleton {
 	@Prop() widths: string[] = ["8rem", "9rem", "10rem"]
-	@Prop() width: string
+	@Prop({ mutable: true }) width: string
 	@Prop() color: string
 	@Prop() period: number
 	@Prop() distance: string
