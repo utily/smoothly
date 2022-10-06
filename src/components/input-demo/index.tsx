@@ -46,6 +46,19 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="card-csc" name="card" style={{ width: "calc(40% - 1px)", borderLeft: "none" }}>
 						CVV/CVC
 					</smoothly-input>
+					<smoothly-radio-button>
+						<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} expansion={true}>
+							<span>Option 1</span>
+							<span slot="expansion">Some description.</span>
+						</smoothly-radio-button-item>
+						<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }} expansion={true}>
+							<span>Option 2</span>
+							<span slot="expansion">Some other description.</span>
+						</smoothly-radio-button-item>
+						<smoothly-radio-button-item value={{ some: "one", yes: "kid" }}>
+							<span>Option 3</span>
+						</smoothly-radio-button-item>
+					</smoothly-radio-button>
 					<smoothly-radio name="option" value="1">
 						option 1
 					</smoothly-radio>
