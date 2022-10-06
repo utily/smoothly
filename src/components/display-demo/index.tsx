@@ -40,6 +40,18 @@ export class SmoothlyDisplayDemo {
 					<dd>
 						<smoothly-display type="price" value="13.37" currency="SEK"></smoothly-display>
 					</dd>
+					<dt>display amount without decimals</dt>
+					<dd>
+						<smoothly-display-amount amount={200} currency="SEK" concat={true}></smoothly-display-amount>
+					</dd>
+					<dt>display amount with decimals if they are set, otherwise no decimal</dt>
+					<dd>
+						<smoothly-display-amount amount={200.20} currency="SEK" concat={true}></smoothly-display-amount>
+					</dd>
+					<dt>display amount with decimals</dt>
+					<dd>
+						<smoothly-display-amount amount={200.20} currency="SEK"></smoothly-display-amount>
+					</dd>
 					<dt>percent</dt>
 					<dd>
 						<smoothly-display type="percent" value="42"></smoothly-display>

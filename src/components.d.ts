@@ -72,6 +72,7 @@ export namespace Components {
     }
     interface SmoothlyDisplayAmount {
         "amount": number | string;
+        "concat": boolean;
         "currency": Currency;
     }
     interface SmoothlyDisplayDateTime {
@@ -872,6 +873,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayAmount {
         "amount"?: number | string;
+        "concat"?: boolean;
         "currency"?: Currency;
     }
     interface SmoothlyDisplayDateTime {
