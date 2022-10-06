@@ -9,6 +9,7 @@ import { Color, Expand, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { GoogleFont } from "./model/GoogleFont";
+import { Selected } from "./components/radio-button/Selected";
 import { Data } from "./components/submit/Data";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -206,6 +207,14 @@ export namespace Components {
         "tabIndex": number;
         "value": string;
     }
+    interface SmoothlyRadioButton {
+        "value"?: any;
+    }
+    interface SmoothlyRadioButtonItem {
+        "expansion": boolean;
+        "selected": boolean;
+        "value": any;
+    }
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
@@ -364,6 +373,10 @@ export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyRadioElement;
+}
+export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyRadioButtonItemElement;
 }
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -598,6 +611,18 @@ declare global {
         prototype: HTMLSmoothlyRadioElement;
         new (): HTMLSmoothlyRadioElement;
     };
+    interface HTMLSmoothlyRadioButtonElement extends Components.SmoothlyRadioButton, HTMLStencilElement {
+    }
+    var HTMLSmoothlyRadioButtonElement: {
+        prototype: HTMLSmoothlyRadioButtonElement;
+        new (): HTMLSmoothlyRadioButtonElement;
+    };
+    interface HTMLSmoothlyRadioButtonItemElement extends Components.SmoothlyRadioButtonItem, HTMLStencilElement {
+    }
+    var HTMLSmoothlyRadioButtonItemElement: {
+        prototype: HTMLSmoothlyRadioButtonItemElement;
+        new (): HTMLSmoothlyRadioButtonItemElement;
+    };
     interface HTMLSmoothlyRadioGroupElement extends Components.SmoothlyRadioGroup, HTMLStencilElement {
     }
     var HTMLSmoothlyRadioGroupElement: {
@@ -775,6 +800,8 @@ declare global {
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
+        "smoothly-radio-button": HTMLSmoothlyRadioButtonElement;
+        "smoothly-radio-button-item": HTMLSmoothlyRadioButtonItemElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-room": HTMLSmoothlyRoomElement;
@@ -1019,6 +1046,15 @@ declare namespace LocalJSX {
         "tabIndex"?: number;
         "value"?: string;
     }
+    interface SmoothlyRadioButton {
+        "value"?: any;
+    }
+    interface SmoothlyRadioButtonItem {
+        "expansion"?: boolean;
+        "onRadioSelect"?: (event: SmoothlyRadioButtonItemCustomEvent<Selected>) => void;
+        "selected"?: boolean;
+        "value"?: any;
+    }
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
@@ -1157,6 +1193,8 @@ declare namespace LocalJSX {
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
+        "smoothly-radio-button": SmoothlyRadioButton;
+        "smoothly-radio-button-item": SmoothlyRadioButtonItem;
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
         "smoothly-room": SmoothlyRoom;
@@ -1219,6 +1257,8 @@ declare module "@stencil/core" {
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
+            "smoothly-radio-button": LocalJSX.SmoothlyRadioButton & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonElement>;
+            "smoothly-radio-button-item": LocalJSX.SmoothlyRadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonItemElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-room": LocalJSX.SmoothlyRoom & JSXBase.HTMLAttributes<HTMLSmoothlyRoomElement>;
