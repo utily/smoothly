@@ -42,11 +42,11 @@ export class SmoothlyDisplayDemo {
 					</dd>
 					<dt>display amount without decimals</dt>
 					<dd>
-						<smoothly-display-amount amount={200} currency="SEK" concat={true}></smoothly-display-amount>
+						<smoothly-display-amount amount={200} currency="SEK" toInteger={true}></smoothly-display-amount>
 					</dd>
 					<dt>display amount with decimals if they are set, otherwise no decimal</dt>
 					<dd>
-						<smoothly-display-amount amount={200.20} currency="SEK" concat={true}></smoothly-display-amount>
+						<smoothly-display-amount amount={200.20} currency="SEK" toInteger={true}></smoothly-display-amount>
 					</dd>
 					<dt>display amount with decimals</dt>
 					<dd>

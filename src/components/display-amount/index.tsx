@@ -9,7 +9,7 @@ import { Currency } from "isoly"
 export class SmoothlyDisplayAmount {
 	@Prop() amount: number | string
 	@Prop() currency: Currency
-	@Prop() concat = false
+	@Prop() toInteger = false
 
 	format(amount: string): string {
 		const digitsPerGroup = 3
@@ -31,7 +31,7 @@ export class SmoothlyDisplayAmount {
 			beforeSeparator = separator
 			result = result.padEnd(separator + maxDecimals + 1, "0")
 			result = result.substring(0, separator + maxDecimals + 1)
-		} else if (!this.concat) {
+		} else if (!this.toInteger) {
 			result = result + "."
 			separator = result.length - 1
 			result = result.padEnd(separator + maxDecimals + 1, "0")
