@@ -208,10 +208,11 @@ export namespace Components {
         "value": string;
     }
     interface SmoothlyRadioButton {
+        "decoration": "button" | "radio";
+        "deselectable"?: boolean;
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {
-        "expansion": boolean;
         "selected": boolean;
         "value": any;
     }
@@ -373,6 +374,10 @@ export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyRadioElement;
+}
+export interface SmoothlyRadioButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyRadioButtonElement;
 }
 export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1047,11 +1052,13 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface SmoothlyRadioButton {
+        "decoration"?: "button" | "radio";
+        "deselectable"?: boolean;
+        "onRadioButtonSelected"?: (event: SmoothlyRadioButtonCustomEvent<any>) => void;
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {
-        "expansion"?: boolean;
-        "onRadioSelect"?: (event: SmoothlyRadioButtonItemCustomEvent<Selected>) => void;
+        "onRadioItemSelectInternal"?: (event: SmoothlyRadioButtonItemCustomEvent<Selected>) => void;
         "selected"?: boolean;
         "value"?: any;
     }

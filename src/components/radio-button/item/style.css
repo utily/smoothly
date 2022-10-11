@@ -1,3 +1,6 @@
+@import "./radio.css";
+@import "./button.css";
+
 :host {
 	display: block;
 	margin-bottom: 0.5rem;
@@ -12,56 +15,16 @@
 	align-items: center;
 }
 
-:host > header > smoothly-icon {
-	margin-right: 0.5rem;
-	border-radius: 100%;
-	font-size: 1.3rem;
-	display: flex;
-	background: rgb(var(--smoothly-light-color));
-	transition: 0.2s;
-}
-
-:host[selected] > header > smoothly-icon {
-	color: rgb(var(--smoothly-success-color));
-	background: rgb(var(--smoothly-success-shade));
-}
-
-:host > aside {
+::slotted([slot=expansion]) {
 	display: none;
-	background: rgb(var(--smoothly-light-color));
-	color: rgb(var(--smoothly-light-contrast));
+	background: rgb(var(--smoothly-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
 	padding: 0;
-	border-radius: 5px;
-	margin-top: 0.5rem;
 	position: relative;
 	transition: 0.1s;
 }
 
-:host > aside::before {
-	content: "\25B2";
-	position: absolute;
-	top: -0.8rem;
-	left: 3rem;
-	color: rgb(var(--smoothly-light-color));
-}
-
-:host[selected] > aside {
+[selected]::slotted([slot=expansion]) {
 	display: block;
 	padding: 0.5rem;
-}
-
-:host > aside.hide {
-	display: none;
-}
-
-@media screen and (min-width: 900px){
-	:host > header:hover > smoothly-icon {
-		background: rgb(var(--smoothly-success-color));
-		cursor: pointer;
-	}
-	:host[selected] > header:hover > smoothly-icon {
-		background: rgb(var(--smoothly-warning-shade));
-		color: rgb(var(--smoothly-warning-color));
-		cursor: pointer;
-	}
 }
