@@ -1054,7 +1054,7 @@ declare namespace LocalJSX {
     interface SmoothlyRadioButton {
         "decoration"?: "button" | "radio";
         "deselectable"?: boolean;
-        "onSelected"?: (event: SmoothlyRadioButtonCustomEvent<any>) => void;
+        "onRadioButtonSelected"?: (event: SmoothlyRadioButtonCustomEvent<any>) => void;
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {

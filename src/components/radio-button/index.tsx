@@ -11,14 +11,14 @@ export class SmoothlyRadioButton {
 	@Prop({ reflect: true }) deselectable?: boolean
 	@Prop({ reflect: true }) decoration: "button" | "radio" = "radio"
 	active?: Selected
-	@Event() selected: EventEmitter<any>
+	@Event() radioButtonSelected: EventEmitter<any>
 
 	@Listen("radioItemSelectInternal", { capture: true })
 	radioSelectHandler(event: CustomEvent<Selected>) {
 		if (this.deselectable || this.active?.value != event.detail.value) {
 			this.active?.select(false)
 			this.active = event.detail
-			this.selected.emit((this.value = this.active.selected ? event.detail.value : undefined))
+			this.radioButtonSelected.emit((this.value = this.active.selected ? event.detail.value : undefined))
 			this.active.select(this.active.selected)
 		}
 	}
