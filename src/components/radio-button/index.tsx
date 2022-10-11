@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/core"
 import { Selected } from "./Selected"
 
 @Component({
@@ -8,14 +8,19 @@ import { Selected } from "./Selected"
 })
 export class SmoothlyRadioButton {
 	@Prop({ mutable: true }) value?: any
+	@Prop({ reflect: true }) deselectable?: boolean
+	@Prop({ reflect: true }) decoration: "button" | "radio" = "radio"
 	active?: Selected
+	@Event() selected: EventEmitter<any>
 
-	@Listen("radioSelect")
+	@Listen("radioItemSelectInternal", { capture: true })
 	radioSelectHandler(event: CustomEvent<Selected>) {
-		this.active?.select(false)
-		this.active = event.detail
-		this.value = this.active.selected ? event.detail.value : undefined
-		this.active.select(this.active.selected)
+		if (this.deselectable || this.active?.value != event.detail.value) {
+			this.active?.select(false)
+			this.active = event.detail
+			this.selected.emit((this.value = this.active.selected ? event.detail.value : undefined))
+			this.active.select(this.active.selected)
+		}
 	}
 
 	render() {

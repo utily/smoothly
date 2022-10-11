@@ -9,15 +9,14 @@ import { Selected } from "../Selected"
 export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
-	@Prop() expansion = false
-	@Event() radioSelect: EventEmitter<Selected>
+	@Event() radioItemSelectInternal: EventEmitter<Selected>
 
 	componentWillLoad(): void | Promise<void> {
 		this.select(this.selected)
 	}
 
 	private select(selected = false) {
-		this.radioSelect.emit({
+		this.radioItemSelectInternal.emit({
 			value: this.value,
 			selected,
 			select: s => (this.selected = s),
@@ -35,10 +34,9 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 						size="tiny"
 						toolTip="Select"></smoothly-icon>
 					<slot></slot>
+					<slot name="end"></slot>
 				</header>
-				<aside class={this.expansion ? "" : "hide"}>
-					<slot name="expansion"></slot>
-				</aside>
+				<slot name="expansion"></slot>
 			</Host>
 		)
 	}

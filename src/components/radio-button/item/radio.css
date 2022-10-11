@@ -1,0 +1,15 @@
+smoothly-radio-button[decoration=radio] :host > header {
+	padding: 0.5rem;
+}
+
+smoothly-radio-button[decoration=radio] :host > header > smoothly-icon {
+	display: none;
+}
+smoothly-radio-button[decoration=radio] :host[selected] > header {
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
+}
+
+smoothly-radio-button[decoration=radio] ::slotted([slot=expansion])::before {
+	content: unset;
+}
