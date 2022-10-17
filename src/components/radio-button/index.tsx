@@ -18,7 +18,7 @@ export class SmoothlyRadioButton {
 		if (this.deselectable || this.active?.value != event.detail.value) {
 			this.active?.select(false)
 			this.active = event.detail
-			this.radioButtonSelected.emit((this.value = this.active.selected ? event.detail.value : undefined))
+			this.radioButtonSelected.emit((this.value = this.active.selected ? this.active.value : undefined))
 			this.active.select(this.active.selected)
 		}
 	}

@@ -1,6 +1,12 @@
+smoothly-radio-button[decoration=radio] :host {
+	background: rgb(var(--smoothly-primary-shade));
+	color: rgb(var(--smoothly-primary-contrast));
+}
+
 smoothly-radio-button[decoration=radio] :host > header {
 	padding: 0.5rem;
 }
+
 
 smoothly-radio-button[decoration=radio] :host > header > smoothly-icon {
 	display: none;

@@ -1,3 +1,10 @@
+smoothly-radio-button[decoration=button] :host {
+	margin-bottom: 0.5rem;
+}
+smoothly-radio-button[decoration=button] :host:last-child {
+	margin-bottom: 0;
+}
+
 smoothly-radio-button[decoration=button] :host > header > smoothly-icon {
 	margin-right: 0.5rem;
 	border-radius: 100%;
