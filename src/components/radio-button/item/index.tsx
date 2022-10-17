@@ -12,13 +12,13 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Event() radioItemSelectInternal: EventEmitter<Selected>
 
 	componentWillLoad(): void | Promise<void> {
-		this.select(this.selected)
+		this.selected && this.select(this.selected)
 	}
 
 	private select(selected = false) {
 		this.radioItemSelectInternal.emit({
 			value: this.value,
-			selected,
+			selected: selected,
 			select: s => (this.selected = s),
 		})
 	}
