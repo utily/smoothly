@@ -24,5 +24,6 @@ smoothly-radio-button[decoration=radio] ::slotted([slot=expansion])::before {
 @media screen and (min-width: 900px) {
 	smoothly-radio-button[decoration=radio] :host:hover {
 		background: rgb(var(--smoothly-primary-color));
+		cursor: pointer;
 	}
 }
