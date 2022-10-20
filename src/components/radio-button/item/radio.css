@@ -1,6 +1,7 @@
 smoothly-radio-button[decoration=radio] :host {
 	background: rgb(var(--smoothly-primary-shade));
 	color: rgb(var(--smoothly-primary-contrast));
+	transition: 0.2s;
 }
 
 smoothly-radio-button[decoration=radio] :host > header {
@@ -18,4 +19,10 @@ smoothly-radio-button[decoration=radio] :host[selected] > header {
 
 smoothly-radio-button[decoration=radio] ::slotted([slot=expansion])::before {
 	content: unset;
+}
+
+@media screen and (min-width: 900px) {
+	smoothly-radio-button[decoration=radio] :host:hover {
+		background: rgb(var(--smoothly-primary-color));
+	}
 }
