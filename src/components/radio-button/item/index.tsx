@@ -1,4 +1,5 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Color } from "../../../model"
 import { Selected } from "../Selected"
 
 @Component({
@@ -9,6 +10,7 @@ import { Selected } from "../Selected"
 export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
+	@Prop({ reflect: true }) color?: Color
 	@Event() radioItemSelectInternal: EventEmitter<Selected>
 
 	componentWillLoad(): void | Promise<void> {
