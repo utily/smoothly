@@ -103,7 +103,9 @@ export class SmoothlyInputDemo {
 								<span>Option 3</span>
 							</smoothly-radio-button-item>
 						</smoothly-radio-button>
-						<h3>Radio List without button</h3>
+						<h3>
+							Radio List <b>without button</b>
+						</h3>
 						<smoothly-radio-button>
 							<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} selected color="secondary">
 								<span>Option 1</span>
