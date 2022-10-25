@@ -213,6 +213,7 @@ export namespace Components {
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {
+        "color"?: Color;
         "selected": boolean;
         "value": any;
     }
@@ -1058,6 +1059,7 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {
+        "color"?: Color;
         "onRadioItemSelectInternal"?: (event: SmoothlyRadioButtonItemCustomEvent<Selected>) => void;
         "selected"?: boolean;
         "value"?: any;
