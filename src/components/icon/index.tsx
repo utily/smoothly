@@ -40,7 +40,7 @@ export class SmoothlyIcon {
 	}
 	private static cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	static async load(name: string): Promise<string | undefined> {
-		const url = `https://unpkg.com/ionicons@5.0.0/dist/svg/${name}.svg`
+		const url = `https://site-icons.pages.dev/ionicons@5.0.0/dist/svg/${name}.svg`
 		return SmoothlyIcon.cache[url] ?? (SmoothlyIcon.cache[url] = SmoothlyIcon.fetch(url))
 	}
 }
