@@ -55,6 +55,7 @@
     "@types/pvutils": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.36.0",
     "@typescript-eslint/parser": "^5.36.0",
+    "cloudly-http": "^0.0.53",
     "eslint": "^8.26.0",
     "eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20221021",
     "eslint-plugin-simple-import-sort": "^7.0.0",
@@ -63,6 +64,7 @@
     "prettier": "^2.7.1",
     "prettierx": "github:utily/prettierx#utily-20221021",
     "puppeteer": "^17.0.0",
+    "selectively": "^2.0.2",
     "typescript": "^4.8.4"
   }
 }

@@ -1,0 +1,377 @@
+{
+  "copyright": "Copyright Sveriges Radio 2022. All rights reserved.",
+  "programs": [
+    {
+      "description": "Sport, P4 Skaraborg, Sveriges Radio.",
+      "email": "sporten.skaraborg@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/gruppsida.aspx?programid=97&grupp=3840",
+      "programslug": "sportenp4skaraborg",
+      "programimage": "https://static-cdn.sr.se/images/content/sverigesradiologga.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/content/sverigesradiologga.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/35/3116563_176_132.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/35/3116563_176_132.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/content/sverigesradiologga.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/content/sverigesradiologga.jpg",
+      "socialmediaplatforms": [],
+      "channel": {
+        "id": 208,
+        "name": "P4 Skaraborg"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": false,
+      "responsibleeditor": "Kajsa Hallberg",
+      "id": 35,
+      "name": "Sporten P4 Skaraborg"
+    },
+    {
+      "description": "I P4 Jämtland hör du lokala nyheter, aktualiteter, väderprognoser, sport och kultur. ",
+      "broadcastinfo": "Har du nyhetstips? Kontakta oss via e-post: p4jamtland@sverigesradio.se eller 063-16 06 31",
+      "email": "p4jamtland@sverigesradio.se ",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=78",
+      "programslug": "jamtland",
+      "programimage": "https://static-cdn.sr.se/images/78/3f969001-3c0d-46c0-a3a6-30b44ef999c0.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/78/3f969001-3c0d-46c0-a3a6-30b44ef999c0.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/78/3664639_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/78/3664639_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/78/3f969001-3c0d-46c0-a3a6-30b44ef999c0.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/78/3f969001-3c0d-46c0-a3a6-30b44ef999c0.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/P4Jamtland"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4jamtland/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4jamtland/"
+        }
+      ],
+      "channel": {
+        "id": 200,
+        "name": "P4 Jämtland"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Daniel Hansson",
+      "id": 78,
+      "name": "Nyheter P4 Jämtland"
+    },
+    {
+      "description": "P4 Kalmar ger dig lokala nyheter och program från Kalmar län.",
+      "email": "p4kalmar@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=86",
+      "programslug": "kalmar",
+      "programimage": "https://static-cdn.sr.se/images/86/2efa24a7-f80c-435d-ae1c-29d060cb645d.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/86/2efa24a7-f80c-435d-ae1c-29d060cb645d.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/86/e5bfa47b-cc1b-4040-91ba-150bb119761d.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/86/e5bfa47b-cc1b-4040-91ba-150bb119761d.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/86/2efa24a7-f80c-435d-ae1c-29d060cb645d.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/86/2efa24a7-f80c-435d-ae1c-29d060cb645d.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/p4kalmar"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4kalmar/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4kalmar/"
+        }
+      ],
+      "channel": {
+        "id": 201,
+        "name": "P4 Kalmar"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Jesper Ericson",
+      "id": 86,
+      "name": "Nyheter P4 Kalmar"
+    },
+    {
+      "description": "I P4 Sörmland hör du det senaste som händer i länet. Du får aktuella nyheter, intervjuer, trafik och väder blandat med musik.",
+      "broadcastinfo": "Har du tips? Mejla oss: p4sormland@sverigesradio.se",
+      "email": "p4sormland@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=87",
+      "programslug": "sormland",
+      "programimage": "https://static-cdn.sr.se/images/87/17ead849-8d1c-410f-84bd-21c65f5d2a89.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/87/17ead849-8d1c-410f-84bd-21c65f5d2a89.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/87/b2bf90d3-c733-41d1-96b9-b4e476e179f0.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/87/b2bf90d3-c733-41d1-96b9-b4e476e179f0.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/87/17ead849-8d1c-410f-84bd-21c65f5d2a89.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/87/17ead849-8d1c-410f-84bd-21c65f5d2a89.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/p4sormland"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4sormland/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4sormland/"
+        }
+      ],
+      "channel": {
+        "id": 202,
+        "name": "P4 Sörmland"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Katrin Säfström",
+      "id": 87,
+      "name": "Nyheter P4 Sörmland"
+    },
+    {
+      "description": "I P4 Jönköping Sveriges Radio hör du lokala nyheter, sport och kultur från Jönköpings län - Jönköping, Habo, Mullsjö, Aneby, Eksjö, Nässjö, Sävsjö, Tranås, Vetlanda, Gnosjö, Gislaved, Vaggeryd, Värnamo.",
+      "broadcastinfo": "Varje dag. Året runt.",
+      "email": "p4jonkoping@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=91",
+      "programslug": "jonkoping",
+      "programimage": "https://static-cdn.sr.se/images/91/317c1c40-0352-49e1-913c-9c718b788419.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/91/317c1c40-0352-49e1-913c-9c718b788419.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/91/24e6436e-0b26-49e9-9f7f-dfb306c43bd4.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/91/24e6436e-0b26-49e9-9f7f-dfb306c43bd4.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/91/317c1c40-0352-49e1-913c-9c718b788419.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/91/317c1c40-0352-49e1-913c-9c718b788419.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/P4Jonkoping"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com//"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4jonkoping/"
+        }
+      ],
+      "channel": {
+        "id": 203,
+        "name": "P4 Jönköping"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Adam Wållgren",
+      "id": 91,
+      "name": "Nyheter P4 Jönköping"
+    },
+    {
+      "description": "I P4 Värmland hör du lokala nyheter, lokala aktualiteter och lokal kultur.",
+      "email": "p4varmland@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=93",
+      "programslug": "varmland",
+      "programimage": "https://static-cdn.sr.se/images/93/aae3ef44-751f-4f29-a368-20b4ee68a655.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/93/aae3ef44-751f-4f29-a368-20b4ee68a655.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/93/3599291_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/93/3599291_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/93/aae3ef44-751f-4f29-a368-20b4ee68a655.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/93/aae3ef44-751f-4f29-a368-20b4ee68a655.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/P4Varmland"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4varmland/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/P4Varmland/"
+        }
+      ],
+      "channel": {
+        "id": 204,
+        "name": "P4 Värmland"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Ola Finell",
+      "id": 93,
+      "name": "Nyheter P4 Värmland"
+    },
+    {
+      "description": "P4 Gotland bevakar det som händer på och omkring Gotland, med nyheter, intervjuer och reportage.",
+      "programcategory": {
+        "id": 68,
+        "name": "Nyheter"
+      },
+      "email": "p4gotland@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=94",
+      "programslug": "gotland",
+      "programimage": "https://static-cdn.sr.se/images/94/99c16fdf-e9b7-4232-ba4b-223f0f8e4e79.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/94/99c16fdf-e9b7-4232-ba4b-223f0f8e4e79.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/94/3200427_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/94/3200427_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/94/99c16fdf-e9b7-4232-ba4b-223f0f8e4e79.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/94/99c16fdf-e9b7-4232-ba4b-223f0f8e4e79.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/p4gotland"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4gotland/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4gotland/"
+        }
+      ],
+      "channel": {
+        "id": 205,
+        "name": "P4 Gotland"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Jacob Wesley",
+      "id": 94,
+      "name": "Nyheter P4 Gotland"
+    },
+    {
+      "description": "Lokala nyheter över Sjuhärad - dagligen, året runt",
+      "email": "david.svanberg@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=95",
+      "programslug": "sjuharad",
+      "programimage": "https://static-cdn.sr.se/images/95/166bb0fb-282d-4823-a5ea-2ead69f4f662.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/95/166bb0fb-282d-4823-a5ea-2ead69f4f662.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/95/3138455_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/95/3138455_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/95/166bb0fb-282d-4823-a5ea-2ead69f4f662.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/95/166bb0fb-282d-4823-a5ea-2ead69f4f662.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/P4Sjuharad"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com//"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4sjuharad/"
+        }
+      ],
+      "channel": {
+        "id": 206,
+        "name": "P4 Sjuhärad"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": " David Svanberg ",
+      "id": 95,
+      "name": "Nyheter P4 Sjuhärad"
+    },
+    {
+      "description": "Lokala nyheter, sport och kultur från Skåne.",
+      "broadcastinfo": "Helsingborg 103,2 MHz ● Hörby 89,5 MHz ● Malmö 102,0 MHz ● Trelleborg 103,7 MHz ● Ystad 103,0 MHz",
+      "email": "p4malmohus@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=96",
+      "programslug": "malmohus",
+      "programimage": "https://static-cdn.sr.se/images/96/f4b9f6ef-b53c-4022-9e30-88ed80f25e2a.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/96/f4b9f6ef-b53c-4022-9e30-88ed80f25e2a.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/96/3469796_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/96/3469796_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/96/f4b9f6ef-b53c-4022-9e30-88ed80f25e2a.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/96/f4b9f6ef-b53c-4022-9e30-88ed80f25e2a.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/pages/Sveriges-Radio-P4-Radio-Malm%C3%B6hus/184974592076"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/p4malmohus/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4malmohus/"
+        }
+      ],
+      "channel": {
+        "id": 207,
+        "name": "P4 Malmöhus"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Karolin Johansson",
+      "id": 96,
+      "name": "Nyheter P4 Malmöhus"
+    },
+    {
+      "description": "Skaraborgs största radiokanal ger dig senaste nytt där du bor.",
+      "email": "nyheterna.skaraborg@sverigesradio.se",
+      "phone": "",
+      "programurl": "https://sverigesradio.se/default.aspx?programid=97",
+      "programslug": "skaraborg",
+      "programimage": "https://static-cdn.sr.se/images/97/c949c8a2-e03e-4b42-b395-126c6bc260b5.jpg?preset=api-default-square",
+      "programimagetemplate": "https://static-cdn.sr.se/images/97/c949c8a2-e03e-4b42-b395-126c6bc260b5.jpg",
+      "programimagewide": "https://static-cdn.sr.se/images/97/3138661_2048_1152.jpg?preset=api-default-rectangle",
+      "programimagetemplatewide": "https://static-cdn.sr.se/images/97/3138661_2048_1152.jpg",
+      "socialimage": "https://static-cdn.sr.se/images/97/c949c8a2-e03e-4b42-b395-126c6bc260b5.jpg?preset=api-default-square",
+      "socialimagetemplate": "https://static-cdn.sr.se/images/97/c949c8a2-e03e-4b42-b395-126c6bc260b5.jpg",
+      "socialmediaplatforms": [
+        {
+          "platform": "Facebook",
+          "platformurl": "https://www.facebook.com/P4Skaraborg"
+        },
+        {
+          "platform": "Twitter",
+          "platformurl": "https://twitter.com/P4Skaraborg/"
+        },
+        {
+          "platform": "Instagram",
+          "platformurl": "https://instagram.com/p4skaraborg_/"
+        }
+      ],
+      "channel": {
+        "id": 208,
+        "name": "P4 Skaraborg"
+      },
+      "archived": false,
+      "hasondemand": true,
+      "haspod": true,
+      "responsibleeditor": "Kajsa Hallberg",
+      "id": 97,
+      "name": "Nyheter P4 Skaraborg"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "size": 10,
+    "totalhits": 835,
+    "totalpages": 84,
+    "nextpage": "http://api.sr.se/v2/programs?format=json&page=2"
+  }
+}

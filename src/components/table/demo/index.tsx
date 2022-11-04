@@ -85,6 +85,7 @@ export class TableDemo {
 					</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
+			// <smoothly-table-demo-example></smoothly-table-demo-example>,
 		]
 	}
 }
