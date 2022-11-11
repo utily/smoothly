@@ -9,17 +9,18 @@ import * as data from "./data"
 	scoped: true,
 })
 export class TableDemoExample implements ComponentWillLoad {
-	@State() programs?: data.Program[]
+	@State() senators?: data.Senator[]
 	@State() filter?: selectively.Rule
+	@State() expression = ""
 	async componentWillLoad(): Promise<void> {
 		const response = await http.fetch({
-			url: "http://api.sr.se/api/v2/programs?format=json&size=100",
+			url: "https://www.govtrack.us/api/v2/role?current=true&role_type=senator",
 		})
-		this.programs = ((await response.body) as data.Programs).programs
+		this.senators = ((await response.body) as data.RootObject).objects
 	}
 
 	render() {
-		return !this.programs ? (
+		return !this.senators ? (
 			<p>Loading data</p>
 		) : (
 			[
@@ -27,22 +28,37 @@ export class TableDemoExample implements ComponentWillLoad {
 					name="filter"
 					onSmoothlyInput={event => {
 						console.log("event", event.detail)
-						this.filter = selectively.property("email", selectively.startsWith(event.detail.value))
+						this.expression = event.detail.value
 					}}></smoothly-input>,
+				<smoothly-input-date
+					onValueChanged={event => (this.expression = `enddate:${event.detail}`)}></smoothly-input-date>,
+				<smoothly-button
+					onClick={
+						event => (this.filter = selectively.parse(this.expression))
+						// (this.filter = selectively.property("description", selectively.startsWith(this.expression)))
+					}>
+					Apply filter
+				</smoothly-button>,
 				<smoothly-table>
 					<smoothly-table-row>
-						<smoothly-table-header>Channel</smoothly-table-header>
-						<smoothly-table-header>Program</smoothly-table-header>
+						<smoothly-table-header>Name</smoothly-table-header>
+						<smoothly-table-header>Nickname</smoothly-table-header>
+						<smoothly-table-header>Started</smoothly-table-header>
+						<smoothly-table-header>Number of sessions of congress</smoothly-table-header>
 					</smoothly-table-row>
-					{(this.filter?.filter(this.programs) ?? this.programs).map(program => (
+					{(this.filter?.filter(this.senators) ?? this.senators).map(senator => (
 						<smoothly-table-row>
-							<smoothly-table-cell>{program.channel.name}</smoothly-table-cell>
+							<smoothly-table-cell>
+								{senator.person.firstname} {senator.person.lastname}
+							</smoothly-table-cell>
 							<smoothly-table-expandable-cell>
-								{program.name}
+								{senator.person.nickname}
 								<aside slot="detail">
-									<p>{program.description}</p>
+									<p>{senator.description}</p>
 								</aside>
 							</smoothly-table-expandable-cell>
+							<smoothly-table-cell>{senator.startdate}</smoothly-table-cell>
+							<smoothly-table-cell>{senator.congress_numbers.length}</smoothly-table-cell>
 						</smoothly-table-row>
 					))}
 				</smoothly-table>,
