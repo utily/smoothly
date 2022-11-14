@@ -56,6 +56,10 @@ export namespace Components {
         "selected": boolean;
         "size": "tiny" | "small" | "medium" | "large";
     }
+    interface SmoothlyCountry {
+        "text": "alpha2" | "name" | "none";
+        "value": CountryCode.Alpha2;
+    }
     interface SmoothlyDialog {
         "closable": boolean;
         "color": Color | undefined;
@@ -474,6 +478,12 @@ declare global {
         prototype: HTMLSmoothlyCheckboxElement;
         new (): HTMLSmoothlyCheckboxElement;
     };
+    interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
+    }
+    var HTMLSmoothlyCountryElement: {
+        prototype: HTMLSmoothlyCountryElement;
+        new (): HTMLSmoothlyCountryElement;
+    };
     interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {
     }
     var HTMLSmoothlyDialogElement: {
@@ -783,6 +793,7 @@ declare global {
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
+        "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
@@ -889,6 +900,10 @@ declare namespace LocalJSX {
         "selectAll"?: boolean;
         "selected"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
+    }
+    interface SmoothlyCountry {
+        "text"?: "alpha2" | "name" | "none";
+        "value"?: CountryCode.Alpha2;
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
@@ -1180,6 +1195,7 @@ declare namespace LocalJSX {
         "smoothly-button": SmoothlyButton;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
+        "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
@@ -1244,6 +1260,7 @@ declare module "@stencil/core" {
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
+            "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
