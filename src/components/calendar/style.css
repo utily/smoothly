@@ -1,10 +1,15 @@
 :host {
 	display: block;
 	--other-month-opacity: 0.5;
+	margin-bottom: 1rem;
 }
 :host > smoothly-input-month {
 	width: calc(100% - 1em);
 	padding: 0.5em 0.5em 0 0.5em;
+}
+:host > table {
+	table-layout: fixed;
+	width: 100%;
 }
 th,
 td {

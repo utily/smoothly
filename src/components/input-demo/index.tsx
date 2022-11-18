@@ -11,7 +11,7 @@ export class SmoothlyInputDemo {
 				</header>
 				<main>
 					<fieldset>
-						<h2>Smoothly Iput</h2>
+						<h2>Smoothly Input</h2>
 						<h3>Card</h3>
 						<smoothly-input
 							type="text"
@@ -71,7 +71,7 @@ export class SmoothlyInputDemo {
 						<smoothly-input type="phone" name="phone">
 							Phone
 						</smoothly-input>
-						<smoothly-input-date>Date</smoothly-input-date>
+						<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 					</fieldset>
 					<fieldset>
 						<h2>Smoothly Radio</h2>
