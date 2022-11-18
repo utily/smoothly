@@ -27,6 +27,7 @@ export class InputDate {
 		return [
 			<smoothly-input
 				name={this.name}
+				onFocus={() => (this.open = !this.open)}
 				onClick={() => (this.open = !this.open)}
 				disabled={this.disabled}
 				type="date"
