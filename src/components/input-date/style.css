@@ -7,6 +7,7 @@ nav {
 	z-index: 10;
 	top: 3.5em;
 	background-color: rgb(var(--smoothly-default-shade));
+	min-width: 18em;
 }
 :host > div {
 	position: fixed;
