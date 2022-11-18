@@ -27,7 +27,7 @@ nav {
 	background-color: rgb(var(--smoothly-default-shade));
 }
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 400px){
 	nav {
 		position: absolute;
 		z-index: 10;
