@@ -1,5 +1,6 @@
 :host[type=link] {
 	display: inline;
+	border: none;
 }
 :host:not([type=link]) {
 	display: block;
