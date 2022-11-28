@@ -61,7 +61,8 @@ export class Selector {
 					break
 				case "Enter":
 					const result = this.items.find(item => item.selected)
-					this.selected.emit(result?.value)
+					if (result?.value)
+						this.selected.emit(result?.value)
 					this.opened = false
 					this.filter = ""
 					break
