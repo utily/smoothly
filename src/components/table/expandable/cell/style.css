@@ -16,6 +16,9 @@
 	float: left;
 	padding: 0 0.3rem;
 	transition: transform 0.2s;
+	display: flex;
+	height: 100%;
+	align-self: center;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
