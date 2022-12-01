@@ -16,6 +16,8 @@
 	margin-top: -1rem;
 	margin-left: -1rem;
 	transition: transform 0.2s;
+	display: flex;
+	height: 100%;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
