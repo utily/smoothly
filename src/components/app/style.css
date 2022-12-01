@@ -90,14 +90,11 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
 smoothly-app > smoothly-notifier > header > [slot=header] {
-	display: flex;
 	margin-right: 2.1rem;
-	justify-content: flex-end;
 	border: 0;
 }
 smoothly-app > smoothly-notifier > header > [slot=header] > a {
 	display: flex;
-	align-self: center;
 	border-width: 0;
 	align-items: center;
 	margin-right: 3.9rem;
