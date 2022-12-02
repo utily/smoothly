@@ -3,7 +3,9 @@
 	border: none;
 }
 :host:not([type=link]) {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 :host {
 	margin: 1em;
@@ -16,13 +18,13 @@
 }
 :host[disabled] {
 	opacity: 0.5;
+	border: none;
 }
 a,
 button {
 	display: block;
 	border-color: transparent;
 	background-color: transparent;
-	padding: 0.2em 0.3em;
 	font-size: 110%;
 	font-weight: 400;
 }
@@ -40,6 +42,7 @@ button {
 	width: calc(100% - 0.6em);
 }
 :host > button {
+	height: 100%;
 	width: 100%;
 }
 :host[expand=fill] {

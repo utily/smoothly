@@ -29,9 +29,13 @@ export class SmoothlyButton {
 				break
 			case "button":
 				result = this.link ? (
-					<a href={this.link} target="_blank" download={this.download}>
+					this.disabled ? (
 						<slot></slot>
-					</a>
+					) : (
+						<a href={this.link} target="_blank" download={this.download}>
+							<slot></slot>
+						</a>
+					)
 				) : (
 					<button disabled={this.disabled}>
 						<slot></slot>

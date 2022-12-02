@@ -33,6 +33,9 @@ export class SmoothlyAppDemo {
 						<smoothly-button fill="solid" color="danger" onClick={() => alert("clicked")}>
 							action
 						</smoothly-button>
+						<smoothly-button disabled fill="solid" color="danger" onClick={() => alert("clicked")}>
+							action
+						</smoothly-button>
 						<smoothly-button type="link" fill="clear" color="danger" onClick={() => alert("clicked")}>
 							action link
 						</smoothly-button>
