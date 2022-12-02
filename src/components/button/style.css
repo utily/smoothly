@@ -25,6 +25,7 @@ button {
 	display: block;
 	border-color: transparent;
 	background-color: transparent;
+	padding: 0.2em 0.3em;
 	font-size: 110%;
 	font-weight: 400;
 }
