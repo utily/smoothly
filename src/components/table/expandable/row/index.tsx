@@ -1,44 +1,71 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Prop,
+	State,
+	Watch,
+} from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-expandable-row",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class TableExpandableRow {
+export class TableExpandableRow implements ComponentWillLoad {
+	private expansionElement?: HTMLTableRowElement
 	@Element() element: HTMLSmoothlyTableRowElement
-	expansionElement?: HTMLTableRowElement
-	@Event() expansionOpen: EventEmitter<HTMLElement>
+	@State() allowSpotlight = true
+	@State() spotlight = true
 	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
+	@Event() expansionOpen: EventEmitter<HTMLElement>
+	@Event() expandableChange: EventEmitter<boolean>
+	@Event() expandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
 	@Watch("open")
-	openChanged(value: boolean) {
+	openChanged() {
 		if (this.expansionElement)
 			this.element.after(this.expansionElement)
+		this.expandableChange.emit(this.open)
 	}
-
-	@Listen("click")
-	onClick(e: UIEvent) {
-		this.open = !this.open
-		e.stopPropagation()
+	@Watch("open")
+	@Watch("allowSpotlight")
+	handleSpotlight() {
+		this.spotlight = this.open && this.allowSpotlight
 	}
-
+	componentWillLoad() {
+		this.expandableLoad.emit({
+			allowSpotlight: (allowed: boolean) => (this.allowSpotlight = allowed),
+		})
+	}
 	componentDidRender(): void {
 		this.expansionOpen.emit(this.expansionElement)
 		if (this.expansionElement && this.open)
 			this.element.after(this.expansionElement)
+	}
+	@Listen("click")
+	onClick(event: UIEvent) {
+		event.stopPropagation()
+		this.open = !this.open
+	}
+	@Listen("tableLoad")
+	handleTableLoaded(event: CustomEvent<(owner: EventTarget) => void>) {
+		event.stopPropagation()
+		event.detail(this.element)
 	}
 	render() {
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
 				<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
-
-				<tr ref={e => (this.expansionElement = e)}>
+				<tr class={this.spotlight ? "spotlight" : ""} ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>
-						<div class="slot-detail">
-							<slot name="detail"></slot>
-						</div>
+						<slot name="detail"></slot>
 					</td>
 				</tr>
 			</Host>
