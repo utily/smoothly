@@ -111,7 +111,7 @@ export class TableDemo {
 										<smoothly-table-expandable-row>
 											<smoothly-table-cell>e row</smoothly-table-cell>
 											<smoothly-table-cell>f row</smoothly-table-cell>
-											<div slot="detail">nested expandable rows</div>
+											<div slot="detail">nested expandable row expansion e f</div>
 										</smoothly-table-expandable-row>
 									</smoothly-table>
 								</div>
@@ -120,7 +120,27 @@ export class TableDemo {
 					</div>
 				</smoothly-table-expandable-row>
 				<smoothly-table-row>
-					<smoothly-table-cell>a cell</smoothly-table-cell>
+					<smoothly-table-expandable-cell>
+						a cell
+						<div slot="detail">
+							<smoothly-table>
+								<smoothly-table-row>
+									<smoothly-table-header>E</smoothly-table-header>
+									<smoothly-table-header>F</smoothly-table-header>
+								</smoothly-table-row>
+								<smoothly-table-row>
+									<smoothly-table-expandable-cell>
+										e cell
+										<div slot="detail">nested expandable cell expansion e</div>
+									</smoothly-table-expandable-cell>
+									<smoothly-table-expandable-cell>
+										f cell
+										<div slot="detail">nested expandable cell expansion f</div>
+									</smoothly-table-expandable-cell>
+								</smoothly-table-row>
+							</smoothly-table>
+						</div>
+					</smoothly-table-expandable-cell>
 					<smoothly-table-expandable-cell>
 						b cell
 						<div slot="detail">
@@ -130,10 +150,13 @@ export class TableDemo {
 									<smoothly-table-header>D</smoothly-table-header>
 								</smoothly-table-row>
 								<smoothly-table-row>
-									<smoothly-table-cell>c cell</smoothly-table-cell>
+									<smoothly-table-expandable-cell>
+										c cell
+										<div slot="detail">nested expandable cell expansion c</div>
+									</smoothly-table-expandable-cell>
 									<smoothly-table-expandable-cell>
 										d cell
-										<div slot="detail">nested expandable cell</div>
+										<div slot="detail">nested expandable cell expansion d</div>
 									</smoothly-table-expandable-cell>
 								</smoothly-table-row>
 							</smoothly-table>
