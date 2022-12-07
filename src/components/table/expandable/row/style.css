@@ -57,9 +57,9 @@ td::slotted(*)::after {
 	width: calc(var(--expansion-width) -1px);
 	border-top: 1px solid rgb(var(--smoothly-dark-color));
 }
-:host::slotted(smoothly-table-cell:last-of-type) smoothly-icon {
+:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	display: flex;
 }
-:host[open]::slotted(smoothly-table-cell:last-of-type) smoothly-icon {
+:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	transform: rotate(90deg);
 }
