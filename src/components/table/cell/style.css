@@ -13,9 +13,10 @@
 :host > div {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 }
-
+:host > div > div {
+	width: 100%;
+}
 :host smoothly-icon {
 	width: 0.6rem;
 	height: 0.6rem;
