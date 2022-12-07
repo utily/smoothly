@@ -5,3 +5,20 @@
 	padding: 0.3rem 0 0.3rem 1rem;
 	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
 }
+
+:host smoothly-icon {
+	display: none;
+}
+
+:host > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+:host smoothly-icon {
+	width: 0.6rem;
+	height: 0.6rem;
+	margin: 0 0.3rem;
+	transition: transform 0.2s;
+}
