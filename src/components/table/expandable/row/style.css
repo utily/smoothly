@@ -2,6 +2,7 @@
 	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
+	position: relative;
 }
 :host[open] {
 	position: relative;
@@ -15,10 +16,11 @@
 }
 :host smoothly-icon {
 	width: 0.6rem;
-	height: 1rem;
-	margin-top: -1rem;
 	margin-left: -1rem;
 	transition: transform 0.2s;
+	position: absolute;
+	top: 0;
+	align-items: center;
 	display: flex;
 	height: 100%;
 }
