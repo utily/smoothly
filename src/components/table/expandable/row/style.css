@@ -2,7 +2,6 @@
 	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
-	position: relative;
 }
 :host[open] {
 	position: relative;
@@ -13,19 +12,6 @@
 }
 :host[open]::slotted(smoothly-table-cell) {
 	border-bottom: none;
-}
-:host smoothly-icon {
-	width: 0.6rem;
-	margin-left: -1rem;
-	transition: transform 0.2s;
-	position: absolute;
-	top: 0;
-	align-items: center;
-	display: flex;
-	height: 100%;
-}
-:host[open] smoothly-icon {
-	transform: rotate(90deg);
 }
 
 .hide {
@@ -70,4 +56,10 @@ td::slotted(*)::after {
 	right: 0;
 	width: calc(var(--expansion-width) -1px);
 	border-top: 1px solid rgb(var(--smoothly-dark-color));
+}
+:host::slotted(smoothly-table-cell:last-of-type) smoothly-icon {
+	display: flex;
+}
+:host[open]::slotted(smoothly-table-cell:last-of-type) smoothly-icon {
+	transform: rotate(90deg);
 }

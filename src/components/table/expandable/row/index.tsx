@@ -62,7 +62,6 @@ export class TableExpandableRow implements ComponentWillLoad {
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
-				<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
 				<tr class={this.spotlight ? "spotlight" : ""} ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>
 						<slot name="detail"></slot>
