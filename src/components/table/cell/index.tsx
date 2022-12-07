@@ -10,7 +10,9 @@ export class TableCell {
 		return (
 			<Host>
 				<div>
-					<slot></slot>
+					<div>
+						<slot></slot>
+					</div>
 					<smoothly-icon name="chevron-forward" size="tiny" />
 				</div>
 			</Host>
