@@ -121,9 +121,9 @@ export class TableDemo {
 				</smoothly-table-expandable-row>
 				<smoothly-table-expandable-row>
 					<smoothly-table-cell>
-						<div>one</div>
-						<div>two</div>
-						<div>three</div>
+						<span>one</span>
+						<span>two</span>
+						<span>three</span>
 					</smoothly-table-cell>
 					<smoothly-table-cell>
 						five<smoothly-icon name="paper-plane-sharp" size="small"></smoothly-icon>
