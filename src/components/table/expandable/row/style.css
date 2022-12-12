@@ -7,33 +7,59 @@
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
-	border: 2px solid rgb(var(--smoothly-dark-color));
+	box-shadow: -1px 0 0 0 rgb(var(--smoothly-dark-color)) inset, 
+		1px 0 0 0 rgb(var(--smoothly-dark-color)) inset;
+}
+:host[open]::slotted(smoothly-table-cell) {
 	border-bottom: none;
-}
-:host smoothly-icon {
-	width: 0.6rem;
-	height: 1rem;
-	margin-top: -1rem;
-	margin-left: -1rem;
-	transition: transform 0.2s;
-	display: flex;
-	height: 100%;
-}
-:host[open] smoothly-icon {
-	transform: rotate(90deg);
 }
 
 .hide {
 	display: none;
 }
-.slot-detail {
+:host > tr > td {
+	position: relative;
+}
+td::slotted(*) {
+	--expansion-width: 1.5rem;
+	--expansion-border-width: 3px;
 	position: relative;
 	background-color: rgb(var(--smoothly-default-color));
-	width: 104%;
-	left: -2%;
-	border-left-style: solid;
-	border-left-color: rgb(var(--smoothly-tertiary-color));
+	width: calc(100% + 3rem - var(--expansion-border-width));
+	left: calc(-1 * var(--expansion-width));
+	border-left: var(--expansion-border-width) solid rgb(0, 0, 0, 0);
 	box-shadow: 0px 0px 4px 2px rgb(var(--smoothly-dark-color));
 	box-sizing: border-box;
-	padding: 0.5rem 2%;
+	padding: 0.5rem calc(var(--expansion-width) - var(--expansion-border-width));
+	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
+	border-left-width: 3px;
+}
+tr.spotlight > td::slotted(*) {
+	border-left-color: rgb(var(--smoothly-tertiary-color));
+}
+td::slotted(*)::before {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	left: -3px;
+	width: calc(var(--expansion-width) + 1px);
+	border-top: 1px solid rgb(var(--smoothly-dark-color));
+}
+td::slotted(*)::after {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: calc(var(--expansion-width) -1px);
+	border-top: 1px solid rgb(var(--smoothly-dark-color));
+}
+:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+	display: flex;
+}
+:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+	transform: rotate(90deg);
 }
