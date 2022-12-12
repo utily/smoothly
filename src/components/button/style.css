@@ -3,7 +3,9 @@
 	border: none;
 }
 :host:not([type=link]) {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 :host {
 	margin: 1em;
@@ -16,6 +18,7 @@
 }
 :host[disabled] {
 	opacity: 0.5;
+	pointer-events: none;
 }
 a,
 button {
@@ -40,6 +43,7 @@ button {
 	width: calc(100% - 0.6em);
 }
 :host > button {
+	height: 100%;
 	width: 100%;
 }
 :host[expand=fill] {
