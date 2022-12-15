@@ -81,7 +81,6 @@ export class Selector {
 			do {
 				selectedIndex = (selectedIndex + direction + this.items.length) % this.items.length
 			} while (this.items[selectedIndex].hidden)
-			console.log("selectedindex", selectedIndex)
 			this.selectedElement = this.items[selectedIndex]
 			this.selectedElement.selected = true
 		}
