@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, State, Watch } from "@stencil/core"
 @Component({
 	tag: "smoothly-selector",
 	styleUrl: "style.css",
@@ -14,8 +14,19 @@ export class Selector {
 	@State() filter = ""
 	@Event() selected: EventEmitter<any>
 	aside?: HTMLElement
+
+	@Method()
+	async reset() {
+		this.selectedElement = undefined
+		if (this.mainElement) {
+			//reset to the same value as it started with
+			this.mainElement.innerHTML = "(none)"
+		}
+	}
+
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+		console.log(value?.value)
 		if (old)
 			old.selected = false
 		this.selected.emit(value?.value)

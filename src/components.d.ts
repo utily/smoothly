@@ -241,6 +241,7 @@ export namespace Components {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
+        "reset": () => Promise<void>;
     }
     interface SmoothlySkeleton {
         "align": "left" | "center" | "right";
