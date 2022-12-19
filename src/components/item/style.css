@@ -9,6 +9,7 @@
 	color: rgb(var(--smoothly-default-contrast));
 	border: rgb(var(--smoothly-default-shade) solid 1px);
 }
+:host([marked]),
 :host:hover {
 	background-color: rgb(var(--smoothly-primary-color));
 	color: rgb(var(--smoothly-primary-contrast));

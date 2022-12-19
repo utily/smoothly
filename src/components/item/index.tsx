@@ -9,6 +9,7 @@ export class Item {
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
+	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Event() itemSelected: EventEmitter<void>
 	@Watch("selected")
 	onSelectedChanged(value: boolean, old: boolean) {
