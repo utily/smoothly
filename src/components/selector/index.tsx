@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 @Component({
 	tag: "smoothly-selector",
 	styleUrl: "style.css",
@@ -6,6 +6,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, State
 })
 export class Selector {
 	@Element() element: HTMLSmoothlySelectorElement
+	@Prop() initialPrompt?: string
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
@@ -20,7 +21,7 @@ export class Selector {
 		this.selectedElement = undefined
 		if (this.mainElement) {
 			//reset to the same value as it started with
-			this.mainElement.innerHTML = "(none)"
+			this.mainElement.innerHTML = this.initialPrompt ?? "(none)"
 		}
 	}
 
@@ -98,7 +99,7 @@ export class Selector {
 	render() {
 		return (
 			<Host tabIndex={2} class={this.missing ? "missing" : ""}>
-				<main ref={element => (this.mainElement = element)}>(none)</main>
+				<main ref={element => (this.mainElement = element)}>{this.initialPrompt ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
 						{this.filter}

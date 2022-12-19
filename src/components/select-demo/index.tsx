@@ -73,7 +73,9 @@ export class SmoothlySelectDemo {
 					"--padding": "0 0.75em",
 					"--input-width": "6rem",
 				}}></smoothly-input-date-range>,
-			<smoothly-selector ref={(element: HTMLSmoothlySelectorElement) => (this.selectorElement = element)}>
+			<smoothly-selector
+				initialPrompt="Select..."
+				ref={(element: HTMLSmoothlySelectorElement) => (this.selectorElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>
 				<smoothly-item value="3">March</smoothly-item>
