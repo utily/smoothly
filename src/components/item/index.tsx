@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-item",
@@ -36,6 +36,10 @@ export class Item {
 		return result
 	}
 	render() {
-		return <slot />
+		return (
+			<Host tabIndex={-1}>
+				<slot />
+			</Host>
+		)
 	}
 }

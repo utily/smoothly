@@ -107,6 +107,7 @@ export class Selector {
 				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
 			} while (this.items[markedIndex].hidden)
 			this.items[markedIndex].marked = true
+			this.items[markedIndex].focus()
 		}
 	}
 	render() {
