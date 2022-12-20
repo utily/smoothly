@@ -51,10 +51,19 @@ export class Selector {
 		if (this.mainElement)
 			this.mainElement.innerHTML = this.selectedElement.innerHTML
 	}
+	@Watch("opened")
+	onClosed() {
+		if (!this.opened) {
+			const marked = this.items.find(item => item.marked)
+			if (marked)
+				marked.marked = false
+		}
+	}
 
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
+		event.preventDefault()
 		if (this.opened) {
 			let direction: -1 | 0 | 1 = 0
 			switch (event.key) {
@@ -71,9 +80,10 @@ export class Selector {
 					this.filter = this.filter.slice(0, -1)
 					break
 				case "Enter":
-					const result = this.items.find(item => item.selected)
-					if (result?.value)
-						this.selected.emit(result?.value)
+					const result = this.items.find(item => item.marked)
+					if (result?.value) {
+						result.selected = true
+					}
 					this.opened = false
 					this.filter = ""
 					break
@@ -88,12 +98,15 @@ export class Selector {
 	}
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {
-			let selectedIndex = this.items.findIndex(item => item == this.selectedElement)
+			let markedIndex = this.items.findIndex(item => item.marked)
+			if (markedIndex == -1)
+				markedIndex = this.items.findIndex(item => item.selected)
+			if (this.items[markedIndex])
+				this.items[markedIndex].marked = false
 			do {
-				selectedIndex = (selectedIndex + direction + this.items.length) % this.items.length
-			} while (this.items[selectedIndex].hidden)
-			this.selectedElement = this.items[selectedIndex]
-			this.selectedElement.selected = true
+				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
+			} while (this.items[markedIndex].hidden)
+			this.items[markedIndex].marked = true
 		}
 	}
 	render() {
