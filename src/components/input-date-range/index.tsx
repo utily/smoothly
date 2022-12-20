@@ -14,6 +14,8 @@ export class InputDateRange {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
+	@Prop() labelStart = "from"
+	@Prop() labelEnd = "to"
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
 
@@ -44,7 +46,7 @@ export class InputDateRange {
 					value={this.start}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => (this.start = e.detail.value)}>
-					from
+					{`${this.labelStart}`}
 				</smoothly-input>
 				<span>–</span>
 				<smoothly-input
@@ -52,7 +54,7 @@ export class InputDateRange {
 					showLabel={this.showLabel}
 					value={this.end}
 					onSmoothlyInput={e => (this.end = e.detail.value)}>
-					to
+					{`${this.labelEnd}`}
 				</smoothly-input>
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
