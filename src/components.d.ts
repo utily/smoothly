@@ -241,6 +241,8 @@ export namespace Components {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
+        "initialPrompt"?: string;
+        "reset": () => Promise<void>;
     }
     interface SmoothlySkeleton {
         "align": "left" | "center" | "right";
@@ -1103,6 +1105,7 @@ declare namespace LocalJSX {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
+        "initialPrompt"?: string;
         "onSelected"?: (event: SmoothlySelectorCustomEvent<any>) => void;
     }
     interface SmoothlySkeleton {

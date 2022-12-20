@@ -10,3 +10,6 @@ button:focus {
 smoothly-selector {
 	outline: none;
 }
+button {
+	display: block;
+}
