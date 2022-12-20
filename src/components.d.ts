@@ -131,6 +131,8 @@ export namespace Components {
     }
     interface SmoothlyInputDateRange {
         "end"?: Date;
+        "labelEnd": string;
+        "labelStart": string;
         "max": Date;
         "min": Date;
         "open": boolean;
@@ -983,6 +985,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDateRange {
         "end"?: Date;
+        "labelEnd"?: string;
+        "labelStart"?: string;
         "max"?: Date;
         "min"?: Date;
         "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
