@@ -11,6 +11,7 @@ export class SmoothlySelectDemo {
 	private quantityElement?: HTMLSmoothlySelectElement
 	private currencies: Currency[] = ["SEK", "EUR"]
 	private currency: Currency = "SEK"
+	private selectorElement: HTMLSmoothlySelectorElement
 
 	private alertf() {
 		console.log(this.quantityElement)
@@ -72,7 +73,9 @@ export class SmoothlySelectDemo {
 					"--padding": "0 0.75em",
 					"--input-width": "6rem",
 				}}></smoothly-input-date-range>,
-			<smoothly-selector>
+			<smoothly-selector
+				initialPrompt="Select..."
+				ref={(element: HTMLSmoothlySelectorElement) => (this.selectorElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>
 				<smoothly-item value="3">March</smoothly-item>
@@ -86,6 +89,7 @@ export class SmoothlySelectDemo {
 				<smoothly-item value="11">November</smoothly-item>
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-selector>,
+			<button onClick={async () => this.selectorElement.reset()}>reset selector</button>,
 			<button onClick={() => this.alertf()}>press here</button>,
 			<smoothly-picker
 				label="Filter"
