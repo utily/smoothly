@@ -175,6 +175,19 @@ export class TableDemo {
 					</smoothly-table-expandable-cell>
 				</smoothly-table-row>
 			</smoothly-table>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>display</smoothly-table-header>
+					<smoothly-table-header>contents</smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-expandable-row>
+					<div class={"content"}>
+						<smoothly-table-cell>A</smoothly-table-cell>
+						<smoothly-table-cell>B</smoothly-table-cell>
+					</div>
+					<div slot="detail">expansion</div>
+				</smoothly-table-expandable-row>
+			</smoothly-table>,
 		]
 	}
 }
