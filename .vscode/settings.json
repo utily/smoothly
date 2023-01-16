@@ -1,5 +1,5 @@
 {
-	"javascript.implicitProjectConfig.experimentalDecorators": true,
+	"js/ts.implicitProjectConfig.experimentalDecorators": true,
 	"files.exclude": {
 		".*": true,
 		"*.json": true,
@@ -10,6 +10,17 @@
 		"loader": true,
 		"README.md": true,
 		"LICENSE": true,
+	},
+	"search.exclude": {
+		".*": false,
+		"*.json": false,
+		"stencil.config.ts": false,
+		"src/components.d.ts": false,
+		"dist": false,
+		"www": false,
+		"loader": false,
+		"README.md": false,
+		"LICENSE": false,
 	},
 	"files.insertFinalNewline": true,
 	"editor.tabSize": 2,
