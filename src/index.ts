@@ -11,5 +11,6 @@ export {
 	Notice,
 	Trigger,
 	Option,
+	Listenable,
 } from "./model"
 export { Cosmetic } from "./utilities"
