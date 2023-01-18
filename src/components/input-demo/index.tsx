@@ -203,14 +203,28 @@ export class SmoothlyInputDemo {
 				<main style={{ margin: "2em" }}>
 					<fieldset>
 						<h2>Smoothly addresses</h2>
-						<smoothly-address-display value='{ "countryCode": "SE", "street": "Korkstigen 2", "zipCode": "654 31", "city": "Fejksala" }'></smoothly-address-display>
+						<smoothly-address-display
+							value={{
+								countryCode: "SE",
+								street: "Korkstigen 2",
+								zipCode: "654 31",
+								city: "Fejksala",
+							}}></smoothly-address-display>
 						<smoothly-address
 							editable={false}
-							value='{ "countryCode": "SE", "street": "Stigvägen 34", "zipCode": "123 45", "city": "Hobbiton" }'></smoothly-address>
+							value={{
+								countryCode: "SE",
+								street: "Stigvägen 34",
+								zipCode: "123 45",
+								city: "Hobbiton",
+							}}></smoothly-address>
 						<smoothly-addresses
-							allowed="billing delivery visit"
-							editable={true}
-							value='{ "billing": { "countryCode": "SE", "street": "Rundslingan 3", "zipCode": "987 65", "city": "Klotby" }, "visit": { "countryCode": "SE", "street": "Gångbanan 34", "zipCode": "543 21", "city": "Traskträsk" } }'></smoothly-addresses>
+							// allowed="billing delivery visit"
+							// editable={true}
+							value={[
+								{ countryCode: "SE", street: "Rundslingan 3", zipCode: "987 65", city: "Klotby" },
+								{ countryCode: "SE", street: "Gångbanan 34", zipCode: "543 21", city: "Traskträsk" },
+							]}></smoothly-addresses>
 					</fieldset>
 				</main>
 				<footer>

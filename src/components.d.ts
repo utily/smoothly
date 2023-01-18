@@ -5,6 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { address } from "./components/address-display";
+import { address as address1 } from "./components/address-display/index";
 import { Color, Expand, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
@@ -19,6 +21,17 @@ export namespace Components {
         "brand"?: string | string[];
         "name": string;
         "open"?: boolean;
+    }
+    interface SmoothlyAddress {
+        "editable": boolean;
+        "value": address;
+    }
+    interface SmoothlyAddressDisplay {
+        "value": address;
+    }
+    interface SmoothlyAddresses {
+        "editable": boolean;
+        "value": address[];
     }
     interface SmoothlyApp {
         "color": Color;
@@ -451,6 +464,24 @@ declare global {
         prototype: HTMLSmoothlyAccordionItemElement;
         new (): HTMLSmoothlyAccordionItemElement;
     };
+    interface HTMLSmoothlyAddressElement extends Components.SmoothlyAddress, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAddressElement: {
+        prototype: HTMLSmoothlyAddressElement;
+        new (): HTMLSmoothlyAddressElement;
+    };
+    interface HTMLSmoothlyAddressDisplayElement extends Components.SmoothlyAddressDisplay, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAddressDisplayElement: {
+        prototype: HTMLSmoothlyAddressDisplayElement;
+        new (): HTMLSmoothlyAddressDisplayElement;
+    };
+    interface HTMLSmoothlyAddressesElement extends Components.SmoothlyAddresses, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAddressesElement: {
+        prototype: HTMLSmoothlyAddressesElement;
+        new (): HTMLSmoothlyAddressesElement;
+    };
     interface HTMLSmoothlyAppElement extends Components.SmoothlyApp, HTMLStencilElement {
     }
     var HTMLSmoothlyAppElement: {
@@ -802,6 +833,9 @@ declare global {
     interface HTMLElementTagNameMap {
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
+        "smoothly-address": HTMLSmoothlyAddressElement;
+        "smoothly-address-display": HTMLSmoothlyAddressDisplayElement;
+        "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
@@ -874,6 +908,17 @@ declare namespace LocalJSX {
         "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;
+    }
+    interface SmoothlyAddress {
+        "editable"?: boolean;
+        "value"?: address;
+    }
+    interface SmoothlyAddressDisplay {
+        "value"?: address;
+    }
+    interface SmoothlyAddresses {
+        "editable"?: boolean;
+        "value"?: address[];
     }
     interface SmoothlyApp {
         "color"?: Color;
@@ -1219,6 +1264,9 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
+        "smoothly-address": SmoothlyAddress;
+        "smoothly-address-display": SmoothlyAddressDisplay;
+        "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-backtotop": SmoothlyBacktotop;
@@ -1285,6 +1333,9 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
+            "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
+            "smoothly-address-display": LocalJSX.SmoothlyAddressDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyAddressDisplayElement>;
+            "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
