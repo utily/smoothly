@@ -1,0 +1,45 @@
+smoothly-form {
+	display: block;
+}
+smoothly-form > form > fieldset {
+	display: flex;
+	flex-flow: row wrap;
+
+	margin-inline-start: unset;
+	margin-inline-end: unset;
+	padding-block-start: unset;
+	padding-inline-start: unset;
+	padding-inline-end: unset;
+	padding-block-end: unset;
+	min-inline-size: unset;
+	border-width: unset;
+	border-style: unset;
+	border-color: unset;
+	border-image: unset;
+}
+smoothly-form > form > fieldset > * {
+	flex-grow: 1;
+	min-width: 10em;
+}
+smoothly-form[looks="border"] > form > fieldset > *,
+smoothly-form[looks="grid"] > form > fieldset > * {
+	border: rgb(var(--smoothly-default-contrast)) solid 1px;
+}
+smoothly-form[looks="line"] > form > fieldset > * {
+	border-bottom: rgb(var(--smoothly-default-contrast)) solid 1px;
+}
+smoothly-form[looks="grid"] > form > fieldset {
+	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
+}
+smoothly-form[looks="grid"] > form > fieldset > * {
+	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
+}
+smoothly-form[looks="line"] > form > fieldset,
+smoothly-form[looks="border"] > form > fieldset {
+	gap: 2em
+}
+
+smoothly-form > form > [slot=submit] {
+	margin: .5em auto;
+	max-width: 10em;
+}

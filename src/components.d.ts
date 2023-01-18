@@ -85,6 +85,9 @@ export namespace Components {
     }
     interface SmoothlyDisplayDemo {
     }
+    interface SmoothlyForm {
+        "looks": "plain" | "grid" | "border" | "line";
+    }
     interface SmoothlyFrame {
         "name": string;
         "origin": string | undefined;
@@ -116,7 +119,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: Direction | undefined) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": string;
         "value": any;
@@ -526,6 +529,12 @@ declare global {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
     };
+    interface HTMLSmoothlyFormElement extends Components.SmoothlyForm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormElement: {
+        prototype: HTMLSmoothlyFormElement;
+        new (): HTMLSmoothlyFormElement;
+    };
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
     }
     var HTMLSmoothlyFrameElement: {
@@ -806,6 +815,7 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
@@ -936,6 +946,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
+    }
+    interface SmoothlyForm {
+        "looks"?: "plain" | "grid" | "border" | "line";
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1219,6 +1232,7 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
@@ -1284,6 +1298,7 @@ declare module "@stencil/core" {
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;

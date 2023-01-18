@@ -43,6 +43,7 @@ button {
 	width: calc(100% - 0.6em);
 }
 :host > button {
+	display: inline;
 	height: 100%;
 	width: 100%;
 }

@@ -21,7 +21,7 @@ input[type=radio] {
 	-webkit-appearance: none;
 }
 input[type=radio] ~ label {
-	border: 1px solid rgb(var(--smoothly-default-color));
+	/*border: 1px solid rgb(var(--smoothly-default-color));*/
 	color: rgba(var(--smoothly-default-contrast), 0.5);
 	background: rgb(var(--smoothly-default-color));
 }
