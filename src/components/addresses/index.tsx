@@ -7,8 +7,8 @@ import { address } from "../address-display"
 })
 export class SmoothlyAddresses {
 	@Prop() value: address[]
-	@Prop() editable = false
+	@Prop() editable: boolean[]
 	render() {
-		return this.value.map(value => <smoothly-address value={value}></smoothly-address>)
+		return [this.value.map(value => <smoothly-address value={value}></smoothly-address>)]
 	}
 }

@@ -9,6 +9,6 @@ export class SmoothlyAddress {
 	@Prop() value: address
 	@Prop() editable = false
 	render() {
-		return <smoothly-address-display value={this.value}></smoothly-address-display>
+		return <smoothly-address-display value={this.value} editable={this.editable}></smoothly-address-display>
 	}
 }
