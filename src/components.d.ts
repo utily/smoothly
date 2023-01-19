@@ -27,10 +27,11 @@ export namespace Components {
         "value": address;
     }
     interface SmoothlyAddressDisplay {
+        "editable": boolean;
         "value": address;
     }
     interface SmoothlyAddresses {
-        "editable": boolean;
+        "editable": boolean[];
         "value": address[];
     }
     interface SmoothlyApp {
@@ -45,6 +46,15 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyButton {
+        "color": Color | undefined;
+        "disabled": boolean;
+        "download"?: boolean;
+        "expand": Expand;
+        "fill": Fill;
+        "link"?: string;
+        "type": "link" | "button";
+    }
+    interface SmoothlyButtonTest {
         "color": Color | undefined;
         "disabled": boolean;
         "download"?: boolean;
@@ -506,6 +516,12 @@ declare global {
         prototype: HTMLSmoothlyButtonElement;
         new (): HTMLSmoothlyButtonElement;
     };
+    interface HTMLSmoothlyButtonTestElement extends Components.SmoothlyButtonTest, HTMLStencilElement {
+    }
+    var HTMLSmoothlyButtonTestElement: {
+        prototype: HTMLSmoothlyButtonTestElement;
+        new (): HTMLSmoothlyButtonTestElement;
+    };
     interface HTMLSmoothlyCalendarElement extends Components.SmoothlyCalendar, HTMLStencilElement {
     }
     var HTMLSmoothlyCalendarElement: {
@@ -840,6 +856,7 @@ declare global {
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
+        "smoothly-button-test": HTMLSmoothlyButtonTestElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
@@ -914,10 +931,11 @@ declare namespace LocalJSX {
         "value"?: address;
     }
     interface SmoothlyAddressDisplay {
+        "editable"?: boolean;
         "value"?: address;
     }
     interface SmoothlyAddresses {
-        "editable"?: boolean;
+        "editable"?: boolean[];
         "value"?: address[];
     }
     interface SmoothlyApp {
@@ -932,6 +950,15 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyButton {
+        "color"?: Color | undefined;
+        "disabled"?: boolean;
+        "download"?: boolean;
+        "expand"?: Expand;
+        "fill"?: Fill;
+        "link"?: string;
+        "type"?: "link" | "button";
+    }
+    interface SmoothlyButtonTest {
         "color"?: Color | undefined;
         "disabled"?: boolean;
         "download"?: boolean;
@@ -1271,6 +1298,7 @@ declare namespace LocalJSX {
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-backtotop": SmoothlyBacktotop;
         "smoothly-button": SmoothlyButton;
+        "smoothly-button-test": SmoothlyButtonTest;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-country": SmoothlyCountry;
@@ -1340,6 +1368,7 @@ declare module "@stencil/core" {
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
+            "smoothly-button-test": LocalJSX.SmoothlyButtonTest & JSXBase.HTMLAttributes<HTMLSmoothlyButtonTestElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;

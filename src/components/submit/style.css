@@ -27,11 +27,11 @@ button {
 :host:not([processing]):not([disabled]):active {
 	border-color: rgb(var(--smoothly-submit-border));
 }
-:host[expand=fill] > button,
+:host[expand=full] > button,
 :host[expand=block] > button {
 	width: 100%;
 }
-:host[expand=fill] {
+:host[expand=full] {
 	border-left: none;
 	border-right: none;
 }
