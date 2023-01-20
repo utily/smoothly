@@ -102,8 +102,8 @@ export namespace Components {
         "maxLength": number;
         "minLength": number;
         "name": string;
-        "pattern": RegExp | undefined;
-        "placeholder": string | undefined;
+        "pattern"?: RegExp;
+        "placeholder"?: string;
         "readonly": boolean;
         "required": boolean;
         "showLabel": boolean;
@@ -1021,8 +1021,8 @@ declare namespace LocalJSX {
         "minLength"?: number;
         "name"?: string;
         "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
-        "pattern"?: RegExp | undefined;
-        "placeholder"?: string | undefined;
+        "pattern"?: RegExp;
+        "placeholder"?: string;
         "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;

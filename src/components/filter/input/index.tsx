@@ -17,8 +17,8 @@ export class SmoothlyFilterInput {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() maxLength: number = Number.POSITIVE_INFINITY
 	@Prop() autocomplete = true
-	@Prop() pattern: RegExp | undefined
-	@Prop() placeholder: string | undefined
+	@Prop() pattern?: RegExp
+	@Prop() placeholder?: string
 	@Prop() disabled = false
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
@@ -60,7 +60,7 @@ export class SmoothlyFilterInput {
 				name={this.name}
 				onChange={(event: CustomEvent) => (this.value = event.detail)}
 				onBlur={() => this.onFilter()}>
-				<smoothly-icon slot="start" name="search-outline" size="tiny"></smoothly-icon>
+				<smoothly-icon color="dark" fill="clear" slot="start" name="search-outline" size="tiny"></smoothly-icon>
 				<smoothly-button slot="end" onClick={() => (this.isExpanded = !this.isExpanded)}>
 					{this.isExpanded ? (
 						<smoothly-icon name="funnel" size="tiny"></smoothly-icon>
