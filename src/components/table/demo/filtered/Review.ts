@@ -1,9 +1,9 @@
 export interface Review {
-	reviewtitle: string
-	reviewbody: string
+	reviewTitle: string
+	reviewBody: string
 	stars: string
 	reviewer: string
-	reviewdate: string
-	createdate: string
-	reviewer_itemname: string
+	reviewDate: string
+	createDate: string
+	reviewerItemName: string
 }

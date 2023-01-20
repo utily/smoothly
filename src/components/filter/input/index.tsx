@@ -62,11 +62,7 @@ export class SmoothlyFilterInput {
 				onBlur={() => this.onFilter()}>
 				<smoothly-icon color="dark" fill="clear" slot="start" name="search-outline" size="tiny"></smoothly-icon>
 				<smoothly-button slot="end" onClick={() => (this.isExpanded = !this.isExpanded)}>
-					{this.isExpanded ? (
-						<smoothly-icon name="funnel" size="tiny"></smoothly-icon>
-					) : (
-						<smoothly-icon name="funnel-outline" size="tiny"></smoothly-icon>
-					)}
+					<smoothly-icon name={this.isExpanded ? "funnel" : "funnel-outline"} size="tiny"></smoothly-icon>
 				</smoothly-button>
 			</smoothly-input>,
 			<smoothly-filter-advanced hidden={!this.isExpanded}></smoothly-filter-advanced>,

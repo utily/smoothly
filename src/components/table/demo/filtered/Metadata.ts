@@ -1,23 +1,23 @@
 export interface Metadata {
 	identifier: string
-	mediatype: string
+	mediaType: string
 	description: string
 	language: string
 	scanner: string
 	title: string
-	publicdate: string
+	publicDate: string
 	uploader: string
-	addeddate: string
-	"identifier-access": string
-	"identifier-ark": string
+	addedDate: string
+	identifierAccess: string
+	identifierArk: string
 	ppi: string
 	ocr: string
-	repub_state: string
+	repubState: string
 	creator: string
 	subject: string[]
 	curation: string
 	collection: string[]
 	backup_location: string
-	openlibrary_edition: string
-	openlibrary_work: string
+	openLibraryEdition: string
+	openLibraryWork: string
 }

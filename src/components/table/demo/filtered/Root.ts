@@ -7,12 +7,12 @@ export interface Root {
 	d2: string
 	dir: string
 	files: File[]
-	files_count: number
-	item_last_updated: number
-	item_size: number
+	filesCount: number
+	itemLastUpdated: number
+	itemSize: number
 	metadata: Metadata
 	reviews: Review[]
 	server: string
 	uniq: number
-	workable_servers: string[]
+	workableServers: string[]
 }
