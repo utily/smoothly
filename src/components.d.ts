@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Color, Expand, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
+import { Criteria } from "selectively";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 import { Data } from "./components/submit/Data";
@@ -87,6 +88,27 @@ export namespace Components {
         "datetime": DateTime;
     }
     interface SmoothlyDisplayDemo {
+    }
+    interface SmoothlyFilter {
+        "criteria": Record<string, Criteria>;
+    }
+    interface SmoothlyFilterAdvanced {
+    }
+    interface SmoothlyFilterInput {
+        "autocomplete": boolean;
+        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "currency"?: Currency;
+        "disabled": boolean;
+        "maxLength": number;
+        "minLength": number;
+        "name": string;
+        "pattern": RegExp | undefined;
+        "placeholder": string | undefined;
+        "readonly": boolean;
+        "required": boolean;
+        "showLabel": boolean;
+        "type": string;
+        "value": any;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -289,6 +311,8 @@ export namespace Components {
     }
     interface SmoothlyTableDemo {
     }
+    interface SmoothlyTableDemoFiltered {
+    }
     interface SmoothlyTableExpandableCell {
         "align": "left" | "center" | "right";
         "open": boolean;
@@ -341,6 +365,14 @@ export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
+}
+export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterElement;
+}
+export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterInputElement;
 }
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -531,6 +563,24 @@ declare global {
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
+    };
+    interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterElement: {
+        prototype: HTMLSmoothlyFilterElement;
+        new (): HTMLSmoothlyFilterElement;
+    };
+    interface HTMLSmoothlyFilterAdvancedElement extends Components.SmoothlyFilterAdvanced, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterAdvancedElement: {
+        prototype: HTMLSmoothlyFilterAdvancedElement;
+        new (): HTMLSmoothlyFilterAdvancedElement;
+    };
+    interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterInputElement: {
+        prototype: HTMLSmoothlyFilterInputElement;
+        new (): HTMLSmoothlyFilterInputElement;
     };
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
     }
@@ -742,6 +792,12 @@ declare global {
         prototype: HTMLSmoothlyTableDemoElement;
         new (): HTMLSmoothlyTableDemoElement;
     };
+    interface HTMLSmoothlyTableDemoFilteredElement extends Components.SmoothlyTableDemoFiltered, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoFilteredElement: {
+        prototype: HTMLSmoothlyTableDemoFilteredElement;
+        new (): HTMLSmoothlyTableDemoFilteredElement;
+    };
     interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
     }
     var HTMLSmoothlyTableExpandableCellElement: {
@@ -812,6 +868,9 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-filter": HTMLSmoothlyFilterElement;
+        "smoothly-filter-advanced": HTMLSmoothlyFilterAdvancedElement;
+        "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
@@ -847,6 +906,7 @@ declare global {
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
         "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
+        "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
@@ -945,6 +1005,29 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
+    }
+    interface SmoothlyFilter {
+        "criteria"?: Record<string, Criteria>;
+        "onFilter"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
+    }
+    interface SmoothlyFilterAdvanced {
+    }
+    interface SmoothlyFilterInput {
+        "autocomplete"?: boolean;
+        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "currency"?: Currency;
+        "disabled"?: boolean;
+        "maxLength"?: number;
+        "minLength"?: number;
+        "name"?: string;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
+        "pattern"?: RegExp | undefined;
+        "placeholder"?: string | undefined;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "showLabel"?: boolean;
+        "type"?: string;
+        "value"?: any;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1166,6 +1249,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableDemo {
     }
+    interface SmoothlyTableDemoFiltered {
+    }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
         "onExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
@@ -1228,6 +1313,9 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-filter": SmoothlyFilter;
+        "smoothly-filter-advanced": SmoothlyFilterAdvanced;
+        "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
@@ -1263,6 +1351,7 @@ declare namespace LocalJSX {
         "smoothly-table": SmoothlyTable;
         "smoothly-table-cell": SmoothlyTableCell;
         "smoothly-table-demo": SmoothlyTableDemo;
+        "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
@@ -1296,6 +1385,9 @@ declare module "@stencil/core" {
              */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
+            "smoothly-filter-advanced": LocalJSX.SmoothlyFilterAdvanced & JSXBase.HTMLAttributes<HTMLSmoothlyFilterAdvancedElement>;
+            "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
@@ -1331,6 +1423,7 @@ declare module "@stencil/core" {
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
             "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
