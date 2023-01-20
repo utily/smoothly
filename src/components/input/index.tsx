@@ -237,7 +237,8 @@ export class SmoothlyInput {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<div>
+				<section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+					<slot name="start"></slot>
 					<input
 						name={this.name}
 						type={this.state?.type}
@@ -259,7 +260,8 @@ export class SmoothlyInput {
 						<slot />
 					</label>
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
-				</div>
+					<slot name="end"></slot>
+				</section>
 			</Host>
 		)
 	}
