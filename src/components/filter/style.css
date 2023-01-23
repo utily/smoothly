@@ -1,17 +1,35 @@
 :host {
-  display: block;
+  display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
 main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 600px;
+}
+
+div {
+	position: absolute;
+	display: flex;
+	right: 0;
+}
+
+.container {
+	border: 1px solid #6C6C6C;
+	border-radius: 0.25em;
+	margin-bottom: 1em;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 .arrow {
-	position: relative;
-	bottom: 1.5em;
-	left: 20.05em;
+	position: absolute;
+	top: 2.5rem;
+	right: 11.75rem;
 	z-index: 3;
 	transform: translate(0em, 1.1em) rotate(45deg);
 	width: 0.6em;
@@ -21,8 +39,3 @@ main {
 	border-left: 1px solid #6C6C6C;
 }
 
-section {
-	border: 1px solid #6C6C6C;
-	border-radius: 0.25em;
-	margin-bottom: 1em;
-}

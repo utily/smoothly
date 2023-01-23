@@ -17,7 +17,6 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
 		this.criteria = event.detail
-		console.log(event.detail)
 	}
 	inputElement: HTMLSmoothlyInputElement
 
@@ -32,8 +31,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			? "Failed to load data."
 			: [
 					<smoothly-filter>
-						<smoothly-filter-input criteria={this.criteria} name="name"></smoothly-filter-input>
-						<smoothly-filter-input criteria={this.criteria} name="source"></smoothly-filter-input>
+						<smoothly-filter-input criteria={this.criteria} name="name" icon="person-outline"></smoothly-filter-input>
+						<smoothly-filter-input criteria={this.criteria} name="source" icon="search-outline"></smoothly-filter-input>
 					</smoothly-filter>,
 
 					<smoothly-table>

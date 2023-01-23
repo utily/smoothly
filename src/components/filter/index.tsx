@@ -14,7 +14,6 @@ export class SmoothlyFilter {
 	@Listen("filter")
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
-		console.log(event.detail)
 		this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
 	}
 
@@ -35,7 +34,7 @@ export class SmoothlyFilter {
 					)}
 				</smoothly-button>
 			</main>,
-			<section hidden={!this.isExpanded}>
+			<section hidden={!this.isExpanded} class={{ container: this.isExpanded }}>
 				{/* arrow */}
 				<div hidden={!this.isExpanded} class={{ arrow: this.isExpanded }}></div>
 				<slot></slot>

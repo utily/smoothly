@@ -92,15 +92,13 @@ export namespace Components {
     interface SmoothlyFilter {
         "criteria": Record<string, Criteria>;
     }
-    interface SmoothlyFilterAdvanced {
-        "isExpanded": boolean;
-    }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
         "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
         "criteria": Criteria;
         "currency"?: Currency;
         "disabled": boolean;
+        "icon"?: string;
         "maxLength": number;
         "minLength": number;
         "name": string;
@@ -572,12 +570,6 @@ declare global {
         prototype: HTMLSmoothlyFilterElement;
         new (): HTMLSmoothlyFilterElement;
     };
-    interface HTMLSmoothlyFilterAdvancedElement extends Components.SmoothlyFilterAdvanced, HTMLStencilElement {
-    }
-    var HTMLSmoothlyFilterAdvancedElement: {
-        prototype: HTMLSmoothlyFilterAdvancedElement;
-        new (): HTMLSmoothlyFilterAdvancedElement;
-    };
     interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
     }
     var HTMLSmoothlyFilterInputElement: {
@@ -871,7 +863,6 @@ declare global {
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
-        "smoothly-filter-advanced": HTMLSmoothlyFilterAdvancedElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
@@ -1012,15 +1003,13 @@ declare namespace LocalJSX {
         "criteria"?: Record<string, Criteria>;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
     }
-    interface SmoothlyFilterAdvanced {
-        "isExpanded"?: boolean;
-    }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
         "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
         "criteria"?: Criteria;
         "currency"?: Currency;
         "disabled"?: boolean;
+        "icon"?: string;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
@@ -1318,7 +1307,6 @@ declare namespace LocalJSX {
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-filter": SmoothlyFilter;
-        "smoothly-filter-advanced": SmoothlyFilterAdvanced;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
@@ -1390,7 +1378,6 @@ declare module "@stencil/core" {
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
-            "smoothly-filter-advanced": LocalJSX.SmoothlyFilterAdvanced & JSXBase.HTMLAttributes<HTMLSmoothlyFilterAdvancedElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;

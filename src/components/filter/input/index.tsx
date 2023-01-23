@@ -9,6 +9,7 @@ import { Criteria } from "selectively"
 	scoped: true,
 })
 export class SmoothlyFilterInput {
+	@Prop() icon?: string
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
@@ -59,14 +60,13 @@ export class SmoothlyFilterInput {
 	render() {
 		return [
 			//advance
-			<section>
-				<slot></slot>
-				<smoothly-input
-					name={this.name}
-					ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-					onChange={() => this.onFilter()}
-					onSmoothlyBlur={() => this.onFilter()}></smoothly-input>
-			</section>,
+			<smoothly-input
+				name={this.name}
+				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
+				onChange={() => this.onFilter()}
+				onSmoothlyBlur={() => this.onFilter()}>
+				<smoothly-icon name={this.icon} size="tiny" />
+			</smoothly-input>,
 		]
 	}
 }
