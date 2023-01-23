@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 import { Currency } from "isoly"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
@@ -10,7 +10,7 @@ import { Criteria } from "selectively"
 })
 export class SmoothlyFilterInput {
 	@Prop({ reflect: true }) name: string
-	@Prop() value: any
+	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop() minLength = 0
@@ -23,12 +23,14 @@ export class SmoothlyFilterInput {
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
+	@Prop() criteria: Criteria
 
-	@State() isExpanded = false
+	smoothlyInput: HTMLSmoothlyInputElement
 
 	@Event() filter: EventEmitter<Criteria>
 
 	private onFilter() {
+		this.value = this.smoothlyInput.value
 		let criteria: selectively.Criteria
 		switch (this.comparison) {
 			case "equals":
@@ -56,16 +58,15 @@ export class SmoothlyFilterInput {
 
 	render() {
 		return [
-			<smoothly-input
-				name={this.name}
-				onChange={(event: CustomEvent) => (this.value = event.detail)}
-				onBlur={() => this.onFilter()}>
-				<smoothly-icon color="dark" fill="clear" slot="start" name="search-outline" size="tiny"></smoothly-icon>
-				<smoothly-button slot="end" onClick={() => (this.isExpanded = !this.isExpanded)}>
-					<smoothly-icon name={this.isExpanded ? "funnel" : "funnel-outline"} size="tiny"></smoothly-icon>
-				</smoothly-button>
-			</smoothly-input>,
-			<smoothly-filter-advanced hidden={!this.isExpanded}></smoothly-filter-advanced>,
+			//advance
+			<section>
+				<slot></slot>
+				<smoothly-input
+					name={this.name}
+					ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
+					onChange={() => this.onFilter()}
+					onSmoothlyBlur={() => this.onFilter()}></smoothly-input>
+			</section>,
 		]
 	}
 }

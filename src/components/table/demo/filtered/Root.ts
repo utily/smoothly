@@ -1,6 +1,6 @@
+import { File } from "./File"
 import { Metadata } from "./Metadata"
 import { Review } from "./Review"
-
 export interface Root {
 	created: number
 	d1: string

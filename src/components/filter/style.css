@@ -1,3 +1,28 @@
 :host {
   display: block;
 }
+
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.arrow {
+	position: relative;
+	bottom: 1.5em;
+	left: 20.05em;
+	z-index: 3;
+	transform: translate(0em, 1.1em) rotate(45deg);
+	width: 0.6em;
+	height: 0.6em;
+	background-color: white;
+	border-top: 1px solid #6C6C6C;
+	border-left: 1px solid #6C6C6C;
+}
+
+section {
+	border: 1px solid #6C6C6C;
+	border-radius: 0.25em;
+	margin-bottom: 1em;
+}

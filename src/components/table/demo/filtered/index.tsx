@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, State } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 import * as http from "cloudly-http"
@@ -13,6 +13,14 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	@State() criteria: Criteria
 	@State() data?: Root | false
 
+	@Listen("filters")
+	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
+		event.stopPropagation()
+		this.criteria = event.detail
+		console.log(event.detail)
+	}
+	inputElement: HTMLSmoothlyInputElement
+
 	async componentWillLoad(): Promise<void> {
 		const response = await http.fetch("https://archive.org/metadata/principleofrelat00eins")
 		this.data = response.status == 200 && (await response.body)
@@ -24,7 +32,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			? "Failed to load data."
 			: [
 					<smoothly-filter>
-						<smoothly-filter-input></smoothly-filter-input>
+						<smoothly-filter-input criteria={this.criteria} name="name"></smoothly-filter-input>
+						<smoothly-filter-input criteria={this.criteria} name="source"></smoothly-filter-input>
 					</smoothly-filter>,
 
 					<smoothly-table>
@@ -32,21 +41,18 @@ export class TableDemoFiltered implements ComponentWillLoad {
 							<smoothly-table-header>name</smoothly-table-header>
 							<smoothly-table-header>source</smoothly-table-header>
 						</smoothly-table-row>
-						{selectively.filter(
-							this.criteria,
-							data.files.map(file => (
-								<smoothly-table-row>
-									<smoothly-table-expandable-cell>
-										{file.name}
-										<div slot="detail"> expandable cell 1 content</div>
-									</smoothly-table-expandable-cell>
-									<smoothly-table-expandable-cell>
-										{file.size}
-										<div slot="detail"> expandable cell 2 content</div>
-									</smoothly-table-expandable-cell>
-								</smoothly-table-row>
-							))
-						)}
+						{selectively.filter(this.criteria, data.files).map(file => (
+							<smoothly-table-row>
+								<smoothly-table-expandable-cell>
+									{file.name}
+									<div slot="detail"> expandable cell 1 content</div>
+								</smoothly-table-expandable-cell>
+								<smoothly-table-expandable-cell>
+									{file.source}
+									<div slot="detail"> expandable cell 2 content</div>
+								</smoothly-table-expandable-cell>
+							</smoothly-table-row>
+						))}
 					</smoothly-table>,
 			  ]
 	}

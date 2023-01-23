@@ -93,10 +93,12 @@ export namespace Components {
         "criteria": Record<string, Criteria>;
     }
     interface SmoothlyFilterAdvanced {
+        "isExpanded": boolean;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
         "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "criteria": Criteria;
         "currency"?: Currency;
         "disabled": boolean;
         "maxLength": number;
@@ -1008,13 +1010,15 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilter {
         "criteria"?: Record<string, Criteria>;
-        "onFilter"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
+        "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
     }
     interface SmoothlyFilterAdvanced {
+        "isExpanded"?: boolean;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
         "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "criteria"?: Criteria;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
