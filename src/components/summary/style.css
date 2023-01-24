@@ -1,0 +1,31 @@
+:host > details > summary {
+	list-style: none;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+:host > details > summary > smoothly-icon {
+	transition: 0.2s;
+}
+
+:host > details[open] > summary > smoothly-icon {
+	transform: rotate(90deg);
+}
+
+:host > details > summary::slotted([slot=summary]){
+	display: inline-block;
+	margin: 0;
+}
+
+:host > details::slotted([slot=content]){
+	display: inline-block;
+	margin: 0;
+	padding: 0.5rem 1.75rem;
+}
+
+@media screen and (min-width: 900px){
+	:host > details > summary:hover {
+		cursor: pointer;
+	}
+}
