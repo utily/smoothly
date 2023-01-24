@@ -53,6 +53,7 @@ export class SmoothlyFilterInput {
 				break
 		}
 		this.filter.emit({ [this.name]: criteria })
+		console.log("criteria :", criteria)
 	}
 
 	render() {
@@ -62,6 +63,7 @@ export class SmoothlyFilterInput {
 				name={this.name}
 				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
 				onKeyDown={() => this.onFilter()}>
+				{/* icons & labels */}
 				<div>
 					<slot name="start"></slot>
 					<slot></slot>
