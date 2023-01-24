@@ -189,11 +189,15 @@ export class SmoothlyDisplayDemo {
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly summary</h2>
-					<smoothly-summary color="light" fill="clear">
+					<smoothly-summary color="light" fill="clear" size="large">
 						<p slot="summary">Some title</p>
 						<p slot="content">Some content</p>
 					</smoothly-summary>
-					<smoothly-summary color="light" fill="clear">
+					<smoothly-summary color="light" fill="clear" size="large">
+						<p slot="summary">Some title</p>
+						<p slot="content">Some content</p>
+					</smoothly-summary>
+					<smoothly-summary color="danger" fill="clear">
 						<div slot="summary" style={{display: "flex", gap: "0.3rem"}}><span>Person</span><smoothly-icon name="person" color="light" fill="clear" size="tiny"></smoothly-icon></div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>
