@@ -18,7 +18,6 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		event.stopPropagation()
 		this.criteria = event.detail
 	}
-	inputElement: HTMLSmoothlyInputElement
 
 	async componentWillLoad(): Promise<void> {
 		const response = await http.fetch("https://archive.org/metadata/principleofrelat00eins")
@@ -30,7 +29,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return !data
 			? "Failed to load data."
 			: [
-					<smoothly-filter>
+					<smoothly-filter inputValue={this.criteria}>
 						<smoothly-filter-input criteria={this.criteria} name="name" icon="person-outline"></smoothly-filter-input>
 						<smoothly-filter-input criteria={this.criteria} name="source" icon="search-outline"></smoothly-filter-input>
 					</smoothly-filter>,

@@ -29,7 +29,6 @@ export class SmoothlyFilterInput {
 	smoothlyInput: HTMLSmoothlyInputElement
 
 	@Event() filter: EventEmitter<Criteria>
-
 	private onFilter() {
 		this.value = this.smoothlyInput.value
 		let criteria: selectively.Criteria
