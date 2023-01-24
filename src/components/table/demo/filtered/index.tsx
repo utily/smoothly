@@ -29,9 +29,15 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return !data
 			? "Failed to load data."
 			: [
-					<smoothly-filter inputValue={this.criteria}>
-						<smoothly-filter-input criteria={this.criteria} name="name" icon="person-outline"></smoothly-filter-input>
-						<smoothly-filter-input criteria={this.criteria} name="source" icon="search-outline"></smoothly-filter-input>
+					<smoothly-filter>
+						<smoothly-filter-input name="name">
+							<smoothly-icon slot="start" name="person-outline" size="tiny" />
+							name
+						</smoothly-filter-input>
+						<smoothly-filter-input name="source">
+							<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							source
+						</smoothly-filter-input>
 					</smoothly-filter>,
 
 					<smoothly-table>

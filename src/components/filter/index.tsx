@@ -22,17 +22,22 @@ export class SmoothlyFilter {
 	@Listen("filter")
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
-		this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
-		console.log("working filter", this.criteria)
+
+		!this.freeSearchValue
+			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
+			: this.filters.emit(
+					selectively.and(
+						selectively.any(selectively.includes(this.freeSearchValue)),
+						(this.criteria = { ...this.criteria, ...event.detail })
+					)
+			  )
 	}
 
 	onKeyDown() {
 		this.freeSearchValue = this.freeSearchElement.value
 		this.inputValue = selectively.includes(this.freeSearchValue)
-		this.filters.emit((this.criteria = { ...this.criteria, ...{ name: this.inputValue } }))
-		console.log("inputValue", this.inputValue)
 
-		console.log("nonworking filter", this.criteria)
+		this.filters.emit(selectively.any(this.inputValue))
 	}
 
 	render() {
@@ -42,7 +47,6 @@ export class SmoothlyFilter {
 				<smoothly-icon name="search-outline" size="tiny" />
 				<smoothly-input
 					name="filter"
-					// value={selectivelyCreate(this.criteria).stringify()}
 					ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
 					onKeyDown={() => this.onKeyDown()}></smoothly-input>
 				<smoothly-button

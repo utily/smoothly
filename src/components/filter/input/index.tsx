@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop, State } from "@stencil/core"
 import { Currency } from "isoly"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
@@ -9,7 +9,6 @@ import { Criteria } from "selectively"
 	scoped: true,
 })
 export class SmoothlyFilterInput {
-	@Prop() icon?: string
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
@@ -24,7 +23,7 @@ export class SmoothlyFilterInput {
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
-	@Prop() criteria: Criteria
+	@State() criteria: Criteria
 
 	smoothlyInput: HTMLSmoothlyInputElement
 
@@ -62,9 +61,11 @@ export class SmoothlyFilterInput {
 			<smoothly-input
 				name={this.name}
 				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-				onChange={() => this.onFilter()}
-				onSmoothlyBlur={() => this.onFilter()}>
-				<smoothly-icon name={this.icon} size="tiny" />
+				onKeyDown={() => this.onFilter()}>
+				<div>
+					<slot name="start"></slot>
+					<slot></slot>
+				</div>
 			</smoothly-input>,
 		]
 	}
