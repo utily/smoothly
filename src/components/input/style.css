@@ -3,7 +3,7 @@
 	position: relative;
 	font-weight: var(--smoothly-font-weight);
 	padding: var(--padding);
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: rgb(var(--background-color));
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 }
@@ -17,7 +17,7 @@
 }
 label {
 	position: absolute;
-	left: 0.4em;
+	left: 2.5em;
 	top: 0.6em;
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 	opacity: 0.8;
@@ -77,4 +77,22 @@ input:-webkit-autofill:active {
 input:-webkit-autofill,
 input:-webkit-autofill + label {
 	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+}
+
+.input-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
+	border-radius: 0.25em;
+	max-width: 95%;
+	margin: 0.5em;
+}
+
+.input-container::slotted([slot="start"]) {
+	padding: 0.2em 0.5em;
+}
+
+.input-container::slotted([slot="end"]) {
+	padding: 0.2em 0.5em;
 }

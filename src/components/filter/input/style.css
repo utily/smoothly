@@ -1,14 +1,10 @@
 :host {
   display: block;
-	margin: 0.5rem;
+	/* margin: 0.25em 0.5rem; */
 }
 
-div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+main {
+	width: 100%;
 }
 
-div::slotted([slot="start"]) {
-	margin-right: 4px;
-}
+

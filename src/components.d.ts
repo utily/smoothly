@@ -90,10 +90,8 @@ export namespace Components {
     interface SmoothlyDisplayDemo {
     }
     interface SmoothlyFilter {
-        "comparison": string;
         "criteria": Record<string, Criteria>;
         "inputValue": Criteria;
-        "name": string;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
@@ -1001,10 +999,8 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyFilter {
-        "comparison"?: string;
         "criteria"?: Record<string, Criteria>;
         "inputValue"?: Criteria;
-        "name"?: string;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
     }
     interface SmoothlyFilterInput {

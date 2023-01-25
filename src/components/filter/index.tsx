@@ -1,20 +1,18 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilter {
 	freeSearchElement: HTMLSmoothlyInputElement
 
-	@Prop({ reflect: true }) name: string
 	@State() isExpanded = false
 	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
-	@Prop() comparison = "includes"
 	@Prop({ mutable: true }) inputValue: Criteria
 
 	@Event() filters: EventEmitter<Criteria>
@@ -42,28 +40,33 @@ export class SmoothlyFilter {
 
 	render() {
 		return [
-			//main filter
-			<main>
-				<smoothly-icon name="search-outline" size="tiny" />
-				<smoothly-input
-					name="filter"
-					ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
-					onKeyDown={() => this.onKeyDown()}></smoothly-input>
-				<smoothly-button
-					onClick={() => {
-						this.isExpanded = !this.isExpanded
-					}}>
-					{this.isExpanded ? (
-						<smoothly-icon name="funnel" size="tiny" />
-					) : (
-						<smoothly-icon name="funnel-outline" size="tiny" />
-					)}
-				</smoothly-button>
-			</main>,
+			<smoothly-input
+				name="filter"
+				ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
+				onKeyDown={() => this.onKeyDown()}>
+				{/* icon */}
+				<section slot="start">
+					<slot name="start" />
+				</section>
+				<slot />
+				<section slot="end">
+					{/* div to be changed to smoothly-button later */}
+					<aside
+						onClick={() => {
+							this.isExpanded = !this.isExpanded
+						}}>
+						{this.isExpanded ? (
+							<smoothly-icon name="funnel" size="tiny" />
+						) : (
+							<smoothly-icon name="funnel-outline" size="tiny" />
+						)}
+					</aside>
+				</section>
+			</smoothly-input>,
+
 			<section hidden={!this.isExpanded} class={{ container: this.isExpanded }}>
-				{/* arrow */}
 				<div hidden={!this.isExpanded} class={{ arrow: this.isExpanded }}></div>
-				<slot></slot>
+				<slot name="filter" />
 			</section>,
 		]
 	}

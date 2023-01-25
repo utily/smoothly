@@ -6,7 +6,7 @@ import { Criteria } from "selectively"
 @Component({
 	tag: "smoothly-filter-input",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilterInput {
 	@Prop({ reflect: true }) name: string
@@ -59,16 +59,17 @@ export class SmoothlyFilterInput {
 	render() {
 		return [
 			//advance
-			<smoothly-input
-				name={this.name}
-				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-				onKeyDown={() => this.onFilter()}>
-				{/* icons & labels */}
-				<div>
-					<slot name="start"></slot>
-					<slot></slot>
-				</div>
-			</smoothly-input>,
+			<main>
+				<smoothly-input
+					name={this.name}
+					ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
+					onKeyDown={() => this.onFilter()}>
+					<div slot="start">
+						<slot name="start" />
+					</div>
+					<slot />
+				</smoothly-input>
+			</main>,
 		]
 	}
 }

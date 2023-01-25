@@ -30,23 +30,34 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return !data
 			? "Failed to load data."
 			: [
+					<smoothly-input>
+						<smoothly-icon slot="start" name="search-outline" size="tiny" />
+						search
+						<smoothly-icon slot="end" name="person-outline" size="tiny" />
+					</smoothly-input>,
+					<br />,
+
 					<smoothly-filter>
-						<smoothly-filter-input name="breed">
-							<smoothly-icon slot="start" name="search-outline" size="tiny" />
-							breed
-						</smoothly-filter-input>
-						<smoothly-filter-input name="country">
-							<smoothly-icon slot="start" name="search-outline" size="tiny" />
-							country
-						</smoothly-filter-input>
-						<smoothly-filter-input name="coat">
-							<smoothly-icon slot="start" name="search-outline" size="tiny" />
-							coat
-						</smoothly-filter-input>
-						<smoothly-filter-input name="pattern">
-							<smoothly-icon slot="start" name="search-outline" size="tiny" />
-							pattern
-						</smoothly-filter-input>
+						<smoothly-icon slot="start" name="search-outline" size="tiny" />
+						filter
+						<div slot="filter">
+							<smoothly-filter-input name="breed">
+								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+								breed
+							</smoothly-filter-input>
+							<smoothly-filter-input name="country">
+								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+								country
+							</smoothly-filter-input>
+							<smoothly-filter-input name="coat">
+								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+								coat
+							</smoothly-filter-input>
+							<smoothly-filter-input name="pattern">
+								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+								pattern
+							</smoothly-filter-input>
+						</div>
 					</smoothly-filter>,
 
 					<smoothly-table>

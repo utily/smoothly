@@ -237,7 +237,7 @@ export class SmoothlyInput {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<div>
+				<div class="input-container">
 					<slot name="start"></slot>
 					<input
 						name={this.name}

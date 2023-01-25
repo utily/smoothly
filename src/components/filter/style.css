@@ -1,41 +1,42 @@
 :host {
   display: flex;
 	flex-direction: column;
-	position: relative;
-}
-
-main {
-	display: flex;
-	align-items: center;
 	justify-content: center;
-	width: 600px;
+	align-items: center;
+	position: relative;
+	width: 100%;
 }
 
 div {
-	position: absolute;
+	position: relative;
 	display: flex;
-	right: 0;
 }
 
 .container {
-	border: 1px solid #6C6C6C;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	border: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
 	border-radius: 0.25em;
+	margin-top: 0.5em;
 	margin-bottom: 1em;
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
 }
 
 .arrow {
-	position: absolute;
-	top: 2.5rem;
-	right: 11.75rem;
+	position: relative;
+	bottom: 2.5rem;
+	left: 7.25rem;
 	z-index: 3;
 	transform: translate(0em, 1.1em) rotate(45deg);
 	width: 0.6em;
 	height: 0.6em;
 	background-color: white;
-	border-top: 1px solid #6C6C6C;
-	border-left: 1px solid #6C6C6C;
+	border-top: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
+	border-left: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
 }
 
+
+.container::slotted([slot="filter"]) {
+}
