@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop } from "@stencil/core"
-import { Color, Expand, Fill } from "../../model"
+import { Color, Fill } from "../../model"
 import { Data } from "./Data"
 
 @Component({
@@ -14,7 +14,6 @@ export class SmoothlySubmit {
 	}
 	@Prop({ mutable: true, reflect: true }) processing: boolean
 	@Prop({ reflect: true }) color?: Color
-	@Prop({ reflect: true }) expand?: Expand
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop() prevent?: boolean
