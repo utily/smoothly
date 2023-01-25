@@ -10,6 +10,7 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
+import { Criteria } from "selectively";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 import { Data } from "./components/submit/Data";
@@ -99,6 +100,9 @@ export namespace Components {
         "currency": Currency;
         "toInteger": boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime": DateTime;
     }
@@ -106,6 +110,26 @@ export namespace Components {
     }
     interface SmoothlyForm {
         "looks": "plain" | "grid" | "border" | "line";
+    interface SmoothlyFilter {
+        "criteria": Record<string, Criteria>;
+    }
+    interface SmoothlyFilterAdvanced {
+    }
+    interface SmoothlyFilterInput {
+        "autocomplete": boolean;
+        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "currency"?: Currency;
+        "disabled": boolean;
+        "maxLength": number;
+        "minLength": number;
+        "name": string;
+        "pattern"?: RegExp;
+        "placeholder"?: string;
+        "readonly": boolean;
+        "required": boolean;
+        "showLabel": boolean;
+        "type": string;
+        "value": any;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -289,6 +313,11 @@ export namespace Components {
         "processing": boolean;
         "submit": () => Promise<boolean>;
     }
+    interface SmoothlySummary {
+        "color": Color;
+        "fill": Fill;
+        "size": "tiny" | "small" | "medium" | "large";
+    }
     interface SmoothlySvg {
         "color": string;
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
@@ -306,6 +335,8 @@ export namespace Components {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
         "align": "left" | "center" | "right";
@@ -358,6 +389,14 @@ export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
+}
+export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterElement;
+}
+export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterInputElement;
 }
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -558,6 +597,9 @@ declare global {
         prototype: HTMLSmoothlyDisplayAmountElement;
         new (): HTMLSmoothlyDisplayAmountElement;
     };
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
     }
     var HTMLSmoothlyDisplayDateTimeElement: {
@@ -575,6 +617,23 @@ declare global {
     var HTMLSmoothlyFormElement: {
         prototype: HTMLSmoothlyFormElement;
         new (): HTMLSmoothlyFormElement;
+    interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterElement: {
+        prototype: HTMLSmoothlyFilterElement;
+        new (): HTMLSmoothlyFilterElement;
+    };
+    interface HTMLSmoothlyFilterAdvancedElement extends Components.SmoothlyFilterAdvanced, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterAdvancedElement: {
+        prototype: HTMLSmoothlyFilterAdvancedElement;
+        new (): HTMLSmoothlyFilterAdvancedElement;
+    };
+    interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterInputElement: {
+        prototype: HTMLSmoothlyFilterInputElement;
+        new (): HTMLSmoothlyFilterInputElement;
     };
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
     }
@@ -750,6 +809,12 @@ declare global {
         prototype: HTMLSmoothlySubmitElement;
         new (): HTMLSmoothlySubmitElement;
     };
+    interface HTMLSmoothlySummaryElement extends Components.SmoothlySummary, HTMLStencilElement {
+    }
+    var HTMLSmoothlySummaryElement: {
+        prototype: HTMLSmoothlySummaryElement;
+        new (): HTMLSmoothlySummaryElement;
+    };
     interface HTMLSmoothlySvgElement extends Components.SmoothlySvg, HTMLStencilElement {
     }
     var HTMLSmoothlySvgElement: {
@@ -785,6 +850,12 @@ declare global {
     var HTMLSmoothlyTableDemoElement: {
         prototype: HTMLSmoothlyTableDemoElement;
         new (): HTMLSmoothlyTableDemoElement;
+    };
+    interface HTMLSmoothlyTableDemoFilteredElement extends Components.SmoothlyTableDemoFiltered, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoFilteredElement: {
+        prototype: HTMLSmoothlyTableDemoFilteredElement;
+        new (): HTMLSmoothlyTableDemoFilteredElement;
     };
     interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
     }
@@ -861,6 +932,9 @@ declare global {
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-form": HTMLSmoothlyFormElement;
+        "smoothly-filter": HTMLSmoothlyFilterElement;
+        "smoothly-filter-advanced": HTMLSmoothlyFilterAdvancedElement;
+        "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
@@ -890,12 +964,14 @@ declare global {
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
+        "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-svg": HTMLSmoothlySvgElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
         "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
         "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
+        "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
@@ -1003,6 +1079,9 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "toInteger"?: boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime"?: DateTime;
     }
@@ -1011,6 +1090,28 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "looks"?: "plain" | "grid" | "border" | "line";
+    interface SmoothlyFilter {
+        "criteria"?: Record<string, Criteria>;
+        "onFilter"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
+    }
+    interface SmoothlyFilterAdvanced {
+    }
+    interface SmoothlyFilterInput {
+        "autocomplete"?: boolean;
+        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "currency"?: Currency;
+        "disabled"?: boolean;
+        "maxLength"?: number;
+        "minLength"?: number;
+        "name"?: string;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
+        "pattern"?: RegExp;
+        "placeholder"?: string;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "showLabel"?: boolean;
+        "type"?: string;
+        "value"?: any;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1209,6 +1310,11 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "processing"?: boolean;
     }
+    interface SmoothlySummary {
+        "color"?: Color;
+        "fill"?: Fill;
+        "size"?: "tiny" | "small" | "medium" | "large";
+    }
     interface SmoothlySvg {
         "color"?: string;
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
@@ -1230,6 +1336,8 @@ declare namespace LocalJSX {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
@@ -1297,6 +1405,9 @@ declare namespace LocalJSX {
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-form": SmoothlyForm;
+        "smoothly-filter": SmoothlyFilter;
+        "smoothly-filter-advanced": SmoothlyFilterAdvanced;
+        "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
@@ -1326,12 +1437,14 @@ declare namespace LocalJSX {
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
+        "smoothly-summary": SmoothlySummary;
         "smoothly-svg": SmoothlySvg;
         "smoothly-tab": SmoothlyTab;
         "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
         "smoothly-table-cell": SmoothlyTableCell;
         "smoothly-table-demo": SmoothlyTableDemo;
+        "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
@@ -1364,9 +1477,15 @@ declare module "@stencil/core" {
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
+            /**
+             * DEPRECATED, use  <smoothly-display type="date-time">
+             */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
+            "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
+            "smoothly-filter-advanced": LocalJSX.SmoothlyFilterAdvanced & JSXBase.HTMLAttributes<HTMLSmoothlyFilterAdvancedElement>;
+            "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
@@ -1396,12 +1515,14 @@ declare module "@stencil/core" {
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
+            "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
             "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
             "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;

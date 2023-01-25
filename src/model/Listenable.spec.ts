@@ -1,3 +1,6 @@
+// TODO: Should be imported with
+// import * as model from "../model/index"
+// But test fails because of test not handling ESM-module of imported libraries.
 import { Listenable } from "./Listenable"
 
 describe("Listenable", () => {
