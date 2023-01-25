@@ -100,16 +100,11 @@ export namespace Components {
         "currency": Currency;
         "toInteger": boolean;
     }
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
     interface SmoothlyDisplayDateTime {
         "datetime": DateTime;
     }
     interface SmoothlyDisplayDemo {
     }
-    interface SmoothlyForm {
-        "looks": "plain" | "grid" | "border" | "line";
     interface SmoothlyFilter {
         "criteria": Record<string, Criteria>;
     }
@@ -130,6 +125,9 @@ export namespace Components {
         "showLabel": boolean;
         "type": string;
         "value": any;
+    }
+    interface SmoothlyForm {
+        "looks": "plain" | "grid" | "border" | "line";
     }
     interface SmoothlyFrame {
         "name": string;
@@ -162,7 +160,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: any) => Promise<void>;
         "showLabel": boolean;
         "type": string;
         "value": any;
@@ -597,9 +595,6 @@ declare global {
         prototype: HTMLSmoothlyDisplayAmountElement;
         new (): HTMLSmoothlyDisplayAmountElement;
     };
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
     interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
     }
     var HTMLSmoothlyDisplayDateTimeElement: {
@@ -612,11 +607,6 @@ declare global {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
     };
-    interface HTMLSmoothlyFormElement extends Components.SmoothlyForm, HTMLStencilElement {
-    }
-    var HTMLSmoothlyFormElement: {
-        prototype: HTMLSmoothlyFormElement;
-        new (): HTMLSmoothlyFormElement;
     interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
     }
     var HTMLSmoothlyFilterElement: {
@@ -634,6 +624,12 @@ declare global {
     var HTMLSmoothlyFilterInputElement: {
         prototype: HTMLSmoothlyFilterInputElement;
         new (): HTMLSmoothlyFilterInputElement;
+    };
+    interface HTMLSmoothlyFormElement extends Components.SmoothlyForm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormElement: {
+        prototype: HTMLSmoothlyFormElement;
+        new (): HTMLSmoothlyFormElement;
     };
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
     }
@@ -931,10 +927,10 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
-        "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-advanced": HTMLSmoothlyFilterAdvancedElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
+        "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
@@ -1079,17 +1075,12 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "toInteger"?: boolean;
     }
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
     interface SmoothlyDisplayDateTime {
         "datetime"?: DateTime;
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
-    interface SmoothlyForm {
-        "looks"?: "plain" | "grid" | "border" | "line";
     interface SmoothlyFilter {
         "criteria"?: Record<string, Criteria>;
         "onFilter"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
@@ -1112,6 +1103,9 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "type"?: string;
         "value"?: any;
+    }
+    interface SmoothlyForm {
+        "looks"?: "plain" | "grid" | "border" | "line";
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1404,10 +1398,10 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
-        "smoothly-form": SmoothlyForm;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-advanced": SmoothlyFilterAdvanced;
         "smoothly-filter-input": SmoothlyFilterInput;
+        "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
@@ -1477,15 +1471,12 @@ declare module "@stencil/core" {
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
-            /**
-             * DEPRECATED, use  <smoothly-display type="date-time">
-             */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
-            "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-advanced": LocalJSX.SmoothlyFilterAdvanced & JSXBase.HTMLAttributes<HTMLSmoothlyFilterAdvancedElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
+            "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
