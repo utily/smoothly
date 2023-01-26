@@ -35,30 +35,50 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						search
 						<smoothly-icon slot="end" name="person-outline" size="tiny" />
 					</smoothly-input>,
-					<br />,
 
-					<smoothly-filter>
-						<smoothly-icon slot="start" name="search-outline" size="tiny" />
-						filter
-						<div slot="filter">
-							<smoothly-filter-input name="breed">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
-								breed
-							</smoothly-filter-input>
-							<smoothly-filter-input name="country">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
-								country
-							</smoothly-filter-input>
-							<smoothly-filter-input name="coat">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
-								coat
-							</smoothly-filter-input>
-							<smoothly-filter-input name="pattern">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
-								pattern
-							</smoothly-filter-input>
-						</div>
-					</smoothly-filter>,
+					<div style={{ display: "flex", justifyContent: "center", alignItems: "start" }}>
+						<smoothly-filter>
+							<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							filter
+							<div slot="filter">
+								<smoothly-filter-input name="breed">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									breed
+								</smoothly-filter-input>
+								<smoothly-filter-input name="country">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									country
+								</smoothly-filter-input>
+								<smoothly-filter-input name="coat">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									coat
+								</smoothly-filter-input>
+								<smoothly-filter-input name="pattern">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									pattern
+								</smoothly-filter-input>
+							</div>
+						</smoothly-filter>
+
+						<smoothly-table>
+							<smoothly-table-row>
+								<smoothly-table-header>HeaderA</smoothly-table-header>
+								<smoothly-table-header>HeaderB</smoothly-table-header>
+								<smoothly-table-header>HeaderC</smoothly-table-header>
+							</smoothly-table-row>
+							<smoothly-table-row>
+								<smoothly-table-expandable-cell>
+									expandable
+									<div slot="detail">...some content......some content...</div>
+								</smoothly-table-expandable-cell>
+								<smoothly-table-cell>cell</smoothly-table-cell>
+								<smoothly-table-expandable-cell>
+									expandable
+									<div slot="detail">more content</div>
+								</smoothly-table-expandable-cell>
+							</smoothly-table-row>
+						</smoothly-table>
+					</div>,
 
 					<smoothly-table>
 						<smoothly-table-row>

@@ -59,17 +59,15 @@ export class SmoothlyFilterInput {
 	render() {
 		return [
 			//advance
-			<main>
-				<smoothly-input
-					name={this.name}
-					ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-					onKeyDown={() => this.onFilter()}>
-					<div slot="start">
-						<slot name="start" />
-					</div>
-					<slot />
-				</smoothly-input>
-			</main>,
+			<smoothly-input
+				name={this.name}
+				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
+				onKeyDown={() => this.onFilter()}>
+				<div slot="start">
+					<slot name="start" />
+				</div>
+				<slot />
+			</smoothly-input>,
 		]
 	}
 }

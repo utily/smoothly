@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Prop, State } from "@stencil/core"
 import * as selectively from "selectively"
-import { Criteria } from "selectively"
+import { create as selectivelyCreate, Criteria } from "selectively"
 
 @Component({
 	tag: "smoothly-filter",
@@ -14,6 +14,7 @@ export class SmoothlyFilter {
 	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
 	@Prop({ mutable: true }) inputValue: Criteria
+	@State() opacity: "1"
 
 	@Event() filters: EventEmitter<Criteria>
 
@@ -43,7 +44,9 @@ export class SmoothlyFilter {
 			<smoothly-input
 				name="filter"
 				ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
-				onKeyDown={() => this.onKeyDown()}>
+				value={selectivelyCreate(this.criteria).stringify()}
+				onKeyDown={() => this.onKeyDown()}
+				readonly>
 				{/* icon */}
 				<section slot="start">
 					<slot name="start" />
@@ -64,9 +67,9 @@ export class SmoothlyFilter {
 				</section>
 			</smoothly-input>,
 
-			<section hidden={!this.isExpanded} class={{ container: this.isExpanded }}>
+			<section hidden={!this.isExpanded} class={this.isExpanded ? "container" : "hidden"}>
 				<div hidden={!this.isExpanded} class={{ arrow: this.isExpanded }}></div>
-				<slot name="filter" />
+				{this.isExpanded && <slot name="filter" />}
 			</section>,
 		]
 	}

@@ -12,6 +12,13 @@ div {
 	display: flex;
 }
 
+.hidden {
+	display: flex;
+	width: 0px;
+	opacity: 0;
+}
+
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -22,7 +29,12 @@ div {
 	border-radius: 0.25em;
 	margin-top: 0.5em;
 	margin-bottom: 1em;
+	min-width: 250px;
+	opacity: 1;
+	transition: opacity 100ms ease-in-out
+
 }
+
 
 .arrow {
 	position: relative;
