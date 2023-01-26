@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
-import { Color, Expand, Fill, Trigger } from "../../model"
+import { Color, Fill, Trigger } from "../../model"
 
 @Component({
 	tag: "smoothly-trigger",
@@ -8,7 +8,6 @@ import { Color, Expand, Fill, Trigger } from "../../model"
 })
 export class SmoothlyTrigger {
 	@Prop({ reflect: true }) color: Color | undefined
-	@Prop({ reflect: true }) expand: Expand
 	@Prop({ reflect: true }) fill: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
