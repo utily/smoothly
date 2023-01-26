@@ -7,13 +7,17 @@
 	border: solid 1px;
 	min-width: 10em;
 }
-
+/*TODO: Make links with icons look correct*/
 :host([type=link]){
 	display: inline;
 	border: none;
 }
 :host([hidden]){
 	display: none;
+}
+:host([disabled]){
+	opacity: 0.5;
+	pointer-events: none;
 }
 a,
 button{
@@ -23,11 +27,11 @@ button{
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
+	display: inline-flex;
+	gap: 0.5rem;
 }
 button{
-	display: flex;
 	justify-content: center;
-	gap: 0.5rem;
 	height: 100%;
 	width: 100%;
 }
@@ -42,14 +46,12 @@ button{
 :host([size=large]) > button{
 	font-size: 130%;
 }
+/*Icon buttons only work with solid and default fill*/
 :host([size=icon]){
 	display: inline-block;
 	margin: 1em;
 	box-sizing: border-box;
 	border: solid 1px;
-}
-:host([size=icon]) > button {
-	background: rgb(var(--smoothly-color));
 }
 :host([expand]) {
 	width: 100%;
@@ -62,9 +64,44 @@ button{
 :host([shape=rounded]){
 	border-radius: 2rem;
 }
-:host([disabled]){
-	opacity: 0.5;
-	pointer-events: none;
+::slotted(smoothly-icon[slot=start]),
+::slotted(smoothly-icon[slot=end]){
+	font-size: 0.65em;
+}
+/*For Fill Solid and Default*/
+:host(:not([fill=outline],[fill=clear]):hover),
+:host(:not([fill=outline],[fill=clear]):focus),
+:host(:not([fill=outline],[fill=clear]):active){
+	/*Where does this come from and why does this only apply to some buttons?
+	border-color: rgb(var(--smoothly-button-border)) !important;*/
+	border-color: rgb(var(--smoothly-color-shade)) !important;
+	background: rgb(var(--smoothly-color-tint)) !important;
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
+}
+/*For Fill Outline and Clear*/
+:host(:not([fill=solid],[fill=default]):hover),
+:host(:not([fill=solid],[fill=default]):focus),
+:host(:not([fill=solid],[fill=default]):active) {
+	border-color: rgb(var(--smoothly-color-shade)) !important;
+	background: rgb(var(--smoothly-color-tint)) !important;
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
+}
+/*Need to target button for color.*/
+:host(:not([fill=solid],[fill=default]):hover) > button,
+:host(:not([fill=solid],[fill=default]):focus) > button,
+:host(:not([fill=solid],[fill=default]):active) > button{
+	/*Color wanted for this?*/
+	color: rgb(var(--smoothly-color-shade)) !important;
+}
+/*TODO: Make sure hover effects apply to icon-buttons accordingly*/
+:host([size=icon]:hover) > button,
+:host([size=icon]:active) > button,
+:host([size=icon]:focus) > button{
+	background: rgb(var(--smoothly-color-shade));
+	stroke: rgb(var(--smoothly-color-shade));
+	fill: rgb(var(--smoothly-color));
 }
 :host(:not([fill])),
 :host([fill=default]) {
@@ -99,23 +136,4 @@ button{
 :host([fill=outline]) > button,
 :host([fill=clear]) > button{
 	color: rgb(var(--smoothly-color));
-}
-::slotted(smoothly-icon[slot=start]),
-::slotted(smoothly-icon[slot=end]){
-	font-size: 0.65em;
-}
-:host(:hover),
-:host(:focus),
-:host(:active) {
-	border-color: rgb(var(--smoothly-color-shade)) !important;
-	background: rgb(var(--smoothly-color-tint)) !important;
-	stroke: rgb(var(--smoothly-color));
-	fill: rgb(var(--smoothly-color));
-}
-:host([size=icon]:hover) > button,
-:host([size=icon]:active) > button,
-:host([size=icon]:focus) > button{
-	background: rgb(var(--smoothly-color-shade));
-	stroke: rgb(var(--smoothly-color));
-	fill: rgb(var(--smoothly-color));
 }

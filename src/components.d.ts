@@ -100,6 +100,9 @@ export namespace Components {
         "currency": Currency;
         "toInteger": boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime": DateTime;
     }
@@ -132,7 +135,7 @@ export namespace Components {
     interface SmoothlyFrame {
         "name": string;
         "origin": string | undefined;
-        "send": (message: string | Message<any>, content?: Trigger | any) => Promise<void>;
+        "send": (message2: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
     }
     interface SmoothlyGoogleFont {
@@ -160,7 +163,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: any) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": string;
         "value": any;
@@ -348,6 +351,9 @@ export namespace Components {
         "name": string;
     }
     interface SmoothlyTableRow {
+    }
+    interface SmoothlyToggle {
+        "selected": boolean;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -595,6 +601,9 @@ declare global {
         prototype: HTMLSmoothlyDisplayAmountElement;
         new (): HTMLSmoothlyDisplayAmountElement;
     };
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
     }
     var HTMLSmoothlyDisplayDateTimeElement: {
@@ -877,6 +886,12 @@ declare global {
         prototype: HTMLSmoothlyTableRowElement;
         new (): HTMLSmoothlyTableRowElement;
     };
+    interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
+    }
+    var HTMLSmoothlyToggleElement: {
+        prototype: HTMLSmoothlyToggleElement;
+        new (): HTMLSmoothlyToggleElement;
+    };
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
     }
     var HTMLSmoothlyTriggerElement: {
@@ -972,6 +987,7 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
+        "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
@@ -1075,6 +1091,9 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "toInteger"?: boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime"?: DateTime;
     }
@@ -1109,7 +1128,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFrame {
         "name"?: string;
-        "onMessage"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
+        "onMessage2"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
@@ -1353,6 +1372,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableRow {
     }
+    interface SmoothlyToggle {
+        "selected"?: boolean;
+    }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
         "disabled"?: boolean;
@@ -1443,6 +1465,7 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
+        "smoothly-toggle": SmoothlyToggle;
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
@@ -1471,6 +1494,9 @@ declare module "@stencil/core" {
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
+            /**
+             * DEPRECATED, use  <smoothly-display type="date-time">
+             */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
@@ -1518,6 +1544,7 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
