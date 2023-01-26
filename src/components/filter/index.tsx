@@ -53,8 +53,9 @@ export class SmoothlyFilter {
 				</section>
 				<slot />
 				<section slot="end">
-					{/* div to be changed to smoothly-button later */}
+					{/* <smoothly-icon name="close" size="tiny" /> */}
 					<aside
+						class="btn"
 						onClick={() => {
 							this.isExpanded = !this.isExpanded
 						}}>
@@ -67,9 +68,10 @@ export class SmoothlyFilter {
 				</section>
 			</smoothly-input>,
 
-			<section hidden={!this.isExpanded} class={this.isExpanded ? "container" : "hidden"}>
-				<div hidden={!this.isExpanded} class={{ arrow: this.isExpanded }}></div>
-				{this.isExpanded && <slot name="filter" />}
+			<section hidden={!this.isExpanded} class={this.isExpanded ? "container arrow-top" : "hidden"}>
+				<div hidden={!this.isExpanded} class={this.isExpanded ? "container-wrapper" : "hidden"}>
+					{this.isExpanded && <slot name="filter" />}
+				</div>
 			</section>,
 		]
 	}

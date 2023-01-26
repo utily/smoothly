@@ -59,25 +59,6 @@ export class TableDemoFiltered implements ComponentWillLoad {
 								</smoothly-filter-input>
 							</div>
 						</smoothly-filter>
-
-						<smoothly-table>
-							<smoothly-table-row>
-								<smoothly-table-header>HeaderA</smoothly-table-header>
-								<smoothly-table-header>HeaderB</smoothly-table-header>
-								<smoothly-table-header>HeaderC</smoothly-table-header>
-							</smoothly-table-row>
-							<smoothly-table-row>
-								<smoothly-table-expandable-cell>
-									expandable
-									<div slot="detail">...some content......some content...</div>
-								</smoothly-table-expandable-cell>
-								<smoothly-table-cell>cell</smoothly-table-cell>
-								<smoothly-table-expandable-cell>
-									expandable
-									<div slot="detail">more content</div>
-								</smoothly-table-expandable-cell>
-							</smoothly-table-row>
-						</smoothly-table>
 					</div>,
 
 					<smoothly-table>
