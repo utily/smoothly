@@ -8,6 +8,20 @@ export class SmoothlyInputDemo {
 		return [
 			<h2>Buttons</h2>,
 			<section>
+				<h4>Toggle switches</h4>
+				<smoothly-toggle>Press me</smoothly-toggle>
+				<h4>Toggle switches</h4>
+				<div style={{ display: "inline-block", height: "3em", width: "6em", padding: "1em" }}>
+					<smoothly-toggle-switch disabled={true}></smoothly-toggle-switch>
+				</div>
+				<div style={{ display: "inline-block", height: "3em", width: "6em", padding: "1em" }}>
+					<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
+				</div>
+				<div style={{ display: "inline-block", height: "2em", width: "4em", padding: "1em" }}>
+					<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
+					<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
+					<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
+				</div>
 				<h4>Links with icons</h4>
 				<div style={{ display: "inline" }}>
 					<smoothly-button type="link">
@@ -25,34 +39,23 @@ export class SmoothlyInputDemo {
 				</div>
 
 				<h4>Size and Color test</h4>
-				<smoothly-button color="primary" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="primary" fill="solid" size="small">
 					Color Primary + Small
 				</smoothly-button>
 				<smoothly-button color="secondary" fill="solid" shape="rounded">
 					Color Secondary + Default
 				</smoothly-button>
-				<smoothly-button color="warning" fill="solid" size="large" shape="rounded">
-					Color Warning + Large
-				</smoothly-button>
-
-				<h4>Size and Color test</h4>
-				<smoothly-button color="primary" fill="solid" size="small">
-					Color Primary + Small
-				</smoothly-button>
-				<smoothly-button color="secondary" fill="solid">
-					Color Secondary + Default
-				</smoothly-button>
 				<smoothly-button color="warning" fill="solid" size="large">
 					Color Warning + Large
 				</smoothly-button>
-				<h4>Expand</h4>
-				<smoothly-button fill="outline" expand="block" color="medium">
-					Fill Outline + Expand Block
-				</smoothly-button>
-				<smoothly-button fill="solid" expand="full" color="light">
-					Fill Solid + Expand Full
-				</smoothly-button>
 
+				<h4>Expand examples</h4>
+				<smoothly-button color="light" fill="solid" expand="full">
+					Color Secondary + Default
+				</smoothly-button>
+				<smoothly-button color="dark" fill="solid" expand="block">
+					Color Warning + Large
+				</smoothly-button>
 				<h4>Fill examples</h4>
 				<smoothly-button shape="rounded" color="default" fill="solid">
 					Fill Solid
@@ -70,18 +73,6 @@ export class SmoothlyInputDemo {
 					Fill Solid
 				</smoothly-button>
 				<smoothly-button color="warning" fill="solid">
-					Fill Solid
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="danger" fill="solid">
-					Fill Solid
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="dark" fill="solid">
-					Fill Solid
-				</smoothly-button>
-				<smoothly-button color="medium" fill="solid">
-					Fill Solid
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="light" fill="solid">
 					Fill Solid
 				</smoothly-button>
 
@@ -107,15 +98,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button shape="rounded" color="danger" fill="outline">
 					Fill Outline
 				</smoothly-button>
-				<smoothly-button shape="rounded" color="dark" fill="outline">
-					Fill Outline
-				</smoothly-button>
-				<smoothly-button color="medium" fill="outline">
-					Fill Outline
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="light" fill="outline">
-					Fill Outline
-				</smoothly-button>
 
 				<h4>Clear different colors</h4>
 				<smoothly-button shape="rounded" color="default" fill="clear">
@@ -136,18 +118,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="warning" fill="clear">
 					Fill Clear
 				</smoothly-button>
-				<smoothly-button shape="rounded" color="danger" fill="clear">
-					Fill Clear
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="dark" fill="clear">
-					Fill Clear
-				</smoothly-button>
-				<smoothly-button color="medium" fill="clear">
-					Fill Clear
-				</smoothly-button>
-				<smoothly-button shape="rounded" color="light" fill="clear">
-					Fill Clear
-				</smoothly-button>
 
 				<h4>Buttons with Icon in "start"</h4>
 				<div style={{ display: "flex" }}>
@@ -155,8 +125,45 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
 						Check
 					</smoothly-button>
+					<smoothly-button shape="rounded" fill="solid" color="secondary">
+						<smoothly-icon name="basketball" slot="start"></smoothly-icon>
+						Check
+					</smoothly-button>
+					<smoothly-button shape="rounded" fill="solid" color="success">
+						<smoothly-icon name="call" slot="start"></smoothly-icon>
+						Check
+					</smoothly-button>
 				</div>
+				<h4>Buttons with Icon in default slot, Fill Clear</h4>
+				<smoothly-button fill="clear" color="success" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="warning" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="danger" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="secondary" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="tertiary" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="light" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
 
+				<h4>Other fills</h4>
+				<smoothly-button fill="solid" color="warning" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="solid" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="clear" color="danger" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="default" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
+				<smoothly-button fill="outline" color="success" style={{ width: "7em", padding: "none" }}>
+					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
+				</smoothly-button>
 				<h4>Buttons with Icon in "end"</h4>
 				<div style={{ display: "flex" }}>
 					<smoothly-button fill="solid" color="warning" type="button">

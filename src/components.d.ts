@@ -353,7 +353,16 @@ export namespace Components {
     interface SmoothlyTableRow {
     }
     interface SmoothlyToggle {
+        "disabled": boolean;
+        "name": string;
         "selected": boolean;
+        "value"?: any;
+    }
+    interface SmoothlyToggleSwitch {
+        "disabled": boolean;
+        "name": string;
+        "selected": boolean;
+        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -892,6 +901,12 @@ declare global {
         prototype: HTMLSmoothlyToggleElement;
         new (): HTMLSmoothlyToggleElement;
     };
+    interface HTMLSmoothlyToggleSwitchElement extends Components.SmoothlyToggleSwitch, HTMLStencilElement {
+    }
+    var HTMLSmoothlyToggleSwitchElement: {
+        prototype: HTMLSmoothlyToggleSwitchElement;
+        new (): HTMLSmoothlyToggleSwitchElement;
+    };
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
     }
     var HTMLSmoothlyTriggerElement: {
@@ -988,6 +1003,7 @@ declare global {
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
+        "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
@@ -1373,7 +1389,16 @@ declare namespace LocalJSX {
     interface SmoothlyTableRow {
     }
     interface SmoothlyToggle {
+        "disabled"?: boolean;
+        "name"?: string;
         "selected"?: boolean;
+        "value"?: any;
+    }
+    interface SmoothlyToggleSwitch {
+        "disabled"?: boolean;
+        "name"?: string;
+        "selected"?: boolean;
+        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
@@ -1466,6 +1491,7 @@ declare namespace LocalJSX {
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-toggle": SmoothlyToggle;
+        "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
@@ -1545,6 +1571,7 @@ declare module "@stencil/core" {
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
+            "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
