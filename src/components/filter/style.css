@@ -15,11 +15,6 @@
 	margin-bottom: 0.5em;
 }
 
-/* temporary button for funnel */
-section > aside:hover {
-	cursor:pointer
-}
-
 .hidden {
 	display: flex;
 	width: 0px;
@@ -61,7 +56,7 @@ section > aside:hover {
 
 /* arrow placement */
 .container.arrow-top:before {
-	left: calc(88%);
+	left: calc(90%);
 	top: -6px;
 }
 
@@ -72,11 +67,26 @@ section > aside:hover {
 	position: relative;
 }
 
+/* the outline icons are invisible without stroke */
+.btn {
+	stroke: rgb(46, 52, 54);
+}
+
+/* temporary button for funnel */
+.btn:hover {
+	cursor:pointer
+}
+
+.btn.hidden {
+	margin-right: 0.25em;
+	opacity: 0;
+	cursor:text
+}
+
+.btn.clear {
+	margin-right: 0.25em;
+	opacity: 0.3;
+}
 
 /* .container::slotted([slot="filter"]) {
 } */
-
-/* the outline icons are invisible */
-.btn {
-	stroke: rgb(46, 52, 54)
-}

@@ -9,15 +9,11 @@ import { create as selectivelyCreate, Criteria } from "selectively"
 })
 export class SmoothlyFilter {
 	freeSearchElement: HTMLSmoothlyInputElement
-
+	private inputs: Map<EventTarget, () => void> = new Map()
 	@State() isExpanded = false
 	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
 	@Prop({ mutable: true }) inputValue: Criteria
-	@State() opacity: "1"
-
-	@Event() filters: EventEmitter<Criteria>
-
 	@Listen("filter")
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
@@ -32,13 +28,33 @@ export class SmoothlyFilter {
 			  )
 	}
 
+	@Event() filters: EventEmitter<Criteria>
 	onKeyDown() {
 		this.freeSearchValue = this.freeSearchElement.value
 		this.inputValue = selectively.includes(this.freeSearchValue)
+		console.log("input value: ", this.inputValue)
 
 		this.filters.emit(selectively.any(this.inputValue))
 	}
 
+	@Listen("clearAll")
+	handleClearAll(event: CustomEvent<() => void>) {
+		console.log("event.target: ", event.target)
+		console.log("event.detail: ", event.detail)
+		event.target && this.inputs.set(event.target, event.detail)
+		//button to work as a boolean
+		//only run if true
+	}
+
+	clickHandle(ev: MouseEvent) {
+		//Array.from(this.inputs.values()).forEach(value => value())
+		// Array.from(this.inputs.values(), value => value())
+
+		for (const clear of this.inputs.values())
+			clear()
+
+		this.criteria = {}
+	}
 	render() {
 		return [
 			<smoothly-input
@@ -52,17 +68,24 @@ export class SmoothlyFilter {
 					<slot name="start" />
 				</section>
 				<slot />
+				{/* to be replaced with smoothly-button */}
 				<section slot="end">
-					{/* <smoothly-icon name="close" size="tiny" /> */}
+					<smoothly-icon
+						class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
+						name="close"
+						size="tiny"
+						onClick={ev => this.clickHandle(ev)}
+					/>
+					{/* to be replaced with smoothly-button */}
 					<aside
 						class="btn"
 						onClick={() => {
 							this.isExpanded = !this.isExpanded
 						}}>
 						{this.isExpanded ? (
-							<smoothly-icon name="funnel" size="tiny" />
+							<smoothly-icon name="options" size="tiny" />
 						) : (
-							<smoothly-icon name="funnel-outline" size="tiny" />
+							<smoothly-icon name="options-outline" size="tiny" />
 						)}
 					</aside>
 				</section>

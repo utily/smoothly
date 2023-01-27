@@ -1095,6 +1095,7 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
+        "onClearAll"?: (event: SmoothlyFilterInputCustomEvent<any>) => void;
         "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
         "pattern"?: RegExp;
         "placeholder"?: string;

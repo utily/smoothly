@@ -9,6 +9,8 @@ import { Criteria } from "selectively"
 	shadow: true,
 })
 export class SmoothlyFilterInput {
+	smoothlyInput: HTMLSmoothlyInputElement
+
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
@@ -24,8 +26,6 @@ export class SmoothlyFilterInput {
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
 	@State() criteria: Criteria
-
-	smoothlyInput: HTMLSmoothlyInputElement
 
 	@Event() filter: EventEmitter<Criteria>
 	private onFilter() {
@@ -56,13 +56,25 @@ export class SmoothlyFilterInput {
 		console.log("criteria :", criteria)
 	}
 
+	@Event() clearAll: EventEmitter
+	componentWillLoad() {
+		// sending this.value as undefined to the parent
+		this.clearAll.emit(() => (this.value = undefined))
+	}
+
 	render() {
 		return [
 			//advance
 			<smoothly-input
 				name={this.name}
 				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-				onKeyDown={() => this.onFilter()}>
+				//setting the value
+				value={this.value}
+				onKeyDown={() => this.onFilter()}
+				//getting the value
+				onSmoothlyInput={ev => {
+					this.value = ev.detail.value
+				}}>
 				<div slot="start">
 					<slot name="start" />
 				</div>
