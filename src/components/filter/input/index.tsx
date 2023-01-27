@@ -55,7 +55,7 @@ export class SmoothlyFilterInput {
 		this.filter.emit({ [this.name]: criteria })
 	}
 	@Method()
-	clear() {
+	async clear() {
 		this.value = ""
 	}
 
