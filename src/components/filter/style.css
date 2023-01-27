@@ -34,7 +34,7 @@
 	content:"";
 	height: 100%;
 	width: 100%;
-	border: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
+	border: 1px solid rgb(var(--smoothly-default-contrast));
 	border-radius: 0.25em;
 	position: absolute;
 	top: 0;
@@ -47,9 +47,9 @@
 	width: 0.6em;
 	height: 0.6em;
 	transform: rotate(45deg);
-	border-top: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
-	border-left: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
-	background-color: white;
+	border-top: 1px solid rgb(var(--smoothly-default-contrast));
+	border-left: 1px solid rgb(var(--smoothly-default-contrast));
+	background-color: rgb(var(--smoothly-default-color));
 	position: absolute;
 	z-index: 3;
 }

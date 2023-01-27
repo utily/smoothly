@@ -17,7 +17,6 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
 		this.criteria = event.detail
-		console.log("event.detail :", event.detail)
 	}
 
 	async componentWillLoad(): Promise<void> {
