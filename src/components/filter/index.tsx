@@ -27,7 +27,6 @@ export class SmoothlyFilter {
 					)
 			  )
 	}
-
 	@Event() filters: EventEmitter<Criteria>
 	onKeyDown() {
 		this.freeSearchValue = this.freeSearchElement.value
@@ -42,10 +41,9 @@ export class SmoothlyFilter {
 		console.log("event.target: ", event.target)
 		console.log("event.detail: ", event.detail)
 		event.target && this.inputs.set(event.target, event.detail)
-		//button to work as a boolean
-		//only run if true
 	}
 
+	@Event() cleared: EventEmitter
 	clickHandle(ev: MouseEvent) {
 		//Array.from(this.inputs.values()).forEach(value => value())
 		// Array.from(this.inputs.values(), value => value())
@@ -54,7 +52,10 @@ export class SmoothlyFilter {
 			clear()
 
 		this.criteria = {}
+		this.cleared.emit()
+		// this.cleared.emit((this.criteria = {}))
 	}
+
 	render() {
 		return [
 			<smoothly-input

@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Listen, State, Watch } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 import * as http from "cloudly-http"
@@ -24,6 +24,18 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
 		this.data = response.status == 200 && (await response.body)
 	}
+
+	// update clear
+	@Listen("cleared")
+	ComponentWillRender() {
+		this.criteria = {}
+	}
+
+	// @Listen("cleared")
+	// onCleared(event: CustomEvent<Record<string, Criteria>>) {
+	// 	event.stopPropagation()
+	// 	this.criteria = event.detail
+	// }
 
 	render() {
 		const data = this.data
