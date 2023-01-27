@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
 import { Currency } from "isoly"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
@@ -53,25 +53,19 @@ export class SmoothlyFilterInput {
 				break
 		}
 		this.filter.emit({ [this.name]: criteria })
-		console.log("criteria :", criteria)
 	}
-
-	@Event() clearAll: EventEmitter
-	componentWillLoad() {
-		// sending this.value as undefined to the parent
-		this.clearAll.emit(() => (this.value = undefined))
+	@Method()
+	clear() {
+		this.value = ""
 	}
 
 	render() {
 		return [
-			//advance
 			<smoothly-input
 				name={this.name}
 				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
-				//setting the value
 				value={this.value}
 				onKeyDown={() => this.onFilter()}
-				//getting the value
 				onSmoothlyInput={ev => {
 					this.value = ev.detail.value
 				}}>

@@ -10,7 +10,7 @@ import { Root } from "./Root"
 	scoped: true,
 })
 export class TableDemoFiltered implements ComponentWillLoad {
-	@State() criteria: Criteria
+	@State() criteria: Criteria = {}
 	@State() data?: Root | false
 
 	@Listen("filters")
@@ -25,29 +25,11 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		this.data = response.status == 200 && (await response.body)
 	}
 
-	// update clear
-	@Listen("cleared")
-	ComponentWillRender() {
-		this.criteria = {}
-	}
-
-	// @Listen("cleared")
-	// onCleared(event: CustomEvent<Record<string, Criteria>>) {
-	// 	event.stopPropagation()
-	// 	this.criteria = event.detail
-	// }
-
 	render() {
 		const data = this.data
 		return !data
 			? "Failed to load data."
 			: [
-					<smoothly-input>
-						<smoothly-icon slot="start" name="search-outline" size="tiny" />
-						search
-						<smoothly-icon slot="end" name="person-outline" size="tiny" />
-					</smoothly-input>,
-
 					<div style={{ display: "flex", justifyContent: "center", alignItems: "start" }}>
 						<smoothly-filter>
 							<smoothly-icon slot="start" name="search-outline" size="tiny" />

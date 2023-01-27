@@ -3,7 +3,7 @@
 	position: relative;
 	font-weight: var(--smoothly-font-weight);
 	padding: var(--padding);
-	/* overflow: hidden; */
+	overflow: hidden;
 	background-color: rgb(var(--background-color));
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 }
@@ -83,8 +83,6 @@ input:-webkit-autofill + label {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid rgb(var(--text-color, var(--smoothly-default-contrast)));
-	border-radius: 0.25em;
 	max-width: 95%;
 	margin: 0.5em;
 }

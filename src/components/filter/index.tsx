@@ -17,7 +17,7 @@ export class SmoothlyFilter {
 	@Listen("filter")
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
-
+		event.target && this.inputs.set(event.target, () => (event.target as HTMLSmoothlyFilterInputElement).clear())
 		!this.freeSearchValue
 			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
 			: this.filters.emit(
@@ -31,29 +31,12 @@ export class SmoothlyFilter {
 	onKeyDown() {
 		this.freeSearchValue = this.freeSearchElement.value
 		this.inputValue = selectively.includes(this.freeSearchValue)
-		console.log("input value: ", this.inputValue)
-
 		this.filters.emit(selectively.any(this.inputValue))
 	}
 
-	@Listen("clearAll")
-	handleClearAll(event: CustomEvent<() => void>) {
-		console.log("event.target: ", event.target)
-		console.log("event.detail: ", event.detail)
-		event.target && this.inputs.set(event.target, event.detail)
-	}
-
-	@Event() cleared: EventEmitter
-	clickHandle(ev: MouseEvent) {
-		//Array.from(this.inputs.values()).forEach(value => value())
-		// Array.from(this.inputs.values(), value => value())
-
-		for (const clear of this.inputs.values())
-			clear()
-
-		this.criteria = {}
-		this.cleared.emit()
-		// this.cleared.emit((this.criteria = {}))
+	clearHandler(event: MouseEvent) {
+		this.inputs.forEach(c => c())
+		this.filters.emit((this.criteria = {}))
 	}
 
 	render() {
@@ -75,7 +58,7 @@ export class SmoothlyFilter {
 						class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
 						name="close"
 						size="tiny"
-						onClick={ev => this.clickHandle(ev)}
+						onClick={e => this.clearHandler(e)}
 					/>
 					{/* to be replaced with smoothly-button */}
 					<aside
