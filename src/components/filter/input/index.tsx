@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
 import { Currency } from "isoly"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
@@ -6,11 +6,13 @@ import { Criteria } from "selectively"
 @Component({
 	tag: "smoothly-filter-input",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilterInput {
+	smoothlyInput: HTMLSmoothlyInputElement
+
 	@Prop({ reflect: true }) name: string
-	@Prop() value: any
+	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop() minLength = 0
@@ -23,12 +25,11 @@ export class SmoothlyFilterInput {
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
-
-	@State() isExpanded = false
+	@State() criteria: Criteria
 
 	@Event() filter: EventEmitter<Criteria>
-
 	private onFilter() {
+		this.value = this.smoothlyInput.value
 		let criteria: selectively.Criteria
 		switch (this.comparison) {
 			case "equals":
@@ -53,19 +54,26 @@ export class SmoothlyFilterInput {
 		}
 		this.filter.emit({ [this.name]: criteria })
 	}
+	@Method()
+	async clear() {
+		this.value = ""
+	}
 
 	render() {
 		return [
 			<smoothly-input
 				name={this.name}
-				onChange={(event: CustomEvent) => (this.value = event.detail)}
-				onBlur={() => this.onFilter()}>
-				<smoothly-icon color="dark" fill="clear" slot="start" name="search-outline" size="tiny"></smoothly-icon>
-				<smoothly-button slot="end" onClick={() => (this.isExpanded = !this.isExpanded)}>
-					<smoothly-icon name={this.isExpanded ? "funnel" : "funnel-outline"} size="tiny"></smoothly-icon>
-				</smoothly-button>
+				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
+				value={this.value}
+				onKeyDown={() => this.onFilter()}
+				onSmoothlyInput={ev => {
+					this.value = ev.detail.value
+				}}>
+				<div slot="start">
+					<slot name="start" />
+				</div>
+				<slot />
 			</smoothly-input>,
-			<smoothly-filter-advanced hidden={!this.isExpanded}></smoothly-filter-advanced>,
 		]
 	}
 }

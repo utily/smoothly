@@ -1,24 +1,85 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop, State } from "@stencil/core"
+import * as selectively from "selectively"
 import { create as selectivelyCreate, Criteria } from "selectively"
 
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilter {
+	freeSearchElement: HTMLSmoothlyInputElement
+	private inputs: Map<EventTarget, () => void> = new Map()
+	@State() isExpanded = false
+	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
-	@Event() filter: EventEmitter<Criteria>
-
+	@Prop({ mutable: true }) inputValue: Criteria
 	@Listen("filter")
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
-		this.filter.emit((this.criteria = { ...this.criteria, ...event.detail }))
+		event.stopPropagation()
+		event.target && this.inputs.set(event.target, () => (event.target as HTMLSmoothlyFilterInputElement).clear())
+		!this.freeSearchValue
+			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
+			: this.filters.emit(
+					selectively.and(
+						selectively.any(selectively.includes(this.freeSearchValue)),
+						(this.criteria = { ...this.criteria, ...event.detail })
+					)
+			  )
+	}
+	@Event() filters: EventEmitter<Criteria>
+	onKeyDown() {
+		this.freeSearchValue = this.freeSearchElement.value
+		this.inputValue = selectively.includes(this.freeSearchValue)
+		this.filters.emit(selectively.any(this.inputValue))
+	}
+
+	clearHandler(event: MouseEvent) {
+		this.inputs.forEach(c => c())
+		this.filters.emit((this.criteria = {}))
 	}
 
 	render() {
 		return [
-			<smoothly-input name="filter" disabled value={selectivelyCreate(this.criteria).stringify()}></smoothly-input>,
-			<slot></slot>,
+			<smoothly-input
+				name="filter"
+				ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
+				value={selectivelyCreate(this.criteria).stringify()}
+				onKeyDown={() => this.onKeyDown()}
+				readonly>
+				{/* icon */}
+				<section slot="start">
+					<slot name="start" />
+				</section>
+				<slot />
+				{/* to be replaced with smoothly-button */}
+				<section slot="end">
+					<smoothly-icon
+						class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
+						name="close"
+						size="tiny"
+						onClick={e => this.clearHandler(e)}
+					/>
+					{/* to be replaced with smoothly-button */}
+					<aside
+						class="btn"
+						onClick={() => {
+							this.isExpanded = !this.isExpanded
+						}}>
+						{this.isExpanded ? (
+							<smoothly-icon name="options" size="tiny" />
+						) : (
+							<smoothly-icon name="options-outline" size="tiny" />
+						)}
+					</aside>
+				</section>
+			</smoothly-input>,
+
+			<section hidden={!this.isExpanded} class={this.isExpanded ? "container arrow-top" : "hidden"}>
+				<div hidden={!this.isExpanded} class={this.isExpanded ? "container-wrapper" : "hidden"}>
+					{this.isExpanded && <slot name="filter" />}
+				</div>
+			</section>,
 		]
 	}
 }
