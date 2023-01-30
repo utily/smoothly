@@ -110,11 +110,11 @@ export namespace Components {
     }
     interface SmoothlyFilter {
         "criteria": Record<string, Criteria>;
-    }
-    interface SmoothlyFilterAdvanced {
+        "inputValue": Criteria;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
+        "clear": () => Promise<void>;
         "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
         "currency"?: Currency;
         "disabled": boolean;
@@ -632,12 +632,6 @@ declare global {
         prototype: HTMLSmoothlyFilterElement;
         new (): HTMLSmoothlyFilterElement;
     };
-    interface HTMLSmoothlyFilterAdvancedElement extends Components.SmoothlyFilterAdvanced, HTMLStencilElement {
-    }
-    var HTMLSmoothlyFilterAdvancedElement: {
-        prototype: HTMLSmoothlyFilterAdvancedElement;
-        new (): HTMLSmoothlyFilterAdvancedElement;
-    };
     interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
     }
     var HTMLSmoothlyFilterInputElement: {
@@ -959,7 +953,6 @@ declare global {
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
-        "smoothly-filter-advanced": HTMLSmoothlyFilterAdvancedElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
@@ -1119,9 +1112,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilter {
         "criteria"?: Record<string, Criteria>;
-        "onFilter"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
-    }
-    interface SmoothlyFilterAdvanced {
+        "inputValue"?: Criteria;
+        "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
@@ -1449,7 +1441,6 @@ declare namespace LocalJSX {
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-filter": SmoothlyFilter;
-        "smoothly-filter-advanced": SmoothlyFilterAdvanced;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
@@ -1529,7 +1520,6 @@ declare module "@stencil/core" {
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
-            "smoothly-filter-advanced": LocalJSX.SmoothlyFilterAdvanced & JSXBase.HTMLAttributes<HTMLSmoothlyFilterAdvancedElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;

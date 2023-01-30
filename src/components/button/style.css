@@ -4,9 +4,9 @@
 	display: inline-block;
 	margin: 1em;
 	box-sizing: border-box;
-	border: solid 1.5px;
 	border-radius: 0.5rem;
 	min-width: 8em;
+	border: solid 1px;
 }
 :host([type=link]){
 	display: inline;
@@ -33,6 +33,14 @@ button{
 button{
 	padding: 0.8em;
 	justify-content: center;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+button{
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
 	height: 100%;
 	width: 100%;
 }
@@ -51,6 +59,10 @@ button{
 	display: inline-block;
 	margin: 1em;
 	box-sizing: border-box;
+	border: solid 1px;
+}
+:host([size=icon]) > button {
+	background: rgb(var(--smoothly-color));
 }
 :host([expand]) {
 	width: 100%;
@@ -132,4 +144,65 @@ button{
 :host([size=icon]:active) > button,
 :host([size=icon]:focus) > button{
 	background: rgb(var(--smoothly-color-tint));
+}
+:host([shape=rounded]) > button,
+:host([shape=rounded]){
+	border-radius: 2rem;
+}
+:host([disabled]){
+	opacity: 0.5;
+	pointer-events: none;
+}
+:host(:not([fill])),
+:host([fill=default]) {
+	color: rgb(var(--smoothly-color-contrast));
+	stroke: rgb(var(--smoothly-color-contrast));
+	fill: rgb(var(--smoothly-color-contrast));
+	background: rgb(var(--smoothly-color));
+	border-color: transparent;
+}
+:host([fill=solid]) {
+	stroke: rgb(var(--smoothly-color-contrast));
+	fill: rgb(var(--smoothly-color-contrast));
+	background: rgb(var(--smoothly-color));
+	border-color: rgb(var(--smoothly-color-shade));
+}
+:host([fill=solid]) > button,
+:host([fill=default]) > button{
+	color: rgb(var(--smoothly-color-contrast));
+}
+:host([fill=outline]) {
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
+	background: transparent;
+	border-color: rgb(var(--smoothly-color));
+}
+:host([fill=clear]) {
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
+	background: transparent;
+	border-color: transparent;
+}
+:host([fill=outline]) > button,
+:host([fill=clear]) > button{
+	color: rgb(var(--smoothly-color));
+}
+::slotted(smoothly-icon[slot=start]),
+::slotted(smoothly-icon[slot=end]){
+	font-size: 0.65em;
+}
+:host(:hover),
+:host(:focus),
+:host(:active) {
+	border-color: rgb(var(--smoothly-color-shade)) !important;
+	background: rgb(var(--smoothly-color-tint)) !important;
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
+}
+:host([size=icon]:hover) > button,
+:host([size=icon]:active) > button,
+:host([size=icon]:focus) > button{
+	background: rgb(var(--smoothly-color-shade));
+	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color));
 }

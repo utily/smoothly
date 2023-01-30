@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, State } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 import * as http from "cloudly-http"
@@ -10,11 +10,17 @@ import { Root } from "./Root"
 	scoped: true,
 })
 export class TableDemoFiltered implements ComponentWillLoad {
-	@State() criteria: Criteria
+	@State() criteria: Criteria = {}
 	@State() data?: Root | false
 
+	@Listen("filters")
+	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
+		event.stopPropagation()
+		this.criteria = event.detail
+	}
+
 	async componentWillLoad(): Promise<void> {
-		const response = await http.fetch("https://archive.org/metadata/principleofrelat00eins")
+		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
 		this.data = response.status == 200 && (await response.body)
 	}
 
@@ -23,30 +29,48 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return !data
 			? "Failed to load data."
 			: [
-					<smoothly-filter>
-						<smoothly-filter-input></smoothly-filter-input>
-					</smoothly-filter>,
+					<div style={{ display: "flex", justifyContent: "center", alignItems: "start" }}>
+						<smoothly-filter>
+							<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							filter
+							<div slot="filter">
+								<smoothly-filter-input name="breed">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									breed
+								</smoothly-filter-input>
+								<smoothly-filter-input name="country">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									country
+								</smoothly-filter-input>
+								<smoothly-filter-input name="coat">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									coat
+								</smoothly-filter-input>
+								<smoothly-filter-input name="pattern">
+									<smoothly-icon slot="start" name="search-outline" size="tiny" />
+									pattern
+								</smoothly-filter-input>
+							</div>
+						</smoothly-filter>
+					</div>,
 
 					<smoothly-table>
 						<smoothly-table-row>
-							<smoothly-table-header>name</smoothly-table-header>
-							<smoothly-table-header>source</smoothly-table-header>
+							<smoothly-table-header>breed</smoothly-table-header>
+							<smoothly-table-header>coat</smoothly-table-header>
 						</smoothly-table-row>
-						{selectively.filter(
-							this.criteria,
-							data.files.map(file => (
-								<smoothly-table-row>
-									<smoothly-table-expandable-cell>
-										{file.name}
-										<div slot="detail"> expandable cell 1 content</div>
-									</smoothly-table-expandable-cell>
-									<smoothly-table-expandable-cell>
-										{file.size}
-										<div slot="detail"> expandable cell 2 content</div>
-									</smoothly-table-expandable-cell>
-								</smoothly-table-row>
-							))
-						)}
+						{selectively.filter(this.criteria, data.data).map(cat => (
+							<smoothly-table-row>
+								<smoothly-table-expandable-cell>
+									{cat.breed}
+									<div slot="detail">Country: {cat.country}</div>
+								</smoothly-table-expandable-cell>
+								<smoothly-table-expandable-cell>
+									{cat.coat}
+									<div slot="detail">Pattern: {cat.pattern}</div>
+								</smoothly-table-expandable-cell>
+							</smoothly-table-row>
+						))}
 					</smoothly-table>,
 			  ]
 	}

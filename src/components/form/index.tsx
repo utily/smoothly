@@ -6,6 +6,7 @@ import { Component, h, Prop } from "@stencil/core"
 })
 export class SmoothlyForm {
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
+
 	render() {
 		return (
 			<form
