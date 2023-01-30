@@ -7,6 +7,8 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 })
 export class SmoothlyToggle {
 	@Prop({ mutable: true, reflect: true }) selected: boolean
+	@Prop({ reflect: true }) color: "light" | "medium" | "dark" = "medium"
+	@Prop({ reflect: true }) shape: "rounded"
 	@Prop({ reflect: true }) disabled = false
 	@Prop() name: string
 	@Prop() value?: any
@@ -17,6 +19,11 @@ export class SmoothlyToggle {
 	}
 
 	render() {
-		return <smoothly-button></smoothly-button>
+		return (
+			<button>
+				<slot name="icon-slot"></slot>
+				<slot>{this.name}</slot>
+			</button>
+		)
 	}
 }

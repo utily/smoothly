@@ -356,6 +356,7 @@ export namespace Components {
         "disabled": boolean;
         "name": string;
         "selected": boolean;
+        "shape": "rounded";
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
@@ -1389,9 +1390,11 @@ declare namespace LocalJSX {
     interface SmoothlyTableRow {
     }
     interface SmoothlyToggle {
+        "color"?: "light" | "medium" | "dark";
         "disabled"?: boolean;
         "name"?: string;
         "selected"?: boolean;
+        "shape"?: "rounded";
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {

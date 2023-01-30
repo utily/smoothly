@@ -8,8 +8,23 @@ export class SmoothlyInputDemo {
 		return [
 			<h2>Buttons</h2>,
 			<section>
-				<h4>Toggle switches</h4>
-				<smoothly-toggle>Press me</smoothly-toggle>
+				<h4>Toggle button</h4>
+				<div style={{ display: "inline-block" }}>
+					<smoothly-toggle>
+						<smoothly-icon name="card" fill="solid" slot="icon-slot"></smoothly-icon>
+					</smoothly-toggle>
+					<smoothly-toggle>
+						<smoothly-icon name="briefcase" slot="icon-slot"></smoothly-icon>
+					</smoothly-toggle>
+					<smoothly-toggle>
+						<smoothly-icon name="airplane" slot="icon-slot"></smoothly-icon>
+					</smoothly-toggle>
+				</div>
+				<div style={{ display: "flex", marginTop: "1em" }}>
+					<smoothly-toggle disabled shape="rounded" name="This"></smoothly-toggle>
+					<smoothly-toggle shape="rounded" name="That"></smoothly-toggle>
+					<smoothly-toggle shape="rounded" name="Press"></smoothly-toggle>
+				</div>
 				<h4>Toggle switches</h4>
 				<div style={{ display: "inline-block", height: "3em", width: "6em", padding: "1em" }}>
 					<smoothly-toggle-switch disabled={true}></smoothly-toggle-switch>
@@ -401,7 +416,7 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
-			<h4>Smoothly Accordion</h4>,
+			<h4>Smoothly checkboxes</h4>,
 			<smoothly-form looks="grid">
 				<smoothly-checkbox selectAll={true} intermediate={true} style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>

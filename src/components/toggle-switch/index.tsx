@@ -6,9 +6,8 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 	shadow: true,
 })
 export class SmoothlyToggleSwitch {
-	@Prop({ mutable: true, reflect: true }) selected: boolean
+	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ reflect: true }) disabled = false
-	/*@Prop ({ reflect: true }) size: "small" | "medium" | "large" = "medium" */
 	@Prop() name: string
 	@Prop() value?: any
 
