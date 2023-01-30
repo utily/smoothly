@@ -52,9 +52,8 @@ export class SmoothlyInputDemo {
 						link + type link
 					</smoothly-button>
 				</div>
-
 				<h4>Size and Color test</h4>
-				<smoothly-button color="primary" fill="solid" size="small">
+				<smoothly-button color="primary" fill="solid" size="small"></smoothly-button>
 				<h4>Size and Color test</h4>
 				<smoothly-button color="primary" fill="solid" size="small" shape="rounded">
 					Color Primary + Small
@@ -65,7 +64,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="warning" fill="solid" size="large">
 					Color Warning + Large
 				</smoothly-button>
-
 				<h4>Expand examples</h4>
 				<smoothly-button color="light" fill="solid" expand="full">
 					Color Secondary + Default
@@ -92,7 +90,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="warning" fill="solid">
 					Fill Solid
 				</smoothly-button>
-
 				<h4>Outline different colors</h4>
 				<smoothly-button shape="rounded" color="default" fill="outline">
 					Fill Outline
@@ -115,7 +112,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button shape="rounded" color="danger" fill="outline">
 					Fill Outline
 				</smoothly-button>
-
 				<h4>Clear different colors</h4>
 				<smoothly-button shape="rounded" color="default" fill="clear">
 					Fill Clear
@@ -132,12 +128,11 @@ export class SmoothlyInputDemo {
 				<smoothly-button shape="rounded" color="success" fill="clear">
 					Fill Clear
 				</smoothly-button>
-				<smoothly-button color="warning" fill="clear">
-					Fill Clear
+				<smoothly-button color="warning" fill="clear"></smoothly-button>
+				Fill Clear
 				<smoothly-button color="warning" fill="solid" size="large" shape="rounded">
 					Color Warning + Large
 				</smoothly-button>
-
 				<h4>Size and Color test</h4>
 				<smoothly-button color="primary" fill="solid" size="small">
 					Color Primary + Small
@@ -155,7 +150,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button fill="solid" expand="full" color="light">
 					Fill Solid + Expand Full
 				</smoothly-button>
-
 				<h4>Fill examples</h4>
 				<smoothly-button shape="rounded" color="warning" fill="solid">
 					Fill Solid
@@ -169,7 +163,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="light" fill="default">
 					Fill Default
 				</smoothly-button>
-
 				<h4>Outline different colors</h4>
 				<smoothly-button shape="rounded" color="warning" fill="outline">
 					Fill Solid
@@ -183,7 +176,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="light" fill="outline">
 					Fill Default
 				</smoothly-button>
-
 				<h4>Buttons with Icon in "start"</h4>
 				<div style={{ display: "flex" }}>
 					<smoothly-button shape="rounded" fill="solid" color="warning">
@@ -218,7 +210,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button fill="clear" color="light" style={{ width: "7em", padding: "none" }}>
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-
 				<h4>Other fills</h4>
 				<smoothly-button fill="solid" color="warning" style={{ width: "7em", padding: "none" }}>
 					<smoothly-icon fill="solid" name="funnel-outline"></smoothly-icon>
@@ -233,8 +224,8 @@ export class SmoothlyInputDemo {
 				<div style={{ display: "flex" }}>
 					<smoothly-button fill="solid" color="warning" type="button">
 						<a href="https://google.com">link</a>
+					</smoothly-button>
 				</div>
-
 				<h4>Buttons with Icon in "end"</h4>
 				<div style={{ display: "flex" }}>
 					<smoothly-button fill="solid" color="light">
@@ -242,7 +233,6 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="arrow-forward" slot="end"></smoothly-icon>
 					</smoothly-button>
 				</div>
-
 				<h4>Test for icon button</h4>
 				<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
 					<smoothly-icon name="call"></smoothly-icon>
@@ -253,7 +243,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button size="icon" shape="rounded" color="secondary">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-button>
-
 				<h4>Link examples</h4>
 				<smoothly-button type="link">type link</smoothly-button>
 				<smoothly-button type="button">
@@ -262,7 +251,6 @@ export class SmoothlyInputDemo {
 				<smoothly-button link="https://google.com" type="link">
 					link + type link
 				</smoothly-button>
-
 				<h4>Disabled buttons</h4>
 				<smoothly-button disabled fill="solid" color="secondary">
 					Disabled
