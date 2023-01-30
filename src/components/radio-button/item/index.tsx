@@ -10,7 +10,7 @@ import { Selected } from "../Selected"
 export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
-	@Prop({ reflect: true }) color?: Color
+	@Prop({ reflect: true }) color: Color = "medium"
 	@Event() radioItemSelectInternal: EventEmitter<Selected>
 
 	componentWillLoad(): void | Promise<void> {
