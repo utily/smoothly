@@ -23,8 +23,7 @@ smoothly-radio-button[decoration=button] ::slotted([slot=expansion]) {
 	margin-top: 0.5rem;
 }
 
-html smoothly-notifier,
-smoothly-notifier smoothly-radio-button[decoration=button] > :host {
+html smoothly-radio-button[decoration=button] > :host {
 	background-color: rgb(var(--smoothly-default-color));
 	color: rgb(var(--smoothly-default-contrast));
 }
