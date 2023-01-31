@@ -68,7 +68,9 @@ export namespace Components {
     }
     interface SmoothlyCheckbox {
         "disabled": boolean;
+        "index"?: number;
         "intermediate": boolean;
+        "keys"?: any;
         "selectAll": boolean;
         "selected": boolean;
         "size": "tiny" | "small" | "medium" | "large";
@@ -1050,7 +1052,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyCheckbox {
         "disabled"?: boolean;
+        "index"?: number;
         "intermediate"?: boolean;
+        "keys"?: any;
         "onChecked"?: (event: SmoothlyCheckboxCustomEvent<{ selected: boolean }>) => void;
         "selectAll"?: boolean;
         "selected"?: boolean;

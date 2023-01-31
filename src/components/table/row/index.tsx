@@ -21,6 +21,12 @@ export class TableRow {
 		if (event.detail)
 			this.element.after(event.detail)
 	}
+
+	/* 	@Method()
+	async check() {
+
+	}
+ */
 	render() {
 		return <slot></slot>
 	}

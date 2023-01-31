@@ -15,6 +15,8 @@ export class SmoothlyCheckbox {
 	@Prop({ mutable: true, reflect: true }) disabled: boolean
 	@Event() checked: EventEmitter<{ selected: boolean }>
 	@State() t: langly.Translate
+	@Prop({ mutable: true, reflect: true }) keys?: any //store all data
+	@Prop({ mutable: true, reflect: true }) index?: number
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
@@ -23,8 +25,9 @@ export class SmoothlyCheckbox {
 		if (!this.disabled) {
 			this.selected = !this.selected
 			this.checked.emit({ selected: this.selected })
-			console.log("e:", e.target)
 		}
+		console.log(this.index)
+		console.log(this.keys)
 	}
 	render() {
 		return [
