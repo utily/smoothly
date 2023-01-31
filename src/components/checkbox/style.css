@@ -1,16 +1,18 @@
 :host {
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-:host[hidden] {
-	display: none;
-}
-smoothly-icon {
+
+.checkbox {
 	cursor: pointer;
+	stroke: rgb(var(--smoothly-color-contrast));
+	height: 100% !important;
+	transform: translate(0%, 10%)
 }
-smoothly-icon:nth-child(2) {
-	position: absolute;
-	transform: scaleX(0.6);
-}
+
 :host[disabled] smoothly-icon {
 	stroke: rgba(var(--smoothly-color-contrast), 0.3);
 }
+
+

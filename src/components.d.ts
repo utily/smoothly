@@ -337,6 +337,8 @@ export namespace Components {
     }
     interface SmoothlyTableDemo {
     }
+    interface SmoothlyTableDemoChecked {
+    }
     interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
@@ -847,6 +849,12 @@ declare global {
         prototype: HTMLSmoothlyTableDemoElement;
         new (): HTMLSmoothlyTableDemoElement;
     };
+    interface HTMLSmoothlyTableDemoCheckedElement extends Components.SmoothlyTableDemoChecked, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoCheckedElement: {
+        prototype: HTMLSmoothlyTableDemoCheckedElement;
+        new (): HTMLSmoothlyTableDemoCheckedElement;
+    };
     interface HTMLSmoothlyTableDemoFilteredElement extends Components.SmoothlyTableDemoFiltered, HTMLStencilElement {
     }
     var HTMLSmoothlyTableDemoFilteredElement: {
@@ -966,6 +974,7 @@ declare global {
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
         "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
+        "smoothly-table-demo-checked": HTMLSmoothlyTableDemoCheckedElement;
         "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
@@ -1332,6 +1341,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableDemo {
     }
+    interface SmoothlyTableDemoChecked {
+    }
     interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
@@ -1438,6 +1449,7 @@ declare namespace LocalJSX {
         "smoothly-table": SmoothlyTable;
         "smoothly-table-cell": SmoothlyTableCell;
         "smoothly-table-demo": SmoothlyTableDemo;
+        "smoothly-table-demo-checked": SmoothlyTableDemoChecked;
         "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
@@ -1515,6 +1527,7 @@ declare module "@stencil/core" {
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
             "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-demo-checked": LocalJSX.SmoothlyTableDemoChecked & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoCheckedElement>;
             "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;

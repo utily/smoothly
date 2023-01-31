@@ -19,32 +19,36 @@ export class SmoothlyCheckbox {
 	componentWillLoad() {
 		this.t = translation.create(this.element)
 	}
-	toggle() {
+	toggle(e: MouseEvent) {
 		if (!this.disabled) {
 			this.selected = !this.selected
 			this.checked.emit({ selected: this.selected })
+			console.log("e:", e.target)
 		}
 	}
 	render() {
 		return [
 			<smoothly-icon
-				toolTip={this.t(this.selectAll ? "Deselect all" : "Deselect")}
-				onClick={() => this.toggle()}
-				style={{ display: this.selected ? "" : "none" }}
+				class="checkbox"
+				toolTip={this.t(
+					this.intermediate && !this.selected
+						? "Select all"
+						: this.selectAll
+						? "Select all"
+						: !this.selected
+						? "Select"
+						: "De-select"
+				)}
+				onClick={e => this.toggle(e)}
 				size={this.size}
-				name="checkbox-outline"></smoothly-icon>,
-			<smoothly-icon
-				toolTip={this.t(this.intermediate && !this.selected ? "Deselect all" : "Select all")}
-				onClick={() => this.toggle()}
-				style={{ display: this.intermediate && !this.selected ? "" : "none" }}
-				size={this.size}
-				name="remove-outline"></smoothly-icon>,
-			<smoothly-icon
-				toolTip={this.t(this.selectAll ? "Select all" : "Select")}
-				onClick={() => this.toggle()}
-				style={{ display: !this.selected ? "" : "none" }}
-				size={this.size}
-				name="square-outline"></smoothly-icon>,
+				name={
+					this.intermediate && !this.selected
+						? "square-outline"
+						: !this.selected
+						? "square-outline"
+						: "checkbox-outline"
+				}
+			/>,
 		]
 	}
 }
