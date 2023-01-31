@@ -1,5 +1,6 @@
-import { Component, Element, Event, EventEmitter, h, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Date, DateRange } from "isoly"
+import { Color } from "../../model"
 import * as generate from "./generate"
 
 @Component({
@@ -16,6 +17,7 @@ export class Calendar {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) doubleInput: boolean
+	@Prop({ reflect: true }) color?: Color
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() startChanged: EventEmitter<Date>
 	@Event() endChanged: EventEmitter<Date>
@@ -64,54 +66,58 @@ export class Calendar {
 		}
 	}
 	render() {
-		return [
-			<smoothly-input-month
-				value={this.month ?? this.value}
-				onValueChanged={event => {
-					this.month = event.detail
-					event.stopPropagation()
-				}}></smoothly-input-month>,
-			<table>
-				<thead>
-					<tr>
-						{generate.weekdays().map(day => (
-							<th>{day}</th>
-						))}
-					</tr>
-				</thead>
-				{generate.month(this.month ?? this.value).map(week => (
-					<tr>
-						{week.map(date => (
-							<td
-								tabindex={1}
-								onMouseOver={() => {
-									!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
-										? undefined
-										: this.onHover(date)
-								}}
-								onClick={
-									(this.min || this.max) && (date < this.min || date > this.max) ? undefined : () => this.onClick(date)
-								}
-								class={(date == this.value ? ["selected"] : [])
-									.concat(
-										...(date == Date.now() ? ["today"] : []),
-										Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
-										this.doubleInput
-											? this.start == date || this.end == date
-												? ["selected"]
-												: date >= (this.start ?? "") && date <= (this.end ?? "")
-												? ["dateRange"]
-												: []
-											: ""
-									)
-									.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
-									.join(" ")}>
-								{date.substring(8, 10)}
-							</td>
-						))}
-					</tr>
-				))}
-			</table>,
-		]
+		return (
+			<Host>
+				<smoothly-input-month
+					value={this.month ?? this.value}
+					onValueChanged={event => {
+						this.month = event.detail
+						event.stopPropagation()
+					}}></smoothly-input-month>
+				<table>
+					<thead>
+						<tr>
+							{generate.weekdays().map(day => (
+								<th>{day}</th>
+							))}
+						</tr>
+					</thead>
+					{generate.month(this.month ?? this.value).map(week => (
+						<tr>
+							{week.map(date => (
+								<td
+									tabindex={1}
+									onMouseOver={() => {
+										!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
+											? undefined
+											: this.onHover(date)
+									}}
+									onClick={
+										(this.min || this.max) && (date < this.min || date > this.max)
+											? undefined
+											: () => this.onClick(date)
+									}
+									class={(date == this.value ? ["selected"] : [])
+										.concat(
+											...(date == Date.now() ? ["today"] : []),
+											Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
+											this.doubleInput
+												? this.start == date || this.end == date
+													? ["selected"]
+													: date >= (this.start ?? "") && date <= (this.end ?? "")
+													? ["dateRange"]
+													: []
+												: ""
+										)
+										.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
+										.join(" ")}>
+									{date.substring(8, 10)}
+								</td>
+							))}
+						</tr>
+					))}
+				</table>
+			</Host>
+		)
 	}
 }
