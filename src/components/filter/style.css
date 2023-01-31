@@ -1,3 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
 :host {
-  display: block;
+  display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 100%;
+}
+
+:host > smoothly-input {
+	margin-bottom: 0.5em;
+}
+
+.hidden {
+	display: flex;
+	width: 0px;
+	opacity: 0;
+}
+
+.container {
+	width: inherit;
+	position: relative;
+	z-index: 3;
+	margin-bottom: 1em;
+	opacity: 1;
+	transition: opacity 100ms ease-in-out;
+}
+
+.container:after {
+	content:"";
+	height: 100%;
+	width: 100%;
+	border: 1px solid rgb(var(--smoothly-default-contrast));
+	border-radius: 0.25em;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* arrow */
+.container:before {
+	content:"";
+	width: 0.6em;
+	height: 0.6em;
+	transform: rotate(45deg);
+	border-top: 1px solid rgb(var(--smoothly-default-contrast));
+	border-left: 1px solid rgb(var(--smoothly-default-contrast));
+	background-color: rgb(var(--smoothly-default-color));
+	position: absolute;
+	z-index: 3;
+}
+
+/* arrow placement */
+.container.arrow-top:before {
+	left: calc(90%);
+	top: -6px;
+}
+
+/* wrapper for slot(filters) */
+.container-wrapper {
+	width: 100%;
+	padding: 1em;
+	position: relative;
+}
+
+/* the outline icons are invisible without stroke */
+.btn {
+	stroke: rgb(46, 52, 54);
+}
+
+/* temporary button for funnel */
+.btn:hover {
+	cursor:pointer
+}
+
+.btn.hidden {
+	margin-right: 0.25em;
+	opacity: 0;
+	cursor:text
+}
+
+.btn.clear {
+	margin-right: 0.25em;
+	opacity: 0.3;
 }
