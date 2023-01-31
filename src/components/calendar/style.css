@@ -1,11 +1,15 @@
-:host {
+html smoothly-notifier :host {
 	display: block;
 	--other-month-opacity: 0.5;
-	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+}
+html smoothly-notifier :host[color] {
+	background-color: rgb(var(--smoothly-color-shade));
 }
 :host > smoothly-input-month {
 	width: calc(100% - 1em);
 	padding: 0.5em 0.5em 0 0.5em;
+	background-color: rgb(var(--smoothly-color-shade));
 }
 :host > table {
 	table-layout: fixed;
@@ -16,21 +20,21 @@ td {
 	text-align: center;
 	padding: 0.5em;
 	min-width: 2em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 	cursor: pointer;
 	user-select: none;
 }
 td.currentMonth {
-	color: rgb(var(--smoothly-default-contrast));
+	color: rgb(var(--smoothly-color-contrast));
 }
 td:not(.currentMonth) {
-	color: rgba(var(--smoothly-default-contrast), var(--other-month-opacity));
+	color: rgba(var(--smoothly-color-contrast), var(--other-month-opacity));
 }
 td:nth-child(6):not(.currentMonth).selected,
 td:nth-child(6):not(.currentMonth).dateRange,
 td:nth-child(7):not(.currentMonth).selected,
 td:nth-child(7):not(.currentMonth).dateRange {
-	color: rgba(var(--smoothly-default-contrast));
+	color: rgba(var(--smoothly-color-contrast));
 }
 td:nth-child(6),
 td:nth-child(7) {
@@ -58,6 +62,6 @@ td.dateRange {
 }
 td.disable {
 	cursor: not-allowed;
-	background-color: rgb(var(--smoothly-default-tint), 0.5);
-	color: rgb(var(--smoothly-default-contrast), 0.5);
+	background-color: rgb(var(--smoothly-color-tint), 0.5);
+	color: rgb(var(--smoothly-color-contrast), 0.5);
 }

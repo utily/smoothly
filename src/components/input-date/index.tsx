@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
+import { Color } from "../../model"
 
 @Component({
 	tag: "smoothly-input-date",
@@ -13,6 +14,7 @@ export class InputDate {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
+	@Prop({ mutable: true }) color: Color = "default"
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")
 	onStart(next: Date) {
@@ -39,7 +41,7 @@ export class InputDate {
 				? [
 						<div onClick={() => (this.open = false)}></div>,
 						<nav>
-							<div class="arrow"></div>
+							<div class="arrow" color={this.color}></div>
 							<smoothly-calendar
 								doubleInput={false}
 								value={this.value ?? Date.now()}
@@ -47,6 +49,7 @@ export class InputDate {
 									this.value = event.detail
 									event.stopPropagation()
 								}}
+								color={this.color}
 								max={this.max}
 								min={this.min}></smoothly-calendar>
 						</nav>,

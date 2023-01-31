@@ -41,6 +41,7 @@ export namespace Components {
         "type": "link" | "button";
     }
     interface SmoothlyCalendar {
+        "color"?: Color;
         "doubleInput": boolean;
         "end"?: Date;
         "max": Date;
@@ -125,6 +126,7 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputDate {
+        "color": Color;
         "disabled": boolean;
         "max": Date;
         "min": Date;
@@ -224,7 +226,7 @@ export namespace Components {
         "value"?: any;
     }
     interface SmoothlyRadioButtonItem {
-        "color"?: Color;
+        "color": Color;
         "selected": boolean;
         "value": any;
     }
@@ -892,6 +894,7 @@ declare namespace LocalJSX {
         "type"?: "link" | "button";
     }
     interface SmoothlyCalendar {
+        "color"?: Color;
         "doubleInput"?: boolean;
         "end"?: Date;
         "max"?: Date;
@@ -984,6 +987,7 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputDate {
+        "color"?: Color;
         "disabled"?: boolean;
         "max"?: Date;
         "min"?: Date;
