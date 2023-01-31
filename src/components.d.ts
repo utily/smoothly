@@ -133,7 +133,6 @@ export namespace Components {
     interface SmoothlyForm {
         "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
-        "name"?: string;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -1115,7 +1114,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "looks"?: "plain" | "grid" | "border" | "line";
-        "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyFormCustomEvent<{ name: string; value: Data }>) => void;
     }
     interface SmoothlyFrame {
