@@ -21,19 +21,16 @@ export class SmoothlyForm {
 		)
 		if (Clearable.is(event.target)) {
 			const clearable = event.target
-			console.log(this.clearables)
 			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
 		}
 	}
 	@Method()
 	async clear(): Promise<void> {
-		console.log(this.clearables)
 		new Set(this.clearables.values()).forEach(clearable => clearable.clear())
 	}
 	render() {
 		return (
 			<form
-				onSubmit={event => (event.preventDefault(), this.clear())}
 				action="done"
 				style={{
 					position: "relative",
