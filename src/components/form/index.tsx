@@ -9,6 +9,7 @@ export class SmoothlyForm {
 	private value: Data = {}
 	private clearables = new Map<string, Clearable>()
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
+	@Prop() name?: string
 	@Event() smoothlyInput: EventEmitter<{ name: string; value: Data }>
 
 	@Listen("smoothlyInput")
@@ -29,11 +30,7 @@ export class SmoothlyForm {
 	}
 	render() {
 		return (
-			<form
-				action="done"
-				style={{
-					position: "relative",
-				}}>
+			<form>
 				<fieldset>
 					<slot></slot>
 				</fieldset>

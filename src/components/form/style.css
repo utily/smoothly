@@ -1,6 +1,9 @@
 smoothly-form {
 	display: block;
 }
+smoothly-form > form {
+	position: "relative";
+}
 smoothly-form > form > fieldset {
 	display: flex;
 	flex-flow: row wrap;
