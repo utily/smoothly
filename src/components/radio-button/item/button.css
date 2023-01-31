@@ -24,8 +24,8 @@ smoothly-radio-button[decoration=button] ::slotted([slot=expansion]) {
 }
 
 html smoothly-radio-button[decoration=button] > :host {
-	background-color: rgb(var(--smoothly-default-color));
-	color: rgb(var(--smoothly-default-contrast));
+	background-color: inherit;
+	color: inherit;
 }
 
 smoothly-radio-button[decoration=button] ::slotted([slot=expansion])::before {
