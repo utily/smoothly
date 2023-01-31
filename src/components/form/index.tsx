@@ -33,7 +33,7 @@ export class SmoothlyForm {
 	render() {
 		return (
 			<form
-				onSubmit={event => event.preventDefault()}
+				onSubmit={event => (event.preventDefault(), this.clear())}
 				action="done"
 				style={{
 					position: "relative",
