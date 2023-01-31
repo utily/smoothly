@@ -9,7 +9,7 @@ button{
 	justify-content: center;
 	font-size: 110%;
 	font-weight: 400;
-	color: gray;
+	color: rgb(var(--smoothly-default-tint));
 	background-color: rgb(var(--smoothly-default-shade));
 }
 :host([shape=rounded]){
@@ -28,8 +28,8 @@ button{
 	font-size: 110%;
 }
 :host(:not([selected])) > ::slotted(smoothly-icon) {
-	stroke: gray;
-	fill:gray;
+	color: rgb(var(--smoothly-default-tint));
+	fill:rgb(var(--smoothly-default-tint));
 }
 :host([disabled]) {
 	opacity: 0.5;

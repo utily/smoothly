@@ -38,7 +38,7 @@ export class SmoothlyInputDemo {
 					<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
 				</div>
 				<h4>Links with icons</h4>
-				<div style={{ display: "inline" }}>
+				<span style={{ display: "inline" }}>
 					<smoothly-button type="link">
 						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
 						type link
@@ -51,7 +51,7 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="arrow-forward" slot="end"></smoothly-icon>
 						link + type link
 					</smoothly-button>
-				</div>
+				</span>
 				<h4>Size and Color test</h4>
 				<smoothly-button color="primary" fill="solid" size="small"></smoothly-button>
 				<h4>Size and Color test</h4>
@@ -192,32 +192,32 @@ export class SmoothlyInputDemo {
 					</smoothly-button>
 				</div>
 				<h4>Buttons with Icon in default slot, Fill Clear</h4>
-				<smoothly-button fill="clear" color="success" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="success">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="warning" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="warning">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="danger" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="danger">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="secondary" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="secondary">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="tertiary" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="tertiary">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="light" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="light">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
 				<h4>Other fills</h4>
-				<smoothly-button fill="solid" color="warning" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="solid" color="warning">
 					<smoothly-icon fill="solid" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="clear" color="danger" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="clear" color="danger">
 					<smoothly-icon fill="default" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
-				<smoothly-button fill="outline" color="success" style={{ width: "7em", padding: "none" }}>
+				<smoothly-button fill="outline" color="success">
 					<smoothly-icon fill="clear" name="funnel-outline"></smoothly-icon>
 				</smoothly-button>
 				<h4>Buttons with Icon in "end"</h4>
