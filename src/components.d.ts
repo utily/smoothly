@@ -100,6 +100,9 @@ export namespace Components {
         "currency": Currency;
         "toInteger": boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime": DateTime;
     }
@@ -160,7 +163,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: any) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": string;
         "value": any;
@@ -595,6 +598,9 @@ declare global {
         prototype: HTMLSmoothlyDisplayAmountElement;
         new (): HTMLSmoothlyDisplayAmountElement;
     };
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
     }
     var HTMLSmoothlyDisplayDateTimeElement: {
@@ -1075,6 +1081,9 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "toInteger"?: boolean;
     }
+    /**
+     * DEPRECATED, use  <smoothly-display type="date-time">
+     */
     interface SmoothlyDisplayDateTime {
         "datetime"?: DateTime;
     }
@@ -1471,6 +1480,9 @@ declare module "@stencil/core" {
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
+            /**
+             * DEPRECATED, use  <smoothly-display type="date-time">
+             */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
