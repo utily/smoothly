@@ -1,8 +1,18 @@
 :host {
 	display: table-cell;
-	line-height: 1.5rem;
+	line-height: 2.5rem;
 	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
 	border-top: 1px solid rgb(var(--smoothly-dark-color));
-	padding: 0.5rem 0 0.5rem 1rem;
+	padding-left: 1rem;
 	font-weight: bold;
+}
+
+smoothly-table[align=bottom] :host {
+	vertical-align: bottom;
+}
+smoothly-table[align=middle] :host {
+	vertical-align: middle;
+}
+smoothly-table[align=top] :host {
+	vertical-align: top;
 }

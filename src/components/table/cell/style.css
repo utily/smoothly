@@ -23,3 +23,12 @@
 	margin: 0 0.3rem;
 	transition: transform 0.2s;
 }
+smoothly-table[align=bottom] :host {
+	vertical-align: bottom;
+}
+smoothly-table[align=middle] :host {
+	vertical-align: middle;
+}
+smoothly-table[align=top] :host {
+	vertical-align: top;
+}

@@ -333,6 +333,7 @@ export namespace Components {
     interface SmoothlyTabSwitch {
     }
     interface SmoothlyTable {
+        "align": "middle" | "bottom" | "top";
         "root": boolean;
     }
     interface SmoothlyTableCell {
@@ -1335,6 +1336,7 @@ declare namespace LocalJSX {
     interface SmoothlyTabSwitch {
     }
     interface SmoothlyTable {
+        "align"?: "middle" | "bottom" | "top";
         "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
         "onSpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
         "onTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;

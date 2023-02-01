@@ -11,7 +11,9 @@ export class Table implements ComponentWillLoad {
 	private expanded: Set<EventTarget> = new Set()
 	@Element() element: HTMLSmoothlyTableElement
 	@Prop({ mutable: true, reflect: true }) root = true
-	@Event() smoothlyNestedTable: EventEmitter<() => void>
+	@Prop({ reflect: true }) align: "middle" | "bottom" | "top" = "middle"
+	@Event()
+	smoothlyNestedTable: EventEmitter<() => void>
 	@Event() spotlightChange: EventEmitter<{ allowSpotlight: boolean; owner?: EventTarget }>
 	@Event() tableLoad: EventEmitter<(owner: EventTarget) => void>
 	componentWillLoad() {
