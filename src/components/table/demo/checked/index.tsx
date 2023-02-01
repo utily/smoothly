@@ -30,12 +30,11 @@ export class TableDemoChecked implements ComponentWillLoad {
 							<smoothly-table-header>Breed</smoothly-table-header>
 							<smoothly-table-header>Coat</smoothly-table-header>
 						</smoothly-table-row>
-						{data.data.map((cat, idx) => {
-							console.log("breed", cat.breed, idx)
+						{data.data.map(cat => {
 							return (
 								<smoothly-table-row>
 									<smoothly-table-cell>
-										<smoothly-checkbox keys={cat.breed} index={idx}></smoothly-checkbox>
+										<smoothly-checkbox name={cat.breed} value={cat}></smoothly-checkbox>
 									</smoothly-table-cell>
 									<smoothly-table-cell>{cat.breed}</smoothly-table-cell>
 									<smoothly-table-cell>{cat.coat}</smoothly-table-cell>

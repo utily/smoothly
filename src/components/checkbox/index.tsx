@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
 import * as langly from "langly"
 import * as translation from "./translation"
 @Component({
@@ -8,50 +8,37 @@ import * as translation from "./translation"
 })
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
-	@Prop() selectAll = false
-	@Prop() size: "tiny" | "small" | "medium" | "large" = "small"
+	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
+	@Prop({ mutable: true, reflect: true }) checked = false
 	@Prop({ mutable: true, reflect: true }) intermediate: boolean
-	@Prop({ mutable: true, reflect: true }) selected: boolean
-	@Prop({ mutable: true, reflect: true }) disabled: boolean
-	@Event() checked: EventEmitter<{ selected: boolean }>
+	@Prop() name = "checked"
+	@Prop() value: any = true
+	@Prop({ reflect: true }) disabled: boolean
+	@Event() smoothlyChecked: EventEmitter<Record<string, boolean | "intermediate" | any>>
 	@State() t: langly.Translate
-	@Prop({ mutable: true, reflect: true }) keys?: any //store all data
-	@Prop({ mutable: true, reflect: true }) index?: number
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
+		console.log("value", this.value)
 	}
-	toggle(e: MouseEvent) {
-		if (!this.disabled) {
-			this.selected = !this.selected
-			this.checked.emit({ selected: this.selected })
-		}
-		console.log(this.index)
-		console.log(this.keys)
+	@Method()
+	toggle() {
+		if (!this.disabled)
+			this.smoothlyChecked.emit({ [this.name]: (this.checked = !this.checked) || this.value })
+		console.log(this.checked)
 	}
 	render() {
-		return [
+		return (
 			<smoothly-icon
-				class="checkbox"
-				toolTip={this.t(
-					this.intermediate && !this.selected
-						? "Select all"
-						: this.selectAll
-						? "Select all"
-						: !this.selected
-						? "Select"
-						: "De-select"
-				)}
-				onClick={e => this.toggle(e)}
+				toolTip={this.t(!this.checked ? "Select" : "De-select")}
+				onClick={e => {
+					this.toggle()
+					e.stopPropagation()
+				}}
 				size={this.size}
-				name={
-					this.intermediate && !this.selected
-						? "square-outline"
-						: !this.selected
-						? "square-outline"
-						: "checkbox-outline"
-				}
-			/>,
-		]
+				name={this.intermediate ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
+				class={!this.checked && !this.intermediate ? "hidden" : "outline"}
+			/>
+		)
 	}
 }

@@ -38,6 +38,7 @@
 	"typescript.format.enable": false,
 	"cSpell.words": [
 		"deselectable",
-		"isoly"
+		"isoly",
+		"langly"
 	]
 }
