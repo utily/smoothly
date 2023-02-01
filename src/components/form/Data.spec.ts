@@ -1,4 +1,6 @@
+import { Blob } from "web-file-polyfill"
 import { Data } from "./Data"
+globalThis.Blob = Blob
 
 describe("Data", () => {
 	it("Data.set", () => expect(Data.set({}, "name.last".split("."), "Smith")).toEqual({ name: { last: "Smith" } }))
