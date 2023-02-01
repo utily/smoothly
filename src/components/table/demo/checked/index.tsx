@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, State } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Listen, Prop, State } from "@stencil/core"
 import * as http from "cloudly-http"
 import { Root } from "../filtered/Root"
 
@@ -8,29 +8,41 @@ import { Root } from "../filtered/Root"
 	scoped: true,
 })
 export class TableDemoChecked implements ComponentWillLoad {
-	@State() data?: Root | false
+	@State() data?: Root // Root | False
+	private checks: Map<EventTarget, () => void> = new Map()
+	@Prop({ mutable: true, reflect: true }) state: "none" | "intermediate" | "all" = "none" // to mark if all are selected or not
 
 	async componentWillLoad(): Promise<void> {
 		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
 		this.data = response.status == 200 && (await response.body)
 	}
 
+	@Listen("smoothlyChecked")
+	onSmoothlyChecked(event: CustomEvent<Record<string, boolean | any>>) {
+		event.stopPropagation()
+		event.target && this.checks.set(event.target, () => (event.target as HTMLSmoothlyCheckboxElement).toggle())
+		console.log("checks:", this.checks)
+		console.log(this.checks.size)
+		if (this.data !== undefined) {
+			this.state = this.checks.size < 1 ? "none" : this.data?.data.length > this.checks.size ? "intermediate" : "all"
+		}
+	}
+
 	render() {
-		const data = this.data
-		return !data
+		// const data = this.data
+
+		return !this.data
 			? "Failed to load data."
 			: [
-					<div>sketch</div>,
-					<br />,
 					<smoothly-table>
 						<smoothly-table-row>
 							<smoothly-table-header>
-								<smoothly-checkbox />
+								<smoothly-checkbox state={this.state} />
 							</smoothly-table-header>
 							<smoothly-table-header>Breed</smoothly-table-header>
 							<smoothly-table-header>Coat</smoothly-table-header>
 						</smoothly-table-row>
-						{data.data.map(cat => {
+						{this.data?.data.map(cat => {
 							return (
 								<smoothly-table-row>
 									<smoothly-table-cell>
@@ -45,3 +57,5 @@ export class TableDemoChecked implements ComponentWillLoad {
 			  ]
 	}
 }
+
+//top checkbox needs to select all / de-select all.

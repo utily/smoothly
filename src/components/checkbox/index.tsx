@@ -9,8 +9,8 @@ import * as translation from "./translation"
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
-	@Prop({ mutable: true, reflect: true }) checked = false
-	@Prop({ mutable: true, reflect: true }) intermediate: boolean
+	@Prop({ mutable: true, reflect: true }) checked: boolean
+	@Prop({ mutable: true, reflect: true }) state: "none" | "intermediate" | "all" = "none" // to mark if all are selected or not
 	@Prop() name = "checked"
 	@Prop() value: any = true
 	@Prop({ reflect: true }) disabled: boolean
@@ -19,13 +19,13 @@ export class SmoothlyCheckbox {
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
-		console.log("value", this.value)
+		console.log("value:", this.value)
 	}
 	@Method()
 	toggle() {
 		if (!this.disabled)
 			this.smoothlyChecked.emit({ [this.name]: (this.checked = !this.checked) || this.value })
-		console.log(this.checked)
+		console.log("checked?", this.checked)
 	}
 	render() {
 		return (
@@ -36,8 +36,14 @@ export class SmoothlyCheckbox {
 					e.stopPropagation()
 				}}
 				size={this.size}
-				name={this.intermediate ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
-				class={!this.checked && !this.intermediate ? "hidden" : "outline"}
+				name={
+					this.state == "intermediate"
+						? "remove-outline"
+						: (this.checked && this.state == "none") || this.state == "all"
+						? "checkmark-outline"
+						: "square-outline"
+				}
+				class={!this.checked && this.state == "none" ? "hidden" : "outline"}
 			/>
 		)
 	}
