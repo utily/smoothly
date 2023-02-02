@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, Listen, Prop, State } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
 import * as http from "cloudly-http"
 import { Root } from "../filtered/Root"
 
@@ -9,8 +9,9 @@ import { Root } from "../filtered/Root"
 })
 export class TableDemoChecked implements ComponentWillLoad {
 	@State() data?: Root // Root | False
-	private checks: Map<EventTarget, () => void> = new Map()
-	@Prop({ mutable: true, reflect: true }) state: "none" | "intermediate" | "all" = "none" // to mark if all are selected or not
+	/* 	private checks: Map<EventTarget, () => void> = new Map() */
+
+	@State() checked: Readonly<Record<string | number, any | undefined>> = {}
 
 	async componentWillLoad(): Promise<void> {
 		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
@@ -18,18 +19,13 @@ export class TableDemoChecked implements ComponentWillLoad {
 	}
 
 	@Listen("smoothlyChecked")
-	onSmoothlyChecked(event: CustomEvent<Record<string, boolean | any>>) {
+	onSmoothlyChecked(event: CustomEvent<{ checked: boolean }>) {
 		event.stopPropagation()
-		event.target && this.checks.set(event.target, () => (event.target as HTMLSmoothlyCheckboxElement).toggle())
-		console.log("checks:", this.checks)
-		console.log(this.checks.size)
-		if (this.data !== undefined) {
-			this.state = this.checks.size < 1 ? "none" : this.data?.data.length > this.checks.size ? "intermediate" : "all"
-		}
 	}
 
 	render() {
-		// const data = this.data
+		const dataList = this.data?.data
+		// console.log(this.checkAll)
 
 		return !this.data
 			? "Failed to load data."
@@ -37,7 +33,20 @@ export class TableDemoChecked implements ComponentWillLoad {
 					<smoothly-table>
 						<smoothly-table-row>
 							<smoothly-table-header>
-								<smoothly-checkbox state={this.state} />
+								<smoothly-checkbox
+									mid={
+										dataList &&
+										Object.keys(this.checked).length > 0 &&
+										Object.keys(this.checked).length < dataList.length
+									}
+									checked={dataList && Object.keys(this.checked).length == dataList.length}
+									onSmoothlyChecked={(event: CustomEvent<{ checked: boolean }>) => {
+										dataList && event.detail.checked
+											? (this.checked = Object.fromEntries(dataList.map(cat => [cat.breed, cat])))
+											: (this.checked = {})
+										console.log(this.checked) // logging correctly
+									}}
+								/>
 							</smoothly-table-header>
 							<smoothly-table-header>Breed</smoothly-table-header>
 							<smoothly-table-header>Coat</smoothly-table-header>
@@ -46,7 +55,18 @@ export class TableDemoChecked implements ComponentWillLoad {
 							return (
 								<smoothly-table-row>
 									<smoothly-table-cell>
-										<smoothly-checkbox name={cat.breed} value={cat}></smoothly-checkbox>
+										<smoothly-checkbox
+											name={cat.breed}
+											value={cat}
+											checked={this.checked[cat.breed]}
+											onSmoothlyChecked={(event: CustomEvent<Record<string, boolean | any>>) => {
+												const previous = this.checked
+												console.log("event.detail", event.detail)
+												this.checked = event.detail.checked
+													? { ...this.checked, [cat.breed]: cat }
+													: (({ [cat.breed]: _, ...data }) => data)(this.checked)
+												console.log("compare:", previous, this.checked)
+											}}></smoothly-checkbox>
 									</smoothly-table-cell>
 									<smoothly-table-cell>{cat.breed}</smoothly-table-cell>
 									<smoothly-table-cell>{cat.coat}</smoothly-table-cell>
