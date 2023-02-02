@@ -11,9 +11,10 @@ import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
+import { Data } from "./components/form/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
-import { Data } from "./components/submit/Data";
+import { Data as Data1 } from "./components/submit/Data";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -130,7 +131,9 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyForm {
+        "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
+        "name"?: string;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -152,6 +155,7 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete": boolean;
+        "clear": () => Promise<void>;
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -411,6 +415,10 @@ export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterInputElement;
+}
+export interface SmoothlyFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFormElement;
 }
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1134,6 +1142,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "looks"?: "plain" | "grid" | "border" | "line";
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyFormCustomEvent<{ name: string; value: Data }>) => void;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1162,8 +1172,8 @@ declare namespace LocalJSX {
         "minLength"?: number;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
-        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -1328,7 +1338,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data>) => void;
+        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data1>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }
