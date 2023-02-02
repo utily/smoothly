@@ -36,7 +36,7 @@ export namespace Components {
         "value": address[];
     }
     interface SmoothlyApp {
-        "color": Color;
+        "label": string;
     }
     interface SmoothlyAppDemo {
         "baseUrl": string;
@@ -280,7 +280,8 @@ export namespace Components {
     interface SmoothlyRoom {
         "icon"?: string;
         "label"?: string;
-        "path": string | RegExp;
+        "path": string;
+        "selected"?: boolean;
         "to"?: string;
     }
     interface SmoothlySelect {
@@ -458,6 +459,10 @@ export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
+}
+export interface SmoothlyRoomCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyRoomElement;
 }
 export interface SmoothlySelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1004,7 +1009,7 @@ declare namespace LocalJSX {
         "value"?: address[];
     }
     interface SmoothlyApp {
-        "color"?: Color;
+        "label"?: string;
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
@@ -1270,7 +1275,9 @@ declare namespace LocalJSX {
     interface SmoothlyRoom {
         "icon"?: string;
         "label"?: string;
-        "path"?: string | RegExp;
+        "onSmoothlyRoomSelected"?: (event: SmoothlyRoomCustomEvent<HTMLElement>) => void;
+        "path"?: string;
+        "selected"?: boolean;
         "to"?: string;
     }
     interface SmoothlySelect {

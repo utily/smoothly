@@ -324,7 +324,7 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
-			<h4>Smoothly Accordion</h4>,
+			<h4>Smoothly Checkbox</h4>,
 			<smoothly-form looks="grid">
 				<smoothly-checkbox selectAll={true} intermediate={true} style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>

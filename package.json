@@ -74,7 +74,6 @@
 		"langly": "2.0.1",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.2",
-		"stencil-router-v2": "^0.6.0",
 		"tidily": "0.0.53"
 	},
 	"devDependencies": {
