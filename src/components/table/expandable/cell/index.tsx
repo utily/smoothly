@@ -55,6 +55,10 @@ export class TableExpandableCell implements ComponentWillLoad {
 			this.expansionOpen.emit(this.expansionElement)
 		}
 	}
+	componentDidLoad() {
+		if (this.open && this.expansionElement)
+			this.element.parentElement?.after(this.expansionElement)
+	}
 	@Listen("click")
 	onClick() {
 		this.open = !this.open
