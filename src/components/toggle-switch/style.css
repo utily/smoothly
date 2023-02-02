@@ -7,8 +7,8 @@ button{
 	position: relative;
 	display: flex;
 	justify-content: center;
-	width: 100%;
-	height: 100%;
+	width: 4em;
+	height: 2em;
 	border-radius: 3em;
 	background-color: rgb(var(--smoothly-default-shade));
 	box-shadow: inset 0.05em 0.05em 0.5em 0.2em rgba(105, 103, 103, 0.25);
