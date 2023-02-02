@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-toggle-switch",
@@ -11,14 +11,9 @@ export class SmoothlyToggleSwitch {
 	@Prop() name: string
 	@Prop() value?: any
 
-	@Listen("click")
-	onClick(e: UIEvent) {
-		this.selected = !this.selected
-	}
-
 	render() {
 		return (
-			<button disabled={this.disabled} id="toggleBtn">
+			<button disabled={this.disabled} id="toggleBtn" onClick={() => (this.selected = !this.selected)}>
 				<div class="circle"></div>
 			</button>
 		)
