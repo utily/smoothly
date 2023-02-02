@@ -280,7 +280,7 @@ export namespace Components {
     interface SmoothlyRoom {
         "icon"?: string;
         "label"?: string;
-        "path": string;
+        "path": string | URLPattern;
         "selected"?: boolean;
         "to"?: string;
     }
@@ -1276,7 +1276,7 @@ declare namespace LocalJSX {
         "icon"?: string;
         "label"?: string;
         "onSmoothlyRoomSelected"?: (event: SmoothlyRoomCustomEvent<HTMLElement>) => void;
-        "path"?: string;
+        "path"?: string | URLPattern;
         "selected"?: boolean;
         "to"?: string;
     }

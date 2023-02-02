@@ -1,4 +1,6 @@
 import { Component, ComponentDidLoad, Event, EventEmitter, h, Prop } from "@stencil/core"
+if (!(globalThis as any).URLPattern)
+	await import("urlpattern-polyfill")
 
 @Component({
 	tag: "smoothly-room",
@@ -8,24 +10,24 @@ import { Component, ComponentDidLoad, Event, EventEmitter, h, Prop } from "@sten
 export class SmoothlyRoom implements ComponentDidLoad {
 	@Prop() label?: string
 	@Prop() icon?: string
-	@Prop() path: string
+	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true }) selected?: boolean
 	@Event() smoothlyRoomSelected: EventEmitter<HTMLElement>
 	contentElement: HTMLElement
 
 	componentDidLoad(): void | Promise<void> {
-		this.smoothlyRoomSelected.emit(this.contentElement)
+		if ((typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(window.location))
+			this.smoothlyRoomSelected.emit(this.contentElement)
 	}
 	render() {
 		return [
 			<li>
 				<a
-					href={this.path}
+					href={typeof this.path == "string" ? this.path : this.path.pathname}
 					onClick={(event: PointerEvent) => {
 						if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
 							event.preventDefault()
-							this.selected = true
 							this.smoothlyRoomSelected.emit(this.contentElement)
 						}
 					}}>

@@ -1,43 +1,45 @@
-import { Component, ComponentWillLoad, h, Listen, Prop, State } from "@stencil/core"
+import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
+
+interface Selected {
+	room: HTMLSmoothlyRoomElement
+	content: HTMLElement
+}
 
 @Component({
 	tag: "smoothly-app",
 	styleUrl: "style.css",
 	scoped: false,
 })
-export class SmoothlyApp implements ComponentWillLoad {
+export class SmoothlyApp {
 	@Prop() label = "App"
-	@State() selected?: HTMLSmoothlyRoomElement
+	@State() selected?: Selected
 	mainElement?: HTMLElement
+	rooms: Record<string, Selected> = {}
 
-	componentWillLoad(): void | Promise<void> {
-		const pushState = history.pushState
-		history.pushState = (...argument: any[]) => {
-			pushState.apply(history, ...argument)
-			this.locationChangeHandler()
+	@Watch("selected")
+	selectedChanged(value: Selected | undefined, previous: Selected | undefined) {
+		if (previous)
+			previous.room.selected = false
+		if (value) {
+			value.room.selected = true
+			const path = value.room.path.toString()
+			this.rooms[path] = value
+			history.pushState({ smoothlyPath: path }, value.room.label ?? "", path)
+			if (this.mainElement) {
+				this.mainElement.innerHTML = ""
+				this.mainElement.appendChild(value.content)
+			}
 		}
-		const replaceState = history.replaceState
-		history.replaceState = (...argument: any[]) => {
-			replaceState.apply(history, ...argument)
-			this.locationChangeHandler()
-		}
-		window.addEventListener("popstate", () => this.locationChangeHandler())
 	}
-	locationChangeHandler() {
-		alert("change")
+	@Listen("popstate", { target: "window" })
+	locationChangeHandler(event: PopStateEvent) {
+		if (typeof event.state.smoothlyPath == "string")
+			this.selected = this.rooms[event.state.smoothlyPath]
 	}
 
 	@Listen("smoothlyRoomSelected")
 	roomSelectedHandler(event: CustomEvent<HTMLElement>) {
-		if (this.selected)
-			this.selected.selected = false
-		if ((event.target as HTMLSmoothlyRoomElement).selected || !this.selected) {
-			this.selected = event.target as HTMLSmoothlyRoomElement
-			if (this.mainElement) {
-				this.mainElement.innerHTML = ""
-				this.mainElement.appendChild(event.detail)
-			}
-		}
+		this.selected = { room: event.target as HTMLSmoothlyRoomElement, content: event.detail }
 	}
 	render() {
 		return (
