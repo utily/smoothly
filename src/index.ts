@@ -1,6 +1,5 @@
 export { Components, JSX } from "./components"
 export { App, redirect } from "./components/App"
-
 export {
 	Autocomplete,
 	ClientIdentifier,
