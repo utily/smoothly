@@ -10,7 +10,7 @@ export class SmoothlyFrame {
 	@Prop() url: string
 	@Prop() name: string
 	@Event() trigger: EventEmitter<Trigger>
-	@Event() message: EventEmitter<Message<any>>
+	@Event() message2: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	get contentWindow(): Window | undefined {
 		const iframe =
@@ -33,20 +33,23 @@ export class SmoothlyFrame {
 						if (Trigger.is(content))
 							this.trigger.emit(content)
 						else
-							this.message.emit({ destination, content })
+							this.message2.emit({ destination, content })
 				},
 				window
 			)
 	}
-	send(message: Message<any>): void
+	send(message2: Message<any>): void
 	send(destination: string, content: Trigger | any): void
 	@Method()
-	async send(message: string | Message<any>, content?: Trigger | any): Promise<void> {
-		if (typeof message == "string")
-			Message.send((this.origin ?? this.defaultOrigin) + "#" + message, content, this.contentWindow)
-		else if (Message.is(message) && this.contentWindow)
+	async send(message2: string | Message<any>, content?: Trigger | any): Promise<void> {
+		if (typeof message2 == "string")
+			Message.send((this.origin ?? this.defaultOrigin) + "#" + message2, content, this.contentWindow)
+		else if (Message.is(message2) && this.contentWindow)
 			Message.send(
-				{ destination: (this.origin ?? this.defaultOrigin) + "#" + message.destination, content: message.destination },
+				{
+					destination: (this.origin ?? this.defaultOrigin) + "#" + message2.destination,
+					content: message2.destination,
+				},
 				this.contentWindow
 			)
 	}
