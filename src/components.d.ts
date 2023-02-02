@@ -37,14 +37,29 @@ export namespace Components {
     }
     interface SmoothlyApp {
         "label": string;
+        "menuOpen": boolean;
     }
     interface SmoothlyAppDemo {
         "baseUrl": string;
+    }
+    interface SmoothlyAppMenu {
+    }
+    interface SmoothlyAppRoom {
+        "icon"?: string;
+        "label"?: string;
+        "path": string | URLPattern;
+        "selected"?: boolean;
+        "to"?: string;
     }
     interface SmoothlyBacktotop {
         "bottom": string;
         "opacity": string;
         "right": string;
+    }
+    interface SmoothlyBurger {
+        "mediaQuery": string;
+        "open": boolean;
+        "visible": boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -290,13 +305,6 @@ export namespace Components {
     }
     interface SmoothlyReorder {
     }
-    interface SmoothlyRoom {
-        "icon"?: string;
-        "label"?: string;
-        "path": string;
-        "selected"?: boolean;
-        "to"?: string;
-    }
     interface SmoothlySelect {
         "background"?: string;
         "identifier": string;
@@ -409,6 +417,14 @@ export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyAccordionItemElement;
 }
+export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyAppRoomElement;
+}
+export interface SmoothlyBurgerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyBurgerElement;
+}
 export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCalendarElement;
@@ -493,10 +509,6 @@ export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
 }
-export interface SmoothlyRoomCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyRoomElement;
-}
 export interface SmoothlySelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlySelectElement;
@@ -576,11 +588,29 @@ declare global {
         prototype: HTMLSmoothlyAppDemoElement;
         new (): HTMLSmoothlyAppDemoElement;
     };
+    interface HTMLSmoothlyAppMenuElement extends Components.SmoothlyAppMenu, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAppMenuElement: {
+        prototype: HTMLSmoothlyAppMenuElement;
+        new (): HTMLSmoothlyAppMenuElement;
+    };
+    interface HTMLSmoothlyAppRoomElement extends Components.SmoothlyAppRoom, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAppRoomElement: {
+        prototype: HTMLSmoothlyAppRoomElement;
+        new (): HTMLSmoothlyAppRoomElement;
+    };
     interface HTMLSmoothlyBacktotopElement extends Components.SmoothlyBacktotop, HTMLStencilElement {
     }
     var HTMLSmoothlyBacktotopElement: {
         prototype: HTMLSmoothlyBacktotopElement;
         new (): HTMLSmoothlyBacktotopElement;
+    };
+    interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
+    }
+    var HTMLSmoothlyBurgerElement: {
+        prototype: HTMLSmoothlyBurgerElement;
+        new (): HTMLSmoothlyBurgerElement;
     };
     interface HTMLSmoothlyButtonElement extends Components.SmoothlyButton, HTMLStencilElement {
     }
@@ -807,12 +837,6 @@ declare global {
         prototype: HTMLSmoothlyReorderElement;
         new (): HTMLSmoothlyReorderElement;
     };
-    interface HTMLSmoothlyRoomElement extends Components.SmoothlyRoom, HTMLStencilElement {
-    }
-    var HTMLSmoothlyRoomElement: {
-        prototype: HTMLSmoothlyRoomElement;
-        new (): HTMLSmoothlyRoomElement;
-    };
     interface HTMLSmoothlySelectElement extends Components.SmoothlySelect, HTMLStencilElement {
     }
     var HTMLSmoothlySelectElement: {
@@ -971,7 +995,10 @@ declare global {
         "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
+        "smoothly-app-menu": HTMLSmoothlyAppMenuElement;
+        "smoothly-app-room": HTMLSmoothlyAppRoomElement;
         "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
+        "smoothly-burger": HTMLSmoothlyBurgerElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
@@ -1009,7 +1036,6 @@ declare global {
         "smoothly-radio-button-item": HTMLSmoothlyRadioButtonItemElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
-        "smoothly-room": HTMLSmoothlyRoomElement;
         "smoothly-select": HTMLSmoothlySelectElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-selector": HTMLSmoothlySelectorElement;
@@ -1064,14 +1090,31 @@ declare namespace LocalJSX {
     }
     interface SmoothlyApp {
         "label"?: string;
+        "menuOpen"?: boolean;
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
+    }
+    interface SmoothlyAppMenu {
+    }
+    interface SmoothlyAppRoom {
+        "icon"?: string;
+        "label"?: string;
+        "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<HTMLElement>) => void;
+        "path"?: string | URLPattern;
+        "selected"?: boolean;
+        "to"?: string;
     }
     interface SmoothlyBacktotop {
         "bottom"?: string;
         "opacity"?: string;
         "right"?: string;
+    }
+    interface SmoothlyBurger {
+        "mediaQuery"?: string;
+        "onBurgerStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        "open"?: boolean;
+        "visible"?: boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -1336,14 +1379,6 @@ declare namespace LocalJSX {
     interface SmoothlyReorder {
         "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
-    interface SmoothlyRoom {
-        "icon"?: string;
-        "label"?: string;
-        "onSmoothlyRoomSelected"?: (event: SmoothlyRoomCustomEvent<HTMLElement>) => void;
-        "path"?: string;
-        "selected"?: boolean;
-        "to"?: string;
-    }
     interface SmoothlySelect {
         "background"?: string;
         "identifier"?: string;
@@ -1475,7 +1510,10 @@ declare namespace LocalJSX {
         "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
+        "smoothly-app-menu": SmoothlyAppMenu;
+        "smoothly-app-room": SmoothlyAppRoom;
         "smoothly-backtotop": SmoothlyBacktotop;
+        "smoothly-burger": SmoothlyBurger;
         "smoothly-button": SmoothlyButton;
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-calendar": SmoothlyCalendar;
@@ -1513,7 +1551,6 @@ declare namespace LocalJSX {
         "smoothly-radio-button-item": SmoothlyRadioButtonItem;
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
-        "smoothly-room": SmoothlyRoom;
         "smoothly-select": SmoothlySelect;
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-selector": SmoothlySelector;
@@ -1552,7 +1589,10 @@ declare module "@stencil/core" {
             "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
+            "smoothly-app-menu": LocalJSX.SmoothlyAppMenu & JSXBase.HTMLAttributes<HTMLSmoothlyAppMenuElement>;
+            "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
             "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
+            "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
@@ -1593,7 +1633,6 @@ declare module "@stencil/core" {
             "smoothly-radio-button-item": LocalJSX.SmoothlyRadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonItemElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
-            "smoothly-room": LocalJSX.SmoothlyRoom & JSXBase.HTMLAttributes<HTMLSmoothlyRoomElement>;
             "smoothly-select": LocalJSX.SmoothlySelect & JSXBase.HTMLAttributes<HTMLSmoothlySelectElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-selector": LocalJSX.SmoothlySelector & JSXBase.HTMLAttributes<HTMLSmoothlySelectorElement>;

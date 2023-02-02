@@ -1,59 +1,80 @@
-import { Component, ComponentWillLoad, h, Listen, Prop, State } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+
+interface Selected {
+	room: HTMLSmoothlyAppRoomElement
+	content: HTMLElement
+}
 
 @Component({
 	tag: "smoothly-app",
 	styleUrl: "style.css",
 	scoped: false,
 })
-export class SmoothlyApp implements ComponentWillLoad {
+export class SmoothlyApp {
 	@Prop() label = "App"
-	@State() selected?: HTMLSmoothlyRoomElement
+	@Prop({ mutable: true, reflect: true }) menuOpen = false
+	@State() selected?: Selected
 	mainElement?: HTMLElement
+	rooms: Record<string, Selected> = {}
 
-	componentWillLoad(): void | Promise<void> {
-		const pushState = history.pushState
-		history.pushState = (...argument: any[]) => {
-			pushState.apply(history, ...argument)
-			this.locationChangeHandler()
+	@Watch("selected")
+	selectedChanged(value: Selected | undefined, previous: Selected | undefined) {
+		if (previous) {
+			previous.room.selected = false
 		}
-		const replaceState = history.replaceState
-		history.replaceState = (...argument: any[]) => {
-			replaceState.apply(history, ...argument)
-			this.locationChangeHandler()
+		if (value) {
+			value.room.selected = true
+			const path = value.room.path.toString()
+			this.rooms[path] = value
+
+			history.pushState({ smoothlyPath: path }, value.room.label ?? "", path)
+
+			if (this.mainElement) {
+				this.mainElement.innerHTML = ""
+				this.mainElement.appendChild(value.content)
+			}
 		}
-		window.addEventListener("popstate", () => this.locationChangeHandler())
 	}
-	locationChangeHandler() {
-		alert("change")
+
+	@Listen("burgerStatus")
+	burgerStatusHandler(event: CustomEvent) {
+		event.stopPropagation()
+		this.menuOpen = event.detail ? true : false
+	}
+
+	@Listen("popstate", { target: "window" })
+	locationChangeHandler(event: PopStateEvent) {
+		console.log("popstate", event.state, this.selected?.room.path.toString())
+		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.room.path) {
+			this.selected = this.rooms[event.state.smoothlyPath]
+		}
+		if (this.mainElement) {
+			this.mainElement.innerHTML = ""
+			this.mainElement.appendChild(this.rooms[event.state.smoothlyPath].content)
+		}
 	}
 
 	@Listen("smoothlyRoomSelected")
 	roomSelectedHandler(event: CustomEvent<HTMLElement>) {
-		if (this.selected)
-			this.selected.selected = false
-		if ((event.target as HTMLSmoothlyRoomElement).selected || !this.selected) {
-			this.selected = event.target as HTMLSmoothlyRoomElement
-			if (this.mainElement) {
-				this.mainElement.innerHTML = ""
-				this.mainElement.appendChild(event.detail)
-			}
-		}
+		this.selected = { room: event.target as HTMLSmoothlyAppRoomElement, content: event.detail }
 	}
+
 	render() {
 		return (
 			<smoothly-notifier>
-				<header>
+				<header color="tertiary">
 					<h1>
 						<a href={"/"}>{this.label}</a>
 					</h1>
 					<slot name="header"></slot>
 					<nav>
-						<ul>
+						<ul class={this.menuOpen.toString()}>
 							<slot name="nav-start"></slot>
-							<slot></slot>
+							<slot> </slot>
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>
+					<smoothly-burger></smoothly-burger>
 				</header>
 				<main ref={e => (this.mainElement = e)}></main>
 			</smoothly-notifier>

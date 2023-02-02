@@ -1,7 +1,0 @@
-:host > content {
-	display: none;
-}
-:host[selected] > li {
-	color: rgb(var(--smoothly-primary-contrast));
-	background: rgb(var(--smoothly-primary-color));
-}
