@@ -50,7 +50,8 @@ export class SmoothlyFrame {
 				this.contentWindow
 			)
 	}
+
 	render() {
-		return <iframe src={this.url + "#" + window.location.origin} height="100%" width="100%"></iframe>
+		return [] //<iframe src={this.url + "#" + window.location.origin} height="100%" width="100%"></iframe>
 	}
 }

@@ -64,12 +64,32 @@
 }
 
 smoothly-app>smoothly-notifier>header>h1>a {
-	color: transparent;
+	color: var(--smoothly-default-color);
 	width: 10em;
 	height: 100%;
-	background-image: url("../logo/smoothly.svg");
+	margin-top: 1.3em;
+	margin-left: -2.5em;
+	font-weight: 900;
+	justify-content: center;
+	background-image: url("../logo/smoothly.svg"); 
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+smoothly-app>smoothly-notifier>header>nav>ul {
+ display: flex;
+ gap: 10px;
+ gap: 10px 20px; 
+ row-gap: 10px;
+ column-gap: 20px;
+ 
+}
+
+smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon{
+	fill: rgb(var(--smoothly-primary-shade));
+	stroke: rgb(var(--smoothly-primary-shade));
+	color: rgb(var(--smoothly-primary-shade));
+	margin-top: 0.7em;
+	
 }
 
 

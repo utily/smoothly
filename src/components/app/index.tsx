@@ -29,6 +29,7 @@ export class SmoothlyApp {
 				this.mainElement.innerHTML = ""
 				this.mainElement.appendChild(value.content)
 			}
+			console.log(history.pushState)
 		}
 	}
 	@Listen("popstate", { target: "window" })

@@ -16,11 +16,18 @@ a,
 a:hover,
 a:visited {
 	color: inherit;
+	
 }
 
 a:hover {
 	cursor: pointer;
+	background-color: rgb(var(--smoothly-primary-tint));
+	transition: 0.3s; 
+	
+	
 }
+
+
 
 [color=default] {
 	--smoothly-color: var(--smoothly-default-color);
