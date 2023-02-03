@@ -1,0 +1,24 @@
+:host {
+	display: block;
+	cursor: pointer;
+}
+:host > content {
+	display: none;
+}
+:host > li {
+	height: 100%;
+	list-style: none;
+	padding: 0;
+}
+:host > li > a {
+	height: 100%;
+}
+:host[selected] {
+	color: rgb(var(--smoothly-color-contrast));
+	background: rgb(var(--smoothly-color));
+}
+:host:hover {
+	color:rgb(var(--smoothly-color-contrast)); 
+	background-color: rgb(var(--smoothly-color-tint));
+	transition: 0.2s;	
+}

@@ -3,11 +3,11 @@ if (!(globalThis as any).URLPattern)
 	await import("urlpattern-polyfill")
 
 @Component({
-	tag: "smoothly-room",
+	tag: "smoothly-app-room",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyRoom implements ComponentDidLoad {
+export class SmoothlyAppRoom implements ComponentDidLoad {
 	@Prop() label?: string
 	@Prop() icon?: string
 	@Prop() path: string | URLPattern = ""

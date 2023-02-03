@@ -3,11 +3,11 @@
 :root {
 	--smoothly-font-family: "Open Sans", Verdana;
 	--smoothly-semitransparent: .8;
-	
+
+	--smoothly-default-contrast: 51, 51, 51;
 	--smoothly-default-color: 255, 255, 255;
-	--smoothly-default-contrast: 46, 52, 54;
-	--smoothly-default-shade: 234, 234, 231;
-	--smoothly-default-tint: 136, 138, 133;
+	--smoothly-default-shade: 225, 232, 249;
+	--smoothly-default-tint: 246, 249, 254;
 	
 	--smoothly-primary-color: 207, 32, 63;
 	--smoothly-primary-contrast: 255, 255, 255;
@@ -54,9 +54,7 @@
 	--smoothly-light-shade: 225, 232, 249;
 	--smoothly-light-tint: 246, 249, 254;
 	
-	--smoothly-color-contrast: 46, 52, 54;
-	
-	--smoothly-shadow: 0 0 4px 2px rgba(var(--smoothly-default-contrast), 0.25);
+	--smoothly-shadow: 0 0 4px 2px rgba(var(--smoothly-color-contrast), 0.25);
 	--smoothly-shadow-strong: 0 0 4px 4px rgba(var(--smoothly-light-color), 0.25);
 	--border-radius: 0.25rem;
 	--input-width: 18rem;
@@ -75,21 +73,3 @@ smoothly-app>smoothly-notifier>header>h1>a {
 	background-repeat: no-repeat;
 	background-size: contain;
 }
-smoothly-app>smoothly-notifier>header>nav>ul {
- display: flex;
- gap: 10px;
- gap: 10px 20px; 
- row-gap: 10px;
- column-gap: 20px;
- 
-}
-
-smoothly-app>smoothly-notifier>header>[slot=header]>a>smoothly-icon{
-	fill: rgb(var(--smoothly-primary-shade));
-	stroke: rgb(var(--smoothly-primary-shade));
-	color: rgb(var(--smoothly-primary-shade));
-	margin-top: 0.7em;
-	
-}
-
-

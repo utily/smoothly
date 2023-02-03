@@ -1,7 +1,7 @@
 import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
 
 interface Selected {
-	room: HTMLSmoothlyRoomElement
+	room: HTMLSmoothlyAppRoomElement
 	content: HTMLElement
 }
 
@@ -40,12 +40,12 @@ export class SmoothlyApp {
 
 	@Listen("smoothlyRoomSelected")
 	roomSelectedHandler(event: CustomEvent<HTMLElement>) {
-		this.selected = { room: event.target as HTMLSmoothlyRoomElement, content: event.detail }
+		this.selected = { room: event.target as HTMLSmoothlyAppRoomElement, content: event.detail }
 	}
 	render() {
 		return (
 			<smoothly-notifier>
-				<header>
+				<header color="primary">
 					<h1>
 						<a href={"/"}>{this.label}</a>
 					</h1>

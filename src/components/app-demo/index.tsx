@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app label="Smoothly Demo">
-				<smoothly-room path="/">
+				<smoothly-app-room path="/">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">
@@ -31,26 +31,26 @@ export class SmoothlyAppDemo {
 							action link
 						</smoothly-button>
 					</div>
-				</smoothly-room>
-				<smoothly-room path="/input" label="Input">
+				</smoothly-app-room>
+				<smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
-				</smoothly-room>
-				<smoothly-room path="/dialog" label="Dialog">
+				</smoothly-app-room>
+				<smoothly-app-room path="/dialog" label="Dialog">
 					<smoothly-dialog-demo />
-				</smoothly-room>
-				<smoothly-room path="/display" label="Display" icon="eye-outline">
+				</smoothly-app-room>
+				<smoothly-app-room path="/display" label="Display" icon="eye-outline">
 					<smoothly-display-demo />
-				</smoothly-room>
-				<smoothly-room path="/table" label="Table">
+				</smoothly-app-room>
+				<smoothly-app-room path="/table" label="Table">
 					<smoothly-table-demo />
-				</smoothly-room>
-				<smoothly-room path="/select" label="Select">
+				</smoothly-app-room>
+				<smoothly-app-room path="/select" label="Select">
 					<smoothly-select-demo />
-				</smoothly-room>
-				<smoothly-room path="/icon" label="Icon">
+				</smoothly-app-room>
+				<smoothly-app-room path="/icon" label="Icon">
 					<smoothly-icon-demo />
-				</smoothly-room>
-				<smoothly-room path="/old" label="Old" to="select"></smoothly-room>
+				</smoothly-app-room>
+				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
 				<smoothly-trigger slot="header" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
