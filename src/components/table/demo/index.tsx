@@ -16,7 +16,7 @@ export class TableDemo {
 					<smoothly-table-header>Header D</smoothly-table-header>
 				</smoothly-table-row>
 				<smoothly-table-row>
-					<smoothly-table-expandable-cell>
+					<smoothly-table-expandable-cell open>
 						normal row (exp.cell)
 						<div slot="detail">expandable cell 1 content</div>
 					</smoothly-table-expandable-cell>
@@ -37,7 +37,7 @@ export class TableDemo {
 				<smoothly-table-row>
 					<smoothly-table-cell>normal row (nor.cell)"</smoothly-table-cell>
 					<smoothly-table-cell>normal cell</smoothly-table-cell>
-					<smoothly-table-expandable-cell>
+					<smoothly-table-expandable-cell open>
 						expandable cell
 						<div slot="detail">expandable cell details.</div>
 					</smoothly-table-expandable-cell>
