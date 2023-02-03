@@ -9,32 +9,28 @@ import * as translation from "./translation"
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
-	@Prop({ mutable: true, reflect: true }) checked: boolean
-	@Prop({ mutable: true, reflect: true }) mid: boolean
-	@Prop({ mutable: true, reflect: true }) selectAll = false
-	@Prop() name = "checked"
-	@Prop() value: any = true
+	@Prop({ mutable: true, reflect: true }) checked: boolean | "intermediate" = false
+	@Prop() name: string
+	@Prop() value: any
 	@Prop({ reflect: true }) disabled: boolean
-	// @Event() smoothlyCheckAll: EventEmitter<{ checked: boolean }>
-	// @Event() smoothlyChecked: EventEmitter<Record<string, boolean>>
-	@Event() smoothlyChecked: EventEmitter<{ checked: boolean }>
+	@Prop() suppress = false
+	@Event() smoothlyChecked: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
-		// console.log("value:", this.value)
 	}
+
 	@Method()
-	toggle() {
-		if (!this.disabled)
-			this.checked = !this.checked
-		// this.smoothlyChecked.emit({ [this.name]: (this.checked, this.value) })
-		this.smoothlyChecked.emit({ checked: this.checked })
-		// console.log("checkbox", this.checked)
-		// console.log("checkbox.value", this.value)
-		// if (this.selectAll && !this.disabled)
-		// 	//compare the length of data and checks and check all
-		// 	this.smoothlyCheckAll.emit({ checked: this.checked })
+	async toggle(): Promise<void> {
+		if (!this.disabled) {
+			const checked = this.checked == "intermediate" || this.checked == false
+			this.smoothlyChecked.emit({
+				[this.name]: checked ? this.value : undefined,
+			})
+			// if (!this.suppress)
+			this.checked = checked
+		}
 	}
 
 	render() {
@@ -46,8 +42,8 @@ export class SmoothlyCheckbox {
 					e.stopPropagation()
 				}}
 				size={this.size}
-				name={this.mid ? "remove-outline" : this.checked && !this.mid ? "checkmark-outline" : "square-outline"}
-				class={!this.checked && !this.mid ? "hidden" : "outline"}
+				name={this.checked == "intermediate" ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
+				class={!this.checked == true ? "hidden" : "outline"}
 			/>
 		)
 	}

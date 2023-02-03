@@ -2,7 +2,8 @@ import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 import * as http from "cloudly-http"
-import { Root } from "./Root"
+import { Selector } from "../../Selector"
+import { Cat, Root } from "./Root"
 
 @Component({
 	tag: "smoothly-table-demo-filtered",
@@ -12,11 +13,17 @@ import { Root } from "./Root"
 export class TableDemoFiltered implements ComponentWillLoad {
 	@State() criteria: Criteria = {}
 	@State() data?: Root | false
+	@State() selector: Selector<Cat> = Selector.create("breed")
 
 	@Listen("filters")
 	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
 		this.criteria = event.detail
+	}
+
+	@Listen("smoothlyChecked", { capture: true })
+	smoothlyCheckedHandler(event: CustomEvent<Record<string, any>>) {
+		this.selector = this.selector.handle(event.detail)
 	}
 
 	async componentWillLoad(): Promise<void> {
@@ -25,7 +32,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	}
 
 	render() {
-		const data = this.data
+		const data = this.data && selectively.filter(this.criteria, this.data.data)
 		return !data
 			? "Failed to load data."
 			: [
@@ -36,19 +43,19 @@ export class TableDemoFiltered implements ComponentWillLoad {
 							<div slot="filter">
 								<smoothly-filter-input name="breed">
 									<smoothly-icon slot="start" name="search-outline" size="tiny" />
-									breed
+									Breed
 								</smoothly-filter-input>
 								<smoothly-filter-input name="country">
 									<smoothly-icon slot="start" name="search-outline" size="tiny" />
-									country
+									Country
 								</smoothly-filter-input>
 								<smoothly-filter-input name="coat">
 									<smoothly-icon slot="start" name="search-outline" size="tiny" />
-									coat
+									Coat
 								</smoothly-filter-input>
 								<smoothly-filter-input name="pattern">
 									<smoothly-icon slot="start" name="search-outline" size="tiny" />
-									pattern
+									Pattern
 								</smoothly-filter-input>
 							</div>
 						</smoothly-filter>
@@ -56,11 +63,13 @@ export class TableDemoFiltered implements ComponentWillLoad {
 
 					<smoothly-table>
 						<smoothly-table-row>
-							<smoothly-table-header>breed</smoothly-table-header>
-							<smoothly-table-header>coat</smoothly-table-header>
+							<smoothly-table-header>{this.selector.render(data)}</smoothly-table-header>
+							<smoothly-table-header>Breed</smoothly-table-header>
+							<smoothly-table-header>Coat</smoothly-table-header>
 						</smoothly-table-row>
-						{selectively.filter(this.criteria, data.data).map(cat => (
+						{data.map(cat => (
 							<smoothly-table-row>
+								<smoothly-table-cell>{this.selector.render(cat)}</smoothly-table-cell>
 								<smoothly-table-expandable-cell>
 									{cat.breed}
 									<div slot="detail">Country: {cat.country}</div>
