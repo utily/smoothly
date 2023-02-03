@@ -63,18 +63,23 @@ export class SmoothlyInputDemo {
 					Fill Clear
 				</smoothly-button>
 				<h4>Buttons with Icon in "start"</h4>
-				<smoothly-button shape="rounded" fill="solid" color="warning">
-					<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
-					Check
-				</smoothly-button>
-				<smoothly-button shape="rounded" fill="solid" color="secondary">
-					<smoothly-icon name="basketball" slot="start"></smoothly-icon>
-					Check
-				</smoothly-button>
-				<smoothly-button shape="rounded" fill="solid" color="success">
-					<smoothly-icon name="call" slot="start"></smoothly-icon>
-					Check
-				</smoothly-button>
+				<div style={{ display: "inline-block" }}>
+					<smoothly-button shape="rounded" fill="solid" color="warning">
+						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						Check
+					</smoothly-button>
+					<smoothly-button shape="rounded" fill="solid" color="secondary">
+						<smoothly-icon name="basketball" slot="start"></smoothly-icon>
+						Check
+					</smoothly-button>
+					<smoothly-button shape="rounded" fill="solid" color="success">
+						<smoothly-icon name="call" slot="start"></smoothly-icon>
+						Check
+					</smoothly-button>
+					<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
+						<smoothly-icon name="call"></smoothly-icon>
+					</smoothly-button>
+				</div>
 				<h4>Buttons with Icon in "end"</h4>
 				<smoothly-button fill="solid" color="light">
 					Go Forward
@@ -92,7 +97,7 @@ export class SmoothlyInputDemo {
 				</smoothly-button>
 				<h4>Link examples</h4>
 				<smoothly-button type="link">type link</smoothly-button>
-				<smoothly-button type="button">
+				<smoothly-button type="button" fill="clear">
 					<a href="https://google.com">link</a>
 				</smoothly-button>
 				<smoothly-button link="https://google.com" type="link">
@@ -120,7 +125,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h2>Grid</h2>,
 			<h4>Contact</h4>,
-			<smoothly-form looks="grid">
+			<smoothly-form looks="grid" method="GET" action="https://webhook.site/85bb78f6-b450-4a74-81ac-d7cac6e94bbe">
 				<smoothly-input type="text" name="name.last">
 					First Name
 				</smoothly-input>
@@ -146,27 +151,28 @@ export class SmoothlyInputDemo {
 					Email
 				</smoothly-input>
 				<smoothly-submit slot="submit" color="success" fill="solid">
-					<smoothly-icon name="checkmark-circle"></smoothly-icon>
+					<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+					Submit
 				</smoothly-submit>
 			</smoothly-form>,
 			<h4>Card</h4>,
-			<smoothly-form looks="grid">
+			<smoothly-form looks="grid" onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}>
 				<smoothly-input type="card-number" name="card" style={{ width: "80%" }}>
 					Card #
 				</smoothly-input>
-				<smoothly-submit slot="submit" color="success" fill="solid">
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
-				<smoothly-input type="card-expires" name="card">
+				<smoothly-input type="card-expires" name="expires">
 					Expires
 				</smoothly-input>
-				<smoothly-input type="card-csc" name="card">
+				<smoothly-input type="card-csc" name="csc">
 					CVV/CVC
 				</smoothly-input>
-				<smoothly-input type="text" name="firstName">
+				<smoothly-input type="text" name="name.first">
 					First Name
 				</smoothly-input>
-				<smoothly-input type="text" name="name.first">
+				<smoothly-input type="text" name="name.last">
 					Last Name
 				</smoothly-input>
 			</smoothly-form>,
@@ -184,7 +190,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input type="percent" name="percent">
 					Percent
 				</smoothly-input>
-				<smoothly-submit slot="submit" color="success" fill="solid">
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
@@ -241,7 +247,7 @@ export class SmoothlyInputDemo {
 						<span slot="expansion">Some third description.</span>
 					</smoothly-radio-button-item>
 				</smoothly-radio-button>
-				<smoothly-submit slot="submit" color="success" fill="solid">
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
@@ -261,7 +267,7 @@ export class SmoothlyInputDemo {
 						<span slot="expansion">Some third description.</span>
 					</smoothly-radio-button-item>
 				</smoothly-radio-button>
-				<smoothly-submit slot="submit" color="success" fill="solid">
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
@@ -303,7 +309,7 @@ export class SmoothlyInputDemo {
 						</smoothly-radio>
 					</smoothly-accordion-item>
 				</smoothly-accordion>
-				<smoothly-submit slot="submit" color="success" fill="solid">
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
@@ -342,7 +348,7 @@ export class SmoothlyInputDemo {
 						{ allowed: "Delivery", countryCode: "SE", street: "Rundslingan 3", zipCode: "987 65", city: "Klotby" },
 						{ allowed: "Billing", countryCode: "SE", street: "Gångbanan 34", zipCode: "543 21", city: "Traskträsk" },
 					]}></smoothly-addresses>
-				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success">
+				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
 					Submit
 				</smoothly-submit>
 			</smoothly-form>,

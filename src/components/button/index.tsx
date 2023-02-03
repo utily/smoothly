@@ -1,9 +1,10 @@
-import { Component,h, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 import { Color, Fill } from "../../model"
+import { Button } from "../Button"
 
 @Component({
 	tag: "smoothly-button",
-	styleUrl: "style.css",
+	styleUrl: "../button/style.css",
 	shadow: true,
 })
 export class SmoothlyButton {
@@ -18,26 +19,6 @@ export class SmoothlyButton {
 	@Prop() download?: boolean
 
 	render() {
-		return this.disabled && (this.link || this.type == "link") ? (
-			<slot></slot>
-		) : this.link ? (
-			<a href={this.link} target="_blank" download={this.download}>
-				<slot name="start"></slot>
-				<slot></slot>
-				<slot name="end"></slot>
-			</a>
-		) : this.type == "link" ? (
-			<a href={this.link}>
-				<slot name="start"></slot>
-				<slot></slot>
-				<slot name="end"></slot>
-			</a>
-		) : (
-			<button disabled={this.disabled}>
-				<slot name="start"></slot>
-				<slot></slot>
-				<slot name="end"></slot>
-			</button>
-		)
+		return <Button disabled={this.disabled} type={this.type} link={this.link} download={this.download}></Button>
 	}
 }

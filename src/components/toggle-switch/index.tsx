@@ -1,9 +1,9 @@
-import { Component, h, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-toggle-switch",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyToggleSwitch {
 	@Prop({ mutable: true, reflect: true }) selected = false
@@ -13,9 +13,11 @@ export class SmoothlyToggleSwitch {
 
 	render() {
 		return (
-			<button disabled={this.disabled} id="toggleBtn" onClick={() => (this.selected = !this.selected)}>
-				<div class="circle"></div>
-			</button>
+			<Host>
+				<button disabled={this.disabled} id="toggleBtn" onClick={() => (this.selected = !this.selected)}>
+					<smoothly-icon name="checkmark-circle" fill="clear"></smoothly-icon>
+				</button>
+			</Host>
 		)
 	}
 }

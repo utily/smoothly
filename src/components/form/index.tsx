@@ -1,6 +1,9 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { http } from "cloudly-http"
+import { Notice } from "../../model/Notice"
 import { Clearable } from "./Clearable"
 import { Data } from "./Data"
+
 @Component({
 	tag: "smoothly-form",
 	styleUrl: "style.css",
@@ -10,18 +13,45 @@ export class SmoothlyForm {
 	private clearables = new Map<string, Clearable>()
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
-	@Event() smoothlyInput: EventEmitter<{ name: string; value: Data }>
+	@Prop() method?: "GET" | "POST"
+	@Prop() action?: string
+	@Event() smoothlyFormInput: EventEmitter<Data>
+	@Event() smoothlyFormSubmit: EventEmitter<Data>
+	@State() notice?: Notice
 
-	@Listen("smoothlyInput")
+	@Listen("smoothlyInput", { capture: true })
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		event.stopPropagation()
-		this.value = Object.entries(event.detail).reduce(
-			(r, [name, value]) => Data.set(r, name.split("."), value),
-			this.value
+		this.notice = undefined
+		this.smoothlyFormInput.emit(
+			(this.value = Object.entries(event.detail).reduce(
+				(r, [name, value]) => Data.set(r, name.split("."), value),
+				this.value
+			))
 		)
 		if (Clearable.is(event.target)) {
 			const clearable = event.target
 			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
+		}
+	}
+	@Listen("smoothlySubmit", { capture: true })
+	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
+		this.submit()
+	}
+	@Method()
+	async submit(): Promise<void> {
+		console.log("form submit")
+		this.smoothlyFormSubmit.emit(this.value)
+		if (this.action) {
+			const response = await http.fetch(
+				this.method == "POST"
+					? { method: "POST", url: this.action, body: this.value }
+					: { url: `${this.action}?${http.Search.stringify(this.value)}` }
+			)
+			if (response.status >= 200 && response.status < 300) {
+				this.notice = Notice.succeded("Form sucessfully submitted.")
+				await this.clear()
+			} else
+				this.notice = Notice.failed("Failed to submit form.")
 		}
 	}
 	@Method()
@@ -30,12 +60,15 @@ export class SmoothlyForm {
 	}
 	render() {
 		return (
-			<form>
-				<fieldset>
-					<slot></slot>
-				</fieldset>
-				<slot name="submit"></slot>
-			</form>
+			<Host>
+				{this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []}
+				<form name={this.name}>
+					<fieldset>
+						<slot></slot>
+					</fieldset>
+					<slot name="submit"></slot>
+				</form>
+			</Host>
 		)
 	}
 }
