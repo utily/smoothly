@@ -370,6 +370,7 @@ export namespace Components {
         "disabled": boolean;
         "name": string;
         "selected": boolean;
+        "size": "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyTrigger {
@@ -1410,6 +1411,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "name"?: string;
         "selected"?: boolean;
+        "size"?: "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyTrigger {

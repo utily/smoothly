@@ -20,8 +20,8 @@ export class SmoothlyInputDemo {
 				</smoothly-toggle>
 				<h4>Toggle switches</h4>
 				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
-				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
-				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
+				<smoothly-toggle-switch disabled={false} size="small"></smoothly-toggle-switch>
+				<smoothly-toggle-switch disabled={false} size="large"></smoothly-toggle-switch>
 				<h4>Links with icons</h4>
 				<smoothly-button type="link">
 					<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>

@@ -1,12 +1,24 @@
 :host{
-	margin:1em;
+	display: block;
+	margin: 1em;
+	width: 4em;
+	height: 2em;
+}
+:host([size=large]){
+	width: 5em;
+	height: 2.5em;
+}
+:host([size=small]){
+	width: 3em;
+	height: 1.5em;
 }
 button{
 	padding:none;
 	border: none;
 	position: relative;
-	width: 4em;
-	height: 2em;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
 	border-radius: 3em;
 	background-color: rgb(var(--smoothly-primary-color));
 	cursor: pointer;
@@ -15,11 +27,14 @@ smoothly-icon{
 	position: relative;
 	fill: white;
 	stroke: white;
-	font-size: 110%;
-	float: right;
+	font-size: 120%;
+	top: -8%;
+}
+:host([selected]) smoothly-icon{
+	left: 47%;
 }
 :host(:not([selected])) smoothly-icon{
-	float: left;
+	left: -17%;
 }
 :host([selected]) > button{
 	background-color: rgb(var(--smoothly-success-color));
