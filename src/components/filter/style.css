@@ -56,7 +56,7 @@
 
 /* arrow placement */
 .container.arrow-top:before {
-	left: calc(90%);
+	left: calc(86%);
 	top: -6px;
 }
 

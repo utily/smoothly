@@ -7,7 +7,6 @@ export class Selector<T> {
 	}
 	private constructor(private readonly key: keyof T, private data: Readonly<Record<string, T>> = {}) {}
 	handle(data: Record<string, T>): Selector<T> {
-		console.log(Selector)
 		return new Selector(
 			this.key,
 			"check-all" in data
@@ -20,17 +19,15 @@ export class Selector<T> {
 			<smoothly-checkbox
 				name="check-all"
 				value={Object.fromEntries(item.map(i => [i[this.key], i]))}
-				checked={this.selected.length == item.length ? true : this.selected.length == 0 ? false : "intermediate"}
+				checked={this.selected.length == item.length ? true : this.selected.length == 0 && false}
+				intermediate={this.selected.length > 1 && this.selected.length !== item.length}
 			/>
 		) : (
-			(console.log("render", item[this.key], !!this.data[item[this.key]?.toString() ?? ""]),
-			(
-				<smoothly-checkbox
-					name={item[this.key]?.toString()}
-					value={item}
-					checked={!!this.data[item[this.key]?.toString() ?? ""]}
-				/>
-			))
+			<smoothly-checkbox
+				name={item[this.key]?.toString()}
+				value={item}
+				checked={!!this.data[item[this.key]?.toString() ?? ""]}
+			/>
 		)
 	}
 	static create<T>(key: keyof T): Selector<T> {

@@ -8,7 +8,7 @@ import { Component, h } from "@stencil/core"
 export class TableDemo {
 	render() {
 		return [
-			<h2>Filtered Table</h2>,
+			<h2>Filtered & Checked Table</h2>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
 			<smoothly-table>
 				<smoothly-table-row>

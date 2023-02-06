@@ -9,11 +9,11 @@ import * as translation from "./translation"
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
-	@Prop({ mutable: true, reflect: true }) checked: boolean | "intermediate" = false
+	@Prop({ mutable: true, reflect: true }) checked = false
+	@Prop({ mutable: true, reflect: true }) intermediate = false
 	@Prop() name: string
 	@Prop() value: any
 	@Prop({ reflect: true }) disabled: boolean
-	@Prop() suppress = false
 	@Event() smoothlyChecked: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
 
@@ -24,11 +24,10 @@ export class SmoothlyCheckbox {
 	@Method()
 	async toggle(): Promise<void> {
 		if (!this.disabled) {
-			const checked = this.checked == "intermediate" || this.checked == false
+			const checked = this.intermediate || this.checked == false
 			this.smoothlyChecked.emit({
 				[this.name]: checked ? this.value : undefined,
 			})
-			// if (!this.suppress)
 			this.checked = checked
 		}
 	}
@@ -42,7 +41,7 @@ export class SmoothlyCheckbox {
 					e.stopPropagation()
 				}}
 				size={this.size}
-				name={this.checked == "intermediate" ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
+				name={this.intermediate ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
 				class={!this.checked == true ? "hidden" : "outline"}
 			/>
 		)

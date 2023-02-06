@@ -67,11 +67,11 @@ export namespace Components {
         "value": Date;
     }
     interface SmoothlyCheckbox {
-        "checked": boolean | "intermediate";
+        "checked": boolean;
         "disabled": boolean;
+        "intermediate": boolean;
         "name": string;
         "size": "tiny" | "small" | "medium" | "large";
-        "suppress": boolean;
         "toggle": () => Promise<void>;
         "value": any;
     }
@@ -1043,12 +1043,12 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyCheckbox {
-        "checked"?: boolean | "intermediate";
+        "checked"?: boolean;
         "disabled"?: boolean;
+        "intermediate"?: boolean;
         "name"?: string;
         "onSmoothlyChecked"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";
-        "suppress"?: boolean;
         "value"?: any;
     }
     interface SmoothlyColor {
