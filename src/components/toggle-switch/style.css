@@ -4,14 +4,6 @@
 	width: 4em;
 	height: 2em;
 }
-:host([size=large]){
-	width: 5em;
-	height: 2.5em;
-}
-:host([size=small]){
-	width: 3em;
-	height: 1.5em;
-}
 button{
 	padding:none;
 	border: none;
@@ -23,18 +15,41 @@ button{
 	background-color: rgb(var(--smoothly-primary-color));
 	cursor: pointer;
 }
+:host([size=large]){
+	width: 5em;
+	height: 2.5em;
+}
+:host([size=small]){
+	width: 3em;
+	height: 1.5em;
+}
 smoothly-icon{
 	position: relative;
 	fill: white;
 	stroke: white;
-	font-size: 120%;
-	top: -8%;
+	font-size: 1.4em;
+	top: -7%;
+}
+:host([size=large]) smoothly-icon{
+	font-size: 1.75em;
+	top: -5%;
+
+}
+:host([size=small]) smoothly-icon{
+	font-size: 1.05em;
+	top: -7.5%;
 }
 :host([selected]) smoothly-icon{
 	left: 47%;
 }
 :host(:not([selected])) smoothly-icon{
-	left: -17%;
+	left: -8%;
+}
+:host([size=large]:not([selected])) smoothly-icon{
+	left: -6%;
+}
+:host([size=small]:not([selected])) smoothly-icon{
+	left: -10%;
 }
 :host([selected]) > button{
 	background-color: rgb(var(--smoothly-success-color));

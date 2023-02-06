@@ -157,7 +157,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h4>Card</h4>,
 			<smoothly-form looks="grid" onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}>
-				<smoothly-input type="card-number" name="card" style={{ width: "80%" }}>
+				<smoothly-input type="card-number" name="card">
 					Card #
 				</smoothly-input>
 				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
@@ -205,7 +205,7 @@ export class SmoothlyInputDemo {
 					style={{ width: "100%" }}>
 					Readonly
 				</smoothly-input>
-				<smoothly-input type="text" name="testing" style={{ width: "40%" }}>
+				<smoothly-input type="text" name="testing">
 					TextTest
 				</smoothly-input>
 				<smoothly-input type="date-time" name="date-time">

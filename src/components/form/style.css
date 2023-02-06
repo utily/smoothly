@@ -3,6 +3,7 @@ smoothly-form {
 }
 smoothly-form > form {
 	position: "relative";
+	min-width: 15em;
 }
 smoothly-form > form > fieldset {
 	display: flex;
