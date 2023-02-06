@@ -19,8 +19,8 @@ export class Selector<T> {
 			<smoothly-checkbox
 				name="check-all"
 				value={Object.fromEntries(item.map(i => [i[this.key], i]))}
+				intermediate={this.selected.length > 0 && this.selected.length < item.length}
 				checked={this.selected.length == item.length ? true : this.selected.length == 0 && false}
-				intermediate={this.selected.length > 1 && this.selected.length !== item.length}
 			/>
 		) : (
 			<smoothly-checkbox

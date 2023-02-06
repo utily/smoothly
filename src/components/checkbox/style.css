@@ -12,7 +12,6 @@
 	height: max-content;
 	margin: 0.3rem 0;
 	line-height: 0;
-	/* transform: translate(0%, 15%); */
 
 }
 
@@ -20,15 +19,12 @@ smoothly-icon {
 	display: flex;
 	justify-content: center;	
 	align-items: center;
-	/* width: 0.8rem !important;
-	height: 0.8rem !important */
 }
 
 .outline {
-	/* transform: translate(0%, 10%); */
 	stroke: rgb(var(--smoothly-color-contrast));
 	opacity: 1;
-	transition: opacity 100ms ease-in-out;
+	transition: opacity 200ms ease-in-out;
 }
 
 .hidden {

@@ -41,8 +41,14 @@ export class SmoothlyCheckbox {
 					e.stopPropagation()
 				}}
 				size={this.size}
-				name={this.intermediate ? "remove-outline" : this.checked ? "checkmark-outline" : "square-outline"}
-				class={!this.checked == true ? "hidden" : "outline"}
+				name={
+					this.intermediate && !this.checked
+						? "remove-outline"
+						: this.checked && !this.intermediate
+						? "checkmark-outline"
+						: "square-outline"
+				}
+				class={!this.checked && !this.intermediate ? "hidden" : "outline"}
 			/>
 		)
 	}
