@@ -15,6 +15,7 @@ export class SmoothlyForm {
 	@Prop() name?: string
 	@Prop() method?: "GET" | "POST"
 	@Prop() action?: string
+	@Prop({ mutable: true, reflect: true }) processing: boolean
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
@@ -35,7 +36,9 @@ export class SmoothlyForm {
 	}
 	@Listen("smoothlySubmit", { capture: true })
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
+		this.processing = true
 		this.submit()
+		this.processing = false
 	}
 	@Method()
 	async submit(): Promise<void> {
@@ -62,6 +65,7 @@ export class SmoothlyForm {
 		return (
 			<Host>
 				{this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []}
+				<smoothly-spinner active={this.processing}></smoothly-spinner>
 				<form name={this.name}>
 					<fieldset>
 						<slot></slot>

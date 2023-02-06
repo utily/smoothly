@@ -135,6 +135,7 @@ export namespace Components {
         "looks": "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
+        "processing": boolean;
         "submit": () => Promise<void>;
     }
     interface SmoothlyFrame {
@@ -1151,6 +1152,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "processing"?: boolean;
     }
     interface SmoothlyFrame {
         "name"?: string;
