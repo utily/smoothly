@@ -28,11 +28,10 @@ smoothly-icon{
 	fill: white;
 	stroke: white;
 	font-size: 1.4em;
-	top: -7%;
+	top: -6%;
 }
 :host([size=large]) smoothly-icon{
 	font-size: 1.75em;
-	top: -5%;
 
 }
 :host([size=small]) smoothly-icon{
@@ -43,13 +42,13 @@ smoothly-icon{
 	left: 47%;
 }
 :host(:not([selected])) smoothly-icon{
-	left: -8%;
+	left: -12%;
 }
 :host([size=large]:not([selected])) smoothly-icon{
-	left: -6%;
+	left: -10%;
 }
 :host([size=small]:not([selected])) smoothly-icon{
-	left: -10%;
+	left: -18%;
 }
 :host([selected]) > button{
 	background-color: rgb(var(--smoothly-success-color));
