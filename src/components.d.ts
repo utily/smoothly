@@ -68,11 +68,14 @@ export namespace Components {
         "value": Date;
     }
     interface SmoothlyCheckbox {
+        "checked": boolean;
         "disabled": boolean;
         "intermediate": boolean;
-        "selectAll": boolean;
-        "selected": boolean;
+        "label": string;
+        "name": string;
         "size": "tiny" | "small" | "medium" | "large";
+        "toggle": () => Promise<void>;
+        "value": any;
     }
     interface SmoothlyColor {
         "color"?: Color;
@@ -110,8 +113,10 @@ export namespace Components {
     interface SmoothlyDisplayDemo {
     }
     interface SmoothlyFilter {
+        "clear": (event: MouseEvent) => Promise<void>;
         "criteria": Record<string, Criteria>;
         "inputValue": Criteria;
+        "placeholder": string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
@@ -335,6 +340,7 @@ export namespace Components {
     interface SmoothlyTabSwitch {
     }
     interface SmoothlyTable {
+        "align": "middle" | "bottom" | "top";
         "root": boolean;
     }
     interface SmoothlyTableCell {
@@ -1075,12 +1081,14 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyCheckbox {
+        "checked"?: boolean;
         "disabled"?: boolean;
         "intermediate"?: boolean;
-        "onChecked"?: (event: SmoothlyCheckboxCustomEvent<{ selected: boolean }>) => void;
-        "selectAll"?: boolean;
-        "selected"?: boolean;
+        "label"?: string;
+        "name"?: string;
+        "onSmoothlyChecked"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";
+        "value"?: any;
     }
     interface SmoothlyColor {
         "color"?: Color;
@@ -1122,6 +1130,7 @@ declare namespace LocalJSX {
         "criteria"?: Record<string, Criteria>;
         "inputValue"?: Criteria;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
+        "placeholder"?: string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
@@ -1360,6 +1369,7 @@ declare namespace LocalJSX {
     interface SmoothlyTabSwitch {
     }
     interface SmoothlyTable {
+        "align"?: "middle" | "bottom" | "top";
         "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
         "onSpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
         "onTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
