@@ -34,9 +34,9 @@ export class SmoothlyAppRoom implements ComponentDidLoad {
 					{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label} size="medium"></smoothly-icon> : this.label}
 				</a>
 			</li>,
-			<content ref={(e: HTMLElement) => (this.contentElement = e)}>
+			<main ref={(e: HTMLElement) => (this.contentElement = e)}>
 				<slot></slot>
-			</content>,
+			</main>,
 		]
 	}
 }

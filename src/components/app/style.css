@@ -29,6 +29,8 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 	height: 100%;
 	margin: 0;
 }
+
+
 smoothly-app > smoothly-notifier > header > h1 {
 	margin-left: 3.8rem;
 }
@@ -59,3 +61,4 @@ smoothly-app > smoothly-notifier > main {
 	position: relative;
 	top: 5rem;
 }
+

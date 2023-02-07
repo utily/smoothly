@@ -18,8 +18,9 @@ export class SmoothlyApp {
 
 	@Watch("selected")
 	selectedChanged(value: Selected | undefined, previous: Selected | undefined) {
-		if (previous)
+		if (previous) {
 			previous.room.selected = false
+		}
 		if (value) {
 			value.room.selected = true
 			const path = value.room.path.toString()
@@ -29,19 +30,26 @@ export class SmoothlyApp {
 				this.mainElement.innerHTML = ""
 				this.mainElement.appendChild(value.content)
 			}
-			console.log(history.pushState)
 		}
 	}
+
 	@Listen("popstate", { target: "window" })
 	locationChangeHandler(event: PopStateEvent) {
-		if (typeof event.state.smoothlyPath == "string")
+		console.log("popstate", event.state, this.selected?.room.path.toString())
+		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.room.path) {
 			this.selected = this.rooms[event.state.smoothlyPath]
+		}
+		if (this.mainElement) {
+			this.mainElement.innerHTML = ""
+			this.mainElement.appendChild(this.rooms[event.state.smoothlyPath].content)
+		}
 	}
 
 	@Listen("smoothlyRoomSelected")
 	roomSelectedHandler(event: CustomEvent<HTMLElement>) {
 		this.selected = { room: event.target as HTMLSmoothlyAppRoomElement, content: event.detail }
 	}
+
 	render() {
 		return (
 			<smoothly-notifier>

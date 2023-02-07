@@ -2,7 +2,7 @@
 	display: block;
 	cursor: pointer;
 }
-:host > content {
+:host > main {
 	display: none;
 }
 :host > li {
