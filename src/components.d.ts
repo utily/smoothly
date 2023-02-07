@@ -113,6 +113,7 @@ export namespace Components {
     interface SmoothlyFilter {
         "criteria": Record<string, Criteria>;
         "inputValue": Criteria;
+        "placeholder": string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
@@ -1091,6 +1092,7 @@ declare namespace LocalJSX {
         "criteria"?: Record<string, Criteria>;
         "inputValue"?: Criteria;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
+        "placeholder"?: string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;

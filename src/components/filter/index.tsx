@@ -10,6 +10,7 @@ import { create as selectivelyCreate, Criteria } from "selectively"
 export class SmoothlyFilter {
 	freeSearchElement: HTMLSmoothlyInputElement
 	private inputs: Map<EventTarget, () => void> = new Map()
+	@Prop({ mutable: true }) placeholder: string | undefined
 	@State() isExpanded = false
 	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
@@ -46,6 +47,7 @@ export class SmoothlyFilter {
 				ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
 				value={selectivelyCreate(this.criteria).stringify()}
 				onKeyDown={() => this.onKeyDown()}
+				placeholder={this.placeholder}
 				readonly>
 				{/* icon */}
 				<section slot="start">
@@ -67,9 +69,9 @@ export class SmoothlyFilter {
 							this.isExpanded = !this.isExpanded
 						}}>
 						{this.isExpanded ? (
-							<smoothly-icon name="options" size="tiny" />
+							<smoothly-icon name="options" size="small" />
 						) : (
-							<smoothly-icon name="options-outline" size="tiny" />
+							<smoothly-icon name="options-outline" size="small" />
 						)}
 					</aside>
 				</section>

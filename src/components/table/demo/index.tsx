@@ -8,8 +8,21 @@ import { Component, h } from "@stencil/core"
 export class TableDemo {
 	render() {
 		return [
-			<h2>Filtered & Checked Table</h2>,
+			<h4>Inputs</h4>,
+			<smoothly-input placeholder="ex. placeholder">
+				Slot Start
+				<smoothly-icon slot="start" name="search-outline" size="small" />
+			</smoothly-input>,
+			<smoothly-input placeholder="something">
+				Start, End
+				<smoothly-icon slot="start" name="search-outline" size="small" />
+				<smoothly-icon slot="end" name="send" size="small" />
+			</smoothly-input>,
+			<smoothly-input placeholder="some placeholder">No Slots</smoothly-input>,
+
+			<h4>Filtered & Checked Table</h4>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
+
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>

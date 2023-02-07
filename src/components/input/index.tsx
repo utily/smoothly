@@ -233,12 +233,12 @@ export class SmoothlyInput {
 		)
 	}
 	render() {
-		return (
+		return [
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
+				<slot name="start"></slot>
 				<div class="input-container">
-					<slot name="start"></slot>
 					<input
 						name={this.name}
 						type={this.state?.type}
@@ -262,8 +262,34 @@ export class SmoothlyInput {
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 					<slot name="end"></slot>
 				</div>
-			</Host>
-		)
+			</Host>,
+
+			// <label htmlFor={this.name}>
+			// 	<slot />
+			// </label>,
+
+			// <div class="input-container" onClick={() => this.inputElement?.focus()}>
+			// 	<slot name="start" />
+			// 	<input
+			// 		name={this.name}
+			// 		type={this.state?.type}
+			// 		placeholder={this.placeholder}
+			// 		required={this.required}
+			// 		autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+			// 		disabled={this.disabled}
+			// 		readOnly={this.readonly}
+			// 		pattern={this.state?.pattern && this.state?.pattern.source}
+			// 		value={this.state?.value}
+			// 		onInput={(e: InputEvent) => this.onInput(e)}
+			// 		onFocus={e => this.onFocus(e)}
+			// 		onClick={e => this.onClick(e)}
+			// 		onBlur={e => this.onBlur(e)}
+			// 		onKeyDown={e => this.onKeyDown(e)}
+			// 		ref={(el: HTMLInputElement) => (this.inputElement = el)}
+			// 		onPaste={e => this.onPaste(e)}></input>
+			// 	<slot name="end" />
+			// </div>,
+		]
 	}
 }
 

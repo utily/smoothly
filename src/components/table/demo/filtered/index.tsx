@@ -37,24 +37,24 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			? "Failed to load data."
 			: [
 					<smoothly-filter>
-						<smoothly-icon slot="start" name="search-outline" size="tiny" />
-						filter
+						Filter here
+						<smoothly-icon slot="start" name="search-outline" size="small" />
 						<div slot="filter">
-							<smoothly-filter-input name="breed">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
 								Breed
+								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-							<smoothly-filter-input name="country">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
 								Country
+								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-							<smoothly-filter-input name="coat">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							<smoothly-filter-input name="coat" placeholder="ex. Short">
 								Coat
+								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-							<smoothly-filter-input name="pattern">
-								<smoothly-icon slot="start" name="search-outline" size="tiny" />
+							<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
 								Pattern
+								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
 						</div>
 					</smoothly-filter>,

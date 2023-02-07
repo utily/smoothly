@@ -28,6 +28,7 @@ smoothly-table[align=bottom] :host {
 }
 smoothly-table[align=middle] :host {
 	vertical-align: middle;
+	text-align: left;
 }
 smoothly-table[align=top] :host {
 	vertical-align: top;

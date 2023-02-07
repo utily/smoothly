@@ -68,7 +68,8 @@ export class SmoothlyFilterInput {
 				onKeyDown={() => this.onFilter()}
 				onSmoothlyInput={e => {
 					this.value = e.detail.value
-				}}>
+				}}
+				placeholder={this.placeholder}>
 				<div slot="start">
 					<slot name="start" />
 				</div>

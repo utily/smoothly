@@ -68,7 +68,6 @@ export class SmoothlySelectDemo {
 				max="2022-12-30"
 				showLabel={false}
 				style={{
-					"--background": "rgb(var(--smoothly-dark-shade))",
 					"--border-radius": "4px",
 					"--padding": "0 0.75em",
 					"--input-width": "6rem",
