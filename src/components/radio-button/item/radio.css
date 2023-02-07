@@ -1,5 +1,5 @@
 smoothly-radio-button[decoration=radio] :host {
-	transition: 0.2s;
+	transition: 0.1s;
 }
 
 smoothly-radio-button[decoration=radio] :host > header {
