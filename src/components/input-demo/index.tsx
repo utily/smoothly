@@ -331,10 +331,11 @@ export class SmoothlyInputDemo {
 				</smoothly-submit>
 			</smoothly-form>,
 			<h4>Smoothly checkboxes</h4>,
-			<smoothly-form looks="grid">
+			<smoothly-form looks="plain">
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox disabled={true} style={{ width: "100%" }}></smoothly-checkbox>
+				<smoothly-checkbox label="Label" />
 			</smoothly-form>,
 			<h2>Smoothly addresses</h2>,
 			<smoothly-form looks="grid" style={{ margin: "2em" }}>

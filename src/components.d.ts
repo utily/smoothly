@@ -71,6 +71,7 @@ export namespace Components {
         "checked": boolean;
         "disabled": boolean;
         "intermediate": boolean;
+        "label": string;
         "name": string;
         "size": "tiny" | "small" | "medium" | "large";
         "toggle": () => Promise<void>;
@@ -1083,6 +1084,7 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         "disabled"?: boolean;
         "intermediate"?: boolean;
+        "label"?: string;
         "name"?: string;
         "onSmoothlyChecked"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";

@@ -5,14 +5,19 @@
 :host {
 	display: flex;
 	justify-content: center;
-	align-items: baseline;
-	border: 1px solid rgb(var(--smoothly-color-contrast));
-	border-radius: 2px;
+	align-items: center;
 	width: fit-content;
 	height: max-content;
 	margin: 0.3rem 0;
 	line-height: 0;
+}
 
+label {
+	margin-right: 0.5em;
+}
+
+:host > div {
+	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
 
 smoothly-icon {
@@ -31,7 +36,7 @@ smoothly-icon {
 	opacity: 0;
 }
 
-:host[disabled] {
+:host[disabled] > div {
 	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
 }
 
