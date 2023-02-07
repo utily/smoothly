@@ -42,40 +42,42 @@ export class SmoothlyFilter {
 
 	render() {
 		return [
-			<smoothly-input
-				name="filter"
-				ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
-				value={selectivelyCreate(this.criteria).stringify()}
-				onKeyDown={() => this.onKeyDown()}
-				placeholder={this.placeholder}
-				readonly>
-				{/* icon */}
-				<section slot="start">
-					<slot name="start" />
-				</section>
-				<slot />
-				{/* to be replaced with smoothly-button */}
-				<section slot="end">
-					<smoothly-icon
-						class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
-						name="close"
-						size="tiny"
-						onClick={e => this.clearHandler(e)}
-					/>
+			<smoothly-form looks="border">
+				<smoothly-input
+					name="filter"
+					ref={(element: HTMLSmoothlyInputElement) => (this.freeSearchElement = element)}
+					value={selectivelyCreate(this.criteria).stringify()}
+					onKeyDown={() => this.onKeyDown()}
+					placeholder={this.placeholder}
+					readonly>
+					{/* icon */}
+					<section slot="start">
+						<slot name="start" />
+					</section>
+					<slot />
 					{/* to be replaced with smoothly-button */}
-					<aside
-						class="btn"
-						onClick={() => {
-							this.isExpanded = !this.isExpanded
-						}}>
-						{this.isExpanded ? (
-							<smoothly-icon name="options" size="small" />
-						) : (
-							<smoothly-icon name="options-outline" size="small" />
-						)}
-					</aside>
-				</section>
-			</smoothly-input>,
+					<section slot="end">
+						<smoothly-icon
+							class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
+							name="close"
+							size="tiny"
+							onClick={e => this.clearHandler(e)}
+						/>
+						{/* to be replaced with smoothly-button */}
+						<aside
+							class="btn"
+							onClick={() => {
+								this.isExpanded = !this.isExpanded
+							}}>
+							{this.isExpanded ? (
+								<smoothly-icon name="options" size="small" />
+							) : (
+								<smoothly-icon name="options-outline" size="small" />
+							)}
+						</aside>
+					</section>
+				</smoothly-input>
+			</smoothly-form>,
 
 			<section hidden={!this.isExpanded} class={this.isExpanded ? "container arrow-top" : "hidden"}>
 				<div hidden={!this.isExpanded} class={this.isExpanded ? "container-wrapper" : "hidden"}>
