@@ -62,6 +62,9 @@ export class SmoothlyInputDemo {
 				<smoothly-button shape="rounded" color="tertiary" fill="clear">
 					Fill Clear
 				</smoothly-button>
+				<smoothly-button size="icon" shape="rounded" color="success" fill="solid">
+					<smoothly-icon name="basketball" fill="solid"></smoothly-icon>
+				</smoothly-button>
 				<h4>Buttons with Icon in "start"</h4>
 				<div style={{ display: "inline-block" }}>
 					<smoothly-button shape="rounded" fill="solid" color="warning">
@@ -160,7 +163,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input type="card-number" name="card">
 					Card #
 				</smoothly-input>
-				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
+				<smoothly-submit size="icon" slot="submit" color="success" fill="solid">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 				<smoothly-input type="card-expires" name="expires">

@@ -5,7 +5,6 @@
 	margin: 1em;
 	box-sizing: border-box;
 	border-radius: 0.5rem;
-	min-width: 8em;
 	border: solid 1px;
 }
 :host([type=link]){
@@ -55,7 +54,6 @@ button {
 	font-size: 130%;
 }
 :host(:not([size=icon])){
-	border-radius: 0.5rem;
 	min-width: 8em;
 }
 :host([expand]) {
@@ -76,25 +74,25 @@ button {
 	border-color: rgb(var(--smoothly-color-shade)) !important;
 	background: rgb(var(--smoothly-color-tint)) !important;
 }
-:host([fill=clear]:hover),
-:host([fill=clear]:focus),
-:host([fill=clear]:active){
-	border-color: transparent !important;
-	background: transparent !important;
-}
-:host([fill=clear]):hover > button,
-:host([fill=clear]):focus > button,
-:host([fill=clear]):active > button{
-	color: rgb(var(--smoothly-color-tint)) !important;
-	stroke: rgb(var(--smoothly-color-tint)) !important;
-	fill: rgb(var(--smoothly-color-tint)) !important;
-}
 :host(:not([fill=clear]):hover) > button,
 :host(:not([fill=clear]):focus) > button,
 :host(:not([fill=clear]):active) > button{
 	color: rgb(var(--smoothly-color-contrast)) !important;
 	stroke: rgb(var(--smoothly-color-contrast)) !important;
 	fill: rgb(var(--smoothly-color-contrast)) !important;
+}
+/* :host([fill=clear]:hover),
+:host([fill=clear]:focus),
+:host([fill=clear]:active){
+	border-color: transparent !important;
+	background: transparent !important;
+} */
+:host([fill=clear]:hover) > button,
+:host([fill=clear]:focus) > button,
+:host([fill=clear]:active) > button{
+	color: rgb(var(--smoothly-color-tint)) !important;
+	stroke: rgb(var(--smoothly-color-tint)) !important;
+	fill: rgb(var(--smoothly-color-tint)) !important;
 }
 :host([disabled]){
 	opacity: 0.5;
