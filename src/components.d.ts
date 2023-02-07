@@ -112,6 +112,7 @@ export namespace Components {
     interface SmoothlyDisplayDemo {
     }
     interface SmoothlyFilter {
+        "clear": (event: MouseEvent) => Promise<void>;
         "criteria": Record<string, Criteria>;
         "inputValue": Criteria;
         "placeholder": string | undefined;
