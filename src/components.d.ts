@@ -11,9 +11,10 @@ import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
+import { Data } from "./components/form/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
-import { Data } from "./components/submit/Data";
+import { Data as Data1 } from "./components/submit/Data";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -133,12 +134,14 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyForm {
+        "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
+        "name"?: string;
     }
     interface SmoothlyFrame {
         "name": string;
         "origin": string | undefined;
-        "send": (message: string | Message<any>, content?: Trigger | any) => Promise<void>;
+        "send": (message2: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
     }
     interface SmoothlyGoogleFont {
@@ -155,6 +158,7 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete": boolean;
+        "clear": () => Promise<void>;
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -356,6 +360,19 @@ export namespace Components {
     }
     interface SmoothlyTableRow {
     }
+    interface SmoothlyToggle {
+        "disabled": boolean;
+        "name": string;
+        "selected": boolean;
+        "shape": "rounded";
+        "value"?: any;
+    }
+    interface SmoothlyToggleSwitch {
+        "disabled": boolean;
+        "name": string;
+        "selected": boolean;
+        "value"?: any;
+    }
     interface SmoothlyTrigger {
         "color": Color | undefined;
         "disabled": boolean;
@@ -402,6 +419,10 @@ export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterInputElement;
+}
+export interface SmoothlyFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFormElement;
 }
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -881,6 +902,18 @@ declare global {
         prototype: HTMLSmoothlyTableRowElement;
         new (): HTMLSmoothlyTableRowElement;
     };
+    interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
+    }
+    var HTMLSmoothlyToggleElement: {
+        prototype: HTMLSmoothlyToggleElement;
+        new (): HTMLSmoothlyToggleElement;
+    };
+    interface HTMLSmoothlyToggleSwitchElement extends Components.SmoothlyToggleSwitch, HTMLStencilElement {
+    }
+    var HTMLSmoothlyToggleSwitchElement: {
+        prototype: HTMLSmoothlyToggleSwitchElement;
+        new (): HTMLSmoothlyToggleSwitchElement;
+    };
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
     }
     var HTMLSmoothlyTriggerElement: {
@@ -975,6 +1008,8 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
+        "smoothly-toggle": HTMLSmoothlyToggleElement;
+        "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
@@ -1113,10 +1148,12 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "looks"?: "plain" | "grid" | "border" | "line";
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyFormCustomEvent<{ name: string; value: Data }>) => void;
     }
     interface SmoothlyFrame {
         "name"?: string;
-        "onMessage"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
+        "onMessage2"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
@@ -1141,8 +1178,8 @@ declare namespace LocalJSX {
         "minLength"?: number;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
-        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -1307,7 +1344,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data>) => void;
+        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data1>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }
@@ -1360,6 +1397,19 @@ declare namespace LocalJSX {
         "name"?: string;
     }
     interface SmoothlyTableRow {
+    }
+    interface SmoothlyToggle {
+        "disabled"?: boolean;
+        "name"?: string;
+        "selected"?: boolean;
+        "shape"?: "rounded";
+        "value"?: any;
+    }
+    interface SmoothlyToggleSwitch {
+        "disabled"?: boolean;
+        "name"?: string;
+        "selected"?: boolean;
+        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
@@ -1450,6 +1500,8 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
+        "smoothly-toggle": SmoothlyToggle;
+        "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
@@ -1527,6 +1579,8 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
+            "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;

@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.0.0-alpha.5",
+	"version": "1.0.0-alpha.7",
 	"description": "Web component library written in Stencil.",
 	"author": "PayFunc",
 	"license": "MIT",
@@ -92,6 +92,7 @@
 		"prettier": "^2.7.1",
 		"prettierx": "github:utily/prettierx#utily-20221229",
 		"puppeteer": "^17.0.0",
-		"typescript": "^4.8.4"
+		"typescript": "^4.8.4",
+		"web-file-polyfill": "^1.0.4"
 	}
 }

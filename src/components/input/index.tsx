@@ -45,8 +45,8 @@ export class SmoothlyInput {
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
 	@Event() smoothlyBlur: EventEmitter<void>
-	@Event() smoothlyChange: EventEmitter<{ name: string; value: any }>
-	@Event() smoothlyInput: EventEmitter<{ name: string; value: any }>
+	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		if (this.lastValue != value) {
@@ -59,7 +59,7 @@ export class SmoothlyInput {
 		if (value != before) {
 			if (typeof value == "string")
 				value = value.trim()
-			this.smoothlyInput.emit({ name: this.name, value })
+			this.smoothlyInput.emit({ [this.name]: value })
 		}
 	}
 	@Watch("currency")
@@ -83,6 +83,10 @@ export class SmoothlyInput {
 			this.inputElement.focus()
 			this.keepFocusOnReRender = false
 		}
+	}
+	@Method()
+	async clear(): Promise<void> {
+		this.value = undefined
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
@@ -127,7 +131,7 @@ export class SmoothlyInput {
 	onBlur(event: FocusEvent) {
 		this.smoothlyBlur.emit()
 		if (this.initialValue != this.value)
-			this.smoothlyChange.emit({ name: this.name, value: this.value })
+			this.smoothlyChange.emit({ [this.name]: this.value })
 		this.initialValue = undefined
 	}
 	onFocus(event: FocusEvent) {
