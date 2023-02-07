@@ -53,6 +53,8 @@ export namespace Components {
         "opacity": string;
         "right": string;
     }
+    interface SmoothlyBurger {
+    }
     interface SmoothlyButton {
         "color"?: Color;
         "disabled": boolean;
@@ -555,6 +557,12 @@ declare global {
         prototype: HTMLSmoothlyBacktotopElement;
         new (): HTMLSmoothlyBacktotopElement;
     };
+    interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
+    }
+    var HTMLSmoothlyBurgerElement: {
+        prototype: HTMLSmoothlyBurgerElement;
+        new (): HTMLSmoothlyBurgerElement;
+    };
     interface HTMLSmoothlyButtonElement extends Components.SmoothlyButton, HTMLStencilElement {
     }
     var HTMLSmoothlyButtonElement: {
@@ -922,6 +930,7 @@ declare global {
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-app-room": HTMLSmoothlyAppRoomElement;
         "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
+        "smoothly-burger": HTMLSmoothlyBurgerElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
@@ -1026,6 +1035,8 @@ declare namespace LocalJSX {
         "bottom"?: string;
         "opacity"?: string;
         "right"?: string;
+    }
+    interface SmoothlyBurger {
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -1396,6 +1407,7 @@ declare namespace LocalJSX {
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-app-room": SmoothlyAppRoom;
         "smoothly-backtotop": SmoothlyBacktotop;
+        "smoothly-burger": SmoothlyBurger;
         "smoothly-button": SmoothlyButton;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
@@ -1470,6 +1482,7 @@ declare module "@stencil/core" {
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
             "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
+            "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;

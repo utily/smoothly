@@ -1,0 +1,15 @@
+:host{
+	display:block;
+	width: 3.2em;	
+	height:4em;
+}
+
+.slide{
+	position: relative;
+	display: flex;
+	height: 0.4em;
+	width: auto;
+	background-color: rgb(var(--smoothly-dark-tint));
+	border-radius: 0.1em;
+	margin: 0.3em;
+}

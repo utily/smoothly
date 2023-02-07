@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app label="Smoothly Demo">
-				<smoothly-app-room path="/">
+				<smoothly-app-room path="/google.com" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">

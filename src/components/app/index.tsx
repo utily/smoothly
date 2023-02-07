@@ -25,7 +25,11 @@ export class SmoothlyApp {
 			value.room.selected = true
 			const path = value.room.path.toString()
 			this.rooms[path] = value
+
 			history.pushState({ smoothlyPath: path }, value.room.label ?? "", path)
+
+			console.log(history.pushState, "this is the history")
+
 			if (this.mainElement) {
 				this.mainElement.innerHTML = ""
 				this.mainElement.appendChild(value.content)
@@ -53,15 +57,18 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
-				<header color="primary">
+				<header color="tertiary">
 					<h1>
 						<a href={"/"}>{this.label}</a>
 					</h1>
+
 					<slot name="header"></slot>
 					<nav>
 						<ul>
 							<slot name="nav-start"></slot>
-							<slot></slot>
+							<smoothly-burger></smoothly-burger>
+
+							<slot> </slot>
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>

@@ -13,11 +13,11 @@
 :host > li > a {
 	height: 100%;
 }
-:host[selected] {
+:host[selected] > li {
 	color: rgb(var(--smoothly-color-contrast));
-	background: rgb(var(--smoothly-color));
+	background: rgb(var(--smoothly-color-shade));
 }
-:host:hover {
+:host:hover > li {
 	color:rgb(var(--smoothly-color-contrast)); 
 	background-color: rgb(var(--smoothly-color-tint));
 	transition: 0.2s;	

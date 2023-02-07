@@ -42,6 +42,7 @@ smoothly-app > smoothly-notifier > header > h1 > a {
 	align-self: center;
 	size: 100%;
 	background-position-y: center;
+	text-decoration: none;
 }
 smoothly-app > smoothly-notifier > header > nav > ul  li a {
 	line-height: 1.6cm;
@@ -61,4 +62,20 @@ smoothly-app > smoothly-notifier > main {
 	position: relative;
 	top: 5rem;
 }
+
+@media screen and (max-width: 900px) {
+  smoothly-app > smoothly-notifier > header > nav,
+  smoothly-app > smoothly-notifier > header > nav > ul {
+    position: relative;
+    flex-direction: column;
+    width: 250px;
+  }
+  smoothly-app > smoothly-notifier > header > nav > ul  li {
+    margin-right: 0;
+    margin-bottom: 1em;
+		background-color: rgba(var(--smoothly-dark-color));
+  }
+}
+
+
 
