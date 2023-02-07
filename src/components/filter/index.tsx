@@ -8,10 +8,10 @@ import { create as selectivelyCreate, Criteria } from "selectively"
 	shadow: true,
 })
 export class SmoothlyFilter {
-	freeSearchElement: HTMLSmoothlyInputElement
+	private freeSearchElement: HTMLSmoothlyInputElement
 	private inputs: Map<EventTarget, () => void> = new Map()
 	@Prop({ mutable: true }) placeholder: string | undefined
-	@State() isExpanded = false
+	@State() expanded = false
 	@State() freeSearchValue: string
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
 	@Prop({ mutable: true }) inputValue: Criteria
@@ -50,7 +50,6 @@ export class SmoothlyFilter {
 					onKeyDown={() => this.onKeyDown()}
 					placeholder={this.placeholder}
 					readonly>
-					{/* icon */}
 					<section slot="start">
 						<slot name="start" />
 					</section>
@@ -67,9 +66,9 @@ export class SmoothlyFilter {
 						<aside
 							class="btn"
 							onClick={() => {
-								this.isExpanded = !this.isExpanded
+								this.expanded = !this.expanded
 							}}>
-							{this.isExpanded ? (
+							{this.expanded ? (
 								<smoothly-icon name="options" size="small" />
 							) : (
 								<smoothly-icon name="options-outline" size="small" />
@@ -79,9 +78,9 @@ export class SmoothlyFilter {
 				</smoothly-input>
 			</smoothly-form>,
 
-			<section hidden={!this.isExpanded} class={this.isExpanded ? "container arrow-top" : "hidden"}>
-				<div hidden={!this.isExpanded} class={this.isExpanded ? "container-wrapper" : "hidden"}>
-					{this.isExpanded && <slot name="filter" />}
+			<section hidden={!this.expanded} class={this.expanded ? "container arrow-top" : "hidden"}>
+				<div hidden={!this.expanded} class={this.expanded ? "container-wrapper" : "hidden"}>
+					{this.expanded && <slot name="filter" />}
 				</div>
 			</section>,
 		]

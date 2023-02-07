@@ -14,7 +14,7 @@ export class Selector<T> {
 				: Object.fromEntries(Object.entries({ ...this.data, ...data }).filter(([_, value]) => value != undefined))
 		)
 	}
-	render(item: T | T[]): any {
+	render(item: T | T[]): HTMLSmoothlyCheckboxElement {
 		return Array.isArray(item) ? (
 			<smoothly-checkbox
 				name="check-all"

@@ -38,7 +38,6 @@ export class SmoothlyCheckbox {
 				toolTip={this.t(!this.checked ? "Select" : "De-select")}
 				onClick={e => {
 					this.toggle()
-					e.stopPropagation()
 				}}
 				size={this.size}
 				name={
