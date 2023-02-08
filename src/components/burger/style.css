@@ -1,13 +1,19 @@
 :host([visible]){
-	display:block;
+display: block;
+height: 4em;
+transform: rotate(180deg);
+transition: transform 100ms ease-in-out;
+}
+:host([visible]) .burger{
+	display: block;
 	width: 3.2em;	
 	height:4em;
+	padding: 1em;
+	cursor: pointer;
 }
-
 :host:not([visible]){
 	display: none;
 }
-
 .slide{
 	position: relative;
 	display: flex;
@@ -16,4 +22,8 @@
 	background-color: rgb(var(--smoothly-dark-tint));
 	border-radius: 0.1em;
 	margin: 0.3em;
+}
+:host:not([closed]){
+	transform: rotate(90deg);
+	transition: transform 100ms ease-in-out;
 }

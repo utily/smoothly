@@ -54,6 +54,7 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyBurger {
+        "closed": boolean;
         "mediaQuery": string;
         "visible": boolean;
     }
@@ -1039,6 +1040,7 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyBurger {
+        "closed"?: boolean;
         "mediaQuery"?: string;
         "visible"?: boolean;
     }

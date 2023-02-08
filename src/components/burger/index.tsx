@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop } from "@stencil/core"
+import { Component, h, Host, Listen, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -7,6 +7,7 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 })
 export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
+	@Prop({ mutable: true, reflect: true }) closed = true
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 
 	@Listen("resize", { target: "window" })
@@ -14,17 +15,21 @@ export class SmoothlyBurger {
 		const reduced = window.matchMedia(this.mediaQuery).matches
 		if (reduced)
 			this.visible = true
-		else
+		else {
 			this.visible = false
+			this.closed = true
+		}
 	}
 
 	render() {
 		return (
-			<span>
-				<div class="slide"></div>
-				<div class="slide"></div>
-				<div class="slide"></div>
-			</span>
+			<Host>
+				<span class="burger" onClick={() => ((this.closed = !this.closed), console.log(this.closed))}>
+					<div class="slide"></div>
+					<div class="slide"></div>
+					<div class="slide"></div>
+				</span>
+			</Host>
 		)
 	}
 }

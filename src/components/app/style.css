@@ -75,6 +75,14 @@ smoothly-app > smoothly-notifier > main {
     margin-bottom: 1em;
 		background-color: rgba(var(--smoothly-dark-color));
   }
+
+	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger{
+		position: relative;
+		right: 0%;
+		align-self: flex-end;
+		margin-right: 2em;
+	}
+
 }
 
 
