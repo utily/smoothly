@@ -8,6 +8,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app label="Smoothly Demo">
+				<smoothly-burger></smoothly-burger>
 				<smoothly-app-room path="/google.com" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>

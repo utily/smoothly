@@ -61,13 +61,10 @@ export class SmoothlyApp {
 					<h1>
 						<a href={"/"}>{this.label}</a>
 					</h1>
-
 					<slot name="header"></slot>
 					<nav>
 						<ul>
 							<slot name="nav-start"></slot>
-							<smoothly-burger></smoothly-burger>
-
 							<slot> </slot>
 							<slot name="nav-end"></slot>
 						</ul>
