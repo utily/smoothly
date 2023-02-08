@@ -54,6 +54,8 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyBurger {
+        "mediaQuery": string;
+        "visible": boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -1037,6 +1039,8 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyBurger {
+        "mediaQuery"?: string;
+        "visible"?: boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;

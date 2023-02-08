@@ -1,7 +1,11 @@
-:host{
+:host([visible]){
 	display:block;
 	width: 3.2em;	
 	height:4em;
+}
+
+:host:not([visible]){
+	display: none;
 }
 
 .slide{
