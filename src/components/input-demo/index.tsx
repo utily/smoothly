@@ -45,11 +45,29 @@ export class SmoothlyInputDemo {
 				<smoothly-button color="warning" fill="solid" size="large">
 					Color Warning + Large
 				</smoothly-button>
+				<smoothly-button color="danger" fill="solid" size="small" shape="rounded">
+					Color Danger + Small
+				</smoothly-button>
+				<smoothly-button color="success" fill="solid" size="small" shape="rounded">
+					Color Success + Small
+				</smoothly-button>
+				<smoothly-button color="tertiary" fill="solid" size="small" shape="rounded">
+					Color Tertiary + Small
+				</smoothly-button>
+				<smoothly-button color="dark" fill="solid" size="small" shape="rounded">
+					Color Dark + Small
+				</smoothly-button>
+				<smoothly-button color="medium" fill="solid" size="small" shape="rounded">
+					Color Medium + Small
+				</smoothly-button>
+				<smoothly-button color="light" fill="solid" size="small" shape="rounded">
+					Color Light + Small
+				</smoothly-button>
 				<h4>Expand examples</h4>
-				<smoothly-button color="light" fill="solid" expand="full">
+				<smoothly-button color="secondary" fill="solid" expand="full">
 					Color Secondary + Default
 				</smoothly-button>
-				<smoothly-button color="dark" fill="solid" expand="block">
+				<smoothly-button color="warning" fill="solid" expand="block">
 					Color Warning + Large
 				</smoothly-button>
 				<h4>Fill examples</h4>
