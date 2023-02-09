@@ -1,7 +1,7 @@
 :host {
 	display: block;
 	margin: 1em 0;
-	width: 4em;
+	width: 3.6em;
 	height: 1.8em;
 }
 
@@ -18,26 +18,25 @@ button {
 	background-color: rgb(var(--smoothly-light-color));
 }
 
-smoothly-icon {
+:host smoothly-icon {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
+	align-items: center;
 	position: absolute;
 	left: 0;
-	width: 90px;
-	height: 90px;
-	fill: white;
-	stroke: white;
+	fill: rgb(var(--smoothly-default-color));
+	stroke: rgb(var(--smoothly-default-color));
 	font-size: 1.2em;
 }
 
-:host([size=large]){
-	width: 5.6em;
-	height: 2.5em;
+:host([size=small]){
+	width: 3.05em;
+	height: 1.5em;
 }
 
-:host([size=small]){
-	width: 3.5em;
-	height: 1.5em;
+:host([size=large]){
+	width: 5.2em;
+	height: 2.5em;
 }
 
 :host([size=small]) smoothly-icon{
@@ -53,5 +52,5 @@ smoothly-icon {
 }
 
 :host([selected]) smoothly-icon{
-	left: calc(55%);
+	transform: translateX(100%);
 }
