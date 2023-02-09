@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -9,6 +9,12 @@ export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
 	@Prop({ mutable: true, reflect: true }) closed = true
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
+	@Event() burgerStatus: EventEmitter<boolean>
+
+	@Watch("closed")
+	closedHandler() {
+		this.burgerStatus.emit(this.closed)
+	}
 
 	@Listen("resize", { target: "window" })
 	resizeHandler() {
