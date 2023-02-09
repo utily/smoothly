@@ -252,6 +252,29 @@ export class SmoothlyInputDemo {
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
+			<h2>Input Alternatives</h2>,
+			<smoothly-form looks="border">
+				<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+					First Name
+				</smoothly-input>
+				<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
+					Last Name
+					<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
+				</smoothly-input>
+				<smoothly-input
+					type="text"
+					name="name.first"
+					placeholder="Smith"
+					onSmoothlyChange={e => console.log("smoothly change event")}>
+					Last Name
+					<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
+				</smoothly-input>
+				<smoothly-input placeholder="test"></smoothly-input>
+				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success">
+					Send
+				</smoothly-submit>
+			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
 			<smoothly-form>
 				<smoothly-radio-button deselectable decoration="button">
@@ -335,10 +358,11 @@ export class SmoothlyInputDemo {
 				</smoothly-submit>
 			</smoothly-form>,
 			<h4>Smoothly checkboxes</h4>,
-			<smoothly-form looks="grid">
-				<smoothly-checkbox selectAll={true} intermediate={true} style={{ width: "100%" }}></smoothly-checkbox>
+			<smoothly-form looks="plain">
+				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox disabled={true} style={{ width: "100%" }}></smoothly-checkbox>
+				<smoothly-checkbox label="Label" />
 			</smoothly-form>,
 			<h2>Smoothly addresses</h2>,
 			<smoothly-form looks="grid" style={{ margin: "2em" }}>

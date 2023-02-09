@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.0.0-alpha.7",
+	"version": "1.0.0-alpha.8",
 	"description": "Web component library written in Stencil.",
 	"author": "PayFunc",
 	"license": "MIT",

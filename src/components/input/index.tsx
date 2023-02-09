@@ -22,7 +22,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
 	@Prop({ mutable: true }) autocomplete = true
 	@Prop({ mutable: true }) pattern: RegExp | undefined
-	@Prop({ mutable: true }) placeholder: string | undefined
+	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
@@ -241,8 +241,8 @@ export class SmoothlyInput {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<div class="input-container">
-					<slot name="start"></slot>
+				<slot name="start"></slot>
+				<div>
 					<input
 						name={this.name}
 						type={this.state?.type}
@@ -264,8 +264,8 @@ export class SmoothlyInput {
 						<slot />
 					</label>
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
-					<slot name="end"></slot>
 				</div>
+				<slot name="end"></slot>
 			</Host>
 		)
 	}

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
 import * as langly from "langly"
 import * as translation from "./translation"
 @Component({
@@ -8,43 +8,52 @@ import * as translation from "./translation"
 })
 export class SmoothlyCheckbox {
 	@Element() element: HTMLElement
-	@Prop() selectAll = false
-	@Prop() size: "tiny" | "small" | "medium" | "large" = "small"
-	@Prop({ mutable: true, reflect: true }) intermediate: boolean
-	@Prop({ mutable: true, reflect: true }) selected: boolean
-	@Prop({ mutable: true, reflect: true }) disabled: boolean
-	@Event() checked: EventEmitter<{ selected: boolean }>
+	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
+	@Prop({ mutable: true, reflect: true }) checked = false
+	@Prop({ mutable: true, reflect: true }) intermediate = false
+	@Prop() name: string
+	@Prop() value: any
+	@Prop({ reflect: true }) disabled: boolean
+	@Event() smoothlyChecked: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
+	@Prop() label: string
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
 	}
-	toggle() {
+
+	@Method()
+	async toggle(): Promise<void> {
 		if (!this.disabled) {
-			this.selected = !this.selected
-			this.checked.emit({ selected: this.selected })
+			const checked = this.intermediate || this.checked == false
+			this.smoothlyChecked.emit({
+				[this.name]: checked ? this.value : undefined,
+			})
+			this.checked = checked
 		}
 	}
+
 	render() {
-		return [
-			<smoothly-icon
-				toolTip={this.t(this.selectAll ? "Deselect all" : "Deselect")}
-				onClick={() => this.toggle()}
-				style={{ display: this.selected ? "" : "none" }}
-				size={this.size}
-				name="checkbox-outline"></smoothly-icon>,
-			<smoothly-icon
-				toolTip={this.t(this.intermediate && !this.selected ? "Deselect all" : "Select all")}
-				onClick={() => this.toggle()}
-				style={{ display: this.intermediate && !this.selected ? "" : "none" }}
-				size={this.size}
-				name="remove-outline"></smoothly-icon>,
-			<smoothly-icon
-				toolTip={this.t(this.selectAll ? "Select all" : "Select")}
-				onClick={() => this.toggle()}
-				style={{ display: !this.selected ? "" : "none" }}
-				size={this.size}
-				name="square-outline"></smoothly-icon>,
-		]
+		return (
+			<Host>
+				{this.label && <label htmlFor={this.name}>{this.label}</label>}
+				<div>
+					<smoothly-icon
+						toolTip={this.t(!this.checked ? "Select" : "De-select")}
+						onClick={e => {
+							this.toggle()
+						}}
+						size={this.size}
+						name={
+							this.intermediate && !this.checked
+								? "remove-outline"
+								: this.checked && !this.intermediate
+								? "checkmark-outline"
+								: "square-outline"
+						}
+						class={!this.checked && !this.intermediate ? "hidden" : "outline"}></smoothly-icon>
+				</div>
+			</Host>
+		)
 	}
 }
