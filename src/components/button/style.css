@@ -6,6 +6,7 @@
 	box-sizing: border-box;
 	border-radius: 0.5rem;
 	border: solid 1px;
+	transition: background 150ms ease-in-out;
 }
 :host([type=link]){
 	display: inline;
@@ -71,7 +72,7 @@ button {
 :host(:not([fill=clear]):hover),
 :host(:not([fill=clear]):focus),	
 :host(:not([fill=clear]):active){
-	border-color: rgb(var(--smoothly-color-shade)) !important;
+	border-color: rgb(var(--smoothly-color-tint)) !important;
 	background: rgb(var(--smoothly-color-tint)) !important;
 }
 :host(:not([fill=clear]):hover) > button,
@@ -81,12 +82,6 @@ button {
 	stroke: rgb(var(--smoothly-color-contrast)) !important;
 	fill: rgb(var(--smoothly-color-contrast)) !important;
 }
-/* :host([fill=clear]:hover),
-:host([fill=clear]:focus),
-:host([fill=clear]:active){
-	border-color: transparent !important;
-	background: transparent !important;
-} */
 :host([fill=clear]:hover) > button,
 :host([fill=clear]:focus) > button,
 :host([fill=clear]:active) > button{
