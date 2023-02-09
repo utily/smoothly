@@ -37,6 +37,7 @@ export namespace Components {
     }
     interface SmoothlyApp {
         "label": string;
+        "menuOpen": boolean;
     }
     interface SmoothlyAppDemo {
         "baseUrl": string;
@@ -54,8 +55,8 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyBurger {
-        "closed": boolean;
         "mediaQuery": string;
+        "open": boolean;
         "visible": boolean;
     }
     interface SmoothlyButton {
@@ -388,6 +389,10 @@ export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyAppRoomElement;
+}
+export interface SmoothlyBurgerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyBurgerElement;
 }
 export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1022,6 +1027,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyApp {
         "label"?: string;
+        "menuOpen"?: boolean;
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
@@ -1040,8 +1046,9 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyBurger {
-        "closed"?: boolean;
         "mediaQuery"?: string;
+        "onBurgerStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        "open"?: boolean;
         "visible"?: boolean;
     }
     interface SmoothlyButton {

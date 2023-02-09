@@ -12,6 +12,7 @@ interface Selected {
 })
 export class SmoothlyApp {
 	@Prop() label = "App"
+	@Prop() menuOpen: boolean
 	@State() selected?: Selected
 	mainElement?: HTMLElement
 	rooms: Record<string, Selected> = {}
@@ -35,6 +36,13 @@ export class SmoothlyApp {
 				this.mainElement.appendChild(value.content)
 			}
 		}
+	}
+
+	@Listen("burgerStatus")
+	burgerStatusHandler(event: CustomEvent){
+		event.stopPropagation()
+		console.log(event.detail)
+		this.menuOpen = event.detail
 	}
 
 	@Listen("popstate", { target: "window" })

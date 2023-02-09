@@ -7,13 +7,13 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 })
 export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) closed = true
+	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 	@Event() burgerStatus: EventEmitter<boolean>
 
 	@Watch("closed")
 	closedHandler() {
-		this.burgerStatus.emit(this.closed)
+		this.burgerStatus.emit(this.open)
 	}
 
 	@Listen("resize", { target: "window" })
@@ -23,14 +23,14 @@ export class SmoothlyBurger {
 			this.visible = true
 		else {
 			this.visible = false
-			this.closed = true
+			this.open = false
 		}
 	}
 
 	render() {
 		return (
 			<Host>
-				<span class="burger" onClick={() => ((this.closed = !this.closed), console.log(this.closed))}>
+				<span class="burger" onClick={() => (this.open = !this.open)}>
 					<div class="slide"></div>
 					<div class="slide"></div>
 					<div class="slide"></div>
