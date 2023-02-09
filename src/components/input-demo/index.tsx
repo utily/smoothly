@@ -19,8 +19,8 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="airplane" slot="icon-slot"></smoothly-icon>
 				</smoothly-toggle>
 				<h4>Toggle switches</h4>
-				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false} size="small"></smoothly-toggle-switch>
+				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false} size="large"></smoothly-toggle-switch>
 				<h4>Links with icons</h4>
 				<smoothly-button type="link">
@@ -359,7 +359,6 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h4>Smoothly checkboxes</h4>,
 			<smoothly-form looks="plain">
-				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox disabled={true} style={{ width: "100%" }}></smoothly-checkbox>
 				<smoothly-checkbox label="Label" />

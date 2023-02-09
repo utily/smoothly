@@ -1,59 +1,57 @@
-:host{
+:host {
 	display: block;
-	margin: 1em;
+	margin: 1em 0;
 	width: 4em;
-	height: 2em;
+	height: 1.8em;
 }
-button{
-	padding:none;
-	border: none;
-	position: relative;
-	overflow: hidden;
+
+button {
 	width: 100%;
 	height: 100%;
-	border-radius: 3em;
-	background-color: rgb(var(--smoothly-primary-color));
-	cursor: pointer;
-}
-:host([size=large]){
-	width: 5em;
-	height: 2.5em;
-}
-:host([size=small]){
-	width: 3em;
-	height: 1.5em;
-}
-smoothly-icon{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
+	cursor: pointer;
+	border: none;
+	border-radius: 3em;
+	background-color: rgb(var(--smoothly-light-color));
+}
+
+smoothly-icon {
+	display: flex;
+	justify-content: space-around;
+	position: absolute;
+	left: 0;
+	width: 90px;
+	height: 90px;
 	fill: white;
 	stroke: white;
-	font-size: 1.4em;
-	top: -6%;
+	font-size: 1.2em;
 }
+
+:host([size=large]){
+	width: 5.6em;
+	height: 2.5em;
+}
+
+:host([size=small]){
+	width: 3.5em;
+	height: 1.5em;
+}
+
+:host([size=small]) smoothly-icon{
+	font-size: 1em;
+}
+
 :host([size=large]) smoothly-icon{
 	font-size: 1.75em;
+}
 
-}
-:host([size=small]) smoothly-icon{
-	font-size: 1.05em;
-	top: -7.5%;
-}
-:host([selected]) smoothly-icon{
-	left: 47%;
-}
-:host(:not([selected])) smoothly-icon{
-	left: -12%;
-}
-:host([size=large]:not([selected])) smoothly-icon{
-	left: -10%;
-}
-:host([size=small]:not([selected])) smoothly-icon{
-	left: -18%;
-}
 :host([selected]) > button{
 	background-color: rgb(var(--smoothly-success-color));
 }
-:host([disabled]) {
-	opacity: 0.5;
-	pointer-events: none;
+
+:host([selected]) smoothly-icon{
+	left: calc(55%);
 }
