@@ -31,7 +31,7 @@ export class SmoothlyAppRoom implements ComponentDidLoad {
 							this.smoothlyRoomSelected.emit(this.contentElement)
 						}
 					}}>
-					{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label} size="medium"></smoothly-icon> : this.label}
+					{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 				</a>
 			</li>,
 			<main ref={(e: HTMLElement) => (this.contentElement = e)}>

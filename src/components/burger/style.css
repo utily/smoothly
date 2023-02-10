@@ -1,14 +1,13 @@
 :host([visible]){
 display: block;
 height: 4em;
-transform: rotate(180deg);
-transition: transform 100ms ease-in-out;
+transform: rotate(90deg);
+	transition: transform 100ms ease-in-out;
 }
 :host([visible]) .burger{
 	display: block;
 	width: 3.2em;	
 	height:4em;
-	padding: 1em;
 	cursor: pointer;
 }
 :host:not([visible]){
@@ -24,6 +23,6 @@ transition: transform 100ms ease-in-out;
 	margin: 0.3em;
 }
 :host([open]){
-	transform: rotate(90deg);
+	transform: rotate(180deg);
 	transition: transform 100ms ease-in-out;
 }

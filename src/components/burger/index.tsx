@@ -7,7 +7,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 })
 export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) open = false
+	@Prop({ mutable: true, reflect: true }) open = true
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 	@Event() burgerStatus: EventEmitter<boolean>
 
@@ -19,9 +19,10 @@ export class SmoothlyBurger {
 	@Listen("resize", { target: "window" })
 	resizeHandler() {
 		const reduced = window.matchMedia(this.mediaQuery).matches
-		if (reduced)
+		if (reduced) {
 			this.visible = true
-		else {
+			this.open = true
+		} else {
 			this.visible = false
 			this.open = false
 		}

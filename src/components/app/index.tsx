@@ -12,7 +12,7 @@ interface Selected {
 })
 export class SmoothlyApp {
 	@Prop() label = "App"
-	@Prop({ mutable: true, reflect: true }) menuOpen = false
+	@Prop({ mutable: true, reflect: true }) menuOpen = true
 	@State() selected?: Selected
 	mainElement?: HTMLElement
 	rooms: Record<string, Selected> = {}
@@ -68,7 +68,7 @@ export class SmoothlyApp {
 					</h1>
 					<slot name="header"></slot>
 					<nav>
-						<ul>
+						<ul class={this.menuOpen.toString()}>
 							<slot name="nav-start"></slot>
 							<slot> </slot>
 							<slot name="nav-end"></slot>

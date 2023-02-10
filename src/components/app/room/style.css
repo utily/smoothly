@@ -8,9 +8,9 @@
 :host > li {
 	height: 100%;
 	list-style: none;
-	padding: 0;
 }
 :host > li > a {
+	margin-left: 2em;
 	height: 100%;
 }
 :host[selected] > li {

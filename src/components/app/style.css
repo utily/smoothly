@@ -29,7 +29,6 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 	height: 100%;
 	margin: 0;
 }
-
 smoothly-app > smoothly-notifier > header > h1 {
 	margin-left: 3.8rem;
 }
@@ -47,6 +46,8 @@ smoothly-app > smoothly-notifier > header > nav > ul  li a {
 	line-height: 1.6cm;
 }
 smoothly-app > smoothly-notifier > header > nav > ul {
+	align-items: center;
+	justify-content: center;
 	width: 100%;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
@@ -61,29 +62,30 @@ smoothly-app > smoothly-notifier > main {
 	position: relative;
 	top: 5rem;
 }
-
 @media screen and (max-width: 900px) {
   smoothly-app > smoothly-notifier > header > nav,
   smoothly-app > smoothly-notifier > header > nav > ul {
     position: relative;
     flex-direction: column;
-    width: 250px;
+    width: 220px;
   }
-	
   smoothly-app > smoothly-notifier > header > nav > ul  li {
     margin-right: 0;
     margin-bottom: 1em;
 		background-color: rgba(var(--smoothly-dark-color));
   }
-
 	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger{
 		position: relative;
 		right: 0%;
 		align-self: flex-end;
-		margin-right: 2em;
+		top: 1em;
+		right: 2em;
 	}
-
 }
 
-
-
+.true:not([menuOpen]) > * > *{
+	display: none;
+}
+.true > * > *{
+	width: 10em;
+}
