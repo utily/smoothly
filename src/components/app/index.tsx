@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 interface Selected {
 	room: HTMLSmoothlyAppRoomElement
@@ -12,7 +12,7 @@ interface Selected {
 })
 export class SmoothlyApp {
 	@Prop() label = "App"
-	@Prop({ mutable: true, reflect: true }) menuOpen = true
+	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Selected
 	mainElement?: HTMLElement
 	rooms: Record<string, Selected> = {}

@@ -46,8 +46,6 @@ smoothly-app > smoothly-notifier > header > nav > ul  li a {
 	line-height: 1.6cm;
 }
 smoothly-app > smoothly-notifier > header > nav > ul {
-	align-items: center;
-	justify-content: center;
 	width: 100%;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
@@ -61,6 +59,9 @@ smoothly-app > smoothly-notifier > header > nav > ul li a {
 smoothly-app > smoothly-notifier > main {
 	position: relative;
 	top: 5rem;
+}
+::slotted(li){
+	height:0em;
 }
 @media screen and (max-width: 900px) {
   smoothly-app > smoothly-notifier > header > nav,
@@ -82,10 +83,9 @@ smoothly-app > smoothly-notifier > main {
 		right: 2em;
 	}
 }
-
 .true:not([menuOpen]) > * > *{
 	display: none;
 }
-.true > * > *{
+.true> * > *{
 	width: 10em;
 }
