@@ -2,7 +2,7 @@ smoothly-form {
 	display: block;
 }
 smoothly-form > form {
-	position: "relative";
+	position: relative;
 	min-width: 15em;
 }
 smoothly-form > form > fieldset {

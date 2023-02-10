@@ -31,7 +31,7 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 				<header onClick={() => this.select(!this.selected)}>
 					<smoothly-icon
 						color={this.selected ? "success" : "medium"}
-						fill="solid"
+						fill="outline"
 						name={this.selected ? "checkmark-circle" : "ellipse-outline"}
 						size="tiny"
 						toolTip="Select"></smoothly-icon>

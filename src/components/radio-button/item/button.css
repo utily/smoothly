@@ -7,13 +7,6 @@ smoothly-radio-button[decoration=button] :host > header > smoothly-icon {
 	border-radius: 100%;
 	font-size: 1.3rem;
 	display: flex;
-	background: rgb(var(--smoothly-light-color));
-	transition: 0.2s;
-}
-
-smoothly-radio-button[decoration=button] :host[selected] > header > smoothly-icon {
-	color: rgb(var(--smoothly-success-color));
-	background: rgb(var(--smoothly-success-shade));
 }
 
 smoothly-radio-button[decoration=button] ::slotted([slot=expansion]) {
@@ -33,12 +26,9 @@ smoothly-radio-button[decoration=button] ::slotted([slot=expansion])::before {
 
 @media screen and (min-width: 900px){
 	smoothly-radio-button[decoration=button] :host > header:hover > smoothly-icon {
-		background: rgb(var(--smoothly-success-color));
 		cursor: pointer;
 	}
 	smoothly-radio-button[deselectable] :host[selected] > header:hover > smoothly-icon {
-		background: rgb(var(--smoothly-warning-shade));
-		color: rgb(var(--smoothly-warning-color));
 		cursor: pointer;
 	}
 }

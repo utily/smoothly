@@ -277,9 +277,14 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h4>Smoothly checkboxes</h4>,
 			<smoothly-form>
-				<smoothly-checkbox></smoothly-checkbox>
-				<smoothly-checkbox disabled={true}></smoothly-checkbox>
-				<smoothly-checkbox>Label</smoothly-checkbox>
+				<div>
+					<smoothly-checkbox>
+						Check me
+						<div slot="expansion">Some context</div>
+					</smoothly-checkbox>
+					<smoothly-checkbox>Label</smoothly-checkbox>
+					<smoothly-checkbox disabled={true} />
+				</div>
 			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
 			<smoothly-form>
