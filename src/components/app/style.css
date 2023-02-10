@@ -30,7 +30,6 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 	margin: 0;
 }
 
-
 smoothly-app > smoothly-notifier > header > h1 {
 	margin-left: 3.8rem;
 }
@@ -70,6 +69,7 @@ smoothly-app > smoothly-notifier > main {
     flex-direction: column;
     width: 250px;
   }
+	
   smoothly-app > smoothly-notifier > header > nav > ul  li {
     margin-right: 0;
     margin-bottom: 1em;

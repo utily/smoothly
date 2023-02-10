@@ -11,7 +11,7 @@ export class SmoothlyBurger {
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 	@Event() burgerStatus: EventEmitter<boolean>
 
-	@Watch("closed")
+	@Watch("open")
 	closedHandler() {
 		this.burgerStatus.emit(this.open)
 	}
