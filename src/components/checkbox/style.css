@@ -3,8 +3,11 @@
 }
 
 :host {
+	display: block;
+}
+
+:host > main {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	width: fit-content;
 	height: max-content;
@@ -12,32 +15,49 @@
 	line-height: 0;
 }
 
-label {
-	margin-right: 0.5em;
+:host > main > label {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0.2em;
 }
 
-:host > div {
+:host > main > div {
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
 
-smoothly-icon {
+:host > main > div > smoothly-icon {
 	display: flex;
 	justify-content: center;	
 	align-items: center;
 }
 
-.outline {
+:host:not([checked]) > main > div > smoothly-icon,
+:host:not([intermediate]) > main > div > smoothly-icon {
 	stroke: rgb(var(--smoothly-color-contrast));
-	opacity: 1;
-	transition: opacity 200ms ease-in-out;
 }
 
-.hidden {
-	opacity: 0;
-}
-
-:host[disabled] > div {
+:host[disabled] > main > div {
 	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
 }
 
+::slotted([slot=expansion]) {
+	display: none;
+	background-color: rgb(var(--smoothly-secondary-color));
+	color: rgb(var(--smoothly-secondary-contrast));
+}
 
+[checked]::slotted([slot=expansion]) {
+	display: block;
+	padding: 0.5em;
+	border-radius: 5px;
+	margin: 0.5rem 0;
+}
+
+[checked]::slotted([slot=expansion])::before {
+	content: "\25B2";
+	position: relative;
+	top: -1.35em;
+	left: 2rem;
+	color: rgb(var(--smoothly-secondary-color))
+}

@@ -16,7 +16,6 @@ export class SmoothlyCheckbox {
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyChecked: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
-	@Prop() label: string
 
 	componentWillLoad() {
 		this.t = translation.create(this.element)
@@ -36,23 +35,27 @@ export class SmoothlyCheckbox {
 	render() {
 		return (
 			<Host>
-				{this.label && <label htmlFor={this.name}>{this.label}</label>}
-				<div>
-					<smoothly-icon
-						toolTip={this.t(!this.checked ? "Select" : "De-select")}
-						onClick={e => {
-							this.toggle()
-						}}
-						size={this.size}
-						name={
-							this.intermediate && !this.checked
-								? "remove-outline"
-								: this.checked && !this.intermediate
-								? "checkmark-outline"
-								: "square-outline"
-						}
-						class={!this.checked && !this.intermediate ? "hidden" : "outline"}></smoothly-icon>
-				</div>
+				<main>
+					<div>
+						<smoothly-icon
+							toolTip={this.t(!this.checked ? "Select" : "De-select")}
+							onClick={e => {
+								this.toggle()
+							}}
+							size={this.size}
+							name={
+								this.intermediate && !this.checked
+									? "remove-outline"
+									: this.checked && !this.intermediate
+									? "checkmark-outline"
+									: "empty"
+							}></smoothly-icon>
+					</div>
+					<label htmlFor={this.name}>
+						<slot></slot>
+					</label>
+				</main>
+				<slot name="expansion" />
 			</Host>
 		)
 	}
