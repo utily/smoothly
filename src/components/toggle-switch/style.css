@@ -5,7 +5,7 @@
 	height: 2em;
 }
 button{
-	padding:none;
+	padding: 1px 4px;
 	border: none;
 	position: relative;
 	overflow: hidden;
