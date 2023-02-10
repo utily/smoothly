@@ -16,7 +16,12 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async loadDocument() {
 		if (this.name)
-			this.document = await SmoothlyIcon.load(this.name)
+			this.document =
+				this.name != "empty"
+					? await SmoothlyIcon.load(this.name)
+					: `<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+			<title>Empty</title>
+			</svg>`
 	}
 	async componentWillLoad() {
 		await this.loadDocument()

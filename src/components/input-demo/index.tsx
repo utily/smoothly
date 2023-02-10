@@ -275,20 +275,23 @@ export class SmoothlyInputDemo {
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
+			<h4>Smoothly checkboxes</h4>,
+			<smoothly-form>
+				<smoothly-checkbox></smoothly-checkbox>
+				<smoothly-checkbox disabled={true}></smoothly-checkbox>
+				<smoothly-checkbox>Label</smoothly-checkbox>
+			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
 			<smoothly-form>
 				<smoothly-radio-button deselectable decoration="button">
 					<smoothly-radio-button-item value={{ some: "content", yes: "sir" }}>
-						<span>Option 1</span>
-						<span slot="expansion">Some description.</span>
+						Option 1<div slot="expansion">Some description.</div>
 					</smoothly-radio-button-item>
 					<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }}>
-						<span>Option 2</span>
-						<span slot="expansion">Some other description.</span>
+						Option 2<div slot="expansion">Some other description.</div>
 					</smoothly-radio-button-item>
 					<smoothly-radio-button-item value={{ some: "one", yes: "kid" }}>
-						<span>Option 3</span>
-						<span slot="expansion">Some third description.</span>
+						Option 3<div slot="expansion">Some third description.</div>
 					</smoothly-radio-button-item>
 				</smoothly-radio-button>
 				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
@@ -357,48 +360,6 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
 			</smoothly-form>,
-			<h4>Smoothly checkboxes</h4>,
-			<smoothly-form looks="plain">
-				<smoothly-checkbox style={{ width: "100%" }}></smoothly-checkbox>
-				<smoothly-checkbox disabled={true} style={{ width: "100%" }}></smoothly-checkbox>
-				<smoothly-checkbox label="Label" />
-			</smoothly-form>,
-			<h2>Smoothly addresses</h2>,
-			<smoothly-form looks="grid" style={{ margin: "2em" }}>
-				<smoothly-address
-					style={{ width: "30%" }}
-					value={{
-						allowed: "Visit",
-						countryCode: "SE",
-						street: "Korkstigen 2",
-						zipCode: "654 32",
-						city: "Fejksala",
-					}}></smoothly-address>
-				<smoothly-address
-					style={{ width: "30%" }}
-					editable={true}
-					value={{
-						allowed: "Billing",
-						countryCode: "SE",
-						street: "Stigvägen 34",
-						zipCode: "123 45",
-						city: "Hobbiton",
-					}}></smoothly-address>
-				<smoothly-addresses
-					style={{ width: "30%" }}
-					// allowed="billing delivery visit"
-					// editable={true}
-					value={[
-						{ allowed: "Delivery", countryCode: "SE", street: "Rundslingan 3", zipCode: "987 65", city: "Klotby" },
-						{ allowed: "Billing", countryCode: "SE", street: "Gångbanan 34", zipCode: "543 21", city: "Traskträsk" },
-					]}></smoothly-addresses>
-				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
-					Submit
-				</smoothly-submit>
-			</smoothly-form>,
-			<smoothly-trigger color="success" onClick={(e: UIEvent) => console.log(e.detail)}>
-				Trigger
-			</smoothly-trigger>,
 			<smoothly-backtotop></smoothly-backtotop>,
 		]
 	}

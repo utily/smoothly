@@ -61,7 +61,6 @@ export class SmoothlyFilter {
 						<slot name="start" />
 					</section>
 					<slot />
-					{/* to be replaced with smoothly-button */}
 					<section slot="end">
 						<smoothly-icon
 							class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
@@ -69,7 +68,6 @@ export class SmoothlyFilter {
 							size="tiny"
 							onClick={e => this.clear(e)}
 						/>
-						{/* to be replaced with smoothly-button */}
 						<aside
 							class="btn"
 							onClick={() => {
