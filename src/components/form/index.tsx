@@ -42,7 +42,6 @@ export class SmoothlyForm {
 	}
 	@Method()
 	async submit(): Promise<void> {
-		console.log("form submit")
 		this.smoothlyFormSubmit.emit(this.value)
 		if (this.action) {
 			const response = await http.fetch(
