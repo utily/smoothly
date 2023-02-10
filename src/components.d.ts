@@ -14,7 +14,6 @@ import { Criteria } from "selectively";
 import { Data } from "./components/form/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
-import { Data as Data1 } from "./components/submit/Data";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -136,9 +135,13 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyForm {
+        "action"?: string;
         "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
+        "method"?: "GET" | "POST";
         "name"?: string;
+        "processing": boolean;
+        "submit": () => Promise<void>;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -318,10 +321,11 @@ export namespace Components {
     interface SmoothlySubmit {
         "color"?: Color;
         "disabled": boolean;
+        "expand"?: "block" | "full";
         "fill"?: Fill;
-        "prevent"?: boolean;
-        "processing": boolean;
-        "submit": () => Promise<boolean>;
+        "shape"?: "rounded";
+        "size": "small" | "large" | "icon";
+        "type": "link" | "button";
     }
     interface SmoothlySummary {
         "color": Color;
@@ -373,6 +377,7 @@ export namespace Components {
         "disabled": boolean;
         "name": string;
         "selected": boolean;
+        "size": "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyTrigger {
@@ -1150,9 +1155,13 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyForm {
+        "action"?: string;
         "looks"?: "plain" | "grid" | "border" | "line";
+        "method"?: "GET" | "POST";
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyFormCustomEvent<{ name: string; value: Data }>) => void;
+        "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "processing"?: boolean;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1346,10 +1355,12 @@ declare namespace LocalJSX {
     interface SmoothlySubmit {
         "color"?: Color;
         "disabled"?: boolean;
+        "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data1>) => void;
-        "prevent"?: boolean;
-        "processing"?: boolean;
+        "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
+        "shape"?: "rounded";
+        "size"?: "small" | "large" | "icon";
+        "type"?: "link" | "button";
     }
     interface SmoothlySummary {
         "color"?: Color;
@@ -1412,6 +1423,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "name"?: string;
         "selected"?: boolean;
+        "size"?: "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyTrigger {
