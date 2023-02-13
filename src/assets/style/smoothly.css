@@ -58,5 +58,18 @@
 	--smoothly-shadow-strong: 0 0 4px 4px rgba(var(--smoothly-light-color), 0.25);
 	--border-radius: 0.25rem;
 	--input-width: 18rem;
-	--table-width: 100%;	
+	--table-width: 100%;
 }
+
+	smoothly-app > smoothly-notifier > header > h1 > a {
+		color: var(--smoothly-default-color);
+		width: 10em;
+		height: 100%;
+		margin-top: 1.3em;
+		margin-left: -2.5em;
+		font-weight: 900;
+		justify-content: center;
+		background-image: url("../logo/smoothly.svg"); 
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
