@@ -13,7 +13,7 @@ export class SmoothlyButton {
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
-	@Prop({ reflect: true }) size: "small" | "large" | "icon"
+	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() link?: string
 	@Prop() download?: boolean

@@ -62,13 +62,15 @@ export class SmoothlyFilter {
 					</section>
 					<slot />
 					<section slot="end">
-						<smoothly-icon
-							class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
-							name="close"
-							size="tiny"
-							onClick={e => this.clear(e)}
-						/>
-						<aside
+						<smoothly-button size="flexible" onClick={e => this.clear(e)}>
+							<smoothly-icon
+								class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
+								name="close"
+								size="tiny"
+							/>
+						</smoothly-button>
+						<smoothly-button
+							size="flexible"
 							class="btn"
 							onClick={() => {
 								this.expanded = !this.expanded
@@ -78,7 +80,7 @@ export class SmoothlyFilter {
 							) : (
 								<smoothly-icon name="options-outline" size="small" />
 							)}
-						</aside>
+						</smoothly-button>
 					</section>
 				</smoothly-input>
 			</smoothly-form>,

@@ -103,4 +103,11 @@ section {
 	gap: 0.5em;
 }
 
+:host > smoothly-fom > smoothly-input > section[slot=end] > smoothly-button {
+	font-size: 100%;
+	min-width: min-content;
+	padding: 0;
+	margin: 0;
+	border: none !important;
+}
 

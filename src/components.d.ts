@@ -54,7 +54,7 @@ export namespace Components {
         "fill"?: Fill;
         "link"?: string;
         "shape"?: "rounded";
-        "size": "small" | "large" | "icon";
+        "size": "small" | "large" | "icon" | "flexible";
         "type": "link" | "button";
     }
     interface SmoothlyCalendar {
@@ -1067,7 +1067,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "link"?: string;
         "shape"?: "rounded";
-        "size"?: "small" | "large" | "icon";
+        "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: "link" | "button";
     }
     interface SmoothlyCalendar {
