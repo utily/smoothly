@@ -74,6 +74,7 @@ export class SmoothlyApp {
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>
+					<smoothly-burger></smoothly-burger>
 				</header>
 				<main ref={e => (this.mainElement = e)}></main>
 			</smoothly-notifier>
