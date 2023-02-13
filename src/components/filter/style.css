@@ -64,7 +64,7 @@ section {
 /* arrow placement */
 .container.arrow-top:before {
 	left: calc(84.5%);
-	top: -6px;
+	top: -5px;
 }
 
 /* wrapper for slot(filters) */
