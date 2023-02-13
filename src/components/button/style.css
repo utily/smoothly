@@ -55,8 +55,25 @@ button {
 :host([size=large]) > button{
 	font-size: 130%;
 }
+
 :host(:not([size=icon])){
 	min-width: 8em;
+}
+
+:host([size=flexible]) {
+	min-width: unset;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+}
+
+:host([size=flexible]) > button {
+	min-width: unset;
+	padding: 0;
+	margin: 0 !important;
 }
 :host([expand]) {
 	width: 100%;
