@@ -2,8 +2,3 @@ smoothly-input-demo {
 	display: block;
 	margin: 2em;
 }
-
-smoothly-input-demo > section > div {
-	display: flex;
-	align-items: center;
-}
