@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
 
 interface Selected {
 	room: HTMLSmoothlyAppRoomElement
