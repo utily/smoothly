@@ -41,7 +41,7 @@ section {
 	content:"";
 	height: 100%;
 	width: 100%;
-	border: 1px solid rgb(var(--smoothly-default-contrast));
+	border: 1px solid rgb(var(--smoothly-color-contrast));
 	border-radius: 0.25em;
 	position: absolute;
 	top: 0;
@@ -54,8 +54,8 @@ section {
 	width: 0.6em;
 	height: 0.6em;
 	transform: rotate(45deg);
-	border-top: 1px solid rgb(var(--smoothly-default-contrast));
-	border-left: 1px solid rgb(var(--smoothly-default-contrast));
+	border-top: 1px solid rgb(var(--smoothly-color-contrast));
+	border-left: 1px solid rgb(var(--smoothly-color-contrast));
 	background-color: rgb(var(--smoothly-default-color));
 	position: absolute;
 	z-index: 3;
@@ -72,16 +72,6 @@ section {
 	width: 100%;
 	padding: 1em;
 	position: relative;
-}
-
-/* the outline icons are invisible without stroke */
-.btn {
-	stroke: rgb(46, 52, 54);
-}
-
-/* temporary button for funnel */
-.btn:hover {
-	cursor:pointer
 }
 
 .btn.hidden {
