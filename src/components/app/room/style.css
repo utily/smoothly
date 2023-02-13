@@ -1,6 +1,7 @@
 :host {
 	display: block;
 	cursor: pointer;
+	margin: 1.5em;
 }
 :host > main {
 	display: none;
@@ -10,7 +11,7 @@
 	list-style: none;
 }
 :host > li > a {
-	margin-left: 2em;
+	/* margin-left: 2em; */
 	height: 100%;
 }
 :host[selected] > li {

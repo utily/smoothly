@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
 
 interface Selected {
 	room: HTMLSmoothlyAppRoomElement
@@ -63,18 +63,26 @@ export class SmoothlyApp {
 		return (
 			<smoothly-notifier>
 				<header color="tertiary">
-					<h1>
+					{/* 	<h1>
 						<a href={"/"}>{this.label}</a>
-					</h1>
+					</h1> */}
+
+					<a href="/">
+						<h1>{this.label}</h1>
+					</a>
+
 					<slot name="header"></slot>
+
 					<nav>
 						<ul class={this.menuOpen.toString()}>
 							<slot name="nav-start"></slot>
-							<slot> </slot>
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>
 				</header>
+				<section color="tertiary">
+					<slot></slot>
+				</section>
 				<main ref={e => (this.mainElement = e)}></main>
 			</smoothly-notifier>
 		)

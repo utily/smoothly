@@ -1,4 +1,4 @@
-smoothly-app {
+/* smoothly-app {
 	display: block;
 	scrollbar-width: none;
 }
@@ -89,3 +89,88 @@ smoothly-app > smoothly-notifier > main {
 .true> * > *{
 	width: 10em;
 }
+
+ */
+
+ * {
+	 box-sizing: border-box
+ }
+
+ smoothly-app {
+	display: flex;
+	position: fixed;
+	left: 0;
+	top: 0;
+	min-width: 100vw;
+	background-color: rgba(var(--smoothly-dark-color));
+ }
+
+ smoothly-app > smoothly-notifier {
+	display: flex !important;
+ }
+
+ smoothly-app > smoothly-notifier > header {
+	display: flex;
+	align-items: center;
+ }
+
+ smoothly-app > smoothly-notifier > header > a > h1 {
+	margin: 0;
+ }
+
+ smoothly-app > smoothly-notifier > section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+ }
+
+ smoothly-app > smoothly-notifier > header > nav > ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	margin: 0;
+ }
+
+ smoothly-app > smoothly-notifier > header > nav > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+ }
+
+ @media screen and (max-width: 900px) {
+	smoothly-app {
+		display: block;
+		padding: 1em;
+	}
+
+	smoothly-app > smoothly-notifier > header > nav {
+		display: flex;
+		flex-direction: column;
+		position: fixed;
+		right: 0;
+	}
+
+	smoothly-app > smoothly-notifier > header > nav > ul {
+		display: flex;
+		flex-direction: column;
+	}
+
+/* 	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger {
+		position: fixed;
+		right: 0;
+		align-self: flex-end;
+		top: 0;
+		right: 2em;
+	} */
+	
+	smoothly-app > smoothly-notifier > section {
+		position: absolute;
+		top: 4.5em;
+		right: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	
+ }
