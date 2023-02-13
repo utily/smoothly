@@ -1,0 +1,8 @@
+smoothly-button-demo {
+	display: block;
+}
+
+smoothly-button-demo > section > div {
+	display: flex;
+	align-items: center;
+}
