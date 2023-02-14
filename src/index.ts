@@ -10,5 +10,9 @@ export {
 	Trigger,
 	Option,
 	Listenable,
+	HasListenable,
+	WithListenable,
+	CanBeListenable,
+	StateBase,
 } from "./model"
 export { Cosmetic } from "./utilities"
