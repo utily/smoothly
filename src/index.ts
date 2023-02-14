@@ -11,5 +11,6 @@ export {
 	Trigger,
 	Option,
 	Listenable,
+	StateBase,
 } from "./model"
 export { Cosmetic } from "./utilities"
