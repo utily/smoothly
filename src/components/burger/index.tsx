@@ -17,7 +17,8 @@ export class SmoothlyBurger {
 	}
 
 	@Listen("resize", { target: "window" })
-	resizeHandler() {
+	@Listen("innerHeight", { target: "window" })
+	windowHandler() {
 		const reduced = window.matchMedia(this.mediaQuery).matches
 		if (reduced) {
 			this.visible = true

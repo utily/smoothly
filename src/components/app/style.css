@@ -79,10 +79,14 @@ smoothly-app > smoothly-notifier > main {
 		top: 0;
 		right: 0;
 	}
+
+	.true:not([menuOpen]) > * > *{
+		display: none;
+	}
 }
-.true:not([menuOpen]) > * > *{
+/* .true:not([menuOpen]) > * > *{
 	display: none;
-}
+} */
 .true> * > *{
 	width: 10em;
 }
