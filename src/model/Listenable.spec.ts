@@ -2,19 +2,23 @@
 // import * as model from "../model/index"
 // But test fails because of test not handling ESM-module of imported libraries.
 import { Listenable } from "./Listenable"
+import { StateBase } from "./StateBase"
 
 describe("Listenable", () => {
-	class State {
+	class State extends StateBase<State> {
 		disabled = false
+		static create() {
+			return Listenable.load(new State())
+		}
 	}
 	it("load", () => {
-		const state = Listenable.load(new State())
+		const state = State.create()
 		expect(typeof state.listen).toEqual("function")
 		expect(typeof state.unlisten).toEqual("function")
 		expect(state.disabled).toEqual(false)
 	})
 	it("subscribe", () => {
-		const state = Listenable.load(new State())
+		const state = State.create()
 		class FakeComponent {
 			disabled: boolean
 			constructor() {
@@ -30,7 +34,7 @@ describe("Listenable", () => {
 		expect(components.every(component => component.disabled)).toEqual(true)
 	})
 	it("unsubscribe", () => {
-		const state = Listenable.load(new State())
+		const state = State.create()
 		let count = 0
 		class FakeComponent {
 			disabled: boolean
