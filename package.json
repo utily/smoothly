@@ -78,8 +78,8 @@
 		"urlpattern-polyfill": "^6.0.2"
 	},
 	"devDependencies": {
-		"@stencil/core": "^3.0.0",
-		"@stencil/sass": "^2.0.3",
+		"@stencil/core": "^2.22.2",
+		"@stencil/sass": "^1.5.2",
 		"@types/jest": "^29.4.0",
 		"@types/pvutils": "^1.0.1",
 		"@typescript-eslint/eslint-plugin": "^5.51.0",
