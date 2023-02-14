@@ -1,6 +1,6 @@
 import { Component, ComponentDidLoad, Event, EventEmitter, h, Prop } from "@stencil/core"
 if (!(globalThis as any).URLPattern)
-	await import("urlpattern-polyfill")
+	(async () => await import("urlpattern-polyfill"))()
 
 @Component({
 	tag: "smoothly-app-room",
