@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app label="Smoothly Demo">
-				<smoothly-app-room path="/google.com" label="Links">
+				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">
@@ -54,7 +54,7 @@ export class SmoothlyAppDemo {
 					<smoothly-icon-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
-				<smoothly-trigger slot="header" type="link" name="logout">
+				<smoothly-trigger slot="nav-end" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
 			</smoothly-app>

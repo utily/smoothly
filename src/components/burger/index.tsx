@@ -32,9 +32,7 @@ export class SmoothlyBurger {
 		return (
 			<Host>
 				<span class="burger" onClick={() => (this.open = !this.open)}>
-					<div class="slide"></div>
-					<div class="slide"></div>
-					<div class="slide"></div>
+					<smoothly-icon name="menu"> </smoothly-icon>
 				</span>
 			</Host>
 		)

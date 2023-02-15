@@ -44,7 +44,6 @@ export class SmoothlyApp {
 
 	@Listen("popstate", { target: "window" })
 	locationChangeHandler(event: PopStateEvent) {
-		console.log("popstate", event.state, this.selected?.room.path.toString())
 		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.room.path) {
 			this.selected = this.rooms[event.state.smoothlyPath]
 		}
@@ -64,7 +63,7 @@ export class SmoothlyApp {
 			<smoothly-notifier>
 				<header color="tertiary">
 					<h1>
-						<a href={"/"}>{this.label}</a>
+						<a href={""}>{this.label}</a>
 					</h1>
 					<slot name="header"></slot>
 					<nav>
