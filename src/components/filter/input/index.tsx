@@ -12,7 +12,7 @@ export class SmoothlyFilterInput {
 	smoothlyInput: HTMLSmoothlyInputElement
 
 	@Prop({ reflect: true }) name: string
-	@Prop({ mutable: true }) value: any
+	@Prop({ mutable: true }) value = ""
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop() minLength = 0
@@ -30,7 +30,9 @@ export class SmoothlyFilterInput {
 	@Event() filter: EventEmitter<Criteria>
 	private onFilter() {
 		this.value = this.smoothlyInput.value
-		let criteria: selectively.Criteria
+		let result: Criteria = ""
+		let criteria: Criteria
+
 		switch (this.comparison) {
 			case "equals":
 				criteria = this.value
@@ -52,8 +54,14 @@ export class SmoothlyFilterInput {
 				criteria = selectively.includes(this.value)
 				break
 		}
-		this.filter.emit({ [this.name]: criteria })
+
+		result = this.name
+			.split(".")
+			.reverse()
+			.reduce<Criteria>((previousValue, currentValue) => ({ [currentValue]: previousValue }), criteria)
+		this.filter.emit(result)
 	}
+
 	@Method()
 	async clear() {
 		this.value = ""
@@ -67,7 +75,7 @@ export class SmoothlyFilterInput {
 				value={this.value}
 				onKeyDown={() => this.onFilter()}
 				onSmoothlyInput={e => {
-					this.value = e.detail.value
+					this.value = e.detail.value ?? ""
 				}}
 				placeholder={this.placeholder}>
 				<div slot="start">
