@@ -55,8 +55,7 @@ export class SmoothlyFilter {
 					ref={element => (this.freeSearchElement = element)}
 					value={selectivelyCreate(this.criteria).stringify()}
 					onKeyDown={() => this.onKeyDown()}
-					placeholder={this.placeholder}
-					readonly>
+					placeholder={this.placeholder}>
 					<section slot="start">
 						<slot name="start" />
 					</section>
