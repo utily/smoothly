@@ -60,10 +60,12 @@ export class SmoothlyFilter {
 				<smoothly-input
 					name="filter"
 					ref={element => (this.freeSearchElement = element)}
+
 					value={this.filter}
 					onKeyDown={event => this.onKeyDown(event)}
 					placeholder={this.placeholder}
 					readonly>
+
 					<section slot="start">
 						<slot name="start" />
 					</section>
