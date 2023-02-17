@@ -11,12 +11,12 @@ import { Cat, Root } from "./Root"
 	scoped: true,
 })
 export class TableDemoFiltered implements ComponentWillLoad {
-	@State() criteria: Criteria = {}
+	@State() criteria: Criteria
 	@State() data?: Root | false
 	@State() selector: Selector<Cat> = Selector.create("breed")
 
 	@Listen("filters")
-	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
+	onFilterUpdate(event: CustomEvent<selectively.Rule>) {
 		event.stopPropagation()
 		this.criteria = event.detail
 	}

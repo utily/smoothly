@@ -121,7 +121,7 @@ export namespace Components {
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
         "clear": () => Promise<void>;
-        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes" | "some";
         "currency"?: Currency;
         "disabled": boolean;
         "maxLength": number;
@@ -1148,13 +1148,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
-        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
+        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes" | "some";
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<string>) => void;
         "pattern"?: RegExp;
         "placeholder"?: string;
         "readonly"?: boolean;

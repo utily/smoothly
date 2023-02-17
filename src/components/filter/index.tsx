@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
 import * as selectively from "selectively"
-import { create as selectivelyCreate, Criteria } from "selectively"
+import { Criteria } from "selectively"
 import { Clearable } from "./Clearable"
 
 @Component({
@@ -14,31 +14,33 @@ export class SmoothlyFilter {
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@State() expanded = false
 	@State() freeSearchValue: string
+	@State() rule = ""
 	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
 	@Prop({ mutable: true }) inputValue: Criteria
+	@State() filter: selectively.selectively.Rule
 
 	@Listen("filter")
-	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
+	filterHandler(event: CustomEvent<string>) {
 		event.stopPropagation()
+		console.log("event.detail", event.detail)
 
 		if (Clearable.is(event.target)) {
 			const target = event.target
 			Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
 		}
-		!this.freeSearchValue
-			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
-			: this.filters.emit(
-					selectively.and(
-						selectively.any(selectively.includes(this.freeSearchValue)),
-						(this.criteria = { ...this.criteria, ...event.detail })
-					)
-			  )
+
+		this.rule = `${this.rule} ${event.detail}`
+		this.filter = selectively.parse(this.rule)
+
+		this.filters.emit(this.filter)
 	}
+
 	@Event() filters: EventEmitter<Criteria>
-	onKeyDown() {
+	onKeyDown(event: KeyboardEvent) {
+		console.log("the event", event)
 		this.freeSearchValue = this.freeSearchElement?.value
 		this.inputValue = selectively.includes(this.freeSearchValue)
-		this.filters.emit(selectively.any(this.inputValue))
+		// this.filters.emit(this.inputValue ? selectively.any(this.inputValue) : selectively.and())
 	}
 
 	@Method()
@@ -53,8 +55,8 @@ export class SmoothlyFilter {
 				<smoothly-input
 					name="filter"
 					ref={element => (this.freeSearchElement = element)}
-					value={selectivelyCreate(this.criteria).stringify()}
-					onKeyDown={() => this.onKeyDown()}
+					value={this.filter}
+					onKeyDown={event => this.onKeyDown(event)}
 					placeholder={this.placeholder}
 					readonly>
 					<section slot="start">
