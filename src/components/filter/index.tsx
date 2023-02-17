@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
 import * as selectively from "selectively"
-import { Criteria } from "selectively"
+import { create as selectivelyCreate, Criteria } from "selectively"
 import { Clearable } from "./Clearable"
 
 @Component({
@@ -14,44 +14,37 @@ export class SmoothlyFilter {
 	@Prop({ mutable: true }) placeholder: string | undefined
 	@State() expanded = false
 	@State() freeSearchValue: string
-	@State() rule = ""
-	// @Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
-	@Prop({ mutable: true }) criteria = ""
-
+	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
 	@Prop({ mutable: true }) inputValue: Criteria
-	@State() filter: selectively.selectively.Rule
 
 	@Listen("filter")
-	filterHandler(event: CustomEvent<string>) {
+	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
 		event.stopPropagation()
-		console.log("event.detail", event.detail)
 
 		if (Clearable.is(event.target)) {
 			const target = event.target
 			Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
 		}
-
-		this.rule = `${this.rule} ${event.detail}`
-		this.filter = selectively.parse(this.rule)
-		console.log("rule", this.rule)
-
-		this.filters.emit(this.filter)
+		!this.freeSearchValue
+			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
+			: this.filters.emit(
+					selectively.and(
+						selectively.any(selectively.includes(this.freeSearchValue)),
+						(this.criteria = { ...this.criteria, ...event.detail })
+					)
+			  )
 	}
-
 	@Event() filters: EventEmitter<Criteria>
-	onKeyDown(event: KeyboardEvent) {
-		console.log("the event", event)
+	onKeyDown() {
 		this.freeSearchValue = this.freeSearchElement?.value
 		this.inputValue = selectively.includes(this.freeSearchValue)
-		// this.filters.emit(this.inputValue ? selectively.any(this.inputValue) : selectively.and())
+		this.filters.emit(selectively.any(this.inputValue))
 	}
 
 	@Method()
 	async clear(event: MouseEvent): Promise<void> {
 		new Set(this.inputs.values()).forEach(input => input.clear())
-		this.rule = ""
-		this.filter = selectively.parse(this.rule)
-		this.filters.emit(this.filter)
+		this.filters.emit((this.criteria = {}))
 	}
 
 	render() {
@@ -60,19 +53,20 @@ export class SmoothlyFilter {
 				<smoothly-input
 					name="filter"
 					ref={element => (this.freeSearchElement = element)}
-
-					value={this.filter}
-					onKeyDown={event => this.onKeyDown(event)}
-					placeholder={this.placeholder}
-					readonly>
-
+					value={selectivelyCreate(this.criteria).stringify()}
+					onKeyDown={() => this.onKeyDown()}
+					placeholder={this.placeholder}>
 					<section slot="start">
 						<slot name="start" />
 					</section>
 					<slot />
 					<section slot="end">
 						<smoothly-button size="flexible" onClick={e => this.clear(e)}>
-							<smoothly-icon class={this.rule.length >= 1 ? "btn clear" : "btn hidden"} name="close" size="tiny" />
+							<smoothly-icon
+								class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
+								name="close"
+								size="tiny"
+							/>
 						</smoothly-button>
 						<smoothly-button
 							size="flexible"

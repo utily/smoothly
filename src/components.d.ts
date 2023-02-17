@@ -114,14 +114,14 @@ export namespace Components {
     }
     interface SmoothlyFilter {
         "clear": (event: MouseEvent) => Promise<void>;
-        "criteria": string;
+        "criteria": Record<string, Criteria>;
         "inputValue": Criteria;
         "placeholder": string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
         "clear": () => Promise<void>;
-        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes" | "some";
+        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
         "currency"?: Currency;
         "disabled": boolean;
         "maxLength": number;
@@ -1141,20 +1141,20 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyFilter {
-        "criteria"?: string;
+        "criteria"?: Record<string, Criteria>;
         "inputValue"?: Criteria;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
         "placeholder"?: string | undefined;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
-        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes" | "some";
+        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<string>) => void;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
         "pattern"?: RegExp;
         "placeholder"?: string;
         "readonly"?: boolean;
