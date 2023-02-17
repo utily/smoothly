@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
 import { Currency } from "isoly"
-import * as selectively from "selectively"
+// import * as selectively from "selectively"
 import { Criteria } from "selectively"
 
 @Component({
@@ -24,42 +24,53 @@ export class SmoothlyFilterInput {
 	@Prop() disabled = false
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
-	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
+	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" | "some" = "includes"
 	@State() criteria: Criteria
 
-	@Event() filter: EventEmitter<Criteria>
-	private onFilter() {
+	@Event() filter: EventEmitter<string> //<{ name: string; value: string }>
+	private onFilter(event: KeyboardEvent) {
 		this.value = this.smoothlyInput.value
-		let result: Criteria = ""
-		let criteria: Criteria
+
+		// const result: Criteria = ""
+		let criteria: string
+		console.log("value", this.value)
+		console.log("an event", event)
 
 		switch (this.comparison) {
 			case "equals":
-				criteria = this.value
+				criteria = `:${this.value}`
 				break
 			case "less":
-				criteria = selectively.lesserThan(this.value)
+				criteria = `:<${this.value}` //selectively.lesserThan(this.value)
 				break
 			case "greater":
-				criteria = selectively.greaterThan(this.value)
+				criteria = `:>${this.value}` //selectively.greaterThan(this.value)
 				break
 			case "starts":
-				criteria = selectively.startsWith(this.value)
+				criteria = `:${this.value}*` // selectively.startsWith(this.value)
 				break
 			case "ends":
-				criteria = selectively.endsWith(this.value)
+				criteria = `:*${this.value}` // selectively.endsWith(this.value)
+				break
+			case "some":
+				criteria = `:${this.value}`
 				break
 			default:
 			case "includes":
-				criteria = selectively.includes(this.value)
+				criteria = `:*${this.value}*` //selectively.includes(this.value)
 				break
 		}
 
-		result = this.name
+		/*result = this.name
 			.split(".")
 			.reverse()
-			.reduce<Criteria>((previousValue, currentValue) => ({ [currentValue]: previousValue }), criteria)
-		this.filter.emit(result)
+			.reduce<Criteria>((previousValue, currentValue) => ({ [currentValue]: previousValue }), criteria) */
+		// this.filter.emit({ name: this.name, value: this.value == "" ? this.name + ":**" : this.name + criteria })
+		// console.log("emit: ", { name: this.name, value: this.value == "" ? this.name + ":**" : this.name + criteria })
+		// this.filter.emit({ name: this.name, value: this.value == "" ? "**" : criteria })
+		// console.log({ name: this.name, value: this.value == "" ? "**" : criteria })
+		this.filter.emit(this.name + criteria)
+		console.log("criteria? ", this.name + criteria)
 	}
 
 	@Method()
@@ -73,7 +84,7 @@ export class SmoothlyFilterInput {
 				name={this.name}
 				ref={(element: HTMLSmoothlyInputElement) => (this.smoothlyInput = element)}
 				value={this.value}
-				onKeyDown={() => this.onFilter()}
+				onKeyDown={event => this.onFilter(event)}
 				onSmoothlyInput={e => {
 					this.value = e.detail.value ?? ""
 				}}
