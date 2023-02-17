@@ -61,7 +61,7 @@ export class SmoothlyFilterInput {
 				break
 		}
 
-		result = this.name
+		/*result = this.name
 			.split(".")
 			.reverse()
 			.reduce<Criteria>((previousValue, currentValue) => ({ [currentValue]: previousValue }), criteria) */
