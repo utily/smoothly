@@ -114,7 +114,7 @@ export namespace Components {
     }
     interface SmoothlyFilter {
         "clear": (event: MouseEvent) => Promise<void>;
-        "criteria": Record<string, Criteria>;
+        "criteria": string;
         "inputValue": Criteria;
         "placeholder": string | undefined;
     }
@@ -1141,7 +1141,7 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyFilter {
-        "criteria"?: Record<string, Criteria>;
+        "criteria"?: string;
         "inputValue"?: Criteria;
         "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
         "placeholder"?: string | undefined;

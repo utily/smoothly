@@ -15,7 +15,9 @@ export class SmoothlyFilter {
 	@State() expanded = false
 	@State() freeSearchValue: string
 	@State() rule = ""
-	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
+	// @Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
+	@Prop({ mutable: true }) criteria = ""
+
 	@Prop({ mutable: true }) inputValue: Criteria
 	@State() filter: selectively.selectively.Rule
 
@@ -31,6 +33,7 @@ export class SmoothlyFilter {
 
 		this.rule = `${this.rule} ${event.detail}`
 		this.filter = selectively.parse(this.rule)
+		console.log("rule", this.rule)
 
 		this.filters.emit(this.filter)
 	}
@@ -46,7 +49,9 @@ export class SmoothlyFilter {
 	@Method()
 	async clear(event: MouseEvent): Promise<void> {
 		new Set(this.inputs.values()).forEach(input => input.clear())
-		this.filters.emit((this.criteria = {}))
+		this.rule = ""
+		this.filter = selectively.parse(this.rule)
+		this.filters.emit(this.filter)
 	}
 
 	render() {
@@ -65,11 +70,7 @@ export class SmoothlyFilter {
 					<slot />
 					<section slot="end">
 						<smoothly-button size="flexible" onClick={e => this.clear(e)}>
-							<smoothly-icon
-								class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
-								name="close"
-								size="tiny"
-							/>
+							<smoothly-icon class={this.rule.length >= 1 ? "btn clear" : "btn hidden"} name="close" size="tiny" />
 						</smoothly-button>
 						<smoothly-button
 							size="flexible"
