@@ -148,7 +148,7 @@ export namespace Components {
         "required": boolean;
         "showLabel": boolean;
         "type": string;
-        "value": any;
+        "value": string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -1209,7 +1209,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "showLabel"?: boolean;
         "type"?: string;
-        "value"?: any;
+        "value"?: string;
     }
     interface SmoothlyForm {
         "action"?: string;
