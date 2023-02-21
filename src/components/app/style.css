@@ -74,16 +74,17 @@ smoothly-app > smoothly-notifier > main {
 @media screen and (max-width: 900px) {
   smoothly-app > smoothly-notifier > header > nav,
   smoothly-app > smoothly-notifier > header > nav > ul {
+		width: 10em;
 		top: 2.5rem;
-		right: 0;
 		position: absolute;
+		right: 0;
     flex-direction: column;
-    width: 220px;
   }
   smoothly-app > smoothly-notifier > header > nav > ul  li {
     margin-right: 0;
     margin-bottom: 1em;
 		background-color: rgba(var(--smoothly-color));
+		width: 100%;
   }
 	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger{
 		position: absolute;
