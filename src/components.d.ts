@@ -42,8 +42,6 @@ export namespace Components {
     interface SmoothlyAppDemo {
         "baseUrl": string;
     }
-    interface SmoothlyAppMenu {
-    }
     interface SmoothlyAppRoom {
         "icon"?: string;
         "label"?: string;
@@ -588,12 +586,6 @@ declare global {
         prototype: HTMLSmoothlyAppDemoElement;
         new (): HTMLSmoothlyAppDemoElement;
     };
-    interface HTMLSmoothlyAppMenuElement extends Components.SmoothlyAppMenu, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAppMenuElement: {
-        prototype: HTMLSmoothlyAppMenuElement;
-        new (): HTMLSmoothlyAppMenuElement;
-    };
     interface HTMLSmoothlyAppRoomElement extends Components.SmoothlyAppRoom, HTMLStencilElement {
     }
     var HTMLSmoothlyAppRoomElement: {
@@ -995,7 +987,6 @@ declare global {
         "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
-        "smoothly-app-menu": HTMLSmoothlyAppMenuElement;
         "smoothly-app-room": HTMLSmoothlyAppRoomElement;
         "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
         "smoothly-burger": HTMLSmoothlyBurgerElement;
@@ -1094,8 +1085,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
-    }
-    interface SmoothlyAppMenu {
     }
     interface SmoothlyAppRoom {
         "icon"?: string;
@@ -1510,7 +1499,6 @@ declare namespace LocalJSX {
         "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
-        "smoothly-app-menu": SmoothlyAppMenu;
         "smoothly-app-room": SmoothlyAppRoom;
         "smoothly-backtotop": SmoothlyBacktotop;
         "smoothly-burger": SmoothlyBurger;
@@ -1589,7 +1577,6 @@ declare module "@stencil/core" {
             "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
-            "smoothly-app-menu": LocalJSX.SmoothlyAppMenu & JSXBase.HTMLAttributes<HTMLSmoothlyAppMenuElement>;
             "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
             "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
             "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
