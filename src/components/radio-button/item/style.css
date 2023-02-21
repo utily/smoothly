@@ -23,3 +23,11 @@
 	display: block;
 	padding: 0.5rem;
 }
+
+:host[disabled] {
+	pointer-events: none;
+}
+
+:host[disabled] > header > smoothly-icon {
+	opacity: 0.25;
+}
