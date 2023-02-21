@@ -1,5 +1,7 @@
 :host {
-	display: block;
+	display: flex;
+	justify-content: center;
+	text-align: center;
 	cursor: pointer;
 }
 :host > main {
@@ -10,7 +12,7 @@
 	list-style: none;
 }
 :host > li > a {
-	margin-left: 2em;
+	margin: 0em 1.5em;
 	height: 100%;
 }
 :host[selected] > li {
@@ -21,4 +23,8 @@
 	color:rgb(var(--smoothly-color-contrast)); 
 	background-color: rgb(var(--smoothly-color-tint));
 	transition: 0.2s;	
+}
+:host > li > a > smoothly-icon{
+	align-self:inherit;
+	margin-bottom: 1em;
 }

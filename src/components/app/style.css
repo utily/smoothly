@@ -5,6 +5,13 @@ smoothly-app {
 smoothly-app[hidden] {
 	display: none;
 }
+smoothly-app > smoothly-notifier{
+	background: none;
+}
+smoothly-app > smoothly-notifier > header{
+	background: rgba(var(--smoothly-color-color));
+	color: rgba(var(--smoothly-color-contrast));
+}
 smoothly-app > smoothly-notifier > header {
 	position: fixed;
 	top: 0;
@@ -45,6 +52,9 @@ smoothly-app > smoothly-notifier > header > h1 > a {
 smoothly-app > smoothly-notifier > header > nav > ul  li a {
 	line-height: 1.6cm;
 }
+smoothly-app > smoothly-notifier > header > nav > ul  li a {
+	line-height: 1.6cm;
+}
 smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
@@ -73,7 +83,7 @@ smoothly-app > smoothly-notifier > main {
   smoothly-app > smoothly-notifier > header > nav > ul  li {
     margin-right: 0;
     margin-bottom: 1em;
-		background-color: rgba(var(--smoothly-dark-color));
+		background-color: rgba(var(--smoothly-color));
   }
 	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger{
 		position: absolute;
@@ -81,9 +91,6 @@ smoothly-app > smoothly-notifier > main {
 		right: 0;
 	}
 }
-.true:not([menuOpen]) > * > *{
+.true:not([menuOpen]) > * {
 	display: none;
-}
-.true> * > *{
-	width: 10em;
 }

@@ -54,9 +54,6 @@ export class SmoothlyAppDemo {
 					<smoothly-icon-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
-				<smoothly-trigger slot="nav-end" type="link" name="logout">
-					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
-				</smoothly-trigger>
 			</smoothly-app>
 		)
 	}
