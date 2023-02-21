@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Method, Prop } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Method, Prop } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 
 @Component({
@@ -53,7 +53,8 @@ export class SmoothlyFrame {
 				this.contentWindow
 			)
 	}
+
 	render() {
-		return <iframe src={this.url + "#" + window.location.origin} height="100%" width="100%"></iframe>
+		return []
 	}
 }

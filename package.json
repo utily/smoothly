@@ -69,30 +69,30 @@
 	},
 	"dependencies": {
 		"authly": "3.0.1",
-		"cloudly-http": "^0.1.1",
-		"isoly": "^2.0.13",
-		"langly": "2.0.1",
+		"cloudly-http": "^0.1.2",
+		"isoly": "^2.0.14",
+		"langly": "2.0.3",
 		"normalize.css": "^8.0.1",
-		"selectively": "^2.0.2",
-		"stencil-router-v2": "^0.6.0",
-		"tidily": "0.0.53"
+		"selectively": "^2.0.4",
+		"tidily": "0.0.53",
+		"urlpattern-polyfill": "^6.0.2"
 	},
 	"devDependencies": {
 		"@stencil/core": "^2.22.2",
 		"@stencil/sass": "^1.5.2",
 		"@types/jest": "^27.0.3",
 		"@types/pvutils": "^1.0.1",
-		"@typescript-eslint/eslint-plugin": "^5.36.0",
-		"@typescript-eslint/parser": "^5.36.0",
-		"eslint": "^8.26.0",
+		"@typescript-eslint/eslint-plugin": "^5.51.0",
+		"@typescript-eslint/parser": "^5.51.0",
+		"eslint": "^8.34.0",
 		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20221229",
-		"eslint-plugin-simple-import-sort": "^7.0.0",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"jest": "^27.0.3",
 		"jest-cli": "^27.4.5",
-		"prettier": "^2.7.1",
+		"prettier": "^2.8.4",
 		"prettierx": "github:utily/prettierx#utily-20221229",
 		"puppeteer": "^17.0.0",
-		"typescript": "^4.8.4",
+		"typescript": "^4.9.5",
 		"web-file-polyfill": "^1.0.4"
 	}
 }

@@ -1,0 +1,19 @@
+:host([visible]){
+display: block;
+height: 4em;
+transform: rotate(-90deg);
+	transition: transform 100ms ease-in-out;
+}
+:host([visible]) .burger smoothly-icon{
+	font-size: 1.7em;
+	margin-right: 0.5em;
+	margin-top: 0.25em;
+	cursor: pointer;
+}
+:host:not([visible]){
+	display: none;
+}
+:host([open]){
+	transform: rotate(0deg);
+	transition: transform 100ms ease-in-out;
+}

@@ -2,7 +2,6 @@
 
 :root {
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--smoothly-background-color));
 }
 
 input,
@@ -18,17 +17,13 @@ a:visited {
 	color: inherit;
 }
 
-a:hover {
-	cursor: pointer;
-}
-
+:root,
 [color=default] {
 	--smoothly-color: var(--smoothly-default-color);
 	--smoothly-color-contrast: var(--smoothly-default-contrast);
 	--smoothly-color-shade: var(--smoothly-default-shade);
 	--smoothly-color-tint: var(--smoothly-default-tint);
 }
-
 [color=primary] {
 	--smoothly-color: var(--smoothly-primary-color);
 	--smoothly-color-contrast: var(--smoothly-primary-contrast);
@@ -92,7 +87,7 @@ a:hover {
 	--smoothly-color-tint: var(--smoothly-dark-tint);
 }
 
-html 
+:root,
 [color]:not([fill]),
 [fill=default] {
 	color: rgb(var(--smoothly-color-contrast));
