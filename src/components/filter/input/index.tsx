@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Method, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Method, Prop } from "@stencil/core"
 import { Currency } from "isoly"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
@@ -25,9 +25,9 @@ export class SmoothlyFilterInput {
 	@Prop() readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
-	@State() criteria: Criteria
+	@Prop({ mutable: true }) filter: Criteria
+	@Event() smoothlyFilter: EventEmitter<Criteria>
 
-	@Event() filter: EventEmitter<Criteria>
 	private onFilter() {
 		this.value = this.smoothlyInput.value
 		let result: Criteria = ""
@@ -59,7 +59,7 @@ export class SmoothlyFilterInput {
 			.split(".")
 			.reverse()
 			.reduce<Criteria>((previousValue, currentValue) => ({ [currentValue]: previousValue }), criteria)
-		this.filter.emit(result)
+		this.smoothlyFilter.emit(result)
 	}
 
 	@Method()
@@ -78,9 +78,9 @@ export class SmoothlyFilterInput {
 					this.value = e.detail.value ?? ""
 				}}
 				placeholder={this.placeholder}>
-				<div slot="start">
+				<section slot="start">
 					<slot name="start" />
-				</div>
+				</section>
 				<slot />
 			</smoothly-input>,
 		]

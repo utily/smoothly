@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
-import * as selectively from "selectively"
 import { create as selectivelyCreate, Criteria } from "selectively"
 import { Clearable } from "./Clearable"
 
@@ -9,81 +8,55 @@ import { Clearable } from "./Clearable"
 	shadow: true,
 })
 export class SmoothlyFilter {
-	private freeSearchElement?: HTMLSmoothlyInputElement
 	private inputs = new Map<string, Clearable>()
-	@Prop({ mutable: true }) placeholder: string | undefined
 	@State() expanded = false
-	@State() freeSearchValue: string
-	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
-	@Prop({ mutable: true }) inputValue: Criteria
+	@Prop({ mutable: true }) filter: Record<string, Criteria> = {}
+	@Event() smoothlyFilter: EventEmitter<Record<string, Criteria>>
 
-	@Listen("filter")
+	@Listen("smoothlyFilter", { capture: true })
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
-		event.stopPropagation()
-
 		if (Clearable.is(event.target)) {
 			const target = event.target
 			Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
 		}
-		!this.freeSearchValue
-			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
-			: this.filters.emit(
-					selectively.and(
-						selectively.any(selectively.includes(this.freeSearchValue)),
-						(this.criteria = { ...this.criteria, ...event.detail })
-					)
-			  )
-	}
-	@Event() filters: EventEmitter<Criteria>
-	onKeyDown() {
-		this.freeSearchValue = this.freeSearchElement?.value
-		this.inputValue = selectively.includes(this.freeSearchValue)
-		this.filters.emit(selectively.any(this.inputValue))
+		this.smoothlyFilter.emit((this.filter = { ...this.filter, ...event.detail }))
 	}
 
 	@Method()
-	async clear(event: MouseEvent): Promise<void> {
+	async clear(): Promise<void> {
 		new Set(this.inputs.values()).forEach(input => input.clear())
-		this.filters.emit((this.criteria = {}))
+		this.smoothlyFilter.emit((this.filter = {}))
 	}
 
 	render() {
 		return [
-			<smoothly-form looks="border">
-				<smoothly-input
-					name="filter"
-					ref={element => (this.freeSearchElement = element)}
-					value={selectivelyCreate(this.criteria).stringify()}
-					onKeyDown={() => this.onKeyDown()}
-					placeholder={this.placeholder}>
-					<section slot="start">
-						<slot name="start" />
-					</section>
-					<slot />
-					<section slot="end">
-						<smoothly-button size="flexible" onClick={e => this.clear(e)}>
-							<smoothly-icon
-								class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
-								name="close"
-								size="tiny"
-							/>
-						</smoothly-button>
-						<smoothly-button
-							size="flexible"
-							class="btn"
-							onClick={() => {
-								this.expanded = !this.expanded
-							}}>
-							{this.expanded ? (
-								<smoothly-icon name="options" size="small" />
-							) : (
-								<smoothly-icon name="options-outline" size="small" />
-							)}
-						</smoothly-button>
-					</section>
-				</smoothly-input>
-			</smoothly-form>,
-
+			<smoothly-input name="filter" readonly value={selectivelyCreate(this.filter).stringify()}>
+				<section slot="start">
+					<slot name="start" />
+				</section>
+				<slot />
+				<section slot="end">
+					<smoothly-button size="flexible" onClick={() => this.clear()}>
+						<smoothly-icon
+							class={Object.keys(this.filter).length >= 1 ? "btn clear" : "btn hidden"}
+							name="close"
+							size="tiny"
+						/>
+					</smoothly-button>
+					<smoothly-button
+						size="flexible"
+						class="btn"
+						onClick={() => {
+							this.expanded = !this.expanded
+						}}>
+						{this.expanded ? (
+							<smoothly-icon name="options" size="small" />
+						) : (
+							<smoothly-icon name="options-outline" size="small" />
+						)}
+					</smoothly-button>
+				</section>
+			</smoothly-input>,
 			<section hidden={!this.expanded} class={this.expanded ? "container arrow-top" : "hidden"}>
 				<div hidden={!this.expanded} class={this.expanded ? "container-wrapper" : "hidden"}>
 					{this.expanded && <slot name="filter" />}
