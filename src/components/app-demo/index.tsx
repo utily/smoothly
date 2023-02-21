@@ -35,10 +35,10 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="button" label="Button">
+				<smoothly-app-room path="/button" label="Button">
 					<smoothly-button-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="dialog" label="Dialog">
+				<smoothly-app-room path="/dialog" label="Dialog">
 					<smoothly-dialog-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/display" label="Display" icon="eye-outline">
