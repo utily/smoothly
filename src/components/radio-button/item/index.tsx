@@ -11,6 +11,7 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true }) color: Color = "medium"
+	@Prop({ reflect: true, mutable: true }) disabled: boolean
 	@Event() radioItemSelectInternal: EventEmitter<Selected>
 
 	componentWillLoad(): void | Promise<void> {

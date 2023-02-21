@@ -91,6 +91,9 @@ export class SmoothlyInputDemo {
 							<smoothly-radio-button-item value={{ some: "one", yes: "kid" }}>
 								<span>Option 3</span>
 							</smoothly-radio-button-item>
+							<smoothly-radio-button-item value={{ some: "some", yes: "thing" }} disabled={true}>
+								<span>Option 4 (Disabled)</span>
+							</smoothly-radio-button-item>
 						</smoothly-radio-button>
 						<h3>Radio List with button</h3>
 						<smoothly-radio-button decoration="button">
