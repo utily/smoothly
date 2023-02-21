@@ -9,7 +9,7 @@ smoothly-app > smoothly-notifier{
 	background: none;
 }
 smoothly-app > smoothly-notifier > header{
-	background: rgba(var(--smoothly-color-color));
+	background: rgba(var(--smoothly-color));
 	color: rgba(var(--smoothly-color-contrast));
 }
 smoothly-app > smoothly-notifier > header {
