@@ -36,6 +36,7 @@ export namespace Components {
         "value": address[];
     }
     interface SmoothlyApp {
+        "color": Color;
         "label": string;
         "menuOpen": boolean;
     }
@@ -1080,6 +1081,7 @@ declare namespace LocalJSX {
         "value"?: address[];
     }
     interface SmoothlyApp {
+        "color"?: Color;
         "label"?: string;
         "menuOpen"?: boolean;
     }
