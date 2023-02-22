@@ -7,7 +7,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 })
 export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) open = true
+	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 	@Event() burgerStatus: EventEmitter<boolean>
 

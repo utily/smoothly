@@ -61,7 +61,7 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
-				<header color="tertiary">
+				<header color="medium">
 					<h1>
 						<a href={""}>{this.label}</a>
 					</h1>
