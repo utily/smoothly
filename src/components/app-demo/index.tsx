@@ -7,7 +7,7 @@ export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
 	render() {
 		return (
-			<smoothly-app label="Smoothly Demo">
+			<smoothly-app color="medium" label="Smoothly Demo">
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>

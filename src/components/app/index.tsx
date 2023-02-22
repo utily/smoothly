@@ -1,4 +1,5 @@
 import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
+import { Color } from "../../model"
 
 interface Selected {
 	room: HTMLSmoothlyAppRoomElement
@@ -12,6 +13,7 @@ interface Selected {
 })
 export class SmoothlyApp {
 	@Prop() label = "App"
+	@Prop() color: Color
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Selected
 	mainElement?: HTMLElement
@@ -61,7 +63,7 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
-				<header color="medium">
+				<header color={this.color}>
 					<h1>
 						<a href={""}>{this.label}</a>
 					</h1>
