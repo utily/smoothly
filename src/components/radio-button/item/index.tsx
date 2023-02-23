@@ -11,8 +11,9 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true }) color: Color = "medium"
-	@Prop({ reflect: true, mutable: true }) disabled: boolean
 	@Event() radioItemSelectInternal: EventEmitter<Selected>
+	@Prop() iconColor: Color = "medium"
+	@Prop({ reflect: true, mutable: true }) disabled: boolean
 
 	componentWillLoad(): void | Promise<void> {
 		this.selected && this.select(this.selected)
@@ -31,8 +32,8 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 			<Host>
 				<header onClick={() => this.select(!this.selected)}>
 					<smoothly-icon
-						color={this.selected ? "success" : "medium"}
-						fill="solid"
+						color={this.selected ? "success" : this.iconColor}
+						fill="outline"
 						name={this.selected ? "checkmark-circle" : "ellipse-outline"}
 						size="tiny"
 						toolTip="Select"></smoothly-icon>
