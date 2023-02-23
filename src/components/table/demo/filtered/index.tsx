@@ -2,7 +2,7 @@ import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { Criteria } from "selectively"
 import * as http from "cloudly-http"
-import { Selector } from "../../Selector"
+import { Selector } from "../../../../Selector"
 import { Cat, Root } from "./Root"
 
 @Component({

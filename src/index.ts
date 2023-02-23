@@ -17,3 +17,4 @@ export {
 	StateBase,
 } from "./model"
 export { Cosmetic } from "./utilities"
+export { Selector } from "./Selector"

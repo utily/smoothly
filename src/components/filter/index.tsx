@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
 import { create as selectivelyCreate, Criteria } from "selectively"
 import { Clearable } from "./Clearable"
 
@@ -12,14 +12,17 @@ export class SmoothlyFilter {
 	@State() expanded = false
 	@Prop({ mutable: true }) filter: Record<string, Criteria> = {}
 	@Event() smoothlyFilter: EventEmitter<Record<string, Criteria>>
+	@Element() element: HTMLSmoothlyFilterElement
 
 	@Listen("smoothlyFilter", { capture: true })
 	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
-		if (Clearable.is(event.target)) {
-			const target = event.target
-			Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
+		if (event.target != this.element) {
+			if (Clearable.is(event.target)) {
+				const target = event.target
+				Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
+			}
+			this.smoothlyFilter.emit((this.filter = { ...this.filter, ...event.detail }))
 		}
-		this.smoothlyFilter.emit((this.filter = { ...this.filter, ...event.detail }))
 	}
 
 	@Method()
