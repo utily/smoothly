@@ -12,8 +12,6 @@
 
 ::slotted([slot=expansion]) {
 	display: none;
-	background: rgb(var(--smoothly-secondary-tint));
-	color: rgb(var(--smoothly-secondary-contrast));
 	padding: 0;
 	position: relative;
 	transition: 0.1s;

@@ -80,15 +80,15 @@ export class SmoothlyInputDemo {
 						<h2>Smoothly Radio</h2>
 						<h3>Deselectable Radio List with button</h3>
 						<smoothly-radio-button deselectable decoration="button">
-							<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} color="primary">
+							<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} color="primary" iconColor="medium">
 								<span>Option 1</span>
 								<span slot="expansion">Some description.</span>
 							</smoothly-radio-button-item>
-							<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }}>
+							<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }} iconColor="light">
 								<span>Option 2</span>
 								<span slot="expansion">Some other description.</span>
 							</smoothly-radio-button-item>
-							<smoothly-radio-button-item value={{ some: "one", yes: "kid" }}>
+							<smoothly-radio-button-item value={{ some: "one", yes: "kid" }} iconColor="danger">
 								<span>Option 3</span>
 							</smoothly-radio-button-item>
 							<smoothly-radio-button-item value={{ some: "some", yes: "thing" }} disabled={true}>
