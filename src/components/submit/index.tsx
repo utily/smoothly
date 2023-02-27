@@ -5,7 +5,7 @@ import { Button } from "../Button"
 @Component({
 	tag: "smoothly-submit",
 	styleUrl: "../button/style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlySubmit {
 	@Prop({ reflect: true }) color?: Color = "success"
