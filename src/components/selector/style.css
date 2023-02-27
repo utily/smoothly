@@ -4,9 +4,14 @@
 }
 :host > main,
 :host > main > * {
+	min-width: 25px;
+	max-width: inherit;
 	height: 100%;
 	display: flex;
 	align-items: center;
+	border: 1px transparent;
+	margin: 0.5em;
+
 }
 :host > div > nav {
 	display: flex;
@@ -35,12 +40,4 @@
 }
 .hidden {
 	display: none;
-}
-:host > section {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100vw;
-	height: 100vh;
-	z-index: 10;
 }

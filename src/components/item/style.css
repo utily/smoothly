@@ -3,6 +3,7 @@
 	color: rgb(var(--smoothly-primary-contrast));
 }
 :host {
+	min-width: 25px;
 	padding: 0.5em;
 	cursor: pointer;
 	background-color: rgb(var(--smoothly-default-shade));
