@@ -177,7 +177,7 @@ export class SmoothlySelectDemo {
 				<smoothly-tab label="test3">this is a test message again!</smoothly-tab>
 			</smoothly-tab-switch>,
 
-			<smoothly-selector initialPrompt="select" style={{ maxWidth: "25px" }}>
+			<smoothly-selector initialPrompt="select" style={{ maxWidth: "25px" }} disableFilter={true}>
 				<smoothly-item>
 					<img src="assets/images/da-DK.svg" alt="danish" />
 				</smoothly-item>
