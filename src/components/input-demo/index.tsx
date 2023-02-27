@@ -122,7 +122,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
 					Last Name
 				</smoothly-input>
-				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success">
+				<smoothly-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success">
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
@@ -145,7 +145,7 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
 				</smoothly-input>
 				<smoothly-input placeholder="test"></smoothly-input>
-				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success">
+				<smoothly-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success">
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
