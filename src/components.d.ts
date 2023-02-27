@@ -251,6 +251,7 @@ export namespace Components {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
+        "disableFilter": boolean;
         "initialPrompt"?: string;
         "reset": () => Promise<void>;
     }
@@ -1128,6 +1129,7 @@ declare namespace LocalJSX {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelector {
+        "disableFilter"?: boolean;
         "initialPrompt"?: string;
         "onSelected"?: (event: SmoothlySelectorCustomEvent<any>) => void;
     }

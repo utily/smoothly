@@ -7,6 +7,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 export class Selector {
 	@Element() element: HTMLSmoothlySelectorElement
 	@Prop() initialPrompt?: string
+	@Prop() disableFilter = false
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
@@ -62,39 +63,41 @@ export class Selector {
 
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
-		event.stopPropagation()
-		event.preventDefault()
-		if (this.opened) {
-			let direction: -1 | 0 | 1 = 0
-			switch (event.key) {
-				case "ArrowUp":
-					direction = -1
-					break
-				case "ArrowDown":
-					direction = 1
-					break
-				case "Escape":
-					this.filter = ""
-					break
-				case "Backspace":
-					this.filter = this.filter.slice(0, -1)
-					break
-				case "Enter":
-					const result = this.items.find(item => item.marked)
-					if (result?.value) {
-						result.selected = true
-					}
-					this.opened = false
-					this.filter = ""
-					break
-				default:
-					if (event.key.length == 1)
-						this.filter += event.key
-					break
-			}
-			this.move(direction)
-		} else if (event.key == "Enter")
-			this.opened = true
+		if (!this.disableFilter) {
+			event.stopPropagation()
+			event.preventDefault()
+			if (this.opened) {
+				let direction: -1 | 0 | 1 = 0
+				switch (event.key) {
+					case "ArrowUp":
+						direction = -1
+						break
+					case "ArrowDown":
+						direction = 1
+						break
+					case "Escape":
+						this.filter = ""
+						break
+					case "Backspace":
+						this.filter = this.filter.slice(0, -1)
+						break
+					case "Enter":
+						const result = this.items.find(item => item.marked)
+						if (result?.value) {
+							result.selected = true
+						}
+						this.opened = false
+						this.filter = ""
+						break
+					default:
+						if (event.key.length == 1)
+							this.filter += event.key
+						break
+				}
+				this.move(direction)
+			} else if (event.key == "Enter")
+				this.opened = true
+		}
 	}
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {

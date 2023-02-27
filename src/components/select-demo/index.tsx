@@ -176,6 +176,18 @@ export class SmoothlySelectDemo {
 				<smoothly-tab label="test2">this is a test message!</smoothly-tab>
 				<smoothly-tab label="test3">this is a test message again!</smoothly-tab>
 			</smoothly-tab-switch>,
+
+			<smoothly-selector initialPrompt="select" style={{ maxWidth: "25px" }} disableFilter={true}>
+				<smoothly-item>
+					<img src="assets/images/da-DK.svg" alt="danish" style={{ width: "25px" }} />
+				</smoothly-item>
+				<smoothly-item>
+					<img src="assets/images/en-GB.svg" alt="british english" />
+				</smoothly-item>
+				<smoothly-item>
+					<img src="assets/images/en-US.svg" alt="american english" />
+				</smoothly-item>
+			</smoothly-selector>,
 		]
 	}
 }
