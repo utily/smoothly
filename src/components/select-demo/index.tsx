@@ -179,7 +179,7 @@ export class SmoothlySelectDemo {
 
 			<smoothly-selector initialPrompt="select" style={{ maxWidth: "25px" }} disableFilter={true}>
 				<smoothly-item>
-					<img src="assets/images/da-DK.svg" alt="danish" />
+					<img src="assets/images/da-DK.svg" alt="danish" style={{ width: "25px" }} />
 				</smoothly-item>
 				<smoothly-item>
 					<img src="assets/images/en-GB.svg" alt="british english" />
