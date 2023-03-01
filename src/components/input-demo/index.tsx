@@ -184,6 +184,14 @@ export class SmoothlyInputDemo {
 					<smoothly-submit expand="block" onSubmit={(e: Event) => alert(e)} color="success">
 						Submit
 					</smoothly-submit>
+					<smoothly-submit
+						disabled={true}
+						expand="block"
+						onClick={e => console.log(e)}
+						onSubmit={(e: Event) => alert(e)}
+						color="success">
+						Submit
+					</smoothly-submit>
 					<smoothly-trigger expand="block" color="success" onClick={(e: UIEvent) => console.log(e.detail)}>
 						Trigger
 					</smoothly-trigger>
