@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop } from "@stencil/core"
 import { Color, Expand, Fill } from "../../model"
 import { Data } from "./Data"
 
@@ -45,6 +45,11 @@ export class SmoothlySubmit {
 			this.processing = false
 		}
 	}
+
+	handleClick(e: MouseEvent) {
+		this.disabled && e.stopImmediatePropagation()
+	}
+
 	@Method()
 	async submit(): Promise<boolean> {
 		let result: boolean
@@ -53,15 +58,17 @@ export class SmoothlySubmit {
 		return result
 	}
 	render() {
-		return [
-			<smoothly-spinner active={this.processing}></smoothly-spinner>,
-			<button
-				type="submit"
-				disabled={this.disabled || this.processing}
-				ref={(element: HTMLButtonElement) => (this.button = element)}>
-				<slot></slot>
-			</button>,
-		]
+		return (
+			<Host onClick={(e: MouseEvent) => this.handleClick(e)}>
+				<smoothly-spinner active={this.processing}></smoothly-spinner>
+				<button
+					type="submit"
+					disabled={this.disabled || this.processing}
+					ref={(element: HTMLButtonElement) => (this.button = element)}>
+					<slot></slot>
+				</button>
+			</Host>
+		)
 	}
 }
 function hasNameAndValue(element: any): element is { name: string; value: string } {

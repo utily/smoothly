@@ -74,6 +74,14 @@ export class SmoothlyAppDemo {
 						}}>
 						External
 					</smoothly-button>
+					<smoothly-button
+						disabled
+						style={{ "max-width": "300px" }}
+						onClick={() => {
+							redirect("https://google.com")
+						}}>
+						External
+					</smoothly-button>
 				</smoothly-room>
 				<smoothly-room path={/^\/routing\/\w+\/?/} label="No effect">
 					<h2>Regex routing</h2>
