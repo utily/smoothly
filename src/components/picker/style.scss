@@ -21,6 +21,12 @@
 	height: 2.5rem;
 	border-radius: 0.25rem;
 }
+:host([disabled]){
+	cursor: default;
+	div > input {
+		cursor: default;
+	}
+}
 :host(:focus-within) {
 	border-color: rgb(var(--smoothly-primary-shade));
 	border-width: 2px;
