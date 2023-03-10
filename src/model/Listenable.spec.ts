@@ -6,6 +6,9 @@ import { Listenable } from "./Listenable"
 describe("Listenable", () => {
 	class State {
 		disabled = false
+		set write(value: boolean) {
+			this.disabled = !value
+		}
 	}
 	it("load", () => {
 		const state = Listenable.load(new State())
@@ -56,5 +59,20 @@ describe("Listenable", () => {
 		component.disconnectedCallback()
 		state.disabled = false
 		expect(count).toEqual(2)
+	})
+	it("write only subscription", async () => {
+		const state = Listenable.load(new State())
+		const promise = new Promise(resolve => {
+			const result: unknown[] = []
+			state.listen("write", value => {
+				result.push(value)
+				if (result.length == 3)
+					resolve(result)
+			})
+		})
+		state.write = true
+		state.write = false
+		const result = await promise
+		expect(result).toEqual([undefined, undefined, undefined])
 	})
 })
