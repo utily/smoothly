@@ -13,6 +13,7 @@ export class InputDateRange {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) open: boolean
+	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
@@ -40,7 +41,7 @@ export class InputDateRange {
 	}
 	render() {
 		return [
-			<section onClick={() => (this.open = !this.open)}>
+			<section onClick={() => (this.open = !this.disabled && !this.open)}>
 				<smoothly-input
 					type="date"
 					value={this.start}
