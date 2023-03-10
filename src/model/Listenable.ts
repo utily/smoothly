@@ -40,7 +40,7 @@ export class Listenable<T extends Record<string, any>> {
 								},
 								set(value: any) {
 									backend[name] = value
-									result.#listeners[name]?.forEach(listener => listener(value))
+									result.#listeners[name]?.forEach(listener => listener(backend[name]))
 								},
 						  }
 						: {
