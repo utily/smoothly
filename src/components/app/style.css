@@ -59,16 +59,15 @@ smoothly-app > smoothly-notifier > header > nav > ul  li a {
 smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > smoothly-trigger[slot=nav-start]{
-	border: none;
+smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
 	height: fit-content;
-	margin-top: 1.5em;
+	padding: 0.5em 0em;
+	margin-top: 1em;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > smoothly-select[slot=nav-end] {
-	display: flex;
-	width: 2vw;
-	padding: 1.5em;
-	margin-left: 5em;
+smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+	align-self: center;
+	height: fit-content;
+	margin-left: 20em;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
 	display: flex;
@@ -103,13 +102,13 @@ smoothly-app > smoothly-notifier > main {
 		top: 0;
 		right: 0;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > smoothly-trigger[slot=nav-start]{
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
 		display:none;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > smoothly-select[slot=nav-end] {
-		margin-left: 0;
-		width: 100%;
-    margin-bottom: 1em;
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+		margin-left: 3em;
+		width: 10em;
+		padding: 1.5em;
 		background-color: rgba(var(--smoothly-color));
 	}
 }

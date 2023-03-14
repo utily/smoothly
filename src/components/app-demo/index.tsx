@@ -5,17 +5,18 @@ import { Component, h, Prop } from "@stencil/core"
 })
 export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
+
 	render() {
 		return (
 			<smoothly-app color="dark" label="Smoothly Demo">
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-select identifier="quantity" slot="nav-end">
-					<option value="1">Test</option>
-					<option value="2">EU</option>
-					<option value="3">UK</option>
-				</smoothly-select>
+				<smoothly-selector slot="nav-end">
+					<smoothly-item value="test">Test</smoothly-item>
+					<smoothly-item value="eu">EU</smoothly-item>
+					<smoothly-item value="uk">UK</smoothly-item>
+				</smoothly-selector>
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
