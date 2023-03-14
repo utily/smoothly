@@ -65,9 +65,11 @@ smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
 	margin-top: 1em;
 }
 smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+	width: fit-content;
+	gap: 0.5em;
 	align-self: center;
 	height: fit-content;
-	margin-left: 20em;
+	margin-left: 10em;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
 	display: flex;
