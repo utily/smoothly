@@ -12,11 +12,6 @@ export class SmoothlyAppDemo {
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-selector slot="nav-end">
-					<smoothly-item value="test">Test</smoothly-item>
-					<smoothly-item value="eu">EU</smoothly-item>
-					<smoothly-item value="uk">UK</smoothly-item>
-				</smoothly-selector>
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
