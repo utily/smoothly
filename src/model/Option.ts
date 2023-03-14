@@ -4,4 +4,5 @@ export type Option = {
 	hint?: string
 	aliases?: string[]
 	divider?: boolean
+	toggle?: boolean
 }

@@ -27,6 +27,7 @@ export class SmoothlyPicker {
 	@Prop({ mutable: true }) selections: Option[] = []
 	@Prop({ mutable: true }) selectNoneName = "Select None"
 	@Prop({ mutable: true }) selectAllName = "Select All"
+	@Prop({ mutable: true }) selectAllEnabled = true
 	@Prop({ mutable: true }) selectionName = "items selected"
 	@Prop({ mutable: true }) newOptionLabel = "Add:"
 	@Prop() valueValidator: (value: any) => [boolean, Notice | undefined] = _ => [true, undefined]
@@ -77,7 +78,7 @@ export class SmoothlyPicker {
 			: this.select(option)
 	}
 	toggleAll() {
-		this.selections = this.selections.length == this.options?.length ? [] : this.options
+		this.selections = this.selections.length == this.options?.length || !this.selectAllEnabled ? [] : this.options
 		this.inputElement.focus()
 		this.keepFocusOnReRender = true
 	}
@@ -168,9 +169,13 @@ export class SmoothlyPicker {
 				? [
 						{
 							value: "select-none",
-							name: this.selections.length == this.options.length ? this.selectNoneName : this.selectAllName,
-							checked: this.selections.length == this.options.length,
+							name:
+								this.selections.length != this.options.length && this.selectAllEnabled
+									? this.selectAllName
+									: this.selectNoneName,
+							checked: this.selectAllEnabled ? this.selections.length == this.options.length : undefined,
 							divider: true,
+							toggle: this.selectAllEnabled,
 						},
 				  ]
 				: []),

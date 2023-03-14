@@ -201,6 +201,7 @@ export namespace Components {
         "optionStyle": any;
         "options": (Option & { checked?: boolean })[];
         "readonly": boolean;
+        "selectAllEnabled": boolean;
         "selectAllName": string;
         "selectNoneName": string;
         "selectionName": string;
@@ -1073,6 +1074,7 @@ declare namespace LocalJSX {
         "optionStyle"?: any;
         "options"?: (Option & { checked?: boolean })[];
         "readonly"?: boolean;
+        "selectAllEnabled"?: boolean;
         "selectAllName"?: string;
         "selectNoneName"?: string;
         "selectionName"?: string;
