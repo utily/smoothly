@@ -38,6 +38,7 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 }
 smoothly-app > smoothly-notifier > header > h1 {
 	margin-left: 3.8rem;
+	margin-bottom: 0.8em;
 	display: flex;
 	height: 100%;
 }
@@ -57,6 +58,18 @@ smoothly-app > smoothly-notifier > header > nav > ul  li a {
 }
 smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
+}
+smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
+	height: fit-content;
+	padding: 0.5em 0em;
+	margin-top: 1em;
+}
+smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+	width: fit-content;
+	gap: 0.5em;
+	align-self: center;
+	height: fit-content;
+	margin-left: 10em;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
 	display: flex;
@@ -90,6 +103,15 @@ smoothly-app > smoothly-notifier > main {
 		position: absolute;
 		top: 0;
 		right: 0;
+	}
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
+		display:none;
+	}
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+		margin-left: 3em;
+		width: 10em;
+		padding: 1.5em;
+		background-color: rgba(var(--smoothly-color));
 	}
 }
 .true:not([menuOpen]) > * {
