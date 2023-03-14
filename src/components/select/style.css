@@ -7,9 +7,10 @@
 select {
 	min-width: 1.5em;
 	padding-top: 0.5em;
-	border: none;
+	border: 1px solid rgb(var(--smoothly-color-shade));
 	-webkit-appearance: none;
-	background-color: rgb(var(--smoothly-color));
+	background-color: rgb(var(--smoothly-dark-contrast));
+	color: rgb(var(--smoothly-dark-color));
 	padding: 0.3em;
 }
 select > option {

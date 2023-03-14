@@ -7,7 +7,15 @@ export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
 	render() {
 		return (
-			<smoothly-app color="medium" label="Smoothly Demo">
+			<smoothly-app color="dark" label="Smoothly Demo">
+				<smoothly-trigger slot="nav-start" type="link" name="logout">
+					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
+				</smoothly-trigger>
+				<smoothly-select identifier="quantity" slot="nav-end">
+					<option value="1">Test</option>
+					<option value="2">EU</option>
+					<option value="3">UK</option>
+				</smoothly-select>
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
