@@ -309,7 +309,7 @@ export namespace Components {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
-        "size": "small" | "large" | "icon";
+        "size": "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
     }
     interface SmoothlySummary {
@@ -1328,7 +1328,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
         "shape"?: "rounded";
-        "size"?: "small" | "large" | "icon";
+        "size"?: "flexible" | "small" | "large" | "icon";
         "type"?: "link" | "button";
     }
     interface SmoothlySummary {
