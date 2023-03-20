@@ -241,6 +241,8 @@ export namespace Components {
         "toggle": boolean;
     }
     interface SmoothlyNotification {
+        "closable": boolean;
+        "icon": boolean;
         "notice": Notice;
     }
     interface SmoothlyNotifier {
@@ -335,6 +337,7 @@ export namespace Components {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
+        "noticeHidden": boolean;
     }
     interface SmoothlyTableDemoFiltered {
     }
@@ -1249,6 +1252,8 @@ declare namespace LocalJSX {
         "toggle"?: boolean;
     }
     interface SmoothlyNotification {
+        "closable"?: boolean;
+        "icon"?: boolean;
         "notice"?: Notice;
         "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
     }
@@ -1358,6 +1363,7 @@ declare namespace LocalJSX {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
+        "noticeHidden"?: boolean;
     }
     interface SmoothlyTableDemoFiltered {
     }

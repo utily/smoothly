@@ -9,6 +9,8 @@ import { Color, Notice, Trigger } from "../../model"
 })
 export class Notification {
 	@Prop() notice: Notice
+	@Prop() closable = true //added
+	@Prop() icon = false //added
 	@State() tick = {}
 	@Event() remove: EventEmitter<Notice>
 	private listener: Notice.Listener = notice => {
@@ -40,6 +42,30 @@ export class Notification {
 		}
 		return result
 	}
+
+	private get iconName() {
+		let result: string
+		switch (this.notice.state) {
+			case "delayed":
+			case "warning":
+				result = "warning-outline"
+				break
+			case "success":
+				result = "checkmark-circle"
+				break
+			case "executing":
+				result = "hourglass-outline"
+				break
+			case "failed":
+				result = "alert-circle"
+				break
+			default:
+				result = ""
+				break
+		}
+		return result
+	}
+
 	@Listen("trigger")
 	onTrigger(event: CustomEvent<Trigger>) {
 		if (event.detail.name == "close") {
@@ -61,10 +87,17 @@ export class Notification {
 	render() {
 		return (
 			<Host color={this.color} fill="solid">
-				<smoothly-trigger fill="clear" name="close">
-					<smoothly-icon name="close-circle-outline"></smoothly-icon>
-				</smoothly-trigger>
-				<p>{this.notice.message}</p>
+				{this.closable ? (
+					<smoothly-trigger fill="clear" name="close">
+						<smoothly-icon name="close-circle-outline"></smoothly-icon>
+					</smoothly-trigger>
+				) : (
+					""
+				)}
+				<span>
+					{this.icon ? <smoothly-icon name={this.iconName}></smoothly-icon> : ""}
+					<p>{this.notice.message}</p>
+				</span>
 			</Host>
 		)
 	}
