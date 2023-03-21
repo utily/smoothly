@@ -1,5 +1,4 @@
-import { Component, h, Prop } from "@stencil/core"
-import { Notice } from "../../../model"
+import { Component, h } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-demo",
@@ -7,16 +6,9 @@ import { Notice } from "../../../model"
 	scoped: true,
 })
 export class TableDemo {
-	@Prop({ mutable: true, reflect: true }) noticeHidden = true
 	render() {
 		return [
 			<h4>Filtered & Checked Table</h4>,
-			<button onClick={() => (this.noticeHidden = !this.noticeHidden)}>Show Notification</button>,
-			<smoothly-notification
-				notice={Notice.succeded("You are currently viewing operations between the dates 2022-02-13 and 2022-02-22.")}
-				icon={true}
-				closable={false}
-				hidden={this.noticeHidden}></smoothly-notification>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
 
 			<smoothly-table>

@@ -337,7 +337,6 @@ export namespace Components {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
-        "noticeHidden": boolean;
     }
     interface SmoothlyTableDemoFiltered {
     }
@@ -1363,7 +1362,6 @@ declare namespace LocalJSX {
     interface SmoothlyTableCell {
     }
     interface SmoothlyTableDemo {
-        "noticeHidden"?: boolean;
     }
     interface SmoothlyTableDemoFiltered {
     }
