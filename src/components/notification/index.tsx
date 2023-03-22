@@ -9,8 +9,8 @@ import { Color, Notice, Trigger } from "../../model"
 })
 export class Notification {
 	@Prop() notice: Notice
-	@Prop() closable = true //added
-	@Prop() icon = false //added
+	@Prop() closable = true
+	@Prop() icon = false
 	@State() tick = {}
 	@Event() remove: EventEmitter<Notice>
 	private listener: Notice.Listener = notice => {
@@ -20,47 +20,24 @@ export class Notification {
 		else
 			this.tick = {}
 	}
-	private get color(): Color {
-		let result: Color
+	private get props(): [Color, string] {
+		let result: [Color, string]
 		switch (this.notice.state) {
 			case "delayed":
 			case "warning":
-				result = "warning"
+				result = ["warning", "warning-outline"]
 				break
 			case "success":
-				result = "success"
+				result = ["success", "checkmark-circle"]
 				break
 			case "executing":
-				result = "light"
+				result = ["light", "hourglass-outline"]
 				break
 			case "failed":
-				result = "danger"
+				result = ["danger", "alert-circle"]
 				break
 			default:
-				result = "light"
-				break
-		}
-		return result
-	}
-
-	private get iconName() {
-		let result: string
-		switch (this.notice.state) {
-			case "delayed":
-			case "warning":
-				result = "warning-outline"
-				break
-			case "success":
-				result = "checkmark-circle"
-				break
-			case "executing":
-				result = "hourglass-outline"
-				break
-			case "failed":
-				result = "alert-circle"
-				break
-			default:
-				result = ""
+				result = ["light", ""]
 				break
 		}
 		return result
@@ -86,7 +63,7 @@ export class Notification {
 
 	render() {
 		return (
-			<Host color={this.color} fill="solid">
+			<Host color={this.props[0]} fill="solid">
 				{this.closable ? (
 					<smoothly-trigger fill="clear" name="close">
 						<smoothly-icon name="close-circle-outline"></smoothly-icon>
@@ -95,7 +72,7 @@ export class Notification {
 					""
 				)}
 				<span>
-					{this.icon ? <smoothly-icon name={this.iconName}></smoothly-icon> : ""}
+					{this.icon ? <smoothly-icon name={this.props[1]}></smoothly-icon> : ""}
 					<p>{this.notice.message}</p>
 				</span>
 			</Host>
