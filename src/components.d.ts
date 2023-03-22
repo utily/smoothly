@@ -241,6 +241,8 @@ export namespace Components {
         "toggle": boolean;
     }
     interface SmoothlyNotification {
+        "closable": boolean;
+        "icon": boolean;
         "notice": Notice;
     }
     interface SmoothlyNotifier {
@@ -1249,6 +1251,8 @@ declare namespace LocalJSX {
         "toggle"?: boolean;
     }
     interface SmoothlyNotification {
+        "closable"?: boolean;
+        "icon"?: boolean;
         "notice"?: Notice;
         "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
     }
