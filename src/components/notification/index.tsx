@@ -20,7 +20,7 @@ export class Notification {
 		else
 			this.tick = {}
 	}
-	private get props(): [Color, string] {
+	private get properties(): [Color, string] {
 		let result: [Color, string]
 		switch (this.notice.state) {
 			case "delayed":
@@ -63,7 +63,7 @@ export class Notification {
 
 	render() {
 		return (
-			<Host color={this.props[0]} fill="solid">
+			<Host color={this.properties[0]} fill="solid">
 				{this.closable ? (
 					<smoothly-trigger fill="clear" name="close">
 						<smoothly-icon name="close-circle-outline"></smoothly-icon>
@@ -72,7 +72,7 @@ export class Notification {
 					""
 				)}
 				<span>
-					{this.icon ? <smoothly-icon name={this.props[1]}></smoothly-icon> : ""}
+					{this.icon ? <smoothly-icon name={this.properties[1]}></smoothly-icon> : ""}
 					<p>{this.notice.message}</p>
 				</span>
 			</Host>
