@@ -71,7 +71,7 @@ export class Notification {
 				) : (
 					""
 				)}
-				<span>
+				<span class={this.icon ? "icon" : "clean"}>
 					{this.icon ? <smoothly-icon name={this.properties[1]}></smoothly-icon> : ""}
 					<p>{this.notice.message}</p>
 				</span>
