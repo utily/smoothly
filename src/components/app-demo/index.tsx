@@ -1,4 +1,5 @@
 import { Component, h, Prop } from "@stencil/core"
+import { redirect } from "../../model"
 
 @Component({
 	tag: "smoothly-app-demo",
@@ -58,6 +59,10 @@ export class SmoothlyAppDemo {
 					<smoothly-icon-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
+				<smoothly-app-room path="/redirect" label="Redirect">
+					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
+					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
+				</smoothly-app-room>
 			</smoothly-app>
 		)
 	}

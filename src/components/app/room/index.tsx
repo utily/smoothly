@@ -14,11 +14,14 @@ export class SmoothlyAppRoom implements ComponentDidLoad {
 	@Prop() to?: string
 	@Prop({ reflect: true }) selected?: boolean
 	@Event() smoothlyRoomSelected: EventEmitter<HTMLElement>
+	@Event() smoothlyRoomLoaded: EventEmitter<HTMLElement>
 	contentElement: HTMLElement
 
 	componentDidLoad(): void | Promise<void> {
 		if ((typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(window.location))
 			this.smoothlyRoomSelected.emit(this.contentElement)
+		else
+			this.smoothlyRoomLoaded.emit(this.contentElement)
 	}
 	render() {
 		return [
