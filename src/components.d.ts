@@ -1047,6 +1047,7 @@ declare namespace LocalJSX {
     interface SmoothlyAppRoom {
         "icon"?: string;
         "label"?: string;
+        "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<HTMLElement>) => void;
         "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<HTMLElement>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
