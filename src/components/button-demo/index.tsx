@@ -73,12 +73,15 @@ export class SmoothlyButtonDemo {
 				<h4>Fill examples</h4>
 				<div>
 					<smoothly-button shape="rounded" color="primary" fill="solid">
+						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
 						Fill Solid
 					</smoothly-button>
 					<smoothly-button shape="rounded" color="secondary" fill="outline">
+						<smoothly-icon name="checkmark-circle" slot="start" fill="clear"></smoothly-icon>
 						Fill Outline
 					</smoothly-button>
 					<smoothly-button shape="rounded" color="tertiary" fill="clear">
+						<smoothly-icon name="checkmark-circle" slot="start" fill="clear"></smoothly-icon>
 						Fill Clear
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="success" fill="solid">
