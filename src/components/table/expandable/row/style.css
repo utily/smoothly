@@ -7,12 +7,19 @@
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
-	box-shadow: -1px 0 0 0 rgb(var(--smoothly-dark-color)) inset, 
-		1px 0 0 0 rgb(var(--smoothly-dark-color)) inset;
 }
 :host[open]::slotted(*) smoothly-table-cell,
 :host[open]::slotted(smoothly-table-cell) {
-	border-bottom: none;
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;	
+}
+:host[open]::slotted(*) smoothly-table-cell:first-child {
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
+}
+:host[open]::slotted(*) smoothly-table-cell:last-child {
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
+}
+:host[open]::slotted(*) smoothly-table-cell:last-child:first-child {
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
 
 .hide {
@@ -26,17 +33,14 @@ td::slotted(*) {
 	--expansion-border-width: 3px;
 	position: relative;
 	background-color: rgb(var(--smoothly-default-color));
-	width: calc(100% + 3rem - var(--expansion-border-width));
+	width: calc(100% + 3rem - 1px);
 	left: calc(-1 * var(--expansion-width));
-	border-left: var(--expansion-border-width) solid rgb(0, 0, 0, 0);
-	box-shadow: 0px 0px 4px 2px rgb(var(--smoothly-dark-color));
 	box-sizing: border-box;
-	padding: 0.5rem calc(var(--expansion-width) - var(--expansion-border-width));
-	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
-	border-left-width: 3px;
+	padding: 0.5rem calc(var(--expansion-width) - 1px);
+	border-bottom: 1px solid rgb(var(--smoothly-light-shade));
 }
 tr.spotlight > td::slotted(*) {
-	border-left-color: rgb(var(--smoothly-tertiary-color));
+	box-shadow: calc(var(--expansion-border-width)) 0px 0px 0px rgb(var(--smoothly-tertiary-color)) inset;
 }
 td::slotted(*)::before {
 	content: "";
@@ -44,9 +48,9 @@ td::slotted(*)::before {
 	display: flex;
 	top: 0;
 	bottom: 0;
-	left: -3px;
+	left: 0;
 	width: calc(var(--expansion-width) + 1px);
-	border-top: 1px solid rgb(var(--smoothly-dark-color));
+	border-top: 1px solid rgb(var(--smoothly-light-shade));
 }
 td::slotted(*)::after {
 	content: "";
@@ -55,8 +59,9 @@ td::slotted(*)::after {
 	top: 0;
 	bottom: 0;
 	right: 0;
-	width: calc(var(--expansion-width) -1px);
-	border-top: 1px solid rgb(var(--smoothly-dark-color));
+	width: calc(var(--expansion-width) - 1px);
+	border-top: 1px solid rgb(var(--smoothly-light-shade));
+	border-right: 1px solid rgb(var(--smoothly-light-shade));
 }
 :host::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
 :host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {

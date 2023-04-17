@@ -1,8 +1,8 @@
 :host {
 	display: table-cell;
 	line-height: 2.5rem;
-	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
-	border-top: 1px solid rgb(var(--smoothly-dark-color));
+	border-top: 1px solid rgb(var(--smoothly-light-shade));
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade));
 	padding-left: 1rem;
 	font-weight: bold;
 }
