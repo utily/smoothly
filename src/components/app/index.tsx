@@ -71,8 +71,8 @@ export class SmoothlyApp {
 						<a href={""}>{this.label}</a>
 					</h1>
 					<slot name="header"></slot>
-					<nav>
-						<ul class={this.menuOpen.toString()}>
+					<nav class={this.menuOpen.toString()}>
+						<ul>
 							<slot name="nav-start"></slot>
 							<slot> </slot>
 							<slot name="nav-end"></slot>
