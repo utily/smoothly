@@ -33,8 +33,8 @@ td::slotted(*) {
 	--expansion-border-width: 3px;
 	position: relative;
 	background-color: rgb(var(--smoothly-default-color));
-	width: calc(100% + 3rem - 1px);
-	left: calc(-1 * var(--expansion-width));
+	width: calc(100% + 3rem - 2px);
+	left: calc(-1 * var(--expansion-width) + 1px);
 	box-sizing: border-box;
 	padding: 0.5rem calc(var(--expansion-width) - 1px);
 	border-bottom: 1px solid rgb(var(--smoothly-light-shade));
@@ -42,13 +42,16 @@ td::slotted(*) {
 tr.spotlight > td::slotted(*) {
 	box-shadow: calc(var(--expansion-border-width)) 0px 0px 0px rgb(var(--smoothly-tertiary-color)) inset;
 }
+tr:not(.spotlight) > td::slotted(*) {
+	box-shadow: -1px 0 0 0 rgb(var(--smoothly-light-shade)), 1px 0 0 0 rgb(var(--smoothly-light-shade));
+}
 td::slotted(*)::before {
 	content: "";
 	position: absolute;
 	display: flex;
 	top: 0;
 	bottom: 0;
-	left: 0;
+	left: -1px;
 	width: calc(var(--expansion-width) + 1px);
 	border-top: 1px solid rgb(var(--smoothly-light-shade));
 }
