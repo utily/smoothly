@@ -1356,8 +1356,8 @@ declare namespace LocalJSX {
     interface SmoothlyTable {
         "align"?: "middle" | "bottom" | "top";
         "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
-        "onSpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
-        "onTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
+        "onSmoothlySpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
+        "onSmoothlyTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
         "root"?: boolean;
     }
     interface SmoothlyTableCell {
@@ -1368,17 +1368,17 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
-        "onExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
-        "onExpandableLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
-        "onExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
-        "onExpansionOpen"?: (event: SmoothlyTableExpandableCellCustomEvent<HTMLElement>) => void;
+        "onSmoothlyExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
+        "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
+        "onSmoothlyExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
+        "onSmoothlyExpansionOpen"?: (event: SmoothlyTableExpandableCellCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTableExpandableRow {
         "align"?: "left" | "center" | "right";
-        "onExpandableChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
-        "onExpandableLoad"?: (event: SmoothlyTableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
-        "onExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
+        "onSmoothlyExpandableChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
+        "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
+        "onSmoothlyExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTableHeader {

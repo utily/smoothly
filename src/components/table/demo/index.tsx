@@ -145,7 +145,24 @@ export class TableDemo {
 								<smoothly-table-row>
 									<smoothly-table-expandable-cell>
 										e cell
-										<div slot="detail">nested expandable cell expansion e</div>
+										<div slot="detail">
+											<smoothly-table>
+												<smoothly-table-row>
+													<smoothly-table-header>G</smoothly-table-header>
+													<smoothly-table-header>H</smoothly-table-header>
+												</smoothly-table-row>
+												<smoothly-table-row>
+													<smoothly-table-expandable-cell>
+														g cell
+														<div slot="detail">nested expandable cell expansion g</div>
+													</smoothly-table-expandable-cell>
+													<smoothly-table-expandable-cell>
+														h cell
+														<div slot="detail">nested expandable cell expansion h</div>
+													</smoothly-table-expandable-cell>
+												</smoothly-table-row>
+											</smoothly-table>
+										</div>
 									</smoothly-table-expandable-cell>
 									<smoothly-table-expandable-cell>
 										f cell
