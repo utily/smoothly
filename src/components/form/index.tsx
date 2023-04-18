@@ -1,8 +1,8 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State } from "@stencil/core"
 import { http } from "cloudly-http"
+import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Clearable } from "./Clearable"
-import { Data } from "./Data"
 
 @Component({
 	tag: "smoothly-form",
