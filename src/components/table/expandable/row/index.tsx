@@ -24,14 +24,14 @@ export class TableExpandableRow implements ComponentWillLoad {
 	@State() spotlight = true
 	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
-	@Event() expansionOpen: EventEmitter<HTMLElement>
-	@Event() expandableChange: EventEmitter<boolean>
-	@Event() expandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
+	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
+	@Event() smoothlyExpandableChange: EventEmitter<boolean>
+	@Event() smoothlyExpandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
 	@Watch("open")
 	openChanged() {
 		if (this.expansionElement)
 			this.element.after(this.expansionElement)
-		this.expandableChange.emit(this.open)
+		this.smoothlyExpandableChange.emit(this.open)
 	}
 	@Watch("open")
 	@Watch("allowSpotlight")
@@ -39,12 +39,12 @@ export class TableExpandableRow implements ComponentWillLoad {
 		this.spotlight = this.open && this.allowSpotlight
 	}
 	componentWillLoad() {
-		this.expandableLoad.emit({
+		this.smoothlyExpandableLoad.emit({
 			allowSpotlight: (allowed: boolean) => (this.allowSpotlight = allowed),
 		})
 	}
 	componentDidRender(): void {
-		this.expansionOpen.emit(this.expansionElement)
+		this.smoothlyExpansionOpen.emit(this.expansionElement)
 		if (this.expansionElement && this.open)
 			this.element.after(this.expansionElement)
 	}
@@ -53,7 +53,7 @@ export class TableExpandableRow implements ComponentWillLoad {
 		event.stopPropagation()
 		this.open = !this.open
 	}
-	@Listen("tableLoad")
+	@Listen("smoothlyTableLoad")
 	handleTableLoaded(event: CustomEvent<(owner: EventTarget) => void>) {
 		event.stopPropagation()
 		event.detail(this.element)

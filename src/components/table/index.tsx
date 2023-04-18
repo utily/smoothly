@@ -13,24 +13,24 @@ export class Table implements ComponentWillLoad {
 	@Prop({ mutable: true, reflect: true }) root = true
 	@Prop({ reflect: true }) align: "middle" | "bottom" | "top" = "middle"
 	@Event() smoothlyNestedTable: EventEmitter<() => void>
-	@Event() spotlightChange: EventEmitter<{ allowSpotlight: boolean; owner?: EventTarget }>
-	@Event() tableLoad: EventEmitter<(owner: EventTarget) => void>
+	@Event() smoothlySpotlightChange: EventEmitter<{ allowSpotlight: boolean; owner?: EventTarget }>
+	@Event() smoothlyTableLoad: EventEmitter<(owner: EventTarget) => void>
 	componentWillLoad() {
 		this.smoothlyNestedTable.emit(() => (this.root = false))
-		this.tableLoad.emit((owner: EventTarget) => (this.owner = owner))
+		this.smoothlyTableLoad.emit((owner: EventTarget) => (this.owner = owner))
 	}
-	@Listen("expandableLoad")
+	@Listen("smoothlyExpandableLoad")
 	handleExpandableLoaded(event: CustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) {
 		event.stopPropagation()
 		event.target && this.expandable.set(event.target, event.detail)
 	}
-	@Listen("expandableChange")
+	@Listen("smoothlyExpandableChange")
 	handleExpandableState(event: CustomEvent<boolean>) {
 		event.stopPropagation()
 		event.target && (event.detail ? this.expanded.add(event.target) : this.expanded.delete(event.target))
-		this.spotlightChange.emit({ allowSpotlight: !this.expanded.size, owner: this.owner })
+		this.smoothlySpotlightChange.emit({ allowSpotlight: !this.expanded.size, owner: this.owner })
 	}
-	@Listen("spotlightChange")
+	@Listen("smoothlySpotlightChange")
 	handleSpotlightState(event: CustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) {
 		event.target != this.element &&
 			(event.stopPropagation(),
@@ -40,8 +40,8 @@ export class Table implements ComponentWillLoad {
 	handleNestedTable(event: CustomEvent<() => void>) {
 		event.target != this.element && (event.stopPropagation(), event.detail())
 	}
-	@Listen("expansionLoad")
-	@Listen("expansionOpen")
+	@Listen("smoothlyExpansionLoad")
+	@Listen("smoothlyExpansionOpen")
 	handleEvents(event: Event) {
 		event.stopPropagation()
 	}
