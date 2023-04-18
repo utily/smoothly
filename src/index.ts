@@ -14,6 +14,7 @@ export {
 	WithListenable,
 	CanBeListenable,
 	StateBase,
+	Data,
 	redirect,
 } from "./model"
 export { Cosmetic } from "./utilities"
