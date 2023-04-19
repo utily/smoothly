@@ -1,0 +1,10 @@
+:host {
+	display: flex;
+}
+:host:not([open]) .menu {
+	display: none;
+}
+smoothly-button {
+	margin: 0;
+	padding: 0;
+}

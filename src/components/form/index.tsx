@@ -16,6 +16,7 @@ export class SmoothlyForm {
 	@Prop() method?: "GET" | "POST"
 	@Prop() action?: string
 	@Prop({ mutable: true, reflect: true }) processing: boolean
+	@Prop() prevent = true
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
@@ -65,7 +66,7 @@ export class SmoothlyForm {
 			<Host>
 				{this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []}
 				<smoothly-spinner active={this.processing}></smoothly-spinner>
-				<form name={this.name}>
+				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>
 						<slot></slot>
 					</fieldset>

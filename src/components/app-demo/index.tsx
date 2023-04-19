@@ -63,6 +63,19 @@ export class SmoothlyAppDemo {
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
 				</smoothly-app-room>
+				<smoothly-app-room path="testing" label="Testing">
+					<smoothly-picker>
+						<smoothly-picker-option>
+							<smoothly-icon name="ellipse-outline" />
+						</smoothly-picker-option>
+						<smoothly-picker-option>
+							<smoothly-icon name="cube-outline" />
+						</smoothly-picker-option>
+						<smoothly-picker-option>
+							<smoothly-icon name="square-outline" />
+						</smoothly-picker-option>
+					</smoothly-picker>
+				</smoothly-app-room>
 			</smoothly-app>
 		)
 	}
