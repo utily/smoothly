@@ -64,17 +64,32 @@ export class SmoothlyAppDemo {
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
 				</smoothly-app-room>
 				<smoothly-app-room path="testing" label="Testing">
-					<smoothly-picker>
-						<smoothly-picker-option>
-							<smoothly-icon name="ellipse-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option>
-							<smoothly-icon name="cube-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option>
-							<smoothly-icon name="square-outline" />
-						</smoothly-picker-option>
-					</smoothly-picker>
+					<smoothly-form
+						onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
+						style={{ "max-width": "50rem" }}
+						looks="grid">
+						<smoothly-input name="purpose" type="text">
+							Purpose
+						</smoothly-input>
+						<smoothly-picker label="Shape" onSmoothlyInput={e => console.log("smoothly input", e.detail)}>
+							<smoothly-picker-option name="o" value={"CIRCLE"} labeled>
+								<smoothly-icon name="ellipse-outline" />
+							</smoothly-picker-option>
+							<smoothly-picker-option value={"CUBE"} labeled>
+								<smoothly-icon name="cube-outline" />
+							</smoothly-picker-option>
+							<smoothly-picker-option name="square" value={"SQUARE"} selected labeled>
+								<smoothly-icon name="square-outline" />
+							</smoothly-picker-option>
+							<smoothly-picker-option name="pyramid" value={"PYRAMID"} labeled>
+								<span>pyramid</span>
+							</smoothly-picker-option>
+							<smoothly-picker-option value={"elias@issuefab.com"} labeled>
+								elias@issuefab.com
+							</smoothly-picker-option>
+						</smoothly-picker>
+						<smoothly-submit slot="submit">Submit</smoothly-submit>
+					</smoothly-form>
 				</smoothly-app-room>
 			</smoothly-app>
 		)

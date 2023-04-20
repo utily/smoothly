@@ -1,0 +1,27 @@
+* {
+	box-sizing: border-box;
+}
+:host {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	gap: 0.5rem;
+	top: 100%;
+	left: -1px;
+	right: -1px;
+}
+:host >*:first-child {
+	margin-top: 0.5rem;
+}
+:host >*:last-child {
+	margin-bottom: 0.5rem;
+}
+:host .items {
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	align-items: center;
+	row-gap: 1ch;
+}
+:host > * {
+	margin: 0 0.5rem;
+}

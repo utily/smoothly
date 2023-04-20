@@ -1,5 +1,9 @@
 :host {
 	display: flex;
+	position: relative;
+	width: max-content;
+	padding: 0 0.4em;
+	padding: 1.2em 0.7em 0.2em 0.8em;
 }
 :host:not([open]) .menu {
 	display: none;
@@ -7,4 +11,34 @@
 smoothly-button {
 	margin: 0;
 	padding: 0;
+}
+.selector {
+	display: flex;
+	align-items: center;
+}
+.selected {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.selected * {
+	display: none;
+}
+
+.label {
+	position: absolute;
+	left: 0.4rem;
+	top: 0.6rem;
+	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	opacity: 0.8;
+	user-select: none;
+	cursor: inherit;
+	transform-origin: top left;
+	transition: transform 100ms ease;
+}
+.selected:not(:empty) + .label {
+	top: 0.4em;
+	transform: scale(0.6);
 }
