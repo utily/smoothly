@@ -5,6 +5,11 @@ export interface Option {
 	slotted: Node[]
 	element: HTMLSmoothlyPickerOptionElement
 }
+export namespace Option {
+	export interface New {
+		value: string
+	}
+}
 @Component({
 	tag: "smoothly-picker-option",
 	styleUrl: "style.css",

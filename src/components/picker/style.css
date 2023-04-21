@@ -42,3 +42,7 @@ smoothly-button {
 	top: 0.4em;
 	transform: scale(0.6);
 }
+
+.hide {
+	display: none;
+}

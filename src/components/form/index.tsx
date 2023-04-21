@@ -21,8 +21,9 @@ export class SmoothlyForm {
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
 
-	@Listen("smoothlyInput", { capture: true })
+	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
+		console.log(event.target)
 		this.notice = undefined
 		this.smoothlyFormInput.emit(
 			(this.value = Object.entries(event.detail).reduce(
@@ -35,7 +36,7 @@ export class SmoothlyForm {
 			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
 		}
 	}
-	@Listen("smoothlySubmit", { capture: true })
+	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
 		this.processing = true
 		this.submit()

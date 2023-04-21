@@ -92,6 +92,8 @@ export namespace Components {
         "toggle": () => Promise<void>;
         "value": any;
     }
+    interface SmoothlyChildClone {
+    }
     interface SmoothlyColor {
         "color"?: Color;
     }
@@ -236,15 +238,20 @@ export namespace Components {
     }
     interface SmoothlyPicker {
         "label": string;
+        "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
         "open": boolean;
+        "searchLabel": string;
+        "validator"?: (value: string) => boolean;
     }
     interface SmoothlyPickerMenu {
         "label": string;
+        "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
+        "validator"?: (value: string) => boolean;
     }
     interface SmoothlyPickerOption {
         "labeled": boolean;
@@ -406,6 +413,10 @@ export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCheckboxElement;
+}
+export interface SmoothlyChildCloneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyChildCloneElement;
 }
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -595,6 +606,12 @@ declare global {
     var HTMLSmoothlyCheckboxElement: {
         prototype: HTMLSmoothlyCheckboxElement;
         new (): HTMLSmoothlyCheckboxElement;
+    };
+    interface HTMLSmoothlyChildCloneElement extends Components.SmoothlyChildClone, HTMLStencilElement {
+    }
+    var HTMLSmoothlyChildCloneElement: {
+        prototype: HTMLSmoothlyChildCloneElement;
+        new (): HTMLSmoothlyChildCloneElement;
     };
     interface HTMLSmoothlyColorElement extends Components.SmoothlyColor, HTMLStencilElement {
     }
@@ -956,6 +973,7 @@ declare global {
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
+        "smoothly-child-clone": HTMLSmoothlyChildCloneElement;
         "smoothly-color": HTMLSmoothlyColorElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
@@ -1103,6 +1121,9 @@ declare namespace LocalJSX {
         "onSmoothlyChecked"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";
         "value"?: any;
+    }
+    interface SmoothlyChildClone {
+        "onSmoothlyRender"?: (event: SmoothlyChildCloneCustomEvent<Node[]>) => void;
     }
     interface SmoothlyColor {
         "color"?: Color;
@@ -1254,17 +1275,22 @@ declare namespace LocalJSX {
     }
     interface SmoothlyPicker {
         "label"?: string;
+        "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "open"?: boolean;
+        "searchLabel"?: string;
+        "validator"?: (value: string) => boolean;
     }
     interface SmoothlyPickerMenu {
         "label"?: string;
+        "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
+        "validator"?: (value: string) => boolean;
     }
     interface SmoothlyPickerOption {
         "labeled"?: boolean;
@@ -1443,6 +1469,7 @@ declare namespace LocalJSX {
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
+        "smoothly-child-clone": SmoothlyChildClone;
         "smoothly-color": SmoothlyColor;
         "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
@@ -1520,6 +1547,7 @@ declare module "@stencil/core" {
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
+            "smoothly-child-clone": LocalJSX.SmoothlyChildClone & JSXBase.HTMLAttributes<HTMLSmoothlyChildCloneElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;

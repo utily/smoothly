@@ -6,11 +6,14 @@ import { Option } from "./option"
 	scoped: true,
 })
 export class SmoothlyPicker {
-	@Prop() label = "Pick"
-	@Prop() name = "pick"
+	@Prop() label = "Label"
+	@Prop() name: string
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop() multiple = false
 	@Prop() mutable = false
+	@Prop() searchLabel = "Search"
+	@Prop() validator?: (value: string) => boolean
+	@Prop() labeledDefault = false
 	@State() selectedElement?: HTMLElement
 	@State() selected = new Map<string, Option>()
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
@@ -68,7 +71,13 @@ export class SmoothlyPicker {
 				<button onClick={() => this.clickHandler()} type={"button"}>
 					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
-				<smoothly-picker-menu multiple={this.multiple} mutable={this.mutable} class={"menu"}>
+				<smoothly-picker-menu
+					label={this.searchLabel}
+					labeledDefault={this.labeledDefault}
+					validator={this.validator}
+					multiple={this.multiple}
+					mutable={this.mutable}
+					class={"menu"}>
 					<slot />
 				</smoothly-picker-menu>
 			</Host>
