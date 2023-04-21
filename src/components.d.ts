@@ -236,11 +236,15 @@ export namespace Components {
     }
     interface SmoothlyPicker {
         "label": string;
-        "multiple": true;
+        "multiple": boolean;
+        "mutable": boolean;
         "name": string;
         "open": boolean;
     }
     interface SmoothlyPickerMenu {
+        "label": string;
+        "multiple": boolean;
+        "mutable": boolean;
     }
     interface SmoothlyPickerOption {
         "labeled": boolean;
@@ -1250,13 +1254,17 @@ declare namespace LocalJSX {
     }
     interface SmoothlyPicker {
         "label"?: string;
-        "multiple"?: true;
+        "multiple"?: boolean;
+        "mutable"?: boolean;
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "open"?: boolean;
     }
     interface SmoothlyPickerMenu {
+        "label"?: string;
+        "multiple"?: boolean;
+        "mutable"?: boolean;
     }
     interface SmoothlyPickerOption {
         "labeled"?: boolean;

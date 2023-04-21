@@ -71,8 +71,8 @@ export class SmoothlyAppDemo {
 						<smoothly-input name="purpose" type="text">
 							Purpose
 						</smoothly-input>
-						<smoothly-picker label="Shape" onSmoothlyInput={e => console.log("smoothly input", e.detail)}>
-							<smoothly-picker-option name="o" value={"CIRCLE"} labeled>
+						<smoothly-picker multiple mutable label="Shape">
+							<smoothly-picker-option name="circle" value={"CIRCLE"} labeled>
 								<smoothly-icon name="ellipse-outline" />
 							</smoothly-picker-option>
 							<smoothly-picker-option value={"CUBE"} labeled>
@@ -89,6 +89,17 @@ export class SmoothlyAppDemo {
 							</smoothly-picker-option>
 						</smoothly-picker>
 						<smoothly-submit slot="submit">Submit</smoothly-submit>
+						<smoothly-picker label="Shape" onSmoothlyInput={e => console.log(e.detail)}>
+							<smoothly-picker-option name="circle" value={"CIRCLE"} labeled>
+								<smoothly-icon name="ellipse-outline" />
+							</smoothly-picker-option>
+							<smoothly-picker-option value={"CUBE"} labeled>
+								<smoothly-icon name="cube-outline" />
+							</smoothly-picker-option>
+							<smoothly-picker-option name="square" value={"SQUARE"} selected labeled>
+								<smoothly-icon name="square-outline" />
+							</smoothly-picker-option>
+						</smoothly-picker>
 					</smoothly-form>
 				</smoothly-app-room>
 			</smoothly-app>

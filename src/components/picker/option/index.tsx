@@ -1,13 +1,9 @@
 import { Component, Element, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 
 export interface Option {
-	name: string
 	value: any
-	selected: boolean
 	slotted: Node[]
-	show: () => void
-	hide: () => void
-	visible: () => boolean
+	element: HTMLSmoothlyPickerOptionElement
 }
 @Component({
 	tag: "smoothly-picker-option",
@@ -15,21 +11,20 @@ export interface Option {
 	scoped: true,
 })
 export class SmoothlyPickerOption {
-	@Element() element: HTMLElement
+	@Element() element: HTMLSmoothlyPickerOptionElement
 	@Prop({ mutable: true, reflect: true }) multiple = false
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) visible = true
 	@Prop({ reflect: true }) labeled = false
 	@Prop() value: any
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@State() valueElement?: HTMLElement
 	@Event() smoothlyPickerOptionLoaded: EventEmitter<Option>
 	@Event() smoothlyPickerOptionChanged: EventEmitter<Option>
 	get option(): Option {
-		const result = {
-			name: this.name,
+		return {
 			value: this.value,
-			selected: this.selected,
+			element: this.element,
 			slotted: !this.element
 				? []
 				: Array.from(this.element.childNodes).reduce<Node[]>(
@@ -39,11 +34,7 @@ export class SmoothlyPickerOption {
 								: [...result, child.cloneNode(true)],
 						[]
 				  ),
-			show: () => (this.visible = true),
-			hide: () => (this.visible = false),
-			visible: () => this.visible,
 		}
-		return result
 	}
 	componentWillLoad() {
 		this.name = this.name ?? this.value
@@ -58,9 +49,11 @@ export class SmoothlyPickerOption {
 	render() {
 		return (
 			<Host onClick={() => this.clickHandler()}>
-				<button type={"button"} class={"exclude"}>
-					<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
-				</button>
+				<div class={"exclude"}>
+					<button type={"button"}>
+						<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
+					</button>
+				</div>
 				<div>
 					<slot />
 				</div>

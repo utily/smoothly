@@ -9,11 +9,13 @@ export class SmoothlyPicker {
 	@Prop() label = "Pick"
 	@Prop() name = "pick"
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Prop() multiple: true
+	@Prop() multiple = false
+	@Prop() mutable = false
 	@State() selectedElement?: HTMLElement
-	@State() selected = new Map<any, Option>()
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@State() selected = new Map<string, Option>()
+	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
+	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
+	private options = new Map<string, Option>()
 
 	@Watch("selected")
 	componentDidLoad() {
@@ -22,23 +24,36 @@ export class SmoothlyPicker {
 		for (const option of this.selected.values())
 			option.slotted.forEach(child => this.selectedElement?.appendChild(child))
 		const selected = Array.from(this.selected.values(), option => option.value)
-		this.smoothlyInput.emit({ [this.name]: selected })
-		this.smoothlyChange.emit({ [this.name]: selected })
+		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		event.stopPropagation()
-		if (event.detail.selected)
-			this.selected = new Map(this.selected.set(event.detail.name, event.detail).entries())
+		this.options.set(event.detail.element.name, event.detail)
+		event.detail.element.multiple = this.multiple
+		if (event.detail.element.selected)
+			this.selected = this.multiple
+				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
+				: new Map().set(event.detail.element.name, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionsSelected(event: CustomEvent<Option>) {
 		event.stopPropagation()
-		this.selected = event.detail.selected
-			? new Map(this.selected.set(event.detail.name, event.detail).entries())
-			: !this.selected.delete(event.detail.name)
-			? this.selected
-			: new Map(this.selected.entries())
+		if (this.multiple)
+			this.selected = event.detail.element.selected
+				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
+				: !this.selected.delete(event.detail.element.name)
+				? this.selected
+				: new Map(this.selected.entries())
+		else {
+			for (const option of this.options.values())
+				if (option.element != event.detail.element)
+					option.element.selected = false
+			this.selected = !event.detail.element.selected
+				? new Map()
+				: new Map().set(event.detail.element.name, event.detail)
+		}
 	}
 	clickHandler() {
 		this.open = !this.open
@@ -53,7 +68,7 @@ export class SmoothlyPicker {
 				<button onClick={() => this.clickHandler()} type={"button"}>
 					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
-				<smoothly-picker-menu class={"menu"}>
+				<smoothly-picker-menu multiple={this.multiple} mutable={this.mutable} class={"menu"}>
 					<slot />
 				</smoothly-picker-menu>
 			</Host>

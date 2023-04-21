@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Prop, State } from "@stencil/core"
 import { Option } from "../option"
 
 @Component({
@@ -7,31 +7,46 @@ import { Option } from "../option"
 	scoped: true,
 })
 export class SmoothlyPickerMenu {
-	private selected = new Map<any, Option>()
-	private search = ""
+	@Element() element: HTMLElement
+	@Prop({ reflect: true }) multiple = false
+	@Prop({ reflect: true }) mutable = false
+	@Prop() label = "Search"
+	@State() allowed = false
+	private options = new Map<any, Option>()
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
-		this.selected.set(event.detail.name, event.detail)
+		this.options.set(event.detail.element.name, event.detail)
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopPropagation()
-		this.search = event.detail.search
-		if (!this.search)
-			for (const option of this.selected.values())
-				option.show()
-		else
-			for (const option of this.selected.values())
-				option.name.includes(this.search) ? option.show() : option.hide()
+		if (!event.detail.search) {
+			this.allowed = false
+			for (const option of this.options.values())
+				option.element.visible = true
+		} else {
+			this.allowed = !Array.from(this.options.values()).find(option => option.value == event.detail.search)
+			for (const option of this.options.values())
+				option.element.name.toLocaleLowerCase().includes(event.detail.search.toLocaleLowerCase())
+					? (option.element.visible = true)
+					: (option.element.visible = false)
+		}
 	}
 	render() {
 		return (
 			<Host>
-				<smoothly-input
-					name={"search"}
-					onSmoothlyInput={e => this.inputHandler(e)}
-					onSmoothlyChange={e => this.inputHandler(e)}>
-					Search
-				</smoothly-input>
+				<div class={"controls"}>
+					<smoothly-input
+						name={"search"}
+						onSmoothlyInput={e => this.inputHandler(e)}
+						onSmoothlyChange={e => this.inputHandler(e)}>
+						{this.label}
+					</smoothly-input>
+					{this.mutable ? (
+						<button disabled={!this.allowed} class={"add"} type={"button"}>
+							<smoothly-icon name="add-outline" />
+						</button>
+					) : null}
+				</div>
 				<div class={"items"}>
 					<slot />
 				</div>
