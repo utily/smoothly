@@ -23,7 +23,6 @@ export class SmoothlyPicker {
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
 	}
-
 	@Watch("selected")
 	componentDidLoad() {
 		if (this.selectedElement)
@@ -43,7 +42,7 @@ export class SmoothlyPicker {
 				: new Map().set(event.detail.element.name, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
-	optionsSelected(event: CustomEvent<Option>) {
+	optionsSelectedHandler(event: CustomEvent<Option>) {
 		event.stopPropagation()
 		if (this.multiple)
 			this.selected = event.detail.element.selected
