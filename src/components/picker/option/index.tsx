@@ -1,15 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Option } from "../../../model"
 
-export interface Option {
-	value: any
-	slotted: Node[]
-	element: HTMLSmoothlyPickerOptionElement
-}
-export namespace Option {
-	export interface New {
-		value: string
-	}
-}
 @Component({
 	tag: "smoothly-picker-option",
 	styleUrl: "style.css",

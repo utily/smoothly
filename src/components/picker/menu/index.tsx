@@ -1,5 +1,5 @@
 import { Component, Element, h, Host, Listen, Prop, State } from "@stencil/core"
-import { Option } from "../option"
+import { Option } from "../../../model"
 @Component({
 	tag: "smoothly-picker-menu",
 	styleUrl: "style.css",
@@ -13,7 +13,7 @@ export class SmoothlyPickerMenu {
 	@Prop() validator?: (value: string) => boolean
 	@Prop() labeledDefault = false
 	@State() allowed = false
-	@State() new: { value: string; selected: boolean }[] = []
+	@State() new: Option.New[] = []
 	@State() search = ""
 	private options = new Map<any, Option>()
 	private searchElement?: HTMLElement

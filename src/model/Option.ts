@@ -1,7 +1,11 @@
-export type Option = {
+export interface Option {
 	value: any
-	name: string
-	hint?: string
-	aliases?: string[]
-	divider?: boolean
+	slotted: Node[]
+	element: HTMLSmoothlyPickerOptionElement
+}
+export namespace Option {
+	export interface New {
+		value: string
+		selected: boolean
+	}
 }

@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Option } from "./option"
+import { Option } from "../../model"
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
