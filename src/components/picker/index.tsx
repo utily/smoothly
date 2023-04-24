@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Option } from "./option"
 @Component({
 	tag: "smoothly-picker",
@@ -6,6 +6,7 @@ import { Option } from "./option"
 	scoped: true,
 })
 export class SmoothlyPicker {
+	@Element() element: HTMLSmoothlyPickerElement
 	@Prop() label = "Label"
 	@Prop() name: string
 	@Prop({ mutable: true, reflect: true }) open = false
@@ -18,6 +19,10 @@ export class SmoothlyPicker {
 	@State() selected = new Map<string, Option>()
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
+
+	componentWillLoad() {
+		window.addEventListener("click", this.clickHandler)
+	}
 
 	@Watch("selected")
 	componentDidLoad() {
@@ -51,20 +56,20 @@ export class SmoothlyPicker {
 				? new Map()
 				: new Map().set(event.detail.element.name, event.detail)
 	}
-	clickHandler() {
-		this.open = !this.open
+	clickHandler = (event: MouseEvent) => {
+		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
 	render() {
+		console.log("rerendered picker")
 		return (
 			<Host>
-				<div onClick={() => this.clickHandler()} ref={element => (this.selectedElement = element)} class={"selected"} />
-				<span onClick={() => this.clickHandler()} class={"label"}>
-					{this.label}
-				</span>
-				<button onClick={() => this.clickHandler()} type={"button"}>
+				<div ref={element => (this.selectedElement = element)} class={"selected"} />
+				<span class={"label"}>{this.label}</span>
+				<button type={"button"}>
 					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
+					onClick={event => event.stopPropagation()}
 					label={this.searchLabel}
 					labeledDefault={this.labeledDefault}
 					validator={this.validator}
