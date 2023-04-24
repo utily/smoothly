@@ -20,12 +20,10 @@ export class SmoothlyPickerMenu {
 
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
-		console.log("menu detected load", event.detail.element.name)
 		this.options.set(event.detail.element.name, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionChangedHandler(event: CustomEvent<Option>) {
-		console.log("change detected")
 		if (!this.multiple && event.detail.element.selected) {
 			for (const option of this.options.values())
 				if (option.element != event.detail.element)
@@ -33,7 +31,6 @@ export class SmoothlyPickerMenu {
 		}
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
-		console.log("input detected")
 		event.stopImmediatePropagation()
 		this.search = event.detail.search
 		if (!this.search) {
