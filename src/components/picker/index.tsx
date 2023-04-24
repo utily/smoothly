@@ -34,7 +34,7 @@ export class SmoothlyPicker {
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		event.stopPropagation()
 		this.options.set(event.detail.element.name, event.detail)
-		event.detail.element.multiple = this.multiple
+		console.log("loaded options", this.options)
 		if (event.detail.element.selected)
 			this.selected = this.multiple
 				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
@@ -49,14 +49,10 @@ export class SmoothlyPicker {
 				: !this.selected.delete(event.detail.element.name)
 				? this.selected
 				: new Map(this.selected.entries())
-		else {
-			for (const option of this.options.values())
-				if (option.element != event.detail.element)
-					option.element.selected = false
+		else
 			this.selected = !event.detail.element.selected
 				? new Map()
 				: new Map().set(event.detail.element.name, event.detail)
-		}
 	}
 	clickHandler() {
 		this.open = !this.open

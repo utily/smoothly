@@ -23,7 +23,6 @@ export class SmoothlyForm {
 
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		console.log(event.target)
 		this.notice = undefined
 		this.smoothlyFormInput.emit(
 			(this.value = Object.entries(event.detail).reduce(

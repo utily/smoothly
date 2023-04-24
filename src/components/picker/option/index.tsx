@@ -17,7 +17,6 @@ export namespace Option {
 })
 export class SmoothlyPickerOption {
 	@Element() element: HTMLSmoothlyPickerOptionElement
-	@Prop({ mutable: true, reflect: true }) multiple = false
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) visible = true
 	@Prop({ reflect: true }) labeled = false

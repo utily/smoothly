@@ -13,13 +13,23 @@ export class SmoothlyPickerMenu {
 	@Prop() validator?: (value: string) => boolean
 	@Prop() labeledDefault = false
 	@State() allowed = false
-	@State() new: string[] = []
+	@State() new: { value: string; selected: boolean }[] = []
 	@State() search = ""
 	private options = new Map<any, Option>()
+	private searchElement?: HTMLElement
 
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		this.options.set(event.detail.element.name, event.detail)
+	}
+	@Listen("smoothlyPickerOptionChanged")
+	optionChangedHandler(event: CustomEvent<Option>) {
+		if (!this.multiple && event.detail.element.selected) {
+			for (const option of this.options.values())
+				if (option.element != event.detail.element)
+					option.element.selected = false
+			this.new = this.new.map(option => ({ ...option, selected: option.value == event.detail.value }))
+		}
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopImmediatePropagation()
@@ -29,17 +39,28 @@ export class SmoothlyPickerMenu {
 			for (const option of this.options.values())
 				option.element.visible = true
 		} else {
-			this.allowed = !Array.from(this.options.values()).find(option => option.value == this.search)
+			this.allowed =
+				!Array.from(this.options.values()).find(option => option.value == this.search) ||
+				!this.new.find(option => option.value == this.search)
 			for (const option of this.options.values())
 				option.element.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())
 					? (option.element.visible = true)
 					: (option.element.visible = false)
 		}
 	}
+	keyDownHandler(event: KeyboardEvent) {
+		if (event.key == "Enter") {
+			event.preventDefault()
+			this.addHandler()
+		}
+	}
 	addHandler() {
 		if (!this.validator || this.validator(this.search)) {
-			this.new = [...this.new, this.search]
+			for (const option of this.options.values())
+				option.element.selected = false
+			this.new = [{ value: this.search, selected: true }, ...this.new.map(option => ({ ...option, selected: false }))]
 			this.search = ""
+			this.searchElement?.focus()
 		}
 	}
 	render() {
@@ -47,10 +68,12 @@ export class SmoothlyPickerMenu {
 			<Host>
 				<div class={"controls"}>
 					<smoothly-input
+						ref={element => (this.searchElement = element)}
 						name={"search"}
 						value={this.search}
 						onSmoothlyInput={e => this.inputHandler(e)}
-						onSmoothlyChange={e => this.inputHandler(e)}>
+						onSmoothlyChange={e => this.inputHandler(e)}
+						onKeyDown={event => this.keyDownHandler(event)}>
 						{this.label}
 					</smoothly-input>
 					{this.mutable ? (
@@ -60,9 +83,9 @@ export class SmoothlyPickerMenu {
 					) : null}
 				</div>
 				<div class={"items"}>
-					{this.new.map(value => (
-						<smoothly-picker-option labeled={this.labeledDefault} selected value={value}>
-							{value}
+					{this.new.map(option => (
+						<smoothly-picker-option labeled={this.labeledDefault} selected={option.selected} value={option.value}>
+							{option.value}
 						</smoothly-picker-option>
 					))}
 					<slot />
