@@ -63,45 +63,6 @@ export class SmoothlyAppDemo {
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
 				</smoothly-app-room>
-				<smoothly-app-room path="testing" label="Testing">
-					<smoothly-form
-						onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
-						style={{ "max-width": "50rem" }}
-						looks="grid">
-						<smoothly-input name="purpose" type="text">
-							Purpose
-						</smoothly-input>
-						<smoothly-picker labeledDefault multiple mutable label="Shape" name="shape">
-							<smoothly-picker-option name="circle" value={"CIRCLE"} labeled>
-								<smoothly-icon name="ellipse-outline" />
-							</smoothly-picker-option>
-							<smoothly-picker-option value={"CUBE"} labeled>
-								<smoothly-icon name="cube-outline" />
-							</smoothly-picker-option>
-							<smoothly-picker-option name="square" value={"SQUARE"} selected labeled>
-								<smoothly-icon name="square-outline" />
-							</smoothly-picker-option>
-							<smoothly-picker-option name="pyramid" value={"PYRAMID"} labeled>
-								<span>pyramid</span>
-							</smoothly-picker-option>
-							<smoothly-picker-option value={"elias@issuefab.com"} labeled>
-								elias@issuefab.com
-							</smoothly-picker-option>
-						</smoothly-picker>
-						<smoothly-submit slot="submit">Submit</smoothly-submit>
-						<smoothly-picker mutable label="Shape" name="shape2">
-							<smoothly-picker-option name="circle" value={"CIRCLE"} labeled>
-								<smoothly-icon name="ellipse-outline" />
-							</smoothly-picker-option>
-							<smoothly-picker-option value={"CUBE"} labeled>
-								<smoothly-icon name="cube-outline" />
-							</smoothly-picker-option>
-							<smoothly-picker-option name="square" value={"SQUARE"} selected labeled>
-								<smoothly-icon name="square-outline" />
-							</smoothly-picker-option>
-						</smoothly-picker>
-					</smoothly-form>
-				</smoothly-app-room>
 			</smoothly-app>
 		)
 	}
