@@ -208,22 +208,6 @@ export class TableDemo {
 					<div slot="detail">expansion</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
-
-			// <smoothly-table>
-			// 	<smoothly-table-row>
-			// 		<smoothly-table-header>A</smoothly-table-header>
-			// 		<smoothly-table-header>B</smoothly-table-header>
-			// 		<smoothly-table-header>C</smoothly-table-header>
-			// 	</smoothly-table-row>
-			// 	<smoothly-table-row>
-			// 		<smoothly-table-cell name={"a"}>a cell</smoothly-table-cell>
-			// 		<smoothly-table-cell name={"a"}>b cell</smoothly-table-cell>
-			// 		<smoothly-table-cell name={"a"}>c cell</smoothly-table-cell>
-			// 		<smoothly-table-expansion slot="expansion" name={"a"}>expansion a</smoothly-table-expansion>
-			// 		<smoothly-table-expansion slot="expansion" name={"b"}>expansion b</smoothly-table-expansion>
-			// 		<smoothly-table-expansion slot="expansion" name={"c"}>expansion c</smoothly-table-expansion>
-			// 	</smoothly-table-row>
-			// </smoothly-table>,
 		]
 	}
 }
