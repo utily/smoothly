@@ -155,6 +155,7 @@ export namespace Components {
         "looks": "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
+        "prevent": boolean;
         "processing": boolean;
         "submit": () => Promise<void>;
     }
@@ -225,21 +226,6 @@ export namespace Components {
         "selected": boolean;
         "value": any;
     }
-    interface SmoothlyMenuOptions {
-        "emptyMenuLabel": string;
-        "filterOptions": (keyword: string, excludeValues?: string[]) => Promise<void>;
-        "getHighlighted": () => Promise<Option | undefined>;
-        "maxMenuHeight": "inherit";
-        "moveHighlight": (step: number) => Promise<void>;
-        "mutable": boolean;
-        "newOptionLabel": string;
-        "optionStyle": any;
-        "options": Option[];
-        "order": boolean;
-        "resetHighlightOnOptionsChange": boolean;
-        "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
-        "toggle": boolean;
-    }
     interface SmoothlyNotification {
         "closable": boolean;
         "icon": boolean;
@@ -247,16 +233,29 @@ export namespace Components {
     }
     interface SmoothlyNotifier {
     }
-    interface SmoothlyOption {
-        "aliases": string;
-        "checkbox": boolean;
-        "checked": boolean;
-        "dataHighlight": boolean;
-        "divider"?: boolean;
+    interface SmoothlyPicker {
+        "label": string;
+        "labeledDefault": boolean;
+        "multiple": boolean;
+        "mutable": boolean;
         "name": string;
-        "new"?: boolean;
-        "toggle": boolean;
-        "value": string;
+        "open": boolean;
+        "searchLabel": string;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
+    }
+    interface SmoothlyPickerMenu {
+        "label": string;
+        "labeledDefault": boolean;
+        "multiple": boolean;
+        "mutable": boolean;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
+    }
+    interface SmoothlyPickerOption {
+        "labeled": boolean;
+        "name": string;
+        "selected": boolean;
+        "value": any;
+        "visible": boolean;
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -310,6 +309,7 @@ export namespace Components {
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "prevent": boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
@@ -450,17 +450,21 @@ export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyItemElement;
 }
-export interface SmoothlyMenuOptionsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyMenuOptionsElement;
-}
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
 }
-export interface SmoothlyOptionCustomEvent<T> extends CustomEvent<T> {
+export interface SmoothlyPickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyOptionElement;
+    target: HTMLSmoothlyPickerElement;
+}
+export interface SmoothlyPickerMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyPickerMenuElement;
+}
+export interface SmoothlyPickerOptionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyPickerOptionElement;
 }
 export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -728,12 +732,6 @@ declare global {
         prototype: HTMLSmoothlyItemElement;
         new (): HTMLSmoothlyItemElement;
     };
-    interface HTMLSmoothlyMenuOptionsElement extends Components.SmoothlyMenuOptions, HTMLStencilElement {
-    }
-    var HTMLSmoothlyMenuOptionsElement: {
-        prototype: HTMLSmoothlyMenuOptionsElement;
-        new (): HTMLSmoothlyMenuOptionsElement;
-    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -746,11 +744,23 @@ declare global {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
     };
-    interface HTMLSmoothlyOptionElement extends Components.SmoothlyOption, HTMLStencilElement {
+    interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
     }
-    var HTMLSmoothlyOptionElement: {
-        prototype: HTMLSmoothlyOptionElement;
-        new (): HTMLSmoothlyOptionElement;
+    var HTMLSmoothlyPickerElement: {
+        prototype: HTMLSmoothlyPickerElement;
+        new (): HTMLSmoothlyPickerElement;
+    };
+    interface HTMLSmoothlyPickerMenuElement extends Components.SmoothlyPickerMenu, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerMenuElement: {
+        prototype: HTMLSmoothlyPickerMenuElement;
+        new (): HTMLSmoothlyPickerMenuElement;
+    };
+    interface HTMLSmoothlyPickerOptionElement extends Components.SmoothlyPickerOption, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerOptionElement: {
+        prototype: HTMLSmoothlyPickerOptionElement;
+        new (): HTMLSmoothlyPickerOptionElement;
     };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
@@ -974,10 +984,11 @@ declare global {
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-item": HTMLSmoothlyItemElement;
-        "smoothly-menu-options": HTMLSmoothlyMenuOptionsElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
-        "smoothly-option": HTMLSmoothlyOptionElement;
+        "smoothly-picker": HTMLSmoothlyPickerElement;
+        "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
+        "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
@@ -1166,6 +1177,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "prevent"?: boolean;
         "processing"?: boolean;
     }
     interface SmoothlyFrame {
@@ -1239,18 +1251,6 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: any;
     }
-    interface SmoothlyMenuOptions {
-        "emptyMenuLabel"?: string;
-        "maxMenuHeight"?: "inherit";
-        "mutable"?: boolean;
-        "newOptionLabel"?: string;
-        "onMenuEmpty"?: (event: SmoothlyMenuOptionsCustomEvent<boolean>) => void;
-        "optionStyle"?: any;
-        "options"?: Option[];
-        "order"?: boolean;
-        "resetHighlightOnOptionsChange"?: boolean;
-        "toggle"?: boolean;
-    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -1259,20 +1259,34 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNotifier {
     }
-    interface SmoothlyOption {
-        "aliases"?: string;
-        "checkbox"?: boolean;
-        "checked"?: boolean;
-        "dataHighlight"?: boolean;
-        "divider"?: boolean;
+    interface SmoothlyPicker {
+        "label"?: string;
+        "labeledDefault"?: boolean;
+        "multiple"?: boolean;
+        "mutable"?: boolean;
         "name"?: string;
-        "new"?: boolean;
-        "onOptionAdd"?: (event: SmoothlyOptionCustomEvent<{ name: string; value: string }>) => void;
-        "onOptionHover"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
-        "onOptionSelect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
-        "onOptionUnselect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
-        "toggle"?: boolean;
-        "value"?: string;
+        "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "open"?: boolean;
+        "searchLabel"?: string;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
+    }
+    interface SmoothlyPickerMenu {
+        "label"?: string;
+        "labeledDefault"?: boolean;
+        "multiple"?: boolean;
+        "mutable"?: boolean;
+        "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
+    }
+    interface SmoothlyPickerOption {
+        "labeled"?: boolean;
+        "name"?: string;
+        "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "selected"?: boolean;
+        "value"?: any;
+        "visible"?: boolean;
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
@@ -1332,6 +1346,7 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
+        "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "type"?: "link" | "button";
@@ -1461,10 +1476,11 @@ declare namespace LocalJSX {
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-item": SmoothlyItem;
-        "smoothly-menu-options": SmoothlyMenuOptions;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
-        "smoothly-option": SmoothlyOption;
+        "smoothly-picker": SmoothlyPicker;
+        "smoothly-picker-menu": SmoothlyPickerMenu;
+        "smoothly-picker-option": SmoothlyPickerOption;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
@@ -1540,10 +1556,11 @@ declare module "@stencil/core" {
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
-            "smoothly-menu-options": LocalJSX.SmoothlyMenuOptions & JSXBase.HTMLAttributes<HTMLSmoothlyMenuOptionsElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
-            "smoothly-option": LocalJSX.SmoothlyOption & JSXBase.HTMLAttributes<HTMLSmoothlyOptionElement>;
+            "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
+            "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
+            "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;

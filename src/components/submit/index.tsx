@@ -5,7 +5,7 @@ import { Button } from "../Button"
 @Component({
 	tag: "smoothly-submit",
 	styleUrl: "../button/style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlySubmit {
 	@Prop({ reflect: true }) color?: Color = "success"
@@ -15,6 +15,7 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
+	@Prop() prevent = true
 	@Event() smoothlySubmit: EventEmitter
 
 	@Listen("click")
@@ -23,6 +24,10 @@ export class SmoothlySubmit {
 	}
 
 	render() {
-		return <Button disabled={this.disabled} type={this.type}></Button>
+		return (
+			<Button disabled={this.disabled} type={this.type}>
+				<slot />
+			</Button>
+		)
 	}
 }

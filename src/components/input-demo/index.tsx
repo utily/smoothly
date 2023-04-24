@@ -1,4 +1,5 @@
 import { Component, h } from "@stencil/core"
+import { Notice } from "../../model"
 @Component({
 	tag: "smoothly-input-demo",
 	styleUrl: "style.css",
@@ -238,6 +239,41 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 					<smoothly-icon name="checkmark-circle"></smoothly-icon>
 				</smoothly-submit>
+			</smoothly-form>,
+			<h4>Smoothly picker</h4>,
+			<smoothly-form
+				onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
+				style={{ "max-width": "50rem" }}
+				looks="line">
+				<smoothly-input name="purpose" type="text">
+					Purpose
+				</smoothly-input>
+				<smoothly-picker
+					multiple
+					mutable
+					label="Emails"
+					name="emails"
+					validator={value =>
+						value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
+					}>
+					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
+					<smoothly-picker-option selected value={"jessie@rocket.com"}>
+						jessie@rocket.com
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
+				</smoothly-picker>
+				<smoothly-submit slot="submit">Submit</smoothly-submit>
+				<smoothly-picker label="Shape" name="shape">
+					<smoothly-picker-option name="Circle" value={"circle"} labeled>
+						<smoothly-icon name="ellipse-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option name="Cube" value={"cube"} labeled>
+						<smoothly-icon name="cube-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option name="Square" value={"square"} selected labeled>
+						<smoothly-icon name="square-outline" />
+					</smoothly-picker-option>
+				</smoothly-picker>
 			</smoothly-form>,
 			<smoothly-backtotop></smoothly-backtotop>,
 		]

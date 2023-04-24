@@ -16,11 +16,12 @@ export class SmoothlyForm {
 	@Prop() method?: "GET" | "POST"
 	@Prop() action?: string
 	@Prop({ mutable: true, reflect: true }) processing: boolean
+	@Prop() prevent = true
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
 
-	@Listen("smoothlyInput", { capture: true })
+	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.notice = undefined
 		this.smoothlyFormInput.emit(
@@ -34,7 +35,7 @@ export class SmoothlyForm {
 			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
 		}
 	}
-	@Listen("smoothlySubmit", { capture: true })
+	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
 		this.processing = true
 		this.submit()
@@ -65,7 +66,7 @@ export class SmoothlyForm {
 			<Host>
 				{this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []}
 				<smoothly-spinner active={this.processing}></smoothly-spinner>
-				<form name={this.name}>
+				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>
 						<slot></slot>
 					</fieldset>
