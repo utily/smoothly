@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Option } from "../../model"
+import { Notice, Option } from "../../model"
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
@@ -13,7 +13,7 @@ export class SmoothlyPicker {
 	@Prop() multiple = false
 	@Prop() mutable = false
 	@Prop() searchLabel = "Search"
-	@Prop() validator?: (value: string) => boolean
+	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() selectedElement?: HTMLElement
 	@State() selected = new Map<string, Option>()

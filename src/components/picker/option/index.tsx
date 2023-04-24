@@ -31,18 +31,13 @@ export class SmoothlyPickerOption {
 				  ),
 		}
 	}
-	// componentWillLoad() {
-	// 	this.name = this.name ?? this.value
-	// }
-	componentWillRender() {
+	componentWillLoad() {
 		this.name = this.name ?? this.value
 	}
 	componentDidLoad() {
-		console.log("option", this.name, "loaded", this.selected)
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	clickHandler() {
-		console.log("option", this.name, "clicked")
 		this.selected = !this.selected
 		this.smoothlyPickerOptionChanged.emit(this.option)
 	}

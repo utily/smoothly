@@ -1,5 +1,6 @@
-import { Component, Element, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State } from "@stencil/core"
 import { Option } from "../../../model"
+import { Notice } from "../../../model"
 @Component({
 	tag: "smoothly-picker-menu",
 	styleUrl: "style.css",
@@ -10,11 +11,12 @@ export class SmoothlyPickerMenu {
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop() label = "Search"
-	@Prop() validator?: (value: string) => boolean
+	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() allowed = false
 	@State() new: Option.New[] = []
 	@State() search = ""
+	@Event() notice: EventEmitter<Notice>
 	private options = new Map<any, Option>()
 	private searchElement?: HTMLElement
 
@@ -52,7 +54,8 @@ export class SmoothlyPickerMenu {
 		}
 	}
 	addHandler() {
-		if (!this.validator || this.validator(this.search)) {
+		const validation = !this.validator ? true : this.validator(this.search)
+		if (typeof validation == "object" ? validation.result : validation) {
 			if (!this.multiple)
 				for (const option of this.options.values())
 					option.element.selected = false
@@ -60,6 +63,8 @@ export class SmoothlyPickerMenu {
 			this.search = ""
 			this.searchElement?.focus()
 		}
+		if (typeof validation == "object")
+			this.notice.emit(validation.notice)
 	}
 	render() {
 		return (

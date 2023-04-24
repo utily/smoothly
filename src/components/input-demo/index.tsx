@@ -1,4 +1,5 @@
 import { Component, h } from "@stencil/core"
+import { Notice } from "../../model"
 @Component({
 	tag: "smoothly-input-demo",
 	styleUrl: "style.css",
@@ -247,7 +248,14 @@ export class SmoothlyInputDemo {
 				<smoothly-input name="purpose" type="text">
 					Purpose
 				</smoothly-input>
-				<smoothly-picker multiple mutable label="Emails" name="emails">
+				<smoothly-picker
+					multiple
+					mutable
+					label="Emails"
+					name="emails"
+					validator={value =>
+						value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
+					}>
 					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
 					<smoothly-picker-option selected value={"jessie@rocket.com"}>
 						jessie@rocket.com

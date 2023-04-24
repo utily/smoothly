@@ -241,14 +241,14 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "searchLabel": string;
-        "validator"?: (value: string) => boolean;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerMenu {
         "label": string;
         "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
-        "validator"?: (value: string) => boolean;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
         "labeled": boolean;
@@ -457,6 +457,10 @@ export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyPickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyPickerElement;
+}
+export interface SmoothlyPickerMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyPickerMenuElement;
 }
 export interface SmoothlyPickerOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1265,14 +1269,15 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "open"?: boolean;
         "searchLabel"?: string;
-        "validator"?: (value: string) => boolean;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerMenu {
         "label"?: string;
         "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
-        "validator"?: (value: string) => boolean;
+        "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
+        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
         "labeled"?: boolean;
