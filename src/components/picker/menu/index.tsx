@@ -20,18 +20,20 @@ export class SmoothlyPickerMenu {
 
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
+		console.log("menu detected load", event.detail.element.name)
 		this.options.set(event.detail.element.name, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionChangedHandler(event: CustomEvent<Option>) {
+		console.log("change detected")
 		if (!this.multiple && event.detail.element.selected) {
 			for (const option of this.options.values())
 				if (option.element != event.detail.element)
 					option.element.selected = false
-			this.new = this.new.map(option => ({ ...option, selected: option.value == event.detail.value }))
 		}
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
+		console.log("input detected")
 		event.stopImmediatePropagation()
 		this.search = event.detail.search
 		if (!this.search) {
@@ -39,9 +41,7 @@ export class SmoothlyPickerMenu {
 			for (const option of this.options.values())
 				option.element.visible = true
 		} else {
-			this.allowed =
-				!Array.from(this.options.values()).find(option => option.value == this.search) ||
-				!this.new.find(option => option.value == this.search)
+			this.allowed = !Array.from(this.options.values()).find(option => option.value == this.search)
 			for (const option of this.options.values())
 				option.element.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())
 					? (option.element.visible = true)
@@ -56,9 +56,10 @@ export class SmoothlyPickerMenu {
 	}
 	addHandler() {
 		if (!this.validator || this.validator(this.search)) {
-			for (const option of this.options.values())
-				option.element.selected = false
-			this.new = [{ value: this.search, selected: true }, ...this.new.map(option => ({ ...option, selected: false }))]
+			if (!this.multiple)
+				for (const option of this.options.values())
+					option.element.selected = false
+			this.new = [...this.new, { value: this.search, selected: true }]
 			this.search = ""
 			this.searchElement?.focus()
 		}
@@ -83,12 +84,16 @@ export class SmoothlyPickerMenu {
 					) : null}
 				</div>
 				<div class={"items"}>
+					<slot />
 					{this.new.map(option => (
-						<smoothly-picker-option labeled={this.labeledDefault} selected={option.selected} value={option.value}>
+						<smoothly-picker-option
+							labeled={this.labeledDefault}
+							selected={option.selected}
+							value={option.value}
+							onSmoothlyPickerOptionChanged={event => (option.selected = event.detail.element.selected)}>
 							{option.value}
 						</smoothly-picker-option>
 					))}
-					<slot />
 				</div>
 			</Host>
 		)

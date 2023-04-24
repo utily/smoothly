@@ -43,3 +43,7 @@
 .add:disabled {
 	visibility: hidden;
 }
+.new {
+	display: contents;
+}
+
