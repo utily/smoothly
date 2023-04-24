@@ -59,7 +59,6 @@ export class SmoothlyPicker {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
 	render() {
-		console.log("rerendered picker")
 		return (
 			<Host>
 				<div ref={element => (this.selectedElement = element)} class={"selected"} />
