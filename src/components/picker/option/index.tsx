@@ -47,7 +47,7 @@ export class SmoothlyPickerOption {
 	render() {
 		return (
 			<Host onClick={() => this.clickHandler()}>
-				<div class={"exclude button"}>
+				<div class={"exclude"}>
 					<button type={"button"}>
 						<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
 					</button>
