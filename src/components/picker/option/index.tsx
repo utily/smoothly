@@ -11,6 +11,7 @@ export class SmoothlyPickerOption {
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) visible = true
 	@Prop({ reflect: true }) labeled = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() value: any
 	@Prop({ reflect: true }) name: string
 	@State() valueElement?: HTMLElement
@@ -38,13 +39,15 @@ export class SmoothlyPickerOption {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	clickHandler() {
-		this.selected = !this.selected
-		this.smoothlyPickerOptionChanged.emit(this.option)
+		if (!this.readonly) {
+			this.selected = !this.selected
+			this.smoothlyPickerOptionChanged.emit(this.option)
+		}
 	}
 	render() {
 		return (
 			<Host onClick={() => this.clickHandler()}>
-				<div class={"exclude"}>
+				<div class={"exclude button"}>
 					<button type={"button"}>
 						<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
 					</button>
