@@ -12,6 +12,7 @@ export class SmoothlyPicker {
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop() multiple = false
 	@Prop() mutable = false
+	@Prop() readonly = false
 	@Prop() searchLabel = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
@@ -44,16 +45,17 @@ export class SmoothlyPicker {
 	@Listen("smoothlyPickerOptionChanged")
 	optionsSelectedHandler(event: CustomEvent<Option>) {
 		event.stopPropagation()
-		if (this.multiple)
-			this.selected = event.detail.element.selected
-				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
-				: !this.selected.delete(event.detail.element.name)
-				? this.selected
-				: new Map(this.selected.entries())
-		else
-			this.selected = !event.detail.element.selected
-				? new Map()
-				: new Map().set(event.detail.element.name, event.detail)
+		if (!this.readonly)
+			if (this.multiple)
+				this.selected = event.detail.element.selected
+					? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
+					: !this.selected.delete(event.detail.element.name)
+					? this.selected
+					: new Map(this.selected.entries())
+			else
+				this.selected = !event.detail.element.selected
+					? new Map()
+					: new Map().set(event.detail.element.name, event.detail)
 	}
 	clickHandler = (event: MouseEvent) => {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
@@ -73,6 +75,7 @@ export class SmoothlyPicker {
 					validator={this.validator}
 					multiple={this.multiple}
 					mutable={this.mutable}
+					readonly={this.readonly}
 					class={"menu"}>
 					<slot />
 				</smoothly-picker-menu>

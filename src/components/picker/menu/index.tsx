@@ -10,6 +10,7 @@ export class SmoothlyPickerMenu {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop() label = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
@@ -23,10 +24,12 @@ export class SmoothlyPickerMenu {
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		this.options.set(event.detail.element.name, event.detail)
+		if (this.readonly)
+			event.detail.element.readonly = true
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionChangedHandler(event: CustomEvent<Option>) {
-		if (!this.multiple && event.detail.element.selected) {
+		if (!this.readonly && !this.multiple && event.detail.element.selected) {
 			for (const option of this.options.values())
 				if (option.element != event.detail.element)
 					option.element.selected = false

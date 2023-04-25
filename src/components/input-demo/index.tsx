@@ -274,6 +274,13 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="square-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
+				<smoothly-picker multiple readonly name="animals" label="Animals">
+					<smoothly-picker-option selected value={"cat"}>
+						Cat
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
+					<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
+				</smoothly-picker>
 			</smoothly-form>,
 			<smoothly-backtotop></smoothly-backtotop>,
 		]
