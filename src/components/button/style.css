@@ -118,7 +118,7 @@ button {
 }
 :host([fill=solid]) {
 	background: rgb(var(--smoothly-color));
-	border-color: rgb(var(--smoothly-color-shade));
+	border-color: rgb(var(--smoothly-color));
 }
 :host([fill=solid]) > button,
 :host([fill=default]) > button{
