@@ -5,7 +5,7 @@ import { Button } from "../Button"
 @Component({
 	tag: "smoothly-button",
 	styleUrl: "../button/style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyButton {
 	@Prop({ reflect: true }) color?: Color
