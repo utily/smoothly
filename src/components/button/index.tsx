@@ -19,6 +19,10 @@ export class SmoothlyButton {
 	@Prop() download?: boolean
 
 	render() {
-		return <Button disabled={this.disabled} type={this.type} link={this.link} download={this.download}></Button>
+		return (
+			<Button disabled={this.disabled} type={this.type} link={this.link} download={this.download}>
+				<slot />
+			</Button>
+		)
 	}
 }
