@@ -6,6 +6,3 @@
 .hide {
 	display: none;
 }
-:host[open] {
-	background-color: aqua;
-}
