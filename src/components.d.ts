@@ -335,6 +335,7 @@ export namespace Components {
     }
     interface SmoothlyTable {
         "align": "middle" | "bottom" | "top";
+        "open": boolean;
         "root": boolean;
     }
     interface SmoothlyTableCell {
@@ -355,6 +356,7 @@ export namespace Components {
         "name": string;
     }
     interface SmoothlyTableRow {
+        "open": boolean;
     }
     interface SmoothlyToggle {
         "disabled": boolean;
@@ -1379,6 +1381,7 @@ declare namespace LocalJSX {
         "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
         "onSmoothlySpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
         "onSmoothlyTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
+        "open"?: boolean;
         "root"?: boolean;
     }
     interface SmoothlyTableCell {
@@ -1406,6 +1409,7 @@ declare namespace LocalJSX {
         "name"?: string;
     }
     interface SmoothlyTableRow {
+        "open"?: boolean;
     }
     interface SmoothlyToggle {
         "disabled"?: boolean;

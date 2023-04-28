@@ -12,6 +12,7 @@ export class Table implements ComponentWillLoad {
 	@Element() element: HTMLSmoothlyTableElement
 	@Prop({ mutable: true, reflect: true }) root = true
 	@Prop({ reflect: true }) align: "middle" | "bottom" | "top" = "middle"
+	@Prop({ reflect: true, mutable: true }) open = false
 	@Event() smoothlyNestedTable: EventEmitter<() => void>
 	@Event() smoothlySpotlightChange: EventEmitter<{ allowSpotlight: boolean; owner?: EventTarget }>
 	@Event() smoothlyTableLoad: EventEmitter<(owner: EventTarget) => void>
@@ -32,6 +33,7 @@ export class Table implements ComponentWillLoad {
 	}
 	@Listen("smoothlySpotlightChange")
 	handleSpotlightState(event: CustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) {
+		this.open = !!this.expanded.size
 		event.target != this.element &&
 			(event.stopPropagation(),
 			event.detail.owner && this.expandable.get(event.detail.owner)?.allowSpotlight(event.detail.allowSpotlight))
@@ -42,7 +44,7 @@ export class Table implements ComponentWillLoad {
 	}
 	@Listen("smoothlyExpansionLoad")
 	@Listen("smoothlyExpansionOpen")
-	handleEvents(event: Event) {
+	handleEvents(event: CustomEvent) {
 		event.stopPropagation()
 	}
 	render() {
