@@ -14,7 +14,6 @@ export class Notification {
 	@State() tick = {}
 	@Event() remove: EventEmitter<Notice>
 	private listener: Notice.Listener = notice => {
-		console.log("changed: ", notice)
 		if (notice.state == "closed")
 			this.remove.emit(notice)
 		else
