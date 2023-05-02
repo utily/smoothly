@@ -1,11 +1,11 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 @Component({
-	tag: "smoothly-selector",
+	tag: "smoothly-input-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class Selector {
-	@Element() element: HTMLSmoothlySelectorElement
+export class SmoothlyInputSelect {
+	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() initialPrompt?: string
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []

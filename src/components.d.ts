@@ -220,6 +220,10 @@ export namespace Components {
     interface SmoothlyInputMonth {
         "value"?: Date;
     }
+    interface SmoothlyInputSelect {
+        "initialPrompt"?: string;
+        "reset": () => Promise<void>;
+    }
     interface SmoothlyItem {
         "filter": (filter: string) => Promise<boolean>;
         "marked": boolean;
@@ -290,10 +294,6 @@ export namespace Components {
     interface SmoothlyReorder {
     }
     interface SmoothlySelectDemo {
-    }
-    interface SmoothlySelector {
-        "initialPrompt"?: string;
-        "reset": () => Promise<void>;
     }
     interface SmoothlySkeleton {
         "align": "left" | "center" | "right";
@@ -451,6 +451,10 @@ export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
 }
+export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputSelectElement;
+}
 export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyItemElement;
@@ -490,10 +494,6 @@ export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
-}
-export interface SmoothlySelectorCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlySelectorElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -731,6 +731,12 @@ declare global {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
     };
+    interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputSelectElement: {
+        prototype: HTMLSmoothlyInputSelectElement;
+        new (): HTMLSmoothlyInputSelectElement;
+    };
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
     }
     var HTMLSmoothlyItemElement: {
@@ -814,12 +820,6 @@ declare global {
     var HTMLSmoothlySelectDemoElement: {
         prototype: HTMLSmoothlySelectDemoElement;
         new (): HTMLSmoothlySelectDemoElement;
-    };
-    interface HTMLSmoothlySelectorElement extends Components.SmoothlySelector, HTMLStencilElement {
-    }
-    var HTMLSmoothlySelectorElement: {
-        prototype: HTMLSmoothlySelectorElement;
-        new (): HTMLSmoothlySelectorElement;
     };
     interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
     }
@@ -988,6 +988,7 @@ declare global {
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
+        "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
@@ -1002,7 +1003,6 @@ declare global {
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
-        "smoothly-selector": HTMLSmoothlySelectorElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
@@ -1250,6 +1250,10 @@ declare namespace LocalJSX {
         "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
     }
+    interface SmoothlyInputSelect {
+        "initialPrompt"?: string;
+        "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
+    }
     interface SmoothlyItem {
         "marked"?: boolean;
         "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
@@ -1331,10 +1335,6 @@ declare namespace LocalJSX {
         "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
     interface SmoothlySelectDemo {
-    }
-    interface SmoothlySelector {
-        "initialPrompt"?: string;
-        "onSelected"?: (event: SmoothlySelectorCustomEvent<any>) => void;
     }
     interface SmoothlySkeleton {
         "align"?: "left" | "center" | "right";
@@ -1485,6 +1485,7 @@ declare namespace LocalJSX {
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
@@ -1499,7 +1500,6 @@ declare namespace LocalJSX {
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
         "smoothly-select-demo": SmoothlySelectDemo;
-        "smoothly-selector": SmoothlySelector;
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
@@ -1565,6 +1565,7 @@ declare module "@stencil/core" {
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
@@ -1579,7 +1580,6 @@ declare module "@stencil/core" {
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
-            "smoothly-selector": LocalJSX.SmoothlySelector & JSXBase.HTMLAttributes<HTMLSmoothlySelectorElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
