@@ -335,14 +335,14 @@ export class SmoothlyInputDemo {
 			</smoothly-input-select>,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
 
-			<smoothly-form looks="border" onSmoothlyFormSubmit={e => this.testSubmit(e)}>
+			<smoothly-form looks="border" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input-file placeholder="Select or drag a file here" name="input file demo">
 					{" "}
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
 
-				<smoothly-submit slot="Submit">submit</smoothly-submit>
+				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
 		]
