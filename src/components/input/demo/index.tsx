@@ -333,7 +333,7 @@ export class SmoothlyInputDemo {
 			<smoothly-input-file name="input file demo">
 				{" "}
 				<span slot="label">Testing file input</span>
-				<smoothly-button slot="button">testing</smoothly-button>
+				<smoothly-icon slot="button" name="folder-outline" />
 			</smoothly-input-file>,
 			<br />,
 		]
