@@ -1,8 +1,8 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State } from "@stencil/core"
 import { http } from "cloudly-http"
+import { Clearable } from "../../model/Clearable"
 import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
-import { Clearable } from "./Clearable"
 
 @Component({
 	tag: "smoothly-form",
@@ -53,8 +53,7 @@ export class SmoothlyForm {
 			if (response.status >= 200 && response.status < 300) {
 				this.notice = Notice.succeded("Form sucessfully submitted.")
 				await this.clear()
-			} else
-				this.notice = Notice.failed("Failed to submit form.")
+			} else this.notice = Notice.failed("Failed to submit form.")
 		}
 	}
 	@Method()

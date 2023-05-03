@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
 import * as selectively from "selectively"
 import { create as selectivelyCreate, Criteria } from "selectively"
-import { Clearable } from "./Clearable"
+import { Clearable } from "../../model/Clearable"
 
 @Component({
 	tag: "smoothly-filter",
