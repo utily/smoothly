@@ -465,5 +465,5 @@ type Name =
 	| "volume-off"
 	| "woman"
 
-type Variants = "filled" | "outline" | "sharp"
+type Variants = "outline" | "sharp"
 export type Icon = Name | `${Name}-${Variants}`
