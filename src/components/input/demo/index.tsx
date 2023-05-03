@@ -330,6 +330,11 @@ export class SmoothlyInputDemo {
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-input-select>,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
+			<smoothly-input-file name="input file demo">
+				{" "}
+				<span slot="label">Testing file input</span>
+				<smoothly-button slot="button">testing</smoothly-button>
+			</smoothly-input-file>,
 			<br />,
 		]
 	}
