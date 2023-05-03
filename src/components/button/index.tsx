@@ -17,11 +17,16 @@ export class SmoothlyButton {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() link?: string
 	@Prop() download?: boolean
+	@Prop({ reflect: true }) icon?: string
 
 	render() {
 		return (
 			<Button disabled={this.disabled} type={this.type} link={this.link} download={this.download}>
-				<slot />
+				{this.icon ? (
+					<smoothly-icon fill={this.fill} color={this.fill && this.color} name={this.icon}></smoothly-icon>
+				) : (
+					<slot />
+				)}
 			</Button>
 		)
 	}

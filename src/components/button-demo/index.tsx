@@ -8,9 +8,37 @@ export class SmoothlyButtonDemo {
 		return [
 			<h2>Buttons</h2>,
 			<section>
+				<h4>Icon buttons</h4>
+				<div>
+					<smoothly-button size="icon" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="small" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="large" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="icon" icon="call" color="danger" fill="outline" />
+					<smoothly-button size="small" icon="call" color="danger" fill="outline" />
+					<smoothly-button size="large" icon="call" color="danger" fill="outline" />
+				</div>
+				<div>
+					<smoothly-button size="icon" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="small" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="large" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="icon" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button size="small" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button size="large" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+				</div>
+				<div>
+					<smoothly-button size="icon" icon="call" color="secondary" shape="rounded" fill="clear" />
+					<smoothly-button size="small" icon="call" color="dark" shape="rounded" fill="clear" />
+					<smoothly-button size="large" icon="call" color="primary" shape="rounded" fill="clear" />
+				</div>
+				{/* <div> Fortsätt kanske på dessa ??
+					<smoothly-button type="link" size="icon" icon="checkmark-circle" />
+					<smoothly-button type="link" size="small" icon="checkmark-circle" />
+					<smoothly-button type="link" size="large" icon="checkmark-circle" />
+				</div> */}
+
 				<h4>Toggle button</h4>
 				<smoothly-toggle>
-					<smoothly-icon name="card" fill="solid" slot="icon-slot"></smoothly-icon>
+					<smoothly-icon name="checkmark-circle" fill="solid" slot="icon-slot"></smoothly-icon>
 				</smoothly-toggle>
 				<smoothly-toggle>
 					<smoothly-icon name="briefcase" slot="icon-slot"></smoothly-icon>

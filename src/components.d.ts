@@ -66,6 +66,7 @@ export namespace Components {
         "download"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon"?: string;
         "link"?: string;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
@@ -1086,6 +1087,7 @@ declare namespace LocalJSX {
         "download"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon"?: string;
         "link"?: string;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";

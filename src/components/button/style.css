@@ -1,6 +1,6 @@
 @import "../color/style.css";
 
-:host{
+:host {
 	display: inline-block;
 	margin: 1em;
 	box-sizing: border-box;
@@ -8,16 +8,19 @@
 	border: solid 1px;
 	transition: background 150ms ease-in-out;
 }
-:host([type=link]){
+:host([type="link"]) {
 	display: inline;
 	border: none;
 }
-:host([disabled]){
+:host([disabled]) {
 	opacity: 0.5;
 	pointer-events: none;
 }
+:host([icon]) {
+	margin: 0.5em;
+}
 a,
-button{
+button {
 	font-size: 110%;
 	font-weight: 400;
 	border: none;
@@ -31,34 +34,37 @@ button {
 	height: 100%;
 	width: 100%;
 	border-radius: 0.5rem;
-	min-width: 8em;
 	align-items: center;
 }
-:host(:not([size=icon])) > button {
+
+:host(:not([icon])) > button {
+	min-width: 8em;
+}
+:host(:not([size="icon"])) > button {
 	padding: 0.8em;
 }
-:host([size=icon]) > button{
+:host([size="icon"]) > button {
 	padding: 0.5em;
 }
-:host([shape=rounded]) > button,
-:host([shape=rounded]){
+:host([shape="rounded"]) > button,
+:host([shape="rounded"]) {
 	border-radius: 2rem;
 }
-:host([type=button]) > a {
+:host([type="button"]) > a {
 	text-align: center;
 	text-decoration: inherit;
 	width: calc(100% - 0.6em);
 }
-:host([size=small]) > button{
+:host([size="small"]) > button {
 	font-size: 100%;
 }
-:host([size=large]) > button{
+:host([size="large"]) > button {
 	font-size: 130%;
 }
-:host(:not([size=icon])){
+:host(:not([size="icon"]):not([icon])) {
 	min-width: 8em;
 }
-:host([size=flexible]) {
+:host([size="flexible"]) {
 	min-width: unset;
 	padding: 0;
 	margin: 0;
@@ -67,7 +73,7 @@ button {
 	align-items: center;
 	border: none;
 }
-:host([size=flexible]) > button {
+:host([size="flexible"]) > button {
 	min-width: unset;
 	padding: 0;
 	margin: 0 !important;
@@ -75,75 +81,80 @@ button {
 :host([expand]) {
 	width: 100%;
 }
-:host([expand=full]) {
+:host([expand="full"]) {
 	border-left: none;
 	border-right: none;
 	border-radius: 0;
 }
-:host([shape=rounded]) > button,
-:host([shape=rounded]){
+:host([shape="rounded"]) > button,
+:host([shape="rounded"]) {
 	border-radius: 2rem;
 }
-:host(:not([fill=clear]):hover),
-:host(:not([fill=clear]):focus),	
-:host(:not([fill=clear]):active){
+:host(:not([fill="clear"]):hover),
+:host(:not([fill="clear"]):focus),
+:host(:not([fill="clear"]):active) {
 	border-color: rgb(var(--smoothly-color-tint)) !important;
 	background: rgb(var(--smoothly-color-tint)) !important;
 }
-:host(:not([fill=clear]):hover) > button,
-:host(:not([fill=clear]):focus) > button,
-:host(:not([fill=clear]):active) > button,
-:host(:not([fill=clear]):hover) ::slotted(smoothly-icon),
-:host(:not([fill=clear]):focus) ::slotted(smoothly-icon),
-:host(:not([fill=clear]):active) ::slotted(smoothly-icon){
+:host(:not([fill="clear"]):hover) > button,
+:host(:not([fill="clear"]):focus) > button,
+:host(:not([fill="clear"]):active) > button,
+:host(:not([fill="clear"]):hover) ::slotted(smoothly-icon),
+:host(:not([fill="clear"]):focus) ::slotted(smoothly-icon),
+:host(:not([fill="clear"]):active) ::slotted(smoothly-icon) {
 	color: rgb(var(--smoothly-color-contrast)) !important;
 	stroke: rgb(var(--smoothly-color-contrast)) !important;
 	fill: rgb(var(--smoothly-color-contrast)) !important;
 }
-:host([fill=clear]:hover) > button,
-:host([fill=clear]:focus) > button,
-:host([fill=clear]:active) > button{
+:host([fill="clear"]:hover) > button,
+:host([fill="clear"]:focus) > button,
+:host([fill="clear"]:active) > button {
 	color: rgb(var(--smoothly-color-tint)) !important;
 	stroke: rgb(var(--smoothly-color-tint)) !important;
 	fill: rgb(var(--smoothly-color-tint)) !important;
 }
-:host([disabled]){
+:host([disabled]) {
 	opacity: 0.5;
 	pointer-events: none;
 }
 :host(:not([fill])),
-:host([fill=default]) {
+:host([fill="default"]) {
 	background: rgb(var(--smoothly-color));
 	border-color: transparent;
 }
-:host([fill=solid]) {
+:host([fill="solid"]) {
 	background: rgb(var(--smoothly-color));
 	border-color: rgb(var(--smoothly-color));
 }
-:host([fill=solid]) > button,
-:host([fill=default]) > button{
+:host([fill="solid"]) > button,
+:host([fill="default"]) > button {
 	stroke: rgb(var(--smoothly-color-contrast));
 	fill: rgb(var(--smoothly-color-contrast));
 	color: rgb(var(--smoothly-color-contrast));
 }
-:host([fill=outline]) > button,
-:host([fill=clear]) > button{
+:host([fill="outline"]) > button,
+:host([fill="clear"]) > button {
 	stroke: rgb(var(--smoothly-color));
 	fill: rgb(var(--smoothly-color));
 	color: rgb(var(--smoothly-color));
 }
-:host([fill=outline]) {
+:host([fill="outline"]) {
 	background: transparent;
 	border-color: rgb(var(--smoothly-color));
 }
-:host([fill=clear]) {
+:host([fill="clear"]) {
 	background: transparent;
 	border-color: transparent;
 }
-::slotted(smoothly-icon[slot=start]),
-::slotted(smoothly-icon[slot=end]){
+::slotted(smoothly-icon[slot="start"]),
+::slotted(smoothly-icon[slot="end"]),
+:host([icon]) > ::slotted(smoothly-icon) {
 	font-size: 0.65em;
 }
-:host([hidden]){
+:host([hidden]) {
 	display: none;
+}
+
+:host([icon][fill="clear"]) > ::slotted(smoothly-icon):hover {
+	filter: opacity(75%);
 }
