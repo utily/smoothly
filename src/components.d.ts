@@ -219,7 +219,8 @@ export namespace Components {
     }
     interface SmoothlyInputFile {
         "name": string;
-        "prompt": string;
+        "placeholder": string | undefined;
+        "showLabel": boolean;
         "value"?: File;
     }
     interface SmoothlyInputMonth {
@@ -1266,7 +1267,8 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
-        "prompt"?: string;
+        "placeholder"?: string | undefined;
+        "showLabel"?: boolean;
         "value"?: File;
     }
     interface SmoothlyInputMonth {

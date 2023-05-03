@@ -9,9 +9,10 @@ export class SmoothlyInputFile {
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	@State() dragging = false
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
+	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
-	@Prop() prompt = "Upload your file here"
+	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@Event() smoothlyInput: EventEmitter<{ name: string; value: File }>
 	@Event() smoothlyChange: EventEmitter<{ name: string; value: File }>
 	render() {
@@ -26,7 +27,9 @@ export class SmoothlyInputFile {
 				<smoothly-button onClick={event => (event.stopPropagation(), this.input?.click())}>
 					<slot name={"button"} />
 				</smoothly-button>
-				<span onClick={event => (event.stopPropagation(), this.input?.click())}>{this.value?.name ?? this.prompt}</span>
+				<span onClick={event => (event.stopPropagation(), this.input?.click())}>
+					{this.value?.name ?? this.placeholder}
+				</span>
 				<div
 					class={"mask"}
 					onDrop={event => (

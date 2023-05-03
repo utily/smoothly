@@ -12,6 +12,10 @@ export class SmoothlyInputDemo {
 		console.log("selectionChanged", event.detail)
 	}
 
+	testSubmit(e: CustomEvent) {
+		console.log(e.detail)
+	}
+
 	render() {
 		return [
 			<h2>Border</h2>,
@@ -312,7 +316,7 @@ export class SmoothlyInputDemo {
 					"--input-width": "6rem",
 				}}></smoothly-input-date-range>,
 			<br />,
-			<h4>Smothly Selector</h4>,
+			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
 				initialPrompt="Select..."
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
@@ -330,11 +334,16 @@ export class SmoothlyInputDemo {
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-input-select>,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
-			<smoothly-input-file name="input file demo">
-				{" "}
-				<span slot="label">Testing file input</span>
-				<smoothly-icon slot="button" name="folder-outline" />
-			</smoothly-input-file>,
+
+			<smoothly-form looks="border" onSmoothlyFormSubmit={e => this.testSubmit(e)}>
+				<smoothly-input-file placeholder="Select or drag a file here" name="input file demo">
+					{" "}
+					<span slot="label">Testing file input</span>
+					<smoothly-icon slot="button" name="folder-outline" />
+				</smoothly-input-file>
+
+				<smoothly-submit slot="Submit">submit</smoothly-submit>
+			</smoothly-form>,
 			<br />,
 		]
 	}
