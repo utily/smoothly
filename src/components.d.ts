@@ -333,6 +333,8 @@ export namespace Components {
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
         "url": string;
     }
+    interface SmoothlySwitch {
+    }
     interface SmoothlyTab {
         "label": string;
         "open": boolean;
@@ -867,6 +869,12 @@ declare global {
         prototype: HTMLSmoothlySvgElement;
         new (): HTMLSmoothlySvgElement;
     };
+    interface HTMLSmoothlySwitchElement extends Components.SmoothlySwitch, HTMLStencilElement {
+    }
+    var HTMLSmoothlySwitchElement: {
+        prototype: HTMLSmoothlySwitchElement;
+        new (): HTMLSmoothlySwitchElement;
+    };
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
     }
     var HTMLSmoothlyTabElement: {
@@ -1025,6 +1033,7 @@ declare global {
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-svg": HTMLSmoothlySvgElement;
+        "smoothly-switch": HTMLSmoothlySwitchElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
         "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
@@ -1394,6 +1403,8 @@ declare namespace LocalJSX {
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
         "url": string;
     }
+    interface SmoothlySwitch {
+    }
     interface SmoothlyTab {
         "label"?: string;
         "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLElement>) => void;
@@ -1531,6 +1542,7 @@ declare namespace LocalJSX {
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
         "smoothly-svg": SmoothlySvg;
+        "smoothly-switch": SmoothlySwitch;
         "smoothly-tab": SmoothlyTab;
         "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
@@ -1612,6 +1624,7 @@ declare module "@stencil/core" {
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
+            "smoothly-switch": LocalJSX.SmoothlySwitch & JSXBase.HTMLAttributes<HTMLSmoothlySwitchElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
             "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
