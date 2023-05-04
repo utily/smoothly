@@ -9,11 +9,9 @@
 	/* stylelint-disable-next-line declaration-no-important */
 	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
-
 :host[hidden] {
 	display: none;
 }
-
 :host > header {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
@@ -22,11 +20,9 @@
 	background: rgb(var(--smoothly-primary-color));
 	border-color: rgb(var(--smoothly-primary-color));
 }
-
 :host:not([header]) header {
 	border: none;
 }
-
 :host > * {
 	position: relative;
 	color: rgb(var(--smoothly-default-contrast));
@@ -42,7 +38,6 @@
 	margin-right: auto;
 	border-collapse: collapse;
 }
-
 :host > main {
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -51,11 +46,9 @@
 	box-sizing: border-box;
 	overflow: hidden;
 }
-
 :host:not([header]) main {
 	border-radius: 8px;
 }
-
 :host > * > smoothly-trigger {
 	position: absolute;
 	right: -2em;
@@ -63,16 +56,13 @@
 	z-index: 1;
 	border-color: transparent;
 }
-
 :host > * > smoothly-trigger:hover {
 	border-color: transparent;
 }
-
 :host smoothly-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }
-
 :host > * > * {
 	margin: 10px;
 }
