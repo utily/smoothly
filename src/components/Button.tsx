@@ -1,26 +1,32 @@
 import { FunctionalComponent, h } from "@stencil/core"
 
-export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link, download }, children) => {
+export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link, download, icon }, children) => {
+	if (icon)
+		return type == "link" || link ? (
+			<a href={link}>
+				<button disabled={disabled}>{...children}</button>
+			</a>
+		) : (
+			<button disabled={disabled}>{...children}</button>
+		)
+
 	return disabled && (link || type == "link") ? (
-		[...children, <slot></slot>]
+		<slot></slot>
 	) : link ? (
 		<a href={link} target="_blank" download={download}>
 			<slot name="start"></slot>
-			{...children}
 			<slot></slot>
 			<slot name="end"></slot>
 		</a>
 	) : type == "link" ? (
 		<a href={link}>
 			<slot name="start"></slot>
-			{...children}
 			<slot></slot>
 			<slot name="end"></slot>
 		</a>
 	) : (
 		<button disabled={disabled}>
 			<slot name="start"></slot>
-			{...children}
 			<slot></slot>
 			<slot name="end"></slot>
 		</button>
@@ -32,5 +38,6 @@ export namespace Button {
 		type: "link" | "button"
 		link?: string
 		download?: boolean
+		icon?: string
 	}
 }
