@@ -12,10 +12,6 @@ export class SmoothlyInputDemo {
 		console.log("selectionChanged", event.detail)
 	}
 
-	testSubmit(e: CustomEvent) {
-		console.log(e.detail)
-	}
-
 	render() {
 		return [
 			<h2>Border</h2>,
@@ -337,7 +333,6 @@ export class SmoothlyInputDemo {
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input-file placeholder="Select or drag a file here" name="input file demo">
-					{" "}
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
