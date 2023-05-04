@@ -6,7 +6,7 @@ import { Clearable } from "../../form/Clearable"
 	scoped: true,
 })
 export class SmoothlyInputClear {
-	@Prop({ reflect: true }) display = false
+	@Prop({ reflect: true }) display = true
 	@Prop({ reflect: true }) name?: string | undefined
 	@Element() hostElement: HTMLElement
 	@Event() smoothlyInputClear: EventEmitter
@@ -23,10 +23,9 @@ export class SmoothlyInputClear {
 
 	@Listen("click")
 	clickHandler() {
-		console.log("clear")
 		const node = this.hostElement.parentElement
 		if (Clearable.is(node))
-			node.clear()
+			return node.clear()
 		this.smoothlyInputClear.emit()
 	}
 

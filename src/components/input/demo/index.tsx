@@ -19,25 +19,6 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
-			<h4>Clear</h4>,
-			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
-				<smoothly-input type="email" name="email">
-					Email
-				</smoothly-input>
-				<smoothly-input type="password" name="password">
-					Password
-				</smoothly-input>
-				<smoothly-input type="password" name="password">
-					Phone
-					<smoothly-input-clear slot="end">
-						<smoothly-icon name="close" size="tiny"></smoothly-icon>
-					</smoothly-input-clear>
-				</smoothly-input>
-			</smoothly-form>,
-			<smoothly-input-clear>
-				<smoothly-button color="danger">Clear</smoothly-button>
-			</smoothly-input-clear>,
-			<br />,
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
@@ -360,10 +341,24 @@ export class SmoothlyInputDemo {
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
-
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
+
+			<h4>Clear</h4>,
+			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
+				<smoothly-input name="First Name">First name</smoothly-input>
+				<smoothly-input name="Last name">Last name</smoothly-input>
+				<smoothly-input type="phone" name="Phone">
+					Phone
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" size="tiny"></smoothly-icon>
+					</smoothly-input-clear>
+				</smoothly-input>
+			</smoothly-form>,
+			<smoothly-input-clear>
+				<smoothly-button color="danger">Clear</smoothly-button>
+			</smoothly-input-clear>,
 		]
 	}
 }

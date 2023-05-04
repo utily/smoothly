@@ -1,7 +1,16 @@
-:host([display]) {
-	display: none !important;
+:host(:not([display])) {
+	display: none;
+}
+
+:host() ::slotted(smoothly-icon) {
+	filter: opacity(60%);
+	transition: 0.6s;
 }
 
 :host():hover ::slotted(smoothly-icon) {
 	cursor: pointer;
+}
+
+:host():hover ::slotted(smoothly-icon) {
+	filter: opacity(100%);
 }
