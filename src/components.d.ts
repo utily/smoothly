@@ -217,6 +217,12 @@ export namespace Components {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyInputFile {
+        "name": string;
+        "placeholder": string | undefined;
+        "showLabel": boolean;
+        "value"?: File;
+    }
     interface SmoothlyInputMonth {
         "value"?: Date;
     }
@@ -446,6 +452,10 @@ export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateRangeElement;
+}
+export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputFileElement;
 }
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -725,6 +735,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyInputFileElement extends Components.SmoothlyInputFile, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputFileElement: {
+        prototype: HTMLSmoothlyInputFileElement;
+        new (): HTMLSmoothlyInputFileElement;
+    };
     interface HTMLSmoothlyInputMonthElement extends Components.SmoothlyInputMonth, HTMLStencilElement {
     }
     var HTMLSmoothlyInputMonthElement: {
@@ -987,6 +1003,7 @@ declare global {
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
@@ -1246,6 +1263,14 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyInputFile {
+        "name"?: string;
+        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
+        "placeholder"?: string | undefined;
+        "showLabel"?: boolean;
+        "value"?: File;
+    }
     interface SmoothlyInputMonth {
         "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
@@ -1484,6 +1509,7 @@ declare namespace LocalJSX {
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
@@ -1564,6 +1590,7 @@ declare module "@stencil/core" {
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
