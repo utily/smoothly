@@ -22,7 +22,6 @@ export class SmoothlyToggle {
 	}
 
 	render() {
-		console.log("render")
 		return <button>{this.icon ? <smoothly-icon name={this.icon}></smoothly-icon> : <slot></slot>}</button>
 	}
 }
