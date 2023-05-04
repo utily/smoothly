@@ -12,6 +12,12 @@ button{
 	color: rgb(var(--smoothly-default-tint));
 	background-color: rgb(var(--smoothly-default-shade));
 }
+:host([size=small]) > button {
+	font-size: 100%;
+}
+:host([size=large]) > button {
+	font-size: 130%;
+}
 :host([shape=rounded]){
 	border-radius: 0.6em;
 }
@@ -21,12 +27,11 @@ button{
 :host([selected]) > button{
 	color: rgb(var(--smoothly-light-contrast));
 }
-::slotted(smoothly-icon){
+::slotted(smoothly-icon), smoothly-icon {
 	stroke: rgb(var(--smoothly-default-contrast));
 	fill: rgb(var(--smoothly-default-contrast));
-	font-size: 110%;
 }
-:host(:not([selected])) > ::slotted(smoothly-icon) {
+:host(:not([selected])) > ::slotted(smoothly-icon), :host(:not([selected])) smoothly-icon {
 	color: rgb(var(--smoothly-default-tint));
 	fill:rgb(var(--smoothly-default-tint));
 }

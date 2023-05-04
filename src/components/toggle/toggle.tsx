@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-toggle",
@@ -7,22 +7,22 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 })
 export class SmoothlyToggle {
 	@Prop({ mutable: true, reflect: true }) selected = false
-	@Prop({ reflect: true }) shape: "rounded"
+	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) disabled = false
 	@Prop() name: string
 	@Prop() value?: any
+	@Prop({ reflect: true }) size: "small" | "default" | "large" = "default"
+	@Prop() icon?: string // Change to Icon
+	@Event() smoothlyToggle: EventEmitter<{ name: string; value: any; selected: boolean }>
 
 	@Listen("click")
-	onClick(e: UIEvent) {
+	onClick() {
 		this.selected = !this.selected
+		this.smoothlyToggle.emit({ name: this.name, value: this.value, selected: this.selected })
 	}
 
 	render() {
-		return (
-			<button>
-				<slot name="icon-slot"></slot>
-				<slot>{this.name}</slot>
-			</button>
-		)
+		console.log("render")
+		return <button>{this.icon ? <smoothly-icon name={this.icon}></smoothly-icon> : <slot></slot>}</button>
 	}
 }

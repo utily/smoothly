@@ -9,15 +9,16 @@ export class SmoothlyButtonDemo {
 			<h2>Buttons</h2>,
 			<section>
 				<h4>Toggle button</h4>
-				<smoothly-toggle>
-					<smoothly-icon name="card" fill="solid" slot="icon-slot"></smoothly-icon>
+				<smoothly-toggle disabled={true} size="small" shape="rounded">
+					Test
 				</smoothly-toggle>
-				<smoothly-toggle>
-					<smoothly-icon name="briefcase" slot="icon-slot"></smoothly-icon>
+				<smoothly-toggle shape="rounded">Test</smoothly-toggle>
+				<smoothly-toggle size="large" shape="rounded">
+					Test
 				</smoothly-toggle>
-				<smoothly-toggle>
-					<smoothly-icon name="airplane" slot="icon-slot"></smoothly-icon>
-				</smoothly-toggle>
+				<smoothly-toggle disabled={true} size="small" icon="airplane" color="primary" />
+				<smoothly-toggle icon="airplane" color="danger" />
+				<smoothly-toggle size="large" icon="airplane" color="success" />
 				<h4>Toggle switches</h4>
 				<smoothly-toggle-switch disabled={false} size="small"></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>

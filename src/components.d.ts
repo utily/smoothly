@@ -366,9 +366,11 @@ export namespace Components {
     }
     interface SmoothlyToggle {
         "disabled": boolean;
+        "icon"?: string;
         "name": string;
         "selected": boolean;
-        "shape": "rounded";
+        "shape"?: "rounded";
+        "size": "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
@@ -524,6 +526,10 @@ export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T
 export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyToggleElement;
 }
 export interface SmoothlyTriggerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1438,9 +1444,12 @@ declare namespace LocalJSX {
     }
     interface SmoothlyToggle {
         "disabled"?: boolean;
+        "icon"?: string;
         "name"?: string;
+        "onSmoothlyToggle"?: (event: SmoothlyToggleCustomEvent<{ name: string; value: any; selected: boolean }>) => void;
         "selected"?: boolean;
         "shape"?: "rounded";
+        "size"?: "small" | "default" | "large";
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
