@@ -186,6 +186,19 @@ export class SmoothlyButtonDemo {
 					<smoothly-button link="/" size="small" icon="call" color="dark" shape="rounded" fill="clear" />
 					<smoothly-button link="/" size="large" icon="call" color="primary" shape="rounded" fill="clear" />
 				</div>
+
+				<h4>Submit button</h4>
+				<div>
+					<smoothly-submit color="success" shape="rounded">
+						Save
+					</smoothly-submit>
+					<smoothly-submit color="success" shape="rounded">
+						<smoothly-icon name="save" slot="start"></smoothly-icon>
+						Save
+					</smoothly-submit>
+					<smoothly-submit icon="save" color="success" shape="rounded" />
+					<smoothly-submit fill="clear" icon="save" color="success" shape="rounded" />
+				</div>
 			</section>,
 			<smoothly-backtotop></smoothly-backtotop>,
 		]

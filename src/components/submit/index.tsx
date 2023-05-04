@@ -16,6 +16,7 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() prevent = true
+	@Prop({ reflect: true }) icon?: string
 	@Event() smoothlySubmit: EventEmitter
 
 	@Listen("click")
@@ -25,8 +26,12 @@ export class SmoothlySubmit {
 
 	render() {
 		return (
-			<Button disabled={this.disabled} type={this.type}>
-				<slot />
+			<Button disabled={this.disabled} type={this.type} icon={this.icon}>
+				{this.icon ? (
+					<smoothly-icon fill={this.fill} color={this.fill && this.color} name={this.icon}></smoothly-icon>
+				) : (
+					<slot />
+				)}
 			</Button>
 		)
 	}

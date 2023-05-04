@@ -313,6 +313,7 @@ export namespace Components {
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon"?: string;
         "prevent": boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
@@ -1355,6 +1356,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon"?: string;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
