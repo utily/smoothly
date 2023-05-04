@@ -1,0 +1,7 @@
+:host([display]) {
+	display: none !important;
+}
+
+:host():hover ::slotted(smoothly-icon) {
+	cursor: pointer;
+}

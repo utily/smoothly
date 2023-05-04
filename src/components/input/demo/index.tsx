@@ -6,14 +6,38 @@ import { Notice } from "../../../model"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
-
+	private formElement?: HTMLSmoothlyFormElement
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
 		console.log("selectionChanged", event.detail)
 	}
 
+	@Listen("smoothlyInputClear")
+	onClear() {
+		this.formElement?.clear()
+	}
+
 	render() {
 		return [
+			<h4>Clear</h4>,
+			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
+				<smoothly-input type="email" name="email">
+					Email
+				</smoothly-input>
+				<smoothly-input type="password" name="password">
+					Password
+				</smoothly-input>
+				<smoothly-input type="password" name="password">
+					Phone
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" size="tiny"></smoothly-icon>
+					</smoothly-input-clear>
+				</smoothly-input>
+			</smoothly-form>,
+			<smoothly-input-clear>
+				<smoothly-button color="danger">Clear</smoothly-button>
+			</smoothly-input-clear>,
+			<br />,
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
