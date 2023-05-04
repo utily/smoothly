@@ -20,8 +20,8 @@ export class Notification {
 		else
 			this.tick = {}
 	}
-	private get properties(): [Color, string] {
-		let result: [Color, string]
+	private get properties(): [Color, Icon | undefined] {
+		let result: [Color, Icon | undefined]
 		switch (this.notice.state) {
 			case "delayed":
 			case "warning":
@@ -37,7 +37,7 @@ export class Notification {
 				result = ["danger", "alert-circle"]
 				break
 			default:
-				result = ["light", ""]
+				result = ["light", undefined]
 				break
 		}
 		return result
@@ -72,7 +72,7 @@ export class Notification {
 					""
 				)}
 				<span class={this.icon ? "icon" : "clean"}>
-					{this.icon ? <smoothly-icon name={this.properties[1] as Icon}></smoothly-icon> : ""}
+					{this.icon ? <smoothly-icon name={this.properties[1]}></smoothly-icon> : ""}
 					<p>{this.notice.message}</p>
 				</span>
 			</Host>
