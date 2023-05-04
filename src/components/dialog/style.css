@@ -9,10 +9,12 @@
 	/* stylelint-disable-next-line declaration-no-important */
 	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
+
 :host[hidden] {
 	display: none;
 }
-:host > header {
+
+:host>header {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	margin-top: 2em;
@@ -20,10 +22,12 @@
 	background: rgb(var(--smoothly-primary-color));
 	border-color: rgb(var(--smoothly-primary-color));
 }
+
 :host:not([header]) header {
 	border: none;
 }
-:host > * {
+
+:host>* {
 	position: relative;
 	color: rgb(var(--smoothly-default-contrast));
 	background-color: rgb(var(--smoothly-default-color));
@@ -38,7 +42,8 @@
 	margin-right: auto;
 	border-collapse: collapse;
 }
-:host > main {
+
+:host>main {
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	margin-bottom: 2em;
@@ -46,23 +51,28 @@
 	box-sizing: border-box;
 	overflow: hidden;
 }
+
 :host:not([header]) main {
 	border-radius: 8px;
 }
-:host > * > smoothly-trigger {
+
+:host>*>smoothly-trigger {
 	position: absolute;
 	right: -2em;
 	top: -2em;
 	z-index: 1;
 	border-color: transparent;
 }
-:host > * > smoothly-trigger:hover {
+
+:host>*>smoothly-trigger:hover {
 	border-color: transparent;
 }
+
 :host smoothly-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }
-:host > * > * {
+
+:host>*>* {
 	margin: 10px;
 }

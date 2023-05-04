@@ -3,12 +3,12 @@ smoothly-form {
 	--background-color: var(--smoothly-default-color);
 }
 
-smoothly-form>form {
+smoothly-form > form {
 	position: relative;
 	min-width: 15em;
 }
 
-smoothly-form>form>fieldset {
+smoothly-form > form > fieldset {
 	display: flex;
 	flex-flow: row wrap;
 
@@ -25,40 +25,40 @@ smoothly-form>form>fieldset {
 	border-image: unset;
 }
 
-smoothly-form>form>fieldset>* {
+smoothly-form > form > fieldset > * {
 	flex-grow: 1;
 	min-width: 10em;
 	flex-basis: 40%;
 }
 
-smoothly-form>form>fieldset smoothly-picker smoothly-picker-menu,
-smoothly-form[looks="border"]>form>fieldset smoothly-picker smoothly-input smoothly-input-file,
-smoothly-form[looks="grid"]>form>fieldset smoothly-picker smoothly-input smoothly-input-file,
-smoothly-form[looks="border"]>form>fieldset>*,
-smoothly-form[looks="grid"]>form>fieldset>* {
+smoothly-form > form > fieldset smoothly-picker smoothly-picker-menu,
+smoothly-form[looks="border"] > form > fieldset smoothly-picker smoothly-input,
+smoothly-form[looks="grid"] > form > fieldset smoothly-picker smoothly-input,
+smoothly-form[looks="border"] > form > fieldset > *,
+smoothly-form[looks="grid"] > form > fieldset > * {
 	border: rgb(var(--smoothly-default-contrast)) solid 1px;
 }
 
-smoothly-form[looks="line"]>form>fieldset smoothly-picker smoothly-input smoothly-input-file,
-smoothly-form[looks="line"]>form>fieldset>* {
+smoothly-form[looks="line"] > form > fieldset smoothly-picker smoothly-input,
+smoothly-form[looks="line"] > form > fieldset > * {
 	border-bottom: rgb(var(--smoothly-default-contrast)) solid 1px;
 }
 
-smoothly-form[looks="grid"]>form>fieldset {
+smoothly-form[looks="grid"] > form > fieldset {
 	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
 }
 
-smoothly-form[looks="grid"]>form>fieldset smoothly-picker smoothly-input smoothly-input-file,
-smoothly-form[looks="grid"]>form>fieldset>* {
+smoothly-form[looks="grid"] > form > fieldset smoothly-picker smoothly-input,
+smoothly-form[looks="grid"] > form > fieldset > * {
 	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
 }
 
-smoothly-form[looks="line"]>form>fieldset,
-smoothly-form[looks="border"]>form>fieldset {
+smoothly-form[looks="line"] > form > fieldset,
+smoothly-form[looks="border"] > form > fieldset {
 	gap: 2em
 }
 
-smoothly-form>form>[slot=submit] {
+smoothly-form > form > [slot=submit] {
 	margin: .5em auto;
 	max-width: 10em;
 }

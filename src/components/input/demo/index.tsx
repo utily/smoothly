@@ -335,7 +335,7 @@ export class SmoothlyInputDemo {
 			</smoothly-input-select>,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
 
-			<smoothly-form looks="border" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
+			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input-file placeholder="Select or drag a file here" name="input file demo">
 					{" "}
 					<span slot="label">Testing file input</span>
