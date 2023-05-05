@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from "@stencil/core"
+import { Component, h, Listen } from "@stencil/core"
 import { Notice } from "../../../model"
 @Component({
 	tag: "smoothly-input-demo",
@@ -18,23 +18,19 @@ export class SmoothlyInputDemo {
 		this.formElement?.clear()
 	}
 
-	@State() formClearDisabled = false
-	@Listen("smoothlyFormInput")
-	onFormInput(e: CustomEvent) {
-		console.log(Object.entries(e.detail)) // fortsätt här
-	}
-
 	render() {
 		return [
 			<h4>Clear</h4>,
 			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
-				<smoothly-input name="First Name">First name</smoothly-input>
+				<smoothly-input clearable name="First Name">
+					First name
+				</smoothly-input>
 				<smoothly-input name="Last name">Last name</smoothly-input>
 				<smoothly-input value="072" type="phone" name="Phone">
 					Phone
 				</smoothly-input>
 			</smoothly-form>,
-			<smoothly-input-clear disabled={this.formClearDisabled} icon={false} />,
+			<smoothly-input-clear icon={false} />,
 
 			<h2>Border</h2>,
 			<smoothly-form looks="border">

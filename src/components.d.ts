@@ -181,6 +181,7 @@ export namespace Components {
     interface SmoothlyInput {
         "autocomplete": boolean;
         "clear": () => Promise<void>;
+        "clearable": boolean;
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -1244,6 +1245,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;
+        "clearable"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;

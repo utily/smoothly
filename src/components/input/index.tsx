@@ -27,6 +27,7 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
+	@Prop({ reflect: true }) clearable = false
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
@@ -265,7 +266,7 @@ export class SmoothlyInput {
 					</label>
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 				</div>
-				{true && <smoothly-input-clear value={this.value} />}
+				{this.clearable && <smoothly-input-clear value={this.value} />}
 				<slot name="end"></slot>
 			</Host>
 		)
