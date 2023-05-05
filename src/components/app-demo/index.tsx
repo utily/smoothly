@@ -63,6 +63,9 @@ export class SmoothlyAppDemo {
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
 				</smoothly-app-room>
+				<smoothly-app-room path={"friday"} label="Friday">
+					<smoothly-friday></smoothly-friday>
+				</smoothly-app-room>
 			</smoothly-app>
 		)
 	}
