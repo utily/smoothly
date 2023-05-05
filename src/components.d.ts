@@ -13,6 +13,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { ButtonProps } from "./components/input/clear/index";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -197,8 +198,13 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputClear {
+        "button": ButtonProps;
+        "condition": (a: any) => boolean;
+        "disabled": boolean;
         "display": boolean;
+        "icon": boolean;
         "name"?: string;
+        "value"?: any;
     }
     interface SmoothlyInputDate {
         "disabled": boolean;
@@ -1255,10 +1261,15 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputClear {
+        "button"?: ButtonProps;
+        "condition"?: (a: any) => boolean;
+        "disabled"?: boolean;
         "display"?: boolean;
+        "icon"?: boolean;
         "name"?: string;
         "onSmoothlyInputClear"?: (event: SmoothlyInputClearCustomEvent<any>) => void;
         "onSmoothlyInputClearDisplay"?: (event: SmoothlyInputClearCustomEvent<{ name: string | undefined; display: boolean }>) => void;
+        "value"?: any;
     }
     interface SmoothlyInputDate {
         "disabled"?: boolean;

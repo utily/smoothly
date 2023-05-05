@@ -265,6 +265,7 @@ export class SmoothlyInput {
 					</label>
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 				</div>
+				{true && <smoothly-input-clear value={this.value} />}
 				<slot name="end"></slot>
 			</Host>
 		)
