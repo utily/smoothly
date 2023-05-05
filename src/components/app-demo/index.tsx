@@ -58,6 +58,9 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/icon" label="Icon">
 					<smoothly-icon-demo />
 				</smoothly-app-room>
+				<smoothly-app-room path="/offcanvas" label="Offcanvas">
+					<smoothly-offcanvas-demo></smoothly-offcanvas-demo>
+				</smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
 				<smoothly-app-room path="/redirect" label="Redirect">
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>

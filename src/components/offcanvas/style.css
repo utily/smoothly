@@ -1,0 +1,102 @@
+:host() {
+	position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+	height: 100%;
+  z-index: 9999;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+:host(:not([open])) {
+	animation-name: host-fade-out;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+:host([open]) {
+	animation-name: host-fade-in;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes host-fade-in {
+  0%   { background-color: rgba(0, 0, 0, 0); }
+  100% { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+@keyframes host-fade-out {
+  0%   { background-color: rgba(0, 0, 0, 0.5); }
+  100% { background-color: rgba(0, 0, 0, 0); }
+}
+
+aside {
+	position: absolute;
+  top: 0;
+  height: 100%;
+  width: 90vw;
+  background-color: #fff;
+}
+
+:host([position=left]) aside {
+	left: -90vw;
+	animation-name: aside-fade-in-left;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+:host(:not([open])[position=left]) aside {
+	animation-name: aside-fade-out-left;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes aside-fade-in-left {
+  0%   {  transform: translateX(0%); }
+  100% {  transform: translateX(100%); }
+}
+
+@keyframes aside-fade-out-left {
+  0% { transform: translateX(100%); }
+	100%   { transform: translateX(0%); }
+}
+
+
+:host([position=right]) aside {
+	right: +90vw;
+	animation-name: aside-fade-in-right;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+:host(:not([open])[position=right]) aside {
+	animation-name: aside-fade-out-right;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes aside-fade-in-right {
+  0%   {  transform: translateX(200%); }
+  100% {  transform: translateX(100%); }
+}
+
+@keyframes aside-fade-out-right {
+  0% { transform: translateX(100%); }
+	100%   { transform: translateX(200%); }
+}
+
+
+@media only screen and (min-width: 400px) {
+	aside {
+		width: 350px;
+	}
+
+  :host([position=left]) aside {
+		left: -350px
+	}
+
+	:host([position=right]) aside {
+		right: +350px
+	}
+}
