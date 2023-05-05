@@ -31,72 +31,124 @@
   100% { background-color: rgba(0, 0, 0, 0); }
 }
 
-aside {
+div {
 	position: absolute;
-  top: 0;
-  height: 100%;
-  width: 90vw;
   background-color: #fff;
 }
 
-:host([position=left]) aside {
+:host([position=left]) div {
+	top: 0;
 	left: -90vw;
-	animation-name: aside-fade-in-left;
+	height: 100%;
+  width: 90vw;
+	animation-name: div-fade-in-left;
 	animation-duration: 0.6s;
 	animation-fill-mode: forwards;
 }
 
-:host(:not([open])[position=left]) aside {
-	animation-name: aside-fade-out-left;
+:host(:not([open])[position=left]) div {
+	animation-name: div-fade-out-left;
 	animation-duration: 0.6s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes aside-fade-in-left {
+@keyframes div-fade-in-left {
   0%   {  transform: translateX(0%); }
   100% {  transform: translateX(100%); }
 }
 
-@keyframes aside-fade-out-left {
+@keyframes div-fade-out-left {
   0% { transform: translateX(100%); }
 	100%   { transform: translateX(0%); }
 }
 
-
-:host([position=right]) aside {
+:host([position=right]) div {
+	top: 0;
 	right: +90vw;
-	animation-name: aside-fade-in-right;
+	height: 100%;
+  width: 90vw;
+	animation-name: div-fade-in-right;
 	animation-duration: 0.6s;
 	animation-fill-mode: forwards;
 }
 
-:host(:not([open])[position=right]) aside {
-	animation-name: aside-fade-out-right;
+:host(:not([open])[position=right]) div {
+	animation-name: div-fade-out-right;
 	animation-duration: 0.6s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes aside-fade-in-right {
+@keyframes div-fade-in-right {
   0%   {  transform: translateX(200%); }
   100% {  transform: translateX(100%); }
 }
 
-@keyframes aside-fade-out-right {
+@keyframes div-fade-out-right {
   0% { transform: translateX(100%); }
 	100%   { transform: translateX(200%); }
 }
 
+:host([position=top]) div {
+	height: 350px;
+	top: -350px;
+	left: 0;
+	width: 100%;
+	animation-name: div-fade-in-top;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+:host(:not([open])[position=top]) div {
+	animation-name: div-fade-out-top;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes div-fade-in-top {
+  0%   {  transform: translateY(0%); }
+  100% {  transform: translateY(100%); }
+}
+
+@keyframes div-fade-out-top {
+  0% { transform: translateY(100%); }
+	100%   { transform: translateY(0%); }
+}
+
+:host([position=bottom]) div {
+	height: 350px;
+	bottom: +350px;
+	left: 0;
+  width: 100%;
+	animation-name: div-fade-in-bottom;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+:host(:not([open])[position=bottom]) div {
+	animation-name: div-fade-out-bottom;
+	animation-duration: 0.6s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes div-fade-in-bottom {
+  0%   {  transform: translateY(200%); }
+  100% {  transform: translateY(100%); }
+}
+
+@keyframes div-fade-out-bottom {
+  0% { transform: translateY(100%); }
+	100%   { transform: translateY(200%); }
+}
 
 @media only screen and (min-width: 400px) {
-	aside {
-		width: 350px;
-	}
 
-  :host([position=left]) aside {
+  :host([position=left]) div {
+		width: 350px;
 		left: -350px
 	}
 
-	:host([position=right]) aside {
+	:host([position=right]) div {
+		width: 350px;
 		right: +350px
 	}
 }

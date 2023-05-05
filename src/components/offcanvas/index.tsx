@@ -7,7 +7,8 @@ import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
 })
 export class SmoothlyOffcanvas {
 	@Prop({ reflect: true }) open = false
-	@Prop({ reflect: true }) position: "left" | "right" = "left"
+	@Prop({ reflect: true }) position: "left" | "right" | "top" | "bottom" = "left"
+	@Prop() clickable = true
 	@Element() el: HTMLSmoothlyOffcanvasElement
 
 	@Watch("open")
@@ -27,17 +28,15 @@ export class SmoothlyOffcanvas {
 
 	@Listen("click")
 	handleClick(e: Event) {
-		if (e.target === this.el)
+		if (e.target === this.el && this.clickable)
 			this.open = !this.open
 	}
 
-	// Add feature for top and bottom position ?
-
 	render() {
 		return (
-			<aside>
+			<div>
 				<slot></slot>
-			</aside>
+			</div>
 		)
 	}
 }

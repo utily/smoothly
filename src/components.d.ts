@@ -244,8 +244,9 @@ export namespace Components {
     interface SmoothlyNotifier {
     }
     interface SmoothlyOffcanvas {
+        "clickable": boolean;
         "open": boolean;
-        "position": "left" | "right";
+        "position": "left" | "right" | "top" | "bottom";
     }
     interface SmoothlyOffcanvasDemo {
     }
@@ -1314,8 +1315,9 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
     }
     interface SmoothlyOffcanvas {
+        "clickable"?: boolean;
         "open"?: boolean;
-        "position"?: "left" | "right";
+        "position"?: "left" | "right" | "top" | "bottom";
     }
     interface SmoothlyOffcanvasDemo {
     }
