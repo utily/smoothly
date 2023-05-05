@@ -24,7 +24,7 @@ export class SmoothlyInputFile {
 				<label>
 					<slot name={"label"} />
 				</label>
-				<smoothly-button onClick={event => (event.stopPropagation(), this.input?.click())}>
+				<smoothly-button size="flexible" onClick={event => (event.stopPropagation(), this.input?.click())}>
 					<slot name={"button"} />
 				</smoothly-button>
 				<span onClick={event => (event.stopPropagation(), this.input?.click())}>
