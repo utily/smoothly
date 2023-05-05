@@ -7,6 +7,7 @@ import { Notice } from "../../../model"
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
 	private formElement?: HTMLSmoothlyFormElement
+
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
 		console.log("selectionChanged", event.detail)
@@ -19,6 +20,21 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<h4>Clear</h4>,
+			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
+				<smoothly-input name="First Name">First name</smoothly-input>
+				<smoothly-input name="Last name">Last name</smoothly-input>
+				<smoothly-input value="072" type="phone" name="Phone">
+					Phone
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" size="tiny"></smoothly-icon>
+					</smoothly-input-clear>
+				</smoothly-input>
+			</smoothly-form>,
+			<smoothly-input-clear>
+				<smoothly-button color="danger">Clear</smoothly-button>
+			</smoothly-input-clear>,
+
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
@@ -344,21 +360,6 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
-
-			<h4>Clear</h4>,
-			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
-				<smoothly-input name="First Name">First name</smoothly-input>
-				<smoothly-input name="Last name">Last name</smoothly-input>
-				<smoothly-input type="phone" name="Phone">
-					Phone
-					<smoothly-input-clear slot="end">
-						<smoothly-icon name="close" size="tiny"></smoothly-icon>
-					</smoothly-input-clear>
-				</smoothly-input>
-			</smoothly-form>,
-			<smoothly-input-clear>
-				<smoothly-button color="danger">Clear</smoothly-button>
-			</smoothly-input-clear>,
 		]
 	}
 }

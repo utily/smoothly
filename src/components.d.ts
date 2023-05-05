@@ -198,7 +198,7 @@ export namespace Components {
     }
     interface SmoothlyInputClear {
         "display": boolean;
-        "name"?: string | undefined;
+        "name"?: string;
     }
     interface SmoothlyInputDate {
         "disabled": boolean;
@@ -1256,7 +1256,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputClear {
         "display"?: boolean;
-        "name"?: string | undefined;
+        "name"?: string;
         "onSmoothlyInputClear"?: (event: SmoothlyInputClearCustomEvent<any>) => void;
         "onSmoothlyInputClearDisplay"?: (event: SmoothlyInputClearCustomEvent<{ name: string | undefined; display: boolean }>) => void;
     }

@@ -7,12 +7,12 @@ import { Clearable } from "../../form/Clearable"
 })
 export class SmoothlyInputClear {
 	@Prop({ reflect: true }) display = true
-	@Prop({ reflect: true }) name?: string | undefined
+	@Prop({ reflect: true }) name?: string
 	@Element() hostElement: HTMLElement
 	@Event() smoothlyInputClear: EventEmitter
 	@Event() smoothlyInputClearDisplay: EventEmitter<{ name: string | undefined; display: boolean }>
 
-	componentWillLoad() {
+	async componentWillLoad() {
 		this.smoothlyInputClearDisplay.emit({ name: this.name, display: this.display })
 	}
 
