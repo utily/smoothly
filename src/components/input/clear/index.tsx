@@ -6,7 +6,7 @@ export interface ButtonProps {
 	expand?: "block" | "full"
 	color?: Color
 	fill?: Fill
-	type: "link" | "button"
+	type?: "link" | "button"
 	size?: "flexible" | "small" | "large" | "icon"
 	shape?: "rounded"
 }
@@ -18,7 +18,6 @@ export interface ButtonProps {
 })
 export class SmoothlyInputClear {
 	@Prop() value?: any
-	@Prop() condition: (a: any) => boolean
 	@Prop({ reflect: true }) button: ButtonProps = {
 		color: "danger",
 		fill: "solid",
@@ -48,7 +47,7 @@ export class SmoothlyInputClear {
 	@Watch("value")
 	onChangeValue() {
 		if (this.icon)
-			return (this.display = this.value || false)
+			this.display = Boolean(this.value)
 	}
 
 	@Listen("click")
@@ -66,7 +65,7 @@ export class SmoothlyInputClear {
 					<smoothly-icon name="close" size="tiny"></smoothly-icon>
 				) : (
 					<smoothly-button disabled={this.disabled} {...this.button}>
-						Clear
+						<slot />
 					</smoothly-button>
 				)}
 			</host>

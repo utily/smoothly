@@ -30,7 +30,7 @@ export class SmoothlyInputDemo {
 					Phone
 				</smoothly-input>
 			</smoothly-form>,
-			<smoothly-input-clear icon={false} />,
+			<smoothly-input-clear icon={false}>Clear</smoothly-input-clear>,
 
 			<h2>Border</h2>,
 			<smoothly-form looks="border">

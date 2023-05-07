@@ -200,7 +200,6 @@ export namespace Components {
     }
     interface SmoothlyInputClear {
         "button": ButtonProps;
-        "condition": (a: any) => boolean;
         "disabled": boolean;
         "display": boolean;
         "icon": boolean;
@@ -1264,7 +1263,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputClear {
         "button"?: ButtonProps;
-        "condition"?: (a: any) => boolean;
         "disabled"?: boolean;
         "display"?: boolean;
         "icon"?: boolean;
