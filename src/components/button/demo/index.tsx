@@ -144,142 +144,63 @@ export class SmoothlyButtonDemo {
 				</div>
 				<h4>Icon buttons</h4>
 				<div>
-					<smoothly-icon-button styles={{ size: "icon", color: "primary" }} icon="checkmark-circle" />
-					<smoothly-icon-button styles={{ size: "small", color: "primary" }} icon="checkmark-circle" />
-					<smoothly-icon-button styles={{ size: "large", color: "primary" }} icon="checkmark-circle" />
-					<smoothly-icon-button styles={{ size: "icon", color: "danger", fill: "outline" }} icon="call" />
-					<smoothly-icon-button styles={{ size: "small", color: "danger", fill: "outline" }} icon="call" />
-					<smoothly-icon-button styles={{ size: "large", color: "danger", fill: "outline" }} icon="call" />
+					<smoothly-button size="icon" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="small" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="large" icon="checkmark-circle" color="primary" />
+					<smoothly-button size="icon" icon="call" color="danger" fill="outline" />
+					<smoothly-button size="small" icon="call" color="danger" fill="outline" />
+					<smoothly-button size="large" icon="call" color="danger" fill="outline" />
 				</div>
 				<div>
-					<smoothly-icon-button styles={{ size: "icon", color: "success", shape: "rounded" }} icon="search" />
-					<smoothly-icon-button styles={{ size: "small", color: "success", shape: "rounded" }} icon="search" />
-					<smoothly-icon-button styles={{ size: "large", color: "success", shape: "rounded" }} icon="search" />
-					<smoothly-icon-button
-						styles={{ size: "icon", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
-					<smoothly-icon-button
-						styles={{ size: "small", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
-					<smoothly-icon-button
-						styles={{ size: "large", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
+					<smoothly-button size="icon" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="small" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="large" icon="search" color="success" shape="rounded" />
+					<smoothly-button size="icon" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button size="small" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button size="large" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
 				</div>
 				<div>
-					<smoothly-icon-button
-						styles={{ size: "icon", color: "secondary", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
-					<smoothly-icon-button
-						styles={{ size: "small", color: "dark", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
-					<smoothly-icon-button
-						styles={{ size: "large", color: "primary", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
+					<smoothly-button size="icon" icon="call" color="secondary" shape="rounded" fill="clear" />
+					<smoothly-button size="small" icon="call" color="dark" shape="rounded" fill="clear" />
+					<smoothly-button size="large" icon="call" color="primary" shape="rounded" fill="clear" />
 				</div>
 				<h4>Icon links</h4>
 				<div>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false }}
-						styles={{ size: "icon", color: "primary" }}
-						icon="checkmark-circle"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false }}
-						styles={{ size: "small", color: "primary" }}
-						icon="checkmark-circle"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false }}
-						styles={{ size: "large", color: "primary" }}
-						icon="checkmark-circle"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false, link: "/" }}
-						styles={{ size: "icon", fill: "outline" }}
-						icon="call"
-						color="danger"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false, link: "/" }}
-						styles={{ size: "small", fill: "outline" }}
-						icon="call"
-						color="danger"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", disabled: false, link: "/" }}
-						styles={{ size: "large", fill: "outline" }}
-						icon="call"
-						color="danger"
-					/>
+					<smoothly-button type="link" size="icon" icon="checkmark-circle" color="primary" />
+					<smoothly-button type="link" size="small" icon="checkmark-circle" color="primary" />
+					<smoothly-button type="link" size="large" icon="checkmark-circle" color="primary" />
+					<smoothly-button type="link" link="/" size="icon" icon="call" color="danger" fill="outline" />
+					<smoothly-button type="link" link="/" size="small" icon="call" color="danger" fill="outline" />
+					<smoothly-button type="link" link="/" size="large" icon="call" color="danger" fill="outline" />
 				</div>
 				<div>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "icon", color: "success", shape: "rounded" }}
-						icon="search"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "small", color: "success", shape: "rounded" }}
-						icon="search"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "large", color: "success", shape: "rounded" }}
-						icon="search"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "icon", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "small", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "large", color: "dark", shape: "rounded", fill: "outline" }}
-						icon="arrow-forward"
-					/>
+					<smoothly-button link="/" size="icon" icon="search" color="success" shape="rounded" />
+					<smoothly-button link="/" size="small" icon="search" color="success" shape="rounded" />
+					<smoothly-button link="/" size="large" icon="search" color="success" shape="rounded" />
+					<smoothly-button link="/" size="icon" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button link="/" size="small" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
+					<smoothly-button link="/" size="large" icon="arrow-forward" color="dark" shape="rounded" fill="outline" />
 				</div>
 				<div>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "icon", color: "secondary", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "small", color: "dark", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
-					<smoothly-icon-button
-						base={{ type: "link", link: "/", disabled: false }}
-						styles={{ size: "large", color: "primary", shape: "rounded", fill: "clear" }}
-						icon="call"
-					/>
+					<smoothly-button link="/" size="icon" icon="call" color="secondary" shape="rounded" fill="clear" />
+					<smoothly-button link="/" size="small" icon="call" color="dark" shape="rounded" fill="clear" />
+					<smoothly-button link="/" size="large" icon="call" color="primary" shape="rounded" fill="clear" />
 				</div>
-
 				<h4>Submit button</h4>
-				{/* <div>
-					<smoothly-submit color="success" shape="rounded">
-						Save
-					</smoothly-submit>
-					<smoothly-submit color="success" shape="rounded">
+				<div>
+					<smoothly-form>
+						<smoothly-button type="submit" color="success" shape="rounded">
+							Save
+						</smoothly-button>
+					</smoothly-form>
+					<smoothly-button color="success" shape="rounded">
 						<smoothly-icon name="save" slot="start"></smoothly-icon>
 						Save
-					</smoothly-submit>
-					<smoothly-submit icon="save" color="success" shape="rounded" />
-					<smoothly-submit fill="clear" icon="save" color="success" shape="rounded" />
-				</div> */}
+					</smoothly-button>
+					<smoothly-button icon="save" color="success" shape="rounded" />
+					<smoothly-button fill="clear" icon="save" color="success" shape="rounded" />
+				</div>
+				,
 			</section>,
 			<smoothly-backtotop></smoothly-backtotop>,
 		]

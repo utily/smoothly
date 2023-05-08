@@ -13,7 +13,6 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
-import { Button } from "./components/button/Button";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -69,9 +68,10 @@ export namespace Components {
         "fill"?: Fill;
         "icon"?: string;
         "link"?: string;
+        "prevent": boolean;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
-        "type": "link" | "button";
+        "type": "link" | "button" | "submit";
     }
     interface SmoothlyButtonDemo {
     }
@@ -176,11 +176,6 @@ export namespace Components {
         "name"?: string;
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
-    }
-    interface SmoothlyIconButton {
-        "base": Button.BaseProps;
-        "icon": string;
-        "styles": Button.StyleProps;
     }
     interface SmoothlyIconDemo {
     }
@@ -413,6 +408,10 @@ export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyBurgerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyBurgerElement;
+}
+export interface SmoothlyButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyButtonElement;
 }
 export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -702,12 +701,6 @@ declare global {
         prototype: HTMLSmoothlyIconElement;
         new (): HTMLSmoothlyIconElement;
     };
-    interface HTMLSmoothlyIconButtonElement extends Components.SmoothlyIconButton, HTMLStencilElement {
-    }
-    var HTMLSmoothlyIconButtonElement: {
-        prototype: HTMLSmoothlyIconButtonElement;
-        new (): HTMLSmoothlyIconButtonElement;
-    };
     interface HTMLSmoothlyIconDemoElement extends Components.SmoothlyIconDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyIconDemoElement: {
@@ -995,7 +988,6 @@ declare global {
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
-        "smoothly-icon-button": HTMLSmoothlyIconButtonElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
@@ -1102,9 +1094,11 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "icon"?: string;
         "link"?: string;
+        "onSmoothlySubmit"?: (event: SmoothlyButtonCustomEvent<any>) => void;
+        "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "link" | "button";
+        "type"?: "link" | "button" | "submit";
     }
     interface SmoothlyButtonDemo {
     }
@@ -1216,11 +1210,6 @@ declare namespace LocalJSX {
         "name"?: string;
         "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
-    }
-    interface SmoothlyIconButton {
-        "base"?: Button.BaseProps;
-        "icon"?: string;
-        "styles"?: Button.StyleProps;
     }
     interface SmoothlyIconDemo {
     }
@@ -1499,7 +1488,6 @@ declare namespace LocalJSX {
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
-        "smoothly-icon-button": SmoothlyIconButton;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-date": SmoothlyInputDate;
@@ -1580,7 +1568,6 @@ declare module "@stencil/core" {
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
-            "smoothly-icon-button": LocalJSX.SmoothlyIconButton & JSXBase.HTMLAttributes<HTMLSmoothlyIconButtonElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;

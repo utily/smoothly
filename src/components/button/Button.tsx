@@ -1,7 +1,6 @@
 import { FunctionalComponent, h } from "@stencil/core"
-import { Color, Fill } from "../../model"
 
-export const Button: FunctionalComponent<Button.BaseProps> = ({ disabled, type, link, download, icon }, children) => {
+export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link, download, icon }, children) => {
 	if (icon)
 		return type == "link" || link ? (
 			<a href={link}>
@@ -34,19 +33,11 @@ export const Button: FunctionalComponent<Button.BaseProps> = ({ disabled, type, 
 	)
 }
 export namespace Button {
-	export interface BaseProps {
+	export interface Properties {
 		disabled: boolean
-		type: "link" | "button"
+		type: "link" | "button" | "submit"
 		link?: string
 		download?: boolean
 		icon?: boolean
-	}
-
-	export interface StyleProps {
-		color?: Color
-		expand?: "block" | "full"
-		fill?: Fill
-		size: "small" | "large" | "icon" | "flexible"
-		shape?: "rounded"
 	}
 }
