@@ -13,7 +13,6 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
-import { ButtonProps } from "./components/input/clear/index";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -152,6 +151,7 @@ export namespace Components {
     }
     interface SmoothlyForm {
         "action"?: string;
+        "changed": boolean;
         "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
@@ -159,6 +159,7 @@ export namespace Components {
         "prevent": boolean;
         "processing": boolean;
         "submit": () => Promise<void>;
+        "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -180,8 +181,8 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete": boolean;
+        "changed": boolean;
         "clear": () => Promise<void>;
-        "clearable": boolean;
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -199,12 +200,14 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputClear {
-        "button": ButtonProps;
+        "color"?: Color;
         "disabled": boolean;
         "display": boolean;
-        "icon": boolean;
-        "name"?: string;
-        "value"?: any;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "shape"?: "rounded";
+        "size": "small" | "large" | "icon" | "flexible";
+        "type": "form" | "input";
     }
     interface SmoothlyInputDate {
         "disabled": boolean;
@@ -1215,6 +1218,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "action"?: string;
+        "changed"?: boolean;
         "looks"?: "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
@@ -1222,6 +1226,7 @@ declare namespace LocalJSX {
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
+        "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1244,7 +1249,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;
-        "clearable"?: boolean;
+        "changed"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
@@ -1262,14 +1267,15 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputClear {
-        "button"?: ButtonProps;
+        "color"?: Color;
         "disabled"?: boolean;
         "display"?: boolean;
-        "icon"?: boolean;
-        "name"?: string;
-        "onSmoothlyInputClear"?: (event: SmoothlyInputClearCustomEvent<any>) => void;
-        "onSmoothlyInputClearDisplay"?: (event: SmoothlyInputClearCustomEvent<{ name: string | undefined; display: boolean }>) => void;
-        "value"?: any;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "small" | "large" | "icon" | "flexible";
+        "type"?: "form" | "input";
     }
     interface SmoothlyInputDate {
         "disabled"?: boolean;

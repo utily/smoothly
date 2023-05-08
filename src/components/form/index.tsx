@@ -1,16 +1,18 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
 import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
-import { Clearable } from "./Clearable"
+import { Changeable } from "../input/Changeable"
+import { Clearable } from "../input/Clearable"
+import { Submitable } from "../input/Submitable"
 
 @Component({
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm {
-	private value: Data = {}
+export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	private clearables = new Map<string, Clearable>()
+	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
 	@Prop() method?: "GET" | "POST"
@@ -20,8 +22,19 @@ export class SmoothlyForm {
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
+	@Prop({ mutable: true, reflect: true }) changed = false
+	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
 
-	@Listen("smoothlyInput")
+	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+		;(this.listeners[property] ??= []).push(listener)
+		listener(this)
+	}
+	@Watch("value")
+	watchValue() {
+		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
+		this.listeners.changed?.forEach(l => l(this))
+	}
+	@Listen("smoothlyInput", { capture: true })
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.notice = undefined
 		this.smoothlyFormInput.emit(
@@ -40,6 +53,10 @@ export class SmoothlyForm {
 		this.processing = true
 		this.submit()
 		this.processing = false
+	}
+	@Listen("smoothlyInputLoad")
+	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+		event.detail(this)
 	}
 	@Method()
 	async submit(): Promise<void> {
@@ -70,6 +87,7 @@ export class SmoothlyForm {
 					<fieldset>
 						<slot></slot>
 					</fieldset>
+					<slot name="clear"></slot>
 					<slot name="submit"></slot>
 				</form>
 			</Host>

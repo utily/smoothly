@@ -1,15 +1,10 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Clearable } from "../../form/Clearable"
-
-export interface ButtonProps {
-	expand?: "block" | "full"
-	color?: Color
-	fill?: Fill
-	type?: "link" | "button"
-	size?: "flexible" | "small" | "large" | "icon"
-	shape?: "rounded"
-}
+import { Button } from "../../Button"
+import { SmoothlyForm } from "../../form"
+import { SmoothlyInput } from ".."
+import { Changeable } from "../Changeable"
+import { Clearable } from "../Clearable"
 
 @Component({
 	tag: "smoothly-input-clear",
@@ -17,58 +12,40 @@ export interface ButtonProps {
 	scoped: true,
 })
 export class SmoothlyInputClear {
-	@Prop() value?: any
-	@Prop({ reflect: true }) button: ButtonProps = {
-		color: "danger",
-		fill: "solid",
-		type: "button",
-	}
-	@Prop({ reflect: true }) icon = true
+	@Prop({ reflect: true }) color?: Color
+	@Prop({ reflect: true }) expand?: "block" | "full"
+	@Prop({ reflect: true }) fill?: Fill
+	@Prop({ reflect: true }) disabled = false
+	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
+	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) display = true
-	@Prop({ mutable: true }) disabled = false
-	@Prop({ reflect: true }) name?: string
-	@Element() hostElement: HTMLElement
-	@Event() smoothlyInputClear: EventEmitter
-	@Event() smoothlyInputClearDisplay: EventEmitter<{ name: string | undefined; display: boolean }>
+	@Prop({ reflect: true }) type: "form" | "input" = "input"
+	private parent?: Clearable | (Clearable & Changeable)
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	async componentWillLoad() {
-		this.smoothlyInputClearDisplay.emit({ name: this.name, display: this.display })
+		this.smoothlyInputLoad.emit(parent => {
+			if (Clearable.is(parent)) {
+				this.parent = parent
+				if (Changeable.is(parent))
+					parent.listen("changed", async p => {
+						if (p instanceof SmoothlyForm)
+							this.disabled = !p.changed
+						if (p instanceof SmoothlyInput)
+							this.display = p.changed
+					})
+			}
+		})
 	}
-
-	@Watch("display")
-	onChangeDisplay() {
-		this.smoothlyInputClearDisplay.emit({ name: this.name, display: this.display })
-	}
-
-	componentWillRender() {
-		this.onChangeValue()
-	}
-
-	@Watch("value")
-	onChangeValue() {
-		if (this.icon)
-			this.display = Boolean(this.value)
-	}
-
 	@Listen("click")
 	clickHandler() {
-		const node = this.hostElement.parentElement
-		if (Clearable.is(node))
-			return node.clear()
-		this.smoothlyInputClear.emit()
+		this.parent?.clear()
 	}
-
 	render() {
 		return (
-			<host>
-				{this.icon ? (
-					<smoothly-icon name="close" size="tiny"></smoothly-icon>
-				) : (
-					<smoothly-button disabled={this.disabled} {...this.button}>
-						<slot />
-					</smoothly-button>
-				)}
-			</host>
+			<Button disabled={this.disabled} type="button">
+				<slot />
+			</Button>
 		)
 	}
 }

@@ -22,15 +22,21 @@ export class SmoothlyInputDemo {
 		return [
 			<h4>Clear</h4>,
 			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
-				<smoothly-input clearable name="First Name">
-					First name
+				<smoothly-input name="First Name">First name</smoothly-input>
+				<smoothly-input name="Last name">
+					Last name
+					<smoothly-input-clear slot="end">Clear</smoothly-input-clear>
 				</smoothly-input>
-				<smoothly-input name="Last name">Last name</smoothly-input>
-				<smoothly-input value="072" type="phone" name="Phone">
+				<smoothly-input type="phone" name="Phone">
 					Phone
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" />
+					</smoothly-input-clear>
 				</smoothly-input>
+				<smoothly-input-clear type="form" color="danger" slot="submit">
+					Clear
+				</smoothly-input-clear>
 			</smoothly-form>,
-			<smoothly-input-clear icon={false}>Clear</smoothly-input-clear>,
 
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
