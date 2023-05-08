@@ -13,6 +13,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Button } from "./components/button/Button";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -176,6 +177,11 @@ export namespace Components {
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
+    interface SmoothlyIconButton {
+        "base": Button.BaseProps;
+        "icon": string;
+        "styles": Button.StyleProps;
+    }
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
@@ -313,7 +319,6 @@ export namespace Components {
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "icon"?: string;
         "prevent": boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
@@ -697,6 +702,12 @@ declare global {
         prototype: HTMLSmoothlyIconElement;
         new (): HTMLSmoothlyIconElement;
     };
+    interface HTMLSmoothlyIconButtonElement extends Components.SmoothlyIconButton, HTMLStencilElement {
+    }
+    var HTMLSmoothlyIconButtonElement: {
+        prototype: HTMLSmoothlyIconButtonElement;
+        new (): HTMLSmoothlyIconButtonElement;
+    };
     interface HTMLSmoothlyIconDemoElement extends Components.SmoothlyIconDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyIconDemoElement: {
@@ -984,6 +995,7 @@ declare global {
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
+        "smoothly-icon-button": HTMLSmoothlyIconButtonElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
@@ -1205,6 +1217,11 @@ declare namespace LocalJSX {
         "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
+    interface SmoothlyIconButton {
+        "base"?: Button.BaseProps;
+        "icon"?: string;
+        "styles"?: Button.StyleProps;
+    }
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
@@ -1356,7 +1373,6 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "icon"?: string;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
@@ -1483,6 +1499,7 @@ declare namespace LocalJSX {
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
+        "smoothly-icon-button": SmoothlyIconButton;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-date": SmoothlyInputDate;
@@ -1563,6 +1580,7 @@ declare module "@stencil/core" {
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
+            "smoothly-icon-button": LocalJSX.SmoothlyIconButton & JSXBase.HTMLAttributes<HTMLSmoothlyIconButtonElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;

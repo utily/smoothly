@@ -1,10 +1,10 @@
 import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
-import { Color, Fill } from "../../model"
-import { Button } from "../Button"
+import { Color, Fill } from "../../../model"
+import { Button } from "./../Button"
 
 @Component({
 	tag: "smoothly-submit",
-	styleUrl: "../button/style.css",
+	styleUrl: "../style.css",
 	scoped: true,
 })
 export class SmoothlySubmit {
@@ -16,7 +16,6 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() prevent = true
-	@Prop({ reflect: true }) icon?: string
 	@Event() smoothlySubmit: EventEmitter
 
 	@Listen("click")
@@ -26,12 +25,8 @@ export class SmoothlySubmit {
 
 	render() {
 		return (
-			<Button disabled={this.disabled} type={this.type} icon={this.icon}>
-				{this.icon ? (
-					<smoothly-icon fill={this.fill} color={this.fill && this.color} name={this.icon}></smoothly-icon>
-				) : (
-					<slot />
-				)}
+			<Button disabled={this.disabled} type={this.type}>
+				<slot />
 			</Button>
 		)
 	}
