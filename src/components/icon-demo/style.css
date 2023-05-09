@@ -1,13 +1,16 @@
-icon-demo {
+:host {
 	display: block;
+	padding: 1rem;
+	max-width: 900px;
+	margin: auto;
 }
-icon-demo[hidden] {
-	display: none;
-}
-icon-demo > content {
+
+:host > div {
 	display: flex;
-	flex-flow: row wrap;
+	flex-wrap: wrap;
+	justify-content: center;
 }
-icon-demo > content > * {
-	margin: 1cm;
+
+:host > div > smoothly-icon {
+	margin: 1.5rem;
 }
