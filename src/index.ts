@@ -7,6 +7,7 @@ export {
 	Expand,
 	Fill,
 	GoogleFont,
+	Icon,
 	Message,
 	Notice,
 	Trigger,
