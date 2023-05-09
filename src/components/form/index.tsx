@@ -24,7 +24,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	@State() notice?: Notice
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
-	@Prop({ reflect: true }) align: "default" | "right"
 
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
@@ -55,12 +54,8 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 		this.submit()
 		this.processing = false
 	}
-	@Listen("smoothlyInputClearLoad")
+	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
-		event.detail(this)
-	}
-	@Listen("smoothlySubmitLoad")
-	async SmoothlySubmitLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.detail(this)
 	}
 	@Method()

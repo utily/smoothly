@@ -21,7 +21,7 @@ export class SmoothlyInputDemo {
 	render() {
 		return [
 			<h2>Submit</h2>,
-			<smoothly-form looks="border" align="right">
+			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
 					Email
 				</smoothly-input>

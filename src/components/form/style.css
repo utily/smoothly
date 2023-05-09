@@ -50,15 +50,12 @@ smoothly-form[looks="border"] > form > fieldset {
 	gap: 2em
 }
 
-:host() > form > div {
-	width: 100%;
-	display: flex;
-	gap: 1rem;
-	padding: 0rem;
-}
-
-:host([align=right]) > form > div {
+smoothly-form > form > div {
 	display: flex;
 	justify-content: end;
-	gap: 1rem;
+	gap: 1em;
+}
+
+smoothly-form > form > div > smoothly-input-clear, smoothly-form > form > div > smoothly-submit {
+	margin: 1em 0em !important
 }

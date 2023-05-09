@@ -14,6 +14,9 @@
 	line-height: 1;
 }
 
+:host([type="form"]) {
+	margin: 1em
+}
 
 :host([type="input"]) ::slotted(smoothly-icon) {
 	filter: opacity(60%);

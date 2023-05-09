@@ -19,10 +19,10 @@ export class SmoothlySubmit {
 	@Prop() prevent = true
 	@Event() smoothlySubmit: EventEmitter
 	private parent?: Submitable
-	@Event() smoothlySubmitLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	async componentWillLoad() {
-		this.smoothlySubmitLoad.emit(parent => {
+		this.smoothlyInputLoad.emit(parent => {
 			if (Submitable.is(parent)) {
 				this.parent = parent
 			}

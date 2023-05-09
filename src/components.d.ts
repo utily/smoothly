@@ -151,7 +151,6 @@ export namespace Components {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "align": "default" | "right";
         "changed": boolean;
         "clear": () => Promise<void>;
         "looks": "plain" | "grid" | "border" | "line";
@@ -1219,7 +1218,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "align"?: "default" | "right";
         "changed"?: boolean;
         "looks"?: "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
@@ -1274,7 +1272,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputClearLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: "form" | "input";
@@ -1418,8 +1416,8 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
-        "onSmoothlySubmitLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
