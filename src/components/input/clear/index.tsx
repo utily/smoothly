@@ -21,10 +21,10 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	private parent?: Clearable | (Clearable & Changeable)
-	@Event() smoothlyInputClearLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	async componentWillLoad() {
-		this.smoothlyInputClearLoad.emit(parent => {
+		this.smoothlyInputLoad.emit(parent => {
 			if (Clearable.is(parent)) {
 				this.parent = parent
 				if (Changeable.is(parent))

@@ -37,7 +37,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 		this.listener[property] = listener
 		listener(this)
 	}
-	@Listen("smoothlyInputClearLoad")
+	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
 		event.stopPropagation()
 		event.detail(this)
