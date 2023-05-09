@@ -1,0 +1,60 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+.mask {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgb(var(--smoothly-default-contrast), 0.3);
+}
+
+:host:not(.dragging) .mask {
+	display: none;
+}
+input {
+	overflow: hidden;
+	height: 0;
+	width: 0;
+	padding: 0;
+}
+smoothly-button {
+	margin: 0;
+	border: none;
+}
+label {
+	padding-left: 0.4rem;
+	padding-top: 0.4rem;
+	display: flex;
+	width: 100%;
+	align-items: baseline;
+	justify-content: flex-start;
+	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	cursor: inherit;
+
+}
+label::slotted(*) {
+	display: block;
+	width: 100%;
+	font-size: 0.65em;
+	opacity: 0.8;
+}
+:host:not([show-label]) label {
+	display: none;
+}
+smoothly-icon {
+	display: none;
+	position: absolute;
+	right: 0.2em;
+	top: 0.6em;
+}
+span {
+	cursor: pointer;
+	padding-left: 0.5rem;
+}
