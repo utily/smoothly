@@ -1,5 +1,6 @@
 import { Component, ComponentDidLoad, Event, EventEmitter, h, Prop } from "@stencil/core"
 import "urlpattern-polyfill"
+import { Icon } from "../../icon/Icon"
 
 @Component({
 	tag: "smoothly-app-room",
@@ -8,7 +9,7 @@ import "urlpattern-polyfill"
 })
 export class SmoothlyAppRoom implements ComponentDidLoad {
 	@Prop() label?: string
-	@Prop() icon?: string
+	@Prop() icon?: Icon
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true }) selected?: boolean
