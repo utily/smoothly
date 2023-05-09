@@ -1417,6 +1417,7 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
+        "onSmoothlySubmitLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";

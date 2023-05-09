@@ -58,6 +58,10 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.detail(this)
 	}
+	@Listen("smoothlySubmitLoad")
+	async SmoothlySubmitLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+		event.detail(this)
+	}
 	@Method()
 	async submit(): Promise<void> {
 		this.smoothlyFormSubmit.emit(this.value)

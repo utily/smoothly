@@ -20,6 +20,17 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<h2>Submit</h2>,
+			<smoothly-form looks="border">
+				<smoothly-input type="email" name="email">
+					Email
+				</smoothly-input>
+				<smoothly-input type="password" name="password">
+					Password
+				</smoothly-input>
+				<smoothly-submit slot="submit">Submit</smoothly-submit>
+			</smoothly-form>,
+
 			<h4>Clear</h4>,
 			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
 				<smoothly-input name="First Name">First name</smoothly-input>
