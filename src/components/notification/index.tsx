@@ -20,8 +20,8 @@ export class Notification {
 		else
 			this.tick = {}
 	}
-	private get properties(): [Color, string] {
-		let result: [Color, string]
+	private get properties(): [Color, Icon | undefined] {
+		let result: [Color, Icon | undefined]
 		switch (this.notice.state) {
 			case "delayed":
 			case "warning":
@@ -37,7 +37,7 @@ export class Notification {
 				result = ["danger", "alert-circle"]
 				break
 			default:
-				result = ["light", ""]
+				result = ["light", undefined]
 				break
 		}
 		return result
