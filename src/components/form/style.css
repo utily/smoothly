@@ -9,7 +9,6 @@ smoothly-form > form {
 smoothly-form > form > fieldset {
 	display: flex;
 	flex-flow: row wrap;
-
 	margin-inline-start: unset;
 	margin-inline-end: unset;
 	padding-block-start: unset;
@@ -22,12 +21,13 @@ smoothly-form > form > fieldset {
 	border-color: unset;
 	border-image: unset;
 }
+
 smoothly-form > form > fieldset > * {
 	flex-grow: 1;
 	min-width: 10em;
 	flex-basis: 40%;
 }
-smoothly-form > form > fieldset smoothly-picker smoothly-picker-menu ,
+smoothly-form > form > fieldset smoothly-picker smoothly-picker-menu,
 smoothly-form[looks="border"] > form > fieldset smoothly-picker smoothly-input,
 smoothly-form[looks="grid"] > form > fieldset smoothly-picker smoothly-input,
 smoothly-form[looks="border"] > form > fieldset > *,
@@ -49,7 +49,6 @@ smoothly-form[looks="line"] > form > fieldset,
 smoothly-form[looks="border"] > form > fieldset {
 	gap: 2em
 }
-
 smoothly-form > form > [slot=submit] {
 	margin: .5em auto;
 	max-width: 10em;
