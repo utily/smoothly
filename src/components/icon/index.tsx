@@ -1,5 +1,5 @@
 import { Component, Prop, State, Watch } from "@stencil/core"
-import { Color, Fill } from "../../model"
+import { Color, Fill, Icon } from "../../model"
 
 @Component({
 	tag: "smoothly-icon",
@@ -16,7 +16,7 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async loadDocument() {
 		if (this.name)
-			this.document = await SmoothlyIcon.load(this.name)
+			this.document = await Icon.load(this.name)
 	}
 	async componentWillLoad() {
 		await this.loadDocument()
@@ -33,14 +33,5 @@ export class SmoothlyIcon {
 	}
 	render() {
 		return []
-	}
-	private static async fetch(url: string): Promise<string | undefined> {
-		const response = await fetch(url)
-		return response.ok ? response.text() : undefined
-	}
-	private static cache: { [url: string]: Promise<string | undefined> | undefined } = {}
-	static async load(name: string): Promise<string | undefined> {
-		const url = `https://site-icons.pages.dev/ionicons@5.0.0/dist/svg/${name}.svg`
-		return SmoothlyIcon.cache[url] ?? (SmoothlyIcon.cache[url] = SmoothlyIcon.fetch(url))
 	}
 }

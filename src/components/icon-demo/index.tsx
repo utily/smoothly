@@ -5,7 +5,6 @@ import { Component, h } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyIconDemo {
-	page = 0
 	render() {
 		return [
 			<h1>Icons</h1>,
@@ -476,11 +475,9 @@ export class SmoothlyIconDemo {
 					"volume-mute",
 					"volume-off",
 					"woman",
-				]
-					.slice(this.page * 100, 100)
-					.map(name => (
-						<smoothly-icon name={name} toolTip={name}></smoothly-icon>
-					))}
+				].map(name => (
+					<smoothly-icon name={name} toolTip={name}></smoothly-icon>
+				))}
 			</content>,
 		]
 	}
