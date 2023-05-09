@@ -14,8 +14,10 @@
 	line-height: 1;
 }
 
+
 :host([type="input"]) ::slotted(smoothly-icon) {
 	filter: opacity(60%);
+	font-size: 70%;
 }
 
 :host([type="input"]):hover ::slotted(smoothly-icon) {

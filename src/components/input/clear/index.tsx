@@ -14,7 +14,7 @@ import { Clearable } from "../Clearable"
 export class SmoothlyInputClear {
 	@Prop({ reflect: true }) color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
-	@Prop({ reflect: true }) fill?: Fill
+	@Prop({ reflect: true }) fill?: Fill = "clear"
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
