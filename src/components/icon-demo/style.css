@@ -1,13 +1,16 @@
 :host {
 	display: block;
 	padding: 1rem;
+	max-width: 900px;
+	margin: auto;
 }
 
-:host > content {
+:host > div {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
-:host > content > smoothly-icon {
-	margin: 1rem;
+:host > div > smoothly-icon {
+	margin: 1.5rem;
 }
