@@ -1265,8 +1265,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputFile {
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
         "placeholder"?: string | undefined;
         "showLabel"?: boolean;
         "value"?: File;
