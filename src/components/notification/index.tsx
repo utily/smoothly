@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Color, Notice, Trigger } from "../../model"
+import { Icon } from "../icon/Icon"
 
 @Component({
 	tag: "smoothly-notification",
@@ -19,8 +20,8 @@ export class Notification {
 		else
 			this.tick = {}
 	}
-	private get properties(): [Color, string] {
-		let result: [Color, string]
+	private get properties(): [Color, Icon | undefined] {
+		let result: [Color, Icon | undefined]
 		switch (this.notice.state) {
 			case "delayed":
 			case "warning":
@@ -36,7 +37,7 @@ export class Notification {
 				result = ["danger", "alert-circle"]
 				break
 			default:
-				result = ["light", ""]
+				result = ["light", undefined]
 				break
 		}
 		return result
