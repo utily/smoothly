@@ -54,7 +54,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 		this.submit()
 		this.processing = false
 	}
-	@Listen("smoothlyInputLoad")
+	@Listen("smoothlyInputClearLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.detail(this)
 	}

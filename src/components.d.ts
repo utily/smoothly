@@ -1272,7 +1272,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputClearLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: "form" | "input";
