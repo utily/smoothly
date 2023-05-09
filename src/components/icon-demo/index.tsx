@@ -1,4 +1,5 @@
 import { Component, h } from "@stencil/core"
+import { Icon } from "../icon/Icon"
 @Component({
 	tag: "smoothly-icon-demo",
 	styleUrl: "./style.css",
@@ -479,7 +480,7 @@ export class SmoothlyIconDemo {
 				]
 					.slice(this.page * 100, 100)
 					.map(name => (
-						<smoothly-icon name={name} toolTip={name}></smoothly-icon>
+						<smoothly-icon name={name as Icon} toolTip={name}></smoothly-icon>
 					))}
 			</content>,
 		]

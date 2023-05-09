@@ -6,16 +6,10 @@ import { Notice } from "../../../model"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
-	private formElement?: HTMLSmoothlyFormElement
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
 		console.log("selectionChanged", event.detail)
-	}
-
-	@Listen("smoothlyInputClear")
-	onClear() {
-		this.formElement?.clear()
 	}
 
 	render() {
@@ -35,7 +29,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 
 			<h4>Clear</h4>,
-			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
+			<smoothly-form looks="border">
 				<smoothly-input name="First Name">First name</smoothly-input>
 				<smoothly-input name="Last name">
 					Last name
@@ -372,7 +366,10 @@ export class SmoothlyInputDemo {
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
-				<smoothly-input-file placeholder="Select or drag a file here" name="input file demo">
+				<smoothly-input type="text" name="text">
+					Text
+				</smoothly-input>
+				<smoothly-input-file placeholder="Select or drag a file here" name="file">
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>

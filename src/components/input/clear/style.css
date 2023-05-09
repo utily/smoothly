@@ -25,9 +25,6 @@
 
 :host([type="input"]):hover ::slotted(smoothly-icon) {
 	cursor: pointer;
-}
-
-:host([type="input"]):hover ::slotted(smoothly-icon) {
 	filter: opacity(100%);
 }
 

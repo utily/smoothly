@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
+import { Icon } from "./components/icon/Icon";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
@@ -44,7 +45,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
-        "icon"?: string;
+        "icon"?: Icon;
         "label"?: string;
         "path": string | URLPattern;
         "selected"?: boolean;
@@ -173,7 +174,7 @@ export namespace Components {
     interface SmoothlyIcon {
         "color": Color;
         "fill": Fill;
-        "name"?: string;
+        "name"?: Icon | "empty";
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
@@ -1102,7 +1103,7 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyAppRoom {
-        "icon"?: string;
+        "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<HTMLElement>) => void;
         "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<HTMLElement>) => void;
@@ -1241,7 +1242,7 @@ declare namespace LocalJSX {
     interface SmoothlyIcon {
         "color"?: Color;
         "fill"?: Fill;
-        "name"?: string;
+        "name"?: Icon | "empty";
         "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
@@ -1303,8 +1304,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputFile {
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<{ name: string; value: File }>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
         "placeholder"?: string | undefined;
         "showLabel"?: boolean;
         "value"?: File;

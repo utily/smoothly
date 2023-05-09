@@ -1,5 +1,6 @@
 import { Component, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
+import { Icon } from "./Icon"
 
 @Component({
 	tag: "smoothly-icon",
@@ -9,7 +10,7 @@ import { Color, Fill } from "../../model"
 export class SmoothlyIcon {
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
-	@Prop() name?: string
+	@Prop() name?: Icon | "empty"
 	@Prop({ reflect: true }) size: "tiny" | "small" | "medium" | "large" = "medium"
 	@Prop() toolTip?: string
 	@State() document?: string

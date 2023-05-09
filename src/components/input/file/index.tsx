@@ -13,8 +13,8 @@ export class SmoothlyInputFile {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
-	@Event() smoothlyInput: EventEmitter<{ name: string; value: File }>
-	@Event() smoothlyChange: EventEmitter<{ name: string; value: File }>
+	@Event() smoothlyInput: EventEmitter<Record<string, File>>
+	@Event() smoothlyChange: EventEmitter<Record<string, File>>
 	render() {
 		return (
 			<Host
@@ -24,7 +24,7 @@ export class SmoothlyInputFile {
 				<label>
 					<slot name={"label"} />
 				</label>
-				<smoothly-button onClick={event => (event.stopPropagation(), this.input?.click())}>
+				<smoothly-button size="flexible" onClick={event => (event.stopPropagation(), this.input?.click())}>
 					<slot name={"button"} />
 				</smoothly-button>
 				<span onClick={event => (event.stopPropagation(), this.input?.click())}>
@@ -37,8 +37,8 @@ export class SmoothlyInputFile {
 						event.stopPropagation(),
 						(this.dragging = false),
 						event.dataTransfer?.files.length &&
-							(this.smoothlyInput.emit({ name: this.name, value: (this.value = event.dataTransfer.files[0]) }),
-							this.smoothlyChange.emit({ name: this.name, value: (this.value = event.dataTransfer.files[0]) }))
+							(this.smoothlyInput.emit({ [this.name]: (this.value = event.dataTransfer.files[0]) }),
+							this.smoothlyChange.emit({ [this.name]: (this.value = event.dataTransfer.files[0]) }))
 					)}
 					onDragLeave={event => (event.stopPropagation(), (this.dragging = false))}
 				/>
@@ -48,13 +48,11 @@ export class SmoothlyInputFile {
 					files={(this.transfer.items.clear(), this.value && this.transfer.items.add(this.value), this.transfer.files)}
 					onInput={event => (
 						event.stopPropagation(),
-						this.input?.files?.length &&
-							this.smoothlyInput.emit({ name: this.name, value: (this.value = this.input?.files[0]) })
+						this.input?.files?.length && this.smoothlyInput.emit({ [this.name]: (this.value = this.input?.files[0]) })
 					)}
 					onChange={event => (
 						event.stopPropagation(),
-						this.input?.files?.length &&
-							this.smoothlyChange.emit({ name: this.name, value: (this.value = this.input?.files[0]) })
+						this.input?.files?.length && this.smoothlyChange.emit({ [this.name]: (this.value = this.input?.files[0]) })
 					)}
 				/>
 				<slot />
