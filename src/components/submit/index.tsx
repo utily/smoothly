@@ -31,9 +31,7 @@ export class SmoothlySubmit {
 
 	@Listen("click")
 	clickHandler() {
-		if (this.parent)
-			return this.parent.submit()
-		this.smoothlySubmit.emit()
+		this.parent?.submit()
 	}
 
 	render() {

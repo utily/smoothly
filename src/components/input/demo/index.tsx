@@ -21,13 +21,16 @@ export class SmoothlyInputDemo {
 	render() {
 		return [
 			<h2>Submit</h2>,
-			<smoothly-form looks="border">
+			<smoothly-form looks="border" align="right">
 				<smoothly-input type="email" name="email">
 					Email
 				</smoothly-input>
 				<smoothly-input type="password" name="password">
 					Password
 				</smoothly-input>
+				<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 
