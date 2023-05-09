@@ -92,7 +92,7 @@ export class SmoothlyDisplayDemo {
 							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric"}} value="2022-07-07T00:00+02:00"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"+01:00"}} value="2022-07-07T12:15Z"></smoothly-display>
+							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"Europe/Stockholm"}} value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
 						<dt>Deprecated display date time</dt>
 						<dd>
