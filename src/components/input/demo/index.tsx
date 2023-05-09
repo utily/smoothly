@@ -6,22 +6,16 @@ import { Notice } from "../../../model"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
-	private formElement?: HTMLSmoothlyFormElement
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
 		console.log("selectionChanged", event.detail)
 	}
 
-	@Listen("smoothlyInputClear")
-	onClear() {
-		this.formElement?.clear()
-	}
-
 	render() {
 		return [
 			<h4>Clear</h4>,
-			<smoothly-form looks="border" ref={el => (this.formElement = el)}>
+			<smoothly-form looks="border">
 				<smoothly-input name="First Name">First name</smoothly-input>
 				<smoothly-input name="Last name">
 					Last name
