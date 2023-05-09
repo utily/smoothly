@@ -39,14 +39,22 @@ export class TableExpandableRow implements ComponentWillLoad {
 		this.spotlight = this.open && this.allowSpotlight
 	}
 	componentWillLoad() {
+		setInterval(() => {
+			this.open && this.expansionElement && this.element.after(this.expansionElement)
+			console.log("hello")
+		}, 10)
 		this.smoothlyExpandableLoad.emit({
 			allowSpotlight: (allowed: boolean) => (this.allowSpotlight = allowed),
 		})
 	}
-	componentDidRender(): void {
+	async componentDidRender(): Promise<void> {
 		this.smoothlyExpansionOpen.emit(this.expansionElement)
-		if (this.expansionElement && this.open)
+		if (this.expansionElement && this.open) {
+			console.log("testopen")
 			this.element.after(this.expansionElement)
+		} else {
+			console.log("closed")
+		}
 	}
 	@Listen("click")
 	onClick(event: UIEvent) {
@@ -59,6 +67,8 @@ export class TableExpandableRow implements ComponentWillLoad {
 		event.detail(this.element)
 	}
 	render() {
+		console.log("render")
+
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<slot></slot>
