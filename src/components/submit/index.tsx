@@ -5,7 +5,7 @@ import { Submitable } from "../input/Submitable"
 
 @Component({
 	tag: "smoothly-submit",
-	styleUrl: "../button/style.css",
+	styleUrl: "./style.css",
 	scoped: true,
 })
 export class SmoothlySubmit {
