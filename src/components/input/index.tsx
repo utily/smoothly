@@ -41,9 +41,9 @@ export class SmoothlyInput implements Changeable, Clearable, Editable {
 		listener(this)
 	}
 	@Listen("smoothlyEditable")
-	async smoothlyEditableHandler(event: CustomEvent<(parent: SmoothlyInput, readonly: boolean) => void>): Promise<void> {
+	async smoothlyEditableHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
 		event.stopPropagation()
-		event.detail(this, this.readonly)
+		event.detail(this)
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
