@@ -13,7 +13,7 @@ export class SmoothlyPickerOption {
 	@Prop({ reflect: true }) labeled = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() value: any
-	@Prop({ reflect: true }) name: string
+	@Prop({ reflect: true, mutable: true }) name: string
 	@State() valueElement?: HTMLElement
 	@Event() smoothlyPickerOptionLoaded: EventEmitter<Option>
 	@Event() smoothlyPickerOptionChanged: EventEmitter<Option>
@@ -34,8 +34,6 @@ export class SmoothlyPickerOption {
 	}
 	componentWillLoad() {
 		this.name = this.name ?? this.value
-	}
-	componentDidLoad() {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	clickHandler() {

@@ -12,7 +12,7 @@ export class SmoothlyAppRoom implements ComponentDidLoad {
 	@Prop() icon?: Icon
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
-	@Prop({ reflect: true }) selected?: boolean
+	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Event() smoothlyRoomSelected: EventEmitter<HTMLElement>
 	@Event() smoothlyRoomLoaded: EventEmitter<HTMLElement>
 	contentElement: HTMLElement

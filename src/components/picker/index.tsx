@@ -16,16 +16,17 @@ export class SmoothlyPicker {
 	@Prop() searchLabel = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
-	@State() selectedElement?: HTMLElement
+	private selectedElement?: HTMLElement
 	@State() selected = new Map<string, Option>()
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
 
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
+		this.onSelected()
 	}
 	@Watch("selected")
-	componentDidLoad() {
+	onSelected() {
 		if (this.selectedElement)
 			this.selectedElement.innerHTML = ""
 		for (const option of this.selected.values())
