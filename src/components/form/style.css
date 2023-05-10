@@ -49,7 +49,9 @@ smoothly-form[looks="line"] > form > fieldset,
 smoothly-form[looks="border"] > form > fieldset {
 	gap: 2em
 }
-smoothly-form > form > [slot=submit] {
-	margin: .5em auto;
-	max-width: 10em;
+
+smoothly-form > form > div {
+	display: flex;
+	justify-content: end;
+	gap: 1em;
 }
