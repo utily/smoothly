@@ -203,9 +203,9 @@ export class SmoothlyInputDemo {
 				</div>
 			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
-			<smoothly-form>
-				<smoothly-radio-button deselectable decoration="button">
-					<smoothly-radio-button-item value={{ some: "content", yes: "sir" }}>
+			<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)}>
+				<smoothly-radio-button name="radioButtonDemo" deselectable decoration="button">
+					<smoothly-radio-button-item value={"test"}>
 						Option 1<div slot="expansion">Some description.</div>
 					</smoothly-radio-button-item>
 					<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }}>
@@ -221,7 +221,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h4>Radio List without button 1</h4>,
 			<smoothly-form>
-				<smoothly-radio-button>
+				<smoothly-radio-button name="RadioListWithoutButton">
 					<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} selected color="light">
 						<span>Option 1</span>
 						<span slot="expansion">Some description.</span>
