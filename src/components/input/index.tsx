@@ -1,13 +1,15 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+import { Changeable } from "./Changeable"
+import { Clearable } from "./Clearable"
 
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput {
+export class SmoothlyInput implements Changeable, Clearable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -27,6 +29,20 @@ export class SmoothlyInput {
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
+
+	@Prop({ mutable: true, reflect: true }) changed = false
+	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
+
+	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+		this.listener[property] = listener
+		listener(this)
+	}
+	@Listen("smoothlyInputLoad")
+	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
+		event.stopPropagation()
+		event.detail(this)
+	}
+
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
@@ -61,6 +77,9 @@ export class SmoothlyInput {
 				value = value.trim()
 			this.smoothlyInput.emit({ [this.name]: value })
 		}
+
+		this.changed = Boolean(this.value)
+		this.listener.changed?.(this)
 	}
 	@Watch("currency")
 	onCurrency() {

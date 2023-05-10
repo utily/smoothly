@@ -14,6 +14,26 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<h4>Clear</h4>,
+			<smoothly-form looks="border">
+				<smoothly-input name="First Name">First name</smoothly-input>
+				<smoothly-input name="Last name">
+					Last name
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" />
+					</smoothly-input-clear>
+				</smoothly-input>
+				<smoothly-input type="phone" name="Phone">
+					Phone
+					<smoothly-input-clear slot="end">
+						<smoothly-icon name="close" />
+					</smoothly-input-clear>
+				</smoothly-input>
+				<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
+					Clear
+				</smoothly-input-clear>
+			</smoothly-form>,
+
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
@@ -339,7 +359,6 @@ export class SmoothlyInputDemo {
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
-
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
