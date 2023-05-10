@@ -1418,6 +1418,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";

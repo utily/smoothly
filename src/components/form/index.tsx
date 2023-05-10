@@ -87,8 +87,10 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 					<fieldset>
 						<slot></slot>
 					</fieldset>
-					<slot name="clear"></slot>
-					<slot name="submit"></slot>
+					<div>
+						<slot name="clear"></slot>
+						<slot name="submit"></slot>
+					</div>
 				</form>
 			</Host>
 		)
