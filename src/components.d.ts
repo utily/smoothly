@@ -203,7 +203,7 @@ export namespace Components {
         "name": string;
         "pattern": RegExp | undefined;
         "placeholder": string | undefined;
-        "readonly": boolean;
+        "readonly"?: boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setReadonly": (readonly: boolean) => Promise<void>;

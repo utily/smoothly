@@ -56,7 +56,8 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable
 		}
 		if (Editable.is(event.target) && !this.editables.includes(event.target)) {
 			this.editables.push(event.target)
-			event.target.setReadonly(this.readonly)
+			if (!event.target.readonly)
+				event.target.setReadonly(this.readonly)
 		}
 	}
 	@Listen("smoothlySubmit")
@@ -100,6 +101,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable
 						<slot></slot>
 					</fieldset>
 					<div>
+						<slot name="edit"></slot>
 						<slot name="clear"></slot>
 						<slot name="submit"></slot>
 					</div>

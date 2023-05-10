@@ -1,5 +1,5 @@
 export interface Editable {
-	readonly: boolean
+	readonly?: boolean
 	setReadonly(readonly: boolean): Promise<void>
 }
 export namespace Editable {
