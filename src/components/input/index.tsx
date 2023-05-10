@@ -3,13 +3,14 @@ import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
+import { Editable } from "./Editable"
 
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput implements Changeable, Clearable {
+export class SmoothlyInput implements Changeable, Clearable, Editable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -29,20 +30,26 @@ export class SmoothlyInput implements Changeable, Clearable {
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
-
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
-
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+	}
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		this.listener[property] = listener
 		listener(this)
 	}
+	@Listen("smoothlyEditable")
+	async smoothlyEditableHandler(event: CustomEvent<(parent: SmoothlyInput, readonly: boolean) => void>): Promise<void> {
+		event.stopPropagation()
+		event.detail(this, this.readonly)
+	}
 	@Listen("smoothlyInputLoad")
-	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
 		event.stopPropagation()
 		event.detail(this)
 	}
-
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
@@ -96,6 +103,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
+		this.smoothlyInput.emit({ [this.name]: value })
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {

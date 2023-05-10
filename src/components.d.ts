@@ -127,6 +127,15 @@ export namespace Components {
     }
     interface SmoothlyDisplayDemo {
     }
+    interface SmoothlyEditable {
+        "color"?: Color;
+        "disabled": boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "shape"?: "rounded";
+        "size": "flexible" | "small" | "large" | "icon";
+        "type"?: "input" | "form";
+    }
     interface SmoothlyFilter {
         "clear": (event: MouseEvent) => Promise<void>;
         "criteria": Record<string, Criteria>;
@@ -159,6 +168,8 @@ export namespace Components {
         "name"?: string;
         "prevent": boolean;
         "processing": boolean;
+        "readonly": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "submit": () => Promise<void>;
         "value": Readonly<Data>;
     }
@@ -195,6 +206,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": string;
@@ -438,6 +450,10 @@ export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
+}
+export interface SmoothlyEditableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyEditableElement;
 }
 export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -686,6 +702,12 @@ declare global {
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
+    };
+    interface HTMLSmoothlyEditableElement extends Components.SmoothlyEditable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyEditableElement: {
+        prototype: HTMLSmoothlyEditableElement;
+        new (): HTMLSmoothlyEditableElement;
     };
     interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
     }
@@ -1016,6 +1038,7 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-editable": HTMLSmoothlyEditableElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
@@ -1194,6 +1217,16 @@ declare namespace LocalJSX {
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
+    interface SmoothlyEditable {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyEditable"?: (event: SmoothlyEditableCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "flexible" | "small" | "large" | "icon";
+        "type"?: "input" | "form";
+    }
     interface SmoothlyFilter {
         "criteria"?: Record<string, Criteria>;
         "inputValue"?: Criteria;
@@ -1227,6 +1260,7 @@ declare namespace LocalJSX {
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
+        "readonly"?: boolean;
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -1538,6 +1572,7 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-editable": SmoothlyEditable;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
@@ -1620,6 +1655,7 @@ declare module "@stencil/core" {
              */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-editable": LocalJSX.SmoothlyEditable & JSXBase.HTMLAttributes<HTMLSmoothlyEditableElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;

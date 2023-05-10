@@ -14,6 +14,26 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<h2>Editable</h2>,
+			<smoothly-form looks="border" readonly={true}>
+				<smoothly-input type="text" name="name.first">
+					First Name
+				</smoothly-input>
+				<smoothly-input type="text" name="name.last">
+					Last Name
+				</smoothly-input>
+				<smoothly-editable slot="submit">Edit</smoothly-editable>
+			</smoothly-form>,
+			<br />,
+			<smoothly-form looks="border" readonly={true}>
+				<smoothly-input value="asd123" type="password" name="password" readonly={true}>
+					Password
+					<smoothly-editable slot="end" type="input" fill="clear">
+						<smoothly-icon name="create-sharp" />
+					</smoothly-editable>
+				</smoothly-input>
+			</smoothly-form>,
+			<br />,
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
@@ -28,7 +48,7 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 
-			<h4>Clear</h4>,
+			<h2>Clear</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input name="First Name">First name</smoothly-input>
 				<smoothly-input name="Last name">

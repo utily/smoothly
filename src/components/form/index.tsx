@@ -4,14 +4,16 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Editable } from "../input/Editable"
 import { Submitable } from "../input/Submitable"
 
 @Component({
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submitable {
+export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable {
 	private clearables = new Map<string, Clearable>()
+	private editables: Editable[] = []
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
@@ -23,8 +25,13 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
 	@Prop({ mutable: true, reflect: true }) changed = false
+	@Prop({ mutable: true }) readonly = false
 	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
-
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+		this.editables.forEach(editable => editable.setReadonly(readonly))
+	}
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
@@ -47,6 +54,10 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 			const clearable = event.target
 			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
 		}
+		if (Editable.is(event.target) && !this.editables.includes(event.target)) {
+			this.editables.push(event.target)
+			event.target.setReadonly(this.readonly)
+		}
 	}
 	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
@@ -54,6 +65,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 		this.submit()
 		this.processing = false
 	}
+	@Listen("smoothlyEditable")
 	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.detail(this)
