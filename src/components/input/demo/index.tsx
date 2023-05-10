@@ -48,7 +48,7 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 
-			<h2>Clear</h2>,
+			<h4>Clear</h4>,
 			<smoothly-form looks="border">
 				<smoothly-input name="First Name">First name</smoothly-input>
 				<smoothly-input name="Last name">

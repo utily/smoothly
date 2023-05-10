@@ -55,7 +55,3 @@ smoothly-form > form > div {
 	justify-content: end;
 	gap: 1em;
 }
-
-smoothly-form > form > div > smoothly-input-clear, smoothly-form > form > div > smoothly-submit {
-	margin: 1em 0em !important
-}
