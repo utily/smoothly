@@ -11,6 +11,8 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
+				<slot name="header"></slot>
+				<slot name="main"></slot>
 				<slot></slot>
 			</smoothly-notifier>
 		)

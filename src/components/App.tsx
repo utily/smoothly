@@ -25,7 +25,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
 	return (
 		<smoothly-app>
-			<header>
+			<header slot="header">
 				<h1>
 					<a {...href(resolve("") ?? "/")}>{attributes.label}</a>
 				</h1>
@@ -91,7 +91,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 				</nav>
 				{children.filter(child => child.vattrs?.slot == "header").map(child => child.node)}
 			</header>
-			<main>
+			<main slot="main">
 				<Router.Switch>
 					{children
 						.filter(child => child.vattrs?.path != undefined)
