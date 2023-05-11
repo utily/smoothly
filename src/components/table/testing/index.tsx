@@ -5,7 +5,7 @@ import { data } from "./data"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyFriday {
+export class SmoothlyTableTesting {
 	@State() counter = 0
 	render() {
 		return (
