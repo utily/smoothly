@@ -1,4 +1,4 @@
-import { Component, Element, h, Listen, Prop } from "@stencil/core"
+import { Component, h, Listen, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-row",
@@ -6,7 +6,7 @@ import { Component, Element, h, Listen, Prop } from "@stencil/core"
 	scoped: true,
 })
 export class TableRow {
-	@Element() element: HTMLSmoothlyTableRowElement
+	private element?: HTMLElement
 	@Prop({ reflect: true, mutable: true }) open = false
 	expansions: HTMLSmoothlyTableExpandableCellElement[] = []
 	@Listen("smoothlyExpansionLoad")
@@ -24,9 +24,13 @@ export class TableRow {
 				cell.open = false
 		})
 		if (event.detail)
-			this.element.after(event.detail)
+			this.element?.after(event.detail)
 	}
 	render() {
-		return <slot></slot>
+		return (
+			<div ref={e => (this.element = e)}>
+				<slot></slot>
+			</div>
+		)
 	}
 }

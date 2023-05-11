@@ -378,6 +378,8 @@ export namespace Components {
     interface SmoothlyTableRow {
         "open": boolean;
     }
+    interface SmoothlyTableTesting {
+    }
     interface SmoothlyToggle {
         "disabled": boolean;
         "name": string;
@@ -951,6 +953,12 @@ declare global {
         prototype: HTMLSmoothlyTableRowElement;
         new (): HTMLSmoothlyTableRowElement;
     };
+    interface HTMLSmoothlyTableTestingElement extends Components.SmoothlyTableTesting, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableTestingElement: {
+        prototype: HTMLSmoothlyTableTestingElement;
+        new (): HTMLSmoothlyTableTestingElement;
+    };
     interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
     }
     var HTMLSmoothlyToggleElement: {
@@ -1060,6 +1068,7 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
+        "smoothly-table-testing": HTMLSmoothlyTableTestingElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
@@ -1477,6 +1486,8 @@ declare namespace LocalJSX {
     interface SmoothlyTableRow {
         "open"?: boolean;
     }
+    interface SmoothlyTableTesting {
+    }
     interface SmoothlyToggle {
         "disabled"?: boolean;
         "name"?: string;
@@ -1583,6 +1594,7 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
+        "smoothly-table-testing": SmoothlyTableTesting;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
@@ -1665,6 +1677,7 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-table-testing": LocalJSX.SmoothlyTableTesting & JSXBase.HTMLAttributes<HTMLSmoothlyTableTestingElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
