@@ -1,31 +1,34 @@
 :host {
+	display: contents;
+}
+div {
 	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
 }
-:host[open] {
+div[open] {
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
 }
-:host[open]::slotted(*) smoothly-table-cell,
-:host[open]::slotted(smoothly-table-cell) {
+div[open]::slotted(*) smoothly-table-cell,
+div[open]::slotted(smoothly-table-cell) {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;	
 }
-:host[open]::slotted(*) smoothly-table-cell:first-child {
+div[open]::slotted(*) smoothly-table-cell:first-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-child {
+div[open]::slotted(*) smoothly-table-cell:last-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-child:first-child {
+div[open]::slotted(*) smoothly-table-cell:last-child:first-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
 
 .hide {
 	display: none;
 }
-:host > tr > td {
+div > tr > td {
 	position: relative;
 }
 td::slotted(*) {
@@ -66,11 +69,11 @@ td::slotted(*)::after {
 	border-top: 1px solid rgb(var(--smoothly-light-shade));
 	border-right: 1px solid rgb(var(--smoothly-light-shade));
 }
-:host::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+div::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
+div::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	display: flex;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+div[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
+div[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	transform: rotate(90deg);
 }

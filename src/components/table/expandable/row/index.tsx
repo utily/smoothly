@@ -18,7 +18,6 @@ import {
 	scoped: true,
 })
 export class TableExpandableRow implements ComponentWillLoad {
-	private expansionElement?: HTMLTableRowElement
 	@Element() element: HTMLSmoothlyTableRowElement
 	@State() allowSpotlight = true
 	@State() spotlight = true
@@ -27,12 +26,7 @@ export class TableExpandableRow implements ComponentWillLoad {
 	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
 	@Event() smoothlyExpandableChange: EventEmitter<boolean>
 	@Event() smoothlyExpandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
-	@Watch("open")
-	openChanged() {
-		if (this.expansionElement)
-			this.element.after(this.expansionElement)
-		this.smoothlyExpandableChange.emit(this.open)
-	}
+
 	@Watch("open")
 	@Watch("allowSpotlight")
 	handleSpotlight() {
@@ -43,16 +37,6 @@ export class TableExpandableRow implements ComponentWillLoad {
 			allowSpotlight: (allowed: boolean) => (this.allowSpotlight = allowed),
 		})
 	}
-	componentDidRender(): void {
-		this.smoothlyExpansionOpen.emit(this.expansionElement)
-		if (this.expansionElement && this.open)
-			this.element.after(this.expansionElement)
-	}
-	@Listen("click")
-	onClick(event: UIEvent) {
-		event.stopPropagation()
-		this.open = !this.open
-	}
 	@Listen("smoothlyTableLoad")
 	handleTableLoaded(event: CustomEvent<(owner: EventTarget) => void>) {
 		event.stopPropagation()
@@ -61,9 +45,11 @@ export class TableExpandableRow implements ComponentWillLoad {
 	render() {
 		return (
 			<Host style={{ textAlign: this.align }}>
-				<slot></slot>
-				<tr class={this.spotlight ? "spotlight" : ""} ref={e => (this.expansionElement = e)}>
-					<td colSpan={999} class={!this.open ? "hide" : ""}>
+				<div style={{ textAlign: this.align }} onClick={e => (e.stopPropagation(), (this.open = !this.open))}>
+					<slot></slot>
+				</div>
+				<tr class={{ spotlight: this.spotlight }}>
+					<td colSpan={999} class={{ hide: !this.open }}>
 						<slot name="detail"></slot>
 					</td>
 				</tr>
