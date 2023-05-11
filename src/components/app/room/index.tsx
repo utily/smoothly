@@ -1,4 +1,4 @@
-import { Component, ComponentDidLoad, Event, EventEmitter, h, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Method, Prop } from "@stencil/core"
 import "urlpattern-polyfill"
 import { Icon } from "../../icon/Icon"
 
@@ -7,22 +7,28 @@ import { Icon } from "../../icon/Icon"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyAppRoom implements ComponentDidLoad {
+export class SmoothlyAppRoom {
 	@Prop() label?: string
 	@Prop() icon?: Icon
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
-	@Event() smoothlyRoomSelected: EventEmitter<HTMLElement>
-	@Event() smoothlyRoomLoaded: EventEmitter<HTMLElement>
+	@Event() smoothlyRoomSelected: EventEmitter
+	@Event() smoothlyRoomLoaded: EventEmitter
 	contentElement: HTMLElement
 
-	componentDidLoad(): void | Promise<void> {
+	componentWillLoad() {
 		if ((typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(window.location))
-			this.smoothlyRoomSelected.emit(this.contentElement)
+			this.smoothlyRoomSelected.emit()
 		else
-			this.smoothlyRoomLoaded.emit(this.contentElement)
+			this.smoothlyRoomLoaded.emit()
 	}
+
+	@Method()
+	async getContent() {
+		return this.contentElement
+	}
+
 	render() {
 		return [
 			<li>
@@ -31,7 +37,7 @@ export class SmoothlyAppRoom implements ComponentDidLoad {
 					onClick={(event: PointerEvent) => {
 						if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
 							event.preventDefault()
-							this.smoothlyRoomSelected.emit(this.contentElement)
+							this.smoothlyRoomSelected.emit()
 						}
 					}}>
 					{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}

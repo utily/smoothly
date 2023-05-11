@@ -1,4 +1,4 @@
-import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Element, h, Listen, Method, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-accordion",
@@ -21,24 +21,27 @@ export class SmoothlyAccordion {
 		else if (this.value == event.detail.name)
 			this.value = undefined
 	}
-	@Listen("smoothlyAccordionItemDidLoad")
-	onAccordionItemDidLoad(ev: Event) {
+	@Listen("smoothlyAccordionItemWillLoad")
+	onAccordionItemDidLoad(ev: CustomEvent<(parent: SmoothlyAccordion) => void>) {
 		const item = ev.target as HTMLSmoothlyAccordionItemElement
 		this.items.push(item)
 		if (this.value == undefined && item.open)
 			this.value = item.name
 		else
 			this.updateItems()
-	}
-	@Listen("smoothlyAccordionItemDidUnload")
-	onAccordionItemDidUnload(ev: Event) {
-		const index = this.items.indexOf(ev.target as HTMLSmoothlyAccordionItemElement)
-		if (index > -1)
-			this.items.splice(index, 1)
+
+		ev.detail(this)
 	}
 	componentDidLoad() {
 		this.updateItems()
 	}
+	@Method()
+	removeItem(el: HTMLSmoothlyAccordionItemElement) {
+		const index = this.items.indexOf(el)
+		if (index > -1)
+			this.items.splice(index, 1)
+	}
+
 	private updateItems() {
 		let hasChecked = false
 		for (const item of this.items)
