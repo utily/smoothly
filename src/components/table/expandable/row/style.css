@@ -6,22 +6,22 @@ div {
 	cursor: pointer;
 	line-height: 1.5rem;
 }
-div[open] {
+:host[open] div {
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
 }
-div[open]::slotted(*) smoothly-table-cell,
-div[open]::slotted(smoothly-table-cell) {
+:host[open]::slotted(*) smoothly-table-cell,
+:host[open]::slotted(smoothly-table-cell) {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;	
 }
-div[open]::slotted(*) smoothly-table-cell:first-child {
+:host[open]::slotted(*) smoothly-table-cell:first-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-div[open]::slotted(*) smoothly-table-cell:last-child {
+:host[open]::slotted(*) smoothly-table-cell:last-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-div[open]::slotted(*) smoothly-table-cell:last-child:first-child {
+:host[open]::slotted(*) smoothly-table-cell:last-child:first-child {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
 
@@ -69,11 +69,11 @@ td::slotted(*)::after {
 	border-top: 1px solid rgb(var(--smoothly-light-shade));
 	border-right: 1px solid rgb(var(--smoothly-light-shade));
 }
-div::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-div::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+:host::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
+:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	display: flex;
 }
-div[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-div[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+:host[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
+:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
 	transform: rotate(90deg);
 }

@@ -1,8 +1,5 @@
 :host {
 	display: table-cell;
-}
-div {
-	display: table-cell;
 	padding: 0.3rem 0 0.3rem 0;
 	cursor: pointer;
 	line-height: 1.5rem;
@@ -11,13 +8,13 @@ div {
 :host:not([open]) {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade));
 }
-:host[open] div {
+:host[open] {
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
 	box-shadow: 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-div smoothly-icon {
+:host smoothly-icon {
 	width: 0.6rem;
 	float: left;
 	padding: 0 0.3rem;
@@ -26,7 +23,7 @@ div smoothly-icon {
 	height: 100%;
 	align-self: center;
 }
-:host[open] div smoothly-icon {
+:host[open] smoothly-icon {
 	transform: rotate(90deg);
 }
 aside {
