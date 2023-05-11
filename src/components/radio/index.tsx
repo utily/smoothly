@@ -9,7 +9,7 @@ export class SmoothlyRadio {
 	@Prop() name: string
 	@Prop() value: string
 	@Prop({ mutable: true, reflect: true }) checked: boolean
-	@Prop() tabIndex: number
+	@Prop() tabIdx: number
 	@Event() smoothlySelected!: EventEmitter<{ name: string; value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
@@ -23,7 +23,7 @@ export class SmoothlyRadio {
 				type="radio"
 				name={this.name}
 				id={this.value}
-				tabindex={this.tabIndex}
+				tabindex={this.tabIdx}
 				checked={this.checked}
 				value={this.value}
 				onChange={e => this.onInput(e as UIEvent)}

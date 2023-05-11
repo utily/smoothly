@@ -36,7 +36,7 @@ export class SmoothlyAccordion {
 		this.updateItems()
 	}
 	@Method()
-	removeItem(el: HTMLSmoothlyAccordionItemElement) {
+	async removeItem(el: HTMLSmoothlyAccordionItemElement) {
 		const index = this.items.indexOf(el)
 		if (index > -1)
 			this.items.splice(index, 1)
