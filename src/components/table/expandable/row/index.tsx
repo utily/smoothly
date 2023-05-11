@@ -45,7 +45,7 @@ export class TableExpandableRow implements ComponentWillLoad {
 	render() {
 		return (
 			<Host style={{ textAlign: this.align }}>
-				<div style={{ textAlign: this.align }} onClick={e => (e.stopPropagation(), (this.open = !this.open))}>
+				<div style={{ textAlign: this.align }} onClick={e => (this.open = !this.open)}>
 					<slot></slot>
 				</div>
 				<tr class={{ spotlight: this.spotlight }}>
