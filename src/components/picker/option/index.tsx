@@ -33,7 +33,7 @@ export class SmoothlyPickerOption {
 				  ),
 		}
 	}
-	async componentWillLoad() {
+	componentWillLoad() {
 		this.name = this.name ?? this.value
 		this.smoothlyPickerOptionLoad.emit(this.element)
 	}
