@@ -348,7 +348,7 @@ export class SmoothlyInputDemo {
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
-				initialPrompt="Select..."
+				label="Select month"
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>
@@ -363,6 +363,9 @@ export class SmoothlyInputDemo {
 				<smoothly-item value="11">November</smoothly-item>
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-input-select>,
+			<br />,
+			<br />,
+			<br />,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
