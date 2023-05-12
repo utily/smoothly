@@ -11,7 +11,6 @@ export class SmoothlyPickerMenu {
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) readonly = false
-	// @Prop() label = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() allowed = false
