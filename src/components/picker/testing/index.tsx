@@ -14,7 +14,7 @@ export class SmoothlyPickerTester {
 		return (
 			<smoothly-form
 				looks="grid"
-				onSmoothlyFormInput={e => console.log("input", (this.data = { ...this.data, ...e.detail }))}
+				onSmoothlyFormInput={e => (this.data = { ...this.data, ...e.detail })}
 				onSmoothlyFormSubmit={e => console.log("submit", { ...this.data, ...e.detail })}>
 				<smoothly-input type="text" name="message" value={this.data.message}>
 					Message

@@ -36,7 +36,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		console.log("form caught")
 		this.notice = undefined
 		this.smoothlyFormInput.emit(
 			(this.value = Object.entries(event.detail).reduce(
