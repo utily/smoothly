@@ -127,6 +127,12 @@ export namespace Components {
     }
     interface SmoothlyDisplayDemo {
     }
+    interface SmoothlyExpandable {
+        "open": boolean;
+    }
+    interface SmoothlyExpandableTrigger {
+        "open": boolean;
+    }
     interface SmoothlyFilter {
         "clear": (event: MouseEvent) => Promise<void>;
         "criteria": Record<string, Criteria>;
@@ -441,6 +447,10 @@ export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
 }
+export interface SmoothlyExpandableTriggerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyExpandableTriggerElement;
+}
 export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterElement;
@@ -688,6 +698,18 @@ declare global {
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
+    };
+    interface HTMLSmoothlyExpandableElement extends Components.SmoothlyExpandable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyExpandableElement: {
+        prototype: HTMLSmoothlyExpandableElement;
+        new (): HTMLSmoothlyExpandableElement;
+    };
+    interface HTMLSmoothlyExpandableTriggerElement extends Components.SmoothlyExpandableTrigger, HTMLStencilElement {
+    }
+    var HTMLSmoothlyExpandableTriggerElement: {
+        prototype: HTMLSmoothlyExpandableTriggerElement;
+        new (): HTMLSmoothlyExpandableTriggerElement;
     };
     interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
     }
@@ -1024,6 +1046,8 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-expandable": HTMLSmoothlyExpandableElement;
+        "smoothly-expandable-trigger": HTMLSmoothlyExpandableTriggerElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
@@ -1202,6 +1226,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
+    }
+    interface SmoothlyExpandable {
+        "open"?: boolean;
+    }
+    interface SmoothlyExpandableTrigger {
+        "onSmoothlyExpansion"?: (event: SmoothlyExpandableTriggerCustomEvent<ChildNode[] | undefined>) => void;
+        "open"?: boolean;
     }
     interface SmoothlyFilter {
         "criteria"?: Record<string, Criteria>;
@@ -1551,6 +1582,8 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-expandable": SmoothlyExpandable;
+        "smoothly-expandable-trigger": SmoothlyExpandableTrigger;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
@@ -1634,6 +1667,8 @@ declare module "@stencil/core" {
              */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-expandable": LocalJSX.SmoothlyExpandable & JSXBase.HTMLAttributes<HTMLSmoothlyExpandableElement>;
+            "smoothly-expandable-trigger": LocalJSX.SmoothlyExpandableTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyExpandableTriggerElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;

@@ -36,37 +36,41 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return !data
 			? "Failed to load data."
 			: [
-					<smoothly-filter>
-						<smoothly-icon slot="start" name="search-outline" size="small" />
-						Readonly
-						<div slot="filter">
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
-									Breed
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
-									Country
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="coat" placeholder="ex. Short">
-									Coat
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
-									Pattern
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-						</div>
-					</smoothly-filter>,
-
+					<smoothly-form>
+						<smoothly-filter>
+							<smoothly-icon slot="start" name="search-outline" size="small" />
+							Readonly
+							<div slot="filter">
+								<smoothly-form looks="border">
+									<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
+										Breed
+										<smoothly-icon slot="start" name="search-outline" size="small" />
+									</smoothly-filter-input>
+								</smoothly-form>
+								<smoothly-form looks="border">
+									<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
+										Country
+										<smoothly-icon slot="start" name="search-outline" size="small" />
+									</smoothly-filter-input>
+								</smoothly-form>
+								<smoothly-form looks="border">
+									<smoothly-filter-input name="coat" placeholder="ex. Short">
+										Coat
+										<smoothly-icon slot="start" name="search-outline" size="small" />
+									</smoothly-filter-input>
+								</smoothly-form>
+								<smoothly-form looks="border">
+									<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
+										Pattern
+										<smoothly-icon slot="start" name="search-outline" size="small" />
+									</smoothly-filter-input>
+								</smoothly-form>
+							</div>
+						</smoothly-filter>
+						<smoothly-input type="text" name="dummy">
+							Dummy
+						</smoothly-input>
+					</smoothly-form>,
 					<smoothly-table>
 						<smoothly-table-row>
 							<smoothly-table-header>{this.selector.render(data)}</smoothly-table-header>
