@@ -1367,6 +1367,7 @@ declare namespace LocalJSX {
         "labeled"?: boolean;
         "name"?: string;
         "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElement>) => void;
         "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
         "readonly"?: boolean;
         "selected"?: boolean;

@@ -6,6 +6,7 @@ import { Notice, Option } from "../../model"
 	scoped: true,
 })
 export class SmoothlyPicker {
+	private selectedElement?: HTMLElement
 	@Element() element: HTMLSmoothlyPickerElement
 	@Prop() label = "Label"
 	@Prop() name: string
@@ -16,7 +17,6 @@ export class SmoothlyPicker {
 	@Prop() searchLabel = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
-	@State() selectedElement?: HTMLElement
 	@State() selected = new Map<string, Option>()
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>

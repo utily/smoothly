@@ -21,11 +21,15 @@ export class SmoothlyPickerMenu {
 	private options = new Map<any, Option>()
 	private searchElement?: HTMLElement
 
+	@Listen("smoothlyPickerOptionLoad")
+	optionLoadHandler(event: CustomEvent<HTMLSmoothlyPickerOptionElement>) {
+		if (this.readonly)
+			event.detail.readonly = true
+	}
+
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		this.options.set(event.detail.element.name, event.detail)
-		if (this.readonly)
-			event.detail.element.readonly = true
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionChangedHandler(event: CustomEvent<Option>) {
