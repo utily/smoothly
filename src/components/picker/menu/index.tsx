@@ -11,7 +11,6 @@ export class SmoothlyPickerMenu {
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) readonly = false
-	@Prop() label = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() allowed = false
@@ -29,6 +28,10 @@ export class SmoothlyPickerMenu {
 
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
+		const old = this.options.get(event.detail.element.name)
+		const filtered = this.new.filter(option => option.value != old?.value)
+		if (filtered.length != this.new.length)
+			this.new = filtered
 		this.options.set(event.detail.element.name, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
@@ -40,7 +43,7 @@ export class SmoothlyPickerMenu {
 		}
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
-		event.stopImmediatePropagation()
+		event.stopPropagation()
 		this.search = event.detail.search
 		if (!this.search) {
 			this.allowed = false
@@ -79,12 +82,12 @@ export class SmoothlyPickerMenu {
 				<div class={"controls"}>
 					<smoothly-input
 						ref={element => (this.searchElement = element)}
-						name={"search"}
 						value={this.search}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => this.inputHandler(e)}
+						onSmoothlyBlur={e => e.stopPropagation()}
 						onKeyDown={event => this.keyDownHandler(event)}>
-						{this.label}
+						<slot name="search" />
 					</smoothly-input>
 					{this.mutable ? (
 						<button onClick={() => this.addHandler()} disabled={!this.allowed} class={"add"} type={"button"}>

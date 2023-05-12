@@ -14,7 +14,6 @@ export class SmoothlyPicker {
 	@Prop() multiple = false
 	@Prop() mutable = false
 	@Prop() readonly = false
-	@Prop() searchLabel = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() selected = new Map<string, Option>()
@@ -64,19 +63,21 @@ export class SmoothlyPicker {
 		return (
 			<Host>
 				<div ref={element => (this.selectedElement = element)} class={"selected"} />
-				<span class={"label"}>{this.label}</span>
+				<span class={"label"}>
+					<slot name="label" />
+				</span>
 				<button type={"button"}>
 					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
 					onClick={event => event.stopPropagation()}
-					label={this.searchLabel}
 					labeledDefault={this.labeledDefault}
 					validator={this.validator}
 					multiple={this.multiple}
 					mutable={this.mutable}
 					readonly={this.readonly}
 					class={"menu"}>
+					<slot name="search" slot="search" />
 					<slot />
 				</smoothly-picker-menu>
 			</Host>
