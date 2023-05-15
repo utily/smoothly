@@ -6,16 +6,22 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 })
 export class SmoothlyInputSelect {
 	@Element() element: HTMLSmoothlyInputSelectElement
-	@Prop() value?: string
+	@Prop({ mutable: true }) value?: string
 	@Prop() defaultValue?: string
 	@Prop() label?: string
 	@State() opened = false
 	@State() selectedElement?: HTMLSmoothlyItemElement
 	@State() missing = false
 	@State() filter = ""
+	@Prop() filterable = false
 	@Event() selected: EventEmitter<any>
 	items: HTMLSmoothlyItemElement[] = []
 	input?: HTMLSmoothlyInputElement
+
+	// Om den stängs och har default value men inget annat värde, sätt till defaultValue
+	// Sätt defaultValue på init på input samt sätt selected element = true som har samma värde
+	// Fixa buggen för när man använder pilar upp och ner
+	// Fundera varför det buggar med attr flytta alla items på willLoad istället för didLoad
 
 	@Method()
 	async reset() {
@@ -24,9 +30,10 @@ export class SmoothlyInputSelect {
 			this.input.value = this.defaultValue || ""
 	}
 
-	// cOMPONENTwILLlOAD FÅR SÄTTA DEFAULTvALUE OM DET ÄR SATT
 	@Watch("filter")
 	async onFilterChange(value: string) {
+		if (!this.filterable)
+			return
 		value = value.toLowerCase()
 		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
 			this.missing = true
@@ -36,10 +43,8 @@ export class SmoothlyInputSelect {
 	}
 
 	@Watch("selectedElement")
-	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
-		if (old)
-			old.selected = false
-		this.selected.emit(value?.value)
+	onSelectedChange(selected: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+		this.selected.emit(selected?.value)
 	}
 	@Listen("click")
 	onClick(event: UIEvent) {
@@ -48,10 +53,15 @@ export class SmoothlyInputSelect {
 	}
 	@Listen("itemSelected")
 	onItemSelected(event: Event) {
-		this.selectedElement = event.target as HTMLSmoothlyItemElement
-		if (this.input)
-			this.input.value = this.selectedElement.textContent
-		this.value = this.selectedElement.value
+		const element = event.target as HTMLSmoothlyItemElement
+		if (!this.input || !element)
+			return
+		if (this.selectedElement)
+			this.selectedElement.selected = false
+		this.selectedElement = element
+		this.input.value = element.textContent
+		this.value = element.value
+		console.log("Nytt Element  selected: itemSelected", this.value)
 	}
 	@Watch("opened")
 	onClosed() {
@@ -61,16 +71,20 @@ export class SmoothlyInputSelect {
 				selected.marked = false
 		}
 	}
-	private setSelected() {
+	@Listen("smoothlyInput")
+	onInput(e: CustomEvent<{ filter: string }>) {
+		this.filter = e.detail.filter
 		this.value = ""
 		this.items.forEach(item => {
 			if (item.textContent === this.filter) {
 				item.selected = true
-				this.value = item.value
+				this.selectedElement = item
 			} else {
 				item.selected = false
 			}
 		})
+		if (!this.value)
+			this.selectedElement = undefined
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
@@ -88,10 +102,6 @@ export class SmoothlyInputSelect {
 				case "Escape":
 					this.filter = ""
 					break
-				case "Backspace":
-					this.filter = this.filter.slice(0, -1)
-					this.setSelected()
-					break
 				case "Enter":
 					const result = this.items.find(item => item.marked)
 					if (result?.value) {
@@ -99,19 +109,27 @@ export class SmoothlyInputSelect {
 						this.value = result.value
 					}
 					this.opened = false
-					this.filter = ""
 					break
 				default:
-					if (event.key.length == 1 && event.key !== ("ArrowRight" || "ArrowLeft")) {
-						this.filter += event.key
-						this.setSelected()
-					}
 					break
 			}
 			this.move(direction)
 		} else if (event.key == "Enter")
 			this.opened = true
 	}
+	@Listen("smoothlyItemLoad")
+	onItemLoad(e: CustomEvent<HTMLSmoothlyItemElement>) {
+		if (isItem(e.target) && !this.items.includes(e.target))
+			this.items.push(e.target)
+	}
+
+	// if (!this.defaultValue || e.target?.value != this.defaultValue)
+	// return
+
+	// 	item.selected = true
+	// 	this.value = item.value
+	// 	this.filter = item.textContent || ""
+
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {
 			let markedIndex = this.items.findIndex(item => item.marked)
@@ -129,7 +147,12 @@ export class SmoothlyInputSelect {
 	render() {
 		return (
 			<Host tabIndex={2} class={this.missing ? "missing" : ""}>
-				<smoothly-input value={this.filter} ref={el => (this.input = el)} type="text" name={this.value}>
+				<smoothly-input
+					readonly={!this.filterable}
+					value={this.filter}
+					ref={el => (this.input = el)}
+					type="text"
+					name="filter">
 					{this.label}
 				</smoothly-input>
 				{this.opened ? <section onClick={() => (this.opened = true)}></section> : []}
@@ -141,16 +164,16 @@ export class SmoothlyInputSelect {
 			</Host>
 		)
 	}
-	componentDidRender() {
-		const items: HTMLSmoothlyItemElement[] = []
-		const children = this.element.querySelectorAll("div > nav > smoothly-item")
-		for (let i = 0; i < children.length; i++) {
-			const node = children.item(i)
-			if (isItem(node))
-				items.push(node)
-		}
-		this.items = items
-	}
+	// componentDidRender() {
+	// 	const items: HTMLSmoothlyItemElement[] = []
+	// 	const children = this.element.querySelectorAll("div > nav > smoothly-item")
+	// 	for (let i = 0; i < children.length; i++) {
+	// 		const node = children.item(i)
+	// 		if (isItem(node))
+	// 			items.push(node)
+	// 	}
+	// 	this.items = items
+	// }
 }
 function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
 	return (

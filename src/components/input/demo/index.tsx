@@ -348,7 +348,9 @@ export class SmoothlyInputDemo {
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
+				filterable={true}
 				label="Select month"
+				defaultValue="5"
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>

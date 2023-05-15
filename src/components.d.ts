@@ -242,6 +242,7 @@ export namespace Components {
     }
     interface SmoothlyInputSelect {
         "defaultValue"?: string;
+        "filterable": boolean;
         "label"?: string;
         "reset": () => Promise<void>;
         "value"?: string;
@@ -1318,6 +1319,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputSelect {
         "defaultValue"?: string;
+        "filterable"?: boolean;
         "label"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
         "value"?: string;
@@ -1325,6 +1327,7 @@ declare namespace LocalJSX {
     interface SmoothlyItem {
         "marked"?: boolean;
         "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
+        "onSmoothlyItemLoad"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
