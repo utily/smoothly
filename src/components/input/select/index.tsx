@@ -23,7 +23,7 @@ export class SmoothlyInputSelect implements Clearable {
 		if (this.defaultValue)
 			return this.setDefaultValue()
 		this.selectedElement = undefined
-		this.value = ""
+		this.value = undefined
 		this.filter = ""
 	}
 	private setDefaultValue() {
@@ -31,14 +31,14 @@ export class SmoothlyInputSelect implements Clearable {
 	}
 	@Watch("filter")
 	async onFilterChange(value: string) {
-		if (!this.filterable)
-			return
-		value = value.toLowerCase()
-		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
-			this.missing = true
-			this.items.forEach(el => el.filter(""))
-		} else
-			this.missing = false
+		if (this.filterable) {
+			value = value.toLowerCase()
+			if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
+				this.missing = true
+				this.items.forEach(el => el.filter(""))
+			} else
+				this.missing = false
+		}
 	}
 	@Watch("selectedElement")
 	onSelectedChange(selected: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
@@ -54,9 +54,8 @@ export class SmoothlyInputSelect implements Clearable {
 	@Listen("itemSelected")
 	onItemSelected(event: Event) {
 		const element = event.target as HTMLSmoothlyItemElement
-		if (!this.input || !element)
-			return
-		this.input.value = element.textContent
+		if (this.input && element)
+			this.input.value = element.textContent
 	}
 	@Watch("opened")
 	onClosed() {
@@ -71,15 +70,14 @@ export class SmoothlyInputSelect implements Clearable {
 	@Listen("smoothlyInput")
 	onInput(e: CustomEvent<{ filter: string }>) {
 		this.filter = e.detail.filter
-		this.value = ""
+		this.value = undefined
 		this.items.forEach(item => {
 			if (item.textContent == this.filter) {
 				item.selected = true
 				this.selectedElement = item
 				this.value = item.value
-			} else {
+			} else
 				item.selected = false
-			}
 		})
 		if (!this.value)
 			this.selectedElement = undefined
