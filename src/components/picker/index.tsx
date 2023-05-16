@@ -1,11 +1,12 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../model"
+import { Clearable } from "../input/Clearable"
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPicker {
+export class SmoothlyPicker implements Clearable {
 	private selectedElement?: HTMLElement
 	@Element() element: HTMLSmoothlyPickerElement
 	@Prop() label = "Label"
@@ -20,6 +21,13 @@ export class SmoothlyPicker {
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
 
+	@Method()
+	async clear() {
+		this.selected.forEach(key => {
+			if (key.element.selected)
+				key.element.clickHandler()
+		})
+	}
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
 	}

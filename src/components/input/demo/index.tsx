@@ -6,6 +6,7 @@ import { Notice } from "../../../model"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
+	private pickerElement: HTMLSmoothlyPickerElement
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
@@ -290,6 +291,10 @@ export class SmoothlyInputDemo {
 					Purpose
 				</smoothly-input>
 				<smoothly-picker
+					ref={el => {
+						if (el)
+							this.pickerElement = el
+					}}
 					multiple
 					mutable
 					name="emails"
@@ -305,6 +310,9 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
+				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-picker label="Shape" name="shape">
 					<smoothly-picker-option name="Circle" value={"circle"} labeled>
 						<smoothly-icon name="ellipse-outline" />

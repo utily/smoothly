@@ -258,6 +258,7 @@ export namespace Components {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
+        "clear": () => Promise<void>;
         "label": string;
         "labeledDefault": boolean;
         "multiple": boolean;
@@ -275,6 +276,7 @@ export namespace Components {
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
+        "clickHandler": () => Promise<void>;
         "labeled": boolean;
         "name": string;
         "readonly": boolean;
