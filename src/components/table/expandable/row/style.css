@@ -6,22 +6,26 @@ div {
 	cursor: pointer;
 	line-height: 1.5rem;
 }
-:host[open] div {
+:host[open] > div {
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
 }
-:host[open]::slotted(*) smoothly-table-cell,
-:host[open]::slotted(smoothly-table-cell) {
+:host[open] > div::slotted(*) smoothly-table-cell,
+:host[open] > div::slotted(smoothly-table-cell) {
+	/* background-color: red !important; */
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;	
 }
-:host[open]::slotted(*) smoothly-table-cell:first-child {
+:host[open] > div::slotted(*) smoothly-table-cell:first-child {
+	/* background-color: goldenrod !important; */
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-child {
+:host[open] > div::slotted(*) smoothly-table-cell:last-child {
+	/* background-color: cadetblue !important; */
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-child:first-child {
+:host[open] > div::slotted(*) smoothly-table-cell:last-child:first-child {
+	/* background-color: pink !important; */
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
 
@@ -68,12 +72,4 @@ td::slotted(*)::after {
 	width: calc(var(--expansion-width) - 1px);
 	border-top: 1px solid rgb(var(--smoothly-light-shade));
 	border-right: 1px solid rgb(var(--smoothly-light-shade));
-}
-:host::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
-	display: flex;
-}
-:host[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
-	transform: rotate(90deg);
 }
