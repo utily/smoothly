@@ -41,7 +41,7 @@ export class SmoothlyPickerOption {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	@Method()
-	clickHandler() {
+	async clickHandler() {
 		if (!this.readonly) {
 			this.selected = !this.selected
 			this.smoothlyPickerOptionChanged.emit(this.option)
