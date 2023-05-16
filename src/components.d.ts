@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
@@ -17,6 +18,7 @@ import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
+        "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
         "value"?: string;
     }
     interface SmoothlyAccordionItem {
@@ -1093,7 +1095,7 @@ declare namespace LocalJSX {
     interface SmoothlyAccordionItem {
         "brand"?: string | string[];
         "name"?: string;
-        "onSmoothlyAccordionItemWillLoad"?: (event: SmoothlyAccordionItemCustomEvent<void>) => void;
+        "onSmoothlyAccordionItemWillLoad"?: (event: SmoothlyAccordionItemCustomEvent<(parent: SmoothlyAccordion) => void>) => void;
         "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;

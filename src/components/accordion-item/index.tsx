@@ -11,7 +11,7 @@ export class SmoothlyAccordionItem {
 	@Prop() brand?: string | string[]
 	@Prop({ mutable: true, reflect: true }) open?: boolean
 	@Element() element: HTMLSmoothlyAccordionItemElement
-	@Event() smoothlyAccordionItemWillLoad!: EventEmitter<void>
+	@Event() smoothlyAccordionItemWillLoad!: EventEmitter<(parent: SmoothlyAccordion) => void>
 	@Event() smoothlyOpen!: EventEmitter<{ name: string; open: boolean }>
 	@Event() smoothlyClose!: EventEmitter<{ name: string; open: boolean }>
 	private parent?: SmoothlyAccordion
@@ -38,7 +38,12 @@ export class SmoothlyAccordionItem {
 			summary[0].addEventListener("click", onClick)
 			summary[0].addEventListener("touch", onClick)
 		}
-		this.smoothlyAccordionItemWillLoad.emit()
+		this.smoothlyAccordionItemWillLoad.emit(parent => {
+			this.parent = parent
+		})
+	}
+	disconnectedCallback() {
+		this.parent?.removeItem(this.element)
 	}
 	render() {
 		return (
