@@ -1,8 +1,11 @@
 :host {
-	display: table-row;
+	display: table-row-group;
 	cursor: default;
 	line-height: 1.5rem;
 }
 .hide {
 	display: none;
+}
+div {
+	display: contents;
 }

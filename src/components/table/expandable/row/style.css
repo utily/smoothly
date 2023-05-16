@@ -1,9 +1,12 @@
 :host {
+	display: contents;
+}
+div {
 	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
 }
-:host[open] {
+:host[open] div {
 	position: relative;
 	z-index: 3;
 	background-color: rgb(var(--smoothly-default-color));
@@ -25,7 +28,7 @@
 .hide {
 	display: none;
 }
-:host > tr > td {
+div > tr > td {
 	position: relative;
 }
 td::slotted(*) {

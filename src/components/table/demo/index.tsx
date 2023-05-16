@@ -10,7 +10,7 @@ export class TableDemo {
 		return [
 			<h4>Filtered & Checked Table</h4>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
-
+			<smoothly-table-testing></smoothly-table-testing>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>

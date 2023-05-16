@@ -267,11 +267,9 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
-        "searchLabel": string;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerMenu {
-        "label": string;
         "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
@@ -285,6 +283,8 @@ export namespace Components {
         "selected": boolean;
         "value": any;
         "visible": boolean;
+    }
+    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -379,6 +379,8 @@ export namespace Components {
     }
     interface SmoothlyTableRow {
         "open": boolean;
+    }
+    interface SmoothlyTableTesting {
     }
     interface SmoothlyToggle {
         "disabled": boolean;
@@ -815,6 +817,12 @@ declare global {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
     };
+    interface HTMLSmoothlyPickerTesterElement extends Components.SmoothlyPickerTester, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerTesterElement: {
+        prototype: HTMLSmoothlyPickerTesterElement;
+        new (): HTMLSmoothlyPickerTesterElement;
+    };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
     var HTMLSmoothlyPopupElement: {
@@ -953,6 +961,12 @@ declare global {
         prototype: HTMLSmoothlyTableRowElement;
         new (): HTMLSmoothlyTableRowElement;
     };
+    interface HTMLSmoothlyTableTestingElement extends Components.SmoothlyTableTesting, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableTestingElement: {
+        prototype: HTMLSmoothlyTableTestingElement;
+        new (): HTMLSmoothlyTableTestingElement;
+    };
     interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
     }
     var HTMLSmoothlyToggleElement: {
@@ -1039,6 +1053,7 @@ declare global {
         "smoothly-picker": HTMLSmoothlyPickerElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
+        "smoothly-picker-tester": HTMLSmoothlyPickerTesterElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
@@ -1062,6 +1077,7 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
+        "smoothly-table-testing": HTMLSmoothlyTableTestingElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
@@ -1343,11 +1359,9 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
-        "searchLabel"?: string;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerMenu {
-        "label"?: string;
         "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
@@ -1359,11 +1373,14 @@ declare namespace LocalJSX {
         "labeled"?: boolean;
         "name"?: string;
         "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElement>) => void;
         "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
         "readonly"?: boolean;
         "selected"?: boolean;
         "value"?: any;
         "visible"?: boolean;
+    }
+    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
@@ -1478,6 +1495,8 @@ declare namespace LocalJSX {
     interface SmoothlyTableRow {
         "open"?: boolean;
     }
+    interface SmoothlyTableTesting {
+    }
     interface SmoothlyToggle {
         "disabled"?: boolean;
         "name"?: string;
@@ -1561,6 +1580,7 @@ declare namespace LocalJSX {
         "smoothly-picker": SmoothlyPicker;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
+        "smoothly-picker-tester": SmoothlyPickerTester;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
@@ -1584,6 +1604,7 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
+        "smoothly-table-testing": SmoothlyTableTesting;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
@@ -1643,6 +1664,7 @@ declare module "@stencil/core" {
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
+            "smoothly-picker-tester": LocalJSX.SmoothlyPickerTester & JSXBase.HTMLAttributes<HTMLSmoothlyPickerTesterElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
@@ -1666,6 +1688,7 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-table-testing": LocalJSX.SmoothlyTableTesting & JSXBase.HTMLAttributes<HTMLSmoothlyTableTestingElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;

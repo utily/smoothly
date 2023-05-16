@@ -1,0 +1,8 @@
+:host {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+smoothly-table {
+	width: 80%;
+}

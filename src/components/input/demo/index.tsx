@@ -292,11 +292,12 @@ export class SmoothlyInputDemo {
 				<smoothly-picker
 					multiple
 					mutable
-					label="Emails"
 					name="emails"
 					validator={value =>
 						value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
 					}>
+					<span slot="label">Emails</span>
+					<span slot="search">Search</span>
 					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
 					<smoothly-picker-option selected value={"jessie@rocket.com"}>
 						jessie@rocket.com
@@ -315,7 +316,9 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="square-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
-				<smoothly-picker multiple readonly name="animals" label="Animals">
+				<smoothly-picker multiple readonly name="animals">
+					<span slot="label">Animals</span>
+					<span slot="search">Search</span>
 					<smoothly-picker-option selected value={"cat"}>
 						Cat
 					</smoothly-picker-option>
@@ -323,6 +326,7 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 				</smoothly-picker>
 			</smoothly-form>,
+			<smoothly-picker-tester />,
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,
