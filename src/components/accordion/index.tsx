@@ -22,15 +22,13 @@ export class SmoothlyAccordion {
 			this.value = undefined
 	}
 	@Listen("smoothlyAccordionItemWillLoad")
-	onAccordionItemDidLoad(ev: CustomEvent<(parent: SmoothlyAccordion) => void>) {
+	onAccordionItemDidLoad(ev: Event) {
 		const item = ev.target as HTMLSmoothlyAccordionItemElement
 		this.items.push(item)
 		if (this.value == undefined && item.open)
 			this.value = item.name
 		else
 			this.updateItems()
-
-		ev.detail(this)
 	}
 	componentDidLoad() {
 		this.updateItems()
