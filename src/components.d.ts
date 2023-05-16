@@ -17,7 +17,6 @@ import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
-        "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
         "value"?: string;
     }
     interface SmoothlyAccordionItem {

@@ -1,4 +1,4 @@
-import { Component, Element, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-accordion",
@@ -33,13 +33,6 @@ export class SmoothlyAccordion {
 	componentDidLoad() {
 		this.updateItems()
 	}
-	@Method()
-	async removeItem(el: HTMLSmoothlyAccordionItemElement) {
-		const index = this.items.indexOf(el)
-		if (index > -1)
-			this.items.splice(index, 1)
-	}
-
 	private updateItems() {
 		let hasChecked = false
 		for (const item of this.items)
