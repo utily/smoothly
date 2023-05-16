@@ -22,10 +22,9 @@ export class SmoothlyPicker {
 
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
-		this.onSelected()
 	}
 	@Watch("selected")
-	onSelected() {
+	componentDidLoad() {
 		if (this.selectedElement)
 			this.selectedElement.innerHTML = ""
 		for (const option of this.selected.values())
