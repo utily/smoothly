@@ -297,7 +297,7 @@ export namespace Components {
     interface SmoothlyRadio {
         "checked": boolean;
         "name": string;
-        "tabIdx": number;
+        "tab": number;
         "value": string;
     }
     interface SmoothlyRadioButton {
@@ -1378,7 +1378,7 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         "name"?: string;
         "onSmoothlySelected"?: (event: SmoothlyRadioCustomEvent<{ name: string; value: string }>) => void;
-        "tabIdx"?: number;
+        "tab"?: number;
         "value"?: string;
     }
     interface SmoothlyRadioButton {
@@ -1509,7 +1509,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTriggerSource {
         "listen"?: string;
-        "onMsg"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
+        "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
     interface SmoothlyTuple {

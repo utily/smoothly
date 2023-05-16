@@ -10,7 +10,7 @@ export class SmoothlyAccordionItem {
 	@Prop() name: string
 	@Prop() brand?: string | string[]
 	@Prop({ mutable: true, reflect: true }) open?: boolean
-	@Element() me: HTMLSmoothlyAccordionItemElement
+	@Element() element: HTMLSmoothlyAccordionItemElement
 	@Event() smoothlyAccordionItemWillLoad!: EventEmitter<(parent: SmoothlyAccordion) => void>
 	@Event() smoothlyOpen!: EventEmitter<{ name: string; open: boolean }>
 	@Event() smoothlyClose!: EventEmitter<{ name: string; open: boolean }>
@@ -26,7 +26,7 @@ export class SmoothlyAccordionItem {
 		}
 	}
 	componentWillLoad() {
-		const summary = this.me.getElementsByTagName("summary")
+		const summary = this.element.getElementsByTagName("summary")
 		if (summary.length > 0) {
 			const onClick = (e: UIEvent) => {
 				if (this.open)
@@ -43,7 +43,7 @@ export class SmoothlyAccordionItem {
 		})
 	}
 	disconnectedCallback() {
-		this.parent?.removeItem(this.me)
+		this.parent?.removeItem(this.element)
 	}
 	render() {
 		return (
