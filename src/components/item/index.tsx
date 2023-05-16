@@ -11,7 +11,6 @@ export class Item {
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Event() itemSelected: EventEmitter<void>
-	@Event() smoothlyItemLoad: EventEmitter<void>
 	@Watch("selected")
 	onSelectedChanged(value: boolean, old: boolean) {
 		if (value && !old)
@@ -22,12 +21,7 @@ export class Item {
 		this.selected = true
 		this.itemSelected.emit()
 	}
-	// componentDidLoad() {
-	// 	if (this.selected)
-	// 		this.itemSelected.emit()
-	// }
-	componentWillLoad() {
-		this.smoothlyItemLoad.emit()
+	componentDidLoad() {
 		if (this.selected)
 			this.itemSelected.emit()
 	}

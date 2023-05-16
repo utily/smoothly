@@ -1,10 +1,11 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Clearable } from "../Clearable"
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputSelect {
+export class SmoothlyInputSelect implements Clearable {
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop({ mutable: true }) value?: string
 	@Prop() defaultValue?: string
@@ -17,19 +18,17 @@ export class SmoothlyInputSelect {
 	@Event() selected: EventEmitter<any>
 	items: HTMLSmoothlyItemElement[] = []
 	input?: HTMLSmoothlyInputElement
-
-	// Om den stängs och har default value men inget annat värde, sätt till defaultValue
-	// Sätt defaultValue på init på input samt sätt selected element = true som har samma värde
-	// Fixa buggen för när man använder pilar upp och ner
-	// Fundera varför det buggar med attr flytta alla items på willLoad istället för didLoad
-
 	@Method()
-	async reset() {
+	async clear() {
+		if (this.defaultValue)
+			return this.setDefaultValue()
 		this.selectedElement = undefined
-		if (this.input)
-			this.input.value = this.defaultValue || ""
+		this.value = ""
+		this.filter = ""
 	}
-
+	private setDefaultValue() {
+		this.items.forEach(item => (item.selected = item.value == this.defaultValue))
+	}
 	@Watch("filter")
 	async onFilterChange(value: string) {
 		if (!this.filterable)
@@ -41,9 +40,10 @@ export class SmoothlyInputSelect {
 		} else
 			this.missing = false
 	}
-
 	@Watch("selectedElement")
 	onSelectedChange(selected: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+		if (old?.selected)
+			old.selected = false
 		this.selected.emit(selected?.value)
 	}
 	@Listen("click")
@@ -56,12 +56,7 @@ export class SmoothlyInputSelect {
 		const element = event.target as HTMLSmoothlyItemElement
 		if (!this.input || !element)
 			return
-		if (this.selectedElement)
-			this.selectedElement.selected = false
-		this.selectedElement = element
 		this.input.value = element.textContent
-		this.value = element.value
-		console.log("Nytt Element  selected: itemSelected", this.value)
 	}
 	@Watch("opened")
 	onClosed() {
@@ -69,6 +64,8 @@ export class SmoothlyInputSelect {
 			const selected = this.items.find(item => item.marked)
 			if (selected)
 				selected.marked = false
+			if (!this.selectedElement && this.defaultValue)
+				this.setDefaultValue()
 		}
 	}
 	@Listen("smoothlyInput")
@@ -76,9 +73,10 @@ export class SmoothlyInputSelect {
 		this.filter = e.detail.filter
 		this.value = ""
 		this.items.forEach(item => {
-			if (item.textContent === this.filter) {
+			if (item.textContent == this.filter) {
 				item.selected = true
 				this.selectedElement = item
+				this.value = item.value
 			} else {
 				item.selected = false
 			}
@@ -117,19 +115,6 @@ export class SmoothlyInputSelect {
 		} else if (event.key == "Enter")
 			this.opened = true
 	}
-	@Listen("smoothlyItemLoad")
-	onItemLoad(e: CustomEvent<HTMLSmoothlyItemElement>) {
-		if (isItem(e.target) && !this.items.includes(e.target))
-			this.items.push(e.target)
-	}
-
-	// if (!this.defaultValue || e.target?.value != this.defaultValue)
-	// return
-
-	// 	item.selected = true
-	// 	this.value = item.value
-	// 	this.filter = item.textContent || ""
-
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {
 			let markedIndex = this.items.findIndex(item => item.marked)
@@ -164,16 +149,19 @@ export class SmoothlyInputSelect {
 			</Host>
 		)
 	}
-	// componentDidRender() {
-	// 	const items: HTMLSmoothlyItemElement[] = []
-	// 	const children = this.element.querySelectorAll("div > nav > smoothly-item")
-	// 	for (let i = 0; i < children.length; i++) {
-	// 		const node = children.item(i)
-	// 		if (isItem(node))
-	// 			items.push(node)
-	// 	}
-	// 	this.items = items
-	// }
+	componentDidRender() {
+		const items: HTMLSmoothlyItemElement[] = []
+		const children = this.element.querySelectorAll("div > nav > smoothly-item")
+		for (let i = 0; i < children.length; i++) {
+			const node = children.item(i)
+			if (isItem(node)) {
+				items.push(node)
+				if (!node.selected && node.value == this.value)
+					node.selected = true
+			}
+		}
+		this.items = items
+	}
 }
 function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
 	return (
