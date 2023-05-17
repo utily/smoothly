@@ -51,7 +51,7 @@ export class SmoothlyPickerMenu {
 			for (const option of this.options.values())
 				option.element.visible = true
 		} else {
-			this.allowed = !Array.from(this.options.values()).some(option => option.value == this.search)
+			this.allowed = !Array.from(this.options.values()).find(option => option.value == this.search)
 			for (const option of this.options.values())
 				option.element.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())
 					? (option.element.visible = true)
