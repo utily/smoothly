@@ -276,7 +276,7 @@ export namespace Components {
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
-        "clickHandler": () => Promise<void>;
+        "clickHandler": () => void;
         "labeled": boolean;
         "name": string;
         "readonly": boolean;
