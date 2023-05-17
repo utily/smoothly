@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
 
 @Component({
@@ -13,6 +13,8 @@ export class InputDate {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
+	@Prop({ mutable: true }) readonly?: boolean
+	@Event() smoothlyInput: EventEmitter<Record<string, Date | undefined>>
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")
 	onStart(next: Date) {
@@ -23,12 +25,28 @@ export class InputDate {
 		this.open = false
 		e.stopPropagation()
 	}
+	@Method()
+	async clear(): Promise<void> {
+		this.value = undefined
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+	}
+	componentWillLoad() {
+		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
+	private handleClick() {
+		if (!this.readonly)
+			this.open = !this.open
+	}
 	render() {
 		return [
 			<smoothly-input
+				readonly={this.readonly}
 				name={this.name}
-				onFocus={() => (this.open = !this.open)}
-				onClick={() => (this.open = !this.open)}
+				onFocus={() => this.handleClick()}
+				onClick={() => this.handleClick()}
 				disabled={this.disabled}
 				type="date"
 				value={this.value}

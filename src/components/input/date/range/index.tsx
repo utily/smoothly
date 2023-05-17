@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { Date, DateRange } from "isoly"
 
 @Component({
@@ -7,6 +7,7 @@ import { Date, DateRange } from "isoly"
 	scoped: true,
 })
 export class InputDateRange {
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
@@ -16,9 +17,24 @@ export class InputDateRange {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
+	@Prop({ mutable: true }) readonly?: boolean
+	@Event() smoothlyInput: EventEmitter<Record<string, Date | undefined>>
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
 
+	@Method()
+	async clear(): Promise<void> {
+		this.start = undefined
+		this.end = undefined
+		this.value = undefined
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+	}
+	componentWillLoad() {
+		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
 	@Watch("value")
 	onValue(next: Date) {
 		this.valueChanged.emit(next)
@@ -38,10 +54,15 @@ export class InputDateRange {
 		event.stopPropagation()
 		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
 	}
+	private handleClick() {
+		if (!this.readonly)
+			this.open = !this.open
+	}
 	render() {
 		return [
-			<section onClick={() => (this.open = !this.open)}>
+			<section onClick={() => this.handleClick()}>
 				<smoothly-input
+					readonly={this.readonly}
 					type="date"
 					name="start"
 					value={this.start}
@@ -51,6 +72,7 @@ export class InputDateRange {
 				</smoothly-input>
 				<span>–</span>
 				<smoothly-input
+					readonly={this.readonly}
 					type="date"
 					name="end"
 					showLabel={this.showLabel}

@@ -4,11 +4,11 @@ import { Button } from "../../Button"
 import { Editable } from "../Editable"
 
 @Component({
-	tag: "smoothly-editable",
+	tag: "smoothly-edit",
 	styleUrl: "./style.css",
 	scoped: true,
 })
-export class SmoothlyEditable {
+export class SmoothlyEdit {
 	@Prop({ reflect: true }) color?: Color = "light"
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
@@ -16,14 +16,13 @@ export class SmoothlyEditable {
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type?: "input" | "form" = "form"
-	@Event() smoothlyEditable: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	private parent: Editable
 
 	componentWillLoad() {
-		this.smoothlyEditable.emit(parent => {
-			if (Editable.is(parent)) {
+		this.smoothlyInputLoad.emit(parent => {
+			if (Editable.is(parent))
 				this.parent = parent
-			}
 		})
 	}
 

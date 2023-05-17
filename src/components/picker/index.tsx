@@ -1,18 +1,20 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../model"
+import { Clearable } from "../input/Clearable"
+import { Editable } from "../input/Editable"
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPicker {
+export class SmoothlyPicker implements Editable, Clearable {
 	@Element() element: HTMLSmoothlyPickerElement
 	@Prop() label = "Label"
 	@Prop() name: string
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop() multiple = false
 	@Prop() mutable = false
-	@Prop() readonly = false
+	@Prop({ mutable: true }) readonly?: boolean
 	@Prop() searchLabel = "Search"
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
@@ -20,9 +22,21 @@ export class SmoothlyPicker {
 	@State() selected = new Map<string, Option>()
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
-
+	private options: HTMLSmoothlyPickerOptionElement[] = []
+	@Method()
+	async clear(): Promise<void> {
+		this.selected = new Map<string, Option>()
+		this.selectedElement = undefined
+		this.options.forEach(option => (option.selected = false))
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+		this.options.forEach(option => (option.readonly = readonly))
+	}
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
+		this.smoothlyInput.emit({ [this.name]: this.selected })
 	}
 	@Watch("selected")
 	componentDidLoad() {
@@ -37,10 +51,15 @@ export class SmoothlyPicker {
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		event.stopPropagation()
-		if (event.detail.element.selected)
+		const element = event.detail.element
+		if (element.selected)
 			this.selected = this.multiple
-				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
-				: new Map().set(event.detail.element.name, event.detail)
+				? new Map(this.selected.set(element.name, event.detail).entries())
+				: new Map().set(element.name, event.detail)
+		if (!element.readonly)
+			element.readonly = this.readonly
+		if (!this.options.includes(element))
+			this.options.push(element)
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionsSelectedHandler(event: CustomEvent<Option>) {
@@ -57,8 +76,8 @@ export class SmoothlyPicker {
 					? new Map()
 					: new Map().set(event.detail.element.name, event.detail)
 	}
-	clickHandler = (event: MouseEvent) => {
-		this.open = !event.composedPath().includes(this.element) ? false : !this.open
+	private clickHandler = (event: MouseEvent) => {
+		this.open = !event.composedPath().includes(this.element) || this.readonly ? false : !this.open
 	}
 	render() {
 		return (

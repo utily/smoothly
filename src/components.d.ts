@@ -127,7 +127,7 @@ export namespace Components {
     }
     interface SmoothlyDisplayDemo {
     }
-    interface SmoothlyEditable {
+    interface SmoothlyEdit {
         "color"?: Color;
         "disabled": boolean;
         "expand"?: "block" | "full";
@@ -223,20 +223,27 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputDate {
+        "clear": () => Promise<void>;
         "disabled": boolean;
         "max": Date;
         "min": Date;
         "name": string;
         "open": boolean;
+        "readonly"?: boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "clear": () => Promise<void>;
         "end"?: Date;
         "labelEnd": string;
         "labelStart": string;
         "max": Date;
         "min": Date;
+        "name": string;
         "open": boolean;
+        "readonly"?: boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "showLabel": boolean;
         "start"?: Date;
         "value"?: Date;
@@ -244,8 +251,11 @@ export namespace Components {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "clear": () => Promise<void>;
         "name": string;
         "placeholder": string | undefined;
+        "readonly"?: boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "showLabel": boolean;
         "value"?: File;
     }
@@ -270,14 +280,16 @@ export namespace Components {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
+        "clear": () => Promise<void>;
         "label": string;
         "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
         "open": boolean;
-        "readonly": boolean;
+        "readonly"?: boolean;
         "searchLabel": string;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerMenu {
@@ -291,7 +303,7 @@ export namespace Components {
     interface SmoothlyPickerOption {
         "labeled": boolean;
         "name": string;
-        "readonly": boolean;
+        "readonly"?: boolean;
         "selected": boolean;
         "value": any;
         "visible": boolean;
@@ -451,9 +463,9 @@ export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
 }
-export interface SmoothlyEditableCustomEvent<T> extends CustomEvent<T> {
+export interface SmoothlyEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyEditableElement;
+    target: HTMLSmoothlyEditElement;
 }
 export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -703,11 +715,11 @@ declare global {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
     };
-    interface HTMLSmoothlyEditableElement extends Components.SmoothlyEditable, HTMLStencilElement {
+    interface HTMLSmoothlyEditElement extends Components.SmoothlyEdit, HTMLStencilElement {
     }
-    var HTMLSmoothlyEditableElement: {
-        prototype: HTMLSmoothlyEditableElement;
-        new (): HTMLSmoothlyEditableElement;
+    var HTMLSmoothlyEditElement: {
+        prototype: HTMLSmoothlyEditElement;
+        new (): HTMLSmoothlyEditElement;
     };
     interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
     }
@@ -1038,7 +1050,7 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
-        "smoothly-editable": HTMLSmoothlyEditableElement;
+        "smoothly-edit": HTMLSmoothlyEditElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
@@ -1217,12 +1229,12 @@ declare namespace LocalJSX {
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
-    interface SmoothlyEditable {
+    interface SmoothlyEdit {
         "color"?: Color;
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyEditable"?: (event: SmoothlyEditableCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyEditCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "type"?: "input" | "form";
@@ -1317,8 +1329,10 @@ declare namespace LocalJSX {
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, Date | undefined>>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
+        "readonly"?: boolean;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
@@ -1327,9 +1341,12 @@ declare namespace LocalJSX {
         "labelStart"?: string;
         "max"?: Date;
         "min"?: Date;
+        "name"?: string;
         "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Record<string, Date | undefined>>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<Date>) => void;
         "open"?: boolean;
+        "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: Date;
         "value"?: Date;
@@ -1339,8 +1356,9 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File | undefined>>) => void;
         "placeholder"?: string | undefined;
+        "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: File;
     }
@@ -1573,7 +1591,7 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
-        "smoothly-editable": SmoothlyEditable;
+        "smoothly-edit": SmoothlyEdit;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
@@ -1656,7 +1674,7 @@ declare module "@stencil/core" {
              */
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
-            "smoothly-editable": LocalJSX.SmoothlyEditable & JSXBase.HTMLAttributes<HTMLSmoothlyEditableElement>;
+            "smoothly-edit": LocalJSX.SmoothlyEdit & JSXBase.HTMLAttributes<HTMLSmoothlyEditElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;

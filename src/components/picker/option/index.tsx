@@ -11,7 +11,7 @@ export class SmoothlyPickerOption {
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) visible = true
 	@Prop({ reflect: true }) labeled = false
-	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly?: boolean
 	@Prop() value: any
 	@Prop({ reflect: true }) name: string
 	@State() valueElement?: HTMLElement

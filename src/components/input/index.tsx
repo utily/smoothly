@@ -32,18 +32,9 @@ export class SmoothlyInput implements Changeable, Clearable, Editable {
 	@State() initialValue?: any
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
-	@Method()
-	async setReadonly(readonly: boolean): Promise<void> {
-		this.readonly = readonly
-	}
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		this.listener[property] = listener
 		listener(this)
-	}
-	@Listen("smoothlyEditable")
-	async smoothlyEditableHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
-		event.stopPropagation()
-		event.detail(this)
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
@@ -135,6 +126,10 @@ export class SmoothlyInput implements Changeable, Clearable, Editable {
 			}
 		}
 		return result
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
 	}
 	hasNameAndValue(element: any): element is { name: string; value: string } {
 		return (

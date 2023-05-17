@@ -39,7 +39,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable
 	@Watch("value")
 	watchValue() {
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
-		this.listeners.changed?.forEach(l => l(this))
+		this.listeners.changed?.forEach(listener => listener(this))
 	}
 	@Listen("smoothlyInput", { capture: true })
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
@@ -66,7 +66,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable
 		this.submit()
 		this.processing = false
 	}
-	@Listen("smoothlyEditable")
 	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.detail(this)

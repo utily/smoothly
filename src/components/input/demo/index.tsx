@@ -14,8 +14,39 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<smoothly-form looks="border" readonly={true}>
+				<smoothly-input type="text" name="name.first">
+					First Name
+				</smoothly-input>
+
+				<smoothly-input-file placeholder="Select or drag a file here" name="file">
+					<smoothly-icon slot="button" name="folder-outline" />
+				</smoothly-input-file>
+
+				<smoothly-picker multiple mutable label="Emails" name="emails">
+					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
+					<smoothly-picker-option value={"jessie@rocket.com"}>jessie@rocket.com</smoothly-picker-option>
+					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
+				</smoothly-picker>
+
+				<smoothly-input-select initialPrompt="Select...">
+					<smoothly-item value="1">January</smoothly-item>
+					<smoothly-item value="2">February</smoothly-item>
+					<smoothly-item value="3">March</smoothly-item>
+				</smoothly-input-select>
+
+				<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
+
+				<smoothly-input-date-range min="2023-02-01" max="2023-12-30"></smoothly-input-date-range>
+
+				<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
+					Clear
+				</smoothly-input-clear>
+				<smoothly-edit slot="edit">Edit</smoothly-edit>
+			</smoothly-form>,
+
 			<h2>Editable</h2>,
-			<smoothly-form looks="border" readonly={false}>
+			<smoothly-form looks="border" readonly={true}>
 				<smoothly-input type="text" name="name.first">
 					First Name
 				</smoothly-input>
@@ -24,19 +55,19 @@ export class SmoothlyInputDemo {
 				</smoothly-input>
 				<smoothly-input value="asd123" type="password" name="password" readonly={true}>
 					Password
-					<smoothly-editable slot="end" type="input" fill="clear">
+					<smoothly-edit slot="end" type="input" fill="clear">
 						<smoothly-icon name="create-sharp" />
-					</smoothly-editable>
+					</smoothly-edit>
 				</smoothly-input>
-				<smoothly-editable slot="edit">Edit</smoothly-editable>
+				<smoothly-edit slot="edit">Edit</smoothly-edit>
 			</smoothly-form>,
 			<br />,
 			<smoothly-form looks="border" readonly={true}>
 				<smoothly-input value="asd123" type="password" name="password" readonly={true}>
 					Password
-					<smoothly-editable slot="end" type="input" fill="clear">
+					<smoothly-edit slot="end" type="input" fill="clear">
 						<smoothly-icon name="create-sharp" />
-					</smoothly-editable>
+					</smoothly-edit>
 				</smoothly-input>
 			</smoothly-form>,
 			<br />,
