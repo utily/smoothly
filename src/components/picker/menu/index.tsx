@@ -82,6 +82,7 @@ export class SmoothlyPickerMenu {
 				<div class={"controls"}>
 					<smoothly-input
 						ref={element => (this.searchElement = element)}
+						name="search"
 						value={this.search}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => this.inputHandler(e)}
