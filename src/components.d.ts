@@ -5,8 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { address } from "./components/address-display";
-import { address as address1 } from "./components/address-display/index";
+import { address } from "./components/forms/groups/address-display";
+import { address as address1 } from "./components/forms/groups/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
@@ -14,7 +14,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
-import { Selected } from "./components/radio-button/Selected";
+import { Selected } from "./components/forms/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
         "value"?: string;
@@ -315,8 +315,6 @@ export namespace Components {
     }
     interface SmoothlyReorder {
     }
-    interface SmoothlySelectDemo {
-    }
     interface SmoothlySkeleton {
         "align": "left" | "center" | "right";
         "color": string;
@@ -352,6 +350,8 @@ export namespace Components {
     interface SmoothlyTab {
         "label": string;
         "open": boolean;
+    }
+    interface SmoothlyTabDemo {
     }
     interface SmoothlyTabSwitch {
     }
@@ -865,12 +865,6 @@ declare global {
         prototype: HTMLSmoothlyReorderElement;
         new (): HTMLSmoothlyReorderElement;
     };
-    interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlySelectDemoElement: {
-        prototype: HTMLSmoothlySelectDemoElement;
-        new (): HTMLSmoothlySelectDemoElement;
-    };
     interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
     }
     var HTMLSmoothlySkeletonElement: {
@@ -906,6 +900,12 @@ declare global {
     var HTMLSmoothlyTabElement: {
         prototype: HTMLSmoothlyTabElement;
         new (): HTMLSmoothlyTabElement;
+    };
+    interface HTMLSmoothlyTabDemoElement extends Components.SmoothlyTabDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTabDemoElement: {
+        prototype: HTMLSmoothlyTabDemoElement;
+        new (): HTMLSmoothlyTabDemoElement;
     };
     interface HTMLSmoothlyTabSwitchElement extends Components.SmoothlyTabSwitch, HTMLStencilElement {
     }
@@ -1061,13 +1061,13 @@ declare global {
         "smoothly-radio-button-item": HTMLSmoothlyRadioButtonItemElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
-        "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-svg": HTMLSmoothlySvgElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
+        "smoothly-tab-demo": HTMLSmoothlyTabDemoElement;
         "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
@@ -1418,8 +1418,6 @@ declare namespace LocalJSX {
     interface SmoothlyReorder {
         "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
-    interface SmoothlySelectDemo {
-    }
     interface SmoothlySkeleton {
         "align"?: "left" | "center" | "right";
         "color"?: string;
@@ -1458,6 +1456,8 @@ declare namespace LocalJSX {
         "label"?: string;
         "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
+    }
+    interface SmoothlyTabDemo {
     }
     interface SmoothlyTabSwitch {
     }
@@ -1589,13 +1589,13 @@ declare namespace LocalJSX {
         "smoothly-radio-button-item": SmoothlyRadioButtonItem;
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
-        "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
         "smoothly-svg": SmoothlySvg;
         "smoothly-tab": SmoothlyTab;
+        "smoothly-tab-demo": SmoothlyTabDemo;
         "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
         "smoothly-table-cell": SmoothlyTableCell;
@@ -1673,13 +1673,13 @@ declare module "@stencil/core" {
             "smoothly-radio-button-item": LocalJSX.SmoothlyRadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonItemElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
-            "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
+            "smoothly-tab-demo": LocalJSX.SmoothlyTabDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabDemoElement>;
             "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
