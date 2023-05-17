@@ -45,7 +45,6 @@ export class SmoothlyPickerMenu {
 	inputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopPropagation()
 		this.search = event.detail.search
-		console.log(this.search)
 		if (!this.search) {
 			this.allowed = false
 			for (const option of this.options.values())
