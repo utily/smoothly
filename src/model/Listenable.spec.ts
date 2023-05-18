@@ -6,6 +6,9 @@ import { StateBase } from "./StateBase"
 
 describe("Listenable", () => {
 	class State extends StateBase<State> {
+		get foo() {
+			return "bar"
+		}
 		disabled = false
 		static create() {
 			return Listenable.load(new State())
@@ -29,6 +32,7 @@ describe("Listenable", () => {
 			}
 		}
 		const components = [new FakeComponent(), new FakeComponent()]
+		expect(state.foo).toEqual("bar")
 		expect(components.every(component => !component.disabled))
 		state.disabled = true
 		expect(components.every(component => component.disabled)).toEqual(true)
