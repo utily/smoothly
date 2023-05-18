@@ -16,7 +16,7 @@ export class SmoothlyInputFile implements Clearable, Editable {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
-	@Prop({ mutable: true }) readonly?: boolean
+	@Prop({ mutable: true, reflect: true }) readonly?: boolean
 	@Event() smoothlyInput: EventEmitter<Record<string, File | undefined>>
 	@Event() smoothlyChange: EventEmitter<Record<string, File>>
 	@Method()

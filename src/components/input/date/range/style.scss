@@ -32,11 +32,9 @@
 	display: flex;
 	width: 100%;
 	background-color: var(--background, transparent);
-	border-radius: 0.25rem;
 	cursor: pointer;
 }
 smoothly-input {
-	border-radius: var(--border-radius, none);
 	background-color: transparent;
 	width: var(--input-width);
 }

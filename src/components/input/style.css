@@ -83,3 +83,6 @@ input:-webkit-autofill,
 input:-webkit-autofill + label {
 	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 }
+:host([readonly]) {
+	background-color: rgba(var(--smoothly-default-contrast), 0.1);
+}

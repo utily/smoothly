@@ -13,7 +13,7 @@ export class InputDate {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
-	@Prop({ mutable: true }) readonly?: boolean
+	@Prop({ mutable: true, reflect: true }) readonly?: boolean
 	@Event() smoothlyInput: EventEmitter<Record<string, Date | undefined>>
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")

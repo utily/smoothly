@@ -1,6 +1,6 @@
 :host {
 	position: relative;
-	padding-right: 0.8em;
+	padding-right: 0.8em; 
 }
 nav {
 	position: absolute;
@@ -37,4 +37,12 @@ nav {
 		max-width: 22em;
 		
 	}
+}
+
+:host([readonly]) smoothly-input {
+	background-color: transparent;
+}
+
+:host([readonly]) {
+	background-color: rgba(var(--smoothly-default-contrast), 0.1);
 }

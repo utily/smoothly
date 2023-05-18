@@ -24,3 +24,7 @@ span {
 	display: flex;
 	justify-content: flex-end;
 }
+:host > div:first-of-type {
+	display: flex;
+	align-items: center;
+}

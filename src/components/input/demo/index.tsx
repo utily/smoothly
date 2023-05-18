@@ -37,7 +37,7 @@ export class SmoothlyInputDemo {
 				</smoothly-input-select>
 
 				<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
-				<smoothly-input-date-range min="2023-02-01" max="2023-12-30"></smoothly-input-date-range>
+				<smoothly-input-date-range min="2023-02-01" max="2023-12-30" />
 
 				<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
 					Clear
