@@ -70,7 +70,7 @@ export class InputDateRange {
 					onSmoothlyInput={e => (this.start = e.detail.start)}>
 					{`${this.labelStart}`}
 				</smoothly-input>
-				<span>–</span>
+				{!this.showLabel && <span>–</span>}
 				<smoothly-input
 					readonly={this.readonly}
 					type="date"

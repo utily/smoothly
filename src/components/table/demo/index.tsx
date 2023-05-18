@@ -10,7 +10,7 @@ export class TableDemo {
 		return [
 			<h4>Filtered & Checked Table</h4>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
-
+			<smoothly-table-testing></smoothly-table-testing>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
@@ -207,6 +207,66 @@ export class TableDemo {
 					</div>
 					<div slot="detail">expansion</div>
 				</smoothly-table-expandable-row>
+			</smoothly-table>,
+			<span>nested 1 then normal</span>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>A</smoothly-table-header>
+					<smoothly-table-header>B</smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-expandable-row>
+					<smoothly-table-cell>a</smoothly-table-cell>
+					<smoothly-table-cell>b</smoothly-table-cell>
+					<div slot="detail">
+						<smoothly-table>
+							<smoothly-table-row>
+								<smoothly-table-header>C</smoothly-table-header>
+								<smoothly-table-header>D</smoothly-table-header>
+							</smoothly-table-row>
+							<smoothly-table-row>
+								<smoothly-table-cell>c</smoothly-table-cell>
+								<smoothly-table-cell>d</smoothly-table-cell>
+							</smoothly-table-row>
+							<smoothly-table-row>
+								<smoothly-table-cell>ccc</smoothly-table-cell>
+								<smoothly-table-cell>ddd</smoothly-table-cell>
+							</smoothly-table-row>
+							<smoothly-table-expandable-row>
+								<smoothly-table-cell>cccc</smoothly-table-cell>
+								<smoothly-table-cell>dddd</smoothly-table-cell>
+								<div slot="detail">CONTENT</div>
+							</smoothly-table-expandable-row>
+							<smoothly-table-row>
+								<smoothly-table-cell>ccccc</smoothly-table-cell>
+								<smoothly-table-cell>ddd</smoothly-table-cell>
+							</smoothly-table-row>
+							<smoothly-table-expandable-row>
+								<smoothly-table-cell>cccc</smoothly-table-cell>
+								<smoothly-table-cell>dddd</smoothly-table-cell>
+								<div slot="detail">CONTENT</div>
+							</smoothly-table-expandable-row>
+						</smoothly-table>
+					</div>
+				</smoothly-table-expandable-row>
+			</smoothly-table>,
+			<span>not nested</span>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>C</smoothly-table-header>
+					<smoothly-table-header>D</smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>c</smoothly-table-cell>
+					<smoothly-table-cell>d</smoothly-table-cell>
+				</smoothly-table-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>cc</smoothly-table-cell>
+					<smoothly-table-cell>dd</smoothly-table-cell>
+				</smoothly-table-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>ccc</smoothly-table-cell>
+					<smoothly-table-cell>ddd</smoothly-table-cell>
+				</smoothly-table-row>
 			</smoothly-table>,
 		]
 	}

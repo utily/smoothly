@@ -14,29 +14,29 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
-			<smoothly-form looks="border" readonly={true}>
+			<smoothly-form looks="grid" readonly={true}>
 				<smoothly-input type="text" name="name.first">
 					First Name
 				</smoothly-input>
 
-				<smoothly-input-file placeholder="Select or drag a file here" name="file">
-					<smoothly-icon slot="button" name="folder-outline" />
+				<smoothly-input-file label="Profile image" placeholder="Select or drag a file here" name="file">
+					<smoothly-icon size="small" slot="button" name="folder" />
 				</smoothly-input-file>
 
-				<smoothly-picker multiple mutable label="Emails" name="emails">
+				<smoothly-picker multiple mutable name="emails">
+					<span slot="label">Emails</span>
 					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
 					<smoothly-picker-option value={"jessie@rocket.com"}>jessie@rocket.com</smoothly-picker-option>
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 
-				<smoothly-input-select initialPrompt="Select...">
+				<smoothly-input-select label="Select Month" name="Select">
 					<smoothly-item value="1">January</smoothly-item>
 					<smoothly-item value="2">February</smoothly-item>
 					<smoothly-item value="3">March</smoothly-item>
 				</smoothly-input-select>
 
 				<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
-
 				<smoothly-input-date-range min="2023-02-01" max="2023-12-30"></smoothly-input-date-range>
 
 				<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
@@ -349,11 +349,12 @@ export class SmoothlyInputDemo {
 				<smoothly-picker
 					multiple
 					mutable
-					label="Emails"
 					name="emails"
 					validator={value =>
 						value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
 					}>
+					<span slot="label">Emails</span>
+					<span slot="search">Search</span>
 					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
 					<smoothly-picker-option selected value={"jessie@rocket.com"}>
 						jessie@rocket.com
@@ -361,6 +362,9 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
+				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-picker label="Shape" name="shape">
 					<smoothly-picker-option name="Circle" value={"circle"} labeled>
 						<smoothly-icon name="ellipse-outline" />
@@ -372,7 +376,9 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="square-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
-				<smoothly-picker multiple readonly name="animals" label="Animals">
+				<smoothly-picker multiple readonly name="animals">
+					<span slot="label">Animals</span>
+					<span slot="search">Search</span>
 					<smoothly-picker-option selected value={"cat"}>
 						Cat
 					</smoothly-picker-option>
@@ -380,6 +386,7 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 				</smoothly-picker>
 			</smoothly-form>,
+			<smoothly-picker-tester />,
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,
@@ -405,7 +412,10 @@ export class SmoothlyInputDemo {
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
-				initialPrompt="Select..."
+				filterable={true}
+				label="Select month"
+				defaultValue="5"
+				value="7"
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
 				<smoothly-item value="2">February</smoothly-item>
@@ -420,7 +430,8 @@ export class SmoothlyInputDemo {
 				<smoothly-item value="11">November</smoothly-item>
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-input-select>,
-			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
+			<br />,
+			<button onClick={async () => this.selectElement.clear()}>Reset select</button>,
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input type="text" name="text">

@@ -12,6 +12,7 @@ export class SmoothlyInputFile implements Clearable, Editable {
 	private input?: HTMLInputElement
 	@State() dragging = false
 	@Prop({ reflect: true }) name: string
+	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
@@ -43,13 +44,17 @@ export class SmoothlyInputFile implements Clearable, Editable {
 					if (!this.readonly)
 						this.dragging = true
 				}}>
-				<label>
-					<slot name={"label"} />
-				</label>
+				<label>{this.label}</label>
 				<smoothly-button disabled={this.readonly} size="flexible" onClick={event => this.handleClick(event)}>
 					<slot name={"button"} />
 				</smoothly-button>
-				<span onClick={event => this.handleClick(event)}>{this.value?.name ?? this.placeholder}</span>
+				{!this.value?.name ? (
+					<span onClick={event => this.handleClick(event)} class="placeholder">
+						{this.placeholder}
+					</span>
+				) : (
+					<span onClick={event => this.handleClick(event)}>{this.value.name}</span>
+				)}
 				{!this.readonly && (
 					<div
 						class={"mask"}

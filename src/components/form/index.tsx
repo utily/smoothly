@@ -41,7 +41,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
 		this.listeners.changed?.forEach(listener => listener(this))
 	}
-	@Listen("smoothlyInput", { capture: true })
+	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.notice = undefined
 		this.smoothlyFormInput.emit(

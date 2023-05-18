@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
 import { Option } from "../../../model"
 
 @Component({
@@ -13,8 +13,9 @@ export class SmoothlyPickerOption {
 	@Prop({ reflect: true }) labeled = false
 	@Prop({ reflect: true, mutable: true }) readonly?: boolean
 	@Prop() value: any
-	@Prop({ reflect: true }) name: string
+	@Prop({ mutable: true, reflect: true }) name: string
 	@State() valueElement?: HTMLElement
+	@Event() smoothlyPickerOptionLoad: EventEmitter<HTMLSmoothlyPickerOptionElement>
 	@Event() smoothlyPickerOptionLoaded: EventEmitter<Option>
 	@Event() smoothlyPickerOptionChanged: EventEmitter<Option>
 	get option(): Option {
@@ -34,10 +35,12 @@ export class SmoothlyPickerOption {
 	}
 	componentWillLoad() {
 		this.name = this.name ?? this.value
+		this.smoothlyPickerOptionLoad.emit(this.element)
 	}
 	componentDidLoad() {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
+	@Method()
 	clickHandler() {
 		if (!this.readonly) {
 			this.selected = !this.selected

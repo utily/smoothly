@@ -1,12 +1,17 @@
 :host {
 	display: flex;
+	align-items: center;
 	position: relative;
 	width: max-content;
-	padding: 0 0.4em;
-	padding: 1.2em 0.7em 0.2em 0.8em;
+	padding: 0.8em 0em 0em 0.8em;
+	cursor: pointer;
 }
+
 :host:not([open]) .menu {
 	display: none;
+}
+:host([readonly]) button > smoothly-icon {
+ opacity: 0.6;
 }
 smoothly-button {
 	margin: 0;
@@ -54,10 +59,14 @@ smoothly-button {
 	transition: transform 100ms ease;
 }
 .selected:not(:empty) + .label {
-	top: 0.4em;
+	top: 0.3em;
 	transform: scale(0.6);
 }
 
 .hide {
 	display: none;
+}
+
+button {
+	margin-top: -0.8em;
 }
