@@ -16,7 +16,8 @@ export class SmoothlyInputDemo {
 		return [
 			<h2>Form Controll</h2>,
 			<smoothly-form-controll>
-				<smoothly-input type="email" name="email">
+				<label slot="label"></label>
+				<smoothly-input type="email" name="email" slot="input">
 					Email
 				</smoothly-input>
 			</smoothly-form-controll>,
