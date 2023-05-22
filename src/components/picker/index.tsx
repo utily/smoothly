@@ -14,7 +14,7 @@ export class SmoothlyPicker implements Clearable {
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop() multiple = false
 	@Prop() mutable = false
-	@Prop() readonly = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@Prop() labeledDefault = false
 	@State() selected = new Map<string, Option>()
