@@ -9,7 +9,7 @@ import { Message, Trigger } from "../../model"
 export class SmoothlyTriggerSource {
 	@Prop() listen: string
 	@Event() trigger: EventEmitter<Trigger>
-	@Event() message: EventEmitter<Message<any>>
+	@Event() smoothlyMessage: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
 	componentDidLoad() {
 		Message.listen(
@@ -18,7 +18,7 @@ export class SmoothlyTriggerSource {
 				if (Trigger.is(content))
 					this.trigger.emit(content)
 				else
-					this.message.emit({ destination, content })
+					this.smoothlyMessage.emit({ destination, content })
 			},
 			window
 		)

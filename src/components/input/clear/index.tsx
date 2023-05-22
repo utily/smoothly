@@ -15,10 +15,10 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
-	@Prop({ reflect: true }) disabled = false
+	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
-	@Prop({ reflect: true }) display = true
+	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	private parent?: Clearable | (Clearable & Changeable)
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>

@@ -1,9 +1,9 @@
 import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
+import { SmoothlyAppRoomCustomEvent } from "../../components"
 import { Color } from "../../model"
 
-interface Room {
+type Room = {
 	element: HTMLSmoothlyAppRoomElement
-	content: HTMLElement
 }
 
 @Component({
@@ -20,7 +20,7 @@ export class SmoothlyApp {
 	rooms: Record<string, Room> = {}
 
 	@Watch("selected")
-	selectedChanged(value: Room | undefined, previous: Room | undefined) {
+	async selectedChanged(value: Room | undefined, previous: Room | undefined) {
 		if (previous) {
 			previous.element.selected = false
 		}
@@ -33,35 +33,32 @@ export class SmoothlyApp {
 
 			if (this.mainElement) {
 				this.mainElement.innerHTML = ""
-				this.mainElement.appendChild(value.content)
+				this.mainElement.appendChild(await value.element.getContent())
 			}
 		}
 	}
-
 	@Listen("burgerStatus")
 	burgerStatusHandler(event: CustomEvent) {
 		event.stopPropagation()
 		this.menuOpen = event.detail ? true : false
 	}
 	@Listen("popstate", { target: "window" })
-	locationChangeHandler(event: PopStateEvent) {
+	async locationChangeHandler(event: PopStateEvent) {
 		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.element.path) {
 			this.selected = this.rooms[event.state.smoothlyPath]
 		}
 		if (this.mainElement) {
 			this.mainElement.innerHTML = ""
-			this.mainElement.appendChild(this.rooms[event.state.smoothlyPath].content)
+			this.mainElement.appendChild(await this.rooms[event.state.smoothlyPath].element.getContent())
 		}
 	}
-
 	@Listen("smoothlyRoomSelected")
-	roomSelectedHandler(event: CustomEvent<HTMLElement>) {
-		this.selected = { element: event.target as HTMLSmoothlyAppRoomElement, content: event.detail }
+	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
+		this.selected = { element: event.target }
 	}
 	@Listen("smoothlyRoomLoaded")
-	roomLoadedHandler(event: CustomEvent<HTMLElement>) {
-		const room: Room = { element: event.target as HTMLSmoothlyAppRoomElement, content: event.detail }
-		this.rooms[room.element.path.toString()] = room
+	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
+		this.rooms[event.target.path.toString()] = { element: event.target }
 	}
 	render() {
 		return (
