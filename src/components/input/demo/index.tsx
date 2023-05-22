@@ -31,7 +31,7 @@ export class SmoothlyInputDemo {
 
 				<smoothly-form-controll label="Attachment">
 					<smoothly-input-file name="attachment" />
-					<smoothly-icon slot="start" style={{ fill: "gray" }} name="folder" />
+					<smoothly-icon slot="end" style={{ fill: "gray" }} name="folder" />
 				</smoothly-form-controll>
 			</smoothly-form>,
 

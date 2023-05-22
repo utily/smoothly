@@ -56,5 +56,3 @@ export class SmoothlyFormControll {
 		)
 	}
 }
-
-// lägg clear som en slot i form controll om den ska var en "icon"
