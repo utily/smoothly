@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
+import { SmoothlyAccordion } from "../accordion"
 
 @Component({
 	tag: "smoothly-accordion-item",
@@ -9,11 +10,11 @@ export class SmoothlyAccordionItem {
 	@Prop() name: string
 	@Prop() brand?: string | string[]
 	@Prop({ mutable: true, reflect: true }) open?: boolean
-	@Element() me: HTMLElement
-	@Event() smoothlyAccordionItemDidLoad!: EventEmitter<void>
-	@Event() smoothlyAccordionItemDidUnload!: EventEmitter<void>
+	@Element() element: HTMLSmoothlyAccordionItemElement
+	@Event() smoothlyAccordionItemWillLoad!: EventEmitter<(parent: SmoothlyAccordion) => void>
 	@Event() smoothlyOpen!: EventEmitter<{ name: string; open: boolean }>
 	@Event() smoothlyClose!: EventEmitter<{ name: string; open: boolean }>
+	private parent?: SmoothlyAccordion
 	@Watch("open")
 	openChanged(isChecked: boolean) {
 		this.open = isChecked
@@ -24,8 +25,8 @@ export class SmoothlyAccordionItem {
 			})
 		}
 	}
-	componentDidLoad() {
-		const summary = this.me.getElementsByTagName("summary")
+	componentWillLoad() {
+		const summary = this.element.getElementsByTagName("summary")
 		if (summary.length > 0) {
 			const onClick = (e: UIEvent) => {
 				if (this.open)
@@ -37,10 +38,12 @@ export class SmoothlyAccordionItem {
 			summary[0].addEventListener("click", onClick)
 			summary[0].addEventListener("touch", onClick)
 		}
-		this.smoothlyAccordionItemDidLoad.emit()
+		this.smoothlyAccordionItemWillLoad.emit(parent => {
+			this.parent = parent
+		})
 	}
 	disconnectedCallback() {
-		this.smoothlyAccordionItemDidUnload.emit()
+		this.parent?.removeItem(this.element)
 	}
 	render() {
 		return (
