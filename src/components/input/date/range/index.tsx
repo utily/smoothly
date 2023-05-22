@@ -49,7 +49,6 @@ export class InputDateRange {
 	}
 	@Listen("dateRangeSet")
 	onDateRangeSet(event: CustomEvent<DateRange>) {
-		console.log("dateRangeSet", event.detail)
 		this.open = false
 		event.stopPropagation()
 		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)

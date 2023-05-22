@@ -59,7 +59,6 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 	}
 	@Listen("click")
 	onClick(event: UIEvent) {
-		console.log("triggered")
 		event.stopPropagation()
 		if (!this.readonly)
 			this.opened = !this.opened
