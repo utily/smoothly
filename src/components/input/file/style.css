@@ -15,7 +15,9 @@
 	right: 0;
 	background-color: rgb(var(--smoothly-default-contrast), 0.3);
 }
-
+:host[readonly] .mask {
+	opacity: 0;
+}
 :host:not(.dragging) .mask {
 	display: none;
 }
@@ -35,6 +37,9 @@ smoothly-button {
 	margin: 0;
 	border: none;
 }
+:host[readonly] smoothly-button {
+	cursor: default;
+}
 label {
 	padding-left: 0.4rem;
 	padding-top: 0.4rem;
@@ -44,7 +49,6 @@ label {
 	justify-content: flex-start;
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 	cursor: inherit;
-
 }
 label::slotted(*) {
 	display: block;
@@ -55,13 +59,10 @@ label::slotted(*) {
 :host:not([show-label]) label {
 	display: none;
 }
-smoothly-icon {
-	display: none;
-	position: absolute;
-	right: 0.2em;
-	top: 0.6em;
-}
 span {
 	cursor: pointer;
 	padding-left: 0.5rem;
+}
+:host[readonly] span {
+	cursor: default;
 }

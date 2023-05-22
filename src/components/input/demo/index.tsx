@@ -380,6 +380,10 @@ export class SmoothlyInputDemo {
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
+				<smoothly-input-file readonly placeholder="Select or drag a file here again!" name="file2">
+					<span slot="label">Testing file input</span>
+					<smoothly-icon slot="button" name="folder-outline" />
+				</smoothly-input-file>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
