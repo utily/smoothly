@@ -11,31 +11,6 @@
 :host[hidden] {
 	display: none;
 }
-:host > div:nth-child(2) {
-	margin-left: 0.2em;
-}
-:host > div {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-label {
-	position: absolute;
-	left: 0;
-	top: 0.6em;
-	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
-	opacity: 0.8;
-	user-select: none;
-	cursor: inherit;
-	transform-origin: top left;
-	transition: transform 100ms ease;
-}
-:host:not([show-label]) label {
-	display: none;
-}
-:host:not([show-label]) input {
-	padding: 0.7em 0.3em 0.7em 0.4em;
-}
 input {
 	padding: 1.2em 0.3em 0.2em 0.4em;
 	box-sizing: border-box;
@@ -49,26 +24,6 @@ input {
 	font-family: var(--smoothly-font-family);
 	background-color: rgb(var(--background-color));
 }
-smoothly-icon {
-	display: none;
-	position: absolute;
-	right: 0.2em;
-	top: 0.6em;
-}
-
-input:invalid + label + smoothly-icon {
-	display: block;
-}
-:host > div > label {
-	z-index: 1;
-	pointer-events: none;
-}
-:host[placeholder] > div > label,
-:host.has-value > div > label,
-:host:focus-within > div > label {
-	top: 0.4em;
-	transform: scale(0.6);
-}
 input:focus {
 	outline: none;
 }
@@ -79,7 +34,6 @@ input:-webkit-autofill:active {
 	box-shadow: 0 0 0 40em rgb(var(--background-color)) inset;
 	-webkit-box-shadow: 0 0 0 40em rgb(var(--background-color)) inset;
 }
-input:-webkit-autofill,
-input:-webkit-autofill + label {
+input:-webkit-autofill {
 	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 }

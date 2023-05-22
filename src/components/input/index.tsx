@@ -260,31 +260,23 @@ export class SmoothlyInput implements Changeable, Clearable {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<slot name="start"></slot>
-				<div>
-					<input
-						name={this.name}
-						type={this.state?.type}
-						placeholder={this.placeholder}
-						required={this.required}
-						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
-						disabled={this.disabled}
-						readOnly={this.readonly}
-						pattern={this.state?.pattern && this.state?.pattern.source}
-						value={this.state?.value}
-						onInput={(e: InputEvent) => this.onInput(e)}
-						onFocus={e => this.onFocus(e)}
-						onClick={e => this.onClick(e)}
-						onBlur={e => this.onBlur(e)}
-						onKeyDown={e => this.onKeyDown(e)}
-						ref={(el: HTMLInputElement) => (this.inputElement = el)}
-						onPaste={e => this.onPaste(e)}></input>
-					<label htmlFor={this.name}>
-						<slot />
-					</label>
-					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
-				</div>
-				<slot name="end"></slot>
+				<input
+					name={this.name}
+					type={this.state?.type}
+					placeholder={this.placeholder}
+					required={this.required}
+					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+					disabled={this.disabled}
+					readOnly={this.readonly}
+					pattern={this.state?.pattern && this.state?.pattern.source}
+					value={this.state?.value}
+					onInput={(e: InputEvent) => this.onInput(e)}
+					onFocus={e => this.onFocus(e)}
+					onClick={e => this.onClick(e)}
+					onBlur={e => this.onBlur(e)}
+					onKeyDown={e => this.onKeyDown(e)}
+					ref={(el: HTMLInputElement) => (this.inputElement = el)}
+					onPaste={e => this.onPaste(e)}></input>
 			</Host>
 		)
 	}

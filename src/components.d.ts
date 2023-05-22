@@ -162,6 +162,9 @@ export namespace Components {
         "submit": () => Promise<void>;
         "value": Readonly<Data>;
     }
+    interface SmoothlyFormControll {
+        "label"?: string;
+    }
     interface SmoothlyFrame {
         "name": string;
         "origin": string | undefined;
@@ -709,6 +712,12 @@ declare global {
         prototype: HTMLSmoothlyFormElement;
         new (): HTMLSmoothlyFormElement;
     };
+    interface HTMLSmoothlyFormControllElement extends Components.SmoothlyFormControll, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormControllElement: {
+        prototype: HTMLSmoothlyFormControllElement;
+        new (): HTMLSmoothlyFormControllElement;
+    };
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
     }
     var HTMLSmoothlyFrameElement: {
@@ -1035,6 +1044,7 @@ declare global {
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
+        "smoothly-form-controll": HTMLSmoothlyFormControllElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
@@ -1246,6 +1256,9 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "processing"?: boolean;
         "value"?: Readonly<Data>;
+    }
+    interface SmoothlyFormControll {
+        "label"?: string;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1563,6 +1576,7 @@ declare namespace LocalJSX {
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
+        "smoothly-form-controll": SmoothlyFormControll;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
@@ -1647,6 +1661,7 @@ declare module "@stencil/core" {
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
+            "smoothly-form-controll": LocalJSX.SmoothlyFormControll & JSXBase.HTMLAttributes<HTMLSmoothlyFormControllElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
