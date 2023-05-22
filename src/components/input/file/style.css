@@ -5,6 +5,7 @@
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+	padding-left: 0.4rem
 }
 .mask {
 	position: absolute;
@@ -22,7 +23,13 @@ input {
 	overflow: hidden;
 	height: 0;
 	width: 0;
-	padding: 0;
+	padding:0
+}
+.input {
+	display: flex;
+	align-items:center;
+	padding-left: 0.4rem;
+	padding-bottom: 0.2rem;
 }
 smoothly-button {
 	margin: 0;
