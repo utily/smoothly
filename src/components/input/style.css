@@ -86,3 +86,6 @@ input:-webkit-autofill + label {
 :host([readonly]) {
 	background-color: rgba(var(--smoothly-default-contrast), 0.1);
 }
+:host([disabled]) > div > input {
+	cursor: inherit;
+}

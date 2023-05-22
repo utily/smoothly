@@ -16,7 +16,7 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 	@State() selectedElement?: HTMLSmoothlyItemElement
 	@State() missing = false
 	@State() filter = ""
-	@Prop() filterable = false
+	@Prop({ reflect: true }) filterable = false
 	@Prop({ mutable: true }) readonly?: boolean
 	@Event() selected: EventEmitter<any>
 	@Event() smoothlyInput: EventEmitter<Record<string, string | undefined>>
@@ -144,7 +144,8 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 		return (
 			<Host tabIndex={2} class={this.missing ? "missing" : ""}>
 				<smoothly-input
-					readonly={!this.filterable}
+					disabled={!this.filterable}
+					readonly={this.readonly}
 					value={this.filter}
 					ref={el => (this.input = el)}
 					type="text"

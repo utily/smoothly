@@ -16,3 +16,11 @@ smoothly-icon {
 :host {
 	padding-top: 0em !important;
 }
+
+:host {
+	cursor: pointer
+}
+
+:host smoothly-input-select:hover {
+	cursor: pointer;
+}

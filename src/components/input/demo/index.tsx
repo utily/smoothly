@@ -30,7 +30,7 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 
-				<smoothly-input-select label="Select Month" name="Select">
+				<smoothly-input-select filterable label="Select Month" name="Select">
 					<smoothly-item value="1">January</smoothly-item>
 					<smoothly-item value="2">February</smoothly-item>
 					<smoothly-item value="3">March</smoothly-item>
@@ -412,7 +412,6 @@ export class SmoothlyInputDemo {
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
-				filterable={true}
 				label="Select month"
 				defaultValue="5"
 				value="7"
