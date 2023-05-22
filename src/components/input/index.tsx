@@ -26,7 +26,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 	@Prop({ mutable: true }) pattern: RegExp | undefined
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@Prop({ mutable: true }) disabled = false
-	@Prop({ mutable: true }) readonly = false
+	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
 
