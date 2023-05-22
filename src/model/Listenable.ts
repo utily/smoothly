@@ -53,7 +53,7 @@ export class Listenable<T extends CanBeListenable> {
 						  }
 						: {
 								get() {
-									return backend[name].bind(backend)
+									return backend[name]
 								},
 						  },
 				])

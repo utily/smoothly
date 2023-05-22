@@ -14,7 +14,6 @@ export class SmoothlyDisplayDemo {
 			<main>
 				<fieldset>
 					<h2>Smoothly display</h2>
-					<smoothly-display-date-time datetime="2019-08-15T08:08:17.65Z"></smoothly-display-date-time>
 					<dl>
 						<dt>text</dt>
 						<dd>
@@ -95,9 +94,6 @@ export class SmoothlyDisplayDemo {
 							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"Europe/Stockholm"}} value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
 						<dt>Deprecated display date time</dt>
-						<dd>
-							<smoothly-display-date-time datetime="2019-01-31T20:01:34"></smoothly-display-date-time>
-						</dd>
 						<dt>Display amount</dt>
 						<dd>
 							<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>

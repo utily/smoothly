@@ -241,13 +241,13 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 			<h4>Radio List without button 2</h4>,
 			<smoothly-form>
-				<smoothly-radio name="option" value="1" style={{ width: "100%" }}>
+				<smoothly-radio name="option" value="1a" style={{ width: "100%" }}>
 					option 1
 				</smoothly-radio>
-				<smoothly-radio name="option" value="2" checked style={{ width: "100%" }}>
+				<smoothly-radio name="option" value="2a" checked style={{ width: "100%" }}>
 					option 2
 				</smoothly-radio>
-				<smoothly-radio name="option" value="3" style={{ width: "100%" }}>
+				<smoothly-radio name="option" value="3a" style={{ width: "100%" }}>
 					option 3
 				</smoothly-radio>
 			</smoothly-form>,
@@ -255,24 +255,24 @@ export class SmoothlyInputDemo {
 			<smoothly-form>
 				<smoothly-accordion>
 					<smoothly-accordion-item name="A" open>
-						<smoothly-radio name="a" value="1">
+						<smoothly-radio name="a" value="1b">
 							a 1
 						</smoothly-radio>
-						<smoothly-radio name="a" value="2" checked>
+						<smoothly-radio name="a" value="2b" checked>
 							a 2
 						</smoothly-radio>
-						<smoothly-radio name="a" value="3">
+						<smoothly-radio name="a" value="3b">
 							a 3
 						</smoothly-radio>
 					</smoothly-accordion-item>
 					<smoothly-accordion-item name="B">
-						<smoothly-radio name="b" value="1">
+						<smoothly-radio name="b" value="1c">
 							b 1
 						</smoothly-radio>
-						<smoothly-radio name="b" value="2">
+						<smoothly-radio name="b" value="2c">
 							b 2
 						</smoothly-radio>
-						<smoothly-radio name="b" value="3">
+						<smoothly-radio name="b" value="3c">
 							b 3
 						</smoothly-radio>
 					</smoothly-accordion-item>
@@ -305,6 +305,9 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
+				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-picker label="Shape" name="shape">
 					<smoothly-picker-option name="Circle" value={"circle"} labeled>
 						<smoothly-icon name="ellipse-outline" />
