@@ -1,28 +1,29 @@
 @import "../color/style.css";
 
-:host{
+:host {
 	display: inline-block;
 	margin: 1em;
 	box-sizing: border-box;
 	border-radius: 0.5rem;
 	border: solid 1px;
 	transition: background 150ms ease-in-out;
+	cursor: pointer;
 }
-:host([type=link]){
+:host([type=link]) {
 	display: inline;
 	border: none;
 }
-:host([disabled]){
+:host([disabled]) {
 	opacity: 0.5;
 	pointer-events: none;
 }
 a,
-button{
+button {
 	font-size: 110%;
 	font-weight: 400;
 	border: none;
 	background-color: transparent;
-	cursor: pointer;
+	cursor: inherit;
 	display: inline-flex;
 	gap: 0.5rem;
 }
@@ -37,11 +38,11 @@ button {
 :host(:not([size=icon])) > button {
 	padding: 0.8em;
 }
-:host([size=icon]) > button{
+:host([size=icon]) > button {
 	padding: 0.5em;
 }
 :host([shape=rounded]) > button,
-:host([shape=rounded]){
+:host([shape=rounded]) {
 	border-radius: 2rem;
 }
 :host([type=button]) > a {
@@ -49,13 +50,13 @@ button {
 	text-decoration: inherit;
 	width: calc(100% - 0.6em);
 }
-:host([size=small]) > button{
+:host([size=small]) > button {
 	font-size: 100%;
 }
-:host([size=large]) > button{
+:host([size=large]) > button {
 	font-size: 130%;
 }
-:host(:not([size=icon])){
+:host(:not([size=icon])) {
 	min-width: 8em;
 }
 :host([size=flexible]) {
