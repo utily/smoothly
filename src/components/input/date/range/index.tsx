@@ -41,23 +41,18 @@ export class InputDateRange {
 	render() {
 		return [
 			<section onClick={() => (this.open = !this.open)}>
-				<smoothly-input
-					type="date"
-					name="start"
-					value={this.start}
-					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.start = e.detail.start)}>
-					{`${this.labelStart}`}
-				</smoothly-input>
+				<smoothly-form-controll label={this.labelStart}>
+					<smoothly-input
+						type="date"
+						name="start"
+						value={this.start}
+						onSmoothlyInput={e => (this.start = e.detail.start)}
+					/>
+				</smoothly-form-controll>
 				<span>–</span>
-				<smoothly-input
-					type="date"
-					name="end"
-					showLabel={this.showLabel}
-					value={this.end}
-					onSmoothlyInput={e => (this.end = e.detail.end)}>
-					{`${this.labelEnd}`}
-				</smoothly-input>
+				<smoothly-form-controll label={this.labelEnd}>
+					<smoothly-input type="date" name="end" value={this.end} onSmoothlyInput={e => (this.end = e.detail.end)} />
+				</smoothly-form-controll>
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
 			this.open ? (

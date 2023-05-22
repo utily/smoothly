@@ -20,7 +20,6 @@ export class SmoothlyInput implements Changeable, Clearable {
 	@Prop({ reflect: true }) type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop({ mutable: true }) minLength = 0
-	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
 	@Prop({ mutable: true }) autocomplete = true
 	@Prop({ mutable: true }) pattern: RegExp | undefined
@@ -61,6 +60,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
 	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyFocus: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
@@ -96,6 +96,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
+		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -154,6 +155,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 		this.initialValue = undefined
 	}
 	onFocus(event: FocusEvent) {
+		this.smoothlyFocus.emit()
 		this.initialValue = this.value
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)

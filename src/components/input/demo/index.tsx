@@ -15,12 +15,27 @@ export class SmoothlyInputDemo {
 	render() {
 		return [
 			<h2>Form Controll</h2>,
-			<smoothly-form-controll>
-				<label slot="label"></label>
-				<smoothly-input type="email" name="email" slot="input">
-					Email
-				</smoothly-input>
-			</smoothly-form-controll>,
+			<smoothly-form looks="border">
+				<smoothly-form-controll label="Email">
+					<smoothly-input type="email" name="email" />
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Password" icon="lock-closed">
+					<smoothly-input type="password" name="password" />
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Year">
+					<smoothly-input-date />
+					<smoothly-icon slot="end" style={{ fill: "gray" }} name="calendar" />
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Attachment">
+					<smoothly-input-file name="attachment" />
+					<smoothly-icon slot="start" style={{ fill: "gray" }} name="folder" />
+				</smoothly-form-controll>
+			</smoothly-form>,
+
+			<br />,
 
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">

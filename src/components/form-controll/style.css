@@ -1,0 +1,39 @@
+:host {
+	display: flex;
+	align-items: center;
+	gap: 0.2em;
+	padding: 0 0.4em 0 0.4em;
+}
+
+:host > div {
+	position: relative;
+	width: 100%;
+}
+
+label {
+	position: absolute;
+	left: 0;
+	top: 0.8em;
+	user-select: none;
+	cursor: inherit;
+	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	opacity: 0.8;
+	transform-origin: top left;
+	transition: transform 100ms ease;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+}
+
+label smoothly-icon {
+	opacity: 0.8;
+}
+
+.focus {
+	top: 0.4em;
+	transform: scale(0.6);
+}
+
+span {
+	margin-left: 0.2em;
+}

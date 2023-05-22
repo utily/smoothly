@@ -166,6 +166,8 @@ export namespace Components {
         "value": Readonly<Data>;
     }
     interface SmoothlyFormControll {
+        "icon"?: Icon;
+        "label"?: string | HTMLElement;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -201,7 +203,6 @@ export namespace Components {
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
-        "showLabel": boolean;
         "type": string;
         "value": any;
     }
@@ -254,10 +255,6 @@ export namespace Components {
         "marked": boolean;
         "selected": boolean;
         "value": any;
-    }
-    interface SmoothlyLabel {
-        "icon"?: Icon;
-        "label"?: string;
     }
     interface SmoothlyNotification {
         "closable": boolean;
@@ -802,12 +799,6 @@ declare global {
         prototype: HTMLSmoothlyItemElement;
         new (): HTMLSmoothlyItemElement;
     };
-    interface HTMLSmoothlyLabelElement extends Components.SmoothlyLabel, HTMLStencilElement {
-    }
-    var HTMLSmoothlyLabelElement: {
-        prototype: HTMLSmoothlyLabelElement;
-        new (): HTMLSmoothlyLabelElement;
-    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -1070,7 +1061,6 @@ declare global {
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
-        "smoothly-label": HTMLSmoothlyLabelElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -1270,6 +1260,8 @@ declare namespace LocalJSX {
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFormControll {
+        "icon"?: Icon;
+        "label"?: string | HTMLElement;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1300,12 +1292,12 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyFocus"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;
-        "showLabel"?: boolean;
         "type"?: string;
         "value"?: any;
     }
@@ -1365,10 +1357,6 @@ declare namespace LocalJSX {
         "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
-    }
-    interface SmoothlyLabel {
-        "icon"?: Icon;
-        "label"?: string;
     }
     interface SmoothlyNotification {
         "closable"?: boolean;
@@ -1605,7 +1593,6 @@ declare namespace LocalJSX {
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
-        "smoothly-label": SmoothlyLabel;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -1691,7 +1678,6 @@ declare module "@stencil/core" {
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
-            "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
