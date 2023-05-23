@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Option } from "../../../model"
 import { Notice } from "../../../model"
 @Component({
@@ -19,6 +19,12 @@ export class SmoothlyPickerMenu {
 	@Event() notice: EventEmitter<Notice>
 	private options = new Map<any, Option>()
 	private searchElement?: HTMLElement
+
+	@Watch("readonly")
+	readonlyChanged() {
+		for (const option of this.options.values())
+			option.element.readonly = this.readonly
+	}
 
 	@Listen("smoothlyPickerOptionLoad")
 	optionLoadHandler(event: CustomEvent<HTMLSmoothlyPickerOptionElement>) {
