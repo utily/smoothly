@@ -106,6 +106,7 @@ export class SmoothlyPickerMenu {
 					<slot />
 					{this.new.map(option => (
 						<smoothly-picker-option
+							key={option.value}
 							labeled={this.labeledDefault}
 							selected={option.selected}
 							value={option.value}
