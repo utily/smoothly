@@ -9,6 +9,7 @@ import { Icon } from "../icon/Icon"
 })
 export class SmoothlyFormControll {
 	@Prop({ reflect: true }) label?: string | HTMLElement
+	@Prop() placeholder?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@State() focus = false
 	@State() hasValue?: boolean
@@ -30,6 +31,7 @@ export class SmoothlyFormControll {
 		if (e.target && !this.child)
 			this.child = e.target as HTMLElement
 		this.hasValue = Object.values(e.detail).filter(value => Boolean(value)).length > 0
+		console.log(e.target)
 	}
 
 	@Watch("hasValue")
@@ -40,18 +42,17 @@ export class SmoothlyFormControll {
 
 	render() {
 		return (
-			<Host style={{ cursor: this.child?.style.cursor || "text" }}>
-				<slot name="start" />
+			<Host style={{ cursor: this.child?.style.cursor || "text" }} onClick={() => this.child?.click()}>
 				<div>
 					{(this.label || this.icon) && (
-						<label class={this.focus ? "focus" : ""} slot="label" onClick={() => this.child?.click()}>
+						<label class={this.focus ? "focus" : ""} slot="label">
 							{this.icon && <smoothly-icon size="tiny" name={this.icon} />}
-							<span>{this.label}</span>
+							<span>{this.placeholder && !this.focus ? this.placeholder : this.label}</span>
 						</label>
 					)}
 					<slot />
 				</div>
-				<slot name="end" />
+				{/* <slot name="end" /> fundera om vi kan nyttja denna för input clear */}
 			</Host>
 		)
 	}

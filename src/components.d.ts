@@ -168,6 +168,7 @@ export namespace Components {
     interface SmoothlyFormControll {
         "icon"?: Icon;
         "label"?: string | HTMLElement;
+        "placeholder"?: string;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -1261,6 +1262,7 @@ declare namespace LocalJSX {
     interface SmoothlyFormControll {
         "icon"?: Icon;
         "label"?: string | HTMLElement;
+        "placeholder"?: string;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1316,7 +1318,11 @@ declare namespace LocalJSX {
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
-        "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
+        "onSmoothlyBlur"?: (event: SmoothlyInputDateCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyFocus"?: (event: SmoothlyInputDateCustomEvent<void>) => void;
+        "onSmoothlyFormInput"?: (event: SmoothlyInputDateCustomEvent<void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "open"?: boolean;
         "value"?: Date;
     }
@@ -1337,8 +1343,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputFile {
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyBlur"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File | undefined>>) => void;
+        "onSmoothlyFocus"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
+        "onSmoothlyFormInput"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File | undefined>>) => void;
         "placeholder"?: string | undefined;
         "value"?: File;
     }

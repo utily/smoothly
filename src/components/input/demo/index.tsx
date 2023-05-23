@@ -24,14 +24,12 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="password" name="password" />
 				</smoothly-form-controll>
 
-				<smoothly-form-controll label="Year">
+				<smoothly-form-controll label="Year" icon="calendar">
 					<smoothly-input-date />
-					<smoothly-icon slot="end" style={{ fill: "gray" }} name="calendar" />
 				</smoothly-form-controll>
 
-				<smoothly-form-controll label="Attachment">
+				<smoothly-form-controll label="Attachment" placeholder="Select or drop attachment here" icon="folder">
 					<smoothly-input-file name="attachment" />
-					<smoothly-icon slot="end" style={{ fill: "gray" }} name="folder" />
 				</smoothly-form-controll>
 			</smoothly-form>,
 

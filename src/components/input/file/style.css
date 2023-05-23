@@ -6,11 +6,21 @@
 	overflow: hidden;
 	background-color: rgb(var(--background-color));
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
-	min-height: 2.8em; cursor: pointer;
+	min-height: 2.8em; 
+	cursor: pointer;
 }
-:host(.dragging) {
+.overlayer {
 	background-color: rgb(var(--smoothly-default-contrast), 0.3);
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	right: 0%;
+	bottom: 0%;
 }
+.hidden{
+	display: none;
+}
+
 input {
 	position: absolute;
 	box-sizing: border-box;
@@ -24,7 +34,7 @@ input {
 	font-family: var(--smoothly-font-family);
 	background-color: rgb(var(--background-color));
 }
-div {
+span {
 	cursor: pointer;
-	padding: 1.1em 0.3em 0.3em 0em;
+	padding: 1.2em 0.3em 0.3em 0em;
 }

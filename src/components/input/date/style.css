@@ -1,15 +1,14 @@
 :host {
 	position: relative;
-	max-width: 100vw;
 }
-nav {
+.container {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
 	background-color: rgb(var(--smoothly-default-shade));
 	min-width: 18em;
 }
-:host > div {
+:host > .overlayer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -19,7 +18,7 @@ nav {
 	height: 100vh;
 	z-index: 2;
 }
-:host > nav > .arrow {
+:host > .container > .arrow {
 	position: absolute;
 	z-index: 9;
 	transform: translate(2em, -0.55em) rotate(45deg);
@@ -29,7 +28,7 @@ nav {
 }
 
 @media screen and (min-width: 400px){
-	nav {
+	.container {
 		position: absolute;
 		z-index: 10;
 		top: 3.5em;

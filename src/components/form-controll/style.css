@@ -2,12 +2,12 @@
 	display: flex;
 	align-items: center;
 	gap: 0.2em;
-	padding: 0 0.4em 0 0.4em;
+	position: relative;
 }
 
 :host > div {
-	position: relative;
 	width: 100%;
+	padding: 0 0.4em 0 0.4em;
 }
 
 label {
@@ -23,7 +23,8 @@ label {
 	z-index: 2;
 	display: flex;
 	align-items: center;
-	gap: 0.2em
+	gap: 0.3em;
+	padding: 0 0.4em 0 0.4em;
 }
 
 label smoothly-icon {
