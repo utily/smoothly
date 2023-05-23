@@ -34,6 +34,11 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 
 			<br />,
+			<smoothly-form looks="border">
+				<smoothly-form-controll label="Email">
+					<smoothly-input-new />
+				</smoothly-form-controll>
+			</smoothly-form>,
 
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
