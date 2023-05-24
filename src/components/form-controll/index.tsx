@@ -31,7 +31,6 @@ export class SmoothlyFormControll {
 		if (e.target && !this.child)
 			this.child = e.target as HTMLElement
 		this.hasValue = Object.values(e.detail).filter(value => Boolean(value)).length > 0
-		console.log(e.target)
 	}
 
 	@Watch("hasValue")
@@ -40,12 +39,22 @@ export class SmoothlyFormControll {
 			this.focus = true
 	}
 
+	private geCursor = () => {
+		const type = this.child?.querySelector("input")?.getAttribute("type")
+		switch (type) {
+			case "file":
+				return "pointer"
+			default:
+				return "text"
+		}
+	}
+
 	render() {
 		return (
-			<Host style={{ cursor: this.child?.style.cursor || "text" }} onClick={() => this.child?.click()}>
+			<Host style={{ cursor: this.geCursor() }}>
 				<div>
 					{(this.label || this.icon) && (
-						<label class={this.focus ? "focus" : ""} slot="label">
+						<label class={this.focus ? "focus" : ""} slot="label" onClick={() => this.child?.click()}>
 							{this.icon && <smoothly-icon size="tiny" name={this.icon} />}
 							<span>{this.placeholder && !this.focus ? this.placeholder : this.label}</span>
 						</label>

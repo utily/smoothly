@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Prop } from "@stencil/core"
 import { Date } from "isoly"
 
 @Component({
@@ -13,21 +13,9 @@ export class InputDate {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
-	@Event() smoothlyBlur: EventEmitter<void>
-	@Event() smoothlyFocus: EventEmitter<void>
-	@Event() smoothlyChange: EventEmitter<Record<string, any>>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyFormInput: EventEmitter<void>
 	componentWillLoad() {
 		this.smoothlyFormInput.emit()
-		this.smoothlyInput.emit({ [this.name]: this.value })
-	}
-
-	@Watch("value")
-	onStart(value: Date, pre: Date | undefined) {
-		if (value != pre)
-			this.smoothlyChange.emit({ [this.name]: this.value })
-		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
 	@Listen("dateSet")
@@ -36,26 +24,17 @@ export class InputDate {
 		e.stopPropagation()
 	}
 
-	onFocus() {
-		this.open = true
-		this.smoothlyFocus.emit()
-	}
-
-	onBlur() {
-		this.smoothlyBlur.emit()
-	}
-
 	render() {
 		return (
 			<Host>
-				<input
+				<smoothly-input
 					name={this.name}
-					onFocus={() => this.onFocus()}
-					onBlur={() => this.onBlur()}
+					onFocus={() => (this.open = true)}
+					onClick={() => (this.open = true)}
 					disabled={this.disabled}
 					type="date"
 					value={this.value}
-					onInput={e => (this.value = (e.target as HTMLInputElement).value)}
+					onSmoothlyInput={e => (this.value = e.detail[this.name])}
 				/>
 				{this.open && !this.disabled && (
 					<Fragment>
