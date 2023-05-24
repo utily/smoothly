@@ -22,7 +22,7 @@ export class SmoothlyFilterInput {
 	@Prop() pattern?: RegExp
 	@Prop() placeholder?: string
 	@Prop() disabled = false
-	@Prop() readonly = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop() comparison: "equals" | "less" | "greater" | "starts" | "ends" | "includes" = "includes"
 	@State() criteria: Criteria
