@@ -15,6 +15,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Options } from "./components/input/select/index";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -247,8 +248,13 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputSelect {
-        "initialPrompt"?: string;
-        "reset": () => Promise<void>;
+        "disabled": boolean;
+        "filterable": boolean;
+        "multiple": boolean;
+        "name": string;
+        "options": Options[];
+        "required": boolean;
+        "value"?: string | string[];
     }
     interface SmoothlyItem {
         "filter": (filter: string) => Promise<boolean>;
@@ -1352,8 +1358,18 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputSelect {
-        "initialPrompt"?: string;
-        "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
+        "disabled"?: boolean;
+        "filterable"?: boolean;
+        "multiple"?: boolean;
+        "name"?: string;
+        "onSmoothlyBlur"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputSelectCustomEvent<Record<string, string | string[] | undefined>>) => void;
+        "onSmoothlyFocus"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
+        "onSmoothlyFormInput"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, string | string[] | undefined>>) => void;
+        "options"?: Options[];
+        "required"?: boolean;
+        "value"?: string | string[];
     }
     interface SmoothlyItem {
         "marked"?: boolean;

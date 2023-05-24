@@ -12,6 +12,21 @@ export class SmoothlyInputDemo {
 		console.log("selectionChanged", event.detail)
 	}
 
+	options = [
+		{ value: "January", label: "January" },
+		{ value: "February", label: "February" },
+		{ value: "March", label: "March" },
+		{ value: "April", label: "April" },
+		{ value: "May", label: "May" },
+		{ value: "June", label: "June" },
+		{ value: "July", label: "July" },
+		{ value: "August", label: "August" },
+		{ value: "September", label: "September" },
+		{ value: "October", label: "October" },
+		{ value: "November", label: "November" },
+		{ value: "December", label: "December" },
+	]
+
 	render() {
 		return [
 			<h2>Form Controll</h2>,
@@ -24,12 +39,24 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="password" name="password" />
 				</smoothly-form-controll>
 
-				<smoothly-form-controll label="Year" icon="calendar">
+				{/* <smoothly-form-controll label="Year" icon="calendar">
 					<smoothly-input-date name="Year" />
-				</smoothly-form-controll>
+				</smoothly-form-controll> */}
 
 				<smoothly-form-controll label="Attachment" placeholder="Select or drop attachment here" icon="folder">
 					<smoothly-input-file name="attachment" />
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Filter">
+					<smoothly-input-select filterable name="Filter" options={this.options}></smoothly-input-select>
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Select">
+					<smoothly-input-select name="Select" options={this.options}></smoothly-input-select>
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Test">
+					<smoothly-input type="text" name="test" />
 				</smoothly-form-controll>
 			</smoothly-form>,
 
@@ -353,45 +380,43 @@ export class SmoothlyInputDemo {
 			<smoothly-picker-tester />,
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
-			<smoothly-input-date>Date</smoothly-input-date>,
-			<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
-				Date
-			</smoothly-input-date>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"></smoothly-input-date-range>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"
-				showLabel={false}
-				style={{
-					"--border-radius": "4px",
-					"--padding": "0 0.75em",
-					"--input-width": "6rem",
-				}}></smoothly-input-date-range>,
-			<br />,
-			<h4>Smoothly Selector</h4>,
-			<smoothly-input-select
-				initialPrompt="Select..."
-				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
-				<smoothly-item value="1">January</smoothly-item>
-				<smoothly-item value="2">February</smoothly-item>
-				<smoothly-item value="3">March</smoothly-item>
-				<smoothly-item value="4">April</smoothly-item>
-				<smoothly-item value="5">May</smoothly-item>
-				<smoothly-item value="6">June</smoothly-item>
-				<smoothly-item value="7">July</smoothly-item>
-				<smoothly-item value="8">August</smoothly-item>
-				<smoothly-item value="9">September</smoothly-item>
-				<smoothly-item value="10">October</smoothly-item>
-				<smoothly-item value="11">November</smoothly-item>
-				<smoothly-item value="12">December</smoothly-item>
-			</smoothly-input-select>,
-			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
+			// <smoothly-input-date>Date</smoothly-input-date>,
+			// <smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
+			// 	Date
+			// </smoothly-input-date>,
+			// <smoothly-input-date-range
+			// 	start="2022-10-28"
+			// 	end="2022-11-27"
+			// 	min="2021-10-10"
+			// 	max="2022-12-30"></smoothly-input-date-range>,
+			// <smoothly-input-date-range
+			// 	start="2022-10-28"
+			// 	end="2022-11-27"
+			// 	min="2021-10-10"
+			// 	max="2022-12-30"
+			// 	showLabel={false}
+			// 	style={{
+			// 		"--border-radius": "4px",
+			// 		"--padding": "0 0.75em",
+			// 		"--input-width": "6rem",
+			// 	}}></smoothly-input-date-range>,
+			// <br />,
+			// <h4>Smoothly Selector</h4>,
+			// <smoothly-input-select ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
+			// 	<smoothly-item value="1">January</smoothly-item>
+			// 	<smoothly-item value="2">February</smoothly-item>
+			// 	<smoothly-item value="3">March</smoothly-item>
+			// 	<smoothly-item value="4">April</smoothly-item>
+			// 	<smoothly-item value="5">May</smoothly-item>
+			// 	<smoothly-item value="6">June</smoothly-item>
+			// 	<smoothly-item value="7">July</smoothly-item>
+			// 	<smoothly-item value="8">August</smoothly-item>
+			// 	<smoothly-item value="9">September</smoothly-item>
+			// 	<smoothly-item value="10">October</smoothly-item>
+			// 	<smoothly-item value="11">November</smoothly-item>
+			// 	<smoothly-item value="12">December</smoothly-item>
+			// </smoothly-input-select>,
+			// <button onClick={async () => this.selectElement.clear()}>Reset select</button>,
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input type="text" name="text">

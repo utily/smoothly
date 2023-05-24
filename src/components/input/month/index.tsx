@@ -1,6 +1,6 @@
-import { Component, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
-import * as generate from "../../calendar/generate"
+// import * as generate from "../../calendar/generate"
 
 @Component({
 	tag: "smoothly-input-month",
@@ -19,25 +19,35 @@ export class MonthSelector {
 		date.setMonth(date.getMonth() + delta)
 		this.value = Date.create(date)
 	}
+
+	@Listen("smoothlyInput")
+	@Listen("smoothlyChange")
+	@Listen("smoothlyBlur")
+	@Listen("smoothlyFocus")
+	onSmoothlyInput(e: Event) {
+		e.preventDefault()
+		e.stopPropagation()
+	}
+
 	render() {
 		return [
 			<div onClick={() => this.adjustMonth(-1)}>
 				<smoothly-icon name="chevron-back-outline" size="small"></smoothly-icon>
 			</div>,
-			<smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
-				{generate.years(this.value ?? Date.now()).map(year => (
-					<smoothly-item value={year.date} selected={year.selected}>
-						{year.name}
-					</smoothly-item>
-				))}
-			</smoothly-input-select>,
-			<smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
-				{generate.months(this.value ?? Date.now()).map(month => (
-					<smoothly-item value={month.date} selected={month.selected}>
-						{month.name}
-					</smoothly-item>
-				))}
-			</smoothly-input-select>,
+			// <smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			// 	{generate.years(this.value ?? Date.now()).map(year => (
+			// 		<smoothly-item value={year.date} selected={year.selected}>
+			// 			{year.name}
+			// 		</smoothly-item>
+			// 	))}
+			// </smoothly-input-select>,
+			// <smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			// 	{generate.months(this.value ?? Date.now()).map(month => (
+			// 		<smoothly-item value={month.date} selected={month.selected}>
+			// 			{month.name}
+			// 		</smoothly-item>
+			// 	))}
+			// </smoothly-input-select>,
 			<div onClick={() => this.adjustMonth(1)}>
 				<smoothly-icon name="chevron-forward-outline" size="small"></smoothly-icon>
 			</div>,

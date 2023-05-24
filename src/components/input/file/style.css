@@ -37,4 +37,5 @@ input {
 span {
 	cursor: pointer;
 	padding: 1.2em 0.3em 0.3em 0em;
+	overflow: hidden;
 }
