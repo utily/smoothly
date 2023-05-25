@@ -3,6 +3,7 @@
 	align-items: center;
 	gap: 0.2em;
 	position: relative;
+	background-color: rgb(var(--background-color));
 }
 
 :host > div {

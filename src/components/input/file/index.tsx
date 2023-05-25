@@ -36,7 +36,6 @@ export class SmoothlyInputFile {
 	}
 
 	onClick() {
-		this.input?.click()
 		this.smoothlyFocus.emit()
 	}
 
@@ -53,6 +52,7 @@ export class SmoothlyInputFile {
 	}
 
 	onDragLeave() {
+		console.log("leave")
 		this.dragging = false
 		this.smoothlyBlur.emit()
 	}
@@ -71,12 +71,13 @@ export class SmoothlyInputFile {
 	render() {
 		return (
 			<Host onDragOver={(event: Event) => this.abortEvent(event)} onDragEnter={() => this.onDragEnter()}>
-				<span onClick={() => this.onClick()}>{this.value?.name}</span>
+				<span>{this.value?.name}</span>
 				<div
 					onDragLeave={() => this.onDragLeave()}
 					class={`${this.dragging ? "overlayer" : "hidden"}`}
 					onDrop={(event: DragEvent) => this.onDrop(event)}></div>
 				<input
+					onClick={() => this.onClick()}
 					ref={element => (this.input = element)}
 					type="file"
 					files={(this.transfer.items.clear(), this.value && this.transfer.items.add(this.value), this.transfer.files)}
