@@ -1,0 +1,45 @@
+@import '../style.css';
+
+:host {
+	background: transparent;
+	overflow: visible;
+
+	.dropdown {
+		position: absolute;
+		top: calc(100% + 0.1em);
+		left: 0;
+		z-index: 99999;
+		width: calc(100% - 2px);
+		background-color: rgb(var(--background-color));
+		box-shadow: var(--smoothly-shadow);
+		max-height: 19em;
+		overflow-y: scroll;
+		
+		.option {
+			padding: 0.5em;
+			cursor: pointer;
+
+			&:hover {
+				color: rgb(var(--smoothly-primary-contrast));
+				background-color: rgb(var(--smoothly-primary-tint));
+			}
+		}
+
+		.selected {
+			color: rgb(var(--smoothly-primary-contrast));
+			background-color: rgb(var(--smoothly-primary-color));
+		}
+
+		.focused {
+			color: rgb(var(--smoothly-primary-contrast));
+			background-color: rgb(var(--smoothly-primary-tint));
+		}
+	}
+	
+}
+
+:host:not([filterable]) input {
+	cursor:  pointer;
+}
+
+
