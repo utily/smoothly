@@ -58,6 +58,7 @@ export class SmoothlyInputFile {
 	}
 
 	onInput() {
+		this.dragging = false
 		if (this.input?.files?.length)
 			this.value = this.input?.files[0]
 	}
@@ -69,10 +70,7 @@ export class SmoothlyInputFile {
 
 	render() {
 		return (
-			<Host
-				onDragOver={(event: Event) => this.abortEvent(event)}
-				onDragEnter={() => this.onDragEnter()}
-				onClick={() => this.onClick()}>
+			<Host onDragOver={(event: Event) => this.abortEvent(event)} onDragEnter={() => this.onDragEnter()}>
 				<span onClick={() => this.onClick()}>{this.value?.name}</span>
 				<div
 					onDragLeave={() => this.onDragLeave()}

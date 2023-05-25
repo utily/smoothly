@@ -4,7 +4,7 @@
 	font-weight: var(--smoothly-font-weight);
 	padding: 0 0.4em;
 	overflow: hidden;
-	background-color: rgb(var(--background-color));
+	background-color: transparent;
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 	min-height: 2.8em; 
 	cursor: pointer;
@@ -28,14 +28,13 @@ input {
 	height: 100%;
 	background: none;
 	border: 0;
-	z-index: -1;
+	z-index: 1;
 	opacity: 0;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color));
+	cursor: pointer;
 }
 span {
 	cursor: pointer;
 	padding: 1.2em 0.3em 0.3em 0em;
-	overflow: hidden;
 }

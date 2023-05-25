@@ -5,7 +5,7 @@
 	font-weight: var(--smoothly-font-weight);
 	padding: 0 0.4em;
 	overflow: hidden;
-	background-color: rgb(var(--background-color));
+	background: transparent;
 	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
 }
 :host[hidden] {
@@ -22,7 +22,6 @@ input {
 	position: relative;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color));
 }
 input:focus, select:focus {
 	outline: none;

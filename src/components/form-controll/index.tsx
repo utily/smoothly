@@ -39,22 +39,12 @@ export class SmoothlyFormControll {
 			this.focus = true
 	}
 
-	private geCursor = () => {
-		const type = this.child?.querySelector("input")?.getAttribute("type")
-		switch (type) {
-			case "file":
-				return "pointer"
-			default:
-				return "text"
-		}
-	}
-
 	render() {
 		return (
-			<Host style={{ cursor: this.geCursor() }}>
+			<Host>
 				<div>
 					{(this.label || this.icon) && (
-						<label class={this.focus ? "focus" : ""} slot="label" onClick={() => this.child?.click()}>
+						<label class={this.focus ? "focus" : ""} slot="label">
 							{this.icon && <smoothly-icon size="tiny" name={this.icon} />}
 							<span>{this.placeholder && !this.focus ? this.placeholder : this.label}</span>
 						</label>

@@ -4,6 +4,10 @@ input::-webkit-calendar-picker-indicator {
   display: none !important;
 }
 
+:host {
+	background: transparent;
+}
+
 select {
 	padding: 1.2em 0.3em 0.2em 0em;
 	box-sizing: border-box;
@@ -15,5 +19,4 @@ select {
 	position: relative;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color));
 }
