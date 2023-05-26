@@ -39,9 +39,9 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="password" name="password" />
 				</smoothly-form-controll>
 
-				{/* <smoothly-form-controll label="Year" icon="calendar">
+				<smoothly-form-controll label="Year" icon="calendar">
 					<smoothly-input-date name="Year" />
-				</smoothly-form-controll> */}
+				</smoothly-form-controll>
 
 				<smoothly-form-controll label="Attachment" placeholder="Select or drop attachment here" icon="folder">
 					<smoothly-input-file name="attachment" />
@@ -52,7 +52,10 @@ export class SmoothlyInputDemo {
 				</smoothly-form-controll>
 
 				<smoothly-form-controll label="Filter">
-					<smoothly-input-select name="Filter" options={this.options}></smoothly-input-select>
+					<smoothly-input-select
+						value={[this.options[0].value]}
+						name="Filter"
+						options={this.options}></smoothly-input-select>
 				</smoothly-form-controll>
 
 				<smoothly-form-controll label="Filter">

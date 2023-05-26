@@ -39,6 +39,16 @@ export class SmoothlyInputSelect {
 					this.focused = false
 			})
 		}
+
+		if (this.value && Array.isArray(this.value))
+			this.filter = this.options
+				.filter(option => this.value?.includes(option.value))
+				.map(option => option.label || option.value)
+				.join(", ")
+		else if (this.value) {
+			const target = this.options.filter(option => option.value === this.value)[0]
+			this.filter = target.label || target.value || ""
+		}
 	}
 
 	@Watch("value")

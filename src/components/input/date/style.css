@@ -5,7 +5,8 @@
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
+	box-shadow: var(--smoothly-shadow);
 	min-width: 18em;
 }
 :host > .overlayer {
@@ -25,15 +26,11 @@
 	transform: translate(2em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
 }
 
 @media screen and (min-width: 400px){
 	.container {
-		position: absolute;
-		z-index: 10;
-		top: 3.5em;
-		background-color: rgb(var(--smoothly-default-shade));
 		max-width: 22em;
 	}
 }

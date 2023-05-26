@@ -2,7 +2,16 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: large;
+	align-items: end;
 }
 smoothly-icon {
 	font-size: smaller;
+	margin-bottom: 0.3em;
+}
+.relative {
+	position: relative
+}
+
+.option {
+	font-size: 0.8rem;
 }
