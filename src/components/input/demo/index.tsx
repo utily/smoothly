@@ -332,26 +332,26 @@ export class SmoothlyInputDemo {
 			<smoothly-picker-tester />,
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
-			<smoothly-input-date>Date</smoothly-input-date>,
-			<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
-				Date
-			</smoothly-input-date>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"></smoothly-input-date-range>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"
-				showLabel={false}
-				style={{
-					"--border-radius": "4px",
-					"--padding": "0 0.75em",
-					"--input-width": "6rem",
-				}}></smoothly-input-date-range>,
+
+			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Date picker", e.detail)}>
+				<smoothly-input-date>Date</smoothly-input-date>
+				<smoothly-input-date value="2021-10-28" max="2022-12-30" min="2024-10-10">
+					Date
+				</smoothly-input-date>
+				<smoothly-input-date-range min="2021-10-10" max="2024-12-30"></smoothly-input-date-range>
+				<smoothly-input-date-range
+					start="2022-10-28"
+					end="2022-11-27"
+					min="2021-10-10"
+					max="2024-12-30"
+					showLabel={false}
+					style={{
+						"--border-radius": "4px",
+						"--padding": "0 0.75em",
+						"--input-width": "6rem",
+					}}></smoothly-input-date-range>
+				<smoothly-submit slot="submit">Submit</smoothly-submit>
+			</smoothly-form>,
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
