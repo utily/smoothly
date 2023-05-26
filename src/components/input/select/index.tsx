@@ -15,6 +15,7 @@ export class SmoothlyInputSelect {
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
 	@State() focused = false
+	@State() isHovered = false
 	@State() filter: string
 	@State() optionFiltered: Options[]
 	@State() current: HTMLDivElement | undefined
@@ -30,6 +31,14 @@ export class SmoothlyInputSelect {
 		this.smoothlyFormInput.emit()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.optionFiltered = this.options
+		if (this.multiple) {
+			this.filterable = false
+
+			window.addEventListener("click", (e: Event) => {
+				if (!this.isHovered && this.focused && e.target !== this.input)
+					this.focused = false
+			})
+		}
 	}
 
 	@Watch("value")
@@ -98,14 +107,19 @@ export class SmoothlyInputSelect {
 		}
 
 		if (key === "Enter" && this.current instanceof HTMLDivElement) {
-			this.filter = this.current.textContent || ""
-			this.value = this.current.dataset.value
-			this.focused = false
+			if (!this.multiple) {
+				this.filter = this.current.textContent || ""
+				this.value = this.current.dataset.value
+				this.focused = false
+			} else
+				this.onSelectMutiple(this.current.dataset.value || "")
 		}
 
 		if (key === "Escape") {
-			this.filter = ""
-			this.value = undefined
+			if (!this.multiple) {
+				this.filter = ""
+				this.value = undefined
+			}
 			this.current?.classList.remove("focused")
 			this.onBlur()
 			this.input?.blur()
@@ -113,15 +127,34 @@ export class SmoothlyInputSelect {
 	}
 
 	onClick(e: Event) {
-		// Måste gå att ta bort värden också om det är mutiple samt lägga till flera
 		if (!this.multiple) {
 			this.filter = (e.target as HTMLDivElement).textContent || ""
 			this.value = (e.target as HTMLDivElement).dataset.value
-		}
-		this.focused = false
+			this.focused = false
+		} else
+			this.onSelectMutiple((e.target as HTMLDivElement).dataset.value || "")
 	}
 
-	@State() isHovered = false
+	onSelectMutiple(value: string) {
+		let newValue
+		if (this.value?.includes(value) && Array.isArray(this.value))
+			newValue = this.value.filter(option => option !== value)
+		else if (Array.isArray(this.value))
+			newValue = [...this.value, value]
+		else
+			newValue = [value]
+
+		if (Array.isArray(newValue) && newValue.length)
+			this.value = newValue
+		else
+			this.value = undefined
+
+		this.filter = this.options
+			.filter(option => this.value?.includes(option.value))
+			.map(option => option.label || option.value)
+			.join(", ")
+	}
+
 	render() {
 		return (
 			<Host>
@@ -129,7 +162,13 @@ export class SmoothlyInputSelect {
 					readOnly={!this.filterable}
 					ref={e => (this.input = e)}
 					type="text"
-					onKeyDown={e => this.onKeyDown(e.key)}
+					onKeyDown={e => {
+						if (this.multiple) {
+							e.stopPropagation()
+							e.preventDefault()
+						}
+						this.onKeyDown(e.key)
+					}}
 					onInput={(e: KeyboardEvent) => this.onInput(e)}
 					onFocus={() => this.onFocus()}
 					onBlur={() => {
@@ -153,7 +192,7 @@ export class SmoothlyInputSelect {
 						{this.optionFiltered.map(option => (
 							<div
 								onClick={e => this.onClick(e)}
-								class={option.value === this.value ? "selected option" : "option"}
+								class={option.value === this.value || this.value?.includes(option.value) ? "selected option" : "option"}
 								data-value={option.value}>
 								{option.label || option.value}
 							</div>

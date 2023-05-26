@@ -48,6 +48,14 @@ export class SmoothlyInputDemo {
 				</smoothly-form-controll>
 
 				<smoothly-form-controll label="Filter">
+					<smoothly-input-select multiple name="Filter" options={this.options}></smoothly-input-select>
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Filter">
+					<smoothly-input-select name="Filter" options={this.options}></smoothly-input-select>
+				</smoothly-form-controll>
+
+				<smoothly-form-controll label="Filter">
 					<smoothly-input-select filterable name="Filter" options={this.options}></smoothly-input-select>
 				</smoothly-form-controll>
 			</smoothly-form>,
