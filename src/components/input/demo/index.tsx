@@ -335,7 +335,7 @@ export class SmoothlyInputDemo {
 
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Date picker", e.detail)}>
 				<smoothly-input-date>Date</smoothly-input-date>
-				<smoothly-input-date value="2021-10-28" max="2022-12-30" min="2024-10-10">
+				<smoothly-input-date value="2021-10-28" min="2022-12-30" max="2024-12-30">
 					Date
 				</smoothly-input-date>
 				<smoothly-input-date-range min="2021-10-10" max="2024-12-30"></smoothly-input-date-range>
