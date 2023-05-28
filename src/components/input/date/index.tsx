@@ -28,6 +28,7 @@ export class InputDate {
 		return (
 			<Host>
 				<smoothly-input
+					readonly
 					name={this.name}
 					onFocus={() => (this.open = true)}
 					onClick={() => (this.open = true)}
@@ -35,6 +36,10 @@ export class InputDate {
 					type="date"
 					value={this.value}
 					onSmoothlyInput={e => (this.value = e.detail[this.name])}
+					onSmoothlyChange={e => {
+						e.stopPropagation()
+						e.preventDefault()
+					}}
 				/>
 				{this.open && !this.disabled && (
 					<Fragment>

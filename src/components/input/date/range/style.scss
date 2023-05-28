@@ -3,14 +3,16 @@
 	display: block;
 	width: fit-content;
 }
-:host > nav {
+.container  {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
+	box-shadow: var(--smoothly-shadow);
+	min-width: 18em;
 	max-width: 22em;
 }
-:host > div {
+:host > .overlayer {
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -20,26 +22,28 @@
 	height: 100vh;
 	z-index: 2;
 }
-:host > nav > .arrow {
+:host > .container > .arrow {
 	position: absolute;
 	z-index: 9;
 	transform: translate(10em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
 }
-:host > section {
+:host > fieldset {
+	margin: 0em;
+	padding: 0em;
+	border: none;
 	display: flex;
 	background-color: var(--background, transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
+
 }
 smoothly-input {
+	display: inline;
 	border-radius: var(--border-radius, none);
 	background-color: transparent;
 	width: var(--input-width);
 }
-span {
-	padding: 0.5em 0.2em 0.5em 0.2em;
-	align-self: center;
-}
+

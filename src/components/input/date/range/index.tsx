@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Prop, Watch } from "@stencil/core"
 import { Date, DateRange } from "isoly"
 
 @Component({
@@ -7,21 +7,34 @@ import { Date, DateRange } from "isoly"
 	scoped: true,
 })
 export class InputDateRange {
-	@Prop({ mutable: true }) value?: Date
+	@Prop({ mutable: true }) name: string
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
+	@Prop({ mutable: true }) disabled: boolean
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
-	@Event() valueChanged: EventEmitter<Date>
-	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
-
-	@Watch("value")
-	onValue(next: Date) {
-		this.valueChanged.emit(next)
+	@Event() smoothlyInput: EventEmitter<{
+		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
+	}>
+	@Event() smoothlyChange: EventEmitter<{
+		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
+	}>
+	@Event() smoothlyFormInput: EventEmitter<void>
+	private element?: HTMLElement | null
+	componentWillLoad() {
+		this.smoothlyFormInput.emit()
+		this.smoothlyInput.emit({ [this.name]: this.start && this.end ? { start: this.start, end: this.end } : undefined })
+	}
+	@Watch("end")
+	@Watch("start")
+	onValue(next: Date, pre: Date | undefined) {
+		if (next !== pre)
+			this.smoothlyChange.emit({ [this.name]: { start: this.start, end: this.end } })
+		this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 	}
 	@Listen("startChanged")
 	onStartChanged(event: CustomEvent<Date>) {
@@ -33,46 +46,60 @@ export class InputDateRange {
 	}
 	@Listen("dateRangeSet")
 	onDateRangeSet(event: CustomEvent<DateRange>) {
-		console.log("dateRangeSet", event.detail)
 		this.open = false
 		event.stopPropagation()
-		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
+	}
+	@Listen("smoothlyInput")
+	@Listen("smoothlyChange")
+	abortEvent(e: CustomEvent) {
+		if ("start" in e.detail || "end" in e.detail) {
+			e.preventDefault()
+			e.stopPropagation()
+		}
 	}
 	render() {
-		return [
-			<section onClick={() => (this.open = !this.open)}>
-				<smoothly-form-controll label={this.labelStart}>
-					<smoothly-input
-						type="date"
-						name="start"
-						value={this.start}
-						onSmoothlyInput={e => (this.start = e.detail.start)}
-					/>
-				</smoothly-form-controll>
-				<span>–</span>
-				<smoothly-form-controll label={this.labelEnd}>
-					<smoothly-input type="date" name="end" value={this.end} onSmoothlyInput={e => (this.end = e.detail.end)} />
-				</smoothly-form-controll>
-			</section>,
-			this.open ? <div onClick={() => (this.open = false)}></div> : [],
-			this.open ? (
-				<nav>
-					<div class="arrow"></div>
-					<smoothly-calendar
-						doubleInput={true}
-						value={this.value ?? Date.now()}
-						onValueChanged={event => {
-							this.value = event.detail
-							event.stopPropagation()
-						}}
-						start={this.start}
-						end={this.end}
-						max={this.max}
-						min={this.min}></smoothly-calendar>
-				</nav>
-			) : (
-				[]
-			),
-		]
+		return (
+			<Host ref={e => (this.element = e)}>
+				<fieldset onClick={() => (this.open = !this.open)}>
+					<smoothly-form-controll label={this.labelStart}>
+						<smoothly-input
+							disabled={this.disabled}
+							type="date"
+							name="start"
+							value={this.start}
+							onSmoothlyInput={e => {
+								this.start = e.detail.start
+							}}
+						/>
+					</smoothly-form-controll>
+					<smoothly-form-controll label={this.labelEnd}>
+						<smoothly-input
+							disabled={this.disabled}
+							type="date"
+							name="end"
+							value={this.end}
+							onSmoothlyInput={e => {
+								this.end = e.detail.end
+							}}
+						/>
+					</smoothly-form-controll>
+				</fieldset>
+
+				{this.open && !this.disabled && (
+					<Fragment>
+						<div class="overlayer" onClick={() => (this.open = false)}></div>
+						<div class="container">
+							<div class="arrow"></div>
+							<smoothly-calendar
+								doubleInput={true}
+								start={this.start}
+								end={this.end}
+								max={this.max}
+								min={this.min}></smoothly-calendar>
+						</div>
+					</Fragment>
+				)}
+			</Host>
+		)
 	}
 }

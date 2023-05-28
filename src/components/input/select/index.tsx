@@ -142,6 +142,7 @@ export class SmoothlyInputSelect {
 				this.filter = this.current.textContent || ""
 				this.value = this.current.dataset.value
 				this.focused = false
+				this.input?.blur()
 			} else
 				this.onSelectMutiple(this.current.dataset.value || "")
 		}
