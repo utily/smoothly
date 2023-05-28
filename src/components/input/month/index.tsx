@@ -53,7 +53,6 @@ export class MonthSelector {
 					options={years}
 					name="years"
 					onSmoothlyInput={(e: CustomEvent) => {
-						console.log(e.detail)
 						this.value = e.detail.years
 						this.onSmoothlyInput(e)
 					}}
@@ -65,7 +64,6 @@ export class MonthSelector {
 					options={months}
 					name="months"
 					onSmoothlyInput={(e: CustomEvent) => {
-						console.log(e.detail)
 						this.value = e.detail.months
 						this.onSmoothlyInput(e)
 					}}

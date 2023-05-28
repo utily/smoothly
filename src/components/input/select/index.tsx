@@ -51,6 +51,23 @@ export class SmoothlyInputSelect {
 		}
 	}
 
+	componentWillUpdate() {
+		if (this.value) {
+			if (!this.multiple) {
+				const filter = this.options.filter(option => option.value === this.value)[0]
+				if (filter && this.filter !== filter.value)
+					this.filter = filter.label || filter.value
+			} else {
+				const filter = this.options
+					.filter(option => this.value?.includes(option.value))
+					.map(option => option.label || option.value)
+					.join(", ")
+				if (filter && this.filter !== filter)
+					this.filter = filter
+			}
+		}
+	}
+
 	@Watch("value")
 	onChangeValue(value: File, pre: File | undefined) {
 		if (value != pre)
@@ -87,9 +104,9 @@ export class SmoothlyInputSelect {
 			)
 	}
 
-	onKeyDown(key: string) {
+	onKeyDown(e: KeyboardEvent) {
 		this.focused = true
-		if (key === "ArrowDown" && this.dropDown) {
+		if (e.key === "ArrowDown" && this.dropDown) {
 			let i = 0
 			if (this.current) {
 				this.dropDown?.childNodes.forEach((option: HTMLDivElement, index) => {
@@ -100,10 +117,12 @@ export class SmoothlyInputSelect {
 			}
 			this.current = (this.dropDown?.childNodes[i] || this.dropDown?.childNodes[i - 1]) as HTMLDivElement
 			this.current.classList.add("focused")
+			e.stopPropagation()
+			e.preventDefault()
 			this.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" })
 		}
 
-		if (key === "ArrowUp" && this.dropDown) {
+		if (e.key === "ArrowUp" && this.dropDown) {
 			if (this.current) {
 				this.dropDown?.childNodes.forEach((option: HTMLDivElement, index) => {
 					option.classList.remove("focused")
@@ -113,10 +132,12 @@ export class SmoothlyInputSelect {
 					}
 				})
 			}
+			e.stopPropagation()
+			e.preventDefault()
 			this.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" })
 		}
 
-		if (key === "Enter" && this.current instanceof HTMLDivElement) {
+		if (e.key === "Enter" && this.current instanceof HTMLDivElement) {
 			if (!this.multiple) {
 				this.filter = this.current.textContent || ""
 				this.value = this.current.dataset.value
@@ -125,7 +146,7 @@ export class SmoothlyInputSelect {
 				this.onSelectMutiple(this.current.dataset.value || "")
 		}
 
-		if (key === "Escape") {
+		if (e.key === "Escape") {
 			if (!this.multiple) {
 				this.filter = ""
 				this.value = undefined
@@ -141,6 +162,7 @@ export class SmoothlyInputSelect {
 			this.filter = (e.target as HTMLDivElement).textContent || ""
 			this.value = (e.target as HTMLDivElement).dataset.value
 			this.focused = false
+			this.input?.blur()
 		} else
 			this.onSelectMutiple((e.target as HTMLDivElement).dataset.value || "")
 	}
@@ -172,13 +194,7 @@ export class SmoothlyInputSelect {
 					readOnly={!this.filterable}
 					ref={e => (this.input = e)}
 					type="text"
-					onKeyDown={e => {
-						if (this.multiple) {
-							e.stopPropagation()
-							e.preventDefault()
-						}
-						this.onKeyDown(e.key)
-					}}
+					onKeyDown={e => this.onKeyDown(e)}
 					onInput={(e: KeyboardEvent) => this.onInput(e)}
 					onFocus={() => this.onFocus()}
 					onBlur={() => {
