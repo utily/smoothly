@@ -68,9 +68,9 @@
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
 	"dependencies": {
-		"authly": "3.0.1",
-		"isoly": "^2.0.13",
-		"langly": "2.0.1",
+		"authly": "3.0.5",
+		"isoly": "^2.0.20",
+		"langly": "2.0.3",
 		"normalize.css": "^8.0.1",
 		"stencil-router-v2": "^0.6.0",
 		"tidily": "0.0.53"
