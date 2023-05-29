@@ -24,7 +24,6 @@ export class InputDateRange {
 		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
 	}>
 	@Event() smoothlyFormInput: EventEmitter<void>
-	private element?: HTMLElement | null
 	componentWillLoad() {
 		this.smoothlyFormInput.emit()
 		this.smoothlyInput.emit({ [this.name]: this.start && this.end ? { start: this.start, end: this.end } : undefined })
@@ -59,7 +58,7 @@ export class InputDateRange {
 	}
 	render() {
 		return (
-			<Host ref={e => (this.element = e)}>
+			<Host>
 				<fieldset onClick={() => (this.open = !this.open)}>
 					<smoothly-form-controll label={this.labelStart}>
 						<smoothly-input
@@ -91,11 +90,13 @@ export class InputDateRange {
 						<div class="container">
 							<div class="arrow"></div>
 							<smoothly-calendar
+								value={this.start ?? undefined}
 								doubleInput={true}
 								start={this.start}
 								end={this.end}
 								max={this.max}
-								min={this.min}></smoothly-calendar>
+								min={this.min}
+							/>
 						</div>
 					</Fragment>
 				)}

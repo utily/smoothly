@@ -167,6 +167,7 @@ export namespace Components {
         "value": Readonly<Data>;
     }
     interface SmoothlyFormControll {
+        "clearable": boolean;
         "icon"?: Icon;
         "label"?: string | HTMLElement;
         "placeholder"?: string;
@@ -1267,6 +1268,7 @@ declare namespace LocalJSX {
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFormControll {
+        "clearable"?: boolean;
         "icon"?: Icon;
         "label"?: string | HTMLElement;
         "placeholder"?: string;

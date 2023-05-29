@@ -28,6 +28,20 @@ export class MonthSelector {
 		e.stopPropagation()
 	}
 
+	onChangeValue(e: CustomEvent, type: "m" | "y") {
+		if (this.value) {
+			const pre = this.value?.toString().split("-") || []
+			if (type === "m") {
+				pre[1] = e.detail.months.split("-")[1]
+			} else {
+				pre[0] = e.detail.years.split("-")[0]
+			}
+			this.value = pre.join("-")
+		} else {
+			this.value = e.detail.years || e.detail.months
+		}
+	}
+
 	render() {
 		let yearValue
 		const years = generate.years(this.value ?? Date.now()).map(year => {
@@ -53,7 +67,7 @@ export class MonthSelector {
 					options={years}
 					name="years"
 					onSmoothlyInput={(e: CustomEvent) => {
-						this.value = e.detail.years
+						this.onChangeValue(e, "y")
 						this.onSmoothlyInput(e)
 					}}
 				/>
@@ -64,7 +78,7 @@ export class MonthSelector {
 					options={months}
 					name="months"
 					onSmoothlyInput={(e: CustomEvent) => {
-						this.value = e.detail.months
+						this.onChangeValue(e, "m")
 						this.onSmoothlyInput(e)
 					}}
 				/>

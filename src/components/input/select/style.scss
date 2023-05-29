@@ -7,9 +7,9 @@
 	.dropdown {
 		position: absolute;
 		top: calc(100% + 0.1em);
-		left: 0;
+		left: -1px;
 		z-index: 99999;
-		width: calc(100% - 2px);
+		width: calc(100% + 2px);
 		background-color: rgb(var(--background-color));
 		box-shadow: var(--smoothly-shadow);
 		max-height: 19em;

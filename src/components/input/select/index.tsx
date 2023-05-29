@@ -10,7 +10,7 @@ export class SmoothlyInputSelect {
 	@Prop() name: string
 	@Prop({ mutable: true }) value?: string | string[]
 	@Prop() options: Options[]
-	@Prop({ reflect: true }) filterable = false
+	@Prop({ reflect: true, mutable: true }) filterable = false
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
@@ -36,7 +36,7 @@ export class SmoothlyInputSelect {
 
 			window.addEventListener("click", (e: Event) => {
 				if (!this.isHovered && this.focused && e.target !== this.input)
-					this.focused = false
+					this.onBlur()
 			})
 		}
 
