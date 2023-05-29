@@ -1,4 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Method } from "@stencil/core"
+import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 
 export type Options = { label?: string; value: string }
 @Component({
@@ -6,7 +9,7 @@ export type Options = { label?: string; value: string }
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class SmoothlyInputSelect {
+export class SmoothlyInputSelect implements Clearable, Editable {
 	@Prop() name: string
 	@Prop({ mutable: true }) value?: string | string[]
 	@Prop() options: Options[]
@@ -14,6 +17,7 @@ export class SmoothlyInputSelect {
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
+	@Prop({ reflect: true }) readonly = false
 	@State() focused = false
 	@State() isHovered = false
 	@State() filter: string
@@ -23,12 +27,12 @@ export class SmoothlyInputSelect {
 	@Event() smoothlyFocus: EventEmitter<void>
 	@Event() smoothlyInput: EventEmitter<Record<string, string | string[] | undefined>>
 	@Event() smoothlyChange: EventEmitter<Record<string, string | string[] | undefined>>
-	@Event() smoothlyFormInput: EventEmitter<void>
+	@Event() smoothlyFormInputLoad: EventEmitter<void>
 	private dropDown?: HTMLDivElement
 	private input?: HTMLInputElement
 
 	componentWillLoad() {
-		this.smoothlyFormInput.emit()
+		this.smoothlyFormInputLoad.emit()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.optionFiltered = this.options
 		if (this.multiple) {
@@ -76,8 +80,10 @@ export class SmoothlyInputSelect {
 	}
 
 	onFocus() {
-		this.focused = true
-		this.smoothlyFocus.emit()
+		if (!this.readonly) {
+			this.focused = true
+			this.smoothlyFocus.emit()
+		}
 	}
 
 	onBlur() {
@@ -188,11 +194,22 @@ export class SmoothlyInputSelect {
 			.join(", ")
 	}
 
+	@Method()
+	async clear(): Promise<void> {
+		this.value = undefined
+		this.filter = ""
+		this.smoothlyBlur.emit()
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+	}
+
 	render() {
 		return (
 			<Host>
 				<input
-					readOnly={!this.filterable}
+					readOnly={!this.filterable || this.readonly}
 					ref={e => (this.input = e)}
 					type="text"
 					onKeyDown={e => this.onKeyDown(e)}

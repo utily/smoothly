@@ -4,6 +4,7 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Editable } from "../input/Editable"
 import { Submitable } from "../input/Submitable"
 
 @Component({
@@ -11,7 +12,8 @@ import { Submitable } from "../input/Submitable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Changeable, Clearable, Submitable {
-	private clearables = new Map<string, Clearable>()
+	private clearables: Clearable[] = []
+	private editables: Editable[] = []
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
@@ -33,7 +35,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	watchValue() {
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
 		this.listeners.changed?.forEach(l => l(this))
-		//console.log(this.value)
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
@@ -44,11 +45,17 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 				this.value
 			))
 		)
-		if (Clearable.is(event.target)) {
-			const clearable = event.target
-			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
+	}
+	@Listen("smoothlyFormInputLoad")
+	onRegisterFormInput(e: CustomEvent) {
+		if (Clearable.is(e.target)) {
+			this.clearables.push(e.target)
+		}
+		if (Editable.is(e.target)) {
+			this.editables.push(e.target)
 		}
 	}
+
 	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
 		this.processing = true
@@ -77,7 +84,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		new Set(this.clearables.values()).forEach(clearable => clearable.clear())
+		this.clearables.forEach(clearable => clearable.clear())
 	}
 	render() {
 		return (
@@ -89,6 +96,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 						<slot></slot>
 					</fieldset>
 					<div>
+						<slot name="edit"></slot>
 						<slot name="clear"></slot>
 						<slot name="submit"></slot>
 					</div>

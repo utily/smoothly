@@ -30,30 +30,34 @@ export class SmoothlyInputDemo {
 	render() {
 		return [
 			<h2>Form Controll</h2>,
-			<smoothly-form looks="border">
-				<smoothly-form-controll label="Email">
-					<smoothly-input type="email" name="email" />
+			<smoothly-form looks="border" onSmoothlyFormInput={e => console.log(e.detail)}>
+				<smoothly-form-controll label="Email" clearable>
+					<smoothly-input type="email" name="email" value="göran@gmail.com" />
 				</smoothly-form-controll>
-				<smoothly-form-controll label="Password" icon="lock-closed">
-					<smoothly-input type="password" name="password" />
+				<smoothly-form-controll label="Password" icon="lock-closed" clearable>
+					<smoothly-input type="password" name="password" value="asdasd" />
 				</smoothly-form-controll>
-				<smoothly-form-controll label="Year" icon="calendar">
+				<smoothly-form-controll label="Year" icon="calendar" clearable>
 					<smoothly-input-date name="Year" value="2023-05-05" />
 				</smoothly-form-controll>
 				<smoothly-form-controll clearable label="Attachment" placeholder="Select or drop attachment here" icon="folder">
 					<smoothly-input-file name="attachment" />
 				</smoothly-form-controll>
 				<smoothly-form-controll label="Filter Multiple" clearable>
-					<smoothly-input-select multiple name="FilterMultiple" options={this.options} />
+					<smoothly-input-select
+						value={["January", "February"]}
+						multiple
+						name="FilterMultiple"
+						options={this.options}
+					/>
 				</smoothly-form-controll>
-				<smoothly-form-controll label="Filter">
-					<smoothly-input-select value={[this.options[0].value]} name="Filter" options={this.options} />
-					<smoothly-icon size="tiny" name="chevron-down" slot="end" />
+				<smoothly-form-controll label="Filter" clearable endIcon="chevron-down">
+					<smoothly-input-select value="January" name="Filter" options={this.options} />
 				</smoothly-form-controll>
-				<smoothly-form-controll label="Filterable">
-					<smoothly-input-select filterable name="Filterable" options={this.options} />
+				<smoothly-form-controll label="Filterable" clearable>
+					<smoothly-input-select value="March" filterable name="Filterable" options={this.options} />
 				</smoothly-form-controll>
-				<smoothly-form-controll>
+				<smoothly-form-controll clearable>
 					<smoothly-input-date-range
 						name="DateRange"
 						start="2023-05-15"
@@ -61,8 +65,9 @@ export class SmoothlyInputDemo {
 						min="2023-01-10"
 						max="2023-12-30"
 					/>
-					<smoothly-icon size="tiny" name="calendar" slot="end" />
 				</smoothly-form-controll>
+
+				<smoothly-input-clear slot="clear">Clear</smoothly-input-clear>
 			</smoothly-form>,
 
 			<br />,

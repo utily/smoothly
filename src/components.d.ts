@@ -168,6 +168,7 @@ export namespace Components {
     }
     interface SmoothlyFormControll {
         "clearable": boolean;
+        "endIcon"?: Icon;
         "icon"?: Icon;
         "label"?: string | HTMLElement;
         "placeholder"?: string;
@@ -192,7 +193,6 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete": boolean;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "currency"?: Currency;
         "disabled": boolean;
@@ -205,6 +205,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "type": string;
         "value": any;
@@ -217,17 +218,20 @@ export namespace Components {
         "fill"?: Fill;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
-        "type": "form" | "input";
     }
     interface SmoothlyInputDate {
+        "clear": () => Promise<void>;
         "disabled": boolean;
         "max": Date;
         "min": Date;
         "name": string;
         "open": boolean;
+        "readonly": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "clear": () => Promise<void>;
         "disabled": boolean;
         "end"?: Date;
         "labelEnd": string;
@@ -236,26 +240,33 @@ export namespace Components {
         "min": Date;
         "name": string;
         "open": boolean;
-        "showLabel": boolean;
+        "readonly": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "start"?: Date;
     }
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "clear": () => Promise<void>;
         "name": string;
         "placeholder": string | undefined;
+        "readonly": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "value"?: File;
     }
     interface SmoothlyInputMonth {
         "value"?: Date;
     }
     interface SmoothlyInputSelect {
+        "clear": () => Promise<void>;
         "disabled": boolean;
         "filterable": boolean;
         "multiple": boolean;
         "name": string;
         "options": Options[];
+        "readonly": boolean;
         "required": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
         "value"?: string | string[];
     }
     interface SmoothlyItem {
@@ -1269,6 +1280,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFormControll {
         "clearable"?: boolean;
+        "endIcon"?: Icon;
         "icon"?: Icon;
         "label"?: string | HTMLElement;
         "placeholder"?: string;
@@ -1294,7 +1306,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;
-        "changed"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
@@ -1303,6 +1314,7 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyFocus"?: (event: SmoothlyInputCustomEvent<void>) => void;
+        "onSmoothlyFormInputLoad"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
@@ -1320,15 +1332,15 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "form" | "input";
     }
     interface SmoothlyInputDate {
         "disabled"?: boolean;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
-        "onSmoothlyFormInput"?: (event: SmoothlyInputDateCustomEvent<void>) => void;
+        "onSmoothlyFormInputLoad"?: (event: SmoothlyInputDateCustomEvent<void>) => void;
         "open"?: boolean;
+        "readonly"?: boolean;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
@@ -1342,12 +1354,12 @@ declare namespace LocalJSX {
         "onSmoothlyChange"?: (event: SmoothlyInputDateRangeCustomEvent<{
 		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
 	}>) => void;
-        "onSmoothlyFormInput"?: (event: SmoothlyInputDateRangeCustomEvent<void>) => void;
+        "onSmoothlyFormInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{
 		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
 	}>) => void;
         "open"?: boolean;
-        "showLabel"?: boolean;
+        "readonly"?: boolean;
         "start"?: Date;
     }
     interface SmoothlyInputDemo {
@@ -1357,9 +1369,10 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File | undefined>>) => void;
         "onSmoothlyFocus"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
-        "onSmoothlyFormInput"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
+        "onSmoothlyFormInputLoad"?: (event: SmoothlyInputFileCustomEvent<void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File | undefined>>) => void;
         "placeholder"?: string | undefined;
+        "readonly"?: boolean;
         "value"?: File;
     }
     interface SmoothlyInputMonth {
@@ -1374,9 +1387,10 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputSelectCustomEvent<Record<string, string | string[] | undefined>>) => void;
         "onSmoothlyFocus"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
-        "onSmoothlyFormInput"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
+        "onSmoothlyFormInputLoad"?: (event: SmoothlyInputSelectCustomEvent<void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, string | string[] | undefined>>) => void;
         "options"?: Options[];
+        "readonly"?: boolean;
         "required"?: boolean;
         "value"?: string | string[];
     }

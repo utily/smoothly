@@ -12,14 +12,13 @@ import { Clearable } from "../Clearable"
 	scoped: true,
 })
 export class SmoothlyInputClear {
-	@Prop({ reflect: true }) color?: Color
+	@Prop({ reflect: true }) color?: Color = "danger"
 	@Prop({ reflect: true }) expand?: "block" | "full"
-	@Prop({ reflect: true }) fill?: Fill = "clear"
+	@Prop({ reflect: true }) fill?: Fill = "default"
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
-	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	private parent?: Clearable | (Clearable & Changeable)
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
@@ -29,10 +28,7 @@ export class SmoothlyInputClear {
 				this.parent = parent
 				if (Changeable.is(parent))
 					parent.listen("changed", async p => {
-						if (p instanceof SmoothlyForm)
-							this.disabled = !p.changed
-						if (p instanceof SmoothlyInput)
-							this.display = p.changed
+						this.disabled = !p.changed
 					})
 			}
 		})

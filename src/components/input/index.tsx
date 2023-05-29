@@ -1,15 +1,16 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
+import { Editable } from "./Editable"
 
 @Component({
 	tag: "smoothly-input",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput implements Changeable, Clearable {
+export class SmoothlyInput implements Clearable, Editable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -28,19 +29,11 @@ export class SmoothlyInput implements Changeable, Clearable {
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
-
-	@Prop({ mutable: true, reflect: true }) changed = false
-	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
-
-	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
-		this.listener[property] = listener
-		listener(this)
-	}
-	@Listen("smoothlyInputLoad")
-	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
-		event.stopPropagation()
-		event.detail(this)
-	}
+	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyFocus: EventEmitter<void>
+	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyFormInputLoad: EventEmitter<Record<string, any>>
 
 	get formatter(): Formatter & Converter<any> {
 		let result: (Formatter & Converter<any>) | undefined
@@ -59,10 +52,6 @@ export class SmoothlyInput implements Changeable, Clearable {
 		const formatter = this.formatter
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
-	@Event() smoothlyBlur: EventEmitter<void>
-	@Event() smoothlyFocus: EventEmitter<void>
-	@Event() smoothlyChange: EventEmitter<Record<string, any>>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		if (this.lastValue != value) {
@@ -75,11 +64,8 @@ export class SmoothlyInput implements Changeable, Clearable {
 		if (value != before) {
 			if (typeof value == "string")
 				value = value.trim()
-			this.smoothlyInput.emit({ [this.name]: value })
+			this.smoothlyInput.emit({ [this.name]: value ? value : undefined })
 		}
-
-		this.changed = Boolean(this.value)
-		this.listener.changed?.(this)
 	}
 	@Watch("currency")
 	onCurrency() {
@@ -97,6 +83,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 			selection: { start, end: start, direction: "none" },
 		})
 		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyFormInputLoad.emit()
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -106,7 +93,12 @@ export class SmoothlyInput implements Changeable, Clearable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.value = undefined
+		this.value = ""
+		this.smoothlyBlur.emit()
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {

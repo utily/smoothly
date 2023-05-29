@@ -13,6 +13,7 @@ export class SmoothlyFormControll {
 	@Prop() placeholder?: string
 	@Prop({ reflect: true }) clearable = false
 	@Prop({ reflect: true }) icon?: Icon
+	@Prop({ reflect: true }) endIcon?: Icon
 	@State() focus = false
 	@State() hasValue?: boolean
 	private child?: HTMLElement
@@ -28,33 +29,45 @@ export class SmoothlyFormControll {
 			this.focus = false
 	}
 
-	@Listen("smoothlyInput")
-	onInput(e: CustomEvent<Record<string, any>>) {
+	@Listen("smoothlyFormInputLoad")
+	onFormINputLoad(e: Event) {
 		if (e.target && !this.child)
 			this.child = e.target as HTMLElement
+	}
+
+	@Listen("smoothlyInput")
+	onInput(e: CustomEvent<Record<string, any>>) {
 		this.hasValue = Object.values(e.detail).filter(value => Boolean(value)).length > 0
+		console.log("listen:", this.hasValue)
+		console.log("listen:", this.focus)
 	}
 
 	@Watch("hasValue")
 	onChangeValue() {
 		if (this.hasValue)
 			this.focus = true
+		console.log("cb:", this.hasValue)
+		console.log("cb:", this.focus)
 	}
 
-	clear() {
-		if (Clearable.is(this.child))
-			this.child?.clear()
-	}
-
-	focusChild() {
-		const element = this.child?.querySelector("fieldset")
-		if (element)
-			element.click()
-		else
-			this.child?.querySelector("input")?.focus()
+	onClickEndIcon() {
+		if (this.clearable && this.hasValue) {
+			if (Clearable.is(this.child))
+				this.child?.clear()
+		} else {
+			const element = this.child?.querySelector("fieldset")
+			if (element)
+				element.click()
+			else
+				this.child?.querySelector("input")?.focus()
+		}
 	}
 
 	render() {
+		console.log(this.child?.getAttribute("name"))
+		console.log("render:", this.hasValue)
+		console.log("render:", this.focus)
+		console.log(this.clearable && this.hasValue ? "close" : this.endIcon ?? "empty")
 		return (
 			<Host>
 				<div>
@@ -66,15 +79,9 @@ export class SmoothlyFormControll {
 					)}
 					<slot />
 				</div>
-				{this.clearable && this.hasValue ? (
-					<span class="end" onClick={() => this.clear()}>
-						<smoothly-icon size="tiny" name="close" />
-					</span>
-				) : (
-					<span class="end" onClick={() => this.focusChild()}>
-						<slot name="end" />
-					</span>
-				)}
+				<span class="end" onClick={() => this.onClickEndIcon()}>
+					<smoothly-icon size="tiny" name={this.clearable && this.hasValue ? "close" : this.endIcon ?? "empty"} />
+				</span>
 			</Host>
 		)
 	}

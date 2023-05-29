@@ -1,21 +1,25 @@
-import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Method, Prop } from "@stencil/core"
 import { Date } from "isoly"
+import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 
 @Component({
 	tag: "smoothly-input-date",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class InputDate {
+export class InputDate implements Clearable, Editable {
 	@Prop({ reflect: true }) name: string
+	@Prop({ reflect: true }) readonly = false
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
-	@Event() smoothlyFormInput: EventEmitter<void>
+	@Event() smoothlyFormInputLoad: EventEmitter<void>
+	private input?: HTMLSmoothlyInputElement
 	componentWillLoad() {
-		this.smoothlyFormInput.emit()
+		this.smoothlyFormInputLoad.emit()
 	}
 
 	@Listen("dateSet")
@@ -24,10 +28,20 @@ export class InputDate {
 		e.stopPropagation()
 	}
 
+	@Method()
+	async clear(): Promise<void> {
+		this.input?.clear()
+	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+	}
+
 	render() {
 		return (
 			<Host>
 				<smoothly-input
+					ref={e => (this.input = e)}
 					readonly
 					name={this.name}
 					onFocus={() => (this.open = true)}
@@ -35,13 +49,13 @@ export class InputDate {
 					disabled={this.disabled}
 					type="date"
 					value={this.value}
-					onSmoothlyInput={e => (this.value = e.detail[this.name])}
+					onSmoothlyInput={e => (this.value = e.detail[this.name] ? e.detail[this.name] : undefined)}
 					onSmoothlyChange={e => {
 						e.stopPropagation()
 						e.preventDefault()
 					}}
 				/>
-				{this.open && !this.disabled && (
+				{this.open && !this.disabled && !this.readonly && (
 					<Fragment>
 						<div class="overlayer" onClick={() => (this.open = false)}></div>
 						<div class="container">
