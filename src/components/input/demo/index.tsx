@@ -44,16 +44,14 @@ export class SmoothlyInputDemo {
 					<smoothly-input-file name="attachment" />
 				</smoothly-form-controll>
 				<smoothly-form-controll label="Filter Multiple">
-					<smoothly-input-select multiple name="FilterMultiple" options={this.options}></smoothly-input-select>
+					<smoothly-input-select multiple name="FilterMultiple" options={this.options} />
 				</smoothly-form-controll>
 				<smoothly-form-controll label="Filter">
-					<smoothly-input-select
-						value={[this.options[0].value]}
-						name="Filter"
-						options={this.options}></smoothly-input-select>
+					<smoothly-input-select value={[this.options[0].value]} name="Filter" options={this.options} />
+					<smoothly-icon size="tiny" name="chevron-down" slot="end" />
 				</smoothly-form-controll>
 				<smoothly-form-controll label="Filterable">
-					<smoothly-input-select filterable name="Filterable" options={this.options}></smoothly-input-select>
+					<smoothly-input-select filterable name="Filterable" options={this.options} />
 				</smoothly-form-controll>
 				<smoothly-form-controll>
 					<smoothly-input-date-range
@@ -61,7 +59,9 @@ export class SmoothlyInputDemo {
 						start="2023-05-15"
 						end="2022-05-25"
 						min="2023-01-10"
-						max="2023-12-30"></smoothly-input-date-range>
+						max="2023-12-30"
+					/>
+					<smoothly-icon size="tiny" name="calendar" slot="end" />
 				</smoothly-form-controll>
 			</smoothly-form>,
 

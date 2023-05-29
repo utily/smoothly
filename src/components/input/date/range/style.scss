@@ -2,6 +2,7 @@
 	position: relative;
 	display: block;
 	width: fit-content;
+	width: 100%;
 }
 .container  {
 	position: absolute;
@@ -39,6 +40,7 @@
 	background-color: var(--background, transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
+	width: 100%;
 
 }
 smoothly-input {
@@ -48,3 +50,6 @@ smoothly-input {
 	width: var(--input-width);
 }
 
+smoothly-form-controll {
+	width: 100%;
+}

@@ -51,7 +51,9 @@ export class SmoothlyFormControll {
 					)}
 					<slot />
 				</div>
-				{/* <slot name="end" /> fundera om vi kan nyttja denna för input clear */}
+				<span class="end">
+					<slot name="end" />
+				</span>
 			</Host>
 		)
 	}

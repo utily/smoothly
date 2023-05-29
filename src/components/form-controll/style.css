@@ -4,6 +4,7 @@
 	gap: 0.2em;
 	position: relative;
 	background-color: rgb(var(--background-color));
+	justify-content: space-between;
 }
 
 :host > div {
@@ -28,7 +29,7 @@ label {
 	width: calc(90%); 
 }
 
-label smoothly-icon {
+label smoothly-icon, .end ::slotted(smoothly-icon) {
 	opacity: 0.8;
 	flex-shrink: 0;
 }
@@ -42,4 +43,8 @@ span {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+.end {
+	padding-right: 1em;
 }
