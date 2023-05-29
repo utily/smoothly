@@ -62,6 +62,7 @@ export class InputDateRange {
 				<fieldset onClick={() => (this.open = !this.open)}>
 					<smoothly-form-controll label={this.labelStart}>
 						<smoothly-input
+							readonly
 							disabled={this.disabled}
 							type="date"
 							name="start"
@@ -73,6 +74,7 @@ export class InputDateRange {
 					</smoothly-form-controll>
 					<smoothly-form-controll label={this.labelEnd}>
 						<smoothly-input
+							readonly
 							disabled={this.disabled}
 							type="date"
 							name="end"

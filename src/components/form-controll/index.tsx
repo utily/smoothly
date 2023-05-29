@@ -46,6 +46,14 @@ export class SmoothlyFormControll {
 			this.child?.clear()
 	}
 
+	focusChild() {
+		const element = this.child?.querySelector("fieldset")
+		if (element)
+			element.click()
+		else
+			this.child?.querySelector("input")?.focus()
+	}
+
 	render() {
 		return (
 			<Host>
@@ -63,7 +71,7 @@ export class SmoothlyFormControll {
 						<smoothly-icon size="tiny" name="close" />
 					</span>
 				) : (
-					<span class="end">
+					<span class="end" onClick={() => this.focusChild()}>
 						<slot name="end" />
 					</span>
 				)}

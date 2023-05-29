@@ -40,7 +40,7 @@ export class SmoothlyInputDemo {
 				<smoothly-form-controll label="Year" icon="calendar">
 					<smoothly-input-date name="Year" value="2023-05-05" />
 				</smoothly-form-controll>
-				<smoothly-form-controll label="Attachment" placeholder="Select or drop attachment here" icon="folder">
+				<smoothly-form-controll clearable label="Attachment" placeholder="Select or drop attachment here" icon="folder">
 					<smoothly-input-file name="attachment" />
 				</smoothly-form-controll>
 				<smoothly-form-controll label="Filter Multiple" clearable>

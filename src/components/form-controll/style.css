@@ -33,6 +33,7 @@ label smoothly-icon, .end ::slotted(smoothly-icon), .end smoothly-icon {
 	opacity: 0.8;
 	flex-shrink: 0;
 	transition: 0.6s;
+	cursor: pointer;
 }
 
 .focus {
@@ -47,10 +48,10 @@ span {
 }
 
 .end {
+	z-index: 4;
 	padding-right: 1em;
 }
 
 :host([clearable]) > .end:hover smoothly-icon  {
-	cursor: pointer;
 	opacity: 1;
 }
