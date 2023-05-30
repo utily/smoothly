@@ -10,13 +10,14 @@ import { Editable } from "../Editable"
 })
 export class InputDate implements Clearable, Editable {
 	@Prop({ reflect: true }) name: string
-	@Prop({ reflect: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() smoothlyFormInputLoad: EventEmitter<void>
+	@Event() smoothlyInputReadOnly: EventEmitter<void>
 	private input?: HTMLSmoothlyInputElement
 	componentWillLoad() {
 		this.smoothlyFormInputLoad.emit()
@@ -35,6 +36,7 @@ export class InputDate implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+		this.smoothlyInputReadOnly.emit()
 	}
 
 	render() {

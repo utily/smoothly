@@ -10,7 +10,7 @@ import { Editable } from "../../Editable"
 })
 export class InputDateRange implements Clearable, Editable {
 	private fieldset?: HTMLFieldSetElement
-	@Prop({ reflect: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true, reflect: true }) name: string
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
@@ -27,6 +27,7 @@ export class InputDateRange implements Clearable, Editable {
 		[name: string]: { start: Date | undefined; end: Date | undefined } | undefined
 	}>
 	@Event() smoothlyFormInputLoad: EventEmitter<void>
+	@Event() smoothlyInputReadOnly: EventEmitter<void>
 	componentWillLoad() {
 		this.smoothlyFormInputLoad.emit()
 		this.smoothlyInput.emit({ [this.name]: this.start && this.end ? { start: this.start, end: this.end } : undefined })
@@ -58,6 +59,7 @@ export class InputDateRange implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+		this.smoothlyInputReadOnly.emit()
 	}
 	@Listen("smoothlyInput")
 	abortEvent(e: CustomEvent) {

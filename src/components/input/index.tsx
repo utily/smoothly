@@ -1,7 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
-import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 
@@ -33,6 +32,7 @@ export class SmoothlyInput implements Clearable, Editable {
 	@Event() smoothlyFocus: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInputReadOnly: EventEmitter<void>
 	@Event() smoothlyFormInputLoad: EventEmitter<Record<string, any>>
 
 	get formatter(): Formatter & Converter<any> {
@@ -99,6 +99,7 @@ export class SmoothlyInput implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+		this.smoothlyInputReadOnly.emit()
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
@@ -254,23 +255,25 @@ export class SmoothlyInput implements Clearable, Editable {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<input
-					name={this.name}
-					type={this.state?.type}
-					placeholder={this.placeholder}
-					required={this.required}
-					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
-					disabled={this.disabled}
-					readOnly={this.readonly}
-					pattern={this.state?.pattern && this.state?.pattern.source}
-					value={this.state?.value}
-					onInput={(e: InputEvent) => this.onInput(e)}
-					onFocus={e => this.onFocus(e)}
-					onClick={e => this.onClick(e)}
-					onBlur={e => this.onBlur(e)}
-					onKeyDown={e => this.onKeyDown(e)}
-					ref={(el: HTMLInputElement) => (this.inputElement = el)}
-					onPaste={e => this.onPaste(e)}></input>
+				<smoothly-form-controll label="Email">
+					<input
+						name={this.name}
+						type={this.state?.type}
+						placeholder={this.placeholder}
+						required={this.required}
+						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+						disabled={this.disabled}
+						readOnly={this.readonly}
+						pattern={this.state?.pattern && this.state?.pattern.source}
+						value={this.state?.value}
+						onInput={(e: InputEvent) => this.onInput(e)}
+						onFocus={e => this.onFocus(e)}
+						onClick={e => this.onClick(e)}
+						onBlur={e => this.onBlur(e)}
+						onKeyDown={e => this.onKeyDown(e)}
+						ref={(el: HTMLInputElement) => (this.inputElement = el)}
+						onPaste={e => this.onPaste(e)}></input>
+				</smoothly-form-controll>
 			</Host>
 		)
 	}

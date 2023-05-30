@@ -2,4 +2,20 @@ smoothly-input-demo {
 	display: block;
 	margin: 2em;
 	margin-bottom: 20rem;
+	--background-color: var(--smoothly-default-color);
+}
+
+.customSelect smoothly-input-select {
+	position: relative;
+	border-bottom: rgb(var(--smoothly-default-contrast)) solid 1px;
+	width: 20rem;
+}
+
+.customSelect smoothly-input-select:first-of-type input {
+	padding-top: 0.4rem;
+}
+
+.customSelect > label {
+	font-size: 0.9rem;
+	font-weight: bolder;
 }

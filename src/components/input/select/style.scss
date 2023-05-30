@@ -13,7 +13,7 @@
 		background-color: rgb(var(--background-color));
 		box-shadow: var(--smoothly-shadow);
 		max-height: 19em;
-		overflow-y: scroll;
+		overflow-y: auto;
 		
 		.option {
 			padding: 0.5em;

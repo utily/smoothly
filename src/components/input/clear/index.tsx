@@ -1,10 +1,9 @@
 import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
-import { SmoothlyForm } from "../../form"
-import { SmoothlyInput } from ".."
 import { Changeable } from "../Changeable"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 
 @Component({
 	tag: "smoothly-input-clear",
@@ -18,9 +17,8 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
-	@Prop({ reflect: true, mutable: true }) display = true
-	private parent?: Clearable | (Clearable & Changeable)
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	private parent?: Clearable | (Clearable & Changeable)
 
 	async componentWillLoad() {
 		this.smoothlyInputLoad.emit(parent => {
@@ -28,7 +26,10 @@ export class SmoothlyInputClear {
 				this.parent = parent
 				if (Changeable.is(parent))
 					parent.listen("changed", async p => {
-						this.disabled = !p.changed
+						if (Editable.is(parent) && parent.readonly)
+							this.disabled = true
+						else
+							this.disabled = !p.changed
 					})
 			}
 		})

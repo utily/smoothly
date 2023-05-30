@@ -11,7 +11,7 @@ import { Submitable } from "../input/Submitable"
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submitable {
+export class SmoothlyForm implements Changeable, Clearable, Submitable, Editable {
 	private clearables: Clearable[] = []
 	private editables: Editable[] = []
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
@@ -21,6 +21,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	@Prop() action?: string
 	@Prop({ mutable: true, reflect: true }) processing: boolean
 	@Prop() prevent = true
+	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@State() notice?: Notice
@@ -65,6 +66,8 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 		}
 		if (Editable.is(e.target)) {
 			this.editables.push(e.target)
+			if (!e.target.readonly)
+				e.target.setReadonly(this.readonly)
 		}
 	}
 
@@ -98,6 +101,12 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	async clear(): Promise<void> {
 		this.clearables.forEach(clearable => clearable.clear())
 	}
+	@Method()
+	async setReadonly(readonly: boolean): Promise<void> {
+		this.readonly = readonly
+		this.editables.forEach(editable => editable.setReadonly(readonly))
+		this.listeners.changed?.forEach(l => l(this))
+	}
 	render() {
 		return (
 			<Host>
@@ -108,9 +117,9 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 						<slot></slot>
 					</fieldset>
 					<div>
-						<slot name="edit"></slot>
-						<slot name="clear"></slot>
-						<slot name="submit"></slot>
+						<slot name="edit" />
+						<slot name="clear" />
+						<slot name="submit" />
 					</div>
 				</form>
 			</Host>

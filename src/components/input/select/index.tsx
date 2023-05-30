@@ -17,7 +17,7 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
-	@Prop({ reflect: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@State() focused = false
 	@State() isHovered = false
 	@State() filter: string
@@ -27,6 +27,7 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 	@Event() smoothlyFocus: EventEmitter<void>
 	@Event() smoothlyInput: EventEmitter<Record<string, string | string[] | undefined>>
 	@Event() smoothlyChange: EventEmitter<Record<string, string | string[] | undefined>>
+	@Event() smoothlyInputReadOnly: EventEmitter<void>
 	@Event() smoothlyFormInputLoad: EventEmitter<void>
 	private dropDown?: HTMLDivElement
 	private input?: HTMLInputElement
@@ -203,6 +204,7 @@ export class SmoothlyInputSelect implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+		this.smoothlyInputReadOnly.emit()
 	}
 
 	render() {

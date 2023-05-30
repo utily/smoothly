@@ -12,11 +12,12 @@ export class SmoothlyInputFile implements Clearable, Editable {
 	private input?: HTMLInputElement
 	@State() dragging = false
 	@Prop({ reflect: true }) name: string
-	@Prop({ reflect: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyFocus: EventEmitter<void>
+	@Event() smoothlyInputReadOnly: EventEmitter<void>
 	@Event() smoothlyInput: EventEmitter<Record<string, File | undefined>>
 	@Event() smoothlyChange: EventEmitter<Record<string, File | undefined>>
 	@Event() smoothlyFormInputLoad: EventEmitter<void>
@@ -38,35 +39,37 @@ export class SmoothlyInputFile implements Clearable, Editable {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
-	onClick() {
+	private onClick() {
 		this.smoothlyFocus.emit()
 	}
 
-	onDrop(event: DragEvent) {
+	private onDrop(event: DragEvent) {
 		this.abortEvent(event)
 		this.dragging = false
 		if (event.dataTransfer?.files.length)
 			this.value = event.dataTransfer.files[0]
 	}
 
-	onDragEnter() {
-		this.dragging = true
-		this.smoothlyFocus.emit()
+	private onDragEnter() {
+		if (!this.readonly) {
+			this.dragging = true
+			this.smoothlyFocus.emit()
+		}
 	}
 
-	onDragLeave() {
+	private onDragLeave() {
 		console.log("leave")
 		this.dragging = false
 		this.smoothlyBlur.emit()
 	}
 
-	onInput() {
+	private onInput() {
 		this.dragging = false
 		if (this.input?.files?.length)
 			this.value = this.input?.files[0]
 	}
 
-	abortEvent(event: Event) {
+	private abortEvent(event: Event) {
 		event.preventDefault()
 		event.stopPropagation()
 	}
@@ -79,6 +82,7 @@ export class SmoothlyInputFile implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+		this.smoothlyInputReadOnly.emit()
 	}
 
 	render() {
@@ -90,6 +94,7 @@ export class SmoothlyInputFile implements Clearable, Editable {
 					class={`${this.dragging ? "overlayer" : "hidden"}`}
 					onDrop={(event: DragEvent) => this.onDrop(event)}></div>
 				<input
+					disabled={this.readonly}
 					readOnly={this.readonly}
 					onClick={() => this.onClick()}
 					ref={element => (this.input = element)}
