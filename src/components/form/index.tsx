@@ -33,7 +33,19 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	}
 	@Watch("value")
 	watchValue() {
-		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
+		this.changed =
+			Object.values(this.value).filter(value => {
+				if (Array.isArray(value)) {
+					if (value.length > 0)
+						return value
+				} else if (typeof value === "object") {
+					if (Object.values(value).filter(value => Boolean(value)).length > 0)
+						return value
+				} else if (typeof value === "string" && value)
+					return value
+				else if (value !== (null || undefined))
+					return value
+			}).length > 0
 		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInput")
