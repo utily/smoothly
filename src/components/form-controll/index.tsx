@@ -37,17 +37,23 @@ export class SmoothlyFormControll {
 
 	@Listen("smoothlyInput")
 	onInput(e: CustomEvent<Record<string, any>>) {
-		this.hasValue = Object.values(e.detail).filter(value => Boolean(value)).length > 0
-		console.log("listen:", this.hasValue)
-		console.log("listen:", this.focus)
+		const value = e.detail[Object.keys(e.detail)[0]]
+		if (Array.isArray(value))
+			this.hasValue = value.length > 0
+		else if (typeof value === "object")
+			this.hasValue = Object.values(value).filter(value => Boolean(value)).length > 0
+		else if (typeof value === "string")
+			this.hasValue = Boolean(value)
+		else if (typeof value === "boolean")
+			this.hasValue = value
+		else
+			this.hasValue = value !== (null || undefined)
 	}
 
 	@Watch("hasValue")
 	onChangeValue() {
 		if (this.hasValue)
 			this.focus = true
-		console.log("cb:", this.hasValue)
-		console.log("cb:", this.focus)
 	}
 
 	onClickEndIcon() {
@@ -64,10 +70,6 @@ export class SmoothlyFormControll {
 	}
 
 	render() {
-		console.log(this.child?.getAttribute("name"))
-		console.log("render:", this.hasValue)
-		console.log("render:", this.focus)
-		console.log(this.clearable && this.hasValue ? "close" : this.endIcon ?? "empty")
 		return (
 			<Host>
 				<div>

@@ -51,20 +51,6 @@ export class InputDateRange implements Clearable, Editable {
 		this.open = false
 		event.stopPropagation()
 	}
-	@Listen("smoothlyInput")
-	@Listen("smoothlyChange")
-	abortEvent(e: CustomEvent) {
-		console.log(e.detail)
-		if (!("start" in e.detail && "end" in e.detail)) {
-			e.preventDefault()
-			e.stopPropagation()
-		}
-		// if ("start" in e.detail)
-		// 	this.start = e.detail.start
-		// if ("end" in e.detail)
-		// 	this.end = e.detail.end
-		// Här lär vi fixa så att det sätter end elel start för att trigga omrendering av sig själv så att smoothlyINput triggas i dena component
-	}
 	@Method()
 	async clear(): Promise<void> {
 		this.fieldset?.querySelectorAll("smoothly-input").forEach(input => input.clear())
@@ -72,6 +58,11 @@ export class InputDateRange implements Clearable, Editable {
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
 		this.readonly = readonly
+	}
+	@Listen("smoothlyInput")
+	abortEvent(e: CustomEvent) {
+		if (!(this.name in e.detail))
+			e.stopPropagation()
 	}
 
 	render() {
@@ -88,6 +79,7 @@ export class InputDateRange implements Clearable, Editable {
 							onSmoothlyInput={e => {
 								this.start = e.detail.start
 							}}
+							onSmoothlyChange={e => this.abortEvent(e)}
 						/>
 					</smoothly-form-controll>
 					<smoothly-form-controll label={this.labelEnd}>
@@ -100,6 +92,7 @@ export class InputDateRange implements Clearable, Editable {
 							onSmoothlyInput={e => {
 								this.end = e.detail.end
 							}}
+							onSmoothlyChange={e => this.abortEvent(e)}
 						/>
 					</smoothly-form-controll>
 				</fieldset>

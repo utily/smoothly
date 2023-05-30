@@ -31,9 +31,9 @@ export class MonthSelector {
 	onChangeValue(e: CustomEvent, type: "m" | "y") {
 		if (this.value) {
 			const pre = this.value?.toString().split("-") || []
-			if (type === "m") {
+			if (type === "m" && e.detail.months) {
 				pre[1] = e.detail.months.split("-")[1]
-			} else {
+			} else if (e.detail.years) {
 				pre[0] = e.detail.years.split("-")[0]
 			}
 			this.value = pre.join("-")
