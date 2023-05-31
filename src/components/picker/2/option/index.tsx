@@ -46,16 +46,10 @@ export class SmoothlyPickerOption2 {
 			value: this.value,
 			slotted: this.slotted,
 			set: {
-				selected: (selected: boolean) => (
-					console.log("setting selected", selected == this.selected), (this.selected = selected)
-				),
-				readonly: (readonly: boolean) => (
-					console.log("setting readonly", readonly == this.readonly), (this.readonly = readonly)
-				),
-				visible: (visible: boolean) => (
-					console.log("setting visible", visible == this.visible), (this.visible = visible)
-				),
-				value: (value: any) => (console.log("setting value", value == this.value), (this.value = value)),
+				selected: (selected: boolean) => (this.selected = selected),
+				readonly: (readonly: boolean) => (this.readonly = readonly),
+				visible: (visible: boolean) => (this.visible = visible),
+				value: (value: any) => (this.value = value),
 			},
 		}
 	}

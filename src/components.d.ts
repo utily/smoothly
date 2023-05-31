@@ -350,6 +350,7 @@ export namespace Components {
         "widths": string[];
     }
     interface SmoothlySlotElements {
+        "clone": boolean;
         "node": Node | Node[];
     }
     interface SmoothlySlottedElements {
@@ -1532,6 +1533,7 @@ declare namespace LocalJSX {
         "widths"?: string[];
     }
     interface SmoothlySlotElements {
+        "clone"?: boolean;
         "node"?: Node | Node[];
     }
     interface SmoothlySlottedElements {

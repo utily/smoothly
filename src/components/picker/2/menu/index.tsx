@@ -61,15 +61,18 @@ export class SmoothlyPickerMenu2 {
 		// internal event
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
-			const current = this.options.get(event.detail.value)
+			const current = restore(this.options.get(event.detail.value), event.detail)
+			const currentBackend = this.backend.get(event.detail.value)
+			console.log(currentBackend)
 			this.backend = new Map(
 				this.backend
 					.set(event.detail.value, {
 						...event.detail,
-						clone: restore(current, event.detail)?.element ?? event.detail.element.cloneNode(true),
+						clone: current?.element ?? event.detail.element.cloneNode(true),
 					})
 					.entries()
 			)
+			console.log(this.backend.get(event.detail.value)?.clone == current?.element ?? undefined)
 		} // external event
 		else
 			this.options.set(event.detail.value, event.detail)
@@ -145,7 +148,7 @@ export class SmoothlyPickerMenu2 {
 				</div>
 				<div ref={e => (this.listElement = e)}>
 					{Array.from(this.backend.values()).map(option => (
-						<smoothly-slot-elements key={option.value} ref={e => restoreListener(e, option)} node={option.clone} />
+						<smoothly-slot-elements ref={e => restoreListener(e, option)} node={option.clone} />
 					))}
 				</div>
 			</Host>
