@@ -46,8 +46,8 @@ export class SmoothlyPicker implements Clearable {
 		event.stopPropagation()
 		if (event.detail.element.selected)
 			this.selected = this.multiple
-				? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
-				: new Map().set(event.detail.element.name, event.detail)
+				? new Map(this.selected.set(event.detail.element.value, event.detail).entries())
+				: new Map().set(event.detail.element.value, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChanged")
 	optionsSelectedHandler(event: CustomEvent<Option>) {
@@ -55,14 +55,14 @@ export class SmoothlyPicker implements Clearable {
 		if (!this.readonly)
 			if (this.multiple)
 				this.selected = event.detail.element.selected
-					? new Map(this.selected.set(event.detail.element.name, event.detail).entries())
-					: !this.selected.delete(event.detail.element.name)
+					? new Map(this.selected.set(event.detail.element.value, event.detail).entries())
+					: !this.selected.delete(event.detail.element.value)
 					? this.selected
 					: new Map(this.selected.entries())
 			else
 				this.selected = !event.detail.element.selected
 					? new Map()
-					: new Map().set(event.detail.element.name, event.detail)
+					: new Map().set(event.detail.element.value, event.detail)
 	}
 	clickHandler = (event: MouseEvent) => {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open

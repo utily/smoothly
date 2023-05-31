@@ -14,6 +14,7 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<smoothly-picker-tester />,
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
@@ -329,7 +330,7 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 				</smoothly-picker>
 			</smoothly-form>,
-			<smoothly-picker-tester />,
+
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,

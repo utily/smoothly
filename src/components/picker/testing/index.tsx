@@ -14,7 +14,7 @@ export class SmoothlyPickerTester {
 	render() {
 		return (
 			<Host>
-				<div>
+				{/* <div>
 					<smoothly-button color="tertiary" onClick={() => (this.readonly = !this.readonly)}>
 						Toggle readonly
 					</smoothly-button>
@@ -42,6 +42,44 @@ export class SmoothlyPickerTester {
 						))}
 					</smoothly-picker>
 					<smoothly-submit slot="submit">Submit</smoothly-submit>
+				</smoothly-form> */}
+				{/* <smoothly-m>
+					<smoothly-o value={"cube"}>
+						<smoothly-icon name="cube-outline" />
+					</smoothly-o>
+					<smoothly-o value={"square"}>
+						<smoothly-icon name="square-outline" />
+					</smoothly-o>
+				</smoothly-m> */}
+				{/* <smoothly-form onSmoothlyFormInput={e => console.log("form input", e.detail)}>
+					<smoothly-picker2 name="shapes" multiple mutable>
+						<span slot="label">Shape</span>
+						<span slot="search">Search</span>
+						<smoothly-picker-option2 value={{ shape: "square" }}>
+							<smoothly-icon name="square-outline" />
+						</smoothly-picker-option2>
+						<smoothly-picker-option2 value={{ shape: "cube" }}>
+							<smoothly-icon name="cube-outline" />
+						</smoothly-picker-option2>
+						<smoothly-picker-option2 value={{ shape: "circle" }}>
+							<smoothly-icon name="ellipse-outline" />
+						</smoothly-picker-option2>
+					</smoothly-picker2>
+				</smoothly-form> */}
+				<smoothly-form
+					onSmoothlyFormInput={e => {
+						console.log("email form change", e.detail)
+						this.data = { ...this.data, ...e.detail }
+					}}>
+					<smoothly-picker2 name="emails" mutable multiple>
+						<span slot="label">Emails</span>
+						<span slot="search">Search</span>
+						{this.data.emails.map(email => (
+							<smoothly-picker-option2 value={email} selected>
+								{email}
+							</smoothly-picker-option2>
+						))}
+					</smoothly-picker2>
 				</smoothly-form>
 			</Host>
 		)

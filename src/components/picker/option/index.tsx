@@ -34,7 +34,7 @@ export class SmoothlyPickerOption {
 		}
 	}
 	componentWillLoad() {
-		this.name = this.name ?? this.value
+		this.name = this.name ?? this.value.toString()
 		this.smoothlyPickerOptionLoad.emit(this.element)
 	}
 	componentDidLoad() {
