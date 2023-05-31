@@ -74,9 +74,19 @@ export class SmoothlyPickerTester {
 					<smoothly-picker2 name="emails" mutable multiple>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
+						{/* <smoothly-icon slot="display" name="person-outline" /> */}
+						<img
+							slot="display"
+							style={{ width: "1rem", height: "1rem" }}
+							src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png"
+						/>
 						{this.data.emails.map(email => (
 							<smoothly-picker-option2 value={email} selected>
 								{email}
+								<img
+									style={{ width: "1rem", height: "1rem" }}
+									src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png"
+								/>
 							</smoothly-picker-option2>
 						))}
 					</smoothly-picker2>

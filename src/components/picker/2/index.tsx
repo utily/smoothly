@@ -62,7 +62,7 @@ export class SmoothlyPicker2 {
 					<slot name={"label"} />
 				</span>
 				<button type="button">
-					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
+					<smoothly-icon size="tiny" name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
 				<smoothly-picker-menu2
 					onClick={e => e.stopPropagation()}
@@ -70,6 +70,7 @@ export class SmoothlyPicker2 {
 					mutable={this.mutable}
 					readonly={this.readonly}>
 					<slot name="search" slot="search" />
+					<slot name="display" slot="display" />
 					<slot />
 				</smoothly-picker-menu2>
 			</Host>

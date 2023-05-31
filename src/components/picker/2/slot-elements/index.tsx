@@ -7,15 +7,12 @@ import { Component, Element, h, Host, Prop, Watch } from "@stencil/core"
 })
 export class SmoothlySlotElements {
 	@Element() element: HTMLElement
-	@Prop() clone = false
+	@Prop() clone = true
 	@Prop({ mutable: true }) node: Node | Node[]
 
 	@Watch("node")
-	componentDidLoad(current?: any, old?: any) {
-		if (current)
-			console.log("slot watcher")
-		else
-			console.log("slot did load")
+	componentDidLoad() {
+		console.log("slot node", this.node)
 		this.element.innerHTML = ""
 		if (this.node)
 			if (Array.isArray(this.node))

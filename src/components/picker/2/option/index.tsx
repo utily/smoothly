@@ -86,7 +86,7 @@ export class SmoothlyPickerOption2 {
 					<slot />
 				</smoothly-slotted-elements>
 				<div>
-					<slot name="display" />
+					<slot name="side" />
 				</div>
 			</Host>
 		)

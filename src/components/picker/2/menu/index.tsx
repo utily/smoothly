@@ -35,9 +35,14 @@ export class SmoothlyPickerMenu2 {
 	@State() created = new Map<any, Option2.Created>()
 	@State() search = ""
 	@State() valid = false
+	@State() display: Node[]
 	@Event() notice: EventEmitter<Notice>
 	private listElement?: HTMLElement
-	private searchElement?: HTMLElement
+
+	@Watch("display")
+	displayChanged() {
+		console.log("display changed", this.display)
+	}
 
 	@Watch("readonly")
 	readonlyChanged() {
@@ -112,7 +117,6 @@ export class SmoothlyPickerMenu2 {
 					option.set.selected(false)
 			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
 			this.search = ""
-			this.searchElement?.focus()
 		}
 		if (typeof validation == "object")
 			this.notice.emit(validation.notice)
@@ -124,6 +128,10 @@ export class SmoothlyPickerMenu2 {
 	render() {
 		return (
 			<Host>
+				<smoothly-slotted-elements
+					onSmoothlySlottedChange={e => (console.log("menu display", this.display), (this.display = e.detail))}>
+					<slot name="display" />
+				</smoothly-slotted-elements>
 				<div class={"backends"}>
 					<slot />
 					{Array.from(this.created.values(), option => (
@@ -135,6 +143,7 @@ export class SmoothlyPickerMenu2 {
 				<div>
 					<smoothly-input
 						name="search"
+						value={this.search}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => e.stopPropagation()}
 						onSmoothlyBlur={e => e.stopPropagation()}>
@@ -148,7 +157,7 @@ export class SmoothlyPickerMenu2 {
 				</div>
 				<div ref={e => (this.listElement = e)}>
 					{Array.from(this.backend.values()).map(option => (
-						<smoothly-slot-elements ref={e => restoreListener(e, option)} node={option.clone} />
+						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} node={option.clone} />
 					))}
 				</div>
 			</Host>
