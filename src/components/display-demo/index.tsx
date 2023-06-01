@@ -145,7 +145,7 @@ export class SmoothlyDisplayDemo {
 				<fieldset>
 				<h2>Test of different kinds of notifier</h2>
 					<button onClick={() => this.noticeWarning(Notice.warn("This is a test warning notice."))}>warning</button>
-					<button onClick={() => this.noticeWarning(Notice.succeded("This is a test success notice."))}>success</button>
+					<button onClick={() => this.noticeWarning(Notice.succeeded("This is a test success notice."))}>success</button>
 					<button onClick={() => this.noticeWarning(Notice.failed("This is a test danger notice."))}>danger</button>
 					<button
 						onClick={() =>
