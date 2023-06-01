@@ -24,7 +24,6 @@ export class SmoothlyPicker implements Clearable {
 	@Watch("selected")
 	selectedChanged() {
 		this.display = Array.from(this.selected.values(), option => option.slotted).flat()
-		console.log("picker display changed to", this.display)
 	}
 
 	componentWillLoad() {

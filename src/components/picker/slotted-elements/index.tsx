@@ -11,7 +11,6 @@ export class SmoothlySottedElement {
 	@Event() smoothlySlottedChange: EventEmitter<Node[]>
 
 	componentDidRender() {
-		console.log("slotted display", this.element, this.element.children)
 		const slotted = Array.from(this.element.childNodes, child => {
 			let result: Node | Node[]
 			if (child instanceof HTMLSlotElement) {

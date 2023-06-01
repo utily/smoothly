@@ -18,14 +18,12 @@ export class SmoothlySlotElements {
 	@Event() smoothlySlotEmpty: EventEmitter<Slot>
 
 	componentWillLoad() {
-		console.log("slot loaded", this.nodes)
 		if (!this.nodes)
-			console.log("slot empty emitting", this.element.parentElement),
-				this.smoothlySlotEmpty.emit({
-					set: {
-						nodes: nodes => (console.log("slot setting nodes"), (this.nodes = nodes)),
-					},
-				})
+			this.smoothlySlotEmpty.emit({
+				set: {
+					nodes: nodes => (this.nodes = nodes),
+				},
+			})
 	}
 
 	@Watch("nodes")

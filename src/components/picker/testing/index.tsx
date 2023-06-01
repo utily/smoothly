@@ -1,11 +1,12 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, h, Host, Listen, State } from "@stencil/core"
+import { Data, Notice } from "../../../model"
 
 @Component({
-	tag: "smoothly-picker-tester",
+	tag: "smoothly-picker-demo",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPickerTester {
+export class SmoothlyPickerDemo {
 	@State() readonly = true
 	private users: Record<string, string | undefined> = {
 		"giovani@rocket.com": "giovani doe",
@@ -16,67 +17,22 @@ export class SmoothlyPickerTester {
 		message: "hello world",
 		emails: ["giovani@rocket.com", "jessie@rocket.com", "james@rocket.com"],
 	}
+	inputHandler(event: CustomEvent<Data>) {
+		this.data = { ...this.data, ...event.detail }
+		console.log(this.data)
+	}
+	@Listen("smoothlyFormSubmit")
+	submitHandler(event: CustomEvent<Data>) {
+		console.log("submitted", event.detail)
+	}
 	render() {
 		return (
 			<Host>
-				{/* <div>
-					<smoothly-button color="tertiary" onClick={() => (this.readonly = !this.readonly)}>
-						Toggle readonly
-					</smoothly-button>
-					<span>Form is currently {this.readonly ? "readonly" : "writable"}</span>
-				</div>
-
-				<smoothly-form
-					looks="grid"
-					onSmoothlyFormInput={e => (this.data = { ...this.data, ...e.detail })}
-					onSmoothlyFormSubmit={e => console.log("submit", { ...this.data, ...e.detail })}>
-					<smoothly-input type="text" name="message" value={this.data.message}>
+				<h5>Controlled input</h5>
+				<smoothly-form looks="line" onSmoothlyFormInput={e => this.inputHandler(e)}>
+					<smoothly-input name="message" value={this.data.message}>
 						Message
 					</smoothly-input>
-					<smoothly-picker readonly={this.readonly} name="emails" multiple mutable>
-						<span slot="label">Emails</span>
-						<span slot="search">Search</span>
-						{this.data.emails.map(email => (
-							// OBS using this key property is important with the mutable picker!
-							// without it stencil may reuse a removed option for remaining options
-							// causing a horrible de-sync
-							//                       V
-							<smoothly-picker-option key={email} value={email} selected>
-								{email}
-							</smoothly-picker-option>
-						))}
-					</smoothly-picker>
-					<smoothly-submit slot="submit">Submit</smoothly-submit>
-				</smoothly-form> */}
-				{/* <smoothly-m>
-					<smoothly-o value={"cube"}>
-						<smoothly-icon name="cube-outline" />
-					</smoothly-o>
-					<smoothly-o value={"square"}>
-						<smoothly-icon name="square-outline" />
-					</smoothly-o>
-				</smoothly-m> */}
-				{/* <smoothly-form onSmoothlyFormInput={e => console.log("form input", e.detail)}>
-					<smoothly-picker name="shapes" multiple mutable>
-						<span slot="label">Shape</span>
-						<span slot="search">Search</span>
-						<smoothly-picker-option value={{ shape: "square" }}>
-							<smoothly-icon name="square-outline" />
-						</smoothly-picker-option2>
-						<smoothly-picker-option value={{ shape: "cube" }}>
-							<smoothly-icon name="cube-outline" />
-						</smoothly-picker-option2>
-						<smoothly-picker-option value={{ shape: "circle" }}>
-							<smoothly-icon name="ellipse-outline" />
-						</smoothly-picker-option2>
-					</smoothly-picker2>
-				</smoothly-form> */}
-				<smoothly-form
-					looks="line"
-					onSmoothlyFormInput={e => {
-						console.log("email form change", e.detail)
-						this.data = { ...this.data, ...e.detail }
-					}}>
 					<smoothly-picker name="emails" mutable multiple>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
@@ -88,6 +44,65 @@ export class SmoothlyPickerTester {
 								<smoothly-icon size="tiny" slot="display" name="person-outline" />
 							</smoothly-picker-option>
 						))}
+					</smoothly-picker>
+					<smoothly-submit size="icon" slot="submit">
+						<smoothly-icon name="checkmark-circle" />
+					</smoothly-submit>
+					<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+						Clear
+					</smoothly-input-clear>
+				</smoothly-form>
+				<h5>uncontrolled inputs</h5>
+				<smoothly-form
+					onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
+					style={{ "max-width": "50rem" }}
+					looks="line">
+					<smoothly-input name="purpose" type="text">
+						Purpose
+					</smoothly-input>
+					<smoothly-picker
+						multiple
+						mutable
+						name="emails"
+						validator={value =>
+							value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
+						}>
+						<span slot="label">Emails</span>
+						<span slot="search">Search</span>
+						<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
+						<smoothly-picker-option selected value={"jessie@rocket.com"}>
+							jessie@rocket.com
+						</smoothly-picker-option>
+						<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
+					</smoothly-picker>
+					<smoothly-submit slot="submit">Submit</smoothly-submit>
+					<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+						Clear
+					</smoothly-input-clear>
+					<smoothly-picker name="shape">
+						<span slot="label">Shape</span>
+						<span slot="search">Search</span>
+						<smoothly-picker-option value={"circle"}>
+							<span slot="label">Circle</span>
+							<smoothly-icon size="tiny" name="ellipse-outline" />
+						</smoothly-picker-option>
+						<smoothly-picker-option value={"cube"}>
+							<span slot={"label"}>Cube</span>
+							<smoothly-icon size="tiny" name="cube-outline" />
+						</smoothly-picker-option>
+						<smoothly-picker-option value={"square"} selected>
+							<span slot={"label"}>Square</span>
+							<smoothly-icon size="tiny" name="square-outline" />
+						</smoothly-picker-option>
+					</smoothly-picker>
+					<smoothly-picker multiple readonly name="animals">
+						<span slot="label">Animals</span>
+						<span slot="search">Search</span>
+						<smoothly-picker-option selected value={"cat"}>
+							Cat
+						</smoothly-picker-option>
+						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
+						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
 				</smoothly-form>
 			</Host>

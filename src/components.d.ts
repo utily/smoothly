@@ -271,6 +271,8 @@ export namespace Components {
         "readonly": boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
+    interface SmoothlyPickerDemo {
+    }
     interface SmoothlyPickerMenu {
         "multiple": boolean;
         "mutable": boolean;
@@ -310,8 +312,6 @@ export namespace Components {
         "selected": boolean;
         "value": any;
         "visible": boolean;
-    }
-    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -859,6 +859,12 @@ declare global {
         prototype: HTMLSmoothlyPickerElement;
         new (): HTMLSmoothlyPickerElement;
     };
+    interface HTMLSmoothlyPickerDemoElement extends Components.SmoothlyPickerDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerDemoElement: {
+        prototype: HTMLSmoothlyPickerDemoElement;
+        new (): HTMLSmoothlyPickerDemoElement;
+    };
     interface HTMLSmoothlyPickerMenuElement extends Components.SmoothlyPickerMenu, HTMLStencilElement {
     }
     var HTMLSmoothlyPickerMenuElement: {
@@ -888,12 +894,6 @@ declare global {
     var HTMLSmoothlyPickerOptionOldElement: {
         prototype: HTMLSmoothlyPickerOptionOldElement;
         new (): HTMLSmoothlyPickerOptionOldElement;
-    };
-    interface HTMLSmoothlyPickerTesterElement extends Components.SmoothlyPickerTester, HTMLStencilElement {
-    }
-    var HTMLSmoothlyPickerTesterElement: {
-        prototype: HTMLSmoothlyPickerTesterElement;
-        new (): HTMLSmoothlyPickerTesterElement;
     };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
@@ -1135,12 +1135,12 @@ declare global {
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
+        "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-menu-old": HTMLSmoothlyPickerMenuOldElement;
         "smoothly-picker-old": HTMLSmoothlyPickerOldElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
         "smoothly-picker-option-old": HTMLSmoothlyPickerOptionOldElement;
-        "smoothly-picker-tester": HTMLSmoothlyPickerTesterElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
@@ -1448,6 +1448,8 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
+    interface SmoothlyPickerDemo {
+    }
     interface SmoothlyPickerMenu {
         "multiple"?: boolean;
         "mutable"?: boolean;
@@ -1494,8 +1496,6 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: any;
         "visible"?: boolean;
-    }
-    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
@@ -1702,12 +1702,12 @@ declare namespace LocalJSX {
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
+        "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-menu-old": SmoothlyPickerMenuOld;
         "smoothly-picker-old": SmoothlyPickerOld;
         "smoothly-picker-option": SmoothlyPickerOption;
         "smoothly-picker-option-old": SmoothlyPickerOptionOld;
-        "smoothly-picker-tester": SmoothlyPickerTester;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
@@ -1791,12 +1791,12 @@ declare module "@stencil/core" {
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
+            "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-menu-old": LocalJSX.SmoothlyPickerMenuOld & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuOldElement>;
             "smoothly-picker-old": LocalJSX.SmoothlyPickerOld & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOldElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
             "smoothly-picker-option-old": LocalJSX.SmoothlyPickerOptionOld & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionOldElement>;
-            "smoothly-picker-tester": LocalJSX.SmoothlyPickerTester & JSXBase.HTMLAttributes<HTMLSmoothlyPickerTesterElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;

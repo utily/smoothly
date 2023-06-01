@@ -59,25 +59,20 @@ export class SmoothlyPickerOption {
 		}
 	}
 	componentWillLoad() {
-		console.log("option load")
 		this.smoothlyPickerOptionLoad.emit((({ slotted, ...option }) => option)(this.option))
 	}
 	componentDidLoad() {
-		console.log("option loaded")
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	slottedChangeHandler(event: CustomEvent<Node[]>) {
 		event.stopPropagation()
 		this.slotted = event.detail
-		console.log("option slotted change detail child nodes", event.detail.at(0)?.childNodes)
-		console.log("option  slotted change", this.slotted)
 		this.smoothlyPickerOptionChange.emit(this.option)
 	}
 	@Method()
 	async clickHandler() {
 		if (!this.readonly) {
 			this.selected = !this.selected
-			console.log("option change")
 			this.smoothlyPickerOptionChange.emit(this.option)
 		}
 	}

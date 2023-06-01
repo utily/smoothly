@@ -41,11 +41,6 @@ export class SmoothlyPickerMenu {
 	@Event() notice: EventEmitter<Notice>
 	private listElement?: HTMLElement
 
-	@Watch("display")
-	displayChanged() {
-		console.log("display changed", this.display)
-	}
-
 	@Watch("readonly")
 	readonlyChanged() {
 		for (const option of chain(this.options.values(), this.backend.values()))
@@ -58,10 +53,8 @@ export class SmoothlyPickerMenu {
 		// internal event!
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
-			console.log("internal load", event.detail.value)
 			event.detail.set.readonly(this.readonly)
-		} else
-			console.log("external load", event.detail.value)
+		}
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
@@ -69,8 +62,6 @@ export class SmoothlyPickerMenu {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			const current = restore(this.options.get(event.detail.value), event.detail)
-			const currentBackend = this.backend.get(event.detail.value)
-			console.log(currentBackend)
 			this.backend = new Map(
 				this.backend
 					.set(event.detail.value, {
@@ -79,7 +70,6 @@ export class SmoothlyPickerMenu {
 					})
 					.entries()
 			)
-			console.log(this.backend.get(event.detail.value)?.clone == current?.element ?? undefined)
 		} // external event
 		else
 			this.options.set(event.detail.value, event.detail)
@@ -113,7 +103,6 @@ export class SmoothlyPickerMenu {
 				const searches = option.search.some(value => value.includes(search))
 				const result = value || searches
 				option.set.visible(result)
-				console.log("menu search", option.value, this.search, searches, option.search)
 			}
 		}
 	}
@@ -136,7 +125,6 @@ export class SmoothlyPickerMenu {
 	@Listen("smoothlySlotEmpty")
 	emptyDisplayHandler(event: CustomEvent<Slot>) {
 		event.stopPropagation()
-		console.log("slot empty display")
 		event.detail.set.nodes(this.display)
 	}
 	render() {
