@@ -146,7 +146,7 @@ export class SmoothlyPickerMenu {
 						onSmoothlyBlur={e => e.stopPropagation()}>
 						<slot name="search" />
 					</smoothly-input>
-					{this.mutable ? (
+					{this.mutable && !this.readonly ? (
 						<button onClick={() => this.addHandler()} disabled={!this.valid} type={"button"}>
 							<smoothly-icon name="add-outline" />
 						</button>

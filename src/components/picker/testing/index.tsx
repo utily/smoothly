@@ -11,7 +11,7 @@ function validateEmail(email: string) {
 	scoped: true,
 })
 export class SmoothlyPickerDemo {
-	@State() readonly = true
+	@State() readonly = false
 	private users: Record<string, string | undefined> = {
 		"giovani@rocket.com": "giovani doe",
 		"jessie@rocket.com": "jessie doe",
@@ -32,12 +32,15 @@ export class SmoothlyPickerDemo {
 	render() {
 		return (
 			<Host>
+				<smoothly-button onClick={() => (this.readonly = !this.readonly)}>
+					{this.readonly ? "current readonly" : "current writeable"}
+				</smoothly-button>
 				<h5>Controlled input</h5>
 				<smoothly-form looks="line" onSmoothlyFormInput={e => this.inputHandler(e)}>
-					<smoothly-input name="message" value={this.data.message}>
+					<smoothly-input readonly={this.readonly} name="message" value={this.data.message}>
 						Message
 					</smoothly-input>
-					<smoothly-picker name="emails" mutable multiple validator={validateEmail}>
+					<smoothly-picker name="emails" mutable multiple readonly={this.readonly} validator={validateEmail}>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
 						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
