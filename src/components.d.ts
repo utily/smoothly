@@ -17,6 +17,7 @@ import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Option2 } from "./components/picker/2/option/index";
 import { Selected } from "./components/radio-button/Selected";
+import { Slot } from "./components/picker/2/slot-elements/index";
 export namespace Components {
     interface SmoothlyAccordion {
         "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
@@ -351,7 +352,7 @@ export namespace Components {
     }
     interface SmoothlySlotElements {
         "clone": boolean;
-        "node": Node | Node[];
+        "nodes"?: Node | Node[];
     }
     interface SmoothlySlottedElements {
     }
@@ -568,6 +569,10 @@ export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
+}
+export interface SmoothlySlotElementsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySlotElementsElement;
 }
 export interface SmoothlySlottedElementsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1534,7 +1539,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlySlotElements {
         "clone"?: boolean;
-        "node"?: Node | Node[];
+        "nodes"?: Node | Node[];
+        "onSmoothlySlotEmpty"?: (event: SmoothlySlotElementsCustomEvent<Slot>) => void;
     }
     interface SmoothlySlottedElements {
         "onSmoothlySlottedChange"?: (event: SmoothlySlottedElementsCustomEvent<Node[]>) => void;

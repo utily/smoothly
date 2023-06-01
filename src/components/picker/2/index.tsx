@@ -57,7 +57,7 @@ export class SmoothlyPicker2 {
 	render() {
 		return (
 			<Host>
-				<smoothly-slot-elements node={this.display} />
+				<smoothly-slot-elements nodes={this.display} />
 				<span class={"label"}>
 					<slot name={"label"} />
 				</span>

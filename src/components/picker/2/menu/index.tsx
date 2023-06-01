@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Notice } from "../../../../model"
 import { Option2 } from "../option"
+import { Slot } from "../slot-elements"
 
 function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
 	for (const iterable of iterables)
@@ -125,6 +126,12 @@ export class SmoothlyPickerMenu2 {
 		if (event.key == "Enter")
 			event.preventDefault(), this.addHandler()
 	}
+	@Listen("smoothlySlotEmpty")
+	emptyDisplayHandler(event: CustomEvent<Slot>) {
+		event.stopPropagation()
+		console.log("slot empty display")
+		event.detail.set.nodes(this.display)
+	}
 	render() {
 		return (
 			<Host>
@@ -137,6 +144,7 @@ export class SmoothlyPickerMenu2 {
 					{Array.from(this.created.values(), option => (
 						<smoothly-picker-option2 key={option.value} value={option.value} selected={option.selected}>
 							{option.value}
+							<smoothly-slot-elements slot="display" nodes={this.display} />
 						</smoothly-picker-option2>
 					))}
 				</div>
@@ -157,7 +165,7 @@ export class SmoothlyPickerMenu2 {
 				</div>
 				<div ref={e => (this.listElement = e)}>
 					{Array.from(this.backend.values()).map(option => (
-						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} node={option.clone} />
+						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
 					))}
 				</div>
 			</Host>
