@@ -8,14 +8,13 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
-import { Color, Fill, Message, Notice, Option as Option1, Trigger } from "./model";
+import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
-import { Option } from "./components/picker/option/index";
 import { Selected } from "./components/radio-button/Selected";
 import { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
@@ -1489,9 +1488,9 @@ declare namespace LocalJSX {
     interface SmoothlyPickerOptionOld {
         "labeled"?: boolean;
         "name"?: string;
-        "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionOldCustomEvent<Option1>) => void;
+        "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionOldCustomEvent<Option>) => void;
         "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionOldCustomEvent<HTMLSmoothlyPickerOptionElement>) => void;
-        "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionOldCustomEvent<Option1>) => void;
+        "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionOldCustomEvent<Option>) => void;
         "readonly"?: boolean;
         "selected"?: boolean;
         "value"?: any;

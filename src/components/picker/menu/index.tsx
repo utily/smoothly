@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, Fragment, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Notice } from "../../../model"
-import { Option } from "../option"
+import { Notice, Option } from "../../../model"
 import { Slot } from "../slot-elements"
 
 function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {

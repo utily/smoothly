@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { Notice } from "../../model"
+import { Notice, Option } from "../../model"
 import { Clearable } from "../input/Clearable"
-import { Option } from "./option"
 
 @Component({
 	tag: "smoothly-picker",
