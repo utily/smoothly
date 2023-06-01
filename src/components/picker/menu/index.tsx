@@ -27,9 +27,9 @@ function restoreListener(ref: HTMLElement | undefined, option: Option) {
 })
 export class SmoothlyPickerMenu {
 	@Element() element: HTMLSmoothlyPickerMenuElement
-	@Prop() multiple = false
-	@Prop() mutable = false
-	@Prop() readonly = false
+	@Prop({ reflect: true }) multiple = false
+	@Prop({ reflect: true }) mutable = false
+	@Prop({ reflect: true }) readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@State() backend = new Map<any, Option & { clone: Node }>() // value -> Option
 	@State() options = new Map<any, Option>() // value -> Option
