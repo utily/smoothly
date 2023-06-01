@@ -50,7 +50,6 @@ export class SmoothlyPickerMenu {
 
 	@Listen("smoothlyPickerOptionLoad")
 	optionLoadHandler(event: CustomEvent<Option.Load>) {
-		// internal event!
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			event.detail.set.readonly(this.readonly)
@@ -58,7 +57,6 @@ export class SmoothlyPickerMenu {
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
-		// internal event
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			const current = restore(this.options.get(event.detail.value), event.detail)
@@ -70,18 +68,15 @@ export class SmoothlyPickerMenu {
 					})
 					.entries()
 			)
-		} // external event
-		else
+		} else
 			this.options.set(event.detail.value, event.detail)
 	}
 	@Listen("smoothlyPickerOptionChange")
 	optionChangeHandler(event: CustomEvent<Option>) {
-		// internal event
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			this.options.get(event.detail.value)?.set.selected(event.detail.selected)
-		} // external event
-		else
+		} else
 			this.backend.get(event.detail.value)?.set.selected(event.detail.selected)
 		if (!this.readonly && !this.multiple && event.detail.selected)
 			for (const option of chain(this.options.values(), this.backend.values()))
@@ -114,6 +109,7 @@ export class SmoothlyPickerMenu {
 					option.set.selected(false)
 			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
 			this.search = ""
+			this.valid = false
 		}
 		if (typeof validation == "object")
 			this.notice.emit(validation.notice)

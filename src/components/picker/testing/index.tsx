@@ -1,6 +1,10 @@
 import { Component, h, Host, Listen, State } from "@stencil/core"
 import { Data, Notice } from "../../../model"
 
+function validateEmail(email: string) {
+	return email.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
+}
+
 @Component({
 	tag: "smoothly-picker-demo",
 	styleUrl: "style.css",
@@ -33,7 +37,7 @@ export class SmoothlyPickerDemo {
 					<smoothly-input name="message" value={this.data.message}>
 						Message
 					</smoothly-input>
-					<smoothly-picker name="emails" mutable multiple>
+					<smoothly-picker name="emails" mutable multiple validator={validateEmail}>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
 						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
@@ -53,20 +57,11 @@ export class SmoothlyPickerDemo {
 					</smoothly-input-clear>
 				</smoothly-form>
 				<h5>uncontrolled inputs</h5>
-				<smoothly-form
-					onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
-					style={{ "max-width": "50rem" }}
-					looks="line">
+				<smoothly-form onSmoothlyFormSubmit={e => console.log("submitted", e.detail)} looks="line">
 					<smoothly-input name="purpose" type="text">
 						Purpose
 					</smoothly-input>
-					<smoothly-picker
-						multiple
-						mutable
-						name="emails"
-						validator={value =>
-							value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
-						}>
+					<smoothly-picker multiple mutable name="emails" validator={validateEmail}>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
 						<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
