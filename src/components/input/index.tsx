@@ -255,25 +255,23 @@ export class SmoothlyInput implements Clearable, Editable {
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<smoothly-form-controll label="Email">
-					<input
-						name={this.name}
-						type={this.state?.type}
-						placeholder={this.placeholder}
-						required={this.required}
-						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
-						disabled={this.disabled}
-						readOnly={this.readonly}
-						pattern={this.state?.pattern && this.state?.pattern.source}
-						value={this.state?.value}
-						onInput={(e: InputEvent) => this.onInput(e)}
-						onFocus={e => this.onFocus(e)}
-						onClick={e => this.onClick(e)}
-						onBlur={e => this.onBlur(e)}
-						onKeyDown={e => this.onKeyDown(e)}
-						ref={(el: HTMLInputElement) => (this.inputElement = el)}
-						onPaste={e => this.onPaste(e)}></input>
-				</smoothly-form-controll>
+				<input
+					name={this.name}
+					type={this.state?.type}
+					placeholder={this.placeholder}
+					required={this.required}
+					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+					disabled={this.disabled}
+					readOnly={this.readonly}
+					pattern={this.state?.pattern && this.state?.pattern.source}
+					value={this.state?.value}
+					onInput={(e: InputEvent) => this.onInput(e)}
+					onFocus={e => this.onFocus(e)}
+					onClick={e => this.onClick(e)}
+					onBlur={e => this.onBlur(e)}
+					onKeyDown={e => this.onKeyDown(e)}
+					ref={(el: HTMLInputElement) => (this.inputElement = el)}
+					onPaste={e => this.onPaste(e)}></input>
 			</Host>
 		)
 	}
