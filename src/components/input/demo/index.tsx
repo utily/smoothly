@@ -14,6 +14,19 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<smoothly-input-new layout="line" placement="float" placeholder="Placeholder" type="phone" editable readonly>
+				Float
+				<smoothly-icon slot="end" size="tiny" name="calendar" />
+			</smoothly-input-new>,
+			<br />,
+			<smoothly-input-new layout="border" placement="start" placeholder="Placeholder" value="Abc" clearable>
+				Start
+			</smoothly-input-new>,
+			<br />,
+			<smoothly-input-new layout="grid" placement="top" placeholder="Placeholder">
+				Top
+			</smoothly-input-new>,
+
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">

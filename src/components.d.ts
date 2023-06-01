@@ -15,6 +15,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Layout, Placement } from "./components/forms/Input";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
     interface SmoothlyAccordion {
@@ -203,15 +204,21 @@ export namespace Components {
         "type": string;
         "value": any;
     }
-    interface SmoothlyInputClear {
-        "color"?: Color;
+    interface SmoothlyInputBase {
+        "autocomplete": boolean;
+        "currency"?: Currency;
         "disabled": boolean;
-        "display": boolean;
-        "expand"?: "block" | "full";
-        "fill"?: Fill;
-        "shape"?: "rounded";
-        "size": "small" | "large" | "icon" | "flexible";
-        "type": "form" | "input";
+        "maxLength": number;
+        "minLength": number;
+        "name": string;
+        "pattern": RegExp | undefined;
+        "placeholder": string | undefined;
+        "readonly": boolean;
+        "required": boolean;
+        "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
+        "type": string;
+        "value": any;
     }
     interface SmoothlyInputDate {
         "disabled": boolean;
@@ -242,6 +249,29 @@ export namespace Components {
     }
     interface SmoothlyInputMonth {
         "value"?: Date;
+    }
+    interface SmoothlyInputNew {
+        "autocomplete": boolean;
+        "clear": () => Promise<void>;
+        "clearable": boolean;
+        "currency"?: Currency;
+        "disabled": boolean;
+        "editable": boolean;
+        "focused": boolean;
+        "icon": Icon;
+        "layout": Layout;
+        "maxLength": number;
+        "minLength": number;
+        "name": string;
+        "pattern": RegExp | undefined;
+        "placeholder": string | undefined;
+        "placement": Placement;
+        "readonly": boolean;
+        "required": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
+        "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "type": string;
+        "value": any;
     }
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
@@ -466,9 +496,9 @@ export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputElement;
 }
-export interface SmoothlyInputClearCustomEvent<T> extends CustomEvent<T> {
+export interface SmoothlyInputBaseCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputClearElement;
+    target: HTMLSmoothlyInputBaseElement;
 }
 export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -485,6 +515,10 @@ export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyInputNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputNewElement;
 }
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -742,11 +776,11 @@ declare global {
         prototype: HTMLSmoothlyInputElement;
         new (): HTMLSmoothlyInputElement;
     };
-    interface HTMLSmoothlyInputClearElement extends Components.SmoothlyInputClear, HTMLStencilElement {
+    interface HTMLSmoothlyInputBaseElement extends Components.SmoothlyInputBase, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputClearElement: {
-        prototype: HTMLSmoothlyInputClearElement;
-        new (): HTMLSmoothlyInputClearElement;
+    var HTMLSmoothlyInputBaseElement: {
+        prototype: HTMLSmoothlyInputBaseElement;
+        new (): HTMLSmoothlyInputBaseElement;
     };
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
     }
@@ -777,6 +811,12 @@ declare global {
     var HTMLSmoothlyInputMonthElement: {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
+    };
+    interface HTMLSmoothlyInputNewElement extends Components.SmoothlyInputNew, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputNewElement: {
+        prototype: HTMLSmoothlyInputNewElement;
+        new (): HTMLSmoothlyInputNewElement;
     };
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
     }
@@ -1043,12 +1083,13 @@ declare global {
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
-        "smoothly-input-clear": HTMLSmoothlyInputClearElement;
+        "smoothly-input-base": HTMLSmoothlyInputBaseElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
+        "smoothly-input-new": HTMLSmoothlyInputNewElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
@@ -1287,16 +1328,22 @@ declare namespace LocalJSX {
         "type"?: string;
         "value"?: any;
     }
-    interface SmoothlyInputClear {
-        "color"?: Color;
+    interface SmoothlyInputBase {
+        "autocomplete"?: boolean;
+        "currency"?: Currency;
         "disabled"?: boolean;
-        "display"?: boolean;
-        "expand"?: "block" | "full";
-        "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
-        "shape"?: "rounded";
-        "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "form" | "input";
+        "maxLength"?: number;
+        "minLength"?: number;
+        "name"?: string;
+        "onBlur"?: (event: SmoothlyInputBaseCustomEvent<any>) => void;
+        "onFocus"?: (event: SmoothlyInputBaseCustomEvent<any>) => void;
+        "onInput"?: (event: SmoothlyInputBaseCustomEvent<{ value: any }>) => void;
+        "pattern"?: RegExp | undefined;
+        "placeholder"?: string | undefined;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "type"?: string;
+        "value"?: any;
     }
     interface SmoothlyInputDate {
         "disabled"?: boolean;
@@ -1333,6 +1380,29 @@ declare namespace LocalJSX {
     interface SmoothlyInputMonth {
         "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
+    }
+    interface SmoothlyInputNew {
+        "autocomplete"?: boolean;
+        "clearable"?: boolean;
+        "currency"?: Currency;
+        "disabled"?: boolean;
+        "editable"?: boolean;
+        "focused"?: boolean;
+        "icon"?: Icon;
+        "layout"?: Layout;
+        "maxLength"?: number;
+        "minLength"?: number;
+        "name"?: string;
+        "onSmoothlyBlur"?: (event: SmoothlyInputNewCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: SmoothlyInputNewCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputNewCustomEvent<Record<string, any>>) => void;
+        "pattern"?: RegExp | undefined;
+        "placeholder"?: string | undefined;
+        "placement"?: Placement;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "type"?: string;
+        "value"?: any;
     }
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
@@ -1570,12 +1640,13 @@ declare namespace LocalJSX {
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
-        "smoothly-input-clear": SmoothlyInputClear;
+        "smoothly-input-base": SmoothlyInputBase;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-new": SmoothlyInputNew;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
         "smoothly-notification": SmoothlyNotification;
@@ -1654,12 +1725,13 @@ declare module "@stencil/core" {
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
-            "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
+            "smoothly-input-base": LocalJSX.SmoothlyInputBase & JSXBase.HTMLAttributes<HTMLSmoothlyInputBaseElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-new": LocalJSX.SmoothlyInputNew & JSXBase.HTMLAttributes<HTMLSmoothlyInputNewElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
