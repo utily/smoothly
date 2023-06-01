@@ -114,8 +114,10 @@ export class SmoothlyPickerMenu {
 			this.notice.emit(validation.notice)
 	}
 	keyDownHandler(event: KeyboardEvent) {
-		if (event.key == "Enter")
-			event.preventDefault(), this.addHandler()
+		if (event.key == "Enter") {
+			event.preventDefault()
+			this.addHandler()
+		}
 	}
 	@Listen("smoothlySlotEmpty")
 	emptyDisplayHandler(event: CustomEvent<Slot>) {
