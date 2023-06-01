@@ -7,6 +7,11 @@ import { Component, h, Host, State } from "@stencil/core"
 })
 export class SmoothlyPickerTester {
 	@State() readonly = true
+	private users: Record<string, string | undefined> = {
+		"giovani@rocket.com": "giovani doe",
+		"jessie@rocket.com": "jessie doe",
+		"james@rocket.com": "james doe",
+	}
 	@State() data = {
 		message: "hello world",
 		emails: ["giovani@rocket.com", "jessie@rocket.com", "james@rocket.com"],
@@ -52,36 +57,38 @@ export class SmoothlyPickerTester {
 					</smoothly-o>
 				</smoothly-m> */}
 				{/* <smoothly-form onSmoothlyFormInput={e => console.log("form input", e.detail)}>
-					<smoothly-picker2 name="shapes" multiple mutable>
+					<smoothly-picker name="shapes" multiple mutable>
 						<span slot="label">Shape</span>
 						<span slot="search">Search</span>
-						<smoothly-picker-option2 value={{ shape: "square" }}>
+						<smoothly-picker-option value={{ shape: "square" }}>
 							<smoothly-icon name="square-outline" />
 						</smoothly-picker-option2>
-						<smoothly-picker-option2 value={{ shape: "cube" }}>
+						<smoothly-picker-option value={{ shape: "cube" }}>
 							<smoothly-icon name="cube-outline" />
 						</smoothly-picker-option2>
-						<smoothly-picker-option2 value={{ shape: "circle" }}>
+						<smoothly-picker-option value={{ shape: "circle" }}>
 							<smoothly-icon name="ellipse-outline" />
 						</smoothly-picker-option2>
 					</smoothly-picker2>
 				</smoothly-form> */}
 				<smoothly-form
+					looks="line"
 					onSmoothlyFormInput={e => {
 						console.log("email form change", e.detail)
 						this.data = { ...this.data, ...e.detail }
 					}}>
-					<smoothly-picker2 name="emails" mutable multiple>
+					<smoothly-picker name="emails" mutable multiple>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
-						<smoothly-icon size="tiny" slot="display" name="person-outline" />
+						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
 						{this.data.emails.map(email => (
-							<smoothly-picker-option2 value={email} selected>
-								{email}
+							<smoothly-picker-option value={email} selected search={[this.users[email] ?? []].flat()}>
+								<span>{this.users[email]}</span>
+								<span slot="label">{email}</span>
 								<smoothly-icon size="tiny" slot="display" name="person-outline" />
-							</smoothly-picker-option2>
+							</smoothly-picker-option>
 						))}
-					</smoothly-picker2>
+					</smoothly-picker>
 				</smoothly-form>
 			</Host>
 		)

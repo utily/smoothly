@@ -1,8 +1,0 @@
-:host {
-	display: flex;
-}
-button {
-	color: unset;
-	background-color: inherit;
-	border: none;
-}

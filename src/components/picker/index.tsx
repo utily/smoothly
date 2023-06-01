@@ -1,91 +1,87 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { Notice, Option } from "../../model"
+import { Notice } from "../../model"
 import { Clearable } from "../input/Clearable"
+import { Option } from "./option"
+
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyPicker implements Clearable {
-	private selectedElement?: HTMLElement
 	@Element() element: HTMLSmoothlyPickerElement
-	@Prop() label = "Label"
 	@Prop() name: string
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Prop() multiple = false
-	@Prop() mutable = false
+	@Prop({ reflect: true }) mutable = false
+	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
-	@Prop() labeledDefault = false
 	@State() selected = new Map<string, Option>()
-	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>>
-	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>>
+	@State() display: Node[]
+	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
+	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
 
-	@Method()
-	async clear() {
-		this.selected.forEach(key => {
-			if (key.element.selected)
-				key.element.clickHandler()
-		})
+	@Watch("selected")
+	selectedChanged() {
+		this.display = Array.from(this.selected.values(), option => option.slotted).flat()
+		console.log("picker display changed to", this.display)
 	}
+
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
 	}
 	@Watch("selected")
 	componentDidLoad() {
-		if (this.selectedElement)
-			this.selectedElement.innerHTML = ""
-		for (const option of this.selected.values())
-			option.slotted.forEach(child => this.selectedElement?.appendChild(child))
 		const selected = Array.from(this.selected.values(), option => option.value)
 		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
-		event.stopPropagation()
-		if (event.detail.element.selected)
+		if (event.detail.selected)
 			this.selected = this.multiple
-				? new Map(this.selected.set(event.detail.element.value, event.detail).entries())
-				: new Map().set(event.detail.element.value, event.detail)
+				? new Map(this.selected.set(event.detail.value, event.detail).entries())
+				: new Map().set(event.detail.value, event.detail)
 	}
-	@Listen("smoothlyPickerOptionChanged")
-	optionsSelectedHandler(event: CustomEvent<Option>) {
-		event.stopPropagation()
+
+	@Listen("smoothlyPickerOptionChange")
+	optionChangeHandler(event: CustomEvent<Option>) {
 		if (!this.readonly)
 			if (this.multiple)
-				this.selected = event.detail.element.selected
-					? new Map(this.selected.set(event.detail.element.value, event.detail).entries())
-					: !this.selected.delete(event.detail.element.value)
+				this.selected = event.detail.selected
+					? new Map(this.selected.set(event.detail.value, event.detail).entries())
+					: !this.selected.delete(event.detail.value)
 					? this.selected
 					: new Map(this.selected.entries())
 			else
-				this.selected = !event.detail.element.selected
-					? new Map()
-					: new Map().set(event.detail.element.value, event.detail)
+				this.selected = !event.detail.selected ? new Map() : new Map().set(event.detail.value, event.detail)
 	}
 	clickHandler = (event: MouseEvent) => {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
+
+	@Method()
+	async clear() {
+		this.selected.forEach(option => option.selected && option.element.clickHandler())
+	}
 	render() {
 		return (
 			<Host>
-				<div ref={element => (this.selectedElement = element)} class={"selected"} />
+				<smoothly-slot-elements class={"selected"} nodes={this.display} />
 				<span class={"label"}>
-					<slot name="label" />
+					<slot name={"label"} />
 				</span>
-				<button type={"button"}>
-					<smoothly-icon name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
+				<button type="button">
+					<smoothly-icon size="tiny" name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
-					onClick={event => event.stopPropagation()}
-					labeledDefault={this.labeledDefault}
-					validator={this.validator}
+					onClick={e => e.stopPropagation()}
 					multiple={this.multiple}
 					mutable={this.mutable}
 					readonly={this.readonly}
-					class={"menu"}>
+					validator={this.validator}>
 					<slot name="search" slot="search" />
+					<slot name="display" slot="display" />
 					<slot />
 				</smoothly-picker-menu>
 			</Host>

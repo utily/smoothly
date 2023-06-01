@@ -309,15 +309,20 @@ export class SmoothlyInputDemo {
 				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
 					Clear
 				</smoothly-input-clear>
-				<smoothly-picker label="Shape" name="shape">
-					<smoothly-picker-option name="Circle" value={"circle"} labeled>
-						<smoothly-icon name="ellipse-outline" />
+				<smoothly-picker name="shape">
+					<span slot="label">Shape</span>
+					<span slot="search">Search</span>
+					<smoothly-picker-option value={"circle"}>
+						<span slot="label">Circle</span>
+						<smoothly-icon size="tiny" name="ellipse-outline" />
 					</smoothly-picker-option>
-					<smoothly-picker-option name="Cube" value={"cube"} labeled>
-						<smoothly-icon name="cube-outline" />
+					<smoothly-picker-option value={"cube"}>
+						<span slot={"label"}>Cube</span>
+						<smoothly-icon size="tiny" name="cube-outline" />
 					</smoothly-picker-option>
-					<smoothly-picker-option name="Square" value={"square"} selected labeled>
-						<smoothly-icon name="square-outline" />
+					<smoothly-picker-option value={"square"} selected>
+						<span slot={"label"}>Square</span>
+						<smoothly-icon size="tiny" name="square-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-picker multiple readonly name="animals">

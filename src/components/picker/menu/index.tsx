@@ -1,137 +1,180 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { Option } from "../../../model"
+import { Component, Element, Event, EventEmitter, Fragment, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Notice } from "../../../model"
+import { Option } from "../option"
+import { Slot } from "../slot-elements"
+
+function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
+	for (const iterable of iterables)
+		yield* iterable
+}
+
+function restore(clone: Option | undefined, option: Option): Option | undefined {
+	clone?.set.selected((clone.selected = option.selected))
+	clone?.set.readonly((clone.readonly = option.readonly))
+	clone?.set.visible((clone.visible = option.visible))
+	clone?.set.value((clone.value = option.value))
+	clone?.set.search((clone.search = option.search))
+	return clone
+}
+
+function restoreListener(ref: HTMLElement | undefined, option: Option) {
+	ref?.addEventListener("smoothlyPickerOptionLoad", (e: CustomEvent<Option>) => restore(e.detail, option))
+}
+
 @Component({
 	tag: "smoothly-picker-menu",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyPickerMenu {
-	@Element() element: HTMLElement
-	@Prop({ reflect: true }) multiple = false
-	@Prop({ reflect: true }) mutable = false
-	@Prop({ reflect: true }) readonly = false
+	@Element() element: HTMLSmoothlyPickerMenuElement
+	@Prop() multiple = false
+	@Prop() mutable = false
+	@Prop() readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
-	@Prop() labeledDefault = false
-	@State() allowed = false
-	@State() history = new Map<any, Option>()
-	@State() created: Option.New[] = []
+	@State() backend = new Map<any, Option & { clone: Node }>() // value -> Option
+	@State() options = new Map<any, Option>() // value -> Option
+	@State() created = new Map<any, Option.Created>()
 	@State() search = ""
+	@State() valid = false
+	@State() display: Node[]
 	@Event() notice: EventEmitter<Notice>
-	private options = new Map<any, Option>()
-	private searchElement?: HTMLElement
-	// private itemsElement?: HTMLElement
+	private listElement?: HTMLElement
+
+	@Watch("display")
+	displayChanged() {
+		console.log("display changed", this.display)
+	}
 
 	@Watch("readonly")
 	readonlyChanged() {
-		for (const option of this.options.values())
-			option.element.readonly = this.readonly
+		for (const option of chain(this.options.values(), this.backend.values()))
+			if (this.readonly)
+				option.set.readonly(this.readonly)
 	}
 
 	@Listen("smoothlyPickerOptionLoad")
-	optionLoadHandler(event: CustomEvent<HTMLSmoothlyPickerOptionElement>) {
-		if (this.readonly)
-			event.detail.readonly = true
+	optionLoadHandler(event: CustomEvent<Option.Load>) {
+		// internal event!
+		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
+			event.stopPropagation()
+			console.log("internal load", event.detail.value)
+			event.detail.set.readonly(this.readonly)
+		} else
+			console.log("external load", event.detail.value)
 	}
-
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
-		const current = this.options.get(event.detail.element.value)
-		const created = this.created.filter(option => option.value != current?.value)
-		if (this.created.length != created.length)
-			this.created = created
-		this.options.set(event.detail.element.value, event.detail)
+		// internal event
+		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
+			event.stopPropagation()
+			const current = restore(this.options.get(event.detail.value), event.detail)
+			const currentBackend = this.backend.get(event.detail.value)
+			console.log(currentBackend)
+			this.backend = new Map(
+				this.backend
+					.set(event.detail.value, {
+						...event.detail,
+						clone: current?.element ?? event.detail.element.cloneNode(true),
+					})
+					.entries()
+			)
+			console.log(this.backend.get(event.detail.value)?.clone == current?.element ?? undefined)
+		} // external event
+		else
+			this.options.set(event.detail.value, event.detail)
 	}
-	@Listen("smoothlyPickerOptionChanged")
-	optionChangedHandler(event: CustomEvent<Option>) {
-		if (!this.readonly && !this.multiple && event.detail.element.selected)
-			for (const option of this.options.values())
-				if (option.element != event.detail.element)
-					option.element.selected = false
-		const current = this.history.get(event.detail.element.value)
-		if (current?.element.selected != event.detail.element.selected)
-			if (event.detail.element.selected && this.history.delete(event.detail.element.value))
-				this.history = new Map(this.history.entries())
-			else
-				this.history = new Map(this.history.set(event.detail.element.value, event.detail).entries())
+	@Listen("smoothlyPickerOptionChange")
+	optionChangeHandler(event: CustomEvent<Option>) {
+		// internal event
+		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
+			event.stopPropagation()
+			this.options.get(event.detail.value)?.set.selected(event.detail.selected)
+		} // external event
+		else
+			this.backend.get(event.detail.value)?.set.selected(event.detail.selected)
+		if (!this.readonly && !this.multiple && event.detail.selected)
+			for (const option of chain(this.options.values(), this.backend.values()))
+				if (option.value != event.detail.value)
+					option.set.selected(false)
 	}
-
 	inputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopPropagation()
 		this.search = event.detail.search
 		if (!this.search) {
-			this.allowed = false
-			for (const option of this.options.values())
-				option.element.visible = true
+			this.valid = false
+			for (const option of chain(this.options.values(), this.backend.values()))
+				option.set.visible(true)
 		} else {
-			this.allowed = !Array.from(this.options.values()).find(option => option.value == this.search)
-			for (const option of this.options.values())
-				option.element.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())
-					? (option.element.visible = true)
-					: (option.element.visible = false)
-		}
-	}
-	keyDownHandler(event: KeyboardEvent) {
-		if (event.key == "Enter") {
-			event.preventDefault()
-			this.addHandler()
+			this.valid = !Array.from(this.options.values()).find(option => option.value == this.search)
+			const search = this.search.toLocaleLowerCase()
+			for (const option of chain(this.options.values(), this.backend.values())) {
+				const value = option.value.toString().toLocaleLowerCase().includes(search)
+				const searches = option.search.some(value => value.includes(search))
+				const result = value || searches
+				option.set.visible(result)
+				console.log("menu search", option.value, this.search, searches, option.search)
+			}
 		}
 	}
 	addHandler() {
 		const validation = !this.validator ? true : this.validator(this.search)
 		if (typeof validation == "object" ? validation.result : validation) {
 			if (!this.multiple)
-				for (const option of this.options.values())
-					option.element.selected = false
-			this.created = [...this.created, { value: this.search, selected: true }]
+				for (const option of chain(this.options.values(), this.backend.values()))
+					option.set.selected(false)
+			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
 			this.search = ""
-			this.searchElement?.focus()
 		}
 		if (typeof validation == "object")
 			this.notice.emit(validation.notice)
 	}
-	componentDidRender() {
-		// Array.from<Element & { name?: string }>(this.itemsElement?.children ?? [])
-		// 	.sort((a, b) => ((a.name ?? "") < (b.name ?? "") ? 0 : 1))
-		// 	.forEach(child => this.itemsElement?.appendChild(child))
+	keyDownHandler(event: KeyboardEvent) {
+		if (event.key == "Enter")
+			event.preventDefault(), this.addHandler()
+	}
+	@Listen("smoothlySlotEmpty")
+	emptyDisplayHandler(event: CustomEvent<Slot>) {
+		event.stopPropagation()
+		console.log("slot empty display")
+		event.detail.set.nodes(this.display)
 	}
 	render() {
 		return (
-			<Host>
+			<Host class={{ valid: this.valid }}>
+				<smoothly-slotted-elements class={"hide"} onSmoothlySlottedChange={e => (this.display = e.detail)}>
+					<slot name="display" />
+				</smoothly-slotted-elements>
+				<div class={"hide"}>
+					<slot />
+					{Array.from(this.created.values(), option => (
+						<smoothly-picker-option key={option.value} value={option.value} selected={option.selected}>
+							{option.value}
+							<smoothly-slot-elements slot="display" nodes={this.display} />
+						</smoothly-picker-option>
+					))}
+				</div>
 				<div class={"controls"}>
 					<smoothly-input
-						ref={element => (this.searchElement = element)}
 						name="search"
 						value={this.search}
 						onSmoothlyInput={e => this.inputHandler(e)}
-						onSmoothlyChange={e => this.inputHandler(e)}
-						onSmoothlyBlur={e => e.stopPropagation()}
-						onKeyDown={event => this.keyDownHandler(event)}>
+						onSmoothlyChange={e => e.stopPropagation()}
+						onSmoothlyBlur={e => e.stopPropagation()}>
 						<slot name="search" />
 					</smoothly-input>
 					{this.mutable ? (
-						<button onClick={() => this.addHandler()} disabled={!this.allowed} class={"add"} type={"button"}>
+						<button onClick={() => this.addHandler()} disabled={!this.valid} type={"button"}>
 							<smoothly-icon name="add-outline" />
 						</button>
-					) : null}
+					) : (
+						<Fragment></Fragment>
+					)}
 				</div>
-				<div /*ref={e => (this.itemsElement = e)}*/ class={"items"}>
-					<slot />
-					{[
-						...this.created.map(o => ({ ...o, element: { name: undefined } })),
-						// ...Array.from(this.history.values(), o => ({ ...o, selected: false })),
-					]
-						// .sort((a, b) => ((a.element.name ?? "") < (b.element.name ?? "") ? 0 : 1))
-						.map(option => (
-							<smoothly-picker-option
-								key={option.value}
-								labeled={this.labeledDefault}
-								selected={option.selected}
-								value={option.value}
-								onSmoothlyPickerOptionChanged={event => (option.selected = event.detail.element.selected)}>
-								{option.value}
-							</smoothly-picker-option>
-						))}
+				<div class={"list"} ref={e => (this.listElement = e)}>
+					{Array.from(this.backend.values()).map(option => (
+						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
+					))}
 				</div>
 			</Host>
 		)

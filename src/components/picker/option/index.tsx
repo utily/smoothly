@@ -1,66 +1,102 @@
 import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
-import { Option } from "../../../model"
+
+export interface Option {
+	element: HTMLSmoothlyPickerOptionElement
+	selected: boolean
+	readonly: boolean
+	visible: boolean
+	search: string[]
+	value: any
+	slotted: Node[]
+	set: {
+		selected: (selected: boolean) => void
+		visible: (visible: boolean) => void
+		readonly: (readonly: boolean) => void
+		search: (search: string[]) => void
+		value: (value: any) => void
+	}
+}
+export namespace Option {
+	export type Load = Omit<Option, "slotted">
+	export interface Created {
+		value: string
+		selected: boolean
+	}
+}
 
 @Component({
 	tag: "smoothly-picker-option",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyPickerOption {
 	@Element() element: HTMLSmoothlyPickerOptionElement
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) visible = true
-	@Prop({ reflect: true }) labeled = false
-	@Prop({ reflect: true, mutable: true }) readonly = false
-	@Prop() value: any
-	@Prop({ mutable: true, reflect: true }) name: string
-	@State() valueElement?: HTMLElement
-	@Event() smoothlyPickerOptionLoad: EventEmitter<HTMLSmoothlyPickerOptionElement>
+	@Prop({ mutable: true }) value: any
+	@Prop({ mutable: true }) search: string[] = []
+	@State() readonly = false
+	@State() slotted: Node[] = []
+	@Event() smoothlyPickerOptionLoad: EventEmitter<Option.Load>
 	@Event() smoothlyPickerOptionLoaded: EventEmitter<Option>
-	@Event() smoothlyPickerOptionChanged: EventEmitter<Option>
+	@Event() smoothlyPickerOptionChange: EventEmitter<Option>
 	get option(): Option {
 		return {
-			value: this.value,
 			element: this.element,
-			slotted: !this.element
-				? []
-				: Array.from(this.element.childNodes).reduce<Node[]>(
-						(result, child) =>
-							child instanceof HTMLElement && child.classList.contains("exclude")
-								? result
-								: [...result, child.cloneNode(true)],
-						[]
-				  ),
+			selected: this.selected,
+			readonly: this.readonly,
+			visible: this.visible,
+			search: this.search,
+			value: this.value,
+			slotted: this.slotted,
+			set: {
+				selected: selected => (this.selected = selected),
+				readonly: readonly => (this.readonly = readonly),
+				visible: visible => (this.visible = visible),
+				search: search => (this.search = search),
+				value: value => (this.value = value),
+			},
 		}
 	}
 	componentWillLoad() {
-		this.name = this.name ?? this.value.toString()
-		this.smoothlyPickerOptionLoad.emit(this.element)
+		console.log("option load")
+		this.smoothlyPickerOptionLoad.emit((({ slotted, ...option }) => option)(this.option))
 	}
 	componentDidLoad() {
+		console.log("option loaded")
 		this.smoothlyPickerOptionLoaded.emit(this.option)
+	}
+	slottedChangeHandler(event: CustomEvent<Node[]>) {
+		event.stopPropagation()
+		this.slotted = event.detail
+		console.log("option slotted change detail child nodes", event.detail.at(0)?.childNodes)
+		console.log("option  slotted change", this.slotted)
+		this.smoothlyPickerOptionChange.emit(this.option)
 	}
 	@Method()
 	async clickHandler() {
 		if (!this.readonly) {
 			this.selected = !this.selected
-			this.smoothlyPickerOptionChanged.emit(this.option)
+			console.log("option change")
+			this.smoothlyPickerOptionChange.emit(this.option)
 		}
 	}
+
 	render() {
 		return (
-			<Host key={this.value} onClick={() => this.clickHandler()}>
-				<div class={"exclude"}>
-					<button type={"button"}>
-						<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
-					</button>
+			<Host class={{ visible: this.visible }} onClick={() => this.clickHandler()}>
+				<div class={"display"}>
+					<slot name="display" />
 				</div>
-				<div>
-					<slot />
+				<div class={"content"}>
+					<smoothly-slotted-elements onSmoothlySlottedChange={e => this.slottedChangeHandler(e)} clone>
+						<slot />
+					</smoothly-slotted-elements>
+					<slot name={"label"} />
 				</div>
-				<div class={"exclude value"}>
-					<span>{this.name}</span>
-				</div>
+				<button type={"button"}>
+					<smoothly-icon name={this.selected ? "checkbox-outline" : "square-outline"} />
+				</button>
 			</Host>
 		)
 	}
