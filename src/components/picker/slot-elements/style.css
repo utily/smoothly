@@ -1,6 +1,3 @@
 :host {
 	display: contents;
 }
-/* ::slotted(.hide) {
-	display: none;
-} */
