@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
 import { Icon } from "./Icon"
 
@@ -27,18 +27,19 @@ export class SmoothlyIcon {
 	async componentWillLoad() {
 		await this.loadDocument()
 	}
-	hostData() {
-		return {
-			innerHTML: this.document
-				? this.document
-						.replace(` width="512" height="512"`, "")
-						.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
-						.replace(/stroke:#000;/gi, "")
-				: undefined,
-		}
-	}
 	render() {
-		return []
+		return (
+			<Host
+				innerHTML={
+					this.document
+						? this.document
+								.replace(` width="512" height="512"`, "")
+								.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
+								.replace(/stroke:#000;/gi, "")
+						: ""
+				}
+			/>
+		)
 	}
 	private static async fetch(url: string): Promise<string | undefined> {
 		const response = await fetch(url)

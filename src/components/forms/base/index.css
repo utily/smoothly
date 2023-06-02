@@ -9,7 +9,7 @@ input {
 	border: none;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color));
+	background-color: transparent;
 	opacity: 1;
 	transition: opacity 1s ease;
 }

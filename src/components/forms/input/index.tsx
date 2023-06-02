@@ -1,7 +1,7 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency } from "isoly"
 import { Icon } from "../../icon/Icon"
-import { Input, Layout, Placement } from "../Input"
+import { Colors, Input, Layout, Placement, Radius } from "../Input"
 
 @Component({
 	tag: "smoothly-input-new",
@@ -26,12 +26,28 @@ export class SmoothlyInputNew implements Input {
 	@Prop({ reflect: true }) layout: Layout = "border"
 	@Prop({ reflect: true }) placement: Placement = "float"
 	@Prop({ reflect: true }) icon: Icon
+	@Prop({ reflect: true }) label: Colors = "dark"
+	@Prop({ reflect: true }) border: Colors = "dark"
+	@Prop({ reflect: true }) radius: Radius = "default"
+	@Prop() fill: Colors
+	@Prop() info: string | HTMLElement
 	@Prop({ reflect: true, mutable: true }) focused = false
-	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	private inputElement: HTMLSmoothlyInputBaseElement
-	private iconElement: HTMLSmoothlyIconElement
+	@Event() smoothlyFormInput: EventEmitter
+	@Element() element: HTMLSmoothlyInputNewElement
+	private input: HTMLSmoothlyInputBaseElement
+
+	componentWillLoad() {
+		this.smoothlyFormInput.emit()
+	}
+
+	@Watch("value")
+	handleValue(value: any, pre: any) {
+		if (value != pre)
+			this.smoothlyChange.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
 
 	@Method()
 	async clear(): Promise<void> {
@@ -49,42 +65,10 @@ export class SmoothlyInputNew implements Input {
 		this.placement = placement
 	}
 
-	@Listen("click")
-	onClickElement(e: Event) {
-		console.log("onclick icon", e.target) // Fortsätt här, kolla varför icon elementet visar en svg och inte smoothly-icon
-
-		if (e.target === this.iconElement)
-			this.onClickIcon()
-		else
-			e.target !== this.inputElement
-		this.inputElement.click()
-	}
-
-	onClickIcon() {
-		// Lägg i Input namespace
-		if (this.editable && this.readonly) {
-			this.setReadonly(false)
-		} else if (this.clearable && this.value) {
-			this.clear()
-		} else {
-			this.inputElement.click()
-		}
-	}
-
-	getIcon() {
-		// Lägg i Input namespace
-		let icon: Icon | "empty" = this.icon ?? "empty"
-		if (this.editable && this.readonly)
-			icon = "create"
-		else if (this.clearable && this.value && !this.readonly)
-			icon = "close"
-		return icon
-	}
-
 	render() {
 		return (
 			<Host>
-				<div class="input-container">
+				<div class="input-container" onClick={() => this.input.click()}>
 					<label htmlFor={this.name}>
 						<slot />
 					</label>
@@ -101,14 +85,16 @@ export class SmoothlyInputNew implements Input {
 						readonly={this.readonly}
 						pattern={this.pattern}
 						value={this.value}
-						ref={(el: HTMLSmoothlyInputBaseElement) => (this.inputElement = el)}
+						ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
 					/>
 					<smoothly-icon
-						ref={(el: HTMLSmoothlyIconElement) => (this.iconElement = el)}
+						color={this.fill}
+						onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
 						size="tiny"
-						name={this.getIcon()}
+						name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
 					/>
 				</div>
+				{this.info && <div class="input-info">{this.info}</div>}
 			</Host>
 		)
 	}

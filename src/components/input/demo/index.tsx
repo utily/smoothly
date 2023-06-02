@@ -14,53 +14,6 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
-			<smoothly-input-new layout="line" placement="float" placeholder="Placeholder" type="phone" editable readonly>
-				Float
-				<smoothly-icon slot="end" size="tiny" name="calendar" />
-			</smoothly-input-new>,
-			<br />,
-			<smoothly-input-new layout="border" placement="start" placeholder="Placeholder" value="Abc" clearable>
-				Start
-			</smoothly-input-new>,
-			<br />,
-			<smoothly-input-new layout="grid" placement="top" placeholder="Placeholder">
-				Top
-			</smoothly-input-new>,
-
-			<h2>Submit</h2>,
-			<smoothly-form looks="border">
-				<smoothly-input type="email" name="email">
-					Email
-				</smoothly-input>
-				<smoothly-input type="password" name="password">
-					Password
-				</smoothly-input>
-				<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
-					Clear
-				</smoothly-input-clear>
-				<smoothly-submit slot="submit">Submit</smoothly-submit>
-			</smoothly-form>,
-
-			<h4>Clear</h4>,
-			<smoothly-form looks="border">
-				<smoothly-input name="First Name">First name</smoothly-input>
-				<smoothly-input name="Last name">
-					Last name
-					<smoothly-input-clear slot="end">
-						<smoothly-icon name="close" />
-					</smoothly-input-clear>
-				</smoothly-input>
-				<smoothly-input type="phone" name="Phone">
-					Phone
-					<smoothly-input-clear slot="end">
-						<smoothly-icon name="close" />
-					</smoothly-input-clear>
-				</smoothly-input>
-				<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
-					Clear
-				</smoothly-input-clear>
-			</smoothly-form>,
-
 			<h2>Border</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">

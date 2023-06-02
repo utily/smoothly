@@ -27,3 +27,34 @@
 	width: 4em;
 	height: 4em;
 }
+
+:host[color="default"] {
+	fill: rgb(var(--smoothly-default-color));
+}
+:host[color="primary"] {
+	fill:  rgb(var(--smoothly-primary-color));
+}
+:host[color="secondary"] {
+	fill:  rgb(var(--smoothly-secondary-color));
+}
+:host[color="tertiary"] {
+	fill:  rgb(var(--smoothly-tertiary-color));
+}
+:host[color="success"] {
+	fill:  rgb(var(--smoothly-success-color));
+}
+:host[color="warning"] {
+	fill: rgb(var(--smoothly-warning-color));
+}
+:host[color="danger"] {
+	fill: rgb(var(--smoothly-danger-color));
+}
+:host[color="light"] {
+	fill: rgb(var(--smoothly-light-color));
+}
+:host[color="medium"] {
+	fill: rgb(var(--smoothly-medium-color));
+}
+:host[color="dark"] {
+	fill: rgb(var(--smoothly-dark-color));
+}
