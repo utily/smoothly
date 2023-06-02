@@ -22,7 +22,11 @@ export class SmoothlyPicker implements Clearable {
 
 	@Watch("selected")
 	selectedChanged() {
-		this.display = Array.from(this.selected.values(), option => option.slotted).flat()
+		this.display = Array.from(this.selected.values(), option => {
+			const span = document.createElement("span")
+			option.slotted.forEach(node => span.appendChild(node))
+			return span
+		})
 	}
 
 	componentWillLoad() {
