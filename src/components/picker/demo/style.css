@@ -1,0 +1,7 @@
+:host {
+	display: flex;
+	flex-direction: column;
+}
+smoothly-form {
+	max-width: 50rem;
+}

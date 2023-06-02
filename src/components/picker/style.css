@@ -2,31 +2,23 @@
 	display: flex;
 	position: relative;
 	width: max-content;
-	padding: 0 0.4em;
 	padding: 1.2em 0.7em 0.2em 0.8em;
 }
-:host:not([open]) .menu {
+:host:not([open]) smoothly-picker-menu {
 	display: none;
 }
-smoothly-button {
-	margin: 0;
-	padding: 0;
-}
-.selector {
-	display: flex;
-	align-items: center;
+smoothly-slot-elements {
+	white-space: nowrap;
 }
 .selected {
+	position: relative;
 	display: flex;
-	margin-right: 2px;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 1rem;
 	width: 100%;
-	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	min-width: 0;
-	position: relative;
+	margin-right: 2px;
 }
 .selected::after {
 	content: "";
@@ -37,11 +29,9 @@ smoothly-button {
 	width: 2ch;
 	background: linear-gradient(90deg, rgba(var(--background-color), 0) 0%, rgba(var(--background-color), 1) 100%);
 }
-
 .selected * {
 	display: none;
 }
-
 .label {
 	position: absolute;
 	left: 0.4rem;
@@ -56,8 +46,4 @@ smoothly-button {
 .selected:not(:empty) + .label {
 	top: 0.4em;
 	transform: scale(0.6);
-}
-
-.hide {
-	display: none;
 }

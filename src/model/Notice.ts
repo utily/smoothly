@@ -79,7 +79,7 @@ export class Notice {
 	static execute(message: string, task: Notice.Task): Notice {
 		return new Notice("executing", message, task)
 	}
-	static succeded(message: string): Notice {
+	static succeeded(message: string): Notice {
 		return new Notice("success", message)
 	}
 	static failed(message: string): Notice {

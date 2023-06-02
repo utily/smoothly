@@ -1,5 +1,4 @@
 import { Component, h, Listen } from "@stencil/core"
-import { Notice } from "../../../model"
 @Component({
 	tag: "smoothly-input-demo",
 	styleUrl: "style.css",
@@ -282,54 +281,8 @@ export class SmoothlyInputDemo {
 				</smoothly-submit>
 			</smoothly-form>,
 			<h4>Smoothly Picker</h4>,
-			<smoothly-form
-				onSmoothlyFormSubmit={e => console.log("submitted", e.detail)}
-				style={{ "max-width": "50rem" }}
-				looks="line">
-				<smoothly-input name="purpose" type="text">
-					Purpose
-				</smoothly-input>
-				<smoothly-picker
-					multiple
-					mutable
-					name="emails"
-					validator={value =>
-						value.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
-					}>
-					<span slot="label">Emails</span>
-					<span slot="search">Search</span>
-					<smoothly-picker-option value={"james@rocket.com"}>james@rocket.com</smoothly-picker-option>
-					<smoothly-picker-option selected value={"jessie@rocket.com"}>
-						jessie@rocket.com
-					</smoothly-picker-option>
-					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
-				</smoothly-picker>
-				<smoothly-submit slot="submit">Submit</smoothly-submit>
-				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
-					Clear
-				</smoothly-input-clear>
-				<smoothly-picker label="Shape" name="shape">
-					<smoothly-picker-option name="Circle" value={"circle"} labeled>
-						<smoothly-icon name="ellipse-outline" />
-					</smoothly-picker-option>
-					<smoothly-picker-option name="Cube" value={"cube"} labeled>
-						<smoothly-icon name="cube-outline" />
-					</smoothly-picker-option>
-					<smoothly-picker-option name="Square" value={"square"} selected labeled>
-						<smoothly-icon name="square-outline" />
-					</smoothly-picker-option>
-				</smoothly-picker>
-				<smoothly-picker multiple readonly name="animals">
-					<span slot="label">Animals</span>
-					<span slot="search">Search</span>
-					<smoothly-picker-option selected value={"cat"}>
-						Cat
-					</smoothly-picker-option>
-					<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
-					<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
-				</smoothly-picker>
-			</smoothly-form>,
-			<smoothly-picker-tester />,
+			<smoothly-picker-demo />,
+
 			<smoothly-backtotop></smoothly-backtotop>,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,

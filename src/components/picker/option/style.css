@@ -1,26 +1,25 @@
-* {
-	box-sizing: border-box;
-}
 :host {
 	display: contents;
 }
-:host:not([visible]) {
+:host(:not([visible])) {
 	display: none;
 }
 :host > * {
-	width: 100%;
 	cursor: pointer;
+	padding: 0.25ch 0.5rem
 }
-:host > *:not(:last-child) {
-	padding-right: 1ch;
+.display {
+	padding-left: 0;
 }
-:host:not([labeled]) span {
-	visibility: hidden;
+button {
+	color: unset;
+	background-color: inherit;
+	border: none;
+	padding-right: 0;
 }
-span {
-	margin-left: auto;
-}
-.value {
+.content {
 	display: flex;
-	justify-content: flex-end;
+	column-gap: 1rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }

@@ -16,6 +16,7 @@ import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
+import { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
     interface SmoothlyAccordion {
         "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
@@ -262,8 +263,6 @@ export namespace Components {
     }
     interface SmoothlyPicker {
         "clear": () => Promise<void>;
-        "label": string;
-        "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
@@ -271,8 +270,9 @@ export namespace Components {
         "readonly": boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
+    interface SmoothlyPickerDemo {
+    }
     interface SmoothlyPickerMenu {
-        "labeledDefault": boolean;
         "multiple": boolean;
         "mutable": boolean;
         "readonly": boolean;
@@ -280,14 +280,10 @@ export namespace Components {
     }
     interface SmoothlyPickerOption {
         "clickHandler": () => Promise<void>;
-        "labeled": boolean;
-        "name": string;
-        "readonly": boolean;
+        "search": string[];
         "selected": boolean;
         "value": any;
         "visible": boolean;
-    }
-    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction": "up" | "down";
@@ -327,6 +323,13 @@ export namespace Components {
         "period": number;
         "width": string;
         "widths": string[];
+    }
+    interface SmoothlySlotElements {
+        "clone": boolean;
+        "nodes"?: Node | Node[];
+    }
+    interface SmoothlySlottedElements {
+        "clone": boolean;
     }
     interface SmoothlySpinner {
         "active": boolean;
@@ -529,6 +532,14 @@ export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
+}
+export interface SmoothlySlotElementsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySlotElementsElement;
+}
+export interface SmoothlySlottedElementsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySlottedElementsElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -808,6 +819,12 @@ declare global {
         prototype: HTMLSmoothlyPickerElement;
         new (): HTMLSmoothlyPickerElement;
     };
+    interface HTMLSmoothlyPickerDemoElement extends Components.SmoothlyPickerDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyPickerDemoElement: {
+        prototype: HTMLSmoothlyPickerDemoElement;
+        new (): HTMLSmoothlyPickerDemoElement;
+    };
     interface HTMLSmoothlyPickerMenuElement extends Components.SmoothlyPickerMenu, HTMLStencilElement {
     }
     var HTMLSmoothlyPickerMenuElement: {
@@ -819,12 +836,6 @@ declare global {
     var HTMLSmoothlyPickerOptionElement: {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
-    };
-    interface HTMLSmoothlyPickerTesterElement extends Components.SmoothlyPickerTester, HTMLStencilElement {
-    }
-    var HTMLSmoothlyPickerTesterElement: {
-        prototype: HTMLSmoothlyPickerTesterElement;
-        new (): HTMLSmoothlyPickerTesterElement;
     };
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
     }
@@ -879,6 +890,18 @@ declare global {
     var HTMLSmoothlySkeletonElement: {
         prototype: HTMLSmoothlySkeletonElement;
         new (): HTMLSmoothlySkeletonElement;
+    };
+    interface HTMLSmoothlySlotElementsElement extends Components.SmoothlySlotElements, HTMLStencilElement {
+    }
+    var HTMLSmoothlySlotElementsElement: {
+        prototype: HTMLSmoothlySlotElementsElement;
+        new (): HTMLSmoothlySlotElementsElement;
+    };
+    interface HTMLSmoothlySlottedElementsElement extends Components.SmoothlySlottedElements, HTMLStencilElement {
+    }
+    var HTMLSmoothlySlottedElementsElement: {
+        prototype: HTMLSmoothlySlottedElementsElement;
+        new (): HTMLSmoothlySlottedElementsElement;
     };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
@@ -1054,9 +1077,9 @@ declare global {
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
+        "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
-        "smoothly-picker-tester": HTMLSmoothlyPickerTesterElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
@@ -1066,6 +1089,8 @@ declare global {
         "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
+        "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
+        "smoothly-slotted-elements": HTMLSmoothlySlottedElementsElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
@@ -1353,8 +1378,6 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
-        "label"?: string;
-        "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "name"?: string;
@@ -1364,8 +1387,9 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
+    interface SmoothlyPickerDemo {
+    }
     interface SmoothlyPickerMenu {
-        "labeledDefault"?: boolean;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
@@ -1373,17 +1397,13 @@ declare namespace LocalJSX {
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
-        "labeled"?: boolean;
-        "name"?: string;
-        "onSmoothlyPickerOptionChanged"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
-        "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElement>) => void;
+        "onSmoothlyPickerOptionChange"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<Option.Load>) => void;
         "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
-        "readonly"?: boolean;
+        "search"?: string[];
         "selected"?: boolean;
         "value"?: any;
         "visible"?: boolean;
-    }
-    interface SmoothlyPickerTester {
     }
     interface SmoothlyPopup {
         "direction"?: "up" | "down";
@@ -1429,6 +1449,15 @@ declare namespace LocalJSX {
         "period"?: number;
         "width"?: string;
         "widths"?: string[];
+    }
+    interface SmoothlySlotElements {
+        "clone"?: boolean;
+        "nodes"?: Node | Node[];
+        "onSmoothlySlotEmpty"?: (event: SmoothlySlotElementsCustomEvent<Slot>) => void;
+    }
+    interface SmoothlySlottedElements {
+        "clone"?: boolean;
+        "onSmoothlySlottedChange"?: (event: SmoothlySlottedElementsCustomEvent<Node[]>) => void;
     }
     interface SmoothlySpinner {
         "active"?: boolean;
@@ -1581,9 +1610,9 @@ declare namespace LocalJSX {
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
+        "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
-        "smoothly-picker-tester": SmoothlyPickerTester;
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
@@ -1593,6 +1622,8 @@ declare namespace LocalJSX {
         "smoothly-reorder": SmoothlyReorder;
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-skeleton": SmoothlySkeleton;
+        "smoothly-slot-elements": SmoothlySlotElements;
+        "smoothly-slotted-elements": SmoothlySlottedElements;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
@@ -1665,9 +1696,9 @@ declare module "@stencil/core" {
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
+            "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
-            "smoothly-picker-tester": LocalJSX.SmoothlyPickerTester & JSXBase.HTMLAttributes<HTMLSmoothlyPickerTesterElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
@@ -1677,6 +1708,8 @@ declare module "@stencil/core" {
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
+            "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;
+            "smoothly-slotted-elements": LocalJSX.SmoothlySlottedElements & JSXBase.HTMLAttributes<HTMLSmoothlySlottedElementsElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;

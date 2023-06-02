@@ -1,49 +1,30 @@
-* {
-	box-sizing: border-box;
-}
 :host {
 	display: flex;
 	flex-direction: column;
+	gap: 0.5rem;
 	position: absolute;
 	z-index: 4;
-	gap: 0.5rem;
 	top: 100%;
 	left: -1px;
 	right: -1px;
 	background-color: rgb(var(--background-color));
+	padding: 0.5rem;
 }
-:host >*:first-child {
-	margin-top: 0.5rem;
+.list {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	row-gap: 0.5ch;
 }
-:host >*:last-child {
-	margin-bottom: 0.5rem;
-}
-:host:not([mutable]) .add {
+.hide {
 	display: none;
 }
-:host .items {
-	display: grid;
-	grid-template-columns: auto auto 1fr;
-	align-items: center;
-	row-gap: 1ch;
-}
-:host > * {
-	margin: 0 0.5rem;
-}
 .controls {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr auto;
 	gap: 0.5rem;
+	transition: grid-template-columns 200ms linear;
 }
-.controls >*:not(.add) {
-	flex: 1 1 0;
+.controls > button:disabled {
+	opacity: 0.3;
 }
-.add {
-	width: fit-content;
-}
-.add:disabled {
-	visibility: hidden;
-}
-.new {
-	display: contents;
-}
-

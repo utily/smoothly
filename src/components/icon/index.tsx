@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
 import { Icon } from "./Icon"
 
@@ -10,7 +10,7 @@ import { Icon } from "./Icon"
 export class SmoothlyIcon {
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
-	@Prop() name?: Icon | "empty"
+	@Prop({ reflect: true }) name?: Icon | "empty"
 	@Prop({ reflect: true }) size: "tiny" | "small" | "medium" | "large" = "medium"
 	@Prop() toolTip?: string
 	@State() document?: string
@@ -25,20 +25,21 @@ export class SmoothlyIcon {
 			</svg>`
 	}
 	async componentWillLoad() {
-		await this.loadDocument()
-	}
-	hostData() {
-		return {
-			innerHTML: this.document
-				? this.document
-						.replace(` width="512" height="512"`, "")
-						.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
-						.replace(/stroke:#000;/gi, "")
-				: undefined,
-		}
+		this.loadDocument()
 	}
 	render() {
-		return []
+		return (
+			<Host
+				innerHTML={
+					this.document
+						? this.document
+								.replace(` width="512" height="512"`, "")
+								.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
+								.replace(/stroke:#000;/gi, "")
+						: undefined
+				}
+			/>
+		)
 	}
 	private static async fetch(url: string): Promise<string | undefined> {
 		const response = await fetch(url)
