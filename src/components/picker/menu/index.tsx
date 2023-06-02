@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Fragment, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../../model"
 import { Slot } from "../slot-elements"
 
@@ -39,6 +39,7 @@ export class SmoothlyPickerMenu {
 	@State() display: Node[]
 	@Event() notice: EventEmitter<Notice>
 	private listElement?: HTMLElement
+	private searchElement?: HTMLElement
 
 	@Watch("readonly")
 	readonlyChanged() {
@@ -108,6 +109,7 @@ export class SmoothlyPickerMenu {
 					option.set.selected(false)
 			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
 			this.search = ""
+			this.searchElement?.focus()
 			this.valid = false
 		}
 		if (typeof validation == "object")
@@ -141,8 +143,10 @@ export class SmoothlyPickerMenu {
 				</div>
 				<div class={"controls"}>
 					<smoothly-input
+						ref={e => (this.searchElement = e)}
 						name="search"
 						value={this.search}
+						onKeyDown={e => this.keyDownHandler(e)}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => e.stopPropagation()}
 						onSmoothlyBlur={e => e.stopPropagation()}>
@@ -152,9 +156,7 @@ export class SmoothlyPickerMenu {
 						<button onClick={() => this.addHandler()} disabled={!this.valid} type={"button"}>
 							<smoothly-icon name="add-outline" />
 						</button>
-					) : (
-						<Fragment></Fragment>
-					)}
+					) : null}
 				</div>
 				<div class={"list"} ref={e => (this.listElement = e)}>
 					{Array.from(this.backend.values()).map(option => (
