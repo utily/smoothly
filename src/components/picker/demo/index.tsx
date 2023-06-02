@@ -23,7 +23,6 @@ export class SmoothlyPickerDemo {
 	}
 	inputHandler(event: CustomEvent<Data>) {
 		this.data = { ...this.data, ...event.detail }
-		console.log(this.data)
 	}
 	@Listen("smoothlyFormSubmit")
 	submitHandler(event: CustomEvent<Data>) {
