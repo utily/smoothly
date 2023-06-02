@@ -73,6 +73,7 @@ export class SmoothlyInputNew implements Input {
 						<slot />
 					</label>
 					<smoothly-input-base
+						focused={this.focused}
 						onFocus={() => (this.focused = true)}
 						onBlur={() => (this.focused = false)}
 						onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : undefined)}

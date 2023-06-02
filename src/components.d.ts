@@ -208,6 +208,7 @@ export namespace Components {
         "autocomplete": boolean;
         "currency"?: Currency;
         "disabled": boolean;
+        "focused": boolean;
         "maxLength": number;
         "minLength": number;
         "name": string;
@@ -1346,6 +1347,7 @@ declare namespace LocalJSX {
         "autocomplete"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
+        "focused"?: boolean;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;

@@ -25,6 +25,7 @@ export class SmoothlyInputBase {
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true }) readonly = false
 	@Prop() currency?: Currency
+	@Prop() focused: boolean
 	@State() initialValue?: any
 	@Event() input: EventEmitter<{ value: any }>
 	@Event() focus: EventEmitter
@@ -225,7 +226,7 @@ export class SmoothlyInputBase {
 		return (
 			<Host onClick={() => this.inputElement.focus()}>
 				<input
-					class={!this.placeholder && !this.value ? "fadeIn" : ""}
+					class={!this.placeholder && !this.value && !this.focused ? "fadeIn" : ""}
 					name={this.name}
 					type={this.state?.type}
 					placeholder={this.placeholder}
