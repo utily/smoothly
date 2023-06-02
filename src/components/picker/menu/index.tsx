@@ -44,8 +44,7 @@ export class SmoothlyPickerMenu {
 	@Watch("readonly")
 	readonlyChanged() {
 		for (const option of chain(this.options.values(), this.backend.values()))
-			if (this.readonly)
-				option.set.readonly(this.readonly)
+			option.element, option.set.readonly(this.readonly)
 	}
 
 	@Listen("smoothlyPickerOptionLoad")
