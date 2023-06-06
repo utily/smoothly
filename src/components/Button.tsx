@@ -1,6 +1,9 @@
 import { FunctionalComponent, h } from "@stencil/core"
 
-export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link, download }) => {
+export const Button: FunctionalComponent<Button.Properties> = (
+	{ disabled, type, link, download, action = "button" },
+	children
+) => {
 	return disabled && (link || type == "link") ? (
 		<slot></slot>
 	) : link ? (
@@ -16,9 +19,10 @@ export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type,
 			<slot name="end"></slot>
 		</a>
 	) : (
-		<button disabled={disabled}>
+		<button disabled={disabled} type={action}>
 			<slot name="start"></slot>
 			<slot></slot>
+			{...children}
 			<slot name="end"></slot>
 		</button>
 	)
@@ -29,5 +33,6 @@ export namespace Button {
 		type: "link" | "button"
 		link?: string
 		download?: boolean
+		action?: "submit" | "button"
 	}
 }

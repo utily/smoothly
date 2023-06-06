@@ -21,7 +21,7 @@ export interface Input extends Clearable, Editable, Stylable {
 }
 
 export type Layout = "plain" | "grid" | "border" | "line"
-export type Placement = "float" | "start" | "top"
+export type Placement = "float" | "start" | "top" | "outside"
 export type Radius = "default" | "rounded" | "circle"
 export type Colors =
 	| "primary"
@@ -67,5 +67,9 @@ export namespace Input {
 		} else {
 			inputElement.click()
 		}
+	}
+
+	export function is(value: Input | any): value is Input {
+		return value && typeof value == "object" && typeof value.name == "string"
 	}
 }

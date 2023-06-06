@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+import { Clearable } from "../Clearable"
 
 function getLocale(): Locale | undefined {
 	const result = navigator.language
@@ -12,7 +13,7 @@ function getLocale(): Locale | undefined {
 	styleUrl: "index.css",
 	scoped: true,
 })
-export class SmoothlyInputBase {
+export class SmoothlyInputBase implements Clearable {
 	@Prop() name: string
 	@Prop() type = "text"
 	@Prop() required = false
@@ -106,12 +107,12 @@ export class SmoothlyInputBase {
 		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
 	}
 
-	onBlur() {
+	private onBlur() {
 		this.initialValue = undefined
 		this.blur.emit()
 	}
 
-	onFocus(event: FocusEvent) {
+	private onFocus(event: FocusEvent) {
 		this.initialValue = this.value
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)
@@ -119,7 +120,7 @@ export class SmoothlyInputBase {
 		this.focus.emit()
 	}
 
-	onClick(event: MouseEvent) {
+	private onClick(event: MouseEvent) {
 		const backend = event.target as HTMLInputElement
 		this.state = {
 			...this.state,
@@ -134,7 +135,7 @@ export class SmoothlyInputBase {
 		this.updateBackend(after, backend)
 	}
 
-	onKeyDown(event: KeyboardEvent) {
+	private onKeyDown(event: KeyboardEvent) {
 		if (event.key && !(event.key == "Unidentified")) {
 			const backend = event.target as HTMLInputElement
 			this.state = {
@@ -163,7 +164,7 @@ export class SmoothlyInputBase {
 		}
 	}
 
-	onPaste(event: ClipboardEvent) {
+	private onPaste(event: ClipboardEvent) {
 		event.preventDefault()
 		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
@@ -172,7 +173,7 @@ export class SmoothlyInputBase {
 			this.processKey({ key: letter }, backend)
 	}
 
-	onInput(event: InputEvent) {
+	private onInput(event: InputEvent) {
 		if (event.inputType == "insertReplacementText") {
 			this.processKey({ key: "a", ctrlKey: true }, event.target as HTMLInputElement)
 			;[...(event.data ?? "")].forEach(c => this.processKey({ key: c }, event.target as HTMLInputElement))
@@ -220,6 +221,16 @@ export class SmoothlyInputBase {
 		this.value = this.lastValue = this.formatter.fromString(
 			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
 		)
+	}
+
+	@Method()
+	async clear() {
+		const value = ""
+		const start = value.length
+		this.state = this.newState({
+			value,
+			selection: { start, end: start, direction: "none" },
+		})
 	}
 
 	render() {

@@ -1,0 +1,30 @@
+smoothly-form {
+	display: block;
+	--background-color: var(--smoothly-default-color);
+}
+
+.form-input {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.form-input > * {
+	flex-grow: 1;
+	min-width: 15em;
+	flex-basis: 40%;
+}
+
+.form-button {
+	display: flex;
+	justify-content: end;
+	gap: 1em;
+}
+
+smoothly-form-new[layout="line"] > form > .form-input,
+smoothly-form-new[layout="border"] > form > .form-input {
+	gap: 2em
+}
+
+smoothly-form-new[layout="grid"] > form > .form-input {
+	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
+}

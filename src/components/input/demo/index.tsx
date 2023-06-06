@@ -271,9 +271,6 @@ export class SmoothlyInputDemo {
 					<smoothly-picker-option value={"giovanni@rocket.com"}>giovanni@rocket.com</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
-				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
-					Clear
-				</smoothly-input-clear>
 				<smoothly-picker label="Shape" name="shape">
 					<smoothly-picker-option name="Circle" value={"circle"} labeled>
 						<smoothly-icon name="ellipse-outline" />

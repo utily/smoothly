@@ -1,0 +1,7 @@
+@import "../../button/style.css";
+
+:host() {
+	transition: 0.4s;
+	margin: 1em 0em;
+	min-width: 0rem;
+}

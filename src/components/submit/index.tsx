@@ -36,7 +36,7 @@ export class SmoothlySubmit {
 
 	render() {
 		return (
-			<Button disabled={this.disabled} type={this.type}>
+			<Button disabled={this.disabled} type={this.type} action="submit">
 				<slot />
 			</Button>
 		)

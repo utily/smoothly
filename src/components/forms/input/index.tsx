@@ -9,7 +9,7 @@ import { Colors, Input, Layout, Placement, Radius } from "../Input"
 	scoped: true,
 })
 export class SmoothlyInputNew implements Input {
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop() type = "text"
 	@Prop() required = false
 	@Prop() minLength = 0
@@ -34,12 +34,13 @@ export class SmoothlyInputNew implements Input {
 	@Prop({ reflect: true, mutable: true }) focused = false
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	@Event() smoothlyFormInput: EventEmitter
+	@Event() smoothlyInputLoad: EventEmitter
 	@Element() element: HTMLSmoothlyInputNewElement
 	private input: HTMLSmoothlyInputBaseElement
 
 	componentWillLoad() {
-		this.smoothlyFormInput.emit()
+		this.smoothlyInputLoad.emit()
+		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
 	@Watch("value")
@@ -51,7 +52,8 @@ export class SmoothlyInputNew implements Input {
 
 	@Method()
 	async clear(): Promise<void> {
-		this.value = undefined
+		this.input.clear()
+		this.value = null
 	}
 
 	@Method()
@@ -76,7 +78,7 @@ export class SmoothlyInputNew implements Input {
 						focused={this.focused}
 						onFocus={() => (this.focused = true)}
 						onBlur={() => (this.focused = false)}
-						onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : undefined)}
+						onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : null)}
 						name={this.name}
 						type={this.type}
 						placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
