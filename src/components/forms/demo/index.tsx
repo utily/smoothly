@@ -21,6 +21,7 @@ export class SmoothlyInputNewDemo {
 				</nav>
 				{this.selected == "input" && <smoothly-input-new-preview />}
 				{this.selected == "form" && <smoothly-form-new-preview />}
+				{this.selected == "select" && <smoothly-select-new-preview />}
 			</Host>
 		)
 	}

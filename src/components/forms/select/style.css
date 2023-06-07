@@ -1,0 +1,42 @@
+@import '../input.css';
+
+:host {
+	cursor: text;
+	position: relative;
+}
+
+:host:not([filterable]) input {
+	cursor:  pointer;
+}
+
+.dropdown {
+	position: absolute;
+	top: calc(100% + 0.1em);
+	left: -1px;
+	z-index: 99999;
+	width: calc(100% + 2px);
+	background-color: rgb(var(--background-color));
+	box-shadow: var(--smoothly-shadow);
+	max-height: 19em;
+	overflow-y: auto;
+}
+
+.option {
+	padding: 0.5em;
+	cursor: pointer;
+}
+
+.option:hover {
+	color: rgb(var(--smoothly-primary-contrast));
+	background-color: rgb(var(--smoothly-primary-tint));
+}
+
+.selected {
+	color: rgb(var(--smoothly-primary-contrast));
+	background-color: rgb(var(--smoothly-primary-color));
+}
+
+.focused {
+	color: rgb(var(--smoothly-primary-contrast));
+	background-color: rgb(var(--smoothly-primary-tint));
+}

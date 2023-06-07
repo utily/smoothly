@@ -56,7 +56,7 @@ export class SmoothlyInputNewPreview {
 						<br />
 					</Fragment>
 				))}
-				<h4>Input icons & fill options</h4>
+				<h4>Icons & fill options</h4>
 				{["primary", "secondary", "tertiary", "success", "warning", "danger", "light", "medium", "dark"].map(
 					(type: any) => (
 						<Fragment>

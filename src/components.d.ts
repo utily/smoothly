@@ -19,6 +19,7 @@ import { Changeable } from "./components/forms/Changeable";
 import { Submitable } from "./components/forms/Submitable";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
+import { Options } from "./components/forms/select/index";
 export namespace Components {
     interface SmoothlyAccordion {
         "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
@@ -401,6 +402,33 @@ export namespace Components {
     }
     interface SmoothlySelectDemo {
     }
+    interface SmoothlySelectNew {
+        "border": Colors;
+        "clear": () => Promise<void>;
+        "clearable": boolean;
+        "disabled": boolean;
+        "editable": boolean;
+        "fill": Colors;
+        "filterable": boolean;
+        "focused": boolean;
+        "icon": Icon;
+        "info": string | HTMLElement;
+        "label": Colors;
+        "layout": Layout;
+        "multiple": boolean;
+        "name": string;
+        "options": Options[];
+        "placeholder": string | undefined;
+        "placement": Placement;
+        "radius": Radius;
+        "readonly": boolean;
+        "required": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
+        "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "value"?: string | string[];
+    }
+    interface SmoothlySelectNewPreview {
+    }
     interface SmoothlySkeleton {
         "align": "left" | "center" | "right";
         "color": string;
@@ -636,6 +664,10 @@ export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyReorderElement;
+}
+export interface SmoothlySelectNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySelectNewElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1027,6 +1059,18 @@ declare global {
         prototype: HTMLSmoothlySelectDemoElement;
         new (): HTMLSmoothlySelectDemoElement;
     };
+    interface HTMLSmoothlySelectNewElement extends Components.SmoothlySelectNew, HTMLStencilElement {
+    }
+    var HTMLSmoothlySelectNewElement: {
+        prototype: HTMLSmoothlySelectNewElement;
+        new (): HTMLSmoothlySelectNewElement;
+    };
+    interface HTMLSmoothlySelectNewPreviewElement extends Components.SmoothlySelectNewPreview, HTMLStencilElement {
+    }
+    var HTMLSmoothlySelectNewPreviewElement: {
+        prototype: HTMLSmoothlySelectNewPreviewElement;
+        new (): HTMLSmoothlySelectNewPreviewElement;
+    };
     interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
     }
     var HTMLSmoothlySkeletonElement: {
@@ -1231,6 +1275,8 @@ declare global {
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
+        "smoothly-select-new": HTMLSmoothlySelectNewElement;
+        "smoothly-select-new-preview": HTMLSmoothlySelectNewPreviewElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
@@ -1663,6 +1709,33 @@ declare namespace LocalJSX {
     }
     interface SmoothlySelectDemo {
     }
+    interface SmoothlySelectNew {
+        "border"?: Colors;
+        "clearable"?: boolean;
+        "disabled"?: boolean;
+        "editable"?: boolean;
+        "fill"?: Colors;
+        "filterable"?: boolean;
+        "focused"?: boolean;
+        "icon"?: Icon;
+        "info"?: string | HTMLElement;
+        "label"?: Colors;
+        "layout"?: Layout;
+        "multiple"?: boolean;
+        "name"?: string;
+        "onSmoothlyChange"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlySelectNewCustomEvent<void>) => void;
+        "options"?: Options[];
+        "placeholder"?: string | undefined;
+        "placement"?: Placement;
+        "radius"?: Radius;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "value"?: string | string[];
+    }
+    interface SmoothlySelectNewPreview {
+    }
     interface SmoothlySkeleton {
         "align"?: "left" | "center" | "right";
         "color"?: string;
@@ -1852,6 +1925,8 @@ declare namespace LocalJSX {
         "smoothly-radio-group": SmoothlyRadioGroup;
         "smoothly-reorder": SmoothlyReorder;
         "smoothly-select-demo": SmoothlySelectDemo;
+        "smoothly-select-new": SmoothlySelectNew;
+        "smoothly-select-new-preview": SmoothlySelectNewPreview;
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
@@ -1944,6 +2019,8 @@ declare module "@stencil/core" {
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
+            "smoothly-select-new": LocalJSX.SmoothlySelectNew & JSXBase.HTMLAttributes<HTMLSmoothlySelectNewElement>;
+            "smoothly-select-new-preview": LocalJSX.SmoothlySelectNewPreview & JSXBase.HTMLAttributes<HTMLSmoothlySelectNewPreviewElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;

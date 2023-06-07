@@ -5,7 +5,7 @@ import { Stylable } from "./Stylable"
 
 export interface Input extends Clearable, Editable, Stylable {
 	name: string
-	value: any
+	value?: any
 	required: boolean
 	placement: Placement
 	placeholder?: string
@@ -57,7 +57,7 @@ export namespace Input {
 		editable: boolean,
 		clearable: boolean,
 		readonly: boolean,
-		inputElement: HTMLSmoothlyInputNewElement
+		inputElement: HTMLElement
 	) {
 		if (editable && readonly) {
 			if (Editable.is(inputElement))
