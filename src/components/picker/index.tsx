@@ -19,8 +19,8 @@ export class SmoothlyPicker implements Clearable {
 	@State() selected = new Map<any, Option>()
 	@State() display: Node[]
 	@Event() smoothlyPickerLoaded: EventEmitter<Controls>
-	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
-	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
+	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
+	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	private controls?: Controls
 
 	@Watch("selected")
