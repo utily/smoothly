@@ -7,19 +7,22 @@ function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
 		yield* iterable
 }
 
-function restore(clone: Option | undefined, option: Option): Option | undefined {
-	clone?.set.selected((clone.selected = option.selected))
-	clone?.set.readonly((clone.readonly = option.readonly))
-	clone?.set.visible((clone.visible = option.visible))
-	clone?.set.value((clone.value = option.value))
-	clone?.set.search((clone.search = option.search))
-	return clone
+function restore<T extends Option>(target: T | undefined, source: Option): T | undefined {
+	target?.set.selected((target.selected = source.selected))
+	target?.set.readonly((target.readonly = source.readonly))
+	target?.set.visible((target.visible = source.visible))
+	target?.set.value((target.value = source.value))
+	target?.set.search((target.search = source.search))
+	return target
 }
 
 function restoreListener(ref: HTMLElement | undefined, option: Option) {
 	ref?.addEventListener("smoothlyPickerOptionLoad", (e: CustomEvent<Option>) => restore(e.detail, option))
 }
-
+export interface Controls {
+	remember: () => void
+	restore: () => void
+}
 @Component({
 	tag: "smoothly-picker-menu",
 	styleUrl: "style.css",
@@ -38,8 +41,39 @@ export class SmoothlyPickerMenu {
 	@State() valid = false
 	@State() display: Node[]
 	@Event() notice: EventEmitter<Notice>
+	@Event() smoothlyPickerMenuLoaded: EventEmitter<Controls>
+	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
+
+	componentDidLoad() {
+		this.smoothlyPickerMenuLoaded.emit({
+			remember: () => {
+				this.memory = {
+					backend: new Map(Array.from(this.backend.entries(), ([value, option]) => [value, { ...option }])),
+					options: new Map(Array.from(this.options.entries(), ([value, option]) => [value, { ...option }])),
+				}
+			},
+			restore: () => {
+				if (this.memory) {
+					for (const option of this.options.values()) {
+						const memory = this.memory.options.get(option.value)
+						if (memory != undefined)
+							restore(option, memory)
+						else if (this.created.get(option.value))
+							option.set.selected((option.selected = false))
+					}
+					for (const option of this.backend.values()) {
+						const memory = this.memory.backend.get(option.value)
+						if (memory != undefined)
+							restore(option, memory)
+						else if (this.created.get(option.value))
+							option.set.selected((option.selected = false))
+					}
+				}
+			},
+		})
+	}
 
 	@Watch("readonly")
 	readonlyChanged() {
@@ -52,18 +86,22 @@ export class SmoothlyPickerMenu {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			event.detail.set.readonly(this.readonly)
+
+			const current = this.options.get(event.detail.value)
+			if (current)
+				event.detail.set.selected(current.element.selected)
 		}
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
-			const current = restore(this.options.get(event.detail.value), event.detail)
+			const current = restore(this.backend.get(event.detail.value), event.detail)
 			this.backend = new Map(
 				this.backend
 					.set(event.detail.value, {
 						...event.detail,
-						clone: current?.element ?? event.detail.element.cloneNode(true),
+						clone: current?.clone ?? event.detail.element.cloneNode(true),
 					})
 					.entries()
 			)
@@ -75,8 +113,12 @@ export class SmoothlyPickerMenu {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			this.options.get(event.detail.value)?.set.selected(event.detail.selected)
-		} else
-			this.backend.get(event.detail.value)?.set.selected(event.detail.selected)
+		} else {
+			const current = this.backend.get(event.detail.value)
+			if (current?.element.parentElement)
+				current?.set.selected(event.detail.selected)
+		}
+
 		if (!this.readonly && !this.multiple && event.detail.selected)
 			for (const option of chain(this.options.values(), this.backend.values()))
 				if (option.value != event.detail.value)

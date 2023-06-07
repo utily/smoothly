@@ -1,5 +1,6 @@
 import { Component, h, Host, Listen, State } from "@stencil/core"
 import { Data, Notice } from "../../../model"
+import { Controls } from "../menu"
 
 function validateEmail(email: string) {
 	return email.match(/^.+@.+/) ? true : { result: false, notice: Notice.failed("That is not an email") }
@@ -11,7 +12,7 @@ function validateEmail(email: string) {
 	scoped: true,
 })
 export class SmoothlyPickerDemo {
-	@State() readonly = false
+	private controls?: Controls
 	private users: Record<string, string | undefined> = {
 		"giovani@rocket.com": "giovani doe",
 		"jessie@rocket.com": "jessie doe",
@@ -19,32 +20,63 @@ export class SmoothlyPickerDemo {
 	}
 	@State() data = {
 		message: "hello world",
-		emails: ["giovani@rocket.com", "jessie@rocket.com", "james@rocket.com"],
+		emails: ["jessie@rocket.com", "james@rocket.com"],
+		options: ["giovani@rocket.com"],
 	}
+	@State() change?: SmoothlyPickerDemo["data"]
 	inputHandler(event: CustomEvent<Data>) {
-		this.data = { ...this.data, ...event.detail }
+		if (this.change) {
+			this.change = {
+				...this.change,
+				...event.detail,
+			}
+			console.log("demo input", this.change)
+		}
 	}
 	@Listen("smoothlyFormSubmit")
 	submitHandler(event: CustomEvent<Data>) {
 		console.log("submitted", event.detail)
 	}
+	clickHandler() {
+		if (!this.change)
+			this.controls?.remember()
+		else
+			this.controls?.restore()
+		this.change = this.change ? undefined : { ...this.data, emails: [...this.data.emails] }
+	}
+	loadedHandler(event: CustomEvent<Controls>) {
+		this.controls = event.detail
+	}
 	render() {
 		return (
 			<Host>
-				<smoothly-button onClick={() => (this.readonly = !this.readonly)}>
-					{this.readonly ? "current readonly" : "current writeable"}
+				<smoothly-button onClick={() => this.clickHandler()}>
+					{!this.change ? "start edit" : "end edit"}
 				</smoothly-button>
 				<h5>Controlled input</h5>
-				<smoothly-form looks="line" onSmoothlyFormInput={e => this.inputHandler(e)}>
-					<smoothly-input readonly={this.readonly} name="message" value={this.data.message}>
+				<smoothly-form looks="line" onSmoothlyFormInput={e => this.inputHandler(e as any)}>
+					<smoothly-input readonly={!this.change} name="message" value={this.data.message}>
 						Message
 					</smoothly-input>
-					<smoothly-picker name="emails" mutable multiple readonly={this.readonly} validator={validateEmail}>
+					<smoothly-picker
+						name="emails"
+						mutable
+						multiple
+						readonly={!this.change}
+						validator={validateEmail}
+						onSmoothlyPickerLoaded={e => this.loadedHandler(e)}>
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
 						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
-						{this.data.emails.map(email => (
-							<smoothly-picker-option value={email} selected search={[this.users[email] ?? []].flat()}>
+						{(this.change?.emails ?? this.data.emails).map(email => (
+							<smoothly-picker-option key={email} value={email} selected search={[this.users[email] ?? []].flat()}>
+								<span>{this.users[email]}</span>
+								<span slot="label">{email}</span>
+								<smoothly-icon size="tiny" slot="display" name="person-outline" />
+							</smoothly-picker-option>
+						))}
+						{this.data.options.map(email => (
+							<smoothly-picker-option key={email} value={email} search={[this.users[email] ?? []].flat()}>
 								<span>{this.users[email]}</span>
 								<span slot="label">{email}</span>
 								<smoothly-icon size="tiny" slot="display" name="person-outline" />

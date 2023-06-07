@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../model"
 import { Clearable } from "../input/Clearable"
+import { Controls } from "./menu"
 
 @Component({
 	tag: "smoothly-picker",
@@ -15,16 +16,21 @@ export class SmoothlyPicker implements Clearable {
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
-	@State() selected = new Map<string, Option>()
+	@State() selected = new Map<any, Option>()
 	@State() display: Node[]
-	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
-	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // mutable -> any[]
+	@Event() smoothlyPickerLoaded: EventEmitter<Controls>
+	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
+	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
+	private controls?: Controls
 
 	@Watch("selected")
 	selectedChanged() {
+		const selected = Array.from(this.selected.values(), option => option.value)
+		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 		this.display = Array.from(this.selected.values(), option => {
 			const span = document.createElement("span")
-			option.slotted.forEach(node => span.appendChild(node))
+			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))
 			return span
 		})
 	}
@@ -32,11 +38,13 @@ export class SmoothlyPicker implements Clearable {
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
 	}
-	@Watch("selected")
 	componentDidLoad() {
-		const selected = Array.from(this.selected.values(), option => option.value)
-		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
-		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		if (this.controls)
+			this.smoothlyPickerLoaded.emit(this.controls)
+	}
+	@Listen("smoothlyPickerMenuLoaded")
+	menuLoadedHandler(event: CustomEvent<Controls>) {
+		this.controls = event.detail
 	}
 	@Listen("smoothlyPickerOptionLoaded")
 	optionLoadedHandler(event: CustomEvent<Option>) {

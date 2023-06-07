@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Option } from "../../../model"
 @Component({
 	tag: "smoothly-picker-option",
@@ -34,6 +34,13 @@ export class SmoothlyPickerOption {
 			},
 		}
 	}
+	@Watch("selected")
+	@Watch("slotted")
+	emitChange() {
+		if (this.element.parentElement)
+			this.smoothlyPickerOptionChange.emit(this.option)
+	}
+
 	componentWillLoad() {
 		this.smoothlyPickerOptionLoad.emit((({ slotted, ...option }) => option)(this.option))
 	}
@@ -43,14 +50,11 @@ export class SmoothlyPickerOption {
 	slottedChangeHandler(event: CustomEvent<Node[]>) {
 		event.stopPropagation()
 		this.slotted = event.detail
-		this.smoothlyPickerOptionChange.emit(this.option)
 	}
 	@Method()
 	async clickHandler() {
-		if (!this.readonly) {
+		if (!this.readonly)
 			this.selected = !this.selected
-			this.smoothlyPickerOptionChange.emit(this.option)
-		}
 	}
 
 	render() {
