@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { Option } from "../../../model"
 @Component({
 	tag: "smoothly-picker-option",
@@ -26,7 +26,7 @@ export class SmoothlyPickerOption {
 			value: this.value,
 			slotted: this.slotted,
 			set: {
-				selected: selected => (this.selected = selected),
+				selected: selected => (console.log("option set", this.value, "selected", selected), (this.selected = selected)),
 				readonly: readonly => (this.readonly = readonly),
 				visible: visible => (this.visible = visible),
 				search: search => (this.search = search),
@@ -34,6 +34,17 @@ export class SmoothlyPickerOption {
 			},
 		}
 	}
+	@Watch("selected")
+	@Watch("slotted")
+	emitChange() {
+		if (this.element.parentElement) {
+			console.log("options emitting change", this.value, this.selected)
+			this.smoothlyPickerOptionChange.emit(this.option)
+		} else {
+			console.log("options not connected", this.value, this.selected)
+		}
+	}
+
 	componentWillLoad() {
 		this.smoothlyPickerOptionLoad.emit((({ slotted, ...option }) => option)(this.option))
 	}
@@ -41,19 +52,20 @@ export class SmoothlyPickerOption {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	slottedChangeHandler(event: CustomEvent<Node[]>) {
+		console.log("option change", this.selected)
 		event.stopPropagation()
 		this.slotted = event.detail
-		this.smoothlyPickerOptionChange.emit(this.option)
 	}
 	@Method()
 	async clickHandler() {
 		if (!this.readonly) {
 			this.selected = !this.selected
-			this.smoothlyPickerOptionChange.emit(this.option)
+			console.log("option click", this.value, this.selected)
 		}
 	}
 
 	render() {
+		console.log("option render", this.value, this.selected)
 		return (
 			<Host class={{ visible: this.visible }} onClick={() => this.clickHandler()}>
 				<div class={"display"}>

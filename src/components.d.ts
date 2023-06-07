@@ -15,6 +15,8 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Controls } from "./components/picker/menu";
+import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
 import { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
@@ -1383,6 +1385,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyPickerLoaded"?: (event: SmoothlyPickerCustomEvent<Controls>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
@@ -1393,6 +1396,7 @@ declare namespace LocalJSX {
         "multiple"?: boolean;
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
+        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls>) => void;
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }

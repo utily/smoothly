@@ -15,7 +15,11 @@ export class SmoothlySottedElement {
 			let result: Node | Node[]
 			if (child instanceof HTMLSlotElement) {
 				const assigned = child.assignedNodes()
-				result = assigned.length ? assigned.map(child => child) : child
+				result = assigned.length
+					? assigned.map(child => (this.clone ? child.cloneNode(true) : child))
+					: this.clone
+					? child.cloneNode(true)
+					: child
 			} else
 				result = child
 			return result
