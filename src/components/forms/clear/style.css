@@ -5,3 +5,17 @@
 	margin: 1em 0em;
 	min-width: 0rem;
 }
+
+:host[reactive] {
+	margin: 0;
+	min-width: 0rem !important;
+	width: fit-content;
+	border-radius: 2rem;
+	font-size: 0.8rem;
+	box-shadow: var(--smoothly-shadow);
+}
+
+:host[reactive] button {
+	min-width: 0rem;
+	width: fit-content;
+}

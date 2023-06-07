@@ -11,20 +11,20 @@ import { Colors, Input, Layout, Placement, Radius } from "../Input"
 export class SmoothlyInputNew implements Input {
 	@Prop({ reflect: true }) name: string
 	@Prop() type = "text"
-	@Prop() required = false
 	@Prop() minLength = 0
 	@Prop() maxLength: number = Number.POSITIVE_INFINITY
 	@Prop() autocomplete = true
 	@Prop() pattern: RegExp | undefined
 	@Prop() placeholder: string | undefined
+	@Prop({ reflect: true }) required = false
 	@Prop({ mutable: true, reflect: true }) value: any
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@Prop({ reflect: true }) editable = false
 	@Prop({ reflect: true }) clearable = false
-	@Prop({ reflect: true }) layout: Layout = "border"
-	@Prop({ reflect: true }) placement: Placement = "float"
+	@Prop({ reflect: true, mutable: true }) layout: Layout = "border"
+	@Prop({ reflect: true, mutable: true }) placement: Placement = "float"
 	@Prop({ reflect: true }) icon: Icon
 	@Prop({ reflect: true }) label: Colors = "dark"
 	@Prop({ reflect: true }) border: Colors = "dark"

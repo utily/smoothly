@@ -19,15 +19,20 @@ export class SmoothlyFormNew implements Changeable, Clearable, Editable, Submita
 	@Prop() action?: string
 	@Prop() prevent = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) reactive = false
 	@State() value: Readonly<Record<string, any>> = {}
 	@State() changed = false
+	@State() focus = false
 	@Event() smoothlyFormInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyFormSubmit: EventEmitter<Record<string, any>>
 	private inputs: Input[] = []
 	private clearables: Clearable[] = []
 	private editabbles: Editable[] = []
 	private stylables: Stylable[] = []
-	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
+	private listeners: {
+		changed?: ((parent: Changeable) => Promise<void>)[]
+		valid?: ((parent: Submitable) => Promise<void>)[]
+	} = {}
 
 	@Watch("value")
 	onValueChange() {
@@ -67,6 +72,7 @@ export class SmoothlyFormNew implements Changeable, Clearable, Editable, Submita
 	async onSmoothlyInput(event: CustomEvent<Record<string, any>>) {
 		this.value = { ...this.value, ...event.detail }
 		this.smoothlyFormInput.emit(this.value)
+		this.listeners.valid?.forEach(listener => listener(this))
 	}
 
 	@Listen("smoothlyButtonLoad")
@@ -92,7 +98,7 @@ export class SmoothlyFormNew implements Changeable, Clearable, Editable, Submita
 	}
 
 	@Method()
-	async listen(property: "changed", listener: (parent: Changeable) => Promise<void>) {
+	async listen(property: "changed" | "valid", listener: (parent: Changeable | Submitable) => Promise<void>) {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
@@ -109,10 +115,17 @@ export class SmoothlyFormNew implements Changeable, Clearable, Editable, Submita
 		return this.value
 	}
 
+	@Method()
+	async isValid() {
+		return this.inputs.filter(input => input.required && !input.value).length == 0
+	}
+
 	render() {
 		return (
 			<Host>
 				<form
+					onMouseEnter={() => (this.focus = true)}
+					onMouseLeave={() => (this.focus = false)}
 					action={this.action}
 					method={this.method}
 					onSubmit={(e: Event) => {
@@ -124,8 +137,10 @@ export class SmoothlyFormNew implements Changeable, Clearable, Editable, Submita
 						<slot></slot>
 					</div>
 					<div class="form-button">
-						<slot name="edit"></slot>
-						<slot name="clear"></slot>
+						<div class={`form-action ${this.reactive && !this.focus ? "fadeIn" : ""}`}>
+							<slot name="edit"></slot>
+							<slot name="clear"></slot>
+						</div>
 						<slot name="submit"></slot>
 					</div>
 				</form>

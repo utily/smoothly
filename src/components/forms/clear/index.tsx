@@ -4,6 +4,7 @@ import { Button } from "../../Button"
 import { Changeable } from "../Changeable"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
+import { SmoothlyFormNew } from "../form"
 
 @Component({
 	tag: "smoothly-clear",
@@ -17,6 +18,7 @@ export class SmoothlyClear {
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
+	@Prop({ reflect: true, mutable: true }) reactive?: boolean
 	@Event() smoothlyButtonLoad: EventEmitter<(parent: HTMLElement) => void>
 	private parent?: Clearable | (Clearable & Changeable)
 
@@ -26,11 +28,13 @@ export class SmoothlyClear {
 				this.parent = parent
 				if (Changeable.is(parent))
 					parent.listen("changed", async p => {
-						if (Editable.is(parent) && parent.readonly)
+						if (Editable.is(p) && p.readonly)
 							this.disabled = true
 						else
 							this.disabled = !p.changed
 					})
+				if (parent instanceof SmoothlyFormNew && parent.reactive)
+					this.reactive = true
 			}
 		})
 	}
@@ -41,6 +45,7 @@ export class SmoothlyClear {
 	render() {
 		return (
 			<Button disabled={this.disabled} type="button">
+				{this.reactive && <smoothly-icon size="tiny" name="close" />}
 				<slot />
 			</Button>
 		)

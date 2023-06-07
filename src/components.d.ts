@@ -16,6 +16,7 @@ import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { Colors, Layout, Placement, Radius } from "./components/forms/Input";
 import { Changeable } from "./components/forms/Changeable";
+import { Submitable } from "./components/forms/Submitable";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 export namespace Components {
@@ -102,6 +103,7 @@ export namespace Components {
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "reactive"?: boolean;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
     }
@@ -146,7 +148,8 @@ export namespace Components {
         "expand"?: "block" | "full";
         "fallback"?: string;
         "fill"?: Fill;
-        "label"?: string;
+        "label"?: string | HTMLElement;
+        "reactive"?: boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
     }
@@ -189,11 +192,13 @@ export namespace Components {
         "action"?: string;
         "clear": () => Promise<void>;
         "getValues": () => Promise<Readonly<Record<string, any>>>;
+        "isValid": () => Promise<boolean>;
         "layout": Layout;
-        "listen": (property: "changed", listener: (parent: Changeable) => Promise<void>) => Promise<void>;
+        "listen": (property: "changed" | "valid", listener: (parent: Changeable | Submitable) => Promise<void>) => Promise<void>;
         "method"?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "OPTIONS";
         "placement": Placement;
         "prevent": boolean;
+        "reactive": boolean;
         "readonly": boolean;
         "reset": (values: { [key: string]: any; }) => Promise<void>;
         "setReadonly": (readonly: boolean) => Promise<void>;
@@ -418,6 +423,16 @@ export namespace Components {
         "size": "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
     }
+    interface SmoothlySubmitNew {
+        "color"?: Color;
+        "disabled": boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "prevent": boolean;
+        "shape"?: "rounded";
+        "size": "flexible" | "small" | "large" | "icon";
+        "type": "link" | "button";
+    }
     interface SmoothlySummary {
         "color": Color;
         "fill": Fill;
@@ -625,6 +640,10 @@ export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlySubmitElement;
+}
+export interface SmoothlySubmitNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySubmitNewElement;
 }
 export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1026,6 +1045,12 @@ declare global {
         prototype: HTMLSmoothlySubmitElement;
         new (): HTMLSmoothlySubmitElement;
     };
+    interface HTMLSmoothlySubmitNewElement extends Components.SmoothlySubmitNew, HTMLStencilElement {
+    }
+    var HTMLSmoothlySubmitNewElement: {
+        prototype: HTMLSmoothlySubmitNewElement;
+        new (): HTMLSmoothlySubmitNewElement;
+    };
     interface HTMLSmoothlySummaryElement extends Components.SmoothlySummary, HTMLStencilElement {
     }
     var HTMLSmoothlySummaryElement: {
@@ -1209,6 +1234,7 @@ declare global {
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
+        "smoothly-submit-new": HTMLSmoothlySubmitNewElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-svg": HTMLSmoothlySvgElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
@@ -1325,6 +1351,7 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyButtonLoad"?: (event: SmoothlyClearCustomEvent<(parent: HTMLElement) => void>) => void;
+        "reactive"?: boolean;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
     }
@@ -1370,8 +1397,9 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fallback"?: string;
         "fill"?: Fill;
-        "label"?: string;
+        "label"?: string | HTMLElement;
         "onSmoothlyButtonLoad"?: (event: SmoothlyEditCustomEvent<(parent: HTMLElement) => void>) => void;
+        "reactive"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
     }
@@ -1418,6 +1446,7 @@ declare namespace LocalJSX {
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormNewCustomEvent<Record<string, any>>) => void;
         "placement"?: Placement;
         "prevent"?: boolean;
+        "reactive"?: boolean;
         "readonly"?: boolean;
     }
     interface SmoothlyFormNewPreview {
@@ -1658,6 +1687,18 @@ declare namespace LocalJSX {
         "size"?: "flexible" | "small" | "large" | "icon";
         "type"?: "link" | "button";
     }
+    interface SmoothlySubmitNew {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyButtonLoad"?: (event: SmoothlySubmitNewCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlySubmit"?: (event: SmoothlySubmitNewCustomEvent<any>) => void;
+        "prevent"?: boolean;
+        "shape"?: "rounded";
+        "size"?: "flexible" | "small" | "large" | "icon";
+        "type"?: "link" | "button";
+    }
     interface SmoothlySummary {
         "color"?: Color;
         "fill"?: Fill;
@@ -1814,6 +1855,7 @@ declare namespace LocalJSX {
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
+        "smoothly-submit-new": SmoothlySubmitNew;
         "smoothly-summary": SmoothlySummary;
         "smoothly-svg": SmoothlySvg;
         "smoothly-tab": SmoothlyTab;
@@ -1905,6 +1947,7 @@ declare module "@stencil/core" {
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
+            "smoothly-submit-new": LocalJSX.SmoothlySubmitNew & JSXBase.HTMLAttributes<HTMLSmoothlySubmitNewElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;

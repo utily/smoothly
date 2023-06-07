@@ -1,6 +1,7 @@
-smoothly-form {
+smoothly-form-new {
 	display: block;
 	--background-color: var(--smoothly-default-color);
+	position: relative;
 }
 
 .form-input {
@@ -27,4 +28,23 @@ smoothly-form-new[layout="border"] > form > .form-input {
 
 smoothly-form-new[layout="grid"] > form > .form-input {
 	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
+}
+
+.form-action {
+	display: flex;
+	gap: 1em;
+	opacity: 1;
+	transition: opacity 0.2s ease;
+}
+
+smoothly-form-new[reactive] .form-action {
+	flex-direction: column;
+	position: absolute;
+	top: 0%;
+	right: -6%;
+	gap: 0.5rem
+}
+
+.fadeIn {
+	opacity: 0;
 }

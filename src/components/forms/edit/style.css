@@ -2,6 +2,19 @@
 
 :host() {
 	transition: 0.4s;
-	min-width: 0rem !important;
 	margin: 1em 0em;
+}
+
+:host[reactive] {
+	margin: 0;
+	min-width: 0rem !important;
+	width: fit-content;
+	border-radius: 2rem;
+	font-size: 0.8rem;
+	box-shadow: var(--smoothly-shadow);
+}
+
+:host[reactive] button {
+	min-width: 0rem;
+	width: fit-content;
 }

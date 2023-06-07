@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, h, Listen, Prop, State } from "@stencil
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
 import { Editable } from "../Editable"
+import { SmoothlyFormNew } from "../form"
 import { Resetable } from "../Resetable"
 
 interface Form extends Editable, Resetable {}
@@ -12,7 +13,7 @@ interface Form extends Editable, Resetable {}
 	scoped: true,
 })
 export class SmoothlyEdit {
-	@Prop() label?: string
+	@Prop() label?: string | HTMLElement
 	@Prop() fallback?: string
 	@Prop({ reflect: true }) color?: Color = "light"
 	@Prop({ reflect: true }) expand?: "block" | "full"
@@ -20,6 +21,7 @@ export class SmoothlyEdit {
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
+	@Prop({ reflect: true, mutable: true }) reactive?: boolean
 	@State() readonly?: boolean
 	@Event() smoothlyButtonLoad: EventEmitter<(parent: HTMLElement) => void>
 	private parent: Form
@@ -30,6 +32,8 @@ export class SmoothlyEdit {
 			if (Editable.is(parent) && Resetable.is(parent)) {
 				this.parent = parent
 				this.readonly = parent.readonly
+				if (parent instanceof SmoothlyFormNew && parent.reactive)
+					this.reactive = true
 			}
 		})
 	}
@@ -45,10 +49,19 @@ export class SmoothlyEdit {
 	}
 
 	render() {
-		console.log(this.readonly ? this.label : this.fallback)
 		return (
 			<Button disabled={this.disabled} type="button">
-				{this.readonly ? this.label : this.fallback}
+				{this.readonly ? (
+					this.reactive ? (
+						<smoothly-icon size="tiny" name="lock-closed" />
+					) : (
+						this.label
+					)
+				) : this.reactive ? (
+					<smoothly-icon size="tiny" name="lock-open" />
+				) : (
+					this.fallback
+				)}
 				<slot />
 			</Button>
 		)

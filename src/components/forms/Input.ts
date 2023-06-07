@@ -6,6 +6,7 @@ import { Stylable } from "./Stylable"
 export interface Input extends Clearable, Editable, Stylable {
 	name: string
 	value: any
+	required: boolean
 	placement: Placement
 	placeholder?: string
 	editable: boolean
