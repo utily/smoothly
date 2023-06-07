@@ -59,16 +59,14 @@ export class SmoothlyPickerMenu {
 					for (const option of this.options.values()) {
 						const memory = this.memory.options.get(option.value)
 						if (memory != undefined)
-							option.set.selected((option.selected = memory.selected))
-						// restore(option, memory)
+							restore(option, memory)
 						else if (this.created.get(option.value))
 							option.set.selected((option.selected = false))
 					}
 					for (const option of this.backend.values()) {
 						const memory = this.memory.backend.get(option.value)
 						if (memory != undefined)
-							option.set.selected((option.selected = memory.selected))
-						// restore(option, memory)
+							restore(option, memory)
 						else if (this.created.get(option.value))
 							option.set.selected((option.selected = false))
 					}
