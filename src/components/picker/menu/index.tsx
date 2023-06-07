@@ -7,13 +7,13 @@ function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
 		yield* iterable
 }
 
-function restore<T extends Option>(clone: T | undefined, option: Option): T | undefined {
-	clone?.set.selected((clone.selected = option.selected))
-	clone?.set.readonly((clone.readonly = option.readonly))
-	clone?.set.visible((clone.visible = option.visible))
-	clone?.set.value((clone.value = option.value))
-	clone?.set.search((clone.search = option.search))
-	return clone
+function restore<T extends Option>(target: T | undefined, source: Option): T | undefined {
+	target?.set.selected((target.selected = source.selected))
+	target?.set.readonly((target.readonly = source.readonly))
+	target?.set.visible((target.visible = source.visible))
+	target?.set.value((target.value = source.value))
+	target?.set.search((target.search = source.search))
+	return target
 }
 
 function restoreListener(ref: HTMLElement | undefined, option: Option) {
@@ -42,35 +42,29 @@ export class SmoothlyPickerMenu {
 	@State() display: Node[]
 	@Event() notice: EventEmitter<Notice>
 	@Event() smoothlyPickerMenuLoaded: EventEmitter<Controls>
-	private memory?: { backend: Map<any, boolean>; options: Map<any, boolean> }
+	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
 
 	componentDidLoad() {
 		this.smoothlyPickerMenuLoaded.emit({
 			remember: () => {
-				console.log("menu remember")
 				this.memory = {
-					backend: new Map(Array.from(this.backend.entries(), ([value, option]) => [value, option.element.selected])),
-					options: new Map(Array.from(this.backend.entries(), ([value, option]) => [value, option.element.selected])),
+					backend: new Map(Array.from(this.backend.entries(), ([value, option]) => [value, { ...option }])),
+					options: new Map(Array.from(this.options.entries(), ([value, option]) => [value, { ...option }])),
 				}
 			},
 			restore: () => {
-				console.log("menu restoring")
 				if (this.memory) {
 					for (const option of this.options.values()) {
 						const memory = this.memory.options.get(option.value)
-						if (memory != undefined) {
-							console.log("menu restoring option", option.value, "to", !!this.options.get(option.value)?.selected)
-							option.set.selected(memory)
-						}
+						if (memory != undefined)
+							restore(option, memory)
 					}
 					for (const option of this.backend.values()) {
 						const memory = this.memory.options.get(option.value)
-						if (memory != undefined) {
-							console.log("menu restoring backend", option.value, "to", !!this.options.get(option.value)?.selected)
-							option.set.selected(memory)
-						}
+						if (memory != undefined)
+							restore(option, memory)
 					}
 				}
 			},
@@ -99,7 +93,6 @@ export class SmoothlyPickerMenu {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
 			const current = restore(this.backend.get(event.detail.value), event.detail)
-			console.log("menu internal loaded", event.detail.value, event.detail.selected)
 			this.backend = new Map(
 				this.backend
 					.set(event.detail.value, {
@@ -108,35 +101,24 @@ export class SmoothlyPickerMenu {
 					})
 					.entries()
 			)
-		} else {
-			console.log("menu external loaded", event.detail.value, event.detail.selected)
+		} else
 			this.options.set(event.detail.value, event.detail)
-		}
 	}
 	@Listen("smoothlyPickerOptionChange")
 	optionChangeHandler(event: CustomEvent<Option>) {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
-			console.log("menu internal change", event.detail.value, event.detail.selected)
 			this.options.get(event.detail.value)?.set.selected(event.detail.selected)
 		} else {
-			console.log(
-				"menu external change",
-				event.detail.value,
-				event.detail.selected,
-				this.backend.get(event.detail.value),
-				this.backend.get(event.detail.value)?.element.parentElement
-			)
 			const current = this.backend.get(event.detail.value)
 			if (current?.element.parentElement)
 				current?.set.selected(event.detail.selected)
 		}
 
-		if (!this.readonly && !this.multiple && event.detail.selected) {
+		if (!this.readonly && !this.multiple && event.detail.selected)
 			for (const option of chain(this.options.values(), this.backend.values()))
 				if (option.value != event.detail.value)
-					console.log("menu change setting false"), option.set.selected(false)
-		}
+					option.set.selected(false)
 	}
 	inputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopPropagation()
@@ -161,7 +143,7 @@ export class SmoothlyPickerMenu {
 		if (typeof validation == "object" ? validation.result : validation) {
 			if (!this.multiple)
 				for (const option of chain(this.options.values(), this.backend.values()))
-					console.log("menu add handler"), option.set.selected(false)
+					option.set.selected(false)
 			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
 			this.search = ""
 			this.searchElement?.focus()
@@ -182,7 +164,6 @@ export class SmoothlyPickerMenu {
 		event.detail.set.nodes(this.display)
 	}
 	render() {
-		console.log("menu render")
 		return (
 			<Host class={{ valid: this.valid }}>
 				<smoothly-slotted-elements class={"hide"} onSmoothlySlottedChange={e => (this.display = e.detail)}>

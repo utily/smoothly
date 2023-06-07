@@ -20,7 +20,8 @@ export class SmoothlyPickerDemo {
 	}
 	@State() data = {
 		message: "hello world",
-		emails: ["giovani@rocket.com", "jessie@rocket.com", "james@rocket.com"],
+		emails: ["jessie@rocket.com", "james@rocket.com"],
+		options: ["giovani@rocket.com"],
 	}
 	@State() change?: SmoothlyPickerDemo["data"]
 	inputHandler(event: CustomEvent<Data>) {
@@ -44,7 +45,6 @@ export class SmoothlyPickerDemo {
 		this.change = this.change ? undefined : { ...this.data, emails: [...this.data.emails] }
 	}
 	loadedHandler(event: CustomEvent<Controls>) {
-		console.log("demo loadedHandler")
 		this.controls = event.detail
 	}
 	render() {
@@ -68,16 +68,20 @@ export class SmoothlyPickerDemo {
 						<span slot="label">Emails</span>
 						<span slot="search">Search</span>
 						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
-						{(this.change?.emails ?? this.data.emails).map(email => {
-							console.log("demo email", email)
-							return (
-								<smoothly-picker-option key={email} value={email} search={[this.users[email] ?? []].flat()}>
-									<span>{this.users[email]}</span>
-									<span slot="label">{email}</span>
-									<smoothly-icon size="tiny" slot="display" name="person-outline" />
-								</smoothly-picker-option>
-							)
-						})}
+						{(this.change?.emails ?? this.data.emails).map(email => (
+							<smoothly-picker-option key={email} value={email} selected search={[this.users[email] ?? []].flat()}>
+								<span>{this.users[email]}</span>
+								<span slot="label">{email}</span>
+								<smoothly-icon size="tiny" slot="display" name="person-outline" />
+							</smoothly-picker-option>
+						))}
+						{this.data.options.map(email => (
+							<smoothly-picker-option key={email} value={email} search={[this.users[email] ?? []].flat()}>
+								<span>{this.users[email]}</span>
+								<span slot="label">{email}</span>
+								<smoothly-icon size="tiny" slot="display" name="person-outline" />
+							</smoothly-picker-option>
+						))}
 					</smoothly-picker>
 					<smoothly-submit size="icon" slot="submit">
 						<smoothly-icon name="checkmark-circle" />

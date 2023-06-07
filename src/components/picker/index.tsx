@@ -41,8 +41,6 @@ export class SmoothlyPicker implements Clearable {
 	componentDidLoad() {
 		if (this.controls)
 			this.smoothlyPickerLoaded.emit(this.controls)
-
-		console.log("picker selected", this.selected)
 	}
 	@Listen("smoothlyPickerMenuLoaded")
 	menuLoadedHandler(event: CustomEvent<Controls>) {

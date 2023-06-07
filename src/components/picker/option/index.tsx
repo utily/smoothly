@@ -26,7 +26,7 @@ export class SmoothlyPickerOption {
 			value: this.value,
 			slotted: this.slotted,
 			set: {
-				selected: selected => (console.log("option set", this.value, "selected", selected), (this.selected = selected)),
+				selected: selected => (this.selected = selected),
 				readonly: readonly => (this.readonly = readonly),
 				visible: visible => (this.visible = visible),
 				search: search => (this.search = search),
@@ -37,12 +37,8 @@ export class SmoothlyPickerOption {
 	@Watch("selected")
 	@Watch("slotted")
 	emitChange() {
-		if (this.element.parentElement) {
-			console.log("options emitting change", this.value, this.selected)
+		if (this.element.parentElement)
 			this.smoothlyPickerOptionChange.emit(this.option)
-		} else {
-			console.log("options not connected", this.value, this.selected)
-		}
 	}
 
 	componentWillLoad() {
@@ -52,20 +48,16 @@ export class SmoothlyPickerOption {
 		this.smoothlyPickerOptionLoaded.emit(this.option)
 	}
 	slottedChangeHandler(event: CustomEvent<Node[]>) {
-		console.log("option change", this.selected)
 		event.stopPropagation()
 		this.slotted = event.detail
 	}
 	@Method()
 	async clickHandler() {
-		if (!this.readonly) {
+		if (!this.readonly)
 			this.selected = !this.selected
-			console.log("option click", this.value, this.selected)
-		}
 	}
 
 	render() {
-		console.log("option render", this.value, this.selected)
 		return (
 			<Host class={{ visible: this.visible }} onClick={() => this.clickHandler()}>
 				<div class={"display"}>
