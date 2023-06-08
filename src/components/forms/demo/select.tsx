@@ -23,7 +23,15 @@ export class SmoothlySelectNewPreview {
 		return (
 			<Host>
 				<h4>Select</h4>
-				<smoothly-select-new options={options}>Select items</smoothly-select-new>
+				<smoothly-select-new options={options}>Select</smoothly-select-new>
+				<br />
+				<smoothly-select-new multiple options={options}>
+					Select mutiple
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new filterable options={options}>
+					Select filterable
+				</smoothly-select-new>
 			</Host>
 		)
 	}

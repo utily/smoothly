@@ -5,7 +5,7 @@
 	position: relative;
 }
 
-:host:not([filterable]) input {
+:host:not([filterable]), :host:not([filterable]) smoothly-input-base {
 	cursor:  pointer;
 }
 
@@ -39,4 +39,9 @@
 .focused {
 	color: rgb(var(--smoothly-primary-contrast));
 	background-color: rgb(var(--smoothly-primary-tint));
+}
+
+:host[placement="float"][filter]:not([filter=""]) label  {
+	top: 0.2em;
+	transform: scale(0.85);
 }

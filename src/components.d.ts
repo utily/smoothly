@@ -258,6 +258,8 @@ export namespace Components {
         "placeholder": string | undefined;
         "readonly": boolean;
         "required": boolean;
+        "setBlur": () => Promise<void>;
+        "setFocus": () => Promise<void>;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "type": string;
@@ -409,6 +411,7 @@ export namespace Components {
         "disabled": boolean;
         "editable": boolean;
         "fill": Colors;
+        "filter": string;
         "filterable": boolean;
         "focused": boolean;
         "icon": Icon;
@@ -1544,6 +1547,7 @@ declare namespace LocalJSX {
         "minLength"?: number;
         "name"?: string;
         "onBlur"?: (event: SmoothlyInputBaseCustomEvent<any>) => void;
+        "onClick"?: (event: SmoothlyInputBaseCustomEvent<any>) => void;
         "onFocus"?: (event: SmoothlyInputBaseCustomEvent<any>) => void;
         "onInput"?: (event: SmoothlyInputBaseCustomEvent<{ value: any }>) => void;
         "pattern"?: RegExp | undefined;
@@ -1715,6 +1719,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "editable"?: boolean;
         "fill"?: Colors;
+        "filter"?: string;
         "filterable"?: boolean;
         "focused"?: boolean;
         "icon"?: Icon;

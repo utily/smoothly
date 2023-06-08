@@ -31,6 +31,7 @@ export class SmoothlyInputBase implements Clearable {
 	@Event() input: EventEmitter<{ value: any }>
 	@Event() focus: EventEmitter
 	@Event() blur: EventEmitter
+	@Event() click: EventEmitter
 	private inputElement: HTMLInputElement
 	private keepFocusOnReRender = false
 	private lastValue: any
@@ -133,6 +134,7 @@ export class SmoothlyInputBase implements Clearable {
 		}
 		const after = this.newState({ ...this.state })
 		this.updateBackend(after, backend)
+		this.click.emit()
 	}
 
 	private onKeyDown(event: KeyboardEvent) {
@@ -231,6 +233,16 @@ export class SmoothlyInputBase implements Clearable {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
+	}
+
+	@Method()
+	async setFocus() {
+		this.inputElement.focus()
+	}
+
+	@Method()
+	async setBlur() {
+		this.inputElement.blur()
 	}
 
 	render() {

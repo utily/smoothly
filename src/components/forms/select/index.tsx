@@ -12,14 +12,13 @@ export type Options = { label?: string; value: string }
 })
 export class SmoothlySelectNew implements Input {
 	@Prop() name: string
-	@Prop({ mutable: true }) value?: string | string[]
+	@Prop({ reflect: true, mutable: true }) value?: string | string[]
 	@Prop() options: Options[]
 	@Prop({ reflect: true, mutable: true }) filterable = false
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
-
 	@Prop() placeholder: string | undefined
 	@Prop({ reflect: true }) editable = false
 	@Prop({ reflect: true }) clearable = false
@@ -32,17 +31,14 @@ export class SmoothlySelectNew implements Input {
 	@Prop() fill: Colors
 	@Prop() info: string | HTMLElement
 	@Prop({ reflect: true, mutable: true }) focused = false
-
+	@Prop({ reflect: true, mutable: true }) filter: string
 	@State() isHovered = false
-	@State() filter: string
 	@State() optionFiltered: Options[]
 	@State() current: HTMLDivElement | undefined
-
 	@Event() smoothlyInput: EventEmitter<Record<string, string | string[] | undefined>>
 	@Event() smoothlyChange: EventEmitter<Record<string, string | string[] | undefined>>
 	@Event() smoothlyInputLoad: EventEmitter<void>
 	@Element() element: HTMLSmoothlySelectNewElement
-
 	private dropDown?: HTMLDivElement
 	private input: HTMLSmoothlyInputBaseElement
 
@@ -50,14 +46,8 @@ export class SmoothlySelectNew implements Input {
 		this.smoothlyInputLoad.emit()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.optionFiltered = this.options
-		if (this.multiple) {
+		if (this.multiple)
 			this.filterable = false
-
-			window.addEventListener("click", (e: Event) => {
-				if (!this.isHovered && this.focused && e.target !== this.input)
-					this.onBlur()
-			})
-		}
 
 		if (this.value && Array.isArray(this.value))
 			this.filter = this.options
@@ -68,42 +58,23 @@ export class SmoothlySelectNew implements Input {
 			const target = this.options.filter(option => option.value === this.value)[0]
 			this.filter = target.label || target.value || ""
 		}
-	}
 
-	componentWillUpdate() {
-		if (this.value) {
-			if (!this.multiple) {
-				const filter = this.options.filter(option => option.value === this.value)[0]
-				if (filter && this.filter !== filter.value)
-					this.filter = filter.label || filter.value
-			} else {
-				const filter = this.options
-					.filter(option => this.value?.includes(option.value))
-					.map(option => option.label || option.value)
-					.join(", ")
-				if (filter && this.filter !== filter)
-					this.filter = filter
-			}
-		}
+		if (this.filterable && this.filter)
+			this.optionFiltered = this.options.filter(option =>
+				new RegExp(this.filter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(
+					(option.label || option.value).toLocaleLowerCase()
+				)
+			)
 	}
 
 	@Watch("value")
-	onChangeValue(value: File, pre: File | undefined) {
+	onChangeValue(value: any, pre: any) {
 		if (value != pre)
 			this.smoothlyChange.emit({ [this.name]: this.value })
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
-	onFocus() {
-		if (!this.readonly)
-			this.focused = true
-	}
-
-	onBlur() {
-		this.focused = false
-	}
-
-	onInput(e: CustomEvent) {
+	private onInput(e: CustomEvent) {
 		const match = this.options.filter(option => (option.label || option.value) === e.detail.value)[0]
 		if (match)
 			this.value = match.value
@@ -121,7 +92,7 @@ export class SmoothlySelectNew implements Input {
 			)
 	}
 
-	onKeyDown(e: KeyboardEvent) {
+	private onKeyDown(e: KeyboardEvent) {
 		this.focused = true
 		if (e.key === "ArrowDown" && this.dropDown) {
 			let i = 0
@@ -159,7 +130,7 @@ export class SmoothlySelectNew implements Input {
 				this.filter = this.current.textContent || ""
 				this.value = this.current.dataset.value
 				this.focused = false
-				this.input?.blur()
+				this.input?.setBlur()
 			} else
 				this.onSelectMutiple(this.current.dataset.value || "")
 		}
@@ -170,22 +141,22 @@ export class SmoothlySelectNew implements Input {
 				this.value = undefined
 			}
 			this.current?.classList.remove("focused")
-			this.onBlur()
-			this.input?.blur()
+			this.focused = false
+			this.input?.setBlur()
 		}
 	}
 
-	onClick(e: Event) {
+	private onClick(e: Event) {
 		if (!this.multiple) {
 			this.filter = (e.target as HTMLDivElement).textContent || ""
 			this.value = (e.target as HTMLDivElement).dataset.value
 			this.focused = false
-			this.input?.blur()
+			this.input?.setBlur()
 		} else
 			this.onSelectMutiple((e.target as HTMLDivElement).dataset.value || "")
 	}
 
-	onSelectMutiple(value: string) {
+	private onSelectMutiple(value: string) {
 		let newValue
 		if (this.value?.includes(value) && Array.isArray(this.value))
 			newValue = this.value.filter(option => option !== value)
@@ -203,6 +174,8 @@ export class SmoothlySelectNew implements Input {
 			.filter(option => this.value?.includes(option.value))
 			.map(option => option.label || option.value)
 			.join(", ")
+
+		this.input.setFocus()
 	}
 
 	@Method()
@@ -222,25 +195,30 @@ export class SmoothlySelectNew implements Input {
 	}
 
 	render() {
-		console.log(Boolean(this.value))
 		return (
 			<Host>
-				<div class="input-container" onClick={() => this.input.click()}>
+				<div class="input-container" onClick={() => this.input.setFocus()}>
 					<label htmlFor={this.name}>
 						<slot />
 					</label>
 					<smoothly-input-base
-						focused={Boolean(this.value)}
-						onFocus={() => this.onFocus()}
+						focused={this.focused}
+						onFocus={() => {
+							if (!this.readonly)
+								this.focused = true
+						}}
 						onBlur={() => {
 							if (!this.isHovered) {
 								if (!this.value && this.filter)
 									this.filter = ""
-								this.onBlur()
+								this.focused = false
 							}
 						}}
 						onKeyDown={e => this.onKeyDown(e)}
-						onInput={(e: CustomEvent) => this.onInput(e)}
+						onInput={(e: CustomEvent) => {
+							if (this.filterable)
+								this.onInput(e)
+						}}
 						name={this.name}
 						placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
 						required={this.required}
@@ -250,6 +228,7 @@ export class SmoothlySelectNew implements Input {
 						ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
 					/>
 					<smoothly-icon
+						class="input-icon"
 						color={this.fill}
 						onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
 						size="tiny"

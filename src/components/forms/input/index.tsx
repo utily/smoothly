@@ -91,6 +91,7 @@ export class SmoothlyInputNew implements Input {
 						ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
 					/>
 					<smoothly-icon
+						class="input-icon"
 						color={this.fill}
 						onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
 						size="tiny"
