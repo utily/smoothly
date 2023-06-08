@@ -21,7 +21,18 @@ export class SmoothlyPickerDemo {
 	@State() data = {
 		message: "hello world",
 		emails: ["jessie@rocket.com", "james@rocket.com"],
-		options: ["giovani@rocket.com"],
+		options: [
+			"giovani@rocket.com",
+			"john@example.com",
+			"jane@example.com",
+			"jack@example.com",
+			"jessica@example.com",
+			"julia@example.com",
+			"jayden@example.com",
+			"jake@example.com",
+			"jamie@example.com",
+			"jasmine@example.com",
+		],
 	}
 	@State() change?: SmoothlyPickerDemo["data"]
 	inputHandler(event: CustomEvent<Data>) {
