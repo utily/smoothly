@@ -428,7 +428,7 @@ export namespace Components {
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
-        "value"?: string | string[];
+        "value"?: string | string[] | null;
     }
     interface SmoothlySelectNewPreview {
     }
@@ -1728,8 +1728,8 @@ declare namespace LocalJSX {
         "layout"?: Layout;
         "multiple"?: boolean;
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined>>) => void;
-        "onSmoothlyInput"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined>>) => void;
+        "onSmoothlyChange"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined | null>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlySelectNewCustomEvent<Record<string, string | string[] | undefined | null>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlySelectNewCustomEvent<void>) => void;
         "options"?: Options[];
         "placeholder"?: string | undefined;
@@ -1737,7 +1737,7 @@ declare namespace LocalJSX {
         "radius"?: Radius;
         "readonly"?: boolean;
         "required"?: boolean;
-        "value"?: string | string[];
+        "value"?: string | string[] | null;
     }
     interface SmoothlySelectNewPreview {
     }

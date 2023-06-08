@@ -98,6 +98,7 @@ export class SmoothlyInputNew implements Input {
 						name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
 					/>
 				</div>
+
 				{this.info && <div class="input-info">{this.info}</div>}
 			</Host>
 		)

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Method } from "@stencil/core"
 import { Icon } from "../../icon/Icon"
 import { Colors, Input, Layout, Placement, Radius } from "../Input"
@@ -12,7 +12,7 @@ export type Options = { label?: string; value: string }
 })
 export class SmoothlySelectNew implements Input {
 	@Prop() name: string
-	@Prop({ reflect: true, mutable: true }) value?: string | string[]
+	@Prop({ reflect: true, mutable: true }) value?: string | string[] | null
 	@Prop() options: Options[]
 	@Prop({ reflect: true, mutable: true }) filterable = false
 	@Prop({ reflect: true }) disabled = false
@@ -35,8 +35,8 @@ export class SmoothlySelectNew implements Input {
 	@State() isHovered = false
 	@State() optionFiltered: Options[]
 	@State() current: HTMLDivElement | undefined
-	@Event() smoothlyInput: EventEmitter<Record<string, string | string[] | undefined>>
-	@Event() smoothlyChange: EventEmitter<Record<string, string | string[] | undefined>>
+	@Event() smoothlyInput: EventEmitter<Record<string, string | string[] | undefined | null>>
+	@Event() smoothlyChange: EventEmitter<Record<string, string | string[] | undefined | null>>
 	@Event() smoothlyInputLoad: EventEmitter<void>
 	@Element() element: HTMLSmoothlySelectNewElement
 	private dropDown?: HTMLDivElement
@@ -79,7 +79,7 @@ export class SmoothlySelectNew implements Input {
 		if (match)
 			this.value = match.value
 		else
-			this.value = undefined
+			this.value = null
 		this.filter = e.detail.value
 
 		if (!this.filter)
@@ -138,7 +138,7 @@ export class SmoothlySelectNew implements Input {
 		if (e.key === "Escape") {
 			if (!this.multiple) {
 				this.filter = ""
-				this.value = undefined
+				this.value = null
 			}
 			this.current?.classList.remove("focused")
 			this.focused = false
@@ -168,7 +168,7 @@ export class SmoothlySelectNew implements Input {
 		if (Array.isArray(newValue) && newValue.length)
 			this.value = newValue
 		else
-			this.value = undefined
+			this.value = null
 
 		this.filter = this.options
 			.filter(option => this.value?.includes(option.value))
@@ -180,8 +180,9 @@ export class SmoothlySelectNew implements Input {
 
 	@Method()
 	async clear(): Promise<void> {
-		this.value = undefined
+		this.value = null
 		this.filter = ""
+		this.input.setFocus()
 	}
 	@Method()
 	async setReadonly(readonly: boolean): Promise<void> {
@@ -194,64 +195,74 @@ export class SmoothlySelectNew implements Input {
 		this.placement = placement
 	}
 
+	@Listen("click")
+	onClickHandler(e: Event) {
+		console.log(e.target)
+		console.log(this.focused)
+	}
+
 	render() {
 		return (
 			<Host>
-				<div class="input-container" onClick={() => this.input.setFocus()}>
-					<label htmlFor={this.name}>
-						<slot />
-					</label>
-					<smoothly-input-base
-						focused={this.focused}
-						onFocus={() => {
-							if (!this.readonly)
-								this.focused = true
-						}}
-						onBlur={() => {
-							if (!this.isHovered) {
-								if (!this.value && this.filter)
-									this.filter = ""
-								this.focused = false
-							}
-						}}
-						onKeyDown={e => this.onKeyDown(e)}
-						onInput={(e: CustomEvent) => {
-							if (this.filterable)
-								this.onInput(e)
-						}}
-						name={this.name}
-						placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
-						required={this.required}
-						disabled={this.disabled}
-						readonly={!this.filterable || this.readonly}
-						value={this.filter}
-						ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
-					/>
-					<smoothly-icon
-						class="input-icon"
-						color={this.fill}
-						onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
-						size="tiny"
-						name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
-					/>
-				</div>
-				{this.info && <div class="input-info">{this.info}</div>}
-				{this.focused && (
-					<div
-						class="dropdown"
-						ref={e => (this.dropDown = e)}
-						onMouseLeave={() => (this.isHovered = false)}
-						onMouseEnter={() => (this.isHovered = true)}>
-						{this.optionFiltered.map(option => (
-							<div
-								onClick={e => this.onClick(e)}
-								class={option.value === this.value || this.value?.includes(option.value) ? "selected option" : "option"}
-								data-value={option.value}>
-								{option.label || option.value}
-							</div>
-						))}
+				<div class="select-wrapper">
+					<div class="input-container" onClick={() => this.input.setFocus()}>
+						<label htmlFor={this.name}>
+							<slot />
+						</label>
+						<smoothly-input-base
+							focused={this.focused}
+							onFocus={() => {
+								if (!this.readonly)
+									this.focused = true
+							}}
+							onBlur={() => {
+								if (!this.isHovered) {
+									if (!this.value && this.filter)
+										this.filter = ""
+									this.focused = false
+								}
+							}}
+							onKeyDown={e => this.onKeyDown(e)}
+							onInput={(e: CustomEvent) => {
+								if (this.filterable)
+									this.onInput(e)
+							}}
+							name={this.name}
+							placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
+							required={this.required}
+							disabled={this.disabled}
+							readonly={!this.filterable || this.readonly}
+							value={this.filter}
+							ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
+						/>
+						<smoothly-icon
+							class="input-icon"
+							color={this.fill}
+							onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
+							size="tiny"
+							name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
+						/>
 					</div>
-				)}
+					{this.info && <div class="input-info">{this.info}</div>}
+					{this.focused && (
+						<div
+							class="dropdown"
+							ref={e => (this.dropDown = e)}
+							onMouseLeave={() => (this.isHovered = false)}
+							onMouseEnter={() => (this.isHovered = true)}>
+							{this.optionFiltered.map(option => (
+								<div
+									onClick={e => this.onClick(e)}
+									class={
+										option.value === this.value || this.value?.includes(option.value) ? "selected option" : "option"
+									}
+									data-value={option.value}>
+									{option.label || option.value}
+								</div>
+							))}
+						</div>
+					)}
+				</div>
 			</Host>
 		)
 	}

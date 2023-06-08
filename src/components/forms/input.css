@@ -45,6 +45,10 @@ smoothly-icon {
 	opacity: 1
 }
 
+:host[placement="float"] .input-icon, :host[placement="top"] .input-icon {
+	margin-top: -1em;
+}
+
 /* Label */
 label {
 	cursor: inherit;

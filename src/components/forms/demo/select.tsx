@@ -22,15 +22,80 @@ export class SmoothlySelectNewPreview {
 	render() {
 		return (
 			<Host>
-				<h4>Select</h4>
-				<smoothly-select-new options={options}>Select</smoothly-select-new>
-				<br />
-				<smoothly-select-new multiple options={options}>
-					Select mutiple
+				<h4>Select props</h4>
+				<smoothly-select-new options={options} placeholder="Select a value">
+					Default
 				</smoothly-select-new>
 				<br />
-				<smoothly-select-new filterable options={options}>
-					Select filterable
+				<smoothly-select-new multiple options={options} placeholder="Select a value">
+					Mutiple
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new filterable options={options} placeholder="Select a value">
+					Filterable
+				</smoothly-select-new>
+				<br />
+
+				<h4>Select controll</h4>
+				<smoothly-select-new options={options} placement="start" value="January" placeholder="Aaa" clearable>
+					Clearable
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new
+					options={options}
+					placement="start"
+					value="October"
+					placeholder="Aaa"
+					filterable
+					readonly
+					editable>
+					Editable
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new
+					options={options}
+					value={["January", "March"]}
+					placeholder="Aaa"
+					multiple
+					readonly
+					editable
+					clearable
+					icon="chevron-down">
+					Combined
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} placement="start" placeholder="Aaa" info="Awsome text that help user">
+					Info
+				</smoothly-select-new>
+				<br />
+
+				<h4>Style options</h4>
+				<smoothly-select-new options={options} layout="line">
+					Layout
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} placement="top" placeholder="Aaa">
+					Placement
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} border="danger" placeholder="Aaa">
+					Border
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} label="danger">
+					Label
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} placement="top" icon="chevron-down">
+					Icon
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} icon="checkmark-circle" fill="success">
+					Fill
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} radius="rounded" placeholder="Aaa">
+					Radius
 				</smoothly-select-new>
 			</Host>
 		)
