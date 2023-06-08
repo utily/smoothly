@@ -37,6 +37,7 @@ export class SmoothlyPicker implements Clearable {
 
 	componentWillLoad() {
 		window.addEventListener("click", this.clickHandler)
+		window.addEventListener("focusin", this.focusHandler)
 	}
 	componentDidLoad() {
 		if (this.controls)
@@ -68,6 +69,10 @@ export class SmoothlyPicker implements Clearable {
 	}
 	clickHandler = (event: MouseEvent) => {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
+	}
+	focusHandler = (event: FocusEvent) => {
+		if (!event.composedPath().includes(this.element))
+			this.open = false
 	}
 
 	@Method()

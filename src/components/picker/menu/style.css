@@ -15,6 +15,9 @@
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
 	row-gap: 0.5ch;
+	overflow: auto;
+	max-height: calc(1.75rem * 10 + 0.5ch * 9);
+	padding-right: 0.5rem;
 }
 .hide {
 	display: none;
