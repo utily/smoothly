@@ -36,7 +36,7 @@ smoothly-icon {
 }
 
 .input-icon {
-	z-index: 999;
+	z-index: 998;
 }
 
 :host([readonly][editable]) .input-icon, :host([value][clearable]) .input-icon  {
@@ -221,6 +221,6 @@ label {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 998;
+	z-index: 997;
 	cursor: default;
 }

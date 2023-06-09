@@ -65,7 +65,6 @@ export class SmoothlyDateNew implements Input {
 	}
 
 	render() {
-		console.log("render")
 		return (
 			<Host>
 				<div class="date-wrapper">
