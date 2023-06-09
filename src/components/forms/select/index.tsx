@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Fragment, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Method } from "@stencil/core"
 import { Icon } from "../../icon/Icon"
 import { Colors, Input, Layout, Placement, Radius } from "../Input"
@@ -247,22 +247,25 @@ export class SmoothlySelectNew implements Input {
 					</div>
 					{this.info && <div class="input-info">{this.info}</div>}
 					{this.focused && (
-						<div
-							class="dropdown"
-							ref={e => (this.dropDown = e)}
-							onMouseLeave={() => (this.isHovered = false)}
-							onMouseEnter={() => (this.isHovered = true)}>
-							{this.optionFiltered.map(option => (
-								<div
-									onClick={e => this.onClick(e)}
-									class={
-										option.value === this.value || this.value?.includes(option.value) ? "selected option" : "option"
-									}
-									data-value={option.value}>
-									{option.label || option.value}
-								</div>
-							))}
-						</div>
+						<Fragment>
+							<div class="input-backdrop" onClick={() => (this.focused = false)}></div>
+							<div
+								class="dropdown"
+								ref={e => (this.dropDown = e)}
+								onMouseLeave={() => (this.isHovered = false)}
+								onMouseEnter={() => (this.isHovered = true)}>
+								{this.optionFiltered.map(option => (
+									<div
+										onClick={e => this.onClick(e)}
+										class={
+											option.value === this.value || this.value?.includes(option.value) ? "selected option" : "option"
+										}
+										data-value={option.value}>
+										{option.label || option.value}
+									</div>
+								))}
+							</div>
+						</Fragment>
 					)}
 				</div>
 			</Host>

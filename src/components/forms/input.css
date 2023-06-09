@@ -209,3 +209,12 @@ label {
 :host[border="dark"][layout="grid"] .input-container  {
 	border-color:  rgba(var(--smoothly-dark-color), .5);
 }
+
+.input-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 998;
+}

@@ -10,16 +10,7 @@
 
 .calendar-wrapper {
 	position: absolute;
-	z-index: 999999;
+	z-index: 999;
 	top: calc(100% + 0.1em);
 	width: calc(100% + 2px);
-}
-
-.date-backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 999998;
 }

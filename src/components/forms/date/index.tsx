@@ -106,7 +106,7 @@ export class SmoothlyDateNew implements Input {
 
 					{this.focused && !this.disabled && (
 						<Fragment>
-							<div class="date-backdrop" onClick={() => (this.focused = false)}></div>
+							<div class="input-backdrop" onClick={() => (this.focused = false)}></div>
 							<div class="calendar-wrapper">
 								<smoothly-calendar-new
 									doubleInput={false}
