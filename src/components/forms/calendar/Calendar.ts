@@ -82,4 +82,10 @@ export default class Calendar {
 
 		return `${year}-${month}-${day}`
 	}
+
+	static getMonthLabel(datetime: string): string {
+		const date = new Date(datetime)
+		const month = date.toLocaleString("default", { month: "long" })
+		return month.slice(0, 1).toUpperCase() + month.slice(1)
+	}
 }

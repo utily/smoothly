@@ -32,6 +32,8 @@ export class SmoothlySelectNew implements Input {
 	@Prop() info: string | HTMLElement
 	@Prop({ reflect: true, mutable: true }) focused = false
 	@Prop({ reflect: true, mutable: true }) filter: string
+	@Prop({ reflect: true }) transparent: boolean
+
 	@State() isHovered = false
 	@State() optionFiltered: Options[]
 	@State() current: HTMLDivElement | undefined

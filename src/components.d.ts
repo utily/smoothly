@@ -462,6 +462,7 @@ export namespace Components {
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "transparent": boolean;
         "value"?: string | string[] | null;
     }
     interface SmoothlySelectNewPreview {
@@ -1839,6 +1840,7 @@ declare namespace LocalJSX {
         "radius"?: Radius;
         "readonly"?: boolean;
         "required"?: boolean;
+        "transparent"?: boolean;
         "value"?: string | string[] | null;
     }
     interface SmoothlySelectNewPreview {

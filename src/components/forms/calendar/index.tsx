@@ -24,6 +24,7 @@ export class SmoothlyCalendarNew {
 	private frozenDate: Date
 	private clickCounter = 0
 	private monthSelect?: HTMLSmoothlySelectNewElement
+	private yearSelect?: HTMLSmoothlySelectNewElement
 
 	@Watch("start")
 	onStart(next: Date) {
@@ -88,10 +89,18 @@ export class SmoothlyCalendarNew {
 						<div class="calendar-arrow" onClick={() => (this.value = Calendar.adjustYear(this.value, -1))}>
 							<smoothly-icon name="chevron-back-outline" size="small"></smoothly-icon>
 						</div>
+						<div
+							class="input-label"
+							onClick={async () =>
+								console.log((this.yearSelect?.querySelector(".input-container") as HTMLDivElement)?.click())
+							}>
+							{this.value.split("-")[0]}
+						</div>
 						<smoothly-select-new
 							value={this.value.split("-")[0]}
 							name="year"
 							layout="plain"
+							transparent
 							options={Calendar.years()}
 							onSmoothlyInput={(e: CustomEvent) => {
 								e.stopPropagation()
@@ -99,6 +108,7 @@ export class SmoothlyCalendarNew {
 							}}
 							onSmoothlyChange={e => e.stopPropagation()}
 							onSmoothlyInputLoad={e => e.stopPropagation()}
+							ref={e => (this.yearSelect = e)}
 						/>
 						<div class="calendar-arrow" onClick={() => (this.value = Calendar.adjustYear(this.value, 1))}>
 							<smoothly-icon name="chevron-forward-outline" size="small"></smoothly-icon>
@@ -108,10 +118,18 @@ export class SmoothlyCalendarNew {
 						<div class="calendar-arrow" onClick={() => (this.value = Calendar.adjustMonth(this.value, -1))}>
 							<smoothly-icon name="chevron-back-outline" size="small"></smoothly-icon>
 						</div>
+						<div
+							class="input-label"
+							onClick={async () =>
+								console.log((this.monthSelect?.querySelector(".input-container") as HTMLDivElement)?.click())
+							}>
+							{Calendar.getMonthLabel(this.value)}
+						</div>
 						<smoothly-select-new
 							value={this.value.split("-")[1]}
 							name="month"
 							layout="plain"
+							transparent
 							options={Calendar.months()}
 							onSmoothlyInput={(e: CustomEvent) => {
 								e.stopPropagation()

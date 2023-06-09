@@ -82,6 +82,8 @@ td.disable {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	padding: 0 0.6em;
+	gap: 1em
 }
 
 .month-content {
@@ -89,6 +91,8 @@ td.disable {
 	align-items: center;
 	justify-content: space-around;
 	padding: 0.8rem 0rem 0.5em 0em;
+	position: relative;
+	max-width: 15rem;
 }
 
 smoothly-icon {
@@ -108,3 +112,10 @@ smoothly-icon {
 	box-shadow: var(--smoothly-shadow);
 }
 
+.input-label {
+	position: absolute;
+	cursor: pointer;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

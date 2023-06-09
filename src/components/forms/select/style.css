@@ -12,6 +12,10 @@
 	cursor:  pointer;
 }
 
+:host[transparent] .input-container {
+	opacity: 0;
+}
+
 .dropdown {
 	position: absolute;
 	top: calc(100% + 0.1em);
