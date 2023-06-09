@@ -22,6 +22,7 @@ export class SmoothlyInputNewDemo {
 				{this.selected == "input" && <smoothly-input-new-preview />}
 				{this.selected == "form" && <smoothly-form-new-preview />}
 				{this.selected == "select" && <smoothly-select-new-preview />}
+				{this.selected == "date" && <smoothly-date-new-preview />}
 			</Host>
 		)
 	}

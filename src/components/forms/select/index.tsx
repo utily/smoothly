@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Method } from "@stencil/core"
 import { Icon } from "../../icon/Icon"
 import { Colors, Input, Layout, Placement, Radius } from "../Input"
@@ -48,7 +48,14 @@ export class SmoothlySelectNew implements Input {
 		this.optionFiltered = this.options
 		if (this.multiple)
 			this.filterable = false
+		this.initRender()
+	}
 
+	componentWillUpdate() {
+		this.initRender()
+	}
+
+	private initRender() {
 		if (this.value && Array.isArray(this.value))
 			this.filter = this.options
 				.filter(option => this.value?.includes(option.value))
@@ -193,12 +200,6 @@ export class SmoothlySelectNew implements Input {
 	async setStyle(layout: Layout, placement: Placement): Promise<void> {
 		this.layout = layout
 		this.placement = placement
-	}
-
-	@Listen("click")
-	onClickHandler(e: Event) {
-		console.log(e.target)
-		console.log(this.focused)
 	}
 
 	render() {

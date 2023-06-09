@@ -11,10 +11,10 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
+import { Colors, Layout, Placement, Radius } from "./components/forms/Input";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
-import { Colors, Layout, Placement, Radius } from "./components/forms/Input";
 import { Changeable } from "./components/forms/Changeable";
 import { Submitable } from "./components/forms/Submitable";
 import { GoogleFont } from "./model/GoogleFont";
@@ -90,6 +90,14 @@ export namespace Components {
         "start"?: Date;
         "value": Date;
     }
+    interface SmoothlyCalendarNew {
+        "doubleInput": boolean;
+        "end"?: Date;
+        "max": Date;
+        "min": Date;
+        "start"?: Date;
+        "value": string;
+    }
     interface SmoothlyCheckbox {
         "checked": boolean;
         "disabled": boolean;
@@ -114,6 +122,32 @@ export namespace Components {
     interface SmoothlyCountry {
         "text": "alpha2" | "name" | "none";
         "value": CountryCode.Alpha2;
+    }
+    interface SmoothlyDateNew {
+        "border": Colors;
+        "clear": () => Promise<void>;
+        "clearable": boolean;
+        "disabled": boolean;
+        "editable": boolean;
+        "fill": Colors;
+        "focused": boolean;
+        "icon": Icon;
+        "info": string | HTMLElement;
+        "label": Colors;
+        "layout": Layout;
+        "max": Date;
+        "min": Date;
+        "name": string;
+        "placeholder": string | undefined;
+        "placement": Placement;
+        "radius": Radius;
+        "readonly": boolean;
+        "required": boolean;
+        "setReadonly": (readonly: boolean) => Promise<void>;
+        "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "value"?: string | null;
+    }
+    interface SmoothlyDateNewPreview {
     }
     interface SmoothlyDialog {
         "closable": boolean;
@@ -560,6 +594,10 @@ export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCalendarElement;
 }
+export interface SmoothlyCalendarNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyCalendarNewElement;
+}
 export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCheckboxElement;
@@ -567,6 +605,10 @@ export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyClearCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyClearElement;
+}
+export interface SmoothlyDateNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyDateNewElement;
 }
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -783,6 +825,12 @@ declare global {
         prototype: HTMLSmoothlyCalendarElement;
         new (): HTMLSmoothlyCalendarElement;
     };
+    interface HTMLSmoothlyCalendarNewElement extends Components.SmoothlyCalendarNew, HTMLStencilElement {
+    }
+    var HTMLSmoothlyCalendarNewElement: {
+        prototype: HTMLSmoothlyCalendarNewElement;
+        new (): HTMLSmoothlyCalendarNewElement;
+    };
     interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {
     }
     var HTMLSmoothlyCheckboxElement: {
@@ -806,6 +854,18 @@ declare global {
     var HTMLSmoothlyCountryElement: {
         prototype: HTMLSmoothlyCountryElement;
         new (): HTMLSmoothlyCountryElement;
+    };
+    interface HTMLSmoothlyDateNewElement extends Components.SmoothlyDateNew, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDateNewElement: {
+        prototype: HTMLSmoothlyDateNewElement;
+        new (): HTMLSmoothlyDateNewElement;
+    };
+    interface HTMLSmoothlyDateNewPreviewElement extends Components.SmoothlyDateNewPreview, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDateNewPreviewElement: {
+        prototype: HTMLSmoothlyDateNewPreviewElement;
+        new (): HTMLSmoothlyDateNewPreviewElement;
     };
     interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {
     }
@@ -1232,10 +1292,13 @@ declare global {
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
+        "smoothly-calendar-new": HTMLSmoothlyCalendarNewElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-clear": HTMLSmoothlyClearElement;
         "smoothly-color": HTMLSmoothlyColorElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
+        "smoothly-date-new": HTMLSmoothlyDateNewElement;
+        "smoothly-date-new-preview": HTMLSmoothlyDateNewPreviewElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
@@ -1385,6 +1448,19 @@ declare namespace LocalJSX {
         "start"?: Date;
         "value"?: Date;
     }
+    interface SmoothlyCalendarNew {
+        "doubleInput"?: boolean;
+        "end"?: Date;
+        "max"?: Date;
+        "min"?: Date;
+        "onDateRangeSet"?: (event: SmoothlyCalendarNewCustomEvent<DateRange>) => void;
+        "onDateSet"?: (event: SmoothlyCalendarNewCustomEvent<Date>) => void;
+        "onEndChanged"?: (event: SmoothlyCalendarNewCustomEvent<Date>) => void;
+        "onStartChanged"?: (event: SmoothlyCalendarNewCustomEvent<Date>) => void;
+        "onValueChanged"?: (event: SmoothlyCalendarNewCustomEvent<Date>) => void;
+        "start"?: Date;
+        "value"?: string;
+    }
     interface SmoothlyCheckbox {
         "checked"?: boolean;
         "disabled"?: boolean;
@@ -1410,6 +1486,32 @@ declare namespace LocalJSX {
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
         "value"?: CountryCode.Alpha2;
+    }
+    interface SmoothlyDateNew {
+        "border"?: Colors;
+        "clearable"?: boolean;
+        "disabled"?: boolean;
+        "editable"?: boolean;
+        "fill"?: Colors;
+        "focused"?: boolean;
+        "icon"?: Icon;
+        "info"?: string | HTMLElement;
+        "label"?: Colors;
+        "layout"?: Layout;
+        "max"?: Date;
+        "min"?: Date;
+        "name"?: string;
+        "onSmoothlyChange"?: (event: SmoothlyDateNewCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyDateNewCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyDateNewCustomEvent<any>) => void;
+        "placeholder"?: string | undefined;
+        "placement"?: Placement;
+        "radius"?: Radius;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "value"?: string | null;
+    }
+    interface SmoothlyDateNewPreview {
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
@@ -1884,10 +1986,13 @@ declare namespace LocalJSX {
         "smoothly-button": SmoothlyButton;
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-calendar": SmoothlyCalendar;
+        "smoothly-calendar-new": SmoothlyCalendarNew;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-clear": SmoothlyClear;
         "smoothly-color": SmoothlyColor;
         "smoothly-country": SmoothlyCountry;
+        "smoothly-date-new": SmoothlyDateNew;
+        "smoothly-date-new-preview": SmoothlyDateNewPreview;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
@@ -1975,10 +2080,13 @@ declare module "@stencil/core" {
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
+            "smoothly-calendar-new": LocalJSX.SmoothlyCalendarNew & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarNewElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-clear": LocalJSX.SmoothlyClear & JSXBase.HTMLAttributes<HTMLSmoothlyClearElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
+            "smoothly-date-new": LocalJSX.SmoothlyDateNew & JSXBase.HTMLAttributes<HTMLSmoothlyDateNewElement>;
+            "smoothly-date-new-preview": LocalJSX.SmoothlyDateNewPreview & JSXBase.HTMLAttributes<HTMLSmoothlyDateNewPreviewElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;

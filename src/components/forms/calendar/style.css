@@ -1,0 +1,110 @@
+:host {
+	display: block;
+	--other-month-opacity: 0.5;
+	margin-bottom: 1rem;
+	background-color: rgb(var(--smoothly-default-color));
+	box-shadow: var(--smoothly-shadow);
+	padding-bottom: 1em;
+}
+
+:host > smoothly-input-month {
+	width: calc(100% - 1em);
+	padding: 0.5em 0.5em 0 0.5em;
+}
+
+:host > table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+th,
+td {
+	text-align: center;
+	padding: 0.5em;
+	min-width: 2em;
+	cursor: pointer;
+	user-select: none;
+}
+
+td.currentMonth {
+	color: rgb(var(--smoothly-default-contrast));
+}
+
+td:not(.currentMonth) {
+	color: rgba(var(--smoothly-default-contrast), var(--other-month-opacity));
+}
+
+td:nth-child(6):not(.currentMonth).selected,
+td:nth-child(6):not(.currentMonth).dateRange,
+td:nth-child(7):not(.currentMonth).selected,
+td:nth-child(7):not(.currentMonth).dateRange {
+	color: rgba(var(--smoothly-default-contrast));
+}
+
+td:nth-child(6),
+td:nth-child(7) {
+	color: rgb(var(--smoothly-danger-tint));
+}
+
+td:nth-child(6):not(.currentMonth),
+td:nth-child(7):not(.currentMonth) {
+	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
+}
+
+td:not(.selected, .disable):hover {
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-tint));
+}
+
+td.selected {
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
+	font-weight: 600;
+}
+
+td:not(.selected, .dateRange):not(:hover).today {
+	background: rgb(var(--smoothly-dark-tint));
+	color: rgb(var(--smoothly-dark-contrast));
+}
+
+td.dateRange {
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-tint));
+}
+
+td.disable {
+	cursor: not-allowed;
+	background-color: rgb(var(--smoothly-default-tint), 0.5);
+	color: rgb(var(--smoothly-default-contrast), 0.5);
+}
+
+.month-container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.month-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0.8rem 0rem 0.5em 0em;
+}
+
+smoothly-icon {
+	font-size: smaller;
+}
+
+
+.calendar-arrow {
+	box-shadow: var(--smoothly-shadow-light);
+	padding: 0.3em;
+	border-radius: 1em;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+.calendar-arrow:hover {
+	box-shadow: var(--smoothly-shadow);
+}
+

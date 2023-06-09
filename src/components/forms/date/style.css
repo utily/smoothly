@@ -1,0 +1,32 @@
+@import "../input.css";
+
+:host {
+	cursor: text;
+}
+
+.date-wrapper {
+	position: relative;
+}
+
+.calendar-wrapper {
+	position: absolute;
+	z-index: 999999;
+	top: calc(100% + 0.1em);
+	width: calc(100% + 2px);
+	min-width: 18em;
+}
+
+/* @media screen and (min-width: 400px){
+	.calendar-wrapper {
+		max-width: 22em;
+	}
+} */
+
+.date-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999998;
+}

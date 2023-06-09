@@ -86,7 +86,7 @@ export class SmoothlySelectNewPreview {
 					Label
 				</smoothly-select-new>
 				<br />
-				<smoothly-select-new options={options} placement="top" icon="chevron-down">
+				<smoothly-select-new options={options} icon="chevron-down">
 					Icon
 				</smoothly-select-new>
 				<br />
