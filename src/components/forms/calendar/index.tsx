@@ -91,9 +91,7 @@ export class SmoothlyCalendarNew {
 						</div>
 						<div
 							class="input-label"
-							onClick={async () =>
-								console.log((this.yearSelect?.querySelector(".input-container") as HTMLDivElement)?.click())
-							}>
+							onClick={async () => (this.yearSelect?.querySelector(".input-container") as HTMLDivElement)?.click()}>
 							{this.value.split("-")[0]}
 						</div>
 						<smoothly-select-new
@@ -120,9 +118,7 @@ export class SmoothlyCalendarNew {
 						</div>
 						<div
 							class="input-label"
-							onClick={async () =>
-								console.log((this.monthSelect?.querySelector(".input-container") as HTMLDivElement)?.click())
-							}>
+							onClick={async () => (this.monthSelect?.querySelector(".input-container") as HTMLDivElement)?.click()}>
 							{Calendar.getMonthLabel(this.value)}
 						</div>
 						<smoothly-select-new

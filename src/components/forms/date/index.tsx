@@ -65,6 +65,7 @@ export class SmoothlyDateNew implements Input {
 	}
 
 	render() {
+		console.log("render")
 		return (
 			<Host>
 				<div class="date-wrapper">
@@ -77,6 +78,11 @@ export class SmoothlyDateNew implements Input {
 							onFocus={() => {
 								if (!this.readonly)
 									this.focused = true
+							}}
+							onBlur={() => {
+								if (!this.value) {
+									this.clear(), ((this.input.querySelector("input") as HTMLInputElement).value = "")
+								}
 							}}
 							onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : null)}
 							name={this.name}

@@ -7,7 +7,8 @@ export class SmoothlyDateNewPreview {
 	render() {
 		return (
 			<Host>
-				<smoothly-date-new placeholder="yyyy-mm-dd">Select date</smoothly-date-new>
+				<smoothly-date-new placeholder="yyyy-mm-dd">Date picker</smoothly-date-new>
+				<br />
 			</Host>
 		)
 	}
