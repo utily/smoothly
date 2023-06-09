@@ -35,6 +35,10 @@ smoothly-icon {
 	flex-shrink: 0;
 }
 
+.input-icon {
+	z-index: 999;
+}
+
 :host([readonly][editable]) .input-icon, :host([value][clearable]) .input-icon  {
 	cursor: pointer;
 	transition: 0.6s;
@@ -210,6 +214,7 @@ label {
 	border-color:  rgba(var(--smoothly-dark-color), .5);
 }
 
+/* Backdrop for Select, Date and Date-range */
 .input-backdrop {
 	position: fixed;
 	top: 0;
@@ -217,4 +222,5 @@ label {
 	right: 0;
 	bottom: 0;
 	z-index: 998;
+	cursor: default;
 }
