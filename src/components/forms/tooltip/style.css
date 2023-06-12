@@ -1,0 +1,39 @@
+.tooltip {
+  visibility: hidden;
+  background-color: rgba(var(--smoothly-dark-color), 0.9);
+  color: rgb(var(--smoothly-default-color));
+  border-radius: 0.5em;
+  padding: 0.5em;
+  position: absolute;
+  z-index: 995;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(var(--smoothly-dark-color), 0.9) transparent transparent transparent;
+}
+
+.show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}

@@ -68,6 +68,14 @@ export class SmoothlySelectNewPreview {
 					Info
 				</smoothly-select-new>
 				<br />
+				<smoothly-select-new options={options} placement="start" error="Inputfield is required">
+					Error
+				</smoothly-select-new>
+				<br />
+				<smoothly-select-new options={options} tooltip="Awsome tooltip about stuffs!" placeholder="Select a month">
+					Tooltip
+				</smoothly-select-new>
+				<br />
 
 				<h4>Style options</h4>
 				<smoothly-select-new options={options} layout="line">
@@ -76,14 +84,6 @@ export class SmoothlySelectNewPreview {
 				<br />
 				<smoothly-select-new options={options} placement="top" placeholder="Aaa">
 					Placement
-				</smoothly-select-new>
-				<br />
-				<smoothly-select-new options={options} border="danger" placeholder="Aaa">
-					Border
-				</smoothly-select-new>
-				<br />
-				<smoothly-select-new options={options} label="danger">
-					Label
 				</smoothly-select-new>
 				<br />
 				<smoothly-select-new options={options} icon="chevron-down">

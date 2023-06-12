@@ -4,13 +4,13 @@
 	cursor: text;
 }
 
-.date-wrapper {
-	position: relative;
-}
-
 .calendar-wrapper {
 	position: absolute;
 	z-index: 999;
 	top: calc(100% + 0.1em);
 	width: calc(100% + 2px);
+}
+
+:host[info] .calendar-wrapper, :host[error] .calendar-wrapper {
+	top: calc(100% + 0.1em - 1.45em);
 }

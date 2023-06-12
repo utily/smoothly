@@ -11,7 +11,7 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
 import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
-import { Colors, Layout, Placement, Radius } from "./components/forms/Input";
+import { Layout, Placement, Radius } from "./components/forms/Input";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
@@ -124,27 +124,27 @@ export namespace Components {
         "value": CountryCode.Alpha2;
     }
     interface SmoothlyDateNew {
-        "border": Colors;
         "clear": () => Promise<void>;
         "clearable": boolean;
         "disabled": boolean;
         "editable": boolean;
-        "fill": Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "focused": boolean;
-        "icon": Icon;
-        "info": string | HTMLElement;
-        "label": Colors;
+        "icon"?: Icon;
+        "info"?: string | HTMLElement;
         "layout": Layout;
         "max": Date;
         "min": Date;
         "name": string;
-        "placeholder": string | undefined;
+        "placeholder"?: string | undefined;
         "placement": Placement;
         "radius": Radius;
         "readonly": boolean;
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "tooltip"?: string | HTMLElement;
         "value"?: string | null;
     }
     interface SmoothlyDateNewPreview {
@@ -331,31 +331,31 @@ export namespace Components {
     }
     interface SmoothlyInputNew {
         "autocomplete": boolean;
-        "border": Colors;
         "clear": () => Promise<void>;
         "clearable": boolean;
         "currency"?: Currency;
         "disabled": boolean;
         "editable": boolean;
-        "fill": Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "focused": boolean;
-        "icon": Icon;
-        "info": string | HTMLElement;
-        "label": Colors;
+        "icon"?: Icon;
+        "info"?: string | HTMLElement;
         "layout": Layout;
         "maxLength": number;
         "minLength": number;
         "name": string;
         "pattern": RegExp | undefined;
-        "placeholder": string | undefined;
+        "placeholder"?: string | undefined;
         "placement": Placement;
         "radius": Radius;
         "readonly": boolean;
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "tooltip"?: string | HTMLElement;
         "type": string;
-        "value": any;
+        "value"?: any;
     }
     interface SmoothlyInputNewDemo {
     }
@@ -364,6 +364,10 @@ export namespace Components {
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
         "reset": () => Promise<void>;
+    }
+    interface SmoothlyInputTooltip {
+        "content": string | HTMLElement;
+        "open": boolean;
     }
     interface SmoothlyItem {
         "filter": (filter: string) => Promise<boolean>;
@@ -439,29 +443,29 @@ export namespace Components {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelectNew {
-        "border": Colors;
         "clear": () => Promise<void>;
         "clearable": boolean;
         "disabled": boolean;
         "editable": boolean;
-        "fill": Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "filter": string;
         "filterable": boolean;
         "focused": boolean;
-        "icon": Icon;
-        "info": string | HTMLElement;
-        "label": Colors;
+        "icon"?: Icon;
+        "info"?: string | HTMLElement;
         "layout": Layout;
         "multiple": boolean;
         "name": string;
         "options": Options[];
-        "placeholder": string | undefined;
+        "placeholder"?: string | undefined;
         "placement": Placement;
         "radius": Radius;
         "readonly": boolean;
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "tooltip"?: string | HTMLElement;
         "transparent": boolean;
         "value"?: string | string[] | null;
     }
@@ -1033,6 +1037,12 @@ declare global {
         prototype: HTMLSmoothlyInputSelectElement;
         new (): HTMLSmoothlyInputSelectElement;
     };
+    interface HTMLSmoothlyInputTooltipElement extends Components.SmoothlyInputTooltip, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputTooltipElement: {
+        prototype: HTMLSmoothlyInputTooltipElement;
+        new (): HTMLSmoothlyInputTooltipElement;
+    };
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
     }
     var HTMLSmoothlyItemElement: {
@@ -1327,6 +1337,7 @@ declare global {
         "smoothly-input-new-demo": HTMLSmoothlyInputNewDemoElement;
         "smoothly-input-new-preview": HTMLSmoothlyInputNewPreviewElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
+        "smoothly-input-tooltip": HTMLSmoothlyInputTooltipElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
@@ -1489,15 +1500,14 @@ declare namespace LocalJSX {
         "value"?: CountryCode.Alpha2;
     }
     interface SmoothlyDateNew {
-        "border"?: Colors;
         "clearable"?: boolean;
         "disabled"?: boolean;
         "editable"?: boolean;
-        "fill"?: Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "focused"?: boolean;
         "icon"?: Icon;
         "info"?: string | HTMLElement;
-        "label"?: Colors;
         "layout"?: Layout;
         "max"?: Date;
         "min"?: Date;
@@ -1510,6 +1520,7 @@ declare namespace LocalJSX {
         "radius"?: Radius;
         "readonly"?: boolean;
         "required"?: boolean;
+        "tooltip"?: string | HTMLElement;
         "value"?: string | null;
     }
     interface SmoothlyDateNewPreview {
@@ -1698,16 +1709,15 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputNew {
         "autocomplete"?: boolean;
-        "border"?: Colors;
         "clearable"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "editable"?: boolean;
-        "fill"?: Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "focused"?: boolean;
         "icon"?: Icon;
         "info"?: string | HTMLElement;
-        "label"?: Colors;
         "layout"?: Layout;
         "maxLength"?: number;
         "minLength"?: number;
@@ -1721,6 +1731,7 @@ declare namespace LocalJSX {
         "radius"?: Radius;
         "readonly"?: boolean;
         "required"?: boolean;
+        "tooltip"?: string | HTMLElement;
         "type"?: string;
         "value"?: any;
     }
@@ -1731,6 +1742,10 @@ declare namespace LocalJSX {
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
+    }
+    interface SmoothlyInputTooltip {
+        "content"?: string | HTMLElement;
+        "open"?: boolean;
     }
     interface SmoothlyItem {
         "marked"?: boolean;
@@ -1817,17 +1832,16 @@ declare namespace LocalJSX {
     interface SmoothlySelectDemo {
     }
     interface SmoothlySelectNew {
-        "border"?: Colors;
         "clearable"?: boolean;
         "disabled"?: boolean;
         "editable"?: boolean;
-        "fill"?: Colors;
+        "error"?: string | HTMLElement;
+        "fill"?: Color;
         "filter"?: string;
         "filterable"?: boolean;
         "focused"?: boolean;
         "icon"?: Icon;
         "info"?: string | HTMLElement;
-        "label"?: Colors;
         "layout"?: Layout;
         "multiple"?: boolean;
         "name"?: string;
@@ -1840,6 +1854,7 @@ declare namespace LocalJSX {
         "radius"?: Radius;
         "readonly"?: boolean;
         "required"?: boolean;
+        "tooltip"?: string | HTMLElement;
         "transparent"?: boolean;
         "value"?: string | string[] | null;
     }
@@ -2022,6 +2037,7 @@ declare namespace LocalJSX {
         "smoothly-input-new-demo": SmoothlyInputNewDemo;
         "smoothly-input-new-preview": SmoothlyInputNewPreview;
         "smoothly-input-select": SmoothlyInputSelect;
+        "smoothly-input-tooltip": SmoothlyInputTooltip;
         "smoothly-item": SmoothlyItem;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
@@ -2119,6 +2135,7 @@ declare module "@stencil/core" {
             "smoothly-input-new-demo": LocalJSX.SmoothlyInputNewDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputNewDemoElement>;
             "smoothly-input-new-preview": LocalJSX.SmoothlyInputNewPreview & JSXBase.HTMLAttributes<HTMLSmoothlyInputNewPreviewElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
+            "smoothly-input-tooltip": LocalJSX.SmoothlyInputTooltip & JSXBase.HTMLAttributes<HTMLSmoothlyInputTooltipElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;

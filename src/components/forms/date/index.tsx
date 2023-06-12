@@ -1,8 +1,9 @@
 import { Component, Element, Event, EventEmitter, Fragment, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
+import { Color } from "../../../model"
 import { Icon } from "../../icon/Icon"
 import Calendar from "../calendar/Calendar"
-import { Colors, Input, Layout, Placement, Radius } from "../Input"
+import { Input, Layout, Placement, Radius } from "../Input"
 
 @Component({
 	tag: "smoothly-date-new",
@@ -15,20 +16,20 @@ export class SmoothlyDateNew implements Input {
 	@Prop({ mutable: true, reflect: true }) focused: boolean
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
-	@Prop() placeholder: string | undefined
+	@Prop() placeholder?: string | undefined
 	@Prop({ reflect: true }) editable = false
 	@Prop({ reflect: true }) clearable = false
 	@Prop({ reflect: true, mutable: true }) layout: Layout = "border"
 	@Prop({ reflect: true, mutable: true }) placement: Placement = "float"
-	@Prop({ reflect: true }) icon: Icon
-	@Prop({ reflect: true }) label: Colors = "dark"
-	@Prop({ reflect: true }) border: Colors = "dark"
+	@Prop({ reflect: true }) icon?: Icon
+	@Prop({ reflect: true }) error?: string | HTMLElement
 	@Prop({ reflect: true }) radius: Radius = "default"
-	@Prop() fill: Colors
-	@Prop() info: string | HTMLElement
+	@Prop({ reflect: true }) fill?: Color
+	@Prop({ reflect: true }) info?: string | HTMLElement
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
+	@Prop() tooltip?: string | HTMLElement
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter
@@ -67,10 +68,11 @@ export class SmoothlyDateNew implements Input {
 	render() {
 		return (
 			<Host>
-				<div class="date-wrapper">
+				<div class="input-wrapper">
 					<div class="input-container" onClick={() => this.input.click()}>
 						<label htmlFor={this.name}>
 							<slot />
+							{this.required && !this.focused && !this.value && "*"}
 						</label>
 						<smoothly-input-base
 							focused={this.focused}
@@ -101,8 +103,8 @@ export class SmoothlyDateNew implements Input {
 							name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
 						/>
 					</div>
-					{this.info && <div class="input-info">{this.info}</div>}
-
+					{(this.info || this.error) && <div class="input-info">{this.error || this.info}</div>}
+					{this.tooltip && <smoothly-input-tooltip content={this.tooltip} open={this.focused} />}
 					{this.focused && !this.disabled && (
 						<Fragment>
 							<div class="input-backdrop" onClick={() => (this.focused = false)}></div>

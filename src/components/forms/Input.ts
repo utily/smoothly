@@ -1,3 +1,4 @@
+import { Color } from "../../model"
 import { Icon } from "../icon/Icon"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
@@ -12,28 +13,18 @@ export interface Input extends Clearable, Editable, Stylable {
 	editable: boolean
 	clearable: boolean
 	layout: Layout
-	icon: Icon
-	fill: Colors
+	icon?: Icon
+	fill?: Color
 	focused: boolean
-	label: Colors
-	border: Colors
 	radius: Radius
-	info: string | HTMLElement
+	info?: string | HTMLElement
+	error?: string | HTMLElement
+	tooltip?: string | HTMLElement
 }
 
 export type Layout = "plain" | "grid" | "border" | "line"
 export type Placement = "float" | "start" | "top" | "outside"
 export type Radius = "default" | "rounded" | "circle"
-export type Colors =
-	| "primary"
-	| "secondary"
-	| "tertiary"
-	| "success"
-	| "warning"
-	| "danger"
-	| "light"
-	| "medium"
-	| "dark"
 
 export namespace Input {
 	export function placeholder(placement: Placement, value: any, focused: boolean) {

@@ -1,7 +1,8 @@
 import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Currency } from "isoly"
+import { Color } from "../../../model"
 import { Icon } from "../../icon/Icon"
-import { Colors, Input, Layout, Placement, Radius } from "../Input"
+import { Input, Layout, Placement, Radius } from "../Input"
 
 @Component({
 	tag: "smoothly-input-new",
@@ -15,9 +16,9 @@ export class SmoothlyInputNew implements Input {
 	@Prop() maxLength: number = Number.POSITIVE_INFINITY
 	@Prop() autocomplete = true
 	@Prop() pattern: RegExp | undefined
-	@Prop() placeholder: string | undefined
+	@Prop() placeholder?: string | undefined
 	@Prop({ reflect: true }) required = false
-	@Prop({ mutable: true, reflect: true }) value: any
+	@Prop({ mutable: true, reflect: true }) value?: any
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
@@ -25,12 +26,12 @@ export class SmoothlyInputNew implements Input {
 	@Prop({ reflect: true }) clearable = false
 	@Prop({ reflect: true, mutable: true }) layout: Layout = "border"
 	@Prop({ reflect: true, mutable: true }) placement: Placement = "float"
-	@Prop({ reflect: true }) icon: Icon
-	@Prop({ reflect: true }) label: Colors = "dark"
-	@Prop({ reflect: true }) border: Colors = "dark"
+	@Prop({ reflect: true }) icon?: Icon
+	@Prop({ reflect: true }) error?: string | HTMLElement
 	@Prop({ reflect: true }) radius: Radius = "default"
-	@Prop() fill: Colors
-	@Prop() info: string | HTMLElement
+	@Prop({ reflect: true }) fill?: Color
+	@Prop() info?: string | HTMLElement
+	@Prop() tooltip?: string | HTMLElement
 	@Prop({ reflect: true, mutable: true }) focused = false
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -70,35 +71,39 @@ export class SmoothlyInputNew implements Input {
 	render() {
 		return (
 			<Host>
-				<div class="input-container" onClick={() => this.input.click()}>
-					<label htmlFor={this.name}>
-						<slot />
-					</label>
-					<smoothly-input-base
-						focused={this.focused}
-						onFocus={() => (this.focused = true)}
-						onBlur={() => (this.focused = false)}
-						onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : null)}
-						name={this.name}
-						type={this.type}
-						placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
-						required={this.required}
-						autocomplete={this.autocomplete}
-						disabled={this.disabled}
-						readonly={this.readonly}
-						pattern={this.pattern}
-						value={this.value}
-						ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
-					/>
-					<smoothly-icon
-						class="input-icon"
-						color={this.fill}
-						onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
-						size="tiny"
-						name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
-					/>
+				<div class="input-wrapper">
+					<div class="input-container" onClick={() => this.input.click()}>
+						<label htmlFor={this.name}>
+							<slot />
+							{this.required && !this.focused && !this.value && "*"}
+						</label>
+						<smoothly-input-base
+							focused={this.focused}
+							onFocus={() => (this.focused = true)}
+							onBlur={() => (this.focused = false)}
+							onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : null)}
+							name={this.name}
+							type={this.type}
+							placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
+							required={this.required}
+							autocomplete={this.autocomplete}
+							disabled={this.disabled}
+							readonly={this.readonly}
+							pattern={this.pattern}
+							value={this.value}
+							ref={(el: HTMLSmoothlyInputBaseElement) => (this.input = el)}
+						/>
+						<smoothly-icon
+							class="input-icon"
+							color={this.fill}
+							onClick={() => Input.onClickIcon(this.value, this.editable, this.clearable, this.readonly, this.element)}
+							size="tiny"
+							name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
+						/>
+					</div>
+					{(this.info || this.error) && <div class="input-info">{this.error || this.info}</div>}
+					{this.tooltip && <smoothly-input-tooltip content={this.tooltip} open={this.focused} />}
 				</div>
-				{this.info && <div class="input-info">{this.info}</div>}
 			</Host>
 		)
 	}

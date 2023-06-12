@@ -1,7 +1,8 @@
 import { Component, Element, Event, EventEmitter, Fragment, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Method } from "@stencil/core"
+import { Color } from "../../../model"
 import { Icon } from "../../icon/Icon"
-import { Colors, Input, Layout, Placement, Radius } from "../Input"
+import { Input, Layout, Placement, Radius } from "../Input"
 
 export type Options = { label?: string; value: string }
 
@@ -19,20 +20,20 @@ export class SmoothlySelectNew implements Input {
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
-	@Prop() placeholder: string | undefined
+	@Prop() placeholder?: string | undefined
 	@Prop({ reflect: true }) editable = false
 	@Prop({ reflect: true }) clearable = false
 	@Prop({ reflect: true, mutable: true }) layout: Layout = "border"
 	@Prop({ reflect: true, mutable: true }) placement: Placement = "float"
-	@Prop({ reflect: true }) icon: Icon
-	@Prop({ reflect: true }) label: Colors = "dark"
-	@Prop({ reflect: true }) border: Colors = "dark"
+	@Prop({ reflect: true }) icon?: Icon
+	@Prop({ reflect: true }) error?: string | HTMLElement
 	@Prop({ reflect: true }) radius: Radius = "default"
-	@Prop() fill: Colors
-	@Prop() info: string | HTMLElement
+	@Prop({ reflect: true }) fill?: Color
+	@Prop({ reflect: true }) info?: string | HTMLElement
 	@Prop({ reflect: true, mutable: true }) focused = false
 	@Prop({ reflect: true, mutable: true }) filter: string
 	@Prop({ reflect: true }) transparent: boolean
+	@Prop() tooltip?: string | HTMLElement
 	@State() isHovered = false
 	@State() optionFiltered: Options[]
 	@State() current: HTMLDivElement | undefined
@@ -206,10 +207,11 @@ export class SmoothlySelectNew implements Input {
 	render() {
 		return (
 			<Host>
-				<div class="select-wrapper">
+				<div class="input-wrapper">
 					<div class="input-container" onClick={() => this.input.setFocus()}>
 						<label htmlFor={this.name}>
 							<slot />
+							{this.required && !this.focused && !this.value && "*"}
 						</label>
 						<smoothly-input-base
 							focused={this.focused}
@@ -245,7 +247,8 @@ export class SmoothlySelectNew implements Input {
 							name={Input.icon(this.value, this.editable, this.clearable, this.readonly, this.icon)}
 						/>
 					</div>
-					{this.info && <div class="input-info">{this.info}</div>}
+					{(this.info || this.error) && <div class="input-info">{this.error || this.info}</div>}
+					{this.tooltip && <smoothly-input-tooltip content={this.tooltip} open={this.focused} />}
 					{this.focused && (
 						<Fragment>
 							<div class="input-backdrop" onClick={() => (this.focused = false)}></div>

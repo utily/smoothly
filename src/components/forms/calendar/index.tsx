@@ -145,7 +145,7 @@ export class SmoothlyCalendarNew {
 					<thead>
 						<tr>
 							{Calendar.weekdays().map(day => (
-								<th>{day}</th>
+								<th>{day.slice(0, 1).toUpperCase() + day.slice(1)}</th>
 							))}
 						</tr>
 					</thead>

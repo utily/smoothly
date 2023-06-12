@@ -4,10 +4,6 @@
 	cursor: text;
 }
 
-.select-wrapper {
-	position: relative;
-}
-
 :host:not([filterable]), :host:not([filterable]) smoothly-input-base {
 	cursor:  pointer;
 }
@@ -26,6 +22,10 @@
 	box-shadow: var(--smoothly-shadow);
 	max-height: 19em;
 	overflow-y: auto;
+}
+
+:host[info] .dropdown, :host[error] .dropdown {
+	top: calc(100% + 0.1em - 1.45em);
 }
 
 .option {

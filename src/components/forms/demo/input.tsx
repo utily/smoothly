@@ -25,28 +25,6 @@ export class SmoothlyInputNewPreview {
 						<br />
 					</Fragment>
 				))}
-				<h4>Label color</h4>
-				{["primary", "secondary", "tertiary", "success", "warning", "danger", "light", "medium", "dark"].map(
-					(type: any) => (
-						<Fragment>
-							<smoothly-input-new layout="border" placement="float" label={type} placeholder="Placeholder">
-								{type.slice(0, 1).toUpperCase() + type.slice(1)}
-							</smoothly-input-new>
-							<br />
-						</Fragment>
-					)
-				)}
-				<h4>Border color</h4>
-				{["primary", "secondary", "tertiary", "success", "warning", "danger", "light", "medium", "dark"].map(
-					(type: any) => (
-						<Fragment>
-							<smoothly-input-new layout="border" placement="float" border={type} placeholder="Placeholder">
-								{type.slice(0, 1).toUpperCase() + type.slice(1)}
-							</smoothly-input-new>
-							<br />
-						</Fragment>
-					)
-				)}
 				<h4>Border radius</h4>
 				{["default", "rounded", "circle"].map((type: any) => (
 					<Fragment>
@@ -56,17 +34,19 @@ export class SmoothlyInputNewPreview {
 						<br />
 					</Fragment>
 				))}
-				<h4>Icons & fill options</h4>
-				{["primary", "secondary", "tertiary", "success", "warning", "danger", "light", "medium", "dark"].map(
-					(type: any) => (
-						<Fragment>
-							<smoothly-input-new layout="border" placement="start" icon="checkmark-circle" fill={type}>
-								{type.slice(0, 1).toUpperCase() + type.slice(1)}
-							</smoothly-input-new>
-							<br />
-						</Fragment>
-					)
-				)}
+				<h4>Icons & fill</h4>
+				<smoothly-input-new layout="border" placement="start" icon="checkmark-circle" fill="success">
+					Success
+				</smoothly-input-new>
+				<br />
+				<h4>Tooltip</h4>
+				<smoothly-input-new
+					placement="float"
+					placeholder="Placeholder"
+					tooltip="Tooltip can be of type string or HTMLElement">
+					Tooltip
+				</smoothly-input-new>
+				<br />
 				<h4>input Controll</h4>
 				<smoothly-input-new
 					layout="line"
@@ -96,7 +76,7 @@ export class SmoothlyInputNewPreview {
 					editable
 					icon="checkmark"
 					readonly>
-					Clearable & Editable
+					Combined
 				</smoothly-input-new>
 				<br />
 				<smoothly-input-new
@@ -105,6 +85,14 @@ export class SmoothlyInputNewPreview {
 					placeholder="Placeholder"
 					info="Can be either string or HTMLElement">
 					Info
+				</smoothly-input-new>
+				<br />
+				<smoothly-input-new
+					layout="line"
+					placement="float"
+					placeholder="Placeholder"
+					error="Can be either string or HTMLElement">
+					Error
 				</smoothly-input-new>
 			</Host>
 		)
