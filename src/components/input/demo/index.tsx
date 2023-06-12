@@ -1,4 +1,5 @@
 import { Component, h, Listen } from "@stencil/core"
+import { isoly } from "isoly"
 @Component({
 	tag: "smoothly-input-demo",
 	styleUrl: "style.css",
@@ -289,22 +290,25 @@ export class SmoothlyInputDemo {
 			<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
 				Date
 			</smoothly-input-date>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"></smoothly-input-date-range>,
-			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"
-				showLabel={false}
-				style={{
-					"--border-radius": "4px",
-					"--padding": "0 0.75em",
-					"--input-width": "6rem",
-				}}></smoothly-input-date-range>,
+			<smoothly-form looks="grid">
+				<smoothly-input-date-range
+					start={isoly.Date.now()}
+					end={isoly.Date.nextMonth(isoly.Date.now())}
+					min="2021-10-10"
+					max="2024-12-30"></smoothly-input-date-range>
+
+				<smoothly-input-date-range
+					start={isoly.Date.now()}
+					end={isoly.Date.nextMonth(isoly.Date.now())}
+					min="2021-10-10"
+					max="2025-12-30"
+					showLabel={false}
+					style={{
+						"--border-radius": "4px",
+						"--padding": "0 0.75em",
+						"--input-width": "6rem",
+					}}></smoothly-input-date-range>
+			</smoothly-form>,
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
