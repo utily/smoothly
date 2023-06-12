@@ -8,9 +8,9 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
-import { Color, Fill, Message, Notice, Option, Trigger } from "./model";
+import { Color, Data as Data1, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
-import { CountryCode, Currency, Date, DateRange, DateTime } from "isoly";
+import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
@@ -225,15 +225,16 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
-        "end"?: Date;
+        "end"?: isoly.Date;
         "labelEnd": string;
         "labelStart": string;
-        "max": Date;
-        "min": Date;
+        "max": isoly.Date;
+        "min": isoly.Date;
+        "name": string;
         "open": boolean;
         "showLabel": boolean;
-        "start"?: Date;
-        "value"?: Date;
+        "start"?: isoly.Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDemo {
     }
@@ -1335,17 +1336,18 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
-        "end"?: Date;
+        "end"?: isoly.Date;
         "labelEnd"?: string;
         "labelStart"?: string;
-        "max"?: Date;
-        "min"?: Date;
-        "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
-        "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<Date>) => void;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
+        "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
-        "start"?: Date;
-        "value"?: Date;
+        "start"?: isoly.Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDemo {
     }

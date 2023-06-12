@@ -10,7 +10,7 @@ import { Controls } from "./menu"
 })
 export class SmoothlyPicker implements Clearable {
 	@Element() element: HTMLSmoothlyPickerElement
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) multiple = false
