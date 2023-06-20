@@ -19,7 +19,7 @@ export class SmoothlyIcon {
 		if (this.name)
 			this.document =
 				this.name != "empty"
-					? await SmoothlyIcon.load(this.name)
+					? (await SmoothlyIcon.load(this.name))?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
 					: `<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
 			<title>Empty</title>
 			</svg>`
