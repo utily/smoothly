@@ -12,9 +12,8 @@ export class SmoothlySummary {
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
 
 	toggleHandler(event: Event) {
-		if (event.target instanceof HTMLDetailsElement) {
+		if (event.target instanceof HTMLDetailsElement)
 			this.open = event.target.open
-		}
 	}
 
 	render() {
