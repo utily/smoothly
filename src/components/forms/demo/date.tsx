@@ -9,6 +9,10 @@ export class SmoothlyDateNewPreview {
 			<Host>
 				<smoothly-date-new placeholder="yyyy-mm-dd">Date picker</smoothly-date-new>
 				<br />
+				<smoothly-date-new name="range" range placeholder="yyyy-mm-dd - yyyy-mm-dd">
+					Date range picker
+				</smoothly-date-new>
+				<br />
 			</Host>
 		)
 	}

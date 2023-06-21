@@ -211,7 +211,6 @@ export class SmoothlySelectNew implements Input {
 					<div class="input-container" onClick={() => this.input.setFocus()}>
 						<label htmlFor={this.name}>
 							<slot />
-							{this.required && !this.focused && !this.value && "*"}
 						</label>
 						<smoothly-input-base
 							focused={this.focused}

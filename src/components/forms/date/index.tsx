@@ -11,6 +11,10 @@ import { Input, Layout, Placement, Radius } from "../Input"
 	scoped: true,
 })
 export class SmoothlyDateNew implements Input {
+	@Prop() range = false
+	@Prop({ mutable: true }) start?: string
+	@Prop({ mutable: true }) end?: string
+
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true, reflect: true }) value?: string | null
 	@Prop({ mutable: true, reflect: true }) focused: boolean
@@ -38,14 +42,16 @@ export class SmoothlyDateNew implements Input {
 
 	componentWillLoad() {
 		this.smoothlyInputLoad.emit()
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: this.range ? { start: this.start, end: this.end } : this.value })
 	}
 
+	@Watch("start")
+	@Watch("end")
 	@Watch("value")
 	handleValue(value: any, pre: any) {
 		if (value != pre)
-			this.smoothlyChange.emit({ [this.name]: this.value })
-		this.smoothlyInput.emit({ [this.name]: this.value })
+			this.smoothlyChange.emit({ [this.name]: this.range ? { start: this.start, end: this.end } : this.value })
+		this.smoothlyInput.emit({ [this.name]: this.range ? { start: this.start, end: this.end } : this.value })
 	}
 
 	@Method()
@@ -65,6 +71,12 @@ export class SmoothlyDateNew implements Input {
 		this.placement = placement
 	}
 
+	private onRangeInput() {
+		const value = `${this.start} - ${this.end}`
+		if (this.value != value)
+			this.value = value
+	}
+
 	render() {
 		return (
 			<Host>
@@ -72,7 +84,6 @@ export class SmoothlyDateNew implements Input {
 					<div class="input-container" onClick={() => this.input.click()}>
 						<label htmlFor={this.name}>
 							<slot />
-							{this.required && !this.focused && !this.value && "*"}
 						</label>
 						<smoothly-input-base
 							focused={this.focused}
@@ -87,7 +98,7 @@ export class SmoothlyDateNew implements Input {
 							}}
 							onInput={(e: CustomEvent) => (this.value = e.detail.value ? e.detail.value : null)}
 							name={this.name}
-							type="date"
+							type={this.range ? "text" : "date"}
 							placeholder={Input.placeholder(this.placement, this.value, this.focused) ? this.placeholder : undefined}
 							required={this.required}
 							disabled={this.disabled}
@@ -110,18 +121,35 @@ export class SmoothlyDateNew implements Input {
 							<div class="input-backdrop" onClick={() => (this.focused = false)}></div>
 							<div class="calendar-wrapper">
 								<smoothly-calendar-new
-									doubleInput={false}
-									value={this.value ?? Calendar.getCurrentDateString()}
+									doubleInput={this.range}
+									value={this.range ? Calendar.getCurrentDateString() : this.value ?? Calendar.getCurrentDateString()}
 									onValueChanged={(event: CustomEvent) => {
-										this.value = event.detail
+										if (!this.range)
+											this.value = event.detail
 										event.stopPropagation()
 									}}
 									onDateSet={e => {
 										this.focused = false
 										e.stopPropagation()
 									}}
+									onDateRangeSet={e => {
+										this.focused = false
+										e.stopPropagation()
+									}}
 									max={this.max}
 									min={this.min}
+									start={this.start} // new
+									end={this.end}
+									onStartChanged={e => {
+										this.start = e.detail
+										e.stopPropagation()
+										this.onRangeInput()
+									}}
+									onEndChanged={e => {
+										this.end = e.detail
+										e.stopPropagation()
+										this.onRangeInput()
+									}}
 								/>
 							</div>
 						</Fragment>

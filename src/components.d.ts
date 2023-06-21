@@ -128,6 +128,7 @@ export namespace Components {
         "clearable": boolean;
         "disabled": boolean;
         "editable": boolean;
+        "end"?: string;
         "error"?: string | HTMLElement;
         "fill"?: Color;
         "focused": boolean;
@@ -140,10 +141,12 @@ export namespace Components {
         "placeholder"?: string | undefined;
         "placement": Placement;
         "radius": Radius;
+        "range": boolean;
         "readonly": boolean;
         "required": boolean;
         "setReadonly": (readonly: boolean) => Promise<void>;
         "setStyle": (layout: Layout, placement: Placement) => Promise<void>;
+        "start"?: string;
         "tooltip"?: string | HTMLElement;
         "value"?: string | null;
     }
@@ -1503,6 +1506,7 @@ declare namespace LocalJSX {
         "clearable"?: boolean;
         "disabled"?: boolean;
         "editable"?: boolean;
+        "end"?: string;
         "error"?: string | HTMLElement;
         "fill"?: Color;
         "focused"?: boolean;
@@ -1518,8 +1522,10 @@ declare namespace LocalJSX {
         "placeholder"?: string | undefined;
         "placement"?: Placement;
         "radius"?: Radius;
+        "range"?: boolean;
         "readonly"?: boolean;
         "required"?: boolean;
+        "start"?: string;
         "tooltip"?: string | HTMLElement;
         "value"?: string | null;
     }
