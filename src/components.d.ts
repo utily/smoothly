@@ -549,6 +549,10 @@ export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlySubmitElement;
 }
+export interface SmoothlySummaryCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlySummaryElement;
+}
 export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTabElement;
@@ -1485,6 +1489,7 @@ declare namespace LocalJSX {
     interface SmoothlySummary {
         "color"?: Color;
         "fill"?: Fill;
+        "onSmoothlySummaryOpen"?: (event: SmoothlySummaryCustomEvent<boolean>) => void;
         "open"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
     }

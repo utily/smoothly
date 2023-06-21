@@ -1,4 +1,4 @@
-import { Component, h, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 import { Color, Fill } from "../../model"
 @Component({
 	tag: "smoothly-summary",
@@ -10,10 +10,13 @@ export class SmoothlySummary {
 	@Prop() color: Color = "primary"
 	@Prop() fill: Fill = "solid"
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
+	@Event() smoothlySummaryOpen: EventEmitter<boolean>
 
 	toggleHandler(event: Event) {
-		if (event.target instanceof HTMLDetailsElement)
+		if (event.target instanceof HTMLDetailsElement) {
 			this.open = event.target.open
+			this.smoothlySummaryOpen.emit(this.open)
+		}
 	}
 
 	render() {

@@ -74,7 +74,6 @@ smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
 smoothly-app > smoothly-notifier > header > nav > ul li a {
 	display: flex;
 	height: 2.3rem;
-	margin: 0 0.4cm;
 	text-decoration: none;
 	align-items: center;
 	align-self: center;
