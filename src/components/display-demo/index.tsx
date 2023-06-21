@@ -197,7 +197,7 @@ export class SmoothlyDisplayDemo {
 						<div slot="summary" style={{display: "flex", gap: "0.3rem"}}><span>Person</span><smoothly-icon name="person" color="light" fill="clear" size="tiny"></smoothly-icon></div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>
-					<smoothly-summary color="danger" fill="clear" open>
+					<smoothly-summary color="danger" fill="clear" open onSmoothlySummaryOpen={e => console.log("summary is open?", e.detail)}>
 						<p slot="summary">Some other title</p>
 						<p slot="content">A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.</p>
 					</smoothly-summary>
