@@ -351,6 +351,7 @@ export namespace Components {
     interface SmoothlySummary {
         "color": Color;
         "fill": Fill;
+        "open": boolean;
         "size": "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlySvg {
@@ -1484,6 +1485,7 @@ declare namespace LocalJSX {
     interface SmoothlySummary {
         "color"?: Color;
         "fill"?: Fill;
+        "open"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlySvg {
