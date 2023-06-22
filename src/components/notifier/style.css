@@ -8,11 +8,9 @@
 	display: flex;
 	flex-wrap: wrap-reverse;
 	align-content: stretch;
-	justify-content: flex-start;
 	position: fixed;
-	bottom: 3em;
+	bottom: 3rem;
 	left: 0;
 	text-align: center;
-	width: 100%;
 	z-index: 100;
 }
