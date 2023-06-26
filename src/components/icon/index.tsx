@@ -32,7 +32,7 @@ export class SmoothlyIcon {
 						.replace(` width="512" height="512"`, "")
 						.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
 						.replace(/stroke:#000;/gi, "")
-				: undefined,
+				: `<img src="undefined.jpg"/>`,
 		}
 	}
 	render() {
