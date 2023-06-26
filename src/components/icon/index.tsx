@@ -16,7 +16,11 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async loadDocument() {
 		if (this.name)
-			this.document = await Icon.load(this.name)
+			try {
+				this.document = await Icon.load(this.name)
+			} catch (error) {
+				console.log(error)
+			}
 	}
 	async componentWillLoad() {
 		await this.loadDocument()
