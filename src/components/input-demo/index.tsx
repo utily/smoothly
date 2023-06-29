@@ -75,6 +75,9 @@ export class SmoothlyInputDemo {
 						<smoothly-input-date name="some-date" color="tertiary">
 							Calendar (chosen color)
 						</smoothly-input-date>
+						<smoothly-input-date name="some-date" flexible={true}>
+							Calendar (no min-width)
+						</smoothly-input-date>
 					</fieldset>
 					<fieldset>
 						<h2>Smoothly Radio</h2>
