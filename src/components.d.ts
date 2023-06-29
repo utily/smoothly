@@ -128,6 +128,7 @@ export namespace Components {
     interface SmoothlyInputDate {
         "color": Color;
         "disabled": boolean;
+        "flexible": boolean;
         "max": Date;
         "min": Date;
         "name": string;
@@ -994,6 +995,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputDate {
         "color"?: Color;
         "disabled"?: boolean;
+        "flexible"?: boolean;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;

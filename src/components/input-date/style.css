@@ -9,6 +9,9 @@
 	background-color: rgb(var(--smoothly-color-shade));
 	min-width: 18em;
 }
+:host > .flexible {
+	min-width: unset;
+}
 :host > div {
 	position: fixed;
 	top: 0;

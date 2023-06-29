@@ -14,6 +14,7 @@ export class InputDate {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
+	@Prop({ reflect: true }) flexible = false
 	@Prop({ mutable: true }) color: Color = "default"
 	@Event() valueChanged: EventEmitter<Date>
 	@Watch("value")
@@ -40,7 +41,7 @@ export class InputDate {
 			this.open && !this.disabled
 				? [
 						<div onClick={() => (this.open = false)}></div>,
-						<nav>
+						<nav class={{ flexible: this.flexible }}>
 							<div class="arrow" color={this.color}></div>
 							<smoothly-calendar
 								doubleInput={false}
