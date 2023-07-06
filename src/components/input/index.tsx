@@ -18,7 +18,7 @@ export class SmoothlyInput implements Changeable, Clearable {
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type = "text"
-	@Prop({ mutable: true, reflect: true }) required = false
+	@Prop({ mutable: true, reflect: true }) required = false 
 	@Prop({ mutable: true }) minLength = 0
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY

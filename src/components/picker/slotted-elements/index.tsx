@@ -5,7 +5,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlySottedElement {
+export class SmoothlySlottedElement {
 	@Element() element: HTMLElement
 	@Prop() clone = true
 	@Event() smoothlySlottedChange: EventEmitter<Node[]>

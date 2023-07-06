@@ -20,6 +20,8 @@ import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
 import { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
+    interface ShadowWrap {
+    }
     interface SmoothlyAccordion {
         "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
         "value"?: string;
@@ -259,6 +261,8 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyMultipleInput {
+        "default": number;
+        "name": string;
     }
     interface SmoothlyNotification {
         "closable": boolean;
@@ -581,6 +585,12 @@ export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSmoothlyTriggerSourceElement;
 }
 declare global {
+    interface HTMLShadowWrapElement extends Components.ShadowWrap, HTMLStencilElement {
+    }
+    var HTMLShadowWrapElement: {
+        prototype: HTMLShadowWrapElement;
+        new (): HTMLShadowWrapElement;
+    };
     interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
     }
     var HTMLSmoothlyAccordionElement: {
@@ -1053,6 +1063,7 @@ declare global {
         new (): HTMLSmoothlyUrlencodedElement;
     };
     interface HTMLElementTagNameMap {
+        "shadow-wrap": HTMLShadowWrapElement;
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-address": HTMLSmoothlyAddressElement;
@@ -1134,6 +1145,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ShadowWrap {
+    }
     interface SmoothlyAccordion {
         "value"?: string;
     }
@@ -1389,6 +1402,8 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyMultipleInput {
+        "default"?: number;
+        "name"?: string;
     }
     interface SmoothlyNotification {
         "closable"?: boolean;
@@ -1594,6 +1609,7 @@ declare namespace LocalJSX {
         "data"?: string;
     }
     interface IntrinsicElements {
+        "shadow-wrap": ShadowWrap;
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-address": SmoothlyAddress;
@@ -1678,6 +1694,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "shadow-wrap": LocalJSX.ShadowWrap & JSXBase.HTMLAttributes<HTMLShadowWrapElement>;
             "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
