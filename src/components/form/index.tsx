@@ -68,7 +68,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 					: { url: `${this.action}?${http.Search.stringify(this.value)}` }
 			)
 			if (response.status >= 200 && response.status < 300) {
-				this.notice = Notice.succeeded("Form sucessfully submitted.")
+				this.notice = Notice.succeeded("Form successfully submitted.")
 				await this.clear()
 			} else
 				this.notice = Notice.failed("Failed to submit form.")
