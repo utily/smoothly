@@ -239,6 +239,7 @@ export namespace Components {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "clear": () => Promise<void>;
         "name": string;
         "placeholder": string | undefined;
         "showLabel": boolean;
@@ -256,6 +257,8 @@ export namespace Components {
         "marked": boolean;
         "selected": boolean;
         "value": any;
+    }
+    interface SmoothlyMultipleInput {
     }
     interface SmoothlyNotification {
         "closable": boolean;
@@ -809,6 +812,12 @@ declare global {
         prototype: HTMLSmoothlyItemElement;
         new (): HTMLSmoothlyItemElement;
     };
+    interface HTMLSmoothlyMultipleInputElement extends Components.SmoothlyMultipleInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyMultipleInputElement: {
+        prototype: HTMLSmoothlyMultipleInputElement;
+        new (): HTMLSmoothlyMultipleInputElement;
+    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -1082,6 +1091,7 @@ declare global {
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
+        "smoothly-multiple-input": HTMLSmoothlyMultipleInputElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -1378,6 +1388,8 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "value"?: any;
     }
+    interface SmoothlyMultipleInput {
+    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -1620,6 +1632,7 @@ declare namespace LocalJSX {
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
+        "smoothly-multiple-input": SmoothlyMultipleInput;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -1706,6 +1719,7 @@ declare module "@stencil/core" {
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
+            "smoothly-multiple-input": LocalJSX.SmoothlyMultipleInput & JSXBase.HTMLAttributes<HTMLSmoothlyMultipleInputElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;

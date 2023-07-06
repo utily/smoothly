@@ -340,6 +340,9 @@ export class SmoothlyInputDemo {
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
+				<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
+					Clear
+				</smoothly-input-clear>
 			</smoothly-form>,
 			<br />,
 		]
