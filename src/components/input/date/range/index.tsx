@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
 import { Data } from "./../../../../model"
@@ -22,6 +22,7 @@ export class InputDateRange implements Clearable {
 	@Event() valueChanged: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
 
+	@Method()
 	async clear(): Promise<void> {
 		this.start = undefined
 		this.end = undefined

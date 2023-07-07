@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
 import { Clearable } from "../Clearable"
 
 @Component({
@@ -16,6 +16,8 @@ export class SmoothlyInputFile implements Clearable {
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@Event() smoothlyInput: EventEmitter<Record<string, File>>
 	@Event() smoothlyChange: EventEmitter<Record<string, File>>
+
+	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
 	}
