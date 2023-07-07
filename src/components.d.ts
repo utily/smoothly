@@ -217,6 +217,7 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputDate {
+        "clear": () => Promise<void>;
         "disabled": boolean;
         "max": Date;
         "min": Date;
@@ -225,6 +226,7 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "clear": () => Promise<void>;
         "end"?: isoly.Date;
         "labelEnd": string;
         "labelStart": string;
@@ -239,6 +241,7 @@ export namespace Components {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "clear": () => Promise<void>;
         "name": string;
         "placeholder": string | undefined;
         "showLabel": boolean;

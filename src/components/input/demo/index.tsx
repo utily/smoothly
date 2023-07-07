@@ -297,6 +297,9 @@ export class SmoothlyInputDemo {
 					end={isoly.Date.nextMonth(isoly.Date.now())}
 					min="2021-10-10"
 					max="2024-12-30"></smoothly-input-date-range>
+				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-submit slot="submit">submit daterange</smoothly-submit>
 			</smoothly-form>,
 
@@ -339,6 +342,9 @@ export class SmoothlyInputDemo {
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
+				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
+					Clear
+				</smoothly-input-clear>
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
