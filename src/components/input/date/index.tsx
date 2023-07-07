@@ -1,12 +1,13 @@
 import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
+import { Clearable } from "../Clearable"
 
 @Component({
 	tag: "smoothly-input-date",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class InputDate {
+export class InputDate implements Clearable {
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
@@ -14,6 +15,10 @@ export class InputDate {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
+
+	async clear(): Promise<void> {
+		this.value = undefined
+	}
 	@Watch("value")
 	onStart(next: Date) {
 		this.valueChanged.emit(next)

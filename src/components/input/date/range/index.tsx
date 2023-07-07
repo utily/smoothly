@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
 import { isoly } from "isoly"
+import { Clearable } from "../../Clearable"
 import { Data } from "./../../../../model"
 
 @Component({
@@ -7,7 +8,7 @@ import { Data } from "./../../../../model"
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class InputDateRange {
+export class InputDateRange implements Clearable {
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) start?: isoly.Date
@@ -20,6 +21,11 @@ export class InputDateRange {
 	@Prop() labelEnd = "to"
 	@Event() valueChanged: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
+
+	async clear(): Promise<void> {
+		this.start = undefined
+		this.end = undefined
+	}
 
 	componentWillLoad() {
 		if (this.start && this.end)
