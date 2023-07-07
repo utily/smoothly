@@ -96,7 +96,7 @@
 		"web-file-polyfill": "^1.0.4"
 	},
 	"overrides": {
-		"semver": "7.5.3",
-		"optionator": "0.9.3"
+		"semver": "^7.5.3",
+		"optionator": "^0.9.3"
 	}
 }
