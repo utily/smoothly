@@ -345,14 +345,24 @@ export class SmoothlyInputDemo {
 				</smoothly-input-clear>
 			</smoothly-form>,
 			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
+				NODE
 				<smoothly-multiple-input>
+					<smoothly-input name="textTest" type="text">
+						Text
+					</smoothly-input>
+					<smoothly-input slot="inputs" name="numberTest" type="number">
+						Number
+					</smoothly-input>
+				</smoothly-multiple-input>
+				OUTERHTML
+				<smoothly-multiple-outer-input>
 					<smoothly-input name="textTest" type="text">
 						Text
 					</smoothly-input>
 					<smoothly-input name="numberTest" type="number">
 						Number
 					</smoothly-input>
-				</smoothly-multiple-input>
+				</smoothly-multiple-outer-input>
 			</smoothly-form>,
 			<br />,
 		]

@@ -14,9 +14,9 @@ export class SmoothlyMultipleInput {
 	@State() template: Node[]
 
 	componentDidLoad() {
-		this.template = Array.from(this.element.childNodes).filter(childNode => childNode.nodeName == "SHADOW-WRAP")
+		this.template = Array.from(this.element.childNodes).filter(childNode => childNode.nodeName == "SMOOTHLY-INPUT")
 
-		console.log("template", this.template)
+		console.log("Nodetemplate", this.template)
 	}
 
 	addInputs(event: MouseEvent) {
@@ -27,14 +27,7 @@ export class SmoothlyMultipleInput {
 		const multiple = Array.from({ length: this.counter }, (_, index) =>
 			this.template.reduce<Node[]>((result, node) => {
 				const clonedNode = node.cloneNode(true)
-				if (clonedNode instanceof HTMLElement) {
-					clonedNode.childNodes.forEach(node => {
-						if (node instanceof HTMLElement) {
-							const name = node.getAttribute("name")
-							node.setAttribute("name", `${index}+${name}`)
-						}
-					})
-				}
+
 				result.push(clonedNode)
 				return result
 			}, [])
@@ -43,10 +36,9 @@ export class SmoothlyMultipleInput {
 
 		return (
 			<Host>
-				<shadow-wrap>
-					<slot />
-				</shadow-wrap>
-				<smoothly-slot-elements nodes={multiple}></smoothly-slot-elements>
+				<slot name="inputs" />
+
+				<smoothly-slot-elements nodes={multiple} clone={false}></smoothly-slot-elements>
 
 				<smoothly-button type="button" onClick={e => this.addInputs(e)}>
 					<smoothly-icon name="add-circle" />

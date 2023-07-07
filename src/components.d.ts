@@ -15,10 +15,11 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Slot } from "./components/input/multiple/slot-elements/index";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
-import { Slot } from "./components/picker/slot-elements/index";
+import { Slot as Slot1 } from "./components/picker/slot-elements/index";
 export namespace Components {
     interface ShadowWrap {
     }
@@ -264,6 +265,13 @@ export namespace Components {
         "default": number;
         "name": string;
     }
+    interface SmoothlyMultipleOuterInput {
+        "default": number;
+        "name": string;
+    }
+    interface SmoothlyMultipleSlotElements {
+        "nodes"?: string | string[];
+    }
     interface SmoothlyNotification {
         "closable": boolean;
         "icon": boolean;
@@ -507,6 +515,10 @@ export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyItemElement;
+}
+export interface SmoothlyMultipleSlotElementsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyMultipleSlotElementsElement;
 }
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -828,6 +840,18 @@ declare global {
         prototype: HTMLSmoothlyMultipleInputElement;
         new (): HTMLSmoothlyMultipleInputElement;
     };
+    interface HTMLSmoothlyMultipleOuterInputElement extends Components.SmoothlyMultipleOuterInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyMultipleOuterInputElement: {
+        prototype: HTMLSmoothlyMultipleOuterInputElement;
+        new (): HTMLSmoothlyMultipleOuterInputElement;
+    };
+    interface HTMLSmoothlyMultipleSlotElementsElement extends Components.SmoothlyMultipleSlotElements, HTMLStencilElement {
+    }
+    var HTMLSmoothlyMultipleSlotElementsElement: {
+        prototype: HTMLSmoothlyMultipleSlotElementsElement;
+        new (): HTMLSmoothlyMultipleSlotElementsElement;
+    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -1103,6 +1127,8 @@ declare global {
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-multiple-input": HTMLSmoothlyMultipleInputElement;
+        "smoothly-multiple-outer-input": HTMLSmoothlyMultipleOuterInputElement;
+        "smoothly-multiple-slot-elements": HTMLSmoothlyMultipleSlotElementsElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -1405,6 +1431,14 @@ declare namespace LocalJSX {
         "default"?: number;
         "name"?: string;
     }
+    interface SmoothlyMultipleOuterInput {
+        "default"?: number;
+        "name"?: string;
+    }
+    interface SmoothlyMultipleSlotElements {
+        "nodes"?: string | string[];
+        "onSmoothlySlotEmpty"?: (event: SmoothlyMultipleSlotElementsCustomEvent<Slot>) => void;
+    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -1649,6 +1683,8 @@ declare namespace LocalJSX {
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
         "smoothly-multiple-input": SmoothlyMultipleInput;
+        "smoothly-multiple-outer-input": SmoothlyMultipleOuterInput;
+        "smoothly-multiple-slot-elements": SmoothlyMultipleSlotElements;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -1737,6 +1773,8 @@ declare module "@stencil/core" {
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-multiple-input": LocalJSX.SmoothlyMultipleInput & JSXBase.HTMLAttributes<HTMLSmoothlyMultipleInputElement>;
+            "smoothly-multiple-outer-input": LocalJSX.SmoothlyMultipleOuterInput & JSXBase.HTMLAttributes<HTMLSmoothlyMultipleOuterInputElement>;
+            "smoothly-multiple-slot-elements": LocalJSX.SmoothlyMultipleSlotElements & JSXBase.HTMLAttributes<HTMLSmoothlyMultipleSlotElementsElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
