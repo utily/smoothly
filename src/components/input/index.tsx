@@ -180,7 +180,7 @@ export class SmoothlyInput {
 	}
 	onPaste(event: ClipboardEvent) {
 		event.preventDefault()
-		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
+		let pasted = event.clipboardData ? event.clipboardData.getData("text").trim() : ""
 		const backend = event.target as HTMLInputElement
 		pasted = this.expiresAutocompleteFix(backend, pasted)
 		this.processPaste(pasted, backend)
