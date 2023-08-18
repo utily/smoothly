@@ -144,17 +144,19 @@ export class SmoothlyPickerMenu {
 	}
 	addHandler() {
 		const validation = !this.validator ? true : this.validator(this.search)
-		if (typeof validation == "object" ? validation.result : validation) {
-			if (!this.multiple)
-				for (const option of chain(this.options.values(), this.backend.values()))
-					option.set.selected(false)
-			this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
-			this.search = ""
-			this.searchElement?.focus()
-			this.valid = false
+		if (this.mutable) {
+			if (typeof validation == "object" ? validation.result : validation) {
+				if (!this.multiple)
+					for (const option of chain(this.options.values(), this.backend.values()))
+						option.set.selected(false)
+				this.created = new Map(this.created.set(this.search, { value: this.search, selected: true }).entries())
+				this.search = ""
+				this.searchElement?.focus()
+				this.valid = false
+			}
+			if (typeof validation == "object")
+				this.notice.emit(validation.notice)
 		}
-		if (typeof validation == "object")
-			this.notice.emit(validation.notice)
 	}
 	keyDownHandler(event: KeyboardEvent) {
 		if (event.key == "Enter") {
