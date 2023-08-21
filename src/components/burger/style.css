@@ -12,11 +12,11 @@ height: 100%;
 :host:not([visible]){
 	display: none;
 }
-:host([open]) smoothly-icon{
+:host:not([open]) smoothly-icon{
 	transform: rotate(0deg);
 	transition: transform 100ms ease-in-out;
 }
-:host:not([open]) smoothly-icon{
+:host([open]) smoothly-icon{
 	transform: rotate(-90deg);
 	transition: transform 100ms ease-in-out;
 }

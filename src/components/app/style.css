@@ -5,10 +5,10 @@ smoothly-app {
 smoothly-app[hidden] {
 	display: none;
 }
-smoothly-app > smoothly-notifier{
+smoothly-app > smoothly-notifier {
 	background: none;
 }
-smoothly-app > smoothly-notifier > header{
+smoothly-app > smoothly-notifier > header {
 	background: rgba(var(--smoothly-color));
 	color: rgba(var(--smoothly-color-contrast));
 }
@@ -59,7 +59,7 @@ smoothly-app > smoothly-notifier > header > nav > ul  li a {
 smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
+smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start] {
 	height: fit-content;
 	padding: 0.5em 0em;
 	margin-top: 1em;
@@ -98,12 +98,12 @@ smoothly-app > smoothly-notifier > main {
 		background-color: rgba(var(--smoothly-color));
 		width: 100%;
   }
-	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger{
+	smoothly-app > smoothly-notifier > header > nav > ul smoothly-burger {
 		position: absolute;
 		top: 0;
 		right: 0;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start]{
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start] {
 		display:none;
 	}
 	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
@@ -113,6 +113,6 @@ smoothly-app > smoothly-notifier > main {
 		background-color: rgba(var(--smoothly-color));
 	}
 }
-.true:not([menuOpen])  {
+nav:not(.menuOpen) {
 	display: none;
 }
