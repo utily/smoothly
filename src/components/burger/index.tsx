@@ -14,11 +14,10 @@ export class SmoothlyBurger {
 
 	componentWillLoad() {
 		this.history = window.matchMedia(this.mediaQuery).matches
-		if (!window.matchMedia(this.mediaQuery).matches) {
+		if (!window.matchMedia(this.mediaQuery).matches)
 			this.visible = false
-		} else {
+		else
 			this.visible = true
-		}
 		this.navStatus.emit(!this.visible)
 	}
 
