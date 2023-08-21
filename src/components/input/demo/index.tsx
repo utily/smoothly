@@ -342,6 +342,10 @@ export class SmoothlyInputDemo {
 					<span slot="label">Testing file input</span>
 					<smoothly-icon slot="button" name="folder-outline" />
 				</smoothly-input-file>
+				<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
+					<span slot="label">Testing camera photo</span>
+					<smoothly-icon slot="button" name="camera-outline" />
+				</smoothly-input-file>
 				<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
 					Clear
 				</smoothly-input-clear>
