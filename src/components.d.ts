@@ -241,6 +241,8 @@ export namespace Components {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "accept"?: string;
+        "camera": "front" | "back";
         "clear": () => Promise<void>;
         "name": string;
         "placeholder": string | undefined;
@@ -1360,6 +1362,8 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputFile {
+        "accept"?: string;
+        "camera"?: "front" | "back";
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;

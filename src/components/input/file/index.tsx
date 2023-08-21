@@ -10,6 +10,8 @@ export class SmoothlyInputFile implements Clearable {
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	@State() dragging = false
+	@Prop() accept?: string
+	@Prop({ reflect: true }) camera: "front" | "back"
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
@@ -52,6 +54,8 @@ export class SmoothlyInputFile implements Clearable {
 					<input
 						ref={element => (this.input = element)}
 						type={"file"}
+						capture={this.camera == "back" ? "environment" : "user"}
+						accept={this.accept ?? (!this.camera ? undefined : "image/jpeg")}
 						files={
 							(this.transfer.items.clear(), this.value && this.transfer.items.add(this.value), this.transfer.files)
 						}
