@@ -37,10 +37,9 @@ export class SmoothlyApp {
 			}
 		}
 	}
-	@Listen("burgerStatus")
-	burgerStatusHandler(event: CustomEvent) {
+	burgerStatusHandler(event: CustomEvent<boolean>) {
 		event.stopPropagation()
-		this.menuOpen = event.detail ? true : false
+		this.menuOpen = event.detail
 	}
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
@@ -68,14 +67,14 @@ export class SmoothlyApp {
 						<a href={""}>{this.label}</a>
 					</h1>
 					<slot name="header"></slot>
-					<nav class={this.menuOpen.toString()}>
+					<nav class={{ menuOpen: this.menuOpen }}>
 						<ul>
 							<slot name="nav-start"></slot>
 							<slot> </slot>
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>
-					<smoothly-burger></smoothly-burger>
+					<smoothly-burger onNavStatus={e => this.burgerStatusHandler(e)} />
 				</header>
 				<main ref={e => (this.mainElement = e)}></main>
 			</smoothly-notifier>

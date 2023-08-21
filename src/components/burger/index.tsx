@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -7,37 +7,46 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 })
 export class SmoothlyBurger {
 	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) open: boolean
+	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
-	@Event() burgerStatus: EventEmitter<boolean>
+	@State() history: boolean
+	@Event() navStatus: EventEmitter<boolean>
 
 	componentWillLoad() {
-		const windowsize = window.innerWidth
-		windowsize > 900 ? (this.visible = false) : (this.visible = true)
+		this.history = window.matchMedia(this.mediaQuery).matches
+		if (!window.matchMedia(this.mediaQuery).matches)
+			this.visible = false
+		else
+			this.visible = true
+		this.navStatus.emit(!this.visible)
 	}
 
 	@Watch("open")
-	closedHandler() {
-		this.burgerStatus.emit(this.open)
+	openChanged() {
+		this.navStatus.emit(this.open)
 	}
 
 	@Listen("resize", { target: "window" })
 	resizeHandler() {
-		const reduced = window.matchMedia(this.mediaQuery).matches
-		if (reduced) {
-			this.visible = true
-			this.open = true
-		} else {
-			this.visible = false
-			this.open = false
+		const result = window.matchMedia(this.mediaQuery).matches
+		if (result != this.history) {
+			if (result) {
+				this.visible = true
+				this.open = false
+			} else {
+				this.visible = false
+				this.open = false
+			}
+			this.navStatus.emit(!this.visible)
 		}
+		this.history = result
 	}
 
 	render() {
 		return (
 			<Host>
 				<span class="burger" onClick={() => (this.open = !this.open)}>
-					<smoothly-icon name="menu"> </smoothly-icon>
+					<smoothly-icon name="menu" />
 				</span>
 			</Host>
 		)
