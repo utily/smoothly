@@ -1174,7 +1174,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyBurger {
         "mediaQuery"?: string;
-        "onBurgerStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        "onNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
         "visible"?: boolean;
     }
