@@ -21,8 +21,9 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		this.criteria = event.detail
 	}
 
-	@Listen("smoothlyChecked", { capture: true })
-	smoothlyCheckedHandler(event: CustomEvent<Record<string, any>>) {
+	@Listen("smoothlyInput", { capture: true })
+	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
+		event.stopPropagation()
 		this.selector = this.selector.handle(event.detail)
 	}
 

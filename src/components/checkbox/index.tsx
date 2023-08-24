@@ -1,12 +1,13 @@
 import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
 import * as langly from "langly"
+import { Clearable } from "../filter/Clearable"
 import * as translation from "./translation"
 @Component({
 	tag: "smoothly-checkbox",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyCheckbox {
+export class SmoothlyCheckbox implements Clearable {
 	@Element() element: HTMLElement
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
 	@Prop({ mutable: true, reflect: true }) checked = false
@@ -14,7 +15,7 @@ export class SmoothlyCheckbox {
 	@Prop() name: string
 	@Prop() value: any
 	@Prop({ reflect: true }) disabled: boolean
-	@Event() smoothlyChecked: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
 
 	componentWillLoad() {
@@ -25,11 +26,18 @@ export class SmoothlyCheckbox {
 	async toggle(): Promise<void> {
 		if (!this.disabled) {
 			const checked = this.intermediate || this.checked == false
-			this.smoothlyChecked.emit({
+			this.smoothlyInput.emit({
 				[this.name]: checked ? this.value : undefined,
 			})
 			this.checked = checked
 		}
+	}
+	@Method()
+	async clear() {
+		this.checked = false
+		this.smoothlyInput.emit({
+			[this.name]: undefined,
+		})
 	}
 
 	render() {
