@@ -113,6 +113,6 @@ smoothly-app > smoothly-notifier > main {
 		background-color: rgba(var(--smoothly-color));
 	}
 }
-.true:not(menuOpen) {
+.true {
 	display: none;
 }
