@@ -13,7 +13,7 @@ export class TableCell {
 					<div>
 						<slot></slot>
 					</div>
-					<smoothly-icon name="chevron-forward" size="tiny" />
+					<smoothly-icon name="caret-forward-outline" size="tiny" />
 				</div>
 			</Host>
 		)

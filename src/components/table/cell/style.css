@@ -7,6 +7,15 @@
 }
 :host smoothly-icon {
 	display: none;
+	width: 1em;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	margin: 0 0.3rem;
+	transition: transform 0.2s, opacity 0.1s;
+	opacity: 0.3;
+}
+:host:hover smoothly-icon {
+	opacity: 1;
 }
 smoothly-table-expandable-row > div :host:last-of-type smoothly-icon {
 	display: flex;
@@ -14,19 +23,12 @@ smoothly-table-expandable-row > div :host:last-of-type smoothly-icon {
 smoothly-table-expandable-row[open] > div :host:last-of-type smoothly-icon {
 	transform: rotate(90deg);
 }
-
 :host > div {
 	display: flex;
 	align-items: center;
 }
 :host > div > div {
 	width: 100%;
-}
-:host smoothly-icon {
-	width: 0.6rem;
-	height: 0.6rem;
-	margin: 0 0.3rem;
-	transition: transform 0.2s;
 }
 smoothly-table[align=bottom] :host {
 	vertical-align: bottom;
