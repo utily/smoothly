@@ -67,13 +67,11 @@ export class SmoothlyPicker implements Clearable {
 	clickHandler(event: MouseEvent) {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
-
 	@Listen("focusin", { target: "window" })
 	focusHandler(event: FocusEvent) {
 		if (!event.composedPath().includes(this.element))
 			this.open = false
 	}
-
 	@Method()
 	async clear() {
 		this.selected.forEach(option => option.selected && option.element.clickHandler())
