@@ -54,6 +54,7 @@ export class SmoothlyApp {
 	@Listen("smoothlyRoomSelected")
 	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
 		this.selected = { element: event.target }
+		this.menuOpen = false
 	}
 	@Listen("smoothlyRoomLoaded")
 	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
@@ -74,7 +75,7 @@ export class SmoothlyApp {
 							<slot name="nav-end"></slot>
 						</ul>
 					</nav>
-					<smoothly-burger onNavStatus={e => this.burgerStatusHandler(e)} />
+					<smoothly-burger open={this.menuOpen} onNavStatus={e => this.burgerStatusHandler(e)} />
 				</header>
 				<main ref={e => (this.mainElement = e)}></main>
 			</smoothly-notifier>
