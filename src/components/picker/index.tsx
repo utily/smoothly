@@ -35,10 +35,6 @@ export class SmoothlyPicker implements Clearable {
 		})
 	}
 
-	componentWillLoad() {
-		window.addEventListener("click", this.clickHandler)
-		window.addEventListener("focusin", this.focusHandler)
-	}
 	componentDidLoad() {
 		if (this.controls)
 			this.smoothlyPickerLoaded.emit(this.controls)
@@ -67,10 +63,13 @@ export class SmoothlyPicker implements Clearable {
 			else
 				this.selected = !event.detail.selected ? new Map() : new Map().set(event.detail.value, event.detail)
 	}
-	clickHandler = (event: MouseEvent) => {
+	@Listen("click", { target: "window" })
+	clickHandler(event: MouseEvent) {
 		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
-	focusHandler = (event: FocusEvent) => {
+
+	@Listen("focusin", { target: "window" })
+	focusHandler(event: FocusEvent) {
 		if (!event.composedPath().includes(this.element))
 			this.open = false
 	}

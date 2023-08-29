@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -6,6 +6,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } f
 	scoped: true,
 })
 export class SmoothlyBurger {
+	@Element() element: HTMLSmoothlyBurgerElement
 	@Prop({ mutable: true, reflect: true }) visible: boolean
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
@@ -24,6 +25,11 @@ export class SmoothlyBurger {
 	@Watch("open")
 	openChanged() {
 		this.navStatus.emit(this.open)
+	}
+
+	@Listen("click", { target: "window" })
+	clickHandler(event: MouseEvent) {
+		this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
 
 	@Listen("resize", { target: "window" })
@@ -45,7 +51,7 @@ export class SmoothlyBurger {
 	render() {
 		return (
 			<Host>
-				<span class="burger" onClick={() => (this.open = !this.open)}>
+				<span class="burger">
 					<smoothly-icon name="menu" />
 				</span>
 			</Host>
