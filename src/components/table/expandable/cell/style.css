@@ -14,13 +14,18 @@
 	box-shadow: 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;
 }
 :host smoothly-icon {
-	width: 0.6rem;
+	width: 1em;
 	float: left;
 	padding: 0 0.3rem;
-	transition: transform 0.2s;
+	transition: transform 0.2s, opacity 0.1s;
 	display: flex;
-	height: 100%;
+	height: auto;
+	aspect-ratio: 1 / 1;
 	align-self: center;
+	opacity: 0.3;
+}
+:host:hover smoothly-icon {
+	opacity: 1;
 }
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
