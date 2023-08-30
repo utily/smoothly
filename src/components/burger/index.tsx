@@ -12,6 +12,7 @@ export class SmoothlyBurger {
 	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
 	@State() history: boolean
 	@Event() navStatus: EventEmitter<boolean>
+	@Event() visibleStatus: EventEmitter<boolean>
 
 	componentWillLoad() {
 		this.history = window.matchMedia(this.mediaQuery).matches
@@ -20,6 +21,7 @@ export class SmoothlyBurger {
 		else
 			this.visible = true
 		this.navStatus.emit(!this.visible)
+		this.visibleStatus.emit(this.visible)
 	}
 
 	@Watch("open")
@@ -29,7 +31,8 @@ export class SmoothlyBurger {
 
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
-		this.open = !event.composedPath().includes(this.element) ? false : !this.open
+		if (this.visible)
+			this.open = !event.composedPath().includes(this.element) ? false : !this.open
 	}
 
 	@Listen("resize", { target: "window" })
@@ -43,6 +46,7 @@ export class SmoothlyBurger {
 				this.visible = false
 				this.open = false
 			}
+			this.visibleStatus.emit(this.visible)
 			this.navStatus.emit(!this.visible)
 		}
 		this.history = result
