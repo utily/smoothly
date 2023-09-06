@@ -1,11 +1,11 @@
 import { Component, h, Host, Prop, State } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-backtotop",
+	tag: "smoothly-back-to-top",
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class SmoothlyBacktotop {
+export class SmoothlyBackToTop {
 	@Prop() opacity = "0.5"
 	@Prop() bottom = "1rem"
 	@Prop() right = "1rem"
@@ -32,7 +32,7 @@ export class SmoothlyBacktotop {
 						behavior: "smooth",
 					})
 				}>
-				<smoothly-icon name="chevron-up-outline"></smoothly-icon>
+				<smoothly-icon name="caret-up-outline"></smoothly-icon>
 			</Host>
 		)
 	}

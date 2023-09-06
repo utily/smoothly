@@ -57,7 +57,7 @@ export namespace Components {
         "selected"?: boolean;
         "to"?: string;
     }
-    interface SmoothlyBacktotop {
+    interface SmoothlyBackToTop {
         "bottom": string;
         "opacity": string;
         "right": string;
@@ -632,11 +632,11 @@ declare global {
         prototype: HTMLSmoothlyAppRoomElement;
         new (): HTMLSmoothlyAppRoomElement;
     };
-    interface HTMLSmoothlyBacktotopElement extends Components.SmoothlyBacktotop, HTMLStencilElement {
+    interface HTMLSmoothlyBackToTopElement extends Components.SmoothlyBackToTop, HTMLStencilElement {
     }
-    var HTMLSmoothlyBacktotopElement: {
-        prototype: HTMLSmoothlyBacktotopElement;
-        new (): HTMLSmoothlyBacktotopElement;
+    var HTMLSmoothlyBackToTopElement: {
+        prototype: HTMLSmoothlyBackToTopElement;
+        new (): HTMLSmoothlyBackToTopElement;
     };
     interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
     }
@@ -1058,7 +1058,7 @@ declare global {
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-app-room": HTMLSmoothlyAppRoomElement;
-        "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
+        "smoothly-back-to-top": HTMLSmoothlyBackToTopElement;
         "smoothly-burger": HTMLSmoothlyBurgerElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
@@ -1170,7 +1170,7 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "to"?: string;
     }
-    interface SmoothlyBacktotop {
+    interface SmoothlyBackToTop {
         "bottom"?: string;
         "opacity"?: string;
         "right"?: string;
@@ -1599,7 +1599,7 @@ declare namespace LocalJSX {
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-app-room": SmoothlyAppRoom;
-        "smoothly-backtotop": SmoothlyBacktotop;
+        "smoothly-back-to-top": SmoothlyBackToTop;
         "smoothly-burger": SmoothlyBurger;
         "smoothly-button": SmoothlyButton;
         "smoothly-button-demo": SmoothlyButtonDemo;
@@ -1682,7 +1682,7 @@ declare module "@stencil/core" {
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
-            "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
+            "smoothly-back-to-top": LocalJSX.SmoothlyBackToTop & JSXBase.HTMLAttributes<HTMLSmoothlyBackToTopElement>;
             "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;

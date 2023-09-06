@@ -143,7 +143,7 @@ export class SmoothlyButtonDemo {
 					</smoothly-button>
 				</div>
 			</section>,
-			<smoothly-backtotop></smoothly-backtotop>,
+			<smoothly-back-to-top />,
 		]
 	}
 }
