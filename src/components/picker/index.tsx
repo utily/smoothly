@@ -84,7 +84,7 @@ export class SmoothlyPicker implements Clearable {
 					<slot name={"label"} />
 				</span>
 				<button type="button">
-					<smoothly-icon size="tiny" name={this.open ? "chevron-down-outline" : "chevron-forward-outline"} />
+					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
 					onClick={e => e.stopPropagation()}

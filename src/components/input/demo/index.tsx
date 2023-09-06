@@ -284,7 +284,7 @@ export class SmoothlyInputDemo {
 			<h4>Smoothly Picker</h4>,
 			<smoothly-picker-demo />,
 
-			<smoothly-backtotop></smoothly-backtotop>,
+			<smoothly-back-to-top />,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,
 			<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
