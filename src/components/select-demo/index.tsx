@@ -1,5 +1,5 @@
 import { Component, h, Listen } from "@stencil/core"
-import { Currency } from "isoly"
+import { Currency, Date } from "isoly"
 import { Notice } from "../../model"
 
 @Component({
@@ -57,15 +57,14 @@ export class SmoothlySelectDemo {
 				Date
 			</smoothly-input-date>,
 			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"></smoothly-input-date-range>,
+				clearable
+				min={Date.previous(Date.now(), 40)}
+				max={Date.next(Date.now(), 40)}></smoothly-input-date-range>,
 			<smoothly-input-date-range
-				start="2022-10-28"
-				end="2022-11-27"
-				min="2021-10-10"
-				max="2022-12-30"
+				start={Date.previous(Date.now(), 1)}
+				end={Date.next(Date.now(), 1)}
+				min={Date.previous(Date.now(), 30)}
+				max={Date.next(Date.now(), 30)}
 				showLabel={false}
 				style={{
 					"--background": "rgb(var(--smoothly-dark-shade))",

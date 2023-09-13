@@ -33,6 +33,14 @@
 	background-color: var(--background, transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
+	align-items: center;
+}
+:host > section > div {
+	display: flex;
+	align-items: center;
+}
+smoothly-icon {
+	padding-right: 0.5rem;
 }
 smoothly-input {
 	border-radius: var(--border-radius, none);

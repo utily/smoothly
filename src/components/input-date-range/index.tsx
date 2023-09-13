@@ -17,6 +17,7 @@ export class InputDateRange {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
+	@Prop() clearable = false
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
 
@@ -39,24 +40,37 @@ export class InputDateRange {
 		event.stopPropagation()
 		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
 	}
+
 	render() {
 		return [
-			<section onClick={() => (this.open = !this.disabled && !this.open)}>
-				<smoothly-input
-					type="date"
-					value={this.start}
-					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.start = e.detail.value)}>
-					{`${this.labelStart}`}
-				</smoothly-input>
-				<span>–</span>
-				<smoothly-input
-					type="date"
-					showLabel={this.showLabel}
-					value={this.end}
-					onSmoothlyInput={e => (this.end = e.detail.value)}>
-					{`${this.labelEnd}`}
-				</smoothly-input>
+			<section>
+				<div onClick={() => (this.open = !this.disabled && !this.open)}>
+					<smoothly-input
+						type="date"
+						value={this.start}
+						showLabel={this.showLabel}
+						onSmoothlyInput={e => (this.start = e.detail.value)}>
+						{`${this.labelStart}`}
+					</smoothly-input>
+					<span>–</span>
+					<smoothly-input
+						type="date"
+						showLabel={this.showLabel}
+						value={this.end}
+						onSmoothlyInput={e => (this.end = e.detail.value)}>
+						{`${this.labelEnd}`}
+					</smoothly-input>
+				</div>
+				{this.clearable && (
+					<smoothly-icon
+						name="close-circle"
+						size="tiny"
+						onClick={() => {
+							this.start = undefined
+							this.end = undefined
+							this.value = undefined
+						}}></smoothly-icon>
+				)}
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
 			this.open ? (

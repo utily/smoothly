@@ -136,6 +136,7 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "clearable": boolean;
         "disabled": boolean;
         "end"?: Date;
         "labelEnd": string;
@@ -1004,6 +1005,7 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "clearable"?: boolean;
         "disabled"?: boolean;
         "end"?: Date;
         "labelEnd"?: string;
