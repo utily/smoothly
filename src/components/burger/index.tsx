@@ -29,10 +29,10 @@ export class SmoothlyBurger {
 		this.navStatus.emit(this.open)
 	}
 
-	@Listen("click", { target: "window" })
+	@Listen("click", { target: "window" }) //remove?
 	clickHandler(event: MouseEvent) {
 		if (this.visible)
-			this.open = !event.composedPath().includes(this.element) ? false : !this.open
+			this.open = !event.composedPath().includes(this.element) ? false : !this.open //this toggles when clicking outside of component
 	}
 
 	@Listen("resize", { target: "window" })
