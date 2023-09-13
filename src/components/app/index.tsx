@@ -97,7 +97,7 @@ export class SmoothlyApp {
 					<smoothly-burger
 						ref={e => (this.burgerElement = e)}
 						open={this.menuOpen}
-						onNavStatus={e => this.burgerStatusHandler(e)} //this toggles "inside" the component
+						onNavStatus={e => this.burgerStatusHandler(e)}
 						onVisibleStatus={e => this.burgerVisibilityHandler(e)}
 					/>
 				</header>
