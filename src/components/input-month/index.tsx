@@ -22,7 +22,7 @@ export class MonthSelector {
 	render() {
 		return [
 			<div onClick={() => this.adjustMonth(-1)}>
-				<smoothly-icon name="chevron-back-outline" size="small"></smoothly-icon>
+				<smoothly-icon name="chevron-back-outline" size="tiny"></smoothly-icon>
 			</div>,
 			<smoothly-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.years(this.value ?? Date.now()).map(year => (
@@ -39,7 +39,7 @@ export class MonthSelector {
 				))}
 			</smoothly-selector>,
 			<div onClick={() => this.adjustMonth(1)}>
-				<smoothly-icon name="chevron-forward-outline" size="small"></smoothly-icon>
+				<smoothly-icon name="chevron-forward-outline" size="tiny"></smoothly-icon>
 			</div>,
 		]
 	}

@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: large;
+	align-items: center;
 }
 smoothly-icon {
 	font-size: smaller;
