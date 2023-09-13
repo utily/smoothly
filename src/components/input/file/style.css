@@ -1,3 +1,5 @@
+@import "../looks.css";
+
 :host {
 	display: flex;
 	align-items: center;

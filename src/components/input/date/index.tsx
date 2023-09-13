@@ -1,13 +1,17 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
 import { Clearable } from "../Clearable"
+import { Input } from "../Input"
+import { Looks } from "../Looks"
 
 @Component({
 	tag: "smoothly-input-date",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class InputDate implements Clearable {
+export class InputDate implements Clearable, Input {
+	@Element() element: HTMLElement
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
@@ -15,6 +19,12 @@ export class InputDate implements Clearable {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
+	@Event() smoothlyInput: EventEmitter<Record<number, any>>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+
+	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
 
 	@Method()
 	async clear(): Promise<void> {
@@ -23,11 +33,17 @@ export class InputDate implements Clearable {
 	@Watch("value")
 	onStart(next: Date) {
 		this.valueChanged.emit(next)
+		this.smoothlyInput.emit(next)
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+		if (event.target != this.element)
+			event.stopPropagation()
 	}
 	@Listen("dateSet")
-	dateSetHandler(e: CustomEvent<Date>) {
+	dateSetHandler(event: CustomEvent<Date>) {
 		this.open = false
-		e.stopPropagation()
+		event.stopPropagation()
 	}
 	render() {
 		return [
@@ -38,6 +54,7 @@ export class InputDate implements Clearable {
 				disabled={this.disabled}
 				type="date"
 				value={this.value}
+				looks="plain"
 				onSmoothlyInput={e => (this.value = e.detail[this.name])}>
 				<slot></slot>
 			</smoothly-input>,

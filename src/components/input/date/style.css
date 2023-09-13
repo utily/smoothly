@@ -1,3 +1,5 @@
+@import "../looks.css";
+
 :host {
 	position: relative;
 	max-width: 100vw;

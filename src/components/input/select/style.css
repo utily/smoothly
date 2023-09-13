@@ -1,4 +1,7 @@
+@import "../looks.css";
+
 :host {
+	display: flex;
 	position: relative;
 	height: 100%;
 }

@@ -1,6 +1,8 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
+import { Input } from "../../Input"
+import { Looks } from "../../Looks"
 import { Data } from "./../../../../model"
 
 @Component({
@@ -8,7 +10,9 @@ import { Data } from "./../../../../model"
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class InputDateRange implements Clearable {
+export class InputDateRange implements Clearable, Input {
+	@Element() element: HTMLElement
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) start?: isoly.Date
@@ -21,6 +25,7 @@ export class InputDateRange implements Clearable {
 	@Prop() labelEnd = "to"
 	@Event() valueChanged: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
 
 	@Method()
 	async clear(): Promise<void> {
@@ -29,12 +34,18 @@ export class InputDateRange implements Clearable {
 	}
 
 	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		if (this.start && this.end)
 			this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 	}
 	@Watch("value")
 	onValue(next: isoly.Date) {
 		this.valueChanged.emit(next)
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+		if (event.target != this.element)
+			event.stopPropagation()
 	}
 	@Listen("startChanged")
 	onStartChanged(event: CustomEvent<isoly.Date>) {
@@ -57,6 +68,7 @@ export class InputDateRange implements Clearable {
 					type="date"
 					name="start"
 					value={this.start}
+					looks="plain"
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => (this.start = e.detail.start) && e.stopPropagation()}>
 					{`${this.labelStart}`}
@@ -65,8 +77,9 @@ export class InputDateRange implements Clearable {
 				<smoothly-input
 					type="date"
 					name="end"
-					showLabel={this.showLabel}
 					value={this.end}
+					looks="plain"
+					showLabel={this.showLabel}
 					onSmoothlyInput={e => (this.end = e.detail.end) && e.stopPropagation()}>
 					{`${this.labelEnd}`}
 				</smoothly-input>

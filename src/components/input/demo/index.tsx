@@ -304,6 +304,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 
 			<smoothly-input-date-range
+				looks="grid"
 				start={isoly.Date.now()}
 				end={isoly.Date.nextMonth(isoly.Date.now())}
 				min="2021-10-10"
@@ -317,6 +318,7 @@ export class SmoothlyInputDemo {
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
+				looks="line"
 				initialPrompt="Select..."
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
