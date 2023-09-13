@@ -17,6 +17,8 @@ export class SmoothlyApp {
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
 	private burgerVisibility: boolean
+	private burgerElement?: HTMLElement
+	private navElement?: HTMLElement
 	mainElement?: HTMLElement
 	rooms: Record<string, Room> = {}
 
@@ -66,6 +68,17 @@ export class SmoothlyApp {
 	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
 		this.rooms[event.target.path.toString()] = { element: event.target }
 	}
+
+	@Listen("click", { target: "window" })
+	clickHandler(event: MouseEvent) {
+		if (this.burgerVisibility)
+			if (event.composedPath().some(e => e == this.burgerElement || e == this.navElement)) {
+				!this.menuOpen
+			} else {
+				this.menuOpen = false
+			}
+	}
+
 	render() {
 		return (
 			<smoothly-notifier>
@@ -74,7 +87,7 @@ export class SmoothlyApp {
 						<a href={""}>{this.label}</a>
 					</h1>
 					<slot name="header"></slot>
-					<nav class={{ "menu-open": this.menuOpen }}>
+					<nav ref={e => (this.navElement = e)} class={{ "menu-open": this.menuOpen }}>
 						<ul>
 							<slot name="nav-start"></slot>
 							<slot> </slot>
@@ -82,6 +95,7 @@ export class SmoothlyApp {
 						</ul>
 					</nav>
 					<smoothly-burger
+						ref={e => (this.burgerElement = e)}
 						open={this.menuOpen}
 						onNavStatus={e => this.burgerStatusHandler(e)}
 						onVisibleStatus={e => this.burgerVisibilityHandler(e)}
