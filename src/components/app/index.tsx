@@ -72,9 +72,11 @@ export class SmoothlyApp {
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
 		if (this.burgerVisibility)
-			this.menuOpen = !event.composedPath().find(e => e == (this.navElement || this.burgerElement))
-				? false
-				: !this.menuOpen //this toggles when clicking outside of component
+			if (event.composedPath().some(e => e == this.burgerElement || e == this.navElement)) {
+				!this.menuOpen
+			} else {
+				this.menuOpen = false
+			}
 	}
 
 	render() {
