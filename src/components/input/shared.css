@@ -1,3 +1,6 @@
+:host {
+	box-sizing: border-box;
+}
 :host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
 	border: rgb(var(--smoothly-default-contrast)) solid 1px;

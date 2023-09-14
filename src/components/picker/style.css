@@ -1,4 +1,4 @@
-@import "../input/looks.css";
+@import "../input/shared.css";
 
 :host {
 	display: flex;
