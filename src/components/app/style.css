@@ -109,7 +109,8 @@ smoothly-app > smoothly-notifier > main {
 	}
 	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
 		margin-left: 3em;
-		width: 10em;
+		width: 50dvw;
+		max-width: 15rem;
 		padding: 1.5em;
 		background-color: rgba(var(--smoothly-color));
 	}
