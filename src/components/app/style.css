@@ -28,12 +28,12 @@ smoothly-app > smoothly-notifier > header {
 smoothly-app > smoothly-notifier > header > nav {
 	width: 100%;
 	flex-shrink: 2;
+	height: 100%;
 }
 
 smoothly-app > smoothly-notifier > header > nav,
 smoothly-app > smoothly-notifier > header > nav > ul {
 	display: flex;
-	height: 100%;
 	margin: 0;
 }
 smoothly-app > smoothly-notifier > header > h1 {
@@ -50,26 +50,38 @@ smoothly-app > smoothly-notifier > header > h1 > a {
 	text-decoration: none;
 	white-space: nowrap;
 }
-smoothly-app > smoothly-notifier > header > nav > ul  li a {
+smoothly-app > smoothly-notifier > header > nav > ul li a {
 	line-height: 1.6cm;
 }
-smoothly-app > smoothly-notifier > header > nav > ul  li a {
+smoothly-app > smoothly-notifier > header > nav > ul li a {
 	line-height: 1.6cm;
 }
 smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start] {
+smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	margin-left: auto;
+	margin-right: 1rem;
+}
+smoothly-app > smoothly-notifier > header > nav > ul > [slot="nav-start"] {
 	height: fit-content;
 	padding: 0.5em 0em;
 	margin-top: 1em;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
+smoothly-app > smoothly-notifier > header > nav > ul > [slot="nav-end"] {
 	width: fit-content;
 	gap: 0.5em;
 	align-self: center;
 	height: fit-content;
-	margin-left: 10em;
+	margin-left: 10rem;
 }
 smoothly-app > smoothly-notifier > header > nav > ul li a {
 	display: flex;
@@ -84,35 +96,44 @@ smoothly-app > smoothly-notifier > main {
 }
 
 @media screen and (max-width: 900px) {
-  smoothly-app > smoothly-notifier > header > nav,
-  smoothly-app > smoothly-notifier > header > nav > ul {
+	smoothly-app > smoothly-notifier > header > nav,
+	smoothly-app > smoothly-notifier > header > nav > ul {
 		width: 50dvw;
 		max-width: 15rem;
 		top: 2.5rem;
 		position: absolute;
 		right: 0;
-    flex-direction: column;
-  }
-  smoothly-app > smoothly-notifier > header > nav > ul  li {
-    margin-right: 0;
-    margin-bottom: 1em;
+		flex-direction: column;
 		background-color: rgba(var(--smoothly-color));
+	}
+	smoothly-app > smoothly-notifier > header > nav > ul {
+		padding: 1.5rem;
+		padding-top: 0;
+	}
+	smoothly-app > smoothly-notifier > header > nav > ul li {
+		margin-right: 0;
+		margin-bottom: 1em;
 		width: 100%;
-  }
+	}
+
 	smoothly-app > smoothly-notifier > header > smoothly-burger {
 		position: absolute;
 		top: 0;
 		right: 0;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-start] {
-		display:none;
+	smoothly-app > smoothly-notifier > header > nav > ul > [slot="nav-start"] {
+		display: none;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > [slot=nav-end] {
-		margin-left: 3em;
-		width: 50dvw;
-		max-width: 15rem;
-		padding: 1.5em;
-		background-color: rgba(var(--smoothly-color));
+	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container,
+	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
+		flex-direction: column;
+		margin: 0;
+		align-items: start;
+		justify-content: center;
+		gap: 1em;
+	}
+	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container > *:last-child {
+		margin-bottom: 1em;
 	}
 }
 smoothly-app > smoothly-notifier > header > nav:not(.menu-open) {
