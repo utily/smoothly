@@ -22,7 +22,6 @@ smoothly-form > form > fieldset {
 	border-image: unset;
 }
 smoothly-form > form > fieldset > * {
-	box-sizing: border-box;
 	flex-grow: 1;
 	min-width: 10em;
 	flex-basis: 40%;
