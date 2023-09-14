@@ -15,16 +15,28 @@
 	padding: 0 1.5em;
 	height: 100%;
 }
-:host[selected] > li {
+:host[selected] > li > a {
+	display: flex;
 	color: rgb(var(--smoothly-color-contrast));
 	background: rgb(var(--smoothly-color-shade));
 }
-:host:hover > li {
-	color:rgb(var(--smoothly-color-contrast)); 
+:host:hover > li > a {
+	color: rgb(var(--smoothly-color-contrast));
 	background-color: rgb(var(--smoothly-color-tint));
-	transition: 0.2s;	
+	transition: 0.2s;
 }
-:host > li > a > smoothly-icon{
-	align-self:inherit;
+:host > li > a > smoothly-icon {
+	align-self: inherit;
 	margin-bottom: 1em;
+}
+@media screen and (max-width: 900px) {
+	:host > li > a {
+		padding: 0;
+	}
+	:host > li > a {
+		margin-left: -1.5rem;
+		margin-right: -1.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
 }
