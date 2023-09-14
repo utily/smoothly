@@ -356,13 +356,13 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
-			<smoothly-form looks="line">
-				<smoothly-input>Input</smoothly-input>
+			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
+				<smoothly-input name="text">Input</smoothly-input>
 				<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
 					<span slot="label">Testing camera photo</span>
 					<smoothly-icon slot="button" name="camera-outline" />
 				</smoothly-input-file>
-				<smoothly-picker name="shape">
+				<smoothly-picker name="picker">
 					<span slot="label">Shape</span>
 					<span slot="search">Search</span>
 					<smoothly-picker-option value={"circle"}>
@@ -379,6 +379,7 @@ export class SmoothlyInputDemo {
 					</smoothly-picker-option>
 				</smoothly-picker>
 				<smoothly-input-select
+					name="select"
 					initialPrompt="Select..."
 					ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 					<smoothly-item value="1">January</smoothly-item>
@@ -395,6 +396,7 @@ export class SmoothlyInputDemo {
 					<smoothly-item value="12">December</smoothly-item>
 				</smoothly-input-select>
 				<smoothly-input-date-range
+					name="date-range"
 					start={isoly.Date.now()}
 					end={isoly.Date.nextMonth(isoly.Date.now())}
 					min="2021-10-10"
@@ -406,9 +408,12 @@ export class SmoothlyInputDemo {
 						"--input-width": "12ch",
 					}}
 				/>
-				<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
+				<smoothly-input-date name="date" value="2021-10-28" max="2021-12-30" min="2021-10-10">
 					Date
 				</smoothly-input-date>
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
+					<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
+				</smoothly-submit>
 			</smoothly-form>,
 		]
 	}

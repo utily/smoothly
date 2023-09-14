@@ -42,6 +42,11 @@ export class InputDateRange implements Clearable, Input {
 	onValue(next: isoly.Date) {
 		this.valueChanged.emit(next)
 	}
+	@Listen("smoothlyInput")
+	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
+		if (event.target != this.element)
+			event.stopPropagation()
+	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
 		if (event.target != this.element)
@@ -70,7 +75,7 @@ export class InputDateRange implements Clearable, Input {
 					value={this.start}
 					looks="plain"
 					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.start = e.detail.start) && e.stopPropagation()}>
+					onSmoothlyInput={e => (this.start = e.detail.start)}>
 					{`${this.labelStart}`}
 				</smoothly-input>
 				<span>–</span>
@@ -80,7 +85,7 @@ export class InputDateRange implements Clearable, Input {
 					value={this.end}
 					looks="plain"
 					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.end = e.detail.end) && e.stopPropagation()}>
+					onSmoothlyInput={e => (this.end = e.detail.end)}>
 					{`${this.labelEnd}`}
 				</smoothly-input>
 			</section>,

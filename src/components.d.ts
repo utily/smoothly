@@ -1355,7 +1355,7 @@ declare namespace LocalJSX {
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<number, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;

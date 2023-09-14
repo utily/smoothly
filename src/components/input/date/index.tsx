@@ -19,7 +19,7 @@ export class InputDate implements Clearable, Input {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
-	@Event() smoothlyInput: EventEmitter<Record<number, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
 
 	componentWillLoad() {
@@ -33,7 +33,12 @@ export class InputDate implements Clearable, Input {
 	@Watch("value")
 	onStart(next: Date) {
 		this.valueChanged.emit(next)
-		this.smoothlyInput.emit(next)
+		this.smoothlyInput.emit({ [this.name]: next })
+	}
+	@Listen("smoothlyInput")
+	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
+		if (event.target != this.element)
+			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
