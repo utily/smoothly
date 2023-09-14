@@ -56,7 +56,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input type="password" name="password">
 					Password
 				</smoothly-input>
-				<smoothly-submit onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
+				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
