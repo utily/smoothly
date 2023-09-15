@@ -1,6 +1,8 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../model"
 import { Clearable } from "../input/Clearable"
+import { Input } from "../input/Input"
+import { Looks } from "../input/Looks"
 import { Controls } from "./menu"
 
 @Component({
@@ -8,10 +10,11 @@ import { Controls } from "./menu"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPicker implements Clearable {
+export class SmoothlyPicker implements Clearable, Input {
 	@Element() element: HTMLSmoothlyPickerElement
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
-	@Prop({ mutable: true, reflect: true }) open = false
+	@Prop({ reflect: true, mutable: true }) open = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) readonly = false
@@ -21,7 +24,12 @@ export class SmoothlyPicker implements Clearable {
 	@Event() smoothlyPickerLoaded: EventEmitter<Controls>
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
 	private controls?: Controls
+
+	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
 
 	@Watch("selected")
 	selectedChanged() {
@@ -38,6 +46,11 @@ export class SmoothlyPicker implements Clearable {
 	componentDidLoad() {
 		if (this.controls)
 			this.smoothlyPickerLoaded.emit(this.controls)
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+		if (event.target != this.element)
+			event.stopPropagation()
 	}
 	@Listen("smoothlyPickerMenuLoaded")
 	menuLoadedHandler(event: CustomEvent<Controls>) {
@@ -87,6 +100,7 @@ export class SmoothlyPicker implements Clearable {
 					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
+					looks={this.looks}
 					onClick={e => e.stopPropagation()}
 					multiple={this.multiple}
 					mutable={this.mutable}

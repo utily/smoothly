@@ -56,7 +56,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input type="password" name="password">
 					Password
 				</smoothly-input>
-				<smoothly-submit onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
+				<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
 					Send
 				</smoothly-submit>
 			</smoothly-form>,
@@ -304,6 +304,7 @@ export class SmoothlyInputDemo {
 			</smoothly-form>,
 
 			<smoothly-input-date-range
+				looks="grid"
 				start={isoly.Date.now()}
 				end={isoly.Date.nextMonth(isoly.Date.now())}
 				min="2021-10-10"
@@ -312,11 +313,12 @@ export class SmoothlyInputDemo {
 				style={{
 					"--border-radius": "4px",
 					"--padding": "0 0.75em",
-					"--input-width": "6rem",
+					"--input-width": "12ch",
 				}}></smoothly-input-date-range>,
 			<br />,
 			<h4>Smoothly Selector</h4>,
 			<smoothly-input-select
+				looks="line"
 				initialPrompt="Select..."
 				ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 				<smoothly-item value="1">January</smoothly-item>
@@ -333,15 +335,17 @@ export class SmoothlyInputDemo {
 				<smoothly-item value="12">December</smoothly-item>
 			</smoothly-input-select>,
 			<button onClick={async () => this.selectElement.reset()}>Reset select</button>,
-
-			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
+			<br />,
+			<smoothly-form looks="grid" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 				<smoothly-input type="text" name="text">
 					Text
 				</smoothly-input>
-				<smoothly-input-file placeholder="Select or drag a file here" name="file">
-					<span slot="label">Testing file input</span>
-					<smoothly-icon slot="button" name="folder-outline" />
-				</smoothly-input-file>
+				<div>
+					<smoothly-input-file placeholder="Select or drag a file here" name="file">
+						<span slot="label">Testing file input</span>
+						<smoothly-icon slot="button" name="folder-outline" />
+					</smoothly-input-file>
+				</div>
 				<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
 					<span slot="label">Testing camera photo</span>
 					<smoothly-icon slot="button" name="camera-outline" />
@@ -352,6 +356,65 @@ export class SmoothlyInputDemo {
 				<smoothly-submit slot="submit">Submit</smoothly-submit>
 			</smoothly-form>,
 			<br />,
+			<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
+				<smoothly-input name="text">Input</smoothly-input>
+				<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
+					<span slot="label">Testing camera photo</span>
+					<smoothly-icon slot="button" name="camera-outline" />
+				</smoothly-input-file>
+				<smoothly-picker name="picker">
+					<span slot="label">Shape</span>
+					<span slot="search">Search</span>
+					<smoothly-picker-option value={"circle"}>
+						<span slot="label">Circle</span>
+						<smoothly-icon size="tiny" name="ellipse-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"cube"}>
+						<span slot={"label"}>Cube</span>
+						<smoothly-icon size="tiny" name="cube-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"square"} selected>
+						<span slot={"label"}>Square</span>
+						<smoothly-icon size="tiny" name="square-outline" />
+					</smoothly-picker-option>
+				</smoothly-picker>
+				<smoothly-input-select
+					name="select"
+					initialPrompt="Select..."
+					ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
+					<smoothly-item value="1">January</smoothly-item>
+					<smoothly-item value="2">February</smoothly-item>
+					<smoothly-item value="3">March</smoothly-item>
+					<smoothly-item value="4">April</smoothly-item>
+					<smoothly-item value="5">May</smoothly-item>
+					<smoothly-item value="6">June</smoothly-item>
+					<smoothly-item value="7">July</smoothly-item>
+					<smoothly-item value="8">August</smoothly-item>
+					<smoothly-item value="9">September</smoothly-item>
+					<smoothly-item value="10">October</smoothly-item>
+					<smoothly-item value="11">November</smoothly-item>
+					<smoothly-item value="12">December</smoothly-item>
+				</smoothly-input-select>
+				<smoothly-input-date-range
+					name="date-range"
+					start={isoly.Date.now()}
+					end={isoly.Date.nextMonth(isoly.Date.now())}
+					min="2021-10-10"
+					max="2025-12-30"
+					showLabel={false}
+					style={{
+						"--border-radius": "4px",
+						"--padding": "0 0.75em",
+						"--input-width": "12ch",
+					}}
+				/>
+				<smoothly-input-date name="date" value="2021-10-28" max="2021-12-30" min="2021-10-10">
+					Date
+				</smoothly-input-date>
+				<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
+					<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
+				</smoothly-submit>
+			</smoothly-form>,
 		]
 	}
 }

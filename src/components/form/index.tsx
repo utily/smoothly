@@ -4,6 +4,7 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Looks } from "../input/Looks"
 import { Submitable } from "../input/Submitable"
 
 @Component({
@@ -33,6 +34,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submitable {
 	watchValue() {
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
 		this.listeners.changed?.forEach(l => l(this))
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+		event.stopPropagation()
+		event.detail(this.looks)
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {

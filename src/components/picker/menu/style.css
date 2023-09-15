@@ -9,6 +9,7 @@
 	right: -1px;
 	background-color: rgb(var(--background-color));
 	padding: 0.5rem;
+	border: rgb(var(--smoothly-default-contrast)) solid 1px;
 }
 .list {
 	display: grid;

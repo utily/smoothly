@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Notice, Option } from "../../../model"
+import { Looks } from "../../input/Looks"
 import { Slot } from "../slot-elements"
 
 function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
@@ -30,6 +31,7 @@ export interface Controls {
 })
 export class SmoothlyPickerMenu {
 	@Element() element: HTMLSmoothlyPickerMenuElement
+	@Prop() looks: Looks
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) readonly = false
@@ -80,7 +82,6 @@ export class SmoothlyPickerMenu {
 		for (const option of chain(this.options.values(), this.backend.values()))
 			option.element, option.set.readonly(this.readonly)
 	}
-
 	@Listen("smoothlyPickerOptionLoad")
 	optionLoadHandler(event: CustomEvent<Option.Load>) {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
@@ -189,6 +190,7 @@ export class SmoothlyPickerMenu {
 						ref={e => (this.searchElement = e)}
 						name="search"
 						value={this.search}
+						looks={this.looks}
 						onKeyDown={e => this.keyDownHandler(e)}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => e.stopPropagation()}

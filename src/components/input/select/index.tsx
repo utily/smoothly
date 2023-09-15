@@ -1,11 +1,15 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Input } from "../Input"
+import { Looks } from "../Looks"
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputSelect {
+export class SmoothlyInputSelect implements Input {
 	@Element() element: HTMLSmoothlyInputSelectElement
+	@Prop() name: string
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() initialPrompt?: string
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
@@ -14,7 +18,13 @@ export class SmoothlyInputSelect {
 	mainElement?: HTMLElement
 	@State() filter = ""
 	@Event() selected: EventEmitter<any>
+	@Event() smoothlyInput: EventEmitter<Record<number, any>>
 	aside?: HTMLElement
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+
+	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
 
 	@Method()
 	async reset() {
@@ -30,6 +40,7 @@ export class SmoothlyInputSelect {
 		if (old)
 			old.selected = false
 		this.selected.emit(value?.value)
+		this.smoothlyInput.emit({ [this.name]: value?.value })
 	}
 	@Watch("filter")
 	async onFilterChange(value: string) {

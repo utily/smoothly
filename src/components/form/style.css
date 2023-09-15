@@ -21,28 +21,12 @@ smoothly-form > form > fieldset {
 	border-color: unset;
 	border-image: unset;
 }
-
 smoothly-form > form > fieldset > * {
 	flex-grow: 1;
 	min-width: 10em;
 	flex-basis: 40%;
 }
-smoothly-form > form > fieldset smoothly-picker smoothly-picker-menu,
-smoothly-form[looks="border"] > form > fieldset smoothly-picker smoothly-input,
-smoothly-form[looks="grid"] > form > fieldset smoothly-picker smoothly-input,
-smoothly-form[looks="border"] > form > fieldset > *,
-smoothly-form[looks="grid"] > form > fieldset > * {
-	border: rgb(var(--smoothly-default-contrast)) solid 1px;
-}
-smoothly-form[looks="line"] > form > fieldset smoothly-picker smoothly-input,
-smoothly-form[looks="line"] > form > fieldset > * {
-	border-bottom: rgb(var(--smoothly-default-contrast)) solid 1px;
-}
 smoothly-form[looks="grid"] > form > fieldset {
-	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
-}
-smoothly-form[looks="grid"] > form > fieldset smoothly-picker smoothly-input,
-smoothly-form[looks="grid"] > form > fieldset > * {
 	border: rgba(var(--smoothly-default-contrast), .5) solid .5px;
 }
 smoothly-form[looks="line"] > form > fieldset,

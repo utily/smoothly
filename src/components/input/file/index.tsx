@@ -1,23 +1,31 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
 import { Clearable } from "../Clearable"
+import { Input } from "../Input"
+import { Looks } from "../Looks"
 
 @Component({
 	tag: "smoothly-input-file",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputFile implements Clearable {
+export class SmoothlyInputFile implements Clearable, Input {
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	@State() dragging = false
 	@Prop() accept?: string
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) camera: "front" | "back"
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, File>>
 	@Event() smoothlyChange: EventEmitter<Record<string, File>>
+
+	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
 
 	@Method()
 	async clear(): Promise<void> {

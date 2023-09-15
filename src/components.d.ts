@@ -15,6 +15,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
+import { Looks } from "./components/input/Looks";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
@@ -194,6 +195,7 @@ export namespace Components {
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
+        "looks": Looks;
         "maxLength": number;
         "minLength": number;
         "name": string;
@@ -220,6 +222,7 @@ export namespace Components {
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
         "disabled": boolean;
+        "looks": Looks;
         "max": Date;
         "min": Date;
         "name": string;
@@ -231,6 +234,7 @@ export namespace Components {
         "end"?: isoly.Date;
         "labelEnd": string;
         "labelStart": string;
+        "looks": Looks;
         "max": isoly.Date;
         "min": isoly.Date;
         "name": string;
@@ -245,6 +249,7 @@ export namespace Components {
         "accept"?: string;
         "camera": "front" | "back";
         "clear": () => Promise<void>;
+        "looks": Looks;
         "name": string;
         "placeholder": string | undefined;
         "showLabel": boolean;
@@ -255,6 +260,8 @@ export namespace Components {
     }
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
+        "looks": Looks;
+        "name": string;
         "reset": () => Promise<void>;
     }
     interface SmoothlyItem {
@@ -272,6 +279,7 @@ export namespace Components {
     }
     interface SmoothlyPicker {
         "clear": () => Promise<void>;
+        "looks": Looks;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
@@ -282,6 +290,7 @@ export namespace Components {
     interface SmoothlyPickerDemo {
     }
     interface SmoothlyPickerMenu {
+        "looks": Looks;
         "multiple": boolean;
         "mutable": boolean;
         "readonly": boolean;
@@ -1313,12 +1322,14 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
+        "looks"?: Looks;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks) => void>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -1340,9 +1351,12 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDate {
         "disabled"?: boolean;
+        "looks"?: Looks;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
@@ -1351,10 +1365,12 @@ declare namespace LocalJSX {
         "end"?: isoly.Date;
         "labelEnd"?: string;
         "labelStart"?: string;
+        "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
@@ -1366,9 +1382,11 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "accept"?: string;
         "camera"?: "front" | "back";
+        "looks"?: Looks;
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks: Looks) => void>) => void;
         "placeholder"?: string | undefined;
         "showLabel"?: boolean;
         "value"?: File;
@@ -1379,7 +1397,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputSelect {
         "initialPrompt"?: string;
+        "looks"?: Looks;
+        "name"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<number, any>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks) => void>) => void;
     }
     interface SmoothlyItem {
         "marked"?: boolean;
@@ -1396,11 +1418,13 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
+        "looks"?: Looks;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyPickerCustomEvent<(looks: Looks) => void>) => void;
         "onSmoothlyPickerLoaded"?: (event: SmoothlyPickerCustomEvent<Controls>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
@@ -1409,6 +1433,7 @@ declare namespace LocalJSX {
     interface SmoothlyPickerDemo {
     }
     interface SmoothlyPickerMenu {
+        "looks"?: Looks;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
