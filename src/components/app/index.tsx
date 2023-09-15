@@ -89,9 +89,13 @@ export class SmoothlyApp {
 					<slot name="header"></slot>
 					<nav ref={e => (this.navElement = e)} class={{ "menu-open": this.menuOpen }}>
 						<ul>
-							<slot name="nav-start"></slot>
+							<div class={"nav-start-container"}>
+								<slot name="nav-start"></slot>
+							</div>
 							<slot> </slot>
-							<slot name="nav-end"></slot>
+							<div class={"nav-end-container"}>
+								<slot name="nav-end"></slot>
+							</div>
 						</ul>
 					</nav>
 					<smoothly-burger
