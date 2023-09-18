@@ -17,6 +17,7 @@ export class InputDate implements Clearable, Input {
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
+	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -60,6 +61,7 @@ export class InputDate implements Clearable, Input {
 				type="date"
 				value={this.value}
 				looks="plain"
+				showLabel={this.showLabel}
 				onSmoothlyInput={e => (this.value = e.detail[this.name])}>
 				<slot></slot>
 			</smoothly-input>,

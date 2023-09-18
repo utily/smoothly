@@ -287,7 +287,7 @@ export class SmoothlyInputDemo {
 			<smoothly-back-to-top />,
 			<h4>Smoothly Date</h4>,
 			<smoothly-input-date>Date</smoothly-input-date>,
-			<smoothly-input-date value="2021-10-28" max="2021-12-30" min="2021-10-10">
+			<smoothly-input-date showLabel={false} value="2021-10-28" max="2021-12-30" min="2021-10-10">
 				Date
 			</smoothly-input-date>,
 			<smoothly-form looks="grid" onSmoothlyFormSubmit={e => console.log(e.detail)}>
