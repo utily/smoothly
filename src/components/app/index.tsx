@@ -32,11 +32,13 @@ export class SmoothlyApp {
 			const path = value.element.path.toString()
 			this.rooms[path] = value
 
-			history.pushState({ smoothlyPath: path }, value.element.label ?? "", path)
-
-			if (this.mainElement) {
+			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
+			location.pathname = path
+			history.pushState({ smoothlyPath: path }, "", location.href)
+			const content = await value.element.getContent()
+			if (this.mainElement && content) {
 				this.mainElement.innerHTML = ""
-				this.mainElement.appendChild(await value.element.getContent())
+				this.mainElement.appendChild(content)
 			}
 		}
 	}
@@ -53,9 +55,10 @@ export class SmoothlyApp {
 		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.element.path) {
 			this.selected = this.rooms[event.state.smoothlyPath]
 		}
-		if (this.mainElement) {
+		const content = await this.rooms[event.state.smoothlyPath].element.getContent()
+		if (this.mainElement && content) {
 			this.mainElement.innerHTML = ""
-			this.mainElement.appendChild(await this.rooms[event.state.smoothlyPath].element.getContent())
+			this.mainElement.appendChild(content)
 		}
 	}
 	@Listen("smoothlyRoomSelected")
