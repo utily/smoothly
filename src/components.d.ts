@@ -51,7 +51,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
-        "getContent": () => Promise<HTMLElement>;
+        "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
         "label"?: string;
         "path": string | URLPattern;
@@ -227,6 +227,7 @@ export namespace Components {
         "min": Date;
         "name": string;
         "open": boolean;
+        "showLabel": boolean;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
@@ -1359,6 +1360,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
+        "showLabel"?: boolean;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {

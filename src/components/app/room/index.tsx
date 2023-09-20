@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop } from "@stencil/core"
 import "urlpattern-polyfill"
 import { Icon } from "../../icon/Icon"
 
@@ -15,7 +15,7 @@ export class SmoothlyAppRoom {
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Event() smoothlyRoomSelected: EventEmitter
 	@Event() smoothlyRoomLoaded: EventEmitter
-	contentElement: HTMLElement
+	private contentElement?: HTMLElement
 
 	componentWillLoad() {
 		if ((typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(window.location))
@@ -25,27 +25,29 @@ export class SmoothlyAppRoom {
 	}
 
 	@Method()
-	async getContent() {
+	async getContent(): Promise<HTMLElement | undefined> {
 		return this.contentElement
 	}
 
 	render() {
-		return [
-			<li>
-				<a
-					href={typeof this.path == "string" ? this.path : this.path.pathname}
-					onClick={(event: PointerEvent) => {
-						if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
-							event.preventDefault()
-							this.smoothlyRoomSelected.emit()
-						}
-					}}>
-					{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
-				</a>
-			</li>,
-			<main ref={(e: HTMLElement) => (this.contentElement = e)}>
-				<slot></slot>
-			</main>,
-		]
+		return (
+			<Host>
+				<li>
+					<a
+						href={typeof this.path == "string" ? this.path : this.path.pathname}
+						onClick={(event: PointerEvent) => {
+							if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
+								event.preventDefault()
+								this.smoothlyRoomSelected.emit()
+							}
+						}}>
+						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
+					</a>
+				</li>
+				<main ref={e => (this.contentElement = e)}>
+					<slot></slot>
+				</main>
+			</Host>
+		)
 	}
 }
