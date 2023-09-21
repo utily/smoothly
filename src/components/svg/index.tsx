@@ -33,7 +33,7 @@ export class SmoothlySvg {
 					"min-width": width,
 					"--size-height": height,
 					"--size-width": width,
-					"--color": this.color,
+					"--text-color": this.color,
 				}}>
 				<object height={height} width={width} type="image/svg+xml" data={this.url} />
 			</Host>

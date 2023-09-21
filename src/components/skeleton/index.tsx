@@ -19,7 +19,7 @@ export class SmoothlySkeleton {
 		const cssVariables = {
 			"--width": this.width,
 			"--distance": this.distance ?? "10rem",
-			...(this.color ? { "--color": this.color } : undefined),
+			...(this.color ? { "--text-color": this.color } : undefined),
 			...(this.period ? { "--period": this.period + "s" } : undefined),
 		}
 		return <Host style={cssVariables}></Host>
