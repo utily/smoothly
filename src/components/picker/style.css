@@ -5,6 +5,7 @@
 	position: relative;
 	width: max-content;
 	padding: 1.2em 0.7em 0.2em 0.8em;
+	background-color: rgb(var(--background-color));
 }
 :host:not([open]) smoothly-picker-menu {
 	display: none;
