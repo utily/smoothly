@@ -1,7 +1,9 @@
+@import "../color/style.css"; 
+
 smoothly-form {
 	display: block;
-	--background-color: var(--smoothly-default-color);
-	--text-color: var(--smoothly-default-contrast)
+	--background-color: var(--smoothly-color-shade);
+	--text-color: var(--smoothly-color-contrast)
 }
 smoothly-form > form {
 	position: relative;

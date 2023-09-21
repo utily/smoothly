@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
+import { Color } from "../../model"
 import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
@@ -13,6 +14,7 @@ import { Submittable } from "../input/Submittable"
 })
 export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	private clearables = new Map<string, Clearable>()
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
@@ -36,9 +38,9 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
 		event.stopPropagation()
-		event.detail(this.looks)
+		event.detail(this.looks, this.color)
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
