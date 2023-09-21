@@ -20,26 +20,17 @@ export class SmoothlyApp {
 	private burgerElement?: HTMLElement
 	private navElement?: HTMLElement
 	mainElement?: HTMLElement
-	rooms: Record<string, Room> = {}
+	rooms: Record<string, Room | undefined> = {}
 
 	@Watch("selected")
-	async selectedChanged(value: Room | undefined, previous: Room | undefined) {
-		if (previous) {
-			previous.element.selected = false
-		}
-		if (value) {
-			value.element.selected = true
-			const path = value.element.path.toString()
-			this.rooms[path] = value
-
-			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
-			location.pathname = path
-			history.pushState({ smoothlyPath: path }, "", location.href)
-			const content = await value.element.getContent()
-			if (this.mainElement && content) {
-				this.mainElement.innerHTML = ""
-				this.mainElement.appendChild(content)
-			}
+	async selectedChanged() {
+		Object.values(this.rooms).forEach(
+			room => room?.element.path != this.selected?.element.path && room?.element.setSelected(false)
+		)
+		const content = await this.selected?.element.getContent()
+		if (this.mainElement && content) {
+			this.mainElement.innerHTML = ""
+			this.mainElement.appendChild(content)
 		}
 	}
 
@@ -52,34 +43,36 @@ export class SmoothlyApp {
 	}
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
-		if (typeof event.state.smoothlyPath != "string" && event.state.smoothlyPath !== this.selected?.element.path) {
-			this.selected = this.rooms[event.state.smoothlyPath]
-		}
-		const content = await this.rooms[event.state.smoothlyPath].element.getContent()
-		if (this.mainElement && content) {
-			this.mainElement.innerHTML = ""
-			this.mainElement.appendChild(content)
-		}
+		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
 	}
 	@Listen("smoothlyRoomSelected")
-	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
+	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) {
 		this.selected = { element: event.target }
 		if (this.burgerVisibility)
 			this.menuOpen = false
+		if (!event.detail.history) {
+			const path = this.selected.element.path.toString()
+			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
+			location.pathname = path
+			window.history.pushState({ smoothlyPath: path }, "", location.href)
+		}
 	}
 	@Listen("smoothlyRoomLoaded")
-	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElement>) {
-		this.rooms[event.target.path.toString()] = { element: event.target }
+	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) {
+		const room = (this.rooms[event.target.path.toString()] = { element: event.target })
+		if (room.element.selected) {
+			this.selected = room
+			window.history.replaceState({ smoothlyPath: room.element.path }, "", window.location.href)
+		}
 	}
 
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
 		if (this.burgerVisibility)
-			if (event.composedPath().some(e => e == this.burgerElement || e == this.navElement)) {
+			if (event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
 				!this.menuOpen
-			} else {
+			else
 				this.menuOpen = false
-			}
 	}
 
 	render() {
