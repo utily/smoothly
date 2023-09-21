@@ -3,6 +3,7 @@
 :host {
 	display: flex;
 	position: relative;
+	background-color: rgb(var(--smoothly-color-shade));
 }
 :host > main,
 :host > main > * {
@@ -33,7 +34,7 @@
 }
 :host().missing > aside {
 	background-color: rgb(var(--smoothly-warning-color));
-	color: rgb(var(--smoothly-warning-contast));
+	color: rgb(var(--smoothly-warning-contrast));
 }
 .hidden {
 	display: none;

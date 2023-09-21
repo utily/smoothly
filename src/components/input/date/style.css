@@ -3,12 +3,13 @@
 :host {
 	position: relative;
 	max-width: 100vw;
+	background-color: rgb(var(--background-color));
 }
 nav {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
 	min-width: 18em;
 }
 :host > div {
@@ -27,7 +28,7 @@ nav {
 	transform: translate(2em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color));
 }
 
 @media screen and (min-width: 400px){
@@ -35,7 +36,7 @@ nav {
 		position: absolute;
 		z-index: 10;
 		top: 3.5em;
-		background-color: rgb(var(--smoothly-default-shade));
+		background-color: rgb(var(--background-color));
 		max-width: 22em;
 		
 	}

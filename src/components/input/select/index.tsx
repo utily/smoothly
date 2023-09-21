@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Color } from "../../../model"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 @Component({
@@ -9,6 +10,7 @@ import { Looks } from "../Looks"
 export class SmoothlyInputSelect implements Input {
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name: string
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() initialPrompt?: string
 	@State() opened = false
@@ -20,10 +22,10 @@ export class SmoothlyInputSelect implements Input {
 	@Event() selected: EventEmitter<any>
 	@Event() smoothlyInput: EventEmitter<Record<number, any>>
 	aside?: HTMLElement
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 
 	@Method()

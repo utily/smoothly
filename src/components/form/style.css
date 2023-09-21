@@ -1,5 +1,3 @@
-@import "../color/style.css"; 
-
 smoothly-form {
 	display: block;
 	--background-color: var(--smoothly-color-shade);

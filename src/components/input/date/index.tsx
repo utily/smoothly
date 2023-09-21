@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { Date } from "isoly"
+import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -11,6 +12,7 @@ import { Looks } from "../Looks"
 })
 export class InputDate implements Clearable, Input {
 	@Element() element: HTMLElement
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: Date
@@ -21,10 +23,10 @@ export class InputDate implements Clearable, Input {
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() valueChanged: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 
 	@Method()
