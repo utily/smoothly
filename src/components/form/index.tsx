@@ -5,13 +5,13 @@ import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
 import { Looks } from "../input/Looks"
-import { Submitable } from "../input/Submitable"
+import { Submittable } from "../input/Submittable"
 
 @Component({
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submitable {
+export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	private clearables = new Map<string, Clearable>()
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
