@@ -56,6 +56,7 @@ export namespace Components {
         "label"?: string;
         "path": string | URLPattern;
         "selected"?: boolean;
+        "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
         "to"?: string;
     }
     interface SmoothlyBackToTop {
@@ -1174,8 +1175,8 @@ declare namespace LocalJSX {
     interface SmoothlyAppRoom {
         "icon"?: Icon;
         "label"?: string;
-        "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<any>) => void;
-        "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<any>) => void;
+        "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
+        "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
         "to"?: string;

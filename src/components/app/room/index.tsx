@@ -13,34 +13,40 @@ export class SmoothlyAppRoom {
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
-	@Event() smoothlyRoomSelected: EventEmitter
-	@Event() smoothlyRoomLoaded: EventEmitter
+	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
+	@Event() smoothlyRoomLoaded: EventEmitter<{ selected: boolean }>
 	private contentElement?: HTMLElement
 
 	componentWillLoad() {
-		if ((typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(window.location))
-			this.smoothlyRoomSelected.emit()
-		else
-			this.smoothlyRoomLoaded.emit()
+		this.selected = (typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(
+			window.location
+		)
+		this.smoothlyRoomLoaded.emit({ selected: this.selected })
 	}
 
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
 		return this.contentElement
 	}
+	@Method()
+	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
+		this.selected = selected
+		if (selected)
+			this.smoothlyRoomSelected.emit({ history: !!options?.history })
+	}
+
+	clickHandler(event: MouseEvent) {
+		if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
+			event.preventDefault()
+			this.setSelected(true)
+		}
+	}
 
 	render() {
 		return (
 			<Host>
 				<li>
-					<a
-						href={typeof this.path == "string" ? this.path : this.path.pathname}
-						onClick={(event: PointerEvent) => {
-							if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
-								event.preventDefault()
-								this.smoothlyRoomSelected.emit()
-							}
-						}}>
+					<a href={typeof this.path == "string" ? this.path : this.path.pathname} onClick={e => this.clickHandler(e)}>
 						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 					</a>
 				</li>
