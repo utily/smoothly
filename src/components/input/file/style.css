@@ -45,7 +45,7 @@ label {
 	width: 100%;
 	align-items: baseline;
 	justify-content: flex-start;
-	color: rgb(var(--text-color));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 	cursor: inherit;
 
 }

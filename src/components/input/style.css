@@ -8,7 +8,7 @@
 	padding: 0 0.4em;
 	overflow: hidden;
 	background-color: rgb(var(--background-color));
-	color: rgb(var(--text-color));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 }
 :host[hidden] {
 	display: none;
@@ -25,7 +25,7 @@ label {
 	position: absolute;
 	left: 0;
 	top: 0.6em;
-	color: rgb(var(--text-color));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;
@@ -83,5 +83,5 @@ input:-webkit-autofill:active {
 }
 input:-webkit-autofill,
 input:-webkit-autofill + label {
-	-webkit-text-fill-color: rgb(var(--text-color));
+	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 }
