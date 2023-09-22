@@ -7,8 +7,8 @@
 	font-weight: var(--smoothly-font-weight);
 	padding: 0 0.4em;
 	overflow: hidden;
-	background-color: rgb(var(--background-color));
-	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 }
 :host[hidden] {
 	display: none;
@@ -25,7 +25,7 @@ label {
 	position: absolute;
 	left: 0;
 	top: 0.6em;
-	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;
@@ -49,7 +49,7 @@ input {
 	position: relative;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 smoothly-icon {
 	display: none;
@@ -78,10 +78,10 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-	box-shadow: 0 0 0 40em rgb(var(--background-color)) inset;
-	-webkit-box-shadow: 0 0 0 40em rgb(var(--background-color)) inset;
+	box-shadow: 0 0 0 40em rgb(var(--background-color, var(--smoothly-color-shade))) inset;
+	-webkit-box-shadow: 0 0 0 40em rgb(var(--background-color, var(--smoothly-color-shade))) inset;
 }
 input:-webkit-autofill,
 input:-webkit-autofill + label {
-	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 }

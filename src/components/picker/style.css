@@ -5,6 +5,7 @@
 	position: relative;
 	width: max-content;
 	padding: 1.2em 0.7em 0.2em 0.8em;
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 :host:not([open]) smoothly-picker-menu {
 	display: none;
@@ -29,7 +30,7 @@ smoothly-slot-elements {
 	bottom: 0;
 	right: 0;
 	width: 2ch;
-	background: linear-gradient(90deg, rgba(var(--background-color), 0) 0%, rgba(var(--background-color), 1) 100%);
+	background: linear-gradient(90deg, rgba(var(--background-color, var(--smoothly-color-shade)), 0) 0%, rgba(var(--background-color, var(--smoothly-color-shade)), 1) 100%);
 }
 .selected * {
 	display: none;
@@ -38,7 +39,7 @@ smoothly-slot-elements {
 	position: absolute;
 	left: 0.4rem;
 	top: 0.6rem;
-	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;

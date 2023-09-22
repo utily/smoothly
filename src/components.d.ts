@@ -163,6 +163,7 @@ export namespace Components {
         "action"?: string;
         "changed": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "looks": "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
@@ -193,6 +194,7 @@ export namespace Components {
         "autocomplete": boolean;
         "changed": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "currency"?: Currency;
         "disabled": boolean;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -222,6 +224,7 @@ export namespace Components {
     }
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
+        "color"?: Color;
         "disabled": boolean;
         "looks": Looks;
         "max": Date;
@@ -233,6 +236,7 @@ export namespace Components {
     }
     interface SmoothlyInputDateRange {
         "clear": () => Promise<void>;
+        "color"?: Color;
         "end"?: isoly.Date;
         "labelEnd": string;
         "labelStart": string;
@@ -251,6 +255,7 @@ export namespace Components {
         "accept"?: string;
         "camera": "front" | "back";
         "clear": () => Promise<void>;
+        "color"?: Color;
         "looks": Looks;
         "name": string;
         "placeholder": string | undefined;
@@ -261,6 +266,7 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputSelect {
+        "color"?: Color;
         "initialPrompt"?: string;
         "looks": Looks;
         "name": string;
@@ -1291,6 +1297,7 @@ declare namespace LocalJSX {
     interface SmoothlyForm {
         "action"?: string;
         "changed"?: boolean;
+        "color"?: Color;
         "looks"?: "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
@@ -1322,6 +1329,7 @@ declare namespace LocalJSX {
     interface SmoothlyInput {
         "autocomplete"?: boolean;
         "changed"?: boolean;
+        "color"?: Color;
         "currency"?: Currency;
         "disabled"?: boolean;
         "looks"?: Looks;
@@ -1331,7 +1339,7 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -1352,19 +1360,21 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputDate {
+        "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "color"?: Color;
         "end"?: isoly.Date;
         "labelEnd"?: string;
         "labelStart"?: string;
@@ -1373,7 +1383,7 @@ declare namespace LocalJSX {
         "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
@@ -1385,11 +1395,12 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "accept"?: string;
         "camera"?: "front" | "back";
+        "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "placeholder"?: string | undefined;
         "showLabel"?: boolean;
         "value"?: File;
@@ -1399,12 +1410,13 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputSelect {
+        "color"?: Color;
         "initialPrompt"?: string;
         "looks"?: Looks;
         "name"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<number, any>>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
     }
     interface SmoothlyItem {
         "marked"?: boolean;

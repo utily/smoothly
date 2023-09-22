@@ -7,9 +7,9 @@
 	top: 100%;
 	left: -1px;
 	right: -1px;
-	background-color: rgb(var(--background-color));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 	padding: 0.5rem;
-	border: rgb(var(--smoothly-default-contrast)) solid 1px;
+	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
 }
 .list {
 	display: grid;

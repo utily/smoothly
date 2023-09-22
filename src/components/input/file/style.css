@@ -7,7 +7,8 @@
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-	padding-left: 0.4rem
+	padding-left: 0.4rem;
+		background-color: rgb(var(--background-color,var(--smoothly-color-shade)))
 }
 .mask {
 	position: absolute;
@@ -15,7 +16,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgb(var(--smoothly-default-contrast), 0.3);
+	background-color: rgb(var(--text-color ,var(--smoothly-color-contrast)), 0.3);
 }
 
 :host:not(.dragging) .mask {
@@ -44,7 +45,7 @@ label {
 	width: 100%;
 	align-items: baseline;
 	justify-content: flex-start;
-	color: rgb(var(--text-color, var(--smoothly-default-contrast)));
+	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 	cursor: inherit;
 
 }

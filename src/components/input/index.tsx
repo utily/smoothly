@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+import { Color } from "../../model"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
 import { Input } from "./Input"
@@ -17,6 +18,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	private keepFocusOnReRender = false
 	private lastValue: any
 	private state: Readonly<TidilyState> & Readonly<Settings>
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
@@ -32,7 +34,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
 	@State() initialValue?: any
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
@@ -100,7 +102,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {

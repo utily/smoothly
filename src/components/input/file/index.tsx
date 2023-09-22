@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
+import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -13,18 +14,19 @@ export class SmoothlyInputFile implements Clearable, Input {
 	private input?: HTMLInputElement
 	@State() dragging = false
 	@Prop() accept?: string
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) camera: "front" | "back"
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, File>>
 	@Event() smoothlyChange: EventEmitter<Record<string, File>>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 
 	@Method()

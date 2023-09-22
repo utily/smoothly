@@ -4,12 +4,13 @@
 	position: relative;
 	display: block;
 	width: fit-content;
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 :host > nav {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 	max-width: 22em;
 }
 :host > div {
@@ -28,11 +29,11 @@
 	transform: translate(10em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 :host > section {
 	display: flex;
-	background-color: var(--background, transparent);
+	background-color: var(--background-color, var(--smoothly-color-shade), transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
 }
