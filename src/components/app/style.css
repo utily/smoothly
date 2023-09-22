@@ -66,6 +66,7 @@ smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container {
 }
 smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
 	display: flex;
+	gap: 1rem;
 	align-items: center;
 	height: 100%;
 	margin-left: auto;
