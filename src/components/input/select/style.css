@@ -3,7 +3,7 @@
 :host {
 	display: flex;
 	position: relative;
-	background-color: rgb(var(--smoothly-color-shade));
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 :host > main,
 :host > main > * {

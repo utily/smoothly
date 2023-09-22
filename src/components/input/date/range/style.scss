@@ -33,7 +33,7 @@
 }
 :host > section {
 	display: flex;
-	background-color: var(--background-color, transparent);
+	background-color: var(--background-color, var(--smoothly-color-shade), transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
 }

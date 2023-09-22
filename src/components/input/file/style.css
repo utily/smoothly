@@ -8,7 +8,7 @@
 	position: relative;
 	width: 100%;
 	padding-left: 0.4rem;
-		background-color: rgb(var(--smoothly-color-shade))
+		background-color: rgb(var(--background-color,var(--smoothly-color-shade)))
 }
 .mask {
 	position: absolute;
@@ -16,7 +16,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgb(var(--smoothly-color-contrast), 0.3);
+	background-color: rgb(var(--text-color ,var(--smoothly-color-contrast)), 0.3);
 }
 
 :host:not(.dragging) .mask {
