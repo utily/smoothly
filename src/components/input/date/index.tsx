@@ -56,6 +56,7 @@ export class InputDate implements Clearable, Input {
 	render() {
 		return [
 			<smoothly-input
+				color={this.color}
 				name={this.name}
 				onFocus={() => (this.open = !this.open)}
 				onClick={() => (this.open = !this.open)}
