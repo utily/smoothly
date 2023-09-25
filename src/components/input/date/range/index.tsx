@@ -35,7 +35,7 @@ export class InputDateRange implements Clearable, Input {
 	}
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		if (this.start && this.end)
 			this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 	}
