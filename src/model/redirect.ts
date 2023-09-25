@@ -1,5 +1,7 @@
 export function redirect(path: string) {
-	window.history.pushState({ smoothlyPath: path }, "", new URL(window.location.href).origin + path)
-	window.history.back()
-	window.history.forward()
+	const state = { smoothlyPath: path }
+	const url = new URL(window.location.href)
+	url.pathname = path
+	window.history.pushState(state, "", path)
+	window.dispatchEvent(new PopStateEvent("popstate", { state }))
 }
