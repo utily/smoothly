@@ -3,7 +3,7 @@ import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
-import { Data } from "./../../../../model"
+import { Color, Data } from "./../../../../model"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -12,6 +12,7 @@ import { Data } from "./../../../../model"
 })
 export class InputDateRange implements Clearable, Input {
 	@Element() element: HTMLElement
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date
@@ -25,7 +26,7 @@ export class InputDateRange implements Clearable, Input {
 	@Prop() labelEnd = "to"
 	@Event() valueChanged: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	@Method()
 	async clear(): Promise<void> {
@@ -34,7 +35,7 @@ export class InputDateRange implements Clearable, Input {
 	}
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		if (this.start && this.end)
 			this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 	}
