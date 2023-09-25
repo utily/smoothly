@@ -102,7 +102,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
