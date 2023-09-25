@@ -8,8 +8,8 @@ import { Icon } from "../../icon/Icon"
 	scoped: true,
 })
 export class SmoothlyAppRoom {
-	@Prop() label?: string
-	@Prop() icon?: Icon
+	@Prop({ reflect: true }) label?: string
+	@Prop({ reflect: true }) icon?: Icon
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean

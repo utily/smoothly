@@ -46,7 +46,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/dialog" label="Dialog">
 					<smoothly-dialog-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/display" label="Display" icon="eye-outline">
+				<smoothly-app-room path="/display">
 					<smoothly-display-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/table" label="Table">
@@ -62,6 +62,10 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/redirect" label="Redirect">
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
+					<smoothly-button onClick={() => redirect("/hidden")}>To hidden</smoothly-button>
+				</smoothly-app-room>
+				<smoothly-app-room path="/hidden">
+					<p>hello world!</p>
 				</smoothly-app-room>
 			</smoothly-app>
 		)
