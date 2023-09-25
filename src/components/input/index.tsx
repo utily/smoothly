@@ -102,7 +102,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -270,6 +270,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				<slot name="start"></slot>
 				<div>
 					<input
+						color={this.color ?? this.color}
 						name={this.name}
 						type={this.state?.type}
 						placeholder={this.placeholder}
