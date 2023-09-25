@@ -62,6 +62,10 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/redirect" label="Redirect">
 					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
 					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
+					<smoothly-button onClick={() => redirect("/hidden")}>To hidden</smoothly-button>
+				</smoothly-app-room>
+				<smoothly-app-room path="/hidden">
+					<p>hello world!</p>
 				</smoothly-app-room>
 			</smoothly-app>
 		)

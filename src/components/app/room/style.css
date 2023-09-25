@@ -4,6 +4,9 @@
 	text-align: center;
 	cursor: pointer;
 }
+:not(:host[label], :host[icon]) { 
+	display: none;
+}
 :host > main {
 	display: none;
 }
