@@ -43,7 +43,11 @@ export class SmoothlyInputFile implements Clearable, Input {
 					<slot name={"label"} />
 				</label>
 				<div class="input">
-					<smoothly-button size="flexible" onClick={event => (event.stopPropagation(), this.input?.click())}>
+					<smoothly-button
+						color={this.color}
+						fill={"clear"}
+						size="flexible"
+						onClick={event => (event.stopPropagation(), this.input?.click())}>
 						<slot name={"button"} />
 					</smoothly-button>
 					<span onClick={event => (event.stopPropagation(), this.input?.click())}>
