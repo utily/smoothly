@@ -1,4 +1,4 @@
-export function redirect(path: string) {
+export function redirect(path: string): void {
 	const state = { smoothlyPath: path }
 	const url = new URL(window.location.href)
 	url.pathname = path
