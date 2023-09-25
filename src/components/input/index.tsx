@@ -270,7 +270,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				<slot name="start"></slot>
 				<div>
 					<input
-						color={this.color ?? this.color}
+						color={this.color}
 						name={this.name}
 						type={this.state?.type}
 						placeholder={this.placeholder}
