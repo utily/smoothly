@@ -25,7 +25,7 @@ export class SmoothlyInputSelect implements Input {
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 	}
 
 	@Method()

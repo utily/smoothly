@@ -26,7 +26,7 @@ export class SmoothlyInputFile implements Clearable, Input {
 	@Event() smoothlyChange: EventEmitter<Record<string, File>>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 	}
 
 	@Method()
