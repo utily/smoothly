@@ -46,7 +46,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/dialog" label="Dialog">
 					<smoothly-dialog-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/display">
+				<smoothly-app-room path="/display" label="Display" icon="eye-outline">
 					<smoothly-display-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/table" label="Table">
