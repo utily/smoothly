@@ -415,6 +415,7 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 				</smoothly-submit>
 			</smoothly-form>,
+			<h4>Form with spinner showcase</h4>,
 			<smoothly-form looks="line" processing={true} onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
 				<smoothly-input name="text">Input</smoothly-input>
 				<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
