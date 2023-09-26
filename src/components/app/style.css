@@ -92,7 +92,7 @@ smoothly-app > smoothly-notifier > header > nav > ul li a {
 	smoothly-app > smoothly-notifier > header > nav {
 		width: 50dvw;
 		max-width: 15rem;
-		top: 5rem;
+		top: 100%;
 		position: absolute;
 		right: 0;
 		height: auto;
