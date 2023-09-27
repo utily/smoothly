@@ -268,6 +268,23 @@ export class TableDemo {
 					<smoothly-table-cell>ddd</smoothly-table-cell>
 				</smoothly-table-row>
 			</smoothly-table>,
+			<smoothly-table>
+				<smoothly-table-row>
+					<smoothly-table-header>First name</smoothly-table-header>
+					<smoothly-table-header>Last name</smoothly-table-header>
+					<smoothly-table-header style={{ width: "1px" }}>
+						<smoothly-icon name="alert-outline" />
+					</smoothly-table-header>
+				</smoothly-table-row>
+				<smoothly-table-expandable-row>
+					<smoothly-table-cell>Jessie</smoothly-table-cell>
+					<smoothly-table-cell>Doe</smoothly-table-cell>
+					<smoothly-table-cell></smoothly-table-cell>
+					<div slot="detail">
+						<p>This is Jessie</p>
+					</div>
+				</smoothly-table-expandable-row>
+			</smoothly-table>,
 		]
 	}
 }
