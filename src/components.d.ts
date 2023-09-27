@@ -78,7 +78,7 @@ export namespace Components {
         "link"?: string;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
-        "type": "link" | "button";
+        "type": "link" | "button" | "submit" | "reset";
     }
     interface SmoothlyButtonDemo {
     }
@@ -1208,7 +1208,7 @@ declare namespace LocalJSX {
         "link"?: string;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "link" | "button";
+        "type"?: "link" | "button" | "submit" | "reset";
     }
     interface SmoothlyButtonDemo {
     }

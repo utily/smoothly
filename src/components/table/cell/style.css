@@ -24,8 +24,10 @@ smoothly-table-expandable-row[open] > div :host:last-of-type smoothly-icon {
 	transform: rotate(90deg);
 }
 :host > div {
-	display: flex;
+	display: grid;
+	grid-auto-flow: column;
 	align-items: center;
+	justify-content: space-between;
 }
 :host > div > div {
 	width: 100%;
