@@ -30,10 +30,16 @@ function convert(path: string): string {
 		result = new URL(path).pathname
 	else {
 		const url = new URL(path, window.location.origin)
-		if (!url.href.startsWith(window.location.href))
+		if (
+			!(
+				url.href.startsWith(window.location.href) &&
+				url.href.length == window.location.href.length &&
+				url.href != window.location.href
+			)
+		)
 			result = url.pathname
 		else
-			result = new URL(window.location.href + url.pathname).pathname
+			result = new URL(window.location.href.replace(/\/+$/, "") + url.pathname).pathname
 	}
 	return result
 }

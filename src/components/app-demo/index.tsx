@@ -67,6 +67,9 @@ export class SmoothlyAppDemo {
 					<smoothly-button type="link" link={new URL("/hidden", window.location.origin).href}>
 						To hidden
 					</smoothly-button>
+					<smoothly-button type="link" link="redirect">
+						To redirect
+					</smoothly-button>
 				</smoothly-app-room>
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>
