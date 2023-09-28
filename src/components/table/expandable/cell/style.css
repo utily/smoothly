@@ -31,7 +31,10 @@
 	transform: rotate(90deg);
 }
 aside {
-	display: flex;
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: start;
+	align-items: center;
 }
 .hide {
 	display: none;
