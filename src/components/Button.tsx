@@ -30,14 +30,10 @@ function convert(path: string): string {
 		result = new URL(path).pathname
 	else {
 		const url = new URL(path, window.location.origin)
-		console.log(url)
 		if (!url.href.startsWith(window.location.href)) {
 			result = url.pathname
-			console.log("absolute path, url", url)
-			console.log("absolute path, result", result)
 		} else {
 			result = new URL(window.location.href + url.pathname).pathname
-			console.log("relative path?", url, result)
 		}
 	}
 	return result
