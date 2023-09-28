@@ -11,6 +11,20 @@ export class SmoothlyAppDemo {
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
+				<smoothly-app-room path="/" label="root">
+					<smoothly-button type="link" link="/redirect">
+						To redirect
+					</smoothly-button>
+					<smoothly-button type="link" link="/redirect">
+						To /redirect
+					</smoothly-button>
+					<smoothly-button type="link" link={new URL("/redirect", window.location.origin).href}>
+						To new URL("redirect")
+					</smoothly-button>
+					<smoothly-button type="link" link="redirect/nested">
+						To redirect nested
+					</smoothly-button>
+				</smoothly-app-room>
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
@@ -67,10 +81,17 @@ export class SmoothlyAppDemo {
 					<smoothly-button type="link" link={new URL("/hidden", window.location.origin).href}>
 						To hidden
 					</smoothly-button>
+					<smoothly-button type="link" link="/redirect">
+						To redirect
+					</smoothly-button>
+					<smoothly-button type="link" link="nested">
+						To redirect nested, relative path
+					</smoothly-button>
 				</smoothly-app-room>
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>
 				</smoothly-app-room>
+				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
 			</smoothly-app>
 		)
 	}
