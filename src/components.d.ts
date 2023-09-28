@@ -10,6 +10,7 @@ import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Data as Data1, Fill, Message, Notice, Option, Trigger } from "./model";
 import { Icon } from "./components/icon/Icon";
+import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
@@ -72,13 +73,12 @@ export namespace Components {
     interface SmoothlyButton {
         "color"?: Color;
         "disabled": boolean;
-        "download"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "link"?: string;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
-        "type": "link" | "button";
+        "type": Button.Properties["type"];
     }
     interface SmoothlyButtonDemo {
     }
@@ -1202,13 +1202,12 @@ declare namespace LocalJSX {
     interface SmoothlyButton {
         "color"?: Color;
         "disabled"?: boolean;
-        "download"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "link"?: string;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "link" | "button";
+        "type"?: Button.Properties["type"];
     }
     interface SmoothlyButtonDemo {
     }

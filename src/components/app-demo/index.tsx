@@ -1,6 +1,4 @@
 import { Component, h, Prop } from "@stencil/core"
-import { redirect } from "../../model"
-
 @Component({
 	tag: "smoothly-app-demo",
 })
@@ -23,7 +21,7 @@ export class SmoothlyAppDemo {
 							fill="solid"
 							color="danger"
 							link="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-							download={true}>
+							type="download">
 							download
 						</smoothly-button>
 						<smoothly-button fill="solid" color="danger" onClick={() => alert("clicked")}>
@@ -60,9 +58,15 @@ export class SmoothlyAppDemo {
 				</smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
 				<smoothly-app-room path="/redirect" label="Redirect">
-					<smoothly-button onClick={() => redirect("/input")}>To input</smoothly-button>
-					<smoothly-button onClick={() => redirect("/button")}>To button</smoothly-button>
-					<smoothly-button onClick={() => redirect("/hidden")}>To hidden</smoothly-button>
+					<smoothly-button type="link" link="/input">
+						To input
+					</smoothly-button>
+					<smoothly-button type="link" link="../button">
+						To button
+					</smoothly-button>
+					<smoothly-button type="link" link={new URL("/hidden", window.location.origin).href}>
+						To hidden
+					</smoothly-button>
 				</smoothly-app-room>
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>

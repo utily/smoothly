@@ -12,15 +12,14 @@ export class SmoothlyButton {
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
-	@Prop({ reflect: true }) type: "link" | "button" = "button"
+	@Prop({ reflect: true }) type: Button.Properties["type"] = "button"
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() link?: string
-	@Prop() download?: boolean
 
 	render() {
 		return (
-			<Button disabled={this.disabled} type={this.type} link={this.link} download={this.download}>
+			<Button disabled={this.disabled} type={this.type} link={this.link}>
 				<slot />
 			</Button>
 		)
