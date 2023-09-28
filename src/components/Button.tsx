@@ -28,19 +28,11 @@ function convert(path: string): string {
 	let result: ReturnType<typeof convert>
 	if (path.startsWith(window.location.origin))
 		result = new URL(path).pathname
-	else {
-		const url = new URL(path, window.location.origin)
-		if (
-			!(
-				url.href.startsWith(window.location.href) &&
-				url.href.length == window.location.href.length &&
-				url.href != window.location.href
-			)
-		)
-			result = url.pathname
-		else
-			result = new URL(window.location.href.replace(/\/+$/, "") + url.pathname).pathname
-	}
+	else if (path.match(/^\//))
+		result = new URL(path, window.location.origin).pathname
+	else
+		result = new URL(`${window.location.pathname.replace(/\/+$/, "")}/${path}`, window.location.origin).pathname
+
 	return result
 }
 
