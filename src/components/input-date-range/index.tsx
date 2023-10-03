@@ -19,6 +19,7 @@ export class InputDateRange {
 	@Prop() labelEnd = "to"
 	@Prop() clearable = false
 	@Event() valueChanged: EventEmitter<Date>
+	@Event() dateRangeClear: EventEmitter
 	@Event() dateRangeSelected: EventEmitter<{ start: Date; end: Date }>
 
 	@Watch("value")
@@ -35,10 +36,15 @@ export class InputDateRange {
 	}
 	@Listen("dateRangeSet")
 	onDateRangeSet(event: CustomEvent<DateRange>) {
-		console.log("dateRangeSet", event.detail)
 		this.open = false
 		event.stopPropagation()
 		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
+	}
+	clearDateRange() {
+		this.start = undefined
+		this.end = undefined
+		this.value = undefined
+		this.dateRangeClear.emit()
 	}
 
 	render() {
@@ -62,14 +68,7 @@ export class InputDateRange {
 					</smoothly-input>
 				</div>
 				{this.clearable && (
-					<smoothly-icon
-						name="close-circle"
-						size="tiny"
-						onClick={() => {
-							this.start = undefined
-							this.end = undefined
-							this.value = undefined
-						}}></smoothly-icon>
+					<smoothly-icon name="close-circle" size="tiny" onClick={this.clearDateRange.bind(this)}></smoothly-icon>
 				)}
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
