@@ -21,6 +21,10 @@ export class SmoothlySelectDemo {
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
 		console.log("selectionChanged", event.detail)
 	}
+	@Listen("dateRangeClear")
+	handleDateRangeClear() {
+		console.log("dateRangeClear")
+	}
 
 	render() {
 		return [

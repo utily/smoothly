@@ -1012,6 +1012,7 @@ declare namespace LocalJSX {
         "labelStart"?: string;
         "max"?: Date;
         "min"?: Date;
+        "onDateRangeClear"?: (event: SmoothlyInputDateRangeCustomEvent<any>) => void;
         "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<Date>) => void;
         "open"?: boolean;
