@@ -48,7 +48,7 @@ export class Listenable<T extends CanBeListenable> {
 								},
 								set(value: any) {
 									backend[name] = value
-									result.#listeners[name]?.forEach(listener => listener(value))
+									result.#listeners[name]?.forEach(listener => listener(backend[name]))
 								},
 						  }
 						: {
