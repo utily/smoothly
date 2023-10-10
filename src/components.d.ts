@@ -13,7 +13,7 @@ import { Icon } from "./components/icon/Icon";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
-import { Criteria } from "selectively";
+import { Criteria, selectively } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Looks } from "./components/input/Looks";
@@ -143,21 +143,11 @@ export namespace Components {
         "placeholder": string | undefined;
     }
     interface SmoothlyFilterInput {
-        "autocomplete": boolean;
         "clear": () => Promise<void>;
-        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
-        "currency"?: Currency;
-        "disabled": boolean;
-        "maxLength": number;
-        "minLength": number;
+        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "within" | "some" | "has" | "includes";
         "name": string;
-        "pattern"?: RegExp;
         "placeholder"?: string;
-        "readonly": boolean;
-        "required": boolean;
-        "showLabel": boolean;
-        "type": string;
-        "value": string;
+        "value": any;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -1277,21 +1267,11 @@ declare namespace LocalJSX {
         "placeholder"?: string | undefined;
     }
     interface SmoothlyFilterInput {
-        "autocomplete"?: boolean;
-        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
-        "currency"?: Currency;
-        "disabled"?: boolean;
-        "maxLength"?: number;
-        "minLength"?: number;
+        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "within" | "some" | "has" | "includes";
         "name"?: string;
-        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
-        "pattern"?: RegExp;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<selectively.Criteria>) => void;
         "placeholder"?: string;
-        "readonly"?: boolean;
-        "required"?: boolean;
-        "showLabel"?: boolean;
-        "type"?: string;
-        "value"?: string;
+        "value"?: any;
     }
     interface SmoothlyForm {
         "action"?: string;
