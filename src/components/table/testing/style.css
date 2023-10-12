@@ -6,3 +6,8 @@
 smoothly-table {
 	width: 80%;
 }
+.tableCell {
+	display: flex;
+	flex-direction: row;
+	gap:0.5rem;
+}

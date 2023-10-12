@@ -51,6 +51,16 @@ export class SmoothlyTableTesting {
 							</smoothly-table-expandable-cell>
 						</smoothly-table-row>
 					))}
+					<smoothly-table-footer>
+						<smoothly-table-footer-cell>
+							<div class="tableCell">
+								Currently viewing content from:
+								<smoothly-display type="date" value="2023-10-12" />
+							</div>
+						</smoothly-table-footer-cell>
+						<smoothly-table-footer-cell>Viewing: 10</smoothly-table-footer-cell>
+						<smoothly-table-footer-cell>out of 2000</smoothly-table-footer-cell>
+					</smoothly-table-footer>
 				</smoothly-table>
 			</Host>
 		)
