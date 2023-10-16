@@ -52,10 +52,10 @@ td::slotted(*) {
 	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 }
 tr.spotlight > td::slotted(*) {
-	box-shadow: calc(var(--expansion-border-width)) 0 0 0 rgb(var(--smoothly-color-shade)) inset;
+	box-shadow: calc(var(--expansion-border-width)) 0 0 0 rgb(var(--smoothly-tertiary-shade)) inset;
 }
 tr:not(.spotlight) > td::slotted(*) {
-	box-shadow: -1px 0 0 0 rgb(var(--smoothly-color-shade)), 1px 0 0 0 rgb(var(--smoothly-color-shade));
+	box-shadow: -1px 0 0 0 rgb(var(--smoothly-tertiary-shade)), 1px 0 0 0 rgb(var(--smoothly-tertiary-shade));
 }
 td::slotted(*)::before {
 	content: "";
