@@ -7,7 +7,16 @@ smoothly-table {
 	width: 80%;
 }
 .tableCell {
+	height: 3rem;
+	display: flex;
+	align-items: center;
+}
+.tableCell > div {
+	margin-left: 3rem;
+	margin-right: 3rem;
 	display: flex;
 	flex-direction: row;
-	gap:0.5rem;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
 }

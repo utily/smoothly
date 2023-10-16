@@ -2,10 +2,11 @@
 	display: table-footer-group;
 	cursor: default;
 	position: sticky;
+	width: 100%;
 	bottom: 0;
-	background: white ;
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)),
-	inset  0 1px 0 rgb(var(--smoothly-light-shade));
+	background-color: rgb(var(--smoothly-color)) ;
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)),
+	inset  0 1px 0 rgb(var(--smoothly-color-shade));
 }
 div {
 	display: contents;

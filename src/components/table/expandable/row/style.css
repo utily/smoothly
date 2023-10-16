@@ -9,20 +9,20 @@ div {
 :host[open] > div {
 	position: relative;
 	z-index: 3;
-	background-color: rgb(var(--smoothly-default-color));
+	background-color: rgb(var(--smoothly-color));
 }
 :host[open] > div::slotted(*) smoothly-table-cell,
 :host[open] > div::slotted(smoothly-table-cell) {
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset;	
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset;	
 }
 :host[open] > div::slotted(*) smoothly-table-cell:first-child {
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-color-shade)) inset;
 }
 :host[open] > div::slotted(*) smoothly-table-cell:last-child {
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-color-shade)) inset;
 }
 :host[open] > div::slotted(*) smoothly-table-cell:last-child:first-child {
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-light-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-light-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-light-shade)) inset;
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-color-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-color-shade)) inset;
 }
 
 .hide {
@@ -35,18 +35,18 @@ td::slotted(*) {
 	--expansion-width: 1.5rem;
 	--expansion-border-width: 3px;
 	position: relative;
-	background-color: rgb(var(--smoothly-default-color));
+	background-color: rgb(var(--smoothly-color));
 	width: calc(100% + 3rem - 2px);
 	left: calc(-1 * var(--expansion-width) + 1px);
 	box-sizing: border-box;
 	padding: 0.5rem calc(var(--expansion-width) - 1px);
-	border-bottom: 1px solid rgb(var(--smoothly-light-shade));
+	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 }
 tr.spotlight > td::slotted(*) {
-	box-shadow: calc(var(--expansion-border-width)) 0px 0px 0px rgb(var(--smoothly-tertiary-color)) inset;
+	box-shadow: calc(var(--expansion-border-width)) 0px 0px 0px rgb(var(--smoothly-color-shade)) inset;
 }
 tr:not(.spotlight) > td::slotted(*) {
-	box-shadow: -1px 0 0 0 rgb(var(--smoothly-light-shade)), 1px 0 0 0 rgb(var(--smoothly-light-shade));
+	box-shadow: -1px 0 0 0 rgb(var(--smoothly-color-shade)), 1px 0 0 0 rgb(var(--smoothly-color-shade));
 }
 td::slotted(*)::before {
 	content: "";
@@ -56,7 +56,7 @@ td::slotted(*)::before {
 	bottom: 0;
 	left: -1px;
 	width: calc(var(--expansion-width) + 1px);
-	border-top: 1px solid rgb(var(--smoothly-light-shade));
+	border-top: 1px solid rgb(var(--smoothly-color-shade));
 }
 td::slotted(*)::after {
 	content: "";
@@ -66,6 +66,6 @@ td::slotted(*)::after {
 	bottom: 0;
 	right: 0;
 	width: calc(var(--expansion-width) - 1px);
-	border-top: 1px solid rgb(var(--smoothly-light-shade));
-	border-right: 1px solid rgb(var(--smoothly-light-shade));
+	border-top: 1px solid rgb(var(--smoothly-color-shade));
+	border-right: 1px solid rgb(var(--smoothly-color-shade));
 }

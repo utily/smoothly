@@ -1,4 +1,5 @@
 import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Color } from "../../model"
 
 @Component({
 	tag: "smoothly-table",
@@ -11,6 +12,7 @@ export class Table implements ComponentWillLoad {
 	private expanded: Set<EventTarget> = new Set()
 	@Element() element: HTMLSmoothlyTableElement
 	@Prop({ mutable: true, reflect: true }) root = true
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true }) align: "middle" | "bottom" | "top" = "middle"
 	@Prop({ reflect: true, mutable: true }) open = false
 	@Event() smoothlyNestedTable: EventEmitter<() => void>
