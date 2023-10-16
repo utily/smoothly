@@ -1,4 +1,4 @@
-$time: 1.4s;
+$time: 2s;
 :host:not([active]) {
 	display: none;
 }
@@ -19,33 +19,31 @@ $time: 1.4s;
 		left: calc(50% - var(--size) / 2);
 		top: calc(50% - var(--size) / 2);
 		width: var(--size);
-		animation: SPIN-SVG $time linear infinite;
-		circle {
+		animation: SPINNER-ROTATE $time linear infinite;
+		path {
 			transform-origin: center;
-			animation: SPIN-CIRCLE $time ease-in-out infinite;
-			stroke-dasharray: 187;
-			stroke-dashoffset: 0;
+			animation: SPINNER-DRAW $time alternate infinite;
+			stroke-dasharray: 60 120;
+			stroke-dashoffset: 59.5;
 		}
 	}
 }
-@keyframes SPIN-SVG {
+@keyframes SPINNER-ROTATE {
 	0% {
 		transform: rotate(0deg);
 	}
 	100% {
-		transform: rotate(270deg);
+		transform: rotate(0deg);
 	}
 }
-@keyframes SPIN-CIRCLE {
+@keyframes SPINNER-DRAW {
 	0% {
-		stroke-dashoffset: 187;
+		stroke-dashoffset: 59.5;
 	}
-	50% {
-		stroke-dashoffset: 46.75;
-		transform: rotate(135deg);
+	40% {
+		stroke-dashoffset: 0;
 	}
 	100% {
-		stroke-dashoffset: 187;
-		transform: rotate(450deg);
+		stroke-dashoffset: -105;
 	}
 }
