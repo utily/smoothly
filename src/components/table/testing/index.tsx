@@ -10,7 +10,7 @@ export class SmoothlyTableTesting {
 	render() {
 		return (
 			<Host>
-				<smoothly-table>
+				<smoothly-table color="dark">
 					<smoothly-table-row>
 						<smoothly-table-header>Type</smoothly-table-header>
 						<smoothly-table-header>Name</smoothly-table-header>
@@ -51,6 +51,14 @@ export class SmoothlyTableTesting {
 							</smoothly-table-expandable-cell>
 						</smoothly-table-row>
 					))}
+					<smoothly-table-footer>
+						<div class="tableCell">
+							<div>
+								Currently viewing content from:
+								<smoothly-display type="date" value="2023-10-12" />
+							</div>
+						</div>
+					</smoothly-table-footer>
 				</smoothly-table>
 			</Host>
 		)

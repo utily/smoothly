@@ -390,6 +390,7 @@ export namespace Components {
     }
     interface SmoothlyTable {
         "align": "middle" | "bottom" | "top";
+        "color"?: Color;
         "open": boolean;
         "root": boolean;
     }
@@ -406,6 +407,8 @@ export namespace Components {
     interface SmoothlyTableExpandableRow {
         "align": "left" | "center" | "right";
         "open": boolean;
+    }
+    interface SmoothlyTableFooter {
     }
     interface SmoothlyTableHeader {
         "name": string;
@@ -1006,6 +1009,12 @@ declare global {
         prototype: HTMLSmoothlyTableExpandableRowElement;
         new (): HTMLSmoothlyTableExpandableRowElement;
     };
+    interface HTMLSmoothlyTableFooterElement extends Components.SmoothlyTableFooter, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFooterElement: {
+        prototype: HTMLSmoothlyTableFooterElement;
+        new (): HTMLSmoothlyTableFooterElement;
+    };
     interface HTMLSmoothlyTableHeaderElement extends Components.SmoothlyTableHeader, HTMLStencilElement {
     }
     var HTMLSmoothlyTableHeaderElement: {
@@ -1134,6 +1143,7 @@ declare global {
         "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
+        "smoothly-table-footer": HTMLSmoothlyTableFooterElement;
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-testing": HTMLSmoothlyTableTestingElement;
@@ -1555,6 +1565,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTable {
         "align"?: "middle" | "bottom" | "top";
+        "color"?: Color;
         "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
         "onSmoothlySpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
         "onSmoothlyTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
@@ -1581,6 +1592,8 @@ declare namespace LocalJSX {
         "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
         "onSmoothlyExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
+    }
+    interface SmoothlyTableFooter {
     }
     interface SmoothlyTableHeader {
         "name"?: string;
@@ -1697,6 +1710,7 @@ declare namespace LocalJSX {
         "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
+        "smoothly-table-footer": SmoothlyTableFooter;
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-testing": SmoothlyTableTesting;
@@ -1783,6 +1797,7 @@ declare module "@stencil/core" {
             "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
+            "smoothly-table-footer": LocalJSX.SmoothlyTableFooter & JSXBase.HTMLAttributes<HTMLSmoothlyTableFooterElement>;
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-testing": LocalJSX.SmoothlyTableTesting & JSXBase.HTMLAttributes<HTMLSmoothlyTableTestingElement>;
