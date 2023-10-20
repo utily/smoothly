@@ -5,21 +5,34 @@
 	position: relative;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
-:host > main,
-:host > main > * {
+
+:host.icon {
+	width: fit-content;
+	flex-direction: column;
+}
+
+:host>main,
+:host>main>* {
 	height: 100%;
 	display: flex;
 	align-items: center;
 }
-:host > div > nav {
+
+:host.icon>main,
+:host.icon>main>* {
+	padding: 0.5em;
+}
+
+:host>div>nav {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
 	z-index: 10;
-	height:  var(--menu-height, unset);
+	height: var(--menu-height, unset);
 	overflow-y: scroll;
 }
-:host > aside {
+
+:host>aside {
 	position: absolute;
 	top: 0;
 	left: 5em;
@@ -32,14 +45,17 @@
 	display: flex;
 	align-items: center;
 }
-:host().missing > aside {
+
+:host().missing>aside {
 	background-color: rgb(var(--smoothly-warning-color));
 	color: rgb(var(--smoothly-warning-contrast));
 }
+
 .hidden {
 	display: none;
 }
-:host > section {
+
+:host>section {
 	position: fixed;
 	top: 0px;
 	left: 0px;
