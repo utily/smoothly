@@ -19,7 +19,7 @@ jobs:
       - name: "Setup Node"
         uses: "actions/setup-node@v3"
         with:
-          node-version: current
+          node-version: 20
           cache: 'npm'
       - name: "Version Bump"
         id: version-bump
