@@ -19,12 +19,12 @@ jobs:
       - name: "Setup Node"
         uses: "actions/setup-node@v3"
         with:
-          node-version: current
-          cache: 'npm'
+          node-version: 20
+          cache: "npm"
       - name: "Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
         with:
-          tag-prefix: 'release-'
+          tag-prefix: "release-"
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
