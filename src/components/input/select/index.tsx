@@ -12,7 +12,10 @@ export class SmoothlyInputSelect implements Input {
 	@Prop() name: string
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) type?: "icon"
+	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop() initialPrompt?: string
+	@Prop() initialValue?: any
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
@@ -60,7 +63,9 @@ export class SmoothlyInputSelect implements Input {
 	}
 	@Listen("itemSelected")
 	onItemSelected(event: Event) {
+		this.selectedElement && (this.selectedElement.hidden = false)
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
+		!this.showSelected && (this.selectedElement.hidden = true)
 		if (this.mainElement)
 			this.mainElement.innerHTML = this.selectedElement.innerHTML
 	}
@@ -125,7 +130,7 @@ export class SmoothlyInputSelect implements Input {
 	}
 	render() {
 		return (
-			<Host tabIndex={2} class={this.missing ? "missing" : ""}>
+			<Host tabIndex={2} class={(this.missing ? "missing" : this.type) ?? ""}>
 				<main ref={element => (this.mainElement = element)}>{this.initialPrompt ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
@@ -153,8 +158,10 @@ export class SmoothlyInputSelect implements Input {
 		const children = this.element.querySelectorAll("div > nav > smoothly-item")
 		for (let i = 0; i < children.length; i++) {
 			const node = children.item(i)
-			if (isItem(node))
+			if (isItem(node)) {
 				items.push(node)
+				node.value == this.initialValue && this.mainElement && !this.selectedElement && (node.selected = true)
+			}
 		}
 		this.items = items
 	}

@@ -268,9 +268,12 @@ export namespace Components {
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
+        "initialValue"?: any;
         "looks": Looks;
         "name": string;
         "reset": () => Promise<void>;
+        "showSelected"?: boolean;
+        "type"?: "icon";
     }
     interface SmoothlyItem {
         "filter": (filter: string) => Promise<boolean>;
@@ -1421,11 +1424,14 @@ declare namespace LocalJSX {
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
+        "initialValue"?: any;
         "looks"?: Looks;
         "name"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<number, any>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "showSelected"?: boolean;
+        "type"?: "icon";
     }
     interface SmoothlyItem {
         "marked"?: boolean;

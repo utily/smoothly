@@ -317,6 +317,15 @@ export class SmoothlyInputDemo {
 				}}></smoothly-input-date-range>,
 			<br />,
 			<h4>Smoothly Selector</h4>,
+			<smoothly-input-select type="icon" initialValue="folder" showSelected={false}>
+				<smoothly-item value="folder">
+					<smoothly-icon color="dark" name="folder-outline" />
+				</smoothly-item>
+				<smoothly-item value="camera">
+					<smoothly-icon color="dark" name="camera-outline" />
+				</smoothly-item>
+			</smoothly-input-select>,
+			<br />,
 			<smoothly-input-select
 				looks="line"
 				initialPrompt="Select..."
