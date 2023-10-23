@@ -505,7 +505,7 @@ export type Icon = Name | `${Name}-${Variants}`
 
 export namespace Icon {
 	const names: Record<string, string | undefined> & { "*": string } = {
-		"*": "https://https://ionicons.pages.dev/svg/${name}.svg",
+		"*": "https://ionicons.pages.dev/svg/${name}.svg",
 	}
 	const cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	async function fetch(url: string): Promise<string | undefined> {
