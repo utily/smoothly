@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop } from "@stencil/core"
 import "urlpattern-polyfill"
-import { Icon } from "../../icon/Icon"
+import { Icon } from "../../../model"
 
 @Component({
 	tag: "smoothly-app-room",

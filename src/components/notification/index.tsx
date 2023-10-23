@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { Color, Notice, Trigger } from "../../model"
-import { Icon } from "../icon/Icon"
+import { Icon } from "../../model"
 
 @Component({
 	tag: "smoothly-notification",
