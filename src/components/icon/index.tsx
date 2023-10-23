@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
-import { Icon } from "./Icon"
+import { Icon } from "../../model"
 
 @Component({
 	tag: "smoothly-icon",
@@ -19,8 +19,8 @@ export class SmoothlyIcon {
 		if (this.name)
 			this.document =
 				this.name != "empty"
-					? (await SmoothlyIcon.load(this.name))?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
-					: `<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+					? (await Icon.load(this.name))?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
+					: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 			<title>Empty</title>
 			</svg>`
 	}
@@ -40,14 +40,5 @@ export class SmoothlyIcon {
 				}
 			/>
 		)
-	}
-	private static async fetch(url: string): Promise<string | undefined> {
-		const response = await fetch(url)
-		return response.ok ? response.text() : undefined
-	}
-	private static cache: { [url: string]: Promise<string | undefined> | undefined } = {}
-	static async load(name: string): Promise<string | undefined> {
-		const url = `https://site-icons.pages.dev/ionicons@5.0.0/dist/svg/${name}.svg`
-		return SmoothlyIcon.cache[url] ?? (SmoothlyIcon.cache[url] = SmoothlyIcon.fetch(url))
 	}
 }
