@@ -15,7 +15,7 @@ export class SmoothlyCheckbox implements Clearable {
 	@Prop() name: string
 	@Prop() value: any
 	@Prop({ reflect: true }) disabled: boolean
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyCheckbox: EventEmitter<[string, any]>
 	@State() t: langly.Translate
 
 	componentWillLoad() {
@@ -26,18 +26,14 @@ export class SmoothlyCheckbox implements Clearable {
 	async toggle(): Promise<void> {
 		if (!this.disabled) {
 			const checked = this.intermediate || this.checked == false
-			this.smoothlyInput.emit({
-				[this.name]: checked ? this.value : undefined,
-			})
+			this.smoothlyCheckbox.emit([this.name, checked ? this.value : undefined])
 			this.checked = checked
 		}
 	}
 	@Method()
 	async clear() {
 		this.checked = false
-		this.smoothlyInput.emit({
-			[this.name]: undefined,
-		})
+		this.smoothlyCheckbox.emit([this.name, undefined])
 	}
 
 	render() {
