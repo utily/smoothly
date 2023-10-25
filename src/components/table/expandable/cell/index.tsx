@@ -24,6 +24,7 @@ export class TableExpandableCell implements ComponentWillLoad {
 	@State() allowSpotlight = true
 	@State() spotlight = true
 	@Prop() align: "left" | "center" | "right" = "left"
+	@Prop() expansionData?: () => HTMLDivElement
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
 	@Event() smoothlyExpansionLoad: EventEmitter<void>
@@ -73,6 +74,7 @@ export class TableExpandableCell implements ComponentWillLoad {
 				</aside>
 				<tr class={{ spotlight: this.spotlight }} ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>
+						{this.open && this.expansionData?.()}
 						<slot name="detail"></slot>
 					</td>
 				</tr>
