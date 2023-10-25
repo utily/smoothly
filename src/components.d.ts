@@ -404,7 +404,6 @@ export namespace Components {
     }
     interface SmoothlyTableExpandableCell {
         "align": "left" | "center" | "right";
-        "expansionData"?: () => HTMLDivElement;
         "open": boolean;
     }
     interface SmoothlyTableExpandableRow {
@@ -1586,7 +1585,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableExpandableCell {
         "align"?: "left" | "center" | "right";
-        "expansionData"?: () => HTMLDivElement;
         "onSmoothlyExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
         "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
         "onSmoothlyExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
