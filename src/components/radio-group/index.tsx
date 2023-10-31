@@ -1,7 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-radio-group",
+	tag: "smoothly-0-radio-group",
 	styleUrl: "style.css",
 })
 export class SmoothlyToggleGroup {

@@ -13,7 +13,7 @@ import {
 } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table-expandable-row",
+	tag: "smoothly-0-table-expandable-row",
 	styleUrl: "style.css",
 	scoped: true,
 })

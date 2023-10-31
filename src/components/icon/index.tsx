@@ -2,7 +2,7 @@ import { Component, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill, Icon } from "../../model"
 
 @Component({
-	tag: "smoothly-icon",
+	tag: "smoothly-0-icon",
 	styleUrl: "style.css",
 	scoped: true,
 })

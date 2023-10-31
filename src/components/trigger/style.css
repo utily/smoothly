@@ -4,12 +4,15 @@
 	border-width: 1px;
 	border-radius: 3px;
 }
+
 :host[hidden] {
 	display: none;
 }
+
 :host[disabled] {
 	opacity: 0.5;
 }
+
 button {
 	border-color: transparent;
 	background-color: transparent;
@@ -17,15 +20,18 @@ button {
 	font-size: 110%;
 	font-weight: 400;
 }
+
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
-	border-color: var(--smoothly-trigger-border);
+	border-color: var(--smoothly-0-trigger-border);
 }
-:host[expand=fill] > button,
-:host[expand=block] > button {
+
+:host[expand=fill]>button,
+:host[expand=block]>button {
 	width: 100%;
 }
+
 :host[expand=fill] {
 	border-left: none;
 	border-right: none;

@@ -1,7 +1,7 @@
 import { Component, Element, h, Host, Listen, State, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-tab-switch",
+	tag: "smoothly-0-tab-switch",
 	styleUrl: "style.css",
 	scoped: true,
 })

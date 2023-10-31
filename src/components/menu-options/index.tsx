@@ -2,7 +2,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 import { Option } from "../../model"
 
 @Component({
-	tag: "smoothly-menu-options",
+	tag: "smoothly-0-menu-options",
 	styleUrl: "style.scss",
 	shadow: true,
 })
@@ -114,7 +114,7 @@ export class SmoothlyMenuOptions {
 			<Host style={{ "--max-menu-height": this.maxMenuHeight }}>
 				{this.filteredOptions.length > 0 ? (
 					this.filteredOptions.map((option, index) => (
-						<smoothly-option
+						<smoothly-0-option
 							style={this.optionStyle}
 							toggle={option.toggle ?? this.toggle}
 							ref={el => {
@@ -127,19 +127,19 @@ export class SmoothlyMenuOptions {
 							divider={option.divider}
 							data-highlight={this.highlightIndex == index}>
 							{option.hint ? <div slot="hint">{option.hint}</div> : undefined}
-						</smoothly-option>
+						</smoothly-0-option>
 					))
 				) : this.mutable ? (
-					<smoothly-option
+					<smoothly-0-option
 						style={this.optionStyle}
 						value={this.keyword}
 						name={this.keyword}
 						data-highlight={0}
 						new={true}>
 						<div slot="left">
-							<smoothly-icon name="square-outline" size="small"></smoothly-icon> {this.newOptionLabel}
+							<smoothly-0-icon name="square-outline" size="small"></smoothly-0-icon> {this.newOptionLabel}
 						</div>
-					</smoothly-option>
+					</smoothly-0-option>
 				) : (
 					<div>{this.emptyMenuLabel}</div>
 				)}

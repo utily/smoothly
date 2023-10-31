@@ -24,7 +24,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 	}
 	const children = nodes.map(node => ({ ...nodeToChild(node), node }))
 	return (
-		<smoothly-app>
+		<smoothly-0-app>
 			<header slot="header">
 				<h1>
 					<a {...href(resolve("") ?? "/")}>{attributes.label}</a>
@@ -49,7 +49,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 											vchildren: [
 												child.vattrs?.icon
 													? childToNode({
-															vtag: "smoothly-icon",
+															vtag: "smoothly-0-icon",
 															vattrs: {
 																toolTip: child.vattrs?.label,
 																name: child.vattrs?.icon,
@@ -105,7 +105,7 @@ export const App: FunctionalComponent<{ label: string }> = (attributes, nodes, u
 						})}
 				</Router.Switch>
 			</main>
-		</smoothly-app>
+		</smoothly-0-app>
 	)
 }
 function resolve(url: string): string | undefined {

@@ -1,7 +1,7 @@
 import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table",
+	tag: "smoothly-0-table",
 	styleUrl: "style.css",
 	scoped: true,
 })

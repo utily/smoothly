@@ -1,7 +1,7 @@
 import { Component, Element, Event, EventEmitter } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-reorder",
+	tag: "smoothly-0-reorder",
 	styleUrl: "style.css",
 })
 export class SmoothlyReorder {

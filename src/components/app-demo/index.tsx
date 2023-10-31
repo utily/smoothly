@@ -4,7 +4,7 @@ import { redirect } from "../../index"
 import { App } from "../App"
 
 @Component({
-	tag: "smoothly-app-demo",
+	tag: "smoothly-0-app-demo",
 })
 export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
@@ -17,78 +17,78 @@ export class SmoothlyAppDemo {
 				<a slot="nav-start" href="https://google.com">
 					External
 				</a>
-				<smoothly-room path="">
-					<smoothly-input type="text">Default</smoothly-input>
+				<smoothly-0-room path="">
+					<smoothly-0-input type="text">Default</smoothly-0-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
-						<smoothly-button fill="solid" color="danger" link="https://google.com">
+						<smoothly-0-button fill="solid" color="danger" link="https://google.com">
 							open
-						</smoothly-button>
-						<smoothly-button
+						</smoothly-0-button>
+						<smoothly-0-button
 							fill="solid"
 							color="danger"
 							link="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
 							download={true}>
 							download
-						</smoothly-button>
-						<smoothly-button fill="solid" color="danger" onClick={() => alert("clicked")}>
+						</smoothly-0-button>
+						<smoothly-0-button fill="solid" color="danger" onClick={() => alert("clicked")}>
 							action
-						</smoothly-button>
-						<smoothly-button disabled fill="solid" color="danger" onClick={() => alert("clicked")}>
+						</smoothly-0-button>
+						<smoothly-0-button disabled fill="solid" color="danger" onClick={() => alert("clicked")}>
 							action
-						</smoothly-button>
-						<smoothly-button type="link" fill="clear" color="danger" onClick={() => alert("clicked")}>
+						</smoothly-0-button>
+						<smoothly-0-button type="link" fill="clear" color="danger" onClick={() => alert("clicked")}>
 							action link
-						</smoothly-button>
+						</smoothly-0-button>
 					</div>
-				</smoothly-room>
-				<smoothly-room path="input" label="Input">
-					<smoothly-input-demo />
-				</smoothly-room>
-				<smoothly-room path="dialog" label="Dialog">
-					<smoothly-dialog-demo />
-				</smoothly-room>
-				<smoothly-room path="display" label="Display" icon="eye-outline">
-					<smoothly-display-demo />
-				</smoothly-room>
-				<smoothly-room path="table" label="Table">
-					<smoothly-table-demo />
-				</smoothly-room>
-				<smoothly-room path="select" label="Select">
-					<smoothly-select-demo />
-				</smoothly-room>
-				<smoothly-room path="icon" label="Icon">
-					<smoothly-icon-demo />
-				</smoothly-room>
-				<smoothly-room path="/redirect" label="Redirect">
-					<smoothly-button
+				</smoothly-0-room>
+				<smoothly-0-room path="input" label="Input">
+					<smoothly-0-input-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="dialog" label="Dialog">
+					<smoothly-0-dialog-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="display" label="Display" icon="eye-outline">
+					<smoothly-0-display-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="table" label="Table">
+					<smoothly-0-table-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="select" label="Select">
+					<smoothly-0-select-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="icon" label="Icon">
+					<smoothly-0-icon-demo />
+				</smoothly-0-room>
+				<smoothly-0-room path="/redirect" label="Redirect">
+					<smoothly-0-button
 						style={{ "max-width": "300px" }}
 						onClick={() => {
 							redirect("/routing/pathParameter1")
 						}}>
 						Internal
-					</smoothly-button>
-					<smoothly-button
+					</smoothly-0-button>
+					<smoothly-0-button
 						style={{ "max-width": "300px" }}
 						onClick={() => {
 							redirect("https://google.com")
 						}}>
 						External
-					</smoothly-button>
-					<smoothly-button
+					</smoothly-0-button>
+					<smoothly-0-button
 						disabled
 						style={{ "max-width": "300px" }}
 						onClick={() => {
 							redirect("https://google.com")
 						}}>
 						External
-					</smoothly-button>
-				</smoothly-room>
-				<smoothly-room path={/^\/routing\/\w+\/?/} label="No effect">
+					</smoothly-0-button>
+				</smoothly-0-room>
+				<smoothly-0-room path={/^\/routing\/\w+\/?/} label="No effect">
 					<h2>Regex routing</h2>
-				</smoothly-room>
-				<smoothly-room path="old" label="Old" to="select"></smoothly-room>
+				</smoothly-0-room>
+				<smoothly-0-room path="old" label="Old" to="select"></smoothly-0-room>
 				<span slot="header" style={{ width: "100%", maxWidth: "500px" }}>
-					<smoothly-picker
+					<smoothly-0-picker
 						label="All Animals Selected"
 						style={{ minWidth: "100px" }}
 						labelSetting="hide"
@@ -108,11 +108,11 @@ export class SmoothlyAppDemo {
 							{ name: "Talking Parrot Parrot", value: "parrot" },
 							{ name: "Hidden Dragon", value: "dragon" },
 							{ name: "Scary Kraken", value: "kraken" },
-						]}></smoothly-picker>
+						]}></smoothly-0-picker>
 				</span>
-				<smoothly-trigger slot="header" type="link" name="logout">
-					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
-				</smoothly-trigger>
+				<smoothly-0-trigger slot="header" type="link" name="logout">
+					<smoothly-0-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-0-icon>
+				</smoothly-0-trigger>
 			</App>
 		)
 	}

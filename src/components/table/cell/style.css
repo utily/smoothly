@@ -3,21 +3,23 @@
 	line-height: 1.5rem;
 	white-space: nowrap;
 	padding: 0.3rem 0 0.3rem 1rem;
-	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
+	border-bottom: 1px solid rgb(var(--smoothly-0-dark-color));
 }
 
-:host smoothly-icon {
+:host smoothly-0-icon {
 	display: none;
 }
 
-:host > div {
+:host>div {
 	display: flex;
 	align-items: center;
 }
-:host > div > div {
+
+:host>div>div {
 	width: 100%;
 }
-:host smoothly-icon {
+
+:host smoothly-0-icon {
 	width: 0.6rem;
 	height: 0.6rem;
 	margin: 0 0.3rem;

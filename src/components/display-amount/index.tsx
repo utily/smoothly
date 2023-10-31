@@ -2,7 +2,7 @@ import { Component, Prop } from "@stencil/core"
 import { Currency } from "isoly"
 
 @Component({
-	tag: "smoothly-display-amount",
+	tag: "smoothly-0-display-amount",
 	styleUrl: "style.css",
 	scoped: true,
 })

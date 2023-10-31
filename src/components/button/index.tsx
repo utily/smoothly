@@ -2,7 +2,7 @@ import { Component, h, Prop } from "@stencil/core"
 import { Color, Expand, Fill } from "../../model"
 
 @Component({
-	tag: "smoothly-button",
+	tag: "smoothly-0-button",
 	styleUrl: "style.css",
 	scoped: true,
 })

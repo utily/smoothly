@@ -5,10 +5,12 @@
 	border-radius: 5px;
 	margin: 0.5em;
 }
+
 :host[hidden] {
 	display: none;
 }
-smoothly-trigger {
+
+smoothly-0-trigger {
 	float: right;
 	text-align: right;
 	margin-right: 0.2em;

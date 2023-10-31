@@ -1,7 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-room",
+	tag: "smoothly-0-room",
 })
 export class SmoothlyRoom {
 	@Prop() label?: string
