@@ -3,7 +3,7 @@ import { Color, Fill, Icon } from "../../model"
 import { alertCircle } from "./alertCircle"
 
 @Component({
-	tag: "smoothly-icon",
+	tag: "smoothly-0-icon",
 	styleUrl: "style.css",
 	scoped: true,
 })

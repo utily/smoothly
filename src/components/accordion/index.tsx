@@ -1,7 +1,7 @@
 import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-accordion",
+	tag: "smoothly-0-accordion",
 	styleUrl: "style.css",
 	scoped: true,
 })

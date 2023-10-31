@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-select",
+	tag: "smoothly-0-select",
 	styleUrl: "style.css",
 	scoped: true,
 })

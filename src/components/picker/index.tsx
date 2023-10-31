@@ -2,7 +2,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, 
 import { Notice, Option } from "../../model"
 
 @Component({
-	tag: "smoothly-picker",
+	tag: "smoothly-0-picker",
 	styleUrl: "style.scss",
 	shadow: true,
 })
@@ -184,7 +184,7 @@ export class SmoothlyPicker {
 				onMouseDown={(e: MouseEvent) => e.preventDefault()}
 				onClick={() => this.onClick()}>
 				<div>
-					<smoothly-icon part="search" class="search" name="search-outline" size="tiny"></smoothly-icon>
+					<smoothly-0-icon part="search" class="search" name="search-outline" size="tiny"></smoothly-0-icon>
 					<label part="label-element">{this.label}</label>
 					<input
 						part="input"
@@ -200,10 +200,10 @@ export class SmoothlyPicker {
 						}
 						onKeyDown={e => this.onKeyDown(e)}
 						onInput={(e: UIEvent) => this.onInput(e)}></input>
-					<smoothly-icon part="chevron" class="down" name="chevron-down" size="tiny"></smoothly-icon>
-					<smoothly-icon part="chevron" class="up" name="chevron-up" size="tiny"></smoothly-icon>
+					<smoothly-0-icon part="chevron" class="down" name="chevron-down" size="tiny"></smoothly-0-icon>
+					<smoothly-0-icon part="chevron" class="up" name="chevron-up" size="tiny"></smoothly-0-icon>
 				</div>
-				<smoothly-menu-options
+				<smoothly-0-menu-options
 					part="menu-options"
 					style={{ width: "100%" }}
 					toggle={true}
@@ -216,7 +216,7 @@ export class SmoothlyPicker {
 					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
-					options={options}></smoothly-menu-options>
+					options={options}></smoothly-0-menu-options>
 			</Host>
 		)
 	}

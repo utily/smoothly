@@ -2,7 +2,7 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-popup",
+	tag: "smoothly-0-popup",
 	styleUrl: "style.css",
 	scoped: true,
 })

@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 @Component({
-	tag: "smoothly-selector",
+	tag: "smoothly-0-selector",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -125,7 +125,7 @@ export class Selector {
 								e.stopPropagation()
 								this.filter = ""
 							}}>
-							<smoothly-icon name="close" size="small"></smoothly-icon>
+							<smoothly-0-icon name="close" size="small"></smoothly-0-icon>
 						</button>
 					</aside>
 				) : undefined}
@@ -140,7 +140,7 @@ export class Selector {
 	}
 	componentDidRender() {
 		const items: HTMLSmoothlyItemElement[] = []
-		const children = this.element.querySelectorAll("div > nav > smoothly-item")
+		const children = this.element.querySelectorAll("div > nav > smoothly-0-item")
 		for (let i = 0; i < children.length; i++) {
 			const node = children.item(i)
 			if (isItem(node))

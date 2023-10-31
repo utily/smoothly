@@ -10,7 +10,7 @@
 	position: relative;
 }
 :host([data-highlight]) {
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--smoothly-0-default-shade));
 }
 :host > div.name {
 	padding-left: 0.5em;
@@ -31,7 +31,7 @@
 	left: 0;
 	bottom: -0.25em;
 	content: "";
-	background-color: rgba(var(--smoothly-dark-color));
+	background-color: rgba(var(--smoothly-0-dark-color));
 }
 ::slotted([slot=hint]) {
 	display: flex;

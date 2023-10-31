@@ -1,45 +1,55 @@
 :host {
 	display: block;
 }
+
 :host[hidden] {
 	display: none;
 }
+
 details {
 	padding: 0;
 }
-details > summary > span {
+
+details>summary>span {
 	float: right;
 	margin: 0.2em;
 	font-size: 60%;
 }
-details > summary {
+
+details>summary {
 	font-size: 120%;
 	list-style-type: none;
 	cursor: pointer;
 	padding: 0.4em;
-	color: rgb(var(--smoothly-text-tint));
+	color: rgb(var(--smoothly-0-text-tint));
 }
-details > fieldset {
+
+details>fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;
 }
-:host[open] > details > summary {
-	color: rgb(var(--smoothly-primary-contrast));
-	background: rgb(var(--smoothly-primary-color));
+
+:host[open]>details>summary {
+	color: rgb(var(--smoothly-0-primary-contrast));
+	background: rgb(var(--smoothly-0-primary-color));
 }
-details > summary::-webkit-details-marker {
+
+details>summary::-webkit-details-marker {
 	display: none;
 }
-details > summary > svg {
+
+details>summary>svg {
 	width: 1em;
 	height: auto;
 	margin-bottom: -0.2em;
 	margin-right: 0.4em;
 }
-:host[open] > details > summary > svg {
-	fill: rgb(var(--smoothly-primary-contrast));
+
+:host[open]>details>summary>svg {
+	fill: rgb(var(--smoothly-0-primary-contrast));
 }
-:host:not([open]) > details > summary > svg {
-	fill: rgb(var(--smoothly-text-tint));
+
+:host:not([open])>details>summary>svg {
+	fill: rgb(var(--smoothly-0-text-tint));
 }

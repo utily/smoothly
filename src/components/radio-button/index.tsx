@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/
 import { Selected } from "./Selected"
 
 @Component({
-	tag: "smoothly-radio-button",
+	tag: "smoothly-0-radio-button",
 	styleUrl: "style.css",
 	scoped: true,
 })

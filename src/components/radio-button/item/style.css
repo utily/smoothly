@@ -5,7 +5,7 @@
 	display: block;
 }
 
-:host > header {
+:host>header {
 	display: flex;
 	align-items: center;
 }
@@ -26,6 +26,6 @@
 	pointer-events: none;
 }
 
-:host[disabled] > header > smoothly-icon {
+:host[disabled]>header>smoothly-0-icon {
 	opacity: 0.25;
 }
