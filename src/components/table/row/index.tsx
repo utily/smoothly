@@ -6,11 +6,11 @@ import { Component, Element, h, Listen } from "@stencil/core"
 	scoped: true,
 })
 export class TableRow {
-	@Element() element: HTMLSmoothlyTableRowElement
-	expansions: HTMLSmoothlyTableExpandableCellElement[] = []
+	@Element() element: HTMLSmoothly0TableRowElement
+	expansions: HTMLSmoothly0TableExpandableCellElement[] = []
 	@Listen("expansionLoad")
 	onExpansionLoad(event: CustomEvent<void>) {
-		this.expansions.push(event.target as HTMLSmoothlyTableExpandableCellElement)
+		this.expansions.push(event.target as HTMLSmoothly0TableExpandableCellElement)
 	}
 	@Listen("expansionOpen")
 	onExpansionOpen(event: CustomEvent<HTMLElement | undefined>) {

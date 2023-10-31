@@ -8,10 +8,10 @@ import { Notice } from "../../model"
 	scoped: true,
 })
 export class SmoothlySelectDemo {
-	private quantityElement?: HTMLSmoothlySelectElement
+	private quantityElement?: HTMLSmoothly0SelectElement
 	private currencies: Currency[] = ["SEK", "EUR"]
 	private currency: Currency = "SEK"
-	private selectorElement: HTMLSmoothlySelectorElement
+	private selectorElement: HTMLSmoothly0SelectorElement
 
 	private alertf() {
 		console.log(this.quantityElement)
@@ -78,7 +78,7 @@ export class SmoothlySelectDemo {
 				}}></smoothly-0-input-date-range>,
 			<smoothly-0-selector
 				initialPrompt="Select..."
-				ref={(element: HTMLSmoothlySelectorElement) => (this.selectorElement = element)}>
+				ref={(element: HTMLSmoothly0SelectorElement) => (this.selectorElement = element)}>
 				<smoothly-0-item value="1">January</smoothly-0-item>
 				<smoothly-0-item value="2">February</smoothly-0-item>
 				<smoothly-0-item value="3">March</smoothly-0-item>

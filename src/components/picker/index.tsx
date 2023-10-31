@@ -9,7 +9,7 @@ import { Notice, Option } from "../../model"
 export class SmoothlyPicker {
 	private inputElement: HTMLInputElement
 	private keepFocusOnReRender = false
-	private menuElement: HTMLSmoothlyMenuOptionsElement
+	private menuElement: HTMLSmoothly0MenuOptionsElement
 	@Element() element: HTMLElement
 	@State() isOpen: boolean
 	@State() empty: boolean
@@ -213,7 +213,7 @@ export class SmoothlyPicker {
 					newOptionLabel={this.newOptionLabel}
 					max-menu-height={this.maxMenuHeight}
 					mutable={this.mutable}
-					ref={(el: HTMLSmoothlyMenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
+					ref={(el: HTMLSmoothly0MenuOptionsElement) => (this.menuElement = el ?? this.menuElement)}
 					onClick={e => e.stopPropagation()}
 					resetHighlightOnOptionsChange={false}
 					options={options}></smoothly-0-menu-options>
