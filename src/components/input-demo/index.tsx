@@ -24,7 +24,10 @@ export class SmoothlyInputDemo {
 						<smoothly-0-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
 							Name
 						</smoothly-0-input>
-						<smoothly-0-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
+						<smoothly-0-input
+							type="text"
+							name="name.first"
+							onSmoothlyChange={e => console.log("smoothly change event")}>
 							Name
 						</smoothly-0-input>
 						<smoothly-0-input-date></smoothly-0-input-date>

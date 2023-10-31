@@ -5,12 +5,12 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 	scoped: true,
 })
 export class Selector {
-	@Element() element: HTMLSmoothlySelectorElement
+	@Element() element: HTMLSmoothly0SelectorElement
 	@Prop() initialPrompt?: string
 	@Prop() disableFilter = false
 	@State() opened = false
-	items: HTMLSmoothlyItemElement[] = []
-	@State() selectedElement?: HTMLSmoothlyItemElement
+	items: HTMLSmoothly0ItemElement[] = []
+	@State() selectedElement?: HTMLSmoothly0ItemElement
 	@State() missing = false
 	mainElement?: HTMLElement
 	@State() filter = ""
@@ -27,7 +27,7 @@ export class Selector {
 	}
 
 	@Watch("selectedElement")
-	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+	onSelectedChange(value: HTMLSmoothly0ItemElement | undefined, old: HTMLSmoothly0ItemElement | undefined) {
 		if (old)
 			old.selected = false
 		this.selected.emit(value?.value)
@@ -48,7 +48,7 @@ export class Selector {
 	}
 	@Listen("itemSelected")
 	onItemSelected(event: Event) {
-		this.selectedElement = event.target as HTMLSmoothlyItemElement
+		this.selectedElement = event.target as HTMLSmoothly0ItemElement
 		if (this.mainElement)
 			this.mainElement.innerHTML = this.selectedElement.innerHTML
 	}
@@ -139,7 +139,7 @@ export class Selector {
 		)
 	}
 	componentDidRender() {
-		const items: HTMLSmoothlyItemElement[] = []
+		const items: HTMLSmoothly0ItemElement[] = []
 		const children = this.element.querySelectorAll("div > nav > smoothly-0-item")
 		for (let i = 0; i < children.length; i++) {
 			const node = children.item(i)
@@ -149,7 +149,7 @@ export class Selector {
 		this.items = items
 	}
 }
-function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
+function isItem(value: HTMLSmoothly0ItemElement | any): value is HTMLSmoothly0ItemElement {
 	return (
 		typeof value == "object" &&
 		(typeof value.selected == "boolean" || value.selected == undefined) &&

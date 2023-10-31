@@ -6,7 +6,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 	scoped: true,
 })
 export class Item {
-	@Element() element: HTMLSmoothlyItemElement
+	@Element() element: HTMLSmoothly0ItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean

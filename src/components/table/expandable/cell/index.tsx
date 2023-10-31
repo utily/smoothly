@@ -20,7 +20,7 @@ import {
 export class TableExpandableCell implements ComponentWillLoad {
 	private expansionElement?: HTMLTableRowElement
 	private beginOpen: boolean
-	@Element() element: HTMLSmoothlyTableExpandableCellElement
+	@Element() element: HTMLSmoothly0TableExpandableCellElement
 	@State() allowSpotlight = true
 	@State() spotlight = true
 	@Prop() align: "left" | "center" | "right" = "left"

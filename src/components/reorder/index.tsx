@@ -6,7 +6,7 @@ import { Component, Element, Event, EventEmitter } from "@stencil/core"
 })
 export class SmoothlyReorder {
 	@Event() reorder: EventEmitter<[number, number]>
-	@Element() element: HTMLSmoothlyReorderElement
+	@Element() element: HTMLSmoothly0ReorderElement
 	private bounds?: DOMRect
 	private childrenCache?: Draggable[]
 	private get children(): Draggable[] {

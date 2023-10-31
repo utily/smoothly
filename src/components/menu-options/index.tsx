@@ -7,8 +7,8 @@ import { Option } from "../../model"
 	shadow: true,
 })
 export class SmoothlyMenuOptions {
-	private firstOptionsElement: HTMLSmoothlyOptionElement
-	private optionElements: HTMLSmoothlyOptionElement[] = []
+	private firstOptionsElement: HTMLSmoothly0OptionElement
+	private optionElements: HTMLSmoothly0OptionElement[] = []
 	@Element() element: HTMLElement
 	@State() filteredOptions: (Option & { checked?: boolean })[] = []
 	@State() highlightIndex = 0

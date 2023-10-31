@@ -6,17 +6,17 @@ import { Component, Element, h, Host, Listen, State, Watch } from "@stencil/core
 	scoped: true,
 })
 export class SmoothlyTabSwitch {
-	@Element() element: HTMLSmoothlyTabSwitchElement
-	@State() selectedElement: HTMLSmoothlyTabElement
+	@Element() element: HTMLSmoothly0TabSwitchElement
+	@State() selectedElement: HTMLSmoothly0TabElement
 	@Listen("expansionOpen")
 	openChanged(event: CustomEvent) {
 		event.stopPropagation()
-		this.selectedElement = event.target as HTMLSmoothlyTabElement
+		this.selectedElement = event.target as HTMLSmoothly0TabElement
 		this.selectedElement.open = true
 		this.element.after(event.detail)
 	}
 	@Watch("selectedElement")
-	onSelectedChange(value: HTMLSmoothlyTabElement, old: HTMLSmoothlyTabElement) {
+	onSelectedChange(value: HTMLSmoothly0TabElement, old: HTMLSmoothly0TabElement) {
 		if (old)
 			old.open = false
 	}
