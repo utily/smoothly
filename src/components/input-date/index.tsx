@@ -3,7 +3,7 @@ import { Date } from "isoly"
 import { Color } from "../../model"
 
 @Component({
-	tag: "smoothly-input-date",
+	tag: "smoothly-0-input-date",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -28,7 +28,7 @@ export class InputDate {
 	}
 	render() {
 		return [
-			<smoothly-input
+			<smoothly-0-input
 				name={this.name}
 				onFocus={() => (this.open = !this.open)}
 				onClick={() => (this.open = !this.open)}
@@ -37,13 +37,13 @@ export class InputDate {
 				value={this.value}
 				onSmoothlyInput={e => (this.value = e.detail.value)}>
 				<slot></slot>
-			</smoothly-input>,
+			</smoothly-0-input>,
 			this.open && !this.disabled
 				? [
 						<div onClick={() => (this.open = false)}></div>,
 						<nav class={{ flexible: this.flexible }}>
 							<div class="arrow" color={this.color}></div>
-							<smoothly-calendar
+							<smoothly-0-calendar
 								doubleInput={false}
 								value={this.value ?? Date.now()}
 								onValueChanged={event => {
@@ -52,7 +52,7 @@ export class InputDate {
 								}}
 								color={this.color}
 								max={this.max}
-								min={this.min}></smoothly-calendar>
+								min={this.min}></smoothly-0-calendar>
 						</nav>,
 				  ]
 				: [],

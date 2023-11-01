@@ -1,7 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-urlencoded",
+	tag: "smoothly-0-urlencoded",
 })
 export class Urlencoded {
 	@Prop() data: string // TODO: Consider using a specific type for this
@@ -9,6 +9,6 @@ export class Urlencoded {
 		return this.data
 			.split("&")
 			.map(p => p.split("=") as [string, string])
-			.map(tuple => <smoothly-tuple tuple={tuple}></smoothly-tuple>)
+			.map(tuple => <smoothly-0-tuple tuple={tuple}></smoothly-0-tuple>)
 	}
 }

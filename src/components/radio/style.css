@@ -2,14 +2,17 @@
 	display: block;
 	position: relative;
 }
+
 :host[hidden] {
 	display: none;
 }
+
 label {
 	display: block;
 	width: calc(100% - 2 * 0.4em);
 	padding: 0.2em 0.4em 0.2em 0.4em;
 }
+
 input[type=radio] {
 	position: absolute;
 	left: 0;
@@ -20,12 +23,14 @@ input[type=radio] {
 	appearance: none;
 	-webkit-appearance: none;
 }
-input[type=radio] ~ label {
-	border: 1px solid rgb(var(--smoothly-default-color));
-	color: rgba(var(--smoothly-default-contrast), 0.5);
-	background: rgb(var(--smoothly-default-color));
+
+input[type=radio]~label {
+	border: 1px solid rgb(var(--smoothly-0-default-color));
+	color: rgba(var(--smoothly-0-default-contrast), 0.5);
+	background: rgb(var(--smoothly-0-default-color));
 }
-input[type=radio]:checked ~ label {
-	background-color: rgb(var(--smoothly-default-shade));
-	color: rgb(var(--smoothly-default-contrast));
+
+input[type=radio]:checked~label {
+	background-color: rgb(var(--smoothly-0-default-shade));
+	color: rgb(var(--smoothly-0-default-contrast));
 }

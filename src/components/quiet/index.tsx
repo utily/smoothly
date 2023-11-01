@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-quiet",
+	tag: "smoothly-0-quiet",
 	styleUrl: "style.css",
 	scoped: true,
 })

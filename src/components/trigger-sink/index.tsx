@@ -2,7 +2,7 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 
 @Component({
-	tag: "smoothly-trigger-sink",
+	tag: "smoothly-0-trigger-sink",
 	styleUrl: "style.css",
 	scoped: true,
 })

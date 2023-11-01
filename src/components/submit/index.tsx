@@ -3,7 +3,7 @@ import { Color, Expand, Fill } from "../../model"
 import { Data } from "./Data"
 
 @Component({
-	tag: "smoothly-submit",
+	tag: "smoothly-0-submit",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -33,8 +33,8 @@ export class SmoothlySubmit {
 					if (hasNameAndValue(element) && element.name)
 						result[element.name] = element.value
 				}
-				// Overwrite values with values from smoothly-input
-				const smoothlyInputs = this.form.getElementsByTagName("smoothly-input")
+				// Overwrite values with values from smoothly-0-input
+				const smoothlyInputs = this.form.getElementsByTagName("smoothly-0-input")
 				for (let i = 0; i < smoothlyInputs.length; i++) {
 					const element = smoothlyInputs.item(i)
 					if (hasNameAndValue(element) && element.name)
@@ -60,7 +60,7 @@ export class SmoothlySubmit {
 	render() {
 		return (
 			<Host onClick={(e: MouseEvent) => this.handleClick(e)}>
-				<smoothly-spinner active={this.processing}></smoothly-spinner>
+				<smoothly-0-spinner active={this.processing}></smoothly-0-spinner>
 				<button
 					type="submit"
 					disabled={this.disabled || this.processing}

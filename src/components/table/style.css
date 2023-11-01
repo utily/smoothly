@@ -2,14 +2,16 @@
 	display: table;
 	width: var(--table-width, 80%);
 	box-sizing: border-box;
-	background-color: rgb(var(--smoothly-default-color));
+	background-color: rgb(var(--smoothly-0-default-color));
 }
+
 :host[root] {
 	margin-left: auto;
 	margin-right: auto;
 	margin-left: 1.5rem;
 	margin-right: 1.5rem;
 }
+
 :host:not([root]) {
 	margin: 0;
 	width: 100%;

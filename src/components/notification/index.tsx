@@ -3,7 +3,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } f
 import { Color, Notice, Trigger } from "../../model"
 
 @Component({
-	tag: "smoothly-notification",
+	tag: "smoothly-0-notification",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -61,9 +61,9 @@ export class Notification {
 	render() {
 		return (
 			<Host color={this.color} fill="solid">
-				<smoothly-trigger fill="clear" name="close">
-					<smoothly-icon name="close-circle-outline"></smoothly-icon>
-				</smoothly-trigger>
+				<smoothly-0-trigger fill="clear" name="close">
+					<smoothly-0-icon name="close-circle-outline"></smoothly-0-icon>
+				</smoothly-0-trigger>
 				<p>{this.notice.message}</p>
 			</Host>
 		)

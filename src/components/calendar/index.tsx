@@ -4,7 +4,7 @@ import { Color } from "../../model"
 import * as generate from "./generate"
 
 @Component({
-	tag: "smoothly-calendar",
+	tag: "smoothly-0-calendar",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -68,12 +68,12 @@ export class Calendar {
 	render() {
 		return (
 			<Host>
-				<smoothly-input-month
+				<smoothly-0-input-month
 					value={this.month ?? this.value}
 					onValueChanged={event => {
 						this.month = event.detail
 						event.stopPropagation()
-					}}></smoothly-input-month>
+					}}></smoothly-0-input-month>
 				<table>
 					<thead>
 						<tr>

@@ -1,13 +1,14 @@
 :host {
-	--background-color: var(--smoothly-default-color), 1;
-	--color: var(--smoothly-secondary-contrast);
-	--border-color: var(--smoothly-default-shade), 1;
-	--border-highlight-color: var(--smoothly-secondary-contrast), 1;
-	--label-color: var(--smoothly-secondary-contrast), 0.8;
+	--background-color: var(--smoothly-0-default-color), 1;
+	--color: var(--smoothly-0-secondary-contrast);
+	--border-color: var(--smoothly-0-default-shade), 1;
+	--border-highlight-color: var(--smoothly-0-secondary-contrast), 1;
+	--label-color: var(--smoothly-0-secondary-contrast), 0.8;
 	--selected-item-border-radius: 0.25rem;
-	--selected-item-background-color: var(--smoothly-secondary-color), 1;
+	--selected-item-background-color: var(--smoothly-0-secondary-color), 1;
 	--selected-item-color: 255, 255, 255, 1;
 }
+
 :host {
 	display: block;
 	position: relative;
@@ -21,18 +22,22 @@
 	height: 2.5rem;
 	border-radius: 0.25rem;
 }
-:host([disabled]){
+
+:host([disabled]) {
 	cursor: default;
-	div > input {
+
+	div>input {
 		cursor: default;
 	}
 }
+
 :host(:focus-within) {
-	border-color: rgb(var(--smoothly-primary-shade));
+	border-color: rgb(var(--smoothly-0-primary-shade));
 	border-width: 2px;
 	margin: 0px;
 }
-:host > div {
+
+:host>div {
 	display: flex;
 	background-color: transparent;
 	min-height: 2.5rem;
@@ -40,7 +45,8 @@
 	align-self: center;
 	border: none;
 	max-height: var(--max-height);
-	.icons > smoothly-icon {
+
+	.icons>smoothly-0-icon {
 		flex-shrink: 0;
 		padding-left: 0.6em;
 		stroke: rgba(var(--color), 0.4);
@@ -49,10 +55,12 @@
 		width: 1.5em !important;
 		/* stylelint-disable-next-line declaration-no-important */
 		height: 1.5em !important;
+
 		&:hover {
 			fill: rgba(var(--color), 1);
 		}
 	}
+
 	input {
 		width: 100%;
 		background-color: transparent;
@@ -61,22 +69,26 @@
 		cursor: pointer;
 		color: rgb(var(--color));
 		padding: 0 0.6rem;
-		font-family: var(--smoothly-font-family);
+		font-family: var(--smoothly-0-font-family);
 		font-size: 1.05rem;
+
 		&::placeholder {
 			opacity: 1;
 			text-overflow: ellipsis;
 		}
 	}
 }
-:host([is-open]) > div input {
-	color: rgb(var(--smoothly-medium-color));
+
+:host([is-open])>div input {
+	color: rgb(var(--smoothly-0-medium-color));
 }
-:host(:not(:focus-within)[multiple]) ul > li:last-child {
+
+:host(:not(:focus-within)[multiple]) ul>li:last-child {
 	/* Remove Input out of the CSS flow Layout. This way input takes up no extra space */
 	position: absolute;
 	pointer-events: none;
 }
+
 /* stylelint-disable selector-attribute-quotes */
 :host([label=""]) ul,
 /* stylelint-enable selector-attribute-quotes */
@@ -85,58 +97,69 @@
 	padding-top: 0.1rem;
 	padding-bottom: 0.1rem;
 }
+
 label {
 	padding-left: 0.6rem;
 	white-space: nowrap;
 	color: rgba(var(--label-color));
 	transition: var(--intergiro-transition);
-	font-family: var(--smoothly-font-family);
+	font-family: var(--smoothly-0-font-family);
 	pointer-events: none;
 	transform-origin: left;
 }
+
 :host([has-selection]) label {
 	display: var(--label-display);
 }
+
 :host([has-selection]) label,
 :host(:focus-within) label {
 	display: none;
 }
-:host(:hover) smoothly-icon[data-arrow],
-:host(:focus-within) smoothly-icon[data-arrow] {
+
+:host(:hover) smoothly-0-icon[data-arrow],
+:host(:focus-within) smoothly-0-icon[data-arrow] {
 	stroke: rgba(var(--color), 1);
 }
-:host smoothly-icon[data-arrow] {
+
+:host smoothly-0-icon[data-arrow] {
 	pointer-events: none;
 }
-:host smoothly-icon {
+
+:host smoothly-0-icon {
 	flex-shrink: 0;
 	width: 1rem;
 	height: 1rem;
 }
-:host(:not([is-open])) smoothly-icon.up,
-:host([is-open]) smoothly-icon.down {
+
+:host(:not([is-open])) smoothly-0-icon.up,
+:host([is-open]) smoothly-0-icon.down {
 	display: none;
 }
-smoothly-icon.search {
+
+smoothly-0-icon.search {
 	display: flex;
 	align-self: center;
 	padding-left: 0.8rem;
 }
-smoothly-icon.up,
-smoothly-icon.down {
+
+smoothly-0-icon.up,
+smoothly-0-icon.down {
 	display: flex;
 	align-self: center;
 	padding-right: 0.8rem;
-	stroke: rgb(var(--smoothly-primary-shade));
+	stroke: rgb(var(--smoothly-0-primary-shade));
 }
-:host smoothly-menu-options {
+
+:host smoothly-0-menu-options {
 	margin-top: 0.5rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 	position: absolute;
 	z-index: 1;
 }
-:host(:not([is-open])) > smoothly-menu-options {
+
+:host(:not([is-open]))>smoothly-0-menu-options {
 	/* hide options by default */
 	display: none;
 }

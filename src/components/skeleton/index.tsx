@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-skeleton",
+	tag: "smoothly-0-skeleton",
 	styleUrl: "style.css",
 	scoped: true,
 })

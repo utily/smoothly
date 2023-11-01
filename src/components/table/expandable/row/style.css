@@ -3,41 +3,47 @@
 	cursor: pointer;
 	line-height: 1.5rem;
 }
+
 :host[open] {
 	position: relative;
 	z-index: 3;
-	background-color: rgb(var(--smoothly-default-color));
-	box-shadow: -1px 0 0 0 rgb(var(--smoothly-dark-color)) inset, 
-		1px 0 0 0 rgb(var(--smoothly-dark-color)) inset;
+	background-color: rgb(var(--smoothly-0-default-color));
+	box-shadow: -1px 0 0 0 rgb(var(--smoothly-0-dark-color)) inset,
+		1px 0 0 0 rgb(var(--smoothly-0-dark-color)) inset;
 }
-:host[open]::slotted(*) smoothly-table-cell,
-:host[open]::slotted(smoothly-table-cell) {
+
+:host[open]::slotted(*) smoothly-0-table-cell,
+:host[open]::slotted(smoothly-0-table-cell) {
 	border-bottom: none;
 }
 
 .hide {
 	display: none;
 }
-:host > tr > td {
+
+:host>tr>td {
 	position: relative;
 }
+
 td::slotted(*) {
 	--expansion-width: 1.5rem;
 	--expansion-border-width: 3px;
 	position: relative;
-	background-color: rgb(var(--smoothly-default-color));
+	background-color: rgb(var(--smoothly-0-default-color));
 	width: calc(100% + 3rem - var(--expansion-border-width));
 	left: calc(-1 * var(--expansion-width));
 	border-left: var(--expansion-border-width) solid rgb(0, 0, 0, 0);
-	box-shadow: 0px 0px 4px 2px rgb(var(--smoothly-dark-color));
+	box-shadow: 0px 0px 4px 2px rgb(var(--smoothly-0-dark-color));
 	box-sizing: border-box;
 	padding: 0.5rem calc(var(--expansion-width) - var(--expansion-border-width));
-	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
+	border-bottom: 1px solid rgb(var(--smoothly-0-dark-color));
 	border-left-width: 3px;
 }
-tr.spotlight > td::slotted(*) {
-	border-left-color: rgb(var(--smoothly-tertiary-color));
+
+tr.spotlight>td::slotted(*) {
+	border-left-color: rgb(var(--smoothly-0-tertiary-color));
 }
+
 td::slotted(*)::before {
 	content: "";
 	position: absolute;
@@ -46,8 +52,9 @@ td::slotted(*)::before {
 	bottom: 0;
 	left: -3px;
 	width: calc(var(--expansion-width) + 1px);
-	border-top: 1px solid rgb(var(--smoothly-dark-color));
+	border-top: 1px solid rgb(var(--smoothly-0-dark-color));
 }
+
 td::slotted(*)::after {
 	content: "";
 	position: absolute;
@@ -56,13 +63,15 @@ td::slotted(*)::after {
 	bottom: 0;
 	right: 0;
 	width: calc(var(--expansion-width) -1px);
-	border-top: 1px solid rgb(var(--smoothly-dark-color));
+	border-top: 1px solid rgb(var(--smoothly-0-dark-color));
 }
-:host::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+
+:host::slotted(*) smoothly-0-table-cell:last-of-type>div>smoothly-0-icon:last-of-type,
+:host::slotted(smoothly-0-table-cell:last-of-type)>div>smoothly-0-icon:last-of-type {
 	display: flex;
 }
-:host[open]::slotted(*) smoothly-table-cell:last-of-type > div > smoothly-icon:last-of-type,
-:host[open]::slotted(smoothly-table-cell:last-of-type) > div > smoothly-icon:last-of-type {
+
+:host[open]::slotted(*) smoothly-0-table-cell:last-of-type>div>smoothly-0-icon:last-of-type,
+:host[open]::slotted(smoothly-0-table-cell:last-of-type)>div>smoothly-0-icon:last-of-type {
 	transform: rotate(90deg);
 }

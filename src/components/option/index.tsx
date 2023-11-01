@@ -1,7 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-option",
+	tag: "smoothly-0-option",
 	styleUrl: "style.css",
 	shadow: true,
 })
@@ -32,17 +32,17 @@ export class SmoothlyOption {
 				: this.optionUnselect.emit({ name: this.name, value: this.value })
 			this.toggle && (this.checked = !this.checked)
 		} else
-			throw `smoothly-option ${this.element.innerHTML} lacks value-property and can therefore not be selected`
+			throw `smoothly-0-option ${this.element.innerHTML} lacks value-property and can therefore not be selected`
 	}
 
 	render() {
 		return (
 			<Host onMouseDown={(e: any) => this.onSelect(e)} onMouseOver={(e: MouseEvent) => this.onHover(e)}>
-				{this.toggle && <smoothly-icon name={this.checked ? "checkbox" : "square-outline"}></smoothly-icon>}
+				{this.toggle && <smoothly-0-icon name={this.checked ? "checkbox" : "square-outline"}></smoothly-0-icon>}
 				<div class="name">{this.name}</div>
-				<smoothly-quiet>
+				<smoothly-0-quiet>
 					<slot name="hint"></slot>
-				</smoothly-quiet>
+				</smoothly-0-quiet>
 			</Host>
 		)
 	}

@@ -2,24 +2,29 @@
 	display: inline;
 	border: none;
 }
+
 :host:not([type=link]) {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
+
 :host {
 	margin: 1em;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 3px;
 }
+
 :host[hidden] {
 	display: none;
 }
+
 :host[disabled] {
 	opacity: 0.5;
 	pointer-events: none;
 }
+
 a,
 button {
 	display: block;
@@ -29,23 +34,28 @@ button {
 	font-size: 110%;
 	font-weight: 400;
 }
+
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
-	border-color: var(--smoothly-button-border);
+	border-color: var(--smoothly-0-button-border);
 }
-:host[type=button] > a {
+
+:host[type=button]>a {
 	display: block;
 	text-align: center;
 	text-decoration: inherit;
 }
-:host[type=button] > a {
+
+:host[type=button]>a {
 	width: calc(100% - 0.6em);
 }
-:host > button {
+
+:host>button {
 	height: 100%;
 	width: 100%;
 }
+
 :host[expand=fill] {
 	width: 100%;
 	border-left: none;

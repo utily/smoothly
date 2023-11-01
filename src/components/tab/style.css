@@ -1,11 +1,13 @@
 :host([open]) {
-	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
+	border-bottom: 3px solid rgb(var(--smoothly-0-primary-color));
 	box-sizing: border-box;
 	margin-bottom: -3px;
 }
+
 .hide {
 	display: none;
 }
+
 label {
 	display: block;
 	padding: .5rem;

@@ -1,7 +1,7 @@
 import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table",
+	tag: "smoothly-0-table",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -9,7 +9,7 @@ export class Table implements ComponentWillLoad {
 	private owner?: EventTarget
 	private expandable: Map<EventTarget, { allowSpotlight: (allowed: boolean) => void } | undefined> = new Map()
 	private expanded: Set<EventTarget> = new Set()
-	@Element() element: HTMLSmoothlyTableElement
+	@Element() element: HTMLSmoothly0TableElement
 	@Prop({ mutable: true, reflect: true }) root = true
 	@Event() smoothlyNestedTable: EventEmitter<() => void>
 	@Event() spotlightChange: EventEmitter<{ allowSpotlight: boolean; owner?: EventTarget }>

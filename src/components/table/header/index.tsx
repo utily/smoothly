@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table-header",
+	tag: "smoothly-0-table-header",
 	styleUrl: "style.css",
 	scoped: true,
 })

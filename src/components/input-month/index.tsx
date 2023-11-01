@@ -3,7 +3,7 @@ import { Date } from "isoly"
 import * as generate from "../calendar/generate"
 
 @Component({
-	tag: "smoothly-input-month",
+	tag: "smoothly-0-input-month",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -22,24 +22,24 @@ export class MonthSelector {
 	render() {
 		return [
 			<div onClick={() => this.adjustMonth(-1)}>
-				<smoothly-icon name="chevron-back-outline" size="tiny"></smoothly-icon>
+				<smoothly-0-icon name="chevron-back-outline" size="tiny"></smoothly-0-icon>
 			</div>,
-			<smoothly-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			<smoothly-0-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.years(this.value ?? Date.now()).map(year => (
-					<smoothly-item value={year.date} selected={year.selected}>
+					<smoothly-0-item value={year.date} selected={year.selected}>
 						{year.name}
-					</smoothly-item>
+					</smoothly-0-item>
 				))}
-			</smoothly-selector>,
-			<smoothly-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			</smoothly-0-selector>,
+			<smoothly-0-selector onSelected={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.months(this.value ?? Date.now()).map(month => (
-					<smoothly-item value={month.date} selected={month.selected}>
+					<smoothly-0-item value={month.date} selected={month.selected}>
 						{month.name}
-					</smoothly-item>
+					</smoothly-0-item>
 				))}
-			</smoothly-selector>,
+			</smoothly-0-selector>,
 			<div onClick={() => this.adjustMonth(1)}>
-				<smoothly-icon name="chevron-forward-outline" size="tiny"></smoothly-icon>
+				<smoothly-0-icon name="chevron-forward-outline" size="tiny"></smoothly-0-icon>
 			</div>,
 		]
 	}

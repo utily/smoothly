@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-svg",
+	tag: "smoothly-0-svg",
 	styleUrl: "style.css",
 	scoped: true,
 })

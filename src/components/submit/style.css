@@ -16,16 +16,16 @@ button {
 	font-weight: 400;
 }
 :host[processing] {
-	border-color: rgb(var(--smoothly-light-color));
+	border-color: rgb(var(--smoothly-0-light-color));
 }
 :host[processing] > button {
-	color: rgb(var(--smoothly-light-contrast));
-	background: rgb(var(--smoothly-light-color));
+	color: rgb(var(--smoothly-0-light-contrast));
+	background: rgb(var(--smoothly-0-light-color));
 }
 :host:not([processing]):not([disabled]):hover,
 :host:not([processing]):not([disabled]):focus,
 :host:not([processing]):not([disabled]):active {
-	border-color: rgb(var(--smoothly-submit-border));
+	border-color: rgb(var(--smoothly-0-submit-border));
 }
 :host[expand=fill] > button,
 :host[expand=block] > button {

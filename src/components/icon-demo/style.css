@@ -5,12 +5,12 @@
 	margin: auto;
 }
 
-:host > div {
+:host>div {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 
-:host > div > smoothly-icon {
+:host>div>smoothly-0-icon {
 	margin: 1.5rem;
 }

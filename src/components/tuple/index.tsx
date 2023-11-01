@@ -1,7 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-tuple",
+	tag: "smoothly-0-tuple",
 })
 export class SmoothlyTuple {
 	@Prop() tuple: [string, string]

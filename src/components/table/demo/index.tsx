@@ -1,193 +1,193 @@
 import { Component, h } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table-demo",
+	tag: "smoothly-0-table-demo",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class TableDemo {
 	render() {
 		return [
-			<smoothly-table>
-				<smoothly-table-row>
-					<smoothly-table-header>Header A</smoothly-table-header>
-					<smoothly-table-header>Header B</smoothly-table-header>
-					<smoothly-table-header>Header C</smoothly-table-header>
-					<smoothly-table-header>Header D</smoothly-table-header>
-				</smoothly-table-row>
-				<smoothly-table-row>
-					<smoothly-table-expandable-cell open>
+			<smoothly-0-table>
+				<smoothly-0-table-row>
+					<smoothly-0-table-header>Header A</smoothly-0-table-header>
+					<smoothly-0-table-header>Header B</smoothly-0-table-header>
+					<smoothly-0-table-header>Header C</smoothly-0-table-header>
+					<smoothly-0-table-header>Header D</smoothly-0-table-header>
+				</smoothly-0-table-row>
+				<smoothly-0-table-row>
+					<smoothly-0-table-expandable-cell open>
 						normal row (exp.cell)
 						<div slot="detail">expandable cell 1 content</div>
-					</smoothly-table-expandable-cell>
-					<smoothly-table-expandable-cell>
+					</smoothly-0-table-expandable-cell>
+					<smoothly-0-table-expandable-cell>
 						expandable cell
 						<div slot="detail">expandable cell 2 content</div>
-					</smoothly-table-expandable-cell>
-					<smoothly-table-expandable-cell>
+					</smoothly-0-table-expandable-cell>
+					<smoothly-0-table-expandable-cell>
 						expandable cell
 						<div slot="detail">expandable cell 3 content</div>
-					</smoothly-table-expandable-cell>
-					<smoothly-table-expandable-cell>
+					</smoothly-0-table-expandable-cell>
+					<smoothly-0-table-expandable-cell>
 						expandable cell
 						<div slot="detail">expandable cell 4 content</div>
-					</smoothly-table-expandable-cell>
-				</smoothly-table-row>
+					</smoothly-0-table-expandable-cell>
+				</smoothly-0-table-row>
 
-				<smoothly-table-row>
-					<smoothly-table-cell>normal row (nor.cell)"</smoothly-table-cell>
-					<smoothly-table-cell>normal cell</smoothly-table-cell>
-					<smoothly-table-expandable-cell open>
+				<smoothly-0-table-row>
+					<smoothly-0-table-cell>normal row (nor.cell)"</smoothly-0-table-cell>
+					<smoothly-0-table-cell>normal cell</smoothly-0-table-cell>
+					<smoothly-0-table-expandable-cell open>
 						expandable cell
 						<div slot="detail">expandable cell details.</div>
-					</smoothly-table-expandable-cell>
-					<smoothly-table-expandable-cell>
+					</smoothly-0-table-expandable-cell>
+					<smoothly-0-table-expandable-cell>
 						expandable cell
 						<div slot="detail">expandable cell details.</div>
-					</smoothly-table-expandable-cell>
-				</smoothly-table-row>
+					</smoothly-0-table-expandable-cell>
+				</smoothly-0-table-row>
 
-				<smoothly-table-expandable-row>
-					<smoothly-table-cell>expandable row (nor.cell)</smoothly-table-cell>
-					<smoothly-table-cell>Normal cell</smoothly-table-cell>
-					<smoothly-table-cell>normal cell</smoothly-table-cell>
-					<smoothly-table-cell>Normal cell</smoothly-table-cell>
+				<smoothly-0-table-expandable-row>
+					<smoothly-0-table-cell>expandable row (nor.cell)</smoothly-0-table-cell>
+					<smoothly-0-table-cell>Normal cell</smoothly-0-table-cell>
+					<smoothly-0-table-cell>normal cell</smoothly-0-table-cell>
+					<smoothly-0-table-cell>Normal cell</smoothly-0-table-cell>
 					<div slot="detail">expandable row content</div>
-				</smoothly-table-expandable-row>
-			</smoothly-table>,
-			<smoothly-table>
-				<smoothly-table-row>
-					<smoothly-table-header>Header A</smoothly-table-header>
-				</smoothly-table-row>
-				<smoothly-table-expandable-row>
-					<smoothly-table-cell>A Content</smoothly-table-cell>
+				</smoothly-0-table-expandable-row>
+			</smoothly-0-table>,
+			<smoothly-0-table>
+				<smoothly-0-table-row>
+					<smoothly-0-table-header>Header A</smoothly-0-table-header>
+				</smoothly-0-table-row>
+				<smoothly-0-table-expandable-row>
+					<smoothly-0-table-cell>A Content</smoothly-0-table-cell>
 					<div slot="detail">
-						<smoothly-tab-switch>
-							<smoothly-tab label="innertable 1" open={true}>
-								<smoothly-table>
-									<smoothly-table-row>
-										<smoothly-table-header>Header B</smoothly-table-header>
-									</smoothly-table-row>
-									<smoothly-table-expandable-row>B Content</smoothly-table-expandable-row>
-								</smoothly-table>
-							</smoothly-tab>
-							<smoothly-tab label="innertable 2">
-								<smoothly-table>
-									<smoothly-table-row>
-										<smoothly-table-header>Header C</smoothly-table-header>
-									</smoothly-table-row>
-									<smoothly-table-expandable-row>
-										<smoothly-table-cell>C Content</smoothly-table-cell>
-									</smoothly-table-expandable-row>
-								</smoothly-table>
-							</smoothly-tab>
-						</smoothly-tab-switch>
+						<smoothly-0-tab-switch>
+							<smoothly-0-tab label="innertable 1" open={true}>
+								<smoothly-0-table>
+									<smoothly-0-table-row>
+										<smoothly-0-table-header>Header B</smoothly-0-table-header>
+									</smoothly-0-table-row>
+									<smoothly-0-table-expandable-row>B Content</smoothly-0-table-expandable-row>
+								</smoothly-0-table>
+							</smoothly-0-tab>
+							<smoothly-0-tab label="innertable 2">
+								<smoothly-0-table>
+									<smoothly-0-table-row>
+										<smoothly-0-table-header>Header C</smoothly-0-table-header>
+									</smoothly-0-table-row>
+									<smoothly-0-table-expandable-row>
+										<smoothly-0-table-cell>C Content</smoothly-0-table-cell>
+									</smoothly-0-table-expandable-row>
+								</smoothly-0-table>
+							</smoothly-0-tab>
+						</smoothly-0-tab-switch>
 					</div>
-				</smoothly-table-expandable-row>
-			</smoothly-table>,
-			<smoothly-table>
-				<smoothly-table-row>
-					<smoothly-table-header>A</smoothly-table-header>
-					<smoothly-table-header>B</smoothly-table-header>
-				</smoothly-table-row>
-				<smoothly-table-expandable-row>
-					<smoothly-table-cell>a row</smoothly-table-cell>
-					<smoothly-table-cell>b row</smoothly-table-cell>
+				</smoothly-0-table-expandable-row>
+			</smoothly-0-table>,
+			<smoothly-0-table>
+				<smoothly-0-table-row>
+					<smoothly-0-table-header>A</smoothly-0-table-header>
+					<smoothly-0-table-header>B</smoothly-0-table-header>
+				</smoothly-0-table-row>
+				<smoothly-0-table-expandable-row>
+					<smoothly-0-table-cell>a row</smoothly-0-table-cell>
+					<smoothly-0-table-cell>b row</smoothly-0-table-cell>
 					<div slot="detail">
-						<smoothly-table>
-							<smoothly-table-row>
-								<smoothly-table-header>C</smoothly-table-header>
-								<smoothly-table-header>D</smoothly-table-header>
-							</smoothly-table-row>
-							<smoothly-table-expandable-row>
-								<smoothly-table-cell>c</smoothly-table-cell>
-								<smoothly-table-cell>d</smoothly-table-cell>
+						<smoothly-0-table>
+							<smoothly-0-table-row>
+								<smoothly-0-table-header>C</smoothly-0-table-header>
+								<smoothly-0-table-header>D</smoothly-0-table-header>
+							</smoothly-0-table-row>
+							<smoothly-0-table-expandable-row>
+								<smoothly-0-table-cell>c</smoothly-0-table-cell>
+								<smoothly-0-table-cell>d</smoothly-0-table-cell>
 								<div slot="detail">
-									<smoothly-table>
-										<smoothly-table-row>
-											<smoothly-table-header>E</smoothly-table-header>
-											<smoothly-table-header>F</smoothly-table-header>
-										</smoothly-table-row>
-										<smoothly-table-expandable-row>
-											<smoothly-table-cell>e row</smoothly-table-cell>
-											<smoothly-table-cell>f row</smoothly-table-cell>
+									<smoothly-0-table>
+										<smoothly-0-table-row>
+											<smoothly-0-table-header>E</smoothly-0-table-header>
+											<smoothly-0-table-header>F</smoothly-0-table-header>
+										</smoothly-0-table-row>
+										<smoothly-0-table-expandable-row>
+											<smoothly-0-table-cell>e row</smoothly-0-table-cell>
+											<smoothly-0-table-cell>f row</smoothly-0-table-cell>
 											<div slot="detail">nested expandable row expansion e f</div>
-										</smoothly-table-expandable-row>
-									</smoothly-table>
+										</smoothly-0-table-expandable-row>
+									</smoothly-0-table>
 								</div>
-							</smoothly-table-expandable-row>
-						</smoothly-table>
+							</smoothly-0-table-expandable-row>
+						</smoothly-0-table>
 					</div>
-				</smoothly-table-expandable-row>
-				<smoothly-table-expandable-row>
-					<smoothly-table-cell>
+				</smoothly-0-table-expandable-row>
+				<smoothly-0-table-expandable-row>
+					<smoothly-0-table-cell>
 						<span>one</span>
 						<span>two</span>
 						<span>three</span>
-					</smoothly-table-cell>
-					<smoothly-table-cell>
-						five<smoothly-icon name="paper-plane-sharp" size="small"></smoothly-icon>
-					</smoothly-table-cell>
+					</smoothly-0-table-cell>
+					<smoothly-0-table-cell>
+						five<smoothly-0-icon name="paper-plane-sharp" size="small"></smoothly-0-icon>
+					</smoothly-0-table-cell>
 					<div slot="detail">four</div>
-				</smoothly-table-expandable-row>
-				<smoothly-table-row>
-					<smoothly-table-expandable-cell>
+				</smoothly-0-table-expandable-row>
+				<smoothly-0-table-row>
+					<smoothly-0-table-expandable-cell>
 						a cell
 						<div slot="detail">
-							<smoothly-table>
-								<smoothly-table-row>
-									<smoothly-table-header>E</smoothly-table-header>
-									<smoothly-table-header>F</smoothly-table-header>
-								</smoothly-table-row>
-								<smoothly-table-row>
-									<smoothly-table-expandable-cell>
+							<smoothly-0-table>
+								<smoothly-0-table-row>
+									<smoothly-0-table-header>E</smoothly-0-table-header>
+									<smoothly-0-table-header>F</smoothly-0-table-header>
+								</smoothly-0-table-row>
+								<smoothly-0-table-row>
+									<smoothly-0-table-expandable-cell>
 										e cell
 										<div slot="detail">nested expandable cell expansion e</div>
-									</smoothly-table-expandable-cell>
-									<smoothly-table-expandable-cell>
+									</smoothly-0-table-expandable-cell>
+									<smoothly-0-table-expandable-cell>
 										f cell
 										<div slot="detail">nested expandable cell expansion f</div>
-									</smoothly-table-expandable-cell>
-								</smoothly-table-row>
-							</smoothly-table>
+									</smoothly-0-table-expandable-cell>
+								</smoothly-0-table-row>
+							</smoothly-0-table>
 						</div>
-					</smoothly-table-expandable-cell>
-					<smoothly-table-expandable-cell>
+					</smoothly-0-table-expandable-cell>
+					<smoothly-0-table-expandable-cell>
 						b cell
 						<div slot="detail">
-							<smoothly-table>
-								<smoothly-table-row>
-									<smoothly-table-header>C</smoothly-table-header>
-									<smoothly-table-header>D</smoothly-table-header>
-								</smoothly-table-row>
-								<smoothly-table-row>
-									<smoothly-table-expandable-cell>
+							<smoothly-0-table>
+								<smoothly-0-table-row>
+									<smoothly-0-table-header>C</smoothly-0-table-header>
+									<smoothly-0-table-header>D</smoothly-0-table-header>
+								</smoothly-0-table-row>
+								<smoothly-0-table-row>
+									<smoothly-0-table-expandable-cell>
 										c cell
 										<div slot="detail">nested expandable cell expansion c</div>
-									</smoothly-table-expandable-cell>
-									<smoothly-table-expandable-cell>
+									</smoothly-0-table-expandable-cell>
+									<smoothly-0-table-expandable-cell>
 										d cell
 										<div slot="detail">nested expandable cell expansion d</div>
-									</smoothly-table-expandable-cell>
-								</smoothly-table-row>
-							</smoothly-table>
+									</smoothly-0-table-expandable-cell>
+								</smoothly-0-table-row>
+							</smoothly-0-table>
 						</div>
-					</smoothly-table-expandable-cell>
-				</smoothly-table-row>
-			</smoothly-table>,
-			<smoothly-table>
-				<smoothly-table-row>
-					<smoothly-table-header>display</smoothly-table-header>
-					<smoothly-table-header>contents</smoothly-table-header>
-				</smoothly-table-row>
-				<smoothly-table-expandable-row>
+					</smoothly-0-table-expandable-cell>
+				</smoothly-0-table-row>
+			</smoothly-0-table>,
+			<smoothly-0-table>
+				<smoothly-0-table-row>
+					<smoothly-0-table-header>display</smoothly-0-table-header>
+					<smoothly-0-table-header>contents</smoothly-0-table-header>
+				</smoothly-0-table-row>
+				<smoothly-0-table-expandable-row>
 					<div class={"content"}>
-						<smoothly-table-cell>A</smoothly-table-cell>
-						<smoothly-table-cell>B</smoothly-table-cell>
+						<smoothly-0-table-cell>A</smoothly-0-table-cell>
+						<smoothly-0-table-cell>B</smoothly-0-table-cell>
 					</div>
 					<div slot="detail">expansion</div>
-				</smoothly-table-expandable-row>
-			</smoothly-table>,
+				</smoothly-0-table-expandable-row>
+			</smoothly-0-table>,
 		]
 	}
 }
