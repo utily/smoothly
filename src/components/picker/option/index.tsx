@@ -11,11 +11,13 @@ export class SmoothlyPickerOption {
 	@Prop({ mutable: true, reflect: true }) visible = true
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) search: string[] = []
+	@Prop({ reflect: true }) position = -1
 	@State() readonly = false
 	@State() slotted: Node[] = []
 	@Event() smoothlyPickerOptionLoad: EventEmitter<Option.Load>
 	@Event() smoothlyPickerOptionLoaded: EventEmitter<Option>
 	@Event() smoothlyPickerOptionChange: EventEmitter<Option>
+
 	get option(): Option {
 		return {
 			element: this.element,
@@ -25,6 +27,12 @@ export class SmoothlyPickerOption {
 			search: this.search,
 			value: this.value,
 			slotted: this.slotted,
+			position:
+				this.position >= 0
+					? this.position
+					: Array.from(this.element.parentElement?.parentElement?.children ?? []).indexOf(
+							this.element.parentElement ?? this.element
+					  ),
 			set: {
 				selected: selected => (this.selected = selected),
 				readonly: readonly => (this.readonly = readonly),
@@ -34,6 +42,7 @@ export class SmoothlyPickerOption {
 			},
 		}
 	}
+	@Watch("position")
 	@Watch("selected")
 	@Watch("slotted")
 	emitChange() {
@@ -60,10 +69,10 @@ export class SmoothlyPickerOption {
 	render() {
 		return (
 			<Host class={{ visible: this.visible }} onClick={() => this.clickHandler()}>
-				<div class={"display"}>
+				<div part="display" class={"display"}>
 					<slot name="display" />
 				</div>
-				<div class={"content"}>
+				<div part="content" class={"content"}>
 					<smoothly-slotted-elements onSmoothlySlottedChange={e => this.slottedChangeHandler(e)} clone>
 						<slot />
 					</smoothly-slotted-elements>

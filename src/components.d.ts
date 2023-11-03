@@ -308,6 +308,7 @@ export namespace Components {
     }
     interface SmoothlyPickerOption {
         "clickHandler": () => Promise<void>;
+        "position": number;
         "search": string[];
         "selected": boolean;
         "value": any;
@@ -1474,6 +1475,7 @@ declare namespace LocalJSX {
         "onSmoothlyPickerOptionChange"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
         "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<Option.Load>) => void;
         "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "position"?: number;
         "search"?: string[];
         "selected"?: boolean;
         "value"?: any;

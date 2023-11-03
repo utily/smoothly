@@ -204,9 +204,11 @@ export class SmoothlyPickerMenu {
 					) : null}
 				</div>
 				<div class={"list"} ref={e => (this.listElement = e)}>
-					{Array.from(this.backend.values()).map(option => (
-						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
-					))}
+					{Array.from(this.backend.values())
+						.sort(option => -option.position)
+						.map(option => (
+							<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
+						))}
 				</div>
 			</Host>
 		)
