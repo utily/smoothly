@@ -1,4 +1,4 @@
-import { Observers } from "./observers"
+import { Observers } from "./Observers"
 export default function () {
 	return { Observers }
 }
