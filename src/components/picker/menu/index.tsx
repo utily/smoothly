@@ -53,16 +53,6 @@ export class SmoothlyPickerMenu {
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
 
-	@Listen("scroll", { target: "window" })
-	scrollHandler() {
-		this.flipChecked = false
-	}
-	disconnectedCallback() {
-		if (!this.element.parentElement) {
-			Observers.get(this.element)?.disconnect()
-			Observers.remove(this.element)
-		}
-	}
 	componentWillLoad() {
 		if (!Observers.has(this.element)) {
 			Observers.set(
@@ -105,7 +95,12 @@ export class SmoothlyPickerMenu {
 			},
 		})
 	}
-
+	disconnectedCallback() {
+		if (!this.element.parentElement) {
+			Observers.get(this.element)?.disconnect()
+			Observers.remove(this.element)
+		}
+	}
 	@Watch("open")
 	openChange() {
 		const observer = Observers.get(this.element)
@@ -119,6 +114,10 @@ export class SmoothlyPickerMenu {
 	readonlyChanged() {
 		for (const option of chain(this.options.values(), this.backend.values()))
 			option.element, option.set.readonly(this.readonly)
+	}
+	@Listen("scroll", { target: "window" })
+	scrollHandler() {
+		this.flipChecked = false
 	}
 	@Listen("smoothlyPickerOptionLoad")
 	optionLoadHandler(event: CustomEvent<Option.Load>) {
