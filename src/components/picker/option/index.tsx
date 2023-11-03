@@ -28,11 +28,9 @@ export class SmoothlyPickerOption {
 			value: this.value,
 			slotted: this.slotted,
 			position:
-				this.position >= 0
+				this.position >= 0 || !this.element.parentElement?.parentElement
 					? this.position
-					: Array.from(this.element.parentElement?.parentElement?.children ?? []).indexOf(
-							this.element.parentElement ?? this.element
-					  ),
+					: Array.from(this.element.parentElement.parentElement.children).indexOf(this.element.parentElement),
 			set: {
 				selected: selected => (this.selected = selected),
 				readonly: readonly => (this.readonly = readonly),
