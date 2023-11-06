@@ -100,6 +100,7 @@ export class SmoothlyPicker implements Clearable, Input {
 					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</button>
 				<smoothly-picker-menu
+					open={this.open}
 					looks={this.looks}
 					onClick={e => e.stopPropagation()}
 					multiple={this.multiple}

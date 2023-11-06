@@ -1,7 +1,10 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import global from "../../../global/index"
 import { Notice, Option } from "../../../model"
 import { Looks } from "../../input/Looks"
 import { Slot } from "../slot-elements"
+
+const Observers = global().Observers
 
 function* chain<T>(...iterables: Iterable<T>[]): Iterable<T> {
 	for (const iterable of iterables)
@@ -16,7 +19,6 @@ function restore<T extends Option>(target: T | undefined, source: Option): T | u
 	target?.set.search((target.search = source.search))
 	return target
 }
-
 function restoreListener(ref: HTMLElement | undefined, option: Option) {
 	ref?.addEventListener("smoothlyPickerOptionLoad", (e: CustomEvent<Option>) => restore(e.detail, option))
 }
@@ -32,6 +34,7 @@ export interface Controls {
 export class SmoothlyPickerMenu {
 	@Element() element: HTMLSmoothlyPickerMenuElement
 	@Prop() looks: Looks
+	@Prop({ reflect: true }) open = false
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) readonly = false
@@ -42,12 +45,29 @@ export class SmoothlyPickerMenu {
 	@State() search = ""
 	@State() valid = false
 	@State() display: Node[]
+	@State() flip = false
+	@State() flipChecked = false
 	@Event() notice: EventEmitter<Notice>
 	@Event() smoothlyPickerMenuLoaded: EventEmitter<Controls>
 	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
 
+	componentWillLoad() {
+		if (!Observers.has(this.element)) {
+			const threshold = 0.4
+			Observers.set(
+				this.element,
+				new IntersectionObserver(
+					entries =>
+						(entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) < threshold &&
+						!this.flipChecked &&
+						((this.flip = !this.flip), (this.flipChecked = true)),
+					{ threshold }
+				)
+			)
+		}
+	}
 	componentDidLoad() {
 		this.smoothlyPickerMenuLoaded.emit({
 			remember: () => {
@@ -76,11 +96,29 @@ export class SmoothlyPickerMenu {
 			},
 		})
 	}
+	disconnectedCallback() {
+		if (!this.element.parentElement) {
+			Observers.get(this.element)?.disconnect()
+			Observers.remove(this.element)
+		}
+	}
+	@Watch("open")
+	openChange() {
+		const observer = Observers.get(this.element)
+		if (this.open)
+			observer?.observe(this.element)
+		else
+			observer?.unobserve(this.element)
+	}
 
 	@Watch("readonly")
 	readonlyChanged() {
 		for (const option of chain(this.options.values(), this.backend.values()))
 			option.element, option.set.readonly(this.readonly)
+	}
+	@Listen("scroll", { target: "window" })
+	scrollHandler() {
+		this.flipChecked = false
 	}
 	@Listen("smoothlyPickerOptionLoad")
 	optionLoadHandler(event: CustomEvent<Option.Load>) {
@@ -172,7 +210,7 @@ export class SmoothlyPickerMenu {
 	}
 	render() {
 		return (
-			<Host class={{ valid: this.valid }}>
+			<Host class={{ valid: this.valid, flip: this.flip }}>
 				<smoothly-slotted-elements class={"hide"} onSmoothlySlottedChange={e => (this.display = e.detail)}>
 					<slot name="display" />
 				</smoothly-slotted-elements>
@@ -204,9 +242,11 @@ export class SmoothlyPickerMenu {
 					) : null}
 				</div>
 				<div class={"list"} ref={e => (this.listElement = e)}>
-					{Array.from(this.backend.values()).map(option => (
-						<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
-					))}
+					{Array.from(this.backend.values())
+						.sort((a, b) => a.position - b.position)
+						.map(option => (
+							<smoothly-slot-elements ref={e => restoreListener(e, option)} clone={false} nodes={option.clone} />
+						))}
 				</div>
 			</Host>
 		)

@@ -4,31 +4,41 @@
 	gap: 0.5rem;
 	position: absolute;
 	z-index: 4;
-	top: 100%;
 	left: -1px;
 	right: -1px;
+	min-width: max-content;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 	padding: 0.5rem;
 	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
 }
-.list {
+:host:not(.flip) {
+	top: 100%;
+}
+:host.flip {
+	bottom: 100%;
+}
+:host:not([open]) {
+	display: none;
+}
+:host .list {
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
 	row-gap: 0.5ch;
-	overflow: auto;
+	overflow-y: auto;
 	max-height: calc(1.75rem * 10 + 0.5ch * 9);
 	padding-right: 0.5rem;
+	padding-bottom: 0.25rem;
 }
-.hide {
+:host .hide {
 	display: none;
 }
-.controls {
+:host .controls {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	gap: 0.5rem;
 	transition: grid-template-columns 200ms linear;
 }
-.controls > button:disabled {
+:host .controls > button:disabled {
 	opacity: 0.3;
 }

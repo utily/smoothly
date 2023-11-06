@@ -145,6 +145,54 @@ export class SmoothlyPickerDemo {
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
 				</smoothly-form>
+				<smoothly-picker looks="border" name="icon">
+					<span slot="label">Icon</span>
+					<span slot="search">Search</span>
+					<smoothly-picker-option value={"circle"}>
+						<span slot="label">Circle</span>
+						<smoothly-icon size="tiny" name="ellipse-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"cube"}>
+						<span slot={"label"}>Cube</span>
+						<smoothly-icon size="tiny" name="cube-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"square"} selected>
+						<span slot={"label"}>Square</span>
+						<smoothly-icon size="tiny" name="square-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"airplane"}>
+						<span slot={"label"}>Airplane</span>
+						<smoothly-icon size="tiny" name="airplane-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"alarm"}>
+						<span slot={"label"}>Alarm</span>
+						<smoothly-icon size="tiny" name="alarm-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"archive"}>
+						<span slot={"label"}>Archive</span>
+						<smoothly-icon size="tiny" name="archive-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"bag"}>
+						<span slot={"label"}>Bag</span>
+						<smoothly-icon size="tiny" name="bag-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"cafe"}>
+						<span slot={"label"}>Cafe</span>
+						<smoothly-icon size="tiny" name="cafe-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"disc"}>
+						<span slot={"label"}>Disc</span>
+						<smoothly-icon size="tiny" name="disc-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"earth"}>
+						<span slot={"label"}>Earth</span>
+						<smoothly-icon size="tiny" name="earth-outline" />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"fast-food"}>
+						<span slot={"label"}>Fast food</span>
+						<smoothly-icon size="tiny" name="fast-food-outline" />
+					</smoothly-picker-option>
+				</smoothly-picker>
 			</Host>
 		)
 	}

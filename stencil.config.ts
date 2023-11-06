@@ -6,6 +6,7 @@ export const config: Config = {
 	namespace: "smoothly",
 	taskQueue: "async",
 	sourceMap: true,
+	globalScript: "src/global/index.ts",
 	outputTargets: [
 		{
 			type: "dist",

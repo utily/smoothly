@@ -6,6 +6,7 @@ export interface Option {
 	search: string[]
 	value: any
 	slotted: Node[]
+	position: number
 	set: {
 		selected: (selected: boolean) => void
 		visible: (visible: boolean) => void

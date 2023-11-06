@@ -8,18 +8,17 @@
 	cursor: pointer;
 	padding: 0.25ch 0.5rem
 }
-.display {
+:host .display {
 	padding-left: 0;
 }
-button {
+:host button {
 	color: unset;
 	background-color: inherit;
 	border: none;
 	padding-right: 0;
 }
-.content {
+:host .content {
 	display: flex;
 	column-gap: 1rem;
-	flex-wrap: wrap;
 	justify-content: space-between;
 }

@@ -303,11 +303,13 @@ export namespace Components {
         "looks": Looks;
         "multiple": boolean;
         "mutable": boolean;
+        "open": boolean;
         "readonly": boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerOption {
         "clickHandler": () => Promise<void>;
+        "position": number;
         "search": string[];
         "selected": boolean;
         "value": any;
@@ -1467,6 +1469,7 @@ declare namespace LocalJSX {
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
         "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls>) => void;
+        "open"?: boolean;
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
@@ -1474,6 +1477,7 @@ declare namespace LocalJSX {
         "onSmoothlyPickerOptionChange"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
         "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<Option.Load>) => void;
         "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
+        "position"?: number;
         "search"?: string[];
         "selected"?: boolean;
         "value"?: any;
