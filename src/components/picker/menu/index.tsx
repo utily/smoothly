@@ -55,14 +55,15 @@ export class SmoothlyPickerMenu {
 
 	componentWillLoad() {
 		if (!Observers.has(this.element)) {
+			const threshold = 0.4
 			Observers.set(
 				this.element,
 				new IntersectionObserver(
 					entries =>
-						(entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) < 0.4 &&
+						(entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) < threshold &&
 						!this.flipChecked &&
 						((this.flip = !this.flip), (this.flipChecked = true)),
-					{ threshold: 0.4 }
+					{ threshold }
 				)
 			)
 		}
