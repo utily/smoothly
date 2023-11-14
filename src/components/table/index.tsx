@@ -8,7 +8,7 @@ import { Color } from "../../model"
 })
 export class Table implements ComponentWillLoad {
 	private owner?: EventTarget
-	private expandable: Map<EventTarget, { allowSpotlight: (allowed: boolean) => void } | undefined> = new Map()
+	private expandable: WeakMap<EventTarget, { allowSpotlight: (allowed: boolean) => void } | undefined> = new WeakMap()
 	private expanded: Set<EventTarget> = new Set()
 	@Element() element: HTMLSmoothlyTableElement
 	@Prop({ mutable: true, reflect: true }) root = true
