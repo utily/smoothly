@@ -600,6 +600,10 @@ export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T>
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
 }
+export interface SmoothlyToggleSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyToggleSwitchElement;
+}
 export interface SmoothlyTriggerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTriggerElement;
@@ -1625,6 +1629,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "fill"?: Fill;
+        "onSmoothlyToggleSwitchChange"?: (event: SmoothlyToggleSwitchCustomEvent<boolean>) => void;
         "selected"?: boolean;
         "size"?: "small" | "default" | "large";
     }

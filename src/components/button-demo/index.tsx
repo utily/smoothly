@@ -23,7 +23,10 @@ export class SmoothlyButtonDemo {
 					checkmark={false}
 					color="primary"
 					disabled={false}
-					size="small"></smoothly-toggle-switch>
+					size="small"
+					onSmoothlyToggleSwitchChange={e => {
+						console.log("toggleSwitch ", e.detail)
+					}}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false} size="large"></smoothly-toggle-switch>
 				<h4>Links with icons</h4>
