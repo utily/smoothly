@@ -430,11 +430,12 @@ export namespace Components {
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
+        "checkmark": boolean;
+        "color": Color;
         "disabled": boolean;
-        "name": string;
+        "fill": Fill;
         "selected": boolean;
         "size": "small" | "default" | "large";
-        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -598,6 +599,10 @@ export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T
 export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyToggleSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyToggleSwitchElement;
 }
 export interface SmoothlyTriggerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1620,11 +1625,13 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
+        "checkmark"?: boolean;
+        "color"?: Color;
         "disabled"?: boolean;
-        "name"?: string;
+        "fill"?: Fill;
+        "onSmoothlyToggleSwitchChange"?: (event: SmoothlyToggleSwitchCustomEvent<boolean>) => void;
         "selected"?: boolean;
         "size"?: "small" | "default" | "large";
-        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;

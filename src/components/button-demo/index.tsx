@@ -19,7 +19,14 @@ export class SmoothlyButtonDemo {
 					<smoothly-icon name="airplane" slot="icon-slot"></smoothly-icon>
 				</smoothly-toggle>
 				<h4>Toggle switches</h4>
-				<smoothly-toggle-switch disabled={false} size="small"></smoothly-toggle-switch>
+				<smoothly-toggle-switch
+					checkmark={false}
+					color="primary"
+					disabled={false}
+					size="small"
+					onSmoothlyToggleSwitchChange={e => {
+						console.log("toggleSwitch ", e.detail)
+					}}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false}></smoothly-toggle-switch>
 				<smoothly-toggle-switch disabled={false} size="large"></smoothly-toggle-switch>
 				<h4>Links with icons</h4>

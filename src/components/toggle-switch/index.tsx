@@ -1,4 +1,5 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Color, Fill } from "../../model"
 
 @Component({
 	tag: "smoothly-toggle-switch",
@@ -6,23 +7,28 @@ import { Component, h, Host, Prop } from "@stencil/core"
 	shadow: true,
 })
 export class SmoothlyToggleSwitch {
+	@Prop({ reflect: true }) checkmark = true
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) size: "small" | "default" | "large" = "default"
-	@Prop() name: string
-	@Prop() value?: any
+	@Prop({ reflect: true }) color: Color
+	@Prop({ reflect: true }) fill: Fill = "clear"
+	@Event() smoothlyToggleSwitchChange: EventEmitter<boolean>
+
+	handleClick() {
+		this.selected = !this.selected
+		this.smoothlyToggleSwitchChange.emit(this.selected)
+	}
+
 	render() {
 		return (
 			<Host>
-				<button disabled={this.disabled} onClick={() => (this.selected = !this.selected)}>
+				<button disabled={this.disabled} onClick={() => this.handleClick}>
 					<smoothly-icon
-						name="checkmark-circle"
+						color={this.color}
+						name={!this.checkmark ? "ellipse" : this.selected ? "checkmark-circle" : "close-circle"}
 						fill="clear"
-						style={{ display: this.selected ? "" : "none" }}></smoothly-icon>
-					<smoothly-icon
-						name="close-circle"
-						fill="clear"
-						style={{ display: !this.selected ? "" : "none" }}></smoothly-icon>
+						class={{ selected: this.selected }}></smoothly-icon>
 				</button>
 			</Host>
 		)
