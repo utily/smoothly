@@ -430,11 +430,12 @@ export namespace Components {
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
+        "checkmark": boolean;
+        "color": Color;
         "disabled": boolean;
-        "name": string;
+        "fill": Fill;
         "selected": boolean;
         "size": "small" | "default" | "large";
-        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
@@ -1620,11 +1621,12 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyToggleSwitch {
+        "checkmark"?: boolean;
+        "color"?: Color;
         "disabled"?: boolean;
-        "name"?: string;
+        "fill"?: Fill;
         "selected"?: boolean;
         "size"?: "small" | "default" | "large";
-        "value"?: any;
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
