@@ -208,7 +208,8 @@ export namespace Components {
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
-        "type": string;
+        "type": Type;
+        "unit"?: string;
         "value": any;
     }
     interface SmoothlyInputClear {
@@ -1363,7 +1364,8 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;
-        "type"?: string;
+        "type"?: Type;
+        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyInputClear {

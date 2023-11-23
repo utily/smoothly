@@ -14,6 +14,26 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<h2>Duration</h2>,
+			<smoothly-form looks="border">
+				<smoothly-input
+					name="duration"
+					type="duration"
+					placeholder="hh:mm h"
+					value={{ hours: 5, minutes: 30 }}
+					onSmoothlyInput={e => console.log(e.detail.duration)}>
+					Duration
+				</smoothly-input>
+				<smoothly-input
+					name="duration"
+					type="duration"
+					unit="tim"
+					value={{ hours: 5, minutes: 30 }}
+					placeholder="hh:mm"
+					onSmoothlyInput={e => console.log(e.detail.duration)}>
+					Varaktighet
+				</smoothly-input>
+			</smoothly-form>,
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">
