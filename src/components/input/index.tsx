@@ -22,7 +22,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
-	@Prop({ reflect: true }) type = "text"
+	@Prop({ reflect: true }) type: Type = "text"
 	@Prop({ mutable: true, reflect: true }) required = false
 	@Prop({ mutable: true }) minLength = 0
 	@Prop({ reflect: true }) showLabel = true
@@ -33,6 +33,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
+	@Prop({ reflect: true }) unit?: string
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -55,8 +56,11 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			case "price":
 				result = get("price", this.currency)
 				break
+			case "duration":
+				result = get(this.type, this.unit)
+				break
 			default:
-				result = get(this.type as Type, getLocale())
+				result = get(this.type, getLocale())
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
