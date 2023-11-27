@@ -102,6 +102,8 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-quiet color="dark">-</smoothly-quiet>
 						</dd>
+						<dt>Duration</dt>
+						<dd><smoothly-display type="duration" value={{hours: 13, minutes: 35}} unit="h" /><smoothly-display type="duration" value={{hours: 8, minutes: 30}} unit="" /><smoothly-display type="duration" value={{hours: 0, minutes: 3}} unit=" h" /></dd>
 					</dl>
 				</fieldset>
 				<fieldset>

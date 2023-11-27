@@ -120,6 +120,7 @@ export namespace Components {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type": Type;
+        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {
@@ -1274,6 +1275,7 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type"?: Type;
+        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {
