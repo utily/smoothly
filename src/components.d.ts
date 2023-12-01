@@ -424,6 +424,15 @@ export namespace Components {
     }
     interface SmoothlyTableTesting {
     }
+    interface SmoothlyThemeColor {
+        "color": Color;
+    }
+    interface SmoothlyThemeColorVariant {
+        "color": Color;
+        "variant": "shade" | "tint" | "color";
+    }
+    interface SmoothlyThemeColors {
+    }
     interface SmoothlyToggle {
         "disabled": boolean;
         "name": string;
@@ -1044,6 +1053,24 @@ declare global {
         prototype: HTMLSmoothlyTableTestingElement;
         new (): HTMLSmoothlyTableTestingElement;
     };
+    interface HTMLSmoothlyThemeColorElement extends Components.SmoothlyThemeColor, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeColorElement: {
+        prototype: HTMLSmoothlyThemeColorElement;
+        new (): HTMLSmoothlyThemeColorElement;
+    };
+    interface HTMLSmoothlyThemeColorVariantElement extends Components.SmoothlyThemeColorVariant, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeColorVariantElement: {
+        prototype: HTMLSmoothlyThemeColorVariantElement;
+        new (): HTMLSmoothlyThemeColorVariantElement;
+    };
+    interface HTMLSmoothlyThemeColorsElement extends Components.SmoothlyThemeColors, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeColorsElement: {
+        prototype: HTMLSmoothlyThemeColorsElement;
+        new (): HTMLSmoothlyThemeColorsElement;
+    };
     interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
     }
     var HTMLSmoothlyToggleElement: {
@@ -1158,6 +1185,9 @@ declare global {
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-testing": HTMLSmoothlyTableTestingElement;
+        "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
+        "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
+        "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
@@ -1621,6 +1651,15 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableTesting {
     }
+    interface SmoothlyThemeColor {
+        "color"?: Color;
+    }
+    interface SmoothlyThemeColorVariant {
+        "color"?: Color;
+        "variant"?: "shade" | "tint" | "color";
+    }
+    interface SmoothlyThemeColors {
+    }
     interface SmoothlyToggle {
         "disabled"?: boolean;
         "name"?: string;
@@ -1734,6 +1773,9 @@ declare namespace LocalJSX {
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-testing": SmoothlyTableTesting;
+        "smoothly-theme-color": SmoothlyThemeColor;
+        "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
+        "smoothly-theme-colors": SmoothlyThemeColors;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
@@ -1821,6 +1863,9 @@ declare module "@stencil/core" {
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-testing": LocalJSX.SmoothlyTableTesting & JSXBase.HTMLAttributes<HTMLSmoothlyTableTestingElement>;
+            "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
+            "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
+            "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
