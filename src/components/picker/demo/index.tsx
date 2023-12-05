@@ -145,10 +145,10 @@ export class SmoothlyPickerDemo {
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
 				</smoothly-form>
-				<smoothly-picker looks="border" name="icon">
+				<smoothly-picker looks="border" name="icon" multiple>
 					<span slot="label">Icon</span>
 					<span slot="search">Search</span>
-					<smoothly-picker-option value={"circle"}>
+					<smoothly-picker-option value={"circle"} required>
 						<span slot="label">Circle</span>
 						<smoothly-icon size="tiny" name="ellipse-outline" />
 					</smoothly-picker-option>

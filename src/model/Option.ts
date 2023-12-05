@@ -2,6 +2,7 @@ export interface Option {
 	element: HTMLSmoothlyPickerOptionElement
 	selected: boolean
 	readonly: boolean
+	required: boolean
 	visible: boolean
 	search: string[]
 	value: any

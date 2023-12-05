@@ -22,3 +22,6 @@
 	column-gap: 1rem;
 	justify-content: space-between;
 }
+:host([required]) button {
+	opacity: 0.65;
+}
