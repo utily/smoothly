@@ -12,6 +12,7 @@ export class SmoothlyPickerOption {
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) search: string[] = []
 	@Prop({ reflect: true }) position = -1
+	@Prop({ reflect: true }) required = false
 	@State() readonly = false
 	@State() slotted: Node[] = []
 	@Event() smoothlyPickerOptionLoad: EventEmitter<Option.Load>
@@ -23,6 +24,7 @@ export class SmoothlyPickerOption {
 			element: this.element,
 			selected: this.selected,
 			readonly: this.readonly,
+			required: this.required,
 			visible: this.visible,
 			search: this.search,
 			value: this.value,
@@ -49,6 +51,8 @@ export class SmoothlyPickerOption {
 	}
 
 	componentWillLoad() {
+		if (this.required)
+			this.selected = true
 		this.smoothlyPickerOptionLoad.emit((({ slotted, ...option }) => option)(this.option))
 	}
 	componentDidLoad() {
@@ -60,7 +64,7 @@ export class SmoothlyPickerOption {
 	}
 	@Method()
 	async clickHandler() {
-		if (!this.readonly)
+		if (!this.readonly && !this.required)
 			this.selected = !this.selected
 	}
 
