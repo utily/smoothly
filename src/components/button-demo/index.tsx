@@ -6,6 +6,8 @@ import { Component, h } from "@stencil/core"
 export class SmoothlyButtonDemo {
 	render() {
 		return [
+			<h2>Theme</h2>,
+			<smoothly-theme-colors></smoothly-theme-colors>,
 			<h2>Buttons</h2>,
 			<section>
 				<h4>Toggle button</h4>

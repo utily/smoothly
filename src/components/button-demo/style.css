@@ -1,5 +1,6 @@
 smoothly-button-demo {
 	display: block;
+	margin: 1rem;
 }
 
 smoothly-button-demo > section > div {

@@ -1,0 +1,18 @@
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 3em;
+	height: 3em;
+	font-weight: 900;
+}
+
+:host[color][variant=color] {
+	background: rgb(var(--smoothly-color));
+}
+:host[color][variant=tint] {
+	background: rgb(var(--smoothly-color-tint));
+}
+:host[color][variant=shade] {
+	background: rgb(var(--smoothly-color-shade));
+}
