@@ -73,7 +73,7 @@ export class SmoothlyPickerDemo {
 						mutable
 						onSmoothlyInput={e => console.log("demo counter input", e.detail)}>
 						{Array.from({ length: this.counter }).map((_, index) => (
-							<smoothly-picker-option key={index.toString()} value={index} selected={index < this.counter - 1}>
+							<smoothly-picker-option value={index} selected={index < this.counter - 1}>
 								{index}
 							</smoothly-picker-option>
 						))}
