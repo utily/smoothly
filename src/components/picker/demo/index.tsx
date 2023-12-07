@@ -219,7 +219,6 @@ export class SmoothlyPickerDemo {
 						<smoothly-icon size="tiny" name="fast-food-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
-				<smoothly-picker></smoothly-picker>
 			</Host>
 		)
 	}
