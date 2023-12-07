@@ -52,7 +52,7 @@ export class SmoothlyPickerMenu {
 	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
-	private loading = true
+	// private loading = true
 	private synced = false
 
 	componentWillLoad() {
@@ -71,17 +71,12 @@ export class SmoothlyPickerMenu {
 		}
 	}
 	sync() {
-		if (this.synced || this.backend.size != this.options.size)
+		if (this.backend.size != this.options.size)
 			this.synced = false
-		else {
+		else
 			this.synced = true
-			if (this.loading) {
-				this.loading = false
-				this.didLoad()
-			}
-		}
 	}
-	didLoad() {
+	componentDidLoad() {
 		this.smoothlyPickerMenuLoaded.emit({
 			remember: () => {
 				this.memory = {
