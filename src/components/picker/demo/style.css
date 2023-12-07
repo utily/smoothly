@@ -10,9 +10,6 @@
 	width: 3rem;
 	height: 3rem;
 }
-.picker {
-	position: relative;
-}
 :host .counter-button {
 	position: absolute;
 	top: 0;
