@@ -2,6 +2,28 @@
 	display: flex;
 	flex-direction: column;
 }
-smoothly-form {
+:host smoothly-form {
 	max-width: 50rem;
+}
+:host .counter {
+	position: relative;
+	width: 3rem;
+	height: 3rem;
+}
+.picker {
+	position: relative;
+}
+:host .counter-button {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0;
+	margin: 0;
+	height: 3rem;
+	width: 3rem;
+	background-color: inherit;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

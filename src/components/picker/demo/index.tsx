@@ -18,6 +18,7 @@ export class SmoothlyPickerDemo {
 		"jessie@rocket.com": "jessie doe",
 		"james@rocket.com": "james doe",
 	}
+	@State() counter = 3
 	@State() data = {
 		message: "hello world",
 		emails: ["jessie@rocket.com", "james@rocket.com"],
@@ -61,6 +62,26 @@ export class SmoothlyPickerDemo {
 	render() {
 		return (
 			<Host>
+				<div>
+					<smoothly-button onClick={() => (this.counter += 1)}>Add one</smoothly-button>
+					<smoothly-button onClick={() => (this.counter -= 1)}>Remove one</smoothly-button>
+					<smoothly-picker
+						class={"counter"}
+						key={Array.from({ length: this.counter }).toString()}
+						name="counter"
+						multiple
+						onSmoothlyInput={e => console.log("demo counter input", e.detail)}>
+						{Array.from({ length: this.counter }).map((_, index) => (
+							<smoothly-picker-option key={index.toString()} value={index} selected={index < this.counter - 1}>
+								{index}
+							</smoothly-picker-option>
+						))}
+						<span slot="search">Search</span>
+						<button slot="child" class={"counter-button"}>
+							<smoothly-icon name={"add-outline"} />
+						</button>
+					</smoothly-picker>
+				</div>
 				<smoothly-button onClick={() => this.clickHandler()}>
 					{!this.change ? "start edit" : "end edit"}
 				</smoothly-button>
@@ -135,7 +156,11 @@ export class SmoothlyPickerDemo {
 							<smoothly-icon size="tiny" name="square-outline" />
 						</smoothly-picker-option>
 					</smoothly-picker>
-					<smoothly-picker multiple readonly name="animals">
+					<smoothly-picker
+						multiple
+						readonly
+						name="animals"
+						onSmoothlyInput={e => console.log("demo picker animals input", e.detail)}>
 						<span slot="label">Animals</span>
 						<span slot="search">Search</span>
 						<smoothly-picker-option selected value={"cat"}>
@@ -193,6 +218,7 @@ export class SmoothlyPickerDemo {
 						<smoothly-icon size="tiny" name="fast-food-outline" />
 					</smoothly-picker-option>
 				</smoothly-picker>
+				<smoothly-picker></smoothly-picker>
 			</Host>
 		)
 	}

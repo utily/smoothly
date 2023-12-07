@@ -25,7 +25,7 @@ export class SmoothlyPicker implements Clearable, Input {
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
-	private controls?: Controls
+	private controls?: Controls & { synced: () => boolean }
 
 	componentWillLoad() {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
@@ -34,8 +34,10 @@ export class SmoothlyPicker implements Clearable, Input {
 	@Watch("selected")
 	selectedChanged() {
 		const selected = Array.from(this.selected.values(), option => option.value)
-		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
-		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		if (this.controls?.synced()) {
+			this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+			this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		}
 		this.display = Array.from(this.selected.values(), option => {
 			const span = document.createElement("span")
 			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))
@@ -45,7 +47,7 @@ export class SmoothlyPicker implements Clearable, Input {
 
 	componentDidLoad() {
 		if (this.controls)
-			this.smoothlyPickerLoaded.emit(this.controls)
+			this.smoothlyPickerLoaded.emit((({ synced, ...controls }) => controls)(this.controls))
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
@@ -53,7 +55,7 @@ export class SmoothlyPicker implements Clearable, Input {
 			event.stopPropagation()
 	}
 	@Listen("smoothlyPickerMenuLoaded")
-	menuLoadedHandler(event: CustomEvent<Controls>) {
+	menuLoadedHandler(event: CustomEvent<Controls & { synced: () => boolean }>) {
 		this.controls = event.detail
 	}
 	@Listen("smoothlyPickerOptionLoaded")
@@ -99,7 +101,9 @@ export class SmoothlyPicker implements Clearable, Input {
 				<button type="button">
 					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</button>
+				<slot name="child" />
 				<smoothly-picker-menu
+					name={this.name}
 					open={this.open}
 					looks={this.looks}
 					onClick={e => e.stopPropagation()}
