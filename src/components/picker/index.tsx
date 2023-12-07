@@ -103,7 +103,6 @@ export class SmoothlyPicker implements Clearable, Input {
 				</button>
 				<slot name="child" />
 				<smoothly-picker-menu
-					name={this.name}
 					open={this.open}
 					looks={this.looks}
 					onClick={e => e.stopPropagation()}

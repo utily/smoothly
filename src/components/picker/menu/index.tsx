@@ -54,7 +54,6 @@ export class SmoothlyPickerMenu {
 	private searchElement?: HTMLElement
 	private loading = true
 	private synced = false
-	@Prop() name?: string
 
 	componentWillLoad() {
 		if (!Observers.has(this.element)) {

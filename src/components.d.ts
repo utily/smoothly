@@ -305,7 +305,6 @@ export namespace Components {
         "looks": Looks;
         "multiple": boolean;
         "mutable": boolean;
-        "name"?: string;
         "open": boolean;
         "readonly": boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
@@ -1508,7 +1507,6 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "multiple"?: boolean;
         "mutable"?: boolean;
-        "name"?: string;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
         "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls & { synced: () => boolean }>) => void;
         "open"?: boolean;
