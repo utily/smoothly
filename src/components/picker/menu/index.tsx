@@ -52,7 +52,6 @@ export class SmoothlyPickerMenu {
 	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
-	// private loading = true
 	private synced = false
 
 	componentWillLoad() {
