@@ -157,7 +157,7 @@ export class SmoothlyPickerDemo {
 							<smoothly-icon size="tiny" name="square-outline" />
 						</smoothly-picker-option>
 					</smoothly-picker>
-					<smoothly-picker multiple readonly onSmoothlyInput={e => console.log("demo picker animals input", e.detail)}>
+					<smoothly-picker multiple readonly name="animals">
 						<span slot="label">Animals</span>
 						<span slot="search">Search</span>
 						<smoothly-picker-option selected value={"cat"}>
