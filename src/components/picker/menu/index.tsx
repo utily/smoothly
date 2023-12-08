@@ -48,10 +48,11 @@ export class SmoothlyPickerMenu {
 	@State() flip = false
 	@State() flipChecked = false
 	@Event() notice: EventEmitter<Notice>
-	@Event() smoothlyPickerMenuLoaded: EventEmitter<Controls>
+	@Event() smoothlyPickerMenuLoaded: EventEmitter<Controls & { synced: () => boolean }>
 	private memory?: { backend: SmoothlyPickerMenu["backend"]; options: SmoothlyPickerMenu["options"] }
 	private listElement?: HTMLElement
 	private searchElement?: HTMLElement
+	private synced = false
 
 	componentWillLoad() {
 		if (!Observers.has(this.element)) {
@@ -67,6 +68,12 @@ export class SmoothlyPickerMenu {
 				)
 			)
 		}
+	}
+	sync() {
+		if (this.backend.size != this.options.size)
+			this.synced = false
+		else
+			this.synced = true
 	}
 	componentDidLoad() {
 		this.smoothlyPickerMenuLoaded.emit({
@@ -94,6 +101,7 @@ export class SmoothlyPickerMenu {
 					}
 				}
 			},
+			synced: () => this.synced,
 		})
 	}
 	disconnectedCallback() {
@@ -124,6 +132,7 @@ export class SmoothlyPickerMenu {
 	optionLoadHandler(event: CustomEvent<Option.Load>) {
 		if (!this.listElement || !event.composedPath().includes(this.listElement)) {
 			event.stopPropagation()
+			this.sync()
 			event.detail.set.readonly(this.readonly)
 
 			const current = this.options.get(event.detail.value)
@@ -146,6 +155,7 @@ export class SmoothlyPickerMenu {
 			)
 		} else
 			this.options.set(event.detail.value, event.detail)
+		this.sync()
 	}
 	@Listen("smoothlyPickerOptionChange")
 	optionChangeHandler(event: CustomEvent<Option>) {

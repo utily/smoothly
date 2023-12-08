@@ -7,7 +7,10 @@
 	padding: 1.2em 0.7em 0.2em 0.8em;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
-
+:host div.element {
+	display: flex;
+	background-color: inherit;
+}
 smoothly-slot-elements {
 	white-space: nowrap;
 }

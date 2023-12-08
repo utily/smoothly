@@ -1508,7 +1508,7 @@ declare namespace LocalJSX {
         "multiple"?: boolean;
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
-        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls>) => void;
+        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls & { synced: () => boolean }>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
