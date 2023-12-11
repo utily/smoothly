@@ -9,7 +9,7 @@ export function month(date: isoly.Date): isoly.Date[][] {
 		const r = []
 		for (let column = 0; column < 7; column++) {
 			const d = new Date(date)
-			d.setDate(day++)
+			d.setUTCDate(day++)
 			r.push(isoly.Date.create(d))
 		}
 		if (row < 5 || isoly.Date.firstOfMonth(r[0]) == isoly.Date.firstOfMonth(date))
@@ -38,7 +38,7 @@ export function months(current: isoly.Date): { date: isoly.Date; name: string; s
 		result.push({
 			date,
 			name: day.toLocaleString(undefined, { month: "long" }),
-			selected: date.substr(0, 7) == current.substr(0, 7),
+			selected: date.substring(0, 7) == current.substring(0, 7),
 		})
 	}
 	return result
