@@ -61,9 +61,14 @@ export class TableDemo {
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
+					<smoothly-table-expandable-cell>
+						Header expansion
+						<div slot="detail">Expansion content</div>
+					</smoothly-table-expandable-cell>
 				</smoothly-table-row>
 				<smoothly-table-expandable-row>
 					<smoothly-table-cell>A Content</smoothly-table-cell>
+					<smoothly-table-cell>Expansion cell</smoothly-table-cell>
 					<div slot="detail">
 						<smoothly-tab-switch>
 							<smoothly-tab label="innertable 1" open={true}>
