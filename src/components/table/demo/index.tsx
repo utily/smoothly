@@ -92,6 +92,13 @@ export class TableDemo {
 						</smoothly-tab-switch>
 					</div>
 				</smoothly-table-expandable-row>
+				<smoothly-table-row>
+					<smoothly-table-cell>A Content</smoothly-table-cell>
+					<smoothly-table-expandable-cell>
+						Expandable cell
+						<div slot="detail">Expansion content</div>
+					</smoothly-table-expandable-cell>
+				</smoothly-table-row>
 			</smoothly-table>,
 			<smoothly-table>
 				<smoothly-table-row>
