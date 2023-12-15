@@ -96,8 +96,6 @@ export class SmoothlyPicker {
 		const isNewSelection = this.selections.reduce((acc, current) => acc && current.value != selection.value, true)
 		if (isNewSelection)
 			this.selections = this.multiple ? [...this.selections, selection] : [selection]
-		this.inputElement.value = ""
-		this.filterOptions()
 		this.keepFocusOnReRender = true
 		this.isOpen = this.multiple
 	}
@@ -135,7 +133,6 @@ export class SmoothlyPicker {
 		else if (event.key == "Escape") {
 			this.inputElement.value = ""
 			this.isOpen = false
-			this.filterOptions()
 		} else if (event.key == " " && this.inputElement.value == "") {
 			event.preventDefault()
 			this.isOpen = true
@@ -147,13 +144,11 @@ export class SmoothlyPicker {
 			this.isOpen = !this.isOpen
 			this.inputElement.focus()
 			this.highlightDefault()
-			this.filterOptions()
 		}
 	}
 	onBlur() {
 		this.inputElement.value = ""
 		this.isOpen = false
-		this.filterOptions()
 	}
 
 	render() {
@@ -197,7 +192,6 @@ export class SmoothlyPicker {
 						readonly={this.readonly}
 						type="text"
 						ref={(el: HTMLInputElement) => (this.inputElement = el ? el : this.inputElement)}
-						onFocus={() => this.highlightDefault()}
 						onBlur={() => this.onBlur()}
 						placeholder={
 							this.selections.length > 3
