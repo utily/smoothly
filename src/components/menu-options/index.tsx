@@ -68,13 +68,21 @@ export class SmoothlyMenuOptions {
 		this.keyword = keyword
 		const keywordLowercase = keyword.toLowerCase()
 		this.filteredOptions = []
-		for (const option of this.options) {
-			const names = option.name + (option.aliases ? option.aliases.join(" ") : "")
-			const isVisible = names.toLowerCase().includes(keywordLowercase) && !excludeValues.includes(option.value)
-			isVisible && this.filteredOptions.push(option)
+		if (keywordLowercase == "") {
+			this.showAllOptions()
+		} else {
+			for (const option of this.options) {
+				const names = option.name + (option.aliases ? option.aliases.join(" ") : "")
+				const isVisible = names.toLowerCase().includes(keywordLowercase) && !excludeValues.includes(option.value)
+				isVisible && this.filteredOptions.push(option)
+			}
 		}
+
 		this.menuEmpty.emit(!this.filteredOptions.length)
 		this.order && this.sortOptions(keyword)
+	}
+	showAllOptions() {
+		this.filteredOptions = [...this.options]
 	}
 	sortOptions(keyword: string) {
 		const keywordLowercase = keyword.toLowerCase()
