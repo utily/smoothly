@@ -1,11 +1,10 @@
-import { Component, h, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { SmoothlyAppRoomCustomEvent } from "../../components"
 import { Color } from "../../model"
 
 type Room = {
 	element: HTMLSmoothlyAppRoomElement
 }
-
 @Component({
 	tag: "smoothly-app",
 	styleUrl: "style.css",
@@ -21,7 +20,10 @@ export class SmoothlyApp {
 	private navElement?: HTMLElement
 	mainElement?: HTMLElement
 	rooms: Record<string, Room | undefined> = {}
-
+	@Method()
+	selectRoom(path: string) {
+		this.rooms[path]?.element.setSelected(true)
+	}
 	@Watch("selected")
 	async selectedChanged() {
 		Object.values(this.rooms).forEach(
@@ -33,7 +35,6 @@ export class SmoothlyApp {
 			this.mainElement.appendChild(content)
 		}
 	}
-
 	burgerVisibilityHandler(event: CustomEvent<boolean>) {
 		this.burgerVisibility = event.detail
 	}
@@ -65,7 +66,6 @@ export class SmoothlyApp {
 			window.history.replaceState({ smoothlyPath: room.element.path }, "", window.location.href)
 		}
 	}
-
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
 		if (this.burgerVisibility)
@@ -74,7 +74,6 @@ export class SmoothlyApp {
 			else
 				this.menuOpen = false
 	}
-
 	render() {
 		return (
 			<smoothly-notifier>
