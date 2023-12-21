@@ -51,6 +51,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
+        "disabled": boolean;
         "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
         "label"?: string;
@@ -1231,6 +1232,7 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyAppRoom {
+        "disabled"?: boolean;
         "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;

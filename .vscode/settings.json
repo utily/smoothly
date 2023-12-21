@@ -27,10 +27,10 @@
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
-		"eslint.autoFixOnSave": true,
-		"source.fixAll.stylelint": true,
-		"stylelint.autoFixOnSave": true,
+		"source.fixAll.eslint": "explicit",
+		"eslint.autoFixOnSave": "explicit",
+		"source.fixAll.stylelint": "explicit",
+		"stylelint.autoFixOnSave": "explicit"
 	},
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
