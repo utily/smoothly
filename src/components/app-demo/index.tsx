@@ -1,17 +1,18 @@
 import { Component, h, Prop } from "@stencil/core"
+
 @Component({
 	tag: "smoothly-app-demo",
 })
 export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
-
+	app?: HTMLSmoothlyAppElement
 	render() {
 		return (
-			<smoothly-app color="dark" label="Smoothly Demo">
+			<smoothly-app color="dark" label="Smoothly Demo" ref={e => (this.app = e)}>
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-app-room path="/" label="root">
+				<smoothly-app-room path="/root" label="root">
 					<smoothly-button type="link" link="/redirect">
 						To redirect
 					</smoothly-button>
@@ -94,5 +95,8 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
 			</smoothly-app>
 		)
+	}
+	componentDidRender() {
+		this.app?.selectRoom("/root")
 	}
 }
