@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { Currency, Language, Locale } from "isoly"
-import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+import { Currency, Locale } from "isoly"
+import * as langly from "langly"
+import { Action, Converter, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
 import { Color } from "../../model"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
@@ -14,8 +15,6 @@ import { Looks } from "./Looks"
 })
 export class SmoothlyInput implements Changeable, Clearable, Input {
 	private inputElement: HTMLInputElement
-	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
-	private keepFocusOnReRender = false
 	private lastValue: any
 	private state: Readonly<TidilyState> & Readonly<Settings>
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -60,7 +59,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				result = get(this.type, this.unit)
 				break
 			default:
-				result = get(this.type, getLocale())
+				result = get(this.type, Locale.toLocale(langly.getLanguage(this.inputElement) ?? "en"))
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -108,55 +107,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
-	componentDidRender() {
-		if (this.keepFocusOnReRender) {
-			this.inputElement.focus()
-			this.keepFocusOnReRender = false
-		}
-	}
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
-	}
-	@Method()
-	async getFormData(name: string): Promise<Record<string, any>> {
-		const result: Record<string, any> = {}
-		const form = document.forms.namedItem(name)
-		if (form) {
-			const elements = form.elements
-			for (let i = 0; i < elements.length; i++) {
-				const element = elements.item(i)
-				if (this.hasNameAndValue(element) && element.name)
-					result[element.name] = element.value
-			}
-			// Overwrite values with values from smoothly-input
-			const smoothlyInputs = form.getElementsByTagName("smoothly-input")
-			for (let i = 0; i < smoothlyInputs.length; i++) {
-				const element = smoothlyInputs.item(i)
-				if (this.hasNameAndValue(element) && element.name)
-					result[element.name] = element.value
-			}
-		}
-		return result
-	}
-	hasNameAndValue(element: any): element is { name: string; value: string } {
-		return (
-			typeof (element as { name?: string }).name == "string" && typeof (element as { value?: string }).value == "string"
-		)
-	}
-	@Method()
-	async setKeepFocusOnReRender(keepFocus: boolean) {
-		this.keepFocusOnReRender = keepFocus
-	}
-	@Method()
-	async setSelectionRange(start: number, end: number, direction?: Direction) {
-		this.state = this.newState({
-			...this.state,
-			selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
-		})
-
-		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
-		this.updateBackend(after, this.inputElement)
 	}
 	onBlur(event: FocusEvent) {
 		this.smoothlyBlur.emit()
@@ -214,9 +167,8 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	}
 	onPaste(event: ClipboardEvent) {
 		event.preventDefault()
-		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
+		const pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
-		pasted = this.expiresAutocompleteFix(backend, pasted)
 		for (const letter of pasted)
 			this.processKey({ key: letter }, backend)
 	}
@@ -226,26 +178,13 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			;[...(event.data ?? "")].forEach(c => this.processKey({ key: c }, event.target as HTMLInputElement))
 		} else {
 			const backend = event.target as HTMLInputElement
-			let data = backend.value
-			if (data) {
+			if (backend.value) {
 				event.preventDefault()
 				this.processKey({ key: "a", ctrlKey: true }, backend)
-				data = this.expiresAutocompleteFix(backend, data)
-				for (const letter of data)
+				for (const letter of backend.value)
 					this.processKey({ key: letter }, backend)
 			}
 		}
-	}
-	private expiresAutocompleteFix(backend: HTMLInputElement, value: string) {
-		if (backend.attributes.getNamedItem("autocomplete")?.value == "cc-exp")
-			value = value.match(/^20\d\d[.\D]*\d\d$/)
-				? value.substring(value.length - 2, value.length) + value.substring(2, 4)
-				: value.match(/^(1[3-9]|[2-9]\d)[.\D]*\d\d$/)
-				? value.substring(value.length - 2, value.length) + value.substring(0, 2)
-				: value.match(/^\d\d[.\D]*20\d\d$/)
-				? value.substring(0, 2) + value.substring(value.length - 2, value.length)
-				: value
-		return value
 	}
 	private processKey(event: Action, backend: HTMLInputElement) {
 		if (!this.readonly) {
@@ -300,9 +239,4 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			</Host>
 		)
 	}
-}
-
-function getLocale(): Locale | undefined {
-	const result = navigator.language
-	return Locale.is(result) ? result : Language.is(result) ? Locale.toLocale(result) : undefined
 }

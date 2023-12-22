@@ -11,7 +11,7 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
-import { Direction, Type } from "tidily";
+import { Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
@@ -199,7 +199,6 @@ export namespace Components {
         "color"?: Color;
         "currency"?: Currency;
         "disabled": boolean;
-        "getFormData": (name: string) => Promise<Record<string, any>>;
         "looks": Looks;
         "maxLength": number;
         "minLength": number;
@@ -208,8 +207,6 @@ export namespace Components {
         "placeholder": string | undefined;
         "readonly": boolean;
         "required": boolean;
-        "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": Type;
         "unit"?: string;
