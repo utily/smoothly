@@ -464,12 +464,6 @@ export namespace Components {
     interface SmoothlyTriggerSource {
         "listen": string;
     }
-    interface SmoothlyTuple {
-        "tuple": [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data": string;
-    }
 }
 export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1101,18 +1095,6 @@ declare global {
         prototype: HTMLSmoothlyTriggerSourceElement;
         new (): HTMLSmoothlyTriggerSourceElement;
     };
-    interface HTMLSmoothlyTupleElement extends Components.SmoothlyTuple, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTupleElement: {
-        prototype: HTMLSmoothlyTupleElement;
-        new (): HTMLSmoothlyTupleElement;
-    };
-    interface HTMLSmoothlyUrlencodedElement extends Components.SmoothlyUrlencoded, HTMLStencilElement {
-    }
-    var HTMLSmoothlyUrlencodedElement: {
-        prototype: HTMLSmoothlyUrlencodedElement;
-        new (): HTMLSmoothlyUrlencodedElement;
-    };
     interface HTMLElementTagNameMap {
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
@@ -1193,8 +1175,6 @@ declare global {
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
-        "smoothly-tuple": HTMLSmoothlyTupleElement;
-        "smoothly-urlencoded": HTMLSmoothlyUrlencodedElement;
     }
 }
 declare namespace LocalJSX {
@@ -1697,12 +1677,6 @@ declare namespace LocalJSX {
         "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
-    interface SmoothlyTuple {
-        "tuple"?: [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data"?: string;
-    }
     interface IntrinsicElements {
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
@@ -1783,8 +1757,6 @@ declare namespace LocalJSX {
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
-        "smoothly-tuple": SmoothlyTuple;
-        "smoothly-urlencoded": SmoothlyUrlencoded;
     }
 }
 export { LocalJSX as JSX };
@@ -1873,8 +1845,6 @@ declare module "@stencil/core" {
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
-            "smoothly-tuple": LocalJSX.SmoothlyTuple & JSXBase.HTMLAttributes<HTMLSmoothlyTupleElement>;
-            "smoothly-urlencoded": LocalJSX.SmoothlyUrlencoded & JSXBase.HTMLAttributes<HTMLSmoothlyUrlencodedElement>;
         }
     }
 }
