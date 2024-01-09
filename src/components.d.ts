@@ -46,7 +46,7 @@ export namespace Components {
         "color": Color;
         "label": string;
         "menuOpen": boolean;
-        "selectRoom": (path: string) => Promise<void>;
+        "selectRoom": (path: string) => void;
     }
     interface SmoothlyAppDemo {
         "baseUrl": string;
