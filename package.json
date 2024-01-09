@@ -70,11 +70,11 @@
 	"dependencies": {
 		"authly": "3.0.5",
 		"cloudly-http": "^0.1.2",
-		"isoly": "^2.0.20",
+		"isoly": "^2.3.3",
 		"langly": "2.0.3",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.4",
-		"tidily": "^0.0.62",
+		"tidily": "^0.0.63",
 		"urlpattern-polyfill": "^6.0.2"
 	},
 	"devDependencies": {

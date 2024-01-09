@@ -33,7 +33,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
-	@Prop({ reflect: true }) unit?: string
+	@State() formatter: Formatter & Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -50,21 +50,20 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		event.detail(this)
 	}
 
-	get formatter(): Formatter & Converter<any> {
+	@Watch("type")
+	typeChange(): void {
 		let result: (Formatter & Converter<any>) | undefined
 		switch (this.type) {
 			case "price":
 				result = get("price", this.currency)
 				break
-			case "duration":
-				result = get(this.type, this.unit)
-				break
 			default:
 				result = get(this.type, getLocale())
 				break
 		}
+
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		return result || get("text")!
+		this.formatter = result || get("text")!
 	}
 	private newState(state: TidilyState) {
 		const formatter = this.formatter
@@ -100,6 +99,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		}
 	}
 	componentWillLoad() {
+		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
 		const start = value.length
 		this.state = this.newState({

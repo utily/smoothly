@@ -212,7 +212,6 @@ export namespace Components {
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": Type;
-        "unit"?: string;
         "value": any;
     }
     interface SmoothlyInputClear {
@@ -1401,7 +1400,6 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "showLabel"?: boolean;
         "type"?: Type;
-        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyInputClear {
