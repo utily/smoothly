@@ -19,7 +19,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input
 					name="duration"
 					type="duration"
-					placeholder="hh:mm h"
+					placeholder="hh:mm"
 					value={{ hours: 5, minutes: 30 }}
 					onSmoothlyInput={e => console.log(e.detail.duration)}>
 					Duration
@@ -27,7 +27,6 @@ export class SmoothlyInputDemo {
 				<smoothly-input
 					name="duration"
 					type="duration"
-					unit="tim"
 					value={{ hours: 5, minutes: 30 }}
 					placeholder="hh:mm"
 					onSmoothlyInput={e => console.log(e.detail.duration)}>
