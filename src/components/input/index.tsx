@@ -57,9 +57,6 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			case "price":
 				result = get("price", this.currency)
 				break
-			case "duration":
-				result = get(this.type)
-				break
 			default:
 				result = get(this.type, getLocale())
 				break

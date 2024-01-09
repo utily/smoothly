@@ -17,7 +17,7 @@ jobs:
         with:
           path: '**/node_modules'
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm install
+      - run: npm ci
       - run: npm run build
   test:
     name: Test
@@ -32,7 +32,7 @@ jobs:
         with:
           path: '**/node_modules'
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm install
+      - run: npm ci
       - run: npm run test
   lint:
     name: Lint
@@ -47,7 +47,7 @@ jobs:
         with:
           path: '**/node_modules'
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
   audit:
     name: Audit
