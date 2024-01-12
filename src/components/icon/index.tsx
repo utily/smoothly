@@ -34,7 +34,7 @@ export class SmoothlyIcon {
 					this.document
 						? this.document
 								.replace(` width="512" height="512"`, "")
-								.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
+								.replace(/(><\/)\w+/, `><title>${this.toolTip || ""}</title></svg`)
 								.replace(/stroke:#000;/gi, "")
 						: undefined
 				}
