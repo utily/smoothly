@@ -32,10 +32,11 @@ export class SmoothlyIcon {
 			<Host
 				innerHTML={
 					this.document
-						? this.document
+						? (console.log(this.document),
+						  this.document
 								.replace(` width="512" height="512"`, "")
-								.replace(/(><\/)\w+/, `><title>${this.toolTip || ""}</title></svg`)
-								.replace(/stroke:#000;/gi, "")
+								.replace(/(><\/)svg>$/, `><title>${this.toolTip || ""}</title></svg>`)
+								.replace(/stroke:#000;/gi, ""))
 						: undefined
 				}
 			/>
