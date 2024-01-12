@@ -186,7 +186,7 @@ export namespace Components {
     interface SmoothlyIcon {
         "color": Color;
         "fill": Fill;
-        "name"?: Icon | "empty";
+        "name": Icon | "empty";
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
