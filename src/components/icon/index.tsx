@@ -15,7 +15,7 @@ export class SmoothlyIcon {
 	@Prop() toolTip?: string
 	@State() document?: string
 	@Watch("name")
-	async loadDocument(): Promise<string> {
+	async componentWillLoad() {
 		let result: string | undefined
 		if (this.name != "empty") {
 			result = await Icon.load(this.name)
@@ -28,15 +28,11 @@ export class SmoothlyIcon {
 			else
 				result = result?.replace(/(.*>)(<\/svg>$)/, `$1<title>${this.toolTip || ""}</title>$2`)
 		}
-		return (
+		this.document =
 			result ??
 			`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 		<title>Empty</title>
 		</svg>`
-		)
-	}
-	async componentWillLoad() {
-		this.document = await this.loadDocument()
 	}
 	render() {
 		return <Host innerHTML={this.document} />
