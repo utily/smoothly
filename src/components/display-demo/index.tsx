@@ -15,6 +15,17 @@ export class SmoothlyDisplayDemo {
 				<fieldset>
 					<h2>Smoothly display</h2>
 					<dl>
+						<dt>Duration</dt>
+						<dd>
+							<div>
+								<smoothly-display type="duration" value={{ hours: 13, minutes: 100 }} />
+								<smoothly-display type="duration" value={{ hours: 8 }} />
+								<smoothly-display type="duration" value={{ minutes: 3 }} />
+								<smoothly-display type="duration" value={{ hours: -13, minutes: 100 }} />
+								<smoothly-display type="duration" value={{ hours: -8 }} />
+								<smoothly-display type="duration" value={{ minutes: -3 }} />
+							</div>
+						</dd>
 						<dt>text</dt>
 						<dd>
 							<smoothly-display type="text" value="text"></smoothly-display>
@@ -102,8 +113,6 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-quiet color="dark">-</smoothly-quiet>
 						</dd>
-						<dt>Duration</dt>
-						<dd><smoothly-display type="duration" value={{hours: 13, minutes: 100}} /><smoothly-display type="duration" value={{hours: 8, minutes: 30}} /><smoothly-display type="duration" value={{hours: 0, minutes: 3}} /></dd>
 					</dl>
 				</fieldset>
 				<fieldset>
