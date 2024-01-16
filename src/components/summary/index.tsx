@@ -7,7 +7,7 @@ import { Color, Fill } from "../../model"
 })
 export class SmoothlySummary {
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Prop() color: Color = "primary"
+	@Prop() color: Color
 	@Prop() fill: Fill = "solid"
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
 	@Event() smoothlySummaryOpen: EventEmitter<boolean>
