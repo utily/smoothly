@@ -13,7 +13,6 @@ export class SmoothlyDisplay {
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
 	@Prop() format?: DateTime.Format
-	@Prop() unit?: string
 	render() {
 		let result: string | HTMLElement | undefined
 		const type = this.type
@@ -37,7 +36,7 @@ export class SmoothlyDisplay {
 				result = get(this.type as Type, getLocale())?.toString(this.value)
 				break
 			case "duration":
-				result = format(this.value, type, this.unit)
+				result = format(this.value, type)
 				break
 			case "date-time":
 				result = this.format

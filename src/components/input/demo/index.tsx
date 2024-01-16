@@ -6,7 +6,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
-	@State() duration: isoly.TimeSpan = { hours: -5, minutes: 30 }
+	@State() duration: isoly.TimeSpan = { hours: 8 }
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
