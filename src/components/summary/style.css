@@ -23,8 +23,7 @@
 }
 
 :host>details::slotted([slot=content]) {
-	margin: 0;
-	padding: 0.5rem 1.75rem;
+	margin: 0.5rem 1.75rem;
 }
 
 @media screen and (min-width: 900px) {
