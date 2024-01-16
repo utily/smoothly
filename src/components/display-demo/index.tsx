@@ -187,11 +187,11 @@ export class SmoothlyDisplayDemo {
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly summary</h2>
-					<smoothly-summary color="light" fill="clear" size="large">
+					<smoothly-summary>
 						<p slot="summary">Some title</p>
 						<p slot="content">Some content</p>
 					</smoothly-summary>
-					<smoothly-summary color="light" fill="clear" size="large">
+					<smoothly-summary size="large">
 						<p slot="summary">Some title</p>
 						<p slot="content">Some content</p>
 					</smoothly-summary>
