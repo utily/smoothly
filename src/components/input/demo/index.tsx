@@ -1,4 +1,4 @@
-import { Component, h, Listen } from "@stencil/core"
+import { Component, h, Listen, State } from "@stencil/core"
 import { isoly } from "isoly"
 @Component({
 	tag: "smoothly-input-demo",
@@ -6,6 +6,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
+	@State() duration: isoly.TimeSpan = { hours: -5, minutes: 30 }
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
@@ -20,17 +21,25 @@ export class SmoothlyInputDemo {
 					name="duration"
 					type="duration"
 					placeholder="hh:mm"
-					value={{ hours: 5, minutes: 30 }}
-					onSmoothlyInput={e => console.log(e.detail.duration)}>
+					value={this.duration}
+					onSmoothlyInput={e => {
+						const duration = e.detail.duration
+						console.log("event duration", duration)
+						this.duration = duration
+					}}>
 					Duration
 				</smoothly-input>
 				<smoothly-input
 					name="duration"
 					type="duration"
-					value={{ hours: 5, minutes: 30 }}
-					placeholder="hh:mm"
-					onSmoothlyInput={e => console.log(e.detail.duration)}>
-					Varaktighet
+					value={this.duration}
+					placeholder="-hh:mm"
+					onSmoothlyInput={e => {
+						const duration = e.detail.duration
+						console.log("event duration", duration)
+						this.duration = duration
+					}}>
+					Duration
 				</smoothly-input>
 			</smoothly-form>,
 			<h2>Submit</h2>,
