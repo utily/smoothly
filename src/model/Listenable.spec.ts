@@ -99,30 +99,30 @@ describe("Listenable", () => {
 			private set value(value: Dependant["value"]) {
 				this.#value = value
 			}
-			#foo: Dependant["foo"]
-			get foo(): Dependency["value"] {
-				return this.#foo
+			#dependency: Dependant["dependency"]
+			get dependency(): Dependency["value"] {
+				return this.#dependency
 			}
-			private set foo(foo: Dependant["foo"]) {
-				this.#foo = foo
+			private set dependency(dependency: Dependant["dependency"]) {
+				this.#dependency = dependency
 				this.calculate()
 			}
 
 			private calculate() {
-				if (this.foo != undefined && this.raw != undefined)
-					this.listenable.value = this.foo + this.raw
+				if (this.dependency != undefined && this.raw != undefined)
+					this.listenable.value = this.dependency + this.raw
 				else if (this.#value != undefined)
 					this.listenable.value = undefined
 			}
 
 			private subscriptions = {
-				foo: (value: Dependency["value"]) => (this.foo = value),
+				dependency: (value: Dependency["value"]) => (this.dependency = value),
 			}
 
-			static create(foo: WithListenable<Dependency>, options?: { lazy?: boolean }): WithListenable<Dependant> {
+			static create(dependency: WithListenable<Dependency>, options?: { lazy?: boolean }): WithListenable<Dependant> {
 				const backend = new this()
 				const listenable = Listenable.load(backend)
-				foo.listen("value", value => backend.subscriptions.foo(value), options)
+				dependency.listen("value", value => backend.subscriptions.dependency(value), options)
 				return listenable
 			}
 		}
@@ -136,18 +136,18 @@ describe("Listenable", () => {
 
 		const eager = new State()
 		await asyncContextSwitch()
-		expect(eager.dependant.foo).toEqual(100)
+		expect(eager.dependant.dependency).toEqual(100)
 		expect(eager.dependant.raw).toEqual(undefined)
 		expect(eager.dependant.value).toEqual(undefined)
 		expect(eager.dependency.value).toEqual(100)
 		await asyncContextSwitch()
-		expect(eager.dependant.foo).toEqual(100)
+		expect(eager.dependant.dependency).toEqual(100)
 		expect(eager.dependant.raw).toEqual(undefined)
 		expect(eager.dependant.value).toEqual(undefined)
 		expect(eager.dependency.value).toEqual(100)
 		eager.dependant.raw = 50
 		await asyncContextSwitch()
-		expect(eager.dependant.foo).toEqual(100)
+		expect(eager.dependant.dependency).toEqual(100)
 		expect(eager.dependant.raw).toEqual(50)
 		expect(eager.dependant.value).toEqual(150)
 		expect(eager.dependency.value).toEqual(100)
@@ -157,12 +157,12 @@ describe("Listenable", () => {
 
 		const lazy = new State({ lazy: true })
 		await asyncContextSwitch()
-		expect(lazy.dependant.foo).toEqual(undefined)
+		expect(lazy.dependant.dependency).toEqual(undefined)
 		expect(lazy.dependant.raw).toEqual(undefined)
 		expect(lazy.dependant.value).toEqual(undefined)
 		expect(lazy.dependency.value).toEqual(undefined)
 		await asyncContextSwitch()
-		expect(lazy.dependant.foo).toEqual(100)
+		expect(lazy.dependant.dependency).toEqual(100)
 		expect(lazy.dependant.raw).toEqual(undefined)
 		expect(lazy.dependant.value).toEqual(undefined)
 		expect(lazy.dependency.value).toEqual(100)
