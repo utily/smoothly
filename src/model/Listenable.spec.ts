@@ -112,6 +112,8 @@ describe("Listenable", () => {
 			private calculate() {
 				if (this.foo != undefined && this.raw != undefined)
 					this.listenable.value = this.foo + this.raw
+				else if (this.#value != undefined)
+					this.listenable.value = undefined
 			}
 
 			private subscriptions = {
@@ -126,10 +128,9 @@ describe("Listenable", () => {
 			}
 		}
 		class State {
-			readonly dependency: WithListenable<Dependency>
+			readonly dependency = Dependency.create()
 			readonly dependant: WithListenable<Dependant>
 			constructor(options?: { lazy?: boolean }) {
-				this.dependency = Dependency.create()
 				this.dependant = Dependant.create(this.dependency, options)
 			}
 		}
