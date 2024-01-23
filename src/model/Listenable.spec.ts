@@ -116,7 +116,7 @@ describe("Listenable", () => {
 			}
 
 			private subscriptions = {
-				dependency: (value: Dependency["value"]) => (this.dependency = value),
+				dependency: (value: Dependency["value"]) => (this.listenable.dependency = value),
 			}
 
 			static create(dependency: WithListenable<Dependency>, options?: { lazy?: boolean }): WithListenable<Dependant> {
