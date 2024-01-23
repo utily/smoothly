@@ -5,8 +5,8 @@ import { Listenable, WithListenable } from "./Listenable"
 import { StateBase } from "./StateBase"
 
 describe("Listenable", () => {
-	async function sleep(duration: number): Promise<void> {
-		await new Promise(resolve => setTimeout(resolve, duration))
+	async function asyncContextSwitch(callback?: () => void): Promise<void> {
+		await new Promise<void>(resolve => setTimeout(() => resolve(callback?.()), 0))
 	}
 	class State extends StateBase<State> {
 		get foo() {
@@ -72,8 +72,7 @@ describe("Listenable", () => {
 		class Dependency extends StateBase<Dependency> {
 			#value?: Dependency["value"]
 			get value(): number | undefined {
-				return (this.#value ??=
-					(new Promise(resolve => setTimeout(() => resolve((this.listenable.value = 100)), 0)), undefined))
+				return (this.#value ??= (asyncContextSwitch(() => (this.listenable.value = 100)), undefined))
 			}
 			set value(value: Dependency["value"]) {
 				this.#value = value
@@ -136,43 +135,43 @@ describe("Listenable", () => {
 		}
 
 		const eager = new State()
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(eager.dependant.foo).toEqual(100)
 		expect(eager.dependant.raw).toEqual(undefined)
 		expect(eager.dependant.value).toEqual(undefined)
 		expect(eager.dependency.value).toEqual(100)
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(eager.dependant.foo).toEqual(100)
 		expect(eager.dependant.raw).toEqual(undefined)
 		expect(eager.dependant.value).toEqual(undefined)
 		expect(eager.dependency.value).toEqual(100)
 		eager.dependant.raw = 50
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(eager.dependant.foo).toEqual(100)
 		expect(eager.dependant.raw).toEqual(50)
 		expect(eager.dependant.value).toEqual(150)
 		expect(eager.dependency.value).toEqual(100)
 		eager.dependency.value = 200
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(eager.dependant.value).toEqual(250)
 
 		const lazy = new State({ lazy: true })
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(lazy.dependant.foo).toEqual(undefined)
 		expect(lazy.dependant.raw).toEqual(undefined)
 		expect(lazy.dependant.value).toEqual(undefined)
 		expect(lazy.dependency.value).toEqual(undefined)
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(lazy.dependant.foo).toEqual(100)
 		expect(lazy.dependant.raw).toEqual(undefined)
 		expect(lazy.dependant.value).toEqual(undefined)
 		expect(lazy.dependency.value).toEqual(100)
 		lazy.dependant.raw = 50
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(lazy.dependant.raw).toEqual(50)
 		expect(lazy.dependant.value).toEqual(150)
 		lazy.dependency.value = 200
-		await sleep(0) // context switch. do not remove
+		await asyncContextSwitch()
 		expect(lazy.dependant.value).toEqual(250)
 	})
 })
