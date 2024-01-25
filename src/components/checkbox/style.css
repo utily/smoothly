@@ -1,63 +1,110 @@
 * {
 	box-sizing: border-box;
 }
-
 :host {
-	display: block;
+	display: grid;
+	width: fit-content;
+	grid-template-columns: auto 1fr;
+	row-gap: 0.5rem;
+	align-items: center;
+}
+:host label:empty {
+	display: none;
+}
+:host label {
+	grid-column: 2;
+	margin-left: 0.2rem;
 }
 
-:host > main {
+:host smoothly-icon {
+	grid-column: 1;
+	border: 1px solid rgb(var(--smoothly-color-contrast));
+}
+:host[disabled] smoothly-icon {
+	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
+}
+:host:not([checked]) smoothly-icon,
+:host:not([intermediate]) smoothly-icon {
+	stroke: rgb(var(--smoothly-color-contrast));
+}
+
+:host div.expansion {
+	position: relative;
+	grid-column-start: 2;
+	background-color: rgb(var(--smoothly-secondary-color));
+	color: rgb(var(--smoothly-secondary-contrast));
+	padding: 0.5rem;
+	border-radius: 5px;
+}
+:host:not([checked]) div.expansion,
+:host div.expansion:empty {
+	display: none;
+}
+:host div.expansion::before {
+	content: "\25B2";
+	position: absolute;
+	bottom: calc(100% + 0.5rem);
+	line-height: 0;
+	left: 0.5rem;
+	color: rgb(var(--smoothly-secondary-color))
+}
+
+/* :host {
+	display: block;
+} */
+
+/* :host > main {
 	display: flex;
 	align-items: center;
 	width: fit-content;
 	height: max-content;
 	margin: 0.3rem 0;
 	line-height: 0;
-}
+} */
 
-:host > main > label {
+/* :host > main > label {
 	display:flex;
 	justify-content: center;
 	align-items: center;
 	margin: 0 0.2em;
-}
+} */
 
-:host > main > div {
+/* :host > main > div {
 	border: 1px solid rgb(var(--smoothly-color-contrast));
-}
+} */
 
-:host > main > div > smoothly-icon {
+/* :host > main > div > smoothly-icon {
 	display: flex;
 	justify-content: center;	
 	align-items: center;
-}
+} */
 
-:host:not([checked]) > main > div > smoothly-icon,
+/* :host:not([checked]) > main > div > smoothly-icon,
 :host:not([intermediate]) > main > div > smoothly-icon {
 	stroke: rgb(var(--smoothly-color-contrast));
-}
+} */
 
-:host[disabled] > main > div {
+/* :host[disabled] > main > div {
 	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
-}
+} */
 
-::slotted([slot=expansion]) {
+/* ::slotted([slot=expansion]) {
 	display: none;
 	background-color: rgb(var(--smoothly-secondary-color));
 	color: rgb(var(--smoothly-secondary-contrast));
-}
+} */
 
-[checked]::slotted([slot=expansion]) {
+/* [checked]::slotted([slot=expansion]) {
 	display: block;
 	padding: 0.5em;
 	border-radius: 5px;
 	margin: 0.5rem 0;
-}
+} */
 
-[checked]::slotted([slot=expansion])::before {
+/* [checked]::slotted([slot=expansion])::before {
 	content: "\25B2";
 	position: relative;
 	top: -1.35em;
 	left: 2rem;
 	color: rgb(var(--smoothly-secondary-color))
-}
+} */

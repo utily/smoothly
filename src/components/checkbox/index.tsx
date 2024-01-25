@@ -43,27 +43,24 @@ export class SmoothlyCheckbox implements Clearable {
 	render() {
 		return (
 			<Host>
-				<main>
-					<div>
-						<smoothly-icon
-							toolTip={this.t(!this.checked ? "Select" : "De-select")}
-							onClick={e => {
-								this.toggle()
-							}}
-							size={this.size}
-							name={
-								this.intermediate && !this.checked
-									? "remove-outline"
-									: this.checked && !this.intermediate
-									? "checkmark-outline"
-									: "empty"
-							}></smoothly-icon>
-					</div>
-					<label htmlFor={this.name}>
-						<slot></slot>
-					</label>
-				</main>
-				<slot name="expansion" />
+				<smoothly-icon
+					toolTip={this.t(!this.checked ? "Select" : "De-select")}
+					onClick={() => this.toggle()}
+					size={this.size}
+					name={
+						this.intermediate && !this.checked
+							? "remove-outline"
+							: this.checked && !this.intermediate
+							? "checkmark-outline"
+							: "empty"
+					}
+				/>
+				<label htmlFor={this.name}>
+					<slot></slot>
+				</label>
+				<div class={"expansion"}>
+					<slot name="expansion" />
+				</div>
 			</Host>
 		)
 	}
