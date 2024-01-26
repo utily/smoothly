@@ -18,6 +18,7 @@
 
 :host smoothly-icon {
 	grid-column: 1;
+	line-height: 0;
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
 :host[disabled] smoothly-icon {
@@ -48,3 +49,63 @@
 	left: 0.5rem;
 	color: rgb(var(--smoothly-secondary-color))
 }
+
+/* :host {
+	display: block;
+} */
+
+/* :host > main {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	height: max-content;
+	margin: 0.3rem 0;
+	line-height: 0;
+} */
+
+/* :host > main > label {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0.2em;
+} */
+
+/* :host > main > div {
+	border: 1px solid rgb(var(--smoothly-color-contrast));
+} */
+
+/* :host > main > div > smoothly-icon {
+	display: flex;
+	justify-content: center;	
+	align-items: center;
+} */
+
+/* :host:not([checked]) > main > div > smoothly-icon,
+:host:not([intermediate]) > main > div > smoothly-icon {
+	stroke: rgb(var(--smoothly-color-contrast));
+} */
+
+/* :host[disabled] > main > div {
+	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
+} */
+
+/* ::slotted([slot=expansion]) {
+	display: none;
+	background-color: rgb(var(--smoothly-secondary-color));
+	color: rgb(var(--smoothly-secondary-contrast));
+} */
+
+/* [checked]::slotted([slot=expansion]) {
+	display: block;
+	padding: 0.5em;
+	border-radius: 5px;
+	margin: 0.5rem 0;
+} */
+
+/* [checked]::slotted([slot=expansion])::before {
+	content: "\25B2";
+	position: relative;
+	top: -1.35em;
+	left: 2rem;
+	color: rgb(var(--smoothly-secondary-color))
+} */
