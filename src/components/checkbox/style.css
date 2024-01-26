@@ -21,6 +21,9 @@
 	line-height: 0;
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
+:host:not([disabled]) smoothly-icon {
+	cursor: pointer;
+}
 :host[disabled] smoothly-icon {
 	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
 }
