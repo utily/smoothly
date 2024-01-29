@@ -18,8 +18,9 @@ export class SmoothlyApp {
 	private burgerVisibility: boolean
 	private burgerElement?: HTMLElement
 	private navElement?: HTMLElement
-	mainElement?: HTMLElement
-	rooms: Record<string, Room | undefined> = {}
+	private mainElement?: HTMLElement
+	private rooms: Record<string, Room | undefined> = {}
+
 	@Method()
 	async selectRoom(path: string) {
 		this.rooms[path]?.element.setSelected(true)

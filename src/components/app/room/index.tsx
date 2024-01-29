@@ -1,19 +1,25 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, FunctionalComponent, h, Host, Method, Prop, State, Watch } from "@stencil/core"
+import { ComponentWillLoad, Fragment, JSX } from "@stencil/core/internal"
 import "urlpattern-polyfill"
+import global from "../../../global"
 import { Icon } from "../../../model"
+
+const Observers = global().Observers
 
 @Component({
 	tag: "smoothly-app-room",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyAppRoom {
+export class SmoothlyAppRoom implements ComponentWillLoad {
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
+	@Prop() component?: FunctionalComponent | JSX.Element | JSX.Element[]
+	@State() loading = true
 	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
 	@Event() smoothlyRoomLoaded: EventEmitter<{ selected: boolean }>
 	private contentElement?: HTMLElement
@@ -23,6 +29,36 @@ export class SmoothlyAppRoom {
 			window.location
 		)
 		this.smoothlyRoomLoaded.emit({ selected: this.selected })
+	}
+
+	private load(): void {
+		console.log("loaded!")
+		this.loading = false
+		this.unobserve()
+	}
+	private observe(): void {
+		if (this.contentElement && !Observers.has(this.contentElement)) {
+			const observer = new IntersectionObserver(entries => {
+				if (entries.find(entry => entry.target == this.contentElement)?.isIntersecting)
+					this.load()
+			})
+			Observers.set(this.contentElement, observer)
+			observer.observe(this.contentElement)
+		}
+	}
+	private unobserve(): void {
+		if (this.contentElement) {
+			Observers.get(this.contentElement)?.disconnect()
+			Observers.remove(this.contentElement)
+		}
+	}
+
+	@Watch("component")
+	contentChanged(): void {
+		if (!this.component)
+			this.unobserve()
+		else
+			this.observe()
 	}
 
 	@Method()
@@ -51,7 +87,18 @@ export class SmoothlyAppRoom {
 						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 					</a>
 				</li>
-				<main ref={e => (this.contentElement = e)}>
+				<main ref={e => ((this.contentElement = e), this.contentChanged())}>
+					{!this.component ? null : (
+						<Fragment>
+							{this.loading ? (
+								<smoothly-spinner active />
+							) : typeof this.component == "function" ? (
+								<this.component />
+							) : (
+								this.component
+							)}
+						</Fragment>
+					)}
 					<slot></slot>
 				</main>
 			</Host>

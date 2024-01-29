@@ -68,9 +68,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/select" label="Select">
 					<smoothly-select-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/icon" label="Icon">
-					<smoothly-icon-demo />
-				</smoothly-app-room>
+				<smoothly-app-room path="/icon" label="Icon" component={<smoothly-icon-demo />}></smoothly-app-room>
 				<smoothly-app-room path="/old" label="Old" to="select"></smoothly-app-room>
 				<smoothly-app-room path="/redirect" label="Redirect">
 					<smoothly-button type="link" link="/input">

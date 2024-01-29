@@ -9,6 +9,8 @@ import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { FunctionalComponent } from "@stencil/core";
+import { JSX } from "@stencil/core/internal";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
@@ -52,6 +54,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
+        "component"?: FunctionalComponent | JSX.Element | JSX.Element[];
         "disabled": boolean;
         "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
@@ -1232,6 +1235,7 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyAppRoom {
+        "component"?: FunctionalComponent | JSX.Element | JSX.Element[];
         "disabled"?: boolean;
         "icon"?: Icon;
         "label"?: string;
