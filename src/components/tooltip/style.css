@@ -1,0 +1,23 @@
+:host{
+display: contents;
+position: relative;
+}
+
+.toolTip {
+	visibility: hidden;
+	display: inline-block;
+	margin-top: 0.2rem;
+	margin-left: 1rem;
+	width: fit-content;
+	background-color: rgb(var(--smoothly-color-contrast));
+	color: rgb(var(--smoothly-color));
+	text-align: center;
+	border-radius: 0.3rem;
+	padding:  0.2rem 0.4rem;
+	position: absolute;
+}
+
+:host:hover > .toolTip{
+	visibility: visible;
+	opacity: 0.9;
+}

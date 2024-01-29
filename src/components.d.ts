@@ -450,6 +450,10 @@ export namespace Components {
         "selected": boolean;
         "size": "small" | "default" | "large";
     }
+    interface SmoothlyTooltip {
+        "color": Color;
+        "toolTip": string;
+    }
     interface SmoothlyTrigger {
         "color": Color | undefined;
         "disabled": boolean;
@@ -1085,6 +1089,12 @@ declare global {
         prototype: HTMLSmoothlyToggleSwitchElement;
         new (): HTMLSmoothlyToggleSwitchElement;
     };
+    interface HTMLSmoothlyTooltipElement extends Components.SmoothlyTooltip, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTooltipElement: {
+        prototype: HTMLSmoothlyTooltipElement;
+        new (): HTMLSmoothlyTooltipElement;
+    };
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
     }
     var HTMLSmoothlyTriggerElement: {
@@ -1192,6 +1202,7 @@ declare global {
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
+        "smoothly-tooltip": HTMLSmoothlyTooltipElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
@@ -1679,6 +1690,10 @@ declare namespace LocalJSX {
         "selected"?: boolean;
         "size"?: "small" | "default" | "large";
     }
+    interface SmoothlyTooltip {
+        "color"?: Color;
+        "toolTip"?: string;
+    }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
         "disabled"?: boolean;
@@ -1781,6 +1796,7 @@ declare namespace LocalJSX {
         "smoothly-theme-colors": SmoothlyThemeColors;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
+        "smoothly-tooltip": SmoothlyTooltip;
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
@@ -1871,6 +1887,7 @@ declare module "@stencil/core" {
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
+            "smoothly-tooltip": LocalJSX.SmoothlyTooltip & JSXBase.HTMLAttributes<HTMLSmoothlyTooltipElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
