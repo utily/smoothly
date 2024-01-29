@@ -100,6 +100,7 @@ export namespace Components {
         "name": string;
         "size": "tiny" | "small" | "medium" | "large";
         "toggle": () => Promise<void>;
+        "unavailable": boolean;
         "value": any;
     }
     interface SmoothlyColor {
@@ -122,7 +123,6 @@ export namespace Components {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type": Type;
-        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {
@@ -1297,6 +1297,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";
+        "unavailable"?: boolean;
         "value"?: any;
     }
     interface SmoothlyColor {
@@ -1319,7 +1320,6 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type"?: Type;
-        "unit"?: string;
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {

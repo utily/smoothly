@@ -66,8 +66,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		this.formatter = result || get("text")!
 	}
 	private newState(state: TidilyState) {
-		const formatter = this.formatter
-		return formatter.format(StateEditor.copy(formatter.unformat(StateEditor.copy(state))))
+		return this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy(state))))
 	}
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
@@ -154,7 +153,6 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			...this.state,
 			selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
 		})
-
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
 	}

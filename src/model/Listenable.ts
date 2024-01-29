@@ -11,10 +11,12 @@ export class Listenable<T extends CanBeListenable> {
 	listen<K extends keyof ListenableProperties<T>>(
 		this: T & Listenable<T>,
 		property: K,
-		listener: Listener<T[K]>
+		listener: Listener<T[K]>,
+		options?: { lazy?: boolean }
 	): void {
 		this.#listeners[property]?.push(listener) ?? (this.#listeners[property] = [listener])
-		listener(this[property])
+		if (!options?.lazy)
+			listener(this[property])
 	}
 	unlisten<K extends keyof ListenableProperties<T>>(property: K, listener: Listener<T[K]>): void {
 		const index = this.#listeners[property]?.indexOf(listener)

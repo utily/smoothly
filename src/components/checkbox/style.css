@@ -1,63 +1,60 @@
 * {
 	box-sizing: border-box;
 }
-
 :host {
-	display: block;
-}
-
-:host > main {
-	display: flex;
-	align-items: center;
+	display: grid;
 	width: fit-content;
-	height: max-content;
-	margin: 0.3rem 0;
-	line-height: 0;
-}
-
-:host > main > label {
-	display:flex;
-	justify-content: center;
+	grid-template-columns: auto 1fr;
+	row-gap: 0.5rem;
 	align-items: center;
-	margin: 0 0.2em;
+}
+:host label:empty {
+	display: none;
+}
+:host label {
+	grid-column: 2;
+	margin-left: 0.2rem;
 }
 
-:host > main > div {
+:host smoothly-icon {
+	grid-column: 1;
+	line-height: 0;
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
-
-:host > main > div > smoothly-icon {
-	display: flex;
-	justify-content: center;	
-	align-items: center;
+:host:not([disabled]):not([unavailable]) smoothly-icon {
+	cursor: pointer;
 }
-
-:host:not([checked]) > main > div > smoothly-icon,
-:host:not([intermediate]) > main > div > smoothly-icon {
+:host[disabled] smoothly-icon,
+:host[unavailable] smoothly-icon {
+	border-color: rgb(var(--smoothly-color-contrast), 0.3);
+}
+:host[disabled] smoothly-icon,
+:host[unavailable] smoothly-icon {
+	opacity: 0.7;
+}
+:host:not([checked]) smoothly-icon,
+:host:not([intermediate]) smoothly-icon
+:host:not([unavailable]) {
 	stroke: rgb(var(--smoothly-color-contrast));
 }
 
-:host[disabled] > main > div {
-	border: 1px solid rgb(var(--smoothly-color-contrast), 0.3);
-}
-
-::slotted([slot=expansion]) {
-	display: none;
+:host div.expansion {
+	position: relative;
+	grid-column-start: 2;
 	background-color: rgb(var(--smoothly-secondary-color));
 	color: rgb(var(--smoothly-secondary-contrast));
-}
-
-[checked]::slotted([slot=expansion]) {
-	display: block;
-	padding: 0.5em;
+	padding: 0.5rem;
 	border-radius: 5px;
-	margin: 0.5rem 0;
 }
-
-[checked]::slotted([slot=expansion])::before {
+:host:not([checked]) div.expansion,
+:host div.expansion:empty {
+	display: none;
+}
+:host div.expansion::before {
 	content: "\25B2";
-	position: relative;
-	top: -1.35em;
-	left: 2rem;
+	position: absolute;
+	bottom: calc(100% + 0.5rem /* <-- alignment */ - 0.3rem /* <-- adjustment*/);
+	line-height: 0;
+	left: 0.5rem;
 	color: rgb(var(--smoothly-secondary-color))
 }

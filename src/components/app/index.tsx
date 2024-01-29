@@ -21,7 +21,7 @@ export class SmoothlyApp {
 	mainElement?: HTMLElement
 	rooms: Record<string, Room | undefined> = {}
 	@Method()
-	selectRoom(path: string) {
+	async selectRoom(path: string) {
 		this.rooms[path]?.element.setSelected(true)
 	}
 	@Watch("selected")

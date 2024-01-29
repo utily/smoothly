@@ -1,4 +1,4 @@
-import { Component, h, Listen } from "@stencil/core"
+import { Component, h, Listen, State } from "@stencil/core"
 import { isoly } from "isoly"
 @Component({
 	tag: "smoothly-input-demo",
@@ -6,6 +6,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
+	@State() duration: isoly.TimeSpan = { hours: 8 }
 
 	@Listen("selectionChanged")
 	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
@@ -20,17 +21,25 @@ export class SmoothlyInputDemo {
 					name="duration"
 					type="duration"
 					placeholder="hh:mm"
-					value={{ hours: 5, minutes: 30 }}
-					onSmoothlyInput={e => console.log(e.detail.duration)}>
+					value={this.duration}
+					onSmoothlyInput={e => {
+						const duration = e.detail.duration
+						console.log("event duration", duration)
+						this.duration = duration
+					}}>
 					Duration
 				</smoothly-input>
 				<smoothly-input
 					name="duration"
 					type="duration"
-					value={{ hours: 5, minutes: 30 }}
-					placeholder="hh:mm"
-					onSmoothlyInput={e => console.log(e.detail.duration)}>
-					Varaktighet
+					value={this.duration}
+					placeholder="-hh:mm"
+					onSmoothlyInput={e => {
+						const duration = e.detail.duration
+						console.log("event duration", duration)
+						this.duration = duration
+					}}>
+					Duration
 				</smoothly-input>
 			</smoothly-form>,
 			<h2>Submit</h2>,
@@ -216,9 +225,26 @@ export class SmoothlyInputDemo {
 					<smoothly-checkbox>
 						Check me
 						<div slot="expansion">Some context</div>
+						<div slot="expansion">Some more context</div>
 					</smoothly-checkbox>
 					<smoothly-checkbox>Label</smoothly-checkbox>
 					<smoothly-checkbox disabled={true} />
+					<smoothly-checkbox />
+					<smoothly-checkbox
+						name={"unavailable"}
+						value={true}
+						disabled
+						unavailable
+						checked
+						onSmoothlyInput={e => console.log("unavailable", e.detail)}
+					/>
+					<smoothly-checkbox
+						name={"unavailable"}
+						value={true}
+						unavailable
+						checked
+						onSmoothlyInput={e => console.log("unavailable", e.detail)}
+					/>
 				</div>
 			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
