@@ -23,6 +23,7 @@ export class SmoothlyCheckbox implements Clearable {
 		this.t = translation.create(this.element)
 	}
 
+	@Watch("checked")
 	@Watch("unavailable")
 	unavailableChanged(): void {
 		if (this.unavailable && this.checked)

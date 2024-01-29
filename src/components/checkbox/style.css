@@ -21,15 +21,20 @@
 	line-height: 0;
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
-:host:not([disabled]) smoothly-icon {
+:host:not([disabled]):not([unavailable]) smoothly-icon {
 	cursor: pointer;
 }
-:host[disabled] smoothly-icon {
+:host[disabled] smoothly-icon,
+:host[unavailable] smoothly-icon {
 	border-color: rgb(var(--smoothly-color-contrast), 0.3);
+}
+:host[disabled] smoothly-icon,
+:host[unavailable] smoothly-icon {
+	opacity: 0.7;
 }
 :host:not([checked]) smoothly-icon,
 :host:not([intermediate]) smoothly-icon
-:host[unavailable] {
+:host:not([unavailable]) {
 	stroke: rgb(var(--smoothly-color-contrast));
 }
 
