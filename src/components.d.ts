@@ -100,6 +100,7 @@ export namespace Components {
         "name": string;
         "size": "tiny" | "small" | "medium" | "large";
         "toggle": () => Promise<void>;
+        "unavailable": boolean;
         "value": any;
     }
     interface SmoothlyColor {
@@ -1285,6 +1286,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
         "size"?: "tiny" | "small" | "medium" | "large";
+        "unavailable"?: boolean;
         "value"?: any;
     }
     interface SmoothlyColor {

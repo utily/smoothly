@@ -225,9 +225,26 @@ export class SmoothlyInputDemo {
 					<smoothly-checkbox>
 						Check me
 						<div slot="expansion">Some context</div>
+						<div slot="expansion">Some more context</div>
 					</smoothly-checkbox>
 					<smoothly-checkbox>Label</smoothly-checkbox>
 					<smoothly-checkbox disabled={true} />
+					<smoothly-checkbox />
+					<smoothly-checkbox
+						name={"unavailable"}
+						value={true}
+						disabled
+						unavailable
+						checked
+						onSmoothlyInput={e => console.log("unavailable", e.detail)}
+					/>
+					<smoothly-checkbox
+						name={"unavailable"}
+						value={true}
+						unavailable
+						checked
+						onSmoothlyInput={e => console.log("unavailable", e.detail)}
+					/>
 				</div>
 			</smoothly-form>,
 			<h4>Smoothly Radio Buttons</h4>,
