@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import * as langly from "langly"
 import { Clearable } from "../filter/Clearable"
 import * as translation from "./translation"
@@ -12,9 +12,10 @@ export class SmoothlyCheckbox implements Clearable {
 	@Prop() size: "tiny" | "small" | "medium" | "large" = "tiny"
 	@Prop({ mutable: true, reflect: true }) checked = false
 	@Prop({ mutable: true, reflect: true }) intermediate = false
+	@Prop({ reflect: true }) unavailable = false
+	@Prop({ reflect: true }) disabled = false
 	@Prop() name: string
 	@Prop() value: any
-	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate
 
@@ -22,9 +23,15 @@ export class SmoothlyCheckbox implements Clearable {
 		this.t = translation.create(this.element)
 	}
 
+	@Watch("unavailable")
+	unavailableChanged(): void {
+		if (this.unavailable && this.checked)
+			this.smoothlyInput.emit({ [this.name]: undefined })
+	}
+
 	@Method()
 	async toggle(): Promise<void> {
-		if (!this.disabled) {
+		if (!this.disabled && !this.unavailable) {
 			const checked = this.intermediate || this.checked == false
 			this.smoothlyInput.emit({
 				[this.name]: checked ? this.value : undefined,
@@ -35,9 +42,7 @@ export class SmoothlyCheckbox implements Clearable {
 	@Method()
 	async clear() {
 		this.checked = false
-		this.smoothlyInput.emit({
-			[this.name]: undefined,
-		})
+		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 
 	render() {
@@ -48,7 +53,9 @@ export class SmoothlyCheckbox implements Clearable {
 					onClick={() => this.toggle()}
 					size={this.size}
 					name={
-						this.intermediate && !this.checked
+						this.unavailable
+							? "close-outline"
+							: this.intermediate && !this.checked
 							? "remove-outline"
 							: this.checked && !this.intermediate
 							? "checkmark-outline"
