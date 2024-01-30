@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, Element, h, Host, Prop } from "@stencil/core"
 import { Color } from "../../model"
 
 @Component({
@@ -6,14 +6,18 @@ import { Color } from "../../model"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyTip {
+export class SmoothlyTooltip {
+	@Element() element: HTMLElement
 	@Prop() toolTip: string
 	@Prop() color: Color
+	componentWillLoad() {
+		this.element.title = this.toolTip
+	}
+
 	render() {
 		return (
 			<Host>
 				<slot />
-				<span class="toolTip">{this.toolTip}</span>
 			</Host>
 		)
 	}

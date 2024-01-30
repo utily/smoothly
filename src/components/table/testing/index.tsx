@@ -12,9 +12,9 @@ export class SmoothlyTableTesting {
 			<Host>
 				<smoothly-table color="dark">
 					<smoothly-table-row>
-						<smoothly-table-header>
-							<smoothly-tooltip toolTip="Testing">Type</smoothly-tooltip>
-						</smoothly-table-header>
+						<smoothly-tooltip toolTip="Testing">
+							<smoothly-table-header>Type</smoothly-table-header>
+						</smoothly-tooltip>
 						<smoothly-table-header>Name</smoothly-table-header>
 						<smoothly-table-header>Age</smoothly-table-header>
 					</smoothly-table-row>
