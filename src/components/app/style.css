@@ -1,5 +1,6 @@
 smoothly-app {
 	--margin: -0.5rem;
+	--header-height: 5rem;
 	display: block;
 	scrollbar-width: none;
 	margin-left: var(--margin);
@@ -17,7 +18,7 @@ smoothly-app > smoothly-notifier > header {
 	top: 0;
 	z-index: 5;
 	width: 100%;
-	height: 5rem;
+	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -94,6 +95,8 @@ smoothly-app > smoothly-notifier > header > nav > ul li a {
 		max-width: 15rem;
 		top: 100%;
 		position: absolute;
+		max-height: calc(100dvh - var(--header-height));
+		overflow-y: scroll;
 		right: 0;
 		height: auto;
 	}
