@@ -90,7 +90,7 @@ smoothly-app > smoothly-notifier > header > nav > ul {
 	width: 100%;
 }
 smoothly-app > smoothly-notifier > header > [slot=header] {
-	margin-right: 2.1rem;
+	margin-right: 2.1rem; /* some comment */
 	border: 0;
 }
 smoothly-app > smoothly-notifier > header > [slot=header] > a {
