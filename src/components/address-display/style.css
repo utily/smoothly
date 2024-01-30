@@ -2,3 +2,9 @@
 	display: block;
 	width: 30%;
 }
+:host > div > span{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 2rem;
+}

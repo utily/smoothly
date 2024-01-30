@@ -15,6 +15,10 @@ export class SmoothlyInputDemo {
 
 	render() {
 		return [
+			<smoothly-address-display />,
+			<h2>Contact form</h2>,
+			<h4>Address based on country</h4>,
+			<smoothly-contact-display />,
 			<h2>Duration</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input

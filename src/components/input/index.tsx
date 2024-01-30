@@ -4,6 +4,7 @@ import { Action, Converter, Direction, Formatter, get, Settings, State as Tidily
 import { Color } from "../../model"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
+import { Immutable } from "./Immutable"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
 
@@ -12,7 +13,7 @@ import { Looks } from "./Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput implements Changeable, Clearable, Input {
+export class SmoothlyInput implements Changeable, Clearable, Input, Immutable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -36,6 +37,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@State() formatter: Formatter & Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() getReadonlyStatus: EventEmitter<(looks: boolean) => void>
 
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
@@ -106,12 +108,17 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			selection: { start, end: start, direction: "none" },
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.getReadonlyStatus.emit(readonly => (this.readonly = readonly))
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
 			this.inputElement.focus()
 			this.keepFocusOnReRender = false
 		}
+	}
+	@Method()
+	async updateReadonly(status: boolean): Promise<void> {
+		this.readonly = status
 	}
 	@Method()
 	async clear(): Promise<void> {

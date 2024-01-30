@@ -6,14 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
-import { address } from "./components/address-display";
-import { address as address1 } from "./components/address-display/index";
-import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
-import { Data } from "./model/Data";
+import { Data as Data1 } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
 import { Looks } from "./components/input/Looks";
 import { Controls } from "./components/picker/menu";
@@ -30,17 +28,9 @@ export namespace Components {
         "name": string;
         "open"?: boolean;
     }
-    interface SmoothlyAddress {
-        "editable": boolean;
-        "value": address;
-    }
     interface SmoothlyAddressDisplay {
         "editable": boolean;
-        "value": address;
-    }
-    interface SmoothlyAddresses {
-        "editable": boolean[];
-        "value": address[];
+        "value": any;
     }
     interface SmoothlyApp {
         "color": Color;
@@ -104,6 +94,13 @@ export namespace Components {
     }
     interface SmoothlyColor {
         "color"?: Color;
+    }
+    interface SmoothlyContact {
+        "readonly": boolean;
+    }
+    interface SmoothlyContactDemo {
+    }
+    interface SmoothlyContactDisplay {
     }
     interface SmoothlyCountry {
         "text": "alpha2" | "name" | "none";
@@ -170,8 +167,9 @@ export namespace Components {
         "name"?: string;
         "prevent": boolean;
         "processing": boolean;
+        "readonly": boolean;
         "submit": () => Promise<void>;
-        "value": Readonly<Data>;
+        "value": Readonly<Data1>;
     }
     interface SmoothlyFrame {
         "name": string;
@@ -211,6 +209,7 @@ export namespace Components {
         "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
         "showLabel": boolean;
         "type": Type;
+        "updateReadonly": (status: boolean) => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputClear {
@@ -492,6 +491,10 @@ export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCheckboxElement;
 }
+export interface SmoothlyContactCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyContactElement;
+}
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
@@ -637,23 +640,11 @@ declare global {
         prototype: HTMLSmoothlyAccordionItemElement;
         new (): HTMLSmoothlyAccordionItemElement;
     };
-    interface HTMLSmoothlyAddressElement extends Components.SmoothlyAddress, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAddressElement: {
-        prototype: HTMLSmoothlyAddressElement;
-        new (): HTMLSmoothlyAddressElement;
-    };
     interface HTMLSmoothlyAddressDisplayElement extends Components.SmoothlyAddressDisplay, HTMLStencilElement {
     }
     var HTMLSmoothlyAddressDisplayElement: {
         prototype: HTMLSmoothlyAddressDisplayElement;
         new (): HTMLSmoothlyAddressDisplayElement;
-    };
-    interface HTMLSmoothlyAddressesElement extends Components.SmoothlyAddresses, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAddressesElement: {
-        prototype: HTMLSmoothlyAddressesElement;
-        new (): HTMLSmoothlyAddressesElement;
     };
     interface HTMLSmoothlyAppElement extends Components.SmoothlyApp, HTMLStencilElement {
     }
@@ -714,6 +705,24 @@ declare global {
     var HTMLSmoothlyColorElement: {
         prototype: HTMLSmoothlyColorElement;
         new (): HTMLSmoothlyColorElement;
+    };
+    interface HTMLSmoothlyContactElement extends Components.SmoothlyContact, HTMLStencilElement {
+    }
+    var HTMLSmoothlyContactElement: {
+        prototype: HTMLSmoothlyContactElement;
+        new (): HTMLSmoothlyContactElement;
+    };
+    interface HTMLSmoothlyContactDemoElement extends Components.SmoothlyContactDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyContactDemoElement: {
+        prototype: HTMLSmoothlyContactDemoElement;
+        new (): HTMLSmoothlyContactDemoElement;
+    };
+    interface HTMLSmoothlyContactDisplayElement extends Components.SmoothlyContactDisplay, HTMLStencilElement {
+    }
+    var HTMLSmoothlyContactDisplayElement: {
+        prototype: HTMLSmoothlyContactDisplayElement;
+        new (): HTMLSmoothlyContactDisplayElement;
     };
     interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
     }
@@ -1117,9 +1126,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "smoothly-accordion": HTMLSmoothlyAccordionElement;
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
-        "smoothly-address": HTMLSmoothlyAddressElement;
         "smoothly-address-display": HTMLSmoothlyAddressDisplayElement;
-        "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-app-room": HTMLSmoothlyAppRoomElement;
@@ -1130,6 +1137,9 @@ declare global {
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
+        "smoothly-contact": HTMLSmoothlyContactElement;
+        "smoothly-contact-demo": HTMLSmoothlyContactDemoElement;
+        "smoothly-contact-display": HTMLSmoothlyContactDisplayElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
@@ -1210,17 +1220,9 @@ declare namespace LocalJSX {
         "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyAddress {
-        "editable"?: boolean;
-        "value"?: address;
-    }
     interface SmoothlyAddressDisplay {
         "editable"?: boolean;
-        "value"?: address;
-    }
-    interface SmoothlyAddresses {
-        "editable"?: boolean[];
-        "value"?: address[];
+        "value"?: any;
     }
     interface SmoothlyApp {
         "color"?: Color;
@@ -1290,6 +1292,14 @@ declare namespace LocalJSX {
     interface SmoothlyColor {
         "color"?: Color;
     }
+    interface SmoothlyContact {
+        "onContactForm"?: (event: SmoothlyContactCustomEvent<Data>) => void;
+        "readonly"?: boolean;
+    }
+    interface SmoothlyContactDemo {
+    }
+    interface SmoothlyContactDisplay {
+    }
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
         "value"?: CountryCode.Alpha2;
@@ -1353,11 +1363,12 @@ declare namespace LocalJSX {
         "looks"?: "plain" | "grid" | "border" | "line";
         "method"?: "GET" | "POST";
         "name"?: string;
-        "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
-        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data1>) => void;
+        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data1>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
-        "value"?: Readonly<Data>;
+        "readonly"?: boolean;
+        "value"?: Readonly<Data1>;
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -1388,6 +1399,7 @@ declare namespace LocalJSX {
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
+        "onGetReadonlyStatus"?: (event: SmoothlyInputCustomEvent<(looks: boolean) => void>) => void;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
@@ -1434,7 +1446,7 @@ declare namespace LocalJSX {
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
@@ -1705,9 +1717,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "smoothly-accordion": SmoothlyAccordion;
         "smoothly-accordion-item": SmoothlyAccordionItem;
-        "smoothly-address": SmoothlyAddress;
         "smoothly-address-display": SmoothlyAddressDisplay;
-        "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-app-room": SmoothlyAppRoom;
@@ -1718,6 +1728,9 @@ declare namespace LocalJSX {
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
+        "smoothly-contact": SmoothlyContact;
+        "smoothly-contact-demo": SmoothlyContactDemo;
+        "smoothly-contact-display": SmoothlyContactDisplay;
         "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
@@ -1792,9 +1805,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
-            "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
             "smoothly-address-display": LocalJSX.SmoothlyAddressDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyAddressDisplayElement>;
-            "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
@@ -1805,6 +1816,9 @@ declare module "@stencil/core" {
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
+            "smoothly-contact": LocalJSX.SmoothlyContact & JSXBase.HTMLAttributes<HTMLSmoothlyContactElement>;
+            "smoothly-contact-demo": LocalJSX.SmoothlyContactDemo & JSXBase.HTMLAttributes<HTMLSmoothlyContactDemoElement>;
+            "smoothly-contact-display": LocalJSX.SmoothlyContactDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyContactDisplayElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;

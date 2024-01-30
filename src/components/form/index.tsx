@@ -5,6 +5,7 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Immutable } from "../input/Immutable"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
 
@@ -14,7 +15,9 @@ import { Submittable } from "../input/Submittable"
 })
 export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	private clearables = new Map<string, Clearable>()
+	private immutables = new Map<string, Immutable>() //To store and put readonly on inputs
 	@Prop({ reflect: true, mutable: true }) color?: Color
+	@Prop({ mutable: true }) readonly = false
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
 	@Prop() name?: string
@@ -36,6 +39,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	watchValue() {
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
 		this.listeners.changed?.forEach(l => l(this))
+	}
+	@Listen("getReadonlyStatus")
+	readonlyHandler(event: CustomEvent<(readonly: boolean) => void>) {
+		event.stopPropagation()
+		event.detail(this.readonly)
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
@@ -76,7 +84,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 					: { url: `${this.action}?${http.Search.stringify(this.value)}` }
 			)
 			if (response.status >= 200 && response.status < 300) {
-				this.notice = Notice.succeeded("Form sucessfully submitted.")
+				this.notice = Notice.succeeded("Form successfully submitted.")
 				await this.clear()
 			} else
 				this.notice = Notice.failed("Failed to submit form.")
