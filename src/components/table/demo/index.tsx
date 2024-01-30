@@ -9,13 +9,11 @@ export class TableDemo {
 	render() {
 		return [
 			<h4>Filtered & Checked Table</h4>,
-			<smoothly-table-demo-filtered />,
-			<smoothly-table-testing />,
+			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
+			<smoothly-table-testing></smoothly-table-testing>,
 			<smoothly-table>
 				<smoothly-table-row>
-					<smoothly-table-header slot="tableContent">
-						<smoothly-tooltip toolTip="This is an informative tooltip.">Header A</smoothly-tooltip>
-					</smoothly-table-header>
+					<smoothly-table-header>Header A</smoothly-table-header>
 					<smoothly-table-header>Header B</smoothly-table-header>
 					<smoothly-table-header>Header C</smoothly-table-header>
 					<smoothly-table-header>Header D</smoothly-table-header>
