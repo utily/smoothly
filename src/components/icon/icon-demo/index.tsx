@@ -1,5 +1,5 @@
 import { Component, h } from "@stencil/core"
-import { Icon } from "../../model"
+import { Icon } from "../../../model"
 @Component({
 	tag: "smoothly-icon-demo",
 	styleUrl: "./style.css",

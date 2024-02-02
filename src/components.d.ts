@@ -5,43 +5,18 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { SmoothlyAccordion } from "./components/accordion";
-import { address } from "./components/address-display";
-import { address as address1 } from "./components/address-display/index";
 import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
-import { GoogleFont } from "./model/GoogleFont";
 import { Looks } from "./components/input/Looks";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
-import { Selected } from "./components/radio-button/Selected";
+import { Selected } from "./components/radio/radio-button/Selected";
 import { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
-    interface SmoothlyAccordion {
-        "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
-        "value"?: string;
-    }
-    interface SmoothlyAccordionItem {
-        "brand"?: string | string[];
-        "name": string;
-        "open"?: boolean;
-    }
-    interface SmoothlyAddress {
-        "editable": boolean;
-        "value": address;
-    }
-    interface SmoothlyAddressDisplay {
-        "editable": boolean;
-        "value": address;
-    }
-    interface SmoothlyAddresses {
-        "editable": boolean[];
-        "value": address[];
-    }
     interface SmoothlyApp {
         "color": Color;
         "label": string;
@@ -105,10 +80,6 @@ export namespace Components {
     }
     interface SmoothlyColor {
         "color"?: Color;
-    }
-    interface SmoothlyCountry {
-        "text": "alpha2" | "name" | "none";
-        "value": CountryCode.Alpha2;
     }
     interface SmoothlyDialog {
         "closable": boolean;
@@ -179,9 +150,6 @@ export namespace Components {
         "origin": string | undefined;
         "send": (message2: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
-    }
-    interface SmoothlyGoogleFont {
-        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color": Color;
@@ -319,13 +287,6 @@ export namespace Components {
         "value": any;
         "visible": boolean;
     }
-    interface SmoothlyPopup {
-        "direction": "up" | "down";
-        "visible": boolean;
-    }
-    interface SmoothlyQuiet {
-        "color": string;
-    }
     interface SmoothlyRadio {
         "checked": boolean;
         "name": string;
@@ -345,18 +306,6 @@ export namespace Components {
     }
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
-    }
-    interface SmoothlyReorder {
-    }
-    interface SmoothlySelectDemo {
-    }
-    interface SmoothlySkeleton {
-        "align": "left" | "center" | "right";
-        "color": string;
-        "distance": string;
-        "period": number;
-        "width": string;
-        "widths": string[];
     }
     interface SmoothlySlotElements {
         "clone": boolean;
@@ -466,16 +415,6 @@ export namespace Components {
     interface SmoothlyTriggerSource {
         "listen": string;
     }
-    interface SmoothlyTuple {
-        "tuple": [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data": string;
-    }
-}
-export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyAccordionItemElement;
 }
 export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -561,10 +500,6 @@ export interface SmoothlyPickerOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyPickerOptionElement;
 }
-export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyPopupElement;
-}
 export interface SmoothlyRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyRadioElement;
@@ -576,10 +511,6 @@ export interface SmoothlyRadioButtonCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyRadioButtonItemElement;
-}
-export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyReorderElement;
 }
 export interface SmoothlySlotElementsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -626,36 +557,6 @@ export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSmoothlyTriggerSourceElement;
 }
 declare global {
-    interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAccordionElement: {
-        prototype: HTMLSmoothlyAccordionElement;
-        new (): HTMLSmoothlyAccordionElement;
-    };
-    interface HTMLSmoothlyAccordionItemElement extends Components.SmoothlyAccordionItem, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAccordionItemElement: {
-        prototype: HTMLSmoothlyAccordionItemElement;
-        new (): HTMLSmoothlyAccordionItemElement;
-    };
-    interface HTMLSmoothlyAddressElement extends Components.SmoothlyAddress, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAddressElement: {
-        prototype: HTMLSmoothlyAddressElement;
-        new (): HTMLSmoothlyAddressElement;
-    };
-    interface HTMLSmoothlyAddressDisplayElement extends Components.SmoothlyAddressDisplay, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAddressDisplayElement: {
-        prototype: HTMLSmoothlyAddressDisplayElement;
-        new (): HTMLSmoothlyAddressDisplayElement;
-    };
-    interface HTMLSmoothlyAddressesElement extends Components.SmoothlyAddresses, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAddressesElement: {
-        prototype: HTMLSmoothlyAddressesElement;
-        new (): HTMLSmoothlyAddressesElement;
-    };
     interface HTMLSmoothlyAppElement extends Components.SmoothlyApp, HTMLStencilElement {
     }
     var HTMLSmoothlyAppElement: {
@@ -715,12 +616,6 @@ declare global {
     var HTMLSmoothlyColorElement: {
         prototype: HTMLSmoothlyColorElement;
         new (): HTMLSmoothlyColorElement;
-    };
-    interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
-    }
-    var HTMLSmoothlyCountryElement: {
-        prototype: HTMLSmoothlyCountryElement;
-        new (): HTMLSmoothlyCountryElement;
     };
     interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {
     }
@@ -784,12 +679,6 @@ declare global {
     var HTMLSmoothlyFrameElement: {
         prototype: HTMLSmoothlyFrameElement;
         new (): HTMLSmoothlyFrameElement;
-    };
-    interface HTMLSmoothlyGoogleFontElement extends Components.SmoothlyGoogleFont, HTMLStencilElement {
-    }
-    var HTMLSmoothlyGoogleFontElement: {
-        prototype: HTMLSmoothlyGoogleFontElement;
-        new (): HTMLSmoothlyGoogleFontElement;
     };
     interface HTMLSmoothlyIconElement extends Components.SmoothlyIcon, HTMLStencilElement {
     }
@@ -893,18 +782,6 @@ declare global {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
     };
-    interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
-    }
-    var HTMLSmoothlyPopupElement: {
-        prototype: HTMLSmoothlyPopupElement;
-        new (): HTMLSmoothlyPopupElement;
-    };
-    interface HTMLSmoothlyQuietElement extends Components.SmoothlyQuiet, HTMLStencilElement {
-    }
-    var HTMLSmoothlyQuietElement: {
-        prototype: HTMLSmoothlyQuietElement;
-        new (): HTMLSmoothlyQuietElement;
-    };
     interface HTMLSmoothlyRadioElement extends Components.SmoothlyRadio, HTMLStencilElement {
     }
     var HTMLSmoothlyRadioElement: {
@@ -928,24 +805,6 @@ declare global {
     var HTMLSmoothlyRadioGroupElement: {
         prototype: HTMLSmoothlyRadioGroupElement;
         new (): HTMLSmoothlyRadioGroupElement;
-    };
-    interface HTMLSmoothlyReorderElement extends Components.SmoothlyReorder, HTMLStencilElement {
-    }
-    var HTMLSmoothlyReorderElement: {
-        prototype: HTMLSmoothlyReorderElement;
-        new (): HTMLSmoothlyReorderElement;
-    };
-    interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlySelectDemoElement: {
-        prototype: HTMLSmoothlySelectDemoElement;
-        new (): HTMLSmoothlySelectDemoElement;
-    };
-    interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
-    }
-    var HTMLSmoothlySkeletonElement: {
-        prototype: HTMLSmoothlySkeletonElement;
-        new (): HTMLSmoothlySkeletonElement;
     };
     interface HTMLSmoothlySlotElementsElement extends Components.SmoothlySlotElements, HTMLStencilElement {
     }
@@ -1103,24 +962,7 @@ declare global {
         prototype: HTMLSmoothlyTriggerSourceElement;
         new (): HTMLSmoothlyTriggerSourceElement;
     };
-    interface HTMLSmoothlyTupleElement extends Components.SmoothlyTuple, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTupleElement: {
-        prototype: HTMLSmoothlyTupleElement;
-        new (): HTMLSmoothlyTupleElement;
-    };
-    interface HTMLSmoothlyUrlencodedElement extends Components.SmoothlyUrlencoded, HTMLStencilElement {
-    }
-    var HTMLSmoothlyUrlencodedElement: {
-        prototype: HTMLSmoothlyUrlencodedElement;
-        new (): HTMLSmoothlyUrlencodedElement;
-    };
     interface HTMLElementTagNameMap {
-        "smoothly-accordion": HTMLSmoothlyAccordionElement;
-        "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
-        "smoothly-address": HTMLSmoothlyAddressElement;
-        "smoothly-address-display": HTMLSmoothlyAddressDisplayElement;
-        "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
         "smoothly-app-room": HTMLSmoothlyAppRoomElement;
@@ -1131,7 +973,6 @@ declare global {
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
-        "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
@@ -1142,7 +983,6 @@ declare global {
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
-        "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
@@ -1160,15 +1000,10 @@ declare global {
         "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
-        "smoothly-popup": HTMLSmoothlyPopupElement;
-        "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-radio": HTMLSmoothlyRadioElement;
         "smoothly-radio-button": HTMLSmoothlyRadioButtonElement;
         "smoothly-radio-button-item": HTMLSmoothlyRadioButtonItemElement;
         "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
-        "smoothly-reorder": HTMLSmoothlyReorderElement;
-        "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
-        "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
         "smoothly-slotted-elements": HTMLSmoothlySlottedElementsElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
@@ -1195,34 +1030,9 @@ declare global {
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
-        "smoothly-tuple": HTMLSmoothlyTupleElement;
-        "smoothly-urlencoded": HTMLSmoothlyUrlencodedElement;
     }
 }
 declare namespace LocalJSX {
-    interface SmoothlyAccordion {
-        "value"?: string;
-    }
-    interface SmoothlyAccordionItem {
-        "brand"?: string | string[];
-        "name"?: string;
-        "onSmoothlyAccordionItemWillLoad"?: (event: SmoothlyAccordionItemCustomEvent<(parent: SmoothlyAccordion) => void>) => void;
-        "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
-        "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
-        "open"?: boolean;
-    }
-    interface SmoothlyAddress {
-        "editable"?: boolean;
-        "value"?: address;
-    }
-    interface SmoothlyAddressDisplay {
-        "editable"?: boolean;
-        "value"?: address;
-    }
-    interface SmoothlyAddresses {
-        "editable"?: boolean[];
-        "value"?: address[];
-    }
     interface SmoothlyApp {
         "color"?: Color;
         "label"?: string;
@@ -1291,10 +1101,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyColor {
         "color"?: Color;
-    }
-    interface SmoothlyCountry {
-        "text"?: "alpha2" | "name" | "none";
-        "value"?: CountryCode.Alpha2;
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
@@ -1367,9 +1173,6 @@ declare namespace LocalJSX {
         "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
-    }
-    interface SmoothlyGoogleFont {
-        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color"?: Color;
@@ -1525,14 +1328,6 @@ declare namespace LocalJSX {
         "value"?: any;
         "visible"?: boolean;
     }
-    interface SmoothlyPopup {
-        "direction"?: "up" | "down";
-        "onPopup"?: (event: SmoothlyPopupCustomEvent<boolean>) => void;
-        "visible"?: boolean;
-    }
-    interface SmoothlyQuiet {
-        "color"?: string;
-    }
     interface SmoothlyRadio {
         "checked"?: boolean;
         "name"?: string;
@@ -1556,19 +1351,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyRadioGroup {
         "orientation"?: "horizontal" | "vertical";
-    }
-    interface SmoothlyReorder {
-        "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
-    }
-    interface SmoothlySelectDemo {
-    }
-    interface SmoothlySkeleton {
-        "align"?: "left" | "center" | "right";
-        "color"?: string;
-        "distance"?: string;
-        "period"?: number;
-        "width"?: string;
-        "widths"?: string[];
     }
     interface SmoothlySlotElements {
         "clone"?: boolean;
@@ -1698,18 +1480,7 @@ declare namespace LocalJSX {
         "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
-    interface SmoothlyTuple {
-        "tuple"?: [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data"?: string;
-    }
     interface IntrinsicElements {
-        "smoothly-accordion": SmoothlyAccordion;
-        "smoothly-accordion-item": SmoothlyAccordionItem;
-        "smoothly-address": SmoothlyAddress;
-        "smoothly-address-display": SmoothlyAddressDisplay;
-        "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
         "smoothly-app-room": SmoothlyAppRoom;
@@ -1720,7 +1491,6 @@ declare namespace LocalJSX {
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
-        "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
@@ -1731,7 +1501,6 @@ declare namespace LocalJSX {
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
-        "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
@@ -1749,15 +1518,10 @@ declare namespace LocalJSX {
         "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
-        "smoothly-popup": SmoothlyPopup;
-        "smoothly-quiet": SmoothlyQuiet;
         "smoothly-radio": SmoothlyRadio;
         "smoothly-radio-button": SmoothlyRadioButton;
         "smoothly-radio-button-item": SmoothlyRadioButtonItem;
         "smoothly-radio-group": SmoothlyRadioGroup;
-        "smoothly-reorder": SmoothlyReorder;
-        "smoothly-select-demo": SmoothlySelectDemo;
-        "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-slot-elements": SmoothlySlotElements;
         "smoothly-slotted-elements": SmoothlySlottedElements;
         "smoothly-spinner": SmoothlySpinner;
@@ -1784,19 +1548,12 @@ declare namespace LocalJSX {
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
-        "smoothly-tuple": SmoothlyTuple;
-        "smoothly-urlencoded": SmoothlyUrlencoded;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
-            "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
-            "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
-            "smoothly-address-display": LocalJSX.SmoothlyAddressDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyAddressDisplayElement>;
-            "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
             "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
@@ -1807,7 +1564,6 @@ declare module "@stencil/core" {
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
-            "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
@@ -1821,7 +1577,6 @@ declare module "@stencil/core" {
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
-            "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
@@ -1839,15 +1594,10 @@ declare module "@stencil/core" {
             "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
-            "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
-            "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
             "smoothly-radio-button": LocalJSX.SmoothlyRadioButton & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonElement>;
             "smoothly-radio-button-item": LocalJSX.SmoothlyRadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonItemElement>;
             "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
-            "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
-            "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
-            "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;
             "smoothly-slotted-elements": LocalJSX.SmoothlySlottedElements & JSXBase.HTMLAttributes<HTMLSmoothlySlottedElementsElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
@@ -1874,8 +1624,6 @@ declare module "@stencil/core" {
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
-            "smoothly-tuple": LocalJSX.SmoothlyTuple & JSXBase.HTMLAttributes<HTMLSmoothlyTupleElement>;
-            "smoothly-urlencoded": LocalJSX.SmoothlyUrlencoded & JSXBase.HTMLAttributes<HTMLSmoothlyUrlencodedElement>;
         }
     }
 }

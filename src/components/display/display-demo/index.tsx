@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h } from "@stencil/core"
-import { Notice } from "../../model"
+import { Notice } from "../../../model"
 @Component({
 	tag: "smoothly-display-demo",
 })
@@ -52,11 +52,11 @@ export class SmoothlyDisplayDemo {
 						</dd>
 						<dt>display amount with decimals if they are set, otherwise no decimal</dt>
 						<dd>
-							<smoothly-display-amount amount={200.20} currency="SEK" toInteger={true}></smoothly-display-amount>
+							<smoothly-display-amount amount={200.2} currency="SEK" toInteger={true}></smoothly-display-amount>
 						</dd>
 						<dt>display amount with decimals</dt>
 						<dd>
-							<smoothly-display-amount amount={200.20} currency="SEK"></smoothly-display-amount>
+							<smoothly-display-amount amount={200.2} currency="SEK"></smoothly-display-amount>
 						</dd>
 						<dt>percent</dt>
 						<dd>
@@ -84,25 +84,82 @@ export class SmoothlyDisplayDemo {
 						</dd>
 						<dt>date time</dt>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T02:02:02Z"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{
+									year: "numeric",
+									month: "short",
+									day: "numeric",
+									hour: "numeric",
+									minute: "numeric",
+									second: "numeric",
+								}}
+								value="2022-07-07T02:02:02Z"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "2-digit", month: "long", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit"}} value="2022-07-07T02:02:02Z"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{
+									year: "2-digit",
+									month: "long",
+									day: "2-digit",
+									hour: "2-digit",
+									minute: "2-digit",
+									second: "2-digit",
+								}}
+								value="2022-07-07T02:02:02Z"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "numeric", month: "2-digit", day: "2-digit", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T12:22:24Z"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{
+									year: "numeric",
+									month: "2-digit",
+									day: "2-digit",
+									hour: "numeric",
+									minute: "numeric",
+									second: "numeric",
+								}}
+								value="2022-07-07T12:22:24Z"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"}} value="2022-07-07T12:22:24Z"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{
+									year: "numeric",
+									month: "numeric",
+									day: "numeric",
+									hour: "numeric",
+									minute: "numeric",
+									second: "numeric",
+								}}
+								value="2022-07-07T12:22:24Z"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "numeric", month: "short", day: "numeric"}} value="2022-07-07T00:00+02:00"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{ year: "numeric", month: "short", day: "numeric" }}
+								value="2022-07-07T00:00+02:00"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric"}} value="2022-07-07T00:00+02:00"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{ year: "2-digit", month: "numeric", day: "numeric" }}
+								value="2022-07-07T00:00+02:00"></smoothly-display>
 						</dd>
 						<dd>
-							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"Europe/Stockholm"}} value="2022-07-07T12:15Z"></smoothly-display>
+							<smoothly-display
+								type="date-time"
+								format={{
+									year: "2-digit",
+									month: "numeric",
+									day: "numeric",
+									hour: "2-digit",
+									minute: "2-digit",
+									second: "2-digit",
+									timeZone: "Europe/Stockholm",
+								}}
+								value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
 						<dt>Deprecated display date time</dt>
 						<dt>Display amount</dt>
@@ -120,30 +177,30 @@ export class SmoothlyDisplayDemo {
 					<smoothly-skeleton period={3} distance="20rem" width="20rem"></smoothly-skeleton>
 					<smoothly-skeleton period={3} distance="20rem" color="200,200,255"></smoothly-skeleton>
 					<smoothly-skeleton period={3} distance="20rem" color="var(--smoothly-warning-color)"></smoothly-skeleton>
-					<smoothly-skeleton period={3} distance="20rem" ></smoothly-skeleton>
+					<smoothly-skeleton period={3} distance="20rem"></smoothly-skeleton>
 					<smoothly-skeleton align="center" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
+					<smoothly-skeleton align="center" period={3} distance="20rem"></smoothly-skeleton>
+					<smoothly-skeleton align="center" period={3} distance="20rem"></smoothly-skeleton>
+					<smoothly-skeleton align="center" period={3} distance="20rem"></smoothly-skeleton>
 					<smoothly-skeleton align="right" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-				</fieldset>
-				<fieldset>
-					<h2>Smoothly URL encoded</h2>
-					<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
+					<smoothly-skeleton align="right" period={3} distance="20rem"></smoothly-skeleton>
+					<smoothly-skeleton align="right" period={3} distance="20rem"></smoothly-skeleton>
+					<smoothly-skeleton align="right" period={3} distance="20rem"></smoothly-skeleton>
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly popup</h2>
-					<div style={{display: "flex", justifyContent: "space-between"}}>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<smoothly-popup direction="down">
 							Click for popup
-							<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup stuff that has a lot of text</span>
+							<span slot="popup" color="dark" style={{ whiteSpace: "nowrap" }}>
+								Some popup stuff that has a lot of text
+							</span>
 						</smoothly-popup>
 						<smoothly-popup direction="down">
 							Click for popup
-							<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup with a bunch of text.</span>
+							<span slot="popup" color="dark" style={{ whiteSpace: "nowrap" }}>
+								Some popup with a bunch of text.
+							</span>
 						</smoothly-popup>
 					</div>
 					<smoothly-popup>
@@ -154,9 +211,11 @@ export class SmoothlyDisplayDemo {
 					</smoothly-popup>
 				</fieldset>
 				<fieldset>
-				<h2>Test of different kinds of notifier</h2>
+					<h2>Test of different kinds of notifier</h2>
 					<button onClick={() => this.noticeWarning(Notice.warn("This is a test warning notice."))}>warning</button>
-					<button onClick={() => this.noticeWarning(Notice.succeeded("This is a test success notice."))}>success</button>
+					<button onClick={() => this.noticeWarning(Notice.succeeded("This is a test success notice."))}>
+						success
+					</button>
 					<button onClick={() => this.noticeWarning(Notice.failed("This is a test danger notice."))}>danger</button>
 					<button
 						onClick={() =>
@@ -189,10 +248,26 @@ export class SmoothlyDisplayDemo {
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly spinner</h2>
-					<div style={{position: "relative", height: "10em"}}>Large Spinner<smoothly-spinner active size="large" style={{"--background-color": "255,255,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner></div>
-					<div style={{position: "relative", height: "10em"}}>Medium Spinner<smoothly-spinner active size="medium"></smoothly-spinner></div>
-					<div style={{position: "relative", height: "10em"}}>Small Spinner<smoothly-spinner active size="small"></smoothly-spinner></div>
-					<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div>
+					<div style={{ position: "relative", height: "10em" }}>
+						Large Spinner
+						<smoothly-spinner
+							active
+							size="large"
+							style={{
+								"--background-color": "255,255,255",
+								"--background-opacity": "0.2",
+								"--spinner-color": "0,130,0",
+							}}></smoothly-spinner>
+					</div>
+					<div style={{ position: "relative", height: "10em" }}>
+						Medium Spinner<smoothly-spinner active size="medium"></smoothly-spinner>
+					</div>
+					<div style={{ position: "relative", height: "10em" }}>
+						Small Spinner<smoothly-spinner active size="small"></smoothly-spinner>
+					</div>
+					<div style={{ position: "absolute", left: "500px", top: "150px" }}>
+						<smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg>
+					</div>
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly summary</h2>
@@ -205,12 +280,19 @@ export class SmoothlyDisplayDemo {
 						<p slot="content">Some content</p>
 					</smoothly-summary>
 					<smoothly-summary color="danger" fill="clear">
-						<div slot="summary" style={{display: "flex", gap: "0.3rem"}}><span>Person</span><smoothly-icon name="person" color="light" fill="clear" size="tiny"></smoothly-icon></div>
+						<div slot="summary" style={{ display: "flex", gap: "0.3rem" }}>
+							<span>Person</span>
+							<smoothly-icon name="person" color="light" fill="clear" size="tiny"></smoothly-icon>
+						</div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>
 					<smoothly-summary color="danger" fill="clear" open>
 						<p slot="summary">Some other title</p>
-						<p slot="content">A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.</p>
+						<p slot="content">
+							A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more
+							content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content,
+							yes please. A lot more content, yes please. A lot more content, yes please.
+						</p>
 					</smoothly-summary>
 				</fieldset>
 			</main>,

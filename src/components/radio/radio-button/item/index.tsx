@@ -1,5 +1,5 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
-import { Color } from "../../../model"
+import { Color } from "../../../../model"
 import { Selected } from "../Selected"
 
 @Component({
