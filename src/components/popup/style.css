@@ -5,10 +5,10 @@
 :host[hidden] {
 	display: none;
 }
-:host:not([visible]) aside {
+:host:not([visible]) .popup {
 	display: none;
 }
-:host aside {
+:host .popup {
 	display: inline;
 	position: absolute;
 	padding: 0.3em;
@@ -21,11 +21,11 @@
 	border-radius: 0.6em;
 	z-index: 3;
 }
-:host[direction=down] aside {
+:host[direction=down] .popup {
 	top: 2.2em;
 	box-shadow: 6px 5px 9px -9px black, 5px 6px 9px -9px black;
 }
-:host[direction=up] aside {
+:host[direction=up] .popup {
 	bottom: 2.2em;
 	box-shadow: -6px -5px 9px -9px black, -5px -6px 9px -9px black;
 }
