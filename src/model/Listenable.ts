@@ -1,22 +1,32 @@
-export class Listenable<T extends Record<string, any>> {
+export type WithListenable<T extends Record<string, any>> = T & Listenable<T>
+
+export type CanBeListenable = Record<string, any>
+
+export interface HasListenable<T extends CanBeListenable> {
+	readonly listenable: WithListenable<T>
+}
+
+export class Listenable<T extends CanBeListenable> {
 	#listeners: Listeners<ListenableProperties<T>> = {}
 	listen<K extends keyof ListenableProperties<T>>(
 		this: T & Listenable<T>,
 		property: K,
-		listener: Listener<T[K]>
+		listener: Listener<T[K]>,
+		options?: { lazy?: boolean }
 	): void {
 		this.#listeners[property]?.push(listener) ?? (this.#listeners[property] = [listener])
-		listener(this[property])
+		if (!options?.lazy)
+			listener(this[property])
 	}
 	unlisten<K extends keyof ListenableProperties<T>>(property: K, listener: Listener<T[K]>): void {
 		const index = this.#listeners[property]?.indexOf(listener)
 		index != undefined && index >= 0 && this.#listeners[property]?.splice(index, 1)
 	}
 
-	static load<T extends Record<string, any>>(backend: T, listenable?: Listenable<T>): T & Listenable<T> {
-		const result = listenable ?? new Listenable()
+	static load<T extends HasListenable<CanBeListenable>>(backend: T): WithListenable<T> {
+		const result = backend.listenable
 
-		return Object.defineProperties(result, getProperties(backend)) as T & Listenable<T>
+		return Object.defineProperties(result, getProperties(backend)) as WithListenable<T>
 
 		function getProperties(backend: any) {
 			return Object.fromEntries(
@@ -45,7 +55,7 @@ export class Listenable<T extends Record<string, any>> {
 						  }
 						: {
 								get() {
-									return backend[name].bind(backend)
+									return backend[name]
 								},
 						  },
 				])
