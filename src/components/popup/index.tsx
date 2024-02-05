@@ -11,18 +11,18 @@ export class SmoothlyPopup {
 	@Prop({ mutable: true, reflect: true }) direction: "up" | "down" = "down"
 	@State() cssVariables: { "--left"?: string; "--right"?: string } = { "--left": "0.1em" }
 	@Event() popup: EventEmitter<boolean>
-	private aside: HTMLElement | undefined
+	private popupElement: HTMLElement | undefined
 
 	private onClick() {
 		if (this.visible == false) {
-			this.aside?.style.setProperty("display", "block")
+			this.popupElement?.style.setProperty("display", "block")
 			this.cssVariables =
-				(this.aside?.getBoundingClientRect().right ?? 0) >= window.innerWidth
+				(this.popupElement?.getBoundingClientRect().right ?? 0) >= window.innerWidth
 					? { "--right": "0.1em" }
-					: (this.aside?.getBoundingClientRect().left ?? 0) < 0
+					: (this.popupElement?.getBoundingClientRect().left ?? 0) < 0
 					? { "--left": "0.1em" }
 					: this.cssVariables
-			this.aside?.style.removeProperty("display")
+			this.popupElement?.style.removeProperty("display")
 		}
 		this.visible = !this.visible
 		this.popup.emit(this.visible)
@@ -30,14 +30,14 @@ export class SmoothlyPopup {
 	render() {
 		return (
 			<Host style={{ ...this.cssVariables }}>
-				<content class="pointer" onClick={() => this.onClick()}>
+				<div class="pointer" onClick={() => this.onClick()}>
 					<slot></slot>
-				</content>
+				</div>
 				<div class="background" onClick={() => this.onClick()}></div>
 				<div class="arrow" onClick={() => this.onClick()}></div>
-				<aside ref={el => (this.aside = el)}>
+				<div class="popup" ref={el => (this.popupElement = el)}>
 					<slot name="popup"></slot>
-				</aside>
+				</div>
 			</Host>
 		)
 	}
