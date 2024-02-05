@@ -70,7 +70,7 @@
 	"dependencies": {
 		"authly": "3.0.5",
 		"cloudly-http": "^0.1.2",
-		"isoly": "^2.3.6",
+		"isoly": "utily/isoly#address-type",
 		"langly": "2.0.3",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.4",

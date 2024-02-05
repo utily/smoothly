@@ -120,6 +120,21 @@ export class SmoothlyInputDemo {
 					Submit
 				</smoothly-submit>
 			</smoothly-form>,
+			<h4>Address</h4>,
+			<smoothly-contact looks="grid" showPicker>
+				<smoothly-input type="text" name="name.first">
+					First Name
+				</smoothly-input>
+				<smoothly-input type="text" name="name.last">
+					Last Name
+				</smoothly-input>
+				<smoothly-input type="phone" name="phone">
+					Phone
+				</smoothly-input>
+				<smoothly-input type="email" name="email">
+					Email
+				</smoothly-input>
+			</smoothly-contact>,
 			<h4>Card</h4>,
 			<smoothly-form looks="grid" onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}>
 				<smoothly-input type="card-number" name="card">

@@ -11,11 +11,12 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
+import { Address } from "./components/contact/model";
+import { Looks } from "./components/input/Looks";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { GoogleFont } from "./model/GoogleFont";
-import { Looks } from "./components/input/Looks";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
@@ -105,6 +106,19 @@ export namespace Components {
     }
     interface SmoothlyColor {
         "color"?: Color;
+    }
+    interface SmoothlyContact {
+        "address"?: isoly.Address[Address.CountryCode];
+        "buttons": {
+		text?: { submit: string; clear: string }
+		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
+		size?: "flexible" | "small" | "large" | "icon" | undefined
+		fill?: Fill
+	};
+        "countryCode"?: isoly.CountryCode.Alpha2;
+        "looks"?: Looks;
+        "readonly": boolean;
+        "showPicker": boolean;
     }
     interface SmoothlyCountry {
         "text": "alpha2" | "name" | "none";
@@ -716,6 +730,12 @@ declare global {
         prototype: HTMLSmoothlyColorElement;
         new (): HTMLSmoothlyColorElement;
     };
+    interface HTMLSmoothlyContactElement extends Components.SmoothlyContact, HTMLStencilElement {
+    }
+    var HTMLSmoothlyContactElement: {
+        prototype: HTMLSmoothlyContactElement;
+        new (): HTMLSmoothlyContactElement;
+    };
     interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
     }
     var HTMLSmoothlyCountryElement: {
@@ -1131,6 +1151,7 @@ declare global {
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
+        "smoothly-contact": HTMLSmoothlyContactElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
@@ -1291,6 +1312,19 @@ declare namespace LocalJSX {
     }
     interface SmoothlyColor {
         "color"?: Color;
+    }
+    interface SmoothlyContact {
+        "address"?: isoly.Address[Address.CountryCode];
+        "buttons"?: {
+		text?: { submit: string; clear: string }
+		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
+		size?: "flexible" | "small" | "large" | "icon" | undefined
+		fill?: Fill
+	};
+        "countryCode"?: isoly.CountryCode.Alpha2;
+        "looks"?: Looks;
+        "readonly"?: boolean;
+        "showPicker"?: boolean;
     }
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
@@ -1720,6 +1754,7 @@ declare namespace LocalJSX {
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
+        "smoothly-contact": SmoothlyContact;
         "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
@@ -1807,6 +1842,7 @@ declare module "@stencil/core" {
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
+            "smoothly-contact": LocalJSX.SmoothlyContact & JSXBase.HTMLAttributes<HTMLSmoothlyContactElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
