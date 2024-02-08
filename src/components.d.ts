@@ -8,11 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
+import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
+import { Address } from "./components/address-form/model";
+import { Looks } from "./components/input/Looks";
 import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
-import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
-import { Address } from "./components/contact/model";
-import { Looks } from "./components/input/Looks";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
@@ -38,6 +38,19 @@ export namespace Components {
     interface SmoothlyAddressDisplay {
         "editable": boolean;
         "value": address;
+    }
+    interface SmoothlyAddressForm {
+        "address"?: isoly.Address[Address.Code.Type];
+        "buttons": {
+		text?: { submit: string; clear: string }
+		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
+		size?: "flexible" | "small" | "large" | "icon" | undefined
+		fill?: Fill
+	};
+        "countryCode"?: isoly.CountryCode.Alpha2;
+        "looks"?: Looks;
+        "readonly": boolean;
+        "recipient"?: Address.Recipient;
     }
     interface SmoothlyAddresses {
         "editable": boolean[];
@@ -106,19 +119,6 @@ export namespace Components {
     }
     interface SmoothlyColor {
         "color"?: Color;
-    }
-    interface SmoothlyContact {
-        "address"?: isoly.Address[Address.CountryCode];
-        "buttons": {
-		text?: { submit: string; clear: string }
-		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
-		size?: "flexible" | "small" | "large" | "icon" | undefined
-		fill?: Fill
-	};
-        "countryCode"?: isoly.CountryCode.Alpha2;
-        "looks"?: Looks;
-        "readonly": boolean;
-        "showPicker": boolean;
     }
     interface SmoothlyCountry {
         "text": "alpha2" | "name" | "none";
@@ -664,6 +664,12 @@ declare global {
         prototype: HTMLSmoothlyAddressDisplayElement;
         new (): HTMLSmoothlyAddressDisplayElement;
     };
+    interface HTMLSmoothlyAddressFormElement extends Components.SmoothlyAddressForm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyAddressFormElement: {
+        prototype: HTMLSmoothlyAddressFormElement;
+        new (): HTMLSmoothlyAddressFormElement;
+    };
     interface HTMLSmoothlyAddressesElement extends Components.SmoothlyAddresses, HTMLStencilElement {
     }
     var HTMLSmoothlyAddressesElement: {
@@ -729,12 +735,6 @@ declare global {
     var HTMLSmoothlyColorElement: {
         prototype: HTMLSmoothlyColorElement;
         new (): HTMLSmoothlyColorElement;
-    };
-    interface HTMLSmoothlyContactElement extends Components.SmoothlyContact, HTMLStencilElement {
-    }
-    var HTMLSmoothlyContactElement: {
-        prototype: HTMLSmoothlyContactElement;
-        new (): HTMLSmoothlyContactElement;
     };
     interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
     }
@@ -1140,6 +1140,7 @@ declare global {
         "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-address": HTMLSmoothlyAddressElement;
         "smoothly-address-display": HTMLSmoothlyAddressDisplayElement;
+        "smoothly-address-form": HTMLSmoothlyAddressFormElement;
         "smoothly-addresses": HTMLSmoothlyAddressesElement;
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
@@ -1151,7 +1152,6 @@ declare global {
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
-        "smoothly-contact": HTMLSmoothlyContactElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
@@ -1240,6 +1240,19 @@ declare namespace LocalJSX {
         "editable"?: boolean;
         "value"?: address;
     }
+    interface SmoothlyAddressForm {
+        "address"?: isoly.Address[Address.Code.Type];
+        "buttons"?: {
+		text?: { submit: string; clear: string }
+		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
+		size?: "flexible" | "small" | "large" | "icon" | undefined
+		fill?: Fill
+	};
+        "countryCode"?: isoly.CountryCode.Alpha2;
+        "looks"?: Looks;
+        "readonly"?: boolean;
+        "recipient"?: Address.Recipient;
+    }
     interface SmoothlyAddresses {
         "editable"?: boolean[];
         "value"?: address[];
@@ -1312,19 +1325,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyColor {
         "color"?: Color;
-    }
-    interface SmoothlyContact {
-        "address"?: isoly.Address[Address.CountryCode];
-        "buttons"?: {
-		text?: { submit: string; clear: string }
-		icon?: { submit: Icon; clear: Icon; size?: "tiny" | "small" | "medium" | "large" }
-		size?: "flexible" | "small" | "large" | "icon" | undefined
-		fill?: Fill
-	};
-        "countryCode"?: isoly.CountryCode.Alpha2;
-        "looks"?: Looks;
-        "readonly"?: boolean;
-        "showPicker"?: boolean;
     }
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
@@ -1743,6 +1743,7 @@ declare namespace LocalJSX {
         "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-address": SmoothlyAddress;
         "smoothly-address-display": SmoothlyAddressDisplay;
+        "smoothly-address-form": SmoothlyAddressForm;
         "smoothly-addresses": SmoothlyAddresses;
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
@@ -1754,7 +1755,6 @@ declare namespace LocalJSX {
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
-        "smoothly-contact": SmoothlyContact;
         "smoothly-country": SmoothlyCountry;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
@@ -1831,6 +1831,7 @@ declare module "@stencil/core" {
             "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
             "smoothly-address-display": LocalJSX.SmoothlyAddressDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyAddressDisplayElement>;
+            "smoothly-address-form": LocalJSX.SmoothlyAddressForm & JSXBase.HTMLAttributes<HTMLSmoothlyAddressFormElement>;
             "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
             "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
             "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
@@ -1842,7 +1843,6 @@ declare module "@stencil/core" {
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
-            "smoothly-contact": LocalJSX.SmoothlyContact & JSXBase.HTMLAttributes<HTMLSmoothlyContactElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;

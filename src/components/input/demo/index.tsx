@@ -121,20 +121,10 @@ export class SmoothlyInputDemo {
 				</smoothly-submit>
 			</smoothly-form>,
 			<h4>Address</h4>,
-			<smoothly-contact looks="grid" showPicker>
-				<smoothly-input type="text" name="name.first">
-					First Name
-				</smoothly-input>
-				<smoothly-input type="text" name="name.last">
-					Last Name
-				</smoothly-input>
-				<smoothly-input type="phone" name="phone">
-					Phone
-				</smoothly-input>
-				<smoothly-input type="email" name="email">
-					Email
-				</smoothly-input>
-			</smoothly-contact>,
+			<smoothly-address-form
+				looks="border"
+				address={{ countryCode: "SE", street: "abc", city: "def", zipCode: "12345" }}
+				recipient={["name.first", "name.last", "email", "phone", "email"]}></smoothly-address-form>, // Testing field ordering and redundancy
 			<h4>Card</h4>,
 			<smoothly-form looks="grid" onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}>
 				<smoothly-input type="card-number" name="card">
