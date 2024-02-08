@@ -17,5 +17,6 @@ export {
 	WithListenable,
 	HasListenable,
 	CanBeListenable,
+	ListenerBatch,
 } from "./model"
 export { Cosmetic } from "./utilities"

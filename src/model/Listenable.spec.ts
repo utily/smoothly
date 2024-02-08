@@ -1,7 +1,7 @@
 // TODO: Should be imported with
 // import * as model from "../model/index"
 // But test fails because of test not handling ESM-module of imported libraries.
-import { Listenable, WithListenable } from "./Listenable"
+import { Listenable, ListenerBatch, WithListenable } from "./Listenable"
 import { StateBase } from "./StateBase"
 
 describe("Listenable", () => {
@@ -13,6 +13,7 @@ describe("Listenable", () => {
 			return "bar"
 		}
 		disabled = false
+		count = 0
 		static create() {
 			return Listenable.load(new State())
 		}
@@ -21,6 +22,8 @@ describe("Listenable", () => {
 		const state = State.create()
 		expect(typeof state.listen).toEqual("function")
 		expect(typeof state.unlisten).toEqual("function")
+		expect(typeof state.batchListen).toEqual("function")
+		expect(typeof state.batchUnlisten).toEqual("function")
 		expect(state.disabled).toEqual(false)
 	})
 	it("subscribe", () => {
@@ -67,6 +70,40 @@ describe("Listenable", () => {
 		component.disconnectedCallback()
 		state.disabled = false
 		expect(count).toEqual(2)
+	})
+	it("batchListen and batchUnlisten", () => {
+		const state = State.create()
+		class FakeComponent {
+			disabled: boolean
+			count: number
+			listeners: ListenerBatch<State> = {
+				disabled: disabled => (this.disabled = disabled),
+				count: count => (this.count = count),
+			}
+			constructor() {
+				this.componentWillLoad()
+			}
+			componentWillLoad() {
+				state.batchListen(this.listeners)
+			}
+			disconnectedCallback() {
+				state.batchUnlisten(this.listeners)
+			}
+		}
+		const components = [new FakeComponent(), new FakeComponent()]
+		expect(components.every(components => components.disabled == false)).toBeTruthy()
+		expect(components.every(components => components.count == 0)).toBeTruthy()
+		state.disabled = true
+		state.count++
+		expect(components.every(components => components.disabled == true)).toBeTruthy()
+		expect(components.every(components => components.count == 1)).toBeTruthy()
+		components[0].disconnectedCallback()
+		state.disabled = false
+		state.count = 123
+		expect(components[0].disabled).toEqual(true)
+		expect(components[0].count).toEqual(1)
+		expect(components[1].disabled).toEqual(false)
+		expect(components[1].count).toEqual(123)
 	})
 	it("internal subscriptions", async () => {
 		class Dependency extends StateBase<Dependency> {
