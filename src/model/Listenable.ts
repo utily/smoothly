@@ -22,6 +22,18 @@ export class Listenable<T extends CanBeListenable> {
 		const index = this.#listeners[property]?.indexOf(listener)
 		index != undefined && index >= 0 && this.#listeners[property]?.splice(index, 1)
 	}
+	batchListen(this: T & Listenable<T>, listeners: ListenerBatch<T>, options?: { lazy?: boolean }) {
+		for (const key in listeners) {
+			const listener = listeners[key]
+			listener && this.listen(key, listener, options)
+		}
+	}
+	batchUnlisten(listeners: ListenerBatch<T>) {
+		for (const key in listeners) {
+			const listener = listeners[key]
+			listener && this.unlisten(key, listener)
+		}
+	}
 
 	static load<T extends HasListenable<CanBeListenable>>(backend: T): WithListenable<T> {
 		const result = backend.listenable
@@ -72,3 +84,5 @@ export type Listener<V> = (value: V) => void
 export type Listeners<T> = {
 	[K in keyof T]?: Listener<T[K]>[]
 }
+
+export type ListenerBatch<T> = { [K in keyof ListenableProperties<T>]?: Listener<T[K]> }
