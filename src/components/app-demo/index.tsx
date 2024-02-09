@@ -13,6 +13,19 @@ export class SmoothlyAppDemo {
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
 				<smoothly-app-room path="/root" label="root">
+					<h2>Theme</h2>
+					<smoothly-theme-picker>
+						<smoothly-item value="assets/style/smoothly.css">Smoothly</smoothly-item>
+						<smoothly-item value="https://app.issuefab.com/assets/style/index.css">Issuefab</smoothly-item>
+						<smoothly-item value="https://app.proquse.com/assets/style/index.css">Proquse</smoothly-item>
+						<smoothly-item value="https://app.weekmeter.com/assets/style/index.css">Weekmeter</smoothly-item>
+						<smoothly-item value="https://dash.pax2pay.app/p2pdash.css">Pax2Pay Dashboard</smoothly-item>
+						<smoothly-item value="https://ui.pax2pay.app/assets/style/pax2pay.css">Pax2Pay Portal</smoothly-item>
+						<smoothly-item value="https://theme.payfunc.com/intergiro/index.css">Intergiro Monitor</smoothly-item>
+						<smoothly-item value="https://theme.payfunc.com/light/index.css">Payfunc Light</smoothly-item>
+						<smoothly-item value="https://theme.payfunc.com/dark/index.css">Payfunc Dark</smoothly-item>
+					</smoothly-theme-picker>
+					<smoothly-theme-colors></smoothly-theme-colors>
 					<smoothly-button type="link" link="/redirect">
 						To redirect
 					</smoothly-button>

@@ -270,7 +270,7 @@ export namespace Components {
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
-        "initialValue"?: any;
+        "initialValue"?: unknown;
         "looks": Looks;
         "name": string;
         "reset": () => Promise<void>;
@@ -434,6 +434,9 @@ export namespace Components {
         "variant": "shade" | "tint" | "color";
     }
     interface SmoothlyThemeColors {
+    }
+    interface SmoothlyThemePicker {
+        "element": string;
     }
     interface SmoothlyToggle {
         "disabled": boolean;
@@ -1073,6 +1076,12 @@ declare global {
         prototype: HTMLSmoothlyThemeColorsElement;
         new (): HTMLSmoothlyThemeColorsElement;
     };
+    interface HTMLSmoothlyThemePickerElement extends Components.SmoothlyThemePicker, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemePickerElement: {
+        prototype: HTMLSmoothlyThemePickerElement;
+        new (): HTMLSmoothlyThemePickerElement;
+    };
     interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
     }
     var HTMLSmoothlyToggleElement: {
@@ -1190,6 +1199,7 @@ declare global {
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
         "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
+        "smoothly-theme-picker": HTMLSmoothlyThemePickerElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
@@ -1466,11 +1476,11 @@ declare namespace LocalJSX {
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
-        "initialValue"?: any;
+        "initialValue"?: unknown;
         "looks"?: Looks;
         "name"?: string;
-        "onSelected"?: (event: SmoothlyInputSelectCustomEvent<any>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<number, any>>) => void;
+        "onSelected"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, unknown>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "showSelected"?: boolean;
         "type"?: "icon";
@@ -1663,6 +1673,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyThemeColors {
     }
+    interface SmoothlyThemePicker {
+        "element"?: string;
+    }
     interface SmoothlyToggle {
         "disabled"?: boolean;
         "name"?: string;
@@ -1779,6 +1792,7 @@ declare namespace LocalJSX {
         "smoothly-theme-color": SmoothlyThemeColor;
         "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
         "smoothly-theme-colors": SmoothlyThemeColors;
+        "smoothly-theme-picker": SmoothlyThemePicker;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-trigger": SmoothlyTrigger;
@@ -1869,6 +1883,7 @@ declare module "@stencil/core" {
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
             "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
+            "smoothly-theme-picker": LocalJSX.SmoothlyThemePicker & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;

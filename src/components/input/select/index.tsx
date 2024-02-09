@@ -9,21 +9,21 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputSelect implements Input {
 	@Element() element: HTMLSmoothlyInputSelectElement
-	@Prop() name: string
+	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true, mutable: true }) type?: "icon"
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop() initialPrompt?: string
-	@Prop() initialValue?: any
+	@Prop() initialValue?: unknown
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
 	@State() missing = false
 	mainElement?: HTMLElement
 	@State() filter = ""
-	@Event() selected: EventEmitter<any>
-	@Event() smoothlyInput: EventEmitter<Record<number, any>>
+	@Event() selected: EventEmitter<unknown>
+	@Event() smoothlyInput: EventEmitter<Record<string, unknown>>
 	aside?: HTMLElement
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
