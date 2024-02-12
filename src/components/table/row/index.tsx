@@ -18,8 +18,10 @@ export class TableRow {
 			if (cell != event.target)
 				cell.open = false
 		})
-		if (event.detail)
+		if (event.detail) {
 			this.element.after(event.detail)
+			console.log("listen expansionOpen table row", event.detail)
+		}
 	}
 	render() {
 		return <slot></slot>

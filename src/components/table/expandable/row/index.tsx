@@ -29,8 +29,10 @@ export class TableExpandableRow implements ComponentWillLoad {
 	@Event() expandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
 	@Watch("open")
 	openChanged() {
-		if (this.expansionElement)
+		if (this.expansionElement) {
 			this.element.after(this.expansionElement)
+			console.log("watch open in expandable row", this.expansionElement)
+		}
 		this.expandableChange.emit(this.open)
 	}
 	@Watch("open")
@@ -45,8 +47,10 @@ export class TableExpandableRow implements ComponentWillLoad {
 	}
 	componentDidRender(): void {
 		this.expansionOpen.emit(this.expansionElement)
-		if (this.expansionElement && this.open)
+		if (this.expansionElement && this.open) {
 			this.element.after(this.expansionElement)
+			console.log("didRender expandable row", this.expansionElement)
+		}
 	}
 	@Listen("click")
 	onClick(event: UIEvent) {
