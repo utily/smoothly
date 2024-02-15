@@ -4,10 +4,10 @@
 :host([hidden]) {
 	display: none;
 }
-:host > content {
+:host > div {
 	display: flex;
 	flex-flow: row wrap;
 }
-:host > content > * {
+:host > div > * {
 	margin: 0.5cm;
 }
