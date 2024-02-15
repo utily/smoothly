@@ -1,14 +1,13 @@
-icon-demo {
+:host {
 	display: block;
-	
 }
-icon-demo[hidden] {
+:host([hidden]) {
 	display: none;
 }
-icon-demo > content {
+:host > content {
 	display: flex;
 	flex-flow: row wrap;
 }
-icon-demo > content > * {
-	margin: 1cm;
+:host > content > * {
+	margin: 0.5cm;
 }
