@@ -10,7 +10,7 @@ export class SmoothlyIconDemo {
 	render() {
 		return [
 			<h1>Icons</h1>,
-			<content>
+			<div>
 				{[
 					"add-circle",
 					"add",
@@ -482,7 +482,7 @@ export class SmoothlyIconDemo {
 					.map(name => (
 						<smoothly-icon name={name as Icon} toolTip={name}></smoothly-icon>
 					))}
-			</content>,
+			</div>,
 		]
 	}
 }
