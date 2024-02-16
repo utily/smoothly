@@ -42,6 +42,40 @@ export class SmoothlyInputDemo {
 					Duration
 				</smoothly-input>
 			</smoothly-form>,
+			<h2>Transparent inputs</h2>,
+			<smoothly-form looks={"transparent"}>
+				<smoothly-input-file name={"file"}>
+					<span slot={"label"}>File</span>
+					<smoothly-icon slot={"button"} name={"folder-open-outline"} size={"small"} />
+				</smoothly-input-file>
+				<smoothly-input type={"duration"} looks={"transparent"} placeholder={"h:mm"}>
+					Input
+				</smoothly-input>
+				<smoothly-picker>
+					<span slot={"label"}>Picker</span>
+					<span slot={"search"}>Search</span>
+					<smoothly-picker-option value={"circle"}>
+						<smoothly-icon name={"ellipse-outline"} />
+					</smoothly-picker-option>
+					<smoothly-picker-option value={"square"}>
+						<smoothly-icon name={"square-outline"} />
+					</smoothly-picker-option>
+				</smoothly-picker>
+				<smoothly-input-date>Date</smoothly-input-date>
+				<smoothly-input-date-range>Date Range</smoothly-input-date-range>
+				<smoothly-input-select name={"transport"}>
+					<smoothly-item value={"plane"}>
+						<smoothly-icon name={"airplane-outline"} />
+					</smoothly-item>
+					<smoothly-item value={"car"}>
+						<smoothly-icon name={"car-outline"} />
+					</smoothly-item>
+					<smoothly-item value={"bus"} selected>
+						<smoothly-icon name={"bus-outline"} />
+					</smoothly-item>
+				</smoothly-input-select>
+			</smoothly-form>,
+
 			<h2>Submit</h2>,
 			<smoothly-form looks="border">
 				<smoothly-input type="email" name="email">

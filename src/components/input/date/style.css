@@ -5,6 +5,9 @@
 	max-width: 100vw;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
+:host[looks=transparent] smoothly-input {
+	outline: none;
+}
 nav {
 	position: absolute;
 	z-index: 10;

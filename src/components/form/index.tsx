@@ -16,7 +16,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	private clearables = new Map<string, Clearable>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
-	@Prop({ reflect: true, attribute: "looks" }) looks: "plain" | "grid" | "border" | "line" = "plain"
+	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
 	@Prop() method?: "GET" | "POST"
 	@Prop() action?: string

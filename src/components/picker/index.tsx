@@ -93,7 +93,7 @@ export class SmoothlyPicker implements Clearable, Input {
 	}
 	render() {
 		return (
-			<Host>
+			<Host tabindex={0}>
 				<smoothly-slot-elements class={"selected"} nodes={this.display} />
 				<span class={"label"}>
 					<slot name={"label"} />

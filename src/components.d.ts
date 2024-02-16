@@ -14,8 +14,8 @@ import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
-import { GoogleFont } from "./model/GoogleFont";
 import { Looks } from "./components/input/Looks";
+import { GoogleFont } from "./model/GoogleFont";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Selected } from "./components/radio-button/Selected";
@@ -166,7 +166,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
-        "looks": "plain" | "grid" | "border" | "line";
+        "looks": Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
         "prevent": boolean;
@@ -1362,7 +1362,7 @@ declare namespace LocalJSX {
         "action"?: string;
         "changed"?: boolean;
         "color"?: Color;
-        "looks"?: "plain" | "grid" | "border" | "line";
+        "looks"?: Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;

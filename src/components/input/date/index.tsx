@@ -63,7 +63,7 @@ export class InputDate implements Clearable, Input {
 				disabled={this.disabled}
 				type="date"
 				value={this.value}
-				looks="plain"
+				looks={this.looks}
 				showLabel={this.showLabel}
 				onSmoothlyInput={e => (this.value = e.detail[this.name])}>
 				<slot></slot>
