@@ -1,1 +1,1 @@
-export type Looks = "plain" | "grid" | "border" | "line"
+export type Looks = "plain" | "grid" | "border" | "line" | "transparent"

@@ -13,3 +13,16 @@
 :host[looks="grid"] {
 	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .5) solid .5px;
 }
+:host[looks="transparent"] {
+	border: none;
+}
+:host[looks="transparent"]:not(:focus-within) {
+	background-color: transparent;
+}
+:host[looks="transparent"]:not(:focus-within) input {
+	background: transparent;
+}
+:host[looks="transparent"]:focus-within {
+	outline: 1px solid rgb(var(--smoothly-color-contrast));
+
+}

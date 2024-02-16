@@ -5,6 +5,9 @@
 	display: block;
 	width: fit-content;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	&:focus-within smoothly-input {
+		outline: none;
+	}
 }
 :host > nav {
 	position: absolute;

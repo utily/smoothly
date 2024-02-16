@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
 import { Input } from "../../Input"
@@ -68,47 +68,49 @@ export class InputDateRange implements Clearable, Input {
 		isoly.DateRange.is(event.detail) && this.smoothlyInput.emit({ [this.name]: event.detail })
 	}
 	render() {
-		return [
-			<section onClick={() => (this.open = !this.open)}>
-				<smoothly-input
-					type="date"
-					name="start"
-					value={this.start}
-					looks="plain"
-					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.start = e.detail.start)}>
-					{`${this.labelStart}`}
-				</smoothly-input>
-				<span>–</span>
-				<smoothly-input
-					type="date"
-					name="end"
-					value={this.end}
-					looks="plain"
-					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.end = e.detail.end)}>
-					{`${this.labelEnd}`}
-				</smoothly-input>
-			</section>,
-			this.open ? <div onClick={() => (this.open = false)}></div> : [],
-			this.open ? (
-				<nav>
-					<div class="arrow"></div>
-					<smoothly-calendar
-						doubleInput={true}
-						value={this.value ?? isoly.Date.now()}
-						onValueChanged={event => {
-							this.value = event.detail
-							event.stopPropagation()
-						}}
-						start={this.start}
-						end={this.end}
-						max={this.max}
-						min={this.min}></smoothly-calendar>
-				</nav>
-			) : (
-				[]
-			),
-		]
+		return (
+			<Host tabindex={0}>
+				<section onClick={() => (this.open = !this.open)}>
+					<smoothly-input
+						type="date"
+						name="start"
+						value={this.start}
+						looks={this.looks}
+						showLabel={this.showLabel}
+						onSmoothlyInput={e => (this.start = e.detail.start)}>
+						{`${this.labelStart}`}
+					</smoothly-input>
+					<span>–</span>
+					<smoothly-input
+						type="date"
+						name="end"
+						value={this.end}
+						looks={this.looks}
+						showLabel={this.showLabel}
+						onSmoothlyInput={e => (this.end = e.detail.end)}>
+						{`${this.labelEnd}`}
+					</smoothly-input>
+				</section>
+				{this.open ? <div onClick={() => (this.open = false)}></div> : []}
+				{this.open ? (
+					<nav>
+						<div class="arrow"></div>
+						<smoothly-calendar
+							doubleInput={true}
+							value={this.value ?? isoly.Date.now()}
+							onValueChanged={event => {
+								this.value = event.detail
+								event.stopPropagation()
+							}}
+							start={this.start}
+							end={this.end}
+							max={this.max}
+							min={this.min}></smoothly-calendar>
+					</nav>
+				) : (
+					[]
+				)}
+			</Host>
+		)
 	}
 }

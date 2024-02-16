@@ -37,6 +37,8 @@ export class SmoothlyInputFile implements Clearable, Input {
 		return (
 			<Host
 				class={{ dragging: this.dragging }}
+				tabindex={0}
+				onClick={() => this.input?.click()}
 				onDragOver={(event: Event) => (event.preventDefault(), event.stopPropagation())}
 				onDragEnter={() => (this.dragging = true)}>
 				<label>
