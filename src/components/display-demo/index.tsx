@@ -212,8 +212,25 @@ export class SmoothlyDisplayDemo {
 						<p slot="summary">Some other title</p>
 						<p slot="content">A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.</p>
 					</smoothly-summary>
+					<h2>Label</h2>
+					{labels.map(l => <smoothly-label hue={l.hue} description={l.description} shape={"rectangle"}>{l.name}</smoothly-label>)}
 				</fieldset>
 			</main>,
 		]
 	}
 }
+const labels = [{
+	name: "2fa",
+	hue: 120,
+	description: "User has two factor authentication enabled.",
+},
+{
+name: "expired",
+hue: 240,
+description: "User's password has expired.",
+},
+{
+name: "inactive",
+hue: 60,
+description: "User is inactive.",
+}]
