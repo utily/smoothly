@@ -6,7 +6,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyLabel {
-	@Prop() color: string
+	@Prop() hue: string
 	@Prop() description: string
 	@Prop({ reflect: true }) shape: "rectangle" | "rounded"
 
@@ -15,7 +15,7 @@ export class SmoothlyLabel {
 			<Host
 				title={this.description}
 				style={{
-					backgroundColor: `hsl(${this.color} 85% 70%)`,
+					backgroundColor: `hsl(${this.hue} 85% 70%)`,
 				}}>
 				<slot></slot>
 			</Host>

@@ -284,8 +284,8 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyLabel {
-        "color": string;
         "description": string;
+        "hue": string;
         "shape": "rectangle" | "rounded";
     }
     interface SmoothlyNotification {
@@ -1504,8 +1504,8 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyLabel {
-        "color"?: string;
         "description"?: string;
+        "hue"?: string;
         "shape"?: "rectangle" | "rounded";
     }
     interface SmoothlyNotification {
