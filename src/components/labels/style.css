@@ -1,0 +1,24 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.5em;
+	width: 100%;
+	height: fit-content;
+	align-content: center;
+}
+
+:host>div {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5em;
+}
+
+:host[wrap=wrap]>div {
+	flex-wrap: wrap;
+}
+
+:host[wrap=nowrap]>div {
+	flex-wrap: nowrap;
+	overflow: hidden;
+}

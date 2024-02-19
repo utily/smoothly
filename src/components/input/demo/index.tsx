@@ -563,6 +563,7 @@ export class SmoothlyInputDemo {
 					<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 				</smoothly-submit>
 			</smoothly-form>,
+			<smoothly-labels-demo></smoothly-labels-demo>,
 		]
 	}
 }
