@@ -2,11 +2,6 @@
 	width: 100%;
 }
 
-:host>smoothly-picker>smoothly-picker-menu {
-	/* FIXME: remove when the global css is fixed */
-	background: rgb(var(--smoothly-default-color));
-}
-
 :host smoothly-labels {
 	flex-direction: row;
 	width: 100%;
