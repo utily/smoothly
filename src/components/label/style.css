@@ -1,0 +1,14 @@
+:host>div {
+	position: relative;
+	width: max-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.15em 0.6em;
+	border-radius: 2em;
+	color: rgb(var(--smoothly-default-contrast));
+}
+
+:host([shape=rectangle])>div {
+	border-radius: 0.3em;
+}
