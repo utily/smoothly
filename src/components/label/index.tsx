@@ -1,4 +1,4 @@
-import { Component, h, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-label",
@@ -7,19 +7,18 @@ import { Component, h, Prop } from "@stencil/core"
 })
 export class SmoothlyLabel {
 	@Prop() color: string
-	@Prop() name: string
 	@Prop() description: string
 	@Prop({ reflect: true }) shape: "rectangle" | "rounded"
 
 	render() {
 		return (
-			<div
+			<Host
 				title={this.description}
 				style={{
 					backgroundColor: `hsl(${this.color} 85% 70%)`,
 				}}>
-				{this.name}
-			</div>
+				<slot></slot>
+			</Host>
 		)
 	}
 }

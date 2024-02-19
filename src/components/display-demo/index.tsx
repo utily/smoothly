@@ -213,7 +213,7 @@ export class SmoothlyDisplayDemo {
 						<p slot="content">A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more content, yes please.</p>
 					</smoothly-summary>
 					<h2>Label</h2>
-					{labels.map(l => <smoothly-label name={l.name} color={l.color} description={l.description} shape={"rectangle"}></smoothly-label>)}
+					{labels.map(l => <smoothly-label color={l.color} description={l.description} shape={"rectangle"}>{l.name}</smoothly-label>)}
 				</fieldset>
 			</main>,
 		]

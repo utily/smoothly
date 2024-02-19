@@ -1,4 +1,4 @@
-:host>div {
+:host {
 	position: relative;
 	width: max-content;
 	display: flex;
@@ -9,6 +9,6 @@
 	color: rgb(var(--smoothly-default-contrast));
 }
 
-:host([shape=rectangle])>div {
+:host([shape=rectangle]) {
 	border-radius: 0.3em;
 }
