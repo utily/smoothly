@@ -15,7 +15,7 @@ export class SmoothlyLabel {
 			<Host
 				title={this.description}
 				style={{
-					backgroundColor: `hsl(${this.hue} 85% 70%)`,
+					"--hue": this.hue,
 				}}>
 				<slot></slot>
 			</Host>

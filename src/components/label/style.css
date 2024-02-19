@@ -7,6 +7,7 @@
 	padding: 0.15em 0.6em;
 	border-radius: 2em;
 	color: rgb(var(--smoothly-default-contrast));
+	background-color: hsl(var(--hue), 85%, 70%);
 }
 
 :host([shape=rectangle]) {
