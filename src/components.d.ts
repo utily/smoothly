@@ -112,6 +112,7 @@ export namespace Components {
     }
     interface SmoothlyDialog {
         "closable": boolean;
+        "close": () => Promise<void>;
         "color": Color | undefined;
         "header": string | undefined;
         "open": boolean;
