@@ -1,0 +1,17 @@
+:host {
+	display: block;
+}
+:host::part(slide) {
+	position: relative;
+	background-color: rgb(var(--smoothly-primary-tint));
+	border-radius: 1em;
+}
+:host::part(slider) {
+	position: relative;
+	background-color: rgb(var(--smoothly-primary-contrast));
+	border-radius: 50%;
+	width: 1em;
+	height: 1em;
+	left: 20%;
+	transform: translateX(-50%);
+}
