@@ -21,7 +21,9 @@ export class SmoothlyThemeColors {
 								variants
 									.map(variant => {
 										const variableName = `--smoothly-${color}-${variant}`
-										return `${variableName}: ${document.documentElement.style.getPropertyValue(variableName)};`
+										return `${variableName}: ${getComputedStyle(document.documentElement).getPropertyValue(
+											variableName
+										)};`
 									})
 									.join("\n\t")
 							)
