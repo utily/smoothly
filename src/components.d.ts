@@ -437,6 +437,7 @@ export namespace Components {
     }
     interface SmoothlyThemeColorVariant {
         "color": Color;
+        "immutable": boolean;
         "variant": "shade" | "tint" | "color";
     }
     interface SmoothlyThemeColors {
@@ -1687,6 +1688,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyThemeColorVariant {
         "color"?: Color;
+        "immutable"?: boolean;
         "variant"?: "shade" | "tint" | "color";
     }
     interface SmoothlyThemeColors {
