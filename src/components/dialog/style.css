@@ -4,11 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
+	inset: 0;
 	/* stylelint-disable-next-line declaration-no-important */
 	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
@@ -35,7 +31,6 @@
 	max-width: 40em;
 	width: calc(100vw - 4em - 2px);
 	max-height: calc(100vh - 6em - 2px);
-	height: auto;
 	border-collapse: collapse;
 	padding: 1em;
 	box-sizing: border-box;

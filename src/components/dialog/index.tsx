@@ -7,7 +7,7 @@ import { Color, Trigger } from "../../model"
 	scoped: true,
 })
 export class SmoothlyDialog {
-	@Prop({ reflect: true }) color: Color | undefined
+	@Prop({ reflect: true }) color: Color | undefined = "primary"
 	@Prop({ mutable: true, reflect: true }) open = true
 	@Prop({ reflect: true }) closable = false
 	@Prop({ reflect: true }) header: string | undefined
@@ -20,8 +20,7 @@ export class SmoothlyDialog {
 			this.close()
 	}
 	@Method()
-	close() {
-		console.log("close")
+	async close() {
 		this.open = false
 	}
 	render() {
