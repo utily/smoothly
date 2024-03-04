@@ -268,6 +268,7 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
+        "isDragging": boolean;
         "max": number;
         "min": number;
         "padding": number;
@@ -1499,6 +1500,7 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
+        "isDragging"?: boolean;
         "max"?: number;
         "min"?: number;
         "padding"?: number;
