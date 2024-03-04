@@ -4,14 +4,15 @@
 :host::part(slide) {
 	position: relative;
 	background-color: rgb(var(--smoothly-primary-tint));
-	border-radius: 1em;
+	border-radius: 10em;
+
+	
 }
 :host::part(slider) {
 	position: relative;
 	background-color: rgb(var(--smoothly-primary-contrast));
 	border-radius: 50%;
-	width: 1em;
-	height: 1em;
+	width: 1.5em;
+	height: 1.5em;
 	left: 20%;
-	transform: translateX(-50%);
 }
