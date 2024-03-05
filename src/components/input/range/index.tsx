@@ -10,7 +10,7 @@ export class SmoothlyInputRange {
 	slider?: HTMLDivElement
 	isDragging = false
 	private set ratio(value: number) {
-		this.value = Math.max(this.min, Math.min(this.max, value * (this.max - this.min) + this.min))
+		this.value = Math.floor(Math.max(this.min, Math.min(this.max, value * (this.max - this.min) + this.min)))
 	}
 	private get ratio(): number {
 		return (this.value - this.min) / (this.max - this.min)
@@ -29,7 +29,7 @@ export class SmoothlyInputRange {
 	}
 	@Prop({ mutable: true }) value = 0
 	@Prop() min = 0
-	@Prop() max = 1
+	@Prop() max = 100
 	@Prop() padding = 4
 	@Prop() name: string
 	@Listen("mousemove", { target: "window" })
@@ -59,13 +59,13 @@ export class SmoothlyInputRange {
 	render() {
 		return (
 			<Host>
-				<label
+				<p
 					part="value"
 					style={{
 						left: `${this.ratio * this.slideLength + this.sliderWidth / 2}px`,
 					}}>
 					{this.value}
-				</label>
+				</p>
 				<div
 					part="slide"
 					ref={e => (this.slide = e)}
@@ -81,7 +81,13 @@ export class SmoothlyInputRange {
 						}}></div>
 				</div>
 				<div class="min-max">
-					<p part="min">{this.min}</p>
+					<p
+						part="min"
+						style={{
+							left: `${this.sliderWidth / 2 - this.padding}px`,
+						}}>
+						{this.min}
+					</p>
 					<p part="max">{this.max}</p>
 				</div>
 			</Host>
