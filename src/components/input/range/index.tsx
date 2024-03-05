@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-input-range",
@@ -8,6 +8,7 @@ import { Component, h, Host, Listen, Prop } from "@stencil/core"
 export class SmoothlyInputRange {
 	slide?: HTMLDivElement
 	slider?: HTMLDivElement
+	isDragging = false
 	private set ratio(value: number) {
 		this.value = Math.max(this.min, Math.min(this.max, value * (this.max - this.min) + this.min))
 	}
@@ -30,19 +31,24 @@ export class SmoothlyInputRange {
 	@Prop() min = 0
 	@Prop() max = 1
 	@Prop() padding = 4
-	@Prop({ mutable: true }) isDragging = false
+	@Prop() name: string
 	@Listen("mousemove", { target: "window" })
 	handleMouseMove(e: MouseEvent) {
 		if (this.isDragging) {
-			this.ratio = (e.offsetX - this.slideStart) / this.slideLength
+			this.updateRatio(e)
 		}
 	}
 	@Listen("mouseup", { target: "window" })
 	handleMouseUp() {
 		this.isDragging = false
 	}
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Watch("value")
+	valueChanged() {
+		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
 
-	handleSlideClick(e: MouseEvent | DragEvent): void {
+	updateRatio(e: MouseEvent): void {
 		this.ratio = (e.offsetX - this.slideStart) / this.slideLength
 	}
 	handleSliderClick(e: MouseEvent): void {
@@ -57,7 +63,7 @@ export class SmoothlyInputRange {
 					part="slide"
 					ref={e => (this.slide = e)}
 					style={{ padding: `${this.padding}px` }}
-					onClick={e => this.handleSlideClick(e)}>
+					onClick={e => this.updateRatio(e)}>
 					<div
 						onClick={e => this.handleSliderClick(e)}
 						ref={e => (this.slider = e)}
