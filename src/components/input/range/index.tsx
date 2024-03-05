@@ -16,7 +16,7 @@ export class SmoothlyInputRange {
 		return (this.value - this.min) / (this.max - this.min)
 	}
 	private get sliderWidth(): number {
-		return (this.slider?.offsetWidth && this.slider?.offsetWidth + this.padding * 2) ?? 1
+		return (this.slider?.offsetWidth && this.slider?.offsetWidth + this.padding * 2) ?? 28
 	}
 	private get slideWidth(): number {
 		return this.slide?.offsetWidth ?? 10
@@ -59,6 +59,13 @@ export class SmoothlyInputRange {
 	render() {
 		return (
 			<Host>
+				<label
+					part="value"
+					style={{
+						left: `${this.ratio * this.slideLength + this.sliderWidth / 2}px`,
+					}}>
+					{this.value}
+				</label>
 				<div
 					part="slide"
 					ref={e => (this.slide = e)}
@@ -72,6 +79,10 @@ export class SmoothlyInputRange {
 						style={{
 							left: `${this.ratio * this.slideLength}px`,
 						}}></div>
+				</div>
+				<div class="min-max">
+					<p part="min">{this.min}</p>
+					<p part="max">{this.max}</p>
 				</div>
 			</Host>
 		)

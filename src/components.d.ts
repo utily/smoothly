@@ -268,9 +268,9 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
-        "isDragging": boolean;
         "max": number;
         "min": number;
+        "name": string;
         "padding": number;
         "value": number;
     }
@@ -551,6 +551,10 @@ export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputRangeElement;
 }
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1500,9 +1504,10 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
-        "isDragging"?: boolean;
         "max"?: number;
         "min"?: number;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "padding"?: number;
         "value"?: number;
     }
