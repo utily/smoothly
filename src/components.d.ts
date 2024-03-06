@@ -268,6 +268,13 @@ export namespace Components {
     interface SmoothlyInputMonth {
         "value"?: Date;
     }
+    interface SmoothlyInputRange {
+        "labelText"?: string;
+        "max": number;
+        "min": number;
+        "name": string;
+        "value": number;
+    }
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
@@ -545,6 +552,10 @@ export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputRangeElement;
 }
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -853,6 +864,12 @@ declare global {
     var HTMLSmoothlyInputMonthElement: {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
+    };
+    interface HTMLSmoothlyInputRangeElement extends Components.SmoothlyInputRange, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputRangeElement: {
+        prototype: HTMLSmoothlyInputRangeElement;
+        new (): HTMLSmoothlyInputRangeElement;
     };
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
     }
@@ -1173,6 +1190,7 @@ declare global {
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
+        "smoothly-input-range": HTMLSmoothlyInputRangeElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-label": HTMLSmoothlyLabelElement;
@@ -1486,6 +1504,14 @@ declare namespace LocalJSX {
         "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
     }
+    interface SmoothlyInputRange {
+        "labelText"?: string;
+        "max"?: number;
+        "min"?: number;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
+        "value"?: number;
+    }
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
@@ -1772,6 +1798,7 @@ declare namespace LocalJSX {
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-range": SmoothlyInputRange;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
         "smoothly-label": SmoothlyLabel;
@@ -1864,6 +1891,7 @@ declare module "@stencil/core" {
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;

@@ -1,0 +1,88 @@
+:host {
+	display: flex;
+	position: relative;
+	
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: space-between;
+}
+
+:host .output-container {
+	width: 98%;
+	margin: auto;
+	position: relative;
+	height: 2em;
+}
+:host output{
+	position: absolute;
+	transform: translateX(-50%);
+	font-weight: 600;
+	font-size: 1.2em;
+	left: var(--left-adjustment, 0);
+}
+
+
+:host ::slotted(div),
+:host label{
+	margin-bottom: 1.5em;
+	font-size: 1.5em;
+}
+
+
+/*--------------------Reset browserspecific CSS------------------ */
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+	height: 3em;
+	
+}
+
+/*--------------------THUMB------------------ */
+/* WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  background-color: rgb(var(--smoothly-primary-contrast));
+	border: 1px rgb(var(--smoothly-primary-contrast)) solid;
+  cursor: pointer;
+  margin-top: .5em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+/* Firefox */
+input[type=range]::-moz-range-thumb {
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  background-color: rgb(var(--smoothly-primary-contrast));
+	border: 1px rgb(var(--smoothly-primary-contrast)) solid;
+  cursor: pointer;
+}
+
+/*--------------------SLIDER TRACK------------------ */
+input[type=range]::-webkit-slider-runnable-track {
+	padding: 0 7px;
+  height: 100%;
+  cursor: pointer;
+	background-color: rgb(var(--smoothly-primary-tint));
+  border-radius: 20px;
+}
+
+input[type=range]::-moz-range-track {
+  width: 101%;
+  height: 3em;
+  cursor: pointer;
+  background-color: rgb(var(--smoothly-primary-tint));
+  border-radius: 20px;
+}
+
+.min, .max {
+	display: inline-block;
+	margin: 0.5em;
+}
+
+.max {
+	text-align: right;
+}
