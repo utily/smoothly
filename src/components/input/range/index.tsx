@@ -13,20 +13,18 @@ export class SmoothlyInputRange {
 	@Prop() labelText?: string
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
-	valueChanged() {
+	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
 	render() {
 		return (
-			<Host>
+			<Host style={{ "--left-adjustment": `${(this.value / this.max) * 100}%` }}>
 				<slot name="label">
 					{typeof this.labelText === "string" && <label htmlFor={this.name}>{this.labelText}</label>}
 				</slot>
 				<div class="output-container">
-					<output htmlFor={this.name} style={{ left: `${(this.value / this.max) * 100}%` }}>
-						{this.value}
-					</output>
+					<output htmlFor={this.name}>{this.value}</output>
 				</div>
 				<input
 					name={this.name}
@@ -35,7 +33,7 @@ export class SmoothlyInputRange {
 					min={this.min}
 					max={this.max}
 					step={"any"}
-					onInput={e => (this.value = Number.parseFloat((e.target as HTMLInputElement).value))}
+					onInput={e => e.target instanceof HTMLInputElement && (this.value = Number.parseFloat(e.target.value))}
 					value={this.value}
 				/>
 				<p class="min">{this.min}</p>
