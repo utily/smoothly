@@ -81,7 +81,6 @@ input[type=range]::-moz-range-track {
 .min, .max {
 	display: inline-block;
 	margin: 0.5em;
-	
 }
 
 .max {
