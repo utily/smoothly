@@ -271,7 +271,6 @@ export namespace Components {
         "max": number;
         "min": number;
         "name": string;
-        "padding": number;
         "value": number;
     }
     interface SmoothlyInputSelect {
@@ -1506,8 +1505,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputRange {
         "max"?: number;
         "min"?: number;
-        "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "padding"?: number;
         "value"?: number;
     }

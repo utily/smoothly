@@ -12,7 +12,7 @@
 :host::part(slide) {
 	position: relative;
 	background-color: rgb(var(--smoothly-primary-tint));
-	border-radius: 10em;
+	border-radius: 10em;	
 }
 :host::part(slider) {
 	position: relative;
@@ -20,17 +20,26 @@
 	border-radius: 50%;
 	width: 1.5em;
 	height: 1.5em;
+	left: 20%;
 }
-:host .min-max {
-	display: flex;
-	justify-content: space-between;
-	margin: auto;
+:host::part(range) {
+	width: 100%;
 }
-:host::part(min), :host::part(max)  {
-	margin: .2em 0 0 0;
-	position: relative;
-	 padding-right:  5px ; 
-	font-weight: bolder;
+input::-webkit-slider-runnable-track { 
+	background-color: rgb(var(--smoothly-primary-tint)); 
+	height: 2em;
+	border-radius: 10em;	
+	width: 100%;
 }
-
-
+input::-moz-range-track { 
+	background-color: rgb(var(--smoothly-primary-tint)); 
+	height: 2em;
+	border-radius: 10em;
+	width: 100%;	
+}
+input::-ms-track { 
+	background-color: rgb(var(--smoothly-primary-tint)); 
+	height: 2em;
+	border-radius: 10em;
+	width: 100%;	
+}
