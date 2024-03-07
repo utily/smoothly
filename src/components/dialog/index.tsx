@@ -15,7 +15,6 @@ export class SmoothlyDialog {
 	@Listen("click")
 	clickHandler(event: CustomEvent<Trigger>) {
 		event.stopPropagation()
-		console.log(event.composedPath().at(0))
 		if (event.composedPath().at(0) == this.element)
 			this.close()
 	}
