@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Method, Prop } from "@stencil/core"
 import { Color, Trigger } from "../../model"
 
 @Component({
@@ -7,38 +7,38 @@ import { Color, Trigger } from "../../model"
 	scoped: true,
 })
 export class SmoothlyDialog {
-	@Prop({ reflect: true }) color: Color | undefined
+	@Element() element: HTMLSmoothlyDialogElement
+	@Prop({ reflect: true }) color: Color | undefined = "primary"
 	@Prop({ mutable: true, reflect: true }) open = true
 	@Prop({ reflect: true }) closable = false
 	@Prop({ reflect: true }) header: string | undefined
-	@Listen("trigger")
-	TriggerListener(event: CustomEvent<Trigger>) {
-		if (Trigger.is(event.detail) && event.detail.name == "close")
-			this.open = false
+
+	@Listen("click")
+	clickHandler(event: CustomEvent<Trigger>): void {
+		event.stopPropagation()
+		if (event.composedPath().at(0) == this.element)
+			this.close()
 	}
-	hostData() {
-		return {
-			style: {
-				display: this.open ? "block" : "none",
-			},
-		}
+	@Method()
+	async close(): Promise<void> {
+		this.open = false
 	}
-	render() {
-		return [
-			<header>
-				{this.closable ? (
-					<smoothly-trigger fill="clear" name="close">
-						<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
-					</smoothly-trigger>
-				) : (
-					[]
-				)}
-				{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
-			</header>,
-			<main>
-				<slot></slot>
-			</main>,
-		]
+	render(): ReturnType<typeof Host> {
+		return (
+			<Host>
+				<header>
+					{this.closable && (
+						<smoothly-button fill="clear" size="flexible" onClick={() => this.close()}>
+							<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
+						</smoothly-button>
+					)}
+					{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
+				</header>
+				<main>
+					<slot></slot>
+				</main>
+			</Host>
+		)
 	}
 }
 //
