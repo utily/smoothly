@@ -62,7 +62,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		}
 	}
 	@Method()
-	async submit(): Promise<void> {
+	async submit(): Promise<void> { // TODO: Tove use Notice.execute
 		this.smoothlyFormSubmit.emit(this.value)
 		this.notice?.emit(
 			Notice.execute("Submitting form", async () => {
