@@ -16,24 +16,24 @@ export class Calendar {
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) doubleInput: boolean
-	@Event() valueChanged: EventEmitter<Date>
-	@Event() startChanged: EventEmitter<Date>
-	@Event() endChanged: EventEmitter<Date>
+	@Event() valueChange: EventEmitter<Date>
+	@Event() startChange: EventEmitter<Date>
+	@Event() endChange: EventEmitter<Date>
 	@Event() dateSet: EventEmitter<Date>
 	@Event() dateRangeSet: EventEmitter<DateRange>
 	private frozenDate: Date
 	@State() firstSelected: boolean
 	@Watch("start")
 	onStart(next: Date) {
-		this.startChanged.emit(next)
+		this.startChange.emit(next)
 	}
 	@Watch("end")
 	onEnd(next: Date) {
-		this.endChanged.emit(next)
+		this.endChange.emit(next)
 	}
 	private clickCounter = 0
 	private onClick(date: Date) {
-		this.valueChanged.emit((this.value = date))
+		this.valueChange.emit((this.value = date))
 		this.clickCounter += 1
 		if (this.doubleInput) {
 			if (this.clickCounter % 2 == 1)
@@ -67,7 +67,7 @@ export class Calendar {
 		return [
 			<smoothly-input-month
 				value={this.month ?? this.value}
-				onValueChanged={event => {
+				onValueChange={event => {
 					this.month = event.detail
 					event.stopPropagation()
 				}}></smoothly-input-month>,

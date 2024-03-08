@@ -1314,9 +1314,9 @@ declare namespace LocalJSX {
         "month"?: Date;
         "onDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<DateRange>) => void;
         "onDateSet"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onEndChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onStartChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onValueChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onEndChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onStartChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onValueChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
         "start"?: Date;
         "value"?: Date;
     }
@@ -1463,7 +1463,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
+        "onValueChange"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
         "value"?: Date;
@@ -1479,7 +1479,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
+        "onValueChange"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date;
@@ -1501,7 +1501,7 @@ declare namespace LocalJSX {
         "value"?: File;
     }
     interface SmoothlyInputMonth {
-        "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
+        "onValueChange"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "value"?: Date;
     }
     interface SmoothlyInputRange {
@@ -1519,7 +1519,7 @@ declare namespace LocalJSX {
         "initialValue"?: unknown;
         "looks"?: Looks;
         "name"?: string;
-        "onSelected"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
+        "onSelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, unknown>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "showSelected"?: boolean;
