@@ -272,6 +272,7 @@ export namespace Components {
         "max": number;
         "min": number;
         "name": string;
+        "step": number | "any";
         "value": number;
     }
     interface SmoothlyInputSelect {
@@ -1509,6 +1510,7 @@ declare namespace LocalJSX {
         "min"?: number;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
+        "step"?: number | "any";
         "value"?: number;
     }
     interface SmoothlyInputSelect {

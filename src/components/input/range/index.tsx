@@ -8,13 +8,18 @@ import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/c
 export class SmoothlyInputRange {
 	@Prop({ mutable: true }) value = 0
 	@Prop() min = 0
-	@Prop() max = 1
+	@Prop() max = 100
 	@Prop() name: string
 	@Prop() labelText?: string
+	@Prop() step: number | "any" = "any"
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
+	inputHandler(e: Event): void {
+		e.target instanceof HTMLInputElement &&
+			(this.value = this.step !== "any" ? e.target.valueAsNumber : Math.round(e.target.valueAsNumber * 100) / 100)
 	}
 
 	render() {
@@ -32,8 +37,8 @@ export class SmoothlyInputRange {
 					type="range"
 					min={this.min}
 					max={this.max}
-					step={"any"}
-					onInput={e => e.target instanceof HTMLInputElement && (this.value = Number.parseFloat(e.target.value))}
+					step={this.step}
+					onInput={e => this.inputHandler(e)}
 					value={this.value}
 				/>
 				<p class="min">{this.min}</p>
