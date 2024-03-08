@@ -25,6 +25,7 @@ function restoreListener(ref: HTMLElement | undefined, option: Option) {
 export interface Controls {
 	remember: () => void
 	restore: () => void
+	clear: () => void
 }
 @Component({
 	tag: "smoothly-picker-menu",
@@ -100,6 +101,13 @@ export class SmoothlyPickerMenu {
 							option.set.selected((option.selected = false))
 					}
 				}
+			},
+			clear: () => {
+				const backend = Array.from(this.backend.entries())
+				backend.filter(([key]) => this.created.has(key)).forEach(([, option]) => option.set.selected(false))
+				this.backend = new Map(backend.filter(([key]) => !this.created.has(key)))
+				this.options = new Map(Array.from(this.options.entries()).filter(([key]) => !this.created.has(key)))
+				this.created = new Map()
 			},
 			synced: () => this.synced,
 		})
