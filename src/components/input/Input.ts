@@ -8,6 +8,7 @@ export interface Input {
 	name: string
 	looks: Looks
 	smoothlyInput: EventEmitter<Data>
+	// TODO: Tove add smoothlyInputForm
 }
 export namespace Input {
 	export function is(value: Input | any): value is Input {
