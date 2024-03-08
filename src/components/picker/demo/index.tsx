@@ -21,18 +21,18 @@ export class SmoothlyPickerDemo {
 	@State() counter = 3
 	@State() data = {
 		message: "hello world",
-		emails: ["jessie@rocket.com", "james@rocket.com"],
+		emails: [{ value: "jessie@rocket.com" }, { value: "james@rocket.com" }],
 		options: [
-			"giovani@rocket.com",
-			"john@example.com",
-			"jane@example.com",
-			"jack@example.com",
-			"jessica@example.com",
-			"julia@example.com",
-			"jayden@example.com",
-			"jake@example.com",
-			"jamie@example.com",
-			"jasmine@example.com",
+			{ value: "giovani@rocket.com" },
+			{ value: "john@example.com" },
+			{ value: "jane@example.com" },
+			{ value: "jack@example.com" },
+			{ value: "jessica@example.com" },
+			{ value: "julia@example.com" },
+			{ value: "jayden@example.com" },
+			{ value: "jake@example.com" },
+			{ value: "jamie@example.com" },
+			{ value: "jasmine@example.com" },
 		],
 	}
 	@State() change?: SmoothlyPickerDemo["data"]
@@ -83,11 +83,12 @@ export class SmoothlyPickerDemo {
 						</button>
 					</smoothly-picker>
 				</div>
-				<smoothly-button onClick={() => this.clickHandler()}>
+
+				<h5>Controlled input</h5>
+				<smoothly-button color={"secondary"} onClick={() => this.clickHandler()}>
 					{!this.change ? "start edit" : "end edit"}
 				</smoothly-button>
-				<h5>Controlled input</h5>
-				<smoothly-form looks="line" onSmoothlyFormInput={e => this.inputHandler(e as any)}>
+				<smoothly-form class={"controlled"} looks="line" onSmoothlyFormInput={e => this.inputHandler(e)}>
 					<smoothly-input readonly={!this.change} name="message" value={this.data.message}>
 						Message
 					</smoothly-input>
@@ -102,27 +103,35 @@ export class SmoothlyPickerDemo {
 						<span slot="search">Search</span>
 						<smoothly-icon size="tiny" slot="display" name="person-add-outline" />
 						{(this.change?.emails ?? this.data.emails).map(email => (
-							<smoothly-picker-option key={email} value={email} selected search={[this.users[email] ?? []].flat()}>
-								<span>{this.users[email]}</span>
-								<span slot="label">{email}</span>
+							<smoothly-picker-option
+								key={email.value}
+								value={email}
+								selected
+								search={[this.users[email.value] ?? []].flat()}>
+								<span>{this.users[email.value]}</span>
+								<span slot="label">{email.value}</span>
 								<smoothly-icon size="tiny" slot="display" name="person-outline" />
 							</smoothly-picker-option>
 						))}
 						{this.data.options.map(email => (
-							<smoothly-picker-option key={email} value={email} search={[this.users[email] ?? []].flat()}>
-								<span>{this.users[email]}</span>
-								<span slot="label">{email}</span>
+							<smoothly-picker-option key={email.value} value={email} search={[this.users[email.value] ?? []].flat()}>
+								<span>{this.users[email.value]}</span>
+								<span slot="label">{email.value}</span>
 								<smoothly-icon size="tiny" slot="display" name="person-outline" />
 							</smoothly-picker-option>
 						))}
 					</smoothly-picker>
+					<smoothly-input-clear slot={"submit"} type="form" color="danger" fill="solid">
+						Clear
+					</smoothly-input-clear>
+					<smoothly-button slot={"submit"} color={"secondary"} onClick={() => this.controls?.clear()}>
+						Removed added by mutation
+					</smoothly-button>
 					<smoothly-submit size="icon" slot="submit">
 						<smoothly-icon name="checkmark-circle" />
 					</smoothly-submit>
-					<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
-						Clear
-					</smoothly-input-clear>
 				</smoothly-form>
+
 				<h5>uncontrolled inputs</h5>
 				<smoothly-form onSmoothlyFormSubmit={e => console.log("submitted", e.detail)} looks="line">
 					<smoothly-input name="purpose" type="text">
