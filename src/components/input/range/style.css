@@ -1,18 +1,18 @@
-:host {
+ :host {
 	display: flex;
 	position: relative;
-	
 	flex-wrap: wrap;
 	width: 100%;
 	justify-content: space-between;
 }
 
 :host .output-container {
-	width: 98%;
-	margin: auto;
+	width: 100%;
+	margin: 0 1.2em;
 	position: relative;
 	height: 2em;
 }
+
 :host output{
 	position: absolute;
 	transform: translateX(-50%);
@@ -21,13 +21,11 @@
 	left: var(--left-adjustment, 0);
 }
 
-
 :host ::slotted(div),
 :host label{
-	margin-bottom: 1.5em;
+	margin-bottom: .5em;
 	font-size: 1.5em;
 }
-
 
 /*--------------------Reset browserspecific CSS------------------ */
 input[type=range] {
@@ -35,7 +33,6 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
 	height: 3em;
-	
 }
 
 /*--------------------THUMB------------------ */
@@ -63,7 +60,7 @@ input[type=range]::-moz-range-thumb {
 
 /*--------------------SLIDER TRACK------------------ */
 input[type=range]::-webkit-slider-runnable-track {
-	padding: 0 7px;
+	padding: 0 .6em;
   height: 100%;
   cursor: pointer;
 	background-color: rgb(var(--smoothly-primary-tint));
@@ -71,7 +68,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 input[type=range]::-moz-range-track {
-  width: 101%;
+  width: calc(100% + 1em);
   height: 3em;
   cursor: pointer;
   background-color: rgb(var(--smoothly-primary-tint));
@@ -80,7 +77,7 @@ input[type=range]::-moz-range-track {
 
 .min, .max {
 	display: inline-block;
-	margin: 0.5em;
+	margin: 0.5em .8em;
 }
 
 .max {
