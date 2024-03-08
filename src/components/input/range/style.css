@@ -1,4 +1,4 @@
- :host {
+:host {
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
@@ -13,7 +13,7 @@
 	height: 2em;
 }
 
-:host output{
+:host output {
 	position: absolute;
 	transform: translateX(-50%);
 	font-weight: 600;
@@ -22,7 +22,7 @@
 }
 
 :host ::slotted(div),
-:host label{
+:host label {
 	margin-bottom: .5em;
 	font-size: 1.5em;
 }

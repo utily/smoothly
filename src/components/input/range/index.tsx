@@ -17,6 +17,10 @@ export class SmoothlyInputRange {
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
+	inputHandler(e: Event): void {
+		e.target instanceof HTMLInputElement &&
+			(this.value = this.step !== "any" ? e.target.valueAsNumber : Math.round(e.target.valueAsNumber * 100) / 100)
+	}
 
 	render() {
 		return (
@@ -34,9 +38,7 @@ export class SmoothlyInputRange {
 					min={this.min}
 					max={this.max}
 					step={this.step}
-					onInput={e =>
-						e.target instanceof HTMLInputElement && (this.value = Math.trunc(e.target.valueAsNumber * 100) / 100)
-					}
+					onInput={e => this.inputHandler(e)}
 					value={this.value}
 				/>
 				<p class="min">{this.min}</p>

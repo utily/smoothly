@@ -19,7 +19,7 @@ export class SmoothlyInputDemo {
 			<Host>
 				<h2>Range</h2>
 				<smoothly-form>
-					<smoothly-input-range step={10}>
+					<smoothly-input-range step={1}>
 						<div slot="label">Select number in range</div>
 					</smoothly-input-range>
 				</smoothly-form>
