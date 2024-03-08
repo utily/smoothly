@@ -5,6 +5,7 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
 
@@ -13,7 +14,7 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Changeable, Clearable, Submittable {
-	private clearables = new Map<string, Clearable>()
+	private inputs = new Map<string, (Clearable & Input) | Input>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
@@ -45,29 +46,25 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.notice = undefined
-		this.smoothlyFormInput.emit(
-			(this.value = Object.entries(event.detail).reduce(
-				(r, [name, value]) => Data.set(r, name.split("."), value),
-				this.value
-			))
-		)
-		if (Clearable.is(event.target)) {
-			const clearable = event.target
-			Object.keys(event.detail).forEach(key => this.clearables.set(key, clearable))
-		}
+		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
 	}
 	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
 		this.processing = true
-		this.submit()
+		await this.submit()
 		this.processing = false
 	}
 	@Listen("smoothlyInputLoad")
-	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+		event.stopPropagation()
 		event.detail(this)
+		if (Input.is(event.target)) {
+			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
+			this.inputs.set(event.target.name, event.target)
+		}
 	}
 	@Method()
-	async submit(): Promise<void> {
+	async submit(): Promise<void> { // TODO: Tove use Notice.execute
 		this.smoothlyFormSubmit.emit(this.value)
 		if (this.action) {
 			const response = await http.fetch(
@@ -76,7 +73,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 					: { url: `${this.action}?${http.Search.stringify(this.value)}` }
 			)
 			if (response.status >= 200 && response.status < 300) {
-				this.notice = Notice.succeeded("Form sucessfully submitted.")
+				this.notice = Notice.succeeded("Form successfully submitted.")
 				await this.clear()
 			} else
 				this.notice = Notice.failed("Failed to submit form.")
@@ -84,7 +81,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		new Set(this.clearables.values()).forEach(clearable => clearable.clear())
+		this.inputs.forEach(input => Clearable.is(input) && input.clear())
 	}
 	render() {
 		return (

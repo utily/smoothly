@@ -12,6 +12,9 @@ export namespace Data {
 		}
 	}
 	export function deepen(data: Record<string, Value>): Data {
-		return Object.entries(data).reduce((result, [name, value]) => set(result, name.split("."), value), {})
+		return merge({}, data)
+	}
+	export function merge(data: Data, changes: Record<string, any>): Data {
+		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
 	}
 }

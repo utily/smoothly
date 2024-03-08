@@ -1,11 +1,16 @@
 import { EventEmitter } from "@stencil/core"
-import { Color } from "../../model"
+import { Color, Data } from "../../model"
 import { Looks } from "./Looks"
 
 export interface Input {
+	value?: Data[string]
 	color?: Color
 	name: string
 	looks: Looks
-	smoothlyInput: EventEmitter<Record<number, any>>
-	smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color | undefined) => void>
+	smoothlyInput: EventEmitter<Data>
+}
+export namespace Input {
+	export function is(value: Input | any): value is Input {
+		return value && typeof value == "object" && typeof value.name == "string" // TODO: Tove add a more precise check using isly
+	}
 }

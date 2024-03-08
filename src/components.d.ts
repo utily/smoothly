@@ -1520,7 +1520,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSelected"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, unknown>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data1>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "showSelected"?: boolean;
         "type"?: "icon";
