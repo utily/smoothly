@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-input-range",
@@ -6,6 +6,7 @@ import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/c
 	shadow: true,
 })
 export class SmoothlyInputRange {
+	@State() isClicked = false
 	@Prop({ mutable: true }) value = 0
 	@Prop() min = 0
 	@Prop() max = 100
@@ -18,19 +19,22 @@ export class SmoothlyInputRange {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	inputHandler(e: Event): void {
+		this.isClicked = true
 		e.target instanceof HTMLInputElement &&
 			(this.value = this.step !== "any" ? e.target.valueAsNumber : Math.round(e.target.valueAsNumber * 100) / 100)
 	}
 
 	render() {
 		return (
-			<Host style={{ "--left-adjustment": `${(this.value / this.max) * 100}%` }}>
-				<slot name="label">
-					{typeof this.labelText === "string" && <label htmlFor={this.name}>{this.labelText}</label>}
-				</slot>
-				<div class="output-container">
-					<output htmlFor={this.name}>{this.value}</output>
-				</div>
+			<Host
+				class={{ "is-clicked": this.isClicked }}
+				style={{ "--left-adjustment": `${(this.value / this.max) * 100}%` }}>
+				<label htmlFor={this.name}>
+					<slot />
+				</label>
+				<output class={`output-left`} htmlFor={this.name}>
+					{this.value}
+				</output>
 				<input
 					name={this.name}
 					part="range"
@@ -41,8 +45,6 @@ export class SmoothlyInputRange {
 					onInput={e => this.inputHandler(e)}
 					value={this.value}
 				/>
-				<p class="min">{this.min}</p>
-				<p class="max">{this.max}</p>
 			</Host>
 		)
 	}

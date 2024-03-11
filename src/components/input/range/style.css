@@ -1,30 +1,47 @@
 :host {
 	display: flex;
 	position: relative;
-	flex-wrap: wrap;
 	width: 100%;
 	justify-content: space-between;
+	align-items: center;
 }
 
 :host .output-container {
 	width: 100%;
-	margin: 0 1.2em;
+	margin: 0 .6em;
 	position: relative;
 	height: 2em;
 }
 
-:host output {
+:host .output-top {
 	position: absolute;
 	transform: translateX(-50%);
 	font-weight: 600;
-	font-size: 1.2em;
 	left: var(--left-adjustment, 0);
 }
 
-:host ::slotted(div),
+:host .output-left {
+	min-width: 3em;
+	text-align: left;
+	padding: 1em;
+	visibility: hidden;
+	transition: visibility 400ms ease 100ms;
+}
+
+:host(.is-clicked) output {
+	visibility: visible;
+}
+
 :host label {
-	margin-bottom: .5em;
-	font-size: 1.5em;
+	position: absolute;
+	z-index: -1;
+	display: block;
+	transition: transform 200ms ease;
+}
+
+:host(:focus-within) > label,
+:host(.is-clicked) > label {
+	transform: scale(0.6) translate(-.5em,-1.5em)
 }
 
 /*--------------------Reset browserspecific CSS------------------ */
@@ -39,47 +56,37 @@ input[type=range] {
 /* WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 2em;
-  width: 2em;
-  border-radius: 50%;
+  height: 1.5em;
+  width: .8em;
+  border-radius: 20%;
   background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--smoothly-primary-contrast)) solid;
+	border: 1px #333 solid;
   cursor: pointer;
-  margin-top: .5em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  margin-top: -.5em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* Firefox */
 input[type=range]::-moz-range-thumb {
-  height: 2em;
-  width: 2em;
-  border-radius: 50%;
+  height: 1.5em;
+  width: .8em;
+  border-radius: 20%;
   background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--smoothly-primary-contrast)) solid;
+	border: 1px #333 solid;
   cursor: pointer;
 }
 
 /*--------------------SLIDER TRACK------------------ */
 input[type=range]::-webkit-slider-runnable-track {
-	padding: 0 .6em;
-  height: 100%;
+  height: .5em;
   cursor: pointer;
 	background-color: rgb(var(--smoothly-primary-tint));
   border-radius: 20px;
 }
 
 input[type=range]::-moz-range-track {
-  width: calc(100% + 1em);
-  height: 3em;
+  width: 100%;
+  height: .5em;
   cursor: pointer;
   background-color: rgb(var(--smoothly-primary-tint));
   border-radius: 20px;
-}
-
-.min, .max {
-	display: inline-block;
-	margin: 0.5em .8em;
-}
-
-.max {
-	text-align: right;
 }
