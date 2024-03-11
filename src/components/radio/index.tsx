@@ -10,11 +10,11 @@ export class SmoothlyRadio {
 	@Prop() value: string
 	@Prop({ mutable: true, reflect: true }) checked: boolean
 	@Prop() tab: number
-	@Event() smoothlySelected!: EventEmitter<{ name: string; value: string }>
+	@Event() smoothlySelect!: EventEmitter<{ name: string; value: string }>
 
 	protected async onInput(e: UIEvent): Promise<boolean> {
 		if (e.target && (e.target as HTMLInputElement).value && (this.checked = (e.target as HTMLInputElement).checked))
-			this.smoothlySelected.emit({ name: this.name, value: this.value })
+			this.smoothlySelect.emit({ name: this.name, value: this.value })
 		return true
 	}
 	render() {

@@ -48,7 +48,7 @@ export class InputDate implements Clearable, Input {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
-	@Listen("dateSet")
+	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<Date>) {
 		this.open = false
 		event.stopPropagation()

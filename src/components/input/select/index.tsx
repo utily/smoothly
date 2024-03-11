@@ -61,8 +61,8 @@ export class SmoothlyInputSelect implements Input {
 		event.stopPropagation()
 		this.opened = !this.opened
 	}
-	@Listen("itemSelected")
-	onItemSelected(event: Event) {
+	@Listen("smoothlyItemSelect")
+	onItemSelect(event: Event) {
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)

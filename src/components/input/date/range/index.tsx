@@ -53,15 +53,15 @@ export class InputDateRange implements Clearable, Input {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
-	@Listen("startChanged")
+	@Listen("smoothlyStartChange")
 	onStartChanged(event: CustomEvent<isoly.Date>) {
 		this.start = event.detail
 	}
-	@Listen("endChanged")
+	@Listen("smoothlyEndChange")
 	onEndChanged(event: CustomEvent<isoly.Date>) {
 		this.end = event.detail
 	}
-	@Listen("dateRangeSet")
+	@Listen("smoothlyDateRangeSet")
 	onDateRangeSet(event: CustomEvent<isoly.DateRange>) {
 		this.open = false
 		event.stopPropagation()

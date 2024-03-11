@@ -1289,8 +1289,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyBurger {
         "mediaQuery"?: string;
-        "onNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
-        "onVisibleStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        "onSmoothlyVisibleStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
         "visible"?: boolean;
     }
@@ -1527,7 +1527,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyItem {
         "marked"?: boolean;
-        "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
@@ -1591,7 +1591,7 @@ declare namespace LocalJSX {
     interface SmoothlyRadio {
         "checked"?: boolean;
         "name"?: string;
-        "onSmoothlySelected"?: (event: SmoothlyRadioCustomEvent<{ name: string; value: string }>) => void;
+        "onSmoothlySelect"?: (event: SmoothlyRadioCustomEvent<{ name: string; value: string }>) => void;
         "tab"?: number;
         "value"?: string;
     }
