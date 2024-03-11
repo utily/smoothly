@@ -1,9 +1,14 @@
 :host {
-	display: flex;
 	position: relative;
 	width: 100%;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	display: flex;
+	padding-top: .8em;
+}
+
+:host div {
+	position: relative;
 }
 
 :host .output-container {
@@ -21,27 +26,19 @@
 }
 
 :host .output-left {
-	min-width: 3em;
-	text-align: left;
-	padding: 1em;
-	visibility: hidden;
-	transition: visibility 400ms ease 100ms;
-}
-
-:host(.is-clicked) output {
-	visibility: visible;
+	min-width: 2em;
+	text-align: center;
+	padding: 0 1em;
 }
 
 :host label {
 	position: absolute;
-	z-index: -1;
 	display: block;
-	transition: transform 200ms ease;
-}
-
-:host(:focus-within) > label,
-:host(.is-clicked) > label {
-	transform: scale(0.6) translate(-.5em,-1.5em)
+	white-space: nowrap;
+	text-align: left;
+	top: -1.5em;
+	font-size: .7em;
+	left: .5em;
 }
 
 /*--------------------Reset browserspecific CSS------------------ */
@@ -49,7 +46,8 @@ input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
-	height: 3em;
+	height: 2.5em;
+	margin: 0;
 }
 
 /*--------------------THUMB------------------ */
@@ -71,7 +69,7 @@ input[type=range]::-moz-range-thumb {
   width: .8em;
   border-radius: 20%;
   background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px #333 solid;
+	border: 1px rgb(var(--text-color, var(--smoothly-color-contrast))) solid;
   cursor: pointer;
 }
 
