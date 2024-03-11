@@ -9,9 +9,9 @@ export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 
-	@Listen("selectionChanged")
-	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
-		console.log("selectionChanged", event.detail)
+	@Listen("smoothlyInput")
+	handleSelectionChanged(event: CustomEvent<Record<string, unknown>>) {
+		console.log("smoothlyInput", event.detail)
 	}
 
 	render() {
