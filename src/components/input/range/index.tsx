@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-input-range",
