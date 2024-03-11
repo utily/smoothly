@@ -9,10 +9,10 @@ import * as generate from "../../calendar/generate"
 })
 export class MonthSelector {
 	@Prop({ mutable: true }) value?: Date
-	@Event() valueChanged: EventEmitter<Date>
+	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Watch("value")
 	onValueChanged(next: Date) {
-		this.valueChanged.emit(next)
+		this.smoothlyValueChange.emit(next)
 	}
 	private adjustMonth(delta: number) {
 		const date = Date.parse(this.value ?? Date.now())
@@ -24,14 +24,14 @@ export class MonthSelector {
 			<div onClick={() => this.adjustMonth(-1)}>
 				<smoothly-icon name="caret-back-outline" size="small" />
 			</div>,
-			<smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			<smoothly-input-select onSmoothlySelect={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.years(this.value ?? Date.now()).map(year => (
 					<smoothly-item value={year.date} selected={year.selected}>
 						{year.name}
 					</smoothly-item>
 				))}
 			</smoothly-input-select>,
-			<smoothly-input-select onSelected={(e: CustomEvent) => (this.value = e.detail)}>
+			<smoothly-input-select onSmoothlySelect={(e: CustomEvent) => (this.value = e.detail)}>
 				{generate.months(this.value ?? Date.now()).map(month => (
 					<smoothly-item value={month.date} selected={month.selected}>
 						{month.name}

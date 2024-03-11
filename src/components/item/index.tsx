@@ -10,20 +10,20 @@ export class Item {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean
-	@Event() itemSelected: EventEmitter<void>
+	@Event() smoothlyItemSelect: EventEmitter<void>
 	@Watch("selected")
 	onSelectedChanged(value: boolean, old: boolean) {
 		if (value && !old)
-			this.itemSelected.emit()
+			this.smoothlyItemSelect.emit()
 	}
 	@Listen("click")
 	onClick() {
 		this.selected = true
-		this.itemSelected.emit()
+		this.smoothlyItemSelect.emit()
 	}
 	componentDidLoad() {
 		if (this.selected)
-			this.itemSelected.emit()
+			this.smoothlyItemSelect.emit()
 	}
 	@Method()
 	async filter(filter: string): Promise<boolean> {

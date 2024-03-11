@@ -24,7 +24,7 @@ export class InputDateRange implements Clearable, Input {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
-	@Event() valueChanged: EventEmitter<isoly.Date>
+	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -41,7 +41,7 @@ export class InputDateRange implements Clearable, Input {
 	}
 	@Watch("value")
 	onValue(next: isoly.Date) {
-		this.valueChanged.emit(next)
+		this.smoothlyValueChange.emit(next)
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
@@ -53,15 +53,15 @@ export class InputDateRange implements Clearable, Input {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
-	@Listen("startChanged")
+	@Listen("smoothlyStartChange")
 	onStartChanged(event: CustomEvent<isoly.Date>) {
 		this.start = event.detail
 	}
-	@Listen("endChanged")
+	@Listen("smoothlyEndChange")
 	onEndChanged(event: CustomEvent<isoly.Date>) {
 		this.end = event.detail
 	}
-	@Listen("dateRangeSet")
+	@Listen("smoothlyDateRangeSet")
 	onDateRangeSet(event: CustomEvent<isoly.DateRange>) {
 		this.open = false
 		event.stopPropagation()
@@ -98,7 +98,7 @@ export class InputDateRange implements Clearable, Input {
 						<smoothly-calendar
 							doubleInput={true}
 							value={this.value ?? isoly.Date.now()}
-							onValueChanged={event => {
+							onSmoothlyValueChange={event => {
 								this.value = event.detail
 								event.stopPropagation()
 							}}

@@ -21,7 +21,7 @@ export class InputDate implements Clearable, Input {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) disabled: boolean
-	@Event() valueChanged: EventEmitter<Date>
+	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -35,7 +35,7 @@ export class InputDate implements Clearable, Input {
 	}
 	@Watch("value")
 	onStart(next: Date) {
-		this.valueChanged.emit(next)
+		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
 	}
 	@Listen("smoothlyInput")
@@ -48,7 +48,7 @@ export class InputDate implements Clearable, Input {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
-	@Listen("dateSet")
+	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<Date>) {
 		this.open = false
 		event.stopPropagation()
@@ -76,7 +76,7 @@ export class InputDate implements Clearable, Input {
 							<smoothly-calendar
 								doubleInput={false}
 								value={this.value ?? Date.now()}
-								onValueChanged={event => {
+								onSmoothlyValueChange={event => {
 									this.value = event.detail
 									event.stopPropagation()
 								}}

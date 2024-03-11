@@ -22,7 +22,7 @@ export class SmoothlyInputSelect implements Input {
 	@State() missing = false
 	mainElement?: HTMLElement
 	@State() filter = ""
-	@Event() selected: EventEmitter<unknown>
+	@Event() smoothlySelect: EventEmitter<unknown>
 	@Event() smoothlyInput: EventEmitter<Record<string, unknown>>
 	aside?: HTMLElement
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -44,7 +44,7 @@ export class SmoothlyInputSelect implements Input {
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
 		if (old)
 			old.selected = false
-		this.selected.emit(value?.value)
+		this.smoothlySelect.emit(value?.value)
 		this.smoothlyInput.emit({ [this.name]: value?.value })
 	}
 	@Watch("filter")
@@ -61,8 +61,8 @@ export class SmoothlyInputSelect implements Input {
 		event.stopPropagation()
 		this.opened = !this.opened
 	}
-	@Listen("itemSelected")
-	onItemSelected(event: Event) {
+	@Listen("smoothlyItemSelect")
+	onItemSelect(event: Event) {
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)
