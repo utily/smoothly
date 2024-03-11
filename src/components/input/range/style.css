@@ -26,16 +26,17 @@
 }
 
 :host .output-left {
-	min-width: 2em;
+	display: block;
+	min-width: 3em;
 	text-align: center;
-	padding: 0 1em;
+	margin: 0 1em;
 }
 
 :host label {
 	position: absolute;
 	display: block;
 	white-space: nowrap;
-	text-align: left;
+	text-align: center;
 	top: -1.5em;
 	font-size: .7em;
 	left: .5em;
