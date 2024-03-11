@@ -6,7 +6,6 @@ import { Component, Event, EventEmitter, h, Host, Prop, State, Watch } from "@st
 	shadow: true,
 })
 export class SmoothlyInputRange {
-	@State() isClicked = false
 	@Prop({ mutable: true }) value = 0
 	@Prop() min = 0
 	@Prop() max = 100
@@ -19,7 +18,6 @@ export class SmoothlyInputRange {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	inputHandler(event: Event): void {
-		this.isClicked = true
 		event.target instanceof HTMLInputElement &&
 			(this.value =
 				this.step !== "any" ? event.target.valueAsNumber : Math.round(event.target.valueAsNumber * 100) / 100)
