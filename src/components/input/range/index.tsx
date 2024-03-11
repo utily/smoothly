@@ -27,9 +27,7 @@ export class SmoothlyInputRange {
 		return (
 			<Host style={{ "--left-adjustment": `${(this.value / this.max) * 100}%` }}>
 				<div>
-					<output class={`output-left`} htmlFor={this.name}>
-						{this.value}
-					</output>
+					<output htmlFor={this.name}>{this.value}</output>
 					<label htmlFor={this.name}>
 						<slot />
 					</label>

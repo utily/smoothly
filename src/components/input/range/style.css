@@ -11,21 +11,7 @@
 	position: relative;
 }
 
-:host .output-container {
-	width: 100%;
-	margin: 0 .6em;
-	position: relative;
-	height: 2em;
-}
-
-:host .output-top {
-	position: absolute;
-	transform: translateX(-50%);
-	font-weight: 600;
-	left: var(--left-adjustment, 0);
-}
-
-:host .output-left {
+:host output {
 	display: block;
 	min-width: 3em;
 	text-align: center;
@@ -48,7 +34,7 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
 	height: 2.5em;
-	margin: 0;
+	margin: 0 
 }
 
 /*--------------------THUMB------------------ */
