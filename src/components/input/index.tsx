@@ -215,8 +215,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
 		pasted = this.expiresAutocompleteFix(backend, pasted)
-		for (const letter of pasted)
-			this.processKey({ key: letter }, backend)
+		this.processPaste(pasted, backend)
 	}
 	onInput(event: InputEvent) {
 		if (event.inputType == "insertReplacementText") {
@@ -244,6 +243,12 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				? value.substring(0, 2) + value.substring(value.length - 2, value.length)
 				: value
 		return value
+	}
+	private processPaste(pasted: string, backend: HTMLInputElement) {
+		if (!this.readonly) {
+			const after = Action.paste(this.formatter, this.state, pasted)
+			this.updateBackend(after, backend)
+		}
 	}
 	private processKey(event: Action, backend: HTMLInputElement) {
 		if (!this.readonly) {
