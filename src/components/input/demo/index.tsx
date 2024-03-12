@@ -18,7 +18,7 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<h2>Range</h2>
-				<smoothly-form>
+				<smoothly-form looks="border">
 					<smoothly-input-range step={1} name="range">
 						Select
 					</smoothly-input-range>
@@ -113,6 +113,9 @@ export class SmoothlyInputDemo {
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>
+					<smoothly-input-range step={1} name="range">
+						Select and the label is so so long
+					</smoothly-input-range>
 					<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
 						Clear
 					</smoothly-input-clear>
