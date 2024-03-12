@@ -114,7 +114,7 @@ export class SmoothlyInputDemo {
 						</smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input-range step={1} name="range">
-						Select and the label is so so long
+						Select number in range
 					</smoothly-input-range>
 					<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
 						Clear

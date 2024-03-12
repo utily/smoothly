@@ -29,7 +29,6 @@ export class SmoothlyInputRange implements Input, Clearable {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	componentWillLoad() {
-		console.log(this.value)
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 	inputHandler(event: Event): void {
