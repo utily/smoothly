@@ -64,24 +64,44 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		}
 	}
 	@Method()
-	async submit(): Promise<void> { // TODO: Tove use Notice.execute
+	async submit(): Promise<void> {
 		this.smoothlyFormSubmit.emit(this.value)
-		if (this.action) {
-			const response = await http.fetch(
-				this.method == "POST"
-					? { method: "POST", url: this.action, body: this.value }
-					: { url: `${this.action}?${http.Search.stringify(this.value)}` }
+		this.notice = Notice.execute("Submitting form", async () => {
+			let result: [boolean, string] = [false, "No action available"]
+			const response = !this.action
+				? undefined
+				: await http
+						.fetch(
+							this.method == "POST"
+								? http.Request.create({
+										method: "POST",
+										url: this.action,
+										header: { contentType: "application/json" },
+										body: this.value,
+								  })
+								: { url: `${this.action}?${http.Search.stringify(this.value)}` }
+						)
+						.catch(() => undefined)
+			console.log(
+				"!response || response?.status < 200 || response.status >= 300: ",
+				!response || response?.status < 200 || response.status >= 300
 			)
-			if (response.status >= 200 && response.status < 300) {
-				this.notice = Notice.succeeded("Form successfully submitted.")
+			if (!response || response?.status < 200 || response.status >= 300)
+				result = [false, "Failed to submit form."]
+			else {
+				result = [true, "Form successfully submitted."]
 				await this.clear()
-			} else
-				this.notice = Notice.failed("Failed to submit form.")
-		}
+			}
+			return result
+		})
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.inputs.forEach(input => Clearable.is(input) && input.clear())
+		console.log(this.inputs)
+		this.inputs.forEach(input => {
+			console.log("clear")
+			Clearable.is(input) && input.clear()
+		})
 	}
 	render() {
 		return (
