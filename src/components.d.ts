@@ -269,7 +269,6 @@ export namespace Components {
     }
     interface SmoothlyInputRange {
         "clear": () => Promise<void>;
-        "color"?: Color;
         "labelText"?: string;
         "looks": Looks;
         "max": number;
@@ -1508,7 +1507,6 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
-        "color"?: Color;
         "labelText"?: string;
         "looks"?: Looks;
         "max"?: number;

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
@@ -9,9 +9,8 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRange implements Input, Clearable {
+export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop({ mutable: true, reflect: true }) value: number | undefined = undefined
-	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() min = 0
 	@Prop() max = 100
@@ -20,6 +19,9 @@ export class SmoothlyInputRange implements Input, Clearable {
 	@Prop() step: number | "any" = "any"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	componentWillLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
@@ -27,9 +29,6 @@ export class SmoothlyInputRange implements Input, Clearable {
 	@Watch("value")
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
-	}
-	componentWillLoad() {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 	inputHandler(event: Event): void {
 		event.target instanceof HTMLInputElement &&
@@ -47,7 +46,6 @@ export class SmoothlyInputRange implements Input, Clearable {
 					</label>
 				</div>
 				<input
-					color={this.color}
 					name={this.name}
 					part="range"
 					type="range"
