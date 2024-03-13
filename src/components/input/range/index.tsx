@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
@@ -19,7 +19,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop() step: number | "any" = "any"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	componentWillLoad() {
+	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 	}
 	@Method()
@@ -36,7 +36,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 				this.step !== "any" ? event.target.valueAsNumber : Math.round(event.target.valueAsNumber * 100) / 100)
 	}
 
-	render() {
+	render(): VNode | VNode[] {
 		return (
 			<Host style={{ "--left-adjustment": `${this.value ? (this.value / this.max) * 100 : 0}%` }}>
 				<div>
