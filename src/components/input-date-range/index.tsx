@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
 import { Date, DateRange } from "isoly"
 
 @Component({
@@ -40,7 +40,8 @@ export class InputDateRange {
 		event.stopPropagation()
 		DateRange.is(event.detail) && this.dateRangeSelected.emit(event.detail)
 	}
-	clearDateRange() {
+	@Method()
+	async clear() {
 		this.start = undefined
 		this.end = undefined
 		this.value = undefined
@@ -68,7 +69,7 @@ export class InputDateRange {
 					</smoothly-input>
 				</div>
 				{this.clearable && (
-					<smoothly-icon name="close-circle" size="tiny" onClick={this.clearDateRange.bind(this)}></smoothly-icon>
+					<smoothly-icon name="close-circle" size="small" onClick={this.clear.bind(this)}></smoothly-icon>
 				)}
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
