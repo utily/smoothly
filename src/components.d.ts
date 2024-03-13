@@ -268,12 +268,14 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputRange {
+        "clear": () => Promise<void>;
         "labelText"?: string;
+        "looks": Looks;
         "max": number;
         "min": number;
         "name": string;
         "step": number | "any";
-        "value": number;
+        "value": number | undefined;
     }
     interface SmoothlyInputSelect {
         "color"?: Color;
@@ -1506,12 +1508,14 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputRange {
         "labelText"?: string;
+        "looks"?: Looks;
         "max"?: number;
         "min"?: number;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "step"?: number | "any";
-        "value"?: number;
+        "value"?: number | undefined;
     }
     interface SmoothlyInputSelect {
         "color"?: Color;
