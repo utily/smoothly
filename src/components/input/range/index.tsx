@@ -17,7 +17,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop() name: string
 	@Prop() labelText?: string
 	@Prop() step: number | "any" = "any"
-	@Prop() outputToRight = false
+	@Prop() outputSide: "right" | "left" = "left"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	componentWillLoad(): void | Promise<void> {
@@ -39,7 +39,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host class={{ "output-to-right": this.outputToRight }}>
+			<Host class={this.outputSide}>
 				<label htmlFor={this.name}>
 					<slot />
 				</label>

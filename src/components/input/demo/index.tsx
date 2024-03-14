@@ -19,7 +19,7 @@ export class SmoothlyInputDemo {
 			<Host>
 				<h2>Range</h2>
 				<smoothly-form looks="border">
-					<smoothly-input-range step={1} name="range" outputToRight>
+					<smoothly-input-range step={1} name="range" outputSide="right">
 						Select
 					</smoothly-input-range>
 				</smoothly-form>
