@@ -276,6 +276,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		return (
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				changed={this.changed}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
 				<div>
