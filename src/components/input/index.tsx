@@ -37,7 +37,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
-	@Prop({ mutable: true, reflect: true }) changed = false
+	@State() changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
 
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
@@ -100,12 +100,15 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	componentWillLoad() {
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
+		this.lastValue = this.value
 		const start = value.length
 		this.state = this.newState({
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.changed = Boolean(this.value)
+		this.listener.changed?.(this)
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -273,6 +276,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		return (
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				changed={this.changed}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
 				<div>
