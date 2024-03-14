@@ -274,7 +274,7 @@ export namespace Components {
         "max": number;
         "min": number;
         "name": string;
-        "outputOnTop": boolean;
+        "outputToRight": boolean;
         "step": number | "any";
         "value": number | undefined;
     }
@@ -1515,7 +1515,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "outputOnTop"?: boolean;
+        "outputToRight"?: boolean;
         "step"?: number | "any";
         "value"?: number | undefined;
     }
