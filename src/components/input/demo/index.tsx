@@ -100,8 +100,10 @@ export class SmoothlyInputDemo {
 
 				<h4>Clear</h4>
 				<smoothly-form looks="border">
-					<smoothly-input name="First Name">First name</smoothly-input>
-					<smoothly-input name="Last name">
+					<smoothly-input name="First Name" value="John">
+						First name
+					</smoothly-input>
+					<smoothly-input name="Last name" value="Doe">
 						Last name
 						<smoothly-input-clear slot="end">
 							<smoothly-icon name="close" />
