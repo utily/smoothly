@@ -1,28 +1,41 @@
 @import "../shared.css";
 
+* {
+	box-sizing: border-box;
+}
+
 :host {
 	position: relative;
 	width: 100%;
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	padding: .6em 1em 0 1em;
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)))
+	padding: 0 .6em ;
+	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
+	gap: 1em;
 }
 
-:host div {
+:host  > div {
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding-top: .8em;
+}
+
+:host[outputside="right"] > div {
+	padding-top: 0;
+	flex-direction: row-reverse;
+}
+
+:host output {
+	min-width: 3em;
+	text-align: center;
 }
 
 :host(:not([value])) output {
 	opacity: .6;
-}
-
-:host output {
-	display: block;
-	min-width: 3em;
-	text-align: center;
-	margin-right: 1em;
 }
 
 :host label {
@@ -30,48 +43,56 @@
 	display: block;
 	white-space: nowrap;
 	text-align: center;
-	top: -1.5em;
+	top: .5em;
+	left: .5em;
 	font-size: .6em;
-	left: -1em;
 }
+
+:host[outputside="right"] label {
+	position: relative;
+	font-size: inherit;
+	left: 0;
+	top: 0
+} 
 
 /*--------------------Reset browserspecific CSS------------------ */
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
-	height: 2.5em;
-	margin: 0 
+	height: 1.5em;
+}
+
+:host[outputside="right"] input[type=range] {
+	height: 2.5em
 }
 
 /*--------------------THUMB------------------ */
 /* WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 1.3em;
-  width: .6em;
+  height: 1.2em;
+  width: .7em;
   border-radius: 20%;
   background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px #333 solid;
+	border: 1px rgb(var(--text-color, var(--smoothly-color-contrast))) solid;
   cursor: pointer;
-  margin-top: -.5em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  margin-top: -.45em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* Firefox */
 input[type=range]::-moz-range-thumb {
-  height: 1.3em;
-  width: .6em;
+  height: 1.2em;
+  width: .7em;
   border-radius: 20%;
   background-color: rgb(var(--smoothly-primary-contrast));
 	border: 1px rgb(var(--text-color, var(--smoothly-color-contrast))) solid;
   cursor: pointer;
 }
 
-
-
 /*--------------------SLIDER TRACK------------------ */
 input[type=range]::-webkit-slider-runnable-track {
-  height: .5em;
+  height: .3em;
   cursor: pointer;
 	background-color: rgb(var(--smoothly-primary-color));
   border-radius: 20px;
@@ -79,7 +100,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 input[type=range]::-moz-range-track {
   width: 100%;
-  height: .5em;
+  height: .3em;
   cursor: pointer;
   background-color: rgb(var(--smoothly-primary-color));
   border-radius: 20px;
