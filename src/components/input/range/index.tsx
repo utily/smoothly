@@ -17,6 +17,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop() name: string
 	@Prop() labelText?: string
 	@Prop() step: number | "any" = "any"
+	@Prop() outputOnTop = false
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	componentWillLoad(): void | Promise<void> {
@@ -38,23 +39,27 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--left-adjustment": `${this.value ? (this.value / this.max) * 100 : 0}%` }}>
-				<div>
-					<output htmlFor={this.name}>{this.value ?? "—"}</output>
-					<label htmlFor={this.name}>
-						<slot />
-					</label>
+			<Host
+				style={{ "--left-adjustment": `${this.value ? (this.value / this.max) * 100 : 0}%` }}
+				class={{ "output-on-top": this.outputOnTop }}>
+				<label htmlFor={this.name}>
+					<slot />
+				</label>
+				<div class="input-output-container">
+					<div class="output-container">
+						<output htmlFor={this.name}>{this.value ?? "—"}</output>
+					</div>
+					<input
+						name={this.name}
+						part="range"
+						type="range"
+						min={this.min}
+						max={this.max}
+						step={this.step}
+						onInput={event => this.inputHandler(event)}
+						value={this.value ?? this.min}
+					/>
 				</div>
-				<input
-					name={this.name}
-					part="range"
-					type="range"
-					min={this.min}
-					max={this.max}
-					step={this.step}
-					onInput={event => this.inputHandler(event)}
-					value={this.value ?? this.min}
-				/>
 			</Host>
 		)
 	}

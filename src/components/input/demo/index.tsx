@@ -113,7 +113,7 @@ export class SmoothlyInputDemo {
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>
-					<smoothly-input-range step={1} name="range">
+					<smoothly-input-range step={1} name="range" outputOnTop>
 						Select number in range
 					</smoothly-input-range>
 					<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">

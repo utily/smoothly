@@ -1,28 +1,60 @@
 @import "../shared.css";
 
+* {
+	box-sizing: border-box;
+}
+
 :host {
 	position: relative;
 	width: 100%;
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	padding: .6em 1em 0 1em;
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)))
+	padding: 0 .6em ;
+	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
+	gap: 1em;
 }
 
-:host div {
+:host  > div {
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+:host.output-on-top > div {
+	flex-direction: column;
 }
 
 :host(:not([value])) output {
 	opacity: .6;
 }
 
-:host output {
+:host .output-container {
+	width: 100%;
+	margin: 0 .6em;
+	position: relative;
+	height: .6em;
+	width: 3em;
+}
+
+:host.output-on-top .output-container {
+	width: calc(100% - .7em);
+}
+
+:host .output-container output {
 	display: block;
 	min-width: 3em;
 	text-align: center;
-	margin-right: 1em;
+}
+
+:host.output-on-top .output-container output {
+	position: absolute;
+	transform: translateX(-50%);
+	left: var(--left-adjustment, 0);
+	top: 0;
+	font-size: .8em ;
 }
 
 :host label {
@@ -30,10 +62,16 @@
 	display: block;
 	white-space: nowrap;
 	text-align: center;
-	top: -1.5em;
+	top: .5em;
+	left: .5em;
 	font-size: .6em;
-	left: -1em;
 }
+
+:host.output-on-top label {
+	position: relative;
+	font-size: inherit;
+	left: 0;
+} 
 
 /*--------------------Reset browserspecific CSS------------------ */
 input[type=range] {
@@ -41,7 +79,12 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
 	height: 2.5em;
-	margin: 0 
+	padding-top: .8em ;
+}
+
+:host.output-on-top input[type=range] {
+	padding: .8em 0 .4em 0;
+	height: 2em
 }
 
 /*--------------------THUMB------------------ */
