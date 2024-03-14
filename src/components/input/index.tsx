@@ -72,6 +72,7 @@ export class SmoothlyInput {
 	}
 	componentWillLoad() {
 		const value = this.formatter.toString(this.value) || ""
+		this.lastValue = this.value
 		const start = value.length
 		this.state = this.newState({
 			value,
