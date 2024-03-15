@@ -1,4 +1,5 @@
 import { EventEmitter } from "@stencil/core"
+import { isly } from "isly"
 import { Color, Data } from "../../model"
 import { Looks } from "./Looks"
 
@@ -8,11 +9,17 @@ export interface Input {
 	name: string
 	looks: Looks
 	smoothlyInput: EventEmitter<Data>
-	// TODO: Tove add smoothlyInputForm
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 }
 export namespace Input {
-	export function is(value: Input | any): value is Input {
-		return value && typeof value == "object" && typeof value.name == "string" // TODO: Tove add a more precise check using isly
-	}
+	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })
+	export const type = isly.object<Input>({
+		color: Color.type,
+		name: isly.string(),
+		looks: Looks.type,
+		value: Data.type,
+		smoothlyInput: EventEmitter,
+		smoothlyInputForm: EventEmitter,
+	})
+	export const is = type.is
 }

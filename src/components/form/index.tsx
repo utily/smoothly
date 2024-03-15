@@ -82,10 +82,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 								: { url: `${this.action}?${http.Search.stringify(this.value)}` }
 						)
 						.catch(() => undefined)
-			console.log(
-				"!response || response?.status < 200 || response.status >= 300: ",
-				!response || response?.status < 200 || response.status >= 300
-			)
 			if (!response || response?.status < 200 || response.status >= 300)
 				result = [false, "Failed to submit form."]
 			else {

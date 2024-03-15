@@ -1,7 +1,24 @@
+import { isly } from "isly"
+
 type Value = string | number | boolean | Blob | undefined
 export type Data = { [name: string]: Data | Value }
 
 export namespace Data {
+	export const valueType = isly.union<Value, string, number, boolean, Blob, undefined>(
+		isly.string(),
+		isly.number(),
+		isly.boolean(),
+		isly.fromIs("Blob", value => value instanceof Blob),
+		isly.undefined()
+	)
+	export const type: isly.Type<Data> = isly.record<Data>(
+		isly.string(),
+		isly.union(
+			isly.lazy(() => type, "Data"),
+			valueType
+		)
+	)
+
 	export function set(data: Data, [head, ...tail]: string[], value: Value): Data {
 		const current = data[head ?? ""]
 		return {
