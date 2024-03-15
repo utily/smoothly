@@ -8,18 +8,18 @@ export interface Input {
 	color?: Color
 	name: string
 	looks: Looks
-	smoothlyInput: EventEmitter<Data>
+	smoothlyInput?: EventEmitter<Data> // These are not found on the object.
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 }
 export namespace Input {
 	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })
 	export const type = isly.object<Input>({
-		color: Color.type,
+		value: Data.type.optional(),
+		color: Color.type.optional(),
 		name: isly.string(),
 		looks: Looks.type,
-		value: Data.type,
-		smoothlyInput: EventEmitter,
-		smoothlyInputForm: EventEmitter,
+		smoothlyInput: EventEmitter.optional(),
+		smoothlyInputForm: EventEmitter.optional(),
 	})
 	export const is = type.is
 }

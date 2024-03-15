@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
 import { Color } from "../../model"
 import { Data } from "../../model/Data"
@@ -25,7 +25,8 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	@Prop() prevent = true
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
-	@State() notice?: Notice
+	@Event() notice: EventEmitter<Notice>
+
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
 
@@ -45,7 +46,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		this.notice = undefined
 		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
 	}
 	@Listen("smoothlySubmit")
@@ -66,43 +66,43 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	@Method()
 	async submit(): Promise<void> {
 		this.smoothlyFormSubmit.emit(this.value)
-		this.notice = Notice.execute("Submitting form", async () => {
-			let result: [boolean, string] = [false, "No action available"]
-			const response = !this.action
-				? undefined
-				: await http
-						.fetch(
-							this.method == "POST"
-								? http.Request.create({
-										method: "POST",
-										url: this.action,
-										header: { contentType: "application/json" },
-										body: this.value,
-								  })
-								: { url: `${this.action}?${http.Search.stringify(this.value)}` }
-						)
-						.catch(() => undefined)
-			if (!response || response?.status < 200 || response.status >= 300)
-				result = [false, "Failed to submit form."]
-			else {
-				result = [true, "Form successfully submitted."]
-				await this.clear()
-			}
-			return result
-		})
+		this.notice?.emit(
+			Notice.execute("Submitting form", async () => {
+				let result: [boolean, string] = [false, "No action available"]
+				const response = !this.action
+					? undefined
+					: await http
+							.fetch(
+								this.method == "POST"
+									? http.Request.create({
+											method: "POST",
+											url: this.action,
+											header: { contentType: "application/json" },
+											body: this.value,
+									  })
+									: { url: `${this.action}?${http.Search.stringify(this.value)}` }
+							)
+							.catch(() => undefined)
+				if (!response || response?.status < 200 || response.status >= 300)
+					result = [false, "Failed to submit form."]
+				else {
+					result = [true, "Form successfully submitted."]
+					this.clear()
+				}
+				return result
+			})
+		)
 	}
 	@Method()
 	async clear(): Promise<void> {
-		console.log(this.inputs)
 		this.inputs.forEach(input => {
-			console.log("clear")
 			Clearable.is(input) && input.clear()
 		})
 	}
 	render() {
 		return (
 			<Host>
-				{this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []}
+				{/* {this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []} */}
 				<smoothly-spinner active={this.processing}></smoothly-spinner>
 				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>

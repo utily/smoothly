@@ -15,6 +15,7 @@ import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Data } from "./model/Data";
 import { Looks } from "./components/input/Looks";
+import { Notice as Notice1 } from "./model/Notice";
 import { GoogleFont } from "./model/GoogleFont";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
@@ -1396,6 +1397,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
+        "onNotice"?: (event: SmoothlyFormCustomEvent<Notice1>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "prevent"?: boolean;
@@ -1434,6 +1436,7 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
