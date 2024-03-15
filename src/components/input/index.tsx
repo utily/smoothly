@@ -154,7 +154,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	async setSelectionRange(start: number, end: number, direction?: Direction) {
 		this.state = this.newState({
 			...this.state,
-			selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
+			selection: { start, end, direction: direction ?? this.state.selection.direction },
 		})
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
@@ -169,7 +169,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		this.initialValue = this.value
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)
-			this.updateBackend(after, event.target as HTMLInputElement)
+			this.updateBackend(after, event.target as HTMLInputElement, false)
 	}
 	onClick(event: MouseEvent) {
 		const backend = event.target as HTMLInputElement
@@ -177,9 +177,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			...this.state,
 			value: backend.value,
 			selection: {
-				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
-				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
-				direction: backend.selectionDirection ? backend.selectionDirection : "none",
+				start: backend.selectionStart ?? backend.value.length,
+				end: backend.selectionEnd ?? backend.value.length,
+				direction: backend.selectionDirection ?? "none",
 			},
 		}
 		const after = this.newState({ ...this.state })
@@ -192,9 +192,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				...this.state,
 				value: backend.value,
 				selection: {
-					start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
-					end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
-					direction: backend.selectionDirection ? backend.selectionDirection : "none",
+					start: backend.selectionStart ?? backend.value.length,
+					end: backend.selectionEnd ?? backend.value.length,
+					direction: backend.selectionDirection ?? "none",
 				},
 			}
 			if (
@@ -259,14 +259,16 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			this.updateBackend(after, backend)
 		}
 	}
-	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement) {
+	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement, setSelection = true) {
 		if (after.value != backend.value)
 			backend.value = after.value
-		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
-			backend.selectionStart = after.selection.start
-		if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
-			backend.selectionEnd = after.selection.end
-		backend.selectionDirection = after.selection.direction ? after.selection.direction : backend.selectionDirection
+		if (setSelection) {
+			if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
+				backend.selectionStart = after.selection.start
+			if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
+				backend.selectionEnd = after.selection.end
+			backend.selectionDirection = after.selection.direction ?? backend.selectionDirection
+		}
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
 			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
