@@ -106,6 +106,9 @@ export class SmoothlyAppDemo {
 					<p>hello world!</p>
 				</smoothly-app-room>
 				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
+				<smoothly-app-room path="/next" label="Next">
+					<smoothly-next-demo></smoothly-next-demo>
+				</smoothly-app-room>
 			</smoothly-app>
 		)
 	}

@@ -298,6 +298,24 @@ export namespace Components {
         "hue": number;
         "shape": "rectangle" | "rounded";
     }
+    interface SmoothlyNextDemo {
+    }
+    interface SmoothlyNextTable {
+        "columns": number;
+    }
+    interface SmoothlyNextTableBody {
+    }
+    interface SmoothlyNextTableCell {
+    }
+    interface SmoothlyNextTableExpandableCell {
+    }
+    interface SmoothlyNextTableExpandableRow {
+        "open": boolean;
+    }
+    interface SmoothlyNextTableHead {
+    }
+    interface SmoothlyNextTableRow {
+    }
     interface SmoothlyNotification {
         "closable": boolean;
         "icon": boolean;
@@ -891,6 +909,54 @@ declare global {
         prototype: HTMLSmoothlyLabelElement;
         new (): HTMLSmoothlyLabelElement;
     };
+    interface HTMLSmoothlyNextDemoElement extends Components.SmoothlyNextDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextDemoElement: {
+        prototype: HTMLSmoothlyNextDemoElement;
+        new (): HTMLSmoothlyNextDemoElement;
+    };
+    interface HTMLSmoothlyNextTableElement extends Components.SmoothlyNextTable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableElement: {
+        prototype: HTMLSmoothlyNextTableElement;
+        new (): HTMLSmoothlyNextTableElement;
+    };
+    interface HTMLSmoothlyNextTableBodyElement extends Components.SmoothlyNextTableBody, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableBodyElement: {
+        prototype: HTMLSmoothlyNextTableBodyElement;
+        new (): HTMLSmoothlyNextTableBodyElement;
+    };
+    interface HTMLSmoothlyNextTableCellElement extends Components.SmoothlyNextTableCell, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableCellElement: {
+        prototype: HTMLSmoothlyNextTableCellElement;
+        new (): HTMLSmoothlyNextTableCellElement;
+    };
+    interface HTMLSmoothlyNextTableExpandableCellElement extends Components.SmoothlyNextTableExpandableCell, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableExpandableCellElement: {
+        prototype: HTMLSmoothlyNextTableExpandableCellElement;
+        new (): HTMLSmoothlyNextTableExpandableCellElement;
+    };
+    interface HTMLSmoothlyNextTableExpandableRowElement extends Components.SmoothlyNextTableExpandableRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableExpandableRowElement: {
+        prototype: HTMLSmoothlyNextTableExpandableRowElement;
+        new (): HTMLSmoothlyNextTableExpandableRowElement;
+    };
+    interface HTMLSmoothlyNextTableHeadElement extends Components.SmoothlyNextTableHead, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableHeadElement: {
+        prototype: HTMLSmoothlyNextTableHeadElement;
+        new (): HTMLSmoothlyNextTableHeadElement;
+    };
+    interface HTMLSmoothlyNextTableRowElement extends Components.SmoothlyNextTableRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableRowElement: {
+        prototype: HTMLSmoothlyNextTableRowElement;
+        new (): HTMLSmoothlyNextTableRowElement;
+    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -1196,6 +1262,14 @@ declare global {
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-label": HTMLSmoothlyLabelElement;
+        "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
+        "smoothly-next-table": HTMLSmoothlyNextTableElement;
+        "smoothly-next-table-body": HTMLSmoothlyNextTableBodyElement;
+        "smoothly-next-table-cell": HTMLSmoothlyNextTableCellElement;
+        "smoothly-next-table-expandable-cell": HTMLSmoothlyNextTableExpandableCellElement;
+        "smoothly-next-table-expandable-row": HTMLSmoothlyNextTableExpandableRowElement;
+        "smoothly-next-table-head": HTMLSmoothlyNextTableHeadElement;
+        "smoothly-next-table-row": HTMLSmoothlyNextTableRowElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -1540,6 +1614,24 @@ declare namespace LocalJSX {
         "hue"?: number;
         "shape"?: "rectangle" | "rounded";
     }
+    interface SmoothlyNextDemo {
+    }
+    interface SmoothlyNextTable {
+        "columns"?: number;
+    }
+    interface SmoothlyNextTableBody {
+    }
+    interface SmoothlyNextTableCell {
+    }
+    interface SmoothlyNextTableExpandableCell {
+    }
+    interface SmoothlyNextTableExpandableRow {
+        "open"?: boolean;
+    }
+    interface SmoothlyNextTableHead {
+    }
+    interface SmoothlyNextTableRow {
+    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -1807,6 +1899,14 @@ declare namespace LocalJSX {
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
         "smoothly-label": SmoothlyLabel;
+        "smoothly-next-demo": SmoothlyNextDemo;
+        "smoothly-next-table": SmoothlyNextTable;
+        "smoothly-next-table-body": SmoothlyNextTableBody;
+        "smoothly-next-table-cell": SmoothlyNextTableCell;
+        "smoothly-next-table-expandable-cell": SmoothlyNextTableExpandableCell;
+        "smoothly-next-table-expandable-row": SmoothlyNextTableExpandableRow;
+        "smoothly-next-table-head": SmoothlyNextTableHead;
+        "smoothly-next-table-row": SmoothlyNextTableRow;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -1900,6 +2000,14 @@ declare module "@stencil/core" {
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
+            "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
+            "smoothly-next-table": LocalJSX.SmoothlyNextTable & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableElement>;
+            "smoothly-next-table-body": LocalJSX.SmoothlyNextTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableBodyElement>;
+            "smoothly-next-table-cell": LocalJSX.SmoothlyNextTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableCellElement>;
+            "smoothly-next-table-expandable-cell": LocalJSX.SmoothlyNextTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableCellElement>;
+            "smoothly-next-table-expandable-row": LocalJSX.SmoothlyNextTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableRowElement>;
+            "smoothly-next-table-head": LocalJSX.SmoothlyNextTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableHeadElement>;
+            "smoothly-next-table-row": LocalJSX.SmoothlyNextTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
