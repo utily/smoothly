@@ -15,10 +15,10 @@ export class SmoothlyNextTableExpandableRow {
 	render(): VNode | VNode[] {
 		return (
 			<Host onClick={() => this.clickHandler()}>
-				<slot name="cell"></slot>
-				<smoothly-next-table-cell>
-					<slot name={"detail"} />
-				</smoothly-next-table-cell>
+				<slot></slot>
+				<div>
+					<slot name="detail" />
+				</div>
 			</Host>
 		)
 	}

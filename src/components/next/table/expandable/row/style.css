@@ -7,9 +7,9 @@
 :host[open] {
 	grid-template-rows: 1fr 1fr;
 }
-/* missing these */
-:host smoothly-next-table-cell:last-child {
+:host div:last-child {
 	grid-column: 1 / -1; 
   overflow: hidden;
+	outline: 2px solid pink;
 }
 
