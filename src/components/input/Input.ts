@@ -3,12 +3,24 @@ import { isly } from "isly"
 import { Color, Data } from "../../model"
 import { Looks } from "./Looks"
 
-export interface Input {
+export interface InputElement {
 	value?: Data[string]
 	color?: Color
 	name: string
 	looks: Looks
-	smoothlyInput?: EventEmitter<Data> // These are not found on the object.
+}
+export namespace InputElement {
+	export const type = isly.object<InputElement>({
+		value: Data.type.optional(),
+		color: Color.type.optional(),
+		name: isly.string(),
+		looks: Looks.type,
+	})
+	export const is = type.is
+}
+
+export interface Input extends InputElement {
+	smoothlyInput: EventEmitter<Data>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 }
 export namespace Input {
@@ -18,7 +30,7 @@ export namespace Input {
 		color: Color.type.optional(),
 		name: isly.string(),
 		looks: Looks.type,
-		smoothlyInput: EventEmitter.optional(),
+		smoothlyInput: EventEmitter,
 		smoothlyInputForm: EventEmitter.optional(),
 	})
 	export const is = type.is

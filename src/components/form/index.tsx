@@ -5,7 +5,7 @@ import { Data } from "../../model/Data"
 import { Notice } from "../../model/Notice"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
-import { Input } from "../input/Input"
+import { Input, InputElement } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
 
@@ -14,7 +14,7 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Changeable, Clearable, Submittable {
-	private inputs = new Map<string, (Clearable & Input) | Input>()
+	private inputs = new Map<string, (Clearable & Input) | Input | InputElement>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
@@ -58,7 +58,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.stopPropagation()
 		event.detail(this)
-		if (Input.is(event.target)) {
+		if (InputElement.is(event.target)) {
 			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
 			this.inputs.set(event.target.name, event.target)
 		}
@@ -102,7 +102,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	render() {
 		return (
 			<Host>
-				{/* {this.notice ? <smoothly-notification notice={this.notice}></smoothly-notification> : []} */}
 				<smoothly-spinner active={this.processing}></smoothly-spinner>
 				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>
