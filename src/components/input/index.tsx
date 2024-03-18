@@ -110,8 +110,8 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		this.smoothlyInputLoad.emit(() => {
-        return
-    })
+			return
+		})
 		this.changed = Boolean(this.value)
 		this.listener.changed?.(this)
 	}

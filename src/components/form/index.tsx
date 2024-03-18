@@ -55,7 +55,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		this.processing = false
 	}
 	@Listen("smoothlyInputLoad")
-	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+	async smoothlyInputLoadHandler(event: CustomEvent): Promise<void> {
 		event.stopPropagation()
 		event.detail(this)
 		if (InputElement.is(event.target)) {
