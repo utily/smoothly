@@ -12,7 +12,7 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Changeable, Clearable, Submittable {
-	private inputs = new Map<string, (Clearable & Input) | Input | Input.Element>()
+	private inputs = new Map<string, Input.Element>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
@@ -66,7 +66,6 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		this.smoothlyFormSubmit.emit(this.value)
 		this.notice?.emit(
 			Notice.execute("Submitting form", async () => {
-				let result: [boolean, string] = [false, "No action available"]
 				const response = !this.action
 					? undefined
 					: await http
@@ -81,6 +80,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 									: { url: `${this.action}?${http.Search.stringify(this.value)}` }
 							)
 							.catch(() => undefined)
+				let result: [boolean, string]
 				if (!response || response?.status < 200 || response.status >= 300)
 					result = [false, "Failed to submit form."]
 				else {
