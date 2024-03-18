@@ -224,7 +224,10 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
-        "value": string;
+        "clear": () => Promise<void>;
+        "looks": Looks;
+        "name": string;
+        "value": string | undefined;
     }
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
@@ -541,6 +544,10 @@ export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputClearCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputClearElement;
+}
+export interface SmoothlyInputColorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputColorElement;
 }
 export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1468,7 +1475,11 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
-        "value"?: string;
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "value"?: string | undefined;
     }
     interface SmoothlyInputDate {
         "color"?: Color;

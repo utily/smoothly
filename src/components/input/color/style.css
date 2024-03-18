@@ -3,7 +3,7 @@
 }
 
 :host .color-sample {
-	height: 3em;
-	width: 3em;
+	height: 2em;
+	width: 5em;
 	background-color: var(--value)
 }
