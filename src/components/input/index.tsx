@@ -36,6 +36,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@State() formatter: Formatter & Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	@State() changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
@@ -46,10 +47,11 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	}
 	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
-		event.stopPropagation()
-		event.detail(this)
+		if (!(event.target && "name" in event.target && event.target.name == this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
 	}
-
 	@Watch("type")
 	typeChange(): void {
 		let result: (Formatter & Converter<any>) | undefined
@@ -107,6 +109,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			selection: { start, end: start, direction: "none" },
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
 		this.changed = Boolean(this.value)
 		this.listener.changed?.(this)
 	}

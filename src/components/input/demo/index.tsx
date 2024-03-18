@@ -229,7 +229,10 @@ export class SmoothlyInputDemo {
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 				</smoothly-form>
 				<h2>Line</h2>
-				<smoothly-form looks="line">
+				<smoothly-form
+					looks="line"
+					method="POST"
+					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
 						First Name
 					</smoothly-input>

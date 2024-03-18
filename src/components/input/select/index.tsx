@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { Color } from "../../../model"
+import { Color, Data } from "../../../model"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 @Component({
@@ -23,7 +23,7 @@ export class SmoothlyInputSelect implements Input {
 	mainElement?: HTMLElement
 	@State() filter = ""
 	@Event() smoothlySelect: EventEmitter<unknown>
-	@Event() smoothlyInput: EventEmitter<Record<string, unknown>>
+	@Event() smoothlyInput: EventEmitter<Data>
 	aside?: HTMLElement
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 

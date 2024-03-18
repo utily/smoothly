@@ -8,12 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
-import { Color, Data as Data1, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
-import { Data } from "./model/Data";
 import { Looks } from "./components/input/Looks";
 import { GoogleFont } from "./model/GoogleFont";
 import { Controls } from "./components/picker/menu";
@@ -1398,6 +1397,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
+        "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "prevent"?: boolean;
@@ -1435,6 +1435,7 @@ declare namespace LocalJSX {
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
@@ -1478,7 +1479,7 @@ declare namespace LocalJSX {
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data1>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
@@ -1523,7 +1524,7 @@ declare namespace LocalJSX {
         "initialValue"?: unknown;
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Record<string, unknown>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "showSelected"?: boolean;
