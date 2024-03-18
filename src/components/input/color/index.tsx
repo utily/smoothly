@@ -11,7 +11,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputColor implements Input, Clearable {
 	@Element() element: HTMLElement
-	@Prop({ mutable: true, reflect: true }) value: string | undefined = "#333"
+	@Prop({ mutable: true, reflect: true }) value: string | undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop() name: string
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
