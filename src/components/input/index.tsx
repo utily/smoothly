@@ -38,7 +38,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
-	@Prop({ mutable: true, reflect: true }) changed = false
+	@State() changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
 
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
@@ -102,14 +102,18 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	async componentWillLoad() {
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
+		this.lastValue = this.value
 		const start = value.length
 		this.state = this.newState({
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(() => {
+        return
+    })
+		this.changed = Boolean(this.value)
+		this.listener.changed?.(this)
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -155,7 +159,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	async setSelectionRange(start: number, end: number, direction?: Direction) {
 		this.state = this.newState({
 			...this.state,
-			selection: { start, end, direction: direction != undefined ? direction : this.state.selection.direction },
+			selection: { start, end, direction: direction ?? this.state.selection.direction },
 		})
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		this.updateBackend(after, this.inputElement)
@@ -170,7 +174,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		this.initialValue = this.value
 		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
 		if (event.target)
-			this.updateBackend(after, event.target as HTMLInputElement)
+			this.updateBackend(after, event.target as HTMLInputElement, false)
 	}
 	onClick(event: MouseEvent) {
 		const backend = event.target as HTMLInputElement
@@ -178,9 +182,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 			...this.state,
 			value: backend.value,
 			selection: {
-				start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
-				end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
-				direction: backend.selectionDirection ? backend.selectionDirection : "none",
+				start: backend.selectionStart ?? backend.value.length,
+				end: backend.selectionEnd ?? backend.value.length,
+				direction: backend.selectionDirection ?? "none",
 			},
 		}
 		const after = this.newState({ ...this.state })
@@ -193,9 +197,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				...this.state,
 				value: backend.value,
 				selection: {
-					start: backend.selectionStart != undefined ? backend.selectionStart : backend.value.length,
-					end: backend.selectionEnd != undefined ? backend.selectionEnd : backend.value.length,
-					direction: backend.selectionDirection ? backend.selectionDirection : "none",
+					start: backend.selectionStart ?? backend.value.length,
+					end: backend.selectionEnd ?? backend.value.length,
+					direction: backend.selectionDirection ?? "none",
 				},
 			}
 			if (
@@ -219,8 +223,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		let pasted = event.clipboardData ? event.clipboardData.getData("text") : ""
 		const backend = event.target as HTMLInputElement
 		pasted = this.expiresAutocompleteFix(backend, pasted)
-		for (const letter of pasted)
-			this.processKey({ key: letter }, backend)
+		this.processPaste(pasted, backend)
 	}
 	onInput(event: InputEvent) {
 		if (event.inputType == "insertReplacementText") {
@@ -249,20 +252,28 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 				: value
 		return value
 	}
+	private processPaste(pasted: string, backend: HTMLInputElement) {
+		if (!this.readonly) {
+			const after = Action.paste(this.formatter, this.state, pasted)
+			this.updateBackend(after, backend)
+		}
+	}
 	private processKey(event: Action, backend: HTMLInputElement) {
 		if (!this.readonly) {
 			const after = Action.apply(this.formatter, this.state, event)
 			this.updateBackend(after, backend)
 		}
 	}
-	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement) {
+	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement, setSelection = true) {
 		if (after.value != backend.value)
 			backend.value = after.value
-		if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
-			backend.selectionStart = after.selection.start
-		if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
-			backend.selectionEnd = after.selection.end
-		backend.selectionDirection = after.selection.direction ? after.selection.direction : backend.selectionDirection
+		if (setSelection) {
+			if (backend.selectionStart != undefined && after.selection.start != backend.selectionStart)
+				backend.selectionStart = after.selection.start
+			if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
+				backend.selectionEnd = after.selection.end
+			backend.selectionDirection = after.selection.direction ?? backend.selectionDirection
+		}
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
 			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
@@ -272,6 +283,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		return (
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				changed={this.changed}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
 				<div>

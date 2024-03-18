@@ -1,48 +1,61 @@
-import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
+import { Color } from "../../../model"
+import { Clearable } from "../Clearable"
+import { Input } from "../Input"
+import { Looks } from "../Looks"
 
 @Component({
 	tag: "smoothly-input-range",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
-export class SmoothlyInputRange {
-	@Prop({ mutable: true }) value = 0
+export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
+	@Prop({ mutable: true, reflect: true }) value: number | undefined = undefined
+	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() min = 0
 	@Prop() max = 100
 	@Prop() name: string
 	@Prop() labelText?: string
 	@Prop() step: number | "any" = "any"
+	@Prop() outputSide: "right" | "left" = "left"
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	componentWillLoad(): void | Promise<void> {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
+	@Method()
+	async clear(): Promise<void> {
+		this.value = undefined
+	}
 	@Watch("value")
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
-	inputHandler(e: Event): void {
-		e.target instanceof HTMLInputElement &&
-			(this.value = this.step !== "any" ? e.target.valueAsNumber : Math.round(e.target.valueAsNumber * 100) / 100)
+	inputHandler(event: Event): void {
+		event.target instanceof HTMLInputElement &&
+			(this.value =
+				this.step !== "any" ? event.target.valueAsNumber : Math.round(event.target.valueAsNumber * 100) / 100)
 	}
 
-	render() {
+	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--left-adjustment": `${(this.value / this.max) * 100}%` }}>
-				<slot name="label">
-					{typeof this.labelText === "string" && <label htmlFor={this.name}>{this.labelText}</label>}
-				</slot>
-				<div class="output-container">
-					<output htmlFor={this.name}>{this.value}</output>
+			<Host class={this.outputSide}>
+				<label htmlFor={this.name}>
+					<slot />
+				</label>
+				<div>
+					<output htmlFor={this.name}>{this.value ?? "—"}</output>
+					<input
+						name={this.name}
+						part="range"
+						type="range"
+						min={this.min}
+						max={this.max}
+						step={this.step}
+						onInput={event => this.inputHandler(event)}
+						value={this.value ?? this.min}
+					/>
 				</div>
-				<input
-					name={this.name}
-					part="range"
-					type="range"
-					min={this.min}
-					max={this.max}
-					step={this.step}
-					onInput={e => this.inputHandler(e)}
-					value={this.value}
-				/>
-				<p class="min">{this.min}</p>
-				<p class="max">{this.max}</p>
 			</Host>
 		)
 	}

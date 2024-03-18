@@ -9,18 +9,18 @@ export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 
-	@Listen("selectionChanged")
-	handleSelectionChanged(event: CustomEvent<{ identifier: string; value: string }>) {
-		console.log("selectionChanged", event.detail)
+	@Listen("smoothlyInput")
+	handleSelectionChanged(event: CustomEvent<Record<string, unknown>>) {
+		console.log("smoothlyInput", event.detail)
 	}
 
 	render() {
 		return (
 			<Host>
 				<h2>Range</h2>
-				<smoothly-form>
-					<smoothly-input-range step={1}>
-						<div slot="label">Select number in range</div>
+				<smoothly-form looks="border">
+					<smoothly-input-range step={1} name="range" outputSide="right">
+						Select
 					</smoothly-input-range>
 				</smoothly-form>
 				<h2>Duration</h2>
@@ -100,8 +100,10 @@ export class SmoothlyInputDemo {
 
 				<h4>Clear</h4>
 				<smoothly-form looks="border">
-					<smoothly-input name="First Name">First name</smoothly-input>
-					<smoothly-input name="Last name">
+					<smoothly-input name="First Name" value="John">
+						First name
+					</smoothly-input>
+					<smoothly-input name="Last name" value="Doe">
 						Last name
 						<smoothly-input-clear slot="end">
 							<smoothly-icon name="close" />

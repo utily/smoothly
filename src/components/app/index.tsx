@@ -96,8 +96,8 @@ export class SmoothlyApp {
 					<smoothly-burger
 						ref={e => (this.burgerElement = e)}
 						open={this.menuOpen}
-						onNavStatus={e => this.burgerStatusHandler(e)}
-						onVisibleStatus={e => this.burgerVisibilityHandler(e)}
+						onSmoothlyNavStatus={e => this.burgerStatusHandler(e)}
+						onSmoothlyVisibleStatus={e => this.burgerVisibilityHandler(e)}
 					/>
 				</header>
 				<main ref={e => (this.mainElement = e)}></main>
