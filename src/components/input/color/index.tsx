@@ -14,8 +14,8 @@ import {
 } from "@stencil/core"
 import { SmoothlyInputCustomEvent } from "../../../components"
 import { Color } from "../../../model"
-import { SmoothlyInput } from ".."
 import { Clearable } from "../Clearable"
+import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
@@ -40,17 +40,17 @@ export class SmoothlyInputColor implements Input, Clearable, ComponentWillLoad {
 		})
 	}
 	@Listen("smoothlyInput")
-	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
+	smoothlyInputHandler(event: CustomEvent<Record<string, any>>): void {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLoad")
-	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): void {
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): void {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
@@ -59,10 +59,10 @@ export class SmoothlyInputColor implements Input, Clearable, ComponentWillLoad {
 		this.value = undefined
 	}
 	@Watch("value")
-	valueChanged() {
+	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
-	inputHandler(event: SmoothlyInputCustomEvent<Record<string, any>>) {
+	inputHandler(event: SmoothlyInputCustomEvent<Record<string, any>>): void {
 		this.value = event.detail[this.name]
 	}
 
