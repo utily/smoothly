@@ -1,9 +1,23 @@
-import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	VNode,
+	Watch,
+} from "@stencil/core"
+import { SmoothlyInputCustomEvent } from "../../../components"
 import { Color } from "../../../model"
+import { SmoothlyInput } from ".."
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { SmoothlyInputCustomEvent } from "../../../components"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -17,8 +31,28 @@ export class SmoothlyInputColor implements Input, Clearable, ComponentWillLoad {
 	@Prop() name: string
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
+	}
+	@Listen("smoothlyInput")
+	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
+		if (event.target != this.element)
+			event.stopPropagation()
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+		if (event.target != this.element)
+			event.stopPropagation()
+	}
+	@Listen("smoothlyInputLoad")
+	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): void {
+		if (event.target != this.element)
+			event.stopPropagation()
 	}
 	@Method()
 	async clear(): Promise<void> {

@@ -1477,6 +1477,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "value"?: string | undefined;
     }
