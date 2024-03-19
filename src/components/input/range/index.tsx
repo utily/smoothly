@@ -10,7 +10,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
-	@Prop({ mutable: true, reflect: true }) value: number | undefined = undefined
+	@Prop({ mutable: true }) value: number | undefined = undefined
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() min = 0
 	@Prop() max = 100
@@ -20,8 +20,13 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop() outputSide: "right" | "left" = "left"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
 	}
 	@Method()
 	async clear(): Promise<void> {
