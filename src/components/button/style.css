@@ -2,7 +2,6 @@
 
 :host{
 	display: inline-block;
-	margin: 1em;
 	box-sizing: border-box;
 	border-radius: 0.5rem;
 	border: solid 1px;
@@ -32,11 +31,11 @@ button {
 	height: 100%;
 	width: 100%;
 	border-radius: 0.5rem;
-	min-width: 8em;
 	align-items: center;
 }
 :host(:not([size=icon])) > button {
 	padding: 0.8em;
+	min-width: 8em;
 }
 :host([size=icon]) > button{
 	padding: 0.5em;
