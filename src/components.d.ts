@@ -14,7 +14,6 @@ import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Looks } from "./components/input/Looks";
-import { Notice as Notice1 } from "./model/Notice";
 import { GoogleFont } from "./model/GoogleFont";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";

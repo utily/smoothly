@@ -3,7 +3,7 @@ import { http } from "cloudly-http"
 import { Color, Data, Notice } from "../../model"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
-import { Input, InputElement } from "../input/Input"
+import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
 
