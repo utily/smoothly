@@ -222,6 +222,12 @@ export namespace Components {
         "size": "small" | "large" | "icon" | "flexible";
         "type": "form" | "input";
     }
+    interface SmoothlyInputColor {
+        "clear": () => Promise<void>;
+        "looks": Looks;
+        "name": string;
+        "value": string | undefined;
+    }
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -538,6 +544,10 @@ export interface SmoothlyInputClearCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputClearElement;
 }
+export interface SmoothlyInputColorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputColorElement;
+}
 export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateElement;
@@ -835,6 +845,12 @@ declare global {
     var HTMLSmoothlyInputClearElement: {
         prototype: HTMLSmoothlyInputClearElement;
         new (): HTMLSmoothlyInputClearElement;
+    };
+    interface HTMLSmoothlyInputColorElement extends Components.SmoothlyInputColor, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputColorElement: {
+        prototype: HTMLSmoothlyInputColorElement;
+        new (): HTMLSmoothlyInputColorElement;
     };
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
     }
@@ -1186,6 +1202,7 @@ declare global {
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
+        "smoothly-input-color": HTMLSmoothlyInputColorElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
@@ -1455,6 +1472,14 @@ declare namespace LocalJSX {
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: "form" | "input";
+    }
+    interface SmoothlyInputColor {
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "value"?: string | undefined;
     }
     interface SmoothlyInputDate {
         "color"?: Color;
@@ -1799,6 +1824,7 @@ declare namespace LocalJSX {
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
         "smoothly-input-clear": SmoothlyInputClear;
+        "smoothly-input-color": SmoothlyInputColor;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
@@ -1892,6 +1918,7 @@ declare module "@stencil/core" {
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
+            "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
