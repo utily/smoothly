@@ -1538,6 +1538,7 @@ declare namespace LocalJSX {
         "min"?: number;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "outputSide"?: "right" | "left";
         "step"?: number | "any";
