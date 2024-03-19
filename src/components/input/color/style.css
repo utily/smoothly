@@ -9,5 +9,7 @@
 :host .color-sample {
 	height: 2em;
 	width: 5em;
-	background-color: var(--value)
+	background-color: var(--value);
+	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
+	border-radius: 2px;
 }
