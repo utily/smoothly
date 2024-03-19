@@ -1,17 +1,18 @@
-import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { SmoothlyInputCustomEvent } from "../../../components"
 
 @Component({
 	tag: "smoothly-input-color",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputColor implements Input, Clearable {
+export class SmoothlyInputColor implements Input, Clearable, ComponentWillLoad {
 	@Element() element: HTMLElement
-	@Prop({ mutable: true, reflect: true }) value: string | undefined
+	@Prop({ mutable: true }) value: string | undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop() name: string
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -23,6 +24,13 @@ export class SmoothlyInputColor implements Input, Clearable {
 	async clear(): Promise<void> {
 		this.value = undefined
 	}
+	@Watch("value")
+	valueChanged() {
+		this.smoothlyInput.emit({ [this.name]: this.value })
+	}
+	inputHandler(event: SmoothlyInputCustomEvent<Record<string, any>>) {
+		this.value = event.detail[this.name]
+	}
 
 	render(): VNode | VNode[] {
 		return (
@@ -31,7 +39,7 @@ export class SmoothlyInputColor implements Input, Clearable {
 					value={this.value}
 					name={this.name}
 					looks={this.looks}
-					onSmoothlyInput={e => (this.value = e.detail[this.name])}>
+					onSmoothlyInput={event => this.inputHandler(event)}>
 					Color
 					<div slot="end" class="color-sample"></div>
 				</smoothly-input>

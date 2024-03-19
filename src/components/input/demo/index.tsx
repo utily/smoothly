@@ -18,7 +18,9 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<h2>Color</h2>
-				<smoothly-input-color name="color"></smoothly-input-color>
+				<smoothly-form looks="border">
+					<smoothly-input-color name="color"></smoothly-input-color>
+				</smoothly-form>
 				<h2>Range</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-range step={1} name="range" outputSide="right">
