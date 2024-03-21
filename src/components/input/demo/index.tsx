@@ -109,7 +109,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear slot="end">
+						<smoothly-input-clear size="icon" slot="end">
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>

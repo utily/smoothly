@@ -13,7 +13,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Prop({ mutable: true }) value: number | undefined = undefined
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop() min = 0
-	@Prop() max = 100
+	@Prop() max = 100000
 	@Prop() name: string
 	@Prop() labelText?: string
 	@Prop() step: number | "any" = "any"
@@ -45,10 +45,11 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	render(): VNode | VNode[] {
 		return (
 			<Host class={this.outputSide}>
-				<label htmlFor={this.name}>
-					<slot />
-				</label>
+				<slot name="start" />
 				<div>
+					<label htmlFor={this.name}>
+						<slot />
+					</label>
 					<output htmlFor={this.name}>{this.value ?? "—"}</output>
 					<input
 						name={this.name}
@@ -61,6 +62,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 						value={this.value ?? this.min}
 					/>
 				</div>
+				<slot name="end" />
 			</Host>
 		)
 	}
