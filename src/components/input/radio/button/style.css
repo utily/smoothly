@@ -9,8 +9,7 @@
 	cursor: pointer;
 }
 
-
-:host input[type="radio"]:focus-visible + smoothly-icon  {
+:host input[type="radio"]:focus-visible + smoothly-icon {
 	outline: 3px solid rgb(var(--smoothly-primary-color));	
 }
 
