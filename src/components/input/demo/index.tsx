@@ -300,6 +300,14 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h4>Smoothly Radio Buttons</h4>
 				<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)}>
+					<smoothly-input-radio name="radioNew">
+						<smoothly-input-radio-button value={"first"}>Label 1</smoothly-input-radio-button>
+						<smoothly-input-radio-button value={"second"}>Label 2</smoothly-input-radio-button>
+						<smoothly-input-radio-button value={"third"}>Label 3</smoothly-input-radio-button>
+					</smoothly-input-radio>
+				</smoothly-form>
+				<h4>Smoothly Radio Buttons</h4>
+				<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)}>
 					<smoothly-radio-button name="radioButtonDemo" deselectable decoration="button">
 						<smoothly-radio-button-item value={"test"}>
 							Option 1<div slot="expansion">Some description.</div>

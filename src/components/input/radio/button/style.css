@@ -1,0 +1,28 @@
+:host {
+	display: flex;
+	margin-right: 1em;
+	align-items: center;
+	position: relative;
+}
+
+:host:hover > * {
+	cursor: pointer;
+}
+
+
+:host input[type="radio"]:focus-visible + smoothly-icon  {
+	outline: 3px solid rgb(var(--smoothly-primary-color));	
+}
+
+:host input[type="radio"] {
+	opacity: 0;
+	z-index: 1;
+	width: 1.5em;
+	height: 1.5em;
+	position: absolute;
+	transform: translateX(50%);
+}
+
+:host label {
+	padding: 0 .5em;
+}
