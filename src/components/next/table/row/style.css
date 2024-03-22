@@ -3,3 +3,12 @@
 	display: grid;
 	grid-template-columns: subgrid;
 }
+:host:has(smoothly-next-table-expandable-cell) {
+  grid-template-rows: auto 0fr 0fr;
+  /*grid-auto-flow: row dense;*/
+  /* transition: all 400ms linear; */
+}
+:host:has(smoothly-next-table-expandable-cell[open]) {
+	grid-template-rows: auto 1fr 0fr;
+}
+

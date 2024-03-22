@@ -26,6 +26,13 @@ export class SmoothlyNextDemo {
 							<smoothly-next-table-cell>bar</smoothly-next-table-cell>
 							<smoothly-next-table-cell>Bar</smoothly-next-table-cell>
 						</smoothly-next-table-expandable-row>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>baz</smoothly-next-table-cell>
+							<smoothly-next-table-expandable-cell>
+								Baz
+								<div slot={"detail"}>The Detail of Baz!</div>
+							</smoothly-next-table-expandable-cell>
+						</smoothly-next-table-row>
 					</smoothly-next-table-body>
 				</smoothly-next-table>
 			</Host>

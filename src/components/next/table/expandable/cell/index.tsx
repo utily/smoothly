@@ -1,4 +1,4 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-expandable-cell",
@@ -6,10 +6,21 @@ import { Component, h, Host, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyNextTableExpandableCell {
+	@Prop({ mutable: true, reflect: true }) open = false
+
+	clickHandler(): void {
+		this.open = !this.open
+	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<slot />
+				<div onClick={() => this.clickHandler()} class={"content"}>
+					<slot />
+				</div>
+				<div class={"detail"}>
+					<slot name={"detail"} />
+				</div>
 			</Host>
 		)
 	}

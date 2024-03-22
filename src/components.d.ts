@@ -308,6 +308,7 @@ export namespace Components {
     interface SmoothlyNextTableCell {
     }
     interface SmoothlyNextTableExpandableCell {
+        "open": boolean;
     }
     interface SmoothlyNextTableExpandableRow {
         "open": boolean;
@@ -1624,6 +1625,7 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableCell {
     }
     interface SmoothlyNextTableExpandableCell {
+        "open"?: boolean;
     }
     interface SmoothlyNextTableExpandableRow {
         "open"?: boolean;

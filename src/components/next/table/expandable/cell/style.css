@@ -1,4 +1,13 @@
+/* expandable cell */
 :host {
-	display: grid;
-	grid-template-columns: repeat(var(--columns), auto);
+  display: contents;
+}
+
+:host div.detail {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  overflow: hidden;
+}
+:host:not([open]) div.detail {
+  display: none;
 }
