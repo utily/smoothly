@@ -64,32 +64,33 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	@Method()
 	async submit(): Promise<void> {
 		this.smoothlyFormSubmit.emit(this.value)
-		this.notice?.emit(
-			Notice.execute("Submitting form", async () => {
-				const response = !this.action
-					? undefined
-					: await http
-							.fetch(
-								this.method == "POST"
-									? http.Request.create({
-											method: "POST",
-											url: this.action,
-											header: { contentType: "application/json" },
-											body: this.value,
-									  })
-									: { url: `${this.action}?${http.Search.stringify(this.value)}` }
-							)
-							.catch(() => undefined)
-				let result: [boolean, string]
-				if (!response || response?.status < 200 || response.status >= 300)
-					result = [false, "Failed to submit form."]
-				else {
-					result = [true, "Form successfully submitted."]
-					this.clear()
-				}
-				return result
-			})
-		)
+		if (this.action) {
+			const action = this.action
+			this.notice?.emit(
+				Notice.execute("Submitting form", async () => {
+					const response = await http
+						.fetch(
+							this.method == "POST"
+								? http.Request.create({
+										method: "POST",
+										url: action,
+										header: { contentType: "application/json" },
+										body: this.value,
+								  })
+								: { url: `${action}?${http.Search.stringify(this.value)}` }
+						)
+						.catch(() => undefined)
+					let result: [boolean, string]
+					if (!response || response?.status < 200 || response.status >= 300)
+						result = [false, "Failed to submit form."]
+					else {
+						result = [true, "Form successfully submitted."]
+						this.clear()
+					}
+					return result
+				})
+			)
+		}
 	}
 	@Method()
 	async clear(): Promise<void> {
