@@ -44,7 +44,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host class={this.outputSide}>
+			<Host class={{ "output-side-right": this.outputSide === "right" }}>
 				<slot name="start" />
 				<div>
 					<label htmlFor={this.name}>
