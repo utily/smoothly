@@ -24,6 +24,16 @@ export class SmoothlyInputDemo {
 				<h2>Range</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-range step={1} name="range" outputSide="right">
+						Select and so
+					</smoothly-input-range>
+					<smoothly-input-range step={1} name="range2">
+						Select with really really long label
+						<smoothly-icon name="checkmark-circle" slot="start" />
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
+					</smoothly-input-range>
+					<smoothly-input-range step={1} name="range3">
 						Select
 					</smoothly-input-range>
 				</smoothly-form>
@@ -109,7 +119,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear slot="end">
+						<smoothly-input-clear size="icon" slot="end">
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>
