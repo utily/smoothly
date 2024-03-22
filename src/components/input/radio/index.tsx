@@ -40,11 +40,12 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 	}
 	@Listen("smoothlyRadioButtonRegister")
 	handleRegister(event: CustomEvent<(name: string) => void>) {
-		event.detail(this.name)
 		event.stopPropagation()
+		event.detail(this.name)
 	}
 	@Listen("smoothlySelect")
 	smoothlyRadioInputHandler(event: CustomEvent<Selectable>): void {
+		event.stopPropagation()
 		if (this.clearable && this.active?.value === event.detail.value) {
 			this.clear()
 		} else if (this.active?.value !== event.detail.value) {
@@ -53,7 +54,6 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 			this.value = this.active.value
 			this.active.select(true)
 		}
-		event.stopPropagation()
 	}
 	@Method()
 	async clear(): Promise<void> {

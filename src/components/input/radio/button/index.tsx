@@ -15,8 +15,9 @@ export class SmoothlyInputRadioButton {
 	@Prop({ mutable: true }) name: string
 	@Event() smoothlySelect: EventEmitter<Selectable>
 	@Event() smoothlyRadioButtonRegister: EventEmitter<(name: string) => void>
-	componentWillLoad() {
+	componentWillLoad(): void | Promise<void> {
 		this.smoothlyRadioButtonRegister.emit(name => (this.name = name))
+		this.selected && this.inputHandler()
 	}
 	inputHandler(): void {
 		this.smoothlySelect.emit({ value: this.value, selected: this.selected, select: s => (this.selected = s) })
