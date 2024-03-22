@@ -10,32 +10,31 @@
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	padding: 0 .6em ;
 	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
-	gap: 1em;
+	padding: 0 .4em;
 }
 
-:host  > div {
+:host :nth-child(2) {
+  margin-left: 0.2em;
+}
+
+:host > div {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding-top: .8em;
+	padding: 1.1em 0 .1em 0;
 }
 
-:host[outputside="right"] > div {
-	padding-top: 0;
-	flex-direction: row-reverse;
+:host.output-side-right > div {
+	padding: 0;
 }
 
 :host output {
-	min-width: 3em;
+	min-width: 4em;
 	text-align: center;
-}
-
-:host(:not([value])) output {
-	opacity: .6;
+	margin-left:  .5em
 }
 
 :host label {
@@ -44,15 +43,20 @@
 	white-space: nowrap;
 	text-align: center;
 	top: .5em;
-	left: .5em;
+	left: 0;
 	font-size: .6em;
 }
 
-:host[outputside="right"] label {
-	position: relative;
+:host.output-side-right label {
+	position: static;
 	font-size: inherit;
-	left: 0;
-	top: 0
+	text-align: left;
+	padding-right: .5em
+} 
+
+:host.output-side-right output {
+	order: 3;
+	margin: 0;
 } 
 
 /*--------------------Reset browserspecific CSS------------------ */
@@ -61,10 +65,7 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
 	height: 1.5em;
-}
-
-:host[outputside="right"] input[type=range] {
-	height: 2.5em
+	padding: 0 .4em;
 }
 
 /*--------------------THUMB------------------ */
