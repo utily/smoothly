@@ -1,0 +1,23 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	position: relative;
+	gap: 1em;
+}
+
+smoothly-icon {
+	position: absolute;
+}
+
+:host input[type='checkbox'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	height: 1.2em;
+	width: 1.2em;
+	border: 1px solid black;
+	display: block;
+	z-index: 1;
+}

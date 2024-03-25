@@ -212,6 +212,19 @@ export namespace Components {
         "type": Type;
         "value": any;
     }
+    interface SmoothlyInputCheckbox {
+        "checked": boolean;
+        "clear": () => Promise<void>;
+        "looks": Looks;
+        "name": string;
+        "value": any;
+    }
+    interface SmoothlyInputCheckboxGroup {
+        "clear": () => Promise<void>;
+        "looks": Looks;
+        "name": string;
+        "value": any;
+    }
     interface SmoothlyInputClear {
         "color"?: Color;
         "disabled": boolean;
@@ -540,6 +553,14 @@ export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputElement;
 }
+export interface SmoothlyInputCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputCheckboxElement;
+}
+export interface SmoothlyInputCheckboxGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputCheckboxGroupElement;
+}
 export interface SmoothlyInputClearCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputClearElement;
@@ -839,6 +860,18 @@ declare global {
     var HTMLSmoothlyInputElement: {
         prototype: HTMLSmoothlyInputElement;
         new (): HTMLSmoothlyInputElement;
+    };
+    interface HTMLSmoothlyInputCheckboxElement extends Components.SmoothlyInputCheckbox, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputCheckboxElement: {
+        prototype: HTMLSmoothlyInputCheckboxElement;
+        new (): HTMLSmoothlyInputCheckboxElement;
+    };
+    interface HTMLSmoothlyInputCheckboxGroupElement extends Components.SmoothlyInputCheckboxGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputCheckboxGroupElement: {
+        prototype: HTMLSmoothlyInputCheckboxGroupElement;
+        new (): HTMLSmoothlyInputCheckboxGroupElement;
     };
     interface HTMLSmoothlyInputClearElement extends Components.SmoothlyInputClear, HTMLStencilElement {
     }
@@ -1201,6 +1234,8 @@ declare global {
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
+        "smoothly-input-checkbox": HTMLSmoothlyInputCheckboxElement;
+        "smoothly-input-checkbox-group": HTMLSmoothlyInputCheckboxGroupElement;
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
         "smoothly-input-color": HTMLSmoothlyInputColorElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
@@ -1460,6 +1495,24 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "showLabel"?: boolean;
         "type"?: Type;
+        "value"?: any;
+    }
+    interface SmoothlyInputCheckbox {
+        "checked"?: boolean;
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyCheckboxRegister"?: (event: SmoothlyInputCheckboxCustomEvent<(name: string) => void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "value"?: any;
+    }
+    interface SmoothlyInputCheckboxGroup {
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputCheckboxGroupCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxGroupCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxGroupCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "value"?: any;
     }
     interface SmoothlyInputClear {
@@ -1824,6 +1877,8 @@ declare namespace LocalJSX {
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
+        "smoothly-input-checkbox": SmoothlyInputCheckbox;
+        "smoothly-input-checkbox-group": SmoothlyInputCheckboxGroup;
         "smoothly-input-clear": SmoothlyInputClear;
         "smoothly-input-color": SmoothlyInputColor;
         "smoothly-input-date": SmoothlyInputDate;
@@ -1918,6 +1973,8 @@ declare module "@stencil/core" {
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
+            "smoothly-input-checkbox": LocalJSX.SmoothlyInputCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
+            "smoothly-input-checkbox-group": LocalJSX.SmoothlyInputCheckboxGroup & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxGroupElement>;
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
             "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;

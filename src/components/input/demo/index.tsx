@@ -17,7 +17,7 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
-				<h2>Color</h2>
+				{/* <h2>Color</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-color name="color"></smoothly-input-color>
 				</smoothly-form>
@@ -279,7 +279,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success">
 						Send
 					</smoothly-submit>
-				</smoothly-form>
+				</smoothly-form> */}
 				<h4>Smoothly checkboxes</h4>
 				<smoothly-form>
 					<div>
@@ -308,7 +308,18 @@ export class SmoothlyInputDemo {
 						/>
 					</div>
 				</smoothly-form>
-				<h4>Smoothly Radio Buttons</h4>
+				<smoothly-form>
+					<smoothly-input-checkbox name="checkbox" value="first option">
+						Hej
+					</smoothly-input-checkbox>
+					<smoothly-input-checkbox checked name="checkbox" value={{ second: { value: "piss" } }}>
+						Hej2
+					</smoothly-input-checkbox>
+					<smoothly-input-checkbox checked name="checkbox" value={{ third: "third" }}>
+						Hej3
+					</smoothly-input-checkbox>
+				</smoothly-form>
+				{/* <h4>Smoothly Radio Buttons</h4>
 				<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)}>
 					<smoothly-radio-button name="radioButtonDemo" deselectable decoration="button">
 						<smoothly-radio-button-item value={"test"}>
@@ -589,7 +600,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form>
+				</smoothly-form> */}
 			</Host>
 		)
 	}
