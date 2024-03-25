@@ -14,6 +14,7 @@ export {
 	WithListenable,
 	CanBeListenable,
 	StateBase,
+	Icon,
 	Data,
 	redirect,
 } from "./model"
