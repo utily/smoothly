@@ -316,88 +316,8 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-button value={"third"}>Label 3</smoothly-input-radio-button>
 					</smoothly-input-radio>
 				</smoothly-form>
-				<h4>Smoothly Radio Buttons</h4>
-				<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)}>
-					<smoothly-radio-button name="radioButtonDemo" deselectable decoration="button">
-						<smoothly-radio-button-item value={"test"}>
-							Option 1<div slot="expansion">Some description.</div>
-						</smoothly-radio-button-item>
-						<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }}>
-							Option 2<div slot="expansion">Some other description.</div>
-						</smoothly-radio-button-item>
-						<smoothly-radio-button-item value={{ some: "one", yes: "kid" }}>
-							Option 3<div slot="expansion">Some third description.</div>
-						</smoothly-radio-button-item>
-					</smoothly-radio-button>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
-					</smoothly-submit>
-				</smoothly-form>
-				<h4>Radio List without button 1</h4>
-				<smoothly-form>
-					<smoothly-radio-button name="RadioListWithoutButton">
-						<smoothly-radio-button-item value={{ some: "content", yes: "sir" }} selected color="light">
-							<span>Option 1</span>
-							<span slot="expansion">Some description.</span>
-						</smoothly-radio-button-item>
-						<smoothly-radio-button-item value={{ some: "thing", yes: "miss" }} color="light">
-							<span>Option 2</span>
-							<span slot="expansion">Some other description.</span>
-						</smoothly-radio-button-item>
-						<smoothly-radio-button-item value={{ some: "one", yes: "kid" }} color="light">
-							<span>Option 3</span>
-							<span slot="expansion">Some third description.</span>
-						</smoothly-radio-button-item>
-					</smoothly-radio-button>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
-					</smoothly-submit>
-				</smoothly-form>
-				<h4>Radio List without button 2</h4>
-				<smoothly-form>
-					<smoothly-radio name="option" value="1a" style={{ width: "100%" }}>
-						option 1
-					</smoothly-radio>
-					<smoothly-radio name="option" value="2a" checked style={{ width: "100%" }}>
-						option 2
-					</smoothly-radio>
-					<smoothly-radio name="option" value="3a" style={{ width: "100%" }}>
-						option 3
-					</smoothly-radio>
-				</smoothly-form>
-				<h4>Smoothly Accordion</h4>
-				<smoothly-form>
-					<smoothly-accordion>
-						<smoothly-accordion-item name="A" open>
-							<smoothly-radio name="a" value="1b">
-								a 1
-							</smoothly-radio>
-							<smoothly-radio name="a" value="2b" checked>
-								a 2
-							</smoothly-radio>
-							<smoothly-radio name="a" value="3b">
-								a 3
-							</smoothly-radio>
-						</smoothly-accordion-item>
-						<smoothly-accordion-item name="B">
-							<smoothly-radio name="b" value="1c">
-								b 1
-							</smoothly-radio>
-							<smoothly-radio name="b" value="2c">
-								b 2
-							</smoothly-radio>
-							<smoothly-radio name="b" value="3c">
-								b 3
-							</smoothly-radio>
-						</smoothly-accordion-item>
-					</smoothly-accordion>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
-					</smoothly-submit>
-				</smoothly-form>
 				<h4>Smoothly Picker</h4>
 				<smoothly-picker-demo />
-
 				<smoothly-back-to-top />
 				<h4>Smoothly Date</h4>
 				<smoothly-input-date>Date</smoothly-input-date>
