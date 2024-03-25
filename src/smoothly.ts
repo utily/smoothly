@@ -13,8 +13,8 @@ export {
 	HasListenable,
 	WithListenable,
 	CanBeListenable,
-	StateBase,
 	Icon,
+	StateBase,
 	Data,
 	redirect,
 } from "./model"
