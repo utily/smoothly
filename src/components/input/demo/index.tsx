@@ -346,7 +346,6 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-item slot="options" value={"third"}>
 							Label 3
 						</smoothly-input-radio-item>
-
 					</smoothly-input-radio>
 				</smoothly-form>
 				<h4>Smoothly Picker</h4>

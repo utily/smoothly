@@ -38,7 +38,7 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 			return
 		})
 	}
-	componentDidLoad() {
+	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	@Listen("smoothlyRadioButtonRegister")
