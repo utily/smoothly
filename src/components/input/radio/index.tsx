@@ -23,7 +23,8 @@ import { Selectable } from "./Selected"
 	scoped: true,
 })
 export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
-	active?: Selectable
+	private active?: Selectable
+	private valueReceivedOnLoad = false
 	@Prop({ mutable: true }) value: any = undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop() clearable?: boolean
@@ -33,10 +34,12 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
-		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
+	}
+	componentDidLoad() {
+		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	@Listen("smoothlyRadioButtonRegister")
 	handleRegister(event: CustomEvent<(name: string) => void>) {
@@ -46,9 +49,10 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 	@Listen("smoothlySelect")
 	smoothlyRadioInputHandler(event: CustomEvent<Selectable>): void {
 		event.stopPropagation()
-		if (this.clearable && this.active?.value === event.detail.value) {
+		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
+		if (this.clearable && this.active?.value === event.detail.value)
 			this.clear()
-		} else if (this.active?.value !== event.detail.value) {
+		else if (this.active?.value !== event.detail.value) {
 			this.active?.select(false)
 			this.active = event.detail
 			this.value = this.active.value
@@ -57,9 +61,11 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.active?.select(false)
-		this.value = undefined
-		this.active = undefined
+		if (this.clearable) {
+			this.active?.select(false)
+			this.value = undefined
+			this.active = undefined
+		}
 	}
 	@Watch("value")
 	valueChanged(): void {
@@ -69,7 +75,14 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<slot />
+				<slot name="start" />
+				<div class="input-group">
+					<slot name="label" />
+					<div>
+						<slot name="options" />
+					</div>
+				</div>
+				<slot name="end" />
 			</Host>
 		)
 	}

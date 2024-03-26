@@ -278,7 +278,7 @@ export namespace Components {
         "name": string;
         "value": any;
     }
-    interface SmoothlyInputRadioButton {
+    interface SmoothlyInputRadioItem {
         "looks": Looks;
         "name": string;
         "selected": boolean;
@@ -561,9 +561,9 @@ export interface SmoothlyInputRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputRadioElement;
 }
-export interface SmoothlyInputRadioButtonCustomEvent<T> extends CustomEvent<T> {
+export interface SmoothlyInputRadioItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputRadioButtonElement;
+    target: HTMLSmoothlyInputRadioItemElement;
 }
 export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -877,11 +877,11 @@ declare global {
         prototype: HTMLSmoothlyInputRadioElement;
         new (): HTMLSmoothlyInputRadioElement;
     };
-    interface HTMLSmoothlyInputRadioButtonElement extends Components.SmoothlyInputRadioButton, HTMLStencilElement {
+    interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputRadioButtonElement: {
-        prototype: HTMLSmoothlyInputRadioButtonElement;
-        new (): HTMLSmoothlyInputRadioButtonElement;
+    var HTMLSmoothlyInputRadioItemElement: {
+        prototype: HTMLSmoothlyInputRadioItemElement;
+        new (): HTMLSmoothlyInputRadioItemElement;
     };
     interface HTMLSmoothlyInputRangeElement extends Components.SmoothlyInputRange, HTMLStencilElement {
     }
@@ -1186,7 +1186,7 @@ declare global {
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
-        "smoothly-input-radio-button": HTMLSmoothlyInputRadioButtonElement;
+        "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
         "smoothly-input-range": HTMLSmoothlyInputRangeElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-item": HTMLSmoothlyItemElement;
@@ -1515,11 +1515,11 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRadioCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "value"?: any;
     }
-    interface SmoothlyInputRadioButton {
+    interface SmoothlyInputRadioItem {
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyRadioButtonRegister"?: (event: SmoothlyInputRadioButtonCustomEvent<(name: string) => void>) => void;
-        "onSmoothlySelect"?: (event: SmoothlyInputRadioButtonCustomEvent<Selectable>) => void;
+        "onSmoothlyRadioButtonRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(name: string) => void>) => void;
+        "onSmoothlySelect"?: (event: SmoothlyInputRadioItemCustomEvent<Selectable>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
@@ -1800,7 +1800,7 @@ declare namespace LocalJSX {
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-input-radio": SmoothlyInputRadio;
-        "smoothly-input-radio-button": SmoothlyInputRadioButton;
+        "smoothly-input-radio-item": SmoothlyInputRadioItem;
         "smoothly-input-range": SmoothlyInputRange;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-item": SmoothlyItem;
@@ -1892,7 +1892,7 @@ declare module "@stencil/core" {
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
-            "smoothly-input-radio-button": LocalJSX.SmoothlyInputRadioButton & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioButtonElement>;
+            "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
             "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;

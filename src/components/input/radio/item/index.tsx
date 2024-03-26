@@ -3,11 +3,11 @@ import { Looks } from "../../Looks"
 import { Selectable } from "../Selected"
 
 @Component({
-	tag: "smoothly-input-radio-button",
+	tag: "smoothly-input-radio-item",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRadioButton {
+export class SmoothlyInputRadioItem {
 	@Element() element: HTMLInputElement
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) selected = false
