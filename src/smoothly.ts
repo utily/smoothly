@@ -13,6 +13,7 @@ export {
 	HasListenable,
 	WithListenable,
 	CanBeListenable,
+	Icon,
 	StateBase,
 	Data,
 	redirect,
