@@ -1,0 +1,29 @@
+@import "../shared.css";
+
+:host {
+	padding: .4em; 
+	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
+	display: flex;
+	align-items: center;
+}
+
+:host .input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: 1em
+}
+
+:host .input-group div {
+	align-items: center;
+	display: flex;
+	justify-content: right;
+	width: 100%;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+:host .input-group::slotted(p) {
+	margin: 0 0 0 0.2em;
+	white-space: nowrap;
+}
