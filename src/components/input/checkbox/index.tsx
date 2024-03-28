@@ -1,8 +1,8 @@
-import { Component,ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Color } from "../../../model"
+import { Clearable } from "../Clearable"
+import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { Input } from "../Input";
-import { Clearable } from "../Clearable";
 
 @Component({
 	tag: "smoothly-input-checkbox",
@@ -14,7 +14,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoa
 	@Prop({ mutable: true }) checked = false
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ mutable: true }) name: string
-	@Prop({reflect:true}) disabled: boolean
+	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -26,7 +26,6 @@ export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoa
 	}
 	@Method()
 	async clear(): Promise<void> {
-		console.log('clear')
 		!this.disabled && (this.checked = false)
 	}
 	@Watch("checked")
@@ -40,7 +39,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoa
 		return (
 			<Host>
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
-				<input type="checkbox" checked={this.checked} onClick={(event) => this.inputHandler(event)} />
+				<input type="checkbox" checked={this.checked} onClick={event => this.inputHandler(event)} />
 				<label>
 					<slot />
 				</label>
