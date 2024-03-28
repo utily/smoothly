@@ -289,30 +289,21 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h4>Smoothly checkboxes</h4>
 				<smoothly-form>
-					<div>
-						<smoothly-checkbox>
-							Check me
-							<div slot="expansion">Some context</div>
-							<div slot="expansion">Some more context</div>
-						</smoothly-checkbox>
-						<smoothly-checkbox>Label</smoothly-checkbox>
-						<smoothly-checkbox disabled={true} />
-						<smoothly-checkbox />
-						<smoothly-checkbox
-							name={"unavailable"}
-							value={true}
-							disabled
-							unavailable
-							checked
-							onSmoothlyInput={e => console.log("unavailable", e.detail)}
-						/>
-						<smoothly-checkbox
-							name={"unavailable"}
-							value={true}
-							unavailable
-							checked
-							onSmoothlyInput={e => console.log("unavailable", e.detail)}
-						/>
+					<div class="checkbox-group">
+						<smoothly-input-checkbox disabled name="first-checkbox" value={"first"}>
+							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
+							First
+						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="second-checkbox" checked value={"second"}>
+							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
+							second
+							<smoothly-input-clear size="icon" slot="end">
+								<smoothly-icon name="close" />
+							</smoothly-input-clear>
+						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="third-checkbox" value={"third"}>
+							3rd
+						</smoothly-input-checkbox>
 					</div>
 				</smoothly-form>
 				<h4>Smoothly Radio Buttons</h4>
