@@ -133,7 +133,14 @@ export class SmoothlyInputDemo {
 						Clear
 					</smoothly-input-clear>
 				</smoothly-form>
-
+				<h2>Identifier</h2>
+				<smoothly-form looks="border">
+					<smoothly-input type="identifier-code">Code</smoothly-input>
+					<smoothly-input type="identifier-attribute">Attribute</smoothly-input>
+					<smoothly-input type="identifier-snake">Snake</smoothly-input>
+					<smoothly-input type="identifier-pascal">Pascal</smoothly-input>
+					<smoothly-input type="identifier-camel">Camel</smoothly-input>
+				</smoothly-form>
 				<h2>Border</h2>
 				<smoothly-form looks="border">
 					<smoothly-input type="email" name="email">
