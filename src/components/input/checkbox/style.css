@@ -1,0 +1,29 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	position: relative;
+	gap: .5em;
+}
+
+smoothly-icon {
+	position: absolute;
+}
+
+:host input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	height: 1.2em;
+	width: 1.2em;
+	border: 1px solid black;
+	display: block;
+	z-index: 1;
+}
+
+:host[disabled] input,
+:host[disabled] smoothly-icon {
+	border-color: rgb(var(--smoothly-color-contrast), 0.3);
+	color: rgb(var(--smoothly-color-contrast), 0.4);
+}
