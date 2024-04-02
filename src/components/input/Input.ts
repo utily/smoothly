@@ -16,7 +16,7 @@ export namespace Input {
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
-			value: Data.type.optional(),
+			value: isly.union<Required<Element>["value"], Data, Data[string]>(Data.type, Data.valueType).optional(),
 			color: Color.type.optional(),
 			name: isly.string(),
 			looks: Looks.type,
