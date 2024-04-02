@@ -1,5 +1,5 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
-import { Color } from "../../../model"
+import { Color, Data } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -11,12 +11,12 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoad {
 	@Prop() name: string
-	@Prop() value: any = undefined
+	@Prop() value: Data[string] = undefined
 	@Prop({ mutable: true }) checked = false
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInput.emit({ [this.name]: this.checked ? this.value : undefined })
