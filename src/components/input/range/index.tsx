@@ -42,7 +42,6 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	}
 	@Listen("smoothlyInputLoad")
 	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRange) => void>): void {
-		console.log(event.target)
 		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
 			event.stopPropagation()
 			event.detail(this)
