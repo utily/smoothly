@@ -46,6 +46,13 @@ export class SmoothlyInputRadio implements Input, Clearable, ComponentWillLoad {
 		event.stopPropagation()
 		event.detail(this.name)
 	}
+	@Listen("smoothlyInputLoad")
+	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRadio) => void>): void {
+		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
+	}
 	@Listen("smoothlySelect")
 	smoothlyRadioInputHandler(event: CustomEvent<Selectable>): void {
 		event.stopPropagation()

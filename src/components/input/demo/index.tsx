@@ -335,14 +335,14 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-item slot="options" value={"third"}>
 							Label 3
 						</smoothly-input-radio-item>
-						<smoothly-input-radio-item slot="options" value={"third"}>
-							Label 3
+						<smoothly-input-radio-item slot="options" value={"fourth"}>
+							Label 4
 						</smoothly-input-radio-item>
-						<smoothly-input-radio-item slot="options" value={"third"}>
-							Label 3
+						<smoothly-input-radio-item slot="options" value={"fifth"}>
+							Label 5
 						</smoothly-input-radio-item>
-						<smoothly-input-radio-item slot="options" value={"third"}>
-							Label 3
+						<smoothly-input-radio-item slot="options" value={"sixth"}>
+							Label 6
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
 				</smoothly-form>
