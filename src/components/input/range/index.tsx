@@ -1,4 +1,16 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	VNode,
+	Watch,
+} from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
@@ -27,6 +39,13 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
+	}
+	@Listen("smoothlyInputLoad")
+	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRange) => void>): void {
+		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
 	}
 	@Method()
 	async clear(): Promise<void> {

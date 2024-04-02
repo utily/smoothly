@@ -218,7 +218,7 @@ export namespace Components {
         "disabled": boolean;
         "looks": Looks;
         "name": string;
-        "value": any;
+        "value": Data[string];
     }
     interface SmoothlyInputClear {
         "color"?: Color;
@@ -1461,10 +1461,10 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "value"?: any;
+        "value"?: Data[string];
     }
     interface SmoothlyInputClear {
         "color"?: Color;
