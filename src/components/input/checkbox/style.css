@@ -4,6 +4,8 @@
 	flex-direction: row;
 	position: relative;
 	gap: .5em;
+	padding: 0 .4em;
+	box-sizing: border-box;
 }
 
 smoothly-icon {

@@ -10,10 +10,10 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoad {
-	@Prop({ mutable: true }) value: any = undefined
+	@Prop() name: string
+	@Prop() value: any = undefined
 	@Prop({ mutable: true }) checked = false
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
-	@Prop({ mutable: true }) name: string
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
