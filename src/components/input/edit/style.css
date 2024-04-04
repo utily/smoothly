@@ -1,0 +1,14 @@
+@import "../../button/style.css";
+
+:host([type="button"]) {
+	margin: 1em 0em;
+}
+
+:host([is-edit-mode]){
+	opacity: 0.5;
+}
+
+:host button::slotted(smoothly-icon){
+	transform: translate(.15em, -.1em);
+}
+
