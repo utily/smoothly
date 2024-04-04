@@ -81,15 +81,14 @@ export class SmoothlyInputSelect implements Input {
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
-		event.preventDefault()
+		event.key != "Tab" && event.preventDefault()
 		if (this.opened) {
-			let direction: -1 | 0 | 1 = 0
 			switch (event.key) {
 				case "ArrowUp":
-					direction = -1
+					this.move(-1)
 					break
 				case "ArrowDown":
-					direction = 1
+					this.move(1)
 					break
 				case "Escape":
 					this.filter = ""
@@ -99,20 +98,39 @@ export class SmoothlyInputSelect implements Input {
 					break
 				case "Enter":
 					const result = this.items.find(item => item.marked)
-					if (result?.value) {
+					if (result?.value)
 						result.selected = true
-					}
 					this.opened = false
 					this.filter = ""
+					break
+				case "Tab":
+					this.opened = false
+					break
+				case " ":
+					if (!this.filter.length)
+						this.opened = false
 					break
 				default:
 					if (event.key.length == 1)
 						this.filter += event.key
 					break
 			}
-			this.move(direction)
-		} else if (event.key == "Enter")
-			this.opened = true
+		} else {
+			switch (event.key) {
+				case "Enter":
+				case " ":
+					this.opened = true
+					break
+				case "ArrowDown":
+					this.opened = true
+					this.move(1)
+					break
+				case "ArrowUp":
+					this.opened = true
+					this.move(-1)
+					break
+			}
+		}
 	}
 	private move(direction: -1 | 0 | 1): void {
 		if (direction) {
@@ -130,7 +148,7 @@ export class SmoothlyInputSelect implements Input {
 	}
 	render() {
 		return (
-			<Host tabIndex={2} class={(this.missing ? "missing" : this.type) ?? ""}>
+			<Host tabIndex={0} class={(this.missing ? "missing" : this.type) ?? ""}>
 				<main ref={element => (this.mainElement = element)}>{this.initialPrompt ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
