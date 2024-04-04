@@ -331,6 +331,13 @@ export namespace Components {
     }
     interface SmoothlyNotifier {
     }
+    interface SmoothlyOffcanvas {
+        "clickable": boolean;
+        "open": boolean;
+        "position": "left" | "right" | "top" | "bottom";
+    }
+    interface SmoothlyOffcanvasDemo {
+    }
     interface SmoothlyPicker {
         "clear": () => Promise<void>;
         "looks": Looks;
@@ -937,6 +944,18 @@ declare global {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
     };
+    interface HTMLSmoothlyOffcanvasElement extends Components.SmoothlyOffcanvas, HTMLStencilElement {
+    }
+    var HTMLSmoothlyOffcanvasElement: {
+        prototype: HTMLSmoothlyOffcanvasElement;
+        new (): HTMLSmoothlyOffcanvasElement;
+    };
+    interface HTMLSmoothlyOffcanvasDemoElement extends Components.SmoothlyOffcanvasDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyOffcanvasDemoElement: {
+        prototype: HTMLSmoothlyOffcanvasDemoElement;
+        new (): HTMLSmoothlyOffcanvasDemoElement;
+    };
     interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
     }
     var HTMLSmoothlyPickerElement: {
@@ -1212,6 +1231,8 @@ declare global {
         "smoothly-label": HTMLSmoothlyLabelElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
+        "smoothly-offcanvas": HTMLSmoothlyOffcanvasElement;
+        "smoothly-offcanvas-demo": HTMLSmoothlyOffcanvasDemoElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
         "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
@@ -1596,6 +1617,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNotifier {
     }
+    interface SmoothlyOffcanvas {
+        "clickable"?: boolean;
+        "open"?: boolean;
+        "position"?: "left" | "right" | "top" | "bottom";
+    }
+    interface SmoothlyOffcanvasDemo {
+    }
     interface SmoothlyPicker {
         "looks"?: Looks;
         "multiple"?: boolean;
@@ -1837,6 +1865,8 @@ declare namespace LocalJSX {
         "smoothly-label": SmoothlyLabel;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
+        "smoothly-offcanvas": SmoothlyOffcanvas;
+        "smoothly-offcanvas-demo": SmoothlyOffcanvasDemo;
         "smoothly-picker": SmoothlyPicker;
         "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
@@ -1930,6 +1960,8 @@ declare module "@stencil/core" {
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
+            "smoothly-offcanvas": LocalJSX.SmoothlyOffcanvas & JSXBase.HTMLAttributes<HTMLSmoothlyOffcanvasElement>;
+            "smoothly-offcanvas-demo": LocalJSX.SmoothlyOffcanvasDemo & JSXBase.HTMLAttributes<HTMLSmoothlyOffcanvasDemoElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
             "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
