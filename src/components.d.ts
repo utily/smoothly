@@ -165,7 +165,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
-        "edit": (isEditMode: boolean) => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
         "looks": Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
@@ -199,7 +199,7 @@ export namespace Components {
         "color"?: Color;
         "currency"?: Currency;
         "disabled": boolean;
-        "edit": (isEditMode: boolean) => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
         "looks": Looks;
         "maxLength": number;
@@ -271,9 +271,9 @@ export namespace Components {
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled": boolean;
+        "editable": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "isEditMode": boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
@@ -1547,9 +1547,9 @@ declare namespace LocalJSX {
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled"?: boolean;
+        "editable"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "isEditMode"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";

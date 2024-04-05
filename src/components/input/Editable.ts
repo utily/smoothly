@@ -7,7 +7,7 @@ export interface Editable {
 }
 export namespace Editable {
 	export type ListenReadonly = (property: "readonly", listener: (parent: Editable) => Promise<void>) => void
-	export type Edit = (isEditMode: boolean) => Promise<void>
+	export type Edit = (editable: boolean) => Promise<void>
 	export const type = isly.object<Editable>({
 		edit: isly.function(),
 		readonly: isly.boolean(),

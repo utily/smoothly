@@ -117,11 +117,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 		})
 	}
 	@Method()
-	async edit(isEditMode: boolean): Promise<void> {
+	async edit(editable: boolean): Promise<void> {
 		this.inputs.forEach(input => {
-			Editable.type.is(input) && input.edit(isEditMode)
+			Editable.type.is(input) && input.edit(editable)
 		})
-		this.readonly = !isEditMode
+		this.readonly = !editable
 	}
 	render() {
 		return (

@@ -128,8 +128,8 @@ export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 		this.value = undefined
 	}
 	@Method()
-	async edit(isEditMode: boolean): Promise<void> {
-		this.readonly = !isEditMode
+	async edit(editable: boolean): Promise<void> {
+		this.readonly = !editable
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {

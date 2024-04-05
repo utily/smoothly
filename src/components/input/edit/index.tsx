@@ -14,7 +14,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
-	@Prop({ reflect: true, mutable: true }) isEditMode = false
+	@Prop({ reflect: true, mutable: true }) editable = false
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
@@ -28,8 +28,8 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	}
 	@Listen("click")
 	clickHandler() {
-		this.isEditMode = !this.isEditMode
-		this.parent?.edit(this.isEditMode)
+		this.editable = !this.editable
+		this.parent?.edit(this.editable)
 	}
 
 	render(): VNode | VNode[] {
