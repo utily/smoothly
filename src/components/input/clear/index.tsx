@@ -5,6 +5,7 @@ import { SmoothlyForm } from "../../form"
 import { SmoothlyInput } from ".."
 import { Changeable } from "../Changeable"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 
 @Component({
 	tag: "smoothly-input-clear",
@@ -20,7 +21,7 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
-	private parent?: Clearable | (Clearable & Changeable)
+	private parent?: Clearable | (Clearable & Changeable) | (Clearable & Editable)
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	async componentWillLoad() {
@@ -28,12 +29,20 @@ export class SmoothlyInputClear {
 			if (Clearable.is(parent)) {
 				this.parent = parent
 				if (Changeable.is(parent))
-					parent.listen("changed", async p => {
+					parent.listenChanged("changed", async p => {
 						if (p instanceof SmoothlyForm)
-							this.disabled = !p.changed
-						if (p instanceof SmoothlyInput)
+							this.disabled = p.readonly ? true : !p.changed
+						if (p instanceof SmoothlyInput) {
 							this.display = p.changed
+							this.disabled = p.readonly ? true : !p.changed
+						}
 					})
+				if (Editable.type.is(parent)) {
+					parent.listenReadonly &&
+						parent.listenReadonly("readonly", async p => {
+							this.disabled = p.readonly
+						})
+				}
 			}
 		})
 	}

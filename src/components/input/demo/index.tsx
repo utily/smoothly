@@ -24,6 +24,9 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
@@ -31,6 +34,9 @@ export class SmoothlyInputDemo {
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="create-outline" fill="solid" />
 					</smoothly-input-edit>
+					<smoothly-input-clear fill="default" type="form" color="danger" slot="submit" size="icon" shape="rounded">
+						<smoothly-icon name="trash-outline" fill="solid" />
+					</smoothly-input-clear>
 				</smoothly-form>
 				<h2>Color</h2>
 				<smoothly-form looks="border">

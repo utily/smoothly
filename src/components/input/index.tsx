@@ -42,7 +42,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 	@State() changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
 
-	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+	listenChanged(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		this.listener[property] = listener
 		listener(this)
 	}
@@ -90,6 +90,10 @@ export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 		}
 
 		this.changed = Boolean(this.value)
+		this.listener.changed?.(this)
+	}
+	@Watch("readonly")
+	watchingReadonly() {
 		this.listener.changed?.(this)
 	}
 	@Watch("currency")
