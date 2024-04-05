@@ -81,17 +81,19 @@ export class SmoothlyInputSelect implements Input {
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
-		event.preventDefault()
+		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
+			event.preventDefault()
 		if (this.opened) {
-			let direction: -1 | 0 | 1 = 0
 			switch (event.key) {
 				case "ArrowUp":
-					direction = -1
+					this.move(-1)
 					break
 				case "ArrowDown":
-					direction = 1
+					this.move(1)
 					break
 				case "Escape":
+					if (this.filter == "")
+						this.opened = false
 					this.filter = ""
 					break
 				case "Backspace":
@@ -99,38 +101,60 @@ export class SmoothlyInputSelect implements Input {
 					break
 				case "Enter":
 					const result = this.items.find(item => item.marked)
-					if (result?.value) {
+					if (result?.value)
 						result.selected = true
-					}
 					this.opened = false
 					this.filter = ""
+					break
+				case "Tab":
+					this.opened = false
 					break
 				default:
 					if (event.key.length == 1)
 						this.filter += event.key
 					break
 			}
-			this.move(direction)
-		} else if (event.key == "Enter")
-			this.opened = true
+		} else {
+			switch (event.key) {
+				case "Enter":
+				case " ":
+					this.opened = true
+					break
+				case "ArrowDown":
+					this.opened = true
+					this.move(0)
+					break
+				case "ArrowUp":
+					this.opened = true
+					this.move(-1)
+					break
+				case "Tab":
+					break
+				default:
+					this.opened = true
+					if (event.key.length == 1)
+						this.filter += event.key
+					break
+			}
+		}
 	}
 	private move(direction: -1 | 0 | 1): void {
-		if (direction) {
-			let markedIndex = this.items.findIndex(item => item.marked)
-			if (markedIndex == -1)
-				markedIndex = this.items.findIndex(item => item.selected)
-			if (this.items[markedIndex])
-				this.items[markedIndex].marked = false
-			do {
-				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
-			} while (this.items[markedIndex].hidden)
-			this.items[markedIndex].marked = true
-			this.items[markedIndex].focus()
-		}
+		let markedIndex = this.items.findIndex(item => item.marked)
+		if (markedIndex == -1)
+			markedIndex = this.items.findIndex(item => item.selected)
+		if (this.items[markedIndex])
+			this.items[markedIndex].marked = false
+		if (markedIndex == -1)
+			markedIndex = 0
+		do {
+			markedIndex = (markedIndex + direction + this.items.length) % this.items.length
+		} while (this.items[markedIndex].hidden)
+		this.items[markedIndex].marked = true
+		this.items[markedIndex].focus()
 	}
 	render() {
 		return (
-			<Host tabIndex={2} class={(this.missing ? "missing" : this.type) ?? ""}>
+			<Host tabIndex={0} class={(this.missing ? "missing" : this.type) ?? ""}>
 				<main ref={element => (this.mainElement = element)}>{this.initialPrompt ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
