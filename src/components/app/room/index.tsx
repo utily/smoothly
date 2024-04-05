@@ -51,7 +51,7 @@ export class SmoothlyAppRoom {
 						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 					</a>
 				</li>
-				<main ref={e => (this.contentElement = e)}>
+				<main ref={e => (this.contentElement = e)} style={{ overflowY: "scroll" }}>
 					<slot></slot>
 				</main>
 			</Host>

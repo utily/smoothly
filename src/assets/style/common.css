@@ -3,6 +3,9 @@
 :root {
 	font-family: var(--smoothly-font-family);
 }
+html {
+	overflow: hidden;
+}
 
 input,
 button {
