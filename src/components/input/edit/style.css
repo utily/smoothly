@@ -4,7 +4,7 @@
 	margin: 1em 0em;
 }
 
-:host([is-edit-mode]){
+:host([editable]){
 	opacity: 0.5;
 }
 

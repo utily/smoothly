@@ -17,6 +17,21 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
+				<h2>Editable form and Input</h2>
+				<smoothly-form looks="grid" readonly>
+					<smoothly-input name="First Name" value="John">
+						First name
+					</smoothly-input>
+					<smoothly-input name="Last name" value="Doe">
+						Last name
+					</smoothly-input>
+					<smoothly-input type="phone" name="Phone" value={"777888999"}>
+						Phone
+					</smoothly-input>
+					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="submit" size="icon" shape="rounded">
+						<smoothly-icon name="create-outline" fill="solid" />
+					</smoothly-input-edit>
+				</smoothly-form>
 				<h2>Color</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-color name="color"></smoothly-input-color>
