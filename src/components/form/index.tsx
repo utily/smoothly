@@ -33,7 +33,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 		readonly?: ((parent: Editable) => Promise<void>)[]
 	} = {}
 
-	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+	listenChanged(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
