@@ -165,11 +165,13 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "edit": (isEditMode: boolean) => Promise<void>;
         "looks": Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
         "prevent": boolean;
         "processing": boolean;
+        "readonly": boolean;
         "submit": () => Promise<void>;
         "value": Readonly<Data>;
     }
@@ -197,6 +199,7 @@ export namespace Components {
         "color"?: Color;
         "currency"?: Currency;
         "disabled": boolean;
+        "edit": (isEditMode: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
         "looks": Looks;
         "maxLength": number;
@@ -1434,6 +1437,7 @@ declare namespace LocalJSX {
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
+        "readonly"?: boolean;
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -1466,6 +1470,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks, color: Color) => void>) => void;

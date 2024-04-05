@@ -3,6 +3,7 @@ import { http } from "cloudly-http"
 import { Color, Data, Notice } from "../../model"
 import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
+import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
@@ -11,10 +12,11 @@ import { Submittable } from "../input/Submittable"
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submittable {
+export class SmoothlyForm implements Changeable, Clearable, Submittable, Editable {
 	private inputs = new Map<string, Input.Element>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
+	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
 	@Prop() method?: "GET" | "POST"
@@ -26,9 +28,16 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	@Event() notice: EventEmitter<Notice>
 
 	@Prop({ mutable: true, reflect: true }) changed = false
-	private listeners: { changed?: ((parent: Changeable) => Promise<void>)[] } = {}
+	private listeners: {
+		changed?: ((parent: Changeable) => Promise<void>)[]
+		readonly?: ((parent: Editable) => Promise<void>)[]
+	} = {}
 
 	listen(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+		;(this.listeners[property] ??= []).push(listener)
+		listener(this)
+	}
+	listenReadonly(property: "readonly", listener: (parent: Editable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
@@ -36,6 +45,10 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 	watchValue() {
 		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
 		this.listeners.changed?.forEach(l => l(this))
+	}
+	@Watch("readonly")
+	watchReadonly() {
+		this.listeners.readonly?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
@@ -60,6 +73,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
 			this.inputs.set(event.target.name, event.target)
 		}
+	}
+	@Listen("smoothlyFormDisable")
+	async smoothlyFormDisableHandler(event: CustomEvent): Promise<void> {
+		event.stopPropagation()
+		event.detail(this.readonly)
 	}
 	@Method()
 	async submit(): Promise<void> {
@@ -97,6 +115,13 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable {
 		this.inputs.forEach(input => {
 			Clearable.is(input) && input.clear()
 		})
+	}
+	@Method()
+	async edit(isEditMode: boolean): Promise<void> {
+		this.inputs.forEach(input => {
+			Editable.type.is(input) && input.edit(isEditMode)
+		})
+		this.readonly = !isEditMode
 	}
 	render() {
 		return (

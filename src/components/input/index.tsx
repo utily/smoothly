@@ -4,6 +4,7 @@ import { Action, Converter, Direction, Formatter, get, Settings, State as Tidily
 import { Color } from "../../model"
 import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
+import { Editable } from "./Editable"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
 
@@ -12,7 +13,7 @@ import { Looks } from "./Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput implements Changeable, Clearable, Input {
+export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -37,7 +38,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
-
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@State() changed = false
 	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
 
@@ -112,6 +113,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
+		this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.changed = Boolean(this.value)
 		this.listener.changed?.(this)
 	}
@@ -124,6 +126,10 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
+	}
+	@Method()
+	async edit(isEditMode: boolean): Promise<void> {
+		this.readonly = !isEditMode
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
@@ -282,7 +288,7 @@ export class SmoothlyInput implements Changeable, Clearable, Input {
 	render() {
 		return (
 			<Host
-				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				class={{ "has-value": this.state?.value != undefined && this.state?.value != "", readonly: this.readonly }}
 				changed={this.changed}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
