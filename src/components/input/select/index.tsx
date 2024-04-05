@@ -81,7 +81,8 @@ export class SmoothlyInputSelect implements Input {
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
-		event.key != "Tab" && event.preventDefault()
+		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
+			event.preventDefault()
 		if (this.opened) {
 			switch (event.key) {
 				case "ArrowUp":
