@@ -5,7 +5,7 @@ import { Editable } from "../Editable"
 
 @Component({
 	tag: "smoothly-input-edit",
-	styleUrl: "./style.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyInputEdit implements ComponentWillLoad {
