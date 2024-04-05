@@ -33,7 +33,7 @@ export class SmoothlyInputClear {
 						if (p instanceof SmoothlyForm)
 							this.disabled = p.readonly ? true : !p.changed
 						if (p instanceof SmoothlyInput) {
-							this.display = p.changed
+							this.display = p.readonly ? false : p.changed
 							this.disabled = p.readonly ? true : !p.changed
 						}
 					})
