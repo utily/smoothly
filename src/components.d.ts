@@ -14,6 +14,7 @@ import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { Direction, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Looks } from "./components/input/Looks";
+import { Editable } from "./components/input/Editable";
 import { GoogleFont } from "./model/GoogleFont";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
@@ -166,6 +167,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "method"?: "GET" | "POST";
         "name"?: string;
@@ -195,12 +197,14 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete": boolean;
+        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "currency"?: Currency;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "maxLength": number;
         "minLength": number;
@@ -1461,6 +1465,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;
+        "changed"?: boolean;
         "color"?: Color;
         "currency"?: Currency;
         "disabled"?: boolean;

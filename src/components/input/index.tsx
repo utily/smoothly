@@ -2,7 +2,6 @@ import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, W
 import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
 import { Color } from "../../model"
-import { Changeable } from "./Changeable"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
@@ -13,7 +12,7 @@ import { Looks } from "./Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
+export class SmoothlyInput implements Clearable, Input, Editable {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -34,15 +33,16 @@ export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 	@Prop({ mutable: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: Currency
+	@Prop({ mutable: true, reflect: true }) changed = false
 	@State() formatter: Formatter & Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	@State() changed = false
-	private listener: { changed?: (parent: Changeable & Editable) => Promise<void> } = {}
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
-	listen(property: "changed", listener: (parent: Changeable & Editable) => Promise<void>): void {
+	@Method()
+	listen(property: "changed", listener: (parent: Editable) => Promise<void>): void {
 		this.listener[property] = listener
 		listener(this)
 	}

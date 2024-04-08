@@ -1,7 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
 import { Color, Data, Notice } from "../../model"
-import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -12,7 +11,7 @@ import { Submittable } from "../input/Submittable"
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submittable, Editable {
+export class SmoothlyForm implements Clearable, Submittable, Editable {
 	private inputs = new Map<string, Input.Element>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
@@ -29,10 +28,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: {
-		changed?: ((parent: Changeable & Editable) => Promise<void>)[]
+		changed?: ((parent: Editable) => Promise<void>)[]
 	} = {}
 
-	listen(property: "changed", listener: (parent: Changeable & Editable) => Promise<void>): void {
+	@Method()
+	listen(property: "changed", listener: (parent: Editable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
