@@ -7,6 +7,10 @@ html {
 	overflow: hidden;
 }
 
+body {
+	margin: 0;
+}
+
 input,
 button {
 	color: unset;

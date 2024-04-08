@@ -1,15 +1,11 @@
 smoothly-app {
-	--margin: -0.5rem;
 	--header-height: 5rem;
 	display: block;
-	margin-left: var(--margin);
-	margin-right: var(--margin);
-	margin-top: var(--margin);
 }
 
 smoothly-app main {
 	height: calc(100dvh - var(--header-height));
-	
+
 }
 
 smoothly-app[hidden] {
