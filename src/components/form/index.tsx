@@ -1,7 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
 import { Color, Data, Notice } from "../../model"
-import { Changeable } from "../input/Changeable"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -12,7 +11,7 @@ import { Submittable } from "../input/Submittable"
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Changeable, Clearable, Submittable, Editable {
+export class SmoothlyForm implements Clearable, Submittable, Editable {
 	private inputs = new Map<string, Input.Element>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
@@ -29,15 +28,11 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: {
-		changed?: ((parent: Changeable) => Promise<void>)[]
-		readonly?: ((parent: Editable) => Promise<void>)[]
+		changed?: ((parent: Editable) => Promise<void>)[]
 	} = {}
 
-	listenChanged(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
-		;(this.listeners[property] ??= []).push(listener)
-		listener(this)
-	}
-	listenReadonly(property: "readonly", listener: (parent: Editable) => Promise<void>): void {
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
@@ -48,7 +43,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 	}
 	@Watch("readonly")
 	watchReadonly() {
-		this.listeners.readonly?.forEach(l => l(this))
+		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
@@ -132,8 +127,9 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 						<slot></slot>
 					</fieldset>
 					<div>
-						<slot name="clear"></slot>
-						<slot name="submit"></slot>
+						<slot name="edit" />
+						<slot name="clear" />
+						<slot name="submit" />
 					</div>
 				</form>
 			</Host>
