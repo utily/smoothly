@@ -32,7 +32,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	} = {}
 
 	@Method()
-	listen(property: "changed", listener: (parent: Editable) => Promise<void>): void {
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}

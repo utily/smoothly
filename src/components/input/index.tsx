@@ -42,7 +42,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
 	@Method()
-	listen(property: "changed", listener: (parent: Editable) => Promise<void>): void {
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
 	}
