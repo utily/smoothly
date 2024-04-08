@@ -189,13 +189,13 @@ export class SmoothlyInputSelect implements Input {
 			}
 		}
 		this.items = items
-		if (this.menuHeight?.endsWith("items") && this.items.length)
+		if (this.menuHeight)
 			this.element?.style.setProperty(
 				"--menu-height",
-				`${this.items[0].clientHeight * +this.menuHeight.replace(/[a-z]/g, "")}px`
+				!this.menuHeight.endsWith("items") || !this.items.length
+					? this.menuHeight
+					: `${this.items[0].clientHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 			)
-		else if (this.menuHeight)
-			this.element?.style.setProperty("--menu-height", this.menuHeight)
 	}
 }
 function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
