@@ -6,16 +6,22 @@ smoothly-app {
 	margin-right: var(--margin);
 	margin-top: var(--margin);
 }
+
 smoothly-app main {
-	height: calc(100dvh - var(--header-height) - var(--margin) - 10px);
+	height: calc(100dvh - var(--header-height));
+	
 }
+
 smoothly-app[hidden] {
 	display: none;
 }
-smoothly-app > smoothly-notifier {
+
+smoothly-app>smoothly-notifier {
+	height: 100%;
 	background: none;
 }
-smoothly-app > smoothly-notifier > header {
+
+smoothly-app>smoothly-notifier>header {
 	position: sticky;
 	top: 0;
 	z-index: 5;
@@ -23,30 +29,34 @@ smoothly-app > smoothly-notifier > header {
 	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
+	box-sizing: border-box;
 	align-items: center;
 	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-dark-shadow));
 	border-bottom: 1px solid rgba(var(--smoothly-dark-color));
 	background: rgba(var(--smoothly-color));
 	color: rgba(var(--smoothly-color-contrast));
 }
-smoothly-app > smoothly-notifier > header > nav {
+
+smoothly-app>smoothly-notifier>header>nav {
 	width: 100%;
 	flex-shrink: 2;
 	height: 100%;
 }
 
-smoothly-app > smoothly-notifier > header > nav,
-smoothly-app > smoothly-notifier > header > nav > ul {
+smoothly-app>smoothly-notifier>header>nav,
+smoothly-app>smoothly-notifier>header>nav>ul {
 	display: flex;
 	margin: 0;
 }
-smoothly-app > smoothly-notifier > header > h1 {
+
+smoothly-app>smoothly-notifier>header>h1 {
 	margin-left: 1rem;
 	margin-bottom: 0.8em;
 	display: flex;
 	height: 100%;
 }
-smoothly-app > smoothly-notifier > header > h1 > a {
+
+smoothly-app>smoothly-notifier>header>h1>a {
 	display: inline-block;
 	align-self: center;
 	size: 100%;
@@ -54,21 +64,26 @@ smoothly-app > smoothly-notifier > header > h1 > a {
 	text-decoration: none;
 	white-space: nowrap;
 }
-smoothly-app > smoothly-notifier > header > nav > ul li a {
+
+smoothly-app>smoothly-notifier>header>nav>ul li a {
 	line-height: 1.6cm;
 }
-smoothly-app > smoothly-notifier > header > nav > ul li a {
+
+smoothly-app>smoothly-notifier>header>nav>ul li a {
 	line-height: 1.6cm;
 }
-smoothly-app > smoothly-notifier > header > nav > ul {
+
+smoothly-app>smoothly-notifier>header>nav>ul {
 	width: 100%;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container {
+
+smoothly-app>smoothly-notifier>header>nav>ul>div.nav-start-container {
 	display: flex;
 	align-items: center;
 	height: 100%;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
+
+smoothly-app>smoothly-notifier>header>nav>ul>div.nav-end-container {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
@@ -76,14 +91,16 @@ smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
 	margin-left: auto;
 	margin-right: 1rem;
 }
-smoothly-app > smoothly-notifier > header > nav > ul > [slot="nav-end"] {
+
+smoothly-app>smoothly-notifier>header>nav>ul>[slot="nav-end"] {
 	width: fit-content;
 	gap: 0.5em;
 	align-self: center;
 	height: fit-content;
 	margin-left: 10rem;
 }
-smoothly-app > smoothly-notifier > header > nav > ul li a {
+
+smoothly-app>smoothly-notifier>header>nav>ul li a {
 	display: flex;
 	height: 2.3rem;
 	text-decoration: none;
@@ -92,7 +109,7 @@ smoothly-app > smoothly-notifier > header > nav > ul li a {
 }
 
 @media screen and (max-width: 900px) {
-	smoothly-app > smoothly-notifier > header > nav {
+	smoothly-app>smoothly-notifier>header>nav {
 		width: 50dvw;
 		max-width: 15rem;
 		top: 100%;
@@ -102,41 +119,48 @@ smoothly-app > smoothly-notifier > header > nav > ul li a {
 		right: 0;
 		height: auto;
 	}
-	smoothly-app > smoothly-notifier > header > nav,
-	smoothly-app > smoothly-notifier > header > nav > ul {
+
+	smoothly-app>smoothly-notifier>header>nav,
+	smoothly-app>smoothly-notifier>header>nav>ul {
 		flex-direction: column;
 		background-color: rgba(var(--smoothly-color));
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul {
+
+	smoothly-app>smoothly-notifier>header>nav>ul {
 		padding: 1.5rem;
 		box-sizing: border-box;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul li {
+
+	smoothly-app>smoothly-notifier>header>nav>ul li {
 		margin-right: 0;
 		margin-bottom: 1em;
 		width: 100%;
 	}
 
-	smoothly-app > smoothly-notifier > header > smoothly-burger {
+	smoothly-app>smoothly-notifier>header>smoothly-burger {
 		position: absolute;
 		top: 0;
 		right: 0;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > [slot="nav-start"] {
+
+	smoothly-app>smoothly-notifier>header>nav>ul>[slot="nav-start"] {
 		display: none;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container,
-	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-end-container {
+
+	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-start-container,
+	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-end-container {
 		flex-direction: column;
 		margin: 0;
 		align-items: start;
 		justify-content: center;
 		gap: 1em;
 	}
-	smoothly-app > smoothly-notifier > header > nav > ul > div.nav-start-container > *:last-child {
+
+	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-start-container>*:last-child {
 		margin-bottom: 1em;
 	}
 }
-smoothly-app > smoothly-notifier > header > nav:not(.menu-open) {
+
+smoothly-app>smoothly-notifier>header>nav:not(.menu-open) {
 	display: none;
 }
