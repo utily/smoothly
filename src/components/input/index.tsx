@@ -40,9 +40,9 @@ export class SmoothlyInput implements Changeable, Clearable, Input, Editable {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@State() changed = false
-	private listener: { changed?: (parent: Changeable) => Promise<void> } = {}
+	private listener: { changed?: (parent: Changeable & Editable) => Promise<void> } = {}
 
-	listenChanged(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
+	listen(property: "changed", listener: (parent: Changeable & Editable) => Promise<void>): void {
 		this.listener[property] = listener
 		listener(this)
 	}

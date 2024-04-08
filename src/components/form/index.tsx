@@ -29,15 +29,10 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 
 	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: {
-		changed?: ((parent: Changeable) => Promise<void>)[]
-		readonly?: ((parent: Editable) => Promise<void>)[]
+		changed?: ((parent: Changeable & Editable) => Promise<void>)[]
 	} = {}
 
-	listenChanged(property: "changed", listener: (parent: Changeable) => Promise<void>): void {
-		;(this.listeners[property] ??= []).push(listener)
-		listener(this)
-	}
-	listenReadonly(property: "readonly", listener: (parent: Editable) => Promise<void>): void {
+	listen(property: "changed", listener: (parent: Changeable & Editable) => Promise<void>): void {
 		;(this.listeners[property] ??= []).push(listener)
 		listener(this)
 	}
@@ -48,7 +43,7 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 	}
 	@Watch("readonly")
 	watchReadonly() {
-		this.listeners.readonly?.forEach(l => l(this))
+		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
@@ -132,8 +127,9 @@ export class SmoothlyForm implements Changeable, Clearable, Submittable, Editabl
 						<slot></slot>
 					</fieldset>
 					<div>
-						<slot name="clear"></slot>
-						<slot name="submit"></slot>
+						<slot name="edit" />
+						<slot name="clear" />
+						<slot name="submit" />
 					</div>
 				</form>
 			</Host>
