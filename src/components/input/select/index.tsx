@@ -16,6 +16,7 @@ export class SmoothlyInputSelect implements Input {
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop() initialPrompt?: string
 	@Prop() initialValue?: unknown
+	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
@@ -188,6 +189,13 @@ export class SmoothlyInputSelect implements Input {
 			}
 		}
 		this.items = items
+		if (this.menuHeight)
+			this.element?.style.setProperty(
+				"--menu-height",
+				!this.menuHeight.endsWith("items") || !this.items.length
+					? this.menuHeight
+					: `${this.items[0].clientHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
+			)
 	}
 }
 function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
