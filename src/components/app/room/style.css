@@ -5,6 +5,10 @@
 	cursor: pointer;
 }
 
+main {
+	overflow-y: auto;
+}
+
 :not(:host[label], :host[icon]),
 :host[disabled] {
 	display: none;
