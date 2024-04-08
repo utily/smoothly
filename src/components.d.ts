@@ -321,6 +321,7 @@ export namespace Components {
         "initialPrompt"?: string;
         "initialValue"?: unknown;
         "looks": Looks;
+        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "name": string;
         "reset": () => Promise<void>;
         "showSelected"?: boolean;
@@ -1607,6 +1608,7 @@ declare namespace LocalJSX {
         "initialPrompt"?: string;
         "initialValue"?: unknown;
         "looks"?: Looks;
+        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;

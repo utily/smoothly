@@ -475,6 +475,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-select
 						name="select"
 						initialPrompt="Select..."
+						menuHeight="7.5items"
 						ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
