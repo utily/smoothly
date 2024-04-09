@@ -1,5 +1,19 @@
-import { Component, Event, EventEmitter, FunctionalComponent, h, Host, Method, Prop, State, Watch } from "@stencil/core"
-import { ComponentWillLoad, Fragment, JSX } from "@stencil/core/internal"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	Fragment,
+	FunctionalComponent,
+	h,
+	Host,
+	Method,
+	Prop,
+	State,
+	Watch,
+} from "@stencil/core"
+import { JSX } from "@stencil/core/internal"
 import "urlpattern-polyfill"
 import global from "../../../global"
 import { Icon } from "../../../model"
@@ -12,6 +26,7 @@ const Observers = global().Observers
 	scoped: true,
 })
 export class SmoothlyAppRoom implements ComponentWillLoad {
+	@Element() element: HTMLElement
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
@@ -19,7 +34,9 @@ export class SmoothlyAppRoom implements ComponentWillLoad {
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() component?: FunctionalComponent | JSX.Element | JSX.Element[]
-	@State() loading = true
+	@Prop() spinner = false
+	@State() shouldLoad = false
+	@State() loaded = false
 	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
 	@Event() smoothlyRoomLoaded: EventEmitter<{ selected: boolean }>
 	private contentElement?: HTMLElement
@@ -32,8 +49,7 @@ export class SmoothlyAppRoom implements ComponentWillLoad {
 	}
 
 	private load(): void {
-		console.log("loaded!")
-		this.loading = false
+		this.shouldLoad = true
 		this.unobserve()
 	}
 	private observe(): void {
@@ -78,6 +94,23 @@ export class SmoothlyAppRoom implements ComponentWillLoad {
 			this.setSelected(true)
 		}
 	}
+	referenceHandler(element?: HTMLElement) {
+		this.contentElement?.removeEventListener("smoothlyLazyLoaded", this.lazyLoadedHandler)
+		if (element) {
+			this.contentChanged()
+			this.contentElement = element
+			element.addEventListener("smoothlyLazyLoaded", this.lazyLoadedHandler)
+		}
+	}
+	/**
+	 * Must be defined as arrow function.
+	 * Must be added with `this.contentElement.addEventListener("smoothlyLazyLoaded", this.lazyLoadedHandler)`
+	 * due to the element being moved outside of this host node.
+	 */
+	lazyLoadedHandler = (event: CustomEvent<boolean>) => {
+		event.stopPropagation()
+		this.loaded = event.detail
+	}
 
 	render() {
 		return (
@@ -87,16 +120,11 @@ export class SmoothlyAppRoom implements ComponentWillLoad {
 						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 					</a>
 				</li>
-				<main ref={e => ((this.contentElement = e), this.contentChanged())}>
-					{!this.component ? null : (
+				<main ref={e => this.referenceHandler(e)}>
+					{!this.component || !this.shouldLoad ? null : (
 						<Fragment>
-							{this.loading ? (
-								<smoothly-spinner active />
-							) : typeof this.component == "function" ? (
-								<this.component />
-							) : (
-								this.component
-							)}
+							{this.spinner && this.shouldLoad && !this.loaded && <smoothly-spinner active />}
+							{typeof this.component == "function" ? <this.component /> : this.component}
 						</Fragment>
 					)}
 					<slot></slot>

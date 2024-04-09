@@ -62,6 +62,7 @@ export namespace Components {
         "path": string | URLPattern;
         "selected"?: boolean;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
+        "spinner": boolean;
         "to"?: string;
     }
     interface SmoothlyBackToTop {
@@ -515,6 +516,10 @@ export interface SmoothlyFormCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFrameElement;
+}
+export interface SmoothlyIconDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyIconDemoElement;
 }
 export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1243,6 +1248,7 @@ declare namespace LocalJSX {
         "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
+        "spinner"?: boolean;
         "to"?: string;
     }
     interface SmoothlyBackToTop {
@@ -1383,6 +1389,7 @@ declare namespace LocalJSX {
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
+        "onSmoothlyLazyLoaded"?: (event: SmoothlyIconDemoCustomEvent<boolean>) => void;
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;

@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core"
+import { Component, Event, EventEmitter, h } from "@stencil/core"
 import { Icon } from "../../model"
 @Component({
 	tag: "smoothly-icon-demo",
@@ -7,6 +7,10 @@ import { Icon } from "../../model"
 })
 export class SmoothlyIconDemo {
 	page = 0
+	@Event() smoothlyLazyLoaded: EventEmitter<boolean>
+	componentWillLoad(): void {
+		setTimeout(() => this.smoothlyLazyLoaded.emit(true), 1500)
+	}
 	render() {
 		return [
 			<h1>Icons</h1>,
