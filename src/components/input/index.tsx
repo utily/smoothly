@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
-import { Currency, Language, Locale } from "isoly"
-import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
+import { isoly } from "isoly"
+import { tidily } from "tidily"
 import { Color } from "../../model"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
@@ -17,24 +17,21 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
 	private lastValue: any
-	private state: Readonly<TidilyState> & Readonly<Settings>
+	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
-	@Prop({ reflect: true }) type: Type = "text"
-	@Prop({ mutable: true, reflect: true }) required = false
-	@Prop({ mutable: true }) minLength = 0
+	@Prop({ reflect: true }) type: tidily.Type = "text"
+	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) showLabel = true
-	@Prop({ mutable: true }) maxLength: number = Number.POSITIVE_INFINITY
-	@Prop({ mutable: true }) autocomplete = true
-	@Prop({ mutable: true }) pattern: RegExp | undefined
-	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
-	@Prop({ mutable: true }) disabled = false
+	@Prop() autocomplete = true
+	@Prop({ reflect: true }) placeholder: string | undefined
+	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
-	@Prop({ reflect: true }) currency?: Currency
+	@Prop({ reflect: true }) currency?: isoly.Currency
 	@Prop({ mutable: true, reflect: true }) changed = false
-	@State() formatter: Formatter & Converter<any>
+	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -55,21 +52,21 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Watch("type")
 	typeChange(): void {
-		let result: (Formatter & Converter<any>) | undefined
+		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
 		switch (this.type) {
 			case "price":
-				result = get("price", this.currency)
+				result = tidily.get("price", this.currency)
 				break
 			default:
-				result = get(this.type, getLocale())
+				result = tidily.get(this.type, getLocale())
 				break
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		this.formatter = result || get("text")!
+		this.formatter = result || tidily.get("text")!
 	}
-	private newState(state: TidilyState) {
-		return this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy(state))))
+	private newState(state: tidily.State) {
+		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
@@ -166,12 +163,14 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.keepFocusOnReRender = keepFocus
 	}
 	@Method()
-	async setSelectionRange(start: number, end: number, direction?: Direction) {
+	async setSelectionRange(start: number, end: number, direction?: tidily.Direction) {
 		this.state = this.newState({
 			...this.state,
 			selection: { start, end, direction: direction ?? this.state.selection.direction },
 		})
-		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
+		const after = this.formatter.format(
+			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
+		)
 		this.updateBackend(after, this.inputElement)
 	}
 	onBlur(event: FocusEvent) {
@@ -182,7 +181,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	onFocus(event: FocusEvent) {
 		this.initialValue = this.value
-		const after = this.formatter.format(StateEditor.copy(this.formatter.unformat(StateEditor.copy({ ...this.state }))))
+		const after = this.formatter.format(
+			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
+		)
 		if (event.target)
 			this.updateBackend(after, event.target as HTMLInputElement, false)
 	}
@@ -264,17 +265,21 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	private processPaste(pasted: string, backend: HTMLInputElement) {
 		if (!this.readonly) {
-			const after = Action.paste(this.formatter, this.state, pasted)
+			const after = tidily.Action.paste(this.formatter, this.state, pasted)
 			this.updateBackend(after, backend)
 		}
 	}
-	private processKey(event: Action, backend: HTMLInputElement) {
+	private processKey(event: tidily.Action, backend: HTMLInputElement) {
 		if (!this.readonly) {
-			const after = Action.apply(this.formatter, this.state, event)
+			const after = tidily.Action.apply(this.formatter, this.state, event)
 			this.updateBackend(after, backend)
 		}
 	}
-	updateBackend(after: Readonly<TidilyState> & Readonly<Settings>, backend: HTMLInputElement, setSelection = true) {
+	updateBackend(
+		after: Readonly<tidily.State> & Readonly<tidily.Settings>,
+		backend: HTMLInputElement,
+		setSelection = true
+	) {
 		if (after.value != backend.value)
 			backend.value = after.value
 		if (setSelection) {
@@ -286,7 +291,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		}
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
-			this.formatter.unformat(StateEditor.copy({ ...this.state })).value
+			this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })).value
 		)
 	}
 	render() {
@@ -326,7 +331,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 }
 
-function getLocale(): Locale | undefined {
+function getLocale(): isoly.Locale | undefined {
 	const result = navigator.language
-	return Locale.is(result) ? result : Language.is(result) ? Locale.toLocale(result) : undefined
+	return isoly.Locale.is(result) ? result : isoly.Language.is(result) ? isoly.Locale.toLocale(result) : undefined
 }

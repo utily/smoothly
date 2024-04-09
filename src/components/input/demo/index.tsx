@@ -132,6 +132,34 @@ export class SmoothlyInputDemo {
 					</smoothly-input-clear>
 					<smoothly-submit slot="submit">Submit</smoothly-submit>
 				</smoothly-form>
+				<h2>Prices</h2>
+				<smoothly-form looks="border">
+					<smoothly-input type="price" name="no">
+						No currency
+					</smoothly-input>
+					<smoothly-input type="price" name="crowns" currency="SEK">
+						SEK
+					</smoothly-input>
+					<smoothly-input type="price" name="usDollar" currency="USD">
+						USD
+					</smoothly-input>
+					<smoothly-input type="price" name="pounds" currency="GBP">
+						GBP
+					</smoothly-input>
+					<smoothly-input type="price" name="peso" currency="UYW">
+						UYW
+					</smoothly-input>
+					<smoothly-input type="price" name="iceland" currency="ISK">
+						ISK
+					</smoothly-input>
+					<smoothly-input type="price" name="Palladium" currency="XPD">
+						{"XPD (Palladium)"}
+					</smoothly-input>
+					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
+						Clear
+					</smoothly-input-clear>
+					<smoothly-submit slot="submit">Submit</smoothly-submit>
+				</smoothly-form>
 
 				<h4>Clear</h4>
 				<smoothly-form looks="border">
