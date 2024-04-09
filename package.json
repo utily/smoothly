@@ -75,7 +75,7 @@
 		"langly": "2.0.3",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.4",
-		"tidily": "^0.0.71",
+		"tidily": "^0.1.0",
 		"urlpattern-polyfill": "^6.0.2"
 	},
 	"devDependencies": {
