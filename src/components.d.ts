@@ -11,7 +11,7 @@ import { address as address1 } from "./components/address-display/index";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
-import { Direction, Type } from "tidily";
+import { tidily, Type } from "tidily";
 import { Criteria } from "selectively";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
@@ -200,23 +200,20 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
-        "currency"?: Currency;
+        "currency"?: isoly.Currency;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
-        "maxLength": number;
-        "minLength": number;
         "name": string;
-        "pattern": RegExp | undefined;
         "placeholder": string | undefined;
         "readonly": boolean;
         "required": boolean;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: Direction) => Promise<void>;
+        "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
-        "type": Type;
+        "type": tidily.Type;
         "value": any;
     }
     interface SmoothlyInputCheckbox {
@@ -1468,11 +1465,9 @@ declare namespace LocalJSX {
         "autocomplete"?: boolean;
         "changed"?: boolean;
         "color"?: Color;
-        "currency"?: Currency;
+        "currency"?: isoly.Currency;
         "disabled"?: boolean;
         "looks"?: Looks;
-        "maxLength"?: number;
-        "minLength"?: number;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
@@ -1480,12 +1475,11 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;
-        "type"?: Type;
+        "type"?: tidily.Type;
         "value"?: any;
     }
     interface SmoothlyInputCheckbox {
