@@ -1,0 +1,10 @@
+@import "../../button/style.css";
+
+:host([type="button"]) {
+	margin: 1em 0em;
+}
+
+:host([editable]){
+	opacity: 0.5;
+}
+

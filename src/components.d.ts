@@ -240,6 +240,15 @@ export namespace Components {
         "name": string;
         "value": string | undefined;
     }
+    interface SmoothlyInputConfirm {
+        "color"?: Color;
+        "disabled": boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "shape"?: "rounded";
+        "size": "flexible" | "small" | "large" | "icon";
+        "type": "link" | "button";
+    }
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -578,6 +587,10 @@ export interface SmoothlyInputColorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputColorElement;
 }
+export interface SmoothlyInputConfirmCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputConfirmElement;
+}
 export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateElement;
@@ -891,6 +904,12 @@ declare global {
     var HTMLSmoothlyInputColorElement: {
         prototype: HTMLSmoothlyInputColorElement;
         new (): HTMLSmoothlyInputColorElement;
+    };
+    interface HTMLSmoothlyInputConfirmElement extends Components.SmoothlyInputConfirm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputConfirmElement: {
+        prototype: HTMLSmoothlyInputConfirmElement;
+        new (): HTMLSmoothlyInputConfirmElement;
     };
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
     }
@@ -1244,6 +1263,7 @@ declare global {
         "smoothly-input-checkbox": HTMLSmoothlyInputCheckboxElement;
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
         "smoothly-input-color": HTMLSmoothlyInputColorElement;
+        "smoothly-input-confirm": HTMLSmoothlyInputConfirmElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
@@ -1531,6 +1551,16 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "value"?: string | undefined;
+    }
+    interface SmoothlyInputConfirm {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "flexible" | "small" | "large" | "icon";
+        "type"?: "link" | "button";
     }
     interface SmoothlyInputDate {
         "color"?: Color;
@@ -1894,6 +1924,7 @@ declare namespace LocalJSX {
         "smoothly-input-checkbox": SmoothlyInputCheckbox;
         "smoothly-input-clear": SmoothlyInputClear;
         "smoothly-input-color": SmoothlyInputColor;
+        "smoothly-input-confirm": SmoothlyInputConfirm;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
@@ -1989,6 +2020,7 @@ declare module "@stencil/core" {
             "smoothly-input-checkbox": LocalJSX.SmoothlyInputCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
             "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
+            "smoothly-input-confirm": LocalJSX.SmoothlyInputConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyInputConfirmElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
