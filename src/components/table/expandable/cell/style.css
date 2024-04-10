@@ -15,7 +15,6 @@
 }
 :host smoothly-icon {
 	width: 1em;
-	float: left;
 	padding: 0 0.3rem;
 	transition: transform 0.2s, opacity 0.1s;
 	display: flex;
@@ -30,10 +29,9 @@
 :host[open] smoothly-icon {
 	transform: rotate(90deg);
 }
-aside {
+:host > div {
 	display: grid;
-	grid-auto-flow: column;
-	justify-content: start;
+	grid-template-columns: auto 1fr;
 	align-items: center;
 }
 .hide {
@@ -84,7 +82,6 @@ smoothly-table[align=bottom] :host {
 }
 smoothly-table[align=middle] :host {
 	vertical-align: middle;
-	text-align: left;
 }
 smoothly-table[align=top] :host {
 	vertical-align: top;

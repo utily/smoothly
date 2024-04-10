@@ -25,9 +25,8 @@ smoothly-table-expandable-row[open] > div :host:last-of-type smoothly-icon {
 }
 :host > div {
 	display: grid;
-	grid-auto-flow: column;
+	grid-template-columns: 1fr auto;
 	align-items: center;
-	justify-content: space-between;
 }
 :host > div > div {
 	width: 100%;
@@ -37,7 +36,6 @@ smoothly-table[align=bottom] :host {
 }
 smoothly-table[align=middle] :host {
 	vertical-align: middle;
-	text-align: left;
 }
 smoothly-table[align=top] :host {
 	vertical-align: top;
