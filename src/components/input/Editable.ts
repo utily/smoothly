@@ -5,6 +5,7 @@ export interface Editable {
 	readonly: boolean
 	changed: boolean
 	listen: Editable.Listen
+	value: any
 }
 export namespace Editable {
 	export type Listen = (property: "changed", listener: (parent: Editable) => Promise<void>) => void
@@ -14,5 +15,6 @@ export namespace Editable {
 		readonly: isly.boolean(),
 		changed: isly.boolean(),
 		listen: isly.function<Listen>(),
+		value: isly.any(),
 	})
 }

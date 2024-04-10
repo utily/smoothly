@@ -30,7 +30,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: isoly.Currency
-	@Prop({ mutable: true, reflect: true }) changed = false
+	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -73,6 +73,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
+		this.changed = this.initialValue !== this.value
 		if (this.lastValue != value) {
 			this.lastValue = value
 			this.state = {
@@ -85,9 +86,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				value = value.trim()
 			this.smoothlyInput.emit({ [this.name]: value })
 		}
-
-		this.changed = Boolean(this.value)
 		this.listener.changed?.(this)
+		console.log(this.value)
 	}
 	@Watch("readonly")
 	watchingReadonly() {
@@ -104,7 +104,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	componentWillLoad() {
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
-		this.lastValue = this.value
+		this.lastValue = this.initialValue = this.value
 		const start = value.length
 		this.state = this.newState({
 			value,
@@ -115,7 +115,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			return
 		})
 		this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.changed = Boolean(this.value)
 		this.listener.changed?.(this)
 	}
 	componentDidRender() {
@@ -131,6 +130,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
+		console.log("this.readonly in edit()", this.readonly)
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
@@ -177,7 +177,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyBlur.emit()
 		if (this.initialValue != this.value)
 			this.smoothlyChange.emit({ [this.name]: this.value })
-		this.initialValue = undefined
 	}
 	onFocus(event: FocusEvent) {
 		this.initialValue = this.value
@@ -297,8 +296,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	render() {
 		return (
 			<Host
-				class={{ "has-value": this.state?.value != undefined && this.state?.value != "", readonly: this.readonly }}
-				changed={this.changed}
+				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
 				<div>

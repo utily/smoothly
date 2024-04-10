@@ -63,12 +63,15 @@ input:invalid + label + smoothly-icon {
 	z-index: 1;
 	pointer-events: none;
 }
-:host[placeholder] > div > label,
+:host:not([readonly]):not(.has-value)[placeholder] > div > label,
 :host.has-value > div > label,
-:host:focus-within > div > label {
+:host:not([readonly]):not(.has-value):focus-within > div > label {
 	top: 0.4em;
 	transform: scale(0.6);
 }
+/* :host[readonly]:not(.has-value) > div > label{
+	transform: scale(1);
+} */
 input:focus {
 	outline: none;
 }
