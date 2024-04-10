@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-footer",
@@ -6,11 +6,12 @@ import { Component, h } from "@stencil/core"
 	scoped: true,
 })
 export class TableFooter {
+	@Prop() colSpan: number
 	render() {
 		return (
-			<div>
+			<th colSpan={this.colSpan}>
 				<slot />
-			</div>
+			</th>
 		)
 	}
 }

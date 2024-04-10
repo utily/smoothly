@@ -461,6 +461,7 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTableFooter {
+        "colSpan": number;
     }
     interface SmoothlyTableHeader {
         "name": string;
@@ -1794,6 +1795,7 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTableFooter {
+        "colSpan"?: number;
     }
     interface SmoothlyTableHeader {
         "name"?: string;
