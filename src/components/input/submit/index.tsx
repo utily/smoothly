@@ -5,11 +5,11 @@ import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
 
 @Component({
-	tag: "smoothly-input-confirm",
+	tag: "smoothly-input-submit",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputConfirm implements ComponentWillLoad {
+export class SmoothlyInputSubmit implements ComponentWillLoad {
 	private parent?: Submittable & Editable
 	@Prop({ reflect: true }) color?: Color = "tertiary"
 	@Prop({ reflect: true }) expand?: "block" | "full"

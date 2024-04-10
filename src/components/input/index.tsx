@@ -87,7 +87,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.smoothlyInput.emit({ [this.name]: value })
 		}
 		this.listener.changed?.(this)
-		console.log(this.value)
 	}
 	@Watch("readonly")
 	watchingReadonly() {
@@ -130,7 +129,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
-		console.log("this.readonly in edit()", this.readonly)
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
