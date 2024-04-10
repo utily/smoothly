@@ -22,11 +22,10 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop() action?: string
 	@Prop({ mutable: true, reflect: true }) processing: boolean
 	@Prop() prevent = true
+	@Prop({ mutable: true }) changed = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@Event() notice: EventEmitter<Notice>
-
-	@Prop({ mutable: true, reflect: true }) changed = false
 	private listeners: {
 		changed?: ((parent: Editable) => Promise<void>)[]
 	} = {}
@@ -38,7 +37,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	}
 	@Watch("value")
 	watchValue() {
-		this.changed = Object.values(this.value).filter(value => Boolean(value)).length > 0
+		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Watch("readonly")
@@ -114,7 +113,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.inputs.forEach(input => {
-			Editable.type.is(input) && input.edit(editable)
+			Editable.Element.type.is(input) && input.edit(editable)
 		})
 		this.readonly = !editable
 	}

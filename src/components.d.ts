@@ -328,6 +328,16 @@ export namespace Components {
         "showSelected"?: boolean;
         "type"?: "icon";
     }
+    interface SmoothlyInputSubmit {
+        "color"?: Color;
+        "disabled": boolean;
+        "display": boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "shape"?: "rounded";
+        "size": "flexible" | "small" | "large" | "icon";
+        "type": "link" | "button";
+    }
     interface SmoothlyItem {
         "filter": (filter: string) => Promise<boolean>;
         "marked": boolean;
@@ -603,6 +613,10 @@ export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputSelectElement;
+}
+export interface SmoothlyInputSubmitCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputSubmitElement;
 }
 export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -938,6 +952,12 @@ declare global {
         prototype: HTMLSmoothlyInputSelectElement;
         new (): HTMLSmoothlyInputSelectElement;
     };
+    interface HTMLSmoothlyInputSubmitElement extends Components.SmoothlyInputSubmit, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputSubmitElement: {
+        prototype: HTMLSmoothlyInputSubmitElement;
+        new (): HTMLSmoothlyInputSubmitElement;
+    };
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
     }
     var HTMLSmoothlyItemElement: {
@@ -1234,6 +1254,7 @@ declare global {
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
         "smoothly-input-range": HTMLSmoothlyInputRangeElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
+        "smoothly-input-submit": HTMLSmoothlyInputSubmitElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-label": HTMLSmoothlyLabelElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
@@ -1615,6 +1636,17 @@ declare namespace LocalJSX {
         "showSelected"?: boolean;
         "type"?: "icon";
     }
+    interface SmoothlyInputSubmit {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "display"?: boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "flexible" | "small" | "large" | "icon";
+        "type"?: "link" | "button";
+    }
     interface SmoothlyItem {
         "marked"?: boolean;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<void>) => void;
@@ -1872,6 +1904,7 @@ declare namespace LocalJSX {
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
         "smoothly-input-range": SmoothlyInputRange;
         "smoothly-input-select": SmoothlyInputSelect;
+        "smoothly-input-submit": SmoothlyInputSubmit;
         "smoothly-item": SmoothlyItem;
         "smoothly-label": SmoothlyLabel;
         "smoothly-notification": SmoothlyNotification;
@@ -1966,6 +1999,7 @@ declare module "@stencil/core" {
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
             "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
+            "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;

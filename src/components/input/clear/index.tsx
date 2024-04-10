@@ -29,12 +29,14 @@ export class SmoothlyInputClear {
 				this.parent = parent
 				if (Editable.type.is(parent)) {
 					parent.listen("changed", async p => {
-						this.disabled = p.readonly ? true : !p.changed
-						if (p instanceof SmoothlyInput)
-							this.display = p.readonly ? false : p.changed
-
-						if (p instanceof SmoothlyForm)
+						if (p instanceof SmoothlyInput) {
+							this.disabled = p.readonly ? true : !p.value
+							this.display = p.readonly ? false : Boolean(p.value)
+						}
+						if (p instanceof SmoothlyForm) {
+							this.disabled = p.readonly ? true : Object.values(p.value).filter(val => val).length < 1
 							this.display = !p.readonly
+						}
 					})
 				}
 			}
