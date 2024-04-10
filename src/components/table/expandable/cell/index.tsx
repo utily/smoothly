@@ -23,7 +23,6 @@ export class TableExpandableCell implements ComponentWillLoad {
 	@Element() element: HTMLSmoothlyTableExpandableCellElement
 	@State() allowSpotlight = true
 	@State() spotlight = true
-	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
 	@Event() smoothlyExpansionLoad: EventEmitter<void>
@@ -66,11 +65,11 @@ export class TableExpandableCell implements ComponentWillLoad {
 	}
 	render() {
 		return (
-			<Host style={{ textAlign: this.align }}>
-				<aside>
+			<Host>
+				<div>
 					<smoothly-icon name="caret-forward-outline"></smoothly-icon>
 					<slot></slot>
-				</aside>
+				</div>
 				<tr class={{ spotlight: this.spotlight }} ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>
 						<slot name="detail"></slot>
