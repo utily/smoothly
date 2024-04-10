@@ -37,10 +37,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	}
 	@Watch("value")
 	watchValue() {
-		this.changed =
-			Array.from(this.inputs.values())
-				.map(d => (Editable.type.is(d) ? d.changed : true))
-				.filter(d => d).length > 0
+		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Watch("readonly")
