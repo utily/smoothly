@@ -34,10 +34,6 @@
 	grid-template-columns: auto 1fr;
 	align-items: center;
 }
-:host > div > div {
-	display: flex;
-	flex-direction: row;
-}
 .hide {
 	display: none;
 }
