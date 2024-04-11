@@ -1,5 +1,8 @@
 :host {
 	display: table-footer-group;
+	position: sticky;
+	bottom: 0;
+	background-color: rgb(var(--smoothly-color));
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)),
 		inset 0 1px 0 rgb(var(--smoothly-color-shade));
 	line-height: 2.5rem;
