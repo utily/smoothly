@@ -8,9 +8,11 @@ import { Component, h } from "@stencil/core"
 export class TableDemo {
 	render() {
 		return [
-			<h4>Filtered & Checked Table</h4>,
+			<h4>Demo table 1: Filtered & Checked Table</h4>,
 			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
+			<h4>Demo table 2</h4>,
 			<smoothly-table-testing></smoothly-table-testing>,
+			<h4>Demo table 3</h4>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
@@ -58,6 +60,7 @@ export class TableDemo {
 					<div slot="detail">expandable row content</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
+			<h4>Demo table 4</h4>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>Header A</smoothly-table-header>
@@ -100,13 +103,14 @@ export class TableDemo {
 					</smoothly-table-expandable-cell>
 				</smoothly-table-row>
 			</smoothly-table>,
+			<h4>Demo table 5</h4>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>A</smoothly-table-header>
 					<smoothly-table-header>B</smoothly-table-header>
 				</smoothly-table-row>
 				<smoothly-table-expandable-row>
-					<smoothly-table-cell>a row</smoothly-table-cell>
+					<smoothly-table-cell>nested expandable row</smoothly-table-cell>
 					<smoothly-table-cell>b row</smoothly-table-cell>
 					<div slot="detail">
 						<smoothly-table>
@@ -147,9 +151,7 @@ export class TableDemo {
 				</smoothly-table-expandable-row>
 				<smoothly-table-row>
 					<smoothly-table-expandable-cell>
-						<div>one</div>
-						<div>two</div>
-						<div>three</div>
+						<span>nested expandable cells</span>
 						<div slot="detail">
 							<smoothly-table>
 								<smoothly-table-row>
@@ -209,6 +211,7 @@ export class TableDemo {
 					</smoothly-table-expandable-cell>
 				</smoothly-table-row>
 			</smoothly-table>,
+			<h4>Demo table 6</h4>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>display</smoothly-table-header>
@@ -222,6 +225,7 @@ export class TableDemo {
 					<div slot="detail">expansion</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
+			<h4>Demo table 7</h4>,
 			<span>nested 1 then normal</span>,
 			<smoothly-table>
 				<smoothly-table-row>
@@ -263,6 +267,7 @@ export class TableDemo {
 					</div>
 				</smoothly-table-expandable-row>
 			</smoothly-table>,
+			<h4>Demo table 8</h4>,
 			<span>not nested</span>,
 			<smoothly-table>
 				<smoothly-table-row>
@@ -282,6 +287,7 @@ export class TableDemo {
 					<smoothly-table-cell>ddd</smoothly-table-cell>
 				</smoothly-table-row>
 			</smoothly-table>,
+			<h4>Demo table 9</h4>,
 			<smoothly-table>
 				<smoothly-table-row>
 					<smoothly-table-header>First name</smoothly-table-header>

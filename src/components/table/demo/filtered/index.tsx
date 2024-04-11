@@ -73,6 +73,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 							<smoothly-table-header>{this.selector.render(data)}</smoothly-table-header>
 							<smoothly-table-header>Breed</smoothly-table-header>
 							<smoothly-table-header>Coat</smoothly-table-header>
+							<smoothly-table-header>Price</smoothly-table-header>
 						</smoothly-table-row>
 						{data.map(cat => (
 							<smoothly-table-row>
@@ -85,6 +86,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 									{cat.coat}
 									<div slot="detail">Pattern: {cat.pattern}</div>
 								</smoothly-table-expandable-cell>
+								<smoothly-table-cell>
+									<smoothly-display
+										type="price"
+										value={[...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0)}
+										currency="SEK"></smoothly-display>
+								</smoothly-table-cell>
 							</smoothly-table-row>
 						))}
 					</smoothly-table>,
