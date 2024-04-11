@@ -68,7 +68,9 @@ export class TableExpandableCell implements ComponentWillLoad {
 			<Host>
 				<div>
 					<smoothly-icon name="caret-forward-outline"></smoothly-icon>
-					<slot></slot>
+					<div>
+						<slot></slot>
+					</div>
 				</div>
 				<tr class={{ spotlight: this.spotlight }} ref={e => (this.expansionElement = e)}>
 					<td colSpan={999} class={!this.open ? "hide" : ""}>

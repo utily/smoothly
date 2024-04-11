@@ -147,7 +147,9 @@ export class TableDemo {
 				</smoothly-table-expandable-row>
 				<smoothly-table-row>
 					<smoothly-table-expandable-cell>
-						a cell
+						<div>one</div>
+						<div>two</div>
+						<div>three</div>
 						<div slot="detail">
 							<smoothly-table>
 								<smoothly-table-row>
