@@ -3,15 +3,18 @@
 	display: flex;
 	justify-content: center;
 }
+
 smoothly-table {
 	width: 80%;
 }
+
 .tableCell {
 	height: 3rem;
 	display: flex;
 	align-items: center;
 }
-.tableCell > div {
+
+.tableCell>div {
 	margin-left: 3rem;
 	margin-right: 3rem;
 	display: flex;
@@ -19,4 +22,11 @@ smoothly-table {
 	align-items: center;
 	justify-content: space-between;
 	gap: 2rem;
+}
+
+td>div.footer {
+	display: flex;
+	padding-left: 1.5em;
+	flex-direction: row;
+	gap: 1em;
 }

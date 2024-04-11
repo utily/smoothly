@@ -94,6 +94,15 @@ export class TableDemoFiltered implements ComponentWillLoad {
 								</smoothly-table-cell>
 							</smoothly-table-row>
 						))}
+						<smoothly-table-footer>
+							<td colSpan={5}>
+								<smoothly-display
+									type="text"
+									value={`Selected: ${
+										this.selector.selected.length != 0 ? this.selector.selected.length : data ? data.length : "?"
+									}`}></smoothly-display>
+							</td>
+						</smoothly-table-footer>
 					</smoothly-table>,
 			  ]
 	}
