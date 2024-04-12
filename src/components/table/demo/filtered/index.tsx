@@ -37,6 +37,15 @@ export class TableDemoFiltered implements ComponentWillLoad {
 							this.data.data.map(
 								cat => cat.origin && <smoothly-picker-option value={cat.origin}>{cat.origin}</smoothly-picker-option>
 							)}
+						<smoothly-filter-icon
+							comparison="includes"
+							property="pattern"
+							icon="ticket"
+							value={"Ticked"}
+							toolTip="Ticked pattern"
+							slot="bar"
+							flip={true}
+						/>
 					</smoothly-filter-picker>
 					<smoothly-form looks="border" slot="detail">
 						<smoothly-filter-input property="breed" placeholder="ex. Abyssinian">

@@ -147,10 +147,9 @@ export namespace Components {
     }
     interface SmoothlyFilterIcon {
         "active": boolean;
-        "clear": () => Promise<void>;
         "comparison": "includes" | "less" | "greater";
         "flip": boolean;
-        "icon": "enter" | "exit" | "download" | "share" | "repeat" | "card" | "close-circle" | "trash";
+        "icon": Icon;
         "property": string;
         "toolTip": string;
         "value": string | number;
@@ -1470,8 +1469,9 @@ declare namespace LocalJSX {
         "active"?: boolean;
         "comparison"?: "includes" | "less" | "greater";
         "flip"?: boolean;
-        "icon"?: "enter" | "exit" | "download" | "share" | "repeat" | "card" | "close-circle" | "trash";
-        "onFilter"?: (event: SmoothlyFilterIconCustomEvent<{ type: string; criteria: selectively.Criteria | undefined }>) => void;
+        "icon"?: Icon;
+        "onFilter"?: (event: SmoothlyFilterIconCustomEvent<Filter.Function>) => void;
+        "onFilterRegister"?: (event: SmoothlyFilterIconCustomEvent<Filter.Update>) => void;
         "property"?: string;
         "toolTip"?: string;
         "value"?: string | number;
