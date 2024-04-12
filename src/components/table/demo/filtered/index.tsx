@@ -39,21 +39,17 @@ export class TableDemoFiltered implements ComponentWillLoad {
 							)}
 					</smoothly-filter-picker>
 					<smoothly-form looks="border" slot="detail">
-						<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
+						<smoothly-filter-input property="breed" placeholder="ex. Abyssinian">
 							Breed
-							<smoothly-icon slot="start" name="search-outline" size="small" />
 						</smoothly-filter-input>
-						<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
+						<smoothly-filter-input property="country" placeholder="ex. Ethiopia">
 							Country
-							<smoothly-icon slot="start" name="search-outline" size="small" />
 						</smoothly-filter-input>
-						<smoothly-filter-input name="coat" placeholder="ex. Short">
+						<smoothly-filter-input property="coat" placeholder="ex. Short">
 							Coat
-							<smoothly-icon slot="start" name="search-outline" size="small" />
 						</smoothly-filter-input>
-						<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
+						<smoothly-filter-input property="pattern" placeholder="ex. Ticked">
 							Pattern
-							<smoothly-icon slot="start" name="search-outline" size="small" />
 						</smoothly-filter-input>
 					</smoothly-form>
 				</smoothly-filter>

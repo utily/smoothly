@@ -156,11 +156,9 @@ export namespace Components {
         "value": string | number;
     }
     interface SmoothlyFilterInput {
-        "clear": () => Promise<void>;
-        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "within" | "some" | "has" | "includes";
-        "name": string;
-        "placeholder"?: string;
-        "value": string;
+        "placeholder": string;
+        "property": string;
+        "type": tidily.Type;
     }
     interface SmoothlyFilterPicker {
         "multiple": boolean;
@@ -1479,11 +1477,11 @@ declare namespace LocalJSX {
         "value"?: string | number;
     }
     interface SmoothlyFilterInput {
-        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "within" | "some" | "has" | "includes";
-        "name"?: string;
-        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<{ type: string; criteria: selectively.Criteria }>) => void;
+        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Filter.Function>) => void;
+        "onFilterRegister"?: (event: SmoothlyFilterInputCustomEvent<Filter.Update>) => void;
         "placeholder"?: string;
-        "value"?: string;
+        "property"?: string;
+        "type"?: tidily.Type;
     }
     interface SmoothlyFilterPicker {
         "multiple"?: boolean;
