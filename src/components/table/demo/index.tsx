@@ -9,7 +9,7 @@ export class TableDemo {
 	render() {
 		return [
 			<h4>Demo table 1: Filtered & Checked Table</h4>,
-			<smoothly-table-demo-filtered></smoothly-table-demo-filtered>,
+			<smoothly-lazy content={<smoothly-table-demo-filtered />} />,
 			<h4>Demo table 2</h4>,
 			<smoothly-table-testing></smoothly-table-testing>,
 			<h4>Demo table 3</h4>,

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, FunctionalComponent, h, Host, JSX, Method, Prop } from "@stencil/core"
 import "urlpattern-polyfill"
 import { Icon } from "../../../model"
 
@@ -14,6 +14,7 @@ export class SmoothlyAppRoom {
 	@Prop() path: string | URLPattern = ""
 	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
+	@Prop() content?: JSX.Element | FunctionalComponent
 	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
 	@Event() smoothlyRoomLoaded: EventEmitter<{ selected: boolean }>
 	private contentElement?: HTMLElement
@@ -52,6 +53,7 @@ export class SmoothlyAppRoom {
 					</a>
 				</li>
 				<main ref={e => (this.contentElement = e)}>
+					{this.content && <smoothly-lazy content={this.content} />}
 					<slot></slot>
 				</main>
 			</Host>
