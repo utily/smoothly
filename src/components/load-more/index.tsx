@@ -1,29 +1,32 @@
-import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-load-more",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class LoadMore {
+export class LoadMore implements ComponentWillLoad {
+	@Element() element: HTMLSmoothlyLoadMoreElement
 	@Prop() offset = "0"
 	@Prop() name = ""
 	@Event() smoothlyLoadMore: EventEmitter<string>
-	@Element() element: HTMLSmoothlyLoadMoreElement
-	observer?: IntersectionObserver // possibly keep reference for GC
-	componentDidLoad() {
-		this.observer = new IntersectionObserver(
-			entries => {
-				if (entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0)
-					this.smoothlyLoadMore.emit(this.name)
-			},
-			{
-				threshold: 0,
-			}
+
+	componentWillLoad(): void {
+		const observer: IntersectionObserver = new IntersectionObserver(entries =>
+			this.observationHandler(observer, entries)
 		)
-		this.observer.observe(this.element)
+		observer.observe(this.element)
 	}
-	render() {
-		return <Host style={{ position: "relative", top: this.offset }}></Host>
+
+	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
+		if (entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) {
+			this.smoothlyLoadMore.emit(this.name)
+			observer.unobserve(this.element)
+			observer.disconnect()
+		}
+	}
+
+	render(): VNode | VNode[] {
+		return <Host style={{ position: "relative", top: this.offset }} />
 	}
 }

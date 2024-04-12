@@ -1,4 +1,4 @@
-import { Component, FunctionalComponent, h, Host, JSX, Prop } from "@stencil/core"
+import { Component, FunctionalComponent, h, Host, JSX, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-lazy",
@@ -8,18 +8,19 @@ import { Component, FunctionalComponent, h, Host, JSX, Prop } from "@stencil/cor
 export class SmoothlyLazy {
 	@Prop({ mutable: true }) show = false
 	@Prop() content?: JSX.Element | FunctionalComponent
-	render() {
+
+	loadMoreHandler(event: CustomEvent<string>): void {
+		event.stopPropagation()
+		this.show = true
+	}
+
+	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<slot name="before"></slot>
-				<smoothly-load-more
-					onSmoothlyLoadMore={e => {
-						this.show = true
-						e.stopPropagation()
-					}}
-				/>
+				<slot name="before" />
+				<smoothly-load-more onSmoothlyLoadMore={e => this.loadMoreHandler(e)} />
 				{this.show && (typeof this.content == "function" ? <this.content /> : this.content)}
-				<slot></slot>
+				<slot />
 			</Host>
 		)
 	}
