@@ -1,8 +1,8 @@
 :host {
 	position: relative;
 	border: 1px solid rgb(var(--smoothly-medium-tint));
-	padding-left: 1rem;
-	padding-right: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 	display: flex;
 	flex-direction: row;
 	min-width: fit-content;

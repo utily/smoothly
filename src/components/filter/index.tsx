@@ -5,13 +5,14 @@ import { Filter } from "./Filter"
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilter {
 	field: HTMLSmoothlyFilterFieldElement | undefined
 	updating = false
 	state: Record<string, selectively.Criteria> = {}
 	filters: Map<string, Filter.Update> = new Map<string, Filter.Update>() // maybe set?
+	@State() detailChildren?: boolean
 	@State() criteria: selectively.Criteria = selectively.and()
 	@State() expanded = false
 	@Event() smoothlyFilter: EventEmitter<selectively.Criteria>
@@ -52,14 +53,16 @@ export class SmoothlyFilter {
 			<Host>
 				<slot name="bar" />
 				<smoothly-filter-field criteria={this.criteria} ref={e => (this.field = e)} />
-				<smoothly-icon
-					name={"close"}
-					toolTip={"Clear all filters"}
-					size="small"
-					onClick={() => {
-						this.clear()
-					}}
-				/>
+				{this.criteria.toString() != "" && (
+					<smoothly-icon
+						name={"close"}
+						toolTip={"Clear all filters"}
+						size="small"
+						onClick={() => {
+							this.clear()
+						}}
+					/>
+				)}
 				<smoothly-icon
 					name={this.expanded ? "options" : "options-outline"}
 					toolTip={(this.expanded ? "Hide" : "Show") + " additional filters"}
