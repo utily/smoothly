@@ -18,7 +18,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private keepFocusOnReRender = false
 	private lastValue: any
 	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	private abortInputEvent?: () => void
 	@Prop({ reflect: true, mutable: true }) color?: Color
+	@Prop() delay = 0
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
@@ -84,9 +86,20 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		if (value != before) {
 			if (typeof value == "string")
 				value = value.trim()
-			this.smoothlyInput.emit({ [this.name]: value })
+			this.smoothlyInputEmit(value)
 		}
 		this.listener.changed?.(this)
+	}
+	async smoothlyInputEmit(value: any): Promise<void> {
+		this.abortInputEvent?.()
+		const timeout = window.setTimeout(() => {
+			this.abortInputEvent = undefined
+			this.smoothlyInput.emit({ [this.name]: value })
+		}, this.delay * 1000)
+		this.abortInputEvent = () => {
+			this.abortInputEvent = undefined
+			window.clearTimeout(timeout)
+		}
 	}
 	@Watch("readonly")
 	watchingReadonly() {
@@ -173,6 +186,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	onBlur(event: FocusEvent) {
 		this.smoothlyBlur.emit()
+		if (this.abortInputEvent) {
+			this.abortInputEvent()
+			const value = typeof this.value == "string" ? this.value.trim() : this.value
+			this.smoothlyInput.emit({ [this.name]: value })
+		}
 		if (this.initialValue != this.value)
 			this.smoothlyChange.emit({ [this.name]: this.value })
 	}
