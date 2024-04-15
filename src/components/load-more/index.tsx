@@ -27,6 +27,6 @@ export class LoadMore implements ComponentWillLoad {
 	}
 
 	render(): VNode | VNode[] {
-		return <Host style={{ position: "relative", top: this.offset }} />
+		return <Host style={{ "--offset": `${this.offset}` }} />
 	}
 }

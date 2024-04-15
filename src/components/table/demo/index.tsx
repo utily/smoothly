@@ -315,9 +315,9 @@ export class TableDemo {
 						<smoothly-table-cell>Pax2Pay</smoothly-table-cell>
 						<smoothly-lazy
 							slot={"detail"}
-							content={
+							content={() => (
 								<img src={"https://dash.pax2pay.app/assets/pax2pay-dark-horizontal.svg"} alt={"Pax2Pay Logotype."} />
-							}
+							)}
 						/>
 					</smoothly-table-expandable-row>
 				</smoothly-table>
@@ -340,9 +340,9 @@ export class TableDemo {
 							Pax2Pay
 							<smoothly-lazy
 								slot={"detail"}
-								content={
+								content={() => (
 									<img src={"https://dash.pax2pay.app/assets/pax2pay-dark-horizontal.svg"} alt={"Pax2Pay Logotype."} />
-								}
+								)}
 							/>
 						</smoothly-table-expandable-cell>
 					</smoothly-table-row>
