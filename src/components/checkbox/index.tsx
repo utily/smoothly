@@ -1,6 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import * as langly from "langly"
-import { Clearable } from "../filter/Clearable"
+import { Clearable } from "../input/Clearable"
 import * as translation from "./translation"
 @Component({
 	tag: "smoothly-checkbox",
