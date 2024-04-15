@@ -92,13 +92,13 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	async smoothlyInputEmit(value: any): Promise<void> {
 		this.abortInputEvent?.()
-		const t: ReturnType<typeof setTimeout> = setTimeout(() => {
+		const timeout = window.setTimeout(() => {
 			this.abortInputEvent = undefined
 			this.smoothlyInput.emit({ [this.name]: value })
 		}, this.delay * 1000)
 		this.abortInputEvent = () => {
 			this.abortInputEvent = undefined
-			clearTimeout(t)
+			window.clearTimeout(timeout)
 		}
 	}
 	@Watch("readonly")
