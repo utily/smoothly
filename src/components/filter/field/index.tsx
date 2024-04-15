@@ -9,13 +9,14 @@ import { selectively } from "selectively"
 export class SmoothlyFilterField {
 	input: HTMLSmoothlyInputElement | undefined
 	@Prop() criteria: selectively.Criteria
-	@Event() filterField: EventEmitter<selectively.Criteria>
+	@Event() filterField: EventEmitter<selectively.Rule>
 	@Method()
 	async clear(): Promise<void> {
 		await this.input?.clear()
 	}
 	render() {
 		const string = this.criteria.toString()
+		console.log("string, ", string)
 		return (
 			<smoothly-input
 				name="filter"

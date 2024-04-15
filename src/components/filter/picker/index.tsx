@@ -32,10 +32,9 @@ export class SmoothlyFilterPicker implements Filter {
 	}
 	update(expression: selectively.Criteria): void {
 		this.updating = true
-		const rule = selectively.create(expression)
-		if (rule instanceof selectively.And && rule.rules.length > 0)
+		if (expression instanceof selectively.And && expression.rules.length > 0)
 			for (const option of this.options.values())
-				option.selected(rule.rules.some(r => r.is(option.state)))
+				option.selected(expression.rules.some(r => r.is(option.state)))
 		else
 			this.options.forEach(o => o.selected(false))
 		this.updating = false
@@ -44,20 +43,39 @@ export class SmoothlyFilterPicker implements Filter {
 		event.stopPropagation()
 		if (!this.updating) {
 			const detail = event.detail[this.property]
-			const manipulate = (criteria: Record<string, selectively.Criteria>): Record<string, selectively.Criteria> => {
-				const result = { ...criteria }
-				if (this.multiple && isly.string().array({ criteria: "minLength", value: 1 }).is(detail)) {
-					result[this.property] = selectively.within(detail)
-				} else if (typeof detail == "string") {
-					result[this.property] = selectively.is(detail)
-				} else {
-					delete result[this.property]
+			const manipulate = (criteria: selectively.Criteria): selectively.Criteria => {
+				let result: selectively.Criteria = criteria
+				const newCriteria = this.getCriteria(detail)
+				if (!(result instanceof selectively.Rule)) {
+					result = newCriteria ? selectively.and(result, newCriteria) : result
+				} else if (result instanceof selectively.And) {
+					const relevantCriteria = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
+					!newCriteria
+						? result.rules.splice(relevantCriteria, 1)
+						: relevantCriteria != -1
+						? (result.rules[relevantCriteria] = newCriteria)
+						: result.rules.push(newCriteria)
+					result = selectively.and(...result.rules)
 				}
 				return result
 			}
 			this.smoothlyFilterManipulate.emit(manipulate.bind(this))
 		}
 	}
+	findInstanceOf(criteria: selectively.Criteria, property: string): boolean {
+		return criteria instanceof selectively.Property && criteria.name == property
+	}
+	private getCriteria(detail: unknown): selectively.Rule | undefined {
+		let result: selectively.Criteria | undefined
+		if (this.multiple && isly.string().array({ criteria: "minLength", value: 1 }).is(detail))
+			result = selectively.within(detail)
+		else if (typeof detail == "string")
+			result = selectively.property(this.property, selectively.is(detail))
+		else
+			result = undefined
+		return result
+	}
+
 	render() {
 		return (
 			<smoothly-picker
