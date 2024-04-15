@@ -1,9 +1,7 @@
 :host {
-	display: block;
+	display: contents;
 }
 
 :host>smoothly-picker {
-	width: 100%;
-	max-width: 100%;
-	min-width: 10em;
+	width: 12.5em;
 }

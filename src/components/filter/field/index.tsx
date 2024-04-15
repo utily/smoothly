@@ -4,7 +4,7 @@ import { selectively } from "selectively"
 @Component({
 	tag: "smoothly-filter-field",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyFilterField {
 	input: HTMLSmoothlyInputElement | undefined
@@ -21,7 +21,7 @@ export class SmoothlyFilterField {
 				name="filter"
 				ref={e => (this.input = e)}
 				value={string}
-				delay={2}
+				delay={1}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyBlur={e => e.stopPropagation()}
 				onSmoothlyFormDisable={e => e.stopPropagation()}

@@ -7,7 +7,7 @@ import { Filter } from "../Filter"
 @Component({
 	tag: "smoothly-filter-picker",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyFilterPicker implements Filter {
 	updating = false
@@ -49,7 +49,7 @@ export class SmoothlyFilterPicker implements Filter {
 				if (this.multiple && isly.string().array({ criteria: "minLength", value: 1 }).is(detail)) {
 					result[this.property] = selectively.within(detail)
 				} else if (typeof detail == "string") {
-					result[this.property] = selectively.includes(detail)
+					result[this.property] = selectively.is(detail)
 				} else {
 					delete result[this.property]
 				}

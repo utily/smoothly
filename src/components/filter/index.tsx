@@ -5,7 +5,7 @@ import { Filter } from "./Filter"
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyFilter {
 	field: HTMLSmoothlyFilterFieldElement | undefined

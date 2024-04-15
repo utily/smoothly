@@ -33,6 +33,7 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
+					<smoothly-icon slot="bar" name="search-outline" size="small" />
 					<smoothly-filter-picker property="origin" slot="bar" multiple={false}>
 						{this.data &&
 							this.data.data.map(
@@ -61,7 +62,12 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 					</div> */}
 				</smoothly-filter>
 				<smoothly-filter>
-					<smoothly-icon slot="bar" name="search-outline" size="small" />
+					<smoothly-filter-picker property="origin" slot="bar" multiple={true}>
+						{this.data &&
+							this.data.data.map(
+								cat => cat.origin && <smoothly-picker-option value={cat.origin}>{cat.origin}</smoothly-picker-option>
+							)}
+					</smoothly-filter-picker>
 				</smoothly-filter>
 				<smoothly-filter>
 					<smoothly-icon slot="start" name="search-outline" size="small" />
