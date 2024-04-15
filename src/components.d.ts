@@ -14,6 +14,7 @@ import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
 import { Criteria, selectively } from "selectively";
+import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
 import { GoogleFont } from "./model/GoogleFont";
@@ -164,6 +165,10 @@ export namespace Components {
         "showLabel": boolean;
         "type": string;
         "value": string;
+    }
+    interface SmoothlyFilterPicker {
+        "multiple": boolean;
+        "property": string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -569,6 +574,10 @@ export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterInputElement;
 }
+export interface SmoothlyFilterPickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterPickerElement;
+}
 export interface SmoothlyFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFormElement;
@@ -868,6 +877,12 @@ declare global {
     var HTMLSmoothlyFilterInputElement: {
         prototype: HTMLSmoothlyFilterInputElement;
         new (): HTMLSmoothlyFilterInputElement;
+    };
+    interface HTMLSmoothlyFilterPickerElement extends Components.SmoothlyFilterPicker, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterPickerElement: {
+        prototype: HTMLSmoothlyFilterPickerElement;
+        new (): HTMLSmoothlyFilterPickerElement;
     };
     interface HTMLSmoothlyFormElement extends Components.SmoothlyForm, HTMLStencilElement {
     }
@@ -1280,6 +1295,7 @@ declare global {
         "smoothly-filter-demo": HTMLSmoothlyFilterDemoElement;
         "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
+        "smoothly-filter-picker": HTMLSmoothlyFilterPickerElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
@@ -1498,6 +1514,12 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "type"?: string;
         "value"?: string;
+    }
+    interface SmoothlyFilterPicker {
+        "multiple"?: boolean;
+        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
+        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
+        "property"?: string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -1946,6 +1968,7 @@ declare namespace LocalJSX {
         "smoothly-filter-demo": SmoothlyFilterDemo;
         "smoothly-filter-field": SmoothlyFilterField;
         "smoothly-filter-input": SmoothlyFilterInput;
+        "smoothly-filter-picker": SmoothlyFilterPicker;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-google-font": SmoothlyGoogleFont;
@@ -2045,6 +2068,7 @@ declare module "@stencil/core" {
             "smoothly-filter-demo": LocalJSX.SmoothlyFilterDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFilterDemoElement>;
             "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
+            "smoothly-filter-picker": LocalJSX.SmoothlyFilterPicker & JSXBase.HTMLAttributes<HTMLSmoothlyFilterPickerElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
