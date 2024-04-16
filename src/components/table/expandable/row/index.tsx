@@ -21,7 +21,6 @@ export class TableExpandableRow implements ComponentWillLoad {
 	@Element() element: HTMLSmoothlyTableRowElement
 	@State() allowSpotlight = true
 	@State() spotlight = true
-	@Prop() align: "left" | "center" | "right" = "left"
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
 	@Event() smoothlyExpandableChange: EventEmitter<boolean>
@@ -44,8 +43,8 @@ export class TableExpandableRow implements ComponentWillLoad {
 	}
 	render() {
 		return (
-			<Host style={{ textAlign: this.align }}>
-				<div style={{ textAlign: this.align }} onClick={() => (this.open = !this.open)}>
+			<Host>
+				<div onClick={() => (this.open = !this.open)}>
 					<slot></slot>
 				</div>
 				<tr class={{ spotlight: this.spotlight }}>

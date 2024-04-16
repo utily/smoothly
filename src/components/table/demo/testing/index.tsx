@@ -52,12 +52,13 @@ export class SmoothlyTableTesting {
 						</smoothly-table-row>
 					))}
 					<smoothly-table-footer>
-						<div class="tableCell">
-							<div>
+						<td colSpan={2}>
+							<div class="footer">
 								Currently viewing content from:
 								<smoothly-display type="date" value="2023-10-12" />
 							</div>
-						</div>
+						</td>
+						<smoothly-table-header>{"Total age: " + data.reduce((r, a) => r + a.age, 0)}</smoothly-table-header>
 					</smoothly-table-footer>
 				</smoothly-table>
 			</Host>

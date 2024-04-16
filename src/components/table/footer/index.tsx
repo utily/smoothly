@@ -7,10 +7,6 @@ import { Component, h } from "@stencil/core"
 })
 export class TableFooter {
 	render() {
-		return (
-			<div>
-				<slot />
-			</div>
-		)
+		return <slot />
 	}
 }

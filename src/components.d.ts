@@ -9,6 +9,7 @@ import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { FunctionalComponent, JSX } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
@@ -52,6 +53,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
+        "content"?: JSX.Element | FunctionalComponent;
         "disabled": boolean;
         "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
@@ -212,6 +214,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "currency"?: isoly.Currency;
+        "delay": number;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -360,6 +363,14 @@ export namespace Components {
         "hue": number;
         "shape": "rectangle" | "rounded";
     }
+    interface SmoothlyLazy {
+        "content"?: JSX.Element | FunctionalComponent;
+        "show": boolean;
+    }
+    interface SmoothlyLoadMore {
+        "name": string;
+        "offset": string;
+    }
     interface SmoothlyNotification {
         "closable": boolean;
         "icon": boolean;
@@ -466,11 +477,9 @@ export namespace Components {
     interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
-        "align": "left" | "center" | "right";
         "open": boolean;
     }
     interface SmoothlyTableExpandableRow {
-        "align": "left" | "center" | "right";
         "open": boolean;
     }
     interface SmoothlyTableFooter {
@@ -636,6 +645,10 @@ export interface SmoothlyInputSubmitCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyItemElement;
+}
+export interface SmoothlyLoadMoreCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyLoadMoreElement;
 }
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -991,6 +1004,18 @@ declare global {
         prototype: HTMLSmoothlyLabelElement;
         new (): HTMLSmoothlyLabelElement;
     };
+    interface HTMLSmoothlyLazyElement extends Components.SmoothlyLazy, HTMLStencilElement {
+    }
+    var HTMLSmoothlyLazyElement: {
+        prototype: HTMLSmoothlyLazyElement;
+        new (): HTMLSmoothlyLazyElement;
+    };
+    interface HTMLSmoothlyLoadMoreElement extends Components.SmoothlyLoadMore, HTMLStencilElement {
+    }
+    var HTMLSmoothlyLoadMoreElement: {
+        prototype: HTMLSmoothlyLoadMoreElement;
+        new (): HTMLSmoothlyLoadMoreElement;
+    };
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
     }
     var HTMLSmoothlyNotificationElement: {
@@ -1279,6 +1304,8 @@ declare global {
         "smoothly-input-submit": HTMLSmoothlyInputSubmitElement;
         "smoothly-item": HTMLSmoothlyItemElement;
         "smoothly-label": HTMLSmoothlyLabelElement;
+        "smoothly-lazy": HTMLSmoothlyLazyElement;
+        "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -1354,6 +1381,7 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyAppRoom {
+        "content"?: JSX.Element | FunctionalComponent;
         "disabled"?: boolean;
         "icon"?: Icon;
         "label"?: string;
@@ -1522,6 +1550,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "color"?: Color;
         "currency"?: isoly.Currency;
+        "delay"?: number;
         "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
@@ -1693,6 +1722,15 @@ declare namespace LocalJSX {
         "hue"?: number;
         "shape"?: "rectangle" | "rounded";
     }
+    interface SmoothlyLazy {
+        "content"?: JSX.Element | FunctionalComponent;
+        "show"?: boolean;
+    }
+    interface SmoothlyLoadMore {
+        "name"?: string;
+        "offset"?: string;
+        "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
+    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -1818,7 +1856,6 @@ declare namespace LocalJSX {
     interface SmoothlyTableDemoFiltered {
     }
     interface SmoothlyTableExpandableCell {
-        "align"?: "left" | "center" | "right";
         "onSmoothlyExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
         "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
         "onSmoothlyExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
@@ -1826,7 +1863,6 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTableExpandableRow {
-        "align"?: "left" | "center" | "right";
         "onSmoothlyExpandableChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
         "onSmoothlyExpandableLoad"?: (event: SmoothlyTableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
         "onSmoothlyExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
@@ -1943,6 +1979,8 @@ declare namespace LocalJSX {
         "smoothly-input-submit": SmoothlyInputSubmit;
         "smoothly-item": SmoothlyItem;
         "smoothly-label": SmoothlyLabel;
+        "smoothly-lazy": SmoothlyLazy;
+        "smoothly-load-more": SmoothlyLoadMore;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -2039,6 +2077,8 @@ declare module "@stencil/core" {
             "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
+            "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
+            "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;

@@ -17,6 +17,10 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
+				<h2>Delayed</h2>
+				<smoothly-input name="Delayed" delay={2}>
+					Delayed
+				</smoothly-input>
 				<h2>Editable form and Input</h2>
 				<smoothly-form looks="grid" readonly>
 					<smoothly-input name="First Name" value="John">

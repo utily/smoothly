@@ -1,3 +1,11 @@
 :host {
 	display: block;
 }
+
+smoothly-table-cell:nth-of-type(2) {
+	text-align: right;
+}
+
+td {
+	padding-left: 1.5em;
+}
