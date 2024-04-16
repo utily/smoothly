@@ -1515,7 +1515,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilterField {
         "criteria"?: selectively.Criteria;
-        "onFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Criteria>) => void;
+        "onFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Rule>) => void;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
