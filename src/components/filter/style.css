@@ -44,11 +44,12 @@
 :host>.container {
 	padding: 2em;
 	position: absolute;
+	right: 0.35em;
 	width: fit-content;
 	display: flex;
 	justify-content: center;
 	top: 100%;
-	width: 95%;
+	width: fit-content;
 	z-index: 4;
 	background-color: rgb(var(--smoothly-color));
 	margin: 0.8em -2em;
