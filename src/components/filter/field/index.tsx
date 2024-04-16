@@ -15,13 +15,11 @@ export class SmoothlyFilterField {
 		await this.input?.clear()
 	}
 	render() {
-		const string = this.criteria.toString()
-		console.log("string, ", string)
 		return (
 			<smoothly-input
 				name="filter"
 				ref={e => (this.input = e)}
-				value={string}
+				value={this.criteria.toString()}
 				delay={1}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyBlur={e => e.stopPropagation()}

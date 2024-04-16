@@ -42,19 +42,19 @@ export class SmoothlyFilterPicker implements Filter {
 	pickerHandler(event: CustomEvent<Record<string, unknown>>) {
 		event.stopPropagation()
 		if (!this.updating) {
-			const detail = event.detail[this.property]
+			const argument = event.detail[this.property]
 			const manipulate = (criteria: selectively.Criteria): selectively.Criteria => {
 				let result: selectively.Criteria = criteria
-				const newCriteria = this.getCriteria(detail)
+				const newCriteria = this.getCriteria(argument)
 				if (!(result instanceof selectively.Rule)) {
 					result = newCriteria ? selectively.and(result, newCriteria) : result
 				} else if (result instanceof selectively.And) {
-					const relevantCriteria = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
+					const index = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
 					!newCriteria
-						? result.rules.splice(relevantCriteria, 1)
-						: relevantCriteria != -1
-						? (result.rules[relevantCriteria] = newCriteria)
-						: result.rules.push(newCriteria)
+						? result.rules.splice(index, 1)
+						: index == -1
+						? result.rules.push(newCriteria)
+						: (result.rules[index] = newCriteria)
 					result = selectively.and(...result.rules)
 				}
 				return result
@@ -68,7 +68,7 @@ export class SmoothlyFilterPicker implements Filter {
 	private getCriteria(detail: unknown): selectively.Rule | undefined {
 		let result: selectively.Criteria | undefined
 		if (this.multiple && isly.string().array({ criteria: "minLength", value: 1 }).is(detail))
-			result = selectively.within(detail)
+			result = selectively.property(this.property, selectively.within(detail))
 		else if (typeof detail == "string")
 			result = selectively.property(this.property, selectively.is(detail))
 		else

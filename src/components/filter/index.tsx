@@ -27,7 +27,6 @@ export class SmoothlyFilter {
 		event.stopPropagation()
 		this.updating = true
 		this.criteria = event.detail(this.criteria)
-		console.log("this.criteria: ", this.criteria)
 		this.smoothlyFilter.emit(this.criteria)
 		this.filters.forEach(update => update(this.criteria))
 		this.updating = false
@@ -47,7 +46,6 @@ export class SmoothlyFilter {
 	}
 
 	render() {
-		console.log("render: ", "render")
 		return (
 			<Host>
 				<slot name="bar" />
