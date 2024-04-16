@@ -4,24 +4,23 @@ import { selectively } from "selectively"
 @Component({
 	tag: "smoothly-filter-field",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyFilterField {
 	input: HTMLSmoothlyInputElement | undefined
 	@Prop() criteria: selectively.Criteria
-	@Event() filterField: EventEmitter<selectively.Criteria>
+	@Event() filterField: EventEmitter<selectively.Rule>
 	@Method()
 	async clear(): Promise<void> {
 		await this.input?.clear()
 	}
 	render() {
-		const string = this.criteria.toString()
 		return (
 			<smoothly-input
 				name="filter"
 				ref={e => (this.input = e)}
-				value={string}
-				delay={2}
+				value={this.criteria.toString()}
+				delay={1}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyBlur={e => e.stopPropagation()}
 				onSmoothlyFormDisable={e => e.stopPropagation()}
