@@ -5,12 +5,11 @@ import { Filter } from "./Filter"
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyFilter {
 	field: HTMLSmoothlyFilterFieldElement | undefined
 	updating = false
-	state: Record<string, selectively.Criteria> = {}
 	filters: Map<string, Filter.Update> = new Map<string, Filter.Update>() // maybe set?
 	@State() detailChildren?: boolean
 	@State() criteria: selectively.Criteria = selectively.and()
@@ -27,8 +26,8 @@ export class SmoothlyFilter {
 	manipulateHandler(event: CustomEvent<Filter.Manipulate>) {
 		event.stopPropagation()
 		this.updating = true
-		this.state = event.detail(this.state)
-		this.smoothlyFilter.emit((this.criteria = selectively.create(this.state)))
+		this.criteria = event.detail(this.criteria)
+		this.smoothlyFilter.emit(this.criteria)
 		this.filters.forEach(update => update(this.criteria))
 		this.updating = false
 	}
@@ -36,13 +35,11 @@ export class SmoothlyFilter {
 	filterFieldHandler(event: CustomEvent<selectively.Criteria>) {
 		event.stopPropagation()
 		if (!this.updating) {
-			this.state = {}
 			this.smoothlyFilter.emit((this.criteria = selectively.and(event.detail)))
 			this.filters.forEach(update => update(this.criteria))
 		}
 	}
 	clear(): void {
-		this.state = {}
 		this.field?.clear()
 		this.smoothlyFilter.emit((this.criteria = selectively.and()))
 		this.filters.forEach(update => update(this.criteria))

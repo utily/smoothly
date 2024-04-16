@@ -8,7 +8,7 @@ export interface Filter extends Filter.Element {
 	smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
 }
 export namespace Filter {
-	export type Manipulate = (criteria: Record<string, selectively.Criteria>) => Record<string, selectively.Criteria>
+	export type Manipulate = (criteria: selectively.Criteria) => selectively.Criteria
 	export type Update = (expression: selectively.Criteria) => void
 	export interface Element {
 		property: string
