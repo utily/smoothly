@@ -34,7 +34,7 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 			<Host>
 				<smoothly-filter>
 					<smoothly-icon slot="start" name="search-outline" size="small" />
-					<div slot="detail">
+					{/* <div slot="detail">
 						<smoothly-form looks="border">
 							<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
 								Breed
@@ -59,7 +59,7 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
 						</smoothly-form>
-					</div>
+					</div> */}
 				</smoothly-filter>
 				<smoothly-filter>
 					<smoothly-icon slot="bar" name="search-outline" size="small" />
