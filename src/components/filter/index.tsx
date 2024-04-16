@@ -1,7 +1,6 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop, State } from "@stencil/core"
-import * as selectively from "selectively"
-import { create as selectivelyCreate, Criteria } from "selectively"
-import { Clearable } from "./Clearable"
+import { Component, Event, EventEmitter, h, Host, Listen, State } from "@stencil/core"
+import { selectively } from "selectively"
+import { Filter } from "./Filter"
 
 @Component({
 	tag: "smoothly-filter",
@@ -9,86 +8,73 @@ import { Clearable } from "./Clearable"
 	shadow: true,
 })
 export class SmoothlyFilter {
-	private freeSearchElement?: HTMLSmoothlyInputElement
-	private inputs = new Map<string, Clearable>()
-	@Prop({ mutable: true }) placeholder: string | undefined
+	field: HTMLSmoothlyFilterFieldElement | undefined
+	updating = false
+	state: Record<string, selectively.Criteria> = {}
+	filters: Map<string, Filter.Update> = new Map<string, Filter.Update>() // maybe set?
+	@State() detailChildren?: boolean
+	@State() criteria: selectively.Criteria = selectively.and()
 	@State() expanded = false
-	@State() freeSearchValue: string
-	@Prop({ mutable: true }) criteria: Record<string, Criteria> = {}
-	@Prop({ mutable: true }) inputValue: Criteria
+	@Event() smoothlyFilter: EventEmitter<selectively.Criteria>
 
-	@Listen("filter")
-	filterHandler(event: CustomEvent<Record<string, Criteria>>) {
+	@Listen("smoothlyFilterUpdate")
+	updateHandler(event: CustomEvent<Filter.Update>) {
 		event.stopPropagation()
-
-		if (Clearable.is(event.target)) {
-			const target = event.target
-			Object.keys(event.detail).forEach(key => this.inputs.set(key, target))
+		if (Filter.Element.type.is(event.target))
+			this.filters.set(event.target.property, event.detail)
+	}
+	@Listen("smoothlyFilterManipulate")
+	manipulateHandler(event: CustomEvent<Filter.Manipulate>) {
+		event.stopPropagation()
+		this.updating = true
+		this.state = event.detail(this.state)
+		this.smoothlyFilter.emit((this.criteria = selectively.create(this.state)))
+		this.filters.forEach(update => update(this.criteria))
+		this.updating = false
+	}
+	@Listen("filterField")
+	filterFieldHandler(event: CustomEvent<selectively.Criteria>) {
+		event.stopPropagation()
+		if (!this.updating) {
+			this.state = {}
+			this.smoothlyFilter.emit((this.criteria = selectively.and(event.detail)))
+			this.filters.forEach(update => update(this.criteria))
 		}
-		!this.freeSearchValue
-			? this.filters.emit((this.criteria = { ...this.criteria, ...event.detail }))
-			: this.filters.emit(
-					selectively.and(
-						selectively.any(selectively.includes(this.freeSearchValue)),
-						(this.criteria = { ...this.criteria, ...event.detail })
-					)
-			  )
 	}
-	@Event() filters: EventEmitter<Criteria>
-	onKeyDown() {
-		this.freeSearchValue = this.freeSearchElement?.value
-		this.inputValue = selectively.includes(this.freeSearchValue)
-		this.filters.emit(selectively.any(this.inputValue))
-	}
-
-	@Method()
-	async clear(event: MouseEvent): Promise<void> {
-		new Set(this.inputs.values()).forEach(input => input.clear())
-		this.filters.emit((this.criteria = {}))
+	clear(): void {
+		this.state = {}
+		this.field?.clear()
+		this.smoothlyFilter.emit((this.criteria = selectively.and()))
+		this.filters.forEach(update => update(this.criteria))
 	}
 
 	render() {
-		return [
-			<smoothly-form looks="border">
-				<smoothly-input
-					name="filter"
-					ref={element => (this.freeSearchElement = element)}
-					value={selectivelyCreate(this.criteria).stringify()}
-					onKeyDown={() => this.onKeyDown()}
-					placeholder={this.placeholder}>
-					<section slot="start">
-						<slot name="start" />
-					</section>
-					<slot />
-					<section slot="end">
-						<smoothly-button size="flexible" onClick={e => this.clear(e)}>
-							<smoothly-icon
-								class={Object.keys(this.criteria).length >= 1 ? "btn clear" : "btn hidden"}
-								name="close"
-								size="tiny"
-							/>
-						</smoothly-button>
-						<smoothly-button
-							size="flexible"
-							class="btn"
-							onClick={() => {
-								this.expanded = !this.expanded
-							}}>
-							{this.expanded ? (
-								<smoothly-icon name="options" size="small" />
-							) : (
-								<smoothly-icon name="options-outline" size="small" />
-							)}
-						</smoothly-button>
-					</section>
-				</smoothly-input>
-			</smoothly-form>,
-
-			<section hidden={!this.expanded} class={this.expanded ? "container arrow-top" : "hidden"}>
-				<div hidden={!this.expanded} class={this.expanded ? "container-wrapper" : "hidden"}>
-					{this.expanded && <slot name="filter" />}
+		return (
+			<Host>
+				<slot name="bar" />
+				<smoothly-filter-field criteria={this.criteria} ref={e => (this.field = e)} />
+				{this.criteria.toString() != "" && (
+					<smoothly-icon
+						name={"close"}
+						toolTip={"Clear all filters"}
+						size="small"
+						onClick={() => {
+							this.clear()
+						}}
+					/>
+				)}
+				<smoothly-icon
+					name={this.expanded ? "options" : "options-outline"}
+					toolTip={(this.expanded ? "Hide" : "Show") + " additional filters"}
+					size="small"
+					onClick={() => {
+						this.expanded = !this.expanded
+					}}
+				/>
+				<div class={this.expanded ? "container arrow-top" : "hidden"}>
+					<slot name="detail" />
 				</div>
-			</section>,
-		]
+			</Host>
+		)
 	}
 }

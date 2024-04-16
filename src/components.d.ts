@@ -13,7 +13,7 @@ import { FunctionalComponent, JSX } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
-import { Criteria } from "selectively";
+import { Criteria, selectively } from "selectively";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
 import { GoogleFont } from "./model/GoogleFont";
@@ -152,10 +152,12 @@ export namespace Components {
     interface SmoothlyDisplayDemo {
     }
     interface SmoothlyFilter {
-        "clear": (event: MouseEvent) => Promise<void>;
-        "criteria": Record<string, Criteria>;
-        "inputValue": Criteria;
-        "placeholder": string | undefined;
+    }
+    interface SmoothlyFilterDemo {
+    }
+    interface SmoothlyFilterField {
+        "clear": () => Promise<void>;
+        "criteria": selectively.Criteria;
     }
     interface SmoothlyFilterInput {
         "autocomplete": boolean;
@@ -574,6 +576,10 @@ export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterElement;
 }
+export interface SmoothlyFilterFieldCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFilterFieldElement;
+}
 export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterInputElement;
@@ -865,6 +871,18 @@ declare global {
     var HTMLSmoothlyFilterElement: {
         prototype: HTMLSmoothlyFilterElement;
         new (): HTMLSmoothlyFilterElement;
+    };
+    interface HTMLSmoothlyFilterDemoElement extends Components.SmoothlyFilterDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterDemoElement: {
+        prototype: HTMLSmoothlyFilterDemoElement;
+        new (): HTMLSmoothlyFilterDemoElement;
+    };
+    interface HTMLSmoothlyFilterFieldElement extends Components.SmoothlyFilterField, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFilterFieldElement: {
+        prototype: HTMLSmoothlyFilterFieldElement;
+        new (): HTMLSmoothlyFilterFieldElement;
     };
     interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
     }
@@ -1281,6 +1299,8 @@ declare global {
         "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
+        "smoothly-filter-demo": HTMLSmoothlyFilterDemoElement;
+        "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
@@ -1489,10 +1509,13 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyFilter {
-        "criteria"?: Record<string, Criteria>;
-        "inputValue"?: Criteria;
-        "onFilters"?: (event: SmoothlyFilterCustomEvent<Criteria>) => void;
-        "placeholder"?: string | undefined;
+        "onSmoothlyFilter"?: (event: SmoothlyFilterCustomEvent<selectively.Criteria>) => void;
+    }
+    interface SmoothlyFilterDemo {
+    }
+    interface SmoothlyFilterField {
+        "criteria"?: selectively.Criteria;
+        "onFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Criteria>) => void;
     }
     interface SmoothlyFilterInput {
         "autocomplete"?: boolean;
@@ -1956,6 +1979,8 @@ declare namespace LocalJSX {
         "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-filter": SmoothlyFilter;
+        "smoothly-filter-demo": SmoothlyFilterDemo;
+        "smoothly-filter-field": SmoothlyFilterField;
         "smoothly-filter-input": SmoothlyFilterInput;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
@@ -2054,6 +2079,8 @@ declare module "@stencil/core" {
             "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
+            "smoothly-filter-demo": LocalJSX.SmoothlyFilterDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFilterDemoElement>;
+            "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;

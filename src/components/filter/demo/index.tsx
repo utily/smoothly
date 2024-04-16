@@ -1,15 +1,15 @@
 import { Component, ComponentWillLoad, h, Host, Listen, State } from "@stencil/core"
 import { selectively } from "selectively"
 import * as http from "cloudly-http"
-import { Selector } from "../../Selector"
+import { Selector } from "../../table/Selector"
 import { Cat, Root } from "./Root"
 
 @Component({
-	tag: "smoothly-table-demo-filtered",
+	tag: "smoothly-filter-demo",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class TableDemoFiltered implements ComponentWillLoad {
+export class SmoothlyFilterDemo implements ComponentWillLoad {
 	@State() criteria: selectively.Criteria = {}
 	@State() data?: Root | false
 	@State() selector: Selector<Cat> = Selector.create("breed")
@@ -30,7 +30,6 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	}
 
 	render() {
-		const cats = this.data && selectively.filter(this.criteria, this.data.data)
 		return (
 			<Host>
 				<smoothly-filter>
@@ -62,46 +61,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						</smoothly-form>
 					</div> */}
 				</smoothly-filter>
-				{!cats ? (
-					"Failed to load data."
-				) : (
-					<smoothly-table>
-						<smoothly-table-row>
-							<smoothly-table-header>{this.selector.render(cats)}</smoothly-table-header>
-							<smoothly-table-header>Breed</smoothly-table-header>
-							<smoothly-table-header>Coat</smoothly-table-header>
-							<smoothly-table-header>Price</smoothly-table-header>
-						</smoothly-table-row>
-						{cats.map(cat => (
-							<smoothly-table-row>
-								<smoothly-table-cell>{this.selector.render(cat)}</smoothly-table-cell>
-								<smoothly-table-expandable-cell>
-									{cat.breed}
-									<div slot="detail">Country: {cat.country}</div>
-								</smoothly-table-expandable-cell>
-								<smoothly-table-expandable-cell>
-									{cat.coat}
-									<div slot="detail">Pattern: {cat.pattern}</div>
-								</smoothly-table-expandable-cell>
-								<smoothly-table-cell>
-									<smoothly-display
-										type="price"
-										value={[...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0)}
-										currency="SEK"></smoothly-display>
-								</smoothly-table-cell>
-							</smoothly-table-row>
-						))}
-						<smoothly-table-footer>
-							<td colSpan={5}>
-								<smoothly-display
-									type="text"
-									value={`Selected: ${
-										this.selector.selected.length != 0 ? this.selector.selected.length : cats ? cats.length : "?"
-									}`}></smoothly-display>
-							</td>
-						</smoothly-table-footer>
-					</smoothly-table>
-				)}
+				<smoothly-filter>
+					<smoothly-icon slot="bar" name="search-outline" size="small" />
+				</smoothly-filter>
+				<smoothly-filter>
+					<smoothly-icon slot="start" name="search-outline" size="small" />
+				</smoothly-filter>
 			</Host>
 		)
 	}
