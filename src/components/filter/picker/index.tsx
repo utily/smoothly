@@ -33,12 +33,8 @@ export class SmoothlyFilterPicker implements Filter {
 	update(expression: selectively.Criteria): void {
 		this.updating = true
 		if (expression instanceof selectively.And && expression.rules.length > 0)
-			for (const option of this.options.values()) {
-				if (expression.rules.some(r => r.is(option.state))) {
-					option.selected(true)
-					break
-				}
-			}
+			for (const option of this.options.values())
+				option.selected(expression.rules.some(r => r.is(option.state)))
 		else
 			this.options.forEach(o => o.selected(false))
 		this.updating = false
