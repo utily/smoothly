@@ -13,7 +13,7 @@ import { FunctionalComponent, JSX } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
-import { Criteria, selectively } from "selectively";
+import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
@@ -150,21 +150,8 @@ export namespace Components {
         "criteria": selectively.Criteria;
     }
     interface SmoothlyFilterInput {
-        "autocomplete": boolean;
-        "clear": () => Promise<void>;
-        "comparison": "equals" | "less" | "greater" | "starts" | "ends" | "includes";
-        "currency"?: Currency;
-        "disabled": boolean;
-        "maxLength": number;
-        "minLength": number;
-        "name": string;
-        "pattern"?: RegExp;
-        "placeholder"?: string;
-        "readonly": boolean;
-        "required": boolean;
-        "showLabel": boolean;
-        "type": string;
-        "value": string;
+        "placeholder": string;
+        "property": string;
     }
     interface SmoothlyFilterPicker {
         "multiple": boolean;
@@ -1499,21 +1486,10 @@ declare namespace LocalJSX {
         "onFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Rule>) => void;
     }
     interface SmoothlyFilterInput {
-        "autocomplete"?: boolean;
-        "comparison"?: "equals" | "less" | "greater" | "starts" | "ends" | "includes";
-        "currency"?: Currency;
-        "disabled"?: boolean;
-        "maxLength"?: number;
-        "minLength"?: number;
-        "name"?: string;
-        "onFilter"?: (event: SmoothlyFilterInputCustomEvent<Criteria>) => void;
-        "pattern"?: RegExp;
+        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Manipulate>) => void;
+        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Update>) => void;
         "placeholder"?: string;
-        "readonly"?: boolean;
-        "required"?: boolean;
-        "showLabel"?: boolean;
-        "type"?: string;
-        "value"?: string;
+        "property"?: string;
     }
     interface SmoothlyFilterPicker {
         "multiple"?: boolean;

@@ -40,26 +40,14 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 								cat => cat.origin && <smoothly-picker-option value={cat.origin}>{cat.origin}</smoothly-picker-option>
 							)}
 					</smoothly-filter-picker>
-					{/* <div slot="detail">
+					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
+							<smoothly-filter-input property="breed" placeholder="ex. Abyssinian">
 								Breed
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-							<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
-								Country
-								<smoothly-icon slot="start" name="search-outline" size="small" />
-							</smoothly-filter-input>
-							<smoothly-filter-input name="coat" placeholder="ex. Short">
-								Coat
-								<smoothly-icon slot="start" name="search-outline" size="small" />
-							</smoothly-filter-input>
-							<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
-								Pattern
-								<smoothly-icon slot="start" name="search-outline" size="small" />
-							</smoothly-filter-input>
 						</smoothly-form>
-					</div> */}
+					</div>
 				</smoothly-filter>
 				<smoothly-filter>
 					<smoothly-filter-picker property="origin" slot="bar" multiple={true}>
