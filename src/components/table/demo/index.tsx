@@ -3,13 +3,12 @@ import { Component, h, Host } from "@stencil/core"
 @Component({
 	tag: "smoothly-table-demo",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class TableDemo {
 	render() {
 		return (
 			<Host>
-				<h4>Demo Filter</h4> <smoothly-filter-demo />
 				<h4>Demo table 1: Filtered & Checked Table</h4> <smoothly-lazy content={<smoothly-table-demo-filtered />} />
 				<h4>Demo table 2</h4> <smoothly-table-testing></smoothly-table-testing> <h4>Demo table 3</h4>
 				<smoothly-table>

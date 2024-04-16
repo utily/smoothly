@@ -5,12 +5,12 @@ import { Filter } from "./Filter"
 @Component({
 	tag: "smoothly-filter",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyFilter {
 	field: HTMLSmoothlyFilterFieldElement | undefined
 	updating = false
-	filters: Map<string, Filter.Update> = new Map<string, Filter.Update>() // maybe set?
+	filters: Set<Filter.Update> = new Set<Filter.Update>() // maybe set?
 	@State() detailChildren?: boolean
 	@State() criteria: selectively.Criteria = selectively.and()
 	@State() expanded = false
@@ -20,7 +20,7 @@ export class SmoothlyFilter {
 	updateHandler(event: CustomEvent<Filter.Update>) {
 		event.stopPropagation()
 		if (Filter.Element.type.is(event.target))
-			this.filters.set(event.target.property, event.detail)
+			this.filters.add(event.detail)
 	}
 	@Listen("smoothlyFilterManipulate")
 	manipulateHandler(event: CustomEvent<Filter.Manipulate>) {
@@ -60,6 +60,9 @@ export class SmoothlyFilter {
 						}}
 					/>
 				)}
+				<div class={this.expanded ? "container arrow-top" : "hidden"}>
+					<slot name="detail" />
+				</div>
 				<smoothly-icon
 					name={this.expanded ? "options" : "options-outline"}
 					toolTip={(this.expanded ? "Hide" : "Show") + " additional filters"}
@@ -68,9 +71,7 @@ export class SmoothlyFilter {
 						this.expanded = !this.expanded
 					}}
 				/>
-				<div class={this.expanded ? "container arrow-top" : "hidden"}>
-					<slot name="detail" />
-				</div>
+				<div class={this.expanded ? "close" : "hidden"} onClick={() => (this.expanded = !this.expanded)} />
 			</Host>
 		)
 	}

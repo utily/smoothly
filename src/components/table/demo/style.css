@@ -7,6 +7,11 @@
 	margin-left: 1.5rem;
 	margin-right: 1.5rem;
 }
+
 .content {
 	display: contents;
+}
+
+smoothly-lazy {
+	width: 80%;
 }
