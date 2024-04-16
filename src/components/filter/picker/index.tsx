@@ -34,7 +34,9 @@ export class SmoothlyFilterPicker implements Filter {
 		this.updating = true
 		if (expression instanceof selectively.And && expression.rules.length > 0)
 			for (const option of this.options.values())
-				option.selected(expression.rules.some(r => r.is(option.state)))
+				option.selected(
+					expression.rules.some(r => r.is(option.state) && r instanceof selectively.Property && r.name == this.property)
+				)
 		else
 			this.options.forEach(o => o.selected(false))
 		this.updating = false

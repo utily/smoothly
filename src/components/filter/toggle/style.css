@@ -1,0 +1,8 @@
+:host {
+	position: relative;
+	display: inline-block;
+}
+
+:host[flip] {
+	transform: scaleX(-1);
+}
