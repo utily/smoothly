@@ -121,13 +121,13 @@ export class SmoothlyButtonDemo {
 				<h4>Test for icon button</h4>
 				<div>
 					<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
-						<smoothly-icon name="call"></smoothly-icon>
+						<smoothly-icon name="call" size="tiny"></smoothly-icon>
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="warning" fill="solid">
-						<smoothly-icon name="search-outline"></smoothly-icon>
+						<smoothly-icon name="search-outline" size="tiny"></smoothly-icon>
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="secondary">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" size="tiny"></smoothly-icon>
 					</smoothly-button>
 				</div>
 				<h4>Link examples</h4>
