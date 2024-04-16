@@ -25,7 +25,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 	}
 
 	async componentWillLoad(): Promise<void> {
-		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
+		const response = await http.fetch("https://catfact.ninja/breeds?limit=15")
 		this.cats =
 			response.status == 200 &&
 			(await response.body).data.map((cat: any) => ({
@@ -39,7 +39,21 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
-					<smoothly-icon slot="start" name="search-outline" size="small" />
+					<smoothly-filter-toggle property="coat" icon="paw" value={"Short"} toolTip="Short cats" slot="bar" />
+					<smoothly-filter-toggle
+						property="pattern"
+						icon="radio-button-on"
+						value={"Solid"}
+						toolTip="Solid cats"
+						slot="bar"
+					/>
+					<smoothly-filter-toggle
+						property="pattern"
+						icon="color-palette"
+						value={"Colorpoint"}
+						toolTip="Solid cats"
+						slot="bar"
+					/>
 					<smoothly-filter-picker property="coat" slot="bar" multiple={false}>
 						{this.cats &&
 							this.cats.map(

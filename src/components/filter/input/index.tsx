@@ -57,7 +57,6 @@ export class SmoothlyFilterInput implements Filter {
 		return (
 			<smoothly-input
 				name={this.property}
-				delay={0.2}
 				value={this.needle}
 				type={this.type}
 				placeholder={this.placeholder}
