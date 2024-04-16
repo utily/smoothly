@@ -35,6 +35,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			<Host>
 				<smoothly-filter>
 					<smoothly-icon slot="start" name="search-outline" size="small" />
+					<smoothly-filter-picker property="coat" slot="bar" multiple={false}>
+						{this.data &&
+							this.data.data.map(
+								cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
+							)}
+					</smoothly-filter-picker>
 					{/* <div slot="detail">
 						<smoothly-form looks="border">
 							<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
@@ -60,7 +66,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
 						</smoothly-form>
-					</div> */}
+					</div>  */}
 				</smoothly-filter>
 				{!cats ? (
 					"Failed to load data."

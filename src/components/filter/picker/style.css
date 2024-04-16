@@ -1,0 +1,7 @@
+:host {
+	display: contents;
+}
+
+:host>smoothly-picker {
+	width: 12.5em;
+}
