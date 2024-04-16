@@ -3,7 +3,7 @@ import { Component, h, Host } from "@stencil/core"
 @Component({
 	tag: "smoothly-table-demo",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class TableDemo {
 	render() {

@@ -33,27 +33,27 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
-					<smoothly-icon slot="start" name="search-outline" size="small" />
+					<smoothly-icon slot="bar" name="search-outline" size="small" />
+					<smoothly-filter-picker property="origin" slot="bar" multiple={false}>
+						{this.data &&
+							this.data.data.map(
+								cat => cat.origin && <smoothly-picker-option value={cat.origin}>{cat.origin}</smoothly-picker-option>
+							)}
+					</smoothly-filter-picker>
 					{/* <div slot="detail">
 						<smoothly-form looks="border">
 							<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
 								Breed
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-						</smoothly-form>
-						<smoothly-form looks="border">
 							<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
 								Country
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-						</smoothly-form>
-						<smoothly-form looks="border">
 							<smoothly-filter-input name="coat" placeholder="ex. Short">
 								Coat
 								<smoothly-icon slot="start" name="search-outline" size="small" />
 							</smoothly-filter-input>
-						</smoothly-form>
-						<smoothly-form looks="border">
 							<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
 								Pattern
 								<smoothly-icon slot="start" name="search-outline" size="small" />
@@ -62,7 +62,12 @@ export class SmoothlyFilterDemo implements ComponentWillLoad {
 					</div> */}
 				</smoothly-filter>
 				<smoothly-filter>
-					<smoothly-icon slot="bar" name="search-outline" size="small" />
+					<smoothly-filter-picker property="origin" slot="bar" multiple={true}>
+						{this.data &&
+							this.data.data.map(
+								cat => cat.origin && <smoothly-picker-option value={cat.origin}>{cat.origin}</smoothly-picker-option>
+							)}
+					</smoothly-filter-picker>
 				</smoothly-filter>
 				<smoothly-filter>
 					<smoothly-icon slot="start" name="search-outline" size="small" />
