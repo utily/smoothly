@@ -7,9 +7,9 @@ import { Color, Data, Fill } from "../../model"
 	scoped: true,
 })
 export class SmoothlyButtonConfirm {
-	timer?: NodeJS.Timeout
+	timer?: number
 	@Prop() color?: Color
-	@Prop({ reflect: true, mutable: true }) name: string
+	@Prop({ reflect: true }) name: string
 	@Prop() doubleClickTime = 0.2
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop() fill?: Fill
@@ -17,26 +17,26 @@ export class SmoothlyButtonConfirm {
 	@Prop() shape?: "rounded"
 	@Prop() type: "link" | "button" = "button"
 	@Prop() size: "small" | "large" | "icon" | "flexible"
-	@State() clicked: number | undefined
+	@State() clickTimeStamp: number | undefined
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyConfirm: EventEmitter<Data>
 
-	clickHandler(event: MouseEvent) {
-		if (this.clicked && event.timeStamp - this.clicked > this.doubleClickTime * 1000) {
-			this.timer && clearTimeout(this.timer)
-			this.clicked = undefined
+	clickHandler(event: MouseEvent): void {
+		if (this.clickTimeStamp && event.timeStamp - this.clickTimeStamp > this.doubleClickTime * 1000) {
+			this.timer && window.clearTimeout(this.timer)
+			this.clickTimeStamp = undefined
 			this.smoothlyConfirm.emit({ [this.name]: true })
 		} else {
-			this.clicked = event.timeStamp
-			this.timer = setTimeout(() => {
-				this.clicked = undefined
+			this.clickTimeStamp = event.timeStamp
+			this.timer = window.setTimeout(() => {
+				this.clickTimeStamp = undefined
 			}, 2000)
 		}
 	}
 
 	render(): VNode | VNode[] {
 		return (
-			<Host warning={this.clicked}>
+			<Host warning={this.clickTimeStamp}>
 				<smoothly-button
 					fill={this.fill}
 					expand={this.expand}
