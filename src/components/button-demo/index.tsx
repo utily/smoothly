@@ -8,6 +8,15 @@ export class SmoothlyButtonDemo {
 		return [
 			<h2>Buttons</h2>,
 			<section>
+				<h4>Confirm button (two clicks)</h4>
+				<div>
+					<smoothly-button-confirm name="confirm" type="button" shape="rounded" color="danger" size="large">
+						Delete
+					</smoothly-button-confirm>
+					<smoothly-button-confirm name="confirm-icon" type="button" shape="rounded" color="success" size="icon">
+						<smoothly-icon name="checkmark-outline" size="small" />
+					</smoothly-button-confirm>
+				</div>
 				<h4>Toggle button</h4>
 				<smoothly-toggle>
 					<smoothly-icon name="card" fill="solid" slot="icon-slot"></smoothly-icon>

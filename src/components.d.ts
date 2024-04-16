@@ -81,6 +81,17 @@ export namespace Components {
         "size": "small" | "large" | "icon" | "flexible";
         "type": Button.Properties["type"];
     }
+    interface SmoothlyButtonConfirm {
+        "color"?: Color;
+        "disabled": boolean;
+        "doubleClickTime": number;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "name": string;
+        "shape"?: "rounded";
+        "size": "small" | "large" | "icon" | "flexible";
+        "type": "link" | "button";
+    }
     interface SmoothlyButtonDemo {
     }
     interface SmoothlyCalendar {
@@ -239,15 +250,6 @@ export namespace Components {
         "looks": Looks;
         "name": string;
         "value": string | undefined;
-    }
-    interface SmoothlyInputConfirm {
-        "color"?: Color;
-        "disabled": boolean;
-        "expand"?: "block" | "full";
-        "fill"?: Fill;
-        "shape"?: "rounded";
-        "size": "flexible" | "small" | "large" | "icon";
-        "type": "link" | "button";
     }
     interface SmoothlyInputDate {
         "clear": () => Promise<void>;
@@ -543,6 +545,10 @@ export interface SmoothlyBurgerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyBurgerElement;
 }
+export interface SmoothlyButtonConfirmCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyButtonConfirmElement;
+}
 export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCalendarElement;
@@ -586,10 +592,6 @@ export interface SmoothlyInputClearCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputColorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputColorElement;
-}
-export interface SmoothlyInputConfirmCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyInputConfirmElement;
 }
 export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -770,6 +772,12 @@ declare global {
         prototype: HTMLSmoothlyButtonElement;
         new (): HTMLSmoothlyButtonElement;
     };
+    interface HTMLSmoothlyButtonConfirmElement extends Components.SmoothlyButtonConfirm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyButtonConfirmElement: {
+        prototype: HTMLSmoothlyButtonConfirmElement;
+        new (): HTMLSmoothlyButtonConfirmElement;
+    };
     interface HTMLSmoothlyButtonDemoElement extends Components.SmoothlyButtonDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyButtonDemoElement: {
@@ -904,12 +912,6 @@ declare global {
     var HTMLSmoothlyInputColorElement: {
         prototype: HTMLSmoothlyInputColorElement;
         new (): HTMLSmoothlyInputColorElement;
-    };
-    interface HTMLSmoothlyInputConfirmElement extends Components.SmoothlyInputConfirm, HTMLStencilElement {
-    }
-    var HTMLSmoothlyInputConfirmElement: {
-        prototype: HTMLSmoothlyInputConfirmElement;
-        new (): HTMLSmoothlyInputConfirmElement;
     };
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
     }
@@ -1241,6 +1243,7 @@ declare global {
         "smoothly-back-to-top": HTMLSmoothlyBackToTopElement;
         "smoothly-burger": HTMLSmoothlyBurgerElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
+        "smoothly-button-confirm": HTMLSmoothlyButtonConfirmElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
@@ -1263,7 +1266,6 @@ declare global {
         "smoothly-input-checkbox": HTMLSmoothlyInputCheckboxElement;
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
         "smoothly-input-color": HTMLSmoothlyInputColorElement;
-        "smoothly-input-confirm": HTMLSmoothlyInputConfirmElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
@@ -1382,6 +1384,19 @@ declare namespace LocalJSX {
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: Button.Properties["type"];
+    }
+    interface SmoothlyButtonConfirm {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "doubleClickTime"?: number;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "name"?: string;
+        "onSmoothlyConfirm"?: (event: SmoothlyButtonConfirmCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyButtonConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "small" | "large" | "icon" | "flexible";
+        "type"?: "link" | "button";
     }
     interface SmoothlyButtonDemo {
     }
@@ -1551,16 +1566,6 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "value"?: string | undefined;
-    }
-    interface SmoothlyInputConfirm {
-        "color"?: Color;
-        "disabled"?: boolean;
-        "expand"?: "block" | "full";
-        "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
-        "shape"?: "rounded";
-        "size"?: "flexible" | "small" | "large" | "icon";
-        "type"?: "link" | "button";
     }
     interface SmoothlyInputDate {
         "color"?: Color;
@@ -1902,6 +1907,7 @@ declare namespace LocalJSX {
         "smoothly-back-to-top": SmoothlyBackToTop;
         "smoothly-burger": SmoothlyBurger;
         "smoothly-button": SmoothlyButton;
+        "smoothly-button-confirm": SmoothlyButtonConfirm;
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
@@ -1924,7 +1930,6 @@ declare namespace LocalJSX {
         "smoothly-input-checkbox": SmoothlyInputCheckbox;
         "smoothly-input-clear": SmoothlyInputClear;
         "smoothly-input-color": SmoothlyInputColor;
-        "smoothly-input-confirm": SmoothlyInputConfirm;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
@@ -1995,6 +2000,7 @@ declare module "@stencil/core" {
             "smoothly-back-to-top": LocalJSX.SmoothlyBackToTop & JSXBase.HTMLAttributes<HTMLSmoothlyBackToTopElement>;
             "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
+            "smoothly-button-confirm": LocalJSX.SmoothlyButtonConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyButtonConfirmElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
@@ -2020,7 +2026,6 @@ declare module "@stencil/core" {
             "smoothly-input-checkbox": LocalJSX.SmoothlyInputCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
             "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
-            "smoothly-input-confirm": LocalJSX.SmoothlyInputConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyInputConfirmElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
