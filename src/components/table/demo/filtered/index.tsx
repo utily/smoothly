@@ -51,7 +51,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						property="pattern"
 						icon="color-palette"
 						value={"Colorpoint"}
-						toolTip="Solid cats"
+						toolTip="Colored cats"
 						slot="bar"
 					/>
 					<smoothly-filter-picker property="coat" slot="bar" multiple={false}>
