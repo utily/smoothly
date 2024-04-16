@@ -60,6 +60,9 @@ export class SmoothlyFilter {
 						}}
 					/>
 				)}
+				<div class={this.expanded ? "container arrow-top" : "hidden"}>
+					<slot name="detail" />
+				</div>
 				<smoothly-icon
 					name={this.expanded ? "options" : "options-outline"}
 					toolTip={(this.expanded ? "Hide" : "Show") + " additional filters"}
@@ -68,9 +71,7 @@ export class SmoothlyFilter {
 						this.expanded = !this.expanded
 					}}
 				/>
-				<div class={this.expanded ? "container arrow-top" : "hidden"}>
-					<slot name="detail" />
-				</div>
+				<div class={this.expanded ? "close" : "hidden"} onClick={() => (this.expanded = !this.expanded)} />
 			</Host>
 		)
 	}
