@@ -170,9 +170,9 @@ export namespace Components {
         "active": boolean;
         "flip": boolean;
         "icon": Icon;
-        "property": string;
+        "not": boolean;
+        "properties": Record<string, string>;
         "toolTip": string;
-        "value": string | number;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -1544,11 +1544,11 @@ declare namespace LocalJSX {
         "active"?: boolean;
         "flip"?: boolean;
         "icon"?: Icon;
+        "not"?: boolean;
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Update>) => void;
-        "property"?: string;
+        "properties"?: Record<string, string>;
         "toolTip"?: string;
-        "value"?: string | number;
     }
     interface SmoothlyForm {
         "action"?: string;

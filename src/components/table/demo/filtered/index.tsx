@@ -39,18 +39,17 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
-					<smoothly-filter-toggle property="coat" icon="paw" value={"Short"} toolTip="Short cats" slot="bar" />
+					<smoothly-filter-toggle properties={{ pattern: "Ticked" }} icon="paw" toolTip="Ticked cats" slot="bar" />
 					<smoothly-filter-toggle
-						property="pattern"
+						properties={{ breed: "Bombay", pattern: "Solid" }}
 						icon="radio-button-on"
-						value={"Solid"}
-						toolTip="Solid cats"
+						toolTip="Solid bombay cats"
 						slot="bar"
 					/>
 					<smoothly-filter-toggle
-						property="pattern"
-						icon="color-palette"
-						value={"Colorpoint"}
+						properties={{ pattern: "Colorpoint" }}
+						not
+						icon="alert"
 						toolTip="Colored cats"
 						slot="bar"
 					/>
@@ -62,18 +61,18 @@ export class TableDemoFiltered implements ComponentWillLoad {
 					</smoothly-filter-picker>
 					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-input property="breed" placeholder="ex. Abyssinian">
-								Breed
-							</smoothly-filter-input>
-							<smoothly-filter-input property="country" placeholder="ex. Ethiopia">
-								Country
-							</smoothly-filter-input>
-							<smoothly-filter-input property="coat" placeholder="ex. Short">
-								Coat
-							</smoothly-filter-input>
-							<smoothly-filter-input property="pattern" placeholder="ex. Ticked">
-								Pattern
-							</smoothly-filter-input>
+							<smoothly-filter-picker property="breed" multiple={false}>
+								{this.cats &&
+									this.cats.map(
+										cat => cat.breed && <smoothly-picker-option value={cat.breed}>{cat.breed}</smoothly-picker-option>
+									)}
+							</smoothly-filter-picker>
+							<smoothly-filter-picker property="coat" multiple={false}>
+								{this.cats &&
+									this.cats.map(
+										cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
+									)}
+							</smoothly-filter-picker>
 						</smoothly-form>
 					</div>
 				</smoothly-filter>

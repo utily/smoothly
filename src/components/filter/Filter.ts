@@ -11,11 +11,13 @@ export namespace Filter {
 	export type Manipulate = (criteria: selectively.Criteria) => selectively.Criteria
 	export type Update = (expression: selectively.Criteria) => void
 	export interface Element {
-		property: string
+		property?: string
+		properties?: Record<string, string>
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
-			property: isly.string(),
+			property: isly.string().optional(),
+			properties: isly.record<Record<string, string>>(isly.string(), isly.string()).optional(),
 		})
 	}
 	export const type = Element.type.extend<Filter>({
