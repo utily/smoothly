@@ -1,0 +1,15 @@
+:host {
+	display: inline-block;
+}
+:host([disabled]){
+	opacity: 0.5;
+}
+:host:not([warning]) smoothly-button:first-child{
+	display: none;
+}
+:host[warning] smoothly-button:nth-child(2){
+	display: none;
+}
+:host([expand]) {
+	width: 100%;
+}

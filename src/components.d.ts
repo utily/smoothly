@@ -83,6 +83,17 @@ export namespace Components {
         "size": "small" | "large" | "icon" | "flexible";
         "type": Button.Properties["type"];
     }
+    interface SmoothlyButtonConfirm {
+        "color"?: Color;
+        "disabled": boolean;
+        "doubleClickTime": number;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "name": string;
+        "shape"?: "rounded";
+        "size": "small" | "large" | "icon" | "flexible";
+        "type": "link" | "button";
+    }
     interface SmoothlyButtonDemo {
     }
     interface SmoothlyCalendar {
@@ -545,6 +556,10 @@ export interface SmoothlyBurgerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyBurgerElement;
 }
+export interface SmoothlyButtonConfirmCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyButtonConfirmElement;
+}
 export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyCalendarElement;
@@ -775,6 +790,12 @@ declare global {
     var HTMLSmoothlyButtonElement: {
         prototype: HTMLSmoothlyButtonElement;
         new (): HTMLSmoothlyButtonElement;
+    };
+    interface HTMLSmoothlyButtonConfirmElement extends Components.SmoothlyButtonConfirm, HTMLStencilElement {
+    }
+    var HTMLSmoothlyButtonConfirmElement: {
+        prototype: HTMLSmoothlyButtonConfirmElement;
+        new (): HTMLSmoothlyButtonConfirmElement;
     };
     interface HTMLSmoothlyButtonDemoElement extends Components.SmoothlyButtonDemo, HTMLStencilElement {
     }
@@ -1265,6 +1286,7 @@ declare global {
         "smoothly-back-to-top": HTMLSmoothlyBackToTopElement;
         "smoothly-burger": HTMLSmoothlyBurgerElement;
         "smoothly-button": HTMLSmoothlyButtonElement;
+        "smoothly-button-confirm": HTMLSmoothlyButtonConfirmElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
@@ -1410,6 +1432,19 @@ declare namespace LocalJSX {
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "type"?: Button.Properties["type"];
+    }
+    interface SmoothlyButtonConfirm {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "doubleClickTime"?: number;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "name"?: string;
+        "onSmoothlyConfirm"?: (event: SmoothlyButtonConfirmCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyButtonConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "small" | "large" | "icon" | "flexible";
+        "type"?: "link" | "button";
     }
     interface SmoothlyButtonDemo {
     }
@@ -1931,6 +1966,7 @@ declare namespace LocalJSX {
         "smoothly-back-to-top": SmoothlyBackToTop;
         "smoothly-burger": SmoothlyBurger;
         "smoothly-button": SmoothlyButton;
+        "smoothly-button-confirm": SmoothlyButtonConfirm;
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
@@ -2027,6 +2063,7 @@ declare module "@stencil/core" {
             "smoothly-back-to-top": LocalJSX.SmoothlyBackToTop & JSXBase.HTMLAttributes<HTMLSmoothlyBackToTopElement>;
             "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
+            "smoothly-button-confirm": LocalJSX.SmoothlyButtonConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyButtonConfirmElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;

@@ -126,7 +126,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
-		this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
 	componentDidRender() {
