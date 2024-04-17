@@ -310,10 +310,15 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputRadio {
+        "changed": boolean;
         "clear": () => Promise<void>;
         "clearable"?: boolean;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputRadioItem {
@@ -1720,12 +1725,15 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputRadio {
+        "changed"?: boolean;
         "clearable"?: boolean;
         "looks"?: Looks;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputRadioCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRadioCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRadioCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRadioCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "readonly"?: boolean;
         "value"?: any;
     }
     interface SmoothlyInputRadioItem {

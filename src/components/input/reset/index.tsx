@@ -2,8 +2,8 @@ import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
 import { SmoothlyForm } from "../../form"
-import { SmoothlyInput } from ".."
 import { Editable } from "../Editable"
+import { Input } from "../Input"
 
 @Component({
 	tag: "smoothly-input-reset",
@@ -19,15 +19,15 @@ export class SmoothlyInputReset {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
-	private parent?: Editable
+	private parent?: Editable.Element
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	async componentWillLoad() {
 		this.smoothlyInputLoad.emit(parent => {
-			if (Editable.type.is(parent)) {
+			if (Editable.Element.type.is(parent)) {
 				this.parent = parent
 				parent.listen("changed", async p => {
-					if (p instanceof SmoothlyInput) {
+					if (Input.is(p)) {
 						this.disabled = p.readonly ? true : !p.changed
 						this.display = p.readonly ? false : p.changed
 					}

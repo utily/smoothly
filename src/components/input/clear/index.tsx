@@ -2,9 +2,9 @@ import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
 import { SmoothlyForm } from "../../form"
-import { SmoothlyInput } from ".."
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
+import { Input } from "../Input"
 
 @Component({
 	tag: "smoothly-input-clear",
@@ -27,9 +27,9 @@ export class SmoothlyInputClear {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Clearable.is(parent)) {
 				this.parent = parent
-				if (Editable.type.is(parent)) {
+				if (Editable.Element.type.is(parent)) {
 					parent.listen("changed", async p => {
-						if (p instanceof SmoothlyInput) {
+						if (Input.is(p)) {
 							this.disabled = p.readonly ? true : !p.value
 							this.display = p.readonly ? false : Boolean(p.value)
 						}
