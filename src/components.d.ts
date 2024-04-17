@@ -46,6 +46,7 @@ export namespace Components {
     }
     interface SmoothlyApp {
         "color": Color;
+        "home"?: string;
         "label": string;
         "menuOpen": boolean;
         "selectRoom": (path: string) => Promise<void>;
@@ -1430,6 +1431,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyApp {
         "color"?: Color;
+        "home"?: string;
         "label"?: string;
         "menuOpen"?: boolean;
     }
