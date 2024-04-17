@@ -39,7 +39,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
-					<smoothly-filter-toggle properties={{ pattern: "Ticked" }} icon="paw" toolTip="Ticked cats" slot="bar" />
+					<smoothly-filter-toggle
+						properties={{ pattern: "Ticked", breed: "" }}
+						icon="paw"
+						toolTip="Ticked cats"
+						slot="bar"
+					/>
 					<smoothly-filter-toggle
 						properties={{ breed: "Bombay", pattern: "Solid" }}
 						icon="radio-button-on"
@@ -49,6 +54,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 					<smoothly-filter-toggle
 						properties={{ pattern: "Colorpoint" }}
 						not
+						active
 						icon="alert"
 						toolTip="Colored cats"
 						slot="bar"
