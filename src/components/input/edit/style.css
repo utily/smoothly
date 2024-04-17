@@ -1,5 +1,9 @@
 @import "../../button/style.css";
 
+:host(:not([display])) {
+	display: none;
+}
+
 :host([type="button"]) {
 	margin: 1em 0em;
 }

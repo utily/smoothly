@@ -42,6 +42,7 @@ export class SmoothlyInputReset {
 	@Listen("click")
 	clickHandler() {
 		this.parent?.reset()
+		this.parent?.edit(false)
 	}
 	render() {
 		return (
