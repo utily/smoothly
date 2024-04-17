@@ -31,7 +31,6 @@ export class SmoothlyFilterField {
 					if ("filter" in e.detail && typeof e.detail.filter == "string")
 						this.filterField.emit(selectively.parse(e.detail.filter))
 				}}>
-				<smoothly-icon slot="start" name="funnel-outline" size="small" />
 				Filter
 			</smoothly-input>
 		)
