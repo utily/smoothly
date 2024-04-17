@@ -14,8 +14,8 @@
 
 :host::slotted([slot=bar]) {
 	pointer-events: auto;
-	margin-left: 0.25em;
-	margin-right: 0.25em;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
 }
 
 :host>div:empty+smoothly-icon {
@@ -24,6 +24,8 @@
 
 :host>smoothly-icon {
 	cursor: pointer;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
 	flex-shrink: 0;
 }
 
