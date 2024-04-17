@@ -1,5 +1,6 @@
 :host {
 	display: block;
+	width: 80%;
 }
 
 smoothly-table-cell:nth-of-type(2) {

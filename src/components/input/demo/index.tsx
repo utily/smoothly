@@ -1,4 +1,4 @@
-import { Component, h, Host, Listen, State } from "@stencil/core"
+import { Component, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -8,11 +8,6 @@ import { isoly } from "isoly"
 export class SmoothlyInputDemo {
 	private selectElement: HTMLSmoothlyInputSelectElement
 	@State() duration: isoly.TimeSpan = { hours: 8 }
-
-	@Listen("smoothlyInput")
-	handleSelectionChanged(event: CustomEvent<Record<string, unknown>>) {
-		console.log("smoothlyInput", event.detail)
-	}
 
 	render() {
 		return (

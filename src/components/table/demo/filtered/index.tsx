@@ -1,9 +1,8 @@
-import { Component, ComponentWillLoad, h, Listen, State } from "@stencil/core"
-import * as selectively from "selectively"
-import { Criteria } from "selectively"
+import { Component, ComponentWillLoad, h, Host, Listen, State } from "@stencil/core"
+import { selectively } from "selectively"
 import * as http from "cloudly-http"
 import { Selector } from "../../Selector"
-import { Cat, Root } from "./Root"
+import { Cat } from "./Root"
 
 @Component({
 	tag: "smoothly-table-demo-filtered",
@@ -11,71 +10,83 @@ import { Cat, Root } from "./Root"
 	scoped: true,
 })
 export class TableDemoFiltered implements ComponentWillLoad {
-	@State() criteria: Criteria = {}
-	@State() data?: Root | false
+	@State() criteria: selectively.Criteria = {}
+	@State() cats?: Cat[] | false
 	@State() selector: Selector<Cat> = Selector.create("breed")
-
-	@Listen("filters")
-	onFilterUpdate(event: CustomEvent<Record<string, Criteria>>) {
+	@Listen("smoothlyFilter")
+	onFilterUpdate(event: CustomEvent<selectively.Criteria>) {
 		event.stopPropagation()
 		this.criteria = event.detail
 	}
-
-	@Listen("smoothlyInput", { capture: true })
+	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
 		event.stopPropagation()
 		this.selector = this.selector.handle(event.detail)
 	}
 
 	async componentWillLoad(): Promise<void> {
-		const response = await http.fetch("https://catfact.ninja/breeds?limit=10")
-		this.data = response.status == 200 && (await response.body)
+		const response = await http.fetch("https://catfact.ninja/breeds?limit=15")
+		this.cats =
+			response.status == 200 &&
+			(await response.body).data.map((cat: any) => ({
+				...cat,
+				price: [...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0),
+			}))
 	}
 
 	render() {
-		const data = this.data && selectively.filter(this.criteria, this.data.data)
-		return !data
-			? "Failed to load data."
-			: [
-					<smoothly-filter>
-						<smoothly-icon slot="start" name="search-outline" size="small" />
-						Readonly
-						<div slot="filter">
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="breed" placeholder="ex. Abyssinian">
-									Breed
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="country" placeholder="ex. Ethiopia">
-									Country
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="coat" placeholder="ex. Short">
-									Coat
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-							<smoothly-form looks="border">
-								<smoothly-filter-input name="pattern" placeholder="ex. Ticked">
-									Pattern
-									<smoothly-icon slot="start" name="search-outline" size="small" />
-								</smoothly-filter-input>
-							</smoothly-form>
-						</div>
-					</smoothly-filter>,
-
+		const cats = this.cats && selectively.filter(this.criteria, this.cats)
+		return (
+			<Host>
+				<smoothly-filter>
+					<smoothly-filter-toggle properties={{ pattern: "Ticked" }} icon="paw" toolTip="Ticked cats" slot="bar" />
+					<smoothly-filter-toggle
+						properties={{ breed: "Bombay", pattern: "Solid" }}
+						icon="radio-button-on"
+						toolTip="Solid bombay cats"
+						slot="bar"
+					/>
+					<smoothly-filter-toggle
+						properties={{ pattern: "Colorpoint" }}
+						not
+						icon="alert"
+						toolTip="Colored cats"
+						slot="bar"
+					/>
+					<smoothly-filter-picker property="coat" slot="bar" multiple={false}>
+						{this.cats &&
+							this.cats.map(
+								cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
+							)}
+					</smoothly-filter-picker>
+					<div slot="detail">
+						<smoothly-form looks="border">
+							<smoothly-filter-picker property="breed" multiple={false}>
+								{this.cats &&
+									this.cats.map(
+										cat => cat.breed && <smoothly-picker-option value={cat.breed}>{cat.breed}</smoothly-picker-option>
+									)}
+							</smoothly-filter-picker>
+							<smoothly-filter-picker property="coat" multiple={false}>
+								{this.cats &&
+									this.cats.map(
+										cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
+									)}
+							</smoothly-filter-picker>
+						</smoothly-form>
+					</div>
+				</smoothly-filter>
+				{!cats ? (
+					"Failed to load data."
+				) : (
 					<smoothly-table>
 						<smoothly-table-row>
-							<smoothly-table-header>{this.selector.render(data)}</smoothly-table-header>
+							<smoothly-table-header>{this.selector.render(cats)}</smoothly-table-header>
 							<smoothly-table-header>Breed</smoothly-table-header>
 							<smoothly-table-header>Coat</smoothly-table-header>
 							<smoothly-table-header>Price</smoothly-table-header>
 						</smoothly-table-row>
-						{data.map(cat => (
+						{cats.map(cat => (
 							<smoothly-table-row>
 								<smoothly-table-cell>{this.selector.render(cat)}</smoothly-table-cell>
 								<smoothly-table-expandable-cell>
@@ -99,11 +110,13 @@ export class TableDemoFiltered implements ComponentWillLoad {
 								<smoothly-display
 									type="text"
 									value={`Selected: ${
-										this.selector.selected.length != 0 ? this.selector.selected.length : data ? data.length : "?"
+										this.selector.selected.length != 0 ? this.selector.selected.length : cats ? cats.length : "?"
 									}`}></smoothly-display>
 							</td>
 						</smoothly-table-footer>
-					</smoothly-table>,
-			  ]
+					</smoothly-table>
+				)}
+			</Host>
+		)
 	}
 }

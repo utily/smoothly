@@ -37,6 +37,9 @@ button {
 	padding: 0.8em;
 	min-width: 8em;
 }
+:host(:not([size=icon])):has(smoothly-icon) > button {
+	padding: 0.6em;
+}
 :host([size=icon]) > button{
 	padding: 0.5em;
 }
