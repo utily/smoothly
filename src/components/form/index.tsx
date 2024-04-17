@@ -117,6 +117,13 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 		})
 		this.readonly = !editable
 	}
+	@Method()
+	async reset(): Promise<void> {
+		this.inputs.forEach(input => {
+			Editable.Element.type.is(input) && input.reset()
+		})
+		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+	}
 	render() {
 		return (
 			<Host>
@@ -127,6 +134,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 					</fieldset>
 					<div>
 						<slot name="edit" />
+						<slot name="reset" />
 						<slot name="clear" />
 						<slot name="submit" />
 					</div>

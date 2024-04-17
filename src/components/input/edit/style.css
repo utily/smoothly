@@ -9,6 +9,6 @@
 }
 
 :host button::slotted(smoothly-icon){
-	transform: translate(.15em, -.1em);
+	transform: translate(.1em, -.1em);
 }
 

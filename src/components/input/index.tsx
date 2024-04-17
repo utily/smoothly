@@ -144,6 +144,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.readonly = !editable
 	}
 	@Method()
+	async reset(): Promise<void> {
+		this.value = this.initialValue
+	}
+	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
 		const result: Record<string, any> = {}
 		const form = document.forms.namedItem(name)
@@ -195,7 +199,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.smoothlyChange.emit({ [this.name]: this.value })
 	}
 	onFocus(event: FocusEvent) {
-		this.initialValue = this.value
 		const after = this.formatter.format(
 			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
 		)

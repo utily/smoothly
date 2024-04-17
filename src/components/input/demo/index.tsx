@@ -16,7 +16,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input name="Delayed" delay={2}>
 					Delayed
 				</smoothly-input>
-				<h2>Editable form and Input</h2>
+				<h2>Editable form and Input with Clear and Reset</h2>
 				<smoothly-form looks="grid" readonly>
 					<smoothly-input name="First Name" value="John">
 						First name
@@ -29,15 +29,21 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
+						<smoothly-input-reset size="icon" slot="end">
+							<smoothly-icon name="refresh-outline" />
+						</smoothly-input-reset>
 					</smoothly-input>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
-						<smoothly-icon name="create-outline" fill="solid" />
+						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>
+					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded">
+						<smoothly-icon name="refresh-outline" fill="solid" size="tiny" />
+					</smoothly-input-reset>
 					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear" size="icon" shape="rounded">
-						<smoothly-icon name="trash-outline" fill="solid" />
+						<smoothly-icon name="trash-outline" fill="solid" size="tiny" />
 					</smoothly-input-clear>
 					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
-						<smoothly-icon name="checkmark-outline" fill="solid" />
+						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
 				</smoothly-form>
 				<h2>Color</h2>

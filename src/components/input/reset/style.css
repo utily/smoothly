@@ -1,0 +1,38 @@
+@import "../../button/style.css";
+
+:host(:not([display])) {
+	display: none;
+}
+
+:host() {
+	transition: 0.6s;
+	margin: 0rem;
+	min-width: 0rem;
+}
+
+:host([type="input"]) {
+	line-height: 1;
+}
+
+:host([type="form"]) {
+	margin: 1em 0em;
+}
+
+:host([type="input"]) ::slotted(smoothly-icon) {
+	filter: opacity(60%);
+	font-size: 70%;
+}
+
+:host([type="input"]):hover ::slotted(smoothly-icon) {
+	cursor: pointer;
+	filter: opacity(100%);
+}
+
+:host([type="input"]) button {
+ 	padding: 0rem;
+ 	margin: 0rem;
+ 	min-width: 0rem; 
+}
+:host button::slotted(smoothly-icon){
+	transform: translateY(-.1em);
+}

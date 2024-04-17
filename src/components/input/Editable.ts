@@ -7,6 +7,7 @@ export interface Editable extends Editable.Element {
 export namespace Editable {
 	export interface Element {
 		edit: Editable.Edit
+		reset: Editable.Reset
 		readonly: boolean
 		listen: Editable.Listen
 	}
@@ -15,10 +16,12 @@ export namespace Editable {
 			edit: isly.function(),
 			readonly: isly.boolean(),
 			listen: isly.function<Listen>(),
+			reset: isly.function<Reset>(),
 		})
 	}
 	export type Listen = (property: "changed", listener: (parent: Editable) => Promise<void>) => void
 	export type Edit = (editable: boolean) => Promise<void>
+	export type Reset = () => Promise<void>
 	export const type = Element.type.extend<Editable>({
 		changed: isly.boolean(),
 		value: isly.any(),

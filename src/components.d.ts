@@ -187,6 +187,7 @@ export namespace Components {
         "prevent": boolean;
         "processing": boolean;
         "readonly": boolean;
+        "reset": () => Promise<void>;
         "submit": () => Promise<void>;
         "value": Readonly<Data>;
     }
@@ -224,6 +225,7 @@ export namespace Components {
         "placeholder": string | undefined;
         "readonly": boolean;
         "required": boolean;
+        "reset": () => Promise<void>;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
@@ -330,6 +332,16 @@ export namespace Components {
         "outputSide": "right" | "left";
         "step": number | "any";
         "value": number | undefined;
+    }
+    interface SmoothlyInputReset {
+        "color"?: Color;
+        "disabled": boolean;
+        "display": boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "shape"?: "rounded";
+        "size": "small" | "large" | "icon" | "flexible";
+        "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
         "color"?: Color;
@@ -645,6 +657,10 @@ export interface SmoothlyInputRadioItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputRangeElement;
+}
+export interface SmoothlyInputResetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputResetElement;
 }
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1010,6 +1026,12 @@ declare global {
         prototype: HTMLSmoothlyInputRangeElement;
         new (): HTMLSmoothlyInputRangeElement;
     };
+    interface HTMLSmoothlyInputResetElement extends Components.SmoothlyInputReset, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputResetElement: {
+        prototype: HTMLSmoothlyInputResetElement;
+        new (): HTMLSmoothlyInputResetElement;
+    };
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
     }
     var HTMLSmoothlyInputSelectElement: {
@@ -1333,6 +1355,7 @@ declare global {
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
         "smoothly-input-range": HTMLSmoothlyInputRangeElement;
+        "smoothly-input-reset": HTMLSmoothlyInputResetElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-input-submit": HTMLSmoothlyInputSubmitElement;
         "smoothly-item": HTMLSmoothlyItemElement;
@@ -1726,6 +1749,17 @@ declare namespace LocalJSX {
         "step"?: number | "any";
         "value"?: number | undefined;
     }
+    interface SmoothlyInputReset {
+        "color"?: Color;
+        "disabled"?: boolean;
+        "display"?: boolean;
+        "expand"?: "block" | "full";
+        "fill"?: Fill;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputResetCustomEvent<(parent: HTMLElement) => void>) => void;
+        "shape"?: "rounded";
+        "size"?: "small" | "large" | "icon" | "flexible";
+        "type"?: "form" | "input";
+    }
     interface SmoothlyInputSelect {
         "color"?: Color;
         "initialPrompt"?: string;
@@ -2017,6 +2051,7 @@ declare namespace LocalJSX {
         "smoothly-input-radio": SmoothlyInputRadio;
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
         "smoothly-input-range": SmoothlyInputRange;
+        "smoothly-input-reset": SmoothlyInputReset;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-input-submit": SmoothlyInputSubmit;
         "smoothly-item": SmoothlyItem;
@@ -2118,6 +2153,7 @@ declare module "@stencil/core" {
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
             "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
+            "smoothly-input-reset": LocalJSX.SmoothlyInputReset & JSXBase.HTMLAttributes<HTMLSmoothlyInputResetElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
