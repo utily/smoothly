@@ -289,7 +289,7 @@ export namespace Components {
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled": boolean;
-        "editable": boolean;
+        "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
@@ -1701,7 +1701,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled"?: boolean;
-        "editable"?: boolean;
+        "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: HTMLElement) => void>) => void;
