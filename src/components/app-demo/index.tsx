@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	app?: HTMLSmoothlyAppElement
 	render() {
 		return (
-			<smoothly-app color="dark" label="Smoothly Demo" ref={e => (this.app = e)}>
+			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
@@ -106,8 +106,5 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
 			</smoothly-app>
 		)
-	}
-	componentDidRender() {
-		this.app?.selectRoom("/table")
 	}
 }

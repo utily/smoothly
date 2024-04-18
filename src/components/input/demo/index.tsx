@@ -33,6 +33,18 @@ export class SmoothlyInputDemo {
 							<smoothly-icon name="refresh-outline" />
 						</smoothly-input-reset>
 					</smoothly-input>
+					<smoothly-input-radio clearable name="radioFirstInput">
+						<p slot="label">Clearable</p>
+						<smoothly-input-radio-item slot="options" value={"first"}>
+							Label 1
+						</smoothly-input-radio-item>
+						<smoothly-input-radio-item selected slot="options" value={"second"}>
+							Label 2
+						</smoothly-input-radio-item>
+						<smoothly-input-radio-item slot="options" value={"third"}>
+							Label 3
+						</smoothly-input-radio-item>
+					</smoothly-input-radio>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
 						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>
