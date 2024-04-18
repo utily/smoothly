@@ -13,6 +13,7 @@ type Room = {
 export class SmoothlyApp {
 	@Prop() label = "App"
 	@Prop() color: Color
+	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
 	private burgerVisibility: boolean
@@ -20,6 +21,13 @@ export class SmoothlyApp {
 	private navElement?: HTMLElement
 	mainElement?: HTMLElement
 	rooms: Record<string, Room | undefined> = {}
+	async componentDidRender() {
+		if (!this.selected && !window.location.search)
+			(this.home && this.rooms[this.home]
+				? this.rooms[this.home]
+				: Object.values(this.rooms).find(room => !room?.element.disabled)
+			)?.element.setSelected(true)
+	}
 	@Method()
 	async selectRoom(path: string) {
 		this.rooms[path]?.element.setSelected(true)
