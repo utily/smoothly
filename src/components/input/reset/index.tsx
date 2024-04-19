@@ -11,6 +11,7 @@ import { Input } from "../Input"
 	scoped: true,
 })
 export class SmoothlyInputReset {
+	readonlyAtRender = false
 	@Prop({ reflect: true }) color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
@@ -26,6 +27,7 @@ export class SmoothlyInputReset {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Editable.Element.type.is(parent)) {
 				this.parent = parent
+				this.readonlyAtRender = parent.readonly
 				parent.listen("changed", async p => {
 					if (Input.is(p)) {
 						this.disabled = p.readonly ? true : !p.changed
@@ -42,7 +44,7 @@ export class SmoothlyInputReset {
 	@Listen("click")
 	clickHandler() {
 		this.parent?.reset()
-		this.parent?.edit(false)
+		this.readonlyAtRender && this.parent?.edit(false)
 	}
 	render() {
 		return (
