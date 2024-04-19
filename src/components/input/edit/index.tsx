@@ -13,7 +13,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	@Prop({ reflect: true }) color?: Color = "tertiary"
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
-	@Prop({ reflect: true }) disabled = false
+	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
