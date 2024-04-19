@@ -2,7 +2,7 @@ import { isly } from "isly"
 
 export interface Editable extends Editable.Element {
 	changed: boolean
-	value: any
+	value?: any
 }
 export namespace Editable {
 	export interface Element {
@@ -24,6 +24,6 @@ export namespace Editable {
 	export type Reset = () => Promise<void>
 	export const type = Element.type.extend<Editable>({
 		changed: isly.boolean(),
-		value: isly.any(),
+		value: isly.any().optional(),
 	})
 }
