@@ -2,7 +2,7 @@
 
 :host {
 	padding: .4em; 
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 	display: flex;
 	align-items: center;
 }

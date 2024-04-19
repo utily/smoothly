@@ -1,0 +1,14 @@
+:root {
+/* input */
+	--smoothly-input-background: var(--smoothly-background);
+	--smoothly-input-foreground: var(--smoothly-foreground);
+	--smoothly-input-shadow: var(--smoothly-foreground);
+	--smoothly-input-border: var(--smoothly-foreground);
+	--smoothly-input-accent: var(--smoothly-accent);
+	--smoothly-input-contrast: var(--smoothly-contrast);
+/* app */
+	--smoothly-app-background: var(--smoothly-background);
+	--smoothly-app-foreground: var(--smoothly-foreground);
+	--smoothly-app-header-background: var(--smoothly-accent);
+	--smoothly-app-header-foreground: var(--smoothly-contrast);
+}

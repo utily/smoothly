@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
-import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { Color, Data, Fill, Icon, Message, Notice, Option, Scope, Trigger } from "./model";
 import { FunctionalComponent, JSX } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
@@ -45,7 +45,6 @@ export namespace Components {
         "value": address[];
     }
     interface SmoothlyApp {
-        "color": Color;
         "home"?: string;
         "label": string;
         "menuOpen": boolean;
@@ -459,6 +458,9 @@ export namespace Components {
         "color": string;
     }
     interface SmoothlyReorder {
+    }
+    interface SmoothlyScope {
+        "scope"?: Scope;
     }
     interface SmoothlySelectDemo {
     }
@@ -1154,6 +1156,12 @@ declare global {
         prototype: HTMLSmoothlyReorderElement;
         new (): HTMLSmoothlyReorderElement;
     };
+    interface HTMLSmoothlyScopeElement extends Components.SmoothlyScope, HTMLStencilElement {
+    }
+    var HTMLSmoothlyScopeElement: {
+        prototype: HTMLSmoothlyScopeElement;
+        new (): HTMLSmoothlyScopeElement;
+    };
     interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
     }
     var HTMLSmoothlySelectDemoElement: {
@@ -1403,6 +1411,7 @@ declare global {
         "smoothly-popup": HTMLSmoothlyPopupElement;
         "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
+        "smoothly-scope": HTMLSmoothlyScopeElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
@@ -1461,7 +1470,6 @@ declare namespace LocalJSX {
         "value"?: address[];
     }
     interface SmoothlyApp {
-        "color"?: Color;
         "home"?: string;
         "label"?: string;
         "menuOpen"?: boolean;
@@ -1910,6 +1918,9 @@ declare namespace LocalJSX {
     interface SmoothlyReorder {
         "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
+    interface SmoothlyScope {
+        "scope"?: Scope;
+    }
     interface SmoothlySelectDemo {
     }
     interface SmoothlySkeleton {
@@ -2118,6 +2129,7 @@ declare namespace LocalJSX {
         "smoothly-popup": SmoothlyPopup;
         "smoothly-quiet": SmoothlyQuiet;
         "smoothly-reorder": SmoothlyReorder;
+        "smoothly-scope": SmoothlyScope;
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-slot-elements": SmoothlySlotElements;
@@ -2220,6 +2232,7 @@ declare module "@stencil/core" {
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
             "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
+            "smoothly-scope": LocalJSX.SmoothlyScope & JSXBase.HTMLAttributes<HTMLSmoothlyScopeElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;

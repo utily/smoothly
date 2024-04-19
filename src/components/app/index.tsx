@@ -1,6 +1,5 @@
 import { Component, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { SmoothlyAppRoomCustomEvent } from "../../components"
-import { Color } from "../../model"
 
 type Room = {
 	element: HTMLSmoothlyAppRoomElement
@@ -12,7 +11,6 @@ type Room = {
 })
 export class SmoothlyApp {
 	@Prop() label = "App"
-	@Prop() color: Color
 	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
@@ -85,7 +83,7 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
-				<header color={this.color}>
+				<header>
 					<h1>
 						<a href={""}>{this.label}</a>
 					</h1>

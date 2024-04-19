@@ -1,0 +1,31 @@
+:root,
+[scope=primary] {
+	--smoothly-background: var(--smoothly-default-color);
+	--smoothly-foreground: var(--smoothly-default-contrast);
+	--smoothly-border: var(--smoothly-default-contrast);
+	--smoothly-shadow: var(--smoothly-default-contrast);
+	--smoothly-accent: var(--smoothly-primary-color);
+	--smoothly-contrast: var(--smoothly-primary-contrast);
+	--smoothly-shade: var(--smoothly-primary-shade);
+	--smoothly-tint: var(--smoothly-primary-tint);
+}
+[scope=secondary] {
+	--smoothly-background: var(--smoothly-default-color);
+	--smoothly-foreground: var(--smoothly-default-contrast);
+	--smoothly-border: var(--smoothly-default-contrast);
+	--smoothly-shadow: var(--smoothly-default-contrast);
+	--smoothly-accent: var(--smoothly-secondary-color);
+	--smoothly-contrast: var(--smoothly-secondary-contrast);
+	--smoothly-shade: var(--smoothly-secondary-shade);
+	--smoothly-tint: var(--smoothly-secondary-tint);
+}
+[scope=dark] {
+	--smoothly-background: var(--smoothly-dark-color);
+	--smoothly-foreground: var(--smoothly-dark-contrast);
+	--smoothly-border: var(--smoothly-dark-contrast);
+	--smoothly-shadow: var(--smoothly-dark-contrast);
+	--smoothly-accent: var(--smoothly-primary-color);
+	--smoothly-contrast: var(--smoothly-primary-contrast);
+	--smoothly-shade: var(--smoothly-primary-shade);
+	--smoothly-tint: var(--smoothly-primary-tint);
+}

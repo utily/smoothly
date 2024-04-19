@@ -1,36 +1,10 @@
-@import "./ionic-normalize.css";
-
-:root {
-	font-family: var(--smoothly-font-family);
-}
-html {
-	overflow: hidden;
-}
-
-body {
-	margin: 0;
-}
-
-input,
-button {
-	color: unset;
-	background-color: inherit;
-	border-color: inherit;
-}
-
-a,
-a:hover,
-a:visited {
-	color: inherit;
-}
-
-:root,
 [color=default] {
 	--smoothly-color: var(--smoothly-default-color);
 	--smoothly-color-contrast: var(--smoothly-default-contrast);
 	--smoothly-color-shade: var(--smoothly-default-shade);
 	--smoothly-color-tint: var(--smoothly-default-tint);
 }
+
 [color=primary] {
 	--smoothly-color: var(--smoothly-primary-color);
 	--smoothly-color-contrast: var(--smoothly-primary-contrast);
@@ -54,7 +28,7 @@ a:visited {
 
 [color=success] {
 	--smoothly-color: var(--smoothly-success-color);
-	--smoothly-color-contrast: var(--smoothly-default-color);
+	--smoothly-color-contrast: var(--smoothly-success-color);
 	--smoothly-color-shade: var(--smoothly-success-shade);
 	--smoothly-color-tint: var(--smoothly-success-tint);
 }
@@ -93,37 +67,3 @@ a:visited {
 	--smoothly-color-shade: var(--smoothly-dark-shade);
 	--smoothly-color-tint: var(--smoothly-dark-tint);
 }
-
-[color]:not([fill]),
-[fill=default] {
-	color: rgb(var(--smoothly-color-contrast));
-	stroke: rgb(var(--smoothly-color-contrast));
-	fill: rgb(var(--smoothly-color-contrast));
-	background: rgb(var(--smoothly-color));
-	border-color: transparent;
-}
-
-[fill=solid] {
-	color: rgb(var(--smoothly-color-contrast));
-	stroke: rgb(var(--smoothly-color-contrast));
-	fill: rgb(var(--smoothly-color-contrast));
-	background: rgb(var(--smoothly-color));
-	border-color: rgb(var(--smoothly-color));
-}
-
-[fill=outline] {
-	color: rgb(var(--smoothly-color));
-	stroke: rgb(var(--smoothly-color));
-	fill: rgb(var(--smoothly-color));
-	background: transparent;
-	border-color: rgb(var(--smoothly-color));
-}
-
-[fill=clear] {
-	color: rgb(var(--smoothly-color));
-	stroke: rgb(var(--smoothly-color));
-	fill: rgb(var(--smoothly-color));
-	background: transparent;
-	border-color: transparent;
-}
-

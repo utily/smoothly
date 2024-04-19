@@ -3,7 +3,14 @@
 	align-items: center;
 	position: relative;
 }
-
+:host > smoothly-icon {
+	stroke: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+}
+:host[selected] > smoothly-icon {
+	stroke: rgb(var(--smoothly-input-accent));
+	fill: rgb(var(--smoothly-input-accent))
+}
 :host:hover > * {
 	cursor: pointer;
 }

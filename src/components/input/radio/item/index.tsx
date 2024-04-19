@@ -10,7 +10,7 @@ import { Selectable } from "../Selected"
 export class SmoothlyInputRadioItem {
 	@Element() element: HTMLInputElement
 	@Prop({ mutable: true }) value: any
-	@Prop({ mutable: true }) selected = false
+	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop({ mutable: true }) name: string
 	@Event() smoothlySelect: EventEmitter<Selectable>
@@ -27,13 +27,7 @@ export class SmoothlyInputRadioItem {
 		return (
 			<Host onClick={() => this.inputHandler()}>
 				<input name={this.name} type="radio" checked={this.selected} />
-				<smoothly-icon
-					name={this.selected ? "checkmark-circle" : "ellipse-outline"}
-					size="medium"
-					fill="outline"
-					color={this.selected ? "success" : "medium"}
-					toolTip="Select"
-				/>
+				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" toolTip="Select" />
 				<label>
 					<slot />
 				</label>

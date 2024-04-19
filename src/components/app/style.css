@@ -1,6 +1,8 @@
 smoothly-app {
 	--header-height: 5rem;
 	display: block;
+	background-color: rgb(var(--smoothly-app-background));
+	color: rgb(var(--smoothly-app-foreground));
 }
 
 smoothly-app main {
@@ -27,10 +29,10 @@ smoothly-app>smoothly-notifier>header {
 	justify-content: space-between;
 	box-sizing: border-box;
 	align-items: center;
-	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-dark-shadow));
-	border-bottom: 1px solid rgba(var(--smoothly-dark-color));
-	background: rgba(var(--smoothly-color));
-	color: rgba(var(--smoothly-color-contrast));
+	box-shadow: 0 2px 5px 0 rgb(var(--smoothly-dark-shadow));
+	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
+	background: rgba(var(--smoothly-app-header-background));
+	color: rgba(var(--smoothly-app-header-foreground));
 }
 
 smoothly-app>smoothly-notifier>header>nav {
@@ -119,7 +121,8 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 	smoothly-app>smoothly-notifier>header>nav,
 	smoothly-app>smoothly-notifier>header>nav>ul {
 		flex-direction: column;
-		background-color: rgba(var(--smoothly-color));
+		background-color: rgba(var(--smoothly-app-header-background));
+		color: rgba(var(--smoothly-app-header-foreground));
 	}
 
 	smoothly-app>smoothly-notifier>header>nav>ul {

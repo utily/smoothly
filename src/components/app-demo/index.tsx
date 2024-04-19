@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	app?: HTMLSmoothlyAppElement
 	render() {
 		return (
-			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
+			<smoothly-app label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
