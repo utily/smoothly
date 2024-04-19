@@ -11,7 +11,7 @@ import { Input } from "../Input"
 	scoped: true,
 })
 export class SmoothlyInputReset {
-	readonlyAtRender = false
+	readonlyAtRender: boolean
 	@Prop({ reflect: true }) color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
