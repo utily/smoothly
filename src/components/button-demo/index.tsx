@@ -121,6 +121,9 @@ export class SmoothlyButtonDemo {
 					<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
 						<smoothly-icon name="call"></smoothly-icon>
 					</smoothly-button>
+					<smoothly-button size="flexible" fill="solid" color="success">
+						<smoothly-icon name="airplane"></smoothly-icon>
+					</smoothly-button>
 				</div>
 				<h4>Buttons with Icon in "end"</h4>
 				<smoothly-button fill="solid" color="light">
