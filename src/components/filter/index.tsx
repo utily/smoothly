@@ -31,7 +31,7 @@ export class SmoothlyFilter {
 		this.filters.forEach(update => update(this.criteria))
 		this.updating = false
 	}
-	@Listen("filterField")
+	@Listen("smoothlyFilterField")
 	filterFieldHandler(event: CustomEvent<selectively.Criteria>) {
 		event.stopPropagation()
 		if (!this.updating) {

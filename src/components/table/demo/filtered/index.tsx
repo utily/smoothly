@@ -73,12 +73,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 										cat => cat.breed && <smoothly-picker-option value={cat.breed}>{cat.breed}</smoothly-picker-option>
 									)}
 							</smoothly-filter-picker>
-							<smoothly-filter-picker property="coat" multiple={false}>
-								{this.cats &&
-									this.cats.map(
-										cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
-									)}
-							</smoothly-filter-picker>
+							<smoothly-filter-input property="coat" placeholder="ex. Short" />
 						</smoothly-form>
 					</div>
 				</smoothly-filter>
