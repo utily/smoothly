@@ -66,15 +66,27 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						toolTip="Colored cats"
 						slot="bar"
 					/>
-					<smoothly-filter-picker property="coat" slot="bar" multiple={false}>
+					<smoothly-filter-picker label="coat" property="nested.coat" slot="bar" multiple={false}>
 						{this.cats &&
 							this.cats.map(
-								cat => cat.coat && <smoothly-picker-option value={cat.coat}>{cat.coat}</smoothly-picker-option>
+								cat =>
+									cat.nested?.coat && (
+										<smoothly-picker-option value={cat.nested.coat}>{cat.nested.coat}</smoothly-picker-option>
+									)
 							)}
 					</smoothly-filter-picker>
 					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-picker property="breed" multiple={false}>
+							<smoothly-filter-picker label="coat" property="nested.coat" multiple>
+								{this.cats &&
+									this.cats.map(
+										cat =>
+											cat.nested?.coat && (
+												<smoothly-picker-option value={cat.nested.coat}>{cat.nested.coat}</smoothly-picker-option>
+											)
+									)}
+							</smoothly-filter-picker>
+							<smoothly-filter-picker label="breed" property="breed" multiple={false}>
 								{this.cats &&
 									this.cats.map(
 										cat => cat.breed && <smoothly-picker-option value={cat.breed}>{cat.breed}</smoothly-picker-option>

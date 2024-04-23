@@ -21,6 +21,7 @@ export interface Cat {
 	coat: string
 	pattern: string
 	price?: number
+	nested?: Cat
 }
 
 export interface Link {

@@ -3,5 +3,6 @@
 }
 
 :host>smoothly-picker {
+	flex-grow: 1;
 	width: 12.5em;
 }
