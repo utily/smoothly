@@ -39,7 +39,7 @@ export class SmoothlyFilterInput implements Filter {
 			if (result instanceof selectively.And) {
 				const index = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
 				!newCriteria
-					? result.rules.splice(index, 1)
+					? index != -1 && result.rules.splice(index, 1)
 					: index == -1
 					? result.rules.push(newCriteria)
 					: (result.rules[index] = newCriteria)
