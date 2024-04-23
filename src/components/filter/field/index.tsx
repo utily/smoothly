@@ -15,7 +15,6 @@ export class SmoothlyFilterField {
 		await this.input?.clear()
 	}
 	filterFieldEmit() {
-		console.log("blabla")
 		this.smoothlyFilterField.emit(selectively.parse(this.input?.value))
 	}
 	render() {
