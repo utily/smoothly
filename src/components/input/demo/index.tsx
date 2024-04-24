@@ -74,6 +74,10 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="small" name="camera-outline" />
 						</smoothly-item>
 					</smoothly-input-select>
+					<smoothly-input-checkbox name="checkbox">Check the box</smoothly-input-checkbox>
+					<smoothly-input-checkbox name="checkbox2" checked>
+						Check the box 2
+					</smoothly-input-checkbox>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
 						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>
@@ -87,7 +91,7 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
 				</smoothly-form>
-				<h2>Color</h2>
+				{/* <h2>Color</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-color name="color"></smoothly-input-color>
 				</smoothly-form>
@@ -646,7 +650,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form>
+				</smoothly-form> */}
 			</Host>
 		)
 	}

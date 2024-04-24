@@ -1,27 +1,34 @@
+@import "../shared.css";
+
 :host {
 	display: flex;
 	align-items: center;
 	flex-direction: row;
 	position: relative;
 	gap: .5em;
-	padding: 0 .4em;
+	padding: .6em;
 	box-sizing: border-box;
+	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
 }
 
 smoothly-icon {
 	position: absolute;
+	z-index: 1;
 }
 
 :host input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	cursor: pointer;
 	height: 1.2em;
 	width: 1.2em;
 	border: 1px solid black;
 	display: block;
-	z-index: 1;
+}
+
+:host:not([readonly]) smoothly-icon,
+:host:not([readonly]) input {
+	cursor: pointer;
 }
 
 :host[disabled] input,
