@@ -20,22 +20,32 @@ export class SmoothlyFilterInput implements Filter {
 	}
 	update(expression: selectively.Criteria): void {
 		if (expression instanceof selectively.And && expression.rules.length > 0)
-			this.needle =
-				(
-					expression.rules.find(
-						r =>
-							r instanceof selectively.Property && r.name == this.property && r.criteria instanceof selectively.Includes
-					) as any
-				)?.criteria.needle ?? ""
+			for (const rule of expression.rules) {
+				const criteria = this.isCriteria(rule, this.property)
+				if (criteria) {
+					this.needle = criteria.needle ?? ""
+					break
+				}
+			}
 		else
 			this.needle = ""
+	}
+	private isCriteria(criteria: selectively.Rule | undefined, key: string): selectively.Includes | undefined {
+		const [property, ...rest] = key.split(".")
+		return (
+			(criteria instanceof selectively.Property &&
+				criteria.name == property &&
+				((criteria.criteria instanceof selectively.Includes && criteria.criteria) ||
+					(criteria.criteria instanceof selectively.Property && this.isCriteria(criteria.criteria, rest.join("."))))) ||
+			undefined
+		)
 	}
 	inputHandler(event: CustomEvent<Record<string, string>>) {
 		event.stopPropagation()
 		const needle = event.detail[this.property]
 		const manipulate: Filter.Manipulate = (criteria: selectively.Criteria): selectively.Criteria => {
 			let result: selectively.Criteria = criteria
-			const newCriteria = needle ? selectively.property(this.property, selectively.includes(needle)) : undefined
+			const newCriteria = needle ? this.getCriteria(needle) : undefined
 			if (result instanceof selectively.And) {
 				const index = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
 				!newCriteria
@@ -49,8 +59,18 @@ export class SmoothlyFilterInput implements Filter {
 		}
 		this.smoothlyFilterManipulate.emit(manipulate.bind(this))
 	}
+	private getCriteria(needle: string): selectively.Rule | undefined {
+		return this.property
+			.split(".")
+			.reduceRight((r: selectively.Rule, e) => selectively.property(e, r), selectively.includes(needle))
+	}
 	findInstanceOf(criteria: selectively.Criteria, property: string): boolean {
-		return criteria instanceof selectively.Property && criteria.name == property
+		const [key, ...rest] = property.split(".")
+		return (
+			criteria instanceof selectively.Property &&
+			criteria.name == key &&
+			(rest.length == 0 || (!!criteria.criteria && this.findInstanceOf(criteria.criteria, rest.join("."))))
+		)
 	}
 
 	render() {

@@ -93,6 +93,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 									)}
 							</smoothly-filter-picker>
 							<smoothly-filter-input property="coat" placeholder="ex. Short" />
+							<smoothly-filter-input property="nested.coat" placeholder="ex. Rex" />
 						</smoothly-form>
 					</div>
 				</smoothly-filter>
