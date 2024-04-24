@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 @Component({
@@ -7,15 +9,19 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputSelect implements Input {
+export class SmoothlyInputSelect implements Input, Editable, Clearable {
+	private initialValue?: HTMLSmoothlyItemElement | undefined
+	private initialValueHandled = false
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
-	@Prop({ reflect: true, mutable: true }) type?: "icon"
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
-	@Prop() initialPrompt?: string
-	@Prop() initialValue?: unknown
+	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ mutable: true }) clearable = true
+	@Prop({ mutable: true }) changed = false
+	@Prop() placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
@@ -27,26 +33,61 @@ export class SmoothlyInputSelect implements Input {
 	@Event() smoothlyInput: EventEmitter<Data>
 	aside?: HTMLElement
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.listener.changed?.(this)
+	}
+	componentDidLoad() {
+		this.selectedElement && !this.initialValueHandled && (this.initialValue = this.selectedElement)
+		this.initialValueHandled = true
+	}
+
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
+		this.listener[property] = listener
+		listener(this)
 	}
 
 	@Method()
 	async reset() {
-		this.selectedElement = undefined
-		if (this.mainElement) {
-			//reset to the same value as it started with
-			this.mainElement.innerHTML = this.initialPrompt ?? "(none)"
+		this.changed = false
+		this.selectedElement && (this.selectedElement.hidden = false)
+		this.mainElement &&
+			(this.mainElement.innerHTML = this.initialValue ? this.initialValue.innerHTML : this.placeholder)
+		this.selectedElement = this.initialValue
+		this.selectedElement && !this.showSelected && (this.selectedElement.hidden = true)
+	}
+
+	@Method()
+	async clear(): Promise<void> {
+		if (this.clearable) {
+			this.selectedElement = undefined
+			if (this.mainElement) {
+				this.mainElement.innerHTML = this.placeholder ?? "(none)"
+			}
 		}
+	}
+
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		this.readonly = !editable
 	}
 
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+		this.initialValueHandled && (this.changed = this.initialValue !== this.selectedElement)
 		if (old)
 			old.selected = false
 		this.smoothlySelect.emit(value?.value)
 		this.smoothlyInput.emit({ [this.name]: value?.value })
+		this.listener.changed?.(this)
 	}
 	@Watch("filter")
 	async onFilterChange(value: string) {
@@ -57,18 +98,21 @@ export class SmoothlyInputSelect implements Input {
 		} else
 			this.missing = false
 	}
+	@Watch("readonly")
+	watchingReadonly() {
+		this.listener.changed?.(this)
+	}
 	@Listen("click")
 	onClick(event: UIEvent) {
 		event.stopPropagation()
-		this.opened = !this.opened
+		this.handleShowOptions()
 	}
 	@Listen("smoothlyItemSelect")
 	onItemSelect(event: Event) {
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)
-		if (this.mainElement)
-			this.mainElement.innerHTML = this.selectedElement.innerHTML
+		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
 	}
 	@Watch("opened")
 	onClosed() {
@@ -77,6 +121,9 @@ export class SmoothlyInputSelect implements Input {
 			if (marked)
 				marked.marked = false
 		}
+	}
+	handleShowOptions() {
+		!this.readonly && (this.opened = !this.opened)
 	}
 
 	@Listen("keydown")
@@ -119,20 +166,20 @@ export class SmoothlyInputSelect implements Input {
 			switch (event.key) {
 				case "Enter":
 				case " ":
-					this.opened = true
+					this.handleShowOptions()
 					break
 				case "ArrowDown":
-					this.opened = true
+					this.handleShowOptions()
 					this.move(0)
 					break
 				case "ArrowUp":
-					this.opened = true
+					this.handleShowOptions()
 					this.move(-1)
 					break
 				case "Tab":
 					break
 				default:
-					this.opened = true
+					this.handleShowOptions()
 					if (event.key.length == 1)
 						this.filter += event.key
 					break
@@ -155,8 +202,8 @@ export class SmoothlyInputSelect implements Input {
 	}
 	render() {
 		return (
-			<Host tabIndex={0} class={(this.missing ? "missing" : this.type) ?? ""}>
-				<main ref={element => (this.mainElement = element)}>{this.initialPrompt ?? "(none)"}</main>
+			<Host tabIndex={0} class={this.missing ? "missing" : ""}>
+				<main ref={element => (this.mainElement = element)}>{this.placeholder ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
 						{this.filter}

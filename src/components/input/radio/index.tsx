@@ -102,7 +102,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	valueChanged(): void {
-		this.changed = this.initialValue?.value !== this.value
+		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.listener.changed?.(this)
 	}
