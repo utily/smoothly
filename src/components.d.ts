@@ -386,6 +386,7 @@ export namespace Components {
         "show": boolean;
     }
     interface SmoothlyLoadMore {
+        "multiple": boolean;
         "name": string;
         "offset": string;
     }
@@ -1810,6 +1811,7 @@ declare namespace LocalJSX {
         "show"?: boolean;
     }
     interface SmoothlyLoadMore {
+        "multiple"?: boolean;
         "name"?: string;
         "offset"?: string;
         "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
