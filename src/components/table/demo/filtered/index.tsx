@@ -31,6 +31,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			(await response.body).data.map((cat: any) => ({
 				...cat,
 				price: [...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0),
+				nested: cat,
 			}))
 	}
 
@@ -39,6 +40,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		return (
 			<Host>
 				<smoothly-filter>
+					<smoothly-filter-toggle
+						properties={{ ["nested.pattern"]: "Ticked", breed: "" }}
+						icon="add"
+						toolTip="Nested Ticked"
+						slot="bar"
+					/>
 					<smoothly-filter-toggle
 						properties={{ pattern: "Ticked", breed: "" }}
 						icon="paw"
@@ -99,10 +106,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 									<div slot="detail">Pattern: {cat.pattern}</div>
 								</smoothly-table-expandable-cell>
 								<smoothly-table-cell>
-									<smoothly-display
-										type="price"
-										value={[...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0)}
-										currency="SEK"></smoothly-display>
+									<smoothly-display type="price" value={cat.price} currency="SEK"></smoothly-display>
 								</smoothly-table-cell>
 							</smoothly-table-row>
 						))}
