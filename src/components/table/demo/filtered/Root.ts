@@ -20,6 +20,7 @@ export interface Cat {
 	origin: string
 	coat: string
 	pattern: string
+	price?: number
 }
 
 export interface Link {

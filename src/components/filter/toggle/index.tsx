@@ -30,15 +30,22 @@ export class SmoothlyFilterToggle {
 					const criteria = !this.not ? r : r instanceof selectively.Not ? r.criteria : undefined
 					return value == ""
 						? !(criteria instanceof selectively.Property && criteria.name == key)
-						: criteria?.is({ [key]: value }) &&
-								criteria instanceof selectively.Property &&
-								this.properties[criteria.name] &&
-								criteria.criteria instanceof selectively.Is
+						: this.isCriteria(criteria, key, value)
 				})
 			)
 		} else
 			this.active = false
 	}
+	private isCriteria(criteria: selectively.Rule | undefined, key: string, value: string): boolean {
+		const [property, ...rest] = key.split(".")
+		return (
+			criteria instanceof selectively.Property &&
+			criteria.name == property &&
+			((criteria.criteria instanceof selectively.Is && criteria.criteria.value == value) ||
+				this.isCriteria(criteria.criteria, rest.join("."), value))
+		)
+	}
+
 	activeHandler(activate?: true) {
 		const manipulate: Filter.Manipulate = (criteria: selectively.Criteria): selectively.Criteria => {
 			let result: selectively.Criteria = criteria
@@ -49,8 +56,8 @@ export class SmoothlyFilterToggle {
 						!this.active || (this.active && value == "")
 							? undefined
 							: this.not
-							? selectively.not(selectively.property(key, selectively.is(value)))
-							: selectively.create({ [key]: value })
+							? selectively.not(this.createCriteria(key, value))
+							: this.createCriteria(key, value)
 					const index = result.rules.findIndex(r => this.findInstanceOf(r, key))
 					!newCriteria && index >= 0
 						? result.rules.splice(index, 1)
@@ -66,9 +73,21 @@ export class SmoothlyFilterToggle {
 		}
 		this.smoothlyFilterManipulate.emit(manipulate.bind(this))
 	}
+	createCriteria(key: string, value: string): selectively.Rule {
+		const [property, ...rest] = key.split(".")
+		return selectively.property(
+			property,
+			rest.length == 0 ? selectively.is(value) : this.createCriteria(rest.join("."), value)
+		)
+	}
 	findInstanceOf(criteria: selectively.Criteria, property: string): boolean {
 		const check = !this.not ? criteria : criteria instanceof selectively.Not ? criteria.criteria : false
-		return check instanceof selectively.Property && check.name == property
+		const [current, ...rest] = property.split(".")
+		return (
+			check instanceof selectively.Property &&
+			check.name == current &&
+			(rest.length == 0 || (!!check.criteria && this.findInstanceOf(check.criteria, rest.join("."))))
+		)
 	}
 	render() {
 		return (
