@@ -82,10 +82,10 @@ export class SmoothlyFilterToggle {
 	}
 	findInstanceOf(criteria: selectively.Criteria, property: string): boolean {
 		const check = !this.not ? criteria : criteria instanceof selectively.Not ? criteria.criteria : false
-		const [current, ...rest] = property.split(".")
+		const [key, ...rest] = property.split(".")
 		return (
 			check instanceof selectively.Property &&
-			check.name == current &&
+			check.name == key &&
 			(rest.length == 0 || (!!check.criteria && this.findInstanceOf(check.criteria, rest.join("."))))
 		)
 	}
