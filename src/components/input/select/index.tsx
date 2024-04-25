@@ -1,4 +1,18 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	State,
+	VNode,
+	Watch,
+} from "@stencil/core"
 import { Color, Data } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -9,7 +23,7 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputSelect implements Input, Editable, Clearable {
+export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
 	private initialValue?: HTMLSmoothlyItemElement | undefined
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -36,7 +50,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
-	componentWillLoad() {
+	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInputLoad.emit(() => {
 			return
@@ -44,7 +58,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
-	componentDidLoad() {
+	componentDidLoad(): void | Promise<void> {
 		this.selectedElement && !this.initialValueHandled && (this.initialValue = this.selectedElement)
 		this.initialValueHandled = true
 	}
@@ -56,7 +70,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	}
 
 	@Method()
-	async reset() {
+	async reset(): Promise<void> {
 		this.changed = false
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.mainElement &&
@@ -81,7 +95,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	}
 
 	@Watch("selectedElement")
-	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined) {
+	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined): void {
 		this.initialValueHandled && (this.changed = this.initialValue !== this.selectedElement)
 		if (old)
 			old.selected = false
@@ -90,7 +104,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 		this.listener.changed?.(this)
 	}
 	@Watch("filter")
-	async onFilterChange(value: string) {
+	async onFilterChange(value: string): Promise<void> {
 		value = value.toLowerCase()
 		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
 			this.missing = true
@@ -99,30 +113,30 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 			this.missing = false
 	}
 	@Watch("readonly")
-	watchingReadonly() {
+	watchingReadonly(): void {
 		this.listener.changed?.(this)
 	}
 	@Listen("click")
-	onClick(event: UIEvent) {
+	onClick(event: UIEvent): void {
 		event.stopPropagation()
 		this.handleShowOptions()
 	}
 	@Listen("smoothlyItemSelect")
-	onItemSelect(event: Event) {
+	onItemSelect(event: Event): void {
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)
 		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
 	}
 	@Watch("opened")
-	onClosed() {
+	onClosed(): void {
 		if (!this.opened) {
 			const marked = this.items.find(item => item.marked)
 			if (marked)
 				marked.marked = false
 		}
 	}
-	handleShowOptions() {
+	handleShowOptions(): void {
 		!this.readonly && (this.opened = !this.opened)
 	}
 
@@ -200,7 +214,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 		this.items[markedIndex].marked = true
 		this.items[markedIndex].focus()
 	}
-	render() {
+	render(): VNode | VNode[] {
 		return (
 			<Host tabIndex={0} class={this.missing ? "missing" : ""}>
 				<main ref={element => (this.mainElement = element)}>{this.placeholder ?? "(none)"}</main>
@@ -225,7 +239,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 			</Host>
 		)
 	}
-	componentDidRender() {
+	componentDidRender(): void | Promise<void> {
 		const items: HTMLSmoothlyItemElement[] = []
 		const children = this.element.querySelectorAll("div > nav > smoothly-item")
 		for (let i = 0; i < children.length; i++) {
