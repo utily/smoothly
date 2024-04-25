@@ -236,12 +236,17 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputCheckbox {
+        "changed": boolean;
         "checked": boolean;
         "clear": () => Promise<void>;
         "disabled": boolean;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
-        "value": Data[string];
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "value": boolean;
     }
     interface SmoothlyInputClear {
         "color"?: Color;
@@ -1646,14 +1651,17 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputCheckbox {
+        "changed"?: boolean;
         "checked"?: boolean;
         "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputCheckboxCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "value"?: Data[string];
+        "readonly"?: boolean;
+        "value"?: boolean;
     }
     interface SmoothlyInputClear {
         "color"?: Color;
