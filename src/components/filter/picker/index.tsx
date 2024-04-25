@@ -48,22 +48,14 @@ export class SmoothlyFilterPicker implements Filter {
 			this.options.forEach(o => o.selected(false))
 		this.updating = false
 	}
-	private isCriteria(criteria: selectively.Rule | undefined, key: string, value: Record<string, any>): boolean {
+	private isCriteria(criteria: selectively.Rule | undefined, key: string, value: Record<string, any> | any): boolean {
 		const [property, ...rest] = key.split(".")
-		return (
-			criteria instanceof selectively.Property &&
-			criteria.name == property &&
-			((!this.multiple && criteria.criteria instanceof selectively.Is && criteria.criteria.value == value[property]) ||
-				(this.multiple &&
-					criteria.criteria instanceof selectively.Within &&
-					criteria.criteria.value.some(e => e == value[property])) ||
-				(this.multiple &&
-					this.type == "array" &&
-					criteria.criteria instanceof selectively.Contains &&
-					criteria.criteria.criteria.some(e => e == value[property])) ||
-				(criteria.criteria instanceof selectively.Property &&
-					this.isCriteria(criteria.criteria, rest.join("."), value[property])))
-		)
+		return criteria instanceof selectively.Property && criteria.name == property
+			? this.isCriteria(criteria.criteria, rest.join("."), value[property])
+			: this.multiple
+			? (criteria instanceof selectively.Within && criteria.value.some(e => e == value)) ||
+			  (this.type == "array" && criteria instanceof selectively.Contains && criteria.criteria.some(e => e == value))
+			: criteria instanceof selectively.Is && criteria.value == value
 	}
 	pickerHandler(event: CustomEvent<Record<string, unknown>>) {
 		event.stopPropagation()
@@ -76,8 +68,10 @@ export class SmoothlyFilterPicker implements Filter {
 					result = newCriteria ? selectively.and(result, newCriteria) : result
 				else if (result instanceof selectively.And) {
 					const index = result.rules.findIndex(r => this.findInstanceOf(r, this.property))
-					!newCriteria
+					!newCriteria && index >= 0
 						? result.rules.splice(index, 1)
+						: !newCriteria
+						? undefined
 						: index == -1
 						? result.rules.push(newCriteria)
 						: (result.rules[index] = newCriteria)
