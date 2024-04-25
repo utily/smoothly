@@ -167,6 +167,7 @@ export namespace Components {
         "label": string;
         "multiple": boolean;
         "property": string;
+        "type": "array" | "string";
     }
     interface SmoothlyFilterToggle {
         "active": boolean;
@@ -335,13 +336,18 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputRange {
+        "changed": boolean;
         "clear": () => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
         "labelText"?: string;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": number;
         "min": number;
         "name": string;
         "outputSide": "right" | "left";
+        "readonly": boolean;
+        "reset": () => Promise<void>;
         "step": number | "any";
         "value": number | undefined;
     }
@@ -1581,6 +1587,7 @@ declare namespace LocalJSX {
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
         "property"?: string;
+        "type"?: "array" | "string";
     }
     interface SmoothlyFilterToggle {
         "active"?: boolean;
@@ -1762,15 +1769,18 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputRange {
+        "changed"?: boolean;
         "labelText"?: string;
         "looks"?: Looks;
         "max"?: number;
         "min"?: number;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "outputSide"?: "right" | "left";
+        "readonly"?: boolean;
         "step"?: number | "any";
         "value"?: number | undefined;
     }
