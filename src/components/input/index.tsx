@@ -148,6 +148,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.value = this.initialValue
 	}
 	@Method()
+	async submit(): Promise<void> {
+		this.initialValue = this.value
+	}
+	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {
 		const result: Record<string, any> = {}
 		const form = document.forms.namedItem(name)

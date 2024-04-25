@@ -100,6 +100,10 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.value = this.initialValue?.value
 		this.active?.select(true)
 	}
+	@Method()
+	async submit(): Promise<void> {
+		this.initialValue = this.active
+	}
 	@Watch("value")
 	valueChanged(): void {
 		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)

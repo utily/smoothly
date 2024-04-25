@@ -52,6 +52,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	async reset(): Promise<void> {
 		this.value = this.initialValue
 	}
+	@Method()
+	async submit(): Promise<void> {
+		this.initialValue = this.value
+	}
 	@Watch("value")
 	valueChanged(): void {
 		this.changed = this.initialValue !== this.value

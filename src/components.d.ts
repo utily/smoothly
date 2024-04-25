@@ -231,6 +231,7 @@ export namespace Components {
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
+        "submit": () => Promise<void>;
         "type": tidily.Type;
         "value": any;
     }
@@ -245,6 +246,7 @@ export namespace Components {
         "name": string;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "submit": () => Promise<void>;
         "value": boolean;
     }
     interface SmoothlyInputClear {
@@ -326,6 +328,7 @@ export namespace Components {
         "name": string;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "submit": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputRadioItem {
@@ -335,14 +338,20 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputRange {
+        "changed": boolean;
         "clear": () => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
         "labelText"?: string;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": number;
         "min": number;
         "name": string;
         "outputSide": "right" | "left";
+        "readonly": boolean;
+        "reset": () => Promise<void>;
         "step": number | "any";
+        "submit": () => Promise<void>;
         "value": number | undefined;
     }
     interface SmoothlyInputReset {
@@ -369,6 +378,7 @@ export namespace Components {
         "readonly": boolean;
         "reset": () => Promise<void>;
         "showSelected"?: boolean;
+        "submit": () => Promise<void>;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
@@ -1762,15 +1772,18 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputRange {
+        "changed"?: boolean;
         "labelText"?: string;
         "looks"?: Looks;
         "max"?: number;
         "min"?: number;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "outputSide"?: "right" | "left";
+        "readonly"?: boolean;
         "step"?: number | "any";
         "value"?: number | undefined;
     }

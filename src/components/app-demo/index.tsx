@@ -39,7 +39,7 @@ export class SmoothlyAppDemo {
 						To redirect nested
 					</smoothly-button>
 				</smoothly-app-room>
-				<smoothly-app-room path="/links" label="Links">
+				{/* <smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">
@@ -62,11 +62,11 @@ export class SmoothlyAppDemo {
 							action link
 						</smoothly-button>
 					</div>
-				</smoothly-app-room>
+				</smoothly-app-room> */}
 				<smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/button" label="Button">
+				{/* <smoothly-app-room path="/button" label="Button">
 					<smoothly-button-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/dialog" label="Dialog">
@@ -103,7 +103,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>
 				</smoothly-app-room>
-				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
+				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room> */}
 			</smoothly-app>
 		)
 	}

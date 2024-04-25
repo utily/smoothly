@@ -37,6 +37,11 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	}
 	@Watch("value")
 	watchValue() {
+		// this.changed = [...this.inputs.values()].some(input => {
+		// 	console.log(input.name, "changed" in input && input.changed)
+		// 	return Editable.type.is(input) ? input.changed : true
+		// })
+		// console.log("form", this.changed)
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.listeners.changed?.forEach(l => l(this))
 	}
@@ -52,6 +57,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
+		console.log(this.value)
 	}
 	@Listen("smoothlySubmit")
 	async smoothlySubmitHandler(event: CustomEvent): Promise<void> {

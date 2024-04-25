@@ -3,6 +3,7 @@ import { isly } from "isly"
 export interface Editable extends Editable.Element {
 	changed: boolean
 	value?: any
+	submit: () => Promise<void>
 }
 export namespace Editable {
 	export interface Element {
@@ -25,5 +26,6 @@ export namespace Editable {
 	export const type = Element.type.extend<Editable>({
 		changed: isly.boolean(),
 		value: isly.any().optional(),
+		submit: isly.function()
 	})
 }

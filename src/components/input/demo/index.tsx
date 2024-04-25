@@ -94,7 +94,7 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
 				</smoothly-form>
-				<h2>Color</h2>
+				{/* <h2>Color</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-color name="color"></smoothly-input-color>
 				</smoothly-form>
@@ -651,7 +651,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form>
+				</smoothly-form> */}
 			</Host>
 		)
 	}
