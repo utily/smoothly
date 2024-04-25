@@ -91,7 +91,7 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
 				</smoothly-form>
-				{/* <h2>Color</h2>
+				<h2>Color</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-color name="color"></smoothly-input-color>
 				</smoothly-form>
@@ -392,20 +392,18 @@ export class SmoothlyInputDemo {
 				<h4>Smoothly checkboxes</h4>
 				<smoothly-form>
 					<div class="checkbox-group">
-						<smoothly-input-checkbox disabled name="first-checkbox" value={"first"}>
+						<smoothly-input-checkbox disabled name="first-checkbox">
 							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
 							First
 						</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="second-checkbox" checked value={"second"}>
+						<smoothly-input-checkbox name="second-checkbox" checked>
 							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
 							second
 							<smoothly-input-clear size="icon" slot="end">
 								<smoothly-icon name="close" />
 							</smoothly-input-clear>
 						</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="third-checkbox" value={"third"}>
-							3rd
-						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="third-checkbox">3rd</smoothly-input-checkbox>
 					</div>
 				</smoothly-form>
 				<h4>Smoothly Radio Buttons</h4>
@@ -650,7 +648,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form> */}
+				</smoothly-form>
 			</Host>
 		)
 	}
