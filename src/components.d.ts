@@ -351,15 +351,19 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
+        "changed": boolean;
+        "clear": () => Promise<void>;
+        "clearable": boolean;
         "color"?: Color;
-        "initialPrompt"?: string;
-        "initialValue"?: unknown;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "name": string;
+        "placeholder"?: string | any;
+        "readonly": boolean;
         "reset": () => Promise<void>;
         "showSelected"?: boolean;
-        "type"?: "icon";
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
@@ -1774,17 +1778,20 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputSelect {
+        "changed"?: boolean;
+        "clearable"?: boolean;
         "color"?: Color;
-        "initialPrompt"?: string;
-        "initialValue"?: unknown;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
+        "placeholder"?: string | any;
+        "readonly"?: boolean;
         "showSelected"?: boolean;
-        "type"?: "icon";
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
