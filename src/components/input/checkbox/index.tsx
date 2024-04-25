@@ -1,6 +1,7 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Color, Data } from "../../../model"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
@@ -9,37 +10,61 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputCheckbox implements Input, Clearable, ComponentWillLoad {
+export class SmoothlyInputCheckbox implements Input, Clearable, Editable, ComponentWillLoad {
+	private initialValue?: any
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop() name: string
-	@Prop() value: Data[string] = undefined
+	@Prop({ mutable: true }) changed = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true }) checked = false
+	@Prop() value = this.checked
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInput.emit({ [this.name]: this.checked ? this.value : undefined })
+		this.initialValue = this.checked
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
+		this.listener.changed?.(this)
 	}
 	@Method()
 	async clear(): Promise<void> {
-		!this.disabled && (this.checked = false)
+		!this.disabled && !this.readonly && (this.checked = false)
+	}
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
+		this.listener[property] = listener
+		listener(this)
+	}
+
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		this.readonly = !editable
+	}
+	@Method()
+	async reset(): Promise<void> {
+		this.checked = this.initialValue
 	}
 	@Watch("checked")
 	elementCheck(): void {
-		this.smoothlyInput.emit({ [this.name]: this.checked ? this.value : undefined })
+		this.changed = this.initialValue !== this.checked
+		this.smoothlyInput.emit({ [this.name]: this.checked })
+		this.listener.changed?.(this)
 	}
-	inputHandler(event: MouseEvent) {
-		!this.disabled && event.target instanceof HTMLInputElement && (this.checked = event.target.checked)
+	inputHandler() {
+		!this.disabled && !this.readonly && (this.checked = !this.checked)
 	}
 	render() {
 		return (
-			<Host>
+			<Host onClick={() => this.inputHandler()}>
+				<input type="checkbox" checked={this.checked} />
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
-				<input type="checkbox" checked={this.checked} onClick={event => this.inputHandler(event)} />
 				<label>
 					<slot />
 				</label>
