@@ -206,7 +206,9 @@ export namespace Components {
     interface SmoothlyIcon {
         "color": Color;
         "fill": Fill;
+        "flip"?: "x" | "y";
         "name": Icon | "empty";
+        "rotate"?: number;
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
@@ -1627,7 +1629,9 @@ declare namespace LocalJSX {
     interface SmoothlyIcon {
         "color"?: Color;
         "fill"?: Fill;
+        "flip"?: "x" | "y";
         "name"?: Icon | "empty";
+        "rotate"?: number;
         "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }

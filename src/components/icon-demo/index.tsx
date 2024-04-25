@@ -483,6 +483,21 @@ export class SmoothlyIconDemo {
 						<smoothly-icon name={name as Icon} toolTip={name}></smoothly-icon>
 					))}
 			</div>,
+			<h3>Icon transforms</h3>,
+			<div>
+				<smoothly-icon name={"bicycle"} toolTip={"Normal"}></smoothly-icon>
+				<smoothly-icon name={"bicycle"} toolTip={"Flipped horizontally"} flip="x"></smoothly-icon>
+				<smoothly-icon name={"bicycle"} toolTip={"Flipped vertically"} flip="y"></smoothly-icon>
+				<smoothly-icon name={"bicycle"} toolTip={"Rotated 180deg"} rotate={180}></smoothly-icon>
+				<smoothly-icon name={"wine"} toolTip={"Rotated 60deg"} rotate={60}></smoothly-icon>
+				<smoothly-icon name={"wine"} toolTip={"Rotated 213deg"} rotate={213}></smoothly-icon>
+				<smoothly-icon name={"wine"} toolTip={"Rotated -60deg"} rotate={-60}></smoothly-icon>
+				<smoothly-icon
+					name={"musical-notes"}
+					toolTip={"Flipped horizontally and rotated 45deg"}
+					rotate={45}
+					flip="x"></smoothly-icon>
+			</div>,
 		]
 	}
 }
