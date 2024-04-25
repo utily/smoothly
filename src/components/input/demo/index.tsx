@@ -78,6 +78,9 @@ export class SmoothlyInputDemo {
 					<smoothly-input-checkbox name="checkbox2" checked>
 						Check the box 2
 					</smoothly-input-checkbox>
+					<smoothly-input-range step={1} name="range3" value={20000}>
+						Select
+					</smoothly-input-range>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
 						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>

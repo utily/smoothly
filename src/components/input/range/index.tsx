@@ -1,18 +1,7 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Method,
-	Prop,
-	VNode,
-	Watch,
-} from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
@@ -21,9 +10,13 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
+export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value: number | undefined = undefined
+	private initialValue = this.value
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ mutable: true }) changed = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() min = 0
 	@Prop() max = 100000
 	@Prop() name: string
@@ -33,27 +26,37 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
-	}
-	@Listen("smoothlyInputLoad")
-	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRange) => void>): void {
-		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
-			event.stopPropagation()
-			event.detail(this)
-		}
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
 	}
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
+		this.listener[property] = listener
+		listener(this)
+	}
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		this.readonly = !editable
+	}
+	@Method()
+	async reset(): Promise<void> {
+		this.value = this.initialValue
+	}
 	@Watch("value")
 	valueChanged(): void {
+		this.changed = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.listener.changed?.(this)
 	}
 	inputHandler(event: Event): void {
 		event.target instanceof HTMLInputElement &&
@@ -77,6 +80,7 @@ export class SmoothlyInputRange implements Input, Clearable, ComponentWillLoad {
 						min={this.min}
 						max={this.max}
 						step={this.step}
+						disabled={this.readonly}
 						onInput={event => this.inputHandler(event)}
 						value={this.value ?? this.min}
 					/>
