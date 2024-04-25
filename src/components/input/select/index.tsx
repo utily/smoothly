@@ -33,7 +33,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
-	@Prop({ mutable: true }) clearable = true
+	@Prop() clearable = true
 	@Prop({ mutable: true }) changed = false
 	@Prop() placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
@@ -216,7 +216,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host tabIndex={0} class={this.missing ? "missing" : ""}>
+			<Host tabIndex={0} class={{ missing: this.missing }}>
 				<main ref={element => (this.mainElement = element)}>{this.placeholder ?? "(none)"}</main>
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
