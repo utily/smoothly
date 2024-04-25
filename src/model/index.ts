@@ -1,5 +1,4 @@
 export { Autocomplete } from "./Autocomplete"
-export { ClientIdentifier } from "./ClientIdentifier"
 export { Color } from "./Color"
 export { Fill } from "./Fill"
 export { GoogleFont } from "./GoogleFont"

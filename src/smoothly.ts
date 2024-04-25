@@ -1,7 +1,6 @@
 export { Components, JSX } from "./components"
 export {
 	Autocomplete,
-	ClientIdentifier,
 	Color,
 	Fill,
 	GoogleFont,

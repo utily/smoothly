@@ -68,7 +68,6 @@
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
 	"dependencies": {
-		"authly": "3.0.5",
 		"cloudly-http": "^0.1.2",
 		"isly": "^0.1.13",
 		"isoly": "^2.3.6",
