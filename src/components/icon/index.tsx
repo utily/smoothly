@@ -12,6 +12,8 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop({ reflect: true }) name: Icon | "empty" = "empty"
 	@Prop({ reflect: true }) size: "tiny" | "small" | "medium" | "large" = "medium"
+	@Prop({ reflect: true }) rotate?: number
+	@Prop({ reflect: true }) flip?: "x" | "y"
 	@Prop() toolTip?: string
 	@State() document?: string
 	@Watch("name")
@@ -35,6 +37,6 @@ export class SmoothlyIcon {
 		</svg>`
 	}
 	render() {
-		return <Host innerHTML={this.document} />
+		return <Host innerHTML={this.document} style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
 	}
 }

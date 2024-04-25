@@ -4,6 +4,21 @@
 :host {
 	display: block;
 }
+:host[rotate] {
+	--rotate: rotate(var(--rotation, 0deg));
+	transform: var(--rotate);
+}
+:host[flip=x] {
+	--flip: scaleX(-1);
+	transform: var(--flip);
+}
+:host[flip=y] {
+	--flip: scaleY(-1);
+	transform: var(--flip);
+}
+:host[rotate][flip] {
+	transform:var(--rotate)var(--flip);
+}
 :host[hidden] {
 	display: none;
 }
