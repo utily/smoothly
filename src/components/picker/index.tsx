@@ -25,7 +25,7 @@ export class SmoothlyPicker implements Clearable, Input {
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
-	private controls?: Controls & { synced: () => boolean }
+	private controls?: Controls
 
 	componentWillLoad() {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
@@ -34,10 +34,8 @@ export class SmoothlyPicker implements Clearable, Input {
 	@Watch("selected")
 	selectedChanged() {
 		const selected = Array.from(this.selected.values(), option => option.value)
-		if (this.controls?.synced()) {
-			this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
-			this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
-		}
+		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 		this.display = Array.from(this.selected.values(), option => {
 			const span = document.createElement("span")
 			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))
@@ -47,7 +45,7 @@ export class SmoothlyPicker implements Clearable, Input {
 
 	componentDidLoad() {
 		if (this.controls)
-			this.smoothlyPickerLoaded.emit((({ synced, ...controls }) => controls)(this.controls))
+			this.smoothlyPickerLoaded.emit(this.controls)
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
