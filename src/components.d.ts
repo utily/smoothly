@@ -167,6 +167,7 @@ export namespace Components {
         "label": string;
         "multiple": boolean;
         "property": string;
+        "type": "array" | "string";
     }
     interface SmoothlyFilterToggle {
         "active": boolean;
@@ -1572,6 +1573,7 @@ declare namespace LocalJSX {
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
         "property"?: string;
+        "type"?: "array" | "string";
     }
     interface SmoothlyFilterToggle {
         "active"?: boolean;

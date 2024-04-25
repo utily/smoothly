@@ -31,7 +31,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			(await response.body).data.map((cat: any) => ({
 				...cat,
 				price: [...cat.breed].reduce((r, c) => r + c.charCodeAt(0), 0),
-				nested: cat,
+				nested: { ...cat, names: names[cat.country] ?? [] },
+				names: names[cat.country] ?? [],
 			}))
 	}
 
@@ -92,6 +93,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 										cat => cat.breed && <smoothly-picker-option value={cat.breed}>{cat.breed}</smoothly-picker-option>
 									)}
 							</smoothly-filter-picker>
+							<smoothly-filter-picker label="names" property="nested.names" multiple={true} type="array">
+								{Object.values(names).flatMap(names =>
+									names.map(name => <smoothly-picker-option value={name}>{name}</smoothly-picker-option>)
+								)}
+							</smoothly-filter-picker>
+
 							<smoothly-filter-input property="coat" placeholder="ex. Short" />
 							<smoothly-filter-input property="nested.coat" placeholder="ex. Rex" />
 						</smoothly-form>
@@ -137,4 +144,10 @@ export class TableDemoFiltered implements ComponentWillLoad {
 			</Host>
 		)
 	}
+}
+const names: Record<string, string[]> = {
+	"United States": ["bill", "bob", "brad", "joe", "molly"],
+	Australia: ["nigel", "bruce", "sheila", "brad", "shane"],
+	"United Kingdom": ["nigel", "james", "molly", "shane", "bob"],
+	Greece: ["dionysius", "demetrius", "polikarpos"],
 }
