@@ -99,8 +99,8 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 						result = [false, "Failed to submit form."]
 					else {
 						result = [true, "Form successfully submitted."]
-						!this.clearOnSubmit && this.setInitialValue()
-						this.clearOnSubmit && this.clear()
+						this.clearOnSubmit && (await this.clear())
+						this.setInitialValue()
 						this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
 					}
 					return result
