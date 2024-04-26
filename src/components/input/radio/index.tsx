@@ -28,7 +28,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	private valueReceivedOnLoad = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	initialValue?: Selectable
-	@Prop({ mutable: true }) changed: boolean
+	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop() clearable?: boolean
@@ -99,6 +99,11 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.active = this.initialValue
 		this.value = this.initialValue?.value
 		this.active?.select(true)
+	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.initialValue = this.active
+		this.valueChanged()
 	}
 	@Watch("value")
 	valueChanged(): void {

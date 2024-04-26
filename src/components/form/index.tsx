@@ -16,6 +16,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop({ mutable: true, reflect: true }) readonly = false
+	private readonlyAtLoad = this.readonly
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
 	@Prop() method?: "GET" | "POST"
@@ -23,6 +24,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop({ mutable: true, reflect: true }) processing: boolean
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
+	@Prop() clearOnSubmit = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Data>
 	@Event() notice: EventEmitter<Notice>
@@ -97,7 +99,9 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 						result = [false, "Failed to submit form."]
 					else {
 						result = [true, "Form successfully submitted."]
-						this.clear()
+						!this.clearOnSubmit && this.setInitialValue()
+						this.clearOnSubmit && this.clear()
+						this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
 					}
 					return result
 				})
@@ -123,6 +127,12 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 			Editable.Element.type.is(input) && input.reset()
 		})
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.inputs.forEach(input => {
+			Editable.Element.type.is(input) && input.setInitialValue()
+		})
 	}
 	render() {
 		return (

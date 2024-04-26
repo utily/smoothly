@@ -51,6 +51,11 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	async reset(): Promise<void> {
 		this.checked = this.initialValue
 	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.initialValue = this.checked
+		this.changed = false
+	}
 	@Watch("checked")
 	elementCheck(): void {
 		this.changed = this.initialValue !== this.checked
