@@ -86,6 +86,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	async clear(): Promise<void> {
 		if (this.clearable) {
 			this.active?.select(false)
+			this.active = undefined
 			this.value = undefined
 		}
 	}
