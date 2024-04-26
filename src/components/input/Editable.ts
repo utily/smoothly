@@ -10,6 +10,7 @@ export namespace Editable {
 		reset: Editable.Reset
 		readonly: boolean
 		listen: Editable.Listen
+		setInitialValue: () => void
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
@@ -17,6 +18,7 @@ export namespace Editable {
 			readonly: isly.boolean(),
 			listen: isly.function<Listen>(),
 			reset: isly.function<Reset>(),
+			setInitialValue: isly.function(),
 		})
 	}
 	export type Listen = (property: "changed", listener: (parent: Editable) => Promise<void>) => void

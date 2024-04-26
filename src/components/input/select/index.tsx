@@ -94,6 +94,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.readonly = !editable
 	}
 
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.changed = false
+		this.initialValue = this.selectedElement
+		this.smoothlyInput.emit({ [this.name]: this.selectedElement?.value })
+	}
+
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined): void {
 		this.initialValueHandled && (this.changed = this.initialValue !== this.selectedElement)

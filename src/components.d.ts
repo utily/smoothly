@@ -181,6 +181,7 @@ export namespace Components {
         "action"?: string;
         "changed": boolean;
         "clear": () => Promise<void>;
+        "clearOnSubmit": boolean;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -191,6 +192,7 @@ export namespace Components {
         "processing": boolean;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "submit": () => Promise<void>;
         "value": Readonly<Data>;
     }
@@ -231,6 +233,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
@@ -248,6 +251,7 @@ export namespace Components {
         "name": string;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "value": boolean;
     }
     interface SmoothlyInputClear {
@@ -329,6 +333,7 @@ export namespace Components {
         "name": string;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputRadioItem {
@@ -350,6 +355,7 @@ export namespace Components {
         "outputSide": "right" | "left";
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "step": number | "any";
         "value": number | undefined;
     }
@@ -376,6 +382,7 @@ export namespace Components {
         "placeholder"?: string | any;
         "readonly": boolean;
         "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -1604,6 +1611,7 @@ declare namespace LocalJSX {
     interface SmoothlyForm {
         "action"?: string;
         "changed"?: boolean;
+        "clearOnSubmit"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "method"?: "GET" | "POST";
