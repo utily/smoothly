@@ -67,11 +67,6 @@ export class SmoothlyPickerOption {
 		if (!this.readonly && !this.required)
 			this.selected = !this.selected
 	}
-	@Method()
-	async setSelected(selected: boolean) {
-		if (!this.readonly && !this.required)
-			this.selected = selected
-	}
 
 	render() {
 		return (

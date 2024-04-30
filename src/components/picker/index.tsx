@@ -132,9 +132,9 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	async reset(): Promise<void> {
 		const initialValueArray = Array.from(this.initialValue.values(), option => option.value)
 		this.selected.forEach(
-			option => !initialValueArray.includes(option.value) && option.selected && option.element.setSelected(false)
+			option => !initialValueArray.includes(option.value) && option.selected && option.set.selected(false)
 		)
-		this.initialValue.forEach(option => option.element.setSelected(true))
+		this.initialValue.forEach(option => option.set.selected(true))
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
