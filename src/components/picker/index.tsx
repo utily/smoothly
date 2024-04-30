@@ -144,14 +144,13 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	areValuesEqual(selected: Map<any, Option>, initialValue: Map<any, Option>): boolean {
 		const initialValueArray = Array.from(initialValue.values(), option => option.value)
 		const selectedArray = Array.from(selected.values(), option => option.value)
+		let result: boolean
 		if (selectedArray.length !== initialValueArray.length) {
-			return false
+			result = false
+		} else {
+			result = initialValueArray.every(value => selectedArray.includes(value))
 		}
-		initialValueArray.forEach(value => {
-			if (!selectedArray.includes(value))
-				return false
-		})
-		return true
+		return result
 	}
 	render(): VNode | VNode[] {
 		return (
