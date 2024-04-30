@@ -1,6 +1,21 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentDidLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	State,
+	VNode,
+	Watch,
+} from "@stencil/core"
 import { Notice, Option } from "../../model"
 import { Clearable } from "../input/Clearable"
+import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Controls } from "./menu"
@@ -10,14 +25,18 @@ import { Controls } from "./menu"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPicker implements Clearable, Input {
+export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidLoad {
+	private valueRecivedOnLoad = false
+	private initialValue = new Map<any, Option>()
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Element() element: HTMLSmoothlyPickerElement
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
+	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) open = false
 	@Prop({ reflect: true }) mutable = false
 	@Prop({ reflect: true }) multiple = false
-	@Prop({ reflect: true }) readonly = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() validator?: (value: string) => boolean | { result: boolean; notice: Notice }
 	@State() selected = new Map<any, Option>()
 	@State() display: Node[]
@@ -25,15 +44,23 @@ export class SmoothlyPicker implements Clearable, Input {
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	private controls?: Controls
 
-	componentWillLoad() {
+	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
+		this.listener.changed?.(this)
 	}
 
 	@Watch("selected")
-	selectedChanged() {
+	selectedChanged(): void {
 		const selected = Array.from(this.selected.values(), option => option.value)
+		this.changed = !this.areValuesEqual(this.selected, this.initialValue)
 		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
 		this.display = Array.from(this.selected.values(), option => {
@@ -41,32 +68,34 @@ export class SmoothlyPicker implements Clearable, Input {
 			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))
 			return span
 		})
+		!this.valueRecivedOnLoad && (this.initialValue = new Map(this.selected))
 	}
 
-	componentDidLoad() {
+	componentDidLoad(): void | Promise<void> {
 		if (this.controls)
 			this.smoothlyPickerLoaded.emit(this.controls)
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
 	@Listen("smoothlyPickerMenuLoaded")
-	menuLoadedHandler(event: CustomEvent<Controls & { synced: () => boolean }>) {
+	menuLoadedHandler(event: CustomEvent<Controls & { synced: () => boolean }>): void {
 		this.controls = event.detail
 	}
 	@Listen("smoothlyPickerOptionLoaded")
-	optionLoadedHandler(event: CustomEvent<Option>) {
+	optionLoadedHandler(event: CustomEvent<Option>): void {
 		if (event.detail.selected)
 			this.selected = this.multiple
 				? new Map(this.selected.set(event.detail.value, event.detail).entries())
 				: new Map().set(event.detail.value, event.detail)
+		!this.valueRecivedOnLoad && (this.valueRecivedOnLoad = !this.valueRecivedOnLoad)
 	}
 
 	@Listen("smoothlyPickerOptionChange")
-	optionChangeHandler(event: CustomEvent<Option>) {
-		if (!this.readonly)
+	optionChangeHandler(event: CustomEvent<Option>): void {
+		if ((this.readonly && !this.valueRecivedOnLoad) || !this.readonly)
 			if (this.multiple)
 				this.selected = event.detail.selected
 					? new Map(this.selected.set(event.detail.value, event.detail).entries())
@@ -78,7 +107,7 @@ export class SmoothlyPicker implements Clearable, Input {
 	}
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
-		this.open = !event.composedPath().includes(this.element) ? false : !this.open
+		this.open = !event.composedPath().includes(this.element) || this.readonly ? false : !this.open
 	}
 	@Listen("focusin", { target: "window" })
 	focusHandler(event: FocusEvent) {
@@ -89,7 +118,42 @@ export class SmoothlyPicker implements Clearable, Input {
 	async clear() {
 		this.selected.forEach(option => option.selected && option.element.clickHandler())
 	}
-	render() {
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
+		this.listener[property] = listener
+		listener(this)
+	}
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		await this.reset()
+		this.readonly = !editable
+	}
+	@Method()
+	async reset(): Promise<void> {
+		const initialValueArray = Array.from(this.initialValue.values(), option => option.value)
+		this.selected.forEach(
+			option => !initialValueArray.includes(option.value) && option.selected && option.element.setSelected(false)
+		)
+		this.initialValue.forEach(option => option.element.setSelected(true))
+	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.initialValue = new Map(this.selected)
+		this.selectedChanged()
+	}
+	areValuesEqual(selected: Map<any, Option>, initialValue: Map<any, Option>): boolean {
+		const initialValueArray = Array.from(initialValue.values(), option => option.value)
+		const selectedArray = Array.from(selected.values(), option => option.value)
+		if (selectedArray.length !== initialValueArray.length) {
+			return false
+		}
+		initialValueArray.forEach(value => {
+			if (!selectedArray.includes(value))
+				return false
+		})
+		return true
+	}
+	render(): VNode | VNode[] {
 		return (
 			<Host tabindex={0}>
 				<smoothly-slot-elements class={"selected"} nodes={this.display} />

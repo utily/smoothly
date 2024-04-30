@@ -82,6 +82,15 @@ export class SmoothlyInputDemo {
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
 					</smoothly-input-range>
+					<smoothly-picker multiple name="animals">
+						<span slot="label">Animals</span>
+						<span slot="search">Search</span>
+						<smoothly-picker-option selected value={"cat"}>
+							Cat
+						</smoothly-picker-option>
+						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
+						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
+					</smoothly-picker>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
 						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>

@@ -423,13 +423,18 @@ export namespace Components {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
+        "changed": boolean;
         "clear": () => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerDemo {
@@ -448,6 +453,7 @@ export namespace Components {
         "required": boolean;
         "search": string[];
         "selected": boolean;
+        "setSelected": (selected: boolean) => Promise<void>;
         "value": any;
         "visible": boolean;
     }
@@ -1864,12 +1870,15 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
     }
     interface SmoothlyPicker {
+        "changed"?: boolean;
         "looks"?: Looks;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "name"?: string;
         "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyFormDisable"?: (event: SmoothlyPickerCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyPickerCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyPickerCustomEvent<(looks: Looks) => void>) => void;
         "onSmoothlyPickerLoaded"?: (event: SmoothlyPickerCustomEvent<Controls>) => void;
         "open"?: boolean;
