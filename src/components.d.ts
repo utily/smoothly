@@ -453,7 +453,6 @@ export namespace Components {
         "required": boolean;
         "search": string[];
         "selected": boolean;
-        "setSelected": (selected: boolean) => Promise<void>;
         "value": any;
         "visible": boolean;
     }
