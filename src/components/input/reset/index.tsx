@@ -30,11 +30,11 @@ export class SmoothlyInputReset {
 				this.readonlyAtLoad = parent.readonly
 				parent.listen("changed", async p => {
 					if (Input.is(p)) {
-						this.disabled = p.readonly ? true : !p.changed
+					//this.disabled = p.readonly ? true : !p.changed
 						this.display = p.readonly ? false : p.changed
 					}
 					if (p instanceof SmoothlyForm) {
-						this.disabled = p.readonly ? true : !p.changed
+						//this.disabled = p.readonly ? true : !p.changed
 						this.display = !p.readonly
 					}
 				})
@@ -43,13 +43,14 @@ export class SmoothlyInputReset {
 	}
 	@Listen("click")
 	clickHandler() {
-		this.parent?.reset()
+		this.parent?.reset() //check with parent.changed?
 		this.parent instanceof SmoothlyForm && this.readonlyAtLoad && this.parent?.edit(false)
 	}
 	render() {
 		return (
 			<Button disabled={this.disabled} type="button">
 				<slot />
+				<smoothly-icon></smoothly-icon>
 			</Button>
 		)
 	}

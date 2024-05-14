@@ -181,19 +181,18 @@ export namespace Components {
         "action"?: string;
         "changed": boolean;
         "clear": () => Promise<void>;
-        "clearOnSubmit": boolean;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
-        "method"?: "GET" | "POST";
         "name"?: string;
         "prevent": boolean;
         "processing": boolean;
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
-        "submit": () => Promise<void>;
+        "submit": (remove?: boolean) => Promise<void>;
+        "type": "change" | "fetch" | "create";
         "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -387,12 +386,13 @@ export namespace Components {
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
+        "delete": boolean;
         "disabled": boolean;
         "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
-        "size": "flexible" | "small" | "large" | "icon";
+        "size"?: "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
     }
     interface SmoothlyItem {
@@ -1616,10 +1616,8 @@ declare namespace LocalJSX {
     interface SmoothlyForm {
         "action"?: string;
         "changed"?: boolean;
-        "clearOnSubmit"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
-        "method"?: "GET" | "POST";
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
@@ -1627,6 +1625,7 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "processing"?: boolean;
         "readonly"?: boolean;
+        "type"?: "change" | "fetch" | "create";
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -1830,6 +1829,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
+        "delete"?: boolean;
         "disabled"?: boolean;
         "display"?: boolean;
         "expand"?: "block" | "full";

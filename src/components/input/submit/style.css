@@ -13,3 +13,7 @@
 	margin: 0rem;
 	min-width: 0rem;
 }
+
+:host > * + smoothly-icon {
+	display: none;
+}

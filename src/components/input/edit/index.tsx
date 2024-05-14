@@ -23,8 +23,9 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Editable.type.is(parent)) {
 				this.parent = parent
+				parent.readonly = true
 				parent.listen("changed", async p => {
-					this.display = !p.readonly // do not show any buttons
+					this.display = p.readonly
 				})
 			}
 		})

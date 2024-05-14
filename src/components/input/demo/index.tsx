@@ -19,10 +19,11 @@ export class SmoothlyInputDemo {
 				<h2>Editable form and Input with Clear and Reset</h2>
 				<smoothly-form
 					looks="grid"
-					clearOnSubmit
-					// readonly
-					method="POST"
-					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+					// clearOnSubmit
+					type="change"
+					readonly
+					// method="POST"
+					resource="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input name="First Name" value="John">
 						First name
 					</smoothly-input>
@@ -97,9 +98,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded">
 						<smoothly-icon name="refresh-outline" fill="solid" size="tiny" />
 					</smoothly-input-reset>
-					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear" size="icon" shape="rounded">
-						<smoothly-icon name="trash-outline" fill="solid" size="tiny" />
-					</smoothly-input-clear>
+					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />
 					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
@@ -270,7 +269,7 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h2>Grid</h2>
 				<h4>Contact</h4>
-				<smoothly-form looks="grid" method="GET" action="https://webhook.site/85bb78f6-b450-4a74-81ac-d7cac6e94bbe">
+				<smoothly-form looks="grid" resource="https://webhook.site/85bb78f6-b450-4a74-81ac-d7cac6e94bbe">
 					<smoothly-input type="text" name="name.last">
 						First Name
 					</smoothly-input>
@@ -367,8 +366,8 @@ export class SmoothlyInputDemo {
 				<h2>Line</h2>
 				<smoothly-form
 					looks="line"
-					method="POST"
-					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+					// method="POST"
+					resource="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
 						First Name
 					</smoothly-input>
