@@ -40,6 +40,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -71,9 +74,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private newState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
-	@Event() smoothlyBlur: EventEmitter<void>
-	@Event() smoothlyChange: EventEmitter<Record<string, any>>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		this.changed = this.initialValue !== this.value
