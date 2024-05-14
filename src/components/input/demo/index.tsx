@@ -22,7 +22,7 @@ export class SmoothlyInputDemo {
 					type="change"
 					readonly
 					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
-					<smoothly-input name="First Name" value="John">
+					<smoothly-input readonly name="First Name" value="John">
 						First name
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">

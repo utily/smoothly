@@ -13,12 +13,6 @@ import { Looks } from "./Looks"
 	scoped: true,
 })
 export class SmoothlyInput implements Clearable, Input, Editable {
-	private inputElement: HTMLInputElement
-	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
-	private keepFocusOnReRender = false
-	private lastValue: any
-	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	private abortInputEvent?: () => void
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop() delay = 0
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -35,10 +29,20 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
+	private inputElement: HTMLInputElement
+	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
+	private keepFocusOnReRender = false
+	private lastValue: any
+	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	private abortInputEvent?: () => void
+	private uneditable = this.readonly
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	@Event() smoothlyBlur: EventEmitter<void>
+	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -70,9 +74,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private newState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
-	@Event() smoothlyBlur: EventEmitter<void>
-	@Event() smoothlyChange: EventEmitter<Record<string, any>>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Watch("value")
 	valueWatcher(value: any, before: any) {
 		this.changed = this.initialValue !== this.value
@@ -137,15 +138,15 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.value = undefined
+		!this.uneditable && (this.value = undefined)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
-		this.readonly = !editable
+		!this.uneditable && (this.readonly = !editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
-		this.value = this.initialValue
+		!this.uneditable && (this.value = this.initialValue)
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
