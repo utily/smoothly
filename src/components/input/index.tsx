@@ -13,12 +13,6 @@ import { Looks } from "./Looks"
 	scoped: true,
 })
 export class SmoothlyInput implements Clearable, Input, Editable {
-	private inputElement: HTMLInputElement
-	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
-	private keepFocusOnReRender = false
-	private lastValue: any
-	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	private abortInputEvent?: () => void
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop() delay = 0
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -31,15 +25,21 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) placeholder: string | undefined
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
-	private uneditable = this.readonly
 	@Prop({ reflect: true }) currency?: isoly.Currency
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
+	private inputElement: HTMLInputElement
+	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
+	private keepFocusOnReRender = false
+	private lastValue: any
+	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	private abortInputEvent?: () => void
+	private uneditable = this.readonly
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -138,7 +138,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.value = undefined
+		!this.uneditable && (this.value = undefined)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -146,7 +146,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async reset(): Promise<void> {
-		this.value = this.initialValue
+		!this.uneditable && (this.value = this.initialValue)
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
