@@ -18,7 +18,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private keepFocusOnReRender = false
 	private lastValue: any
 	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	readOnlyAtLoad = false
+	private uneditable = false
 	private abortInputEvent?: () => void
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop() delay = 0
@@ -127,7 +127,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
-		this.readonly && (this.readOnlyAtLoad = this.readonly)
+		this.readonly && (this.uneditable = this.readonly)
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
@@ -143,7 +143,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
-		!this.readOnlyAtLoad && (this.readonly = !editable)
+		!this.uneditable && (this.readonly = !editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
