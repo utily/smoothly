@@ -240,7 +240,8 @@ export class SmoothlyPickerMenu {
 						onKeyDown={e => this.keyDownHandler(e)}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => e.stopPropagation()}
-						onSmoothlyBlur={e => e.stopPropagation()}>
+						onSmoothlyBlur={e => e.stopPropagation()}
+						onSmoothlyInputLoad={e => e.stopPropagation()}>
 						<slot name="search" />
 					</smoothly-input>
 					{this.mutable && !this.readonly ? (
