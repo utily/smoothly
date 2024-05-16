@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Listen, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Listen, Prop, VNode } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
 import { Editable } from "../Editable"
@@ -18,6 +18,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
+	@Prop() toolTip = "Edit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -37,9 +38,11 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Button disabled={this.disabled} type="button">
-				<slot />
-			</Button>
+			<Host title={this.toolTip}>
+				<Button disabled={this.disabled} type="button">
+					<smoothly-icon class="default" name="create-outline" fill="solid" size="tiny" />
+				</Button>
+			</Host>
 		)
 	}
 }

@@ -25,10 +25,12 @@ export class SmoothlyIcon {
 				?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
 				.replace(` width="512" height="512"`, "")
 				.replace(/stroke:#000;/gi, "")
-			if (result?.includes("<title>"))
-				result = result.replace(/(<title>)[\w\d\s-]*(<\/title>)/, `<title>${this.toolTip || ""}</title>`)
+			if (!this.toolTip)
+				result = result?.replace(/<title>.*<\/title>/, "")
+			else if (result?.includes("<title>"))
+				result = result.replace(/(<title>).*(<\/title>)/, `<title>${this.toolTip}</title>`)
 			else
-				result = result?.replace(/(.*>)(<\/svg>$)/, `$1<title>${this.toolTip || ""}</title>$2`)
+				result = result?.replace(/(.*>)(<\/svg>$)/, `$1<title>${this.toolTip}</title>$2`)
 		}
 		this.document =
 			result ??

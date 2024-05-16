@@ -93,12 +93,14 @@ export class SmoothlyInputDemo {
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
-						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
+						<smoothly-icon name="airplane" fill="solid" size="tiny" />
 					</smoothly-input-edit>
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded">
-						<smoothly-icon name="refresh-outline" fill="solid" size="tiny" />
+						{/* <smoothly-icon name="refresh-outline" fill="solid" size="tiny" /> */}
 					</smoothly-input-reset>
-					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />
+					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded">
+						{/* <smoothly-icon name="checkmark-outline" fill="solid" size="tiny" /> */}
+					</smoothly-input-submit>
 					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
