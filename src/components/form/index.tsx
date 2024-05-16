@@ -12,21 +12,21 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Clearable, Submittable, Editable {
-	private inputs = new Map<string, Input.Element>()
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop() type: "change" | "fetch" | "create" = "create"
 	@Prop() readonly = false
-	private readonlyAtLoad = this.readonly
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
-	@Prop() action?: string //the url to the resource we work on
+	@Prop() action?: string
 	@Prop() processing: boolean
-	@Prop() prevent = true // keep
+	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
-	@Event() smoothlyFormSubmit: EventEmitter<Data>
+	@Event() smoothlyFormSubmit: EventEmitter<{ value: Data; type: "change" | "fetch" | "create" | "remove" }>
 	@Event() notice: EventEmitter<Notice>
+	private inputs = new Map<string, Input.Element>()
+	private readonlyAtLoad = this.readonly
 	private listeners: {
 		changed?: ((parent: Editable) => Promise<void>)[]
 	} = {}
@@ -51,16 +51,10 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 		event.detail(this.looks, this.color)
 	}
 	@Listen("smoothlyInput")
-	//stopPropagation?
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
 	}
-	// @Listen("smoothlySubmit")
-	// async smoothlySubmitHandler(event: CustomEvent): Promise<void> {
-	// 	this.processing = true
-	// 	await this.submit()
-	// 	this.processing = false
-	// }
+
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.stopPropagation()
@@ -78,7 +72,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Method()
 	async submit(remove?: boolean): Promise<void> {
 		this.processing = true
-		this.smoothlyFormSubmit.emit(this.value)
+		this.smoothlyFormSubmit.emit({ value: this.value, type: remove == true ? "remove" : this.type })
 		if (this.action) {
 			const action = this.action
 			this.notice?.emit(
@@ -93,14 +87,12 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 											method: "GET",
 											url: `${action}?${http.Search.stringify(this.value)}`,
 									  }
-									: this.type == "change"
-									? {
-											method: "PUT",
+									: {
+											method: this.type == "change" ? "PUT" : "POST",
 											url: action,
 											header: { contentType: "application/json" },
 											body: this.value,
 									  }
-									: { method: "POST", url: action, header: { contentType: "application/json" }, body: this.value }
 							)
 						)
 						.catch(() => undefined)
@@ -109,7 +101,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 						result = [false, "Failed to submit form."]
 					else {
 						result = [true, "Form successfully submitted."]
-						this.type == "create" && (await this.clear()) //not sure about this check at all.
+						this.type == "create" && (await this.clear())
 						this.setInitialValue()
 						this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
 					}

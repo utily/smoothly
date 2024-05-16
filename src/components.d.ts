@@ -1624,7 +1624,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
-        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<{ value: Data; type: "change" | "fetch" | "create" | "remove" }>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
         "readonly"?: boolean;
@@ -1953,7 +1953,6 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
-        "onSmoothlySubmit"?: (event: SmoothlySubmitCustomEvent<any>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";

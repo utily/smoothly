@@ -17,7 +17,6 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() prevent = true
-	@Event() smoothlySubmit: EventEmitter
 	private parent?: Submittable
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
