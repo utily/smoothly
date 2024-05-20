@@ -19,11 +19,9 @@ export class SmoothlyInputDemo {
 				<h2>Editable form and Input with Clear and Reset</h2>
 				<smoothly-form
 					looks="grid"
-					// clearOnSubmit
 					type="change"
 					readonly
-					// method="POST"
-					resource="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input name="First Name" value="John">
 						First name
 					</smoothly-input>
@@ -93,14 +91,10 @@ export class SmoothlyInputDemo {
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded">
-						<smoothly-icon name="airplane" fill="solid" size="tiny" />
+						<smoothly-icon name="create-outline" fill="solid" size="tiny" />
 					</smoothly-input-edit>
-					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded">
-						{/* <smoothly-icon name="refresh-outline" fill="solid" size="tiny" /> */}
-					</smoothly-input-reset>
-					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded">
-						{/* <smoothly-icon name="checkmark-outline" fill="solid" size="tiny" /> */}
-					</smoothly-input-submit>
+					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
+					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded"></smoothly-input-submit>
 					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>

@@ -15,11 +15,11 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop() type: "change" | "fetch" | "create" = "create"
-	@Prop() readonly = false
+	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
 	@Prop() action?: string
-	@Prop() processing: boolean
+	@Prop({ mutable: true }) processing: boolean
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
