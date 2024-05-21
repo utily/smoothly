@@ -42,7 +42,8 @@ export class SmoothlyInputReset {
 		})
 	}
 	@Listen("click")
-	clickHandler() {
+	clickHandler(event: MouseEvent) {
+		event.stopPropagation()
 		this.parent?.reset()
 		this.parent instanceof SmoothlyForm && this.readonlyAtLoad && this.parent?.edit(false)
 	}
