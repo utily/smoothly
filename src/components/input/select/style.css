@@ -24,7 +24,7 @@
 	position: relative;
 }
 
-:host::slotted(label) {
+:host::slotted([slot=label]) {
 	position: absolute;
 	left: 0.4em;
 	top: 0.6em;
@@ -33,13 +33,13 @@
 	transition: transform 100ms ease;
 }
 
-:host.has-value::slotted(label),
-:host:not(.has-value)[placeholder]::slotted(label) {
+:host.has-value::slotted([slot=label]),
+:host:not(.has-value)[placeholder]::slotted([slot=label]) {
 	top: 0.4em;
 	transform: scale(0.6);
 }
 
-:host.has-value:has(label) main,
+:host.has-value:has([slot=label]) main,
 :host:not(.has-value)[placeholder] main  {
  padding-bottom: 0;
  padding-left: .8em;
@@ -52,7 +52,13 @@
 	position: absolute;
 	z-index: 10;
 	height: var(--menu-height, unset);
+	width: 100%;
 	overflow-y: auto;
+	background-color: rgb(var(--smoothly-default-shade));
+}
+
+:host[looks=border] nav {
+	border: 1px solid black;
 }
 
 :host>div>nav::slotted(smoothly-item){
