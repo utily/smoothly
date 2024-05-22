@@ -6,12 +6,39 @@ import { isoly } from "isoly"
 	styleUrl: "style.css",
 })
 export class SmoothlyInputDemo {
-	private selectElement: HTMLSmoothlyInputSelectElement
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 
 	render() {
 		return (
 			<Host>
+				<h2>Select</h2>
+				<smoothly-input-select menuHeight="7.5items" name="select-month" looks="border">
+					<label slot="label">Month</label>
+					<smoothly-item value="1">January</smoothly-item>
+					<smoothly-item value="2">February</smoothly-item>
+					<smoothly-item value="3">March</smoothly-item>
+					<smoothly-item value="4">April</smoothly-item>
+					<smoothly-item value="5">May</smoothly-item>
+					<smoothly-item value="6">June</smoothly-item>
+					<smoothly-item value="7">July</smoothly-item>
+					<smoothly-item value="8">August</smoothly-item>
+					<smoothly-item value="9">September</smoothly-item>
+					<smoothly-item value="10">October</smoothly-item>
+					<smoothly-item value="11">November</smoothly-item>
+					<smoothly-item value="12">December</smoothly-item>
+					<smoothly-input-reset size="icon" slot="end">
+						<smoothly-icon name="refresh-outline" />
+					</smoothly-input-reset>
+				</smoothly-input-select>
+				<br />
+				<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
+					<smoothly-item value="folder" selected>
+						<smoothly-icon size="small" name="folder-outline" />
+					</smoothly-item>
+					<smoothly-item value="camera">
+						<smoothly-icon size="small" name="camera-outline" />
+					</smoothly-item>
+				</smoothly-input-select>
 				<h2>Delayed</h2>
 				<smoothly-input name="Delayed" delay={2}>
 					Delayed
@@ -50,10 +77,8 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
-					<smoothly-input-select
-						placeholder="Select..."
-						name="select-month"
-						ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
+					<smoothly-input-select placeholder="Select..." name="select-month">
+						<label slot="label">Month</label>
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
 						<smoothly-item value="3">March</smoothly-item>
@@ -492,36 +517,7 @@ export class SmoothlyInputDemo {
 						"--padding": "0 0.75em",
 						"--input-width": "12ch",
 					}}></smoothly-input-date-range>
-				<br />
-				<h4>Smoothly Selector</h4>
-				<smoothly-input-select showSelected={false}>
-					<smoothly-item value="folder" selected>
-						<smoothly-icon color="dark" name="folder-outline" />
-					</smoothly-item>
-					<smoothly-item value="camera">
-						<smoothly-icon color="dark" name="camera-outline" />
-					</smoothly-item>
-				</smoothly-input-select>
-				<br />
-				<smoothly-input-select
-					looks="line"
-					placeholder="Select..."
-					ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
-					<smoothly-item value="1">January</smoothly-item>
-					<smoothly-item value="2">February</smoothly-item>
-					<smoothly-item value="3">March</smoothly-item>
-					<smoothly-item value="4">April</smoothly-item>
-					<smoothly-item value="5">May</smoothly-item>
-					<smoothly-item value="6">June</smoothly-item>
-					<smoothly-item value="7">July</smoothly-item>
-					<smoothly-item value="8">August</smoothly-item>
-					<smoothly-item value="9">September</smoothly-item>
-					<smoothly-item value="10">October</smoothly-item>
-					<smoothly-item value="11">November</smoothly-item>
-					<smoothly-item value="12">December</smoothly-item>
-				</smoothly-input-select>
-				<button onClick={async () => this.selectElement.reset()}>Reset select</button>
-				<br />
+
 				<smoothly-form looks="grid" onSmoothlyFormSubmit={e => console.log("Submitted", e.detail)}>
 					<smoothly-input type="text" name="text">
 						Text
@@ -564,11 +560,7 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="tiny" name="square-outline" />
 						</smoothly-picker-option>
 					</smoothly-picker>
-					<smoothly-input-select
-						name="select"
-						placeholder="Select..."
-						menuHeight="7.5items"
-						ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
+					<smoothly-input-select name="select" placeholder="Select..." menuHeight="7.5items">
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
 						<smoothly-item value="3">March</smoothly-item>
@@ -625,10 +617,7 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="tiny" name="square-outline" />
 						</smoothly-picker-option>
 					</smoothly-picker>
-					<smoothly-input-select
-						name="select"
-						placeholder="Select..."
-						ref={(element: HTMLSmoothlyInputSelectElement) => (this.selectElement = element)}>
+					<smoothly-input-select name="select" placeholder="Select...">
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
 						<smoothly-item value="3">March</smoothly-item>
