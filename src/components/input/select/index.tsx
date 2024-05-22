@@ -35,7 +35,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) changed = false
-	@Prop() placeholder?: string | any
+	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@State() opened = false
 	items: HTMLSmoothlyItemElement[] = []
@@ -74,7 +74,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.changed = false
 		this.selectedElement && (this.selectedElement.hidden = false)
 		this.mainElement &&
-			(this.mainElement.innerHTML = this.initialValue ? this.initialValue.innerHTML : this.placeholder)
+			(this.mainElement.innerHTML =
+				this.initialValue !== undefined ? this.initialValue.innerHTML : this.placeholder ? this.placeholder : "")
 		this.selectedElement = this.initialValue
 		this.selectedElement && !this.showSelected && (this.selectedElement.hidden = true)
 	}
@@ -122,6 +123,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)
+	}
+	@Listen("smoothlyInputLoad")
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
+		if (event.target && "name" in event.target && event.target.name !== this.name) {
+			event.stopPropagation()
+		}
+		event.detail(this)
 	}
 	@Listen("click")
 	onClick(event: UIEvent): void {
@@ -223,8 +231,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host tabIndex={0} class={{ missing: this.missing }}>
-				<main ref={element => (this.mainElement = element)}>{this.placeholder ?? "(none)"}</main>
+			<Host tabIndex={0} class={{ missing: this.missing, "has-value": this.selectedElement ? true : false }}>
+				<main ref={element => (this.mainElement = element)}>{this.placeholder}</main>
+				<slot name="label" />
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
 						{this.filter}
@@ -243,6 +252,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						<slot />
 					</nav>
 				</div>
+				<slot name="end" />
 			</Host>
 		)
 	}
