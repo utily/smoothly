@@ -265,7 +265,7 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h2>Grid</h2>
 				<h4>Contact</h4>
-				<smoothly-form looks="grid" resource="https://webhook.site/85bb78f6-b450-4a74-81ac-d7cac6e94bbe">
+				<smoothly-form looks="grid" action="https://webhook.site/85bb78f6-b450-4a74-81ac-d7cac6e94bbe">
 					<smoothly-input type="text" name="name.last">
 						First Name
 					</smoothly-input>
@@ -360,10 +360,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 				</smoothly-form>
 				<h2>Line</h2>
-				<smoothly-form
-					looks="line"
-					// method="POST"
-					resource="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+				<smoothly-form looks="line" action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
 						First Name
 					</smoothly-input>
