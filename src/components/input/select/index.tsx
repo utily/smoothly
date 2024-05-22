@@ -40,7 +40,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() open = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
-	@State() missing = false
 	mainElement?: HTMLElement
 	@State() filter = ""
 	@Event() smoothlySelect: EventEmitter<unknown>
@@ -114,11 +113,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("filter")
 	async onFilterChange(value: string): Promise<void> {
 		value = value.toLowerCase()
-		if (!(await Promise.all(this.items.map(item => item.filter(value)))).some(r => r)) {
-			this.missing = true
-			this.items.forEach(el => el.filter(""))
-		} else
-			this.missing = false
+		await Promise.all(this.items.map(item => item.filter(value)))
 	}
 	@Watch("readonly")
 	watchingReadonly(): void {
@@ -142,6 +137,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)
 		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
+		this.element.focus()
 	}
 	@Watch("open")
 	onClosed(): void {
@@ -153,6 +149,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	handleShowOptions(): void {
 		!this.readonly && (this.open = !this.open)
+		this.filter = ""
 	}
 
 	@Listen("keydown")
@@ -171,7 +168,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				case "Escape":
 					if (this.filter == "")
 						this.open = false
-					this.filter = ""
+					else
+						this.filter = ""
 					break
 				case "Backspace":
 					this.filter = this.filter.slice(0, -1)
@@ -231,8 +229,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host tabIndex={0} class={{ missing: this.missing, "has-value": this.selectedElement ? true : false }}>
-				<div class="select-display" ref={element => (this.mainElement = element)}>
+			<Host tabIndex={0} class={{ "has-value": this.selectedElement ? true : false }}>
+				<div class="select-display">
 					<div class="selected-value" ref={element => (this.mainElement = element)}>
 						{this.placeholder}
 					</div>
@@ -242,21 +240,24 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</div>
 				<slot name="label" />
-				{this.filter.length != 0 ? (
-					<aside ref={element => (this.aside = element)}>
-						{this.filter}
-						<button
-							onClick={e => {
-								e.stopPropagation()
-								this.filter = ""
-							}}>
-							<smoothly-icon name="close" size="small"></smoothly-icon>
-						</button>
-					</aside>
-				) : undefined}
 				{this.open && <section onClick={() => (this.open = true)} />}
 				<div class={`${this.open ? "" : "hidden"} options`}>
 					<nav>
+						{this.filter.length > 0 && (
+							<smoothly-item selectable={false}>
+								<smoothly-icon name="search-outline" size="small" />
+								{this.filter}
+								<smoothly-icon
+									name="backspace-outline"
+									size="small"
+									onClick={e => {
+										e.stopPropagation()
+										this.filter = ""
+										this.element.focus()
+									}}
+								/>
+							</smoothly-item>
+						)}
 						<slot />
 					</nav>
 				</div>

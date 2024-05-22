@@ -66,7 +66,7 @@
 	flex-direction: column;
 	position: absolute;
 	z-index: 10;
-	height: var(--menu-height, unset);
+	max-height: var(--menu-height, unset);
 	width: 100%;
 	overflow-y: auto;
 	background-color: rgb(var(--smoothly-default-shade));
@@ -88,27 +88,20 @@
 	padding: .7em .9em;
 }
 
+:host>.options>nav::slotted(smoothly-item.non-selectable) {
+	display: flex;
+	gap: 1em;
+	background-color: rgba(var(--smoothly-primary-tint), .3);
+	color: var(--smoothly-color-contrast)
+}
+
+:host>.options>nav>smoothly-item.non-selectable>smoothly-icon[name="backspace-outline"] {
+	margin-left: auto;
+	margin-right: 0;
+}
+
 :host.has-value:has(:not([slot=label])) nav::slotted(smoothly-item) {
 	padding: .7em;
-}
-
-:host>aside {
-	position: absolute;
-	top: 0;
-	left: 5em;
-	z-index: 10;
-	background-color: rgb(var(--smoothly-tertiary-color));
-	color: rgb(var(--smoothly-tertiary-contrast));
-	height: 1.25rem;
-	border-radius: 0.3rem;
-	padding: 0.3rem;
-	display: flex;
-	align-items: center;
-}
-
-:host().missing>aside {
-	background-color: rgb(var(--smoothly-warning-color));
-	color: rgb(var(--smoothly-warning-contrast));
 }
 
 .hidden {

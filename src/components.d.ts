@@ -396,8 +396,9 @@ export namespace Components {
         "type": "link" | "button";
     }
     interface SmoothlyItem {
-        "filter": (filter: string) => Promise<boolean>;
+        "filter": (filter: string) => Promise<void>;
         "marked": boolean;
+        "selectable": boolean;
         "selected": boolean;
         "value": any;
     }
@@ -1842,6 +1843,7 @@ declare namespace LocalJSX {
     interface SmoothlyItem {
         "marked"?: boolean;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<void>) => void;
+        "selectable"?: boolean;
         "selected"?: boolean;
         "value"?: any;
     }
