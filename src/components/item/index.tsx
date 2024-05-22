@@ -10,34 +10,34 @@ export class Item {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean
+	@Prop() selectable = true
 	@Event() smoothlyItemSelect: EventEmitter<void>
 	@Watch("selected")
 	onSelectedChanged(value: boolean, old: boolean) {
-		if (value && !old)
+		if (value && !old && this.selectable)
 			this.smoothlyItemSelect.emit()
 	}
 	@Listen("click")
 	onClick() {
-		this.selected = true
-		this.smoothlyItemSelect.emit()
+		if (this.selectable) {
+			this.selected = true
+			this.smoothlyItemSelect.emit()
+		}
 	}
 	componentDidLoad() {
-		if (this.selected)
+		if (this.selected && this.selectable)
 			this.smoothlyItemSelect.emit()
 	}
 	@Method()
-	async filter(filter: string): Promise<boolean> {
-		const result = !(this.element.hidden = filter
-			? !(
-					(typeof this.value === "string" ? this.value : JSON.stringify(this.value)).toLowerCase().includes(filter) ||
-					this.element.innerText.toLowerCase().includes(filter)
-			  )
-			: false)
-		return result
+	async filter(filter: string): Promise<void> {
+		const value = typeof this.value === "string" ? this.value : JSON.stringify(this.value ?? "")
+		this.element.hidden = filter
+			? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
+			: false
 	}
 	render() {
 		return (
-			<Host tabIndex={-1}>
+			<Host tabIndex={-1} class={!this.selectable ? "non-selectable" : ""}>
 				<slot />
 			</Host>
 		)
