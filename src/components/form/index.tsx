@@ -14,7 +14,7 @@ import { Submittable } from "../input/Submittable"
 export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
-	@Prop() type: "change" | "fetch" | "create" = "create"
+	@Prop() type: "update" | "change" | "fetch" | "create" = "create"
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
@@ -23,7 +23,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@Event() smoothlyFormInput: EventEmitter<Data>
-	@Event() smoothlyFormSubmit: EventEmitter<{ value: Data; type: "change" | "fetch" | "create" | "remove" }>
+	@Event() smoothlyFormSubmit: EventEmitter<{ value: Data; type: "update" | "change" | "fetch" | "create" | "remove" }>
 	@Event() notice: EventEmitter<Notice>
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
@@ -87,8 +87,15 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 											method: "GET",
 											url: `${action}?${http.Search.stringify(this.value)}`,
 									  }
+									: this.type == "change"
+									? {
+											method: "PUT",
+											url: action,
+											header: { contentType: "application/json" },
+											body: this.value,
+									  }
 									: {
-											method: this.type == "change" ? "PUT" : "POST",
+											method: this.type == "update" ? "PATCH" : "POST",
 											url: action,
 											header: { contentType: "application/json" },
 											body: this.value,

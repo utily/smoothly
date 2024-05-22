@@ -192,7 +192,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
-        "type": "change" | "fetch" | "create";
+        "type": "update" | "change" | "fetch" | "create";
         "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -1624,11 +1624,11 @@ declare namespace LocalJSX {
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
-        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<{ value: Data; type: "change" | "fetch" | "create" | "remove" }>) => void;
+        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<{ value: Data; type: "update" | "change" | "fetch" | "create" | "remove" }>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
         "readonly"?: boolean;
-        "type"?: "change" | "fetch" | "create";
+        "type"?: "update" | "change" | "fetch" | "create";
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
