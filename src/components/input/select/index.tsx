@@ -137,6 +137,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selectedElement = event.target as HTMLSmoothlyItemElement
 		!this.showSelected && (this.selectedElement.hidden = true)
 		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
+		this.element.focus()
 	}
 	@Watch("open")
 	onClosed(): void {
@@ -167,7 +168,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				case "Escape":
 					if (this.filter == "")
 						this.open = false
-					this.filter = ""
+					else
+						this.filter = ""
 					break
 				case "Backspace":
 					this.filter = this.filter.slice(0, -1)
@@ -251,6 +253,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 									onClick={e => {
 										e.stopPropagation()
 										this.filter = ""
+										this.element.focus()
 									}}
 								/>
 							</smoothly-item>
