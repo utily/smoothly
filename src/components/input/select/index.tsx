@@ -37,7 +37,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
-	@State() opened = false
+	@State() open = false
 	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
 	@State() missing = false
@@ -143,16 +143,16 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		!this.showSelected && (this.selectedElement.hidden = true)
 		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
 	}
-	@Watch("opened")
+	@Watch("open")
 	onClosed(): void {
-		if (!this.opened) {
+		if (!this.open) {
 			const marked = this.items.find(item => item.marked)
 			if (marked)
 				marked.marked = false
 		}
 	}
 	handleShowOptions(): void {
-		!this.readonly && (this.opened = !this.opened)
+		!this.readonly && (this.open = !this.open)
 	}
 
 	@Listen("keydown")
@@ -160,7 +160,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		event.stopPropagation()
 		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
 			event.preventDefault()
-		if (this.opened) {
+		if (this.open) {
 			switch (event.key) {
 				case "ArrowUp":
 					this.move(-1)
@@ -170,7 +170,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					break
 				case "Escape":
 					if (this.filter == "")
-						this.opened = false
+						this.open = false
 					this.filter = ""
 					break
 				case "Backspace":
@@ -180,11 +180,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					const result = this.items.find(item => item.marked)
 					if (result?.value)
 						result.selected = true
-					this.opened = false
+					this.open = false
 					this.filter = ""
 					break
 				case "Tab":
-					this.opened = false
+					this.open = false
 					break
 				default:
 					if (event.key.length == 1)
@@ -232,7 +232,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host tabIndex={0} class={{ missing: this.missing, "has-value": this.selectedElement ? true : false }}>
-				<main ref={element => (this.mainElement = element)}>{this.placeholder}</main>
+				<div class="select-display" ref={element => (this.mainElement = element)}>
+					<div class="selected-value" ref={element => (this.mainElement = element)}>
+						{this.placeholder}
+					</div>
+				</div>
+				<div class="icons">
+					<slot name="end" />
+					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
+				</div>
 				<slot name="label" />
 				{this.filter.length != 0 ? (
 					<aside ref={element => (this.aside = element)}>
@@ -246,13 +254,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						</button>
 					</aside>
 				) : undefined}
-				{this.opened ? <section onClick={() => (this.opened = true)}></section> : []}
-				<div class={this.opened ? "" : "hidden"}>
+				{this.open && <section onClick={() => (this.open = true)} />}
+				<div class={`${this.open ? "" : "hidden"} options`}>
 					<nav>
 						<slot />
 					</nav>
 				</div>
-				<slot name="end" />
 			</Host>
 		)
 	}

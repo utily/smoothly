@@ -2,11 +2,11 @@
 
 :host {
 	display: flex;
-	justify-content: center;
-	flex-direction: column;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
 	position: relative;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
-	min-height: 2.8em;
 }
 
 :host.icon {
@@ -14,14 +14,25 @@
 	flex-direction: column;
 }
 
-:host>main,
-:host>main>* {
-	height: 100%;
+:host>.select-display {
+	box-sizing: border-box;
+	min-height: 2.8em;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	cursor: default;
 	padding: .7em .6em;
 	position: relative;
+}
+:host>.icons {
+	display:flex;
+	flex-direction: row;
+	align-items: center;
+	padding-right: .4em;
+}
+:host>.icons::slotted(smoothly-input-reset) {
+	transform: translateY(.15em);
+	padding-right: .2em;
 }
 
 :host::slotted([slot=label]) {
@@ -39,14 +50,18 @@
 	transform: scale(0.6);
 }
 
-:host.has-value:has([slot=label]) main,
-:host:not(.has-value)[placeholder] main  {
+:host.has-value:has([slot=label]) .select-display,
+:host:not(.has-value)[placeholder] .select-display  {
  padding-bottom: 0;
  padding-left: .8em;
  padding-top: 1em;
 }
 
-:host>div>nav {
+:host>.options {
+	width: 100%;
+}
+
+:host>.options>nav {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
@@ -58,11 +73,23 @@
 }
 
 :host[looks=border] nav {
-	border: 1px solid black;
+	transform: translateX(-1px);
+	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
+	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .4) solid 1px;
 }
 
-:host>div>nav::slotted(smoothly-item){
-	padding: .6em;
+:host[looks="grid"] nav {
+	transform: translateX(-2px);
+	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .5) solid 2px;
+	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .2) solid 2px;
+}
+
+:host>.options>nav::slotted(smoothly-item){
+	padding: .7em .9em;
+}
+
+:host.has-value:has(:not([slot=label])) nav::slotted(smoothly-item) {
+	padding: .7em;
 }
 
 :host>aside {
@@ -96,8 +123,4 @@
 	height: 100vh;
 	z-index: 10;
 }
-:host::slotted(smoothly-input-reset) {
-	position: absolute;
-	right: .4em;
-	z-index: 10;
-}
+

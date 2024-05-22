@@ -12,20 +12,13 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<h2>Select</h2>
-				<smoothly-input-select menuHeight="7.5items" name="select-month" looks="border">
-					<label slot="label">Month</label>
-					<smoothly-item value="1">January</smoothly-item>
-					<smoothly-item value="2">February</smoothly-item>
-					<smoothly-item value="3">March</smoothly-item>
-					<smoothly-item value="4">April</smoothly-item>
-					<smoothly-item value="5">May</smoothly-item>
-					<smoothly-item value="6">June</smoothly-item>
-					<smoothly-item value="7">July</smoothly-item>
-					<smoothly-item value="8">August</smoothly-item>
-					<smoothly-item value="9">September</smoothly-item>
-					<smoothly-item value="10">October</smoothly-item>
-					<smoothly-item value="11">November</smoothly-item>
-					<smoothly-item value="12">December</smoothly-item>
+				<smoothly-input-select name="select-dessert" looks="border">
+					<label slot="label">Select with reset button</label>
+					<smoothly-item value="1">Ice cream</smoothly-item>
+					<smoothly-item value="2">Sponge cake</smoothly-item>
+					<smoothly-item value="3">Cookie</smoothly-item>
+					<smoothly-item value="4">Croissant</smoothly-item>
+					<smoothly-item value="5">Chocolate fondue</smoothly-item>
 					<smoothly-input-reset size="icon" slot="end">
 						<smoothly-icon name="refresh-outline" />
 					</smoothly-input-reset>
@@ -76,7 +69,7 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
-					<smoothly-input-select placeholder="Select..." name="select-month">
+					<smoothly-input-select menuHeight="7.5items" placeholder="Select..." name="select-month">
 						<label slot="label">Month</label>
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
