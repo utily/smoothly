@@ -143,7 +143,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		!this.showSelected && (this.selectedElement.hidden = true)
 		this.mainElement && this.selectedElement && (this.mainElement.innerHTML = this.selectedElement.innerHTML)
 	}
-	@Watch("opened")
+	@Watch("open")
 	onClosed(): void {
 		if (!this.open) {
 			const marked = this.items.find(item => item.marked)
