@@ -135,7 +135,7 @@ export namespace Components {
         "open": boolean;
         "value"?: Date;
     }
-    interface SmoothlyInputDateRange {
+    interface Smoothly0InputDateRange {
         "clear": () => Promise<void>;
         "clearable": boolean;
         "disabled": boolean;
