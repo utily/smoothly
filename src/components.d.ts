@@ -1848,6 +1848,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyItem {
         "marked"?: boolean;
+        "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "selectable"?: boolean;
         "selected"?: boolean;
