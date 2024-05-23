@@ -71,9 +71,9 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	}
 	@Method()
 	async submit(remove?: boolean): Promise<void> {
-		this.processing = true
 		this.smoothlyFormSubmit.emit({ value: this.value, type: remove == true ? "remove" : this.type })
 		if (this.action) {
+			this.processing = true
 			const action = this.action
 			this.notice?.emit(
 				Notice.execute("Submitting form", async () => {
@@ -87,15 +87,8 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 											method: "GET",
 											url: `${action}?${http.Search.stringify(this.value)}`,
 									  }
-									: this.type == "change"
-									? {
-											method: "PUT",
-											url: action,
-											header: { contentType: "application/json" },
-											body: this.value,
-									  }
 									: {
-											method: this.type == "update" ? "PATCH" : "POST",
+											method: this.type == "change" ? "PUT" : this.type == "update" ? "PATCH" : "POST",
 											url: action,
 											header: { contentType: "application/json" },
 											body: this.value,
@@ -113,11 +106,11 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 						this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
 					}
 
+					this.processing = false
 					return result
 				})
 			)
 		}
-		this.processing = false
 	}
 	@Method()
 	async clear(): Promise<void> {
