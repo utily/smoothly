@@ -35,6 +35,7 @@ export class SmoothlyInputReset {
 					}
 					if (p instanceof SmoothlyForm) {
 						this.display = !p.readonly
+						this.disabled = !this.readonlyAtLoad && !p.changed
 					}
 				})
 			}
