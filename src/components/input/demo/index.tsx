@@ -39,7 +39,7 @@ export class SmoothlyInputDemo {
 				<h2>Editable form and Input with Clear and Reset</h2>
 				<smoothly-form
 					looks="grid"
-					type="change"
+					type="create"
 					readonly
 					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input readonly name="First Name" value="John">
