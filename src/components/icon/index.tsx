@@ -1,5 +1,6 @@
 import { Component, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill, Icon } from "../../model"
+import { alertCircle } from "./alertCircle"
 
 @Component({
 	tag: "smoothly-icon",
@@ -15,7 +16,9 @@ export class SmoothlyIcon {
 	@State() document?: string
 	@Watch("name")
 	async loadDocument() {
-		if (this.name)
+		if (this.name == "alert-circle")
+			this.document = alertCircle
+		else if (this.name)
 			try {
 				this.document = await Icon.load(this.name)
 			} catch (error) {
