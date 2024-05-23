@@ -14,6 +14,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { Item } from "../../item/Item"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -27,6 +28,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue?: HTMLSmoothlyItemElement | undefined
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	items: HTMLSmoothlyItemElement[] = []
+	itemHeight: number | undefined
+	mainElement?: HTMLElement
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -38,13 +42,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@State() open = false
-	items: HTMLSmoothlyItemElement[] = []
 	@State() selectedElement?: HTMLSmoothlyItemElement
-	mainElement?: HTMLElement
 	@State() filter = ""
 	@Event() smoothlySelect: EventEmitter<unknown>
 	@Event() smoothlyInput: EventEmitter<Data>
-	aside?: HTMLElement
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -61,13 +62,22 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selectedElement && !this.initialValueHandled && (this.initialValue = this.selectedElement)
 		this.initialValueHandled = true
 	}
-
+	componentDidRender(): void | Promise<void> {
+		this.itemHeight === undefined && (this.itemHeight = this.items.find(item => item.clientHeight > 0)?.clientHeight)
+		if (this.menuHeight && this.itemHeight) {
+			this.element?.style.setProperty(
+				"--menu-height",
+				!this.menuHeight.endsWith("items") || this.items.length == 0
+					? this.menuHeight
+					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
+			)
+		}
+	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
 	}
-
 	@Method()
 	async reset(): Promise<void> {
 		this.changed = false
@@ -100,7 +110,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.initialValue = this.selectedElement
 		this.smoothlyInput.emit({ [this.name]: this.selectedElement?.value })
 	}
-
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyItemElement | undefined, old: HTMLSmoothlyItemElement | undefined): void {
 		this.initialValueHandled && (this.changed = this.initialValue !== this.selectedElement)
@@ -123,6 +132,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
 		if (event.target && "name" in event.target && event.target.name !== this.name) {
 			event.stopPropagation()
+		} else if (Item.type.is(event.target)) {
+			event.stopPropagation()
+			this.items.push(event.target as HTMLSmoothlyItemElement)
 		}
 		event.detail(this)
 	}
@@ -155,15 +167,17 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
+		const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
+
 		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
 			event.preventDefault()
 		if (this.open) {
 			switch (event.key) {
 				case "ArrowUp":
-					this.move(-1)
+					visibleItems && this.move(-1)
 					break
 				case "ArrowDown":
-					this.move(1)
+					visibleItems && this.move(1)
 					break
 				case "Escape":
 					if (this.filter == "")
@@ -225,7 +239,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			markedIndex = (markedIndex + direction + this.items.length) % this.items.length
 		} while (this.items[markedIndex].hidden)
 		this.items[markedIndex].marked = true
-		this.items[markedIndex].focus()
 	}
 	render(): VNode | VNode[] {
 		return (
@@ -242,52 +255,24 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<slot name="label" />
 				{this.open && <section onClick={() => (this.open = true)} />}
 				<div class={`${this.open ? "" : "hidden"} options`}>
-					<nav>
-						{this.filter.length > 0 && (
-							<smoothly-item selectable={false}>
-								<smoothly-icon name="search-outline" size="small" />
-								{this.filter}
-								<smoothly-icon
-									name="backspace-outline"
-									size="small"
-									onClick={e => {
-										e.stopPropagation()
-										this.filter = ""
-										this.element.focus()
-									}}
-								/>
-							</smoothly-item>
-						)}
-						<slot />
-					</nav>
+					{this.filter.length > 0 && (
+						<smoothly-item selectable={false}>
+							<smoothly-icon name="search-outline" size="small" />
+							{this.filter}
+							<smoothly-icon
+								name="backspace-outline"
+								size="small"
+								onClick={e => {
+									e.stopPropagation()
+									this.filter = ""
+									this.element.focus()
+								}}
+							/>
+						</smoothly-item>
+					)}
+					<slot />
 				</div>
 			</Host>
 		)
 	}
-	componentDidRender(): void | Promise<void> {
-		const items: HTMLSmoothlyItemElement[] = []
-		const children = this.element.querySelectorAll("div > nav > smoothly-item")
-		for (let i = 0; i < children.length; i++) {
-			const node = children.item(i)
-			if (isItem(node)) {
-				items.push(node)
-				node.value == this.initialValue && this.mainElement && !this.selectedElement && (node.selected = true)
-			}
-		}
-		this.items = items
-		if (this.menuHeight)
-			this.element?.style.setProperty(
-				"--menu-height",
-				!this.menuHeight.endsWith("items") || !this.items.length
-					? this.menuHeight
-					: `${this.items[0].clientHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
-			)
-	}
-}
-function isItem(value: HTMLSmoothlyItemElement | any): value is HTMLSmoothlyItemElement {
-	return (
-		typeof value == "object" &&
-		(typeof value.selected == "boolean" || value.selected == undefined) &&
-		typeof value.filter == "function"
-	)
 }
