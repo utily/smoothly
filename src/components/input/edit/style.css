@@ -4,15 +4,14 @@
 	display: none;
 }
 
-:host([type="button"]) {
-	margin: 1em 0em;
-}
-
 :host([editable]){
 	opacity: 0.5;
 }
 
-:host button::slotted(smoothly-icon){
+:host smoothly-icon.default {
 	transform: translate(.1em, -.1em);
 }
 
+:host::slotted(button > * > * + smoothly-icon) {
+	display: none;
+}

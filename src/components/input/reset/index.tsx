@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Button } from "../../Button"
 import { SmoothlyForm } from "../../form"
@@ -20,6 +20,7 @@ export class SmoothlyInputReset {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
+	@Prop() tooltip = "Reset"
 	private parent?: Editable.Element
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
@@ -30,11 +31,9 @@ export class SmoothlyInputReset {
 				this.readonlyAtLoad = parent.readonly
 				parent.listen("changed", async p => {
 					if (Input.is(p)) {
-						this.disabled = p.readonly ? true : !p.changed
 						this.display = p.readonly ? false : p.changed
 					}
 					if (p instanceof SmoothlyForm) {
-						this.disabled = p.readonly ? true : !p.changed
 						this.display = !p.readonly
 					}
 				})
@@ -49,9 +48,11 @@ export class SmoothlyInputReset {
 	}
 	render() {
 		return (
-			<Button disabled={this.disabled} type="button">
-				<slot />
-			</Button>
+			<Host title={this.tooltip}>
+				<Button disabled={this.disabled} type="button">
+					<smoothly-icon class="default" name="refresh-outline" fill="solid" size="tiny" />
+				</Button>
+			</Host>
 		)
 	}
 }

@@ -46,7 +46,7 @@ export class SmoothlyButtonConfirm {
 					disabled={this.disabled}
 					type={this.type}
 					onClick={event => this.clickHandler(event)}>
-					<smoothly-icon name={"alert-outline"} fill="solid" color="warning" size="small" />
+					<smoothly-icon name={"alert-outline"} fill="solid" color="warning" size="tiny" />
 				</smoothly-button>
 				<smoothly-button
 					fill={this.fill}

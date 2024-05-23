@@ -41,4 +41,5 @@ smoothly-form > form > div {
 	display: flex;
 	justify-content: end;
 	gap: 1em;
+	margin-top: 0.5rem;
 }

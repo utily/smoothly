@@ -3,11 +3,6 @@ smoothly-input-demo {
 	margin: 2em;
 	margin-bottom: 20rem;
 }
-
-smoothly-button {
-	margin: 1em
-}
-
 .checkbox-group {
 	display: flex;
 	gap: 1.5em;

@@ -1,6 +1,5 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Listen, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Listen, Prop, VNode } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Button } from "../../Button"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
 
@@ -11,7 +10,8 @@ import { Submittable } from "../Submittable"
 })
 export class SmoothlyInputSubmit implements ComponentWillLoad {
 	private parent?: Submittable & Editable
-	@Prop({ reflect: true }) color?: Color = "tertiary"
+	@Prop() delete = false
+	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true, mutable: true }) disabled = false
@@ -19,6 +19,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
+	@Prop() toolTip = this.delete ? "Remove" : "Submit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -33,14 +34,38 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	}
 	@Listen("click")
 	clickHandler() {
-		this.parent?.submit()
+		this.parent?.submit(this.delete)
 	}
 
 	render(): VNode | VNode[] {
 		return (
-			<Button disabled={this.disabled} type="button">
-				<slot />
-			</Button>
+			<Host title={this.toolTip}>
+				{this.delete == true ? (
+					<smoothly-button-confirm
+						disabled={this.disabled}
+						size={this.size}
+						shape={this.shape}
+						expand={this.expand}
+						type={this.type}
+						color={this.color ?? "danger"}
+						fill={this.fill}>
+						<slot />
+						<smoothly-icon name="trash-outline" fill="solid" size="tiny" />
+					</smoothly-button-confirm>
+				) : (
+					<smoothly-button
+						disabled={this.disabled}
+						size={this.size}
+						type={this.type}
+						shape={this.shape}
+						expand={this.expand}
+						color={this.color ?? "success"}
+						fill={this.fill}>
+						<slot />
+						<smoothly-icon name="checkmark-outline" fill="solid" />
+					</smoothly-button>
+				)}
+			</Host>
 		)
 	}
 }

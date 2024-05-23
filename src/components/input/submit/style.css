@@ -1,15 +1,11 @@
-@import "../../button/style.css";
-
-:host([type="button"]) {
-	margin: 1em 0em;
+:host {
+	display: flex;
 }
-
 :host(:not([display])) {
 	display: none;
 }
-
-:host() {
-	transition: 0.6s;
-	margin: 0rem;
-	min-width: 0rem;
+:host::slotted(smoothly-button button > * > * + smoothly-icon),
+:host::slotted(smoothly-button-confirm button > * > * + smoothly-icon) {
+	display: none;
 }
+
