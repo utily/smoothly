@@ -27,7 +27,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 				this.parent = parent
 				parent.listen("changed", async p => {
 					this.display = !p.readonly
-					this.disabled = p.readonly ? true : this.delete ? false : !p.changed
+					this.disabled = p.readonly ? true : Object.values(p.value).filter(val => val).length < 1 ? true : !p.changed
 				})
 			}
 		})
