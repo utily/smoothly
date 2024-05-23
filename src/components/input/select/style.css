@@ -30,7 +30,6 @@
 	padding-right: .4em;
 }
 :host>.icons::slotted(smoothly-input-reset) {
-	transform: translateY(.15em);
 	padding-right: .2em;
 }
 
