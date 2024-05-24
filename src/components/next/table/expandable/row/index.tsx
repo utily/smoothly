@@ -6,17 +6,18 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyNextTableExpandableRow {
+	private div?: HTMLDivElement
 	@Prop({ mutable: true, reflect: true }) open = false
 
-	clickHandler(): void {
+	clickHandler(event: MouseEvent): void {
 		console.log("click")
-		this.open = !this.open
+		;(this.div && event.composedPath().includes(this.div)) || (this.open = !this.open)
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host onClick={() => this.clickHandler()}>
+			<Host onClick={(e: MouseEvent) => this.clickHandler(e)}>
 				<slot></slot>
-				<div>
+				<div ref={e => (this.div = e)}>
 					<slot name="detail" />
 				</div>
 			</Host>

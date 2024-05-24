@@ -1,15 +1,21 @@
 :host {
 	grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: subgrid;
+	display: grid;
+	grid-template-columns: subgrid;
 	grid-template-rows: 1fr 0fr;
 }
+
+:host::slotted(*) {
+	cursor: pointer;
+}
+
 :host[open] {
 	grid-template-rows: 1fr 1fr;
 }
-:host div:last-child {
-	grid-column: 1 / -1; 
-  overflow: hidden;
-	outline: 2px solid pink;
-}
 
+:host div:last-child {
+	grid-column: 1 / -1;
+	cursor: default;
+	overflow: hidden;
+	background-color: beige;
+}

@@ -308,10 +308,13 @@ export namespace Components {
     interface SmoothlyNextTableCell {
     }
     interface SmoothlyNextTableExpandableCell {
+        "close": () => Promise<void>;
         "open": boolean;
     }
     interface SmoothlyNextTableExpandableRow {
         "open": boolean;
+    }
+    interface SmoothlyNextTableFoot {
     }
     interface SmoothlyNextTableHead {
     }
@@ -585,6 +588,10 @@ export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyItemElement;
+}
+export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNextTableExpandableCellElement;
 }
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -946,6 +953,12 @@ declare global {
         prototype: HTMLSmoothlyNextTableExpandableRowElement;
         new (): HTMLSmoothlyNextTableExpandableRowElement;
     };
+    interface HTMLSmoothlyNextTableFootElement extends Components.SmoothlyNextTableFoot, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableFootElement: {
+        prototype: HTMLSmoothlyNextTableFootElement;
+        new (): HTMLSmoothlyNextTableFootElement;
+    };
     interface HTMLSmoothlyNextTableHeadElement extends Components.SmoothlyNextTableHead, HTMLStencilElement {
     }
     var HTMLSmoothlyNextTableHeadElement: {
@@ -1269,6 +1282,7 @@ declare global {
         "smoothly-next-table-cell": HTMLSmoothlyNextTableCellElement;
         "smoothly-next-table-expandable-cell": HTMLSmoothlyNextTableExpandableCellElement;
         "smoothly-next-table-expandable-row": HTMLSmoothlyNextTableExpandableRowElement;
+        "smoothly-next-table-foot": HTMLSmoothlyNextTableFootElement;
         "smoothly-next-table-head": HTMLSmoothlyNextTableHeadElement;
         "smoothly-next-table-row": HTMLSmoothlyNextTableRowElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
@@ -1625,10 +1639,14 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableCell {
     }
     interface SmoothlyNextTableExpandableCell {
+        "onSmoothlyNextTableExpandableCellOpened"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
+        "onSmoothlyNextTableExpandableCellRegister"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
         "open"?: boolean;
     }
     interface SmoothlyNextTableExpandableRow {
         "open"?: boolean;
+    }
+    interface SmoothlyNextTableFoot {
     }
     interface SmoothlyNextTableHead {
     }
@@ -1907,6 +1925,7 @@ declare namespace LocalJSX {
         "smoothly-next-table-cell": SmoothlyNextTableCell;
         "smoothly-next-table-expandable-cell": SmoothlyNextTableExpandableCell;
         "smoothly-next-table-expandable-row": SmoothlyNextTableExpandableRow;
+        "smoothly-next-table-foot": SmoothlyNextTableFoot;
         "smoothly-next-table-head": SmoothlyNextTableHead;
         "smoothly-next-table-row": SmoothlyNextTableRow;
         "smoothly-notification": SmoothlyNotification;
@@ -2008,6 +2027,7 @@ declare module "@stencil/core" {
             "smoothly-next-table-cell": LocalJSX.SmoothlyNextTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableCellElement>;
             "smoothly-next-table-expandable-cell": LocalJSX.SmoothlyNextTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableCellElement>;
             "smoothly-next-table-expandable-row": LocalJSX.SmoothlyNextTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableRowElement>;
+            "smoothly-next-table-foot": LocalJSX.SmoothlyNextTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFootElement>;
             "smoothly-next-table-head": LocalJSX.SmoothlyNextTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableHeadElement>;
             "smoothly-next-table-row": LocalJSX.SmoothlyNextTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;

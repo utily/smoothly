@@ -1,13 +1,22 @@
 /* expandable cell */
 :host {
-  display: contents;
+	display: contents;
+}
+
+:host>div:first-child {
+	cursor: pointer;
 }
 
 :host div.detail {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  overflow: hidden;
+	grid-column: 1 / -1;
+	grid-row: 2;
+	overflow: hidden;
 }
+
+:host[open] div {
+	background-color: beige;
+}
+
 :host:not([open]) div.detail {
-  display: none;
+	display: none;
 }
