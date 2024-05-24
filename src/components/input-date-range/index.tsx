@@ -69,7 +69,7 @@ export class InputDateRange {
 					</smoothly-0-input>
 				</div>
 				{this.clearable && (
-					<smoothly-icon name="close-circle" size="small" onClick={this.clear.bind(this)}></smoothly-icon>
+					<smoothly-0-icon name="close-circle" size="small" onClick={this.clear.bind(this)}></smoothly-0-icon>
 				)}
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],

@@ -1,5 +1,5 @@
 smoothly-0-accordion-item {
-	border: 1px solid rgb(var(--smoothly-0-dark-color));
+	border: 1px solid rgb(var(--smoothly-dark-color));
 	border-bottom: none;
 }
 
@@ -12,13 +12,13 @@ smoothly-0-accordion-item:first-of-type {
 smoothly-0-accordion-item:last-of-type {
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
-	border-bottom: 1px solid rgb(var(--smoothly-0-dark-color));
+	border-bottom: 1px solid rgb(var(--smoothly-dark-color));
 	margin-bottom: 0.6em;
 }
 
 smoothly-0-accordion-item[open] {
-	border-color: rgb(var(--smoothly-0-primary-color));
-	border-bottom: 1px solid rgb(var(--smoothly-0-primary-color));
+	border-color: rgb(var(--smoothly-primary-color));
+	border-bottom: 1px solid rgb(var(--smoothly-primary-color));
 }
 
 smoothly-0-accordion-item[open]+smoothly-0-accordion-item {

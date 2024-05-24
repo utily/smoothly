@@ -5,7 +5,7 @@ smoothly-0-reorder>* {
 
 smoothly-0-reorder>*.dragging {
 	transition: none;
-	box-shadow: 0 0 10px rgba(var(--smoothly-0-dark-color));
+	box-shadow: 0 0 10px rgba(var(--smoothly-dark-color));
 	z-index: 1;
 	user-select: none;
 }

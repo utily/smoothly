@@ -38,7 +38,7 @@ button {
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
-	border-color: var(--smoothly-0-button-border);
+	border-color: var(--smoothly-button-border);
 }
 
 :host[type=button]>a {

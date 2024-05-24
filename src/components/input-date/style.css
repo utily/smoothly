@@ -7,7 +7,7 @@
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-0-color-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 	min-width: 18em;
 }
 
@@ -32,7 +32,7 @@
 	transform: translate(2em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-0-color-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 }
 
 @media screen and (min-width: 400px) {
@@ -40,7 +40,7 @@
 		position: absolute;
 		z-index: 10;
 		top: 3.5em;
-		background-color: rgb(var(--smoothly-0-color-shade));
+		background-color: rgb(var(--smoothly-color-shade));
 		max-width: 22em;
 	}
 }

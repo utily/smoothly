@@ -8,7 +8,7 @@
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--smoothly-0-default-shade));
+	background-color: rgb(var(--smoothly-default-shade));
 	max-width: 22em;
 }
 
@@ -29,7 +29,7 @@
 	transform: translate(10em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
-	background-color: rgb(var(--smoothly-0-default-shade));
+	background-color: rgb(var(--smoothly-default-shade));
 }
 
 :host>section {
@@ -44,7 +44,7 @@
 	display: flex;
 	align-items: center;
 }
-smoothly-icon {
+smoothly-0-icon {
 	margin-right: 0.5rem;
 }
 

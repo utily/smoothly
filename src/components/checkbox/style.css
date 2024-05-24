@@ -16,5 +16,5 @@ smoothly-0-icon:nth-child(2) {
 }
 
 :host[disabled] smoothly-0-icon {
-	stroke: rgba(var(--smoothly-0-color-contrast), 0.3);
+	stroke: rgba(var(--smoothly-color-contrast), 0.3);
 }

@@ -25,12 +25,12 @@ input[type=radio] {
 }
 
 input[type=radio]~label {
-	border: 1px solid rgb(var(--smoothly-0-default-color));
-	color: rgba(var(--smoothly-0-default-contrast), 0.5);
-	background: rgb(var(--smoothly-0-default-color));
+	border: 1px solid rgb(var(--smoothly-default-color));
+	color: rgba(var(--smoothly-default-contrast), 0.5);
+	background: rgb(var(--smoothly-default-color));
 }
 
 input[type=radio]:checked~label {
-	background-color: rgb(var(--smoothly-0-default-shade));
-	color: rgb(var(--smoothly-0-default-contrast));
+	background-color: rgb(var(--smoothly-default-shade));
+	color: rgb(var(--smoothly-default-contrast));
 }

@@ -24,7 +24,7 @@ button {
 :host:not([disabled]):hover,
 :host:not([disabled]):focus,
 :host:not([disabled]):active {
-	border-color: var(--smoothly-0-trigger-border);
+	border-color: var(--smoothly-trigger-border);
 }
 
 :host[expand=fill]>button,

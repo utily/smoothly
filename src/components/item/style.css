@@ -1,18 +1,18 @@
 :host([selected]) {
-	background-color: rgb(var(--smoothly-0-primary-shade));
-	color: rgb(var(--smoothly-0-primary-contrast));
+	background-color: rgb(var(--smoothly-primary-shade));
+	color: rgb(var(--smoothly-primary-contrast));
 }
 
 :host {
 	padding: 0.5em;
 	cursor: pointer;
-	background-color: rgb(var(--smoothly-0-default-shade));
-	color: rgb(var(--smoothly-0-default-contrast));
-	border: rgb(var(--smoothly-0-default-shade) solid 1px);
+	background-color: rgb(var(--smoothly-default-shade));
+	color: rgb(var(--smoothly-default-contrast));
+	border: rgb(var(--smoothly-default-shade) solid 1px);
 }
 
 :host([marked]),
 :host:hover {
-	background-color: rgb(var(--smoothly-0-primary-color));
-	color: rgb(var(--smoothly-0-primary-contrast));
+	background-color: rgb(var(--smoothly-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
 }

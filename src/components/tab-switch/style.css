@@ -2,5 +2,5 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	border-bottom: 3px solid rgb(var(--smoothly-0-default-shade));
+	border-bottom: 3px solid rgb(var(--smoothly-default-shade));
 }

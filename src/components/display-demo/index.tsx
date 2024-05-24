@@ -113,7 +113,7 @@ export class SmoothlyDisplayDemo {
 				</dl>
 				<smoothly-0-skeleton period={3} distance="20rem" width="20rem"></smoothly-0-skeleton>
 				<smoothly-0-skeleton period={3} distance="20rem" color="200,200,255"></smoothly-0-skeleton>
-				<smoothly-0-skeleton period={3} distance="20rem" color="var(--smoothly-0-warning-color)"></smoothly-0-skeleton>
+				<smoothly-0-skeleton period={3} distance="20rem" color="var(--smoothly-warning-color)"></smoothly-0-skeleton>
 				<smoothly-0-skeleton period={3} distance="20rem" ></smoothly-0-skeleton>
 				<smoothly-0-skeleton align="center" period={3} distance="20rem" width="20rem"></smoothly-0-skeleton>
 				<smoothly-0-skeleton align="center" period={3} distance="20rem" ></smoothly-0-skeleton>

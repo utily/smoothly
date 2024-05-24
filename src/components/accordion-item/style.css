@@ -21,7 +21,7 @@ details>summary {
 	list-style-type: none;
 	cursor: pointer;
 	padding: 0.4em;
-	color: rgb(var(--smoothly-0-text-tint));
+	color: rgb(var(--smoothly-text-tint));
 }
 
 details>fieldset {
@@ -31,8 +31,8 @@ details>fieldset {
 }
 
 :host[open]>details>summary {
-	color: rgb(var(--smoothly-0-primary-contrast));
-	background: rgb(var(--smoothly-0-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
 }
 
 details>summary::-webkit-details-marker {
@@ -47,9 +47,9 @@ details>summary>svg {
 }
 
 :host[open]>details>summary>svg {
-	fill: rgb(var(--smoothly-0-primary-contrast));
+	fill: rgb(var(--smoothly-primary-contrast));
 }
 
 :host:not([open])>details>summary>svg {
-	fill: rgb(var(--smoothly-0-text-tint));
+	fill: rgb(var(--smoothly-text-tint));
 }

@@ -1,11 +1,11 @@
 :host {
-	background-color: rgba(var(--smoothly-0-default-color), 1);
+	background-color: rgba(var(--smoothly-default-color), 1);
 	opacity: var(--opacity);
 	pointer-events: var(--pointer-events);
 	transition: opacity 400ms;
 	z-index: 3;
 	border-radius: 50%;
-	box-shadow: var(--smoothly-0-shadow);
+	box-shadow: var(--smoothly-shadow);
 	height: 3rem;
 	width: 3rem;
 	position: fixed;

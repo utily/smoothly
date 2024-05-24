@@ -1,5 +1,5 @@
 :host([open]) {
-	border-bottom: 3px solid rgb(var(--smoothly-0-primary-color));
+	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
 	box-sizing: border-box;
 	margin-bottom: -3px;
 }

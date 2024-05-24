@@ -2,7 +2,7 @@
 	display: table;
 	width: var(--table-width, 80%);
 	box-sizing: border-box;
-	background-color: rgb(var(--smoothly-0-default-color));
+	background-color: rgb(var(--smoothly-default-color));
 }
 
 :host[root] {

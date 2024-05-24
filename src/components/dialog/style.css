@@ -7,7 +7,7 @@
 	height: 100%;
 	z-index: 1;
 	/* stylelint-disable-next-line declaration-no-important */
-	background: rgba(var(--smoothly-0-default-color), var(--smoothly-0-semitransparent)) !important;
+	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
 :host[hidden] {
 	display: none;
@@ -16,18 +16,18 @@
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	margin-top: 2em;
-	color: rgb(var(--smoothly-0-primary-contrast));
-	background: rgb(var(--smoothly-0-primary-color));
-	border-color: rgb(var(--smoothly-0-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
+	border-color: rgb(var(--smoothly-primary-color));
 }
 :host:not([header]) header {
 	border: none;
 }
 :host > * {
 	position: relative;
-	color: rgb(var(--smoothly-0-default-contrast));
-	background-color: rgb(var(--smoothly-0-default-color));
-	border-color: rgb(var(--smoothly-0-color));
+	color: rgb(var(--smoothly-default-contrast));
+	background-color: rgb(var(--smoothly-default-color));
+	border-color: rgb(var(--smoothly-color));
 	border-width: 1px;
 	border-style: solid;
 	max-width: 40em;
@@ -42,7 +42,7 @@
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	margin-bottom: 2em;
-	border: 1px solid rgb(var(--smoothly-0-default-contrast));
+	border: 1px solid rgb(var(--smoothly-default-contrast));
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -60,7 +60,7 @@
 	border-color: transparent;
 }
 :host smoothly-0-icon {
-	background-color: rgb(var(--smoothly-0-color));
+	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }
 :host > * > * {

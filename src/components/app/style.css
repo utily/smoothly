@@ -9,38 +9,38 @@ smoothly-0-app[hidden] {
 
 smoothly-0-app[color=default],
 smoothly-0-app:not([color]) {
-	--smoothly-0-app-background: var(--smoothly-0-default-color);
-	--smoothly-0-app-color: var(--smoothly-0-default-contrast);
-	--smoothly-0-app-hover-background: var(--smoothly-0-primary-color);
-	--smoothly-0-app-hover-color: var(--smoothly-0-primary-contrast);
-	--smoothly-0-app-shadow: var(--smoothly-0-default-shadow);
+	--smoothly-app-background: var(--smoothly-default-color);
+	--smoothly-app-color: var(--smoothly-default-contrast);
+	--smoothly-app-hover-background: var(--smoothly-primary-color);
+	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
+	--smoothly-app-shadow: var(--smoothly-default-shadow);
 }
 
 smoothly-0-app[color=primary] {
-	--smoothly-0-app-background: var(--smoothly-0-primary-shade);
-	--smoothly-0-app-color: var(--smoothly-0-primary-contrast);
-	--smoothly-0-app-hover-background: var(--smoothly-0-secondary-color);
-	--smoothly-0-app-hover-color: var(--smoothly-0-secondary-contrast);
-	--smoothly-0-app-shadow: var(--smoothly-0-primary-shadow);
+	--smoothly-app-background: var(--smoothly-primary-shade);
+	--smoothly-app-color: var(--smoothly-primary-contrast);
+	--smoothly-app-hover-background: var(--smoothly-secondary-color);
+	--smoothly-app-hover-color: var(--smoothly-secondary-contrast);
+	--smoothly-app-shadow: var(--smoothly-primary-shadow);
 }
 
 smoothly-0-app[color=secondary] {
-	--smoothly-0-app-background: var(--smoothly-0-secondary-shade);
-	--smoothly-0-app-color: var(--smoothly-0-secondary-contrast);
-	--smoothly-0-app-hover-background: var(--smoothly-0-primary-color);
-	--smoothly-0-app-hover-color: var(--smoothly-0-primary-contrast);
-	--smoothly-0-app-shadow: var(--smoothly-0-secondary-shadow);
+	--smoothly-app-background: var(--smoothly-secondary-shade);
+	--smoothly-app-color: var(--smoothly-secondary-contrast);
+	--smoothly-app-hover-background: var(--smoothly-primary-color);
+	--smoothly-app-hover-color: var(--smoothly-primary-contrast);
+	--smoothly-app-shadow: var(--smoothly-secondary-shadow);
 }
 
 smoothly-0-app[color=tertiary],
 smoothly-0-app[color=success],
 smoothly-0-app[color=warning],
 smoothly-0-app[color=danger] {
-	--smoothly-0-app-background: var(--smoothly-0-color-shade);
-	--smoothly-0-app-color: var(--smoothly-0-color-contrast);
-	--smoothly-0-app-hover-background: var(--smoothly-0-default-shade);
-	--smoothly-0-app-hover-color: var(--smoothly-0-default-contrast);
-	--smoothly-0-app-shadow: var(--smoothly-0-color-shadow);
+	--smoothly-app-background: var(--smoothly-color-shade);
+	--smoothly-app-color: var(--smoothly-color-contrast);
+	--smoothly-app-hover-background: var(--smoothly-default-shade);
+	--smoothly-app-hover-color: var(--smoothly-default-contrast);
+	--smoothly-app-shadow: var(--smoothly-color-shadow);
 }
 
 smoothly-0-app>smoothly-0-notifier>header {
@@ -50,15 +50,15 @@ smoothly-0-app>smoothly-0-notifier>header {
 	width: 100%;
 	z-index: 5;
 	height: 5rem;
-	background-color: rgb(var(--smoothly-0-app-background));
-	color: rgba(var(--smoothly-0-medium-color));
-	fill: rgb(var(--smoothly-0-medium-color));
-	stroke: rgb(var(--smoothly-0-medium-color));
+	background-color: rgb(var(--smoothly-app-background));
+	color: rgba(var(--smoothly-medium-color));
+	fill: rgb(var(--smoothly-medium-color));
+	stroke: rgb(var(--smoothly-medium-color));
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-0-app-shadow));
-	border-bottom: 1px solid rgba(var(--smoothly-0-dark-color));
+	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-app-shadow));
+	border-bottom: 1px solid rgba(var(--smoothly-dark-color));
 }
 
 smoothly-0-app>smoothly-0-notifier>header a {
@@ -116,9 +116,9 @@ smoothly-0-app>smoothly-0-notifier>header>[slot=header]>a {
 }
 
 smoothly-0-app>smoothly-0-notifier>header>[slot=header]>a>smoothly-0-icon {
-	fill: rgb(var(--smoothly-0-primary-shade));
-	stroke: rgb(var(--smoothly-0-primary-shade));
-	color: rgb(var(--smoothly-0-primary-shade));
+	fill: rgb(var(--smoothly-primary-shade));
+	stroke: rgb(var(--smoothly-primary-shade));
+	color: rgb(var(--smoothly-primary-shade));
 }
 
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li a {
@@ -140,30 +140,30 @@ smoothly-0-app>smoothly-0-notifier>header>nav>ul li smoothly-0-trigger.sc-smooth
 }
 
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li>a>smoothly-0-icon>svg {
-	fill: rgb(var(--smoothly-0-medium-color));
-	stroke: rgb(var(--smoothly-0-medium-color));
-	color: rgb(var(--smoothly-0-medium-color));
+	fill: rgb(var(--smoothly-medium-color));
+	stroke: rgb(var(--smoothly-medium-color));
+	color: rgb(var(--smoothly-medium-color));
 	align-items: center;
 	display: flex;
 }
 
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li>a:hover>smoothly-0-icon>svg,
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li>a.active>smoothly-0-icon>svg {
-	color: rgb(var(--smoothly-0-app-color));
-	stroke: rgb(var(--smoothly-0-app-color));
-	fill: rgb(var(--smoothly-0-app-color));
+	color: rgb(var(--smoothly-app-color));
+	stroke: rgb(var(--smoothly-app-color));
+	fill: rgb(var(--smoothly-app-color));
 }
 
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li>smoothly-0-trigger.active a>smoothly-0-icon,
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li>smoothly-0-trigger:hover a>smoothly-0-icon,
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li a:hover,
 smoothly-0-app>smoothly-0-notifier>header>nav>ul li a.active {
-	border-bottom: 2px solid rgb(var(--smoothly-0-app-color));
+	border-bottom: 2px solid rgb(var(--smoothly-app-color));
 	margin-bottom: 0px;
 	border-bottom-width: 2px;
-	color: rgb(var(--smoothly-0-app-color));
-	stroke: rgb(var(--smoothly-0-app-color));
-	fill: rgb(var(--smoothly-0-app-color));
+	color: rgb(var(--smoothly-app-color));
+	stroke: rgb(var(--smoothly-app-color));
+	fill: rgb(var(--smoothly-app-color));
 }
 
 smoothly-0-app>smoothly-0-notifier>main {

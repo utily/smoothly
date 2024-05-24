@@ -5,13 +5,13 @@ html smoothly-0-notifier :host {
 }
 
 html smoothly-0-notifier :host[color] {
-	background-color: rgb(var(--smoothly-0-color-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 }
 
 :host>smoothly-0-input-month {
 	width: calc(100% - 1em);
 	padding: 0.5em 0.5em 0 0.5em;
-	background-color: rgb(var(--smoothly-0-color-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 }
 
 :host>table {
@@ -24,58 +24,58 @@ td {
 	text-align: center;
 	padding: 0.5em;
 	min-width: 2em;
-	background-color: rgb(var(--smoothly-0-color-shade));
+	background-color: rgb(var(--smoothly-color-shade));
 	cursor: pointer;
 	user-select: none;
 }
 
 td.currentMonth {
-	color: rgb(var(--smoothly-0-color-contrast));
+	color: rgb(var(--smoothly-color-contrast));
 }
 
 td:not(.currentMonth) {
-	color: rgba(var(--smoothly-0-color-contrast), var(--other-month-opacity));
+	color: rgba(var(--smoothly-color-contrast), var(--other-month-opacity));
 }
 
 td:nth-child(6):not(.currentMonth).selected,
 td:nth-child(6):not(.currentMonth).dateRange,
 td:nth-child(7):not(.currentMonth).selected,
 td:nth-child(7):not(.currentMonth).dateRange {
-	color: rgba(var(--smoothly-0-color-contrast));
+	color: rgba(var(--smoothly-color-contrast));
 }
 
 td:nth-child(6),
 td:nth-child(7) {
-	color: rgb(var(--smoothly-0-danger-tint));
+	color: rgb(var(--smoothly-danger-tint));
 }
 
 td:nth-child(6):not(.currentMonth),
 td:nth-child(7):not(.currentMonth) {
-	color: rgba(var(--smoothly-0-danger-tint), var(--other-month-opacity));
+	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
 
 td:not(.selected, .disable):hover {
-	color: rgb(var(--smoothly-0-primary-contrast));
-	background: rgb(var(--smoothly-0-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-tint));
 }
 
 td.selected {
-	color: rgb(var(--smoothly-0-primary-contrast));
-	background: rgb(var(--smoothly-0-primary-color));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-color));
 }
 
 td:not(.selected, .dateRange):not(:hover).today {
-	background: rgb(var(--smoothly-0-dark-tint));
-	color: rgb(var(--smoothly-0-dark-contrast));
+	background: rgb(var(--smoothly-dark-tint));
+	color: rgb(var(--smoothly-dark-contrast));
 }
 
 td.dateRange {
-	color: rgb(var(--smoothly-0-primary-contrast));
-	background: rgb(var(--smoothly-0-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
+	background: rgb(var(--smoothly-primary-tint));
 }
 
 td.disable {
 	cursor: not-allowed;
-	background-color: rgb(var(--smoothly-0-color-tint), 0.5);
-	color: rgb(var(--smoothly-0-color-contrast), 0.5);
+	background-color: rgb(var(--smoothly-color-tint), 0.5);
+	color: rgb(var(--smoothly-color-contrast), 0.5);
 }

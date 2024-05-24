@@ -1,11 +1,11 @@
 :host {
-	--background-color: var(--smoothly-0-default-color), 1;
-	--color: var(--smoothly-0-secondary-contrast);
-	--border-color: var(--smoothly-0-default-shade), 1;
-	--border-highlight-color: var(--smoothly-0-secondary-contrast), 1;
-	--label-color: var(--smoothly-0-secondary-contrast), 0.8;
+	--background-color: var(--smoothly-default-color), 1;
+	--color: var(--smoothly-secondary-contrast);
+	--border-color: var(--smoothly-default-shade), 1;
+	--border-highlight-color: var(--smoothly-secondary-contrast), 1;
+	--label-color: var(--smoothly-secondary-contrast), 0.8;
 	--selected-item-border-radius: 0.25rem;
-	--selected-item-background-color: var(--smoothly-0-secondary-color), 1;
+	--selected-item-background-color: var(--smoothly-secondary-color), 1;
 	--selected-item-color: 255, 255, 255, 1;
 }
 
@@ -32,7 +32,7 @@
 }
 
 :host(:focus-within) {
-	border-color: rgb(var(--smoothly-0-primary-shade));
+	border-color: rgb(var(--smoothly-primary-shade));
 	border-width: 2px;
 	margin: 0px;
 }
@@ -69,7 +69,7 @@
 		cursor: pointer;
 		color: rgb(var(--color));
 		padding: 0 0.6rem;
-		font-family: var(--smoothly-0-font-family);
+		font-family: var(--smoothly-font-family);
 		font-size: 1.05rem;
 
 		&::placeholder {
@@ -80,7 +80,7 @@
 }
 
 :host([is-open])>div input {
-	color: rgb(var(--smoothly-0-medium-color));
+	color: rgb(var(--smoothly-medium-color));
 }
 
 :host(:not(:focus-within)[multiple]) ul>li:last-child {
@@ -103,7 +103,7 @@ label {
 	white-space: nowrap;
 	color: rgba(var(--label-color));
 	transition: var(--intergiro-transition);
-	font-family: var(--smoothly-0-font-family);
+	font-family: var(--smoothly-font-family);
 	pointer-events: none;
 	transform-origin: left;
 }
@@ -148,7 +148,7 @@ smoothly-0-icon.down {
 	display: flex;
 	align-self: center;
 	padding-right: 0.8rem;
-	stroke: rgb(var(--smoothly-0-primary-shade));
+	stroke: rgb(var(--smoothly-primary-shade));
 }
 
 :host smoothly-0-menu-options {

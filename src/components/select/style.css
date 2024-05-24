@@ -11,7 +11,7 @@ select {
 	padding-top: 0.5em;
 	border: none;
 	-webkit-appearance: none;
-	background-color: rgb(var(--smoothly-0-color));
+	background-color: rgb(var(--smoothly-color));
 	padding: 0.3em;
 }
 

@@ -10,8 +10,8 @@ smoothly-0-radio-button[decoration=button] :host>header>smoothly-0-icon {
 }
 
 smoothly-0-radio-button[decoration=button] ::slotted([slot=expansion]) {
-	background: rgb(var(--smoothly-0-color));
-	color: rgb(var(--smoothly-0-color-contrast));
+	background: rgb(var(--smoothly-color));
+	color: rgb(var(--smoothly-color-contrast));
 	border-radius: 5px;
 	margin-top: 0.5rem;
 }
@@ -26,7 +26,7 @@ smoothly-0-radio-button[decoration=button] ::slotted([slot=expansion])::before {
 	position: absolute;
 	top: -0.8rem;
 	left: 3rem;
-	color: rgb(var(--smoothly-0-color));
+	color: rgb(var(--smoothly-color));
 }
 
 @media screen and (min-width: 900px) {

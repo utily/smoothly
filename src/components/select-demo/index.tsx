@@ -71,7 +71,7 @@ export class SmoothlySelectDemo {
 				max={Date.next(Date.now(), 30)}
 				showLabel={false}
 				style={{
-					"--background": "rgb(var(--smoothly-0-dark-shade))",
+					"--background": "rgb(var(--smoothly-dark-shade))",
 					"--border-radius": "4px",
 					"--padding": "0 0.75em",
 					"--input-width": "6rem",
