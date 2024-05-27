@@ -130,16 +130,8 @@ export class SmoothlyInputDemo {
 						<smoothly-picker-option selected value={"cat"}>
 							Cat
 						</smoothly-picker-option>
-						<smoothly-picker-option selected value={"cat"}>
-							Catellidskfkrjsdlköpofgiwåo0rsgiklfoösdfgooodskdgäåfdgafhadhytkgjuyjlkyuisrth
-						</smoothly-picker-option>
-						<smoothly-picker-option selected value={"dog"}>
-							Dog
-						</smoothly-picker-option>
+						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
-						<smoothly-picker-option value={"rat"}>Rat</smoothly-picker-option>
-						<smoothly-picker-option value={"mouse"}>mouse</smoothly-picker-option>
-						<smoothly-picker-option value={"parrot"}>parrot</smoothly-picker-option>
 					</smoothly-picker>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
@@ -149,7 +141,6 @@ export class SmoothlyInputDemo {
 					</smoothly-input-submit>
 				</smoothly-form>
 				<h2>Editable form and Input with Clear and Reset - Editable</h2>
-				{/* 
 				<smoothly-form
 					looks="grid"
 					type="create"
@@ -745,7 +736,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form> */}
+				</smoothly-form>
 			</Host>
 		)
 	}
