@@ -9,3 +9,11 @@ smoothly-input-demo {
 	align-items: center;
 	background-color: rgb(var(--background-color));
 }
+.select-div {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em
+}
+.select-div>* {
+	width:100%;
+}

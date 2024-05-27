@@ -25,18 +25,17 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Prop() selectable = true
-	@Event() smoothlyItemSelect: EventEmitter<void>
+	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Watch("selected")
-	onSelectedChanged(value: boolean, old: boolean) {
-		if (value && !old && this.selectable)
-			this.smoothlyItemSelect.emit()
+	onSelectedChanged() {
+		if (this.selectable)
+			this.smoothlyItemSelect.emit(this.element)
 	}
 	@Listen("click")
 	onClick() {
 		if (this.selectable) {
-			this.selected = true
-			this.smoothlyItemSelect.emit()
+			this.selected = !this.selected
 		}
 	}
 	componentWillLoad() {
@@ -46,7 +45,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	}
 	componentDidLoad() {
 		if (this.selected && this.selectable)
-			this.smoothlyItemSelect.emit()
+			this.smoothlyItemSelect.emit(this.element)
 	}
 	@Method()
 	async filter(filter: string): Promise<void> {

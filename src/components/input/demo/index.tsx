@@ -12,26 +12,51 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<h2>Select</h2>
-				<smoothly-input-select name="select-dessert" looks="border">
-					<label slot="label">Select with reset button</label>
-					<smoothly-item value="1">Ice cream</smoothly-item>
-					<smoothly-item value="2">Sponge cake</smoothly-item>
-					<smoothly-item value="3">Cookie</smoothly-item>
-					<smoothly-item value="4">Croissant</smoothly-item>
-					<smoothly-item value="5">Chocolate fondue</smoothly-item>
-					<smoothly-input-reset size="icon" slot="end">
-						<smoothly-icon name="refresh-outline" />
-					</smoothly-input-reset>
-				</smoothly-input-select>
-				<br />
-				<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
-					<smoothly-item value="folder" selected>
-						<smoothly-icon size="small" name="folder-outline" />
-					</smoothly-item>
-					<smoothly-item value="camera">
-						<smoothly-icon size="small" name="camera-outline" />
-					</smoothly-item>
-				</smoothly-input-select>
+				<div class="select-div">
+					<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>
+						<label slot="label">Select with reset button</label>
+						<smoothly-item value="1">Ice cream</smoothly-item>
+						<smoothly-item value="2">Sponge cake</smoothly-item>
+						<smoothly-item value="3">Cookie</smoothly-item>
+						<smoothly-item value="4">Croissant</smoothly-item>
+						<smoothly-item value="5">Chocolate fondue</smoothly-item>
+						<smoothly-input-reset size="icon" slot="end">
+							<smoothly-icon name="refresh-outline" />
+						</smoothly-input-reset>
+					</smoothly-input-select>
+					<smoothly-input-select
+						multiple
+						name="select-dessert-multiple"
+						looks="border"
+						onSmoothlyInput={e => console.log(e.detail)}>
+						<label slot="label">Select multiple with reset button</label>
+						<smoothly-item value="ice cream">Ice cream</smoothly-item>
+						<smoothly-item value="sponge cake">Sponge cake</smoothly-item>
+						<smoothly-item selected value="cookie">
+							Cookie
+						</smoothly-item>
+						<smoothly-item value="croissant">Croissant</smoothly-item>
+						<smoothly-item selected value="chocolate fondue">
+							Chocolate fondue
+						</smoothly-item>
+						<smoothly-input-reset size="icon" slot="end">
+							<smoothly-icon name="refresh-outline" />
+						</smoothly-input-reset>
+					</smoothly-input-select>
+					<smoothly-input-select
+						name="select-icon"
+						clearable={false}
+						showSelected={false}
+						onSmoothlyInput={e => console.log("Form Readonly", e.detail)}>
+						<smoothly-item value="folder" selected>
+							<smoothly-icon size="small" name="folder-outline" />
+						</smoothly-item>
+						<smoothly-item value="camera">
+							<smoothly-icon size="small" name="camera-outline" />
+						</smoothly-item>
+					</smoothly-input-select>
+				</div>
+
 				<h2>Delayed</h2>
 				<smoothly-input name="Delayed" delay={2}>
 					Delayed
@@ -147,8 +172,8 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
-					<smoothly-input-select menuHeight="7.5items" placeholder="Select..." name="select-month">
-						<label slot="label">Month</label>
+					<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
+						<label slot="label">Month multiple select</label>
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
 						<smoothly-item value="3">March</smoothly-item>
