@@ -379,6 +379,7 @@ export namespace Components {
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "multiple": boolean;
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
@@ -1823,11 +1824,13 @@ declare namespace LocalJSX {
         "color"?: Color;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "multiple"?: boolean;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "placeholder"?: string | any;
         "readonly"?: boolean;
@@ -1849,7 +1852,7 @@ declare namespace LocalJSX {
     interface SmoothlyItem {
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: HTMLElement) => void>) => void;
-        "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<void>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;
         "selectable"?: boolean;
         "selected"?: boolean;
         "value"?: any;
