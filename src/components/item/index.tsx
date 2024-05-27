@@ -10,7 +10,6 @@ import {
 	Listen,
 	Method,
 	Prop,
-	Watch,
 } from "@stencil/core"
 import { Item } from "./Item"
 

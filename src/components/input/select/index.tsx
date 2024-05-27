@@ -30,7 +30,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	items: HTMLSmoothlyItemElement[] = []
 	itemHeight: number | undefined
-	mainElement?: HTMLElement
+	displaySelectedElement?: HTMLElement
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -87,6 +87,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selected = [...this.initialValue]
 		this.displaySelected()
 		this.changed = false
+		this.open && this.handleShowOptions()
 	}
 
 	@Method()
@@ -94,8 +95,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (this.clearable) {
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
-			if (this.mainElement) {
-				this.mainElement.innerHTML = this.placeholder ?? "(none)"
+			if (this.displaySelectedElement) {
+				this.displaySelectedElement.innerHTML = this.placeholder ?? "(none)"
 			}
 		}
 	}
@@ -140,11 +141,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 		event.detail(this)
 	}
-	@Listen("click")
-	onClick(event: UIEvent): void {
-		event.stopPropagation()
-		!(event.target && "tagName" in event.target && event.target.tagName === "SMOOTHLY-ITEM" && this.multiple) &&
-			this.handleShowOptions()
+	@Listen("click", { target: "window" })
+	onWindowClick(event: Event): void {
+		!event.composedPath().includes(this.element) && this.open && this.handleShowOptions()
 	}
 	@Listen("smoothlyItemSelect")
 	onItemSelect(event: CustomEvent<HTMLSmoothlyItemElement>): void {
@@ -169,17 +168,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				marked.marked = false
 		}
 	}
-	handleShowOptions(): void {
-		!this.readonly && (this.open = !this.open)
+	handleShowOptions(event?: Event): void {
+		!this.readonly &&
+			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			(this.open = !this.open)
 		this.filter = ""
 	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
 	displaySelected(): void {
-		const displayString: string = this.selected.map(option => option.innerHTML).join("    ")
-		this.mainElement &&
-			(this.mainElement.innerHTML = this.selected.length > 0 ? displayString : this.placeholder ? this.placeholder : "")
+		const displayString: string = "<div>" + this.selected.map(option => option.innerHTML).join("</div><div>") + "</div>"
+		this.displaySelectedElement &&
+			(this.displaySelectedElement.innerHTML =
+				this.selected.length > 0 ? displayString : this.placeholder ? this.placeholder : "")
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
@@ -262,25 +264,18 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host tabIndex={0} class={{ "has-value": this.selected.length > 0 ? true : false }}>
-				<div class="select-display">
-					<div class="selected-value" ref={element => (this.mainElement = element)}>
-						{this.placeholder}
-					</div>
+			<Host
+				tabIndex={0}
+				class={{ "has-value": this.selected.length ? true : false }}
+				onClick={(event: Event) => this.handleShowOptions(event)}>
+				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
+					{this.placeholder}
 				</div>
 				<div class="icons">
 					<slot name="end" />
 					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
 				</div>
 				<slot name="label" />
-				{this.open && (
-					<section
-						onClick={e => {
-							e.stopPropagation()
-							this.handleShowOptions()
-						}}
-					/>
-				)}
 				<div class={`${this.open ? "" : "hidden"} options`}>
 					{this.filter.length > 0 && (
 						<smoothly-item selectable={false}>
