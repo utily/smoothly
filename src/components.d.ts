@@ -1830,6 +1830,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "placeholder"?: string | any;
         "readonly"?: boolean;

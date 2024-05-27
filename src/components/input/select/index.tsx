@@ -50,6 +50,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
@@ -82,6 +83,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Method()
 	async reset(): Promise<void> {
 		this.selected.forEach(item => (item.selected = item.hidden = false))
+		this.initialValue.forEach(item => (item.selected = true))
 		this.selected = [...this.initialValue]
 		this.displaySelected()
 		this.changed = false
@@ -207,6 +209,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					const result = this.items.find(item => item.marked)
 					if (result?.value)
 						result.selected = !result.selected
+					this.smoothlyItemSelect.emit(result)
 					if (!this.multiple) {
 						this.open = false
 						this.filter = ""

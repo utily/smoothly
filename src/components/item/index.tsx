@@ -27,15 +27,12 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop() selectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
-	@Watch("selected")
-	onSelectedChanged() {
-		if (this.selectable)
-			this.smoothlyItemSelect.emit(this.element)
-	}
+
 	@Listen("click")
 	onClick() {
 		if (this.selectable) {
 			this.selected = !this.selected
+			this.smoothlyItemSelect.emit(this.element)
 		}
 	}
 	componentWillLoad() {
