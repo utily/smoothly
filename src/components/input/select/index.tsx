@@ -118,7 +118,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				: this.multiple && this.selected.length > 0
 				? this.selected.map(item => item.value)
 				: undefined
-		this.smoothlySelect.emit(value)
 		this.smoothlyInput.emit({ [this.name]: value })
 		this.listener.changed?.(this)
 	}
@@ -151,7 +150,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (this.multiple) {
 			this.selected = event.detail.selected
 				? [...this.selected, event.detail]
-				: [...this.selected].filter(item => item.selected)
+				: this.selected.filter(item => item.selected)
 		} else {
 			this.selected[0] && (this.selected[0].hidden = this.selected[0].selected = false)
 			this.selected = !event.detail.selected ? [] : [event.detail]
