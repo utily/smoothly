@@ -26,8 +26,5 @@ jobs:
         uses: "phips28/gh-action-bump-version@master"
         with:
           default: prerelease
-          preid: alpha
-          rc-wording: ""
-          tag-prefix: "release-"
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
