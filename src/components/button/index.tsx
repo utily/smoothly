@@ -18,6 +18,10 @@ export class SmoothlyButton {
 	@Prop() link?: string
 
 	render() {
-		return <Button disabled={this.disabled} type={this.type} link={this.link} />
+		return (
+			<Button disabled={this.disabled} type={this.type} link={this.link}>
+				<slot />
+			</Button>
+		)
 	}
 }
