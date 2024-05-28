@@ -11,6 +11,8 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
+				<h2>Controlled form</h2>
+				<smoothly-input-demo-controlled-form />
 				<h2>Select</h2>
 				<div class="select-div">
 					<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>
@@ -64,9 +66,9 @@ export class SmoothlyInputDemo {
 				<h2>Editable form and Input with Clear and Reset - Readonly</h2>
 				<smoothly-form
 					looks="grid"
-					type="create"
+					type="fetch"
 					readonly
-					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+					action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input readonly name="First Name" value="John">
 						First name
 					</smoothly-input>
@@ -681,7 +683,7 @@ export class SmoothlyInputDemo {
 					</smoothly-submit>
 				</smoothly-form>
 				<h4>Form with spinner showcase</h4>
-				<smoothly-form looks="line" processing={true} onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
+				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
 					<smoothly-input name="text">Input</smoothly-input>
 					<smoothly-input-file camera="back" placeholder="Capture a photo" name="image">
 						<span slot="label">Testing camera photo</span>
