@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
-import { Color, Data, Fill, Icon, Message, Notice, Option, Trigger } from "./model";
+import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
 import { FunctionalComponent, JSX } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
@@ -1634,11 +1634,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
-        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<{
-		value: Data
-		result: (result: boolean) => void
-		type: "update" | "change" | "fetch" | "create" | "remove"
-	}>) => void;
+        "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Submit>) => void;
         "prevent"?: boolean;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";

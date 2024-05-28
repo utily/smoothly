@@ -16,5 +16,6 @@ export {
 	StateBase,
 	Data,
 	redirect,
+	Submit,
 } from "./model"
 export { Cosmetic } from "./utilities"

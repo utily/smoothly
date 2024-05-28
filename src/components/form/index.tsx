@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
-import { Color, Data, Notice } from "../../model"
+import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -23,11 +23,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop({ mutable: true }) changed = false
 	@State() processing?: Promise<boolean>
 	@Event() smoothlyFormInput: EventEmitter<Data>
-	@Event() smoothlyFormSubmit: EventEmitter<{
-		value: Data
-		result: (result: boolean) => void
-		type: "update" | "change" | "fetch" | "create" | "remove"
-	}>
+	@Event() smoothlyFormSubmit: EventEmitter<Submit>
 	@Event() notice: EventEmitter<Notice>
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
