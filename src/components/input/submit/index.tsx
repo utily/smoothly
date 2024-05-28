@@ -34,7 +34,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	}
 	@Listen("click")
 	clickHandler() {
-		this.parent?.submit(this.delete)
+		!this.disabled && this.parent?.submit(this.delete)
 	}
 
 	render(): VNode | VNode[] {
@@ -62,7 +62,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						color={this.color ?? "success"}
 						fill={this.fill}>
 						<slot />
-						<smoothly-icon name="checkmark-outline" fill="solid" />
+						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-button>
 				)}
 			</Host>
