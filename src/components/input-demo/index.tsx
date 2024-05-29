@@ -56,6 +56,12 @@ export class SmoothlyInputDemo {
 						<smoothly-input type="text" name="testing">
 							Texttest
 						</smoothly-input>
+						<smoothly-input type="integer" name="integer">
+							Integer
+						</smoothly-input>
+						<smoothly-input type="identifier-code" name="identifier-code">
+							Identifier
+						</smoothly-input>
 						<smoothly-input type="password" name="password">
 							Password
 						</smoothly-input>
