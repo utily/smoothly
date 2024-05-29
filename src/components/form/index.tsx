@@ -1,5 +1,6 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
+import { SmoothlyFormCustomEvent } from "../../components"
 import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
@@ -12,13 +13,14 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Clearable, Submittable, Editable {
+	@Element() element: HTMLSmoothlyFormElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
-	@Prop() type: "update" | "change" | "fetch" | "create" = "create"
+	@Prop() action?: string
+	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
-	@Prop() action?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@State() processing?: Promise<boolean>
@@ -54,7 +56,14 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
 	}
-
+	@Listen("smoothlyFormSubmit", { target: "window" })
+	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
+		event.target == this.element && event.detail.result(false)
+	}
+	@Listen("smoothlyFormSubmit")
+	submitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
+		this.action && event.stopPropagation()
+	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.stopPropagation()
@@ -77,10 +86,9 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 				const action = this.action
 				this.notice.emit(
 					Notice.execute("Submitting form", async () => {
-						console.log("this.type", this.type)
 						const method = remove
 							? "DELETE"
-							: this.type == "create"
+							: !this.type || this.type == "create"
 							? "POST"
 							: this.type == "change"
 							? "PUT"

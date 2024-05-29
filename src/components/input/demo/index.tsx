@@ -13,6 +13,14 @@ export class SmoothlyInputDemo {
 			<Host>
 				<h2>Controlled form</h2>
 				<smoothly-input-demo-controlled-form />
+				<h2>Create form defaulting type</h2>
+				<smoothly-form looks={"line"} action={"https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4"}>
+					<smoothly-input type={"text"} name={"name"}>
+						Name
+					</smoothly-input>
+					<smoothly-input-reset slot={"reset"} type={"form"} size={"icon"} color={"warning"} fill={"default"} />
+					<smoothly-input-submit slot={"submit"} size={"icon"} color={"success"} />
+				</smoothly-form>
 				<h2>Select</h2>
 				<div class="select-div">
 					<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>

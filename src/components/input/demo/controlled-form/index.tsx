@@ -18,6 +18,7 @@ export class SmoothlyInputDemoControlledForm {
 	async submitHandler(
 		event: SmoothlyFormCustomEvent<{ result: (result: boolean) => void; value: Data }>
 	): Promise<void> {
+		event.stopPropagation()
 		console.log("Received event. Processing...")
 		if (!(typeof event.detail.value.name == "string")) {
 			console.error("Bad input. Resolving false")
@@ -33,7 +34,7 @@ export class SmoothlyInputDemoControlledForm {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-form readonly type={"update"} looks={"line"} onSmoothlyFormSubmit={e => this.submitHandler(e)}>
+				<smoothly-form readonly looks={"line"} onSmoothlyFormSubmit={e => this.submitHandler(e)}>
 					<smoothly-input type={"text"} name={"name"} value={this.name}>
 						Name
 					</smoothly-input>

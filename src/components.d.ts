@@ -191,7 +191,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
-        "type": "update" | "change" | "fetch" | "create";
+        "type"?: "update" | "change" | "fetch" | "create";
         "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
