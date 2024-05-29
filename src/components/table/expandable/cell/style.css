@@ -1,6 +1,6 @@
 :host {
 	display: table-cell;
-	padding: 0.3rem 0 0.3rem 0;
+	padding: 0.3rem 0.5rem 0.3rem 0.2rem;
 	cursor: pointer;
 	line-height: 1.5rem;
 }
@@ -15,7 +15,7 @@
 }
 :host smoothly-icon {
 	width: 1em;
-	padding: 0 0.3rem;
+	padding-right: 0.3rem;
 	transition: transform 0.2s, opacity 0.1s;
 	display: flex;
 	height: auto;
@@ -27,7 +27,7 @@
 	opacity: 1;
 }
 :host[open] smoothly-icon {
-	transform: rotate(90deg);
+	transform: rotate(90deg) translateX(3px);
 }
 :host > div {
 	display: grid;
