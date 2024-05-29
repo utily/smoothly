@@ -1,0 +1,7 @@
+:host {
+	display: flex;
+	width: 100%;
+}
+:host smoothly-form {
+	width: 100%;
+}

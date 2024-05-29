@@ -1,6 +1,7 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { http } from "cloudly-http"
-import { Color, Data, Notice } from "../../model"
+import { SmoothlyFormCustomEvent } from "../../components"
+import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -12,18 +13,19 @@ import { Submittable } from "../input/Submittable"
 	styleUrl: "style.css",
 })
 export class SmoothlyForm implements Clearable, Submittable, Editable {
+	@Element() element: HTMLSmoothlyFormElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
-	@Prop() type: "update" | "change" | "fetch" | "create" = "create"
+	@Prop() action?: string
+	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
 	@Prop() name?: string
-	@Prop() action?: string
-	@Prop({ mutable: true }) processing: boolean
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
+	@State() processing?: Promise<boolean>
 	@Event() smoothlyFormInput: EventEmitter<Data>
-	@Event() smoothlyFormSubmit: EventEmitter<{ value: Data; type: "update" | "change" | "fetch" | "create" | "remove" }>
+	@Event() smoothlyFormSubmit: EventEmitter<Submit>
 	@Event() notice: EventEmitter<Notice>
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
@@ -54,7 +56,14 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.smoothlyFormInput.emit((this.value = Data.merge(this.value, event.detail)))
 	}
-
+	@Listen("smoothlyFormSubmit", { target: "window" })
+	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
+		event.target == this.element && event.detail.result(false)
+	}
+	@Listen("smoothlyFormSubmit")
+	submitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
+		this.action && event.stopPropagation()
+	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
 		event.stopPropagation()
@@ -71,46 +80,50 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	}
 	@Method()
 	async submit(remove?: boolean): Promise<void> {
-		this.smoothlyFormSubmit.emit({ value: this.value, type: remove == true ? "remove" : this.type })
-		if (this.action) {
-			this.processing = true
-			const action = this.action
-			this.notice?.emit(
-				Notice.execute("Submitting form", async () => {
-					const response = await http
-						.fetch(
-							http.Request.create(
-								remove == true
-									? { method: "DELETE", url: action, header: { contentType: "application/json" }, body: this.value }
-									: this.type == "fetch"
-									? {
-											method: "GET",
-											url: `${action}?${http.Search.stringify(this.value)}`,
-									  }
-									: {
-											method: this.type == "change" ? "PUT" : this.type == "update" ? "PATCH" : "POST",
-											url: action,
-											header: { contentType: "application/json" },
-											body: this.value,
-									  }
+		this.processing = new Promise(resolve => {
+			this.smoothlyFormSubmit.emit({ value: this.value, result: resolve, type: remove == true ? "remove" : this.type })
+			if (this.action) {
+				const action = this.action
+				this.notice.emit(
+					Notice.execute("Submitting form", async () => {
+						const method = remove
+							? "DELETE"
+							: !this.type || this.type == "create"
+							? "POST"
+							: this.type == "change"
+							? "PUT"
+							: this.type == "update"
+							? "PATCH"
+							: "GET"
+						const response = await http
+							.fetch(
+								http.Request.create(
+									method == "GET"
+										? { method, url: `${action}?${http.Search.stringify(this.value)}` }
+										: {
+												method,
+												url: action,
+												...(this.value && { header: { contentType: "application/json" }, body: this.value }),
+										  }
+								)
 							)
-						)
-						.catch(() => undefined)
-					let result: [boolean, string]
-					if (!response || response?.status < 200 || response.status >= 300)
-						result = [false, "Failed to submit form."]
-					else {
-						result = [true, "Form successfully submitted."]
-						this.type == "create" && (await this.clear())
-						this.setInitialValue()
-						this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
-					}
-
-					this.processing = false
-					return result
-				})
-			)
+							.catch(() => undefined)
+						const result =
+							!response || response?.status < 200 || response.status >= 300
+								? ([false, "Failed to submit form."] as const)
+								: ([true, "Form successfully submitted."] as const)
+						resolve(result[0])
+						return [...result]
+					})
+				)
+			}
+		})
+		if (await this.processing) {
+			this.type == "create" && (await this.clear())
+			this.setInitialValue()
+			this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
 		}
+		this.processing = undefined
 	}
 	@Method()
 	async clear(): Promise<void> {
@@ -141,7 +154,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	render() {
 		return (
 			<Host>
-				<smoothly-spinner active={this.processing}></smoothly-spinner>
+				<smoothly-spinner active={!!this.processing}></smoothly-spinner>
 				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>
 						<slot></slot>
