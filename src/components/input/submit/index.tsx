@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Listen, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
@@ -10,7 +10,7 @@ import { Submittable } from "../Submittable"
 })
 export class SmoothlyInputSubmit implements ComponentWillLoad {
 	private parent?: Submittable & Editable
-	@Prop() delete = false
+	@Prop({ reflect: true }) delete = false
 	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
@@ -32,7 +32,6 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 			}
 		})
 	}
-	@Listen("click")
 	clickHandler() {
 		!this.disabled && this.parent?.submit(this.delete)
 	}
@@ -48,7 +47,8 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						expand={this.expand}
 						type={this.type}
 						color={this.color ?? "danger"}
-						fill={this.fill}>
+						fill={this.fill}
+						onSmoothlyConfirm={() => this.clickHandler()}>
 						<slot />
 						<smoothly-icon name="trash-outline" fill="solid" size="tiny" />
 					</smoothly-button-confirm>
@@ -60,7 +60,8 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						shape={this.shape}
 						expand={this.expand}
 						color={this.color ?? "success"}
-						fill={this.fill}>
+						fill={this.fill}
+						onClick={() => this.clickHandler()}>
 						<slot />
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-button>
