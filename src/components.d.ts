@@ -1633,7 +1633,10 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
+        "onSmoothlyFormClear"?: (event: SmoothlyFormCustomEvent<void>) => void;
+        "onSmoothlyFormEdit"?: (event: SmoothlyFormCustomEvent<boolean>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
+        "onSmoothlyFormReset"?: (event: SmoothlyFormCustomEvent<void>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Submit>) => void;
         "prevent"?: boolean;
         "readonly"?: boolean;
