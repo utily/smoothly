@@ -26,6 +26,9 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@State() processing?: Promise<boolean>
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Submit>
+	@Event() smoothlyFormReset: EventEmitter<void>
+	@Event() smoothlyFormEdit: EventEmitter<boolean>
+	@Event() smoothlyFormClear: EventEmitter<void>
 	@Event() notice: EventEmitter<Notice>
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
@@ -130,6 +133,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 		this.inputs.forEach(input => {
 			Clearable.is(input) && input.clear()
 		})
+		this.smoothlyFormClear.emit()
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -137,6 +141,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 			Editable.Element.type.is(input) && input.edit(editable)
 		})
 		this.readonly = !editable
+		this.smoothlyFormEdit.emit(editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
@@ -144,6 +149,7 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 			Editable.Element.type.is(input) && input.reset()
 		})
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+		this.smoothlyFormReset.emit()
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
