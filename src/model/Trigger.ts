@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
 export interface Trigger {
 	name: string
 	value?: any
