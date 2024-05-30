@@ -238,6 +238,7 @@ export class SmoothlyPickerMenu {
 						value={this.search}
 						looks={this.looks}
 						onKeyDown={e => this.keyDownHandler(e)}
+						onSmoothlyFormDisable={e => e.stopPropagation()}
 						onSmoothlyInput={e => this.inputHandler(e)}
 						onSmoothlyChange={e => e.stopPropagation()}
 						onSmoothlyBlur={e => e.stopPropagation()}
