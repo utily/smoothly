@@ -3,14 +3,13 @@ export interface Message<T> {
 	content: T
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class Message<T> {
-	static is(value: Message<any> | any): value is Message<any> {
+export namespace Message {
+	export function is(value: Message<any> | any): value is Message<any> {
 		return typeof value == "object" && typeof value.destination == "string" && value.content != undefined
 	}
-	static send(message: Message<any>, context?: Window): void
-	static send(destination: string, content: any, context?: Window): void
-	static send(message: string | Message<any>, content?: any | Window, context?: Window): void {
+	export function send(message: Message<any>, context?: Window): void
+	export function send(destination: string, content: any, context?: Window): void
+	export function send(message: string | Message<any>, content?: any | Window, context?: Window): void {
 		if (Message.is(message) && context == undefined) {
 			context = content as Window
 			if (!context)
@@ -25,7 +24,7 @@ export class Message<T> {
 				Message.send({ destination: message, content }, context)
 		}
 	}
-	static listen(origin: string, handle: (destination: string, content: any) => void, context?: Window): void {
+	export function listen(origin: string, handle: (destination: string, content: any) => void, context?: Window): void {
 		const splitted = origin.split("#", 2)
 		let destination = ""
 		if (splitted.length == 2) {

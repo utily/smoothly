@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
 export interface Trigger {
 	name: string
 	value?: any
 }
-export class Trigger {
-	static is(value: Trigger | any): value is Trigger {
+export namespace Trigger {
+	export function is(value: Trigger | any): value is Trigger {
 		return typeof value == "object" && typeof value.name == "string"
 	}
 }
