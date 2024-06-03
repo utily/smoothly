@@ -31,6 +31,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	items: HTMLSmoothlyItemElement[] = []
 	itemHeight: number | undefined
 	displaySelectedElement?: HTMLElement
+	buttonTagNames = ["SMOOTHLY-INPUT-CLEAR", "SMOOTHLY-INPUT-RESET"]
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -133,7 +134,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
-		if (event.target && "name" in event.target && event.target.name !== this.name) {
+		if (
+			event.target &&
+			(("name" in event.target && event.target.name !== this.name) ||
+				("tagName" in event.target &&
+					typeof event.target.tagName === "string" &&
+					this.buttonTagNames.includes(event.target.tagName)))
+		) {
 			event.stopPropagation()
 		} else if (Item.type.is(event.target)) {
 			event.stopPropagation()
@@ -169,18 +176,19 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	handleShowOptions(event?: Event): void {
-		const buttonTagNames = ["SMOOTHLY-INPUT-CLEAR", "SMOOTHLY-INPUT-RESET"]
+		event && event.stopPropagation()
+		const wasButtonClicked =
+			event &&
+			event
+				.composedPath()
+				.some(
+					element =>
+						"tagName" in element && typeof element.tagName === "string" && this.buttonTagNames.includes(element.tagName)
+				)
+
 		!this.readonly &&
 			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
-			!(
-				event &&
-				event
-					.composedPath()
-					.some(
-						element =>
-							"tagName" in element && typeof element.tagName === "string" && buttonTagNames.includes(element.tagName)
-					)
-			) &&
+			!wasButtonClicked &&
 			(this.open = !this.open)
 		this.filter = ""
 	}

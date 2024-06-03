@@ -114,6 +114,9 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="10">October</smoothly-item>
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 						<smoothly-item value="folder" selected>
