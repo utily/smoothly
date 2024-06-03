@@ -138,8 +138,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (
 			event.target &&
 			(("name" in event.target && event.target.name !== this.name) ||
-				(event.composedPath().includes(this.iconsDiv as EventTarget) &&
-					!event.composedPath().includes(this.toggle as EventTarget)))
+				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
 		) {
 			event.stopPropagation()
 		} else if (Item.type.is(event.target)) {
@@ -178,12 +177,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	handleShowOptions(event?: Event): void {
 		event && event.stopPropagation()
 		const wasButtonClicked =
-			event &&
-			event.composedPath().includes(this.iconsDiv as EventTarget) &&
-			!event.composedPath().includes(this.toggle as EventTarget)
+			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
 
 		!this.readonly &&
-			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			!(event?.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)
 		this.filter = ""
