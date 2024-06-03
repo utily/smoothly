@@ -28,10 +28,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private displaySelectedElement?: HTMLElement
+	private iconsDiv?: HTMLElement
+	private toggle?: HTMLElement
 	items: HTMLSmoothlyItemElement[] = []
 	itemHeight: number | undefined
-	displaySelectedElement?: HTMLElement
-	buttonTagNames = ["SMOOTHLY-INPUT-CLEAR", "SMOOTHLY-INPUT-RESET"]
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -137,9 +138,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (
 			event.target &&
 			(("name" in event.target && event.target.name !== this.name) ||
-				("tagName" in event.target &&
-					typeof event.target.tagName === "string" &&
-					this.buttonTagNames.includes(event.target.tagName)))
+				(event.composedPath().includes(this.iconsDiv as EventTarget) &&
+					!event.composedPath().includes(this.toggle as EventTarget)))
 		) {
 			event.stopPropagation()
 		} else if (Item.type.is(event.target)) {
@@ -179,12 +179,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		event && event.stopPropagation()
 		const wasButtonClicked =
 			event &&
-			event
-				.composedPath()
-				.some(
-					element =>
-						"tagName" in element && typeof element.tagName === "string" && this.buttonTagNames.includes(element.tagName)
-				)
+			event.composedPath().includes(this.iconsDiv as EventTarget) &&
+			!event.composedPath().includes(this.toggle as EventTarget)
 
 		!this.readonly &&
 			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
@@ -289,9 +285,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons">
+				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<slot name="end" />
-					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
+					<smoothly-icon
+						ref={element => (this.toggle = element)}
+						size="tiny"
+						name={this.open ? "caret-down-outline" : "caret-forward-outline"}
+					/>
 				</div>
 				<slot name="label" />
 				<div class={`${this.open ? "" : "hidden"} options`}>
