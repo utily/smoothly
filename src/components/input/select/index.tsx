@@ -74,6 +74,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 			)
 		}
+		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -96,7 +97,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
 			if (this.displaySelectedElement) {
-				this.displaySelectedElement.innerHTML = this.placeholder ?? "(none)"
+				this.displaySelectedElement.innerHTML = this.placeholder ?? ""
 			}
 		}
 	}

@@ -30,9 +30,9 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="3">Cookie</smoothly-item>
 						<smoothly-item value="4">Croissant</smoothly-item>
 						<smoothly-item value="5">Chocolate fondue</smoothly-item>
-						<smoothly-input-reset size="icon" slot="end">
-							<smoothly-icon name="refresh-outline" />
-						</smoothly-input-reset>
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select
 						multiple
