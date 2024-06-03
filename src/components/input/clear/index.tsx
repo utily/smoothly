@@ -43,7 +43,7 @@ export class SmoothlyInputClear {
 		})
 	}
 	@Listen("click")
-	clickHandler(event: UIEvent) {
+	clickHandler() {
 		this.parent?.clear()
 	}
 	render() {
