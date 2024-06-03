@@ -24,15 +24,15 @@ export class SmoothlyInputDemo {
 				<h2>Select</h2>
 				<div class="select-div">
 					<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>
-						<label slot="label">Select with reset button</label>
+						<label slot="label">Select with clear button</label>
 						<smoothly-item value="1">Ice cream</smoothly-item>
 						<smoothly-item value="2">Sponge cake</smoothly-item>
 						<smoothly-item value="3">Cookie</smoothly-item>
 						<smoothly-item value="4">Croissant</smoothly-item>
 						<smoothly-item value="5">Chocolate fondue</smoothly-item>
-						<smoothly-input-reset size="icon" slot="end">
-							<smoothly-icon name="refresh-outline" />
-						</smoothly-input-reset>
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select
 						multiple
@@ -114,6 +114,9 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="10">October</smoothly-item>
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
+						<smoothly-input-clear size="icon" slot="end">
+							<smoothly-icon name="close" />
+						</smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 						<smoothly-item value="folder" selected>

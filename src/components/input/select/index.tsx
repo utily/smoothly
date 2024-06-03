@@ -28,9 +28,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private displaySelectedElement?: HTMLElement
+	private iconsDiv?: HTMLElement
+	private toggle?: HTMLElement
 	items: HTMLSmoothlyItemElement[] = []
 	itemHeight: number | undefined
-	displaySelectedElement?: HTMLElement
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -74,6 +76,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 			)
 		}
+		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -96,7 +99,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
 			if (this.displaySelectedElement) {
-				this.displaySelectedElement.innerHTML = this.placeholder ?? "(none)"
+				this.displaySelectedElement.innerHTML = this.placeholder ?? ""
 			}
 		}
 	}
@@ -132,7 +135,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
-		if (event.target && "name" in event.target && event.target.name !== this.name) {
+		if (
+			event.target &&
+			(("name" in event.target && event.target.name !== this.name) ||
+				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
+		) {
 			event.stopPropagation()
 		} else if (Item.type.is(event.target)) {
 			event.stopPropagation()
@@ -168,8 +175,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	handleShowOptions(event?: Event): void {
+		event && event.stopPropagation()
+		const wasButtonClicked =
+			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
+
 		!this.readonly &&
-			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			!(event?.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			!wasButtonClicked &&
 			(this.open = !this.open)
 		this.filter = ""
 	}
@@ -270,9 +282,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons">
+				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<slot name="end" />
-					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
+					<smoothly-icon
+						ref={element => (this.toggle = element)}
+						size="tiny"
+						name={this.open ? "caret-down-outline" : "caret-forward-outline"}
+					/>
 				</div>
 				<slot name="label" />
 				<div class={`${this.open ? "" : "hidden"} options`}>
