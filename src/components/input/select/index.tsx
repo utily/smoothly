@@ -171,6 +171,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	handleShowOptions(event?: Event): void {
 		!this.readonly &&
 			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			!(
+				event &&
+				event.composedPath().some(element => "tagName" in element && element.tagName === "SMOOTHLY-INPUT-CLEAR")
+			) &&
 			(this.open = !this.open)
 		this.filter = ""
 	}

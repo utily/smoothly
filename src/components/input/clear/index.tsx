@@ -44,7 +44,6 @@ export class SmoothlyInputClear {
 	}
 	@Listen("click")
 	clickHandler(event: UIEvent) {
-		event.stopPropagation()
 		this.parent?.clear()
 	}
 	render() {
