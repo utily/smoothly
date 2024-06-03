@@ -169,11 +169,17 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	handleShowOptions(event?: Event): void {
+		const buttonTagNames = ["SMOOTHLY-INPUT-CLEAR", "SMOOTHLY-INPUT-RESET"]
 		!this.readonly &&
 			!(event && event.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
 			!(
 				event &&
-				event.composedPath().some(element => "tagName" in element && element.tagName === "SMOOTHLY-INPUT-CLEAR")
+				event
+					.composedPath()
+					.some(
+						element =>
+							"tagName" in element && typeof element.tagName === "string" && buttonTagNames.includes(element.tagName)
+					)
 			) &&
 			(this.open = !this.open)
 		this.filter = ""

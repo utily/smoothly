@@ -24,7 +24,7 @@ export class SmoothlyInputDemo {
 				<h2>Select</h2>
 				<div class="select-div">
 					<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>
-						<label slot="label">Select with reset button</label>
+						<label slot="label">Select with clear button</label>
 						<smoothly-item value="1">Ice cream</smoothly-item>
 						<smoothly-item value="2">Sponge cake</smoothly-item>
 						<smoothly-item value="3">Cookie</smoothly-item>
