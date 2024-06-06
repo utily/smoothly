@@ -17,8 +17,12 @@ export class SmoothlyIcon {
 	@Prop() toolTip?: string
 	@State() latestPromise: Promise<string | undefined>
 	@State() document?: string
-	@Watch("name")
+
 	async componentWillLoad() {
+		await this.nameChanged()
+	}
+	@Watch("name")
+	async nameChanged() {
 		if (this.name != "empty") {
 			const promise = (this.latestPromise = Icon.load(this.name))
 			let result = await promise
