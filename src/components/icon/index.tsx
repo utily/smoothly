@@ -15,12 +15,16 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) rotate?: number
 	@Prop({ reflect: true }) flip?: "x" | "y"
 	@Prop() toolTip?: string
+	@State() latestPromise: Promise<string | undefined>
 	@State() document?: string
 	@Watch("name")
 	async componentWillLoad() {
 		let result: string | undefined
 		if (this.name != "empty") {
-			result = await Icon.load(this.name)
+			const promise = (this.latestPromise = Icon.load(this.name))
+			result = await promise
+			if (this.latestPromise != promise)
+				return
 			result = result
 				?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
 				.replace(` width="512" height="512"`, "")
