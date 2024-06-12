@@ -142,6 +142,10 @@ export class SmoothlyInputDemo {
 						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
 						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
 					</smoothly-picker>
+					<smoothly-input-file name={"profile"} placeholder={"Click or drag your profile picture here..."}>
+						<span slot={"label"}>Profile</span>
+						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
+					</smoothly-input-file>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />

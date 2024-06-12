@@ -1,4 +1,17 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	State,
+	Watch,
+} from "@stencil/core"
 import { http } from "cloudly-http"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Color, Data, Notice, Submit } from "../../model"
@@ -12,7 +25,7 @@ import { Submittable } from "../input/Submittable"
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements Clearable, Submittable, Editable {
+export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, Editable {
 	@Element() element: HTMLSmoothlyFormElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
@@ -24,17 +37,23 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@State() processing?: Promise<boolean>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Submit>
 	@Event() smoothlyFormReset: EventEmitter<void>
 	@Event() smoothlyFormEdit: EventEmitter<boolean>
 	@Event() smoothlyFormClear: EventEmitter<void>
 	@Event() notice: EventEmitter<Notice>
+	private binary = false
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
 	private listeners: {
 		changed?: ((parent: Editable) => Promise<void>)[]
 	} = {}
+
+	componentWillLoad(): void {
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
 
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -72,6 +91,9 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 		event.stopPropagation()
 		event.detail(this)
 		if (Input.Element.is(event.target)) {
+			if (await event.target.binary?.()) {
+				this.binary = true
+			}
 			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
 			this.inputs.set(event.target.name, event.target)
 		}
@@ -106,7 +128,10 @@ export class SmoothlyForm implements Clearable, Submittable, Editable {
 										: {
 												method,
 												url: action,
-												...(this.value && { header: { contentType: "application/json" }, body: this.value }),
+												...(this.value && {
+													header: { contentType: this.binary ? "multipart/form-data" : "application/json" },
+													body: this.value,
+												}),
 										  }
 								)
 							)
