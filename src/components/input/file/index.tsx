@@ -135,7 +135,6 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				binary={true}
 				class={{ dragging: this.dragging }}
 				tabindex={0}
 				onClick={(e: MouseEvent) => this.clickHandler(e)}
