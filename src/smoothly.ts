@@ -12,6 +12,7 @@ export {
 	HasListenable,
 	WithListenable,
 	CanBeListenable,
+	ListenerBatch,
 	Icon,
 	StateBase,
 	Data,
