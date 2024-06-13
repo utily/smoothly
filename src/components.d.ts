@@ -393,6 +393,7 @@ export namespace Components {
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "showArrow": boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -1859,6 +1860,7 @@ declare namespace LocalJSX {
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "placeholder"?: string | any;
         "readonly"?: boolean;
+        "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {

@@ -54,6 +54,7 @@ export class SmoothlyInputDemo {
 						</smoothly-input-reset>
 					</smoothly-input-select>
 					<smoothly-input-select
+						showArrow={false}
 						name="select-icon"
 						clearable={false}
 						showSelected={false}
