@@ -1,4 +1,16 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	Watch,
+} from "@stencil/core"
 import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
 import { Input } from "../../Input"
@@ -10,7 +22,7 @@ import { Color, Data } from "./../../../../model"
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class InputDateRange implements Clearable, Input {
+export class InputDateRange implements ComponentWillLoad, Clearable, Input {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -24,6 +36,7 @@ export class InputDateRange implements Clearable, Input {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() labelStart = "from"
 	@Prop() labelEnd = "to"
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -35,6 +48,7 @@ export class InputDateRange implements Clearable, Input {
 	}
 
 	componentWillLoad() {
+		this.smoothlyInputLoad.emit(() => {})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		if (this.start && this.end)
 			this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })

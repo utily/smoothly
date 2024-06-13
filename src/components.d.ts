@@ -312,12 +312,19 @@ export namespace Components {
     }
     interface SmoothlyInputFile {
         "accept"?: string;
+        "binary": () => Promise<boolean>;
         "camera": "front" | "back";
+        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
         "placeholder": string | undefined;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "value"?: File;
     }
@@ -1634,6 +1641,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
         "onSmoothlyFormClear"?: (event: SmoothlyFormCustomEvent<void>) => void;
+        "onSmoothlyFormDisable"?: (event: SmoothlyFormCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyFormEdit"?: (event: SmoothlyFormCustomEvent<boolean>) => void;
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormReset"?: (event: SmoothlyFormCustomEvent<void>) => void;
@@ -1726,6 +1734,7 @@ declare namespace LocalJSX {
         "min"?: Date;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
@@ -1742,6 +1751,7 @@ declare namespace LocalJSX {
         "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
@@ -1768,13 +1778,16 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "accept"?: string;
         "camera"?: "front" | "back";
+        "changed"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, File>>) => void;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputFileCustomEvent<(disabled: boolean) => void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputFileCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "placeholder"?: string | undefined;
+        "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: File;
     }

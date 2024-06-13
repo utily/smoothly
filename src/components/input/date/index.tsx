@@ -1,4 +1,15 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Listen,
+	Method,
+	Prop,
+	Watch,
+} from "@stencil/core"
 import { Date } from "isoly"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
@@ -10,7 +21,7 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class InputDate implements Clearable, Input {
+export class InputDate implements ComponentWillLoad, Clearable, Input {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -21,11 +32,13 @@ export class InputDate implements Clearable, Input {
 	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) disabled: boolean
+	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
-	componentWillLoad() {
+	componentWillLoad(): void {
+		this.smoothlyInputLoad.emit(() => {})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 

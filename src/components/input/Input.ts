@@ -4,6 +4,7 @@ import { Color, Data } from "../../model"
 import { Looks } from "./Looks"
 
 export interface Input extends Input.Element {
+	smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	smoothlyInput: EventEmitter<Data>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 }
@@ -13,6 +14,7 @@ export namespace Input {
 		color?: Color
 		name: string
 		looks: Looks
+		binary?: Binary
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
@@ -20,11 +22,14 @@ export namespace Input {
 			color: Color.type.optional(),
 			name: isly.string(),
 			looks: Looks.type,
+			binary: isly.function<Binary>().optional(),
 		})
 		export const is = type.is
 	}
+	export type Binary = () => Promise<boolean>
 	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })
 	export const type = Element.type.extend<Input>({
+		smoothlyInputLoad: EventEmitter,
 		smoothlyInput: EventEmitter,
 		smoothlyInputForm: EventEmitter.optional(),
 	})
