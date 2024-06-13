@@ -27,6 +27,9 @@ jobs:
         with:
           default: prerelease
           preid: alpha
+          minor-wording: ""
+          major-wording: ""
+          patch-wording: ""
           rc-wording: ""
           tag-prefix: "release-"
         env:
