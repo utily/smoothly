@@ -35,6 +35,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
+	@Prop() showArrow = true
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
@@ -284,11 +285,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<slot name="end" />
-					<smoothly-icon
-						ref={element => (this.toggle = element)}
-						size="tiny"
-						name={this.open ? "caret-down-outline" : "caret-forward-outline"}
-					/>
+					{this.showArrow && (
+						<smoothly-icon
+							ref={element => (this.toggle = element)}
+							size="tiny"
+							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
+						/>
+					)}
 				</div>
 				<slot name="label" />
 				<div class={`${this.open ? "" : "hidden"} options`}>
