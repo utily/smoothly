@@ -3,9 +3,8 @@ smoothly-app {
 	display: block;
 }
 
-smoothly-app main {
+smoothly-app>smoothly-notifier>main {
 	height: calc(100dvh - var(--header-height));
-
 }
 
 smoothly-app[hidden] {
