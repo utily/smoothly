@@ -91,19 +91,15 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 
 	inputHandler(event: Event): void {
 		event.stopPropagation()
-		if (this.input?.files?.length) {
+		if (this.input?.files?.length)
 			this.value = this.input?.files[0]
-			this.smoothlyInput.emit({ [this.name]: this.value })
-		}
 	}
 	dropHandler(event: DragEvent): void {
 		event.preventDefault()
 		event.stopPropagation()
 		this.dragging = false
-		if (event.dataTransfer?.files.length) {
+		if (event.dataTransfer?.files.length)
 			this.value = event.dataTransfer.files[0]
-			this.smoothlyInput.emit({ [this.name]: this.value })
-		}
 	}
 	clickHandler(event: MouseEvent): void {
 		if (!this.readonly && !event.composedPath().find(target => target == this.input)) {
@@ -117,15 +113,6 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	dragEnterHandler(event: DragEvent): void {
 		event.preventDefault()
 		!this.readonly && (this.dragging = true)
-	}
-	dragDropHandler(event: DragEvent): void {
-		event.preventDefault()
-		event.stopPropagation()
-		this.dragging = false
-		if (event.dataTransfer?.files.length) {
-			this.value = event.dataTransfer.files[0]
-			this.smoothlyInput.emit({ [this.name]: this.value })
-		}
 	}
 	dragLeaveHandler(event: DragEvent): void {
 		event.stopPropagation()

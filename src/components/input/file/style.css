@@ -8,9 +8,9 @@
 	position: relative;
 	width: 100%;
 	padding-left: 0.4rem;
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)))
+	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
 }
-:host .mask {
+.mask {
 	position: absolute;
 	inset: 0;
 	background-color: rgb(var(--text-color ,var(--smoothly-color-contrast)), 0.3);
@@ -19,23 +19,23 @@
 :host:not(.dragging) .mask {
 	display: none;
 }
-:host input {
+ input {
 	overflow: hidden;
 	height: 0;
 	width: 0;
 	padding: 0;
 }
-:host div.input {
+ div.input {
 	display: flex;
 	align-items: center;
 	padding-bottom: 0.2rem;
 	column-gap: 1ch;
 }
-:host smoothly-button {
+ smoothly-button {
 	margin: 0;
 	border: none;
 }
-:host label {
+ label {
 	padding-top: 0.4rem;
 	display: flex;
 	width: 100%;
@@ -45,7 +45,7 @@
 	cursor: inherit;
 
 }
-:host label::slotted(*) {
+ label::slotted(*) {
 	display: block;
 	width: 100%;
 	font-size: 0.65em;
@@ -54,12 +54,12 @@
 :host:not([show-label]) label {
 	display: none;
 }
-:host smoothly-icon {
+smoothly-icon {
 	display: none;
 	position: absolute;
 	right: 0.2em;
 	top: 0.6em;
 }
-:host span {
+span {
 	cursor: pointer;
 }

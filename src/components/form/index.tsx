@@ -44,7 +44,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Event() smoothlyFormEdit: EventEmitter<boolean>
 	@Event() smoothlyFormClear: EventEmitter<void>
 	@Event() notice: EventEmitter<Notice>
-	private binary = false
+	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
 	private listeners: {
@@ -91,9 +91,8 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		event.stopPropagation()
 		event.detail(this)
 		if (Input.Element.is(event.target)) {
-			if (await event.target.binary?.()) {
-				this.binary = true
-			}
+			if (await event.target.binary?.())
+				this.contentType = "form-data"
 			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
 			this.inputs.set(event.target.name, event.target)
 		}
@@ -129,7 +128,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 												method,
 												url: action,
 												...(this.value && {
-													header: { contentType: this.binary ? "multipart/form-data" : "application/json" },
+													header: { contentType: this.contentType ? "multipart/form-data" : "application/json" },
 													body: this.value,
 												}),
 										  }
