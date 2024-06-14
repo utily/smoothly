@@ -1,11 +1,11 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-quiet",
+	tag: "smoothly-0-quiet",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyQuiet {
+export class Smoothly0Quiet {
 	@Prop() color: string
 	render() {
 		return (

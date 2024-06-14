@@ -3,11 +3,11 @@ import { Color, Fill, Icon } from "../../model"
 import { alertCircle } from "./alertCircle"
 
 @Component({
-	tag: "smoothly-icon",
+	tag: "smoothly-0-icon",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyIcon {
+export class Smoothly0Icon {
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop() name?: string

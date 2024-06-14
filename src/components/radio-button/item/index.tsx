@@ -3,11 +3,11 @@ import { Color } from "../../../model"
 import { Selected } from "../Selected"
 
 @Component({
-	tag: "smoothly-radio-button-item",
+	tag: "smoothly-0-radio-button-item",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyRadioButtonItem implements ComponentWillLoad {
+export class Smoothly0RadioButtonItem implements ComponentWillLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true }) color: Color = "medium"
@@ -31,12 +31,12 @@ export class SmoothlyRadioButtonItem implements ComponentWillLoad {
 		return (
 			<Host>
 				<header onClick={() => this.select(!this.selected)}>
-					<smoothly-icon
+					<smoothly-0-icon
 						color={this.selected ? "success" : this.iconColor}
 						fill="outline"
 						name={this.selected ? "checkmark-circle" : "ellipse-outline"}
 						size="tiny"
-						toolTip="Select"></smoothly-icon>
+						toolTip="Select"></smoothly-0-icon>
 					<slot></slot>
 					<slot name="end"></slot>
 				</header>

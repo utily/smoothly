@@ -2,11 +2,11 @@ import { Component, h, Listen, Prop } from "@stencil/core"
 import { Color, Trigger } from "../../model"
 
 @Component({
-	tag: "smoothly-dialog",
+	tag: "smoothly-0-dialog",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDialog {
+export class Smoothly0Dialog {
 	@Prop({ reflect: true }) color: Color | undefined
 	@Prop({ mutable: true, reflect: true }) open = true
 	@Prop({ reflect: true }) closable = false
@@ -27,9 +27,9 @@ export class SmoothlyDialog {
 		return [
 			<header>
 				{this.closable ? (
-					<smoothly-trigger fill="clear" name="close">
-						<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
-					</smoothly-trigger>
+					<smoothly-0-trigger fill="clear" name="close">
+						<smoothly-0-icon name="close-circle" fill="solid" color={this.color}></smoothly-0-icon>
+					</smoothly-0-trigger>
 				) : (
 					[]
 				)}

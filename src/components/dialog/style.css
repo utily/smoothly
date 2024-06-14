@@ -49,17 +49,17 @@
 :host:not([header]) main {
 	border-radius: 8px;
 }
-:host > * > smoothly-trigger {
+:host > * > smoothly-0-trigger {
 	position: absolute;
 	right: -2em;
 	top: -2em;
 	z-index: 1;
 	border-color: transparent;
 }
-:host > * > smoothly-trigger:hover {
+:host > * > smoothly-0-trigger:hover {
 	border-color: transparent;
 }
-:host smoothly-icon {
+:host smoothly-0-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }

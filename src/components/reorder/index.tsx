@@ -1,12 +1,12 @@
 import { Component, Element, Event, EventEmitter } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-reorder",
+	tag: "smoothly-0-reorder",
 	styleUrl: "style.css",
 })
-export class SmoothlyReorder {
+export class Smoothly0Reorder {
 	@Event() reorder: EventEmitter<[number, number]>
-	@Element() element: HTMLSmoothlyReorderElement
+	@Element() element: HTMLSmoothly0ReorderElement
 	private bounds?: DOMRect
 	private childrenCache?: Draggable[]
 	private get children(): Draggable[] {

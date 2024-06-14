@@ -1,11 +1,11 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-spinner",
+	tag: "smoothly-0-spinner",
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class SmoothlySpinner {
+export class Smoothly0Spinner {
 	@Prop({ reflect: true }) active: boolean
 	@Prop({ reflect: true }) size: "small" | "medium" | "large" = "large"
 

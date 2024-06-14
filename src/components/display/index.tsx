@@ -3,11 +3,11 @@ import { CountryCode, Currency, DateTime, Language, Locale } from "isoly"
 import { format, get, Type } from "tidily"
 
 @Component({
-	tag: "smoothly-display",
+	tag: "smoothly-0-display",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDisplay {
+export class Smoothly0Display {
 	@Prop() type: Type
 	@Prop() value?: any
 	@Prop() currency?: Currency

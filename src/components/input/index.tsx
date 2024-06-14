@@ -3,11 +3,11 @@ import { Currency, Language, Locale } from "isoly"
 import { Action, Converter, Direction, Formatter, get, Settings, State as TidilyState, StateEditor, Type } from "tidily"
 
 @Component({
-	tag: "smoothly-input",
+	tag: "smoothly-0-input",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInput {
+export class Smoothly0Input {
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -96,8 +96,8 @@ export class SmoothlyInput {
 				if (this.hasNameAndValue(element) && element.name)
 					result[element.name] = element.value
 			}
-			// Overwrite values with values from smoothly-input
-			const smoothlyInputs = form.getElementsByTagName("smoothly-input")
+			// Overwrite values with values from smoothly-0-input
+			const smoothlyInputs = form.getElementsByTagName("smoothly-0-input")
 			for (let i = 0; i < smoothlyInputs.length; i++) {
 				const element = smoothlyInputs.item(i)
 				if (this.hasNameAndValue(element) && element.name)
@@ -264,7 +264,7 @@ export class SmoothlyInput {
 					<label htmlFor={this.name}>
 						<slot />
 					</label>
-					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
+					<smoothly-0-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-0-icon>
 				</div>
 			</Host>
 		)

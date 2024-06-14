@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, h, Listen, Method, Prop, Watch } from "
 import { Date, DateRange } from "isoly"
 
 @Component({
-	tag: "smoothly-input-date-range",
+	tag: "smoothly-0-input-date-range",
 	styleUrl: "style.scss",
 	scoped: true,
 })
@@ -52,31 +52,31 @@ export class InputDateRange {
 		return [
 			<section>
 				<div onClick={() => (this.open = !this.disabled && !this.open)}>
-					<smoothly-input
+					<smoothly-0-input
 						type="date"
 						value={this.start}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => (this.start = e.detail.value)}>
 						{`${this.labelStart}`}
-					</smoothly-input>
+					</smoothly-0-input>
 					<span>–</span>
-					<smoothly-input
+					<smoothly-0-input
 						type="date"
 						showLabel={this.showLabel}
 						value={this.end}
 						onSmoothlyInput={e => (this.end = e.detail.value)}>
 						{`${this.labelEnd}`}
-					</smoothly-input>
+					</smoothly-0-input>
 				</div>
 				{this.clearable && (
-					<smoothly-icon name="close-circle" size="small" onClick={this.clear.bind(this)}></smoothly-icon>
+					<smoothly-0-icon name="close-circle" size="small" onClick={this.clear.bind(this)}></smoothly-0-icon>
 				)}
 			</section>,
 			this.open ? <div onClick={() => (this.open = false)}></div> : [],
 			this.open ? (
 				<nav>
 					<div class="arrow"></div>
-					<smoothly-calendar
+					<smoothly-0-calendar
 						doubleInput={true}
 						value={this.value ?? Date.now()}
 						onValueChanged={event => {
@@ -86,7 +86,7 @@ export class InputDateRange {
 						start={this.start}
 						end={this.end}
 						max={this.max}
-						min={this.min}></smoothly-calendar>
+						min={this.min}></smoothly-0-calendar>
 				</nav>
 			) : (
 				[]

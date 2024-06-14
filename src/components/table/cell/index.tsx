@@ -1,7 +1,7 @@
 import { Component, h, Host } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table-cell",
+	tag: "smoothly-0-table-cell",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -13,7 +13,7 @@ export class TableCell {
 					<div>
 						<slot></slot>
 					</div>
-					<smoothly-icon name="chevron-forward" size="tiny" />
+					<smoothly-0-icon name="chevron-forward" size="tiny" />
 				</div>
 			</Host>
 		)

@@ -2,7 +2,7 @@ import { Component, h, Listen, State } from "@stencil/core"
 import { Notice } from "../../model"
 
 @Component({
-	tag: "smoothly-notifier",
+	tag: "smoothly-0-notifier",
 	styleUrl: "style.css",
 	scoped: true,
 })
@@ -22,7 +22,7 @@ export class Notifier {
 			<slot></slot>,
 			<aside>
 				{this.notices.map(n => (
-					<smoothly-notification notice={n}></smoothly-notification>
+					<smoothly-0-notification notice={n}></smoothly-0-notification>
 				))}
 			</aside>,
 		]

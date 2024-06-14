@@ -1,4 +1,4 @@
-smoothly-radio-group {
+smoothly-0-radio-group {
 	display: flex;
 	position: relative;
 	/* stylelint-disable-next-line declaration-no-important */
@@ -7,30 +7,30 @@ smoothly-radio-group {
 	background: none !important;
 	margin: 0.5em 0;
 }
-smoothly-radio-group[hidden] {
+smoothly-0-radio-group[hidden] {
 	display: none;
 }
-smoothly-radio-group[orientation=vertical] *:not(:first-of-type) > input[type=radio] ~ label {
+smoothly-0-radio-group[orientation=vertical] *:not(:first-of-type) > input[type=radio] ~ label {
 	border-top: none;
 }
-smoothly-radio-group:not([orientation=vertical]) *:not(:first-of-type) > input[type=radio] ~ label {
+smoothly-0-radio-group:not([orientation=vertical]) *:not(:first-of-type) > input[type=radio] ~ label {
 	border-left: none;
 }
-smoothly-radio-group[orientation=vertical] {
+smoothly-0-radio-group[orientation=vertical] {
 	flex-direction: column;
 }
-smoothly-radio-group[orientation=vertical] :first-of-type > input[type=radio] ~ label {
+smoothly-0-radio-group[orientation=vertical] :first-of-type > input[type=radio] ~ label {
 	border-radius: 4px 4px 0 0;
 }
-smoothly-radio-group[orientation=vertical] :last-of-type > input[type=radio] ~ label {
+smoothly-0-radio-group[orientation=vertical] :last-of-type > input[type=radio] ~ label {
 	border-radius: 0 0 4px 4px;
 }
-smoothly-radio-group:not([orientation=vertical]) {
+smoothly-0-radio-group:not([orientation=vertical]) {
 	flex-direction: row;
 }
-smoothly-radio-group:not([orientation=vertical]) :first-of-type > input[type=radio] ~ label {
+smoothly-0-radio-group:not([orientation=vertical]) :first-of-type > input[type=radio] ~ label {
 	border-radius: 4px 0 0 4px;
 }
-smoothly-radio-group:not([orientation=vertical]) :last-of-type > input[type=radio] ~ label {
+smoothly-0-radio-group:not([orientation=vertical]) :last-of-type > input[type=radio] ~ label {
 	border-radius: 0 4px 4px 0;
 }

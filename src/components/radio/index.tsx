@@ -1,11 +1,11 @@
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-radio",
+	tag: "smoothly-0-radio",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyRadio {
+export class Smoothly0Radio {
 	@Prop() name: string
 	@Prop() value: string
 	@Prop({ mutable: true, reflect: true }) checked: boolean

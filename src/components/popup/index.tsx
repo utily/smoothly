@@ -2,11 +2,11 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-popup",
+	tag: "smoothly-0-popup",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPopup {
+export class Smoothly0Popup {
 	@Prop({ mutable: true, reflect: true }) visible = false
 	@Prop({ mutable: true, reflect: true }) direction: "up" | "down" = "down"
 	@State() cssVariables: { "--left"?: string; "--right"?: string } = { "--left": "0.1em" }

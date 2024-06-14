@@ -2,11 +2,11 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/
 import { Selected } from "./Selected"
 
 @Component({
-	tag: "smoothly-radio-button",
+	tag: "smoothly-0-radio-button",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyRadioButton {
+export class Smoothly0RadioButton {
 	@Prop() name?: string
 	@Prop({ mutable: true }) value?: any
 	@Prop({ reflect: true }) deselectable?: boolean

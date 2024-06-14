@@ -13,7 +13,7 @@
 		1px 0 0 rgb(var(--smoothly-dark-color)) inset;
 	border-bottom: none;
 }
-:host smoothly-icon {
+:host smoothly-0-icon {
 	width: 0.6rem;
 	float: left;
 	padding: 0 0.3rem;
@@ -22,7 +22,7 @@
 	height: 100%;
 	align-self: center;
 }
-:host[open] smoothly-icon {
+:host[open] smoothly-0-icon {
 	transform: rotate(90deg);
 }
 aside {

@@ -2,19 +2,19 @@ import { Component, h, Prop } from "@stencil/core"
 import { Color } from "../../model"
 
 @Component({
-	tag: "smoothly-app",
+	tag: "smoothly-0-app",
 	styleUrl: "style.css",
 	scoped: false,
 })
-export class SmoothlyApp {
+export class Smoothly0App {
 	@Prop() color: Color
 	render() {
 		return (
-			<smoothly-notifier>
+			<smoothly-0-notifier>
 				<slot name="header"></slot>
 				<slot name="main"></slot>
 				<slot></slot>
-			</smoothly-notifier>
+			</smoothly-0-notifier>
 		)
 	}
 }

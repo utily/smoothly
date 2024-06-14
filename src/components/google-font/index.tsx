@@ -2,10 +2,10 @@ import { Component, h, Prop } from "@stencil/core"
 import { GoogleFont } from "../../model/GoogleFont"
 
 @Component({
-	tag: "smoothly-google-font",
+	tag: "smoothly-0-google-font",
 	scoped: true,
 })
-export class SmoothlyGoogleFont {
+export class Smoothly0GoogleFont {
 	@Prop() value?: GoogleFont
 
 	render() {

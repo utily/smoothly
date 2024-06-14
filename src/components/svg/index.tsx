@@ -1,11 +1,11 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-svg",
+	tag: "smoothly-0-svg",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlySvg {
+export class Smoothly0Svg {
 	@Prop({ reflect: true }) url!: string
 	@Prop({ reflect: true }) size?: "large" | "medium" | "small" | "tiny" | { height: string; width: string }
 	@Prop() color: string

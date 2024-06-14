@@ -1,11 +1,11 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-tab",
+	tag: "smoothly-0-tab",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyTab {
+export class Smoothly0Tab {
 	expansionElement?: HTMLDivElement
 	@Event() expansionOpen: EventEmitter<HTMLElement>
 	@Prop() label: string

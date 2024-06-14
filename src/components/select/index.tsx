@@ -1,11 +1,11 @@
 import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-select",
+	tag: "smoothly-0-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlySelect {
+export class Smoothly0Select {
 	@Prop() identifier: string
 	@Prop({ reflect: true }) background?: string
 	private selectElement?: HTMLSelectElement

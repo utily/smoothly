@@ -1,11 +1,11 @@
 import { Component, Element, Event, EventEmitter, h, Prop, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-accordion-item",
+	tag: "smoothly-0-accordion-item",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyAccordionItem {
+export class Smoothly0AccordionItem {
 	@Prop() name: string
 	@Prop() brand?: string | string[]
 	@Prop({ mutable: true, reflect: true }) open?: boolean

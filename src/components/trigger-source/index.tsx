@@ -2,11 +2,11 @@ import { Component, Element, Event, EventEmitter, h, Prop } from "@stencil/core"
 import { Message, Trigger } from "../../model"
 
 @Component({
-	tag: "smoothly-trigger-source",
+	tag: "smoothly-0-trigger-source",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyTriggerSource {
+export class Smoothly0TriggerSource {
 	@Prop() listen: string
 	@Event() trigger: EventEmitter<Trigger>
 	@Event() message: EventEmitter<Message<any>>

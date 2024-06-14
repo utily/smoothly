@@ -2,11 +2,11 @@ import { Component, Prop } from "@stencil/core"
 import { Currency } from "isoly"
 
 @Component({
-	tag: "smoothly-display-amount",
+	tag: "smoothly-0-display-amount",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDisplayAmount {
+export class Smoothly0DisplayAmount {
 	@Prop() amount: number | string
 	@Prop() currency: Currency
 	@Prop() toInteger = false

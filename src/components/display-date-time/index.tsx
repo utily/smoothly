@@ -2,18 +2,18 @@ import { Component, ComponentWillLoad, Prop } from "@stencil/core"
 import { DateTime } from "isoly"
 
 /**
- * DEPRECATED, use  <smoothly-display type="date-time">
+ * DEPRECATED, use  <smoothly-0-display type="date-time">
  */
 @Component({
-	tag: "smoothly-display-date-time",
+	tag: "smoothly-0-display-date-time",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDisplayDateTime implements ComponentWillLoad {
+export class Smoothly0DisplayDateTime implements ComponentWillLoad {
 	@Prop() datetime: DateTime
 
 	componentWillLoad(): void | Promise<void> {
-		console.warn('Component <smoothly-display-date-time> is deprecated, use <smoothly-display type="date-time">.')
+		console.warn('Component <smoothly-0-display-date-time> is deprecated, use <smoothly-0-display type="date-time">.')
 	}
 	render() {
 		const datetime = this.datetime.split("T")

@@ -40,7 +40,7 @@
 	align-self: center;
 	border: none;
 	max-height: var(--max-height);
-	.icons > smoothly-icon {
+	.icons > smoothly-0-icon {
 		flex-shrink: 0;
 		padding-left: 0.6em;
 		stroke: rgba(var(--color), 0.4);
@@ -101,42 +101,42 @@ label {
 :host(:focus-within) label {
 	display: none;
 }
-:host(:hover) smoothly-icon[data-arrow],
-:host(:focus-within) smoothly-icon[data-arrow] {
+:host(:hover) smoothly-0-icon[data-arrow],
+:host(:focus-within) smoothly-0-icon[data-arrow] {
 	stroke: rgba(var(--color), 1);
 }
-:host smoothly-icon[data-arrow] {
+:host smoothly-0-icon[data-arrow] {
 	pointer-events: none;
 }
-:host smoothly-icon {
+:host smoothly-0-icon {
 	flex-shrink: 0;
 	width: 1rem;
 	height: 1rem;
 }
-:host(:not([is-open])) smoothly-icon.up,
-:host([is-open]) smoothly-icon.down {
+:host(:not([is-open])) smoothly-0-icon.up,
+:host([is-open]) smoothly-0-icon.down {
 	display: none;
 }
-smoothly-icon.search {
+smoothly-0-icon.search {
 	display: flex;
 	align-self: center;
 	padding-left: 0.8rem;
 }
-smoothly-icon.up,
-smoothly-icon.down {
+smoothly-0-icon.up,
+smoothly-0-icon.down {
 	display: flex;
 	align-self: center;
 	padding-right: 0.8rem;
 	stroke: rgb(var(--smoothly-primary-shade));
 }
-:host smoothly-menu-options {
+:host smoothly-0-menu-options {
 	margin-top: 0.5rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 	position: absolute;
 	z-index: 1;
 }
-:host(:not([is-open])) > smoothly-menu-options {
+:host(:not([is-open])) > smoothly-0-menu-options {
 	/* hide options by default */
 	display: none;
 }

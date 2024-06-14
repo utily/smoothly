@@ -1,12 +1,12 @@
 import { Component, Element, h, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-accordion",
+	tag: "smoothly-0-accordion",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyAccordion {
-	private items: HTMLSmoothlyAccordionItemElement[] = []
+export class Smoothly0Accordion {
+	private items: HTMLSmoothly0AccordionItemElement[] = []
 	@Element() me: HTMLElement
 	@Prop({ mutable: true }) value?: string
 	@Watch("value")
@@ -23,7 +23,7 @@ export class SmoothlyAccordion {
 	}
 	@Listen("smoothlyAccordionItemDidLoad")
 	onAccordionItemDidLoad(ev: Event) {
-		const item = ev.target as HTMLSmoothlyAccordionItemElement
+		const item = ev.target as HTMLSmoothly0AccordionItemElement
 		this.items.push(item)
 		if (this.value == undefined && item.open)
 			this.value = item.name
@@ -32,7 +32,7 @@ export class SmoothlyAccordion {
 	}
 	@Listen("smoothlyAccordionItemDidUnload")
 	onAccordionItemDidUnload(ev: Event) {
-		const index = this.items.indexOf(ev.target as HTMLSmoothlyAccordionItemElement)
+		const index = this.items.indexOf(ev.target as HTMLSmoothly0AccordionItemElement)
 		if (index > -1)
 			this.items.splice(index, 1)
 	}

@@ -46,13 +46,13 @@ input {
 	font-family: var(--smoothly-font-family);
 	background-color: rgb(var(--background-color));
 }
-smoothly-icon {
+smoothly-0-icon {
 	display: none;
 	position: absolute;
 	right: 0.2em;
 	top: 0.6em;
 }
-input:invalid + label + smoothly-icon {
+input:invalid + label + smoothly-0-icon {
 	display: block;
 }
 :host > div > label {

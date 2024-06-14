@@ -2,11 +2,11 @@ import { Component, Element, Event, EventEmitter, h, Method, Prop } from "@stenc
 import { Message, Trigger } from "../../model"
 
 @Component({
-	tag: "smoothly-frame",
+	tag: "smoothly-0-frame",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyFrame {
+export class Smoothly0Frame {
 	@Prop() url: string
 	@Prop() name: string
 	@Event() trigger: EventEmitter<Trigger>

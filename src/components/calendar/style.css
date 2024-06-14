@@ -1,12 +1,12 @@
-html smoothly-notifier :host {
+html smoothly-0-notifier :host {
 	display: block;
 	--other-month-opacity: 0.5;
 	padding-bottom: 1rem;
 }
-html smoothly-notifier :host[color] {
+html smoothly-0-notifier :host[color] {
 	background-color: rgb(var(--smoothly-color-shade));
 }
-:host > smoothly-input-month {
+:host > smoothly-0-input-month {
 	width: calc(100% - 1em);
 	padding: 0.5em 0.5em 0 0.5em;
 	background-color: rgb(var(--smoothly-color-shade));

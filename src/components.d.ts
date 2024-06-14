@@ -12,26 +12,26 @@ import { GoogleFont } from "./model/GoogleFont";
 import { Selected } from "./components/radio-button/Selected";
 import { Data } from "./components/submit/Data";
 export namespace Components {
-    interface SmoothlyAccordion {
+    interface Smoothly0Accordion {
         "value"?: string;
     }
-    interface SmoothlyAccordionItem {
+    interface Smoothly0AccordionItem {
         "brand"?: string | string[];
         "name": string;
         "open"?: boolean;
     }
-    interface SmoothlyApp {
+    interface Smoothly0App {
         "color": Color;
     }
-    interface SmoothlyAppDemo {
+    interface Smoothly0AppDemo {
         "baseUrl": string;
     }
-    interface SmoothlyBacktotop {
+    interface Smoothly0Backtotop {
         "bottom": string;
         "opacity": string;
         "right": string;
     }
-    interface SmoothlyButton {
+    interface Smoothly0Button {
         "color": Color | undefined;
         "disabled": boolean;
         "download"?: boolean;
@@ -40,7 +40,7 @@ export namespace Components {
         "link"?: string;
         "type": "link" | "button";
     }
-    interface SmoothlyCalendar {
+    interface Smoothly0Calendar {
         "color"?: Color;
         "doubleInput": boolean;
         "end"?: Date;
@@ -50,64 +50,64 @@ export namespace Components {
         "start"?: Date;
         "value": Date;
     }
-    interface SmoothlyCheckbox {
+    interface Smoothly0Checkbox {
         "disabled": boolean;
         "intermediate": boolean;
         "selectAll": boolean;
         "selected": boolean;
         "size": "tiny" | "small" | "medium" | "large";
     }
-    interface SmoothlyCountry {
+    interface Smoothly0Country {
         "text": "alpha2" | "name" | "none";
         "value": CountryCode.Alpha2;
     }
-    interface SmoothlyDialog {
+    interface Smoothly0Dialog {
         "closable": boolean;
         "color": Color | undefined;
         "header": string | undefined;
         "open": boolean;
     }
-    interface SmoothlyDialogDemo {
+    interface Smoothly0DialogDemo {
     }
-    interface SmoothlyDisplay {
+    interface Smoothly0Display {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type": Type;
         "value"?: any;
     }
-    interface SmoothlyDisplayAmount {
+    interface Smoothly0DisplayAmount {
         "amount": number | string;
         "currency": Currency;
         "toInteger": boolean;
     }
     /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
+     * DEPRECATED, use  <smoothly-0-display type="date-time">
      */
-    interface SmoothlyDisplayDateTime {
+    interface Smoothly0DisplayDateTime {
         "datetime": DateTime;
     }
-    interface SmoothlyDisplayDemo {
+    interface Smoothly0DisplayDemo {
     }
-    interface SmoothlyFrame {
+    interface Smoothly0Frame {
         "name": string;
         "origin": string | undefined;
         "send": (message: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
     }
-    interface SmoothlyGoogleFont {
+    interface Smoothly0GoogleFont {
         "value"?: GoogleFont;
     }
-    interface SmoothlyIcon {
+    interface Smoothly0Icon {
         "color": Color;
         "fill": Fill;
         "name"?: string;
         "size": "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
-    interface SmoothlyIconDemo {
+    interface Smoothly0IconDemo {
     }
-    interface SmoothlyInput {
+    interface Smoothly0Input {
         "autocomplete": boolean;
         "currency"?: Currency;
         "disabled": boolean;
@@ -125,7 +125,7 @@ export namespace Components {
         "type": string;
         "value": any;
     }
-    interface SmoothlyInputDate {
+    interface Smoothly0InputDate {
         "color": Color;
         "disabled": boolean;
         "flexible": boolean;
@@ -135,7 +135,7 @@ export namespace Components {
         "open": boolean;
         "value"?: Date;
     }
-    interface SmoothlyInputDateRange {
+    interface Smoothly0InputDateRange {
         "clear": () => Promise<void>;
         "clearable": boolean;
         "disabled": boolean;
@@ -149,18 +149,18 @@ export namespace Components {
         "start"?: Date;
         "value"?: Date;
     }
-    interface SmoothlyInputDemo {
+    interface Smoothly0InputDemo {
     }
-    interface SmoothlyInputMonth {
+    interface Smoothly0InputMonth {
         "value"?: Date;
     }
-    interface SmoothlyItem {
+    interface Smoothly0Item {
         "filter": (filter: string) => Promise<boolean>;
         "marked": boolean;
         "selected": boolean;
         "value": any;
     }
-    interface SmoothlyMenuOptions {
+    interface Smoothly0MenuOptions {
         "emptyMenuLabel": string;
         "filterOptions": (keyword: string, excludeValues?: string[]) => Promise<void>;
         "getHighlighted": () => Promise<Option | undefined>;
@@ -175,12 +175,12 @@ export namespace Components {
         "setHighlight": (newIndex: number | string, scrollToHighlight?: boolean) => Promise<void>;
         "toggle": boolean;
     }
-    interface SmoothlyNotification {
+    interface Smoothly0Notification {
         "notice": Notice;
     }
-    interface SmoothlyNotifier {
+    interface Smoothly0Notifier {
     }
-    interface SmoothlyOption {
+    interface Smoothly0Option {
         "aliases": string;
         "checkbox": boolean;
         "checked": boolean;
@@ -191,7 +191,7 @@ export namespace Components {
         "toggle": boolean;
         "value": string;
     }
-    interface SmoothlyPicker {
+    interface Smoothly0Picker {
         "disabled": boolean;
         "emptyMenuLabel": string;
         "label": string;
@@ -211,56 +211,56 @@ export namespace Components {
         "selections": Option[];
         "valueValidator": (value: any) => [boolean, Notice | undefined];
     }
-    interface SmoothlyPopup {
+    interface Smoothly0Popup {
         "direction": "up" | "down";
         "visible": boolean;
     }
-    interface SmoothlyQuiet {
+    interface Smoothly0Quiet {
         "color": string;
     }
-    interface SmoothlyRadio {
+    interface Smoothly0Radio {
         "checked": boolean;
         "name": string;
         "tabIndex": number;
         "value": string;
     }
-    interface SmoothlyRadioButton {
+    interface Smoothly0RadioButton {
         "decoration": "button" | "radio";
         "deselectable"?: boolean;
         "name"?: string;
         "value"?: any;
     }
-    interface SmoothlyRadioButtonItem {
+    interface Smoothly0RadioButtonItem {
         "color": Color;
         "disabled": boolean;
         "iconColor": Color;
         "selected": boolean;
         "value": any;
     }
-    interface SmoothlyRadioGroup {
+    interface Smoothly0RadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
-    interface SmoothlyReorder {
+    interface Smoothly0Reorder {
     }
-    interface SmoothlyRoom {
+    interface Smoothly0Room {
         "icon"?: string;
         "label"?: string;
         "path": string | RegExp;
         "to"?: string;
     }
-    interface SmoothlySelect {
+    interface Smoothly0Select {
         "background"?: string;
         "identifier": string;
         "value": string;
     }
-    interface SmoothlySelectDemo {
+    interface Smoothly0SelectDemo {
     }
-    interface SmoothlySelector {
+    interface Smoothly0Selector {
         "disableFilter": boolean;
         "initialPrompt"?: string;
         "reset": () => Promise<void>;
     }
-    interface SmoothlySkeleton {
+    interface Smoothly0Skeleton {
         "align": "left" | "center" | "right";
         "color": string;
         "distance": string;
@@ -268,11 +268,11 @@ export namespace Components {
         "width": string;
         "widths": string[];
     }
-    interface SmoothlySpinner {
+    interface Smoothly0Spinner {
         "active": boolean;
         "size": "small" | "medium" | "large";
     }
-    interface SmoothlySubmit {
+    interface Smoothly0Submit {
         "color"?: Color;
         "disabled": boolean;
         "expand"?: Expand;
@@ -281,38 +281,38 @@ export namespace Components {
         "processing": boolean;
         "submit": () => Promise<boolean>;
     }
-    interface SmoothlySvg {
+    interface Smoothly0Svg {
         "color": string;
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
         "url": string;
     }
-    interface SmoothlyTab {
+    interface Smoothly0Tab {
         "label": string;
         "open": boolean;
     }
-    interface SmoothlyTabSwitch {
+    interface Smoothly0TabSwitch {
     }
-    interface SmoothlyTable {
+    interface Smoothly0Table {
         "root": boolean;
     }
-    interface SmoothlyTableCell {
+    interface Smoothly0TableCell {
     }
-    interface SmoothlyTableDemo {
+    interface Smoothly0TableDemo {
     }
-    interface SmoothlyTableExpandableCell {
+    interface Smoothly0TableExpandableCell {
         "align": "left" | "center" | "right";
         "open": boolean;
     }
-    interface SmoothlyTableExpandableRow {
+    interface Smoothly0TableExpandableRow {
         "align": "left" | "center" | "right";
         "open": boolean;
     }
-    interface SmoothlyTableHeader {
+    interface Smoothly0TableHeader {
         "name": string;
     }
-    interface SmoothlyTableRow {
+    interface Smoothly0TableRow {
     }
-    interface SmoothlyTrigger {
+    interface Smoothly0Trigger {
         "color": Color | undefined;
         "disabled": boolean;
         "expand": Expand;
@@ -321,578 +321,578 @@ export namespace Components {
         "type": "link" | "button";
         "value"?: any;
     }
-    interface SmoothlyTriggerSink {
+    interface Smoothly0TriggerSink {
         "context"?: Window;
         "destination": string;
         "filter"?: string;
     }
-    interface SmoothlyTriggerSource {
+    interface Smoothly0TriggerSource {
         "listen": string;
     }
-    interface SmoothlyTuple {
+    interface Smoothly0Tuple {
         "tuple": [string, string];
     }
-    interface SmoothlyUrlencoded {
+    interface Smoothly0Urlencoded {
         "data": string;
     }
 }
-export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0AccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyAccordionItemElement;
+    target: HTMLSmoothly0AccordionItemElement;
 }
-export interface SmoothlyCalendarCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0CalendarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyCalendarElement;
+    target: HTMLSmoothly0CalendarElement;
 }
-export interface SmoothlyCheckboxCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0CheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyCheckboxElement;
+    target: HTMLSmoothly0CheckboxElement;
 }
-export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0DisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyDisplayDemoElement;
+    target: HTMLSmoothly0DisplayDemoElement;
 }
-export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0FrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyFrameElement;
+    target: HTMLSmoothly0FrameElement;
 }
-export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0InputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputElement;
+    target: HTMLSmoothly0InputElement;
 }
-export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0InputDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputDateElement;
+    target: HTMLSmoothly0InputDateElement;
 }
-export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0InputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputDateRangeElement;
+    target: HTMLSmoothly0InputDateRangeElement;
 }
-export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0InputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyInputMonthElement;
+    target: HTMLSmoothly0InputMonthElement;
 }
-export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0ItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyItemElement;
+    target: HTMLSmoothly0ItemElement;
 }
-export interface SmoothlyMenuOptionsCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0MenuOptionsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyMenuOptionsElement;
+    target: HTMLSmoothly0MenuOptionsElement;
 }
-export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0NotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyNotificationElement;
+    target: HTMLSmoothly0NotificationElement;
 }
-export interface SmoothlyOptionCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0OptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyOptionElement;
+    target: HTMLSmoothly0OptionElement;
 }
-export interface SmoothlyPickerCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0PickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyPickerElement;
+    target: HTMLSmoothly0PickerElement;
 }
-export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0PopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyPopupElement;
+    target: HTMLSmoothly0PopupElement;
 }
-export interface SmoothlyRadioCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0RadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyRadioElement;
+    target: HTMLSmoothly0RadioElement;
 }
-export interface SmoothlyRadioButtonCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0RadioButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyRadioButtonElement;
+    target: HTMLSmoothly0RadioButtonElement;
 }
-export interface SmoothlyRadioButtonItemCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0RadioButtonItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyRadioButtonItemElement;
+    target: HTMLSmoothly0RadioButtonItemElement;
 }
-export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0ReorderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyReorderElement;
+    target: HTMLSmoothly0ReorderElement;
 }
-export interface SmoothlySelectCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0SelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlySelectElement;
+    target: HTMLSmoothly0SelectElement;
 }
-export interface SmoothlySelectorCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0SelectorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlySelectorElement;
+    target: HTMLSmoothly0SelectorElement;
 }
-export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0SubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlySubmitElement;
+    target: HTMLSmoothly0SubmitElement;
 }
-export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TabCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTabElement;
+    target: HTMLSmoothly0TabElement;
 }
-export interface SmoothlyTableCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTableElement;
+    target: HTMLSmoothly0TableElement;
 }
-export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TableExpandableCellCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTableExpandableCellElement;
+    target: HTMLSmoothly0TableExpandableCellElement;
 }
-export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTableExpandableRowElement;
+    target: HTMLSmoothly0TableExpandableRowElement;
 }
-export interface SmoothlyTriggerCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TriggerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTriggerElement;
+    target: HTMLSmoothly0TriggerElement;
 }
-export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
+export interface Smoothly0TriggerSourceCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyTriggerSourceElement;
+    target: HTMLSmoothly0TriggerSourceElement;
 }
 declare global {
-    interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
+    interface HTMLSmoothly0AccordionElement extends Components.Smoothly0Accordion, HTMLStencilElement {
     }
-    var HTMLSmoothlyAccordionElement: {
-        prototype: HTMLSmoothlyAccordionElement;
-        new (): HTMLSmoothlyAccordionElement;
+    var HTMLSmoothly0AccordionElement: {
+        prototype: HTMLSmoothly0AccordionElement;
+        new (): HTMLSmoothly0AccordionElement;
     };
-    interface HTMLSmoothlyAccordionItemElement extends Components.SmoothlyAccordionItem, HTMLStencilElement {
+    interface HTMLSmoothly0AccordionItemElement extends Components.Smoothly0AccordionItem, HTMLStencilElement {
     }
-    var HTMLSmoothlyAccordionItemElement: {
-        prototype: HTMLSmoothlyAccordionItemElement;
-        new (): HTMLSmoothlyAccordionItemElement;
+    var HTMLSmoothly0AccordionItemElement: {
+        prototype: HTMLSmoothly0AccordionItemElement;
+        new (): HTMLSmoothly0AccordionItemElement;
     };
-    interface HTMLSmoothlyAppElement extends Components.SmoothlyApp, HTMLStencilElement {
+    interface HTMLSmoothly0AppElement extends Components.Smoothly0App, HTMLStencilElement {
     }
-    var HTMLSmoothlyAppElement: {
-        prototype: HTMLSmoothlyAppElement;
-        new (): HTMLSmoothlyAppElement;
+    var HTMLSmoothly0AppElement: {
+        prototype: HTMLSmoothly0AppElement;
+        new (): HTMLSmoothly0AppElement;
     };
-    interface HTMLSmoothlyAppDemoElement extends Components.SmoothlyAppDemo, HTMLStencilElement {
+    interface HTMLSmoothly0AppDemoElement extends Components.Smoothly0AppDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyAppDemoElement: {
-        prototype: HTMLSmoothlyAppDemoElement;
-        new (): HTMLSmoothlyAppDemoElement;
+    var HTMLSmoothly0AppDemoElement: {
+        prototype: HTMLSmoothly0AppDemoElement;
+        new (): HTMLSmoothly0AppDemoElement;
     };
-    interface HTMLSmoothlyBacktotopElement extends Components.SmoothlyBacktotop, HTMLStencilElement {
+    interface HTMLSmoothly0BacktotopElement extends Components.Smoothly0Backtotop, HTMLStencilElement {
     }
-    var HTMLSmoothlyBacktotopElement: {
-        prototype: HTMLSmoothlyBacktotopElement;
-        new (): HTMLSmoothlyBacktotopElement;
+    var HTMLSmoothly0BacktotopElement: {
+        prototype: HTMLSmoothly0BacktotopElement;
+        new (): HTMLSmoothly0BacktotopElement;
     };
-    interface HTMLSmoothlyButtonElement extends Components.SmoothlyButton, HTMLStencilElement {
+    interface HTMLSmoothly0ButtonElement extends Components.Smoothly0Button, HTMLStencilElement {
     }
-    var HTMLSmoothlyButtonElement: {
-        prototype: HTMLSmoothlyButtonElement;
-        new (): HTMLSmoothlyButtonElement;
+    var HTMLSmoothly0ButtonElement: {
+        prototype: HTMLSmoothly0ButtonElement;
+        new (): HTMLSmoothly0ButtonElement;
     };
-    interface HTMLSmoothlyCalendarElement extends Components.SmoothlyCalendar, HTMLStencilElement {
+    interface HTMLSmoothly0CalendarElement extends Components.Smoothly0Calendar, HTMLStencilElement {
     }
-    var HTMLSmoothlyCalendarElement: {
-        prototype: HTMLSmoothlyCalendarElement;
-        new (): HTMLSmoothlyCalendarElement;
+    var HTMLSmoothly0CalendarElement: {
+        prototype: HTMLSmoothly0CalendarElement;
+        new (): HTMLSmoothly0CalendarElement;
     };
-    interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {
+    interface HTMLSmoothly0CheckboxElement extends Components.Smoothly0Checkbox, HTMLStencilElement {
     }
-    var HTMLSmoothlyCheckboxElement: {
-        prototype: HTMLSmoothlyCheckboxElement;
-        new (): HTMLSmoothlyCheckboxElement;
+    var HTMLSmoothly0CheckboxElement: {
+        prototype: HTMLSmoothly0CheckboxElement;
+        new (): HTMLSmoothly0CheckboxElement;
     };
-    interface HTMLSmoothlyCountryElement extends Components.SmoothlyCountry, HTMLStencilElement {
+    interface HTMLSmoothly0CountryElement extends Components.Smoothly0Country, HTMLStencilElement {
     }
-    var HTMLSmoothlyCountryElement: {
-        prototype: HTMLSmoothlyCountryElement;
-        new (): HTMLSmoothlyCountryElement;
+    var HTMLSmoothly0CountryElement: {
+        prototype: HTMLSmoothly0CountryElement;
+        new (): HTMLSmoothly0CountryElement;
     };
-    interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {
+    interface HTMLSmoothly0DialogElement extends Components.Smoothly0Dialog, HTMLStencilElement {
     }
-    var HTMLSmoothlyDialogElement: {
-        prototype: HTMLSmoothlyDialogElement;
-        new (): HTMLSmoothlyDialogElement;
+    var HTMLSmoothly0DialogElement: {
+        prototype: HTMLSmoothly0DialogElement;
+        new (): HTMLSmoothly0DialogElement;
     };
-    interface HTMLSmoothlyDialogDemoElement extends Components.SmoothlyDialogDemo, HTMLStencilElement {
+    interface HTMLSmoothly0DialogDemoElement extends Components.Smoothly0DialogDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyDialogDemoElement: {
-        prototype: HTMLSmoothlyDialogDemoElement;
-        new (): HTMLSmoothlyDialogDemoElement;
+    var HTMLSmoothly0DialogDemoElement: {
+        prototype: HTMLSmoothly0DialogDemoElement;
+        new (): HTMLSmoothly0DialogDemoElement;
     };
-    interface HTMLSmoothlyDisplayElement extends Components.SmoothlyDisplay, HTMLStencilElement {
+    interface HTMLSmoothly0DisplayElement extends Components.Smoothly0Display, HTMLStencilElement {
     }
-    var HTMLSmoothlyDisplayElement: {
-        prototype: HTMLSmoothlyDisplayElement;
-        new (): HTMLSmoothlyDisplayElement;
+    var HTMLSmoothly0DisplayElement: {
+        prototype: HTMLSmoothly0DisplayElement;
+        new (): HTMLSmoothly0DisplayElement;
     };
-    interface HTMLSmoothlyDisplayAmountElement extends Components.SmoothlyDisplayAmount, HTMLStencilElement {
+    interface HTMLSmoothly0DisplayAmountElement extends Components.Smoothly0DisplayAmount, HTMLStencilElement {
     }
-    var HTMLSmoothlyDisplayAmountElement: {
-        prototype: HTMLSmoothlyDisplayAmountElement;
-        new (): HTMLSmoothlyDisplayAmountElement;
+    var HTMLSmoothly0DisplayAmountElement: {
+        prototype: HTMLSmoothly0DisplayAmountElement;
+        new (): HTMLSmoothly0DisplayAmountElement;
     };
     /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
+     * DEPRECATED, use  <smoothly-0-display type="date-time">
      */
-    interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
+    interface HTMLSmoothly0DisplayDateTimeElement extends Components.Smoothly0DisplayDateTime, HTMLStencilElement {
     }
-    var HTMLSmoothlyDisplayDateTimeElement: {
-        prototype: HTMLSmoothlyDisplayDateTimeElement;
-        new (): HTMLSmoothlyDisplayDateTimeElement;
+    var HTMLSmoothly0DisplayDateTimeElement: {
+        prototype: HTMLSmoothly0DisplayDateTimeElement;
+        new (): HTMLSmoothly0DisplayDateTimeElement;
     };
-    interface HTMLSmoothlyDisplayDemoElement extends Components.SmoothlyDisplayDemo, HTMLStencilElement {
+    interface HTMLSmoothly0DisplayDemoElement extends Components.Smoothly0DisplayDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyDisplayDemoElement: {
-        prototype: HTMLSmoothlyDisplayDemoElement;
-        new (): HTMLSmoothlyDisplayDemoElement;
+    var HTMLSmoothly0DisplayDemoElement: {
+        prototype: HTMLSmoothly0DisplayDemoElement;
+        new (): HTMLSmoothly0DisplayDemoElement;
     };
-    interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
+    interface HTMLSmoothly0FrameElement extends Components.Smoothly0Frame, HTMLStencilElement {
     }
-    var HTMLSmoothlyFrameElement: {
-        prototype: HTMLSmoothlyFrameElement;
-        new (): HTMLSmoothlyFrameElement;
+    var HTMLSmoothly0FrameElement: {
+        prototype: HTMLSmoothly0FrameElement;
+        new (): HTMLSmoothly0FrameElement;
     };
-    interface HTMLSmoothlyGoogleFontElement extends Components.SmoothlyGoogleFont, HTMLStencilElement {
+    interface HTMLSmoothly0GoogleFontElement extends Components.Smoothly0GoogleFont, HTMLStencilElement {
     }
-    var HTMLSmoothlyGoogleFontElement: {
-        prototype: HTMLSmoothlyGoogleFontElement;
-        new (): HTMLSmoothlyGoogleFontElement;
+    var HTMLSmoothly0GoogleFontElement: {
+        prototype: HTMLSmoothly0GoogleFontElement;
+        new (): HTMLSmoothly0GoogleFontElement;
     };
-    interface HTMLSmoothlyIconElement extends Components.SmoothlyIcon, HTMLStencilElement {
+    interface HTMLSmoothly0IconElement extends Components.Smoothly0Icon, HTMLStencilElement {
     }
-    var HTMLSmoothlyIconElement: {
-        prototype: HTMLSmoothlyIconElement;
-        new (): HTMLSmoothlyIconElement;
+    var HTMLSmoothly0IconElement: {
+        prototype: HTMLSmoothly0IconElement;
+        new (): HTMLSmoothly0IconElement;
     };
-    interface HTMLSmoothlyIconDemoElement extends Components.SmoothlyIconDemo, HTMLStencilElement {
+    interface HTMLSmoothly0IconDemoElement extends Components.Smoothly0IconDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyIconDemoElement: {
-        prototype: HTMLSmoothlyIconDemoElement;
-        new (): HTMLSmoothlyIconDemoElement;
+    var HTMLSmoothly0IconDemoElement: {
+        prototype: HTMLSmoothly0IconDemoElement;
+        new (): HTMLSmoothly0IconDemoElement;
     };
-    interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {
+    interface HTMLSmoothly0InputElement extends Components.Smoothly0Input, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputElement: {
-        prototype: HTMLSmoothlyInputElement;
-        new (): HTMLSmoothlyInputElement;
+    var HTMLSmoothly0InputElement: {
+        prototype: HTMLSmoothly0InputElement;
+        new (): HTMLSmoothly0InputElement;
     };
-    interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
+    interface HTMLSmoothly0InputDateElement extends Components.Smoothly0InputDate, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputDateElement: {
-        prototype: HTMLSmoothlyInputDateElement;
-        new (): HTMLSmoothlyInputDateElement;
+    var HTMLSmoothly0InputDateElement: {
+        prototype: HTMLSmoothly0InputDateElement;
+        new (): HTMLSmoothly0InputDateElement;
     };
-    interface HTMLSmoothlyInputDateRangeElement extends Components.SmoothlyInputDateRange, HTMLStencilElement {
+    interface HTMLSmoothly0InputDateRangeElement extends Components.Smoothly0InputDateRange, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputDateRangeElement: {
-        prototype: HTMLSmoothlyInputDateRangeElement;
-        new (): HTMLSmoothlyInputDateRangeElement;
+    var HTMLSmoothly0InputDateRangeElement: {
+        prototype: HTMLSmoothly0InputDateRangeElement;
+        new (): HTMLSmoothly0InputDateRangeElement;
     };
-    interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
+    interface HTMLSmoothly0InputDemoElement extends Components.Smoothly0InputDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputDemoElement: {
-        prototype: HTMLSmoothlyInputDemoElement;
-        new (): HTMLSmoothlyInputDemoElement;
+    var HTMLSmoothly0InputDemoElement: {
+        prototype: HTMLSmoothly0InputDemoElement;
+        new (): HTMLSmoothly0InputDemoElement;
     };
-    interface HTMLSmoothlyInputMonthElement extends Components.SmoothlyInputMonth, HTMLStencilElement {
+    interface HTMLSmoothly0InputMonthElement extends Components.Smoothly0InputMonth, HTMLStencilElement {
     }
-    var HTMLSmoothlyInputMonthElement: {
-        prototype: HTMLSmoothlyInputMonthElement;
-        new (): HTMLSmoothlyInputMonthElement;
+    var HTMLSmoothly0InputMonthElement: {
+        prototype: HTMLSmoothly0InputMonthElement;
+        new (): HTMLSmoothly0InputMonthElement;
     };
-    interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
+    interface HTMLSmoothly0ItemElement extends Components.Smoothly0Item, HTMLStencilElement {
     }
-    var HTMLSmoothlyItemElement: {
-        prototype: HTMLSmoothlyItemElement;
-        new (): HTMLSmoothlyItemElement;
+    var HTMLSmoothly0ItemElement: {
+        prototype: HTMLSmoothly0ItemElement;
+        new (): HTMLSmoothly0ItemElement;
     };
-    interface HTMLSmoothlyMenuOptionsElement extends Components.SmoothlyMenuOptions, HTMLStencilElement {
+    interface HTMLSmoothly0MenuOptionsElement extends Components.Smoothly0MenuOptions, HTMLStencilElement {
     }
-    var HTMLSmoothlyMenuOptionsElement: {
-        prototype: HTMLSmoothlyMenuOptionsElement;
-        new (): HTMLSmoothlyMenuOptionsElement;
+    var HTMLSmoothly0MenuOptionsElement: {
+        prototype: HTMLSmoothly0MenuOptionsElement;
+        new (): HTMLSmoothly0MenuOptionsElement;
     };
-    interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
+    interface HTMLSmoothly0NotificationElement extends Components.Smoothly0Notification, HTMLStencilElement {
     }
-    var HTMLSmoothlyNotificationElement: {
-        prototype: HTMLSmoothlyNotificationElement;
-        new (): HTMLSmoothlyNotificationElement;
+    var HTMLSmoothly0NotificationElement: {
+        prototype: HTMLSmoothly0NotificationElement;
+        new (): HTMLSmoothly0NotificationElement;
     };
-    interface HTMLSmoothlyNotifierElement extends Components.SmoothlyNotifier, HTMLStencilElement {
+    interface HTMLSmoothly0NotifierElement extends Components.Smoothly0Notifier, HTMLStencilElement {
     }
-    var HTMLSmoothlyNotifierElement: {
-        prototype: HTMLSmoothlyNotifierElement;
-        new (): HTMLSmoothlyNotifierElement;
+    var HTMLSmoothly0NotifierElement: {
+        prototype: HTMLSmoothly0NotifierElement;
+        new (): HTMLSmoothly0NotifierElement;
     };
-    interface HTMLSmoothlyOptionElement extends Components.SmoothlyOption, HTMLStencilElement {
+    interface HTMLSmoothly0OptionElement extends Components.Smoothly0Option, HTMLStencilElement {
     }
-    var HTMLSmoothlyOptionElement: {
-        prototype: HTMLSmoothlyOptionElement;
-        new (): HTMLSmoothlyOptionElement;
+    var HTMLSmoothly0OptionElement: {
+        prototype: HTMLSmoothly0OptionElement;
+        new (): HTMLSmoothly0OptionElement;
     };
-    interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
+    interface HTMLSmoothly0PickerElement extends Components.Smoothly0Picker, HTMLStencilElement {
     }
-    var HTMLSmoothlyPickerElement: {
-        prototype: HTMLSmoothlyPickerElement;
-        new (): HTMLSmoothlyPickerElement;
+    var HTMLSmoothly0PickerElement: {
+        prototype: HTMLSmoothly0PickerElement;
+        new (): HTMLSmoothly0PickerElement;
     };
-    interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
+    interface HTMLSmoothly0PopupElement extends Components.Smoothly0Popup, HTMLStencilElement {
     }
-    var HTMLSmoothlyPopupElement: {
-        prototype: HTMLSmoothlyPopupElement;
-        new (): HTMLSmoothlyPopupElement;
+    var HTMLSmoothly0PopupElement: {
+        prototype: HTMLSmoothly0PopupElement;
+        new (): HTMLSmoothly0PopupElement;
     };
-    interface HTMLSmoothlyQuietElement extends Components.SmoothlyQuiet, HTMLStencilElement {
+    interface HTMLSmoothly0QuietElement extends Components.Smoothly0Quiet, HTMLStencilElement {
     }
-    var HTMLSmoothlyQuietElement: {
-        prototype: HTMLSmoothlyQuietElement;
-        new (): HTMLSmoothlyQuietElement;
+    var HTMLSmoothly0QuietElement: {
+        prototype: HTMLSmoothly0QuietElement;
+        new (): HTMLSmoothly0QuietElement;
     };
-    interface HTMLSmoothlyRadioElement extends Components.SmoothlyRadio, HTMLStencilElement {
+    interface HTMLSmoothly0RadioElement extends Components.Smoothly0Radio, HTMLStencilElement {
     }
-    var HTMLSmoothlyRadioElement: {
-        prototype: HTMLSmoothlyRadioElement;
-        new (): HTMLSmoothlyRadioElement;
+    var HTMLSmoothly0RadioElement: {
+        prototype: HTMLSmoothly0RadioElement;
+        new (): HTMLSmoothly0RadioElement;
     };
-    interface HTMLSmoothlyRadioButtonElement extends Components.SmoothlyRadioButton, HTMLStencilElement {
+    interface HTMLSmoothly0RadioButtonElement extends Components.Smoothly0RadioButton, HTMLStencilElement {
     }
-    var HTMLSmoothlyRadioButtonElement: {
-        prototype: HTMLSmoothlyRadioButtonElement;
-        new (): HTMLSmoothlyRadioButtonElement;
+    var HTMLSmoothly0RadioButtonElement: {
+        prototype: HTMLSmoothly0RadioButtonElement;
+        new (): HTMLSmoothly0RadioButtonElement;
     };
-    interface HTMLSmoothlyRadioButtonItemElement extends Components.SmoothlyRadioButtonItem, HTMLStencilElement {
+    interface HTMLSmoothly0RadioButtonItemElement extends Components.Smoothly0RadioButtonItem, HTMLStencilElement {
     }
-    var HTMLSmoothlyRadioButtonItemElement: {
-        prototype: HTMLSmoothlyRadioButtonItemElement;
-        new (): HTMLSmoothlyRadioButtonItemElement;
+    var HTMLSmoothly0RadioButtonItemElement: {
+        prototype: HTMLSmoothly0RadioButtonItemElement;
+        new (): HTMLSmoothly0RadioButtonItemElement;
     };
-    interface HTMLSmoothlyRadioGroupElement extends Components.SmoothlyRadioGroup, HTMLStencilElement {
+    interface HTMLSmoothly0RadioGroupElement extends Components.Smoothly0RadioGroup, HTMLStencilElement {
     }
-    var HTMLSmoothlyRadioGroupElement: {
-        prototype: HTMLSmoothlyRadioGroupElement;
-        new (): HTMLSmoothlyRadioGroupElement;
+    var HTMLSmoothly0RadioGroupElement: {
+        prototype: HTMLSmoothly0RadioGroupElement;
+        new (): HTMLSmoothly0RadioGroupElement;
     };
-    interface HTMLSmoothlyReorderElement extends Components.SmoothlyReorder, HTMLStencilElement {
+    interface HTMLSmoothly0ReorderElement extends Components.Smoothly0Reorder, HTMLStencilElement {
     }
-    var HTMLSmoothlyReorderElement: {
-        prototype: HTMLSmoothlyReorderElement;
-        new (): HTMLSmoothlyReorderElement;
+    var HTMLSmoothly0ReorderElement: {
+        prototype: HTMLSmoothly0ReorderElement;
+        new (): HTMLSmoothly0ReorderElement;
     };
-    interface HTMLSmoothlyRoomElement extends Components.SmoothlyRoom, HTMLStencilElement {
+    interface HTMLSmoothly0RoomElement extends Components.Smoothly0Room, HTMLStencilElement {
     }
-    var HTMLSmoothlyRoomElement: {
-        prototype: HTMLSmoothlyRoomElement;
-        new (): HTMLSmoothlyRoomElement;
+    var HTMLSmoothly0RoomElement: {
+        prototype: HTMLSmoothly0RoomElement;
+        new (): HTMLSmoothly0RoomElement;
     };
-    interface HTMLSmoothlySelectElement extends Components.SmoothlySelect, HTMLStencilElement {
+    interface HTMLSmoothly0SelectElement extends Components.Smoothly0Select, HTMLStencilElement {
     }
-    var HTMLSmoothlySelectElement: {
-        prototype: HTMLSmoothlySelectElement;
-        new (): HTMLSmoothlySelectElement;
+    var HTMLSmoothly0SelectElement: {
+        prototype: HTMLSmoothly0SelectElement;
+        new (): HTMLSmoothly0SelectElement;
     };
-    interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
+    interface HTMLSmoothly0SelectDemoElement extends Components.Smoothly0SelectDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlySelectDemoElement: {
-        prototype: HTMLSmoothlySelectDemoElement;
-        new (): HTMLSmoothlySelectDemoElement;
+    var HTMLSmoothly0SelectDemoElement: {
+        prototype: HTMLSmoothly0SelectDemoElement;
+        new (): HTMLSmoothly0SelectDemoElement;
     };
-    interface HTMLSmoothlySelectorElement extends Components.SmoothlySelector, HTMLStencilElement {
+    interface HTMLSmoothly0SelectorElement extends Components.Smoothly0Selector, HTMLStencilElement {
     }
-    var HTMLSmoothlySelectorElement: {
-        prototype: HTMLSmoothlySelectorElement;
-        new (): HTMLSmoothlySelectorElement;
+    var HTMLSmoothly0SelectorElement: {
+        prototype: HTMLSmoothly0SelectorElement;
+        new (): HTMLSmoothly0SelectorElement;
     };
-    interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
+    interface HTMLSmoothly0SkeletonElement extends Components.Smoothly0Skeleton, HTMLStencilElement {
     }
-    var HTMLSmoothlySkeletonElement: {
-        prototype: HTMLSmoothlySkeletonElement;
-        new (): HTMLSmoothlySkeletonElement;
+    var HTMLSmoothly0SkeletonElement: {
+        prototype: HTMLSmoothly0SkeletonElement;
+        new (): HTMLSmoothly0SkeletonElement;
     };
-    interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
+    interface HTMLSmoothly0SpinnerElement extends Components.Smoothly0Spinner, HTMLStencilElement {
     }
-    var HTMLSmoothlySpinnerElement: {
-        prototype: HTMLSmoothlySpinnerElement;
-        new (): HTMLSmoothlySpinnerElement;
+    var HTMLSmoothly0SpinnerElement: {
+        prototype: HTMLSmoothly0SpinnerElement;
+        new (): HTMLSmoothly0SpinnerElement;
     };
-    interface HTMLSmoothlySubmitElement extends Components.SmoothlySubmit, HTMLStencilElement {
+    interface HTMLSmoothly0SubmitElement extends Components.Smoothly0Submit, HTMLStencilElement {
     }
-    var HTMLSmoothlySubmitElement: {
-        prototype: HTMLSmoothlySubmitElement;
-        new (): HTMLSmoothlySubmitElement;
+    var HTMLSmoothly0SubmitElement: {
+        prototype: HTMLSmoothly0SubmitElement;
+        new (): HTMLSmoothly0SubmitElement;
     };
-    interface HTMLSmoothlySvgElement extends Components.SmoothlySvg, HTMLStencilElement {
+    interface HTMLSmoothly0SvgElement extends Components.Smoothly0Svg, HTMLStencilElement {
     }
-    var HTMLSmoothlySvgElement: {
-        prototype: HTMLSmoothlySvgElement;
-        new (): HTMLSmoothlySvgElement;
+    var HTMLSmoothly0SvgElement: {
+        prototype: HTMLSmoothly0SvgElement;
+        new (): HTMLSmoothly0SvgElement;
     };
-    interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
+    interface HTMLSmoothly0TabElement extends Components.Smoothly0Tab, HTMLStencilElement {
     }
-    var HTMLSmoothlyTabElement: {
-        prototype: HTMLSmoothlyTabElement;
-        new (): HTMLSmoothlyTabElement;
+    var HTMLSmoothly0TabElement: {
+        prototype: HTMLSmoothly0TabElement;
+        new (): HTMLSmoothly0TabElement;
     };
-    interface HTMLSmoothlyTabSwitchElement extends Components.SmoothlyTabSwitch, HTMLStencilElement {
+    interface HTMLSmoothly0TabSwitchElement extends Components.Smoothly0TabSwitch, HTMLStencilElement {
     }
-    var HTMLSmoothlyTabSwitchElement: {
-        prototype: HTMLSmoothlyTabSwitchElement;
-        new (): HTMLSmoothlyTabSwitchElement;
+    var HTMLSmoothly0TabSwitchElement: {
+        prototype: HTMLSmoothly0TabSwitchElement;
+        new (): HTMLSmoothly0TabSwitchElement;
     };
-    interface HTMLSmoothlyTableElement extends Components.SmoothlyTable, HTMLStencilElement {
+    interface HTMLSmoothly0TableElement extends Components.Smoothly0Table, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableElement: {
-        prototype: HTMLSmoothlyTableElement;
-        new (): HTMLSmoothlyTableElement;
+    var HTMLSmoothly0TableElement: {
+        prototype: HTMLSmoothly0TableElement;
+        new (): HTMLSmoothly0TableElement;
     };
-    interface HTMLSmoothlyTableCellElement extends Components.SmoothlyTableCell, HTMLStencilElement {
+    interface HTMLSmoothly0TableCellElement extends Components.Smoothly0TableCell, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableCellElement: {
-        prototype: HTMLSmoothlyTableCellElement;
-        new (): HTMLSmoothlyTableCellElement;
+    var HTMLSmoothly0TableCellElement: {
+        prototype: HTMLSmoothly0TableCellElement;
+        new (): HTMLSmoothly0TableCellElement;
     };
-    interface HTMLSmoothlyTableDemoElement extends Components.SmoothlyTableDemo, HTMLStencilElement {
+    interface HTMLSmoothly0TableDemoElement extends Components.Smoothly0TableDemo, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableDemoElement: {
-        prototype: HTMLSmoothlyTableDemoElement;
-        new (): HTMLSmoothlyTableDemoElement;
+    var HTMLSmoothly0TableDemoElement: {
+        prototype: HTMLSmoothly0TableDemoElement;
+        new (): HTMLSmoothly0TableDemoElement;
     };
-    interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
+    interface HTMLSmoothly0TableExpandableCellElement extends Components.Smoothly0TableExpandableCell, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableExpandableCellElement: {
-        prototype: HTMLSmoothlyTableExpandableCellElement;
-        new (): HTMLSmoothlyTableExpandableCellElement;
+    var HTMLSmoothly0TableExpandableCellElement: {
+        prototype: HTMLSmoothly0TableExpandableCellElement;
+        new (): HTMLSmoothly0TableExpandableCellElement;
     };
-    interface HTMLSmoothlyTableExpandableRowElement extends Components.SmoothlyTableExpandableRow, HTMLStencilElement {
+    interface HTMLSmoothly0TableExpandableRowElement extends Components.Smoothly0TableExpandableRow, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableExpandableRowElement: {
-        prototype: HTMLSmoothlyTableExpandableRowElement;
-        new (): HTMLSmoothlyTableExpandableRowElement;
+    var HTMLSmoothly0TableExpandableRowElement: {
+        prototype: HTMLSmoothly0TableExpandableRowElement;
+        new (): HTMLSmoothly0TableExpandableRowElement;
     };
-    interface HTMLSmoothlyTableHeaderElement extends Components.SmoothlyTableHeader, HTMLStencilElement {
+    interface HTMLSmoothly0TableHeaderElement extends Components.Smoothly0TableHeader, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableHeaderElement: {
-        prototype: HTMLSmoothlyTableHeaderElement;
-        new (): HTMLSmoothlyTableHeaderElement;
+    var HTMLSmoothly0TableHeaderElement: {
+        prototype: HTMLSmoothly0TableHeaderElement;
+        new (): HTMLSmoothly0TableHeaderElement;
     };
-    interface HTMLSmoothlyTableRowElement extends Components.SmoothlyTableRow, HTMLStencilElement {
+    interface HTMLSmoothly0TableRowElement extends Components.Smoothly0TableRow, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableRowElement: {
-        prototype: HTMLSmoothlyTableRowElement;
-        new (): HTMLSmoothlyTableRowElement;
+    var HTMLSmoothly0TableRowElement: {
+        prototype: HTMLSmoothly0TableRowElement;
+        new (): HTMLSmoothly0TableRowElement;
     };
-    interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
+    interface HTMLSmoothly0TriggerElement extends Components.Smoothly0Trigger, HTMLStencilElement {
     }
-    var HTMLSmoothlyTriggerElement: {
-        prototype: HTMLSmoothlyTriggerElement;
-        new (): HTMLSmoothlyTriggerElement;
+    var HTMLSmoothly0TriggerElement: {
+        prototype: HTMLSmoothly0TriggerElement;
+        new (): HTMLSmoothly0TriggerElement;
     };
-    interface HTMLSmoothlyTriggerSinkElement extends Components.SmoothlyTriggerSink, HTMLStencilElement {
+    interface HTMLSmoothly0TriggerSinkElement extends Components.Smoothly0TriggerSink, HTMLStencilElement {
     }
-    var HTMLSmoothlyTriggerSinkElement: {
-        prototype: HTMLSmoothlyTriggerSinkElement;
-        new (): HTMLSmoothlyTriggerSinkElement;
+    var HTMLSmoothly0TriggerSinkElement: {
+        prototype: HTMLSmoothly0TriggerSinkElement;
+        new (): HTMLSmoothly0TriggerSinkElement;
     };
-    interface HTMLSmoothlyTriggerSourceElement extends Components.SmoothlyTriggerSource, HTMLStencilElement {
+    interface HTMLSmoothly0TriggerSourceElement extends Components.Smoothly0TriggerSource, HTMLStencilElement {
     }
-    var HTMLSmoothlyTriggerSourceElement: {
-        prototype: HTMLSmoothlyTriggerSourceElement;
-        new (): HTMLSmoothlyTriggerSourceElement;
+    var HTMLSmoothly0TriggerSourceElement: {
+        prototype: HTMLSmoothly0TriggerSourceElement;
+        new (): HTMLSmoothly0TriggerSourceElement;
     };
-    interface HTMLSmoothlyTupleElement extends Components.SmoothlyTuple, HTMLStencilElement {
+    interface HTMLSmoothly0TupleElement extends Components.Smoothly0Tuple, HTMLStencilElement {
     }
-    var HTMLSmoothlyTupleElement: {
-        prototype: HTMLSmoothlyTupleElement;
-        new (): HTMLSmoothlyTupleElement;
+    var HTMLSmoothly0TupleElement: {
+        prototype: HTMLSmoothly0TupleElement;
+        new (): HTMLSmoothly0TupleElement;
     };
-    interface HTMLSmoothlyUrlencodedElement extends Components.SmoothlyUrlencoded, HTMLStencilElement {
+    interface HTMLSmoothly0UrlencodedElement extends Components.Smoothly0Urlencoded, HTMLStencilElement {
     }
-    var HTMLSmoothlyUrlencodedElement: {
-        prototype: HTMLSmoothlyUrlencodedElement;
-        new (): HTMLSmoothlyUrlencodedElement;
+    var HTMLSmoothly0UrlencodedElement: {
+        prototype: HTMLSmoothly0UrlencodedElement;
+        new (): HTMLSmoothly0UrlencodedElement;
     };
     interface HTMLElementTagNameMap {
-        "smoothly-accordion": HTMLSmoothlyAccordionElement;
-        "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
-        "smoothly-app": HTMLSmoothlyAppElement;
-        "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
-        "smoothly-backtotop": HTMLSmoothlyBacktotopElement;
-        "smoothly-button": HTMLSmoothlyButtonElement;
-        "smoothly-calendar": HTMLSmoothlyCalendarElement;
-        "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
-        "smoothly-country": HTMLSmoothlyCountryElement;
-        "smoothly-dialog": HTMLSmoothlyDialogElement;
-        "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
-        "smoothly-display": HTMLSmoothlyDisplayElement;
-        "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
-        "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
-        "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
-        "smoothly-frame": HTMLSmoothlyFrameElement;
-        "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
-        "smoothly-icon": HTMLSmoothlyIconElement;
-        "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
-        "smoothly-input": HTMLSmoothlyInputElement;
-        "smoothly-input-date": HTMLSmoothlyInputDateElement;
-        "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
-        "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
-        "smoothly-input-month": HTMLSmoothlyInputMonthElement;
-        "smoothly-item": HTMLSmoothlyItemElement;
-        "smoothly-menu-options": HTMLSmoothlyMenuOptionsElement;
-        "smoothly-notification": HTMLSmoothlyNotificationElement;
-        "smoothly-notifier": HTMLSmoothlyNotifierElement;
-        "smoothly-option": HTMLSmoothlyOptionElement;
-        "smoothly-picker": HTMLSmoothlyPickerElement;
-        "smoothly-popup": HTMLSmoothlyPopupElement;
-        "smoothly-quiet": HTMLSmoothlyQuietElement;
-        "smoothly-radio": HTMLSmoothlyRadioElement;
-        "smoothly-radio-button": HTMLSmoothlyRadioButtonElement;
-        "smoothly-radio-button-item": HTMLSmoothlyRadioButtonItemElement;
-        "smoothly-radio-group": HTMLSmoothlyRadioGroupElement;
-        "smoothly-reorder": HTMLSmoothlyReorderElement;
-        "smoothly-room": HTMLSmoothlyRoomElement;
-        "smoothly-select": HTMLSmoothlySelectElement;
-        "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
-        "smoothly-selector": HTMLSmoothlySelectorElement;
-        "smoothly-skeleton": HTMLSmoothlySkeletonElement;
-        "smoothly-spinner": HTMLSmoothlySpinnerElement;
-        "smoothly-submit": HTMLSmoothlySubmitElement;
-        "smoothly-svg": HTMLSmoothlySvgElement;
-        "smoothly-tab": HTMLSmoothlyTabElement;
-        "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
-        "smoothly-table": HTMLSmoothlyTableElement;
-        "smoothly-table-cell": HTMLSmoothlyTableCellElement;
-        "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
-        "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
-        "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
-        "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
-        "smoothly-table-row": HTMLSmoothlyTableRowElement;
-        "smoothly-trigger": HTMLSmoothlyTriggerElement;
-        "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
-        "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
-        "smoothly-tuple": HTMLSmoothlyTupleElement;
-        "smoothly-urlencoded": HTMLSmoothlyUrlencodedElement;
+        "smoothly-0-accordion": HTMLSmoothly0AccordionElement;
+        "smoothly-0-accordion-item": HTMLSmoothly0AccordionItemElement;
+        "smoothly-0-app": HTMLSmoothly0AppElement;
+        "smoothly-0-app-demo": HTMLSmoothly0AppDemoElement;
+        "smoothly-0-backtotop": HTMLSmoothly0BacktotopElement;
+        "smoothly-0-button": HTMLSmoothly0ButtonElement;
+        "smoothly-0-calendar": HTMLSmoothly0CalendarElement;
+        "smoothly-0-checkbox": HTMLSmoothly0CheckboxElement;
+        "smoothly-0-country": HTMLSmoothly0CountryElement;
+        "smoothly-0-dialog": HTMLSmoothly0DialogElement;
+        "smoothly-0-dialog-demo": HTMLSmoothly0DialogDemoElement;
+        "smoothly-0-display": HTMLSmoothly0DisplayElement;
+        "smoothly-0-display-amount": HTMLSmoothly0DisplayAmountElement;
+        "smoothly-0-display-date-time": HTMLSmoothly0DisplayDateTimeElement;
+        "smoothly-0-display-demo": HTMLSmoothly0DisplayDemoElement;
+        "smoothly-0-frame": HTMLSmoothly0FrameElement;
+        "smoothly-0-google-font": HTMLSmoothly0GoogleFontElement;
+        "smoothly-0-icon": HTMLSmoothly0IconElement;
+        "smoothly-0-icon-demo": HTMLSmoothly0IconDemoElement;
+        "smoothly-0-input": HTMLSmoothly0InputElement;
+        "smoothly-0-input-date": HTMLSmoothly0InputDateElement;
+        "smoothly-0-input-date-range": HTMLSmoothly0InputDateRangeElement;
+        "smoothly-0-input-demo": HTMLSmoothly0InputDemoElement;
+        "smoothly-0-input-month": HTMLSmoothly0InputMonthElement;
+        "smoothly-0-item": HTMLSmoothly0ItemElement;
+        "smoothly-0-menu-options": HTMLSmoothly0MenuOptionsElement;
+        "smoothly-0-notification": HTMLSmoothly0NotificationElement;
+        "smoothly-0-notifier": HTMLSmoothly0NotifierElement;
+        "smoothly-0-option": HTMLSmoothly0OptionElement;
+        "smoothly-0-picker": HTMLSmoothly0PickerElement;
+        "smoothly-0-popup": HTMLSmoothly0PopupElement;
+        "smoothly-0-quiet": HTMLSmoothly0QuietElement;
+        "smoothly-0-radio": HTMLSmoothly0RadioElement;
+        "smoothly-0-radio-button": HTMLSmoothly0RadioButtonElement;
+        "smoothly-0-radio-button-item": HTMLSmoothly0RadioButtonItemElement;
+        "smoothly-0-radio-group": HTMLSmoothly0RadioGroupElement;
+        "smoothly-0-reorder": HTMLSmoothly0ReorderElement;
+        "smoothly-0-room": HTMLSmoothly0RoomElement;
+        "smoothly-0-select": HTMLSmoothly0SelectElement;
+        "smoothly-0-select-demo": HTMLSmoothly0SelectDemoElement;
+        "smoothly-0-selector": HTMLSmoothly0SelectorElement;
+        "smoothly-0-skeleton": HTMLSmoothly0SkeletonElement;
+        "smoothly-0-spinner": HTMLSmoothly0SpinnerElement;
+        "smoothly-0-submit": HTMLSmoothly0SubmitElement;
+        "smoothly-0-svg": HTMLSmoothly0SvgElement;
+        "smoothly-0-tab": HTMLSmoothly0TabElement;
+        "smoothly-0-tab-switch": HTMLSmoothly0TabSwitchElement;
+        "smoothly-0-table": HTMLSmoothly0TableElement;
+        "smoothly-0-table-cell": HTMLSmoothly0TableCellElement;
+        "smoothly-0-table-demo": HTMLSmoothly0TableDemoElement;
+        "smoothly-0-table-expandable-cell": HTMLSmoothly0TableExpandableCellElement;
+        "smoothly-0-table-expandable-row": HTMLSmoothly0TableExpandableRowElement;
+        "smoothly-0-table-header": HTMLSmoothly0TableHeaderElement;
+        "smoothly-0-table-row": HTMLSmoothly0TableRowElement;
+        "smoothly-0-trigger": HTMLSmoothly0TriggerElement;
+        "smoothly-0-trigger-sink": HTMLSmoothly0TriggerSinkElement;
+        "smoothly-0-trigger-source": HTMLSmoothly0TriggerSourceElement;
+        "smoothly-0-tuple": HTMLSmoothly0TupleElement;
+        "smoothly-0-urlencoded": HTMLSmoothly0UrlencodedElement;
     }
 }
 declare namespace LocalJSX {
-    interface SmoothlyAccordion {
+    interface Smoothly0Accordion {
         "value"?: string;
     }
-    interface SmoothlyAccordionItem {
+    interface Smoothly0AccordionItem {
         "brand"?: string | string[];
         "name"?: string;
-        "onSmoothlyAccordionItemDidLoad"?: (event: SmoothlyAccordionItemCustomEvent<void>) => void;
-        "onSmoothlyAccordionItemDidUnload"?: (event: SmoothlyAccordionItemCustomEvent<void>) => void;
-        "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
-        "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
+        "onSmoothlyAccordionItemDidLoad"?: (event: Smoothly0AccordionItemCustomEvent<void>) => void;
+        "onSmoothlyAccordionItemDidUnload"?: (event: Smoothly0AccordionItemCustomEvent<void>) => void;
+        "onSmoothlyClose"?: (event: Smoothly0AccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
+        "onSmoothlyOpen"?: (event: Smoothly0AccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyApp {
+    interface Smoothly0App {
         "color"?: Color;
     }
-    interface SmoothlyAppDemo {
+    interface Smoothly0AppDemo {
         "baseUrl"?: string;
     }
-    interface SmoothlyBacktotop {
+    interface Smoothly0Backtotop {
         "bottom"?: string;
         "opacity"?: string;
         "right"?: string;
     }
-    interface SmoothlyButton {
+    interface Smoothly0Button {
         "color"?: Color | undefined;
         "disabled"?: boolean;
         "download"?: boolean;
@@ -901,91 +901,91 @@ declare namespace LocalJSX {
         "link"?: string;
         "type"?: "link" | "button";
     }
-    interface SmoothlyCalendar {
+    interface Smoothly0Calendar {
         "color"?: Color;
         "doubleInput"?: boolean;
         "end"?: Date;
         "max"?: Date;
         "min"?: Date;
         "month"?: Date;
-        "onDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<DateRange>) => void;
-        "onDateSet"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onEndChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onStartChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onValueChanged"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
+        "onDateRangeSet"?: (event: Smoothly0CalendarCustomEvent<DateRange>) => void;
+        "onDateSet"?: (event: Smoothly0CalendarCustomEvent<Date>) => void;
+        "onEndChanged"?: (event: Smoothly0CalendarCustomEvent<Date>) => void;
+        "onStartChanged"?: (event: Smoothly0CalendarCustomEvent<Date>) => void;
+        "onValueChanged"?: (event: Smoothly0CalendarCustomEvent<Date>) => void;
         "start"?: Date;
         "value"?: Date;
     }
-    interface SmoothlyCheckbox {
+    interface Smoothly0Checkbox {
         "disabled"?: boolean;
         "intermediate"?: boolean;
-        "onChecked"?: (event: SmoothlyCheckboxCustomEvent<{ selected: boolean }>) => void;
+        "onChecked"?: (event: Smoothly0CheckboxCustomEvent<{ selected: boolean }>) => void;
         "selectAll"?: boolean;
         "selected"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
     }
-    interface SmoothlyCountry {
+    interface Smoothly0Country {
         "text"?: "alpha2" | "name" | "none";
         "value"?: CountryCode.Alpha2;
     }
-    interface SmoothlyDialog {
+    interface Smoothly0Dialog {
         "closable"?: boolean;
         "color"?: Color | undefined;
         "header"?: string | undefined;
         "open"?: boolean;
     }
-    interface SmoothlyDialogDemo {
+    interface Smoothly0DialogDemo {
     }
-    interface SmoothlyDisplay {
+    interface Smoothly0Display {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "type"?: Type;
         "value"?: any;
     }
-    interface SmoothlyDisplayAmount {
+    interface Smoothly0DisplayAmount {
         "amount"?: number | string;
         "currency"?: Currency;
         "toInteger"?: boolean;
     }
     /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
+     * DEPRECATED, use  <smoothly-0-display type="date-time">
      */
-    interface SmoothlyDisplayDateTime {
+    interface Smoothly0DisplayDateTime {
         "datetime"?: DateTime;
     }
-    interface SmoothlyDisplayDemo {
-        "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
+    interface Smoothly0DisplayDemo {
+        "onNotice"?: (event: Smoothly0DisplayDemoCustomEvent<Notice>) => void;
     }
-    interface SmoothlyFrame {
+    interface Smoothly0Frame {
         "name"?: string;
-        "onMessage"?: (event: SmoothlyFrameCustomEvent<Message<any>>) => void;
-        "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
+        "onMessage"?: (event: Smoothly0FrameCustomEvent<Message<any>>) => void;
+        "onTrigger"?: (event: Smoothly0FrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
     }
-    interface SmoothlyGoogleFont {
+    interface Smoothly0GoogleFont {
         "value"?: GoogleFont;
     }
-    interface SmoothlyIcon {
+    interface Smoothly0Icon {
         "color"?: Color;
         "fill"?: Fill;
         "name"?: string;
         "size"?: "tiny" | "small" | "medium" | "large";
         "toolTip"?: string;
     }
-    interface SmoothlyIconDemo {
+    interface Smoothly0IconDemo {
     }
-    interface SmoothlyInput {
+    interface Smoothly0Input {
         "autocomplete"?: boolean;
         "currency"?: Currency;
         "disabled"?: boolean;
         "maxLength"?: number;
         "minLength"?: number;
         "name"?: string;
-        "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
-        "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyBlur"?: (event: Smoothly0InputCustomEvent<void>) => void;
+        "onSmoothlyChange"?: (event: Smoothly0InputCustomEvent<{ name: string; value: any }>) => void;
+        "onSmoothlyInput"?: (event: Smoothly0InputCustomEvent<{ name: string; value: any }>) => void;
         "pattern"?: RegExp | undefined;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -994,18 +994,18 @@ declare namespace LocalJSX {
         "type"?: string;
         "value"?: any;
     }
-    interface SmoothlyInputDate {
+    interface Smoothly0InputDate {
         "color"?: Color;
         "disabled"?: boolean;
         "flexible"?: boolean;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
-        "onValueChanged"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
+        "onValueChanged"?: (event: Smoothly0InputDateCustomEvent<Date>) => void;
         "open"?: boolean;
         "value"?: Date;
     }
-    interface SmoothlyInputDateRange {
+    interface Smoothly0InputDateRange {
         "clearable"?: boolean;
         "disabled"?: boolean;
         "end"?: Date;
@@ -1013,45 +1013,45 @@ declare namespace LocalJSX {
         "labelStart"?: string;
         "max"?: Date;
         "min"?: Date;
-        "onDateRangeClear"?: (event: SmoothlyInputDateRangeCustomEvent<any>) => void;
-        "onDateRangeSelected"?: (event: SmoothlyInputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
-        "onValueChanged"?: (event: SmoothlyInputDateRangeCustomEvent<Date>) => void;
+        "onDateRangeClear"?: (event: Smoothly0InputDateRangeCustomEvent<any>) => void;
+        "onDateRangeSelected"?: (event: Smoothly0InputDateRangeCustomEvent<{ start: Date; end: Date }>) => void;
+        "onValueChanged"?: (event: Smoothly0InputDateRangeCustomEvent<Date>) => void;
         "open"?: boolean;
         "showLabel"?: boolean;
         "start"?: Date;
         "value"?: Date;
     }
-    interface SmoothlyInputDemo {
+    interface Smoothly0InputDemo {
     }
-    interface SmoothlyInputMonth {
-        "onValueChanged"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
+    interface Smoothly0InputMonth {
+        "onValueChanged"?: (event: Smoothly0InputMonthCustomEvent<Date>) => void;
         "value"?: Date;
     }
-    interface SmoothlyItem {
+    interface Smoothly0Item {
         "marked"?: boolean;
-        "onItemSelected"?: (event: SmoothlyItemCustomEvent<void>) => void;
+        "onItemSelected"?: (event: Smoothly0ItemCustomEvent<void>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
-    interface SmoothlyMenuOptions {
+    interface Smoothly0MenuOptions {
         "emptyMenuLabel"?: string;
         "maxMenuHeight"?: "inherit";
         "mutable"?: boolean;
         "newOptionLabel"?: string;
-        "onMenuEmpty"?: (event: SmoothlyMenuOptionsCustomEvent<boolean>) => void;
+        "onMenuEmpty"?: (event: Smoothly0MenuOptionsCustomEvent<boolean>) => void;
         "optionStyle"?: any;
         "options"?: Option[];
         "order"?: boolean;
         "resetHighlightOnOptionsChange"?: boolean;
         "toggle"?: boolean;
     }
-    interface SmoothlyNotification {
+    interface Smoothly0Notification {
         "notice"?: Notice;
-        "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
+        "onRemove"?: (event: Smoothly0NotificationCustomEvent<Notice>) => void;
     }
-    interface SmoothlyNotifier {
+    interface Smoothly0Notifier {
     }
-    interface SmoothlyOption {
+    interface Smoothly0Option {
         "aliases"?: string;
         "checkbox"?: boolean;
         "checked"?: boolean;
@@ -1059,14 +1059,14 @@ declare namespace LocalJSX {
         "divider"?: boolean;
         "name"?: string;
         "new"?: boolean;
-        "onOptionAdd"?: (event: SmoothlyOptionCustomEvent<{ name: string; value: string }>) => void;
-        "onOptionHover"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
-        "onOptionSelect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
-        "onOptionUnselect"?: (event: SmoothlyOptionCustomEvent<{ value: any; name: string }>) => void;
+        "onOptionAdd"?: (event: Smoothly0OptionCustomEvent<{ name: string; value: string }>) => void;
+        "onOptionHover"?: (event: Smoothly0OptionCustomEvent<{ value: any; name: string }>) => void;
+        "onOptionSelect"?: (event: Smoothly0OptionCustomEvent<{ value: any; name: string }>) => void;
+        "onOptionUnselect"?: (event: Smoothly0OptionCustomEvent<{ value: any; name: string }>) => void;
         "toggle"?: boolean;
         "value"?: string;
     }
-    interface SmoothlyPicker {
+    interface Smoothly0Picker {
         "disabled"?: boolean;
         "emptyMenuLabel"?: string;
         "label"?: string;
@@ -1076,8 +1076,8 @@ declare namespace LocalJSX {
         "multiple"?: boolean;
         "mutable"?: boolean;
         "newOptionLabel"?: string;
-        "onMenuClose"?: (event: SmoothlyPickerCustomEvent<Option[]>) => void;
-        "onNotice"?: (event: SmoothlyPickerCustomEvent<Notice>) => void;
+        "onMenuClose"?: (event: Smoothly0PickerCustomEvent<Option[]>) => void;
+        "onNotice"?: (event: Smoothly0PickerCustomEvent<Notice>) => void;
         "optionStyle"?: any;
         "options"?: (Option & { checked?: boolean })[];
         "readonly"?: boolean;
@@ -1088,62 +1088,62 @@ declare namespace LocalJSX {
         "selections"?: Option[];
         "valueValidator"?: (value: any) => [boolean, Notice | undefined];
     }
-    interface SmoothlyPopup {
+    interface Smoothly0Popup {
         "direction"?: "up" | "down";
-        "onPopup"?: (event: SmoothlyPopupCustomEvent<boolean>) => void;
+        "onPopup"?: (event: Smoothly0PopupCustomEvent<boolean>) => void;
         "visible"?: boolean;
     }
-    interface SmoothlyQuiet {
+    interface Smoothly0Quiet {
         "color"?: string;
     }
-    interface SmoothlyRadio {
+    interface Smoothly0Radio {
         "checked"?: boolean;
         "name"?: string;
-        "onSmoothlySelected"?: (event: SmoothlyRadioCustomEvent<{ name: string; value: string }>) => void;
+        "onSmoothlySelected"?: (event: Smoothly0RadioCustomEvent<{ name: string; value: string }>) => void;
         "tabIndex"?: number;
         "value"?: string;
     }
-    interface SmoothlyRadioButton {
+    interface Smoothly0RadioButton {
         "decoration"?: "button" | "radio";
         "deselectable"?: boolean;
         "name"?: string;
-        "onRadioButtonSelected"?: (event: SmoothlyRadioButtonCustomEvent<{ name: string | undefined; value: any }>) => void;
+        "onRadioButtonSelected"?: (event: Smoothly0RadioButtonCustomEvent<{ name: string | undefined; value: any }>) => void;
         "value"?: any;
     }
-    interface SmoothlyRadioButtonItem {
+    interface Smoothly0RadioButtonItem {
         "color"?: Color;
         "disabled"?: boolean;
         "iconColor"?: Color;
-        "onRadioItemSelectInternal"?: (event: SmoothlyRadioButtonItemCustomEvent<Selected>) => void;
+        "onRadioItemSelectInternal"?: (event: Smoothly0RadioButtonItemCustomEvent<Selected>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
-    interface SmoothlyRadioGroup {
+    interface Smoothly0RadioGroup {
         "orientation"?: "horizontal" | "vertical";
     }
-    interface SmoothlyReorder {
-        "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
+    interface Smoothly0Reorder {
+        "onReorder"?: (event: Smoothly0ReorderCustomEvent<[number, number]>) => void;
     }
-    interface SmoothlyRoom {
+    interface Smoothly0Room {
         "icon"?: string;
         "label"?: string;
         "path"?: string | RegExp;
         "to"?: string;
     }
-    interface SmoothlySelect {
+    interface Smoothly0Select {
         "background"?: string;
         "identifier"?: string;
-        "onSelectionChanged"?: (event: SmoothlySelectCustomEvent<{ identifier: string; value: string }>) => void;
+        "onSelectionChanged"?: (event: Smoothly0SelectCustomEvent<{ identifier: string; value: string }>) => void;
         "value"?: string;
     }
-    interface SmoothlySelectDemo {
+    interface Smoothly0SelectDemo {
     }
-    interface SmoothlySelector {
+    interface Smoothly0Selector {
         "disableFilter"?: boolean;
         "initialPrompt"?: string;
-        "onSelected"?: (event: SmoothlySelectorCustomEvent<any>) => void;
+        "onSelected"?: (event: Smoothly0SelectorCustomEvent<any>) => void;
     }
-    interface SmoothlySkeleton {
+    interface Smoothly0Skeleton {
         "align"?: "left" | "center" | "right";
         "color"?: string;
         "distance"?: string;
@@ -1151,215 +1151,215 @@ declare namespace LocalJSX {
         "width"?: string;
         "widths"?: string[];
     }
-    interface SmoothlySpinner {
+    interface Smoothly0Spinner {
         "active"?: boolean;
         "size"?: "small" | "medium" | "large";
     }
-    interface SmoothlySubmit {
+    interface Smoothly0Submit {
         "color"?: Color;
         "disabled"?: boolean;
         "expand"?: Expand;
         "fill"?: Fill;
-        "onSubmit"?: (event: SmoothlySubmitCustomEvent<Data>) => void;
+        "onSubmit"?: (event: Smoothly0SubmitCustomEvent<Data>) => void;
         "prevent"?: boolean;
         "processing"?: boolean;
     }
-    interface SmoothlySvg {
+    interface Smoothly0Svg {
         "color"?: string;
         "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
         "url": string;
     }
-    interface SmoothlyTab {
+    interface Smoothly0Tab {
         "label"?: string;
-        "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLElement>) => void;
+        "onExpansionOpen"?: (event: Smoothly0TabCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyTabSwitch {
+    interface Smoothly0TabSwitch {
     }
-    interface SmoothlyTable {
-        "onSmoothlyNestedTable"?: (event: SmoothlyTableCustomEvent<() => void>) => void;
-        "onSpotlightChange"?: (event: SmoothlyTableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
-        "onTableLoad"?: (event: SmoothlyTableCustomEvent<(owner: EventTarget) => void>) => void;
+    interface Smoothly0Table {
+        "onSmoothlyNestedTable"?: (event: Smoothly0TableCustomEvent<() => void>) => void;
+        "onSpotlightChange"?: (event: Smoothly0TableCustomEvent<{ allowSpotlight: boolean; owner?: EventTarget }>) => void;
+        "onTableLoad"?: (event: Smoothly0TableCustomEvent<(owner: EventTarget) => void>) => void;
         "root"?: boolean;
     }
-    interface SmoothlyTableCell {
+    interface Smoothly0TableCell {
     }
-    interface SmoothlyTableDemo {
+    interface Smoothly0TableDemo {
     }
-    interface SmoothlyTableExpandableCell {
+    interface Smoothly0TableExpandableCell {
         "align"?: "left" | "center" | "right";
-        "onExpandableChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
-        "onExpandableLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
-        "onExpansionLoad"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
-        "onExpansionOpen"?: (event: SmoothlyTableExpandableCellCustomEvent<HTMLElement>) => void;
+        "onExpandableChange"?: (event: Smoothly0TableExpandableCellCustomEvent<boolean>) => void;
+        "onExpandableLoad"?: (event: Smoothly0TableExpandableCellCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
+        "onExpansionLoad"?: (event: Smoothly0TableExpandableCellCustomEvent<void>) => void;
+        "onExpansionOpen"?: (event: Smoothly0TableExpandableCellCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyTableExpandableRow {
+    interface Smoothly0TableExpandableRow {
         "align"?: "left" | "center" | "right";
-        "onExpandableChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
-        "onExpandableLoad"?: (event: SmoothlyTableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
-        "onExpansionOpen"?: (event: SmoothlyTableExpandableRowCustomEvent<HTMLElement>) => void;
+        "onExpandableChange"?: (event: Smoothly0TableExpandableRowCustomEvent<boolean>) => void;
+        "onExpandableLoad"?: (event: Smoothly0TableExpandableRowCustomEvent<{ allowSpotlight: (allowed: boolean) => void }>) => void;
+        "onExpansionOpen"?: (event: Smoothly0TableExpandableRowCustomEvent<HTMLElement>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyTableHeader {
+    interface Smoothly0TableHeader {
         "name"?: string;
     }
-    interface SmoothlyTableRow {
+    interface Smoothly0TableRow {
     }
-    interface SmoothlyTrigger {
+    interface Smoothly0Trigger {
         "color"?: Color | undefined;
         "disabled"?: boolean;
         "expand"?: Expand;
         "fill"?: Fill;
         "name"?: string;
-        "onTrigger"?: (event: SmoothlyTriggerCustomEvent<Trigger>) => void;
+        "onTrigger"?: (event: Smoothly0TriggerCustomEvent<Trigger>) => void;
         "type"?: "link" | "button";
         "value"?: any;
     }
-    interface SmoothlyTriggerSink {
+    interface Smoothly0TriggerSink {
         "context"?: Window;
         "destination"?: string;
         "filter"?: string;
     }
-    interface SmoothlyTriggerSource {
+    interface Smoothly0TriggerSource {
         "listen"?: string;
-        "onMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
-        "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
+        "onMessage"?: (event: Smoothly0TriggerSourceCustomEvent<Message<any>>) => void;
+        "onTrigger"?: (event: Smoothly0TriggerSourceCustomEvent<Trigger>) => void;
     }
-    interface SmoothlyTuple {
+    interface Smoothly0Tuple {
         "tuple"?: [string, string];
     }
-    interface SmoothlyUrlencoded {
+    interface Smoothly0Urlencoded {
         "data"?: string;
     }
     interface IntrinsicElements {
-        "smoothly-accordion": SmoothlyAccordion;
-        "smoothly-accordion-item": SmoothlyAccordionItem;
-        "smoothly-app": SmoothlyApp;
-        "smoothly-app-demo": SmoothlyAppDemo;
-        "smoothly-backtotop": SmoothlyBacktotop;
-        "smoothly-button": SmoothlyButton;
-        "smoothly-calendar": SmoothlyCalendar;
-        "smoothly-checkbox": SmoothlyCheckbox;
-        "smoothly-country": SmoothlyCountry;
-        "smoothly-dialog": SmoothlyDialog;
-        "smoothly-dialog-demo": SmoothlyDialogDemo;
-        "smoothly-display": SmoothlyDisplay;
-        "smoothly-display-amount": SmoothlyDisplayAmount;
-        "smoothly-display-date-time": SmoothlyDisplayDateTime;
-        "smoothly-display-demo": SmoothlyDisplayDemo;
-        "smoothly-frame": SmoothlyFrame;
-        "smoothly-google-font": SmoothlyGoogleFont;
-        "smoothly-icon": SmoothlyIcon;
-        "smoothly-icon-demo": SmoothlyIconDemo;
-        "smoothly-input": SmoothlyInput;
-        "smoothly-input-date": SmoothlyInputDate;
-        "smoothly-input-date-range": SmoothlyInputDateRange;
-        "smoothly-input-demo": SmoothlyInputDemo;
-        "smoothly-input-month": SmoothlyInputMonth;
-        "smoothly-item": SmoothlyItem;
-        "smoothly-menu-options": SmoothlyMenuOptions;
-        "smoothly-notification": SmoothlyNotification;
-        "smoothly-notifier": SmoothlyNotifier;
-        "smoothly-option": SmoothlyOption;
-        "smoothly-picker": SmoothlyPicker;
-        "smoothly-popup": SmoothlyPopup;
-        "smoothly-quiet": SmoothlyQuiet;
-        "smoothly-radio": SmoothlyRadio;
-        "smoothly-radio-button": SmoothlyRadioButton;
-        "smoothly-radio-button-item": SmoothlyRadioButtonItem;
-        "smoothly-radio-group": SmoothlyRadioGroup;
-        "smoothly-reorder": SmoothlyReorder;
-        "smoothly-room": SmoothlyRoom;
-        "smoothly-select": SmoothlySelect;
-        "smoothly-select-demo": SmoothlySelectDemo;
-        "smoothly-selector": SmoothlySelector;
-        "smoothly-skeleton": SmoothlySkeleton;
-        "smoothly-spinner": SmoothlySpinner;
-        "smoothly-submit": SmoothlySubmit;
-        "smoothly-svg": SmoothlySvg;
-        "smoothly-tab": SmoothlyTab;
-        "smoothly-tab-switch": SmoothlyTabSwitch;
-        "smoothly-table": SmoothlyTable;
-        "smoothly-table-cell": SmoothlyTableCell;
-        "smoothly-table-demo": SmoothlyTableDemo;
-        "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
-        "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
-        "smoothly-table-header": SmoothlyTableHeader;
-        "smoothly-table-row": SmoothlyTableRow;
-        "smoothly-trigger": SmoothlyTrigger;
-        "smoothly-trigger-sink": SmoothlyTriggerSink;
-        "smoothly-trigger-source": SmoothlyTriggerSource;
-        "smoothly-tuple": SmoothlyTuple;
-        "smoothly-urlencoded": SmoothlyUrlencoded;
+        "smoothly-0-accordion": Smoothly0Accordion;
+        "smoothly-0-accordion-item": Smoothly0AccordionItem;
+        "smoothly-0-app": Smoothly0App;
+        "smoothly-0-app-demo": Smoothly0AppDemo;
+        "smoothly-0-backtotop": Smoothly0Backtotop;
+        "smoothly-0-button": Smoothly0Button;
+        "smoothly-0-calendar": Smoothly0Calendar;
+        "smoothly-0-checkbox": Smoothly0Checkbox;
+        "smoothly-0-country": Smoothly0Country;
+        "smoothly-0-dialog": Smoothly0Dialog;
+        "smoothly-0-dialog-demo": Smoothly0DialogDemo;
+        "smoothly-0-display": Smoothly0Display;
+        "smoothly-0-display-amount": Smoothly0DisplayAmount;
+        "smoothly-0-display-date-time": Smoothly0DisplayDateTime;
+        "smoothly-0-display-demo": Smoothly0DisplayDemo;
+        "smoothly-0-frame": Smoothly0Frame;
+        "smoothly-0-google-font": Smoothly0GoogleFont;
+        "smoothly-0-icon": Smoothly0Icon;
+        "smoothly-0-icon-demo": Smoothly0IconDemo;
+        "smoothly-0-input": Smoothly0Input;
+        "smoothly-0-input-date": Smoothly0InputDate;
+        "smoothly-0-input-date-range": Smoothly0InputDateRange;
+        "smoothly-0-input-demo": Smoothly0InputDemo;
+        "smoothly-0-input-month": Smoothly0InputMonth;
+        "smoothly-0-item": Smoothly0Item;
+        "smoothly-0-menu-options": Smoothly0MenuOptions;
+        "smoothly-0-notification": Smoothly0Notification;
+        "smoothly-0-notifier": Smoothly0Notifier;
+        "smoothly-0-option": Smoothly0Option;
+        "smoothly-0-picker": Smoothly0Picker;
+        "smoothly-0-popup": Smoothly0Popup;
+        "smoothly-0-quiet": Smoothly0Quiet;
+        "smoothly-0-radio": Smoothly0Radio;
+        "smoothly-0-radio-button": Smoothly0RadioButton;
+        "smoothly-0-radio-button-item": Smoothly0RadioButtonItem;
+        "smoothly-0-radio-group": Smoothly0RadioGroup;
+        "smoothly-0-reorder": Smoothly0Reorder;
+        "smoothly-0-room": Smoothly0Room;
+        "smoothly-0-select": Smoothly0Select;
+        "smoothly-0-select-demo": Smoothly0SelectDemo;
+        "smoothly-0-selector": Smoothly0Selector;
+        "smoothly-0-skeleton": Smoothly0Skeleton;
+        "smoothly-0-spinner": Smoothly0Spinner;
+        "smoothly-0-submit": Smoothly0Submit;
+        "smoothly-0-svg": Smoothly0Svg;
+        "smoothly-0-tab": Smoothly0Tab;
+        "smoothly-0-tab-switch": Smoothly0TabSwitch;
+        "smoothly-0-table": Smoothly0Table;
+        "smoothly-0-table-cell": Smoothly0TableCell;
+        "smoothly-0-table-demo": Smoothly0TableDemo;
+        "smoothly-0-table-expandable-cell": Smoothly0TableExpandableCell;
+        "smoothly-0-table-expandable-row": Smoothly0TableExpandableRow;
+        "smoothly-0-table-header": Smoothly0TableHeader;
+        "smoothly-0-table-row": Smoothly0TableRow;
+        "smoothly-0-trigger": Smoothly0Trigger;
+        "smoothly-0-trigger-sink": Smoothly0TriggerSink;
+        "smoothly-0-trigger-source": Smoothly0TriggerSource;
+        "smoothly-0-tuple": Smoothly0Tuple;
+        "smoothly-0-urlencoded": Smoothly0Urlencoded;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
-            "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
-            "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
-            "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
-            "smoothly-backtotop": LocalJSX.SmoothlyBacktotop & JSXBase.HTMLAttributes<HTMLSmoothlyBacktotopElement>;
-            "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
-            "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
-            "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
-            "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
-            "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
-            "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
-            "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
-            "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
+            "smoothly-0-accordion": LocalJSX.Smoothly0Accordion & JSXBase.HTMLAttributes<HTMLSmoothly0AccordionElement>;
+            "smoothly-0-accordion-item": LocalJSX.Smoothly0AccordionItem & JSXBase.HTMLAttributes<HTMLSmoothly0AccordionItemElement>;
+            "smoothly-0-app": LocalJSX.Smoothly0App & JSXBase.HTMLAttributes<HTMLSmoothly0AppElement>;
+            "smoothly-0-app-demo": LocalJSX.Smoothly0AppDemo & JSXBase.HTMLAttributes<HTMLSmoothly0AppDemoElement>;
+            "smoothly-0-backtotop": LocalJSX.Smoothly0Backtotop & JSXBase.HTMLAttributes<HTMLSmoothly0BacktotopElement>;
+            "smoothly-0-button": LocalJSX.Smoothly0Button & JSXBase.HTMLAttributes<HTMLSmoothly0ButtonElement>;
+            "smoothly-0-calendar": LocalJSX.Smoothly0Calendar & JSXBase.HTMLAttributes<HTMLSmoothly0CalendarElement>;
+            "smoothly-0-checkbox": LocalJSX.Smoothly0Checkbox & JSXBase.HTMLAttributes<HTMLSmoothly0CheckboxElement>;
+            "smoothly-0-country": LocalJSX.Smoothly0Country & JSXBase.HTMLAttributes<HTMLSmoothly0CountryElement>;
+            "smoothly-0-dialog": LocalJSX.Smoothly0Dialog & JSXBase.HTMLAttributes<HTMLSmoothly0DialogElement>;
+            "smoothly-0-dialog-demo": LocalJSX.Smoothly0DialogDemo & JSXBase.HTMLAttributes<HTMLSmoothly0DialogDemoElement>;
+            "smoothly-0-display": LocalJSX.Smoothly0Display & JSXBase.HTMLAttributes<HTMLSmoothly0DisplayElement>;
+            "smoothly-0-display-amount": LocalJSX.Smoothly0DisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothly0DisplayAmountElement>;
             /**
-             * DEPRECATED, use  <smoothly-display type="date-time">
+             * DEPRECATED, use  <smoothly-0-display type="date-time">
              */
-            "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
-            "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
-            "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
-            "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
-            "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
-            "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
-            "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
-            "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
-            "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
-            "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
-            "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
-            "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
-            "smoothly-menu-options": LocalJSX.SmoothlyMenuOptions & JSXBase.HTMLAttributes<HTMLSmoothlyMenuOptionsElement>;
-            "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
-            "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
-            "smoothly-option": LocalJSX.SmoothlyOption & JSXBase.HTMLAttributes<HTMLSmoothlyOptionElement>;
-            "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
-            "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
-            "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
-            "smoothly-radio": LocalJSX.SmoothlyRadio & JSXBase.HTMLAttributes<HTMLSmoothlyRadioElement>;
-            "smoothly-radio-button": LocalJSX.SmoothlyRadioButton & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonElement>;
-            "smoothly-radio-button-item": LocalJSX.SmoothlyRadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothlyRadioButtonItemElement>;
-            "smoothly-radio-group": LocalJSX.SmoothlyRadioGroup & JSXBase.HTMLAttributes<HTMLSmoothlyRadioGroupElement>;
-            "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
-            "smoothly-room": LocalJSX.SmoothlyRoom & JSXBase.HTMLAttributes<HTMLSmoothlyRoomElement>;
-            "smoothly-select": LocalJSX.SmoothlySelect & JSXBase.HTMLAttributes<HTMLSmoothlySelectElement>;
-            "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
-            "smoothly-selector": LocalJSX.SmoothlySelector & JSXBase.HTMLAttributes<HTMLSmoothlySelectorElement>;
-            "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
-            "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
-            "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
-            "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
-            "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
-            "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
-            "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
-            "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
-            "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
-            "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
-            "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
-            "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
-            "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
-            "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
-            "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
-            "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
-            "smoothly-tuple": LocalJSX.SmoothlyTuple & JSXBase.HTMLAttributes<HTMLSmoothlyTupleElement>;
-            "smoothly-urlencoded": LocalJSX.SmoothlyUrlencoded & JSXBase.HTMLAttributes<HTMLSmoothlyUrlencodedElement>;
+            "smoothly-0-display-date-time": LocalJSX.Smoothly0DisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothly0DisplayDateTimeElement>;
+            "smoothly-0-display-demo": LocalJSX.Smoothly0DisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothly0DisplayDemoElement>;
+            "smoothly-0-frame": LocalJSX.Smoothly0Frame & JSXBase.HTMLAttributes<HTMLSmoothly0FrameElement>;
+            "smoothly-0-google-font": LocalJSX.Smoothly0GoogleFont & JSXBase.HTMLAttributes<HTMLSmoothly0GoogleFontElement>;
+            "smoothly-0-icon": LocalJSX.Smoothly0Icon & JSXBase.HTMLAttributes<HTMLSmoothly0IconElement>;
+            "smoothly-0-icon-demo": LocalJSX.Smoothly0IconDemo & JSXBase.HTMLAttributes<HTMLSmoothly0IconDemoElement>;
+            "smoothly-0-input": LocalJSX.Smoothly0Input & JSXBase.HTMLAttributes<HTMLSmoothly0InputElement>;
+            "smoothly-0-input-date": LocalJSX.Smoothly0InputDate & JSXBase.HTMLAttributes<HTMLSmoothly0InputDateElement>;
+            "smoothly-0-input-date-range": LocalJSX.Smoothly0InputDateRange & JSXBase.HTMLAttributes<HTMLSmoothly0InputDateRangeElement>;
+            "smoothly-0-input-demo": LocalJSX.Smoothly0InputDemo & JSXBase.HTMLAttributes<HTMLSmoothly0InputDemoElement>;
+            "smoothly-0-input-month": LocalJSX.Smoothly0InputMonth & JSXBase.HTMLAttributes<HTMLSmoothly0InputMonthElement>;
+            "smoothly-0-item": LocalJSX.Smoothly0Item & JSXBase.HTMLAttributes<HTMLSmoothly0ItemElement>;
+            "smoothly-0-menu-options": LocalJSX.Smoothly0MenuOptions & JSXBase.HTMLAttributes<HTMLSmoothly0MenuOptionsElement>;
+            "smoothly-0-notification": LocalJSX.Smoothly0Notification & JSXBase.HTMLAttributes<HTMLSmoothly0NotificationElement>;
+            "smoothly-0-notifier": LocalJSX.Smoothly0Notifier & JSXBase.HTMLAttributes<HTMLSmoothly0NotifierElement>;
+            "smoothly-0-option": LocalJSX.Smoothly0Option & JSXBase.HTMLAttributes<HTMLSmoothly0OptionElement>;
+            "smoothly-0-picker": LocalJSX.Smoothly0Picker & JSXBase.HTMLAttributes<HTMLSmoothly0PickerElement>;
+            "smoothly-0-popup": LocalJSX.Smoothly0Popup & JSXBase.HTMLAttributes<HTMLSmoothly0PopupElement>;
+            "smoothly-0-quiet": LocalJSX.Smoothly0Quiet & JSXBase.HTMLAttributes<HTMLSmoothly0QuietElement>;
+            "smoothly-0-radio": LocalJSX.Smoothly0Radio & JSXBase.HTMLAttributes<HTMLSmoothly0RadioElement>;
+            "smoothly-0-radio-button": LocalJSX.Smoothly0RadioButton & JSXBase.HTMLAttributes<HTMLSmoothly0RadioButtonElement>;
+            "smoothly-0-radio-button-item": LocalJSX.Smoothly0RadioButtonItem & JSXBase.HTMLAttributes<HTMLSmoothly0RadioButtonItemElement>;
+            "smoothly-0-radio-group": LocalJSX.Smoothly0RadioGroup & JSXBase.HTMLAttributes<HTMLSmoothly0RadioGroupElement>;
+            "smoothly-0-reorder": LocalJSX.Smoothly0Reorder & JSXBase.HTMLAttributes<HTMLSmoothly0ReorderElement>;
+            "smoothly-0-room": LocalJSX.Smoothly0Room & JSXBase.HTMLAttributes<HTMLSmoothly0RoomElement>;
+            "smoothly-0-select": LocalJSX.Smoothly0Select & JSXBase.HTMLAttributes<HTMLSmoothly0SelectElement>;
+            "smoothly-0-select-demo": LocalJSX.Smoothly0SelectDemo & JSXBase.HTMLAttributes<HTMLSmoothly0SelectDemoElement>;
+            "smoothly-0-selector": LocalJSX.Smoothly0Selector & JSXBase.HTMLAttributes<HTMLSmoothly0SelectorElement>;
+            "smoothly-0-skeleton": LocalJSX.Smoothly0Skeleton & JSXBase.HTMLAttributes<HTMLSmoothly0SkeletonElement>;
+            "smoothly-0-spinner": LocalJSX.Smoothly0Spinner & JSXBase.HTMLAttributes<HTMLSmoothly0SpinnerElement>;
+            "smoothly-0-submit": LocalJSX.Smoothly0Submit & JSXBase.HTMLAttributes<HTMLSmoothly0SubmitElement>;
+            "smoothly-0-svg": LocalJSX.Smoothly0Svg & JSXBase.HTMLAttributes<HTMLSmoothly0SvgElement>;
+            "smoothly-0-tab": LocalJSX.Smoothly0Tab & JSXBase.HTMLAttributes<HTMLSmoothly0TabElement>;
+            "smoothly-0-tab-switch": LocalJSX.Smoothly0TabSwitch & JSXBase.HTMLAttributes<HTMLSmoothly0TabSwitchElement>;
+            "smoothly-0-table": LocalJSX.Smoothly0Table & JSXBase.HTMLAttributes<HTMLSmoothly0TableElement>;
+            "smoothly-0-table-cell": LocalJSX.Smoothly0TableCell & JSXBase.HTMLAttributes<HTMLSmoothly0TableCellElement>;
+            "smoothly-0-table-demo": LocalJSX.Smoothly0TableDemo & JSXBase.HTMLAttributes<HTMLSmoothly0TableDemoElement>;
+            "smoothly-0-table-expandable-cell": LocalJSX.Smoothly0TableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothly0TableExpandableCellElement>;
+            "smoothly-0-table-expandable-row": LocalJSX.Smoothly0TableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothly0TableExpandableRowElement>;
+            "smoothly-0-table-header": LocalJSX.Smoothly0TableHeader & JSXBase.HTMLAttributes<HTMLSmoothly0TableHeaderElement>;
+            "smoothly-0-table-row": LocalJSX.Smoothly0TableRow & JSXBase.HTMLAttributes<HTMLSmoothly0TableRowElement>;
+            "smoothly-0-trigger": LocalJSX.Smoothly0Trigger & JSXBase.HTMLAttributes<HTMLSmoothly0TriggerElement>;
+            "smoothly-0-trigger-sink": LocalJSX.Smoothly0TriggerSink & JSXBase.HTMLAttributes<HTMLSmoothly0TriggerSinkElement>;
+            "smoothly-0-trigger-source": LocalJSX.Smoothly0TriggerSource & JSXBase.HTMLAttributes<HTMLSmoothly0TriggerSourceElement>;
+            "smoothly-0-tuple": LocalJSX.Smoothly0Tuple & JSXBase.HTMLAttributes<HTMLSmoothly0TupleElement>;
+            "smoothly-0-urlencoded": LocalJSX.Smoothly0Urlencoded & JSXBase.HTMLAttributes<HTMLSmoothly0UrlencodedElement>;
         }
     }
 }

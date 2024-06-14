@@ -13,14 +13,14 @@ import {
 } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-table-expandable-cell",
+	tag: "smoothly-0-table-expandable-cell",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class TableExpandableCell implements ComponentWillLoad {
 	private expansionElement?: HTMLTableRowElement
 	private beginOpen: boolean
-	@Element() element: HTMLSmoothlyTableExpandableCellElement
+	@Element() element: HTMLSmoothly0TableExpandableCellElement
 	@State() allowSpotlight = true
 	@State() spotlight = true
 	@Prop() align: "left" | "center" | "right" = "left"
@@ -72,7 +72,7 @@ export class TableExpandableCell implements ComponentWillLoad {
 		return (
 			<Host style={{ textAlign: this.align }}>
 				<aside>
-					<smoothly-icon name="chevron-forward" size="tiny"></smoothly-icon>
+					<smoothly-0-icon name="chevron-forward" size="tiny"></smoothly-0-icon>
 					<slot></slot>
 				</aside>
 				<tr class={this.spotlight ? "spotlight" : ""} ref={e => (this.expansionElement = e)}>

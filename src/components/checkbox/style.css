@@ -4,13 +4,13 @@
 :host[hidden] {
 	display: none;
 }
-smoothly-icon {
+smoothly-0-icon {
 	cursor: pointer;
 }
-smoothly-icon:nth-child(2) {
+smoothly-0-icon:nth-child(2) {
 	position: absolute;
 	transform: scaleX(0.6);
 }
-:host[disabled] smoothly-icon {
+:host[disabled] smoothly-0-icon {
 	stroke: rgba(var(--smoothly-color-contrast), 0.3);
 }

@@ -1,27 +1,27 @@
-smoothly-radio-button[decoration=button] :host {
+smoothly-0-radio-button[decoration=button] :host {
 	padding: 0.3rem;
 	}
 	
-	smoothly-radio-button[decoration=button] :host > header > smoothly-icon {
+	smoothly-0-radio-button[decoration=button] :host > header > smoothly-0-icon {
 		margin-right: 0.5rem;
 		border-radius: 100%;
 		font-size: 1.3rem;
 		display: flex;
 	}
 
-	smoothly-radio-button[decoration=button] ::slotted([slot=expansion]) {
+	smoothly-0-radio-button[decoration=button] ::slotted([slot=expansion]) {
 		background: rgb(var(--smoothly-color));
 		color: rgb(var(--smoothly-color-contrast));
 		border-radius: 5px;
 		margin-top: 0.5rem;
 	}
 
-	html smoothly-radio-button[decoration=button] > :host {
+	html smoothly-0-radio-button[decoration=button] > :host {
 		background-color: inherit;
 		color: inherit;
 	}
 	
-	smoothly-radio-button[decoration=button] ::slotted([slot=expansion])::before {
+	smoothly-0-radio-button[decoration=button] ::slotted([slot=expansion])::before {
 		content: "\25B2";
 		position: absolute;
 		top: -0.8rem;
@@ -30,10 +30,10 @@ smoothly-radio-button[decoration=button] :host {
 	}
 	
 	@media screen and (min-width: 900px){
-		smoothly-radio-button[decoration=button] :host > header:hover > smoothly-icon {
+		smoothly-0-radio-button[decoration=button] :host > header:hover > smoothly-0-icon {
 			cursor: pointer;
 		}
-		smoothly-radio-button[deselectable] :host[selected] > header:hover > smoothly-icon {
+		smoothly-0-radio-button[deselectable] :host[selected] > header:hover > smoothly-0-icon {
 			cursor: pointer;
 		}
 	}

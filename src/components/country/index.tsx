@@ -4,10 +4,10 @@ import { CountryCode, Language } from "isoly"
 import { getLanguage } from "langly"
 
 @Component({
-	tag: "smoothly-country",
+	tag: "smoothly-0-country",
 	scoped: true,
 })
-export class SmoothlyCountry {
+export class Smoothly0Country {
 	@Prop() value: CountryCode.Alpha2
 	@Prop() text: "alpha2" | "name" | "none" = "alpha2"
 	@Element() element: HTMLElement

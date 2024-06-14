@@ -1,10 +1,10 @@
 import { Component, h } from "@stencil/core"
 @Component({
-	tag: "smoothly-icon-demo",
+	tag: "smoothly-0-icon-demo",
 	styleUrl: "./style.css",
 	scoped: true,
 })
-export class SmoothlyIconDemo {
+export class Smoothly0IconDemo {
 	render() {
 		return [
 			<h1>Icons</h1>,
@@ -476,7 +476,7 @@ export class SmoothlyIconDemo {
 					"volume-off",
 					"woman",
 				].map(name => (
-					<smoothly-icon name={name} toolTip={name}></smoothly-icon>
+					<smoothly-0-icon name={name} toolTip={name}></smoothly-0-icon>
 				))}
 			</div>,
 		]

@@ -1,11 +1,11 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-skeleton",
+	tag: "smoothly-0-skeleton",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlySkeleton {
+export class Smoothly0Skeleton {
 	@Prop() widths: string[] = ["8rem", "9rem", "10rem"]
 	@Prop({ mutable: true }) width: string
 	@Prop() color: string
