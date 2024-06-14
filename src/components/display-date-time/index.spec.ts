@@ -1,7 +1,7 @@
-import { SmoothlyDisplayDateTime } from "."
+import { Smoothly0DisplayDateTime } from "."
 
 describe("smoothly-0-display-date-time", () => {
 	it("builds", () => {
-		expect(new SmoothlyDisplayDateTime()).toBeTruthy()
+		expect(new Smoothly0DisplayDateTime()).toBeTruthy()
 	})
 })
