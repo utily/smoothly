@@ -127,7 +127,9 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="small" name="camera-outline" />
 						</smoothly-item>
 					</smoothly-input-select>
-					<smoothly-input-checkbox name="checkbox">Check the box</smoothly-input-checkbox>
+					<smoothly-input-checkbox name="checkbox" onSmoothlyInput={e => e.detail.checkbox}>
+						Check the box
+					</smoothly-input-checkbox>
 					<smoothly-input-checkbox name="checkbox2" checked>
 						Check the box 2
 					</smoothly-input-checkbox>

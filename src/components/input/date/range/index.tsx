@@ -15,7 +15,7 @@ import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
-import { Color, Data } from "./../../../../model"
+import { Color } from "./../../../../model"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -38,7 +38,7 @@ export class InputDateRange implements ComponentWillLoad, Clearable, Input {
 	@Prop() labelEnd = "to"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
-	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyInput: EventEmitter<Record<string, isoly.DateRange>> // Not sure - should it not emit undefined when cleared?
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	@Method()

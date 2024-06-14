@@ -10,7 +10,7 @@ import {
 	Prop,
 	Watch,
 } from "@stencil/core"
-import { Date } from "isoly"
+import { Date, isoly } from "isoly"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Input } from "../Input"
@@ -34,7 +34,7 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 	@Prop({ mutable: true }) disabled: boolean
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<Date>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, isoly.Date | undefined>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	componentWillLoad(): void {
@@ -47,7 +47,7 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 		this.value = undefined
 	}
 	@Watch("value")
-	onStart(next: Date) {
+	onStart(next: Date | undefined) {
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
 	}

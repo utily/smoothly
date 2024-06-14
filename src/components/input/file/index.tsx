@@ -35,7 +35,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@State() dragging = false
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyInput: EventEmitter<Record<string, File | undefined>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	private listener: { changed?: (parent: Editable) => Promise<void> }
