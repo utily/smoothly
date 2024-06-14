@@ -52,10 +52,10 @@ export class SmoothlyAppRoom {
 						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
 					</a>
 				</li>
-				<main ref={e => (this.contentElement = e)}>
+				<div ref={e => (this.contentElement = e)}>
 					{this.content && <smoothly-lazy content={this.content} />}
 					<slot></slot>
-				</main>
+				</div>
 			</Host>
 		)
 	}

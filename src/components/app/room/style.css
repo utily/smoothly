@@ -5,8 +5,9 @@
 	cursor: pointer;
 }
 
-main {
+div {
 	overflow-y: auto;
+	height: 100%;
 }
 
 :not(:host[label], :host[icon]),
@@ -14,7 +15,7 @@ main {
 	display: none;
 }
 
-:host>main {
+:host>div {
 	display: none;
 }
 
