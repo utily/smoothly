@@ -1,6 +1,5 @@
 import {
 	Component,
-	ComponentDidLoad,
 	ComponentWillLoad,
 	Element,
 	Event,
@@ -18,7 +17,8 @@ import { Item } from "./Item"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
+export class SmoothlyItem implements Item, ComponentWillLoad {
+	private loaded = false
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
@@ -29,20 +29,19 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 
 	@Listen("click")
 	onClick() {
-		if (this.selectable) {
+		if (this.selectable)
 			this.selected = !this.selected
-			this.smoothlyItemSelect.emit(this.element)
-		}
 	}
 	componentWillLoad() {
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
 	}
-	componentDidLoad() {
+	componentWillRender() {
 		if (this.selected && this.selectable)
 			this.smoothlyItemSelect.emit(this.element)
 	}
+
 	@Method()
 	async filter(filter: string): Promise<void> {
 		const value = typeof this.value === "string" ? this.value : JSON.stringify(this.value ?? "")
