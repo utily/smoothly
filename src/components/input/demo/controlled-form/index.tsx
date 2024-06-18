@@ -1,4 +1,5 @@
 import { Component, h, Host, State, VNode, Watch } from "@stencil/core"
+import { isoly } from "isoly"
 import { SmoothlyFormCustomEvent } from "../../../../components"
 import { Data } from "../../../../model"
 
@@ -9,6 +10,8 @@ import { Data } from "../../../../model"
 })
 export class SmoothlyInputDemoControlledForm {
 	@State() name = "Initial name"
+	@State() currency: isoly.Currency = "EUR"
+	private currencies: isoly.Currency[] = ["GBP", "SEK", "EUR", "USD"]
 
 	@Watch("name")
 	nameChanged(current: string, previous: string): void {
@@ -19,7 +22,7 @@ export class SmoothlyInputDemoControlledForm {
 		event: SmoothlyFormCustomEvent<{ result: (result: boolean) => void; value: Data }>
 	): Promise<void> {
 		event.stopPropagation()
-		console.log("Received event. Processing...")
+		console.log("Received event. Processing...", event.detail)
 		if (!(typeof event.detail.value.name == "string")) {
 			console.error("Bad input. Resolving false")
 			event.detail.result(false)
@@ -38,6 +41,13 @@ export class SmoothlyInputDemoControlledForm {
 					<smoothly-input type={"text"} name={"name"} value={this.name}>
 						Name
 					</smoothly-input>
+					<smoothly-input-select name={"currency"}>
+						{this.currencies.map(currency => (
+							<smoothly-item selected={currency == this.currency} value={currency}>
+								{currency}
+							</smoothly-item>
+						))}
+					</smoothly-input-select>
 					<smoothly-input-edit slot={"edit"} type={"button"} size={"icon"} color={"primary"} fill={"default"} />
 					<smoothly-input-reset slot={"reset"} type={"form"} size={"icon"} color={"warning"} fill={"default"} />
 					<smoothly-input-submit slot={"submit"} size={"icon"} color={"success"} />
