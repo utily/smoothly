@@ -42,6 +42,7 @@ export class SmoothlyInputDemoControlledForm {
 						Name
 					</smoothly-input>
 					<smoothly-input-select name={"currency"}>
+						<span slot={"label"}>Currency</span>
 						{this.currencies.map(currency => (
 							<smoothly-item selected={currency == this.currency} value={currency}>
 								{currency}
