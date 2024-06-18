@@ -33,6 +33,7 @@ export class SmoothlyInputDemoControlledForm {
 			event.detail.result(true)
 		}
 	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host>
