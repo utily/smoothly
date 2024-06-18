@@ -66,6 +66,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	componentDidLoad(): void | Promise<void> {
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])
 		this.initialValueHandled = true
+		this.onSelectedChange()
 	}
 	componentDidRender(): void | Promise<void> {
 		this.itemHeight === undefined && (this.itemHeight = this.items.find(item => item.clientHeight > 0)?.clientHeight)
