@@ -11,6 +11,7 @@ import { Data } from "../../../../model"
 export class SmoothlyInputDemoControlledForm {
 	@State() name = "Initial name"
 	@State() currency: isoly.Currency = "EUR"
+	@State() date: isoly.Date = isoly.Date.now()
 	private currencies: isoly.Currency[] = ["GBP", "SEK", "EUR", "USD"]
 
 	@Watch("name")
@@ -24,20 +25,26 @@ export class SmoothlyInputDemoControlledForm {
 		event.stopPropagation()
 		console.log("Received event. Processing...", event.detail)
 		if (!(typeof event.detail.value.name == "string")) {
-			console.error("Bad input. Resolving false")
-			event.detail.result(false)
-		} else {
+			console.error("Bad input. Resolving false.")
+		} else if (!(typeof event.detail.value.date == "string"))
+			console.error("Bad input. Resolving false.")
+		else if (!isoly.Currency.is(event.detail.value.currency))
+			console.error("Bad input. Resolving false.")
+		else {
 			await new Promise(resolve => window.setTimeout(resolve, 1_000))
 			this.name = event.detail.value.name
-			console.log("Finished processing successfully. Resolving true")
+			this.date = event.detail.value.date
+			this.currency = event.detail.value.currency
+			console.log("Finished processing successfully. Resolving true.")
 			event.detail.result(true)
 		}
+		event.detail.result(false)
 	}
 
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-form readonly looks={"line"} onSmoothlyFormSubmit={e => this.submitHandler(e)}>
+				<smoothly-form readonly looks={"grid"} onSmoothlyFormSubmit={e => this.submitHandler(e)}>
 					<smoothly-input type={"text"} name={"name"} value={this.name}>
 						Name
 					</smoothly-input>
@@ -49,6 +56,11 @@ export class SmoothlyInputDemoControlledForm {
 							</smoothly-item>
 						))}
 					</smoothly-input-select>
+					<smoothly-input>Dummy</smoothly-input>
+					<smoothly-input-month name={"date"} value={this.date} next previous>
+						<span slot={"year-label"}>Year</span>
+						<span slot={"month-label"}>Month</span>
+					</smoothly-input-month>
 					<smoothly-input-edit slot={"edit"} type={"button"} size={"icon"} color={"primary"} fill={"default"} />
 					<smoothly-input-reset slot={"reset"} type={"form"} size={"icon"} color={"warning"} fill={"default"} />
 					<smoothly-input-submit slot={"submit"} size={"icon"} color={"success"} />

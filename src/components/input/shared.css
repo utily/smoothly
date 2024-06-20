@@ -33,5 +33,4 @@
 }
 :host[looks="transparent"]:focus-within {
 	outline: 1px solid rgb(var(--smoothly-color-contrast));
-
 }

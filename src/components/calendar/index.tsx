@@ -67,10 +67,20 @@ export class Calendar {
 		return [
 			<smoothly-input-month
 				value={this.month ?? this.value}
+				next
+				previous
+				arrows={false}
 				onSmoothlyValueChange={event => {
 					this.month = event.detail
 					event.stopPropagation()
-				}}></smoothly-input-month>,
+				}}>
+				<div slot={"year-label"}>
+					<slot name={"year-label"} />
+				</div>
+				<div slot={"month-label"}>
+					<slot name={"month-label"} />
+				</div>
+			</smoothly-input-month>,
 			<table>
 				<thead>
 					<tr>
