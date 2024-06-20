@@ -46,7 +46,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
 	componentWillLoad(): void {
-		this.valueChanged()
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
