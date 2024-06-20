@@ -10,6 +10,7 @@ import {
 	Listen,
 	Method,
 	Prop,
+	Watch,
 } from "@stencil/core"
 import { Item } from "./Item"
 
@@ -31,8 +32,11 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	onClick() {
 		if (this.selectable) {
 			this.selected = !this.selected
-			this.smoothlyItemSelect.emit(this.element)
 		}
+	}
+	@Watch("selected")
+	selectedWatcher() {
+		this.smoothlyItemSelect.emit(this.element)
 	}
 	componentWillLoad() {
 		this.smoothlyInputLoad.emit(() => {
