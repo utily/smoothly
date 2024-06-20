@@ -35,8 +35,15 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		if (this.selectable && (!this.deselectable || !this.selected))
 			this.selected = !this.selected
 	}
+
+	@Watch("selected")
+	selectedWatcher(): void {
+		this.smoothlyItemSelect.emit(this.element)
+	}
 	componentWillLoad(): void {
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(() => {
+			return
+		})
 	}
 	componentDidLoad(): void {
 		if (this.selected && this.selectable)
@@ -49,10 +56,6 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 			filter && this.selectable
 				? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
 				: false
-	}
-	@Watch("selected")
-	selectedChanged(): void {
-		this.smoothlyItemSelect.emit(this.element)
 	}
 	render(): VNode | VNode[] {
 		return (
