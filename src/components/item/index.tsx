@@ -32,7 +32,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 
 	@Listen("click")
 	clickHandler(): void {
-		if (this.selectable && (!this.deselectable || !this.selected))
+		if (this.selectable && (!this.selected || this.deselectable))
 			this.selected = !this.selected
 	}
 

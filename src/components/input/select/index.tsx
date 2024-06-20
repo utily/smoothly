@@ -129,7 +129,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Watch("required")
 	onRequiredChange(): void {
-		this.items.forEach(item => (item.deselectable = this.required))
+		this.items.forEach(item => (item.deselectable = !this.required))
 	}
 	@Watch("filter")
 	async onFilterChange(value: string): Promise<void> {
@@ -150,7 +150,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			event.stopPropagation()
 		} else if (Item.Element.is(event.target)) {
 			event.stopPropagation()
-			event.target.deselectable = this.required
+			event.target.deselectable = !this.required
 			this.items.push(event.target as HTMLSmoothlyItemElement)
 		}
 		event.detail(this)
