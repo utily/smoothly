@@ -325,7 +325,20 @@ export namespace Components {
         "value"?: File;
     }
     interface SmoothlyInputMonth {
-        "value"?: Date;
+        "arrows": boolean;
+        "changed": boolean;
+        "clear": () => Promise<void>;
+        "color"?: Color;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
+        "looks": Looks;
+        "name": string;
+        "next": boolean;
+        "previous": boolean;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputRadio {
         "changed": boolean;
@@ -387,6 +400,7 @@ export namespace Components {
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
+        "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showArrow": boolean;
@@ -405,6 +419,7 @@ export namespace Components {
         "type": "link" | "button";
     }
     interface SmoothlyItem {
+        "deselectable": boolean;
         "filter": (filter: string) => Promise<void>;
         "marked": boolean;
         "selectable": boolean;
@@ -1784,8 +1799,20 @@ declare namespace LocalJSX {
         "value"?: File;
     }
     interface SmoothlyInputMonth {
+        "arrows"?: boolean;
+        "changed"?: boolean;
+        "color"?: Color;
+        "looks"?: Looks;
+        "name"?: string;
+        "next"?: boolean;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputMonthCustomEvent<(disabled: boolean) => void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputMonthCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
-        "value"?: Date;
+        "previous"?: boolean;
+        "readonly"?: boolean;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputRadio {
         "changed"?: boolean;
@@ -1851,6 +1878,7 @@ declare namespace LocalJSX {
         "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "placeholder"?: string | any;
         "readonly"?: boolean;
+        "required"?: boolean;
         "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
@@ -1868,6 +1896,7 @@ declare namespace LocalJSX {
         "type"?: "link" | "button";
     }
     interface SmoothlyItem {
+        "deselectable"?: boolean;
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;

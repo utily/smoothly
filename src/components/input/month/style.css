@@ -1,8 +1,24 @@
 :host {
 	display: flex;
-	justify-content: space-between;
-	font-size: large;
 }
-smoothly-icon {
-	font-size: smaller;
+:host[looks=line],
+:host[looks=border],
+:host[looks=transparent] {
+	gap: 2em;
+}
+:host:not([previous]) > div:first-of-type smoothly-button,
+:host:not([next]) > div:last-of-type smoothly-button {
+	display: none;
+}
+div {
+	display: flex;
+	width: 100%;
+	gap: 0.5rem;
+}
+smoothly-input-select {
+	flex: 1;
+}
+:host > div > smoothly-button {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
 }
