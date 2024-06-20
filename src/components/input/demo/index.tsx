@@ -11,6 +11,8 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
+				<h2>input-date-range outside from</h2>
+				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}></smoothly-input-date-range>
 				<h2>Controlled form</h2>
 				<smoothly-input-demo-controlled-form />
 				<h2>Create form defaulting type</h2>

@@ -283,17 +283,13 @@ export namespace Components {
     interface SmoothlyInputDateRange {
         "clear": () => Promise<void>;
         "color"?: Color;
-        "end"?: isoly.Date;
-        "labelEnd": string;
-        "labelStart": string;
+        "end": isoly.Date | undefined;
         "looks": Looks;
-        "max": isoly.Date;
-        "min": isoly.Date;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name": string;
-        "open": boolean;
         "showLabel": boolean;
-        "start"?: isoly.Date;
-        "value"?: isoly.Date;
+        "start": isoly.Date | undefined;
     }
     interface SmoothlyInputDemo {
     }
@@ -1744,9 +1740,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDateRange {
         "color"?: Color;
-        "end"?: isoly.Date;
-        "labelEnd"?: string;
-        "labelStart"?: string;
+        "end"?: isoly.Date | undefined;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -1754,11 +1748,8 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyInputDateRangeCustomEvent<isoly.Date>) => void;
-        "open"?: boolean;
         "showLabel"?: boolean;
-        "start"?: isoly.Date;
-        "value"?: isoly.Date;
+        "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDemo {
     }
