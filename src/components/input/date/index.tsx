@@ -38,7 +38,7 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
 	componentWillLoad(): void {
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit()
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 	}
 
