@@ -10,19 +10,18 @@ import { Color, Data } from "./../../../../model"
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class InputDateRange implements Clearable, Input {
-	// private changed: boolean = false
+export class SmoothlyInputDateRange implements Clearable, Input {
 	@Element() element: HTMLElement
 	@Prop() name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) showLabel = true
-	@Prop({ mutable: true }) start: isoly.Date | undefined = undefined
-	@Prop({ mutable: true }) end: isoly.Date | undefined = undefined
+	@Prop({ mutable: true }) start: isoly.Date | undefined = isoly.Date.now()
+	@Prop({ mutable: true }) end: isoly.Date | undefined = isoly.Date.now()
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	@State() open: boolean
-	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -31,13 +30,12 @@ export class InputDateRange implements Clearable, Input {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 	}
-
+	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {
 		const split = "dateRangeInput" in data && typeof data.dateRangeInput == "string" && data.dateRangeInput.split(" - ")
 		if (split && split.length == 2 && isoly.Date.is(split[0]) && isoly.Date.is(split[1])) {
 			this.start = split[0]
 			this.end = split[1]
-			// this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		}
 	}
 	@Listen("smoothlyInputLooks")
@@ -75,22 +73,19 @@ export class InputDateRange implements Clearable, Input {
 							onSmoothlyValueChange={e => e.stopPropagation()}
 							onSmoothlyStartChange={e => {
 								e.stopPropagation()
-								console.log("start change")
 								this.start = e.detail
 							}}
 							onSmoothlyEndChange={e => {
 								e.stopPropagation()
-								console.log("end change")
 								this.end = e.detail
 							}}
 							onSmoothlyDateSet={e => e.stopPropagation()}
 							onSmoothlyDateRangeSet={e => {
 								e.stopPropagation()
 								this.open = false
-								console.log("date range set")
-
 								this.smoothlyInput.emit({ [this.name]: e.detail })
 							}}
+							value={this.start}
 							start={this.start}
 							end={this.end}
 							max={this.max}

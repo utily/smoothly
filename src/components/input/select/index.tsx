@@ -49,7 +49,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
-	@Event() smoothlySelect: EventEmitter<unknown>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>

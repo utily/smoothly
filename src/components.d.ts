@@ -326,7 +326,6 @@ export namespace Components {
     }
     interface SmoothlyInputMonth {
         "arrows": boolean;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
@@ -1760,7 +1759,7 @@ declare namespace LocalJSX {
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<Data>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange }>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "showLabel"?: boolean;
@@ -1800,7 +1799,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputMonth {
         "arrows"?: boolean;
-        "changed"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
@@ -1809,7 +1807,6 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputMonthCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks: Looks, color: Color) => void>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyInputMonthCustomEvent<Date>) => void;
         "previous"?: boolean;
         "readonly"?: boolean;
         "value"?: isoly.Date;
@@ -1875,7 +1872,6 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
-        "onSmoothlySelect"?: (event: SmoothlyInputSelectCustomEvent<unknown>) => void;
         "placeholder"?: string | any;
         "readonly"?: boolean;
         "required"?: boolean;

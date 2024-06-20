@@ -8,6 +8,7 @@ import * as generate from "./generate"
 	scoped: true,
 })
 export class Calendar {
+	private frozenDate: Date
 	@Element() element: HTMLTableRowElement
 	@Prop({ mutable: true }) month?: Date
 	@Prop({ mutable: true }) value: Date = Date.now()
@@ -21,7 +22,6 @@ export class Calendar {
 	@Event() smoothlyEndChange: EventEmitter<Date>
 	@Event() smoothlyDateSet: EventEmitter<Date>
 	@Event() smoothlyDateRangeSet: EventEmitter<DateRange>
-	private frozenDate: Date
 	@State() firstSelected: boolean
 	@Watch("start")
 	onStart(next: Date) {
@@ -66,13 +66,14 @@ export class Calendar {
 	render() {
 		return [
 			<smoothly-input-month
+				name="month"
 				value={this.month ?? this.value}
 				next
 				previous
 				arrows={false}
-				onSmoothlyValueChange={event => {
-					this.month = event.detail
-					event.stopPropagation()
+				onSmoothlyInput={e => {
+					e.stopPropagation()
+					"month" in e.detail && typeof e.detail.month == "string" && (this.month = e.detail.month)
 				}}>
 				<div slot={"year-label"}>
 					<slot name={"year-label"} />
