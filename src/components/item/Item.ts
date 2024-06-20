@@ -18,8 +18,6 @@ export namespace Item {
 		})
 		export const is = type.is
 	}
-	export const type = Element.type.extend<Item>({
-		deselectable: isly.boolean(),
-	})
+	export const type = Element.type.extend<Item>({})
 	export const is = type.is
 }

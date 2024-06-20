@@ -57,7 +57,7 @@ export class SmoothlyInputDemoControlledForm {
 						))}
 					</smoothly-input-select>
 					<smoothly-input>Dummy</smoothly-input>
-					<smoothly-input-month name={"date"} value={this.date}>
+					<smoothly-input-month name={"date"} value={this.date} next previous>
 						<span slot={"year-label"}>Year</span>
 						<span slot={"month-label"}>Month</span>
 					</smoothly-input-month>
