@@ -94,7 +94,14 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 									event.stopPropagation()
 								}}
 								max={this.max}
-								min={this.min}></smoothly-calendar>
+								min={this.min}>
+								<div slot={"year-label"}>
+									<slot name={"year-label"} />
+								</div>
+								<div slot={"month-label"}>
+									<slot name={"month-label"} />
+								</div>
+							</smoothly-calendar>
 						</nav>,
 				  ]
 				: [],

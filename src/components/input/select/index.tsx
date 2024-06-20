@@ -31,8 +31,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
-	items: HTMLSmoothlyItemElement[] = []
-	itemHeight: number | undefined
+	private items: HTMLSmoothlyItemElement[] = []
+	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() name = "selected"
 	@Prop() showArrow = true
@@ -45,6 +45,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
+	@Prop() required = false
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
@@ -126,6 +127,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlyInput.emit({ [this.name]: value })
 		this.listener.changed?.(this)
 	}
+	@Watch("required")
+	onRequiredChange(): void {
+		this.items.forEach(item => (item.deselectable = this.required))
+	}
 	@Watch("filter")
 	async onFilterChange(value: string): Promise<void> {
 		value = value.toLowerCase()
@@ -143,8 +148,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
 		) {
 			event.stopPropagation()
-		} else if (Item.type.is(event.target)) {
+		} else if (Item.Element.is(event.target)) {
 			event.stopPropagation()
+			event.target.deselectable = this.required
 			this.items.push(event.target as HTMLSmoothlyItemElement)
 		}
 		event.detail(this)

@@ -10,6 +10,8 @@ import {
 	Listen,
 	Method,
 	Prop,
+	VNode,
+	Watch,
 } from "@stencil/core"
 import { Item } from "./Item"
 
@@ -23,23 +25,21 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean
 	@Prop({ reflect: true, mutable: true }) marked: boolean
-	@Prop() selectable = true
+	@Prop({ reflect: true }) selectable = true
+	@Prop() deselectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
 	@Listen("click")
-	onClick() {
-		if (this.selectable) {
+	clickHandler(): void {
+		console.log("deselectable", this.deselectable)
+		if (this.selectable && (!this.deselectable || !this.selected))
 			this.selected = !this.selected
-			this.smoothlyItemSelect.emit(this.element)
-		}
 	}
-	componentWillLoad() {
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+	componentWillLoad(): void {
+		this.smoothlyInputLoad.emit(() => {})
 	}
-	componentDidLoad() {
+	componentDidLoad(): void {
 		if (this.selected && this.selectable)
 			this.smoothlyItemSelect.emit(this.element)
 	}
@@ -51,9 +51,13 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 				? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
 				: false
 	}
-	render() {
+	@Watch("selected")
+	selectedChanged(): void {
+		this.smoothlyItemSelect.emit(this.element)
+	}
+	render(): VNode | VNode[] {
 		return (
-			<Host tabIndex={-1} class={!this.selectable ? "non-selectable" : ""}>
+			<Host tabIndex={-1}>
 				<slot />
 			</Host>
 		)
