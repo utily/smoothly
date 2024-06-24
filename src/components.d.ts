@@ -421,7 +421,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
-        "showArrow": boolean;
+        "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
