@@ -421,6 +421,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
+        "showArrow": boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -2491,6 +2492,7 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "searchDisabled"?: boolean;
+        "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {

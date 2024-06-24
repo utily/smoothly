@@ -39,6 +39,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop() showArrow = false
 	@Prop() multiple = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) changed = false
@@ -292,7 +293,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<slot name="end" />
-					{this.looks == "border" && (
+					{(this.looks == "border" || this.showArrow) && (
 						<smoothly-icon
 							ref={element => (this.toggle = element)}
 							size="tiny"
