@@ -1,12 +1,12 @@
 :host {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 }
 
 :host>smoothly-input-select:last-of-type {
 	display: flex;
 	width: 100%;
-	gap: 0.5rem;
 }
 
 :host[looks=line],
@@ -18,9 +18,4 @@
 :host:not([previous])>smoothly-button:first-of-type,
 :host:not([next])>smoothly-button:last-of-type {
 	display: none;
-}
-
-:host>smoothly-button {
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
 }
