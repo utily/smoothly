@@ -5,18 +5,22 @@
 	display: block;
 	width: fit-content;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+
 	&:focus-within smoothly-input {
 		outline: none;
 	}
 }
-:host > nav {
+
+:host>nav {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 	max-width: 22em;
+	min-width: 18em;
 }
-:host > div {
+
+:host>div {
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -26,7 +30,8 @@
 	height: 100vh;
 	z-index: 2;
 }
-:host > nav > .arrow {
+
+:host>nav>.arrow {
 	position: absolute;
 	z-index: 9;
 	transform: translate(10em, -0.55em) rotate(45deg);
@@ -34,16 +39,19 @@
 	height: 1em;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
-:host > section {
+
+:host>section {
 	display: flex;
 	background-color: var(--background-color, var(--smoothly-color-shade), transparent);
 	border-radius: 0.25rem;
 	cursor: pointer;
 }
+
 smoothly-input {
 	border-radius: var(--border-radius, none);
 	background-color: transparent;
 }
+
 span {
 	padding: 0.5em 0.2em 0.5em 0.2em;
 	align-self: center;
