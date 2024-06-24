@@ -128,7 +128,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						menuHeight="5.5items"
 						required
 						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}>
+						onSmoothlyInput={e => this.inputHandler(e)}
+						searchDisabled>
 						<div slot={"label"}>
 							<slot name={"year-label"} />
 						</div>
@@ -150,7 +151,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						menuHeight="5.5items"
 						required
 						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}>
+						onSmoothlyInput={e => this.inputHandler(e)}
+						searchDisabled>
 						<div slot={"label"}>
 							<slot name={"month-label"} />
 						</div>

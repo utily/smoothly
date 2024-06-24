@@ -401,6 +401,7 @@ export namespace Components {
         "readonly": boolean;
         "required": boolean;
         "reset": () => Promise<void>;
+        "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
         "showArrow": boolean;
         "showSelected"?: boolean;
@@ -1875,6 +1876,7 @@ declare namespace LocalJSX {
         "placeholder"?: string | any;
         "readonly"?: boolean;
         "required"?: boolean;
+        "searchDisabled"?: boolean;
         "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
