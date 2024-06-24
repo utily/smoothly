@@ -1,4 +1,4 @@
-export * from "./components"
+export type * from "./components.d.ts"
 export {
 	Autocomplete,
 	Color,
