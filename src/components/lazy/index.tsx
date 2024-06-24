@@ -1,4 +1,4 @@
-import { Component, FunctionalComponent, h, Host, JSX, Prop, VNode } from "@stencil/core"
+import { Component, FunctionalComponent, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-lazy",
@@ -7,7 +7,7 @@ import { Component, FunctionalComponent, h, Host, JSX, Prop, VNode } from "@sten
 })
 export class SmoothlyLazy {
 	@Prop({ mutable: true }) show = false
-	@Prop() content?: JSX.Element | FunctionalComponent
+	@Prop() content?: VNode | FunctionalComponent
 
 	loadMoreHandler(event: CustomEvent<string>): void {
 		event.stopPropagation()

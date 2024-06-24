@@ -30,8 +30,7 @@
 	height: 100vh;
 	z-index: 2;
 }
-
-:host>nav>.arrow {
+:host > nav > div.arrow {
 	position: absolute;
 	z-index: 9;
 	transform: translate(10em, -0.55em) rotate(45deg);
@@ -46,13 +45,11 @@
 	border-radius: 0.25rem;
 	cursor: pointer;
 }
-
-smoothly-input {
+:host > section > smoothly-input {
 	border-radius: var(--border-radius, none);
 	background-color: transparent;
 }
-
-span {
+:host > section > span {
 	padding: 0.5em 0.2em 0.5em 0.2em;
 	align-self: center;
 }

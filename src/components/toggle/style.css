@@ -2,7 +2,7 @@
 	display: inline-block;
 	border: none;
 }
-button{
+:host > button {
 	border: solid white 0.5px;
 	display: flex;
 	padding: 0.6em;
@@ -12,16 +12,16 @@ button{
 	color: rgb(var(--smoothly-default-tint));
 	background-color: rgb(var(--smoothly-default-shade));
 }
-:host([shape=rounded]){
+:host([shape=rounded]) {
 	border-radius: 0.6em;
 }
 :host([shape=rounded]) > button {
 	border-radius: 0.5em;
 }
-:host([selected]) > button{
+:host([selected]) > button {
 	color: rgb(var(--smoothly-light-contrast));
 }
-::slotted(smoothly-icon){
+::slotted(smoothly-icon) {
 	stroke: rgb(var(--smoothly-default-contrast));
 	fill: rgb(var(--smoothly-default-contrast));
 	font-size: 110%;

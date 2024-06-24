@@ -5,18 +5,18 @@
 	border-radius: 5px;
 	margin: 0.5em;
 }
-.clean {
+:host > span.clean {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 0.5em 1em;
 }
-.icon {
+:host > span.icon {
 	display: grid;
 	width: 100%;
 	grid-template-columns: 1fr 5fr;
 }
-.icon > p{
+:host > span.icon > p {
 	padding-right: 1em;
 }
 :host > span > p {
@@ -25,13 +25,13 @@
 :host[hidden] {
 	display: none;
 }
-smoothly-icon {
+:host > smoothly-trigger > smoothly-icon {
 	left: 0;
 	font-size: 1.2em;
 	align-self: center;
 	justify-self: center;
 }
-smoothly-trigger {
+:host > smoothly-trigger {
 	font-size: 0.5em;
 	float: right;
 	text-align: right;

@@ -8,7 +8,7 @@
 :host[looks=transparent] smoothly-input {
 	outline: none;
 }
-nav {
+:host > nav {
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
@@ -25,7 +25,7 @@ nav {
 	height: 100vh;
 	z-index: 2;
 }
-:host > nav > .arrow {
+:host > nav > div.arrow {
 	position: absolute;
 	z-index: 9;
 	transform: translate(2em, -0.55em) rotate(45deg);
@@ -35,7 +35,7 @@ nav {
 }
 
 @media screen and (min-width: 400px){
-	nav {
+	:host > nav {
 		position: absolute;
 		z-index: 10;
 		top: 3.5em;

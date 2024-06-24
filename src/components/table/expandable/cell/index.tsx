@@ -71,7 +71,7 @@ export class TableExpandableCell implements ComponentWillLoad {
 					<slot></slot>
 				</div>
 				<tr class={{ spotlight: this.spotlight }} ref={e => (this.expansionElement = e)}>
-					<td colSpan={999} class={!this.open ? "hide" : ""}>
+					<td colSpan={999}>
 						<slot name="detail"></slot>
 					</td>
 				</tr>

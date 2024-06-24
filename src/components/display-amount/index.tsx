@@ -1,5 +1,5 @@
 import { Component, Prop } from "@stencil/core"
-import { Currency } from "isoly"
+import { isoly } from "isoly"
 
 @Component({
 	tag: "smoothly-display-amount",
@@ -8,14 +8,14 @@ import { Currency } from "isoly"
 })
 export class SmoothlyDisplayAmount {
 	@Prop() amount: number | string
-	@Prop() currency: Currency
+	@Prop() currency: isoly.Currency
 	@Prop() toInteger = false
 
 	format(amount: string): string {
 		const digitsPerGroup = 3
 		const defaultDecimals = 2
 		const maxDecimals = (
-			Currency.decimalDigits(this.currency) ? Currency.decimalDigits(this.currency) : defaultDecimals
+			isoly.Currency.decimalDigits(this.currency) ? isoly.Currency.decimalDigits(this.currency) : defaultDecimals
 		) as number
 		let beforeSeparator = amount.length
 		let separator: number

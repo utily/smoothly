@@ -1,5 +1,5 @@
 import { Component, ComponentWillLoad, Prop } from "@stencil/core"
-import { DateTime } from "isoly"
+import { isoly } from "isoly"
 
 /**
  * DEPRECATED, use  <smoothly-display type="date-time">
@@ -10,7 +10,7 @@ import { DateTime } from "isoly"
 	scoped: true,
 })
 export class SmoothlyDisplayDateTime implements ComponentWillLoad {
-	@Prop() datetime: DateTime
+	@Prop() datetime: isoly.DateTime
 
 	componentWillLoad(): void | Promise<void> {
 		console.warn('Component <smoothly-display-date-time> is deprecated, use <smoothly-display type="date-time">.')

@@ -1,13 +1,13 @@
 :host {
 	display: inline-block;
 }
-:host([disabled]){
+:host([disabled]) {
 	opacity: 0.5;
 }
-:host:not([warning]) smoothly-button:first-child{
+:host:not([warning]) > smoothly-button:first-child {
 	display: none;
 }
-:host[warning] smoothly-button:nth-child(2){
+:host[warning] > smoothly-button:nth-child(2) {
 	display: none;
 }
 :host([expand]) {

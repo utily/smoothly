@@ -347,6 +347,28 @@ export class TableDemo {
 						</smoothly-table-expandable-cell>
 					</smoothly-table-row>
 				</smoothly-table>
+				<h4>Demo table 11 - expandable cells</h4>
+				<smoothly-table>
+					<smoothly-table-row>
+						<smoothly-table-header>Name</smoothly-table-header>
+						<smoothly-table-header>Age</smoothly-table-header>
+						<smoothly-table-header>Location</smoothly-table-header>
+					</smoothly-table-row>
+					<smoothly-table-row>
+						<smoothly-table-expandable-cell>
+							Jessie
+							<div slot={"detail"}>Doe</div>
+						</smoothly-table-expandable-cell>
+						<smoothly-table-expandable-cell>
+							{new Date().getFullYear() - 2000}
+							<div slot={"detail"}>2000-01-01</div>
+						</smoothly-table-expandable-cell>
+						<smoothly-table-expandable-cell>
+							UK
+							<div slot={"detail"}>London</div>
+						</smoothly-table-expandable-cell>
+					</smoothly-table-row>
+				</smoothly-table>
 			</Host>
 		)
 	}

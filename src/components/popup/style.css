@@ -5,10 +5,10 @@
 :host[hidden] {
 	display: none;
 }
-:host:not([visible]) .popup {
+:host:not([visible]) > div.popup {
 	display: none;
 }
-:host .popup {
+:host > div.popup {
 	display: inline;
 	position: absolute;
 	padding: 0.3em;
@@ -21,18 +21,18 @@
 	border-radius: 0.6em;
 	z-index: 3;
 }
-:host[direction=down] .popup {
+:host[direction=down] > div.popup {
 	top: 2.2em;
 	box-shadow: 6px 5px 9px -9px black, 5px 6px 9px -9px black;
 }
-:host[direction=up] .popup {
+:host[direction=up] > div.popup {
 	bottom: 2.2em;
 	box-shadow: -6px -5px 9px -9px black, -5px -6px 9px -9px black;
 }
-:host:not([visible]) .background {
+:host:not([visible]) > div.background {
 	display: none;
 }
-:host .background {
+:host > div.background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -40,10 +40,10 @@
 	height: 100vh;
 	z-index: 2;
 }
-:host:not([visible]) .arrow {
+:host:not([visible]) > div.arrow {
 	display: none;
 }
-:host .arrow {
+:host > div.arrow {
 	background-color: rgb(238, 238, 238);
 	border-color: rgb(238, 238, 238);
 	z-index: 2;
@@ -55,20 +55,20 @@
 	left: calc(var(--left) + 1em);
 	right: calc(var(--right) + 1em);
 }
-:host[direction=down] .arrow {
+:host[direction=down] > div.arrow {
 	top: 2em;
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-left-style: solid;
 	border-left-width: 1px;
 }
-:host[direction=up] .arrow {
+:host[direction=up] > div.arrow {
 	bottom: 2em;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-right-style: solid;
 	border-right-width: 1px;
 }
-:host .pointer {
+:host > div.pointer {
 	cursor: pointer;
 }

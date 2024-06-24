@@ -10,7 +10,7 @@
 :host[disabled] {
 	opacity: 0.5;
 }
-button {
+:host > button {
 	border-color: transparent;
 	background-color: transparent;
 	padding: 0.2em 0.3em;

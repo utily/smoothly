@@ -11,12 +11,12 @@
 	background-color: rgb(var(--background-color));
 }
 
-smoothly-icon {
+:host > smoothly-icon {
 	position: absolute;
 	z-index: 1;
 }
 
-:host input {
+:host > input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -26,13 +26,13 @@ smoothly-icon {
 	display: block;
 }
 
-:host:not([readonly]) smoothly-icon,
-:host:not([readonly]) input {
+:host:not([readonly]) > smoothly-icon,
+:host:not([readonly]) > input {
 	cursor: pointer;
 }
 
-:host[disabled] input,
-:host[disabled] smoothly-icon {
+:host[disabled] > input,
+:host[disabled] > smoothly-icon {
 	border-color: rgb(var(--smoothly-color-contrast), 0.3);
 	color: rgb(var(--smoothly-color-contrast), 0.4);
 }

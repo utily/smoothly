@@ -8,16 +8,16 @@
 	cursor: pointer;
 	padding: 0.25ch 0.5rem
 }
-:host .display {
+:host > div.display {
 	padding-left: 0;
 }
-:host button {
+:host > button {
 	color: unset;
 	background-color: inherit;
 	border: none;
 	padding-right: 0;
 }
-:host .content {
+:host > div.content {
 	display: flex;
 	column-gap: 1rem;
 	justify-content: space-between;
@@ -25,6 +25,6 @@
 :host([required]) > * {
 	cursor: default;
 }
-:host([required]) button {
+:host([required]) > button {
 	opacity: 0.65;
 }

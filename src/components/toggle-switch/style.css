@@ -5,7 +5,7 @@
 	height: 1.8em;
 }
 
-:host button {
+:host > button {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -17,10 +17,10 @@
 	border-radius: 3em;
 	background-color: rgb(var(--smoothly-light-tint));
 }
-:host button:hover {
+:host > button:hover {
 	background-color: rgb(var(--smoothly-light-color));
 }
-:host smoothly-icon {
+:host > button > smoothly-icon {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -32,32 +32,32 @@
 	transition: 100ms ease-in-out;
 }
 
-:host[checkmark] smoothly-icon {
+:host[checkmark] > button > smoothly-icon {
 	fill: rgb(var(--smoothly-success-color));
 	stroke: rgb(var(--smoothly-success-color));
 }
-:host([selected][checkmark]) button{
+:host([selected][checkmark]) > button {
 	background-color: rgb(var(--smoothly-success-color));
 }
 
-:host([selected]) smoothly-icon{
+:host([selected]) > button > smoothly-icon {
 	transform: translateX(100%);
 }
 
-:host([size=small]){
+:host([size=small]) {
 	width: 3.05em;
 	height: 1.5em;
 }
 
-:host([size=large]){
+:host([size=large]) {
 	width: 5.2em;
 	height: 2.5em;
 }
 
-:host([size=small]) smoothly-icon{
+:host([size=small]) > button > smoothly-icon {
 	font-size: 1em;
 }
 
-:host([size=large]) smoothly-icon{
+:host([size=large]) > button > smoothly-icon {
 	font-size: 1.75em;
 }
