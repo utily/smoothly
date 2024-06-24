@@ -43,8 +43,6 @@
 smoothly-input {
 	border-radius: var(--border-radius, none);
 	background-color: transparent;
-	width: var(--input-width);
-	flex-grow: 1;
 }
 span {
 	padding: 0.5em 0.2em 0.5em 0.2em;
