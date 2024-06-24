@@ -101,7 +101,6 @@
 		"prettierx": "github:utily/prettierx#utily-20240618",
 		"puppeteer": "^22.12.0",
 		"typescript": "^5.5.2",
-		"web-file-polyfill": "^1.0.4",
-		"yargs": "^17.7.2"
+		"web-file-polyfill": "^1.0.4"
 	}
 }
