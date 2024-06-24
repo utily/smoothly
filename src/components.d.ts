@@ -22,6 +22,23 @@ import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Slot } from "./components/picker/slot-elements/index";
+export { SmoothlyAccordion } from "./components/accordion";
+export { address } from "./components/address-display";
+export { address as address1 } from "./components/address-display/index";
+export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
+export { FunctionalComponent, JSX } from "@stencil/core";
+export { Button } from "./components/Button";
+export { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
+export { tidily, Type } from "tidily";
+export { selectively } from "selectively";
+export { Filter } from "./components/filter/Filter";
+export { Looks } from "./components/input/Looks";
+export { Editable } from "./components/input/Editable";
+export { GoogleFont } from "./model/GoogleFont";
+export { Selectable } from "./components/input/radio/Selected";
+export { Controls } from "./components/picker/menu";
+export { Controls as Controls1 } from "./components/picker/menu/index";
+export { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
     interface SmoothlyAccordion {
         "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
@@ -38,7 +55,7 @@ export namespace Components {
     }
     interface SmoothlyAddressDisplay {
         "editable": boolean;
-        "value": address;
+        "value": address1;
     }
     interface SmoothlyAddresses {
         "editable": boolean[];
@@ -142,14 +159,14 @@ export namespace Components {
     }
     interface SmoothlyDisplayAmount {
         "amount": number | string;
-        "currency": Currency;
+        "currency": isoly.Currency;
         "toInteger": boolean;
     }
     /**
      * DEPRECATED, use  <smoothly-display type="date-time">
      */
     interface SmoothlyDisplayDateTime {
-        "datetime": DateTime;
+        "datetime": isoly.DateTime;
     }
     interface SmoothlyDisplayDemo {
     }
@@ -819,7 +836,20 @@ declare global {
         prototype: HTMLSmoothlyAccordionElement;
         new (): HTMLSmoothlyAccordionElement;
     };
+    interface HTMLSmoothlyAccordionItemElementEventMap {
+        "smoothlyAccordionItemWillLoad": (parent: SmoothlyAccordion) => void;
+        "smoothlyOpen": { name: string; open: boolean };
+        "smoothlyClose": { name: string; open: boolean };
+    }
     interface HTMLSmoothlyAccordionItemElement extends Components.SmoothlyAccordionItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyAccordionItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyAccordionItemElement, ev: SmoothlyAccordionItemCustomEvent<HTMLSmoothlyAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyAccordionItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyAccordionItemElement, ev: SmoothlyAccordionItemCustomEvent<HTMLSmoothlyAccordionItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyAccordionItemElement: {
         prototype: HTMLSmoothlyAccordionItemElement;
@@ -855,7 +885,19 @@ declare global {
         prototype: HTMLSmoothlyAppDemoElement;
         new (): HTMLSmoothlyAppDemoElement;
     };
+    interface HTMLSmoothlyAppRoomElementEventMap {
+        "smoothlyRoomSelected": { history: boolean };
+        "smoothlyRoomLoaded": { selected: boolean };
+    }
     interface HTMLSmoothlyAppRoomElement extends Components.SmoothlyAppRoom, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyAppRoomElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppRoomElement, ev: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyAppRoomElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppRoomElement, ev: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyAppRoomElement: {
         prototype: HTMLSmoothlyAppRoomElement;
@@ -867,7 +909,19 @@ declare global {
         prototype: HTMLSmoothlyBackToTopElement;
         new (): HTMLSmoothlyBackToTopElement;
     };
+    interface HTMLSmoothlyBurgerElementEventMap {
+        "smoothlyNavStatus": boolean;
+        "smoothlyVisibleStatus": boolean;
+    }
     interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyBurgerElementEventMap>(type: K, listener: (this: HTMLSmoothlyBurgerElement, ev: SmoothlyBurgerCustomEvent<HTMLSmoothlyBurgerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyBurgerElementEventMap>(type: K, listener: (this: HTMLSmoothlyBurgerElement, ev: SmoothlyBurgerCustomEvent<HTMLSmoothlyBurgerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyBurgerElement: {
         prototype: HTMLSmoothlyBurgerElement;
@@ -879,7 +933,19 @@ declare global {
         prototype: HTMLSmoothlyButtonElement;
         new (): HTMLSmoothlyButtonElement;
     };
+    interface HTMLSmoothlyButtonConfirmElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyConfirm": Data;
+    }
     interface HTMLSmoothlyButtonConfirmElement extends Components.SmoothlyButtonConfirm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyButtonConfirmElementEventMap>(type: K, listener: (this: HTMLSmoothlyButtonConfirmElement, ev: SmoothlyButtonConfirmCustomEvent<HTMLSmoothlyButtonConfirmElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyButtonConfirmElementEventMap>(type: K, listener: (this: HTMLSmoothlyButtonConfirmElement, ev: SmoothlyButtonConfirmCustomEvent<HTMLSmoothlyButtonConfirmElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyButtonConfirmElement: {
         prototype: HTMLSmoothlyButtonConfirmElement;
@@ -891,13 +957,39 @@ declare global {
         prototype: HTMLSmoothlyButtonDemoElement;
         new (): HTMLSmoothlyButtonDemoElement;
     };
+    interface HTMLSmoothlyCalendarElementEventMap {
+        "smoothlyValueChange": Date;
+        "smoothlyStartChange": Date;
+        "smoothlyEndChange": Date;
+        "smoothlyDateSet": Date;
+        "smoothlyDateRangeSet": DateRange;
+    }
     interface HTMLSmoothlyCalendarElement extends Components.SmoothlyCalendar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyCalendarElementEventMap>(type: K, listener: (this: HTMLSmoothlyCalendarElement, ev: SmoothlyCalendarCustomEvent<HTMLSmoothlyCalendarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyCalendarElementEventMap>(type: K, listener: (this: HTMLSmoothlyCalendarElement, ev: SmoothlyCalendarCustomEvent<HTMLSmoothlyCalendarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyCalendarElement: {
         prototype: HTMLSmoothlyCalendarElement;
         new (): HTMLSmoothlyCalendarElement;
     };
+    interface HTMLSmoothlyCheckboxElementEventMap {
+        "smoothlyInput": Record<string, any>;
+    }
     interface HTMLSmoothlyCheckboxElement extends Components.SmoothlyCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyCheckboxElementEventMap>(type: K, listener: (this: HTMLSmoothlyCheckboxElement, ev: SmoothlyCheckboxCustomEvent<HTMLSmoothlyCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyCheckboxElementEventMap>(type: K, listener: (this: HTMLSmoothlyCheckboxElement, ev: SmoothlyCheckboxCustomEvent<HTMLSmoothlyCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyCheckboxElement: {
         prototype: HTMLSmoothlyCheckboxElement;
@@ -948,49 +1040,147 @@ declare global {
         prototype: HTMLSmoothlyDisplayDateTimeElement;
         new (): HTMLSmoothlyDisplayDateTimeElement;
     };
+    interface HTMLSmoothlyDisplayDemoElementEventMap {
+        "notice": Notice;
+    }
     interface HTMLSmoothlyDisplayDemoElement extends Components.SmoothlyDisplayDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyDisplayDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyDisplayDemoElement, ev: SmoothlyDisplayDemoCustomEvent<HTMLSmoothlyDisplayDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyDisplayDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyDisplayDemoElement, ev: SmoothlyDisplayDemoCustomEvent<HTMLSmoothlyDisplayDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
     };
+    interface HTMLSmoothlyFilterElementEventMap {
+        "smoothlyFilter": selectively.Criteria;
+    }
     interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterElement, ev: SmoothlyFilterCustomEvent<HTMLSmoothlyFilterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterElement, ev: SmoothlyFilterCustomEvent<HTMLSmoothlyFilterElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFilterElement: {
         prototype: HTMLSmoothlyFilterElement;
         new (): HTMLSmoothlyFilterElement;
     };
+    interface HTMLSmoothlyFilterFieldElementEventMap {
+        "smoothlyFilterField": selectively.Rule;
+    }
     interface HTMLSmoothlyFilterFieldElement extends Components.SmoothlyFilterField, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterFieldElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterFieldElement, ev: SmoothlyFilterFieldCustomEvent<HTMLSmoothlyFilterFieldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterFieldElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterFieldElement, ev: SmoothlyFilterFieldCustomEvent<HTMLSmoothlyFilterFieldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFilterFieldElement: {
         prototype: HTMLSmoothlyFilterFieldElement;
         new (): HTMLSmoothlyFilterFieldElement;
     };
+    interface HTMLSmoothlyFilterInputElementEventMap {
+        "smoothlyFilterUpdate": Filter.Update;
+        "smoothlyFilterManipulate": Filter.Manipulate;
+    }
     interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterInputElement, ev: SmoothlyFilterInputCustomEvent<HTMLSmoothlyFilterInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterInputElement, ev: SmoothlyFilterInputCustomEvent<HTMLSmoothlyFilterInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFilterInputElement: {
         prototype: HTMLSmoothlyFilterInputElement;
         new (): HTMLSmoothlyFilterInputElement;
     };
+    interface HTMLSmoothlyFilterPickerElementEventMap {
+        "smoothlyFilterUpdate": Filter.Update;
+        "smoothlyFilterManipulate": Filter.Manipulate;
+    }
     interface HTMLSmoothlyFilterPickerElement extends Components.SmoothlyFilterPicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterPickerElement, ev: SmoothlyFilterPickerCustomEvent<HTMLSmoothlyFilterPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterPickerElement, ev: SmoothlyFilterPickerCustomEvent<HTMLSmoothlyFilterPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFilterPickerElement: {
         prototype: HTMLSmoothlyFilterPickerElement;
         new (): HTMLSmoothlyFilterPickerElement;
     };
+    interface HTMLSmoothlyFilterToggleElementEventMap {
+        "smoothlyFilterUpdate": Filter.Update;
+        "smoothlyFilterManipulate": Filter.Manipulate;
+    }
     interface HTMLSmoothlyFilterToggleElement extends Components.SmoothlyFilterToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterToggleElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterToggleElement, ev: SmoothlyFilterToggleCustomEvent<HTMLSmoothlyFilterToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterToggleElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterToggleElement, ev: SmoothlyFilterToggleCustomEvent<HTMLSmoothlyFilterToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFilterToggleElement: {
         prototype: HTMLSmoothlyFilterToggleElement;
         new (): HTMLSmoothlyFilterToggleElement;
     };
+    interface HTMLSmoothlyFormElementEventMap {
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyFormInput": Data;
+        "smoothlyFormSubmit": Submit;
+        "smoothlyFormReset": void;
+        "smoothlyFormEdit": boolean;
+        "smoothlyFormClear": void;
+        "notice": Notice;
+    }
     interface HTMLSmoothlyFormElement extends Components.SmoothlyForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFormElementEventMap>(type: K, listener: (this: HTMLSmoothlyFormElement, ev: SmoothlyFormCustomEvent<HTMLSmoothlyFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFormElementEventMap>(type: K, listener: (this: HTMLSmoothlyFormElement, ev: SmoothlyFormCustomEvent<HTMLSmoothlyFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFormElement: {
         prototype: HTMLSmoothlyFormElement;
         new (): HTMLSmoothlyFormElement;
     };
+    interface HTMLSmoothlyFrameElementEventMap {
+        "trigger": Trigger;
+        "message2": Message<any>;
+    }
     interface HTMLSmoothlyFrameElement extends Components.SmoothlyFrame, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFrameElementEventMap>(type: K, listener: (this: HTMLSmoothlyFrameElement, ev: SmoothlyFrameCustomEvent<HTMLSmoothlyFrameElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFrameElementEventMap>(type: K, listener: (this: HTMLSmoothlyFrameElement, ev: SmoothlyFrameCustomEvent<HTMLSmoothlyFrameElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyFrameElement: {
         prototype: HTMLSmoothlyFrameElement;
@@ -1014,37 +1204,119 @@ declare global {
         prototype: HTMLSmoothlyIconDemoElement;
         new (): HTMLSmoothlyIconDemoElement;
     };
+    interface HTMLSmoothlyInputElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyBlur": void;
+        "smoothlyChange": Record<string, any>;
+        "smoothlyInput": Record<string, any>;
+    }
     interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputElement, ev: SmoothlyInputCustomEvent<HTMLSmoothlyInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputElement, ev: SmoothlyInputCustomEvent<HTMLSmoothlyInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputElement: {
         prototype: HTMLSmoothlyInputElement;
         new (): HTMLSmoothlyInputElement;
     };
+    interface HTMLSmoothlyInputCheckboxElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInput": Data;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+    }
     interface HTMLSmoothlyInputCheckboxElement extends Components.SmoothlyInputCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputCheckboxElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputCheckboxElement, ev: SmoothlyInputCheckboxCustomEvent<HTMLSmoothlyInputCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputCheckboxElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputCheckboxElement, ev: SmoothlyInputCheckboxCustomEvent<HTMLSmoothlyInputCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputCheckboxElement: {
         prototype: HTMLSmoothlyInputCheckboxElement;
         new (): HTMLSmoothlyInputCheckboxElement;
     };
+    interface HTMLSmoothlyInputClearElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputClearElement extends Components.SmoothlyInputClear, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputClearElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputClearElement, ev: SmoothlyInputClearCustomEvent<HTMLSmoothlyInputClearElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputClearElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputClearElement, ev: SmoothlyInputClearCustomEvent<HTMLSmoothlyInputClearElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputClearElement: {
         prototype: HTMLSmoothlyInputClearElement;
         new (): HTMLSmoothlyInputClearElement;
     };
+    interface HTMLSmoothlyInputColorElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputColorElement extends Components.SmoothlyInputColor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputColorElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputColorElement, ev: SmoothlyInputColorCustomEvent<HTMLSmoothlyInputColorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputColorElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputColorElement, ev: SmoothlyInputColorCustomEvent<HTMLSmoothlyInputColorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputColorElement: {
         prototype: HTMLSmoothlyInputColorElement;
         new (): HTMLSmoothlyInputColorElement;
     };
+    interface HTMLSmoothlyInputDateElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyValueChange": Date;
+        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+    }
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDateElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateElement, ev: SmoothlyInputDateCustomEvent<HTMLSmoothlyInputDateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDateElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateElement, ev: SmoothlyInputDateCustomEvent<HTMLSmoothlyInputDateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDateElement: {
         prototype: HTMLSmoothlyInputDateElement;
         new (): HTMLSmoothlyInputDateElement;
     };
+    interface HTMLSmoothlyInputDateRangeElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyValueChange": isoly.Date;
+        "smoothlyInput": Data;
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+    }
     interface HTMLSmoothlyInputDateRangeElement extends Components.SmoothlyInputDateRange, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDateRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateRangeElement, ev: SmoothlyInputDateRangeCustomEvent<HTMLSmoothlyInputDateRangeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDateRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateRangeElement, ev: SmoothlyInputDateRangeCustomEvent<HTMLSmoothlyInputDateRangeElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDateRangeElement: {
         prototype: HTMLSmoothlyInputDateRangeElement;
@@ -1062,61 +1334,191 @@ declare global {
         prototype: HTMLSmoothlyInputDemoControlledFormElement;
         new (): HTMLSmoothlyInputDemoControlledFormElement;
     };
+    interface HTMLSmoothlyInputEditElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputEditElement extends Components.SmoothlyInputEdit, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputEditElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputEditElement, ev: SmoothlyInputEditCustomEvent<HTMLSmoothlyInputEditElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputEditElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputEditElement, ev: SmoothlyInputEditCustomEvent<HTMLSmoothlyInputEditElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputEditElement: {
         prototype: HTMLSmoothlyInputEditElement;
         new (): HTMLSmoothlyInputEditElement;
     };
+    interface HTMLSmoothlyInputFileElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+    }
     interface HTMLSmoothlyInputFileElement extends Components.SmoothlyInputFile, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputFileElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputFileElement, ev: SmoothlyInputFileCustomEvent<HTMLSmoothlyInputFileElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputFileElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputFileElement, ev: SmoothlyInputFileCustomEvent<HTMLSmoothlyInputFileElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputFileElement: {
         prototype: HTMLSmoothlyInputFileElement;
         new (): HTMLSmoothlyInputFileElement;
     };
+    interface HTMLSmoothlyInputMonthElementEventMap {
+        "smoothlyInput": Data;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyValueChange": Date;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+    }
     interface HTMLSmoothlyInputMonthElement extends Components.SmoothlyInputMonth, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputMonthElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputMonthElement, ev: SmoothlyInputMonthCustomEvent<HTMLSmoothlyInputMonthElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputMonthElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputMonthElement, ev: SmoothlyInputMonthCustomEvent<HTMLSmoothlyInputMonthElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputMonthElement: {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
     };
+    interface HTMLSmoothlyInputRadioElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInput": Data;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+    }
     interface HTMLSmoothlyInputRadioElement extends Components.SmoothlyInputRadio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputRadioElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioElement, ev: SmoothlyInputRadioCustomEvent<HTMLSmoothlyInputRadioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputRadioElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioElement, ev: SmoothlyInputRadioCustomEvent<HTMLSmoothlyInputRadioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputRadioElement: {
         prototype: HTMLSmoothlyInputRadioElement;
         new (): HTMLSmoothlyInputRadioElement;
     };
+    interface HTMLSmoothlyInputRadioItemElementEventMap {
+        "smoothlySelect": Selectable;
+        "smoothlyRadioButtonRegister": (name: string) => void;
+    }
     interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputRadioItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioItemElement, ev: SmoothlyInputRadioItemCustomEvent<HTMLSmoothlyInputRadioItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputRadioItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioItemElement, ev: SmoothlyInputRadioItemCustomEvent<HTMLSmoothlyInputRadioItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputRadioItemElement: {
         prototype: HTMLSmoothlyInputRadioItemElement;
         new (): HTMLSmoothlyInputRadioItemElement;
     };
+    interface HTMLSmoothlyInputRangeElementEventMap {
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+    }
     interface HTMLSmoothlyInputRangeElement extends Components.SmoothlyInputRange, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRangeElement, ev: SmoothlyInputRangeCustomEvent<HTMLSmoothlyInputRangeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRangeElement, ev: SmoothlyInputRangeCustomEvent<HTMLSmoothlyInputRangeElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputRangeElement: {
         prototype: HTMLSmoothlyInputRangeElement;
         new (): HTMLSmoothlyInputRangeElement;
     };
+    interface HTMLSmoothlyInputResetElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputResetElement extends Components.SmoothlyInputReset, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputResetElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputResetElement, ev: SmoothlyInputResetCustomEvent<HTMLSmoothlyInputResetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputResetElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputResetElement, ev: SmoothlyInputResetCustomEvent<HTMLSmoothlyInputResetElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputResetElement: {
         prototype: HTMLSmoothlyInputResetElement;
         new (): HTMLSmoothlyInputResetElement;
     };
+    interface HTMLSmoothlyInputSelectElementEventMap {
+        "smoothlySelect": unknown;
+        "smoothlyInput": Data;
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyItemSelect": HTMLSmoothlyItemElement;
+    }
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSelectElement, ev: SmoothlyInputSelectCustomEvent<HTMLSmoothlyInputSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSelectElement, ev: SmoothlyInputSelectCustomEvent<HTMLSmoothlyInputSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputSelectElement: {
         prototype: HTMLSmoothlyInputSelectElement;
         new (): HTMLSmoothlyInputSelectElement;
     };
+    interface HTMLSmoothlyInputSubmitElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputSubmitElement extends Components.SmoothlyInputSubmit, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputSubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSubmitElement, ev: SmoothlyInputSubmitCustomEvent<HTMLSmoothlyInputSubmitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputSubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSubmitElement, ev: SmoothlyInputSubmitCustomEvent<HTMLSmoothlyInputSubmitElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputSubmitElement: {
         prototype: HTMLSmoothlyInputSubmitElement;
         new (): HTMLSmoothlyInputSubmitElement;
     };
+    interface HTMLSmoothlyItemElementEventMap {
+        "smoothlyItemSelect": HTMLSmoothlyItemElement;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyItemElement, ev: SmoothlyItemCustomEvent<HTMLSmoothlyItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyItemElement, ev: SmoothlyItemCustomEvent<HTMLSmoothlyItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyItemElement: {
         prototype: HTMLSmoothlyItemElement;
@@ -1134,13 +1536,35 @@ declare global {
         prototype: HTMLSmoothlyLazyElement;
         new (): HTMLSmoothlyLazyElement;
     };
+    interface HTMLSmoothlyLoadMoreElementEventMap {
+        "smoothlyLoadMore": string;
+    }
     interface HTMLSmoothlyLoadMoreElement extends Components.SmoothlyLoadMore, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyLoadMoreElementEventMap>(type: K, listener: (this: HTMLSmoothlyLoadMoreElement, ev: SmoothlyLoadMoreCustomEvent<HTMLSmoothlyLoadMoreElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyLoadMoreElementEventMap>(type: K, listener: (this: HTMLSmoothlyLoadMoreElement, ev: SmoothlyLoadMoreCustomEvent<HTMLSmoothlyLoadMoreElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyLoadMoreElement: {
         prototype: HTMLSmoothlyLoadMoreElement;
         new (): HTMLSmoothlyLoadMoreElement;
     };
+    interface HTMLSmoothlyNotificationElementEventMap {
+        "remove": Notice;
+    }
     interface HTMLSmoothlyNotificationElement extends Components.SmoothlyNotification, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNotificationElementEventMap>(type: K, listener: (this: HTMLSmoothlyNotificationElement, ev: SmoothlyNotificationCustomEvent<HTMLSmoothlyNotificationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNotificationElementEventMap>(type: K, listener: (this: HTMLSmoothlyNotificationElement, ev: SmoothlyNotificationCustomEvent<HTMLSmoothlyNotificationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyNotificationElement: {
         prototype: HTMLSmoothlyNotificationElement;
@@ -1152,7 +1576,23 @@ declare global {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
     };
+    interface HTMLSmoothlyPickerElementEventMap {
+        "smoothlyPickerLoaded": Controls;
+        "smoothlyInput": Record<string, any | any[]>;
+        "smoothlyChange": Record<string, any | any[]>;
+        "smoothlyInputLooks": (looks: Looks) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerElement, ev: SmoothlyPickerCustomEvent<HTMLSmoothlyPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerElement, ev: SmoothlyPickerCustomEvent<HTMLSmoothlyPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyPickerElement: {
         prototype: HTMLSmoothlyPickerElement;
@@ -1164,19 +1604,55 @@ declare global {
         prototype: HTMLSmoothlyPickerDemoElement;
         new (): HTMLSmoothlyPickerDemoElement;
     };
+    interface HTMLSmoothlyPickerMenuElementEventMap {
+        "notice": Notice;
+        "smoothlyPickerMenuLoaded": Controls1;
+    }
     interface HTMLSmoothlyPickerMenuElement extends Components.SmoothlyPickerMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyPickerMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerMenuElement, ev: SmoothlyPickerMenuCustomEvent<HTMLSmoothlyPickerMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyPickerMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerMenuElement, ev: SmoothlyPickerMenuCustomEvent<HTMLSmoothlyPickerMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyPickerMenuElement: {
         prototype: HTMLSmoothlyPickerMenuElement;
         new (): HTMLSmoothlyPickerMenuElement;
     };
+    interface HTMLSmoothlyPickerOptionElementEventMap {
+        "smoothlyPickerOptionLoad": Option.Load;
+        "smoothlyPickerOptionLoaded": Option;
+        "smoothlyPickerOptionChange": Option;
+    }
     interface HTMLSmoothlyPickerOptionElement extends Components.SmoothlyPickerOption, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyPickerOptionElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerOptionElement, ev: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyPickerOptionElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerOptionElement, ev: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyPickerOptionElement: {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
     };
+    interface HTMLSmoothlyPopupElementEventMap {
+        "popup": boolean;
+    }
     interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyPopupElementEventMap>(type: K, listener: (this: HTMLSmoothlyPopupElement, ev: SmoothlyPopupCustomEvent<HTMLSmoothlyPopupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyPopupElementEventMap>(type: K, listener: (this: HTMLSmoothlyPopupElement, ev: SmoothlyPopupCustomEvent<HTMLSmoothlyPopupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyPopupElement: {
         prototype: HTMLSmoothlyPopupElement;
@@ -1188,7 +1664,18 @@ declare global {
         prototype: HTMLSmoothlyQuietElement;
         new (): HTMLSmoothlyQuietElement;
     };
+    interface HTMLSmoothlyReorderElementEventMap {
+        "reorder": [number, number];
+    }
     interface HTMLSmoothlyReorderElement extends Components.SmoothlyReorder, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyReorderElementEventMap>(type: K, listener: (this: HTMLSmoothlyReorderElement, ev: SmoothlyReorderCustomEvent<HTMLSmoothlyReorderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyReorderElementEventMap>(type: K, listener: (this: HTMLSmoothlyReorderElement, ev: SmoothlyReorderCustomEvent<HTMLSmoothlyReorderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyReorderElement: {
         prototype: HTMLSmoothlyReorderElement;
@@ -1206,13 +1693,35 @@ declare global {
         prototype: HTMLSmoothlySkeletonElement;
         new (): HTMLSmoothlySkeletonElement;
     };
+    interface HTMLSmoothlySlotElementsElementEventMap {
+        "smoothlySlotEmpty": Slot;
+    }
     interface HTMLSmoothlySlotElementsElement extends Components.SmoothlySlotElements, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlySlotElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlotElementsElement, ev: SmoothlySlotElementsCustomEvent<HTMLSmoothlySlotElementsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlySlotElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlotElementsElement, ev: SmoothlySlotElementsCustomEvent<HTMLSmoothlySlotElementsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlySlotElementsElement: {
         prototype: HTMLSmoothlySlotElementsElement;
         new (): HTMLSmoothlySlotElementsElement;
     };
+    interface HTMLSmoothlySlottedElementsElementEventMap {
+        "smoothlySlottedChange": Node[];
+    }
     interface HTMLSmoothlySlottedElementsElement extends Components.SmoothlySlottedElements, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlySlottedElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlottedElementsElement, ev: SmoothlySlottedElementsCustomEvent<HTMLSmoothlySlottedElementsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlySlottedElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlottedElementsElement, ev: SmoothlySlottedElementsCustomEvent<HTMLSmoothlySlottedElementsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlySlottedElementsElement: {
         prototype: HTMLSmoothlySlottedElementsElement;
@@ -1224,13 +1733,35 @@ declare global {
         prototype: HTMLSmoothlySpinnerElement;
         new (): HTMLSmoothlySpinnerElement;
     };
+    interface HTMLSmoothlySubmitElementEventMap {
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlySubmitElement extends Components.SmoothlySubmit, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlySubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlySubmitElement, ev: SmoothlySubmitCustomEvent<HTMLSmoothlySubmitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlySubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlySubmitElement, ev: SmoothlySubmitCustomEvent<HTMLSmoothlySubmitElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlySubmitElement: {
         prototype: HTMLSmoothlySubmitElement;
         new (): HTMLSmoothlySubmitElement;
     };
+    interface HTMLSmoothlySummaryElementEventMap {
+        "smoothlySummaryOpen": boolean;
+    }
     interface HTMLSmoothlySummaryElement extends Components.SmoothlySummary, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlySummaryElementEventMap>(type: K, listener: (this: HTMLSmoothlySummaryElement, ev: SmoothlySummaryCustomEvent<HTMLSmoothlySummaryElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlySummaryElementEventMap>(type: K, listener: (this: HTMLSmoothlySummaryElement, ev: SmoothlySummaryCustomEvent<HTMLSmoothlySummaryElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlySummaryElement: {
         prototype: HTMLSmoothlySummaryElement;
@@ -1242,7 +1773,18 @@ declare global {
         prototype: HTMLSmoothlySvgElement;
         new (): HTMLSmoothlySvgElement;
     };
+    interface HTMLSmoothlyTabElementEventMap {
+        "expansionOpen": HTMLElement;
+    }
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTabElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabElement, ev: SmoothlyTabCustomEvent<HTMLSmoothlyTabElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTabElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabElement, ev: SmoothlyTabCustomEvent<HTMLSmoothlyTabElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTabElement: {
         prototype: HTMLSmoothlyTabElement;
@@ -1254,7 +1796,20 @@ declare global {
         prototype: HTMLSmoothlyTabSwitchElement;
         new (): HTMLSmoothlyTabSwitchElement;
     };
+    interface HTMLSmoothlyTableElementEventMap {
+        "smoothlyNestedTable": () => void;
+        "smoothlySpotlightChange": { allowSpotlight: boolean; owner?: EventTarget };
+        "smoothlyTableLoad": (owner: EventTarget) => void;
+    }
     interface HTMLSmoothlyTableElement extends Components.SmoothlyTable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableElement, ev: SmoothlyTableCustomEvent<HTMLSmoothlyTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableElement, ev: SmoothlyTableCustomEvent<HTMLSmoothlyTableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTableElement: {
         prototype: HTMLSmoothlyTableElement;
@@ -1278,13 +1833,40 @@ declare global {
         prototype: HTMLSmoothlyTableDemoFilteredElement;
         new (): HTMLSmoothlyTableDemoFilteredElement;
     };
+    interface HTMLSmoothlyTableExpandableCellElementEventMap {
+        "smoothlyExpansionOpen": HTMLElement;
+        "smoothlyExpansionLoad": void;
+        "smoothlyExpandableChange": boolean;
+        "smoothlyExpandableLoad": { allowSpotlight: (allowed: boolean) => void };
+    }
     interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableCellElement, ev: SmoothlyTableExpandableCellCustomEvent<HTMLSmoothlyTableExpandableCellElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableCellElement, ev: SmoothlyTableExpandableCellCustomEvent<HTMLSmoothlyTableExpandableCellElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTableExpandableCellElement: {
         prototype: HTMLSmoothlyTableExpandableCellElement;
         new (): HTMLSmoothlyTableExpandableCellElement;
     };
+    interface HTMLSmoothlyTableExpandableRowElementEventMap {
+        "smoothlyExpansionOpen": HTMLElement;
+        "smoothlyExpandableChange": boolean;
+        "smoothlyExpandableLoad": { allowSpotlight: (allowed: boolean) => void };
+    }
     interface HTMLSmoothlyTableExpandableRowElement extends Components.SmoothlyTableExpandableRow, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableRowElement, ev: SmoothlyTableExpandableRowCustomEvent<HTMLSmoothlyTableExpandableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableRowElement, ev: SmoothlyTableExpandableRowCustomEvent<HTMLSmoothlyTableExpandableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTableExpandableRowElement: {
         prototype: HTMLSmoothlyTableExpandableRowElement;
@@ -1344,13 +1926,35 @@ declare global {
         prototype: HTMLSmoothlyToggleElement;
         new (): HTMLSmoothlyToggleElement;
     };
+    interface HTMLSmoothlyToggleSwitchElementEventMap {
+        "smoothlyToggleSwitchChange": boolean;
+    }
     interface HTMLSmoothlyToggleSwitchElement extends Components.SmoothlyToggleSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyToggleSwitchElementEventMap>(type: K, listener: (this: HTMLSmoothlyToggleSwitchElement, ev: SmoothlyToggleSwitchCustomEvent<HTMLSmoothlyToggleSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyToggleSwitchElementEventMap>(type: K, listener: (this: HTMLSmoothlyToggleSwitchElement, ev: SmoothlyToggleSwitchCustomEvent<HTMLSmoothlyToggleSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyToggleSwitchElement: {
         prototype: HTMLSmoothlyToggleSwitchElement;
         new (): HTMLSmoothlyToggleSwitchElement;
     };
+    interface HTMLSmoothlyTriggerElementEventMap {
+        "trigger": Trigger;
+    }
     interface HTMLSmoothlyTriggerElement extends Components.SmoothlyTrigger, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTriggerElementEventMap>(type: K, listener: (this: HTMLSmoothlyTriggerElement, ev: SmoothlyTriggerCustomEvent<HTMLSmoothlyTriggerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTriggerElementEventMap>(type: K, listener: (this: HTMLSmoothlyTriggerElement, ev: SmoothlyTriggerCustomEvent<HTMLSmoothlyTriggerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTriggerElement: {
         prototype: HTMLSmoothlyTriggerElement;
@@ -1362,7 +1966,19 @@ declare global {
         prototype: HTMLSmoothlyTriggerSinkElement;
         new (): HTMLSmoothlyTriggerSinkElement;
     };
+    interface HTMLSmoothlyTriggerSourceElementEventMap {
+        "trigger": Trigger;
+        "smoothlyMessage": Message<any>;
+    }
     interface HTMLSmoothlyTriggerSourceElement extends Components.SmoothlyTriggerSource, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTriggerSourceElementEventMap>(type: K, listener: (this: HTMLSmoothlyTriggerSourceElement, ev: SmoothlyTriggerSourceCustomEvent<HTMLSmoothlyTriggerSourceElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTriggerSourceElementEventMap>(type: K, listener: (this: HTMLSmoothlyTriggerSourceElement, ev: SmoothlyTriggerSourceCustomEvent<HTMLSmoothlyTriggerSourceElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTriggerSourceElement: {
         prototype: HTMLSmoothlyTriggerSourceElement;
@@ -1495,7 +2111,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyAddressDisplay {
         "editable"?: boolean;
-        "value"?: address;
+        "value"?: address1;
     }
     interface SmoothlyAddresses {
         "editable"?: boolean[];
@@ -1606,14 +2222,14 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayAmount {
         "amount"?: number | string;
-        "currency"?: Currency;
+        "currency"?: isoly.Currency;
         "toInteger"?: boolean;
     }
     /**
      * DEPRECATED, use  <smoothly-display type="date-time">
      */
     interface SmoothlyDisplayDateTime {
-        "datetime"?: DateTime;
+        "datetime"?: isoly.DateTime;
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
@@ -1959,7 +2575,7 @@ declare namespace LocalJSX {
         "multiple"?: boolean;
         "mutable"?: boolean;
         "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
-        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls>) => void;
+        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls1>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };

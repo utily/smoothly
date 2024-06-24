@@ -1,6 +1,6 @@
 import { Component, ComponentWillLoad, h, Host, Listen, State } from "@stencil/core"
 import { selectively } from "selectively"
-import * as http from "cloudly-http"
+import { http } from "cloudly-http"
 import { Selector } from "../../Selector"
 import { Cat } from "./Root"
 
