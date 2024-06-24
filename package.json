@@ -22,8 +22,8 @@
 	"unpkg": "dist/smoothly/smoothly.esm.js",
 	"exports": {
     ".": {
-      "import": "./dist/stencil-package/stencil-package.esm.js",
-      "require": "./dist/stencil-package/stencil-package.cjs.js"
+      "import": "./dist/smoothly/smoothly.esm.js",
+      "require": "./dist/smoothly/smoothly.cjs.js"
     },
     "./loader": {
       "import": "./loader/index.js",
