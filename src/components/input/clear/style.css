@@ -29,7 +29,7 @@
 	filter: opacity(100%);
 }
 
-:host([type="input"]) button {
+:host([type="input"]) > button {
  	padding: 0rem;
  	margin: 0rem;
  	min-width: 0rem; 

@@ -29,7 +29,7 @@
 	flex-shrink: 0;
 }
 
-.close {
+:host > div.close {
 	position: fixed;
 	z-index: 3;
 	top: 0;
@@ -39,7 +39,7 @@
 	background: transparent;
 }
 
-.hidden {
+:host > div.hidden {
 	display: none;
 }
 
@@ -58,7 +58,7 @@
 }
 
 /* arrow */
-.container:before {
+:host > div.container:before {
 	content: "";
 	width: 0.6em;
 	height: 0.6em;
@@ -71,12 +71,12 @@
 }
 
 /* arrow placement */
-.container.arrow-top:before {
+:host > div.container.arrow-top:before {
 	left: calc(91%);
 	top: -5px;
 }
 
-.container:after {
+:host div.container:after {
 	content: "";
 	height: 100%;
 	width: 100%;

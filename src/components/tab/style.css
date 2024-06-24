@@ -3,10 +3,10 @@
 	box-sizing: border-box;
 	margin-bottom: -3px;
 }
-.hide {
+:host > div.hide {
 	display: none;
 }
-label {
+:host > label {
 	display: block;
 	padding: .5rem;
 	background-color: transparent;

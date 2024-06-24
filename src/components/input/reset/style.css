@@ -23,7 +23,7 @@
 	filter: opacity(100%);
 }
 
-:host([type="input"]) button {
+:host([type="input"]) > button {
  	min-width: 0rem; 
 }
 :host smoothly-icon.default {

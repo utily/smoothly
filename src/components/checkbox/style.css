@@ -8,37 +8,37 @@
 	row-gap: 0.5rem;
 	align-items: center;
 }
-:host label:empty {
+:host > label:empty {
 	display: none;
 }
-:host label {
+:host > label {
 	grid-column: 2;
 	margin-left: 0.2rem;
 }
 
-:host smoothly-icon {
+:host > smoothly-icon {
 	grid-column: 1;
 	line-height: 0;
 	border: 1px solid rgb(var(--smoothly-color-contrast));
 }
-:host:not([disabled]):not([unavailable]) smoothly-icon {
+:host:not([disabled]):not([unavailable]) > smoothly-icon {
 	cursor: pointer;
 }
-:host[disabled] smoothly-icon,
-:host[unavailable] smoothly-icon {
+:host[disabled] > smoothly-icon,
+:host[unavailable] > smoothly-icon {
 	border-color: rgb(var(--smoothly-color-contrast), 0.3);
 }
-:host[disabled] smoothly-icon,
-:host[unavailable] smoothly-icon {
+:host[disabled] > smoothly-icon,
+:host[unavailable] > smoothly-icon {
 	opacity: 0.7;
 }
-:host:not([checked]) smoothly-icon,
-:host:not([intermediate]) smoothly-icon
+:host:not([checked]) > smoothly-icon,
+:host:not([intermediate]) > smoothly-icon
 :host:not([unavailable]) {
 	stroke: rgb(var(--smoothly-color-contrast));
 }
 
-:host div.expansion {
+:host > div.expansion {
 	position: relative;
 	grid-column-start: 2;
 	background-color: rgb(var(--smoothly-secondary-color));
@@ -46,11 +46,11 @@
 	padding: 0.5rem;
 	border-radius: 5px;
 }
-:host:not([checked]) div.expansion,
-:host div.expansion:empty {
+:host:not([checked]) > div.expansion,
+:host > div.expansion:empty {
 	display: none;
 }
-:host div.expansion::before {
+:host > div.expansion::before {
 	content: "\25B2";
 	position: absolute;
 	bottom: calc(100% + 0.5rem /* <-- alignment */ - 0.3rem /* <-- adjustment*/);

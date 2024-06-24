@@ -46,7 +46,7 @@
 	box-sizing: border-box;
 	overflow: hidden;
 }
-:host:not([header]) main {
+:host:not([header]) > main {
 	border-radius: 8px;
 }
 :host > * > smoothly-trigger {
@@ -59,7 +59,7 @@
 :host > * > smoothly-trigger:hover {
 	border-color: transparent;
 }
-:host smoothly-icon {
+:host > header > smoothly-trigger > smoothly-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }

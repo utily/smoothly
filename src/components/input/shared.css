@@ -28,7 +28,7 @@
 :host[looks="transparent"]:not(:focus-within) {
 	background-color: transparent;
 }
-:host[looks="transparent"]:not(:focus-within) input {
+:host[looks="transparent"]:not(:focus-within) > input {
 	background: transparent;
 }
 :host[looks="transparent"]:focus-within {

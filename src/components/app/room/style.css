@@ -5,7 +5,7 @@
 	cursor: pointer;
 }
 
-div {
+:host > div {
 	overflow-y: auto;
 	height: 100%;
 }

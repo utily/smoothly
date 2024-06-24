@@ -20,7 +20,7 @@
 :host:not([open]) {
 	display: none;
 }
-:host .list {
+:host > div.list {
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
@@ -30,15 +30,15 @@
 	padding-right: 0.5rem;
 	padding-bottom: 0.25rem;
 }
-:host .hide {
+:host > .hide {
 	display: none;
 }
-:host .controls {
+:host > div.controls {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	gap: 0.5rem;
 	transition: grid-template-columns 200ms linear;
 }
-:host .controls > button:disabled {
+:host > div.controls > button:disabled {
 	opacity: 0.3;
 }

@@ -7,14 +7,10 @@
 	padding: 1em 0.7em 0.2em 0.8em;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
-:host div.element {
-	display: flex;
-	background-color: inherit;
-}
-smoothly-slot-elements {
+:host > smoothly-slot-elements {
 	white-space: nowrap;
 }
-.selected {
+:host > smoothly-slot-elements.selected {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -24,7 +20,7 @@ smoothly-slot-elements {
 	text-overflow: ellipsis;
 	margin-right: 2px;
 }
-.selected::after {
+:host > smoothly-slot-elements.selected::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -32,13 +28,13 @@ smoothly-slot-elements {
 	right: 0;
 	width: 2ch;
 }
-:host:not([looks=transparent]) .selected::after {
+:host:not([looks=transparent]) > smoothly-slot-elements.selected::after {
 	background: linear-gradient(90deg, rgba(var(--background-color, var(--smoothly-color-shade)), 0) 0%, rgba(var(--background-color, var(--smoothly-color-shade)), 1) 100%);
 }
-.selected * {
+:host > smoothly-slot-elements.selected > * {
 	display: none;
 }
-.label {
+:host > span.label {
 	position: absolute;
 	left: 0.4rem;
 	top: 0.6rem;
@@ -49,7 +45,7 @@ smoothly-slot-elements {
 	transform-origin: top left;
 	transition: transform 100ms ease;
 }
-.selected:not(:empty) + .label {
+:host > smoothly-slot-elements.selected:not(:empty) + span.label {
 	top: 0.4em;
 	transform: scale(0.6);
 }

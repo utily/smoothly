@@ -1,7 +1,7 @@
 :host {
 	display: contents;
 }
-div {
+:host > div {
 	display: table-row;
 	cursor: pointer;
 	line-height: 1.5rem;
@@ -25,13 +25,13 @@ div {
 	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset, 1px 0 0 0 rgb(var(--smoothly-color-shade)) inset, -1px 0 0 0 rgb(var(--smoothly-color-shade)) inset;
 }
 
-.hide {
+:host:not([open]) > tr > td {
 	display: none;
 }
-div > tr > td {
+:host > tr > td {
 	position: relative;
 }
-td::slotted(*) {
+:host > tr > td::slotted(*) {
 	--expansion-width: 1.5rem;
 	--expansion-border-width: 3px;
 	position: relative;
@@ -42,13 +42,13 @@ td::slotted(*) {
 	padding: 0.5rem calc(var(--expansion-width) - 1px);
 	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 }
-tr.spotlight > td::slotted(*) {
+:host > tr.spotlight > td::slotted(*) {
 	box-shadow: calc(var(--expansion-border-width)) 0px 0px 0px rgb(var(--smoothly-tertiary-color)) inset;
 }
-tr:not(.spotlight) > td::slotted(*) {
+:host > tr:not(.spotlight) > td::slotted(*) {
 	box-shadow: -1px 0 0 0 rgb(var(--smoothly-tertiary-color)), 1px 0 0 0 rgb(var(--smoothly-tertiary-color));
 }
-td::slotted(*)::before {
+:host > tr > td::slotted(*)::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -58,7 +58,7 @@ td::slotted(*)::before {
 	width: calc(var(--expansion-width) + 1px);
 	border-top: 1px solid rgb(var(--smoothly-color-shade));
 }
-td::slotted(*)::after {
+:host > tr > td::slotted(*)::after {
 	content: "";
 	position: absolute;
 	display: flex;

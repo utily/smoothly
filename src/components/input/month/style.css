@@ -10,12 +10,12 @@
 :host:not([next]) > div:last-of-type smoothly-button {
 	display: none;
 }
-div {
+:host > div {
 	display: flex;
 	width: 100%;
 	gap: 0.5rem;
 }
-smoothly-input-select {
+:host > div > smoothly-input-select {
 	flex: 1;
 }
 :host > div > smoothly-button {

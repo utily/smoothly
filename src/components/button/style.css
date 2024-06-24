@@ -16,8 +16,8 @@
 	opacity: 0.5;
 	pointer-events: none;
 }
-a,
-button {
+:host > a,
+:host > button {
 	font-size: 110%;
 	font-weight: 400;
 	border: none;
@@ -26,7 +26,7 @@ button {
 	display: inline-flex;
 	gap: 0.5rem;
 }
-button {
+:host > button {
 	justify-content: center;
 	height: 100%;
 	width: 100%;

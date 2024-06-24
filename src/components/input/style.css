@@ -20,7 +20,7 @@
 	width: 100%;
 	height: 100%;
 }
-label {
+:host > div > label {
 	position: absolute;
 	left: 0.4em;
 	top: 0.6em;
@@ -30,13 +30,13 @@ label {
 	transform-origin: top left;
 	transition: transform 100ms ease;
 }
-:host:not([show-label]) label {
+:host:not([show-label]) > div > label {
 	display: none;
 }
-:host:not([show-label]) input {
+:host:not([show-label]) > div > input {
 	padding: 0.7em 0.7em 0.7em 0.8em;
 }
-input {
+:host > div > input {
 	padding: 1.2em 0.7em 0.2em 0.8em;
 	box-sizing: border-box;
 	width: 100%;
@@ -48,14 +48,14 @@ input {
 	font-family: var(--smoothly-font-family);
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
-smoothly-icon {
+:host > div > smoothly-icon {
 	display: none;
 	position: absolute;
 	right: 0.2em;
 	top: 0.6em;
 }
 
-input:invalid + label + smoothly-icon {
+:host > div > input:invalid + label + smoothly-icon {
 	display: block;
 }
 :host > div > label {
@@ -68,17 +68,17 @@ input:invalid + label + smoothly-icon {
 	top: 0.4em;
 	transform: scale(0.6);
 }
-input:focus {
+:host > div > input:focus {
 	outline: none;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+:host > div > input:-webkit-autofill,
+:host > div > input:-webkit-autofill:hover,
+:host > div > input:-webkit-autofill:focus,
+:host > div > input:-webkit-autofill:active {
 	box-shadow: 0 0 0 40em rgb(var(--background-color, var(--smoothly-color-shade))) inset;
 	-webkit-box-shadow: 0 0 0 40em rgb(var(--background-color, var(--smoothly-color-shade))) inset;
 }
-input:-webkit-autofill,
-input:-webkit-autofill + label {
+:host > div > input:-webkit-autofill,
+:host > div > input:-webkit-autofill + label {
 	-webkit-text-fill-color: rgb(var(--text-color, var(--smoothly-color-contrast)));
 }

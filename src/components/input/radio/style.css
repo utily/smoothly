@@ -7,14 +7,14 @@
 	align-items: center;
 }
 
-:host .input-group {
+:host > div.input-group {
 	display: flex;
 	width: 100%;
 	align-items: center;
 	gap: 1em
 }
 
-:host .input-group div {
+:host > div.input-group > div {
 	align-items: center;
 	display: flex;
 	justify-content: right;
@@ -23,7 +23,7 @@
 	gap: 1em;
 }
 
-:host .input-group::slotted(p) {
+:host > div.input-group::slotted(p) {
 	margin: 0 0 0 0.2em;
 	white-space: nowrap;
 }

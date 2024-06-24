@@ -13,26 +13,27 @@
 	flex-direction: column;
 }
 
-:host>.select-display {
+:host>div.select-display {
 	box-sizing: border-box;
 	min-height: 2.7em;
 	display: flex;
 	cursor: default;
-	padding: .7em ;
-	overflow: hidden;	
+	padding: .7em;
+	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
 	gap: 1em;
 	text-overflow: ellipsis;
 }
 
-:host>.icons {
-	display:flex;
+:host>div.icons {
+	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin-right: .4em;
 }
-:host>.icons::slotted(smoothly-input-reset) {
+
+:host>div.icons::slotted(smoothly-input-reset) {
 	padding-right: .2em;
 }
 
@@ -51,13 +52,13 @@
 	transform: scale(0.6);
 }
 
-:host.has-value:has([slot=label]) .select-display,
-:host:not(.has-value)[placeholder] .select-display  {
- padding-bottom: .1em;
- padding-left: .8em;
- padding-top: 1.1em;
- overflow: hidden;	
- width: 100%;
+:host.has-value:has([slot=label])>div.select-display,
+:host:not(.has-value)[placeholder]>div.select-display {
+	padding-bottom: .1em;
+	padding-left: .8em;
+	padding-top: 1.1em;
+	overflow: hidden;
+	width: 100%;
 }
 
 :host>.options {
@@ -72,44 +73,34 @@
 	background-color: rgb(var(--smoothly-default-shade));
 }
 
-:host[looks=border] .options {
+:host[looks=border]>div.options {
 	transform: translateX(-1px);
 	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
 	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .4) solid 1px;
 }
 
-:host[looks="grid"] .options {
+:host[looks="grid"]>div.options {
 	transform: translateX(-2px);
 	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .5) solid 2px;
 	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .2) solid 2px;
 }
 
-:host>.options::slotted(smoothly-item){
+:host>div.options::slotted(smoothly-item) {
 	padding: .7em;
 }
 
-:host>.options::slotted(smoothly-item:not([selectable])) {
+:host>div.options::slotted(smoothly-item:not([selectable])) {
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
 	color: var(--smoothly-color-contrast)
 }
 
-:host>.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
+:host>div.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
 	margin-left: auto;
 	margin-right: 0;
 }
 
-:host>.options.hidden {
+:host>div.options.hidden {
 	display: none;
 }
-
-:host>section {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100vw;
-	height: 100vh;
-	z-index: 10;
-}
-

@@ -159,3 +159,7 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 smoothly-app>smoothly-notifier>header>nav:not(.menu-open) {
 	display: none;
 }
+smoothly-app>smoothly-notifier>main>div {
+	overflow-y: scroll;
+	height: 100%;
+}

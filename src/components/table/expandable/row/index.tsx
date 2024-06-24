@@ -48,7 +48,7 @@ export class TableExpandableRow implements ComponentWillLoad {
 					<slot></slot>
 				</div>
 				<tr class={{ spotlight: this.spotlight }}>
-					<td colSpan={999} class={{ hide: !this.open }}>
+					<td colSpan={999}>
 						<slot name="detail"></slot>
 					</td>
 				</tr>

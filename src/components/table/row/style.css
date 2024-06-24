@@ -6,6 +6,6 @@
 .hide {
 	display: none;
 }
-div {
+:host > div {
 	display: contents;
 }
