@@ -26,11 +26,11 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
+	changed: boolean
 	@Element() element: HTMLSmoothlyInputMonthElement
-	@Prop({ mutable: true }) changed: boolean
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
 	@Prop({ reflect: true }) color?: Color
-	@Prop({ reflect: true }) looks: Looks
+	@Prop({ reflect: true, mutable: true }) looks: Looks
 	@Prop() name: string
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
@@ -38,7 +38,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop() arrows = true
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
-	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	private year?: HTMLSmoothlyInputSelectElement
@@ -51,7 +50,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.valueChanged()
 	}
-
 	@Watch("value")
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
@@ -63,7 +61,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 			this.value = isoly.Date.create(date)
 		}
 	}
-
 	@Method()
 	async clear(): Promise<void> {
 		this.year?.clear()
@@ -88,7 +85,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		this.year?.setInitialValue()
 		this.month?.setInitialValue()
 	}
-
 	inputHandler(event: CustomEvent<Record<string, any>>): void {
 		if (event.target != this.element) {
 			event.stopPropagation()
@@ -129,9 +125,11 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						name={`${this.name}-year`}
 						readonly={this.readonly}
 						changed={this.changed}
+						menuHeight="5.5items"
 						required
 						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}>
+						onSmoothlyInput={e => this.inputHandler(e)}
+						searchDisabled>
 						<div slot={"label"}>
 							<slot name={"year-label"} />
 						</div>
@@ -150,9 +148,11 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						color={this.color}
 						looks={this.looks}
 						changed={this.changed}
+						menuHeight="5.5items"
 						required
 						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}>
+						onSmoothlyInput={e => this.inputHandler(e)}
+						searchDisabled>
 						<div slot={"label"}>
 							<slot name={"month-label"} />
 						</div>
