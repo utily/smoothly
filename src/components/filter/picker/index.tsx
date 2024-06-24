@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { selectively } from "selectively"
 import { isly } from "isly"
 import { Option } from "../../../model"
@@ -16,7 +16,6 @@ export class SmoothlyFilterPicker implements Filter {
 		string,
 		{ state: Record<string, any>; selected: (selected: boolean) => void }
 	>()
-	@Element() element: HTMLSmoothlyFilterPickerElement
 	@Prop() label: string
 	@Prop() property: string
 	@Prop() multiple = false
