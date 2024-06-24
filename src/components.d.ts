@@ -182,6 +182,7 @@ export namespace Components {
     }
     interface SmoothlyFilterPicker {
         "label": string;
+        "looks": Looks;
         "multiple": boolean;
         "property": string;
         "type": "array" | "string";
@@ -420,7 +421,6 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
-        "showArrow": boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -2242,6 +2242,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilterPicker {
         "label"?: string;
+        "looks"?: Looks;
         "multiple"?: boolean;
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
@@ -2490,7 +2491,6 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "searchDisabled"?: boolean;
-        "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {

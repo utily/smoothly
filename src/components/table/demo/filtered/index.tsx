@@ -67,7 +67,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						toolTip="Colored cats"
 						slot="bar"
 					/>
-					<smoothly-filter-picker label="coat" property="nested.coat" slot="bar" multiple={false}>
+					<smoothly-filter-picker label="coat" property="nested.coat" slot="bar" multiple={false} looks="border">
 						{this.cats &&
 							this.cats.map(
 								cat =>
