@@ -112,64 +112,60 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<div>
-					<smoothly-button
-						size={"flexible"}
-						color={this.color}
-						disabled={this.readonly}
-						onClick={() => this.adjustMonth(-1)}>
-						<smoothly-icon name={"caret-back-outline"} size={"tiny"} color={this.color} fill={"default"} />
-					</smoothly-button>
-					<smoothly-input-select
-						ref={e => (this.year = e)}
-						name={`${this.name}-year`}
-						readonly={this.readonly}
-						changed={this.changed}
-						menuHeight="5.5items"
-						required
-						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}
-						searchDisabled>
-						<div slot={"label"}>
-							<slot name={"year-label"} />
-						</div>
-						{generate.years(this.value ?? isoly.Date.now()).map(year => (
-							<smoothly-item key={year.date} value={year.date} selected={year.selected || this.value == year.date}>
-								{year.name}
-							</smoothly-item>
-						))}
-					</smoothly-input-select>
-				</div>
-				<div>
-					<smoothly-input-select
-						ref={e => (this.month = e)}
-						name={`${this.name}-month`}
-						readonly={this.readonly}
-						color={this.color}
-						looks={this.looks}
-						changed={this.changed}
-						menuHeight="5.5items"
-						required
-						showArrow={this.arrows}
-						onSmoothlyInput={e => this.inputHandler(e)}
-						searchDisabled>
-						<div slot={"label"}>
-							<slot name={"month-label"} />
-						</div>
-						{generate.months(this.value ?? isoly.Date.now()).map(month => (
-							<smoothly-item key={month.date} value={month.date} selected={month.selected || this.value == month.date}>
-								{month.name}
-							</smoothly-item>
-						))}
-					</smoothly-input-select>
-					<smoothly-button
-						size={"flexible"}
-						color={this.color}
-						disabled={this.readonly}
-						onClick={() => this.adjustMonth(1)}>
-						<smoothly-icon name={"caret-forward-outline"} size={"tiny"} color={this.color} fill={"default"} />
-					</smoothly-button>
-				</div>
+				<smoothly-button
+					size={"flexible"}
+					color={this.color}
+					disabled={this.readonly}
+					onClick={() => this.adjustMonth(-1)}>
+					<smoothly-icon name={"caret-back-outline"} size={"tiny"} color={this.color} fill={"default"} />
+				</smoothly-button>
+				<smoothly-input-select
+					ref={e => (this.year = e)}
+					name={`${this.name}-year`}
+					readonly={this.readonly}
+					changed={this.changed}
+					menuHeight="5.5items"
+					required
+					showArrow={this.arrows}
+					onSmoothlyInput={e => this.inputHandler(e)}
+					searchDisabled>
+					<div slot={"label"}>
+						<slot name={"year-label"} />
+					</div>
+					{generate.years(this.value ?? isoly.Date.now()).map(year => (
+						<smoothly-item key={year.date} value={year.date} selected={year.selected || this.value == year.date}>
+							{year.name}
+						</smoothly-item>
+					))}
+				</smoothly-input-select>
+				<smoothly-input-select
+					ref={e => (this.month = e)}
+					name={`${this.name}-month`}
+					readonly={this.readonly}
+					color={this.color}
+					looks={this.looks}
+					changed={this.changed}
+					menuHeight="5.5items"
+					required
+					showArrow={this.arrows}
+					onSmoothlyInput={e => this.inputHandler(e)}
+					searchDisabled>
+					<div slot={"label"}>
+						<slot name={"month-label"} />
+					</div>
+					{generate.months(this.value ?? isoly.Date.now()).map(month => (
+						<smoothly-item key={month.date} value={month.date} selected={month.selected || this.value == month.date}>
+							{month.name}
+						</smoothly-item>
+					))}
+				</smoothly-input-select>
+				<smoothly-button
+					size={"flexible"}
+					color={this.color}
+					disabled={this.readonly}
+					onClick={() => this.adjustMonth(1)}>
+					<smoothly-icon name={"caret-forward-outline"} size={"tiny"} color={this.color} fill={"default"} />
+				</smoothly-button>
 			</Host>
 		)
 	}
