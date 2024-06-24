@@ -13,7 +13,10 @@ export const config: Config = {
 			esmLoaderPath: "../loader",
 		},
 		{
-			type: "dist-custom-elements-bundle",
+			type: "dist-custom-elements",
+			customElementsExportBehavior: "auto-define-custom-elements",
+			externalRuntime: false,
+			generateTypeDeclarations: true,
 		},
 		{
 			type: "www",
