@@ -9,7 +9,7 @@ import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
-import { FunctionalComponent, JSX } from "@stencil/core";
+import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
@@ -26,7 +26,7 @@ export { SmoothlyAccordion } from "./components/accordion";
 export { address } from "./components/address-display";
 export { address as address1 } from "./components/address-display/index";
 export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
-export { FunctionalComponent, JSX } from "@stencil/core";
+export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/Button";
 export { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 export { tidily, Type } from "tidily";
@@ -72,7 +72,7 @@ export namespace Components {
         "baseUrl": string;
     }
     interface SmoothlyAppRoom {
-        "content"?: JSX.Element | FunctionalComponent;
+        "content"?: VNode | FunctionalComponent;
         "disabled": boolean;
         "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
@@ -453,7 +453,7 @@ export namespace Components {
         "shape": "rectangle" | "rounded";
     }
     interface SmoothlyLazy {
-        "content"?: JSX.Element | FunctionalComponent;
+        "content"?: VNode | FunctionalComponent;
         "show": boolean;
     }
     interface SmoothlyLoadMore {
@@ -2127,7 +2127,7 @@ declare namespace LocalJSX {
         "baseUrl"?: string;
     }
     interface SmoothlyAppRoom {
-        "content"?: JSX.Element | FunctionalComponent;
+        "content"?: VNode | FunctionalComponent;
         "disabled"?: boolean;
         "icon"?: Icon;
         "label"?: string;
@@ -2535,7 +2535,7 @@ declare namespace LocalJSX {
         "shape"?: "rectangle" | "rounded";
     }
     interface SmoothlyLazy {
-        "content"?: JSX.Element | FunctionalComponent;
+        "content"?: VNode | FunctionalComponent;
         "show"?: boolean;
     }
     interface SmoothlyLoadMore {
