@@ -46,10 +46,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@Prop() required = false
+	@Prop() searchDisabled = false
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
-	@Event() smoothlySelect: EventEmitter<unknown>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -204,67 +204,68 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
-		event.stopPropagation()
-		const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-
-		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
-			event.preventDefault()
-		if (this.open) {
-			switch (event.key) {
-				case "ArrowUp":
-					visibleItems && this.move(-1)
-					break
-				case "ArrowDown":
-					visibleItems && this.move(1)
-					break
-				case "Escape":
-					if (this.filter == "")
+		if (!this.searchDisabled) {
+			event.stopPropagation()
+			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
+			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
+				event.preventDefault()
+			if (this.open) {
+				switch (event.key) {
+					case "ArrowUp":
+						visibleItems && this.move(-1)
+						break
+					case "ArrowDown":
+						visibleItems && this.move(1)
+						break
+					case "Escape":
+						if (this.filter == "")
+							this.open = false
+						else
+							this.filter = ""
+						break
+					case "Backspace":
+						this.filter = this.filter.slice(0, -1)
+						break
+					case "Enter":
+						const result = this.items.find(item => item.marked)
+						if (result?.value)
+							result.selected = !result.selected
+						this.smoothlyItemSelect.emit(result)
+						if (!this.multiple) {
+							this.open = false
+							this.filter = ""
+						}
+						break
+					case "Tab":
 						this.open = false
-					else
-						this.filter = ""
-					break
-				case "Backspace":
-					this.filter = this.filter.slice(0, -1)
-					break
-				case "Enter":
-					const result = this.items.find(item => item.marked)
-					if (result?.value)
-						result.selected = !result.selected
-					this.smoothlyItemSelect.emit(result)
-					if (!this.multiple) {
-						this.open = false
-						this.filter = ""
-					}
-					break
-				case "Tab":
-					this.open = false
-					break
-				default:
-					if (event.key.length == 1)
-						this.filter += event.key
-					break
-			}
-		} else {
-			switch (event.key) {
-				case "Enter":
-				case " ":
-					this.handleShowOptions()
-					break
-				case "ArrowDown":
-					this.handleShowOptions()
-					this.move(0)
-					break
-				case "ArrowUp":
-					this.handleShowOptions()
-					this.move(-1)
-					break
-				case "Tab":
-					break
-				default:
-					this.handleShowOptions()
-					if (event.key.length == 1)
-						this.filter += event.key
-					break
+						break
+					default:
+						if (event.key.length == 1)
+							this.filter += event.key
+						break
+				}
+			} else {
+				switch (event.key) {
+					case "Enter":
+					case " ":
+						this.handleShowOptions()
+						break
+					case "ArrowDown":
+						this.handleShowOptions()
+						this.move(0)
+						break
+					case "ArrowUp":
+						this.handleShowOptions()
+						this.move(-1)
+						break
+					case "Tab":
+						break
+					default:
+						this.handleShowOptions()
+						if (event.key.length == 1)
+							this.filter += event.key
+						break
+				}
 			}
 		}
 	}

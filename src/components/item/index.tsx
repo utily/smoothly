@@ -35,7 +35,6 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		if (this.selectable && (!this.selected || this.deselectable))
 			this.selected = !this.selected
 	}
-
 	@Watch("selected")
 	selectedWatcher(): void {
 		this.smoothlyItemSelect.emit(this.element)
