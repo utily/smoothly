@@ -3,7 +3,7 @@
 	flex-direction: row;
 }
 
-:host>smoothly-input-select {
+:host>smoothly-input-select:last-of-type {
 	display: flex;
 	width: 100%;
 	gap: 0.5rem;
@@ -18,4 +18,9 @@
 :host:not([previous])>smoothly-button:first-of-type,
 :host:not([next])>smoothly-button:last-of-type {
 	display: none;
+}
+
+:host>smoothly-button {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
 }
