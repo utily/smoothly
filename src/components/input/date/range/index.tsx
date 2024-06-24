@@ -53,7 +53,7 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 			<Host tabindex={0}>
 				<section onClick={() => (this.open = !this.open)}>
 					<smoothly-input
-						type="text" // TODO:  date-range tidily thing
+						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
 						value={`${this.start} - ${this.end}`}
 						looks={this.looks}
