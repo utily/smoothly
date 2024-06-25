@@ -525,8 +525,8 @@ export namespace Components {
         "clone": boolean;
     }
     interface SmoothlySpinner {
-        "active": boolean;
-        "size": "small" | "medium" | "large";
+        "overlay": boolean;
+        "size": "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
         "color"?: Color;
@@ -2608,8 +2608,8 @@ declare namespace LocalJSX {
         "onSmoothlySlottedChange"?: (event: SmoothlySlottedElementsCustomEvent<Node[]>) => void;
     }
     interface SmoothlySpinner {
-        "active"?: boolean;
-        "size"?: "small" | "medium" | "large";
+        "overlay"?: boolean;
+        "size"?: "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
         "color"?: Color;

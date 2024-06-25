@@ -1,9 +1,10 @@
-import { Component, Event, EventEmitter, h } from "@stencil/core"
-import { Notice } from "../../model"
+import { Component, Event, EventEmitter, h ,State} from "@stencil/core"
+import { Color, Notice } from "../../model"
 @Component({
 	tag: "smoothly-display-demo",
 })
 export class SmoothlyDisplayDemo {
+	@State() downloadingSpinner: boolean
 	@Event() notice: EventEmitter<Notice>
 	private noticeWarning(notice: Notice) {
 		console.log("emit", notice)
@@ -189,10 +190,48 @@ export class SmoothlyDisplayDemo {
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly spinner</h2>
-					<div style={{position: "relative", height: "10em"}}>Large Spinner<smoothly-spinner active size="large" style={{"--background-color": "255,255,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner></div>
-					<div style={{position: "relative", height: "10em"}}>Medium Spinner<smoothly-spinner active size="medium"></smoothly-spinner></div>
-					<div style={{position: "relative", height: "10em"}}>Small Spinner<smoothly-spinner active size="small"></smoothly-spinner></div>
-					<div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div>
+					<div style={{width: "fit-content"}}>
+						Large
+						<smoothly-spinner size="large" style={{"--spinner-background": "200,255,200", "--spinner-background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner>
+					</div>
+					<div style={{width: "fit-content"}}>
+						Medium
+						<smoothly-spinner size="medium"></smoothly-spinner>
+					</div>
+					<div style={{width: "fit-content"}}>
+						Small
+						<smoothly-spinner size="small"></smoothly-spinner>
+					</div>
+					<div>
+					Icon sized spinner on button
+					{Color.types.map(color => 
+							<smoothly-button 
+								size="icon" 
+								color={color} 
+								shape="rounded"
+								onClick={() => {
+									this.downloadingSpinner = true
+									setTimeout(() => this.downloadingSpinner = false, 3000)
+								}}>
+									{!this.downloadingSpinner && <smoothly-icon name="download-outline"></smoothly-icon>}
+									{this.downloadingSpinner && <smoothly-spinner size="icon" style={{"--spinner-background-opacity": "0"}}></smoothly-spinner>}
+							</smoothly-button>
+					)}
+					</div>
+					<h3>Spinner with overlay</h3>
+					<div style={{position: "relative", height: "10em"}}>
+						Large Overlay Spinner
+						<smoothly-spinner overlay size="large" style={{"--spinner-background": "255,200,255", "--spinner-background-opacity": "0.5", "--spinner-color": "0,130,0", }}></smoothly-spinner>
+					</div>
+					<div style={{position: "relative", height: "10em"}}>
+						Medium Overlay Spinner
+						<smoothly-spinner overlay color="secondary" size="medium"></smoothly-spinner>
+					</div>
+					<div style={{position: "relative", height: "10em"}}>
+						Small Overlay Spinner
+						<smoothly-spinner overlay size="small"></smoothly-spinner>
+					</div>
+					{/* <div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div> */}
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly summary</h2>

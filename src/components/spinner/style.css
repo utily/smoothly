@@ -1,0 +1,65 @@
+:host[hidden] {
+	display: none;
+}
+:host {
+	--spinner-time: 1.4s;
+	--spinner-color: var(--smoothly-color-contrast);
+	--spinner-background: var(--smoothly-color);
+	--spinner-background-opacity: var(--smoothly-semitransparent, 0.8);
+	display: block;
+	stroke: rgb(var(--spinner-color));
+	background-color: rgba(var(--spinner-background), var(--spinner-background-opacity));
+}
+:host:not([overlay]) {
+	width: var(--spinner-size);
+	height: var(--spinner-size);
+}
+:host[overlay] {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: rgba(var(--spinner-background), var(--spinner-background-opacity));
+}
+:host[color]:not([overlay]),
+:host[color][overlay] {
+	background-color: rgba(var(--spinner-background), var(--spinner-background-opacity));
+	stroke: rgb(var(--spinner-color));
+}
+:host[overlay]>svg {
+	position: absolute;
+	width: var(--spinner-size);
+	left: calc(50% - var(--spinner-size) / 2);
+	top: calc(50% - var(--spinner-size) / 2);
+}
+:host>svg {
+	animation: SPIN-SVG var(--spinner-time) linear infinite;
+}
+:host>svg>circle {
+	transform-origin: center;
+	animation: SPIN-CIRCLE var(--spinner-time) ease-in-out infinite;
+	stroke-dasharray: 187;
+	stroke-dashoffset: 0;
+}
+@keyframes SPIN-SVG {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(270deg);
+	}
+}
+@keyframes SPIN-CIRCLE {
+	0% {
+		stroke-dashoffset: 187;
+	}
+	50% {
+		stroke-dashoffset: 46.75;
+		transform: rotate(135deg);
+	}
+	100% {
+		stroke-dashoffset: 187;
+		transform: rotate(450deg);
+	}
+}
