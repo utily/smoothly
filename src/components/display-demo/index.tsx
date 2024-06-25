@@ -1,9 +1,10 @@
-import { Component, Event, EventEmitter, h } from "@stencil/core"
-import { Notice } from "../../model"
+import { Component, Event, EventEmitter, h ,State} from "@stencil/core"
+import { Color, Notice } from "../../model"
 @Component({
 	tag: "smoothly-display-demo",
 })
 export class SmoothlyDisplayDemo {
+	@State() downloadingSpinner: boolean
 	@Event() notice: EventEmitter<Notice>
 	private noticeWarning(notice: Notice) {
 		console.log("emit", notice)
@@ -190,24 +191,41 @@ export class SmoothlyDisplayDemo {
 				<fieldset>
 					<h2>Smoothly spinner</h2>
 					<div style={{width: "fit-content"}}>
-						Large Spinner
-						<smoothly-spinner size="large" style={{"--background-color": "255,200,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner>
+						Large
+						<smoothly-spinner size="large" style={{"--spinner-background": "200,255,200", "--spinner-background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner>
 					</div>
 					<div style={{width: "fit-content"}}>
-						Medium Spinner
-						<smoothly-spinner size="medium" style={{"--background-color": "200,255,255"}}></smoothly-spinner>
+						Medium
+						<smoothly-spinner size="medium"></smoothly-spinner>
 					</div>
 					<div style={{width: "fit-content"}}>
-						Small Spinner
-						<smoothly-spinner size="small" style={{"--background-color": "255,255,200"}}></smoothly-spinner>
+						Small
+						<smoothly-spinner size="small"></smoothly-spinner>
 					</div>
+					<div>
+					Icon sized spinner on button
+					{Color.types.map(color => 
+							<smoothly-button 
+								size="icon" 
+								color={color} 
+								shape="rounded"
+								onClick={() => {
+									this.downloadingSpinner = true
+									setTimeout(() => this.downloadingSpinner = false, 3000)
+								}}>
+									{!this.downloadingSpinner && <smoothly-icon name="download-outline"></smoothly-icon>}
+									{this.downloadingSpinner && <smoothly-spinner size="icon" style={{"--spinner-background-opacity": "0"}}></smoothly-spinner>}
+							</smoothly-button>
+					)}
+					</div>
+					<h3>Spinner with overlay</h3>
 					<div style={{position: "relative", height: "10em"}}>
 						Large Overlay Spinner
-						<smoothly-spinner overlay size="large" style={{"--background-color": "255,200,255", "--background-opacity": "0.2", "--spinner-color": "0,130,0", }}></smoothly-spinner>
+						<smoothly-spinner overlay size="large" style={{"--spinner-background": "255,200,255", "--spinner-background-opacity": "0.5", "--spinner-color": "0,130,0", }}></smoothly-spinner>
 					</div>
 					<div style={{position: "relative", height: "10em"}}>
 						Medium Overlay Spinner
-						<smoothly-spinner overlay size="medium"></smoothly-spinner>
+						<smoothly-spinner overlay color="secondary" size="medium"></smoothly-spinner>
 					</div>
 					<div style={{position: "relative", height: "10em"}}>
 						Small Overlay Spinner

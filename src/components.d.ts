@@ -526,7 +526,7 @@ export namespace Components {
     }
     interface SmoothlySpinner {
         "overlay": boolean;
-        "size": "small" | "medium" | "large";
+        "size": "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
         "color"?: Color;
@@ -2609,7 +2609,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlySpinner {
         "overlay"?: boolean;
-        "size"?: "small" | "medium" | "large";
+        "size"?: "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
         "color"?: Color;
