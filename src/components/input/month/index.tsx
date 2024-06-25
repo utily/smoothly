@@ -35,7 +35,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false
-	@Prop() arrows = true
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -126,7 +125,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
-					showArrow={this.arrows}
 					onSmoothlyInput={e => this.inputHandler(e)}
 					searchDisabled>
 					<div slot={"label"}>
@@ -147,7 +145,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
-					showArrow={this.arrows}
 					onSmoothlyInput={e => this.inputHandler(e)}
 					searchDisabled>
 					<div slot={"label"}>

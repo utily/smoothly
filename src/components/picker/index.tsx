@@ -77,8 +77,10 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+			event.detail(this.looks)
+		}
 	}
 	@Listen("smoothlyPickerMenuLoaded")
 	menuLoadedHandler(event: CustomEvent<Controls & { synced: () => boolean }>): void {
@@ -156,9 +158,11 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 				<span class={"label"}>
 					<slot name={"label"} />
 				</span>
-				<button type="button">
-					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
-				</button>
+				{this.looks == "border" && (
+					<button>
+						<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
+					</button>
+				)}
 				<slot name="child" />
 				<smoothly-picker-menu
 					open={this.open}
