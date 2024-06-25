@@ -182,6 +182,7 @@ export namespace Components {
     }
     interface SmoothlyFilterPicker {
         "label": string;
+        "looks": Looks;
         "multiple": boolean;
         "property": string;
         "type": "array" | "string";
@@ -342,7 +343,6 @@ export namespace Components {
         "value"?: File;
     }
     interface SmoothlyInputMonth {
-        "arrows": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
@@ -420,7 +420,6 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
-        "showArrow": boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -1108,6 +1107,7 @@ declare global {
     interface HTMLSmoothlyFilterPickerElementEventMap {
         "smoothlyFilterUpdate": Filter.Update;
         "smoothlyFilterManipulate": Filter.Manipulate;
+        "smoothlyInputLooks": (looks: Looks) => void;
     }
     interface HTMLSmoothlyFilterPickerElement extends Components.SmoothlyFilterPicker, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyFilterPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterPickerElement, ev: SmoothlyFilterPickerCustomEvent<HTMLSmoothlyFilterPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2242,9 +2242,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilterPicker {
         "label"?: string;
+        "looks"?: Looks;
         "multiple"?: boolean;
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyFilterPickerCustomEvent<(looks: Looks) => void>) => void;
         "property"?: string;
         "type"?: "array" | "string";
     }
@@ -2412,7 +2414,6 @@ declare namespace LocalJSX {
         "value"?: File;
     }
     interface SmoothlyInputMonth {
-        "arrows"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
@@ -2490,7 +2491,6 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "searchDisabled"?: boolean;
-        "showArrow"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {

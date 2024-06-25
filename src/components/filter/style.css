@@ -16,6 +16,11 @@
 	pointer-events: auto;
 	margin-left: 0.3em;
 	margin-right: 0.3em;
+	&>[looks="plain"] {
+		display: flex;
+		align-self: stretch;
+		align-items: center;
+	}
 }
 
 :host>div:empty+smoothly-icon {

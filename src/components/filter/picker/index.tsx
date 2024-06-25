@@ -1,7 +1,8 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { selectively } from "selectively"
 import { isly } from "isly"
 import { Option } from "../../../model"
+import { Looks } from "../../input/Looks"
 import { Filter } from "../Filter"
 
 @Component({
@@ -15,13 +16,17 @@ export class SmoothlyFilterPicker implements Filter {
 		string,
 		{ state: Record<string, any>; selected: (selected: boolean) => void }
 	>()
+	@Element() element: HTMLSmoothlyFilterPickerElement
 	@Prop() label: string
 	@Prop() property: string
 	@Prop() multiple = false
 	@Prop() type: "array" | "string" = "string"
+	@Prop() looks: Looks = "plain"
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
+	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
 	componentDidLoad() {
+		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
 	}
 	@Listen("smoothlyPickerOptionChange")
@@ -31,6 +36,13 @@ export class SmoothlyFilterPicker implements Filter {
 			state: this.property.split(".").reduceRight((r, e) => ({ [e]: r }), event.detail.value),
 			selected: event.detail.set.selected,
 		})
+	}
+	@Listen("smoothlyInputLooks")
+	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
+		if (event.target != this.element) {
+			event.stopPropagation()
+			event.detail(this.looks)
+		}
 	}
 	update(expression: selectively.Criteria): void {
 		this.updating = true
@@ -108,7 +120,7 @@ export class SmoothlyFilterPicker implements Filter {
 		return (
 			<smoothly-picker
 				name={this.property}
-				looks="border"
+				looks={this.looks}
 				multiple={this.multiple}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyChange={e => e.stopPropagation()}

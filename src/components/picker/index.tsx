@@ -26,7 +26,7 @@ import { Controls } from "./menu"
 	scoped: true,
 })
 export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidLoad {
-	private valueRecivedOnLoad = false
+	private valueReceivedOnLoad = false
 	private initialValue = new Map<any, Option>()
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Element() element: HTMLSmoothlyPickerElement
@@ -68,7 +68,7 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))
 			return span
 		})
-		!this.valueRecivedOnLoad && (this.initialValue = new Map(this.selected))
+		!this.valueReceivedOnLoad && (this.initialValue = new Map(this.selected))
 	}
 
 	componentDidLoad(): void | Promise<void> {
@@ -77,8 +77,10 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+			event.detail(this.looks)
+		}
 	}
 	@Listen("smoothlyPickerMenuLoaded")
 	menuLoadedHandler(event: CustomEvent<Controls & { synced: () => boolean }>): void {
@@ -90,12 +92,12 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 			this.selected = this.multiple
 				? new Map(this.selected.set(event.detail.value, event.detail).entries())
 				: new Map().set(event.detail.value, event.detail)
-		!this.valueRecivedOnLoad && (this.valueRecivedOnLoad = !this.valueRecivedOnLoad)
+		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
 	}
 
 	@Listen("smoothlyPickerOptionChange")
 	optionChangeHandler(event: CustomEvent<Option>): void {
-		if ((this.readonly && !this.valueRecivedOnLoad) || !this.readonly)
+		if ((this.readonly && !this.valueReceivedOnLoad) || !this.readonly)
 			if (this.multiple)
 				this.selected = event.detail.selected
 					? new Map(this.selected.set(event.detail.value, event.detail).entries())
@@ -156,9 +158,11 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 				<span class={"label"}>
 					<slot name={"label"} />
 				</span>
-				<button type="button">
-					<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
-				</button>
+				{this.looks == "border" && (
+					<button>
+						<smoothly-icon size="tiny" name={this.open ? "caret-down-outline" : "caret-forward-outline"} />
+					</button>
+				)}
 				<slot name="child" />
 				<smoothly-picker-menu
 					open={this.open}

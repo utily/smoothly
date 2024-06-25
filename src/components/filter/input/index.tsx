@@ -80,7 +80,6 @@ export class SmoothlyFilterInput implements Filter {
 				value={this.needle}
 				type={this.type}
 				placeholder={this.placeholder}
-				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyBlur={e => e.stopPropagation()}
 				onSmoothlyFormDisable={e => e.stopPropagation()}
 				onSmoothlyInputLoad={e => e.stopPropagation()}
