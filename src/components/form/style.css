@@ -37,7 +37,7 @@ smoothly-form[looks="transparent"] > form > fieldset {
 	gap: 2em
 }
 
-smoothly-form > form > div {
+smoothly-form > form > div:not(:empty) {
 	display: flex;
 	justify-content: end;
 	gap: 1em;
