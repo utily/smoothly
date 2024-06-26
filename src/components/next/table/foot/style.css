@@ -4,4 +4,6 @@
 	grid-template-columns: subgrid;
 	position: sticky;
 	bottom: 0;
+	box-sizing: border-box;
+	background-color: rgb(var(--smoothly-color-tint));
 }

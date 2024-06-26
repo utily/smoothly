@@ -113,6 +113,6 @@ export class SmoothlyAppDemo {
 		)
 	}
 	componentDidRender() {
-		this.app?.selectRoom("/root")
+		this.app?.selectRoom("/next")
 	}
 }

@@ -1,3 +1,5 @@
+@import "../arrow.css";
+
 :host {
 	grid-column: 1 / -1;
 	display: grid;
@@ -9,7 +11,14 @@
 	cursor: pointer;
 }
 
+:host::slotted(smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
+:host::slotted(smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
+:host::slotted(smoothly-next-table-cell:hover) {
+	background-color: rgb(var(--smoothly-color-shade));
+}
+
 :host[open] {
+	background-color: rgb(var(--smoothly-color-tint));
 	grid-template-rows: 1fr 1fr;
 }
 
@@ -17,5 +26,7 @@
 	grid-column: 1 / -1;
 	cursor: default;
 	overflow: hidden;
-	background-color: beige;
+	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
+	box-sizing: border-box;
+	background-color: rgb(var(--smoothly-color-tint));
 }

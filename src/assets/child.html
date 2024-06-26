@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
@@ -10,24 +11,27 @@
 	<link rel="stylesheet" type="text/css" href="./common.css">
 	<script>
 		window.addEventListener("message", message => {
-			console.log("inside", message.data)
 		})
 	</script>
 	<style>
 		html {
 			background: none;
 		}
+
 		body {
 			background: none;
 		}
+
 		footer {
 			width: 100%;
 		}
-		footer > * {
+
+		footer>* {
 			margin: auto;
 		}
 	</style>
 </head>
+
 <body>
 	<smoothly-trigger-sink destination="parent" filter="close">
 		<header>Header</header>
@@ -61,4 +65,5 @@
 		</footer>
 	</smoothly-trigger-sink>
 </body>
+
 </html>
