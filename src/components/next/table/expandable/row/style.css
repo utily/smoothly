@@ -4,7 +4,7 @@
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
-	grid-template-rows: 0fr 0fr;
+	grid-template-rows: auto 0fr;
 	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 	box-sizing: border-box;
 }
@@ -24,7 +24,7 @@
 	grid-template-rows: 0fr 1fr;
 }
 
-:host div:last-child {
+:host>div:last-child {
 	grid-column: 1 / -1;
 	cursor: default;
 	overflow: hidden;

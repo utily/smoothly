@@ -10,7 +10,6 @@ export class SmoothlyNextTableExpandableRow {
 	@Prop({ mutable: true, reflect: true }) open = false
 
 	clickHandler(event: MouseEvent): void {
-		console.log("click")
 		;(this.div && event.composedPath().includes(this.div)) || (this.open = !this.open)
 	}
 	render(): VNode | VNode[] {
