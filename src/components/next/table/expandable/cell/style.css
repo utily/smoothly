@@ -1,0 +1,38 @@
+@import "../arrow.css";
+
+/* expandable cell */
+:host {
+	display: contents;
+}
+
+:host>div {
+	padding: 0.3rem 1.1em;
+}
+
+:host>div.content {
+	display: flex;
+	align-items: center;
+	white-space: nowrap
+}
+
+:host>div.content:hover {
+	background-color: rgb(var(--smoothly-color-shade));
+}
+
+:host>div:first-child {
+	cursor: pointer;
+}
+
+:host div.detail {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	overflow: hidden;
+}
+
+:host[open]>div {
+	background-color: rgb(var(--smoothly-color-tint));
+}
+
+:host:not([open]) div.detail {
+	display: none;
+}

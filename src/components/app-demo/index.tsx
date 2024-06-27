@@ -78,6 +78,9 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/table" label="Table">
 					<smoothly-table-demo />
 				</smoothly-app-room>
+				<smoothly-app-room path="/next" label="Next">
+					<smoothly-next-demo />
+				</smoothly-app-room>
 				<smoothly-app-room path="/select" label="Select">
 					<smoothly-select-demo />
 				</smoothly-app-room>
