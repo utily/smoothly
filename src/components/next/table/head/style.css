@@ -1,0 +1,9 @@
+:host {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: subgrid;
+	top: 0;
+	position: sticky;
+	z-index: 1;
+	background-color: rgb(var(--smoothly-color-tint));
+}
