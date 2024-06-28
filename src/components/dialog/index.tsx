@@ -24,21 +24,20 @@ export class SmoothlyDialog {
 		}
 	}
 	render() {
-		return [
-			<header>
-				{this.closable ? (
-					<smoothly-trigger fill="clear" name="close">
-						<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
-					</smoothly-trigger>
-				) : (
-					[]
-				)}
-				{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
-			</header>,
-			<main>
-				<slot></slot>
-			</main>,
-		]
+		return (
+			<section>
+				<header>
+					{this.closable && (
+						<smoothly-trigger fill="clear" name="close">
+							<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
+						</smoothly-trigger>
+					)}
+					{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
+				</header>
+				<div>
+					<slot></slot>
+				</div>
+			</section>
+		)
 	}
 }
-//
