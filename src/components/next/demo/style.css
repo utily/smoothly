@@ -1,1 +1,8 @@
-
+:host {
+	box-sizing: border-box;
+	display: block;
+	max-width: 80rem;
+	width: 100%;
+	margin: auto;
+	padding: 2rem;
+}

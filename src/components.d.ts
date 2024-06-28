@@ -458,6 +458,8 @@ export namespace Components {
     }
     interface SmoothlyNextDemo {
     }
+    interface SmoothlyNextDemoGroup {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -474,6 +476,8 @@ export namespace Components {
         "columns": number;
     }
     interface SmoothlyNextTableBody {
+        "group": boolean;
+        "open": boolean;
     }
     interface SmoothlyNextTableCell {
     }
@@ -793,6 +797,10 @@ export interface SmoothlyLoadMoreCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNextTableExpandableCellElement;
+}
+export interface SmoothlyNextTableRowCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNextTableRowElement;
 }
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1590,6 +1598,12 @@ declare global {
         prototype: HTMLSmoothlyNextDemoElement;
         new (): HTMLSmoothlyNextDemoElement;
     };
+    interface HTMLSmoothlyNextDemoGroupElement extends Components.SmoothlyNextDemoGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextDemoGroupElement: {
+        prototype: HTMLSmoothlyNextDemoGroupElement;
+        new (): HTMLSmoothlyNextDemoGroupElement;
+    };
     interface HTMLSmoothlyNextDemoNestedElement extends Components.SmoothlyNextDemoNested, HTMLStencilElement {
     }
     var HTMLSmoothlyNextDemoNestedElement: {
@@ -1662,7 +1676,18 @@ declare global {
         prototype: HTMLSmoothlyNextTableHeadElement;
         new (): HTMLSmoothlyNextTableHeadElement;
     };
+    interface HTMLSmoothlyNextTableRowElementEventMap {
+        "smoothlyNextTableRowClick": void;
+    }
     interface HTMLSmoothlyNextTableRowElement extends Components.SmoothlyNextTableRow, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNextTableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowElement, ev: SmoothlyNextTableRowCustomEvent<HTMLSmoothlyNextTableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNextTableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowElement, ev: SmoothlyNextTableRowCustomEvent<HTMLSmoothlyNextTableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyNextTableRowElement: {
         prototype: HTMLSmoothlyNextTableRowElement;
@@ -2167,6 +2192,7 @@ declare global {
         "smoothly-lazy": HTMLSmoothlyLazyElement;
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
         "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
+        "smoothly-next-demo-group": HTMLSmoothlyNextDemoGroupElement;
         "smoothly-next-demo-nested": HTMLSmoothlyNextDemoNestedElement;
         "smoothly-next-demo-nested-inner": HTMLSmoothlyNextDemoNestedInnerElement;
         "smoothly-next-demo-simple": HTMLSmoothlyNextDemoSimpleElement;
@@ -2666,6 +2692,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextDemo {
     }
+    interface SmoothlyNextDemoGroup {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -2682,6 +2710,8 @@ declare namespace LocalJSX {
         "columns"?: number;
     }
     interface SmoothlyNextTableBody {
+        "group"?: boolean;
+        "open"?: boolean;
     }
     interface SmoothlyNextTableCell {
     }
@@ -2698,6 +2728,7 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableHead {
     }
     interface SmoothlyNextTableRow {
+        "onSmoothlyNextTableRowClick"?: (event: SmoothlyNextTableRowCustomEvent<void>) => void;
     }
     interface SmoothlyNotification {
         "closable"?: boolean;
@@ -2957,6 +2988,7 @@ declare namespace LocalJSX {
         "smoothly-lazy": SmoothlyLazy;
         "smoothly-load-more": SmoothlyLoadMore;
         "smoothly-next-demo": SmoothlyNextDemo;
+        "smoothly-next-demo-group": SmoothlyNextDemoGroup;
         "smoothly-next-demo-nested": SmoothlyNextDemoNested;
         "smoothly-next-demo-nested-inner": SmoothlyNextDemoNestedInner;
         "smoothly-next-demo-simple": SmoothlyNextDemoSimple;
@@ -3072,6 +3104,7 @@ declare module "@stencil/core" {
             "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
             "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
+            "smoothly-next-demo-group": LocalJSX.SmoothlyNextDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoGroupElement>;
             "smoothly-next-demo-nested": LocalJSX.SmoothlyNextDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedElement>;
             "smoothly-next-demo-nested-inner": LocalJSX.SmoothlyNextDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedInnerElement>;
             "smoothly-next-demo-simple": LocalJSX.SmoothlyNextDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoSimpleElement>;

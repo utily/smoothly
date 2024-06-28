@@ -1,11 +1,23 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-body",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyNextTable {
+export class SmoothlyNextTableBody {
+	@Element() element: HTMLElement
+	@Prop({ reflect: true, mutable: true }) open = false
+	@Prop({ reflect: true }) group = false
+
+	@Listen("smoothlyNextTableRowClick")
+	tableRowClickHandler(event: CustomEvent<void>): void {
+		if (this.element.children[0] == event.target) {
+			event.stopPropagation()
+			this.open = !this.open
+		}
+	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host>

@@ -3,3 +3,35 @@
 	display: grid;
 	grid-template-columns: subgrid;
 }
+:host[group]>:first-child {
+	cursor: pointer;
+}
+:host[group]>:first-child {
+	position: relative;
+}
+:host[group]>:first-child>smoothly-next-table-cell::before {
+	content: '';
+	display: flex;
+	position: absolute;
+	height: 0.4em;
+	width: 0.4em;
+	left: 0.3em;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	transition: rotate 200ms ease-in-out;
+	rotate: -45deg;
+	opacity: 0.3;
+}
+:host[group]>:first-child>smoothly-next-table-cell:hover::before {
+	opacity: 1;
+}
+
+:host[group][open]>:first-child>smoothly-next-table-cell::before {
+	rotate: 45deg;
+}
+:host[group]:has(:first-child:hover)::before {
+	opacity: 1;
+}
+:host[group]:not([open])::slotted(:not(:first-child)) {
+	display: none;
+}
