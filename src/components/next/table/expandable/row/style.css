@@ -16,11 +16,13 @@
 :host::slotted(smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
 :host::slotted(smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
 :host::slotted(smoothly-next-table-cell:hover) {
-	background-color: rgb(var(--smoothly-color-shade));
+	background-color: rgb(var(--smoothly-table-hover-color));
+	color: rgb(var(--smoothly-table-hover-contrast));
 }
 
 :host[open] {
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	color: rgb(var(--smoothly-table-expanded-contrast));
 	grid-template-rows: 0fr 1fr;
 }
 
@@ -28,5 +30,6 @@
 	grid-column: 1 / -1;
 	cursor: default;
 	overflow: hidden;
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	color: rgb(var(--smoothly-table-expanded-contrast));
 }
