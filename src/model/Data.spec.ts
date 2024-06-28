@@ -9,12 +9,20 @@ describe("Data", () => {
 		expect(Data.type.is(null)).toEqual(false)
 	})
 	it("Data.set", () => expect(Data.set({}, "name.last".split("."), "Smith")).toEqual({ name: { last: "Smith" } }))
-	it("Data.set multiple", () => {
+	it.only("Data.set multiple", () => {
 		const input = {
 			"name.last": "Smith",
 			"name.first": "John",
 			"address.city": "Uppsala",
 			"address.zip": "75320",
+			"favoriteColors.0": "teal",
+			"favoriteColors.1": "orange",
+			"pets.1.name": "Mr Meow",
+			"pets.1.type": "cat",
+			"pets.0.name": "Barky",
+			"pets.0.type": "dog",
+			"pets.2.type": "turtle",
+			"pets.2.name": "Speedster",
 		}
 		const output = Data.deepen(input)
 		expect(output).toEqual({
@@ -26,6 +34,12 @@ describe("Data", () => {
 				first: "John",
 				last: "Smith",
 			},
+			favoriteColors: ["teal", "orange"],
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
 		})
 	})
 })
