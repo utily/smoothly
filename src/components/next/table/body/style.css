@@ -25,7 +25,6 @@
 :host[group]>:first-child>smoothly-next-table-cell:hover::before {
 	opacity: 1;
 }
-
 :host[group][open]>:first-child>smoothly-next-table-cell::before {
 	rotate: 45deg;
 }

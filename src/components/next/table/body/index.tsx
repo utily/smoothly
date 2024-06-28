@@ -12,10 +12,9 @@ export class SmoothlyNextTableBody {
 
 	@Listen("smoothlyNextTableRowClick")
 	tableRowClickHandler(event: CustomEvent<void>): void {
-		if (this.element.children[0] == event.target) {
-			event.stopPropagation()
+		event.stopPropagation()
+		if (this.element.children[0] == event.target)
 			this.open = !this.open
-		}
 	}
 
 	render(): VNode | VNode[] {

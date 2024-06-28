@@ -32,7 +32,7 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={250} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>This is the detail of Jessie</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-01T01:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
 						<smoothly-next-table-expandable-row>
 							<smoothly-next-table-cell>
@@ -41,8 +41,16 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={260} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>This is the detail of James</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-01T13:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
+					</smoothly-next-table-body>
+					<smoothly-next-table-body>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>2024-01-02</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={130} />
+							</smoothly-next-table-cell>
+						</smoothly-next-table-row>
 					</smoothly-next-table-body>
 					<smoothly-next-table-body group>
 						<smoothly-next-table-row>
@@ -60,7 +68,7 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={320} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>This is the detail of Jessie</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-02T01:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
 						<smoothly-next-table-expandable-row>
 							<smoothly-next-table-cell>
@@ -69,7 +77,7 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={400} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>This is the detail of James</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-02T13:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
 					</smoothly-next-table-body>
 				</smoothly-next-table>
