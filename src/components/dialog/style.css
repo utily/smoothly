@@ -13,10 +13,10 @@
 :host[hidden] {
 	display: none;
 }
-section {
+:host > section {
 	margin-top: var(--smoothly-dialog-margin-top)
 }
-section > header {
+:host > section > div.header {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	margin-top: 2em;
@@ -24,11 +24,11 @@ section > header {
 	background: rgb(var(--smoothly-primary-color));
 	border-color: rgb(var(--smoothly-primary-color));
 }
-:host:not([header]) header {
+:host:not([header]) div.header {
 	border: none;
 }
 
-section > * {
+:host > section > * {
 	position: relative;
 	color: rgb(var(--smoothly-default-contrast));
 	background-color: rgb(var(--smoothly-default-color));
@@ -43,7 +43,7 @@ section > * {
 	margin-right: auto;
 	border-collapse: collapse;
 }
-section > div {
+:host > section > div.content {
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	margin-bottom: 2em;
@@ -51,23 +51,23 @@ section > div {
 	box-sizing: border-box;
 	overflow: hidden;
 }
-:host:not([header]) >section> div {
+:host:not([header]) >section> div.content {
 	border-radius: 8px;
 }
-section > * > smoothly-trigger {
+:host > section > * > smoothly-trigger {
 	position: absolute;
 	right: -2em;
 	top: -2em;
 	z-index: 1;
 	border-color: transparent;
 }
-section > * > smoothly-trigger:hover {
+:host > section > * > smoothly-trigger:hover {
 	border-color: transparent;
 }
-section > header > smoothly-trigger > smoothly-icon {
+:host > section > div.header > smoothly-trigger > smoothly-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }
-section > * > * {
+:host > section > * > * {
 	margin: 10px;
 }

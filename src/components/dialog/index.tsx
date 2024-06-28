@@ -26,15 +26,15 @@ export class SmoothlyDialog {
 	render() {
 		return (
 			<section>
-				<header>
+				<div class="header">
 					{this.closable && (
 						<smoothly-trigger fill="clear" name="close">
 							<smoothly-icon name="close-circle" fill="solid" color={this.color}></smoothly-icon>
 						</smoothly-trigger>
 					)}
 					{this.header ? <h1>{this.header}</h1> : <slot name="header"></slot>}
-				</header>
-				<div>
+				</div>
+				<div class="content">
 					<slot></slot>
 				</div>
 			</section>
