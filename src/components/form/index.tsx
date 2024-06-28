@@ -105,7 +105,11 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Method()
 	async submit(remove?: boolean): Promise<void> {
 		this.processing = new Promise(resolve => {
-			this.smoothlyFormSubmit.emit({ value: this.value, result: resolve, type: remove == true ? "remove" : this.type })
+			this.smoothlyFormSubmit.emit({
+				value: Data.convertArrays(this.value),
+				result: resolve,
+				type: remove == true ? "remove" : this.type,
+			})
 			if (this.action) {
 				const action = this.action
 				this.notice.emit(

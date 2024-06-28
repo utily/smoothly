@@ -1,8 +1,7 @@
 import { isly } from "isly"
 
 type Value = string | number | boolean | Blob | undefined
-export type Data = { [name: string]: Data | Value }
-
+export type Data = { [name: string | number]: Data | Value | Value[] }
 export namespace Data {
 	export const valueType = isly.union<Value, string, number, boolean, Blob, undefined>(
 		isly.string(),
@@ -36,21 +35,23 @@ export namespace Data {
 		return merge({}, data)
 	}
 	export function convertArrays(data: any): Data {
-		return typeof data == "object" &&
-			data &&
-			Object.keys(data)
-				.sort()
-				.every((k, i) => `${k}` == `${i}`)
-			? (Object.entries(data)
-					.sort(([k0, _], [k1, _1]) => (k0 > k1 ? 1 : -1))
-					.map(([_, v]) =>
-						typeof v == "object" && v ? convertArrays(v as Record<string, Data>) : v
-					) as unknown as Data)
-			: typeof data == "object" && data
+		return isly.object().is(data) &&
+			// Object.keys(data)
+			// 	.sort()
+			// 	.every((k, i) => k == `${i}`)
+			Object.keys(data).every(k => parseInt(k).toString() == k)
+			? // Object.entries(data)
+			  // 		.sort(([k0, _0], [k1, _1]) => (k0 > k1 ? 1 : -1))
+			  // 		.map(([_, v]) => (isly.object().is(v) ? convertArrays(v as Record<string, Data>) : v))
+			  Object.entries(data).reduce((arr: Data[], [k, v]) => {
+					arr[parseInt(k)] = convertArrays(v)
+					return arr
+			  }, [])
+			: isly.object().is(data)
 			? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
 			: data
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
-		return convertArrays(Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data))
+		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
 	}
 }
