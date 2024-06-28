@@ -142,6 +142,8 @@ export namespace Components {
         "text": "alpha2" | "name" | "none";
         "value": CountryCode.Alpha2;
     }
+    interface SmoothlyCssVariables {
+    }
     interface SmoothlyDialog {
         "closable": boolean;
         "color": Color | undefined;
@@ -1039,6 +1041,12 @@ declare global {
     var HTMLSmoothlyCountryElement: {
         prototype: HTMLSmoothlyCountryElement;
         new (): HTMLSmoothlyCountryElement;
+    };
+    interface HTMLSmoothlyCssVariablesElement extends Components.SmoothlyCssVariables, HTMLStencilElement {
+    }
+    var HTMLSmoothlyCssVariablesElement: {
+        prototype: HTMLSmoothlyCssVariablesElement;
+        new (): HTMLSmoothlyCssVariablesElement;
     };
     interface HTMLSmoothlyDialogElement extends Components.SmoothlyDialog, HTMLStencilElement {
     }
@@ -2129,6 +2137,7 @@ declare global {
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
         "smoothly-country": HTMLSmoothlyCountryElement;
+        "smoothly-css-variables": HTMLSmoothlyCssVariablesElement;
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
@@ -2331,6 +2340,8 @@ declare namespace LocalJSX {
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
         "value"?: CountryCode.Alpha2;
+    }
+    interface SmoothlyCssVariables {
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
@@ -2919,6 +2930,7 @@ declare namespace LocalJSX {
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
         "smoothly-country": SmoothlyCountry;
+        "smoothly-css-variables": SmoothlyCssVariables;
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
@@ -3031,6 +3043,7 @@ declare module "@stencil/core" {
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
             "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
+            "smoothly-css-variables": LocalJSX.SmoothlyCssVariables & JSXBase.HTMLAttributes<HTMLSmoothlyCssVariablesElement>;
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;

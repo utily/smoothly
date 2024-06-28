@@ -26,6 +26,7 @@ export class SmoothlyAppDemo {
 						<smoothly-item value="https://theme.payfunc.com/dark/index.css">Payfunc Dark</smoothly-item>
 					</smoothly-theme-picker>
 					<smoothly-theme-colors></smoothly-theme-colors>
+					<smoothly-css-variables></smoothly-css-variables>
 					<smoothly-button type="link" link="/redirect">
 						To redirect
 					</smoothly-button>
