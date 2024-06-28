@@ -1,8 +1,9 @@
 :host {
 	display: block;
 	position: fixed;
-	left: 0;
-	top: 0;
+	top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 	width: 100%;
 	height: 100%;
 	z-index: 1;
@@ -12,7 +13,10 @@
 :host[hidden] {
 	display: none;
 }
-:host > header {
+:host > section {
+	margin-top: var(--smoothly-dialog-margin-top)
+}
+:host > section > div.header {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	margin-top: 2em;
@@ -20,10 +24,11 @@
 	background: rgb(var(--smoothly-primary-color));
 	border-color: rgb(var(--smoothly-primary-color));
 }
-:host:not([header]) header {
+:host:not([header]) div.header {
 	border: none;
 }
-:host > * {
+
+:host > section > * {
 	position: relative;
 	color: rgb(var(--smoothly-default-contrast));
 	background-color: rgb(var(--smoothly-default-color));
@@ -38,7 +43,7 @@
 	margin-right: auto;
 	border-collapse: collapse;
 }
-:host > main {
+:host > section > div.content {
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	margin-bottom: 2em;
@@ -46,23 +51,23 @@
 	box-sizing: border-box;
 	overflow: hidden;
 }
-:host:not([header]) > main {
+:host:not([header]) >section> div.content {
 	border-radius: 8px;
 }
-:host > * > smoothly-trigger {
+:host > section > * > smoothly-trigger {
 	position: absolute;
 	right: -2em;
 	top: -2em;
 	z-index: 1;
 	border-color: transparent;
 }
-:host > * > smoothly-trigger:hover {
+:host > section > * > smoothly-trigger:hover {
 	border-color: transparent;
 }
-:host > header > smoothly-trigger > smoothly-icon {
+:host > section > div.header > smoothly-trigger > smoothly-icon {
 	background-color: rgb(var(--smoothly-color));
 	border-radius: 50%;
 }
-:host > * > * {
+:host > section > * > * {
 	margin: 10px;
 }
