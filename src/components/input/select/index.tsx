@@ -56,7 +56,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
