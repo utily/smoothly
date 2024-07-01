@@ -10,7 +10,7 @@ export class SmoothlyNextTableCell {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--smoothly-table-colspan": this.span.toString(10) }}>
+			<Host style={{ "--smoothly-table-cell-span": this.span.toString(10) }}>
 				<slot />
 			</Host>
 		)
