@@ -13,9 +13,9 @@
 	cursor: pointer;
 }
 
-:host::slotted(* smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
-:host::slotted(* smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
-:host::slotted(* smoothly-next-table-cell:hover) {
+:host::slotted(smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
+:host::slotted(smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
+:host::slotted(smoothly-next-table-cell:hover) {
 	background-color: rgb(var(--smoothly-color-shade));
 }
 
