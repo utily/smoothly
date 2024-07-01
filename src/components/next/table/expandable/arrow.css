@@ -8,6 +8,8 @@
 	content: '';
 	display: flex;
 	position: absolute;
+	top: 50%;
+	translate: 0 -50%;
 	height: 0.4em;
 	width: 0.4em;
 	left: 0.3em;

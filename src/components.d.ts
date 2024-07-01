@@ -476,8 +476,6 @@ export namespace Components {
         "columns": number;
     }
     interface SmoothlyNextTableBody {
-        "group": boolean;
-        "open": boolean;
     }
     interface SmoothlyNextTableCell {
     }
@@ -493,6 +491,10 @@ export namespace Components {
     interface SmoothlyNextTableHead {
     }
     interface SmoothlyNextTableRow {
+    }
+    interface SmoothlyNextTableRowGroup {
+        "align": boolean;
+        "open": boolean;
     }
     interface SmoothlyNotification {
         "closable": boolean;
@@ -1693,6 +1695,12 @@ declare global {
         prototype: HTMLSmoothlyNextTableRowElement;
         new (): HTMLSmoothlyNextTableRowElement;
     };
+    interface HTMLSmoothlyNextTableRowGroupElement extends Components.SmoothlyNextTableRowGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableRowGroupElement: {
+        prototype: HTMLSmoothlyNextTableRowGroupElement;
+        new (): HTMLSmoothlyNextTableRowGroupElement;
+    };
     interface HTMLSmoothlyNotificationElementEventMap {
         "remove": Notice;
     }
@@ -2204,6 +2212,7 @@ declare global {
         "smoothly-next-table-foot": HTMLSmoothlyNextTableFootElement;
         "smoothly-next-table-head": HTMLSmoothlyNextTableHeadElement;
         "smoothly-next-table-row": HTMLSmoothlyNextTableRowElement;
+        "smoothly-next-table-row-group": HTMLSmoothlyNextTableRowGroupElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -2710,8 +2719,6 @@ declare namespace LocalJSX {
         "columns"?: number;
     }
     interface SmoothlyNextTableBody {
-        "group"?: boolean;
-        "open"?: boolean;
     }
     interface SmoothlyNextTableCell {
     }
@@ -2729,6 +2736,10 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextTableRow {
         "onSmoothlyNextTableRowClick"?: (event: SmoothlyNextTableRowCustomEvent<void>) => void;
+    }
+    interface SmoothlyNextTableRowGroup {
+        "align"?: boolean;
+        "open"?: boolean;
     }
     interface SmoothlyNotification {
         "closable"?: boolean;
@@ -3000,6 +3011,7 @@ declare namespace LocalJSX {
         "smoothly-next-table-foot": SmoothlyNextTableFoot;
         "smoothly-next-table-head": SmoothlyNextTableHead;
         "smoothly-next-table-row": SmoothlyNextTableRow;
+        "smoothly-next-table-row-group": SmoothlyNextTableRowGroup;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -3116,6 +3128,7 @@ declare module "@stencil/core" {
             "smoothly-next-table-foot": LocalJSX.SmoothlyNextTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFootElement>;
             "smoothly-next-table-head": LocalJSX.SmoothlyNextTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableHeadElement>;
             "smoothly-next-table-row": LocalJSX.SmoothlyNextTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowElement>;
+            "smoothly-next-table-row-group": LocalJSX.SmoothlyNextTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowGroupElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;

@@ -16,15 +16,9 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-next-table-cell>Total</smoothly-next-table-cell>
 						</smoothly-next-table-row>
 					</smoothly-next-table-head>
-					<smoothly-next-table-body group>
-						<smoothly-next-table-row>
-							<smoothly-next-table-cell>
-								<smoothly-display type="date" value={"2024-01-01"} />
-							</smoothly-next-table-cell>
-							<smoothly-next-table-cell>
-								<smoothly-display type={"price"} currency={"EUR"} value={510} />
-							</smoothly-next-table-cell>
-						</smoothly-next-table-row>
+					<smoothly-next-table-row-group align>
+						<smoothly-display slot={"start"} type="date" value={"2024-01-01"} />
+						<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={510} />
 						<smoothly-next-table-expandable-row>
 							<smoothly-next-table-cell>
 								<smoothly-display type={"date-time"} value={"2024-01-01T01:37:00.000Z"} />
@@ -43,43 +37,81 @@ export class SmoothlyNextDemoGroup {
 							</smoothly-next-table-cell>
 							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-01T13:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
-					</smoothly-next-table-body>
+					</smoothly-next-table-row-group>
 					<smoothly-next-table-body>
 						<smoothly-next-table-row>
-							<smoothly-next-table-cell>2024-01-02</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date"} value={"2024-01-02"} />
+							</smoothly-next-table-cell>
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={130} />
 							</smoothly-next-table-cell>
 						</smoothly-next-table-row>
 					</smoothly-next-table-body>
-					<smoothly-next-table-body group>
-						<smoothly-next-table-row>
-							<smoothly-next-table-cell>
-								<smoothly-display type="date" value={"2024-01-02"} />
-							</smoothly-next-table-cell>
-							<smoothly-next-table-cell>
-								<smoothly-display type={"price"} currency={"EUR"} value={720} />
-							</smoothly-next-table-cell>
-						</smoothly-next-table-row>
+					<smoothly-next-table-row-group>
+						<smoothly-display slot={"start"} type={"date"} value={"2024-01-03"} />
+						<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={720} />
 						<smoothly-next-table-expandable-row>
 							<smoothly-next-table-cell>
-								<smoothly-display type={"date-time"} value={"2024-01-02T01:37:00.000Z"} />
+								<smoothly-display type={"date-time"} value={"2024-01-03T01:37:00.000Z"} />
 							</smoothly-next-table-cell>
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={320} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-02T01:37:00.000Z</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-03T01:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
 						<smoothly-next-table-expandable-row>
 							<smoothly-next-table-cell>
-								<smoothly-display type={"date-time"} value={"2024-01-02T13:37:00.000Z"} />
+								<smoothly-display type={"date-time"} value={"2024-01-03T13:37:00.000Z"} />
 							</smoothly-next-table-cell>
 							<smoothly-next-table-cell>
 								<smoothly-display type={"price"} currency={"EUR"} value={400} />
 							</smoothly-next-table-cell>
-							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-02T13:37:00.000Z</Fragment>} />
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-03T13:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
-					</smoothly-next-table-body>
+					</smoothly-next-table-row-group>
+					<smoothly-next-table-row-group>
+						<smoothly-display slot={"start"} type={"date"} value={"2024-01-04"} />
+						<smoothly-next-table-expandable-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date-time"} value={"2024-01-04T01:37:00.000Z"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={320} />
+							</smoothly-next-table-cell>
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-04T01:37:00.000Z</Fragment>} />
+						</smoothly-next-table-expandable-row>
+						<smoothly-next-table-expandable-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date-time"} value={"2024-01-04T13:37:00.000Z"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={400} />
+							</smoothly-next-table-cell>
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-04T13:37:00.000Z</Fragment>} />
+						</smoothly-next-table-expandable-row>
+					</smoothly-next-table-row-group>
+					<smoothly-next-table-row-group>
+						<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={720} />
+						<smoothly-next-table-expandable-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date-time"} value={"2024-01-05T01:37:00.000Z"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={320} />
+							</smoothly-next-table-cell>
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-05T01:37:00.000Z</Fragment>} />
+						</smoothly-next-table-expandable-row>
+						<smoothly-next-table-expandable-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date-time"} value={"2024-01-05T13:37:00.000Z"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={400} />
+							</smoothly-next-table-cell>
+							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-05T13:37:00.000Z</Fragment>} />
+						</smoothly-next-table-expandable-row>
+					</smoothly-next-table-row-group>
 				</smoothly-next-table>
 			</Host>
 		)
