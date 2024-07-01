@@ -48,6 +48,15 @@ export class SmoothlyNextDemoColspan {
 								/>
 							</smoothly-next-table-expandable-cell>
 						</smoothly-next-table-row>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date"} value={"2024-01-02"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>Not Skipped</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} value={320} currency={"EUR"} />
+							</smoothly-next-table-cell>
+						</smoothly-next-table-row>
 					</smoothly-next-table-body>
 				</smoothly-next-table>
 			</Host>
