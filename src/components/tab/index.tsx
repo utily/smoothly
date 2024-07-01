@@ -11,7 +11,7 @@ export class SmoothlyTab {
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() expansionOpen: EventEmitter<HTMLDivElement>
 	@Watch("open")
-	openChanged() {
+	openHandler() {
 		if (this.expansionElement && this.open) {
 			this.expansionOpen.emit(this.expansionElement)
 		}
@@ -22,7 +22,7 @@ export class SmoothlyTab {
 		this.open = true
 	}
 	componentDidLoad(): void {
-		this.openChanged()
+		this.openHandler()
 	}
 	render() {
 		return (
