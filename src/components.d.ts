@@ -460,6 +460,8 @@ export namespace Components {
     }
     interface SmoothlyNextDemoColspan {
     }
+    interface SmoothlyNextDemoGroup {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -493,6 +495,10 @@ export namespace Components {
     interface SmoothlyNextTableHead {
     }
     interface SmoothlyNextTableRow {
+    }
+    interface SmoothlyNextTableRowGroup {
+        "align": boolean;
+        "open": boolean;
     }
     interface SmoothlyNotification {
         "closable": boolean;
@@ -1600,6 +1606,12 @@ declare global {
         prototype: HTMLSmoothlyNextDemoColspanElement;
         new (): HTMLSmoothlyNextDemoColspanElement;
     };
+    interface HTMLSmoothlyNextDemoGroupElement extends Components.SmoothlyNextDemoGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextDemoGroupElement: {
+        prototype: HTMLSmoothlyNextDemoGroupElement;
+        new (): HTMLSmoothlyNextDemoGroupElement;
+    };
     interface HTMLSmoothlyNextDemoNestedElement extends Components.SmoothlyNextDemoNested, HTMLStencilElement {
     }
     var HTMLSmoothlyNextDemoNestedElement: {
@@ -1677,6 +1689,12 @@ declare global {
     var HTMLSmoothlyNextTableRowElement: {
         prototype: HTMLSmoothlyNextTableRowElement;
         new (): HTMLSmoothlyNextTableRowElement;
+    };
+    interface HTMLSmoothlyNextTableRowGroupElement extends Components.SmoothlyNextTableRowGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableRowGroupElement: {
+        prototype: HTMLSmoothlyNextTableRowGroupElement;
+        new (): HTMLSmoothlyNextTableRowGroupElement;
     };
     interface HTMLSmoothlyNotificationElementEventMap {
         "remove": Notice;
@@ -2178,6 +2196,7 @@ declare global {
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
         "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
         "smoothly-next-demo-colspan": HTMLSmoothlyNextDemoColspanElement;
+        "smoothly-next-demo-group": HTMLSmoothlyNextDemoGroupElement;
         "smoothly-next-demo-nested": HTMLSmoothlyNextDemoNestedElement;
         "smoothly-next-demo-nested-inner": HTMLSmoothlyNextDemoNestedInnerElement;
         "smoothly-next-demo-simple": HTMLSmoothlyNextDemoSimpleElement;
@@ -2189,6 +2208,7 @@ declare global {
         "smoothly-next-table-foot": HTMLSmoothlyNextTableFootElement;
         "smoothly-next-table-head": HTMLSmoothlyNextTableHeadElement;
         "smoothly-next-table-row": HTMLSmoothlyNextTableRowElement;
+        "smoothly-next-table-row-group": HTMLSmoothlyNextTableRowGroupElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-picker": HTMLSmoothlyPickerElement;
@@ -2679,6 +2699,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextDemoColspan {
     }
+    interface SmoothlyNextDemoGroup {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -2713,6 +2735,10 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableHead {
     }
     interface SmoothlyNextTableRow {
+    }
+    interface SmoothlyNextTableRowGroup {
+        "align"?: boolean;
+        "open"?: boolean;
     }
     interface SmoothlyNotification {
         "closable"?: boolean;
@@ -2973,6 +2999,7 @@ declare namespace LocalJSX {
         "smoothly-load-more": SmoothlyLoadMore;
         "smoothly-next-demo": SmoothlyNextDemo;
         "smoothly-next-demo-colspan": SmoothlyNextDemoColspan;
+        "smoothly-next-demo-group": SmoothlyNextDemoGroup;
         "smoothly-next-demo-nested": SmoothlyNextDemoNested;
         "smoothly-next-demo-nested-inner": SmoothlyNextDemoNestedInner;
         "smoothly-next-demo-simple": SmoothlyNextDemoSimple;
@@ -2984,6 +3011,7 @@ declare namespace LocalJSX {
         "smoothly-next-table-foot": SmoothlyNextTableFoot;
         "smoothly-next-table-head": SmoothlyNextTableHead;
         "smoothly-next-table-row": SmoothlyNextTableRow;
+        "smoothly-next-table-row-group": SmoothlyNextTableRowGroup;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-picker": SmoothlyPicker;
@@ -3089,6 +3117,7 @@ declare module "@stencil/core" {
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
             "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
             "smoothly-next-demo-colspan": LocalJSX.SmoothlyNextDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoColspanElement>;
+            "smoothly-next-demo-group": LocalJSX.SmoothlyNextDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoGroupElement>;
             "smoothly-next-demo-nested": LocalJSX.SmoothlyNextDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedElement>;
             "smoothly-next-demo-nested-inner": LocalJSX.SmoothlyNextDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedInnerElement>;
             "smoothly-next-demo-simple": LocalJSX.SmoothlyNextDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoSimpleElement>;
@@ -3100,6 +3129,7 @@ declare module "@stencil/core" {
             "smoothly-next-table-foot": LocalJSX.SmoothlyNextTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFootElement>;
             "smoothly-next-table-head": LocalJSX.SmoothlyNextTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableHeadElement>;
             "smoothly-next-table-row": LocalJSX.SmoothlyNextTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowElement>;
+            "smoothly-next-table-row-group": LocalJSX.SmoothlyNextTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowGroupElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;

@@ -5,7 +5,7 @@ import { Component, h, Host, VNode } from "@stencil/core"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyNextTable {
+export class SmoothlyNextTableBody {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
