@@ -1,4 +1,4 @@
-import { Component, Fragment, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-demo-colspan",
@@ -31,11 +31,7 @@ export class SmoothlyNextDemoColspan {
 								<smoothly-display type={"date"} value={"2024-01-02"} />
 								<smoothly-lazy
 									slot={"detail"}
-									content={
-										<Fragment>
-											<smoothly-display type={"date-time"} value={"2024-01-02T13:37:00.000Z"} />
-										</Fragment>
-									}
+									content={<smoothly-display type={"date-time"} value={"2024-01-02T13:37:00.000Z"} />}
 								/>
 							</smoothly-next-table-expandable-cell>
 							<smoothly-next-table-expandable-cell>
@@ -43,13 +39,11 @@ export class SmoothlyNextDemoColspan {
 								<smoothly-lazy
 									slot={"detail"}
 									content={
-										<Fragment>
-											<span>
-												<smoothly-display type={"price"} value={120} currency={"EUR"} />
-												{" + "}
-												<smoothly-display type={"price"} value={100} currency={"EUR"} />
-											</span>
-										</Fragment>
+										<span>
+											<smoothly-display type={"price"} value={120} currency={"EUR"} />
+											{" + "}
+											<smoothly-display type={"price"} value={100} currency={"EUR"} />
+										</span>
 									}
 								/>
 							</smoothly-next-table-expandable-cell>
