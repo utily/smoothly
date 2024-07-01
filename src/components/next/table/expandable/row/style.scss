@@ -8,15 +8,19 @@
 	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 	box-sizing: border-box;
 }
+
 :host::slotted(*) {
 	cursor: pointer;
 }
-:host:has(>:not(:last-child):hover) > :not(:last-child) {
-	background-color: rgb(var(--smoothly-color-shade));
+
+:host:has(>:not(:last-child):hover)> :not(:last-child) {
+	background-color: rgb(var(--smoothly-table-hover-color));
+	color: rgb(var(--smoothly-table-hover-contrast));
 }
 
 :host[open] {
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	color: rgb(var(--smoothly-table-expanded-contrast));
 	grid-template-rows: auto 1fr;
 }
 
@@ -24,16 +28,19 @@
 	grid-column: 1 / -1;
 	cursor: default;
 	overflow: hidden;
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	color: rgb(var(--smoothly-table-expanded-contrast));
 }
 
-:host > :first-child:not(:last-child) {
+:host> :first-child:not(:last-child) {
 	@include arrow;
 }
-:host:has(>:not(:last-child):hover) > :first-child:not(:last-child) {
+
+:host:has(>:not(:last-child):hover)> :first-child:not(:last-child) {
 	@include arrow-hover;
-	
+
 }
-:host[open] > :first-child:not(:last-child) {
+
+:host[open]> :first-child:not(:last-child) {
 	@include arrow-open;
 }

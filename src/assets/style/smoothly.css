@@ -1,5 +1,7 @@
 @import "./common.css";
+@import "./mapping.css";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 :root {
 	--smoothly-font-family: "Open Sans", Verdana;
 	--smoothly-semitransparent: .8;
@@ -59,4 +61,7 @@
 	--border-radius: 0.25rem;
 	--input-width: 18rem;
 	--table-width: 100%;
+
+
+
 }

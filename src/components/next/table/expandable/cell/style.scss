@@ -22,7 +22,8 @@
 }
 
 :host>div.content:hover {
-	background-color: rgb(var(--smoothly-color-shade));
+	background-color: rgb(var(--smoothly-table-hover-color));
+	color: rgb(var(--smoothly-table-hover-contrast));
 }
 
 :host>div:first-child {
@@ -36,7 +37,8 @@
 }
 
 :host[open]>div {
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	color: rgb(var(--smoothly-table-expanded-contrast));
 }
 
 :host:not([open])>div.detail {

@@ -26,9 +26,9 @@ export class SmoothlyNextDemoNested {
 					<smoothly-next-table-body>
 						{data.map(entry => (
 							<smoothly-next-table-expandable-row>
-								<div slot={"detail"}>
+								<smoothly-color color="secondary" slot={"detail"}>
 									<smoothly-next-demo-nested-inner data={entry.friends} />
-								</div>
+								</smoothly-color>
 								<smoothly-next-table-cell>{entry.id}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.registered}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.name}</smoothly-next-table-cell>
