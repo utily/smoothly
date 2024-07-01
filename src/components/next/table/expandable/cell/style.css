@@ -9,9 +9,10 @@
 }
 
 :host>div.content {
+	grid-column: span var(--smoothly-table-cell-span);
 	display: flex;
 	align-items: center;
-	white-space: nowrap
+	white-space: nowrap;
 }
 
 :host>div.content:hover {
