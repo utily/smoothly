@@ -1,6 +1,7 @@
 :host {
+	display: grid;
+	gap: 5rem;
 	box-sizing: border-box;
-	display: block;
 	max-width: 80rem;
 	width: 100%;
 	margin: auto;
