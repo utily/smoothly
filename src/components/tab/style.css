@@ -12,3 +12,6 @@
 	background-color: transparent;
 	width: auto;
 }
+:host > label:hover {
+	cursor: pointer;
+}

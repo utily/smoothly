@@ -7,24 +7,22 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 })
 export class SmoothlyTab {
 	expansionElement?: HTMLDivElement
-	@Event() expansionOpen: EventEmitter<HTMLElement>
 	@Prop() label: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
+	@Event() expansionOpen: EventEmitter<HTMLDivElement>
 	@Watch("open")
 	openChanged() {
-		if (this.expansionElement) {
+		if (this.expansionElement && this.open) {
 			this.expansionOpen.emit(this.expansionElement)
 		}
 	}
 	@Listen("click")
 	onClick(e: UIEvent) {
-		this.open = !this.open
 		e.stopPropagation()
+		this.open = true
 	}
 	componentDidLoad(): void {
-		if (this.expansionElement && this.open) {
-			this.expansionOpen.emit(this.expansionElement)
-		}
+		this.openChanged()
 	}
 	render() {
 		return (
