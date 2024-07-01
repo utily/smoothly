@@ -458,6 +458,8 @@ export namespace Components {
     }
     interface SmoothlyNextDemo {
     }
+    interface SmoothlyNextDemoColspan {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -476,10 +478,12 @@ export namespace Components {
     interface SmoothlyNextTableBody {
     }
     interface SmoothlyNextTableCell {
+        "span": number;
     }
     interface SmoothlyNextTableExpandableCell {
         "close": () => Promise<void>;
         "open": boolean;
+        "span": number;
     }
     interface SmoothlyNextTableExpandableRow {
         "open": boolean;
@@ -1590,6 +1594,12 @@ declare global {
         prototype: HTMLSmoothlyNextDemoElement;
         new (): HTMLSmoothlyNextDemoElement;
     };
+    interface HTMLSmoothlyNextDemoColspanElement extends Components.SmoothlyNextDemoColspan, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextDemoColspanElement: {
+        prototype: HTMLSmoothlyNextDemoColspanElement;
+        new (): HTMLSmoothlyNextDemoColspanElement;
+    };
     interface HTMLSmoothlyNextDemoNestedElement extends Components.SmoothlyNextDemoNested, HTMLStencilElement {
     }
     var HTMLSmoothlyNextDemoNestedElement: {
@@ -2167,6 +2177,7 @@ declare global {
         "smoothly-lazy": HTMLSmoothlyLazyElement;
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
         "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
+        "smoothly-next-demo-colspan": HTMLSmoothlyNextDemoColspanElement;
         "smoothly-next-demo-nested": HTMLSmoothlyNextDemoNestedElement;
         "smoothly-next-demo-nested-inner": HTMLSmoothlyNextDemoNestedInnerElement;
         "smoothly-next-demo-simple": HTMLSmoothlyNextDemoSimpleElement;
@@ -2666,6 +2677,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextDemo {
     }
+    interface SmoothlyNextDemoColspan {
+    }
     interface SmoothlyNextDemoNested {
     }
     interface SmoothlyNextDemoNestedInner {
@@ -2684,11 +2697,13 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableBody {
     }
     interface SmoothlyNextTableCell {
+        "span"?: number;
     }
     interface SmoothlyNextTableExpandableCell {
         "onSmoothlyNextTableExpandableCellOpened"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
         "onSmoothlyNextTableExpandableCellRegister"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
         "open"?: boolean;
+        "span"?: number;
     }
     interface SmoothlyNextTableExpandableRow {
         "open"?: boolean;
@@ -2957,6 +2972,7 @@ declare namespace LocalJSX {
         "smoothly-lazy": SmoothlyLazy;
         "smoothly-load-more": SmoothlyLoadMore;
         "smoothly-next-demo": SmoothlyNextDemo;
+        "smoothly-next-demo-colspan": SmoothlyNextDemoColspan;
         "smoothly-next-demo-nested": SmoothlyNextDemoNested;
         "smoothly-next-demo-nested-inner": SmoothlyNextDemoNestedInner;
         "smoothly-next-demo-simple": SmoothlyNextDemoSimple;
@@ -3072,6 +3088,7 @@ declare module "@stencil/core" {
             "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
             "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
+            "smoothly-next-demo-colspan": LocalJSX.SmoothlyNextDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoColspanElement>;
             "smoothly-next-demo-nested": LocalJSX.SmoothlyNextDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedElement>;
             "smoothly-next-demo-nested-inner": LocalJSX.SmoothlyNextDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedInnerElement>;
             "smoothly-next-demo-simple": LocalJSX.SmoothlyNextDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoSimpleElement>;

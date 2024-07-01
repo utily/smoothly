@@ -1,4 +1,4 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-cell",
@@ -6,7 +6,13 @@ import { Component, h, Host, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyNextTableCell {
+	@Prop({ reflect: true }) span = 1
+
 	render(): VNode | VNode[] {
-		return <Host></Host>
+		return (
+			<Host style={{ "--smoothly-table-cell-span": this.span.toString(10) }}>
+				<slot />
+			</Host>
+		)
 	}
 }
