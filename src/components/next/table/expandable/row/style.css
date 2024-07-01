@@ -21,7 +21,7 @@
 
 :host[open] {
 	background-color: rgb(var(--smoothly-color-tint));
-	grid-template-rows: 0fr 1fr;
+	grid-template-rows: auto 1fr;
 }
 
 :host>div:last-child {
