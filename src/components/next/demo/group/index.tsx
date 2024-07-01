@@ -112,6 +112,10 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-05T13:37:00.000Z</Fragment>} />
 						</smoothly-next-table-expandable-row>
 					</smoothly-next-table-row-group>
+					<smoothly-next-table-row-group>
+						<smoothly-display slot={"start"} type={"date"} value={"2024-01-06"} />
+						<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={720} />
+					</smoothly-next-table-row-group>
 				</smoothly-next-table>
 			</Host>
 		)
