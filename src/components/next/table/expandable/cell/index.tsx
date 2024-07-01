@@ -6,6 +6,7 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode } from "@s
 	scoped: true,
 })
 export class SmoothlyNextTableExpandableCell {
+	@Prop({ reflect: true }) span = 1
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Event() smoothlyNextTableExpandableCellOpened: EventEmitter<void>
 	@Event() smoothlyNextTableExpandableCellRegister: EventEmitter<void>
@@ -23,7 +24,7 @@ export class SmoothlyNextTableExpandableCell {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host>
+			<Host style={{ "--smoothly-table-cell-span": this.span.toString(10) }}>
 				<div onClick={() => this.clickHandler()} class={"content"}>
 					<slot />
 				</div>
