@@ -46,7 +46,6 @@
 	position: relative;
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
 :host > div > smoothly-icon {
 	display: none;
