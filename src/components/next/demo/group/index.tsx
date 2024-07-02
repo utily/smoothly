@@ -142,7 +142,7 @@ export class SmoothlyNextDemoGroup {
 							</fake-row-wrapper>
 							<fake-expandable-row-wrapper>
 								<smoothly-next-table-expandable-row>
-									<fake-cell-wrapper style={{ "grid-column": "span 2" }}>
+									<fake-cell-wrapper class="span-2">
 										<smoothly-next-table-cell span={2}>
 											<smoothly-display type={"date"} value={"2024-01-07"} />
 										</smoothly-next-table-cell>

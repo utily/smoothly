@@ -4,6 +4,10 @@
 :host smoothly-display {
 	display: inline;
 }
+:host fake-cell-wrapper.span-2 {
+	grid-column: span 2;
+}
+
 /* Apply these styles to your element that is 
  * wrapping one of these table components
 */
@@ -15,8 +19,8 @@
 	grid-template-columns: subgrid;
 }
 :host fake-cell-wrapper {
-	/*                    ↓ This is the column span. only needed if span != 1 */
-	grid-column: 1 / span 1;
+	/*                ↓ This is the column span. only needed if span != 1 */
+	grid-column: span 1;
 	/* it can be any display that is not contents */
 	display: block;
 }
