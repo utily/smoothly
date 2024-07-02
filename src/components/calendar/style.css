@@ -1,18 +1,22 @@
 :host {
 	display: block;
 	--other-month-opacity: 0.5;
-	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	box-shadow: 0 0 1px 0px rgb(var(--smoothly-default-contrast));
 }
-:host > smoothly-input-month {
+
+:host>smoothly-input-month {
 	width: calc(100% - 1em);
 	padding: 0.5em 0.5em 0 0.5em;
 }
-:host > table {
+
+:host>table {
 	table-layout: fixed;
 	width: 100%;
 }
-:host > table > thead > tr >  th,
-:host > table > tr > td {
+
+:host>table>thead>tr>th,
+:host>table>tr>td {
 	text-align: center;
 	padding: 0.5em;
 	min-width: 2em;
@@ -20,43 +24,53 @@
 	cursor: pointer;
 	user-select: none;
 }
-:host > table > tr > td.currentMonth {
+
+:host>table>tr>td.currentMonth {
 	color: rgb(var(--smoothly-default-contrast));
 }
-:host > table > tr > td:not(.currentMonth) {
+
+:host>table>tr>td:not(.currentMonth) {
 	color: rgba(var(--smoothly-default-contrast), var(--other-month-opacity));
 }
-:host > table > tr > td:nth-child(6):not(.currentMonth).selected,
-:host > table > tr > td:nth-child(6):not(.currentMonth).dateRange,
-:host > table > tr > td:nth-child(7):not(.currentMonth).selected,
-:host > table > tr > td:nth-child(7):not(.currentMonth).dateRange {
+
+:host>table>tr>td:nth-child(6):not(.currentMonth).selected,
+:host>table>tr>td:nth-child(6):not(.currentMonth).dateRange,
+:host>table>tr>td:nth-child(7):not(.currentMonth).selected,
+:host>table>tr>td:nth-child(7):not(.currentMonth).dateRange {
 	color: rgba(var(--smoothly-default-contrast));
 }
-:host > table > tr > td:nth-child(6),
-:host > table > tr > td:nth-child(7) {
+
+:host>table>tr>td:nth-child(6),
+:host>table>tr>td:nth-child(7) {
 	color: rgb(var(--smoothly-danger-tint));
 }
-:host > table > tr > td:nth-child(6):not(.currentMonth),
-:host > table > tr > td:nth-child(7):not(.currentMonth) {
+
+:host>table>tr>td:nth-child(6):not(.currentMonth),
+:host>table>tr>td:nth-child(7):not(.currentMonth) {
 	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
 }
-:host > table > tr > td:not(.selected, .disable):hover {
+
+:host>table>tr>td:not(.selected, .disable):hover {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-tint));
 }
-:host > table > tr > td.selected {
+
+:host>table>tr>td.selected {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-color));
 }
-:host > table > tr > td:not(.selected, .dateRange):not(:hover).today {
-	background: rgb(var(--smoothly-dark-tint));
-	color: rgb(var(--smoothly-dark-contrast));
+
+:host>table>tr>td:not(.selected, .dateRange):not(:hover).today {
+	background: rgb(var(--smoothly-medium-tint));
+	color: rgb(var(--smoothly-medium-contrast));
 }
-:host > table > tr > td.dateRange {
+
+:host>table>tr>td.dateRange {
 	color: rgb(var(--smoothly-primary-contrast));
 	background: rgb(var(--smoothly-primary-tint));
 }
-:host > table > tr > td.disable {
+
+:host>table>tr>td.disable {
 	cursor: not-allowed;
 	background-color: rgb(var(--smoothly-default-tint), 0.5);
 	color: rgb(var(--smoothly-default-contrast), 0.5);

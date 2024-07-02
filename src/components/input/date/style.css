@@ -30,6 +30,7 @@
 	z-index: 9;
 	transform: translate(2em, -0.55em) rotate(45deg);
 	width: 1em;
+	top: 1px;
 	height: 1em;
 	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 }
