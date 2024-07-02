@@ -2,6 +2,7 @@
 	position: relative;
 	border: 1px solid rgb(var(--smoothly-medium-tint));
 	margin-left: 1rem;
+	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
 	margin-right: 1rem;
 	display: flex;
 	flex-direction: row;
@@ -16,6 +17,7 @@
 	pointer-events: auto;
 	margin-left: 0.3em;
 	margin-right: 0.3em;
+
 	&>[looks="plain"] {
 		display: flex;
 		align-self: stretch;
@@ -34,7 +36,7 @@
 	flex-shrink: 0;
 }
 
-:host > div.close {
+:host>div.close {
 	position: fixed;
 	z-index: 3;
 	top: 0;
@@ -44,7 +46,7 @@
 	background: transparent;
 }
 
-:host > div.hidden {
+:host>div.hidden {
 	display: none;
 }
 
@@ -63,7 +65,7 @@
 }
 
 /* arrow */
-:host > div.container:before {
+:host>div.container:before {
 	content: "";
 	width: 0.6em;
 	height: 0.6em;
@@ -76,7 +78,7 @@
 }
 
 /* arrow placement */
-:host > div.container.arrow-top:before {
+:host>div.container.arrow-top:before {
 	left: calc(91%);
 	top: -5px;
 }
