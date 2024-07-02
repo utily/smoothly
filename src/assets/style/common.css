@@ -54,7 +54,7 @@ a:visited {
 
 [color=success] {
 	--smoothly-color: var(--smoothly-success-color);
-	--smoothly-color-contrast: var(--smoothly-default-color);
+	--smoothly-color-contrast: var(--smoothly-success-contrast);
 	--smoothly-color-shade: var(--smoothly-success-shade);
 	--smoothly-color-tint: var(--smoothly-success-tint);
 }
