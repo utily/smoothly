@@ -28,7 +28,7 @@ export class SmoothlyTab {
 		return (
 			<Host>
 				<label>{this.label}</label>
-				<div ref={e => (this.expansionElement = e)} class={!this.open ? "hide" : ""}>
+				<div ref={e => (this.expansionElement = e)} hidden={!this.open}>
 					<slot></slot>
 				</div>
 			</Host>

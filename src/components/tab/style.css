@@ -3,9 +3,6 @@
 	box-sizing: border-box;
 	margin-bottom: -3px;
 }
-:host > div.hide {
-	display: none;
-}
 :host > label {
 	display: block;
 	padding: .5rem;
