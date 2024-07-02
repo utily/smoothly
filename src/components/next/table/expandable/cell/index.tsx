@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode } from "@s
 
 @Component({
 	tag: "smoothly-next-table-expandable-cell",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyNextTableExpandableCell {

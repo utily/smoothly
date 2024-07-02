@@ -1,4 +1,4 @@
-@import "../arrow.css";
+@import "../arrow.scss";
 
 :host {
 	display: contents;
@@ -7,12 +7,18 @@
 :host>div {
 	padding: 0.3rem 1.1rem;
 }
-
 :host>div.content {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	@include arrow;
+	&:hover {
+		@include arrow-hover;
+	}
+}
+:host[open] > div.content {
+	@include arrow-open;
 }
 
 :host>div.content:hover {

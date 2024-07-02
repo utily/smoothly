@@ -24,7 +24,9 @@ export class SmoothlyNextTableRowGroup {
 						<slot name={"end"} />
 					</div>
 				</div>
-				<slot />
+				<div>
+					<slot />
+				</div>
 			</Host>
 		)
 	}

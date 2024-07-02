@@ -1,0 +1,45 @@
+@import "../arrow.scss";
+
+:host {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: auto 0fr;
+	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
+	box-sizing: border-box;
+}
+:host::slotted(*) {
+	cursor: pointer;
+}
+
+// :host::slotted(smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
+// :host::slotted(smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
+// :host::slotted(smoothly-next-table-cell:hover) {
+// 	background-color: rgb(var(--smoothly-color-shade));
+// }
+:host:has(>:not(:last-child):hover) > :not(:last-child) {
+	background-color: rgb(var(--smoothly-color-shade));
+}
+
+:host[open] {
+	background-color: rgb(var(--smoothly-color-tint));
+	grid-template-rows: auto 1fr;
+}
+
+:host>div:last-child {
+	grid-column: 1 / -1;
+	cursor: default;
+	overflow: hidden;
+	background-color: rgb(var(--smoothly-color-tint));
+}
+
+:host > :first-child:not(:last-child) {
+	@include arrow;
+}
+:host:has(>:not(:last-child):hover) > :first-child:not(:last-child) {
+	@include arrow-hover;
+	
+}
+:host[open] > :first-child:not(:last-child) {
+	@include arrow-open;
+}

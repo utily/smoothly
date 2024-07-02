@@ -1,3 +1,25 @@
 :host {
 	display: block;
 }
+:host smoothly-display {
+	display: inline;
+}
+/* Apply these styles to your custom element 
+ * if you are trying to wrap a table element
+*/
+:host fake-group-wrapper,
+:host fake-row-wrapper,
+:host fake-expandable-row-wrapper {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: subgrid;
+}
+:host fake-cell-wrapper {
+	/*                    ↓ This is the column span. only needed if span != 1 */
+	grid-column: 1 / span 1;
+	/* it can be any display that is not contents */
+	display: block;
+}
+:host fake-expandable-cell-wrapper {
+	display: contents;
+}
