@@ -10,5 +10,6 @@
 }
 :host([marked]),
 :host:hover {
-	background-color: rgba(var(--smoothly-primary-tint), .3);
+	background-color: rgba(var(--smoothly-primary-tint));
+	color: rgb(var(--smoothly-primary-contrast));
 }
