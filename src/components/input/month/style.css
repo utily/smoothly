@@ -1,7 +1,7 @@
 :host {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 :host>smoothly-input-select:last-of-type {
@@ -19,3 +19,23 @@
 :host:not([next])>smoothly-button:last-of-type {
 	display: none;
 }
+:host >smoothly-icon {
+	padding-bottom: .1em;
+	padding-left: .8em;
+	padding-top: 1.1em;
+}
+:host >smoothly-icon.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+:host >smoothly-icon:hover,
+:host >div>smoothly-input-select>*:hover {
+	cursor: pointer;
+}
+:host >div {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+

@@ -68,7 +68,7 @@
 	top: var(--element-height);
 	z-index: 10;
 	max-height: var(--menu-height, unset);
-	width: 100%;
+	overflow-x: hidden;
 	overflow-y: auto;
 	background-color: rgb(var(--smoothly-default-shade));
 }
