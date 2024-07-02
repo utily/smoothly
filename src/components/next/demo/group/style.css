@@ -4,8 +4,8 @@
 :host smoothly-display {
 	display: inline;
 }
-/* Apply these styles to your custom element 
- * if you are trying to wrap a table element
+/* Apply these styles to your element that is 
+ * wrapping one of these table components
 */
 :host fake-group-wrapper,
 :host fake-row-wrapper,
