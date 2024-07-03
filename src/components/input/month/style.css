@@ -4,9 +4,9 @@
 	justify-content: space-between;
 }
 
-:host>smoothly-input-select:last-of-type {
+:host:not([in-calendar])>smoothly-input-select {
 	display: flex;
-	width: 100%;
+	flex: 1;
 }
 
 :host[looks=line],
@@ -15,8 +15,8 @@
 	gap: 2em;
 }
 
-:host:not([previous])>smoothly-button:first-of-type,
-:host:not([next])>smoothly-button:last-of-type {
+:host:not([previous])>smoothly-icon:first-of-type,
+:host:not([next])>smoothly-icon:last-of-type {
 	display: none;
 }
 :host >smoothly-icon {

@@ -68,6 +68,7 @@ export class Calendar {
 			<smoothly-input-month
 				name="month"
 				value={this.month ?? this.value}
+				inCalendar
 				next
 				previous
 				onSmoothlyInput={e => {

@@ -346,6 +346,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
@@ -2595,6 +2596,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputMonth {
         "color"?: Color;
+        "inCalendar"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "next"?: boolean;
