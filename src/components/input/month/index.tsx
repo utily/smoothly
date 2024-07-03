@@ -120,7 +120,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					class={{ disabled: this.readonly }}
 					onClick={() => this.adjustMonth(-1)}
 				/>
-
 				<smoothly-input-select
 					ref={e => (this.year = e)}
 					name={`${this.name}-year`}
@@ -161,7 +160,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						</smoothly-item>
 					))}
 				</smoothly-input-select>
-
 				<smoothly-icon
 					name={"caret-forward-outline"}
 					size={"tiny"}

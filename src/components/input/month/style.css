@@ -31,10 +31,5 @@
 :host >div>smoothly-input-select>*:hover {
 	cursor: pointer;
 }
-:host >div {
-	display: flex;
-	justify-content: center;
-	align-self: center;
-}
 
 
