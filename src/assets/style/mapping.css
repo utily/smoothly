@@ -7,10 +7,10 @@ smoothly-next-table {
 
 	--smoothly-table-footer-contrast: var(--smoothly-light-contrast);
 	--smoothly-table-footer-color: var(--smoothly-light-color);
-	
+
 	--smoothly-table-hover-contrast: var(--smoothly-color-contrast);
-	--smoothly-table-hover-color: var(--smoothly-color);
-	
+	--smoothly-table-hover-color: var(--smoothly-color-tint);
+
 	--smoothly-table-border: var(--smoothly-color-shade);
 
 	--smoothly-table-expanded-contrast: var(--smoothly-default-contrast);
