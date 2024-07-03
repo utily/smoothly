@@ -1,4 +1,4 @@
-@import "../arrow.css";
+@import "../arrow.scss";
 
 :host {
 	grid-column: 1 / -1;
@@ -8,14 +8,10 @@
 	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
 	box-sizing: border-box;
 }
-
 :host::slotted(*) {
 	cursor: pointer;
 }
-
-:host::slotted(smoothly-next-table-cell:has(~ smoothly-next-table-cell:hover)),
-:host::slotted(smoothly-next-table-cell:hover ~ smoothly-next-table-cell),
-:host::slotted(smoothly-next-table-cell:hover) {
+:host:has(>:not(:last-child):hover) > :not(:last-child) {
 	background-color: rgb(var(--smoothly-color-shade));
 }
 
@@ -29,4 +25,15 @@
 	cursor: default;
 	overflow: hidden;
 	background-color: rgb(var(--smoothly-color-tint));
+}
+
+:host > :first-child:not(:last-child) {
+	@include arrow;
+}
+:host:has(>:not(:last-child):hover) > :first-child:not(:last-child) {
+	@include arrow-hover;
+	
+}
+:host[open] > :first-child:not(:last-child) {
+	@include arrow-open;
 }

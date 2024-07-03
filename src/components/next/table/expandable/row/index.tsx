@@ -2,7 +2,7 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-expandable-row",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyNextTableExpandableRow {
