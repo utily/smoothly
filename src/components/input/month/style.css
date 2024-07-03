@@ -19,10 +19,9 @@
 :host:not([next])>smoothly-icon:last-of-type {
 	display: none;
 }
-:host >smoothly-icon {
-	padding-bottom: .1em;
-	padding-left: .8em;
-	padding-top: 1.1em;
+:host>smoothly-icon {
+	display: flex;
+	align-self: center;
 }
 :host >smoothly-icon.disabled {
 	opacity: 0.5;
