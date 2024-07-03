@@ -1,6 +1,6 @@
-
 @mixin arrow {
 	position: relative;
+
 	&::before {
 		content: '';
 		display: flex;
@@ -10,21 +10,24 @@
 		height: 0.4em;
 		width: 0.4em;
 		left: 0.3em;
-		border-bottom: 1px solid black;
-		border-right: 1px solid black;
+		border-bottom: 1px solid rgb(var(--smoothly-table-contrast));
+		border-right: 1px solid rgb(var(--smoothly-table-contrast));
 		transition: rotate 200ms ease-in-out;
 		rotate: -45deg;
 		opacity: 0.3;
 	}
 }
+
 @mixin arrow-hover {
 	&::before {
+		border-bottom: 1px solid rgb(var(--smoothly-table-hover-contrast));
+		border-right: 1px solid rgb(var(--smoothly-table-hover-contrast));
 		opacity: 1;
 	}
 }
+
 @mixin arrow-open {
 	&::before {
 		rotate: 45deg;
 	}
 }
-

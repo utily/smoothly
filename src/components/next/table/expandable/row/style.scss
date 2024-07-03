@@ -5,8 +5,7 @@
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-template-rows: auto 0fr;
-	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
-	box-sizing: border-box;
+	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
 :host::slotted(*) {
@@ -22,11 +21,15 @@
 	background-color: rgb(var(--smoothly-table-expanded-color));
 	color: rgb(var(--smoothly-table-expanded-contrast));
 	grid-template-rows: auto 1fr;
+	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
+		0px 0px 1px rgb(var(--smoothly-table-border)) inset;
+	grid-template-rows: 0fr 1fr;
 }
 
 :host>div:last-child {
 	grid-column: 1 / -1;
 	cursor: default;
+	position: relative;
 	overflow: hidden;
 	background-color: rgb(var(--smoothly-table-expanded-color));
 	color: rgb(var(--smoothly-table-expanded-contrast));
@@ -43,4 +46,37 @@
 
 :host[open]> :first-child:not(:last-child) {
 	@include arrow-open;
+}
+
+:host[open]>div:last-child {
+	overflow: visible;
+	padding: 0.3rem 1.1rem;
+}
+
+:host>div:last-child::before {
+	content: "";
+	position: absolute;
+	display: flex;
+	box-sizing: border-box;
+	top: 0;
+	bottom: 0;
+	left: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	border-left: 0.3em solid rgb(var(--smoothly-table-border));
+	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
+
+:host>div:last-child::after {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	right: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }

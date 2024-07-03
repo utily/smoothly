@@ -10,6 +10,7 @@
 :host>div.content {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
+	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
 	@include arrow;
@@ -33,7 +34,12 @@
 :host>div.detail {
 	grid-column: 1 / -1;
 	grid-row: 2;
-	overflow: hidden;
+	position: relative;
+}
+
+:host[open]>div.content {
+	box-shadow: 1px 1px 1px -1px rgb(var(--smoothly-table-border)) inset,
+		-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
 }
 
 :host[open]>div {
@@ -43,4 +49,32 @@
 
 :host:not([open])>div.detail {
 	display: none;
+}
+
+:host>div.detail::before {
+	content: "";
+	position: absolute;
+	display: flex;
+	box-sizing: border-box;
+	top: 0;
+	bottom: 0;
+	left: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	border-left: 0.3em solid rgb(var(--smoothly-table-border));
+	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
+
+:host>div.detail::after {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	right: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-color));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
