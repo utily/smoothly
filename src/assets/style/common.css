@@ -3,6 +3,7 @@
 :root {
 	font-family: var(--smoothly-font-family);
 }
+
 html {
 	overflow: hidden;
 }
@@ -31,6 +32,7 @@ a:visited {
 	--smoothly-color-shade: var(--smoothly-default-shade);
 	--smoothly-color-tint: var(--smoothly-default-tint);
 }
+
 [color=primary] {
 	--smoothly-color: var(--smoothly-primary-color);
 	--smoothly-color-contrast: var(--smoothly-primary-contrast);
@@ -127,4 +129,3 @@ a:visited {
 	background: transparent;
 	border-color: transparent;
 }
-

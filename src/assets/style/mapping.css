@@ -1,0 +1,18 @@
+smoothly-next-table {
+	--smoothly-table-contrast: var(--smoothly-default-contrast);
+	--smoothly-table-color: var(--smoothly-default-color);
+
+	--smoothly-table-header-contrast: var(--smoothly-dark-contrast);
+	--smoothly-table-header-color: var(--smoothly-dark-color);
+
+	--smoothly-table-footer-contrast: var(--smoothly-light-contrast);
+	--smoothly-table-footer-color: var(--smoothly-light-color);
+
+	--smoothly-table-hover-contrast: var(--smoothly-color-contrast);
+	--smoothly-table-hover-color: var(--smoothly-color-tint);
+
+	--smoothly-table-border: var(--smoothly-color-shade);
+
+	--smoothly-table-expanded-contrast: var(--smoothly-default-contrast);
+	--smoothly-table-expanded-color: var(--smoothly-default-tint);
+}
