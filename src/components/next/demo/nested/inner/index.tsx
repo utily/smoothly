@@ -26,12 +26,12 @@ export class SmoothlyNextDemoNestedInner {
 					</smoothly-next-table-head>
 					<smoothly-next-table-body>
 						{this.data?.map(entry => (
-							<smoothly-next-table-row>
+							<smoothly-next-table-expandable-row>
 								<smoothly-next-table-cell>{entry.id}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.name}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.age}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.balance}</smoothly-next-table-cell>
-							</smoothly-next-table-row>
+							</smoothly-next-table-expandable-row>
 						))}
 					</smoothly-next-table-body>
 				</smoothly-next-table>

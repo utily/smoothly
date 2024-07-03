@@ -10,43 +10,45 @@ export class SmoothlyNextDemoNested {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-next-table columns={8}>
-					<smoothly-next-table-head>
-						<smoothly-next-table-row>
-							<smoothly-next-table-cell>Id</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Registered</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Name</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Age</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Balance</smoothly-next-table-cell>
-							<smoothly-next-table-cell>EyeColor</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Gender</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Company</smoothly-next-table-cell>
-						</smoothly-next-table-row>
-					</smoothly-next-table-head>
-					<smoothly-next-table-body>
-						{data.map(entry => (
-							<smoothly-next-table-expandable-row>
-								<div slot={"detail"}>
-									<smoothly-next-demo-nested-inner data={entry.friends} />
-								</div>
-								<smoothly-next-table-cell>{entry.id}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.registered}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.name}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.age}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.balance}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.eyeColor}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.gender}</smoothly-next-table-cell>
-								<smoothly-next-table-cell>{entry.company}</smoothly-next-table-cell>
-							</smoothly-next-table-expandable-row>
-						))}
-					</smoothly-next-table-body>
-					<smoothly-next-table-foot>
-						<smoothly-next-table-row>
-							<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
-							<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
-						</smoothly-next-table-row>
-					</smoothly-next-table-foot>
-				</smoothly-next-table>
+				<smoothly-color color="primary">
+					<smoothly-next-table columns={8}>
+						<smoothly-next-table-head>
+							<smoothly-next-table-row>
+								<smoothly-next-table-cell>Id</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Registered</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Name</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Age</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Balance</smoothly-next-table-cell>
+								<smoothly-next-table-cell>EyeColor</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Gender</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Company</smoothly-next-table-cell>
+							</smoothly-next-table-row>
+						</smoothly-next-table-head>
+						<smoothly-next-table-body>
+							{data.map(entry => (
+								<smoothly-next-table-expandable-row>
+									<smoothly-color color="secondary" slot={"detail"}>
+										<smoothly-next-demo-nested-inner data={entry.friends} />
+									</smoothly-color>
+									<smoothly-next-table-cell>{entry.id}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.registered}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.name}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.age}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.balance}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.eyeColor}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.gender}</smoothly-next-table-cell>
+									<smoothly-next-table-cell>{entry.company}</smoothly-next-table-cell>
+								</smoothly-next-table-expandable-row>
+							))}
+						</smoothly-next-table-body>
+						<smoothly-next-table-foot>
+							<smoothly-next-table-row>
+								<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
+								<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
+							</smoothly-next-table-row>
+						</smoothly-next-table-foot>
+					</smoothly-next-table>
+				</smoothly-color>
 			</Host>
 		)
 	}
