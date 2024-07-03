@@ -19,12 +19,13 @@ export class SmoothlyDisplayDemo {
 						<dt>Duration</dt>
 						<dd>
 							<div>
-								<smoothly-display type="duration" value={{ hours: 13, minutes: 100 }} />
-								<smoothly-display type="duration" value={{ hours: 8 }} />
-								<smoothly-display type="duration" value={{ minutes: 3 }} />
-								<smoothly-display type="duration" value={{ hours: -13, minutes: 100 }} />
-								<smoothly-display type="duration" value={{ hours: -8 }} />
-								<smoothly-display type="duration" value={{ minutes: -3 }} />
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ hours: 13, minutes: 100 }} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ hours: 8 }} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ minutes: 3 }} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ hours: -13, minutes: 100 }} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ hours: -8 }} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{}} />{" h"}</div>
+								<div><smoothly-display style={{display: "inline"}} type="duration" value={{ minutes: -3 }} />{" h"}</div>
 							</div>
 						</dd>
 						<dt>text</dt>

@@ -36,7 +36,7 @@ export class SmoothlyDisplay {
 				result = get(this.type as Type, getLocale())?.toString(this.value)
 				break
 			case "duration":
-				result = format(this.value, type)
+				result = format(this.value, type) || "0"
 				break
 			case "date-time":
 				result = this.format
