@@ -46,7 +46,7 @@
 :host:not([open]) {
 	grid-template-rows: auto 0fr;
 }
-:host:not([open]) > :not(:first-child) {
+:host:not([open]) > div:last-child {
 	grid-row: 2;
 	overflow: hidden;
 }
@@ -76,9 +76,8 @@
 :host > div:first-child {
 	background-color: rgb(var(--smoothly-color-tint));
 }
-:host[open] > div:first-child,
-:host>div:first-child:only-child {
-	border-bottom: 1px solid rgb(var(--smoothly-color-shade));
+:host > div:first-child {
+	border-bottom: 1px solid rgb(var(--smoothly-color-shade));;
 }
 :host > div:first-child:hover {
 	background-color: rgb(var(--smoothly-color-shade));
