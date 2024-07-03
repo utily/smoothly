@@ -35,6 +35,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false
+	@Prop({ reflect: true }) inCalendar = false
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -111,13 +112,14 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-button
-					size={"flexible"}
+				<smoothly-icon
+					name={"caret-back-outline"}
+					size={"tiny"}
 					color={this.color}
-					disabled={this.readonly}
-					onClick={() => this.adjustMonth(-1)}>
-					<smoothly-icon name={"caret-back-outline"} size={"tiny"} color={this.color} fill={"default"} />
-				</smoothly-button>
+					fill={"default"}
+					class={{ disabled: this.readonly }}
+					onClick={() => this.adjustMonth(-1)}
+				/>
 				<smoothly-input-select
 					ref={e => (this.year = e)}
 					name={`${this.name}-year`}
@@ -125,6 +127,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					inCalendar={this.inCalendar}
 					onSmoothlyInput={e => this.inputHandler(e)}
 					searchDisabled>
 					<div slot={"label"}>
@@ -145,6 +148,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					inCalendar={this.inCalendar}
 					onSmoothlyInput={e => this.inputHandler(e)}
 					searchDisabled>
 					<div slot={"label"}>
@@ -156,13 +160,14 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 						</smoothly-item>
 					))}
 				</smoothly-input-select>
-				<smoothly-button
-					size={"flexible"}
+				<smoothly-icon
+					name={"caret-forward-outline"}
+					size={"tiny"}
 					color={this.color}
-					disabled={this.readonly}
-					onClick={() => this.adjustMonth(1)}>
-					<smoothly-icon name={"caret-forward-outline"} size={"tiny"} color={this.color} fill={"default"} />
-				</smoothly-button>
+					fill={"default"}
+					class={{ disabled: this.readonly }}
+					onClick={() => this.adjustMonth(1)}
+				/>
 			</Host>
 		)
 	}

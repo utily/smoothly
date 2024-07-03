@@ -346,6 +346,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
@@ -409,6 +410,7 @@ export namespace Components {
         "clearable": boolean;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
@@ -2595,6 +2597,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputMonth {
         "color"?: Color;
+        "inCalendar"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "next"?: boolean;
@@ -2658,6 +2661,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
+        "inCalendar"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple"?: boolean;
