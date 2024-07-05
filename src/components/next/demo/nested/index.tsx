@@ -10,6 +10,7 @@ export class SmoothlyNextDemoNested {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<smoothly-display type="text" value="Nested" />
 				<smoothly-color color="primary">
 					<smoothly-next-table columns={8}>
 						<smoothly-next-table-head>

@@ -13,6 +13,7 @@ export class SmoothlyNextDemo {
 				<smoothly-next-demo-colspan />
 				<smoothly-next-demo-simple />
 				<smoothly-next-demo-nested />
+				<smoothly-next-table-demo-filtered />
 			</Host>
 		)
 	}

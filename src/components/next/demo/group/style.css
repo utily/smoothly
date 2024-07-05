@@ -7,7 +7,13 @@
 :host fake-cell-wrapper.span-2 {
 	grid-column: span 2;
 }
-
+:host>smoothly-display {
+	display: inherit;
+	font-size: 2em;
+}
+:host>* {
+	margin-bottom: 2rem;
+}
 /* Apply these styles to your element that is 
  * wrapping one of these table components
 */

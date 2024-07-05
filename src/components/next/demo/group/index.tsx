@@ -9,6 +9,7 @@ export class SmoothlyNextDemoGroup {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<smoothly-display type="text" value="Group" />
 				<smoothly-next-table columns={2}>
 					<smoothly-next-table-head>
 						<smoothly-next-table-row>

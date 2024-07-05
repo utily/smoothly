@@ -9,6 +9,7 @@ export class SmoothlyNextDemoSimple {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<smoothly-display type="text" value="Simple" />
 				<smoothly-color color="primary">
 					<smoothly-next-table columns={2}>
 						<smoothly-next-table-head>
