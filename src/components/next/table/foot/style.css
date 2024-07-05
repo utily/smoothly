@@ -7,4 +7,6 @@
 	bottom: 0;
 	background-color: rgb(var(--smoothly-table-footer-color));
 	color: rgb(var(--smoothly-table-footer-contrast));
+	stroke: rgb(var(--smoothly-table-footer-contrast));
+	fill: rgb(var(--smoothly-table-footer-contrast));
 }

@@ -484,6 +484,8 @@ export namespace Components {
     interface SmoothlyNextTableCell {
         "span": number;
     }
+    interface SmoothlyNextTableDemoFiltered {
+    }
     interface SmoothlyNextTableExpandableCell {
         "close": () => Promise<void>;
         "open": boolean;
@@ -1654,6 +1656,12 @@ declare global {
         prototype: HTMLSmoothlyNextTableCellElement;
         new (): HTMLSmoothlyNextTableCellElement;
     };
+    interface HTMLSmoothlyNextTableDemoFilteredElement extends Components.SmoothlyNextTableDemoFiltered, HTMLStencilElement {
+    }
+    var HTMLSmoothlyNextTableDemoFilteredElement: {
+        prototype: HTMLSmoothlyNextTableDemoFilteredElement;
+        new (): HTMLSmoothlyNextTableDemoFilteredElement;
+    };
     interface HTMLSmoothlyNextTableExpandableCellElementEventMap {
         "smoothlyNextTableExpandableCellOpened": void;
         "smoothlyNextTableExpandableCellRegister": void;
@@ -2220,6 +2228,7 @@ declare global {
         "smoothly-next-table": HTMLSmoothlyNextTableElement;
         "smoothly-next-table-body": HTMLSmoothlyNextTableBodyElement;
         "smoothly-next-table-cell": HTMLSmoothlyNextTableCellElement;
+        "smoothly-next-table-demo-filtered": HTMLSmoothlyNextTableDemoFilteredElement;
         "smoothly-next-table-expandable-cell": HTMLSmoothlyNextTableExpandableCellElement;
         "smoothly-next-table-expandable-row": HTMLSmoothlyNextTableExpandableRowElement;
         "smoothly-next-table-foot": HTMLSmoothlyNextTableFootElement;
@@ -2740,6 +2749,8 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableCell {
         "span"?: number;
     }
+    interface SmoothlyNextTableDemoFiltered {
+    }
     interface SmoothlyNextTableExpandableCell {
         "onSmoothlyNextTableExpandableCellOpened"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
         "onSmoothlyNextTableExpandableCellRegister"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
@@ -3026,6 +3037,7 @@ declare namespace LocalJSX {
         "smoothly-next-table": SmoothlyNextTable;
         "smoothly-next-table-body": SmoothlyNextTableBody;
         "smoothly-next-table-cell": SmoothlyNextTableCell;
+        "smoothly-next-table-demo-filtered": SmoothlyNextTableDemoFiltered;
         "smoothly-next-table-expandable-cell": SmoothlyNextTableExpandableCell;
         "smoothly-next-table-expandable-row": SmoothlyNextTableExpandableRow;
         "smoothly-next-table-foot": SmoothlyNextTableFoot;
@@ -3144,6 +3156,7 @@ declare module "@stencil/core" {
             "smoothly-next-table": LocalJSX.SmoothlyNextTable & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableElement>;
             "smoothly-next-table-body": LocalJSX.SmoothlyNextTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableBodyElement>;
             "smoothly-next-table-cell": LocalJSX.SmoothlyNextTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableCellElement>;
+            "smoothly-next-table-demo-filtered": LocalJSX.SmoothlyNextTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableDemoFilteredElement>;
             "smoothly-next-table-expandable-cell": LocalJSX.SmoothlyNextTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableCellElement>;
             "smoothly-next-table-expandable-row": LocalJSX.SmoothlyNextTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableRowElement>;
             "smoothly-next-table-foot": LocalJSX.SmoothlyNextTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFootElement>;
