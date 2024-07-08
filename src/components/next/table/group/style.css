@@ -2,6 +2,7 @@
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
+	margin-top: 1px;
 }
 :host > div:first-child {
 	grid-column: 1 / -1;
@@ -60,8 +61,8 @@
 	left: 0.3em;
 	height: 0.4em;
 	width: 0.4em;
-	border-bottom: 1px solid rgb(var(--smoothly-color-contrast));
-	border-right: 1px solid rgb(var(--smoothly-color-contrast));
+	border-bottom: 1px solid rgb(var(--smoothly-default-contrast));
+	border-right: 1px solid rgb(var(--smoothly-default-contrast));
 	transition: rotate 200ms ease-in-out;
 	rotate: -45deg;
 	opacity: 0.3;
@@ -74,11 +75,11 @@
 }
 
 :host > div:first-child {
-	background-color: rgb(var(--smoothly-color-tint));
+	background-color: rgb(var(--smoothly-default-tint));
 }
 :host > div:first-child {
-	border-bottom: 1px solid rgb(var(--smoothly-color-shade));;
+	border-bottom: 1px solid rgb(var(--smoothly-default-shade));
 }
 :host > div:first-child:hover {
-	background-color: rgb(var(--smoothly-color-shade));
+	background-color: rgb(var(--smoothly-default-shade));
 }
