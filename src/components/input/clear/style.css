@@ -22,6 +22,9 @@
 :host([type="input"]) ::slotted(smoothly-icon) {
 	filter: opacity(60%);
 	font-size: 70%;
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
 }
 
 :host([type="input"]):hover ::slotted(smoothly-icon) {
@@ -29,8 +32,8 @@
 	filter: opacity(100%);
 }
 
-:host([type="input"]) > button {
- 	padding: 0rem;
- 	margin: 0rem;
- 	min-width: 0rem; 
+:host([type="input"])>button {
+	padding: 0rem;
+	margin: 0rem;
+	min-width: 0rem;
 }

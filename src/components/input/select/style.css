@@ -5,7 +5,10 @@
 	justify-content: space-between;
 	flex-direction: row;
 	position: relative;
-	background-color: rgb(var(--smoothly-color-shade));
+	background-color: rgb(var(--smoothly-input-background));
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
 }
 
 :host.icon {
@@ -26,12 +29,31 @@
 	text-overflow: ellipsis;
 }
 
+:host>div.select-display smoothly-icon {
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
+}
+
 :host>div.icons {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin-right: .4em;
 }
+
+:host>div.icons::slotted(smoothly-icon) {
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
+	filter: opacity(60%);
+
+}
+
+:host:hover>div.icons::slotted(smoothly-icon) {
+	filter: opacity(100%);
+}
+
 
 :host>div.icons::slotted(smoothly-input-reset) {
 	padding-right: .2em;
@@ -57,12 +79,14 @@
 	overflow: hidden;
 	width: 100%;
 }
+
 :host:not([in-calendar]).has-value:has([slot=label])>div.select-display,
 :host:not([in-calendar]):not(.has-value)[placeholder]>div.select-display {
 	padding-bottom: .1em;
 	padding-left: .8em;
 	padding-top: 1.1em;
 }
+
 :host>.options {
 	display: flex;
 	flex-direction: column;
@@ -72,7 +96,7 @@
 	max-height: var(--menu-height, unset);
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--smoothly-input-background));
 }
 
 :host[looks=border]>div.options {

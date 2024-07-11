@@ -8,52 +8,61 @@
 	position: relative;
 	width: 100%;
 	padding-left: 0.4rem;
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
-}
-:host > div > div.mask {
-	position: absolute;
-	inset: 0;
-	background-color: rgb(var(--text-color ,var(--smoothly-color-contrast)), 0.3);
+	background-color: rgb(var(--smoothly-input-background));
 }
 
-:host:not(.dragging) > div > div.mask {
+:host>div>div.mask {
+	position: absolute;
+	inset: 0;
+	color: rgb(var(--smoothly-hover-contrast));
+	background-color: rgb(var(--smoothly-input-hover));
+}
+
+:host:not(.dragging)>div>div.mask {
 	display: none;
 }
-:host > div > input {
+
+:host>div>input {
 	overflow: hidden;
 	height: 0;
 	width: 0;
 	padding: 0;
 }
-:host > div.input {
+
+:host>div.input {
 	display: flex;
 	align-items: center;
 	padding-bottom: 0.2rem;
 	column-gap: 1ch;
 }
-:host > div > smoothly-button {
+
+:host>div>smoothly-button {
 	margin: 0;
 	border: none;
 }
-:host > label {
+
+:host>label {
 	padding-top: 0.4rem;
 	display: flex;
 	width: 100%;
 	align-items: baseline;
 	justify-content: flex-start;
-	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
+	color: rgb(var(--smoothly-input-foreground));
 	cursor: inherit;
 
 }
-:host > label::slotted(*) {
+
+:host>label::slotted(*) {
 	display: block;
 	width: 100%;
 	font-size: 0.65em;
 	opacity: 0.8;
 }
+
 :host:not([show-label]) label {
 	display: none;
 }
-:host > div > span {
+
+:host>div>span {
 	cursor: pointer;
 }

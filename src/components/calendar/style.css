@@ -20,7 +20,7 @@
 	text-align: center;
 	padding: 0.5em;
 	min-width: 2em;
-	background-color: rgb(var(--smoothly-default-shade));
+	background-color: rgb(var(--smoothly-default-tint));
 	cursor: pointer;
 	user-select: none;
 }

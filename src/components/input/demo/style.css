@@ -3,18 +3,22 @@ smoothly-input-demo {
 	margin: 2em;
 	margin-bottom: 20rem;
 }
+
 .checkbox-group {
 	display: flex;
 	gap: 1.5em;
 	align-items: center;
 	background-color: rgb(var(--background-color));
 }
+
 .select-div {
 	display: flex;
 	justify-content: space-between;
 	gap: 1em;
 	flex-wrap: wrap;
 }
+
+.select-div>smoothly-color>*,
 .select-div>* {
 	flex-basis: 49%;
 }

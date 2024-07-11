@@ -16,3 +16,25 @@ smoothly-next-table {
 	--smoothly-table-expanded-contrast: var(--smoothly-default-contrast);
 	--smoothly-table-expanded-color: var(--smoothly-default-tint);
 }
+
+smoothly-form,
+smoothly-picker,
+smoothly-item,
+smoothly-input-select,
+smoothly-input-range,
+smoothly-input-date,
+smoothly-input-file,
+smoothly-input-month,
+smoothly-input-date-range,
+smoothly-input-radio,
+smoothly-input {
+	--smoothly-input-foreground: var(--smoothly-default-contrast);
+	--smoothly-input-background: var(--smoothly-default-tint);
+	--smoothly-input-border: var(--smoothly-default-shade);
+
+	--smoothly-input-selected: var(--smoothly-primary-color);
+	--smoothly-input-selected-contrast: var(--smoothly-primary-contrast);
+
+	--smoothly-input-hover: var(--smoothly-primary-tint);
+	--smoothly-input-hover-contrast: var(--smoothly-primary-contrast);
+}
