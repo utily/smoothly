@@ -7,20 +7,24 @@
 	left: -1px;
 	right: -1px;
 	min-width: max-content;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 	padding: 0.5rem;
 	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
 }
+
 :host:not(.flip) {
 	top: 100%;
 }
+
 :host.flip {
 	bottom: 100%;
 }
+
 :host:not([open]) {
 	display: none;
 }
-:host > div.list {
+
+:host>div.list {
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
@@ -30,15 +34,18 @@
 	padding-right: 0.5rem;
 	padding-bottom: 0.25rem;
 }
-:host > .hide {
+
+:host>.hide {
 	display: none;
 }
-:host > div.controls {
+
+:host>div.controls {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	gap: 0.5rem;
 	transition: grid-template-columns 200ms linear;
 }
-:host > div.controls > button:disabled {
+
+:host>div.controls>button:disabled {
 	opacity: 0.3;
 }

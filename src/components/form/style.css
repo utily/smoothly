@@ -1,8 +1,6 @@
 smoothly-form {
 	display: block;
 	position: relative;
-	--background-color: var(--smoothly-color-shade);
-	--text-color: var(--smoothly-color-contrast)
 }
 smoothly-form > form {
 	position: relative;

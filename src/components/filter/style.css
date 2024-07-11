@@ -2,7 +2,7 @@
 	position: relative;
 	border: 1px solid rgb(var(--smoothly-medium-tint));
 	margin-left: 1rem;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 	margin-right: 1rem;
 	display: flex;
 	flex-direction: row;
