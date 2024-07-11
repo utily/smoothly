@@ -13,9 +13,9 @@
 	align-self: center;
 }
 :host > span.icon {
-	display: grid;
+	display: flex;
 	width: 100%;
-	grid-template-columns: 3.5rem auto;
+	justify-content: center;
 }
 :host > span.icon > p {
 	padding-right: 1em;
@@ -26,8 +26,8 @@
 :host[hidden] {
 	display: none;
 }
-:host > span.icon > smoothly-icon{
-	margin: 0 1rem;
+:host > span.icon > smoothly-icon {
+	margin: 0 0.5rem;
 }
 :host > smoothly-trigger {
 	font-size: 0.7em;
