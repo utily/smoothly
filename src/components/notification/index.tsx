@@ -11,7 +11,7 @@ import { Icon } from "../../model"
 export class Notification {
 	@Prop() notice: Notice
 	@Prop() closable = true
-	@Prop() icon = false
+	@Prop() icon: boolean
 	@State() tick = {}
 	@Event() remove: EventEmitter<Notice>
 	private listener: Notice.Listener = notice => {
@@ -64,15 +64,13 @@ export class Notification {
 	render() {
 		return (
 			<Host color={this.properties[0]} fill="solid">
-				{this.closable ? (
+				{this.closable && (
 					<smoothly-trigger fill="clear" name="close">
 						<smoothly-icon name="close-circle-outline"></smoothly-icon>
 					</smoothly-trigger>
-				) : (
-					""
 				)}
 				<span class={this.icon ? "icon" : "clean"}>
-					{this.icon ? <smoothly-icon name={this.properties[1]}></smoothly-icon> : ""}
+					{this.icon && <smoothly-icon name={this.properties[1]}></smoothly-icon>}
 					<p>{this.notice.message}</p>
 				</span>
 			</Host>

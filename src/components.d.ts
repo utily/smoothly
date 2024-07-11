@@ -510,6 +510,7 @@ export namespace Components {
         "notice": Notice;
     }
     interface SmoothlyNotifier {
+        "icon": boolean;
     }
     interface SmoothlyPicker {
         "changed": boolean;
@@ -2777,6 +2778,7 @@ declare namespace LocalJSX {
         "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
     }
     interface SmoothlyNotifier {
+        "icon"?: boolean;
     }
     interface SmoothlyPicker {
         "changed"?: boolean;
