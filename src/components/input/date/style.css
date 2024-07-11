@@ -3,7 +3,7 @@
 :host {
 	position: relative;
 	max-width: 100vw;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 }
 :host[looks=transparent] smoothly-input {
 	outline: none;
@@ -12,7 +12,7 @@
 	position: absolute;
 	z-index: 10;
 	top: 3.5em;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 	min-width: 18em;
 }
 :host > div {
@@ -32,7 +32,7 @@
 	width: 1em;
 	top: 1px;
 	height: 1em;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 }
 
 @media screen and (min-width: 400px){
@@ -40,7 +40,7 @@
 		position: absolute;
 		z-index: 10;
 		top: 3.5em;
-		background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+		background-color: rgb(var(--smoothly-input-background));
 		max-width: 22em;
 		
 	}

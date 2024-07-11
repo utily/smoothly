@@ -10,15 +10,15 @@
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	background-color: rgb(var(--background-color,var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 	padding: 0 .4em;
 }
 
 :host :nth-child(2) {
-  margin-left: 0.2em;
+	margin-left: 0.2em;
 }
 
-:host > div {
+:host>div {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -27,17 +27,17 @@
 	padding: 1.1em 0 .1em 0;
 }
 
-:host.output-side-right > div {
+:host.output-side-right>div {
 	padding: 0;
 }
 
-:host > div > output {
+:host>div>output {
 	min-width: 4em;
 	text-align: center;
-	margin-left:  .5em
+	margin-left: .5em
 }
 
-:host > div > label {
+:host>div>label {
 	position: absolute;
 	display: block;
 	white-space: nowrap;
@@ -47,71 +47,74 @@
 	font-size: .6em;
 }
 
-:host.output-side-right > dov > label {
+:host.output-side-right>dov>label {
 	position: static;
 	font-size: inherit;
 	text-align: left;
 	padding-right: .5em
-} 
+}
 
-:host.output-side-right > dov > output {
+:host.output-side-right>dov>output {
 	order: 3;
 	margin: 0;
-} 
+}
 
 /*--------------------Reset browserspecific CSS------------------ */
-:host > div > input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
-  background: transparent; /* Otherwise white in Chrome */
+:host>div>input[type=range] {
+	-webkit-appearance: none;
+	/* Hides the slider so that custom slider can be made */
+	width: 100%;
+	/* Specific width is required for Firefox. */
+	background: transparent;
+	/* Otherwise white in Chrome */
 	height: 1.5em;
 	padding: 0 .4em;
 }
 
 /*--------------------THUMB------------------ */
 /* WebKit/Blink */
-:host > div > input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1.2em;
-  width: .7em;
-  border-radius: 20%;
-  background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--text-color, var(--smoothly-color-contrast))) solid;
-  cursor: pointer;
-  margin-top: -.45em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+:host>div>input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 1.2em;
+	width: .7em;
+	border-radius: 20%;
+	background-color: rgb(var(--smoothly-primary-contrast));
+	border: 1px rgb(var(--smoothly-color-contrast)) solid;
+	cursor: pointer;
+	margin-top: -.45em;
+	/* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* Firefox */
-:host > div > input[type=range]::-moz-range-thumb {
-  height: 1.2em;
-  width: .7em;
-  border-radius: 20%;
-  background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--text-color, var(--smoothly-color-contrast))) solid;
-  cursor: pointer;
+:host>div>input[type=range]::-moz-range-thumb {
+	height: 1.2em;
+	width: .7em;
+	border-radius: 20%;
+	background-color: rgb(var(--smoothly-primary-contrast));
+	border: 1px rgb(var(--smoothly-color-contrast)) solid;
+	cursor: pointer;
 }
 
 /*--------------------SLIDER TRACK------------------ */
-:host > div > input[type=range]::-webkit-slider-runnable-track {
-  height: .3em;
-  cursor: pointer;
+:host>div>input[type=range]::-webkit-slider-runnable-track {
+	height: .3em;
+	cursor: pointer;
 	background-color: rgb(var(--smoothly-primary-color));
-  border-radius: 20px;
+	border-radius: 20px;
 }
 
-:host > div > input[type=range]::-moz-range-track {
-  width: 100%;
-  height: .3em;
-  cursor: pointer;
-  background-color: rgb(var(--smoothly-primary-color));
-  border-radius: 20px;
+:host>div>input[type=range]::-moz-range-track {
+	width: 100%;
+	height: .3em;
+	cursor: pointer;
+	background-color: rgb(var(--smoothly-primary-color));
+	border-radius: 20px;
 }
 
-:host(:not([value])) > div > input[type=range]::-webkit-slider-runnable-track  {
+:host(:not([value]))>div>input[type=range]::-webkit-slider-runnable-track {
 	background-color: rgb(var(--smoothly-primary-tint));
 }
 
-:host(:not([value])) > dov > input[type=range]::-moz-range-track {
+:host(:not([value]))>dov>input[type=range]::-moz-range-track {
 	background-color: rgb(var(--smoothly-primary-tint));
 }
-

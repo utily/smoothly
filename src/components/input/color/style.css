@@ -2,14 +2,15 @@
 	display: flex;
 }
 
-:host > smoothly-input { 
-	width: 100% /* Element doesnt take up all its avaliable space without this*/
+:host>smoothly-input {
+	width: 100%
+		/* Element doesnt take up all its avaliable space without this*/
 }
 
-:host > div.color-sample {
+:host>div.color-sample {
 	height: 2em;
 	width: 5em;
 	background-color: var(--value);
-	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
+	border: rgb(var(--smoothly-input-border)) solid 1px;
 	border-radius: 2px;
 }

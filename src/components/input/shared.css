@@ -1,36 +1,46 @@
 :host {
 	box-sizing: border-box;
 }
+
 :host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
-	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
+	border: rgb(var(--smoothly-input-border)) solid 1px;
 }
-:host[looks="border"][readonly]{
-	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .1) solid 1px;
+
+:host[looks="border"][readonly] {
+	border: rgb(var(--smoothly-input-border)) solid 1px;
 }
+
 :host[looks="line"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="line"] {
-	border-bottom: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
+	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
 }
-:host[looks="line"][readonly]{
-	border-bottom: rgba(var(--text-color, var(--smoothly-color-contrast)), .1) solid 1px;
+
+:host[looks="line"][readonly] {
+	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
 }
+
 :host[looks="grid"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="grid"] {
-	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .5) solid .5px;
+	border: rgb(var(--smoothly-input-border)) solid .5px;
 }
-:host[looks="grid"][readonly]{
-	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .2) solid .5px;
+
+:host[looks="grid"][readonly] {
+	border: rgb(var(--smoothly-input-border)) solid .5px;
 }
+
 :host[looks="transparent"] {
 	border: none;
 }
+
 :host[looks="transparent"]:not(:focus-within) {
 	background-color: transparent;
 }
-:host[looks="transparent"]:not(:focus-within) > input {
+
+:host[looks="transparent"]:not(:focus-within)>input {
 	background: transparent;
 }
+
 :host[looks="transparent"]:focus-within {
-	outline: 1px solid rgb(var(--smoothly-color-contrast));
+	outline: 1px solid rgb(var(--smoothly-input-border));
 }

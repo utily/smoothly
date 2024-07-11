@@ -68,7 +68,6 @@ export class SmoothlyInputDemo {
 						</smoothly-item>
 					</smoothly-input-select>
 				</div>
-
 				<h2>Delayed</h2>
 				<smoothly-input name="Delayed" delay={2}>
 					Delayed

@@ -5,12 +5,14 @@
 	position: relative;
 	width: max-content;
 	padding: 1em 0.7em 0.2em 0.8em;
-	background-color: rgb(var(--background-color, var(--smoothly-color-shade)));
+	background-color: rgb(var(--smoothly-input-background));
 }
-:host > smoothly-slot-elements {
+
+:host>smoothly-slot-elements {
 	white-space: nowrap;
 }
-:host > smoothly-slot-elements.selected {
+
+:host>smoothly-slot-elements.selected {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -20,7 +22,8 @@
 	text-overflow: ellipsis;
 	margin-right: 2px;
 }
-:host > smoothly-slot-elements.selected::after {
+
+:host>smoothly-slot-elements.selected::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -28,24 +31,28 @@
 	right: 0;
 	width: 2ch;
 }
-:host:not([looks=transparent]) > smoothly-slot-elements.selected::after {
-	background: linear-gradient(90deg, rgba(var(--background-color, var(--smoothly-color-shade)), 0) 0%, rgba(var(--background-color, var(--smoothly-color-shade)), 1) 100%);
+
+:host:not([looks=transparent])>smoothly-slot-elements.selected::after {
+	background: linear-gradient(90deg, rgba(var(--smoothly-input-background), 0) 0%, rgba(var(--smoothly-input-background), 1) 100%);
 }
-:host > smoothly-slot-elements.selected > * {
+
+:host>smoothly-slot-elements.selected>* {
 	display: none;
 }
-:host > span.label {
+
+:host>span.label {
 	position: absolute;
 	left: 0.4rem;
 	top: 0.6rem;
-	color: rgb(var(--text-color, var(--smoothly-color-contrast)));
+	color: rgb(var(--smoothly-input-foreground));
 	opacity: 0.8;
 	user-select: none;
 	cursor: inherit;
 	transform-origin: top left;
 	transition: transform 100ms ease;
 }
-:host > smoothly-slot-elements.selected:not(:empty) + span.label {
+
+:host>smoothly-slot-elements.selected:not(:empty)+span.label {
 	top: 0.4em;
 	transform: scale(0.6);
 }

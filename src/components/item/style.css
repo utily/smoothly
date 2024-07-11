@@ -1,17 +1,33 @@
 :host([selected]) {
-	background-color: rgb(var(--smoothly-primary-color));
-	color: rgb(var(--smoothly-primary-contrast));
+	background-color: rgb(var(--smoothly-input-selected));
+	color: rgb(var(--smoothly-input-selected-contrast));
 }
 
 :host {
 	padding: 0.5em;
 	cursor: pointer;
-	color: rgb(var(--smoothly-default-contrast));
-	border: rgb(var(--smoothly-default-shade) solid 1px);
+	border: rgb(var(--smoothly-input-border) solid 1px);
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
+}
+
+:host::slotted(*) {
+	color: rgb(var(--smoothly-input-foreground));
+	fill: rgb(var(--smoothly-input-foreground));
+	stroke: rgb(var(--smoothly-input-foreground));
 }
 
 :host([marked]),
 :host:hover {
-	background-color: rgba(var(--smoothly-primary-tint));
-	color: rgb(var(--smoothly-primary-contrast));
+	background-color: rgb(var(--smoothly-input-hover));
+	color: rgb(var(--smoothly-input-hover-contrast));
+	fill: rgb(var(--smoothly-input-hover-contrast));
+	stroke: rgb(var(--smoothly-input-hover-contrast));
+}
+
+:host:hover::slotted(*) {
+	color: rgb(var(--smoothly-input-hover-contrast));
+	fill: rgb(var(--smoothly-input-hover-contrast));
+	stroke: rgb(var(--smoothly-input-hover-contrast));
 }
