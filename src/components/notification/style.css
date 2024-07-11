@@ -1,20 +1,21 @@
 :host {
 	display: block;
+	position: relative;
 	width: 30em;
 	min-height: 3em;
 	border-radius: 5px;
 	margin: 0.5em;
 }
+:host > span.icon > smoothly-icon,
 :host > span.clean {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	padding: 0.5em 1em;
+	align-self: center;
 }
 :host > span.icon {
-	display: grid;
+	display: flex;
 	width: 100%;
-	grid-template-columns: 1fr 5fr;
+	justify-content: center;
 }
 :host > span.icon > p {
 	padding-right: 1em;
@@ -25,15 +26,11 @@
 :host[hidden] {
 	display: none;
 }
-:host > smoothly-trigger > smoothly-icon {
-	left: 0;
-	font-size: 1.2em;
-	align-self: center;
-	justify-self: center;
+:host > span.icon > smoothly-icon {
+	margin: 0 0.5rem;
 }
 :host > smoothly-trigger {
-	font-size: 0.5em;
-	float: right;
-	text-align: right;
-	margin-right: 0.2em;
+	font-size: 0.7em;
+	position: absolute;
+	right: 0;
 }

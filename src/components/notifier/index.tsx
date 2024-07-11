@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from "@stencil/core"
+import { Component, h, Listen, Prop, State } from "@stencil/core"
 import { Notice } from "../../model"
 
 @Component({
@@ -7,6 +7,7 @@ import { Notice } from "../../model"
 	scoped: true,
 })
 export class Notifier {
+	@Prop() icon = false
 	@State() notices: Notice[] = []
 
 	@Listen("notice")
@@ -22,7 +23,7 @@ export class Notifier {
 			<slot></slot>,
 			<aside>
 				{this.notices.map(n => (
-					<smoothly-notification notice={n}></smoothly-notification>
+					<smoothly-notification notice={n} icon={this.icon}></smoothly-notification>
 				))}
 			</aside>,
 		]
