@@ -11,49 +11,49 @@
 	--smoothly-default-shade: 225, 232, 249;
 	--smoothly-default-contrast: 51, 51, 51;
 
-	--smoothly-primary-tint: 13, 116, 226;
-	--smoothly-primary-color: 0, 98, 204;
-	--smoothly-primary-shade: 1, 95, 196;
+	--smoothly-primary-tint: 63, 150, 244;
+	--smoothly-primary-color: 13, 116, 226;
+	--smoothly-primary-shade: 1, 59, 121;
 	--smoothly-primary-contrast: 255, 255, 255;
 
-	--smoothly-secondary-tint: 159, 159, 160;
+	--smoothly-secondary-tint: 173, 177, 181;
 	--smoothly-secondary-color: 145, 151, 157;
-	--smoothly-secondary-shade: 135, 140, 145;
+	--smoothly-secondary-shade: 71, 75, 80;
 	--smoothly-secondary-contrast: 255, 255, 255;
 
-	--smoothly-tertiary-tint: 33, 168, 188;
+	--smoothly-tertiary-tint: 53, 206, 230;
 	--smoothly-tertiary-color: 23, 162, 184;
-	--smoothly-tertiary-shade: 22, 153, 173;
+	--smoothly-tertiary-shade: 12, 81, 92;
 	--smoothly-tertiary-contrast: 255, 255, 255;
 
-	--smoothly-success-tint: 105, 188, 94;
+	--smoothly-success-tint: 135, 193, 128;
 	--smoothly-success-color: 95, 173, 86;
-	--smoothly-success-shade: 86, 155, 77;
+	--smoothly-success-shade: 47, 87, 42;
 	--smoothly-success-contrast: 255, 255, 255;
 
-	--smoothly-warning-tint: 255, 211, 78;
+	--smoothly-warning-tint: 255, 216, 115;
 	--smoothly-warning-color: 255, 203, 68;
-	--smoothly-warning-shade: 219, 158, 67;
+	--smoothly-warning-shade: 161, 117, 0;
 	--smoothly-warning-contrast: 46, 52, 54;
 
-	--smoothly-danger-tint: 219, 74, 86;
+	--smoothly-danger-tint: 229, 103, 115;
 	--smoothly-danger-color: 220, 53, 69;
-	--smoothly-danger-shade: 209, 52, 65;
+	--smoothly-danger-shade: 116, 20, 29;
 	--smoothly-danger-contrast: 255, 255, 255;
 
-	--smoothly-dark-tint: 63, 63, 63;
+	--smoothly-dark-tint: 102, 102, 102;
 	--smoothly-dark-color: 51, 51, 51;
-	--smoothly-dark-shade: 40, 40, 40;
+	--smoothly-dark-shade: 26, 26, 26;
 	--smoothly-dark-contrast: 255, 255, 255;
 
-	--smoothly-medium-tint: 123, 124, 124;
+	--smoothly-medium-tint: 148, 155, 160;
 	--smoothly-medium-color: 113, 121, 128;
-	--smoothly-medium-shade: 102, 108, 114;
+	--smoothly-medium-shade: 56, 60, 64;
 	--smoothly-medium-contrast: 255, 255, 255;
 
-	--smoothly-light-tint: 234, 234, 234;
+	--smoothly-light-tint: 235, 235, 234;
 	--smoothly-light-color: 229, 229, 227;
-	--smoothly-light-shade: 219, 219, 219;
+	--smoothly-light-shade: 118, 118, 110;
 	--smoothly-light-contrast: 46, 52, 54;
 
 	--smoothly-shadow: 0 0 4px 2px rgba(var(--smoothly-color-contrast), 0.25);
