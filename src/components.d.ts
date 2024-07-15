@@ -640,6 +640,10 @@ export namespace Components {
     }
     interface SmoothlyThemeColors {
     }
+    interface SmoothlyThemeDemo {
+    }
+    interface SmoothlyThemeGuide {
+    }
     interface SmoothlyThemePicker {
         "element": string;
     }
@@ -2083,6 +2087,18 @@ declare global {
         prototype: HTMLSmoothlyThemeColorsElement;
         new (): HTMLSmoothlyThemeColorsElement;
     };
+    interface HTMLSmoothlyThemeDemoElement extends Components.SmoothlyThemeDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeDemoElement: {
+        prototype: HTMLSmoothlyThemeDemoElement;
+        new (): HTMLSmoothlyThemeDemoElement;
+    };
+    interface HTMLSmoothlyThemeGuideElement extends Components.SmoothlyThemeGuide, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeGuideElement: {
+        prototype: HTMLSmoothlyThemeGuideElement;
+        new (): HTMLSmoothlyThemeGuideElement;
+    };
     interface HTMLSmoothlyThemePickerElement extends Components.SmoothlyThemePicker, HTMLStencilElement {
     }
     var HTMLSmoothlyThemePickerElement: {
@@ -2268,6 +2284,8 @@ declare global {
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
         "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
+        "smoothly-theme-demo": HTMLSmoothlyThemeDemoElement;
+        "smoothly-theme-guide": HTMLSmoothlyThemeGuideElement;
         "smoothly-theme-picker": HTMLSmoothlyThemePickerElement;
         "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
@@ -2931,6 +2949,10 @@ declare namespace LocalJSX {
     }
     interface SmoothlyThemeColors {
     }
+    interface SmoothlyThemeDemo {
+    }
+    interface SmoothlyThemeGuide {
+    }
     interface SmoothlyThemePicker {
         "element"?: string;
     }
@@ -3078,6 +3100,8 @@ declare namespace LocalJSX {
         "smoothly-theme-color": SmoothlyThemeColor;
         "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
         "smoothly-theme-colors": SmoothlyThemeColors;
+        "smoothly-theme-demo": SmoothlyThemeDemo;
+        "smoothly-theme-guide": SmoothlyThemeGuide;
         "smoothly-theme-picker": SmoothlyThemePicker;
         "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
@@ -3197,6 +3221,8 @@ declare module "@stencil/core" {
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
             "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
+            "smoothly-theme-demo": LocalJSX.SmoothlyThemeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDemoElement>;
+            "smoothly-theme-guide": LocalJSX.SmoothlyThemeGuide & JSXBase.HTMLAttributes<HTMLSmoothlyThemeGuideElement>;
             "smoothly-theme-picker": LocalJSX.SmoothlyThemePicker & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
             "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
