@@ -13,7 +13,10 @@ export class SmoothlyThemeColor {
 			<Host>
 				{this.color}
 				{(["tint", "color", "shade"] as const).map(variant => (
-					<smoothly-theme-color-variant color={this.color} variant={variant}></smoothly-theme-color-variant>
+					<smoothly-theme-color-variant
+						title={`${this.color} ${variant}`}
+						color={this.color}
+						variant={variant}></smoothly-theme-color-variant>
 				))}
 			</Host>
 		)

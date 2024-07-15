@@ -1,0 +1,17 @@
+:host {
+	display: flex;
+	width: 80%;
+	margin: auto;
+	flex-direction: column;
+	gap: 2em;
+}
+
+:host>smoothly-theme-picker {
+	width: 20em;
+}
+
+:host>span {
+	display: flex;
+	flex-direction: row;
+	gap: 10em;
+}
