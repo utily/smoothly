@@ -1,7 +1,7 @@
 :host {
 	display: block;
 	position: relative;
-	width: 30em;
+	min-width: 30em;
 	min-height: 3em;
 	border-radius: 5px;
 	margin: 0.5em;
@@ -11,6 +11,9 @@
 	display: flex;
 	justify-content: center;
 	align-self: center;
+}
+:host > span {
+	margin: 0 2rem 0 1rem;
 }
 :host > span.icon {
 	display: flex;
