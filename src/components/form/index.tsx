@@ -184,7 +184,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	render() {
 		return (
 			<Host>
-				<smoothly-spinner hidden={!this.processing}></smoothly-spinner>
+				<smoothly-spinner overlay hidden={!this.processing} />
 				<form onSubmit={!this.prevent ? undefined : e => e.preventDefault()} name={this.name}>
 					<fieldset>
 						<slot></slot>
