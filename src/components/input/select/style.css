@@ -101,14 +101,14 @@
 
 :host[looks=border]>div.options {
 	transform: translateX(-1px);
-	border: rgb(var(--text-color, var(--smoothly-color-contrast))) solid 1px;
-	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .4) solid 1px;
+	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
 }
 
 :host[looks="grid"]>div.options {
 	transform: translateX(-2px);
-	border: rgba(var(--text-color, var(--smoothly-color-contrast)), .5) solid 2px;
-	border-top: rgba(var(--text-color, var(--smoothly-color-contrast)), .2) solid 2px;
+	border: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .5) solid 2px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .2) solid 2px;
 }
 
 :host>div.options::slotted(smoothly-item) {
