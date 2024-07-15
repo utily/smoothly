@@ -109,7 +109,7 @@
 
 :host()>button:hover,
 :host()>button:focus-visible {
-	border: solid 1px rgb(var(--smoothly-color-shade));
+	border: solid 1px rgb(var(--smoothly-button-focus-border));
 }
 
 :host(:not([fill=clear]))>button:hover,
@@ -118,15 +118,15 @@
 :host(:not([fill=clear]):hover),
 :host(:not([fill=clear]):focus-visible),
 :host(:not([fill=clear]):active) {
-	background: rgb(var(--smoothly-color-tint));
+	background: rgb(var(--smoothly-button-hover));
 }
 
 
 :host(:not([fill=clear]))>button,
 :host(:not([fill=clear])) ::slotted(smoothly-icon) {
-	color: rgb(var(--smoothly-color-shade));
-	stroke: rgb(var(--smoothly-color-shade));
-	fill: rgb(var(--smoothly-color-shade));
+	color: rgb(var(--smoothly-button-foreground));
+	stroke: rgb(var(--smoothly-button-foreground));
+	fill: rgb(var(--smoothly-button-foreground));
 }
 
 :host([fill=clear])>button:hover,
@@ -135,9 +135,9 @@
 :host([fill=clear]:hover)>button,
 :host([fill=clear]:focus-visible)>button,
 :host([fill=clear]:active)>button {
-	color: rgb(var(--smoothly-color-tint));
-	stroke: rgb(var(--smoothly-color-tint));
-	fill: rgb(var(--smoothly-color-tint));
+	color: rgb(var(--smoothly-button-hover));
+	stroke: rgb(var(--smoothly-button-hover));
+	fill: rgb(var(--smoothly-button-hover));
 }
 
 :host([disabled]) {
