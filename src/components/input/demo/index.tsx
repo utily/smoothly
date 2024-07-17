@@ -315,8 +315,8 @@ export class SmoothlyInputDemo {
 
 				<h2>Submit</h2>
 				<smoothly-form looks="border">
-					<smoothly-input type="email" name="email">
-						Email
+					<smoothly-input type="text" name="username">
+						Username
 					</smoothly-input>
 					<smoothly-input type="password" name="password">
 						Password
@@ -386,8 +386,8 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h2>Border</h2>
 				<smoothly-form looks="border">
-					<smoothly-input type="email" name="email">
-						Email
+					<smoothly-input type="text" name="username">
+						Username
 					</smoothly-input>
 					<smoothly-input type="password" name="password">
 						Password
@@ -451,8 +451,8 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h4>Contact</h4>
 				<smoothly-form looks="grid">
-					<smoothly-input type="email" name="email">
-						Email
+					<smoothly-input type="text" name="username">
+						Username
 					</smoothly-input>
 					<smoothly-input type="password" name="password">
 						Password
