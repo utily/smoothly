@@ -312,7 +312,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				backend.selectionStart = after.selection.start
 			if (backend.selectionEnd != undefined && after.selection.end != backend.selectionEnd)
 				backend.selectionEnd = after.selection.end
-			backend.selectionDirection = after.selection.direction ?? backend.selectionDirection
+			if (backend.selectionDirection != null)
+				backend.selectionDirection = after.selection.direction ?? backend.selectionDirection
 		}
 		this.state = after
 		this.value = this.lastValue = this.formatter.fromString(
