@@ -56,7 +56,6 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
 						value={`${this.start ? this.start : "from "} - ${this.end ? this.end : " to"}`}
-						looks={this.looks}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => {
 							e.stopPropagation()
