@@ -16,8 +16,8 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) showLabel = true
-	@Prop({ mutable: true }) start: isoly.Date | undefined = isoly.Date.now()
-	@Prop({ mutable: true }) end: isoly.Date | undefined = isoly.Date.now()
+	@Prop({ mutable: true }) start: isoly.Date | undefined
+	@Prop({ mutable: true }) end: isoly.Date | undefined
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	@State() open: boolean
@@ -55,7 +55,7 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 					<smoothly-input
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
-						value={`${this.start} - ${this.end}`}
+						value={`${this.start ? this.start : "from "} - ${this.end ? this.end : " to"}`}
 						looks={this.looks}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => {
