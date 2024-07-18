@@ -1,6 +1,13 @@
 :host {
 	position: relative;
 	display: inline-block;
+	cursor: pointer;
+}
+
+:host:hover>smoothly-icon {
+	stroke: rgb(var(--smoothly-success-tint));
+	color: rgb(var(--smoothly-success-tint));
+	fill: rgb(var(--smoothly-success-tint));
 }
 
 :host[flip] {
