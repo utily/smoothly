@@ -76,7 +76,6 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 				disabled={this.disabled}
 				type="date"
 				value={this.value}
-				looks={this.looks}
 				showLabel={this.showLabel}
 				onSmoothlyInput={e => (this.value = e.detail[this.name])}>
 				<slot></slot>

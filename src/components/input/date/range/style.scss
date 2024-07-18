@@ -14,7 +14,7 @@
 :host>nav {
 	position: absolute;
 	z-index: 10;
-	top: 3.5em;
+	top: 4em;
 	background-color: rgb(var(--smoothly-input-background));
 	max-width: 22em;
 	min-width: 18em;
@@ -33,13 +33,14 @@
 
 :host>nav>div.arrow {
 	position: absolute;
+	left: -7em;
 	z-index: 9;
 	transform: translate(10em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
 	background-color: rgb(var(--smoothly-input-background));
-	border-top: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
-	border-left: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
+	border-top: 1px solid rgb(var(--smoothly-input-border));
+	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
 :host>section {
