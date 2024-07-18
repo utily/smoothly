@@ -32,8 +32,8 @@
 	width: 1em;
 	height: 1em;
 	background-color: rgb(var(--smoothly-input-background));
-	border-top: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
-	border-left: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
+	border-top: 1px solid rgb(var(--smoothly-input-border));
+	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
 @media screen and (min-width: 400px){
