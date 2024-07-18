@@ -1,13 +1,12 @@
 :host {
 	display: block;
 	--other-month-opacity: 0.5;
-	padding-bottom: 1rem;
+	padding: 0.5rem;
 	box-shadow: 0 0 1px 0px rgb(var(--smoothly-default-contrast));
 }
 
 :host>smoothly-input-month {
 	width: calc(100% - 1em);
-	padding: 0.5em 0.5em 0 0.5em;
 }
 
 :host>table {
@@ -20,7 +19,8 @@
 	text-align: center;
 	padding: 0.5em;
 	min-width: 2em;
-	background-color: rgb(var(--smoothly-default-tint));
+	background-color: rgb(var(--smoothly-input-background));
+	color:rgb(var(--smoothly-input-foreground));
 	cursor: pointer;
 	user-select: none;
 }
@@ -42,12 +42,12 @@
 
 :host>table>tr>td:nth-child(6),
 :host>table>tr>td:nth-child(7) {
-	color: rgb(var(--smoothly-danger-tint));
+	color: rgb(var(--smoothly-danger-color));
 }
 
 :host>table>tr>td:nth-child(6):not(.currentMonth),
 :host>table>tr>td:nth-child(7):not(.currentMonth) {
-	color: rgba(var(--smoothly-danger-tint), var(--other-month-opacity));
+	color: rgba(var(--smoothly-danger-color), var(--other-month-opacity));
 }
 
 :host>table>tr>td:not(.selected, .disable):hover {
@@ -72,6 +72,6 @@
 
 :host>table>tr>td.disable {
 	cursor: not-allowed;
-	background-color: rgb(var(--smoothly-default-tint), 0.5);
-	color: rgb(var(--smoothly-default-contrast), 0.5);
+	background-color: rgba(var(--smoothly-input-background), 0.5);
+	color: rgba(var(--smoothly-default-contrast), 0.5);
 }

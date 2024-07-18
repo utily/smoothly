@@ -34,11 +34,12 @@
 :host>nav>div.arrow {
 	position: absolute;
 	z-index: 9;
-	top: 1px;
 	transform: translate(10em, -0.55em) rotate(45deg);
 	width: 1em;
 	height: 1em;
 	background-color: rgb(var(--smoothly-input-background));
+	border-top: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
+	border-left: 1px solid rgba(var(--smoothly-default-contrast), 0.2);
 }
 
 :host>section {
