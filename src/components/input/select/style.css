@@ -97,6 +97,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	background-color: rgb(var(--smoothly-input-background));
+	width: 100%;
 }
 
 :host[looks=border]>div.options {
