@@ -7,7 +7,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
-	@State() valid: boolean
+
 	render() {
 		return (
 			<Host>
@@ -168,13 +168,7 @@ export class SmoothlyInputDemo {
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>
-					<smoothly-input
-						type="phone"
-						name="phone"
-						value={"777888999"}
-						onSmoothlyInput={e => {
-							;(this.valid = e.detail.phone.length < 10), console.log("valid", this.valid)
-						}}>
+					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
 						<smoothly-input-reset size="icon" slot="end">
 							<smoothly-icon name="refresh-outline" />
@@ -234,14 +228,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />
-					<smoothly-input-submit
-						fill="default"
-						type="button"
-						color="success"
-						slot="submit"
-						size="icon"
-						shape="rounded"
-						disabled={!this.valid}>
+					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
 				</smoothly-form>
