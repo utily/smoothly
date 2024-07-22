@@ -545,9 +545,6 @@ export namespace Components {
         "direction": "up" | "down";
         "visible": boolean;
     }
-    interface SmoothlyQuiet {
-        "color": string;
-    }
     interface SmoothlyReorder {
     }
     interface SmoothlySelectDemo {
@@ -1809,12 +1806,6 @@ declare global {
         prototype: HTMLSmoothlyPopupElement;
         new (): HTMLSmoothlyPopupElement;
     };
-    interface HTMLSmoothlyQuietElement extends Components.SmoothlyQuiet, HTMLStencilElement {
-    }
-    var HTMLSmoothlyQuietElement: {
-        prototype: HTMLSmoothlyQuietElement;
-        new (): HTMLSmoothlyQuietElement;
-    };
     interface HTMLSmoothlyReorderElementEventMap {
         "reorder": [number, number];
     }
@@ -2247,7 +2238,6 @@ declare global {
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
         "smoothly-popup": HTMLSmoothlyPopupElement;
-        "smoothly-quiet": HTMLSmoothlyQuietElement;
         "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-skeleton": HTMLSmoothlySkeletonElement;
@@ -2827,9 +2817,6 @@ declare namespace LocalJSX {
         "onPopup"?: (event: SmoothlyPopupCustomEvent<boolean>) => void;
         "visible"?: boolean;
     }
-    interface SmoothlyQuiet {
-        "color"?: string;
-    }
     interface SmoothlyReorder {
         "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
     }
@@ -3059,7 +3046,6 @@ declare namespace LocalJSX {
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
         "smoothly-popup": SmoothlyPopup;
-        "smoothly-quiet": SmoothlyQuiet;
         "smoothly-reorder": SmoothlyReorder;
         "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-skeleton": SmoothlySkeleton;
@@ -3179,7 +3165,6 @@ declare module "@stencil/core" {
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
             "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
-            "smoothly-quiet": LocalJSX.SmoothlyQuiet & JSXBase.HTMLAttributes<HTMLSmoothlyQuietElement>;
             "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
