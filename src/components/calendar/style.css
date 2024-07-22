@@ -72,6 +72,5 @@
 
 :host>table>tr>td.disable {
 	cursor: not-allowed;
-	background-color: rgba(var(--smoothly-input-background), 0.5);
-	color: rgba(var(--smoothly-default-contrast), 0.5);
+	opacity: 0.5;
 }
