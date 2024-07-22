@@ -1,7 +1,6 @@
 export { Autocomplete } from "./Autocomplete"
 export { Color } from "./Color"
 export { Fill } from "./Fill"
-export { GoogleFont } from "./GoogleFont"
 export { Icon } from "./Icon"
 export { Message } from "./Message"
 export { Notice } from "./Notice"
