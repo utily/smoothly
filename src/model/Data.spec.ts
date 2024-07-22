@@ -9,15 +9,42 @@ describe("Data", () => {
 		expect(Data.type.is(null)).toEqual(false)
 	})
 	it("Data.set", () => expect(Data.set({}, "name.last".split("."), "Smith")).toEqual({ name: { last: "Smith" } }))
+	it("Data.convertArrays", () => {
+		const input = {
+			"1": "one",
+			"0": "zero",
+			"2": "two",
+			"3": "three",
+		}
+		const output = Data.convertArrays(input)
+		expect(output).toEqual(["zero", "one", "two", "three"])
+	})
+	it("Data.convertArrays incomplete array", () => {
+		const input = {
+			"0": "zero",
+			"1": "one",
+			"3": "three",
+		}
+		const output = Data.convertArrays(input)
+		expect(output).toEqual(["zero", "one", undefined, "three"])
+	})
 	it("Data.set multiple", () => {
 		const input = {
 			"name.last": "Smith",
 			"name.first": "John",
 			"address.city": "Uppsala",
 			"address.zip": "75320",
+			"favoriteColors.0": "teal",
+			"favoriteColors.1": "orange",
+			"pets.1.name": "Mr Meow",
+			"pets.1.type": "cat",
+			"pets.0.name": "Barky",
+			"pets.0.type": "dog",
+			"pets.2.type": "turtle",
+			"pets.2.name": "Speedster",
 		}
 		const output = Data.deepen(input)
-		expect(output).toEqual({
+		expect({
 			address: {
 				city: "Uppsala",
 				zip: "75320",
@@ -26,6 +53,29 @@ describe("Data", () => {
 				first: "John",
 				last: "Smith",
 			},
+			favoriteColors: { 0: "teal", 1: "orange" },
+			pets: {
+				0: { name: "Barky", type: "dog" },
+				1: { name: "Mr Meow", type: "cat" },
+				2: { name: "Speedster", type: "turtle" },
+			},
+		})
+		const outputWithArrays = Data.convertArrays(output)
+		expect(outputWithArrays).toEqual({
+			address: {
+				city: "Uppsala",
+				zip: "75320",
+			},
+			name: {
+				first: "John",
+				last: "Smith",
+			},
+			favoriteColors: ["teal", "orange"],
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
 		})
 	})
 })
