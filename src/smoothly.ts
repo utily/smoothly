@@ -4,7 +4,6 @@ export {
 	Autocomplete,
 	Color,
 	Fill,
-	GoogleFont,
 	Message,
 	Notice,
 	Trigger,
