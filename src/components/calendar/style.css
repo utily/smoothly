@@ -1,12 +1,13 @@
 :host {
 	display: block;
 	--other-month-opacity: 0.5;
-	padding: 0.5rem;
+	padding: 0.5em;
 	border: 1px solid rgb(var(--smoothly-input-border));
 }
 
 :host>smoothly-input-month {
 	width: calc(100% - 1em);
+	padding: 0 0.5em
 }
 
 :host>table {
