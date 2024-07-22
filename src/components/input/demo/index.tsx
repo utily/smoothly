@@ -11,6 +11,22 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
+				<h2>Array in Form</h2>
+				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log(e.detail)}>
+					<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
+					<smoothly-input-range name="pets.0.age" max={100} step={1}>
+						First Pet's Age
+					</smoothly-input-range>
+					<smoothly-input name="pets.1.name">Second Pet's Name</smoothly-input>
+					<smoothly-input-range name="pets.1.age" max={100} step={1}>
+						Second Pet's Age
+					</smoothly-input-range>
+					<smoothly-input name="pets.2.name">Third Pet's Name</smoothly-input>
+					<smoothly-input-range name="pets.2.age" max={100} step={1}>
+						Third Pet's Age
+					</smoothly-input-range>
+					<smoothly-input-submit slot="submit"></smoothly-input-submit>
+				</smoothly-form>
 				<h2>input-date-range outside from</h2>
 				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}></smoothly-input-date-range>
 				<h2>Controlled form</h2>
