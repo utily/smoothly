@@ -2,16 +2,16 @@
 	"name": "smoothly",
 	"version": "1.1.1-alpha.49",
 	"description": "Web component library written in Stencil.",
-	"author": "PayFunc",
+	"author": "Utily",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/payfunc/smoothly"
+		"url": "git+https://github.com/utily/smoothly.git"
 	},
 	"bugs": {
-		"url": "https://github.com/payfunc/smoothly/issues"
+		"url": "https://github.com/utily/smoothly/issues"
 	},
-	"homepage": "https://payfunc.com/open-source/smoothly",
+	"homepage": "https://github.com/utily/smoothly/tree/master-1.0",
 	"private": false,
 	"main": "dist/index.cjs.js",
 	"type": "module",
