@@ -111,10 +111,6 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>
 						</dd>
-						<dt>Quiet</dt>
-						<dd>
-							<smoothly-quiet color="dark">-</smoothly-quiet>
-						</dd>
 					</dl>
 				</fieldset>
 				<fieldset>
