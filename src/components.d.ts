@@ -17,7 +17,6 @@ import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
-import { GoogleFont } from "./model/GoogleFont";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
@@ -34,7 +33,6 @@ export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { Editable } from "./components/input/Editable";
-export { GoogleFont } from "./model/GoogleFont";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
 export { Controls as Controls1 } from "./components/picker/menu/index";
@@ -217,9 +215,6 @@ export namespace Components {
         "origin": string | undefined;
         "send": (message2: string | Message<any>, content?: Trigger | any) => Promise<void>;
         "url": string;
-    }
-    interface SmoothlyGoogleFont {
-        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color": Color;
@@ -1243,12 +1238,6 @@ declare global {
         prototype: HTMLSmoothlyFrameElement;
         new (): HTMLSmoothlyFrameElement;
     };
-    interface HTMLSmoothlyGoogleFontElement extends Components.SmoothlyGoogleFont, HTMLStencilElement {
-    }
-    var HTMLSmoothlyGoogleFontElement: {
-        prototype: HTMLSmoothlyGoogleFontElement;
-        new (): HTMLSmoothlyGoogleFontElement;
-    };
     interface HTMLSmoothlyIconElement extends Components.SmoothlyIcon, HTMLStencilElement {
     }
     var HTMLSmoothlyIconElement: {
@@ -2212,7 +2201,6 @@ declare global {
         "smoothly-filter-toggle": HTMLSmoothlyFilterToggleElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
-        "smoothly-google-font": HTMLSmoothlyGoogleFontElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
         "smoothly-input": HTMLSmoothlyInputElement;
@@ -2494,9 +2482,6 @@ declare namespace LocalJSX {
         "onTrigger"?: (event: SmoothlyFrameCustomEvent<Trigger>) => void;
         "origin"?: string | undefined;
         "url"?: string;
-    }
-    interface SmoothlyGoogleFont {
-        "value"?: GoogleFont;
     }
     interface SmoothlyIcon {
         "color"?: Color;
@@ -3028,7 +3013,6 @@ declare namespace LocalJSX {
         "smoothly-filter-toggle": SmoothlyFilterToggle;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
-        "smoothly-google-font": SmoothlyGoogleFont;
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
         "smoothly-input": SmoothlyInput;
@@ -3149,7 +3133,6 @@ declare module "@stencil/core" {
             "smoothly-filter-toggle": LocalJSX.SmoothlyFilterToggle & JSXBase.HTMLAttributes<HTMLSmoothlyFilterToggleElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
-            "smoothly-google-font": LocalJSX.SmoothlyGoogleFont & JSXBase.HTMLAttributes<HTMLSmoothlyGoogleFontElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
             "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
