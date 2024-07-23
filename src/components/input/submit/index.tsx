@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
 import { Color, Fill } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
@@ -20,6 +20,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop() toolTip = this.delete ? "Remove" : "Submit"
+	@State() inactive: boolean
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -27,7 +28,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 				this.parent = parent
 				parent.listen("changed", async p => {
 					this.display = !p.readonly
-					this.disabled =
+					this.inactive =
 						!this.delete && (p.readonly || Object.values(p.value).filter(val => val).length < 1 || !p.changed)
 				})
 			}
@@ -42,7 +43,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 			<Host title={this.toolTip}>
 				{this.delete == true ? (
 					<smoothly-button-confirm
-						disabled={this.disabled}
+						disabled={this.disabled || this.inactive}
 						size={this.size}
 						shape={this.shape}
 						expand={this.expand}
@@ -55,7 +56,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 					</smoothly-button-confirm>
 				) : (
 					<smoothly-button
-						disabled={this.disabled}
+						disabled={this.disabled || this.inactive}
 						size={this.size}
 						type={this.type}
 						shape={this.shape}
