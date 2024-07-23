@@ -31,6 +31,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
+	private optionsDiv?: HTMLDivElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -177,9 +178,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("open")
 	onClosed(): void {
 		if (!this.open) {
-			const marked = this.items.find(item => item.marked)
-			if (marked)
-				marked.marked = false
+			const markedItem = this.items.find(item => item.marked)
+			if (markedItem)
+				markedItem.marked = false
 		}
 	}
 	handleShowOptions(event?: Event): void {
@@ -251,7 +252,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						break
 					case "ArrowDown":
 						this.handleShowOptions()
-						this.move(0)
+						this.move(1)
 						break
 					case "ArrowUp":
 						this.handleShowOptions()
@@ -268,19 +269,25 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			}
 		}
 	}
-	private move(direction: -1 | 0 | 1): void {
+	private move(direction: -1 | 1): void {
 		let markedIndex = this.items.findIndex(item => item.marked)
 		if (markedIndex == -1)
-			markedIndex = this.items.findIndex(item => item.selected)
-		if (this.items[markedIndex])
-			this.items[markedIndex].marked = false
-		if (markedIndex == -1)
 			markedIndex = 0
-		do {
+		else {
+			this.items[markedIndex].marked = false
 			markedIndex = (markedIndex + direction + this.items.length) % this.items.length
-		} while (this.items[markedIndex].hidden)
+		}
+		if (this.items.some(item => !item.hidden))
+			while (this.items[markedIndex].hidden) {
+				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
+			}
 		this.items[markedIndex].marked = true
+		this.scrollTo(this.items[markedIndex])
 	}
+	private scrollTo(item: HTMLSmoothlyItemElement) {
+		this.optionsDiv?.scrollTo({ top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2 })
+	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host
@@ -301,7 +308,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					)}
 				</div>
 				<slot name="label" />
-				<div class={`${this.open ? "" : "hidden"} options`}>
+				<div
+					class={{ hidden: !this.open, options: true }}
+					ref={(el: HTMLDivElement) => {
+						this.optionsDiv = el
+					}}>
 					{this.filter.length > 0 && (
 						<smoothly-item selectable={false}>
 							<smoothly-icon name="search-outline" size="small" />
