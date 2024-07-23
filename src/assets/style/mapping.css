@@ -23,7 +23,11 @@ smoothly-color {
 	--smoothly-input-background: var(--smoothly-default-tint);
 	--smoothly-input-border: var(--smoothly-default-shade);
 
+	--smoothly-input-hover: var(--smoothly-primary-tint);
+	--smoothly-input-hover-foreground: var(--smoothly-primary-contrast);
+
 	--smoothly-input-selected: var(--smoothly-primary-color);
+	--smoothly-input-selected-border: var(--smoothly-primary-shade);
 	--smoothly-input-selected-contrast: var(--smoothly-primary-contrast);
 
 	--smoothly-input-hover: var(--smoothly-primary-tint);

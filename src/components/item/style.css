@@ -1,11 +1,13 @@
 :host([selected]) {
 	background-color: rgb(var(--smoothly-input-selected));
 	color: rgb(var(--smoothly-input-selected-contrast));
+	border-left: 5px solid rgb(var(--smoothly-input-selected-border));
 }
 
 :host {
 	padding: 0.5em;
 	cursor: pointer;
+	border-left: 5px solid transparent;
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
@@ -20,13 +22,13 @@
 :host([marked]),
 :host:hover {
 	background-color: rgb(var(--smoothly-input-hover));
-	color: rgb(var(--smoothly-input-hover-contrast));
-	fill: rgb(var(--smoothly-input-hover-contrast));
-	stroke: rgb(var(--smoothly-input-hover-contrast));
+	color: rgb(var(--smoothly-input-hover-foreground));
+	fill: rgb(var(--smoothly-input-hover-foreground));
+	stroke: rgb(var(--smoothly-input-hover-foreground));
 }
 
 :host:hover::slotted(*) {
-	color: rgb(var(--smoothly-input-hover-contrast));
-	fill: rgb(var(--smoothly-input-hover-contrast));
-	stroke: rgb(var(--smoothly-input-hover-contrast));
+	color: rgb(var(--smoothly-input-hover-foreground));
+	fill: rgb(var(--smoothly-input-hover-foreground));
+	stroke: rgb(var(--smoothly-input-hover-foreground));
 }
