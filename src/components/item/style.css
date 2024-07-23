@@ -6,7 +6,6 @@
 :host {
 	padding: 0.5em;
 	cursor: pointer;
-	border: rgb(var(--smoothly-input-border) solid 1px);
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
