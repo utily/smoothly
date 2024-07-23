@@ -230,7 +230,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						const result = this.items.find(item => item.marked)
 						if (result?.value)
 							result.selected = !result.selected
-						this.smoothlyItemSelect.emit(result)
 						if (!this.multiple) {
 							this.open = false
 							this.filter = ""
