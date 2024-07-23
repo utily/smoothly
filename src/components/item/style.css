@@ -1,6 +1,7 @@
 :host([selected]) {
 	background-color: rgb(var(--smoothly-input-selected));
 	color: rgb(var(--smoothly-input-selected-contrast));
+	--marked-color: var(--smoothly-input-selected-contrast);
 }
 
 :host {
@@ -10,6 +11,8 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
+	position: relative;
+	--marked-color: var(--smoothly-input-foreground);
 }
 
 :host::slotted(*) {
@@ -18,16 +21,13 @@
 	stroke: rgb(var(--smoothly-input-foreground));
 }
 
-:host([marked]),
-:host:hover {
-	background-color: rgb(var(--smoothly-input-hover));
-	color: rgb(var(--smoothly-input-hover-contrast));
-	fill: rgb(var(--smoothly-input-hover-contrast));
-	stroke: rgb(var(--smoothly-input-hover-contrast));
-}
-
-:host:hover::slotted(*) {
-	color: rgb(var(--smoothly-input-hover-contrast));
-	fill: rgb(var(--smoothly-input-hover-contrast));
-	stroke: rgb(var(--smoothly-input-hover-contrast));
+:host([marked])::before,
+:host:hover::before {
+  content: "";
+	position: absolute;
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+  border: 2px solid rgb(var(--marked-color));
+  inset: 2px;
+  box-sizing: border-box;
 }
