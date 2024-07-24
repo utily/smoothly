@@ -1,6 +1,11 @@
 :host {
 	box-sizing: border-box;
 }
+:host[readonly] {
+	color: rgba(var(--smoothly-input-foreground), 0.7);
+	fill: rgba(var(--smoothly-input-foreground), 0.7);
+	stroke: rgba(var(--smoothly-input-foreground), 0.7);
+}
 
 :host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
@@ -8,7 +13,7 @@
 }
 
 :host[looks="border"][readonly] {
-	border: rgb(var(--smoothly-input-border)) solid 1px;
+	border: transparent solid 1px;
 }
 
 :host[looks="line"]::slotted(smoothly-picker-menu smoothly-input),
@@ -17,7 +22,7 @@
 }
 
 :host[looks="line"][readonly] {
-	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
+	border-bottom: transparent solid 1px;
 }
 
 :host[looks="grid"]::slotted(smoothly-picker-menu smoothly-input),
@@ -26,7 +31,7 @@
 }
 
 :host[looks="grid"][readonly] {
-	border: rgb(var(--smoothly-input-border)) solid .5px;
+	border: transparent solid .5px;
 }
 
 :host[looks="transparent"] {
