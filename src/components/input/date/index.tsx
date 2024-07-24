@@ -5,6 +5,7 @@ import {
 	Event,
 	EventEmitter,
 	h,
+	Host,
 	Listen,
 	Method,
 	Prop,
@@ -21,7 +22,7 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class InputDate implements ComponentWillLoad, Clearable, Input {
+export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -61,27 +62,38 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
+	@Listen("smoothlyInputLoad")
+	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDate) => void>): void {
+		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
+	}
 	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<Date>) {
 		this.open = false
 		event.stopPropagation()
 	}
 	render() {
-		return [
-			<smoothly-input
-				color={this.color}
-				name={this.name}
-				onFocus={() => (this.open = !this.open)}
-				onClick={() => (this.open = !this.open)}
-				disabled={this.disabled}
-				type="date"
-				value={this.value}
-				showLabel={this.showLabel}
-				onSmoothlyInput={e => (this.value = e.detail[this.name])}>
-				<slot></slot>
-			</smoothly-input>,
-			this.open && !this.disabled
-				? [
+		return (
+			<Host>
+				<smoothly-input
+					color={this.color}
+					name={this.name}
+					onFocus={() => (this.open = !this.open)}
+					onClick={() => (this.open = !this.open)}
+					disabled={this.disabled}
+					type="date"
+					value={this.value}
+					showLabel={this.showLabel}
+					onSmoothlyInput={e => (this.value = e.detail[this.name])}>
+					<slot></slot>
+				</smoothly-input>
+				<span class="icons">
+					<slot name={"end"}></slot>
+				</span>
+				{this.open &&
+					!this.disabled && [
 						<div onClick={() => (this.open = false)}></div>,
 						<nav>
 							<div class="arrow"></div>
@@ -102,8 +114,8 @@ export class InputDate implements ComponentWillLoad, Clearable, Input {
 								</div>
 							</smoothly-calendar>
 						</nav>,
-				  ]
-				: [],
-		]
+					]}
+			</Host>
+		)
 	}
 }

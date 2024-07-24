@@ -38,6 +38,13 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 			this.end = split[1]
 		}
 	}
+	@Listen("smoothlyInputLoad")
+	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
+		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
+	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
 		if (event.target != this.element)
@@ -63,6 +70,9 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 						}}
 					/>
 				</section>
+				<span class={"icons"}>
+					<slot name={"end"}></slot>
+				</span>
 				{this.open && <div onClick={() => (this.open = false)} />}
 				{this.open && (
 					<nav>
