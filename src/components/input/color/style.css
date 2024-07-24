@@ -3,13 +3,13 @@
 }
 
 :host>smoothly-input {
-	width: 100%
-		/* Element doesnt take up all its avaliable space without this*/
+	width: 100%;
 }
 
-:host>div.color-sample {
+:host div.color-sample {
 	height: 2em;
 	width: 5em;
+	margin-right: 0.25rem;
 	background-color: var(--value);
 	border: rgb(var(--smoothly-input-border)) solid 1px;
 	border-radius: 2px;
