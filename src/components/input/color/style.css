@@ -3,7 +3,6 @@
 }
 
 :host>smoothly-input {
-	/* Element doesnt take up all its available space without this */
 	width: 100%;
 }
 
