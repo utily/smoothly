@@ -5,8 +5,8 @@
 	position: sticky;
 	z-index: 1;
 	bottom: 0;
-	background-color: rgb(var(--smoothly-table-footer-color));
-	color: rgb(var(--smoothly-table-footer-contrast));
-	stroke: rgb(var(--smoothly-table-footer-contrast));
-	fill: rgb(var(--smoothly-table-footer-contrast));
+	background-color: rgb(var(--smoothly-table-footer-background));
+	color: rgb(var(--smoothly-table-footer-foreground));
+	stroke: rgb(var(--smoothly-table-footer-foreground));
+	fill: rgb(var(--smoothly-table-footer-foreground));
 }

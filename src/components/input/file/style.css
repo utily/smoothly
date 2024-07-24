@@ -15,7 +15,7 @@
 	position: absolute;
 	inset: 0;
 	color: rgb(var(--smoothly-hover-contrast));
-	background-color: rgb(var(--smoothly-input-hover));
+	background-color: rgb(var(--smoothly-input-hover-background));
 }
 
 :host:not(.dragging)>div>div.mask {
