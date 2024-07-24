@@ -27,6 +27,7 @@
 	stroke: rgb(var(--smoothly-input-hover-foreground));
 }
 
+:host([marked])::slotted(*),
 :host:hover::slotted(*) {
 	color: rgb(var(--smoothly-input-hover-foreground));
 	fill: rgb(var(--smoothly-input-hover-foreground));
