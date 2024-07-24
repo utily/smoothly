@@ -6,7 +6,6 @@
 }
 
 :host>smoothly-input-month {
-	width: calc(100% - 1em);
 	padding: 0 0.5em
 }
 
