@@ -136,7 +136,7 @@
 :host(:not([fill=clear]):not([fill=outline]):hover),
 :host(:not([fill=clear]):not([fill=outline]):focus-visible),
 :host(:not([fill=clear]):not([fill=outline]):active) {
-	background: rgb(var(--smoothly-button-hover));
+	background: rgb(var(--smoothly-button-hover-background));
 }
 
 :host>button,

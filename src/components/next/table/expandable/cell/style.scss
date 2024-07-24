@@ -26,10 +26,10 @@
 }
 
 :host>div.content:hover {
-	background-color: rgb(var(--smoothly-table-hover-color));
-	color: rgb(var(--smoothly-table-hover-contrast));
-	stroke: rgb(var(--smoothly-table-hover-contrast));
-	fill: rgb(var(--smoothly-table-hover-contrast));
+	background-color: rgb(var(--smoothly-table-hover-background));
+	color: rgb(var(--smoothly-table-hover-foreground));
+	stroke: rgb(var(--smoothly-table-hover-foreground));
+	fill: rgb(var(--smoothly-table-hover-foreground));
 }
 
 :host>div:first-child {
@@ -48,10 +48,10 @@
 }
 
 :host[open]>div {
-	background-color: rgb(var(--smoothly-table-expanded-color));
-	color: rgb(var(--smoothly-table-expanded-contrast));
-	stroke: rgb(var(--smoothly-table-expanded-contrast));
-	fill: rgb(var(--smoothly-table-expanded-contrast));
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	color: rgb(var(--smoothly-table-expanded-foreground));
+	stroke: rgb(var(--smoothly-table-expanded-foreground));
+	fill: rgb(var(--smoothly-table-expanded-foreground));
 }
 
 :host:not([open])>div.detail {
@@ -67,9 +67,9 @@
 	bottom: 0;
 	left: -1em;
 	width: 1em;
-	background-color: rgb(var(--smoothly-table-expanded-color));
+	background-color: rgb(var(--smoothly-table-expanded-background));
 	border-left: 0.3em solid rgb(var(--smoothly-table-border));
-	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
@@ -81,7 +81,7 @@
 	bottom: 0;
 	right: -1em;
 	width: 1em;
-	background-color: rgb(var(--smoothly-table-expanded-color));
-	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-color)),
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }

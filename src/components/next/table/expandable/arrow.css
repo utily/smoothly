@@ -11,8 +11,8 @@
 	height: 0.4em;
 	width: 0.4em;
 	left: 0.3em;
-	border-bottom: 1px solid rgb(var(--smoothly-table-contrast));
-	border-right: 1px solid rgb(var(--smoothly-table-contrast));
+	border-bottom: 1px solid rgb(var(--smoothly-table-foreground));
+	border-right: 1px solid rgb(var(--smoothly-table-foreground));
 	transition: transform 200ms ease-in-out;
 	transform: rotate(-45deg);
 	opacity: 0.3;
