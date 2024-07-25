@@ -1346,7 +1346,7 @@ declare global {
         new (): HTMLSmoothlyInputDateElement;
     };
     interface HTMLSmoothlyInputDateRangeElementEventMap {
-        "smoothlyInput": { [name: string]: isoly.DateRange };
+        "smoothlyInput": { [name: string]: isoly.DateRange | undefined };
         "smoothlyInputLoad": (parent: HTMLElement) => void;
         "smoothlyInputLooks": (looks: Looks, color: Color) => void;
     }
@@ -2560,7 +2560,7 @@ declare namespace LocalJSX {
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange }>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange | undefined }>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "showLabel"?: boolean;
