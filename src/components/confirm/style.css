@@ -3,6 +3,7 @@
 }
 :host([disabled]) {
 	opacity: 0.5;
+	pointer-events: none;
 }
 :host:not([warning]) > smoothly-button:first-child {
 	display: none;
