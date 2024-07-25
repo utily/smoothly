@@ -43,7 +43,6 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 			<Host title={this.toolTip}>
 				{this.delete == true ? (
 					<smoothly-button-confirm
-						disabled={this.disabled || this.inactive}
 						size={this.size}
 						shape={this.shape}
 						expand={this.expand}
