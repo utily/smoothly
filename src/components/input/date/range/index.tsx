@@ -21,7 +21,7 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	@State() open: boolean
-	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange }>
+	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 
@@ -54,6 +54,7 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 	async clear(): Promise<void> {
 		this.start = undefined
 		this.end = undefined
+		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
 		return (
