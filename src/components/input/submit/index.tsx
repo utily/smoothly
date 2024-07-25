@@ -35,7 +35,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 		})
 	}
 	clickHandler() {
-		!this.disabled && this.parent?.submit(this.delete)
+		this.parent?.submit(this.delete)
 	}
 
 	render(): VNode | VNode[] {
