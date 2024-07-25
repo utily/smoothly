@@ -187,9 +187,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		event && event.stopPropagation()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
-
+		const clickedItem = event
+			?.composedPath()
+			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
 		!this.readonly &&
-			!(event?.target && this.items.includes(event.target as HTMLSmoothlyItemElement) && this.multiple) &&
+			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)
 		this.filter = ""
