@@ -106,50 +106,11 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-display type="date-time" format={{year: "2-digit", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone:"Europe/Stockholm"}} value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
-						<dt>Deprecated display date time</dt>
 						<dt>Display amount</dt>
 						<dd>
 							<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>
 						</dd>
 					</dl>
-				</fieldset>
-				<fieldset>
-					<h2>Smoothly skeleton</h2>
-					<smoothly-skeleton period={3} distance="20rem" width="20rem"></smoothly-skeleton>
-					<smoothly-skeleton period={3} distance="20rem" color="200,200,255"></smoothly-skeleton>
-					<smoothly-skeleton period={3} distance="20rem" color="var(--smoothly-warning-color)"></smoothly-skeleton>
-					<smoothly-skeleton period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="center" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" width="20rem"></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-					<smoothly-skeleton align="right" period={3} distance="20rem" ></smoothly-skeleton>
-				</fieldset>
-				<fieldset>
-					<h2>Smoothly URL encoded</h2>
-					<smoothly-urlencoded data="hej=hopp&tjena=moss"></smoothly-urlencoded>
-				</fieldset>
-				<fieldset>
-					<h2>Smoothly popup</h2>
-					<div style={{display: "flex", justifyContent: "space-between"}}>
-						<smoothly-popup direction="down">
-							Click for popup
-							<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup stuff that has a lot of text</span>
-						</smoothly-popup>
-						<smoothly-popup direction="down">
-							Click for popup
-							<span slot="popup" color="dark" style={{whiteSpace: "nowrap"}}>Some popup with a bunch of text.</span>
-						</smoothly-popup>
-					</div>
-					<smoothly-popup>
-						<div>Popup, click me</div>
-						<div color="dark" slot="popup">
-							1 line popup
-						</div>
-					</smoothly-popup>
 				</fieldset>
 				<fieldset>
 				<h2>Test of different kinds of notifier</h2>
@@ -228,7 +189,6 @@ export class SmoothlyDisplayDemo {
 						Small Overlay Spinner
 						<smoothly-spinner overlay size="small"></smoothly-spinner>
 					</div>
-					{/* <div style={{position: "absolute", left: "500px", top: "150px" }}><smoothly-svg url="https://theme.payfunc.com/intergiro/animated-logo.svg"></smoothly-svg></div> */}
 				</fieldset>
 				<fieldset>
 					<h2>Smoothly summary</h2>

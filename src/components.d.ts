@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { SmoothlyAccordion } from "./components/accordion";
 import { address } from "./components/address-display";
 import { address as address1 } from "./components/address-display/index";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
@@ -21,7 +20,6 @@ import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Slot } from "./components/picker/slot-elements/index";
-export { SmoothlyAccordion } from "./components/accordion";
 export { address } from "./components/address-display";
 export { address as address1 } from "./components/address-display/index";
 export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
@@ -38,15 +36,6 @@ export { Controls } from "./components/picker/menu";
 export { Controls as Controls1 } from "./components/picker/menu/index";
 export { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
-    interface SmoothlyAccordion {
-        "removeItem": (el: HTMLSmoothlyAccordionItemElement) => Promise<void>;
-        "value"?: string;
-    }
-    interface SmoothlyAccordionItem {
-        "brand"?: string | string[];
-        "name": string;
-        "open"?: boolean;
-    }
     interface SmoothlyAddress {
         "editable": boolean;
         "value": address;
@@ -159,12 +148,6 @@ export namespace Components {
         "amount": number | string;
         "currency": isoly.Currency;
         "toInteger": boolean;
-    }
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
-    interface SmoothlyDisplayDateTime {
-        "datetime": isoly.DateTime;
     }
     interface SmoothlyDisplayDemo {
     }
@@ -541,21 +524,7 @@ export namespace Components {
         "value": any;
         "visible": boolean;
     }
-    interface SmoothlyPopup {
-        "direction": "up" | "down";
-        "visible": boolean;
-    }
-    interface SmoothlyReorder {
-    }
     interface SmoothlySelectDemo {
-    }
-    interface SmoothlySkeleton {
-        "align": "left" | "center" | "right";
-        "color": string;
-        "distance": string;
-        "period": number;
-        "width": string;
-        "widths": string[];
     }
     interface SmoothlySlotElements {
         "clone": boolean;
@@ -583,11 +552,6 @@ export namespace Components {
         "fill": Fill;
         "open": boolean;
         "size": "tiny" | "small" | "medium" | "large";
-    }
-    interface SmoothlySvg {
-        "color": string;
-        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
-        "url": string;
     }
     interface SmoothlyTab {
         "label": string;
@@ -670,16 +634,6 @@ export namespace Components {
     interface SmoothlyTriggerSource {
         "listen": string;
     }
-    interface SmoothlyTuple {
-        "tuple": [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data": string;
-    }
-}
-export interface SmoothlyAccordionItemCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyAccordionItemElement;
 }
 export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -821,14 +775,6 @@ export interface SmoothlyPickerOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyPickerOptionElement;
 }
-export interface SmoothlyPopupCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyPopupElement;
-}
-export interface SmoothlyReorderCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyReorderElement;
-}
 export interface SmoothlySlotElementsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlySlotElementsElement;
@@ -878,31 +824,6 @@ export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSmoothlyTriggerSourceElement;
 }
 declare global {
-    interface HTMLSmoothlyAccordionElement extends Components.SmoothlyAccordion, HTMLStencilElement {
-    }
-    var HTMLSmoothlyAccordionElement: {
-        prototype: HTMLSmoothlyAccordionElement;
-        new (): HTMLSmoothlyAccordionElement;
-    };
-    interface HTMLSmoothlyAccordionItemElementEventMap {
-        "smoothlyAccordionItemWillLoad": (parent: SmoothlyAccordion) => void;
-        "smoothlyOpen": { name: string; open: boolean };
-        "smoothlyClose": { name: string; open: boolean };
-    }
-    interface HTMLSmoothlyAccordionItemElement extends Components.SmoothlyAccordionItem, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyAccordionItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyAccordionItemElement, ev: SmoothlyAccordionItemCustomEvent<HTMLSmoothlyAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyAccordionItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyAccordionItemElement, ev: SmoothlyAccordionItemCustomEvent<HTMLSmoothlyAccordionItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyAccordionItemElement: {
-        prototype: HTMLSmoothlyAccordionItemElement;
-        new (): HTMLSmoothlyAccordionItemElement;
-    };
     interface HTMLSmoothlyAddressElement extends Components.SmoothlyAddress, HTMLStencilElement {
     }
     var HTMLSmoothlyAddressElement: {
@@ -1078,15 +999,6 @@ declare global {
     var HTMLSmoothlyDisplayAmountElement: {
         prototype: HTMLSmoothlyDisplayAmountElement;
         new (): HTMLSmoothlyDisplayAmountElement;
-    };
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
-    interface HTMLSmoothlyDisplayDateTimeElement extends Components.SmoothlyDisplayDateTime, HTMLStencilElement {
-    }
-    var HTMLSmoothlyDisplayDateTimeElement: {
-        prototype: HTMLSmoothlyDisplayDateTimeElement;
-        new (): HTMLSmoothlyDisplayDateTimeElement;
     };
     interface HTMLSmoothlyDisplayDemoElementEventMap {
         "notice": Notice;
@@ -1789,51 +1701,11 @@ declare global {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
     };
-    interface HTMLSmoothlyPopupElementEventMap {
-        "popup": boolean;
-    }
-    interface HTMLSmoothlyPopupElement extends Components.SmoothlyPopup, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyPopupElementEventMap>(type: K, listener: (this: HTMLSmoothlyPopupElement, ev: SmoothlyPopupCustomEvent<HTMLSmoothlyPopupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyPopupElementEventMap>(type: K, listener: (this: HTMLSmoothlyPopupElement, ev: SmoothlyPopupCustomEvent<HTMLSmoothlyPopupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyPopupElement: {
-        prototype: HTMLSmoothlyPopupElement;
-        new (): HTMLSmoothlyPopupElement;
-    };
-    interface HTMLSmoothlyReorderElementEventMap {
-        "reorder": [number, number];
-    }
-    interface HTMLSmoothlyReorderElement extends Components.SmoothlyReorder, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyReorderElementEventMap>(type: K, listener: (this: HTMLSmoothlyReorderElement, ev: SmoothlyReorderCustomEvent<HTMLSmoothlyReorderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyReorderElementEventMap>(type: K, listener: (this: HTMLSmoothlyReorderElement, ev: SmoothlyReorderCustomEvent<HTMLSmoothlyReorderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyReorderElement: {
-        prototype: HTMLSmoothlyReorderElement;
-        new (): HTMLSmoothlyReorderElement;
-    };
     interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
     }
     var HTMLSmoothlySelectDemoElement: {
         prototype: HTMLSmoothlySelectDemoElement;
         new (): HTMLSmoothlySelectDemoElement;
-    };
-    interface HTMLSmoothlySkeletonElement extends Components.SmoothlySkeleton, HTMLStencilElement {
-    }
-    var HTMLSmoothlySkeletonElement: {
-        prototype: HTMLSmoothlySkeletonElement;
-        new (): HTMLSmoothlySkeletonElement;
     };
     interface HTMLSmoothlySlotElementsElementEventMap {
         "smoothlySlotEmpty": Slot;
@@ -1908,12 +1780,6 @@ declare global {
     var HTMLSmoothlySummaryElement: {
         prototype: HTMLSmoothlySummaryElement;
         new (): HTMLSmoothlySummaryElement;
-    };
-    interface HTMLSmoothlySvgElement extends Components.SmoothlySvg, HTMLStencilElement {
-    }
-    var HTMLSmoothlySvgElement: {
-        prototype: HTMLSmoothlySvgElement;
-        new (): HTMLSmoothlySvgElement;
     };
     interface HTMLSmoothlyTabElementEventMap {
         "expansionOpen": HTMLDivElement;
@@ -2149,21 +2015,7 @@ declare global {
         prototype: HTMLSmoothlyTriggerSourceElement;
         new (): HTMLSmoothlyTriggerSourceElement;
     };
-    interface HTMLSmoothlyTupleElement extends Components.SmoothlyTuple, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTupleElement: {
-        prototype: HTMLSmoothlyTupleElement;
-        new (): HTMLSmoothlyTupleElement;
-    };
-    interface HTMLSmoothlyUrlencodedElement extends Components.SmoothlyUrlencoded, HTMLStencilElement {
-    }
-    var HTMLSmoothlyUrlencodedElement: {
-        prototype: HTMLSmoothlyUrlencodedElement;
-        new (): HTMLSmoothlyUrlencodedElement;
-    };
     interface HTMLElementTagNameMap {
-        "smoothly-accordion": HTMLSmoothlyAccordionElement;
-        "smoothly-accordion-item": HTMLSmoothlyAccordionItemElement;
         "smoothly-address": HTMLSmoothlyAddressElement;
         "smoothly-address-display": HTMLSmoothlyAddressDisplayElement;
         "smoothly-addresses": HTMLSmoothlyAddressesElement;
@@ -2183,7 +2035,6 @@ declare global {
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
-        "smoothly-display-date-time": HTMLSmoothlyDisplayDateTimeElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
@@ -2237,16 +2088,12 @@ declare global {
         "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
-        "smoothly-popup": HTMLSmoothlyPopupElement;
-        "smoothly-reorder": HTMLSmoothlyReorderElement;
         "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
-        "smoothly-skeleton": HTMLSmoothlySkeletonElement;
         "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
         "smoothly-slotted-elements": HTMLSmoothlySlottedElementsElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
-        "smoothly-svg": HTMLSmoothlySvgElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
         "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
@@ -2270,22 +2117,9 @@ declare global {
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
-        "smoothly-tuple": HTMLSmoothlyTupleElement;
-        "smoothly-urlencoded": HTMLSmoothlyUrlencodedElement;
     }
 }
 declare namespace LocalJSX {
-    interface SmoothlyAccordion {
-        "value"?: string;
-    }
-    interface SmoothlyAccordionItem {
-        "brand"?: string | string[];
-        "name"?: string;
-        "onSmoothlyAccordionItemWillLoad"?: (event: SmoothlyAccordionItemCustomEvent<(parent: SmoothlyAccordion) => void>) => void;
-        "onSmoothlyClose"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
-        "onSmoothlyOpen"?: (event: SmoothlyAccordionItemCustomEvent<{ name: string; open: boolean }>) => void;
-        "open"?: boolean;
-    }
     interface SmoothlyAddress {
         "editable"?: boolean;
         "value"?: address;
@@ -2405,12 +2239,6 @@ declare namespace LocalJSX {
         "amount"?: number | string;
         "currency"?: isoly.Currency;
         "toInteger"?: boolean;
-    }
-    /**
-     * DEPRECATED, use  <smoothly-display type="date-time">
-     */
-    interface SmoothlyDisplayDateTime {
-        "datetime"?: isoly.DateTime;
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
@@ -2812,23 +2640,7 @@ declare namespace LocalJSX {
         "value"?: any;
         "visible"?: boolean;
     }
-    interface SmoothlyPopup {
-        "direction"?: "up" | "down";
-        "onPopup"?: (event: SmoothlyPopupCustomEvent<boolean>) => void;
-        "visible"?: boolean;
-    }
-    interface SmoothlyReorder {
-        "onReorder"?: (event: SmoothlyReorderCustomEvent<[number, number]>) => void;
-    }
     interface SmoothlySelectDemo {
-    }
-    interface SmoothlySkeleton {
-        "align"?: "left" | "center" | "right";
-        "color"?: string;
-        "distance"?: string;
-        "period"?: number;
-        "width"?: string;
-        "widths"?: string[];
     }
     interface SmoothlySlotElements {
         "clone"?: boolean;
@@ -2860,11 +2672,6 @@ declare namespace LocalJSX {
         "onSmoothlySummaryOpen"?: (event: SmoothlySummaryCustomEvent<boolean>) => void;
         "open"?: boolean;
         "size"?: "tiny" | "small" | "medium" | "large";
-    }
-    interface SmoothlySvg {
-        "color"?: string;
-        "size"?: "large" | "medium" | "small" | "tiny" | { height: string; width: string };
-        "url": string;
     }
     interface SmoothlyTab {
         "label"?: string;
@@ -2963,15 +2770,7 @@ declare namespace LocalJSX {
         "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
-    interface SmoothlyTuple {
-        "tuple"?: [string, string];
-    }
-    interface SmoothlyUrlencoded {
-        "data"?: string;
-    }
     interface IntrinsicElements {
-        "smoothly-accordion": SmoothlyAccordion;
-        "smoothly-accordion-item": SmoothlyAccordionItem;
         "smoothly-address": SmoothlyAddress;
         "smoothly-address-display": SmoothlyAddressDisplay;
         "smoothly-addresses": SmoothlyAddresses;
@@ -2991,7 +2790,6 @@ declare namespace LocalJSX {
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
         "smoothly-display-amount": SmoothlyDisplayAmount;
-        "smoothly-display-date-time": SmoothlyDisplayDateTime;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-field": SmoothlyFilterField;
@@ -3045,16 +2843,12 @@ declare namespace LocalJSX {
         "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
-        "smoothly-popup": SmoothlyPopup;
-        "smoothly-reorder": SmoothlyReorder;
         "smoothly-select-demo": SmoothlySelectDemo;
-        "smoothly-skeleton": SmoothlySkeleton;
         "smoothly-slot-elements": SmoothlySlotElements;
         "smoothly-slotted-elements": SmoothlySlottedElements;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
-        "smoothly-svg": SmoothlySvg;
         "smoothly-tab": SmoothlyTab;
         "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
@@ -3078,16 +2872,12 @@ declare namespace LocalJSX {
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
-        "smoothly-tuple": SmoothlyTuple;
-        "smoothly-urlencoded": SmoothlyUrlencoded;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "smoothly-accordion": LocalJSX.SmoothlyAccordion & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionElement>;
-            "smoothly-accordion-item": LocalJSX.SmoothlyAccordionItem & JSXBase.HTMLAttributes<HTMLSmoothlyAccordionItemElement>;
             "smoothly-address": LocalJSX.SmoothlyAddress & JSXBase.HTMLAttributes<HTMLSmoothlyAddressElement>;
             "smoothly-address-display": LocalJSX.SmoothlyAddressDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyAddressDisplayElement>;
             "smoothly-addresses": LocalJSX.SmoothlyAddresses & JSXBase.HTMLAttributes<HTMLSmoothlyAddressesElement>;
@@ -3107,10 +2897,6 @@ declare module "@stencil/core" {
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
-            /**
-             * DEPRECATED, use  <smoothly-display type="date-time">
-             */
-            "smoothly-display-date-time": LocalJSX.SmoothlyDisplayDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDateTimeElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
@@ -3164,16 +2950,12 @@ declare module "@stencil/core" {
             "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
-            "smoothly-popup": LocalJSX.SmoothlyPopup & JSXBase.HTMLAttributes<HTMLSmoothlyPopupElement>;
-            "smoothly-reorder": LocalJSX.SmoothlyReorder & JSXBase.HTMLAttributes<HTMLSmoothlyReorderElement>;
             "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
-            "smoothly-skeleton": LocalJSX.SmoothlySkeleton & JSXBase.HTMLAttributes<HTMLSmoothlySkeletonElement>;
             "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;
             "smoothly-slotted-elements": LocalJSX.SmoothlySlottedElements & JSXBase.HTMLAttributes<HTMLSmoothlySlottedElementsElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
-            "smoothly-svg": LocalJSX.SmoothlySvg & JSXBase.HTMLAttributes<HTMLSmoothlySvgElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
             "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
@@ -3197,8 +2979,6 @@ declare module "@stencil/core" {
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
-            "smoothly-tuple": LocalJSX.SmoothlyTuple & JSXBase.HTMLAttributes<HTMLSmoothlyTupleElement>;
-            "smoothly-urlencoded": LocalJSX.SmoothlyUrlencoded & JSXBase.HTMLAttributes<HTMLSmoothlyUrlencodedElement>;
         }
     }
 }
