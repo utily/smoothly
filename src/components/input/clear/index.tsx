@@ -27,7 +27,7 @@ export class SmoothlyInputClear {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Clearable.is(parent)) {
 				this.parent = parent
-				if (Editable.Element.type.is(parent)) {
+				if (Editable.Element.is(parent)) {
 					parent.listen("changed", async p => {
 						if (Input.is(p)) {
 							this.disabled = p.readonly ? true : p.value ? !p.value : !p.changed

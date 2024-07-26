@@ -28,7 +28,11 @@ export class SmoothlyInputDemo {
 					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
 				<h2>input-date-range outside from</h2>
-				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}></smoothly-input-date-range>
+				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}>
+					<smoothly-input-clear slot="end" size="icon">
+						<smoothly-icon name="close"></smoothly-icon>
+					</smoothly-input-clear>
+				</smoothly-input-date-range>
 				<h2>Controlled form</h2>
 				<smoothly-input-demo-controlled-form />
 				<h2>Create form defaulting type</h2>
@@ -147,6 +151,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-checkbox name="checkbox2" checked>
 						Check the box 2
 					</smoothly-input-checkbox>
+					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()}></smoothly-input-date-range>
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
 					</smoothly-input-range>

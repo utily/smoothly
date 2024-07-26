@@ -1,6 +1,7 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { Clearable } from "../../Clearable"
+import { Editable } from "../../Editable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
 import { Color, Data } from "./../../../../model"
@@ -10,25 +11,35 @@ import { Color, Data } from "./../../../../model"
 	styleUrl: "style.scss",
 	scoped: true,
 })
-export class SmoothlyInputDateRange implements Clearable, Input {
+export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Element() element: HTMLElement
 	@Prop() name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) start: isoly.Date | undefined
 	@Prop({ mutable: true }) end: isoly.Date | undefined
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
+	@Prop({ mutable: true }) changed = false // TODO
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private initialStart?: isoly.Date
+	private initialEnd?: isoly.Date
+	@State() value?: isoly.DateRange
 	@State() open: boolean
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void> // TODO
 
 	componentWillLoad() {
+		this.setInitialValue()
+		this.updateValue()
 		this.smoothlyInputLoad.emit(_ => {})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {
@@ -37,6 +48,16 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 			this.start = split[0]
 			this.end = split[1]
 		}
+	}
+	@Watch("start")
+	@Watch("end")
+	updateValue() {
+		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
+	}
+	@Watch("value")
+	valueChanged() {
+		this.changed = this.initialStart != this.start || this.initialEnd != this.end
+		this.listener.changed?.(this)
 	}
 	@Listen("smoothlyInputLoad")
 	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
@@ -51,6 +72,26 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 			event.stopPropagation()
 	}
 	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
+		this.listener[property] = listener
+		listener(this)
+	}
+	@Method()
+	async edit(editable: boolean) {
+		this.readonly = !editable
+	}
+	@Method()
+	async reset() {
+		this.start = this.initialStart
+		this.end = this.initialEnd
+	}
+	@Method()
+	async setInitialValue() {
+		this.initialStart = this.start
+		this.initialEnd = this.end
+		this.changed = false
+	}
+	@Method()
 	async clear(): Promise<void> {
 		this.start = undefined
 		this.end = undefined
@@ -59,10 +100,11 @@ export class SmoothlyInputDateRange implements Clearable, Input {
 	render() {
 		return (
 			<Host tabindex={0}>
-				<section onClick={() => (this.open = !this.open)}>
+				<section onClick={() => !this.readonly && (this.open = !this.open)}>
 					<smoothly-input
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
+						readonly={this.readonly}
 						value={`${this.start ? this.start : "from "} - ${this.end ? this.end : " to"}`}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => {
