@@ -23,7 +23,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() placeholder = "from - to"
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
-	@Prop({ mutable: true }) changed = false // TODO
+	@Prop({ mutable: true }) changed = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
@@ -32,7 +32,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
-	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void> // TODO
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	componentWillLoad() {
 		this.setInitialValue()
