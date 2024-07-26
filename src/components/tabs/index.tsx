@@ -1,12 +1,12 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
 
 @Component({
-	tag: "smoothly-tab-switch",
+	tag: "smoothly-tabs",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyTabSwitch {
-	@Element() element: HTMLSmoothlyTabSwitchElement
+export class SmoothlyTabs {
+	@Element() element: HTMLSmoothlyTabsElement
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() selectedTab: EventEmitter<string>
 	@Listen("expansionOpen")

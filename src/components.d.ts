@@ -51,7 +51,6 @@ export namespace Components {
         "path": string | URLPattern;
         "selected"?: boolean;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
-        "to"?: string;
     }
     interface SmoothlyBackToTop {
         "bottom": string;
@@ -508,8 +507,6 @@ export namespace Components {
         "value": any;
         "visible": boolean;
     }
-    interface SmoothlySelectDemo {
-    }
     interface SmoothlySlotElements {
         "clone": boolean;
         "nodes"?: Node | Node[];
@@ -541,8 +538,6 @@ export namespace Components {
         "label": string;
         "open": boolean;
     }
-    interface SmoothlyTabSwitch {
-    }
     interface SmoothlyTable {
         "align": "middle" | "bottom" | "top";
         "color"?: Color;
@@ -570,6 +565,10 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTableTesting {
+    }
+    interface SmoothlyTabs {
+    }
+    interface SmoothlyTabsDemo {
     }
     interface SmoothlyThemeColor {
         "color": Color;
@@ -779,10 +778,6 @@ export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTabElement;
 }
-export interface SmoothlyTabSwitchCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyTabSwitchElement;
-}
 export interface SmoothlyTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTableElement;
@@ -794,6 +789,10 @@ export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T
 export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTabsElement;
 }
 export interface SmoothlyToggleSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1667,12 +1666,6 @@ declare global {
         prototype: HTMLSmoothlyPickerOptionElement;
         new (): HTMLSmoothlyPickerOptionElement;
     };
-    interface HTMLSmoothlySelectDemoElement extends Components.SmoothlySelectDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlySelectDemoElement: {
-        prototype: HTMLSmoothlySelectDemoElement;
-        new (): HTMLSmoothlySelectDemoElement;
-    };
     interface HTMLSmoothlySlotElementsElementEventMap {
         "smoothlySlotEmpty": Slot;
     }
@@ -1763,23 +1756,6 @@ declare global {
     var HTMLSmoothlyTabElement: {
         prototype: HTMLSmoothlyTabElement;
         new (): HTMLSmoothlyTabElement;
-    };
-    interface HTMLSmoothlyTabSwitchElementEventMap {
-        "selectedTab": string;
-    }
-    interface HTMLSmoothlyTabSwitchElement extends Components.SmoothlyTabSwitch, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyTabSwitchElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabSwitchElement, ev: SmoothlyTabSwitchCustomEvent<HTMLSmoothlyTabSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyTabSwitchElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabSwitchElement, ev: SmoothlyTabSwitchCustomEvent<HTMLSmoothlyTabSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyTabSwitchElement: {
-        prototype: HTMLSmoothlyTabSwitchElement;
-        new (): HTMLSmoothlyTabSwitchElement;
     };
     interface HTMLSmoothlyTableElementEventMap {
         "smoothlyNestedTable": () => void;
@@ -1880,6 +1856,29 @@ declare global {
     var HTMLSmoothlyTableTestingElement: {
         prototype: HTMLSmoothlyTableTestingElement;
         new (): HTMLSmoothlyTableTestingElement;
+    };
+    interface HTMLSmoothlyTabsElementEventMap {
+        "selectedTab": string;
+    }
+    interface HTMLSmoothlyTabsElement extends Components.SmoothlyTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTabsElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabsElement, ev: SmoothlyTabsCustomEvent<HTMLSmoothlyTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTabsElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabsElement, ev: SmoothlyTabsCustomEvent<HTMLSmoothlyTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTabsElement: {
+        prototype: HTMLSmoothlyTabsElement;
+        new (): HTMLSmoothlyTabsElement;
+    };
+    interface HTMLSmoothlyTabsDemoElement extends Components.SmoothlyTabsDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTabsDemoElement: {
+        prototype: HTMLSmoothlyTabsDemoElement;
+        new (): HTMLSmoothlyTabsDemoElement;
     };
     interface HTMLSmoothlyThemeColorElement extends Components.SmoothlyThemeColor, HTMLStencilElement {
     }
@@ -2051,14 +2050,12 @@ declare global {
         "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
         "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
         "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
-        "smoothly-select-demo": HTMLSmoothlySelectDemoElement;
         "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
         "smoothly-slotted-elements": HTMLSmoothlySlottedElementsElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
-        "smoothly-tab-switch": HTMLSmoothlyTabSwitchElement;
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
         "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
@@ -2069,6 +2066,8 @@ declare global {
         "smoothly-table-header": HTMLSmoothlyTableHeaderElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-testing": HTMLSmoothlyTableTestingElement;
+        "smoothly-tabs": HTMLSmoothlyTabsElement;
+        "smoothly-tabs-demo": HTMLSmoothlyTabsDemoElement;
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
         "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
@@ -2101,7 +2100,6 @@ declare namespace LocalJSX {
         "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
-        "to"?: string;
     }
     interface SmoothlyBackToTop {
         "bottom"?: string;
@@ -2591,8 +2589,6 @@ declare namespace LocalJSX {
         "value"?: any;
         "visible"?: boolean;
     }
-    interface SmoothlySelectDemo {
-    }
     interface SmoothlySlotElements {
         "clone"?: boolean;
         "nodes"?: Node | Node[];
@@ -2628,9 +2624,6 @@ declare namespace LocalJSX {
         "label"?: string;
         "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLDivElement>) => void;
         "open"?: boolean;
-    }
-    interface SmoothlyTabSwitch {
-        "onSelectedTab"?: (event: SmoothlyTabSwitchCustomEvent<string>) => void;
     }
     interface SmoothlyTable {
         "align"?: "middle" | "bottom" | "top";
@@ -2669,6 +2662,11 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTableTesting {
+    }
+    interface SmoothlyTabs {
+        "onSelectedTab"?: (event: SmoothlyTabsCustomEvent<string>) => void;
+    }
+    interface SmoothlyTabsDemo {
     }
     interface SmoothlyThemeColor {
         "color"?: Color;
@@ -2791,14 +2789,12 @@ declare namespace LocalJSX {
         "smoothly-picker-demo": SmoothlyPickerDemo;
         "smoothly-picker-menu": SmoothlyPickerMenu;
         "smoothly-picker-option": SmoothlyPickerOption;
-        "smoothly-select-demo": SmoothlySelectDemo;
         "smoothly-slot-elements": SmoothlySlotElements;
         "smoothly-slotted-elements": SmoothlySlottedElements;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
         "smoothly-tab": SmoothlyTab;
-        "smoothly-tab-switch": SmoothlyTabSwitch;
         "smoothly-table": SmoothlyTable;
         "smoothly-table-cell": SmoothlyTableCell;
         "smoothly-table-demo": SmoothlyTableDemo;
@@ -2809,6 +2805,8 @@ declare namespace LocalJSX {
         "smoothly-table-header": SmoothlyTableHeader;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-testing": SmoothlyTableTesting;
+        "smoothly-tabs": SmoothlyTabs;
+        "smoothly-tabs-demo": SmoothlyTabsDemo;
         "smoothly-theme-color": SmoothlyThemeColor;
         "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
         "smoothly-theme-colors": SmoothlyThemeColors;
@@ -2895,14 +2893,12 @@ declare module "@stencil/core" {
             "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
             "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
             "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
-            "smoothly-select-demo": LocalJSX.SmoothlySelectDemo & JSXBase.HTMLAttributes<HTMLSmoothlySelectDemoElement>;
             "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;
             "smoothly-slotted-elements": LocalJSX.SmoothlySlottedElements & JSXBase.HTMLAttributes<HTMLSmoothlySlottedElementsElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
-            "smoothly-tab-switch": LocalJSX.SmoothlyTabSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyTabSwitchElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
             "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
@@ -2913,6 +2909,8 @@ declare module "@stencil/core" {
             "smoothly-table-header": LocalJSX.SmoothlyTableHeader & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeaderElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-testing": LocalJSX.SmoothlyTableTesting & JSXBase.HTMLAttributes<HTMLSmoothlyTableTestingElement>;
+            "smoothly-tabs": LocalJSX.SmoothlyTabs & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
+            "smoothly-tabs-demo": LocalJSX.SmoothlyTabsDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
             "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;

@@ -12,7 +12,6 @@ export class SmoothlyAppRoom {
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
-	@Prop() to?: string
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
 	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
