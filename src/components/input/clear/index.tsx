@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Button } from "../../Button"
+import { Button } from "../../button/Button"
 import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"

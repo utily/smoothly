@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from "@stencil/core"
-import { redirect } from "../model"
+import { redirect } from "../../model"
 
 export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link }, children) => {
 	return disabled && (link || type == "link") ? (

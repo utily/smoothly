@@ -1,6 +1,6 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Listen, Prop, VNode } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Button } from "../../Button"
+import { Button } from "../../button/Button"
 import { Editable } from "../Editable"
 
 @Component({

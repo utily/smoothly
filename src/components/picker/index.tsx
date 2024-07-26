@@ -20,6 +20,7 @@ import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Controls } from "./menu"
 
+// DEPRECATED use <smoothly-input-select> instead
 @Component({
 	tag: "smoothly-picker",
 	styleUrl: "style.css",
