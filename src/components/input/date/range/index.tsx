@@ -1,5 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
+import { tidily } from "tidily"
+import { DateFormat } from "tidily/dist/cjs/DateFormat"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -99,6 +101,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
+		const format = DateFormat.fromLocale(navigator.language as isoly.Locale)
 		return (
 			<Host tabindex={0}>
 				<section onClick={() => !this.readonly && (this.open = !this.open)}>
@@ -106,7 +109,11 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
 						readonly={this.readonly}
-						value={this.start && this.end ? `${this.start} — ${this.end}` : undefined}
+						value={
+							this.start && this.end
+								? `${tidily.format(this.start, "date", format)} - ${tidily.format(this.end, "date", format)}`
+								: undefined
+						}
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => {
