@@ -1,5 +1,5 @@
 import { Component, h, Listen, Prop } from "@stencil/core"
-import { Message, Trigger } from "../../model"
+import { Message, Trigger } from "../../../model"
 
 @Component({
 	tag: "smoothly-trigger-sink",
