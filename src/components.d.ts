@@ -270,6 +270,7 @@ export namespace Components {
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name": string;
+        "placeholder": string;
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -2349,6 +2350,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange | undefined }>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;

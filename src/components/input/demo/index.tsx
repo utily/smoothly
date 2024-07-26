@@ -29,6 +29,7 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<h2>input-date-range outside from</h2>
 				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}>
+					Date Range
 					<smoothly-input-clear slot="end" size="icon">
 						<smoothly-icon name="close"></smoothly-icon>
 					</smoothly-input-clear>
