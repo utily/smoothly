@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
 import { FunctionalComponent, VNode } from "@stencil/core";
-import { Button } from "./components/Button";
+import { Button } from "./components/button/Button";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
 import { selectively } from "selectively";
@@ -20,7 +20,7 @@ import { Controls as Controls1 } from "./components/picker/menu/index";
 import { Slot } from "./components/picker/slot-elements/index";
 export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
-export { Button } from "./components/Button";
+export { Button } from "./components/button/Button";
 export { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 export { tidily, Type } from "tidily";
 export { selectively } from "selectively";
