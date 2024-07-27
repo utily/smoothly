@@ -1,16 +1,4 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Method,
-	Prop,
-	State,
-	VNode,
-	Watch,
-} from "@stencil/core"
+import { Component, ComponentWillLoad, h, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Action } from "./Action"
