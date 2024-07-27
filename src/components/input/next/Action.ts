@@ -74,11 +74,12 @@ export class Action {
 			this.erase(state)
 			return state
 		},
-		// insertReplacementText - TODO
 		// insertCompositionText - TODO
+		// insertReplacementText - TODO
 		// insertFromDrop - TODO
 		// historyUndo - TODO
 		// historyRedo - TODO
+		// insertLineBreak - TODO
 	}
 
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
