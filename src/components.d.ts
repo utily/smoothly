@@ -416,6 +416,10 @@ export namespace Components {
         "unregister": () => Promise<void>;
         "value"?: isoly.Date;
     }
+    interface SmoothlyInputNext {
+        "currency": isoly.Currency;
+        "type": tidily.Type;
+    }
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
@@ -1595,6 +1599,12 @@ declare global {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
     };
+    interface HTMLSmoothlyInputNextElement extends Components.SmoothlyInputNext, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputNextElement: {
+        prototype: HTMLSmoothlyInputNextElement;
+        new (): HTMLSmoothlyInputNextElement;
+    };
     interface HTMLSmoothlyInputPriceDemoElement extends Components.SmoothlyInputPriceDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyInputPriceDemoElement: {
@@ -2351,6 +2361,7 @@ declare global {
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
+        "smoothly-input-next": HTMLSmoothlyInputNextElement;
         "smoothly-input-price-demo": HTMLSmoothlyInputPriceDemoElement;
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
@@ -2794,6 +2805,10 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "value"?: isoly.Date;
     }
+    interface SmoothlyInputNext {
+        "currency"?: isoly.Currency;
+        "type"?: tidily.Type;
+    }
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
@@ -3196,6 +3211,7 @@ declare namespace LocalJSX {
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-next": SmoothlyInputNext;
         "smoothly-input-price-demo": SmoothlyInputPriceDemo;
         "smoothly-input-radio": SmoothlyInputRadio;
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
@@ -3321,6 +3337,7 @@ declare module "@stencil/core" {
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-next": LocalJSX.SmoothlyInputNext & JSXBase.HTMLAttributes<HTMLSmoothlyInputNextElement>;
             "smoothly-input-price-demo": LocalJSX.SmoothlyInputPriceDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputPriceDemoElement>;
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
