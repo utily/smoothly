@@ -387,7 +387,7 @@ export namespace Components {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputNext {
-        "currency": isoly.Currency;
+        "currency"?: isoly.Currency;
         "type": tidily.Type;
     }
     interface SmoothlyInputRadio {
