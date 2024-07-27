@@ -21,19 +21,32 @@ export class Action {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return new Action(result || tidily.get("text")!)
 	}
-	public insertText(state: tidily.State, insertString: string) {
-		const result = this.unformattedState(state)
-		if (this.formatter.allowed(insertString, result)) {
-			this.replace(result, insertString)
-		}
-		return this.formatter.format(tidily.StateEditor.copy(result))
-	}
-	public deleteContentBackward(state: tidily.State) {
-		const result = this.unformattedState(state)
-		if (result.selection.start == result.selection.end)
-			this.select(result, result.selection.start - 1, result.selection.end)
-		this.erase(result)
+	public onBeforeInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const unformatted = this.unformattedState(state)
+		const result = this.beforeInputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
 		return this.formatState(result)
+	}
+
+	private beforeInputEventHandlers: {
+		[inputType: string]:
+			| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
+			| undefined
+	} = {
+		insertText: (event, state) => {
+			event.preventDefault()
+			const insertString = event.data
+			if (typeof insertString == "string" && this.formatter.allowed(insertString, state)) {
+				this.replace(state, insertString)
+			}
+			return state
+		},
+		deleteContentBackward: (event, state) => {
+			event.preventDefault()
+			if (state.selection.start == state.selection.end)
+				this.select(state, state.selection.start - 1, state.selection.end)
+			this.erase(state)
+			return state
+		},
 	}
 	public deleteContentForward(state: tidily.State) {}
 	public deleteWordBackward(state: tidily.State) {}
