@@ -68,7 +68,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 				value={this.state.value}
 				type={this.type}
 				placeholder={this.type}
-				selectionStart={this.state.selection.start} // TODO see if this still works on android phones
+				selectionStart={this.state.selection.start} // TODO see if selection still works on phones
 				selectionEnd={this.state.selection.end}
 				selectionDirection={this.state.selection.direction}></input>
 		)
