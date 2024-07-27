@@ -51,11 +51,21 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 		})
 	}
 	componentDidLoad() {
-		this.inputElement.addEventListener("beforeinput", (e: InputEvent) => {
+		this.inputElement.addEventListener("input", (e: InputEvent) => {
 			console.log(e.inputType, e.data)
+			// Get actual selection (can't selection event from all devices)
+			const state = Action.newState(this.formatter, {
+				value: this.state.value,
+				selection: {
+					start: this.inputElement.selectionStart ?? 0,
+					end: this.inputElement.selectionEnd ?? 0,
+					direction: this.inputElement.selectionDirection ?? undefined,
+				},
+			})
 			if (e.inputType == "insertText" && typeof e.data == "string") {
-				e.preventDefault()
-				this.state = Action.insertText(this.formatter, this.state, e.data)
+				this.state = Action.insertText(this.formatter, state, e.data)
+			} else if (e.inputType == "deleteContentBackward") {
+				this.state = Action.deleteContentBackward(this.formatter, state)
 			}
 		})
 	}
