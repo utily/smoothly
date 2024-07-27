@@ -51,8 +51,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 		})
 	}
 	componentDidLoad() {
-		this.inputElement.addEventListener("input", (e: InputEvent) => {
-			console.log(e.inputType, e.data)
+		this.inputElement.addEventListener("beforeinput", (e: InputEvent) => {
 			// Get actual selection (can't selection event from all devices)
 			const state = Action.newState(this.formatter, {
 				value: this.state.value,
@@ -62,9 +61,12 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					direction: this.inputElement.selectionDirection ?? undefined,
 				},
 			})
+			console.log(e.inputType, e.data, state.selection.start, state.selection.end)
 			if (e.inputType == "insertText" && typeof e.data == "string") {
+				e.preventDefault()
 				this.state = Action.insertText(this.formatter, state, e.data)
 			} else if (e.inputType == "deleteContentBackward") {
+				e.preventDefault()
 				this.state = Action.deleteContentBackward(this.formatter, state)
 			}
 		})
