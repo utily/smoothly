@@ -63,6 +63,19 @@ export class Action {
 			event.preventDefault()
 			return this.deleteWord(formattedState, "forward")
 		},
+		insertFromPaste: (event, state) => {
+			event.preventDefault()
+			if (typeof event.data == "string") {
+				this.replace(state, event.data)
+			}
+			return state
+		},
+		// deleteByCut - TODO
+		// insertReplacementText - TODO
+		// insertCompositionText - TODO
+		// insertFromDrop - TODO
+		// historyUndo - TODO
+		// historyRedo - TODO
 	}
 
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
