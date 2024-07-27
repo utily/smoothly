@@ -15,7 +15,7 @@ export namespace Action {
 		if (result.selection.start == result.selection.end)
 			select(result, result.selection.start - 1, result.selection.end)
 		erase(result)
-		return formatState(formatter, state)
+		return formatState(formatter, result)
 	}
 	export function deleteContentForward(formatter: Formatter, state: tidily.State) {}
 	export function deleteWordBackward(formatter: Formatter, state: tidily.State) {}
