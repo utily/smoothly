@@ -24,28 +24,24 @@ import { getLocale } from "./getLocale"
 export class SmoothlyInputNext implements ComponentWillLoad {
 	private inputElement: HTMLInputElement
 	@Prop({ reflect: true }) type: tidily.Type = "text"
-	@Prop() currency: isoly.Currency
+	@Prop() currency?: isoly.Currency
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	private formatter: tidily.Formatter & tidily.Converter<any>
+	private action: Action
 
 	@Watch("type")
 	typeChange(): void {
-		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
 		switch (this.type) {
 			case "price":
-				result = tidily.get("price", this.currency)
+				this.action = Action.create("price", this.currency)
 				break
 			default:
-				result = tidily.get(this.type, getLocale())
+				this.action = Action.create(this.type, getLocale())
 				break
 		}
-
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		this.formatter = result || tidily.get("text")!
 	}
 	componentWillLoad() {
 		this.typeChange()
-		this.state = Action.newState(this.formatter, {
+		this.state = this.action.createState({
 			value: "",
 			selection: { start: 0, end: 0, direction: "none" },
 		})
@@ -53,7 +49,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	componentDidLoad() {
 		this.inputElement.addEventListener("beforeinput", (e: InputEvent) => {
 			// Get actual selection (can't selection event from all devices)
-			const state = Action.newState(this.formatter, {
+			const state = this.action.createState({
 				value: this.state.value,
 				selection: {
 					start: this.inputElement.selectionStart ?? 0,
@@ -64,15 +60,22 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 			console.log(e.inputType, e.data, state.selection.start, state.selection.end)
 			if (e.inputType == "insertText" && typeof e.data == "string") {
 				e.preventDefault()
-				this.state = Action.insertText(this.formatter, state, e.data)
+				this.state = this.action.insertText(state, e.data)
 			} else if (e.inputType == "deleteContentBackward") {
 				e.preventDefault()
-				this.state = Action.deleteContentBackward(this.formatter, state)
+				this.state = this.action.deleteContentBackward(state)
 			}
 		})
 	}
 
 	render() {
-		return <input ref={(e: HTMLInputElement) => (this.inputElement = e)} value={this.state.value}></input>
+		return (
+			<input
+				ref={(e: HTMLInputElement) => (this.inputElement = e)}
+				value={this.state.value}
+				selectionStart={this.state.selection.start} // TODO see if this still works on android phones
+				selectionEnd={this.state.selection.end}
+				selectionDirection={this.state.selection.direction}></input>
+		)
 	}
 }
