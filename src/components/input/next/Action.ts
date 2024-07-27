@@ -47,8 +47,14 @@ export class Action {
 			this.erase(state)
 			return state
 		},
+		deleteContentForward: (event, state) => {
+			event.preventDefault()
+			if (state.selection.start == state.selection.end)
+				this.select(state, state.selection.start, state.selection.end + 1)
+			this.erase(state)
+			return state
+		},
 	}
-	public deleteContentForward(state: tidily.State) {}
 	public deleteWordBackward(state: tidily.State) {}
 	public deleteWordForward(state: tidily.State) {}
 	public insertFromPaste(state: tidily.State) {}

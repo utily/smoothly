@@ -27,6 +27,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	@Prop() currency?: isoly.Currency
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	private action: Action
+	private enforceSelection = false // needed to know if selection should be kept
 
 	@Watch("type")
 	typeChange(): void {
@@ -57,9 +58,19 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					direction: this.inputElement.selectionDirection ?? undefined,
 				},
 			})
-			console.log(event.inputType, event.data, state.selection.start, state.selection.end)
 			this.state = this.action.onBeforeInput(event, state)
+			console.log(event.inputType, event.data, state)
+			this.enforceSelection = event.defaultPrevented
 		})
+	}
+	componentDidRender() {
+		if (this.enforceSelection) {
+			this.inputElement.selectionStart = this.state.selection.start
+			this.inputElement.selectionEnd = this.state.selection.end
+			this.inputElement.selectionDirection = this.state.selection.direction ?? null
+			this.enforceSelection = false
+		}
+		console.log("did render", this.state.selection.start, this.inputElement.selectionStart)
 	}
 
 	render() {
