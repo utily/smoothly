@@ -70,7 +70,10 @@ export class Action {
 			}
 			return state
 		},
-		// deleteByCut - TODO
+		deleteByCut: (_, state) => {
+			this.erase(state)
+			return state
+		},
 		// insertReplacementText - TODO
 		// insertCompositionText - TODO
 		// insertFromDrop - TODO
