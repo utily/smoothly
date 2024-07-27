@@ -22,12 +22,24 @@ export class Action {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return new Action(result || tidily.get("text")!)
 	}
+	public onCompositionStart(event: CompositionEvent, state: tidily.State) {
+		// TODO
+		console.log(event.type, event)
+	}
+	public onCompositionUpdate(event: CompositionEvent, state: tidily.State) {
+		// TODO
+		console.log(event.type, event)
+	}
+	public onCompositionEnd(event: CompositionEvent, state: tidily.State) {
+		// TODO
+		console.log(event.type, event)
+	}
+
 	public onBeforeInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const unformatted = this.unformattedState(state)
 		const result = this.beforeInputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
 		return this.formatState(result)
 	}
-
 	private beforeInputEventHandlers: {
 		[inputType: string]:
 			| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
