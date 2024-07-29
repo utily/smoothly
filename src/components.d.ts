@@ -260,13 +260,20 @@ export namespace Components {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name": string;
+        "placeholder": string;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "start": isoly.Date | undefined;
     }
@@ -1226,6 +1233,7 @@ declare global {
         "smoothlyInput": { [name: string]: isoly.DateRange | undefined };
         "smoothlyInputLoad": (parent: HTMLElement) => void;
         "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputDateRangeElement extends Components.SmoothlyInputDateRange, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputDateRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateRangeElement, ev: SmoothlyInputDateRangeCustomEvent<HTMLSmoothlyInputDateRangeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2331,15 +2339,19 @@ declare namespace LocalJSX {
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
+        "changed"?: boolean;
         "color"?: Color;
         "end"?: isoly.Date | undefined;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputDateRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange | undefined }>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "placeholder"?: string;
+        "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;
     }
