@@ -46,7 +46,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					direction: this.inputElement.selectionDirection ?? undefined,
 				},
 			})
-			this.state = this.action.onBeforeInput(event, state)
+			// this.state = this.action.onBeforeInput(event, state)
 			console.log(event.inputType, event.data, state)
 			this.enforceSelection = event.defaultPrevented
 		})
