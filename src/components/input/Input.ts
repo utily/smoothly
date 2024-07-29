@@ -14,6 +14,7 @@ export namespace Input {
 		color?: Color
 		name: string
 		looks: Looks
+		defined?: boolean
 		binary?: Binary
 	}
 	export namespace Element {
@@ -22,6 +23,7 @@ export namespace Input {
 			color: Color.type.optional(),
 			name: isly.string(),
 			looks: Looks.type,
+			defined: isly.boolean().optional(),
 			binary: isly.function<Binary>().optional(),
 		})
 		export const is = type.is

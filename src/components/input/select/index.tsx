@@ -44,6 +44,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() multiple = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) changed = false
+	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@Prop() required = false
@@ -119,6 +120,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("selected")
 	onSelectedChange() {
 		this.initialValueHandled && (this.changed = !this.areValuesEqual(this.selected, this.initialValue))
+		this.defined = this.selected.length > 0
 		const value =
 			!this.multiple && this.selected[0]
 				? this.selected[0].value

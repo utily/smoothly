@@ -377,6 +377,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "clearable": boolean;
         "color"?: Color;
+        "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -2453,6 +2454,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
+        "defined"?: boolean;
         "inCalendar"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
