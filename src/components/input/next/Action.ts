@@ -4,6 +4,13 @@ import { getAdjacentWordBreakIndex } from "./adjecentWordBreak"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 
+type Composition = {
+	data: string
+	selection: {
+		start: number
+		end: number
+	}
+}
 export class Action {
 	constructor(private formatter: Formatter) {}
 	static create(type: "price", currency?: isoly.Currency): Action
@@ -22,8 +29,15 @@ export class Action {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return new Action(result || tidily.get("text")!)
 	}
+	private composition?: Composition
 	public onCompositionStart(event: CompositionEvent, state: tidily.State) {
 		// TODO
+		// this.composition = {
+		// 	data: event.data,
+		// 	selection: {
+
+		// 	}
+		// }
 		console.log(event.type, event)
 	}
 	public onCompositionUpdate(event: CompositionEvent, state: tidily.State) {
