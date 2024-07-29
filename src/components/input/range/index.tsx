@@ -1,4 +1,17 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	VNode,
+	Watch,
+} from "@stencil/core"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -11,6 +24,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
+	@Element() element: HTMLSmoothlyInputRangeElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value: number | undefined = undefined
 	private initialValue = this.value
@@ -19,7 +33,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() min = 0
 	@Prop() max = 100000
-	@Prop() name: string
+	@Prop() name = "range"
 	@Prop() labelText?: string
 	@Prop() step: number | "any" = "any"
 	@Prop() outputSide: "right" | "left" = "left"
@@ -67,6 +81,13 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		event.target instanceof HTMLInputElement &&
 			(this.value =
 				this.step !== "any" ? event.target.valueAsNumber : Math.round(event.target.valueAsNumber * 100) / 100)
+	}
+	@Listen("smoothlyInputLoad")
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: unknown) => void>) {
+		if (event.target != this.element) {
+			event.stopPropagation()
+			event.detail(this)
+		}
 	}
 
 	render(): VNode | VNode[] {
