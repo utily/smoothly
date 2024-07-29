@@ -30,11 +30,10 @@ export class SmoothlyInputClear {
 				if (Editable.Element.is(parent)) {
 					parent.listen("changed", async p => {
 						if (Input.is(p)) {
-							this.disabled = p.readonly ? true : p.value ? !p.value : !p.changed
-							this.display = p.readonly ? false : p.value ? Boolean(p.value) : p.changed
+							this.display = !p.readonly && (typeof p.defined == "boolean" ? p.defined : Boolean(p.value))
 						}
 						if (p instanceof SmoothlyForm) {
-							this.disabled = p.readonly ? true : Object.values(p.value).filter(val => val).length < 1
+							this.disabled = p.readonly || Object.values(p.value).filter(val => val).length < 1
 							this.display = !p.readonly
 						}
 					})
