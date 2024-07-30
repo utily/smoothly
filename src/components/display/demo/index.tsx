@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, State } from "@stencil/core"
+import { isoly } from "isoly"
 import { Color, Notice } from "../../../model"
 @Component({
 	tag: "smoothly-display-demo",
@@ -194,6 +195,12 @@ export class SmoothlyDisplayDemo {
 						</dd>
 					</dl>
 				</fieldset>
+				<h2>With labels</h2>
+				<dd>
+					<smoothly-display label="Today" type="date" value={isoly.Date.now()}></smoothly-display>
+					<smoothly-display label="Total amount" type="price" currency="SEK" value={6789}></smoothly-display>
+					<smoothly-display label="Total amount" type="price" currency="GBP" value={678.9}></smoothly-display>
+				</dd>
 				<fieldset>
 					<h2>Test of different kinds of notifier</h2>
 					<button onClick={() => this.noticeWarning(Notice.warn("This is a test warning notice."))}>warning</button>

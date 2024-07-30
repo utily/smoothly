@@ -9,6 +9,7 @@ import { format, get, Type } from "tidily"
 })
 export class SmoothlyDisplay {
 	@Prop() type: Type
+	@Prop() label?: string
 	@Prop() value?: any
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
@@ -44,7 +45,7 @@ export class SmoothlyDisplay {
 					: get(this.type as Type, getLocale())?.toString(this.value)
 				break
 		}
-		return result
+		return this.label ? [<div>{this.label}</div>, result] : result
 	}
 }
 function getLocale(): Locale | undefined {
