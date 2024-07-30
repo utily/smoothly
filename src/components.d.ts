@@ -124,6 +124,7 @@ export namespace Components {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
+        "label"?: string;
         "type": Type;
         "value"?: any;
     }
@@ -2190,6 +2191,7 @@ declare namespace LocalJSX {
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
+        "label"?: string;
         "type"?: Type;
         "value"?: any;
     }

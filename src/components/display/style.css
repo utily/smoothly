@@ -1,6 +1,13 @@
 :host {
 	display: block;
+	white-space: wrap;
 }
+
 :host[hidden] {
 	display: none;
+}
+
+:host>div {
+	opacity: 0.6;
+	font-size: .8rem;
 }
