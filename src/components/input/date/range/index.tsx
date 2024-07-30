@@ -110,7 +110,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						readonly={this.readonly}
 						value={
 							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} - ${tidily.format(this.end, "date", locale)}`
+								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
 								: undefined
 						}
 						placeholder={this.placeholder}
