@@ -26,10 +26,7 @@ smoothly-app>smoothly-notifier>header {
 	justify-content: space-between;
 	box-sizing: border-box;
 	align-items: center;
-	box-shadow: 0 2px 5px 0 rgba(var(--smoothly-dark-shadow));
-	border-bottom: 1px solid rgba(var(--smoothly-dark-color));
-	background: rgba(var(--smoothly-color));
-	color: rgba(var(--smoothly-color-contrast));
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade));
 }
 
 smoothly-app>smoothly-notifier>header>nav {
@@ -159,6 +156,7 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 smoothly-app>smoothly-notifier>header>nav:not(.menu-open) {
 	display: none;
 }
+
 smoothly-app>smoothly-notifier>main>div {
 	overflow-y: scroll;
 	height: 100%;
