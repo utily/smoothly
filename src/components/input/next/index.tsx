@@ -38,22 +38,14 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	componentDidLoad() {
 		this.inputElement.addEventListener("beforeinput", (event: InputEvent) => {
 			// Get actual selection (can't selection event from all devices)
-			const state = this.action.createState({
-				value: this.state.value,
-				selection: {
-					start: this.inputElement.selectionStart ?? 0,
-					end: this.inputElement.selectionEnd ?? 0,
-					direction: this.inputElement.selectionDirection ?? undefined,
-				},
-			})
-			this.state = this.action.onBeforeInput(event, state)
-			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, state)
+			this.state = this.action.onEvent(event, this.state)
+			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, this.state)
 			this.enforceSelection = event.defaultPrevented
 		})
 	}
 	onInput(event: InputEvent) {
 		console.log("onIput", event.inputType, (event.target as HTMLInputElement).value)
-		this.state = this.action.onInput(event, this.state)
+		this.state = this.action.onEvent(event, this.state)
 	}
 	componentDidRender() {
 		if (this.enforceSelection) {

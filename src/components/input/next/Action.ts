@@ -79,89 +79,80 @@ export class Action {
 		return state
 	}
 
-	public onBeforeInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+	public onEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		const result = this.beforeInputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
+		const result = this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
 		const formatted = this.formatState(result)
 		if (event.defaultPrevented) {
 			;(event.target as HTMLInputElement).value = formatted.value
 		}
 		return formatted
 	}
-	private beforeInputEventHandlers: {
-		[inputType: string]:
-			| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
-			| undefined
-	} = {
-		insertText: (event, state) => {
-			event.preventDefault()
-			const insertString = event.data
-			if (typeof insertString == "string" && this.formatter.allowed(insertString, state)) {
-				this.replace(state, insertString)
-			}
-			return state
-		},
-		deleteContentBackward: (event, state) => {
-			event.preventDefault()
-			if (state.selection.start == state.selection.end)
-				this.select(state, state.selection.start - 1, state.selection.end)
-			this.erase(state)
-			return state
-		},
-		deleteContentForward: (event, state) => {
-			event.preventDefault()
-			if (state.selection.start == state.selection.end)
-				this.select(state, state.selection.start, state.selection.end + 1)
-			this.erase(state)
-			return state
-		},
-		deleteWordBackward: (event, _, formattedState) => {
-			// TODO - exception for password
-			event.preventDefault()
-			return this.deleteWord(formattedState, "backward")
-		},
-		deleteWordForward: (event, _, formattedState) => {
-			// TODO - exception for password
-			event.preventDefault()
-			return this.deleteWord(formattedState, "forward")
-		},
-		insertFromPaste: (event, state) => {
-			event.preventDefault()
-			if (typeof event.data == "string") {
-				this.replace(state, event.data)
-			}
-			return state
-		},
-		deleteByCut: (_, state) => {
-			this.erase(state)
-			return state
-		},
-		insertCompositionText: (event, state) => {
-			event.preventDefault()
-			return state
-		},
-		// insertFromDrop - TODO
-		// historyUndo - TODO
-		// historyRedo - TODO
-		// insertLineBreak - TODO
-	}
-	public onInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
-		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		const result = this.inputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
-		const formatted = this.formatState(result)
-		if (event.defaultPrevented) {
-			;(event.target as HTMLInputElement).value = formatted.value
+	private eventHandlers: {
+		[type: string]: {
+			[inputType: string]:
+				| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
+				| undefined
 		}
-		return formatted
-	}
-	private inputEventHandlers: {
-		[inputType: string]:
-			| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
-			| undefined
 	} = {
-		insertReplacementText: (event, state) => {
-			console.log("on beforeInput insertReplacementText", (event.target as HTMLInputElement).value)
-			return { ...state, value: (event.target as HTMLInputElement).value }
+		beforeinput: {
+			insertText: (event, state) => {
+				event.preventDefault()
+				const insertString = event.data
+				if (typeof insertString == "string" && this.formatter.allowed(insertString, state)) {
+					this.replace(state, insertString)
+				}
+				return state
+			},
+			deleteContentBackward: (event, state) => {
+				event.preventDefault()
+				if (state.selection.start == state.selection.end)
+					this.select(state, state.selection.start - 1, state.selection.end)
+				this.erase(state)
+				return state
+			},
+			deleteContentForward: (event, state) => {
+				event.preventDefault()
+				if (state.selection.start == state.selection.end)
+					this.select(state, state.selection.start, state.selection.end + 1)
+				this.erase(state)
+				return state
+			},
+			deleteWordBackward: (event, _, formattedState) => {
+				// TODO - exception for password
+				event.preventDefault()
+				return this.deleteWord(formattedState, "backward")
+			},
+			deleteWordForward: (event, _, formattedState) => {
+				// TODO - exception for password
+				event.preventDefault()
+				return this.deleteWord(formattedState, "forward")
+			},
+			insertFromPaste: (event, state) => {
+				event.preventDefault()
+				if (typeof event.data == "string") {
+					this.replace(state, event.data)
+				}
+				return state
+			},
+			deleteByCut: (_, state) => {
+				this.erase(state)
+				return state
+			},
+			insertCompositionText: (event, state) => {
+				event.preventDefault()
+				return state
+			},
+			// insertFromDrop - TODO
+			// historyUndo - TODO
+			// historyRedo - TODO
+			// insertLineBreak - TODO
+		},
+		input: {
+			insertReplacementText: (event, state) => {
+				console.log("on beforeInput insertReplacementText", (event.target as HTMLInputElement).value)
+				return { ...state, value: (event.target as HTMLInputElement).value }
+			},
 		},
 	}
 
