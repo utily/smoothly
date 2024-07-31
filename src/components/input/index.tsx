@@ -331,6 +331,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						color={this.color}
 						name={this.name}
 						type={this.state?.type}
+						inputmode={this.state?.inputmode}
 						placeholder={this.placeholder}
 						required={this.required}
 						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
