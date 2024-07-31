@@ -83,8 +83,12 @@ export class Action {
 		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
 		const result = this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
 		const formatted = this.formatState(result)
+		const input = event.target as HTMLInputElement
 		if (event.defaultPrevented) {
-			;(event.target as HTMLInputElement).value = formatted.value
+			input.value = formatted.value
+			input.selectionStart = formatted.selection.start
+			input.selectionEnd = formatted.selection.end
+			input.selectionDirection = formatted.selection.direction ?? null
 		}
 		return formatted
 	}
