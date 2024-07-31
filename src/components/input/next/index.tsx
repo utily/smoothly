@@ -47,9 +47,13 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 				},
 			})
 			this.state = this.action.onBeforeInput(event, state)
-			console.log(event.inputType, event.data, state)
+			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, state)
 			this.enforceSelection = event.defaultPrevented
 		})
+	}
+	onInput(event: InputEvent) {
+		console.log("onIput", event.inputType, (event.target as HTMLInputElement).value)
+		this.state = this.action.onInput(event, this.state)
 	}
 	componentDidRender() {
 		if (this.enforceSelection) {
@@ -70,6 +74,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
+					onInput={(e: InputEvent) => this.onInput(e)}
 					onCompositionstart={e => (this.state = this.action.onCompositionStart(e, this.state))}
 					onCompositionupdate={e => (this.state = this.action.onCompositionUpdate(e, this.state))}
 					onCompositionend={e => (this.state = this.action.onCompositionEnd(e, this.state))}

@@ -137,16 +137,32 @@ export class Action {
 			return state
 		},
 		insertCompositionText: (event, state) => {
-			// TODO
 			event.preventDefault()
 			return state
 		},
-		// insertCompositionText - TODO
-		// insertReplacementText - TODO
 		// insertFromDrop - TODO
 		// historyUndo - TODO
 		// historyRedo - TODO
 		// insertLineBreak - TODO
+	}
+	public onInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
+		const result = this.inputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
+		const formatted = this.formatState(result)
+		if (event.defaultPrevented) {
+			;(event.target as HTMLInputElement).value = formatted.value
+		}
+		return formatted
+	}
+	private inputEventHandlers: {
+		[inputType: string]:
+			| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
+			| undefined
+	} = {
+		insertReplacementText: (event, state) => {
+			console.log("on beforeInput insertReplacementText", (event.target as HTMLInputElement).value)
+			return { ...state, value: (event.target as HTMLInputElement).value }
+		},
 	}
 
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
