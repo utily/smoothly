@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, Prop, State, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Host, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Action } from "./Action"
@@ -46,7 +46,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					direction: this.inputElement.selectionDirection ?? undefined,
 				},
 			})
-			// this.state = this.action.onBeforeInput(event, state)
+			this.state = this.action.onBeforeInput(event, state)
 			console.log(event.inputType, event.data, state)
 			this.enforceSelection = event.defaultPrevented
 		})
@@ -58,22 +58,29 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 			this.inputElement.selectionDirection = this.state.selection.direction ?? null
 			this.enforceSelection = false
 		}
-		console.log("did render", this.state.selection.start, this.inputElement.selectionStart)
+		// console.log("did render", this.state.selection.start, this.inputElement.selectionStart)
 	}
 
 	render() {
 		return (
-			<input
-				ref={(e: HTMLInputElement) => (this.inputElement = e)}
-				value={this.state.value}
-				type={this.type}
-				placeholder={this.type}
-				onCompositionstart={e => this.action.onCompositionStart(e, this.state)}
-				onCompositionupdate={e => this.action.onCompositionUpdate(e, this.state)}
-				onCompositionend={e => this.action.onCompositionEnd(e, this.state)}
-				selectionStart={this.state.selection.start} // TODO see if selection still works on phones
-				selectionEnd={this.state.selection.end}
-				selectionDirection={this.state.selection.direction}></input>
+			<Host>
+				<input
+					ref={(e: HTMLInputElement) => (this.inputElement = e)}
+					// value={this.state.value}
+					type={this.state.type}
+					inputMode={this.state.inputmode}
+					placeholder={this.type}
+					onCompositionstart={e => (this.state = this.action.onCompositionStart(e, this.state))}
+					onCompositionupdate={e => (this.state = this.action.onCompositionUpdate(e, this.state))}
+					onCompositionend={e => (this.state = this.action.onCompositionEnd(e, this.state))}
+
+					// selectionStart={this.state.selection.start} // TODO see if selection still works on phones
+					// selectionEnd={this.state.selection.end}
+					// selectionDirection={this.state.selection.direction}
+				></input>
+				<pre style={{ margin: "0" }}>{this.state.value}</pre>
+				<pre style={{ margin: "0" }}>{this.action.composition?.data}</pre>
+			</Host>
 		)
 	}
 }
