@@ -1,5 +1,6 @@
 :host {
 	display: flex;
+	position: relative;
 }
 
 :host>smoothly-input {
@@ -10,7 +11,34 @@
 	height: 2em;
 	width: 5em;
 	margin-right: 0.25rem;
-	background-color: var(--value);
+	background-color: var(--hexCode);
 	border: rgb(var(--smoothly-input-border)) solid 1px;
 	border-radius: 2px;
+}
+
+:host>div.rgb-sliders {
+	background-color: rgb(var(--smoothly-input-background));
+	position: absolute;
+	padding: 1.5em 0;
+	top: var(--element-height);
+	box-sizing: border-box;
+}
+
+div.rgb-sliders > * {
+	padding: 1em 0 .8em 0
+}
+
+:host[looks=border]>div.rgb-sliders {
+	border: rgb(var(--smoothly-input-border)) solid 1px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
+	/* left: -1px;
+	right: -1px;
+	width: calc(100% - 2px); */
+}
+
+:host[looks="grid"]>div.rgb-sliders {
+	border: rgb(var(--smoothly-input-border)) solid .5px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .2) solid 2px;
+	/* left: -2px;
+	right: -2px; */
 }
