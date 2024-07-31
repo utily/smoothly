@@ -29,30 +29,64 @@ export class Action {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return new Action(result || tidily.get("text")!)
 	}
-	private composition?: Composition
-	public onCompositionStart(event: CompositionEvent, state: tidily.State) {
-		// TODO
-		// this.composition = {
-		// 	data: event.data,
-		// 	selection: {
 
-		// 	}
-		// }
+	public composition?: Composition // TODO make private
+	public onCompositionStart(event: CompositionEvent, state: tidily.State) {
+		const result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
+		// event.stopPropagation()
+		this.composition = {
+			data: event.data,
+			selection: {
+				start: result.selection.start,
+				end: result.selection.start + event.data.length,
+			},
+		}
 		console.log(event.type, event)
+		return this.formatState(result)
 	}
 	public onCompositionUpdate(event: CompositionEvent, state: tidily.State) {
-		// TODO
+		let result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
+		// event.stopPropagation()
+		this.composition!.data = event.data
+		result = this.substituteComposition(this.composition!, result)
+		this.composition!.selection = {
+			start: this.composition?.selection.start ?? 0,
+			end: (this.composition?.selection.start ?? 0) + event.data.length,
+		}
 		console.log(event.type, event)
+		return this.formatState(result)
 	}
 	public onCompositionEnd(event: CompositionEvent, state: tidily.State) {
-		// TODO
+		let result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
+		// event.stopPropagation()
+		this.composition!.data = event.data
+		result = this.substituteComposition(this.composition!, result)
+		this.composition!.selection = {
+			start: this.composition?.selection.start ?? 0,
+			end: (this.composition?.selection.start ?? 0) + event.data.length,
+		}
+		this.composition = undefined
 		console.log(event.type, event)
+		return this.formatState(result)
+	}
+	substituteComposition(composition: Composition, state: tidily.State) {
+		state.value =
+			state.value.substring(0, composition.selection.start) +
+			composition.data +
+			state.value.substring(composition.selection.end)
+		state.selection.start = composition.selection.end
+		state.selection.end = composition.selection.end
+		return state
 	}
 
 	public onBeforeInput(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
-		const unformatted = this.unformattedState(state)
+		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
 		const result = this.beforeInputEventHandlers[event.inputType]?.(event, unformatted, state) ?? state
-		return this.formatState(result)
+		const formatted = this.formatState(result)
+		if (event.defaultPrevented) {
+			;(event.target as HTMLInputElement).value = formatted.value
+		}
+		return formatted
 	}
 	private beforeInputEventHandlers: {
 		[inputType: string]:
@@ -82,10 +116,12 @@ export class Action {
 			return state
 		},
 		deleteWordBackward: (event, _, formattedState) => {
+			// TODO - exception for password
 			event.preventDefault()
 			return this.deleteWord(formattedState, "backward")
 		},
 		deleteWordForward: (event, _, formattedState) => {
+			// TODO - exception for password
 			event.preventDefault()
 			return this.deleteWord(formattedState, "forward")
 		},
@@ -98,6 +134,11 @@ export class Action {
 		},
 		deleteByCut: (_, state) => {
 			this.erase(state)
+			return state
+		},
+		insertCompositionText: (event, state) => {
+			// TODO
+			event.preventDefault()
 			return state
 		},
 		// insertCompositionText - TODO
@@ -131,6 +172,16 @@ export class Action {
 	}
 	public formatState(unformattedState: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(unformattedState))
+	}
+	public updateSelectionFromElement(input: HTMLInputElement, state: tidily.State) {
+		return this.createState({
+			value: state.value,
+			selection: {
+				start: input.selectionStart ?? 0,
+				end: input.selectionEnd ?? 0,
+				direction: input.selectionDirection ?? undefined,
+			},
+		})
 	}
 
 	private select(state: tidily.State, from: number, to: number, direction?: tidily.Direction): void {
