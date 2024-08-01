@@ -1,4 +1,5 @@
 import { Component, Prop, h, Host, VNode} from "@stencil/core"
+import { JsonValue } from "../JsonValue"
 
 @Component({
 	tag: "smoothly-display-json-record",
@@ -18,7 +19,7 @@ export class SmoothlyDisplayJsonRecord {
 							<div class="indent">{
 							<smoothly-display-json-record-key value={k}></smoothly-display-json-record-key>
 						}: {
-							<smoothly-display-json value={v}></smoothly-display-json>
+							<JsonValue value={v}></JsonValue>
 						},</div>))}
 				</span>
 				<span>{"}"}</span>

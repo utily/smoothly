@@ -1,4 +1,5 @@
 import { Component, Prop, h, Host, VNode} from "@stencil/core"
+import { JsonValue } from "../JsonValue"
 
 @Component({
 	tag: "smoothly-display-json-array",
@@ -13,7 +14,7 @@ export class SmoothlyDisplayJsonArray {
 		return <Host class={{empty: this.value.length == 0}}>
 				<span class="open-bracket" onClick={() => this.open = !this.open}>{"["}</span>
 				<span class="content">
-					{this.value.map(v => <div class="indent"><smoothly-display-json value={v}></smoothly-display-json>,</div>)}
+					{this.value.map(v => <div class="indent"><JsonValue value={v}></JsonValue>,</div>)}
 				</span>
 				<span>{"]"}</span>
 			</Host>

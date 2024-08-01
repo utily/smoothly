@@ -1,5 +1,5 @@
-import { Component, Prop, h, Host, VNode} from "@stencil/core"
-import { isly } from "isly"
+import { Component, Prop, h, VNode} from "@stencil/core"
+import { JsonValue } from "./JsonValue"
 
 @Component({
 	tag: "smoothly-display-json",
@@ -10,12 +10,6 @@ export class SmoothlyDisplayJson {
 	@Prop() value: any
 
 	render(): VNode {
-		return <Host>{
-			Array.isArray(this.value) 
-				? <smoothly-display-json-array value={this.value}></smoothly-display-json-array> 
-				: isly.object().is(this.value) 
-				? <smoothly-display-json-record value={this.value}></smoothly-display-json-record> 
-				: <smoothly-display-json-primitive value={this.value}></smoothly-display-json-primitive>
-			}</Host>
+		return <JsonValue value={this.value}></JsonValue>
 	}
 }
