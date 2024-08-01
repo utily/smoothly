@@ -138,16 +138,12 @@ export namespace Components {
     interface SmoothlyDisplayJson {
         "value": any;
     }
-    interface SmoothlyDisplayJsonArray {
+    interface SmoothlyDisplayJsonObject {
         "open": boolean;
-        "value": any[];
+        "value": Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
         "value": any;
-    }
-    interface SmoothlyDisplayJsonRecord {
-        "open": boolean;
-        "value": Record<string, any>;
     }
     interface SmoothlyDisplayJsonRecordKey {
         "value": any;
@@ -1016,23 +1012,17 @@ declare global {
         prototype: HTMLSmoothlyDisplayJsonElement;
         new (): HTMLSmoothlyDisplayJsonElement;
     };
-    interface HTMLSmoothlyDisplayJsonArrayElement extends Components.SmoothlyDisplayJsonArray, HTMLStencilElement {
+    interface HTMLSmoothlyDisplayJsonObjectElement extends Components.SmoothlyDisplayJsonObject, HTMLStencilElement {
     }
-    var HTMLSmoothlyDisplayJsonArrayElement: {
-        prototype: HTMLSmoothlyDisplayJsonArrayElement;
-        new (): HTMLSmoothlyDisplayJsonArrayElement;
+    var HTMLSmoothlyDisplayJsonObjectElement: {
+        prototype: HTMLSmoothlyDisplayJsonObjectElement;
+        new (): HTMLSmoothlyDisplayJsonObjectElement;
     };
     interface HTMLSmoothlyDisplayJsonPrimitiveElement extends Components.SmoothlyDisplayJsonPrimitive, HTMLStencilElement {
     }
     var HTMLSmoothlyDisplayJsonPrimitiveElement: {
         prototype: HTMLSmoothlyDisplayJsonPrimitiveElement;
         new (): HTMLSmoothlyDisplayJsonPrimitiveElement;
-    };
-    interface HTMLSmoothlyDisplayJsonRecordElement extends Components.SmoothlyDisplayJsonRecord, HTMLStencilElement {
-    }
-    var HTMLSmoothlyDisplayJsonRecordElement: {
-        prototype: HTMLSmoothlyDisplayJsonRecordElement;
-        new (): HTMLSmoothlyDisplayJsonRecordElement;
     };
     interface HTMLSmoothlyDisplayJsonRecordKeyElement extends Components.SmoothlyDisplayJsonRecordKey, HTMLStencilElement {
     }
@@ -2058,9 +2048,8 @@ declare global {
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-display-json": HTMLSmoothlyDisplayJsonElement;
-        "smoothly-display-json-array": HTMLSmoothlyDisplayJsonArrayElement;
+        "smoothly-display-json-object": HTMLSmoothlyDisplayJsonObjectElement;
         "smoothly-display-json-primitive": HTMLSmoothlyDisplayJsonPrimitiveElement;
-        "smoothly-display-json-record": HTMLSmoothlyDisplayJsonRecordElement;
         "smoothly-display-json-record-key": HTMLSmoothlyDisplayJsonRecordKeyElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
@@ -2260,16 +2249,12 @@ declare namespace LocalJSX {
     interface SmoothlyDisplayJson {
         "value"?: any;
     }
-    interface SmoothlyDisplayJsonArray {
+    interface SmoothlyDisplayJsonObject {
         "open"?: boolean;
-        "value"?: any[];
+        "value"?: Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
         "value"?: any;
-    }
-    interface SmoothlyDisplayJsonRecord {
-        "open"?: boolean;
-        "value"?: Record<string, any>;
     }
     interface SmoothlyDisplayJsonRecordKey {
         "value"?: any;
@@ -2826,9 +2811,8 @@ declare namespace LocalJSX {
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-display-json": SmoothlyDisplayJson;
-        "smoothly-display-json-array": SmoothlyDisplayJsonArray;
+        "smoothly-display-json-object": SmoothlyDisplayJsonObject;
         "smoothly-display-json-primitive": SmoothlyDisplayJsonPrimitive;
-        "smoothly-display-json-record": SmoothlyDisplayJsonRecord;
         "smoothly-display-json-record-key": SmoothlyDisplayJsonRecordKey;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-field": SmoothlyFilterField;
@@ -2935,9 +2919,8 @@ declare module "@stencil/core" {
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-display-json": LocalJSX.SmoothlyDisplayJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
-            "smoothly-display-json-array": LocalJSX.SmoothlyDisplayJsonArray & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonArrayElement>;
+            "smoothly-display-json-object": LocalJSX.SmoothlyDisplayJsonObject & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
             "smoothly-display-json-primitive": LocalJSX.SmoothlyDisplayJsonPrimitive & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
-            "smoothly-display-json-record": LocalJSX.SmoothlyDisplayJsonRecord & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordElement>;
             "smoothly-display-json-record-key": LocalJSX.SmoothlyDisplayJsonRecordKey & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordKeyElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
