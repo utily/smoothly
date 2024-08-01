@@ -19,7 +19,6 @@ export class Action {
 				result = tidily.get(type, extra)
 				break
 		}
-
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		return new Action(result || tidily.get("text")!)
 	}
