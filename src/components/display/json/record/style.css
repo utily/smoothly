@@ -8,6 +8,7 @@
 
 .indent {
 	padding-left: 1rem;
+	border-left: 1px solid rgb(var(--smoothly-light-shade));
 }
 :host(:not([open])) .content {
 	display: none;

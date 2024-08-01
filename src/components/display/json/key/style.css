@@ -1,8 +1,7 @@
 :host {
 	font-family: monospace;
 	display: inline;
-	color: rgb(var(--smoothly-primary-color));
-	font-weight: bold;
+	color: rgb(var(--smoothly-default-contrast));
 }
 :host[hidden] {
 	display: none;
