@@ -5,7 +5,7 @@ import { Component, Prop, h, Host, VNode} from "@stencil/core"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDisplayJson {
+export class SmoothlyDisplayJsonPrimitive {
 	@Prop() value: any
 
 	render(): VNode {

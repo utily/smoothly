@@ -5,7 +5,7 @@ import { Component, Prop, h, Host, VNode} from "@stencil/core"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyDisplayJson {
+export class SmoothlyDisplayJsonArray {
 	@Prop() value: any[]
 	@Prop({reflect: true, mutable: true}) open = true
 

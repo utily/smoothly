@@ -5,7 +5,7 @@ import { Component, Prop, h, Host, VNode} from "@stencil/core"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyJsonRecord {
+export class SmoothlyDisplayJsonRecord {
 	
 	@Prop() value: Record<string, any>
 	@Prop({reflect: true, mutable: true}) open = true
@@ -16,7 +16,7 @@ export class SmoothlyJsonRecord {
 				<span class="content">
 						{Object.entries(this.value).map(([k, v]) => (
 							<div class="indent">{
-							<smoothly-display-json-key value={k}></smoothly-display-json-key>
+							<smoothly-display-json-record-key value={k}></smoothly-display-json-record-key>
 						}: {
 							<smoothly-display-json value={v}></smoothly-display-json>
 						},</div>))}
