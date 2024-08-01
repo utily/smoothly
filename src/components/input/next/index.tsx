@@ -42,7 +42,6 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 		})
 	}
 	onInput(event: InputEvent) {
-		console.log("onIput", event.inputType, (event.target as HTMLInputElement).value)
 		this.state = this.action.onEvent(event, this.state)
 	}
 
@@ -54,12 +53,8 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
-					onInput={(e: InputEvent) => this.onInput(e)}
-					onCompositionstart={e => (this.state = this.action.onCompositionStart(e, this.state))}
-					onCompositionupdate={e => (this.state = this.action.onCompositionUpdate(e, this.state))}
-					onCompositionend={e => (this.state = this.action.onCompositionEnd(e, this.state))}></input>
+					onInput={(e: InputEvent) => this.onInput(e)}></input>
 				<pre style={{ margin: "0" }}>{this.state.value}</pre>
-				<pre style={{ margin: "0" }}>{this.action.composition?.data}</pre>
 			</Host>
 		)
 	}
