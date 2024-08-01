@@ -1,6 +1,5 @@
 :host {
 	font-family: monospace;
-	position: relative;
 }
 :host[hidden] {
 	display: none;
@@ -12,7 +11,6 @@
 :host(:not([open])) .content {
 	display: none;
 }
-
 .open-bracket::after {
 	background-color: rgb(var(--smoothly-light-color));
 	color: rgb(var(--smoothly-light-shade));

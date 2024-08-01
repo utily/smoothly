@@ -11,8 +11,10 @@ export class SmoothlyDisplayJson {
 
 	render(): VNode {
 		return <Host>
-				<span>{"["}</span>
+				<span class="open-bracket" onClick={() => this.open = !this.open}>{"["}</span>
+				<span class="content">
 					{this.value.map(v => <div class="indent"><smoothly-display-json value={v}></smoothly-display-json>,</div>)}
+				</span>
 				<span>{"]"}</span>
 			</Host>
 	}
