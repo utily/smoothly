@@ -11,6 +11,7 @@ import { Filter } from "../Filter"
 export class SmoothlyFilterInput implements Filter {
 	type: tidily.Type = "text"
 	@State() needle: selectively.Criteria = ""
+	@Prop() label: string
 	@Prop() property: string
 	@Prop() placeholder: string
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
@@ -85,6 +86,7 @@ export class SmoothlyFilterInput implements Filter {
 				onSmoothlyInputLoad={e => e.stopPropagation()}
 				onSmoothlyChange={e => e.stopPropagation()}
 				onSmoothlyInput={e => this.inputHandler(e)}>
+				{this.label}
 				<slot />
 			</smoothly-input>
 		)

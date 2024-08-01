@@ -1,22 +1,22 @@
 import { Component, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { selectively } from "selectively"
 import { isly } from "isly"
-import { Option } from "../../../model"
 import { Looks } from "../../input/Looks"
 import { Filter } from "../Filter"
 
 @Component({
-	tag: "smoothly-filter-picker",
+	tag: "smoothly-filter-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyFilterPicker implements Filter {
+export class SmoothlyFilterSelect implements Filter {
+	private selectElement?: HTMLSmoothlyInputSelectElement
 	updating = false
-	options: Map<string, { state: Record<string, any>; selected: (selected: boolean) => void }> = new Map<
+	items: Map<string, { state: Record<string, any>; item: HTMLSmoothlyItemElement }> = new Map<
 		string,
-		{ state: Record<string, any>; selected: (selected: boolean) => void }
+		{ state: Record<string, any>; item: HTMLSmoothlyItemElement }
 	>()
-	@Element() element: HTMLSmoothlyFilterPickerElement
+	@Element() element: HTMLSmoothlyFilterSelectElement
 	@Prop() label: string
 	@Prop() property: string
 	@Prop() multiple = false
@@ -25,17 +25,18 @@ export class SmoothlyFilterPicker implements Filter {
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
-	componentDidLoad() {
+	async componentDidLoad() {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
 	}
-	@Listen("smoothlyPickerOptionChange")
-	optionChangeHandler(event: CustomEvent<Option>) {
-		event.stopPropagation()
-		this.options.set(event.detail.value, {
-			state: this.property.split(".").reduceRight((r, e) => ({ [e]: r }), event.detail.value),
-			selected: event.detail.set.selected,
-		})
+	@Listen("smoothlyInputLoad")
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: any) => void>): Promise<void> {
+		;(await this.selectElement?.getItems())?.forEach(item =>
+			this.items.set(item.value, {
+				state: this.property.split(".").reduceRight((r, e) => ({ [e]: r }), item.value),
+				item,
+			})
+		)
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
@@ -47,29 +48,30 @@ export class SmoothlyFilterPicker implements Filter {
 	update(expression: selectively.Criteria): void {
 		this.updating = true
 		if (expression instanceof selectively.And && expression.rules.length > 0)
-			for (const option of this.options.values()) {
-				option.selected(
-					expression.rules.some(
-						r =>
-							this.isCriteria(r, this.property, option.state) &&
-							(this.type == "array" ? this.findInstanceOf(r, this.property) : r.is(option.state))
-					)
+			for (const item of this.items.values()) {
+				const selected = expression.rules.some(
+					r =>
+						this.isCriteria(r, this.property, item.state) &&
+						(this.type == "array" ? this.findInstanceOf(r, this.property) : r.is(item.state))
 				)
+				item.item.selected = selected
 			}
 		else
-			this.options.forEach(o => o.selected(false))
+			this.items.forEach(item => (item.item.selected = false))
 		this.updating = false
 	}
 	private isCriteria(criteria: selectively.Rule | undefined, key: string, value: Record<string, any> | any): boolean {
 		const [property, ...rest] = key.split(".")
-		return criteria instanceof selectively.Property && criteria.name == property
-			? this.isCriteria(criteria.criteria, rest.join("."), value[property])
-			: this.multiple
-			? (criteria instanceof selectively.Within && criteria.value.some(e => e == value)) ||
-			  (this.type == "array" && criteria instanceof selectively.Contains && criteria.criteria.some(e => e == value))
-			: criteria instanceof selectively.Is && criteria.value == value
+		const result =
+			criteria instanceof selectively.Property && criteria.name == property
+				? this.isCriteria(criteria.criteria, rest.join("."), value[property])
+				: this.multiple
+				? (criteria instanceof selectively.Within && criteria.value.some(e => e == value)) ||
+				  (this.type == "array" && criteria instanceof selectively.Contains && criteria.criteria.some(e => e == value))
+				: criteria instanceof selectively.Is && criteria.value == value
+		return result
 	}
-	pickerHandler(event: CustomEvent<Record<string, unknown>>) {
+	selectHandler(event: CustomEvent<Record<string, unknown>>) {
 		event.stopPropagation()
 		if (!this.updating) {
 			const argument = event.detail[this.property]
@@ -118,22 +120,21 @@ export class SmoothlyFilterPicker implements Filter {
 
 	render() {
 		return (
-			<smoothly-picker
+			<smoothly-input-select
+				ref={e => (this.selectElement = e)}
 				name={this.property}
 				looks={this.looks}
 				multiple={this.multiple}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
-				onSmoothlyChange={e => e.stopPropagation()}
-				onSmoothlyPickerLoaded={e => e.stopPropagation()}
-				onSmoothlyInput={e => this.pickerHandler(e)}>
+				onSmoothlyItemSelect={e => e.stopPropagation()}
+				onSmoothlyInput={e => this.selectHandler(e)}>
 				{this.label && (
 					<span slot="label">
 						{[this.label.slice(0, 1).toUpperCase(), this.label.slice(1, this.label.length)].join("")}
 					</span>
 				)}
-				<span slot="search">Search</span>
-				<slot />
-			</smoothly-picker>
+				<slot name="items"></slot>
+			</smoothly-input-select>
 		)
 	}
 }
