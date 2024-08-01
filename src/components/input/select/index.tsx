@@ -84,6 +84,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
+	async getItems(): Promise<HTMLSmoothlyItemElement[]> {
+		return this.items
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
@@ -169,9 +173,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.selected = event.detail.selected
 				? [...this.selected, event.detail]
 				: this.selected.filter(item => item.selected)
-		} else {
+		} else if (event.detail.selected || !this.items.some(e => e.selected)) {
 			this.selected[0] && (this.selected[0].hidden = this.selected[0].selected = false)
-			this.selected = !event.detail.selected ? [] : [event.detail]
+			this.selected = !event.detail.selected ? this.selected.filter(item => item.selected) : [event.detail]
 			!this.showSelected && event.detail.selected && (event.detail.hidden = true)
 		}
 		this.displaySelected()
@@ -186,7 +190,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	handleShowOptions(event?: Event): void {
-		event && event.stopPropagation()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
 		const clickedItem = event

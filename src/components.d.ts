@@ -142,10 +142,11 @@ export namespace Components {
         "criteria": selectively.Criteria;
     }
     interface SmoothlyFilterInput {
+        "label": string;
         "placeholder": string;
         "property": string;
     }
-    interface SmoothlyFilterPicker {
+    interface SmoothlyFilterSelect {
         "label": string;
         "looks": Looks;
         "multiple": boolean;
@@ -380,6 +381,7 @@ export namespace Components {
         "color"?: Color;
         "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
+        "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
@@ -663,9 +665,9 @@ export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFilterInputElement;
 }
-export interface SmoothlyFilterPickerCustomEvent<T> extends CustomEvent<T> {
+export interface SmoothlyFilterSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLSmoothlyFilterPickerElement;
+    target: HTMLSmoothlyFilterSelectElement;
 }
 export interface SmoothlyFilterToggleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1043,24 +1045,24 @@ declare global {
         prototype: HTMLSmoothlyFilterInputElement;
         new (): HTMLSmoothlyFilterInputElement;
     };
-    interface HTMLSmoothlyFilterPickerElementEventMap {
+    interface HTMLSmoothlyFilterSelectElementEventMap {
         "smoothlyFilterUpdate": Filter.Update;
         "smoothlyFilterManipulate": Filter.Manipulate;
         "smoothlyInputLooks": (looks: Looks) => void;
     }
-    interface HTMLSmoothlyFilterPickerElement extends Components.SmoothlyFilterPicker, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterPickerElement, ev: SmoothlyFilterPickerCustomEvent<HTMLSmoothlyFilterPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLSmoothlyFilterSelectElement extends Components.SmoothlyFilterSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFilterSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterSelectElement, ev: SmoothlyFilterSelectCustomEvent<HTMLSmoothlyFilterSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterPickerElement, ev: SmoothlyFilterPickerCustomEvent<HTMLSmoothlyFilterPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFilterSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterSelectElement, ev: SmoothlyFilterSelectCustomEvent<HTMLSmoothlyFilterSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLSmoothlyFilterPickerElement: {
-        prototype: HTMLSmoothlyFilterPickerElement;
-        new (): HTMLSmoothlyFilterPickerElement;
+    var HTMLSmoothlyFilterSelectElement: {
+        prototype: HTMLSmoothlyFilterSelectElement;
+        new (): HTMLSmoothlyFilterSelectElement;
     };
     interface HTMLSmoothlyFilterToggleElementEventMap {
         "smoothlyFilterUpdate": Filter.Update;
@@ -2011,7 +2013,7 @@ declare global {
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
-        "smoothly-filter-picker": HTMLSmoothlyFilterPickerElement;
+        "smoothly-filter-select": HTMLSmoothlyFilterSelectElement;
         "smoothly-filter-toggle": HTMLSmoothlyFilterToggleElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
@@ -2211,18 +2213,19 @@ declare namespace LocalJSX {
         "onSmoothlyFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Rule>) => void;
     }
     interface SmoothlyFilterInput {
+        "label"?: string;
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Update>) => void;
         "placeholder"?: string;
         "property"?: string;
     }
-    interface SmoothlyFilterPicker {
+    interface SmoothlyFilterSelect {
         "label"?: string;
         "looks"?: Looks;
         "multiple"?: boolean;
-        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Manipulate>) => void;
-        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterPickerCustomEvent<Filter.Update>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyFilterPickerCustomEvent<(looks: Looks) => void>) => void;
+        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Manipulate>) => void;
+        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Update>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyFilterSelectCustomEvent<(looks: Looks) => void>) => void;
         "property"?: string;
         "type"?: "array" | "string";
     }
@@ -2756,7 +2759,7 @@ declare namespace LocalJSX {
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-field": SmoothlyFilterField;
         "smoothly-filter-input": SmoothlyFilterInput;
-        "smoothly-filter-picker": SmoothlyFilterPicker;
+        "smoothly-filter-select": SmoothlyFilterSelect;
         "smoothly-filter-toggle": SmoothlyFilterToggle;
         "smoothly-form": SmoothlyForm;
         "smoothly-frame": SmoothlyFrame;
@@ -2860,7 +2863,7 @@ declare module "@stencil/core" {
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
-            "smoothly-filter-picker": LocalJSX.SmoothlyFilterPicker & JSXBase.HTMLAttributes<HTMLSmoothlyFilterPickerElement>;
+            "smoothly-filter-select": LocalJSX.SmoothlyFilterSelect & JSXBase.HTMLAttributes<HTMLSmoothlyFilterSelectElement>;
             "smoothly-filter-toggle": LocalJSX.SmoothlyFilterToggle & JSXBase.HTMLAttributes<HTMLSmoothlyFilterToggleElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
