@@ -36,7 +36,6 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	}
 	componentDidLoad() {
 		this.inputElement.addEventListener("beforeinput", (event: InputEvent) => {
-			// Get actual selection (can't selection event from all devices)
 			this.state = this.action.onEvent(event, this.state)
 			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, this.state)
 		})
