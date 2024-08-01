@@ -1,6 +1,6 @@
 import { isoly } from "isoly"
 import { tidily } from "tidily"
-import { getAdjacentWordBreakIndex } from "./adjecentWordBreak"
+import { getAdjacentWordBreakIndex } from "./adjacentWordBreak"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
