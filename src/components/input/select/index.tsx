@@ -169,9 +169,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.selected = event.detail.selected
 				? [...this.selected, event.detail]
 				: this.selected.filter(item => item.selected)
-		} else {
+		} else if (event.detail.selected || !this.items.some(e => e.selected)) {
 			this.selected[0] && (this.selected[0].hidden = this.selected[0].selected = false)
-			this.selected = !event.detail.selected ? [] : [event.detail]
+			this.selected = !event.detail.selected ? this.selected.filter(item => item.selected) : [event.detail]
 			!this.showSelected && event.detail.selected && (event.detail.hidden = true)
 		}
 		this.displaySelected()
