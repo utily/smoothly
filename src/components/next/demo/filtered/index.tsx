@@ -68,7 +68,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						toolTip="Colored cats"
 						slot="bar"
 					/>
-					<smoothly-filter-picker label="coat" property="nested.coat" slot="bar" multiple={false}>
+					<smoothly-filter-select label="coat" property="nested.coat" slot="bar" multiple={false}>
 						{this.cats &&
 							Object.values(
 								this.cats.reduce<Record<string, Cat>>(
@@ -83,10 +83,10 @@ export class TableDemoFiltered implements ComponentWillLoad {
 										</smoothly-item>
 									)
 							)}
-					</smoothly-filter-picker>
+					</smoothly-filter-select>
 					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-picker label="coat" property="nested.coat" multiple>
+							<smoothly-filter-select label="coat" property="nested.coat" multiple>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>(
@@ -101,8 +101,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 												</smoothly-item>
 											)
 									)}
-							</smoothly-filter-picker>
-							<smoothly-filter-picker label="breed" property="breed" multiple={false}>
+							</smoothly-filter-select>
+							<smoothly-filter-select label="breed" property="breed" multiple={false}>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>((r, cat) => (cat.breed ? { ...r, [cat.breed]: cat } : r), {})
@@ -114,8 +114,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 												</smoothly-item>
 											)
 									)}
-							</smoothly-filter-picker>
-							<smoothly-filter-picker label="names" property="nested.names" multiple={true} type="array">
+							</smoothly-filter-select>
+							<smoothly-filter-select label="names" property="nested.names" multiple={true} type="array">
 								{Object.keys(
 									Object.values(names)
 										.flat()
@@ -125,7 +125,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 										{name}
 									</smoothly-item>
 								))}
-							</smoothly-filter-picker>
+							</smoothly-filter-select>
 							<smoothly-filter-input label="Coat" property="coat" />
 							<smoothly-filter-input label="Nested Coat" property="nested.coat" />
 						</smoothly-form>
