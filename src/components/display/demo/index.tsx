@@ -189,6 +189,22 @@ export class SmoothlyDisplayDemo {
 								}}
 								value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
+						<dt>Display JSON</dt>
+						<dd>
+							<smoothly-display type="json" value={{
+		name: "stringy", 
+		nested: {
+			name: "some name", 
+			age: 109, 
+			things: ["one", "two", "three", {name: "arne"}],
+			emptyObject: {}, 
+			truthy: true, 
+			falsy: false, 
+			null: null, 
+			notDefined: undefined
+		}
+	}}></smoothly-display>
+						</dd>
 						<dt>Display amount</dt>
 						<dd>
 							<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>

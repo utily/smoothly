@@ -1,0 +1,32 @@
+:host {
+	font-family: monospace;
+	display: inline;
+}
+:host[hidden] {
+	display: none;
+}
+
+:host(.key), 
+:host(.string), 
+:host(.number),
+:host(.boolean),
+:host(.undefined),
+:host(.null ){
+	font-weight: bold;
+}
+.key {
+	color: rgb(var(--smoothly-primary-color));
+}
+:host(.string) {
+	color: rgb(var(--smoothly-secondary-color));
+}
+:host(.number) {
+	color: rgb(var(--smoothly-tertiary-color));
+}
+:host(.boolean) {
+	color: rgb(var(--smoothly-success-color));
+}
+:host(.null),
+:host(.undefined) {
+	color: rgb(var(--smoothly-dark-color));
+}

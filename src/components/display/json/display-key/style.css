@@ -1,0 +1,9 @@
+:host {
+	font-family: monospace;
+	display: inline;
+	color: rgb(var(--smoothly-primary-color));
+	font-weight: bold;
+}
+:host[hidden] {
+	display: none;
+}

@@ -1,0 +1,10 @@
+:host {
+	font-family: monospace;
+}
+:host[hidden] {
+	display: none;
+}
+
+.indent {
+	padding-left: 1rem;
+}
