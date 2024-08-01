@@ -10,70 +10,68 @@ export class SmoothlyNextDemoSimple {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Simple" />
-				<smoothly-color color="primary">
-					<smoothly-next-table columns={2}>
-						<smoothly-next-table-head>
-							<smoothly-next-table-row>
-								<smoothly-next-table-cell>Breed</smoothly-next-table-cell>
-								<smoothly-next-table-cell>Coat</smoothly-next-table-cell>
-							</smoothly-next-table-row>
-						</smoothly-next-table-head>
-						<smoothly-next-table-body>
-							{cats.map(cat => (
-								<smoothly-next-table-row>
-									<smoothly-next-table-expandable-cell>
-										{cat.breed}
-										<div slot="detail">
-											Country:
-											<br />
-											{cat.country}
-										</div>
-									</smoothly-next-table-expandable-cell>
-									<smoothly-next-table-expandable-cell>
-										{cat.coat}
-										<div slot="detail">Pattern: {cat.pattern}</div>
-									</smoothly-next-table-expandable-cell>
-								</smoothly-next-table-row>
-							))}
-							<smoothly-next-table-expandable-row>
-								<div slot={"detail"}>
-									Content
-									<br />
-									of
-									<br />
-									the
-									<br />
-									expandable
-									<br />
-									row
-								</div>
-								<smoothly-next-table-cell>Cell1 in expandable row</smoothly-next-table-cell>
-								<smoothly-next-table-cell>Cell2 in expandable row</smoothly-next-table-cell>
-							</smoothly-next-table-expandable-row>
-							<smoothly-next-table-row>
-								<smoothly-next-table-cell>Cell5</smoothly-next-table-cell>
-								<smoothly-next-table-expandable-cell>
-									Expandable Cell
-									<div slot={"detail"}>Content of the expandable cell</div>
-								</smoothly-next-table-expandable-cell>
-							</smoothly-next-table-row>
+				<smoothly-next-table color="primary" columns={2}>
+					<smoothly-next-table-head>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>Breed</smoothly-next-table-cell>
+							<smoothly-next-table-cell>Coat</smoothly-next-table-cell>
+						</smoothly-next-table-row>
+					</smoothly-next-table-head>
+					<smoothly-next-table-body>
+						{cats.map(cat => (
 							<smoothly-next-table-row>
 								<smoothly-next-table-expandable-cell>
-									Expandable Cell 1<div slot={"detail"}>Content of the expandable cell 1</div>
+									{cat.breed}
+									<div slot="detail">
+										Country:
+										<br />
+										{cat.country}
+									</div>
 								</smoothly-next-table-expandable-cell>
 								<smoothly-next-table-expandable-cell>
-									Expandable Cell 2<div slot={"detail"}>Content of the expandable cell 2</div>
+									{cat.coat}
+									<div slot="detail">Pattern: {cat.pattern}</div>
 								</smoothly-next-table-expandable-cell>
 							</smoothly-next-table-row>
-						</smoothly-next-table-body>
-						<smoothly-next-table-foot>
-							<smoothly-next-table-row>
-								<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
-								<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
-							</smoothly-next-table-row>
-						</smoothly-next-table-foot>
-					</smoothly-next-table>
-				</smoothly-color>
+						))}
+						<smoothly-next-table-expandable-row>
+							<div slot={"detail"}>
+								Content
+								<br />
+								of
+								<br />
+								the
+								<br />
+								expandable
+								<br />
+								row
+							</div>
+							<smoothly-next-table-cell>Cell1 in expandable row</smoothly-next-table-cell>
+							<smoothly-next-table-cell>Cell2 in expandable row</smoothly-next-table-cell>
+						</smoothly-next-table-expandable-row>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>Cell5</smoothly-next-table-cell>
+							<smoothly-next-table-expandable-cell>
+								Expandable Cell
+								<div slot={"detail"}>Content of the expandable cell</div>
+							</smoothly-next-table-expandable-cell>
+						</smoothly-next-table-row>
+						<smoothly-next-table-row>
+							<smoothly-next-table-expandable-cell>
+								Expandable Cell 1<div slot={"detail"}>Content of the expandable cell 1</div>
+							</smoothly-next-table-expandable-cell>
+							<smoothly-next-table-expandable-cell>
+								Expandable Cell 2<div slot={"detail"}>Content of the expandable cell 2</div>
+							</smoothly-next-table-expandable-cell>
+						</smoothly-next-table-row>
+					</smoothly-next-table-body>
+					<smoothly-next-table-foot>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
+							<smoothly-next-table-cell>Footer Cell</smoothly-next-table-cell>
+						</smoothly-next-table-row>
+					</smoothly-next-table-foot>
+				</smoothly-next-table>
 			</Host>
 		)
 	}
