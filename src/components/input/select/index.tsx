@@ -186,7 +186,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	handleShowOptions(event?: Event): void {
-		event && event.stopPropagation()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
 		const clickedItem = event
