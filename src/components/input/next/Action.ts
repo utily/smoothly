@@ -4,13 +4,8 @@ import { getAdjacentWordBreakIndex } from "./adjecentWordBreak"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 
-type Composition = {
-	data: string
-	selection: {
-		start: number
-		end: number
-	}
-}
+type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
+
 export class Action {
 	constructor(private formatter: Formatter) {}
 	static create(type: "price", currency?: isoly.Currency): Action
@@ -30,58 +25,12 @@ export class Action {
 		return new Action(result || tidily.get("text")!)
 	}
 
-	public composition?: Composition // TODO make private
-	public onCompositionStart(event: CompositionEvent, state: tidily.State) {
-		const result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		// event.stopPropagation()
-		this.composition = {
-			data: event.data,
-			selection: {
-				start: result.selection.start,
-				end: result.selection.start + event.data.length,
-			},
-		}
-		console.log(event.type, event)
-		return this.formatState(result)
-	}
-	public onCompositionUpdate(event: CompositionEvent, state: tidily.State) {
-		let result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		// event.stopPropagation()
-		this.composition!.data = event.data
-		result = this.substituteComposition(this.composition!, result)
-		this.composition!.selection = {
-			start: this.composition?.selection.start ?? 0,
-			end: (this.composition?.selection.start ?? 0) + event.data.length,
-		}
-		console.log(event.type, event)
-		return this.formatState(result)
-	}
-	public onCompositionEnd(event: CompositionEvent, state: tidily.State) {
-		let result = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		// event.stopPropagation()
-		this.composition!.data = event.data
-		result = this.substituteComposition(this.composition!, result)
-		this.composition!.selection = {
-			start: this.composition?.selection.start ?? 0,
-			end: (this.composition?.selection.start ?? 0) + event.data.length,
-		}
-		this.composition = undefined
-		console.log(event.type, event)
-		return this.formatState(result)
-	}
-	substituteComposition(composition: Composition, state: tidily.State) {
-		state.value =
-			state.value.substring(0, composition.selection.start) +
-			composition.data +
-			state.value.substring(composition.selection.end)
-		state.selection.start = composition.selection.end
-		state.selection.end = composition.selection.end
-		return state
-	}
-
 	public onEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
-		const result = this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
+		const result =
+			event.type == "beforeinput" || event.type == "input"
+				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
+				: state
 		const formatted = this.formatState(result)
 		const input = event.target as HTMLInputElement
 		if (event.defaultPrevented) {
@@ -92,13 +41,7 @@ export class Action {
 		}
 		return formatted
 	}
-	private eventHandlers: {
-		[type: string]: {
-			[inputType: string]:
-				| ((event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State)
-				| undefined
-		}
-	} = {
+	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: EventHandler | undefined }> = {
 		beforeinput: {
 			insertText: (event, state) => {
 				event.preventDefault()
@@ -143,20 +86,14 @@ export class Action {
 				this.erase(state)
 				return state
 			},
-			insertCompositionText: (event, state) => {
-				event.preventDefault()
-				return state
-			},
 			// insertFromDrop - TODO
 			// historyUndo - TODO
 			// historyRedo - TODO
 			// insertLineBreak - TODO
 		},
 		input: {
-			insertReplacementText: (event, state) => {
-				console.log("on beforeInput insertReplacementText", (event.target as HTMLInputElement).value)
-				return { ...state, value: (event.target as HTMLInputElement).value }
-			},
+			insertReplacementText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
+			insertCompositionText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
 		},
 	}
 
@@ -176,14 +113,6 @@ export class Action {
 		return result
 	}
 
-	public insertFromPaste(state: tidily.State) {}
-
-	public unformattedState(formattedState: tidily.State) {
-		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
-	}
-	public formatState(unformattedState: tidily.State) {
-		return this.formatter.format(tidily.StateEditor.copy(unformattedState))
-	}
 	public updateSelectionFromElement(input: HTMLInputElement, state: tidily.State) {
 		return this.createState({
 			value: state.value,
@@ -200,7 +129,6 @@ export class Action {
 		state.selection.end = to
 		direction && (state.selection.direction = direction)
 	}
-
 	private erase(state: tidily.State): void {
 		this.replace(state, "")
 	}
@@ -211,6 +139,12 @@ export class Action {
 		state.selection.end = state.selection.start
 	}
 
+	public unformattedState(formattedState: tidily.State) {
+		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
+	}
+	public formatState(unformattedState: tidily.State) {
+		return this.formatter.format(tidily.StateEditor.copy(unformattedState))
+	}
 	public createState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
