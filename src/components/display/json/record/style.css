@@ -21,9 +21,10 @@
 	font-weight: bold;
 	font-size: 0.8em;
 }
-:host(:not([open]))>.open-bracket::after {
+
+:host(:not([open]):not(.empty))>.open-bracket::after {
 	content: " ▶-◀ ";
 }
-:host([open])>.open-bracket::after {
+:host([open]:not(.empty))>.open-bracket::after {
 	content: " ▼ ";
 }
