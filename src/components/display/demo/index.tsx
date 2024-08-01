@@ -193,11 +193,11 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-display type="json" value={{
 		name: "stringy", 
-		nested: {
-			name: "some name", 
+		nested: { 
 			age: 109, 
-			things: ["one", "two", "three", {name: "arne"}],
+			array: ["one", "two", "three", {name: "four"}],
 			emptyObject: {}, 
+			emptyArray: [],
 			truthy: true, 
 			falsy: false, 
 			null: null, 
