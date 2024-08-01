@@ -4,6 +4,7 @@
 	grid-template-areas:
 		"header filter"
 		"main main";
+	margin-bottom: 50em;
 }
 
 :host>smoothly-display {
@@ -14,6 +15,7 @@
 :host>smoothly-filter {
 	margin-left: auto;
 	grid-area: filter;
+	height: fit-content;
 }
 
 :host>* {

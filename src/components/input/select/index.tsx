@@ -84,6 +84,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
+	async getItems(): Promise<HTMLSmoothlyItemElement[]> {
+		return this.items
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
