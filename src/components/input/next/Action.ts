@@ -3,7 +3,6 @@ import { tidily } from "tidily"
 import { getAdjacentWordBreakIndex } from "./adjecentWordBreak"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
-
 type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
 export class Action {
@@ -45,10 +44,16 @@ export class Action {
 		beforeinput: {
 			insertText: (event, state) => {
 				event.preventDefault()
-				const insertString = event.data
-				if (typeof insertString == "string" && this.formatter.allowed(insertString, state)) {
-					this.replace(state, insertString)
-				}
+				if (typeof event.data == "string")
+					for (const c of event.data)
+						this.formatter.allowed(c, state) && this.replace(state, c)
+				return state
+			},
+			insertFromPaste: (event, state) => {
+				event.preventDefault()
+				if (typeof event.data == "string")
+					for (const c of event.data)
+						this.formatter.allowed(c, state) && this.replace(state, c)
 				return state
 			},
 			deleteContentBackward: (event, state) => {
@@ -74,13 +79,6 @@ export class Action {
 				// TODO - exception for password
 				event.preventDefault()
 				return this.deleteWord(formattedState, "forward")
-			},
-			insertFromPaste: (event, state) => {
-				event.preventDefault()
-				if (typeof event.data == "string") {
-					this.replace(state, event.data)
-				}
-				return state
 			},
 			deleteByCut: (_, state) => {
 				this.erase(state)
