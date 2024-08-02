@@ -27,7 +27,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input-range>
 					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
-				{/* 
+				<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 				<h2>input-date-range outside from</h2>
 				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}>
 					Date Range
@@ -95,7 +95,7 @@ export class SmoothlyInputDemo {
 					Delayed
 				</smoothly-input>
 				<h2>Editable form and Input with Clear and Reset - Readonly</h2>
-				<smoothly-form looks="grid" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+				<smoothly-form looks="border" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input readonly name="First Name" value="John">
 						First name
 					</smoothly-input>
@@ -123,6 +123,9 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
+					<smoothly-input-color name="color" value={"#479f56"}>
+						Color
+					</smoothly-input-color>
 					<smoothly-input-select menuHeight="7.5items" placeholder="Select..." multiple name="select-month">
 						<label slot="label">Month</label>
 						<smoothly-item value="1">January</smoothly-item>
@@ -209,6 +212,7 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
+					<smoothly-input-color name="color">Color</smoothly-input-color>
 					<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 						<label slot="label">Month multiple select</label>
 						<smoothly-item value="1">January</smoothly-item>
@@ -254,7 +258,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
 						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
 					</smoothly-input-submit>
-				</smoothly-form> */}
+				</smoothly-form>
 				<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 					<label slot="label">Month multiple select</label>
 					<smoothly-item value="1">January</smoothly-item>
@@ -271,11 +275,10 @@ export class SmoothlyInputDemo {
 					<smoothly-item value="12">December</smoothly-item>
 				</smoothly-input-select>
 				<h2>Color</h2>
-				<smoothly-form looks="border">
-					<smoothly-input-color name="color"></smoothly-input-color>
-					<smoothly-input name="hex" type="hex-color"></smoothly-input>
+				<smoothly-form looks="border" onSmoothlyFormInput={e => console.log(e.detail)}>
+					<smoothly-input-color name="color">Choose color</smoothly-input-color>
 				</smoothly-form>
-				{/* <h2>Range</h2>
+				<h2>Range</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-range step={1} name="range" outputSide="right">
 						Select and so
@@ -351,7 +354,6 @@ export class SmoothlyInputDemo {
 						</smoothly-item>
 					</smoothly-input-select>
 				</smoothly-form>
-
 				<h2>Submit</h2>
 				<smoothly-form looks="border">
 					<smoothly-input type="text" name="username">
@@ -789,7 +791,7 @@ export class SmoothlyInputDemo {
 					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
 						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
 					</smoothly-submit>
-				</smoothly-form> */}
+				</smoothly-form>
 			</Host>
 		)
 	}

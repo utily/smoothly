@@ -14,6 +14,7 @@ import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { Editable } from "./components/input/Editable";
+import { Editable as Editable1 } from "./components";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
@@ -27,6 +28,7 @@ export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { Editable } from "./components/input/Editable";
+export { Editable as Editable1 } from "./components";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
 export { Controls as Controls1 } from "./components/picker/menu/index";
@@ -243,9 +245,15 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
+        "changed": boolean;
         "clear": () => Promise<void>;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable1) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "value": string | undefined;
     }
     interface SmoothlyInputDate {
@@ -1196,6 +1204,7 @@ declare global {
         "smoothlyInputLooks": (looks: Looks, color: Color) => void;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputColorElement extends Components.SmoothlyInputColor, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputColorElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputColorElement, ev: SmoothlyInputColorCustomEvent<HTMLSmoothlyInputColorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2319,11 +2328,14 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
+        "changed"?: boolean;
         "looks"?: Looks;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputColorCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "readonly"?: boolean;
         "value"?: string | undefined;
     }
     interface SmoothlyInputDate {
