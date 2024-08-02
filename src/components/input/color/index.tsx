@@ -13,9 +13,9 @@ import {
 	VNode,
 	Watch,
 } from "@stencil/core"
-import { Editable } from "../../../components"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
