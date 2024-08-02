@@ -2,6 +2,7 @@
 
 :host {
 	position: relative;
+	cursor: pointer;
 	display: flex;
 	width: fit-content;
 	background-color: rgb(var(--smoothly-input-background));
@@ -9,6 +10,15 @@
 	&:focus-within smoothly-input {
 		outline: none;
 	}
+}
+
+:host>section>smoothly-input>div>input {
+	cursor: pointer;
+}
+
+:host[readonly],
+:host[readonly]>section>smoothly-input>div>input {
+	cursor: not-allowed;
 }
 
 :host>nav {

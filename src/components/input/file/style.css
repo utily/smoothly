@@ -63,6 +63,12 @@
 	display: none;
 }
 
-:host>div>span {
+:host,
+:host * {
 	cursor: pointer;
+}
+
+:host[readonly],
+:host[readonly] * {
+	cursor: not-allowed;
 }
