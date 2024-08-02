@@ -125,7 +125,7 @@ export namespace Components {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "label"?: string;
-        "type": Type;
+        "type": Type | "json";
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {
@@ -134,6 +134,19 @@ export namespace Components {
         "toInteger": boolean;
     }
     interface SmoothlyDisplayDemo {
+    }
+    interface SmoothlyDisplayJson {
+        "value": any;
+    }
+    interface SmoothlyDisplayJsonObject {
+        "open": boolean;
+        "value": Record<string, any> | any[];
+    }
+    interface SmoothlyDisplayJsonPrimitive {
+        "value": any;
+    }
+    interface SmoothlyDisplayJsonRecordKey {
+        "value": any;
     }
     interface SmoothlyFilter {
     }
@@ -993,6 +1006,30 @@ declare global {
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
+    };
+    interface HTMLSmoothlyDisplayJsonElement extends Components.SmoothlyDisplayJson, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayJsonElement: {
+        prototype: HTMLSmoothlyDisplayJsonElement;
+        new (): HTMLSmoothlyDisplayJsonElement;
+    };
+    interface HTMLSmoothlyDisplayJsonObjectElement extends Components.SmoothlyDisplayJsonObject, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayJsonObjectElement: {
+        prototype: HTMLSmoothlyDisplayJsonObjectElement;
+        new (): HTMLSmoothlyDisplayJsonObjectElement;
+    };
+    interface HTMLSmoothlyDisplayJsonPrimitiveElement extends Components.SmoothlyDisplayJsonPrimitive, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayJsonPrimitiveElement: {
+        prototype: HTMLSmoothlyDisplayJsonPrimitiveElement;
+        new (): HTMLSmoothlyDisplayJsonPrimitiveElement;
+    };
+    interface HTMLSmoothlyDisplayJsonRecordKeyElement extends Components.SmoothlyDisplayJsonRecordKey, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayJsonRecordKeyElement: {
+        prototype: HTMLSmoothlyDisplayJsonRecordKeyElement;
+        new (): HTMLSmoothlyDisplayJsonRecordKeyElement;
     };
     interface HTMLSmoothlyFilterElementEventMap {
         "smoothlyFilter": selectively.Criteria;
@@ -2011,6 +2048,10 @@ declare global {
         "smoothly-display": HTMLSmoothlyDisplayElement;
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-display-json": HTMLSmoothlyDisplayJsonElement;
+        "smoothly-display-json-object": HTMLSmoothlyDisplayJsonObjectElement;
+        "smoothly-display-json-primitive": HTMLSmoothlyDisplayJsonPrimitiveElement;
+        "smoothly-display-json-record-key": HTMLSmoothlyDisplayJsonRecordKeyElement;
         "smoothly-filter": HTMLSmoothlyFilterElement;
         "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
         "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
@@ -2195,7 +2236,7 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "label"?: string;
-        "type"?: Type;
+        "type"?: Type | "json";
         "value"?: any;
     }
     interface SmoothlyDisplayAmount {
@@ -2205,6 +2246,19 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
+    }
+    interface SmoothlyDisplayJson {
+        "value"?: any;
+    }
+    interface SmoothlyDisplayJsonObject {
+        "open"?: boolean;
+        "value"?: Record<string, any> | any[];
+    }
+    interface SmoothlyDisplayJsonPrimitive {
+        "value"?: any;
+    }
+    interface SmoothlyDisplayJsonRecordKey {
+        "value"?: any;
     }
     interface SmoothlyFilter {
         "onSmoothlyFilter"?: (event: SmoothlyFilterCustomEvent<selectively.Criteria>) => void;
@@ -2758,6 +2812,10 @@ declare namespace LocalJSX {
         "smoothly-display": SmoothlyDisplay;
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-display-json": SmoothlyDisplayJson;
+        "smoothly-display-json-object": SmoothlyDisplayJsonObject;
+        "smoothly-display-json-primitive": SmoothlyDisplayJsonPrimitive;
+        "smoothly-display-json-record-key": SmoothlyDisplayJsonRecordKey;
         "smoothly-filter": SmoothlyFilter;
         "smoothly-filter-field": SmoothlyFilterField;
         "smoothly-filter-input": SmoothlyFilterInput;
@@ -2862,6 +2920,10 @@ declare module "@stencil/core" {
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-display-json": LocalJSX.SmoothlyDisplayJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
+            "smoothly-display-json-object": LocalJSX.SmoothlyDisplayJsonObject & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
+            "smoothly-display-json-primitive": LocalJSX.SmoothlyDisplayJsonPrimitive & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
+            "smoothly-display-json-record-key": LocalJSX.SmoothlyDisplayJsonRecordKey & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordKeyElement>;
             "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
             "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
             "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
