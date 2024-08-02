@@ -8,9 +8,7 @@
 
 :host(.string), 
 :host(.number),
-:host(.boolean),
-:host(.undefined),
-:host(.null ){
+:host(.boolean) {
 	font-weight: bold;
 }
 :host(.string) {
@@ -24,5 +22,5 @@
 }
 :host(.null),
 :host(.undefined) {
-	color: rgb(var(--smoothly-dark-color));
+	color: rgb(var(--smoothly-medium-color));
 }
