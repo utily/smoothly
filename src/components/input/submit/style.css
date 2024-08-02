@@ -1,11 +1,16 @@
 :host {
 	display: flex;
 }
+
 :host(:not([display])) {
 	display: none;
 }
+
 :host::slotted(smoothly-button button > * > * + smoothly-icon),
 :host::slotted(smoothly-button-confirm button > * > * + smoothly-icon) {
 	display: none;
 }
 
+:host([disabled]) {
+	cursor: not-allowed
+}
