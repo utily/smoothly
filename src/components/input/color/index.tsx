@@ -166,7 +166,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					onClick={() => !this.readonly && (this.open = !this.open)}
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexCodeInputHandler(event.detail[this.name]))}>
 					<slot />
-					<slot name="end" />
 					<div slot="end" class="color-sample"></div>
 				</smoothly-input>
 				{this.open && !this.readonly && (
