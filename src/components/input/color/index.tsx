@@ -13,7 +13,7 @@ import {
 	VNode,
 	Watch,
 } from "@stencil/core"
-import { SmoothlyInputRangeCustomEvent } from "../../../components"
+import { smoothly } from "../../.."
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -99,7 +99,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.listener.changed?.(this)
 	}
-	sliderInputHandler(event: SmoothlyInputRangeCustomEvent<Record<string, any>>) {
+	sliderInputHandler(event: CustomEvent<smoothly.Data>) {
 		event.stopPropagation()
 		const color = Object.keys(event.detail)[0]
 		for (const key of Object.keys(this.rgb)) {
@@ -115,9 +115,9 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
 		if (input && regex.test(input)) {
 			this.rgb = this.hexToRGB(input)
-		} else if (!input || !regex.test(input)) {
+		} else if (!input || !regex.test(input))
 			this.rgb = { r: undefined, g: undefined, b: undefined }
-		}
+
 		this.value = input
 	}
 	hexToRGB(hex: string): RGB {
@@ -147,10 +147,8 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				hex += temp.length === 1 ? "0" + temp : temp
 			}
 		}
-
 		const hexPairs = [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)]
 		hexPairs.every(pair => pair[0] === pair[1]) && (hex = hexPairs.map(pair => pair[0]).join(""))
-
 		return "#" + hex
 	}
 
