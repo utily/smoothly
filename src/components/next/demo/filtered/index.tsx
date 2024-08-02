@@ -68,7 +68,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						toolTip="Colored cats"
 						slot="bar"
 					/>
-					<smoothly-filter-select label="coat" property="nested.coat" slot="bar" multiple={false}>
+					<smoothly-filter-select menuHeight="5items" label="coat" property="nested.coat" slot="bar" multiple={false}>
 						{this.cats &&
 							Object.values(
 								this.cats.reduce<Record<string, Cat>>(
@@ -86,7 +86,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 					</smoothly-filter-select>
 					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-select label="coat" property="nested.coat" multiple>
+							<smoothly-filter-select menuHeight="5items" label="coat" property="nested.coat" multiple>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>(
@@ -102,7 +102,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 											)
 									)}
 							</smoothly-filter-select>
-							<smoothly-filter-select label="breed" property="breed" multiple={false}>
+							<smoothly-filter-select menuHeight="5items" label="breed" property="breed" multiple={false}>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>((r, cat) => (cat.breed ? { ...r, [cat.breed]: cat } : r), {})
@@ -115,7 +115,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 											)
 									)}
 							</smoothly-filter-select>
-							<smoothly-filter-select label="names" property="nested.names" multiple={true} type="array">
+							<smoothly-filter-select
+								menuHeight="5items"
+								label="names"
+								property="nested.names"
+								multiple={true}
+								type="array">
 								{Object.keys(
 									Object.values(names)
 										.flat()
