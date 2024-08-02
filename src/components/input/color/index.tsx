@@ -13,6 +13,7 @@ import {
 	VNode,
 	Watch,
 } from "@stencil/core"
+import { SmoothlyInputRangeCustomEvent } from "../../../components"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -52,16 +53,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.value && this.hexCodeInputHandler(this.value), this.setInitialValue()
-	}
-	@Listen("smoothlyInput")
-	smoothlyInputHandler(event: CustomEvent<Record<string, any>>): void {
-		if (event.target !== this.element && event.target && "name" in event.target && event.target.name !== this.name) {
-			event.stopPropagation()
-			const [key, value] = Object.entries(event.detail)[0]
-			if (key in this.rgb && value !== undefined) {
-				this.sliderInputHandler(key, value)
-			}
-		}
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
@@ -108,10 +99,12 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.listener.changed?.(this)
 	}
-	sliderInputHandler(color: string, value: string) {
+	sliderInputHandler(event: SmoothlyInputRangeCustomEvent<Record<string, any>>) {
+		event.stopPropagation()
+		const color = Object.keys(event.detail)[0]
 		for (const key of Object.keys(this.rgb)) {
 			if (key === color)
-				this.rgb = { ...this.rgb, [key]: value }
+				this.rgb = { ...this.rgb, [key]: event.detail[color] }
 			else if (this.rgb[key as keyof RGB] === undefined) {
 				this.rgb = { ...this.rgb, [key]: 0 }
 			}
@@ -144,7 +137,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 
 		return { r, g, b }
 	}
-
 	RGBToHex(): string {
 		let hex = ""
 		for (const component of Object.values(this.rgb)) {
@@ -179,15 +171,18 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				</smoothly-input>
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
-						<smoothly-input-range name="r" min={0} max={255} value={this.rgb.r} step={1} outputSide="right">
-							R
-						</smoothly-input-range>
-						<smoothly-input-range name="g" min={0} max={255} value={this.rgb.g} step={1} outputSide="right">
-							G
-						</smoothly-input-range>
-						<smoothly-input-range name="b" min={0} max={255} value={this.rgb.b} step={1} outputSide="right">
-							B
-						</smoothly-input-range>
+						{Object.entries(this.rgb).map(([key, value]) => (
+							<smoothly-input-range
+								name={key}
+								min={0}
+								max={255}
+								value={value}
+								step={1}
+								outputSide="right"
+								onSmoothlyInput={event => this.sliderInputHandler(event)}>
+								{key.toUpperCase()}
+							</smoothly-input-range>
+						))}
 					</div>
 				)}
 			</Host>
