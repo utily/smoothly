@@ -1,38 +1,29 @@
 @import "../../button/style.css";
 
+:host {
+	display: flex;
+}
+
 :host(:not([display])) {
 	display: none;
 }
 
-:host() {
-	margin: 0rem;
-	min-width: 0rem;
-	display: flex;
-}
-
-:host([type="input"]) {
-	line-height: 1;
-}
-
-:host([type="form"]) {
-	margin: 1em 0em;
-}
-
-:host([type="input"]) ::slotted(smoothly-icon) {
+:host([type="input"])::slotted(smoothly-button>button) {
+	cursor: pointer;
 	filter: opacity(60%);
-	font-size: 70%;
-	color: rgb(var(--smoothly-input-foreground));
-	fill: rgb(var(--smoothly-input-foreground));
-	stroke: rgb(var(--smoothly-input-foreground));
+	--smoothly-button-foreground: var(--smoothly-input-foreground);
+	background-color: transparent;
+}
+
+:host::slotted(smoothly-button>button > * > * + smoothly-icon) {
+	display: none;
+}
+
+:host([disabled]) {
+	cursor: not-allowed
 }
 
 :host([type="input"]):hover ::slotted(smoothly-icon) {
 	cursor: pointer;
 	filter: opacity(100%);
-}
-
-:host([type="input"])>button {
-	padding: 0rem;
-	margin: 0rem;
-	min-width: 0rem;
 }

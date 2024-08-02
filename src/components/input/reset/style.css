@@ -1,3 +1,5 @@
+@import "../../button/style.css";
+
 :host {
 	display: flex;
 }
@@ -6,23 +8,22 @@
 	display: none;
 }
 
-:host([type="input"])>smoothly-button>button {
+:host([type="input"])::slotted(smoothly-button>button) {
+	cursor: pointer;
 	filter: opacity(60%);
 	--smoothly-button-foreground: var(--smoothly-input-foreground);
 	background-color: transparent;
-	
 }
 
-:host([type="input"]):hover>smoothly-button>button {
-	cursor: pointer;
-	filter: opacity(100%);
-	background-color: transparent;
-}
-
-:host::slotted(smoothly-button button > * > * + smoothly-icon) {
+:host::slotted(smoothly-button>button > * > * + smoothly-icon) {
 	display: none;
 }
 
 :host([disabled]) {
 	cursor: not-allowed
+}
+
+:host([type="input"]):hover ::slotted(smoothly-icon) {
+	cursor: pointer;
+	filter: opacity(100%);
 }

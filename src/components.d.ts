@@ -255,6 +255,7 @@ export namespace Components {
         "fill"?: Fill;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
+        "tooltip": string;
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
@@ -2393,6 +2394,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
+        "tooltip"?: string;
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
