@@ -6,3 +6,8 @@
 	flex-grow: 1;
 	width: 12.5em;
 }
+
+.options {
+	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
+}
