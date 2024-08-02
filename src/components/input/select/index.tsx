@@ -49,9 +49,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
 	@Prop() required = false
 	@Prop() searchDisabled = false
+	@Prop() mutable = false
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
+	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -294,6 +296,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private scrollTo(item: HTMLSmoothlyItemElement) {
 		this.optionsDiv?.scrollTo({ top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2 })
 	}
+	private addItem() {
+		this.addedItems = this.addedItems.concat(
+			<smoothly-item value={this.filter} selected>
+				{this.filter}
+			</smoothly-item>
+		)
+	}
 
 	render(): VNode | VNode[] {
 		return (
@@ -333,9 +342,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 									this.element.focus()
 								}}
 							/>
+							{this.mutable && (
+								<smoothly-icon
+									name="add"
+									size="small"
+									onClick={e => {
+										e.stopPropagation()
+										this.addItem()
+									}}
+								/>
+							)}
 						</smoothly-item>
 					)}
 					<slot />
+					{this.addedItems}
 				</div>
 			</Host>
 		)
