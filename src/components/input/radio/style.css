@@ -1,20 +1,20 @@
 @import "../shared.css";
 
 :host {
-	padding: .4em; 
+	padding: .4em;
 	background-color: rgb(var(--smoothly-input-background));
 	display: flex;
 	align-items: center;
 }
 
-:host > div.input-group {
+:host>div.input-group {
 	display: flex;
 	width: 100%;
 	align-items: center;
 	gap: 1em
 }
 
-:host > div.input-group > div {
+:host>div.input-group>div {
 	align-items: center;
 	display: flex;
 	justify-content: right;
@@ -23,7 +23,11 @@
 	gap: 1em;
 }
 
-:host > div.input-group::slotted(p) {
+:host>div.input-group::slotted(p) {
 	margin: 0 0 0 0.2em;
 	white-space: nowrap;
+}
+
+:host[readonly] smoothly-input-radio-item * {
+	cursor: not-allowed;
 }
