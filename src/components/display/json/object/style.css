@@ -1,0 +1,30 @@
+:host {
+	font-family: monospace;
+	position: relative;
+}
+:host[hidden] {
+	display: none;
+}
+
+.indent {
+	padding-left: 1rem;
+	border-left: 1px solid rgb(var(--smoothly-light-shade));
+}
+:host(:not([open])) .content {
+	display: none;
+}
+.open-bracket::after {
+	background-color: rgb(var(--smoothly-light-color));
+	color: rgb(var(--smoothly-light-shade));
+	white-space: pre;
+	border-radius: 0.25rem;
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+:host(:not([open]):not(.empty))>.open-bracket::after {
+	content: " ▶-◀ ";
+}
+:host([open]:not(.empty))>.open-bracket::after {
+	content: " ▼ ";
+}

@@ -197,7 +197,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 					<div>
 						<slot name="edit" />
 						<slot name="reset" />
-						<slot name="clear" />
+						<slot name="delete" />
 						<slot name="submit" />
 					</div>
 				</form>

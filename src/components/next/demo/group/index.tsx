@@ -10,14 +10,14 @@ export class SmoothlyNextDemoGroup {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Group" />
-				<smoothly-color color="primary">
-					<smoothly-next-table columns={2}>
-						<smoothly-next-table-head>
-							<smoothly-next-table-row>
-								<smoothly-next-table-cell>Date</smoothly-next-table-cell>
-								<smoothly-next-table-cell>Total</smoothly-next-table-cell>
-							</smoothly-next-table-row>
-						</smoothly-next-table-head>
+				<smoothly-next-table color="primary" columns={2}>
+					<smoothly-next-table-head>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>Date</smoothly-next-table-cell>
+							<smoothly-next-table-cell>Total</smoothly-next-table-cell>
+						</smoothly-next-table-row>
+					</smoothly-next-table-head>
+					<smoothly-next-table-body>
 						<smoothly-next-table-row-group align>
 							<smoothly-display slot={"start"} type="date" value={"2024-01-01"} />
 							<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={510} />
@@ -40,16 +40,14 @@ export class SmoothlyNextDemoGroup {
 								<smoothly-lazy slot={"detail"} content={<Fragment>Details of 2024-01-01T13:37:00.000Z</Fragment>} />
 							</smoothly-next-table-expandable-row>
 						</smoothly-next-table-row-group>
-						<smoothly-next-table-body>
-							<smoothly-next-table-row>
-								<smoothly-next-table-cell>
-									<smoothly-display type={"date"} value={"2024-01-02"} />
-								</smoothly-next-table-cell>
-								<smoothly-next-table-cell>
-									<smoothly-display type={"price"} currency={"EUR"} value={130} />
-								</smoothly-next-table-cell>
-							</smoothly-next-table-row>
-						</smoothly-next-table-body>
+						<smoothly-next-table-row>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"date"} value={"2024-01-02"} />
+							</smoothly-next-table-cell>
+							<smoothly-next-table-cell>
+								<smoothly-display type={"price"} currency={"EUR"} value={130} />
+							</smoothly-next-table-cell>
+						</smoothly-next-table-row>
 						<smoothly-next-table-row-group>
 							<smoothly-display slot={"start"} type={"date"} value={"2024-01-03"} />
 							<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={720} />
@@ -161,8 +159,8 @@ export class SmoothlyNextDemoGroup {
 							<smoothly-display slot={"start"} type={"date"} value={"2024-01-08"} />
 							<smoothly-display slot={"end"} type={"price"} currency={"EUR"} value={720} />
 						</smoothly-next-table-row-group>
-					</smoothly-next-table>
-				</smoothly-color>
+					</smoothly-next-table-body>
+				</smoothly-next-table>
 			</Host>
 		)
 	}

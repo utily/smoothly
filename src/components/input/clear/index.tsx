@@ -16,7 +16,7 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
 	@Prop({ reflect: true, mutable: true }) disabled = false
-	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
+	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible" = "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"

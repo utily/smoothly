@@ -42,7 +42,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input type={"text"} name={"name"}>
 						Name
 					</smoothly-input>
-					<smoothly-input-reset slot={"reset"} type={"form"} size={"icon"} color={"warning"} fill={"default"} />
+					<smoothly-input-reset slot={"reset"} type={"form"} size={"icon"} color={"warning"} />
 					<smoothly-input-submit slot={"submit"} size={"icon"} color={"success"} />
 				</smoothly-form>
 				<h2>Select</h2>
@@ -73,9 +73,7 @@ export class SmoothlyInputDemo {
 						<smoothly-item selected value="chocolate fondue">
 							Chocolate fondue
 						</smoothly-item>
-						<smoothly-input-reset size="icon" slot="end">
-							<smoothly-icon name="refresh-outline" />
-						</smoothly-input-reset>
+						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 					</smoothly-input-select>
 					<smoothly-input-select
 						name="select-icon"
@@ -160,25 +158,20 @@ export class SmoothlyInputDemo {
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
 					</smoothly-input-range>
-					<smoothly-picker multiple name="animals">
-						<span slot="label">Animals</span>
-						<span slot="search">Search</span>
-						<smoothly-picker-option selected value={"cat"}>
-							Cat
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
-						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
-					</smoothly-picker>
 					<smoothly-input-file name={"profile"} placeholder={"Click or drag your profile picture here..."}>
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
-					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />
-					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
-						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
-					</smoothly-input-submit>
+					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
+					<smoothly-input-submit
+						fill="default"
+						type="button"
+						color="success"
+						slot="submit"
+						size="icon"
+						shape="rounded"></smoothly-input-submit>
 				</smoothly-form>
 				<h2>Editable form and Input with Clear and Reset - Editable</h2>
 				<smoothly-form
@@ -243,21 +236,16 @@ export class SmoothlyInputDemo {
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
 					</smoothly-input-range>
-					<smoothly-picker multiple name="animals">
-						<span slot="label">Animals</span>
-						<span slot="search">Search</span>
-						<smoothly-picker-option selected value={"cat"}>
-							Cat
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"dog"}>Dog</smoothly-picker-option>
-						<smoothly-picker-option value={"fish"}>Fish</smoothly-picker-option>
-					</smoothly-picker>
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
-					<smoothly-input-submit delete slot="clear" color="danger" size="icon" shape="rounded" />
-					<smoothly-input-submit fill="default" type="button" color="success" slot="submit" size="icon" shape="rounded">
-						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
-					</smoothly-input-submit>
+					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
+					<smoothly-input-submit
+						fill="default"
+						type="button"
+						color="success"
+						slot="submit"
+						size="icon"
+						shape="rounded"></smoothly-input-submit>
 				</smoothly-form>
 				<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 					<label slot="label">Month multiple select</label>
@@ -330,16 +318,6 @@ export class SmoothlyInputDemo {
 					<smoothly-input type={"duration"} looks={"transparent"} placeholder={"h:mm"}>
 						Input
 					</smoothly-input>
-					<smoothly-picker>
-						<span slot={"label"}>Picker</span>
-						<span slot={"search"}>Search</span>
-						<smoothly-picker-option value={"circle"}>
-							<smoothly-icon name={"ellipse-outline"} />
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"square"}>
-							<smoothly-icon name={"square-outline"} />
-						</smoothly-picker-option>
-					</smoothly-picker>
 					<smoothly-input-date>Date</smoothly-input-date>
 					<smoothly-input-date-range>Date Range</smoothly-input-date-range>
 					<smoothly-input-select name={"transport"}>
@@ -362,10 +340,8 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="password" name="password">
 						Password
 					</smoothly-input>
-					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
-						Clear
-					</smoothly-input-clear>
-					<smoothly-submit slot="submit">Submit</smoothly-submit>
+					<smoothly-input-reset slot="reset" type="form" size="icon" color="warning"></smoothly-input-reset>
+					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
 				<h2>Prices</h2>
 				<smoothly-form looks="border">
@@ -390,10 +366,8 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="price" name="Palladium" currency="XPD">
 						{"XPD (Palladium)"}
 					</smoothly-input>
-					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear">
-						Clear
-					</smoothly-input-clear>
-					<smoothly-submit slot="submit">Submit</smoothly-submit>
+					<smoothly-input-reset slot="reset" fill="default" type="form" color="warning"></smoothly-input-reset>
+					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
 
 				<h4>Clear</h4>
@@ -409,13 +383,11 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone">
 						Phone
-						<smoothly-input-clear slot="end">
+						<smoothly-input-clear size="icon" slot="end">
 							<smoothly-icon name="close" />
 						</smoothly-input-clear>
 					</smoothly-input>
-					<smoothly-input-clear fill="default" type="form" color="danger" slot="submit">
-						Clear
-					</smoothly-input-clear>
+					<smoothly-input-reset type="form" color="warning" slot="reset"></smoothly-input-reset>
 				</smoothly-form>
 				<h2>Identifier</h2>
 				<smoothly-form looks="border">
@@ -433,9 +405,11 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="password" name="password">
 						Password
 					</smoothly-input>
-					<smoothly-submit slot="submit" onSubmit={(e: Event) => alert(e)} color="success" fill="solid">
-						Send
-					</smoothly-submit>
+					<smoothly-input-submit
+						slot="submit"
+						onSubmit={(e: Event) => alert(e)}
+						color="success"
+						fill="solid"></smoothly-input-submit>
 				</smoothly-form>
 				<h2>Grid</h2>
 				<h4>Contact</h4>
@@ -464,19 +438,14 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="email" name="email">
 						Email
 					</smoothly-input>
-					<smoothly-submit slot="submit" color="success" fill="solid">
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
-						Submit
-					</smoothly-submit>
+					<smoothly-input-submit slot="submit" color="success" fill="solid"></smoothly-input-submit>
 				</smoothly-form>
 				<h4>Card</h4>
 				<smoothly-form looks="grid" onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}>
 					<smoothly-input type="card-number" name="card">
 						Card #
 					</smoothly-input>
-					<smoothly-submit size="icon" slot="submit" color="success" fill="solid">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
-					</smoothly-submit>
+					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid"></smoothly-input-submit>
 					<smoothly-input type="card-expires" name="expires">
 						Expires
 					</smoothly-input>
@@ -504,9 +473,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="percent" name="percent">
 						Percent
 					</smoothly-input>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
-					</smoothly-submit>
+					<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
 				</smoothly-form>
 				<h4>Random</h4>
 				<smoothly-form looks="grid">
@@ -541,9 +508,11 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
 						Last Name
 					</smoothly-input>
-					<smoothly-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success">
-						Send
-					</smoothly-submit>
+					<smoothly-input-submit
+						slot="submit"
+						fill="solid"
+						onSubmit={(e: Event) => alert(e)}
+						color="success"></smoothly-input-submit>
 				</smoothly-form>
 				<h2>Input Alternatives</h2>
 				<smoothly-form looks="border">
@@ -564,9 +533,11 @@ export class SmoothlyInputDemo {
 						<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
 					</smoothly-input>
 					<smoothly-input placeholder="test"></smoothly-input>
-					<smoothly-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success">
-						Send
-					</smoothly-submit>
+					<smoothly-input-submit
+						slot="submit"
+						fill="solid"
+						onSubmit={(e: Event) => alert(e)}
+						color="success"></smoothly-input-submit>
 				</smoothly-form>
 				<h4>Smoothly checkboxes</h4>
 				<smoothly-form>
@@ -625,8 +596,6 @@ export class SmoothlyInputDemo {
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
 				</smoothly-form>
-				<h4>Smoothly Picker</h4>
-				<smoothly-picker-demo />
 				<smoothly-back-to-top />
 				<h4>Smoothly Date</h4>
 				<smoothly-input-date>Date</smoothly-input-date>
@@ -640,10 +609,8 @@ export class SmoothlyInputDemo {
 						end={isoly.Date.nextMonth(isoly.Date.now())}
 						min="2021-10-10"
 						max="2024-12-30"></smoothly-input-date-range>
-					<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
-						Clear
-					</smoothly-input-clear>
-					<smoothly-submit slot="submit">submit daterange</smoothly-submit>
+					<smoothly-input-reset type="form" color="warning" fill="solid" slot="reset"></smoothly-input-reset>
+					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
 
 				<smoothly-input-date-range
@@ -673,10 +640,8 @@ export class SmoothlyInputDemo {
 						<span slot="label">Testing camera photo</span>
 						<smoothly-icon slot="button" name="camera-outline" />
 					</smoothly-input-file>
-					<smoothly-input-clear type="form" color="danger" fill="solid" slot="clear">
-						Clear
-					</smoothly-input-clear>
-					<smoothly-submit slot="submit">Submit</smoothly-submit>
+					<smoothly-input-reset type="form" color="warning" slot="reset"></smoothly-input-reset>
+					<smoothly-input-submit slot="submit"></smoothly-input-submit>
 				</smoothly-form>
 				<br />
 				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
@@ -685,22 +650,6 @@ export class SmoothlyInputDemo {
 						<span slot="label">Testing camera photo</span>
 						<smoothly-icon slot="button" name="camera-outline" />
 					</smoothly-input-file>
-					<smoothly-picker name="picker">
-						<span slot="label">Shape</span>
-						<span slot="search">Search</span>
-						<smoothly-picker-option value={"circle"}>
-							<span slot="label">Circle</span>
-							<smoothly-icon size="tiny" name="ellipse-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"cube"}>
-							<span slot={"label"}>Cube</span>
-							<smoothly-icon size="tiny" name="cube-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"square"} selected>
-							<span slot={"label"}>Square</span>
-							<smoothly-icon size="tiny" name="square-outline" />
-						</smoothly-picker-option>
-					</smoothly-picker>
 					<smoothly-input-select name="select" placeholder="Select..." menuHeight="7.5items">
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
@@ -731,9 +680,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-date name="date" value="2021-10-28" max="2021-12-30" min="2021-10-10">
 						Date
 					</smoothly-input-date>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
-					</smoothly-submit>
+					<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
 				</smoothly-form>
 				<h4>Form with spinner showcase</h4>
 				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log("form input", e.detail)}>
@@ -742,22 +689,6 @@ export class SmoothlyInputDemo {
 						<span slot="label">Testing camera photo</span>
 						<smoothly-icon slot="button" name="camera-outline" />
 					</smoothly-input-file>
-					<smoothly-picker name="picker">
-						<span slot="label">Shape</span>
-						<span slot="search">Search</span>
-						<smoothly-picker-option value={"circle"}>
-							<span slot="label">Circle</span>
-							<smoothly-icon size="tiny" name="ellipse-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"cube"}>
-							<span slot={"label"}>Cube</span>
-							<smoothly-icon size="tiny" name="cube-outline" />
-						</smoothly-picker-option>
-						<smoothly-picker-option value={"square"} selected>
-							<span slot={"label"}>Square</span>
-							<smoothly-icon size="tiny" name="square-outline" />
-						</smoothly-picker-option>
-					</smoothly-picker>
 					<smoothly-input-select name="select" placeholder="Select...">
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
@@ -788,9 +719,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-date name="date" value="2021-10-28" max="2021-12-30" min="2021-10-10">
 						Date
 					</smoothly-input-date>
-					<smoothly-submit slot="submit" color="success" fill="solid" size="icon">
-						<smoothly-icon name="checkmark-circle" fill="solid" size="medium" />
-					</smoothly-submit>
+					<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
 				</smoothly-form>
 			</Host>
 		)

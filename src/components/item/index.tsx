@@ -23,7 +23,7 @@ import { Item } from "./Item"
 export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
-	@Prop({ reflect: true, mutable: true }) selected: boolean
+	@Prop({ reflect: true, mutable: true }) selected: boolean = false
 	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Prop({ reflect: true }) selectable = true
 	@Prop() deselectable = true
