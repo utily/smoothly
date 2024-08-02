@@ -191,19 +191,21 @@ export class SmoothlyDisplayDemo {
 						</dd>
 						<dt>Display JSON</dt>
 						<dd>
-							<smoothly-display type="json" value={{
-		name: "stringy", 
-		nested: { 
-			age: 109, 
-			array: ["one", "two", "three", {name: "four"}],
-			emptyObject: {}, 
-			emptyArray: [],
-			truthy: true, 
-			falsy: false, 
-			null: null, 
-			notDefined: undefined
-		}
-	}}></smoothly-display>
+							<smoothly-display
+								type="json"
+								value={{
+									name: "stringy",
+									nested: {
+										age: 109,
+										array: ["one", "two", "three", { name: "four" }],
+										emptyObject: {},
+										emptyArray: [],
+										truthy: true,
+										falsy: false,
+										null: null,
+										notDefined: undefined,
+									},
+								}}></smoothly-display>
 						</dd>
 						<dt>Display amount</dt>
 						<dd>
@@ -216,7 +218,13 @@ export class SmoothlyDisplayDemo {
 					<smoothly-display label="Today" type="date" value={isoly.Date.now()}></smoothly-display>
 					<smoothly-display label="Total amount" type="price" currency="SEK" value={6789}></smoothly-display>
 					<smoothly-display label="Total amount" type="price" currency="GBP" value={678.9}></smoothly-display>
-					<smoothly-display label="Logs" type="json" value={[{type: "trace", message: "Hello"}, {type: "error", message: "Oh no!"}]}></smoothly-display>
+					<smoothly-display
+						label="Logs"
+						type="json"
+						value={[
+							{ type: "trace", message: "Hello" },
+							{ type: "error", message: "Oh no!" },
+						]}></smoothly-display>
 				</dd>
 				<fieldset>
 					<h2>Test of different kinds of notifier</h2>

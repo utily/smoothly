@@ -1,4 +1,4 @@
-import { Component, Prop, h, Host, VNode} from "@stencil/core"
+import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-display-json-record-key",

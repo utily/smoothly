@@ -20,7 +20,7 @@ export class SmoothlyDisplay {
 		switch (type) {
 			case "json":
 				result = <smoothly-display-json value={this.value}></smoothly-display-json>
-				break;
+				break
 			default:
 				result = format(this.value, type)
 				break

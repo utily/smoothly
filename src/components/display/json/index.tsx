@@ -1,4 +1,4 @@
-import { Component, Prop, h, VNode} from "@stencil/core"
+import { Component, h, Prop, VNode } from "@stencil/core"
 import { JsonValue } from "./JsonValue"
 
 @Component({
