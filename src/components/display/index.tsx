@@ -8,7 +8,7 @@ import { format, get, Type } from "tidily"
 	scoped: true,
 })
 export class SmoothlyDisplay {
-	@Prop() type: Type
+	@Prop() type: Type | "json"
 	@Prop() label?: string
 	@Prop() value?: any
 	@Prop() currency?: Currency
@@ -18,6 +18,9 @@ export class SmoothlyDisplay {
 		let result: string | HTMLElement | undefined
 		const type = this.type
 		switch (type) {
+			case "json":
+				result = <smoothly-display-json value={this.value}></smoothly-display-json>
+				break
 			default:
 				result = format(this.value, type)
 				break

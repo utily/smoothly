@@ -1,0 +1,26 @@
+:host {
+	font-family: monospace;
+	display: inline;
+}
+:host[hidden] {
+	display: none;
+}
+
+:host(.string), 
+:host(.number),
+:host(.boolean) {
+	font-weight: bold;
+}
+:host(.string) {
+	color: rgb(var(--smoothly-primary-color));
+}
+:host(.number) {
+	color: rgb(var(--smoothly-secondary-color));
+}
+:host(.boolean) {
+	color: rgb(var(--smoothly-tertiary-color));
+}
+:host(.null),
+:host(.undefined) {
+	color: rgb(var(--smoothly-medium-color));
+}
