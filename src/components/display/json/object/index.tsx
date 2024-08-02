@@ -12,17 +12,19 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 	@State() empty: boolean
 	private openBracket: string = ""
 	private closeBracket: string = ""
+	private length: number
 
 	componentWillLoad() {
 		if (Array.isArray(this.value)) {
 			this.openBracket = "["
 			this.closeBracket = "]"
-			this.empty = this.value.length == 0
+			this.length = this.value.length
 		} else {
 			this.openBracket = "{"
 			this.closeBracket = "}"
-			this.empty = Object.keys(this.value).length == 0
+			this.length = Object.keys(this.value).length
 		}
+		this.empty = this.length == 0
 	}
 
 	render(): VNode {
@@ -33,15 +35,17 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 				</span>
 				<span class="content">
 					{Array.isArray(this.value)
-						? this.value.map(v => (
+						? this.value.map((v, index) => (
 								<div class="indent">
-									<JsonValue value={v}></JsonValue>,
+									<JsonValue value={v}></JsonValue>
+									{index < this.length - 1 ? "," : ""}
 								</div>
 						  ))
-						: Object.entries(this.value).map(([k, v]) => (
+						: Object.entries(this.value).map(([k, v], index) => (
 								<div class="indent">
 									{<smoothly-display-json-record-key value={k}></smoothly-display-json-record-key>}:{" "}
-									{<JsonValue value={v}></JsonValue>},
+									{<JsonValue value={v}></JsonValue>}
+									{index < this.length - 1 ? "," : ""}
 								</div>
 						  ))}
 				</span>
