@@ -19,6 +19,7 @@ export class SmoothlyFilterSelect implements Filter {
 	@Element() element: HTMLSmoothlyFilterSelectElement
 	@Prop() label: string
 	@Prop() property: string
+	@Prop() menuHeight?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined
 	@Prop() multiple = false
 	@Prop() type: "array" | "string" = "string"
 	@Prop() looks: Looks = "plain"
@@ -125,6 +126,7 @@ export class SmoothlyFilterSelect implements Filter {
 				name={this.property}
 				looks={this.looks}
 				multiple={this.multiple}
+				menuHeight={this.menuHeight}
 				onSmoothlyInputLooks={e => e.stopPropagation()}
 				onSmoothlyItemSelect={e => e.stopPropagation()}
 				onSmoothlyInput={e => this.selectHandler(e)}>

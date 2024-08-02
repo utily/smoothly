@@ -162,6 +162,7 @@ export namespace Components {
     interface SmoothlyFilterSelect {
         "label": string;
         "looks": Looks;
+        "menuHeight"?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined;
         "multiple": boolean;
         "property": string;
         "type": "array" | "string";
@@ -2277,6 +2278,7 @@ declare namespace LocalJSX {
     interface SmoothlyFilterSelect {
         "label"?: string;
         "looks"?: Looks;
+        "menuHeight"?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined;
         "multiple"?: boolean;
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Update>) => void;
