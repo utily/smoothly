@@ -32,16 +32,16 @@ type RGB = {
 	scoped: true,
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
-	@Element() element: HTMLSmoothlyInputColorElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
+	private initialValue: string | undefined
 	@Prop({ mutable: true }) value: string | undefined = undefined
-	private initialValue = this.value
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() name: string
+	@Element() element: HTMLSmoothlyInputColorElement
 	@State() open = false
-	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
