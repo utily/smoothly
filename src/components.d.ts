@@ -383,7 +383,7 @@ export namespace Components {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
-        "size": "small" | "large" | "icon" | "flexible";
+        "size": "flexible" | "small" | "large" | "icon";
         "tooltip": string;
         "type": "form" | "input";
     }
@@ -416,6 +416,7 @@ export namespace Components {
         "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon": Icon | false;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "toolTip": string;
@@ -2505,7 +2506,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputResetCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
-        "size"?: "small" | "large" | "icon" | "flexible";
+        "size"?: "flexible" | "small" | "large" | "icon";
         "tooltip"?: string;
         "type"?: "form" | "input";
     }
@@ -2537,6 +2538,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        "icon"?: Icon | false;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";

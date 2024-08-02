@@ -1,5 +1,5 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
-import { Color, Fill } from "../../../model"
+import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
+import { Color, Fill, Icon } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
 
@@ -12,15 +12,15 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	private parent?: Submittable & Editable
 	@Prop({ reflect: true }) delete = false
 	@Prop() color?: Color
+	@Prop() icon: Icon | false = "checkmark-outline"
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true, mutable: true }) display = false
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "link" | "button" = "button"
-	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
+	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop() toolTip = this.delete ? "Remove" : "Submit"
-	@State() inactive: boolean
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -28,7 +28,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 				this.parent = parent
 				parent.listen("changed", async p => {
 					this.display = !p.readonly
-					this.inactive =
+					this.disabled =
 						!this.delete && (p.readonly || Object.values(p.value).filter(val => val).length < 1 || !p.changed)
 				})
 			}
@@ -55,7 +55,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 					</smoothly-button-confirm>
 				) : (
 					<smoothly-button
-						disabled={this.disabled || this.inactive}
+						disabled={this.disabled}
 						size={this.size}
 						type={this.type}
 						shape={this.shape}
@@ -64,7 +64,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						fill={this.fill}
 						onClick={() => this.clickHandler()}>
 						<slot />
-						<smoothly-icon name="checkmark-outline" fill="solid" size="tiny" />
+						{this.icon && <smoothly-icon name={this.icon} fill="solid" size="tiny" />}
 					</smoothly-button>
 				)}
 			</Host>

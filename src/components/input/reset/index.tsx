@@ -1,6 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Button } from "../../button/Button"
 import { SmoothlyForm } from "../../form"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -12,11 +11,11 @@ import { Input } from "../Input"
 })
 export class SmoothlyInputReset {
 	readonlyAtLoad: boolean
-	@Prop({ reflect: true }) color?: Color
+	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
-	@Prop({ reflect: true }) fill?: Fill = "clear"
+	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true, mutable: true }) disabled = false
-	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
+	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
@@ -50,9 +49,18 @@ export class SmoothlyInputReset {
 	render() {
 		return (
 			<Host title={this.tooltip}>
-				<Button disabled={this.disabled} type="button">
-					<smoothly-icon class="default" name="refresh-outline" fill="solid" size="tiny" />
-				</Button>
+				<smoothly-button
+					disabled={this.disabled}
+					size={this.size}
+					type={"button"}
+					shape={this.shape}
+					expand={this.expand}
+					color={this.color}
+					fill={this.fill ?? (this.type == "input" ? "clear" : undefined)}
+					onClick={event => this.clickHandler(event)}>
+					<slot />
+					<smoothly-icon flip="x" name="refresh-outline" size="tiny" />
+				</smoothly-button>
 			</Host>
 		)
 	}
