@@ -1,6 +1,5 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../../model"
-import { Button } from "../../button/Button"
 import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -20,6 +19,7 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
+	@Prop() tooltip = "Clear"
 	private parent?: Clearable | (Clearable & Editable)
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 
@@ -47,9 +47,19 @@ export class SmoothlyInputClear {
 	}
 	render() {
 		return (
-			<Button disabled={this.disabled} type="button">
-				<slot />
-			</Button>
+			<Host title={this.tooltip}>
+				<smoothly-button
+					disabled={this.disabled}
+					size={this.size}
+					type={"button"}
+					shape={this.shape}
+					expand={this.expand}
+					color={this.color}
+					fill={this.fill ?? (this.type == "input" ? "clear" : undefined)}>
+					<slot />
+					<smoothly-icon name="close" size="tiny" />
+				</smoothly-button>
+			</Host>
 		)
 	}
 }
