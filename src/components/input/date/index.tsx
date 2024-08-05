@@ -14,6 +14,7 @@ import {
 import { Date } from "isoly"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
+import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
@@ -22,25 +23,36 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input {
+export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ reflect: true }) name: string
+	@Prop({ mutable: true }) changed = false
+	@Prop({ reflect: true, mutable: true }) readonly = false
+	private initialValue?: Date
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: Date
 	@Prop({ mutable: true }) min: Date
 	@Prop({ reflect: true }) showLabel = true
-	@Prop({ mutable: true }) disabled: boolean
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	componentWillLoad(): void {
+		this.setInitialValue()
 		this.smoothlyInputLoad.emit(_ => {})
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
+		this.listener[property] = listener
+		listener(this)
 	}
 
 	@Method()
@@ -51,6 +63,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input {
 	onStart(next: Date) {
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
+		this.listener.changed?.(this)
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
@@ -69,6 +82,19 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input {
 			event.detail(this)
 		}
 	}
+	@Method()
+	async edit(editable: boolean) {
+		this.readonly = !editable
+	}
+	@Method()
+	async reset() {
+		this.value = this.initialValue
+	}
+	@Method()
+	async setInitialValue() {
+		this.value = this.initialValue
+		this.changed = false
+	}
 	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<Date>) {
 		this.open = false
@@ -80,20 +106,24 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input {
 				<smoothly-input
 					color={this.color}
 					name={this.name}
-					onFocus={() => (this.open = !this.open)}
-					onClick={() => (this.open = !this.open)}
-					disabled={this.disabled}
+					onFocus={() => !this.readonly && (this.open = !this.open)}
+					onClick={() => !this.readonly && (this.open = !this.open)}
+					readonly={this.readonly}
 					type="date"
 					value={this.value}
 					showLabel={this.showLabel}
-					onSmoothlyInput={e => (this.value = e.detail[this.name])}>
+					onSmoothlyInputLoad={e => e.stopPropagation()}
+					onSmoothlyInput={e => {
+						e.stopPropagation()
+						this.value = e.detail[this.name]
+					}}>
 					<slot></slot>
 				</smoothly-input>
 				<span class="icons">
 					<slot name={"end"}></slot>
 				</span>
 				{this.open &&
-					!this.disabled && [
+					!this.readonly && [
 						<div onClick={() => (this.open = false)}></div>,
 						<nav>
 							<div class="arrow"></div>

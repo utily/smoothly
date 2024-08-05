@@ -169,6 +169,10 @@ export class SmoothlyInputDemo {
 						Check the box 2
 					</smoothly-input-checkbox>
 					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()}></smoothly-input-date-range>
+					<smoothly-input-date name="date">
+						Date
+						<smoothly-input-clear slot="end"></smoothly-input-clear>
+					</smoothly-input-date>
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
 					</smoothly-input-range>
