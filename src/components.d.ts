@@ -407,6 +407,7 @@ export namespace Components {
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple": boolean;
+        "mutable": boolean;
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
@@ -2531,6 +2532,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple"?: boolean;
+        "mutable"?: boolean;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;

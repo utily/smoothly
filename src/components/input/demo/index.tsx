@@ -76,6 +76,18 @@ export class SmoothlyInputDemo {
 						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 					</smoothly-input-select>
 					<smoothly-input-select
+						name="spirit-animals"
+						looks="border"
+						mutable
+						onSmoothlyInput={e => console.log(e.detail)}>
+						<label slot="label">Select or add new options</label>
+						<smoothly-item value="manatee">Manatee</smoothly-item>
+						<smoothly-item value="narwhal">Narwhal</smoothly-item>
+						<smoothly-item selected value="cthulu">
+							Cthulu
+						</smoothly-item>
+					</smoothly-input-select>
+					<smoothly-input-select
 						name="select-icon"
 						clearable={false}
 						showSelected={false}
