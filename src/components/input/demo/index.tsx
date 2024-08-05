@@ -105,7 +105,7 @@ export class SmoothlyInputDemo {
 					Delayed
 				</smoothly-input>
 				<h2>Editable form and Input with Clear and Reset - Readonly</h2>
-				<smoothly-form looks="border" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+				<smoothly-form looks="grid" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input readonly name="First Name" value="John">
 						First name
 					</smoothly-input>
