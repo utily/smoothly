@@ -19,12 +19,7 @@ import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-
-type RGB = {
-	r: number | undefined
-	g: number | undefined
-	b: number | undefined
-}
+import { hexToRGB, RGB, RGBToHex } from "./color"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -109,44 +104,16 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					this.rgb = { ...this.rgb, [key]: 0 }
 				}
 			}
-			this.value = this.RGBToHex()
+			this.value = RGBToHex(this.rgb)
 		}
 	}
 	hexCodeInputHandler(input: string): void {
 		const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
 		if (input && regex.test(input))
-			this.rgb = this.hexToRGB(input)
+			this.rgb = hexToRGB(input)
 		else if (!input || !regex.test(input))
 			this.rgb = { r: undefined, g: undefined, b: undefined }
 		this.value = input
-	}
-	hexToRGB(hex: string): RGB {
-		hex = hex.replace(/^#/, "")
-		if (hex.length === 3) {
-			hex = hex
-				.split("")
-				.map(char => char + char)
-				.join("")
-		}
-		const bigint = parseInt(hex, 16)
-		const r = (bigint >> 16) & 255
-		const g = (bigint >> 8) & 255
-		const b = bigint & 255
-		return { r, g, b }
-	}
-	RGBToHex(): string {
-		let hex = ""
-		for (const component of Object.values(this.rgb)) {
-			if (component === 0) {
-				hex += "00"
-			} else if (component && component >= 0 && component <= 255) {
-				const temp = component.toString(16)
-				hex += temp.length === 1 ? "0" + temp : temp
-			}
-		}
-		const hexPairs = [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)]
-		hexPairs.every(pair => pair[0] === pair[1]) && (hex = hexPairs.map(pair => pair[0]).join(""))
-		return "#" + hex
 	}
 	render(): VNode | VNode[] {
 		return (
