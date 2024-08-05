@@ -11,9 +11,10 @@ export class SmoothlyToggleSwitchDemo {
 			<Host>
 				<h4>Toggle switches</h4>
 				<div>
+					<p>Checkmark</p>
 					<span>
 						<p>Tiny</p>
-						<smoothly-toggle-switch disabled={false} checkmark={false} size="tiny"></smoothly-toggle-switch>
+						<smoothly-toggle-switch disabled={false} size="tiny"></smoothly-toggle-switch>
 					</span>
 					<span>
 						<p>Small</p>
@@ -27,6 +28,7 @@ export class SmoothlyToggleSwitchDemo {
 						<p>Large</p>
 						<smoothly-toggle-switch disabled={false} size="large"></smoothly-toggle-switch>
 					</span>
+					<p>Colors checkmark</p>
 					<span>
 						<p>Danger</p>
 						<smoothly-toggle-switch color="danger" disabled={false} size="small"></smoothly-toggle-switch>
@@ -39,7 +41,8 @@ export class SmoothlyToggleSwitchDemo {
 						<p>Secondary color</p>
 						<smoothly-toggle-switch color="secondary" disabled={false} size="small"></smoothly-toggle-switch>
 					</span>
-					<span/>
+					<p></p>
+					<p>Colors no checkmark</p>
 					<span>
 						<p>Danger</p>
 						<smoothly-toggle-switch
