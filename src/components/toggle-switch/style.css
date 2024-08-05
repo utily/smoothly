@@ -1,10 +1,8 @@
 :host {
 	display: block;
-	margin: 1em 0;
 	width: 3.6em;
 	height: 1.8em;
 }
-
 :host > button {
 	width: 100%;
 	height: 100%;
@@ -15,10 +13,10 @@
 	cursor: pointer;
 	border: none;
 	border-radius: 3em;
-	background-color: rgb(var(--smoothly-light-tint));
+	background-color: rgb(var(--smoothly-color));
 }
 :host > button:hover {
-	background-color: rgb(var(--smoothly-light-color));
+	background-color: rgb(var(--smoothly-color-tint));
 }
 :host > button > smoothly-icon {
 	display: flex;
@@ -26,38 +24,42 @@
 	align-items: center;
 	position: absolute;
 	left: 0;
-	fill: rgb(var(--smoothly-color));
-	stroke: rgb(var(--smoothly-color));
+	fill: rgb(var(--smoothly-color-contrast));
+	stroke: rgb(var(--smoothly-color-contrast));
 	font-size: 1.2em;
 	transition: 100ms ease-in-out;
 }
-
-:host[checkmark] > button > smoothly-icon {
-	fill: rgb(var(--smoothly-success-color));
-	stroke: rgb(var(--smoothly-success-color));
+:host([selected][checkmark]) > button > smoothly-icon{
+	fill: rgb(var(--smoothly-success-contrast));
+	stroke: rgb(var(--smoothly-success-contrast));
 }
 :host([selected][checkmark]) > button {
 	background-color: rgb(var(--smoothly-success-color));
 }
-
+:host([selected][checkmark]) > button:hover{
+	background-color: rgb(var(--smoothly-success-tint));
+}
 :host([selected]) > button > smoothly-icon {
 	transform: translateX(100%);
 }
-
+:host([size=tiny]) {
+	width: 2.4em;
+	height: 1.2em;
+}
 :host([size=small]) {
 	width: 3.05em;
 	height: 1.5em;
 }
-
 :host([size=large]) {
 	width: 5.2em;
 	height: 2.5em;
 }
-
+:host([size=tiny]) > button > smoothly-icon {
+	font-size: .8em;
+}
 :host([size=small]) > button > smoothly-icon {
 	font-size: 1em;
 }
-
 :host([size=large]) > button > smoothly-icon {
 	font-size: 1.75em;
 }
