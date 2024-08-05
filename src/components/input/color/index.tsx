@@ -13,8 +13,7 @@ import {
 	VNode,
 	Watch,
 } from "@stencil/core"
-import { smoothly } from "../../.."
-import { Color } from "../../../model"
+import { Color, Data } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
@@ -99,7 +98,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.listener.changed?.(this)
 	}
-	sliderInputHandler(event: CustomEvent<smoothly.Data>) {
+	sliderInputHandler(event: CustomEvent<Data>) {
 		event.stopPropagation()
 		const color = Object.keys(event.detail)[0]
 		if (event.detail[color] !== undefined) {
@@ -123,19 +122,16 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	hexToRGB(hex: string): RGB {
 		hex = hex.replace(/^#/, "")
-
 		if (hex.length === 3) {
 			hex = hex
 				.split("")
 				.map(char => char + char)
 				.join("")
 		}
-
 		const bigint = parseInt(hex, 16)
 		const r = (bigint >> 16) & 255
 		const g = (bigint >> 8) & 255
 		const b = bigint & 255
-
 		return { r, g, b }
 	}
 	RGBToHex(): string {
@@ -152,7 +148,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		hexPairs.every(pair => pair[0] === pair[1]) && (hex = hexPairs.map(pair => pair[0]).join(""))
 		return "#" + hex
 	}
-
 	render(): VNode | VNode[] {
 		return (
 			<Host style={{ "--hexCode": this.value, "--element-height": `${this.element.clientHeight}px` }}>
