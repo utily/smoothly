@@ -64,9 +64,7 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="3">Cookie</smoothly-item>
 						<smoothly-item value="4">Croissant</smoothly-item>
 						<smoothly-item value="5">Chocolate fondue</smoothly-item>
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select
 						multiple
@@ -121,15 +119,11 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
-						<smoothly-input-reset size="icon" slot="end">
-							<smoothly-icon name="refresh-outline" />
-						</smoothly-input-reset>
+						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 					</smoothly-input>
 					<smoothly-input-radio clearable name="radioFirstInput">
 						<p slot="label">Clearable</p>
@@ -160,9 +154,7 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="10">October</smoothly-item>
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input-select>
 					<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 						<smoothly-item value="folder" selected>
@@ -184,7 +176,7 @@ export class SmoothlyInputDemo {
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
-					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear" size="icon" shape="rounded" />
+					<smoothly-input-clear fill="default" type="form" color="warning" slot="clear" size="icon" shape="rounded" />
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
@@ -206,15 +198,11 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
-						<smoothly-input-reset size="icon" slot="end">
-							<smoothly-icon name="refresh-outline" />
-						</smoothly-input-reset>
+						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 					</smoothly-input>
 					<smoothly-input-radio clearable name="radioFirstInput">
 						<p slot="label">Clearable</p>
@@ -297,9 +285,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-range step={1} name="range2">
 						Select with really really long label
 						<smoothly-icon name="checkmark-circle" slot="start" />
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input-range>
 					<smoothly-input-range step={1} name="range3">
 						Select
@@ -400,15 +386,11 @@ export class SmoothlyInputDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone">
 						Phone
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input>
 					<smoothly-input-reset type="form" color="warning" slot="reset"></smoothly-input-reset>
 				</smoothly-form>
@@ -572,9 +554,7 @@ export class SmoothlyInputDemo {
 						<smoothly-input-checkbox name="second-checkbox" checked>
 							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
 							second
-							<smoothly-input-clear size="icon" slot="end">
-								<smoothly-icon name="close" />
-							</smoothly-input-clear>
+							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 						</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="third-checkbox">3rd</smoothly-input-checkbox>
 					</div>
@@ -583,9 +563,7 @@ export class SmoothlyInputDemo {
 				<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)} looks="border">
 					<smoothly-input-radio clearable name="radioFirstInput">
 						<smoothly-icon name="checkmark-circle" slot="start" />
-						<smoothly-input-clear size="icon" slot="end">
-							<smoothly-icon name="close" />
-						</smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 						<p slot="label">Clearable</p>
 						<smoothly-input-radio-item slot="options" value={"first"}>
 							Label 1
