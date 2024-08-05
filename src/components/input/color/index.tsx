@@ -102,22 +102,23 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	sliderInputHandler(event: CustomEvent<smoothly.Data>) {
 		event.stopPropagation()
 		const color = Object.keys(event.detail)[0]
-		for (const key of Object.keys(this.rgb)) {
-			if (key === color)
-				this.rgb = { ...this.rgb, [key]: event.detail[color] }
-			else if (this.rgb[key as keyof RGB] === undefined) {
-				this.rgb = { ...this.rgb, [key]: 0 }
+		if (event.detail[color] !== undefined) {
+			for (const key of Object.keys(this.rgb)) {
+				if (key === color)
+					this.rgb = { ...this.rgb, [key]: event.detail[color] }
+				else if (this.rgb[key as keyof RGB] === undefined) {
+					this.rgb = { ...this.rgb, [key]: 0 }
+				}
 			}
+			this.value = this.RGBToHex()
 		}
-		this.rgb.r !== undefined && this.rgb.g !== undefined && this.rgb.b !== undefined && (this.value = this.RGBToHex())
 	}
 	hexCodeInputHandler(input: string): void {
 		const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
-		if (input && regex.test(input)) {
+		if (input && regex.test(input))
 			this.rgb = this.hexToRGB(input)
-		} else if (!input || !regex.test(input))
+		else if (!input || !regex.test(input))
 			this.rgb = { r: undefined, g: undefined, b: undefined }
-
 		this.value = input
 	}
 	hexToRGB(hex: string): RGB {
