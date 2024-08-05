@@ -29,11 +29,21 @@ export class SmoothlyInputDemo {
 				</smoothly-form>
 				<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 				<h2>input-date-range outside from</h2>
-				<smoothly-input-date-range onSmoothlyInput={e => console.log("dateRange: ", e)}>
+				<smoothly-input-date-range
+					looks="border"
+					start={isoly.Date.now()}
+					end={isoly.Date.now()}
+					onSmoothlyInput={e => console.log("dateRange: ", e)}>
 					Date Range
-					<smoothly-input-clear slot="end" size="icon">
-						<smoothly-icon name="close"></smoothly-icon>
-					</smoothly-input-clear>
+					<smoothly-input-clear slot="end" size="icon"></smoothly-input-clear>
+				</smoothly-input-date-range>
+				<smoothly-input-date-range
+					looks="border"
+					start={isoly.Date.now()}
+					end={isoly.Date.now()}
+					onSmoothlyInput={e => console.log("dateRange: ", e)}>
+					Date Range
+					<smoothly-input-reset slot="end" size="icon"></smoothly-input-reset>
 				</smoothly-input-date-range>
 				<h2>Controlled form</h2>
 				<smoothly-input-demo-controlled-form />
@@ -104,7 +114,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input name="Delayed" delay={2}>
 					Delayed
 				</smoothly-input>
-				<h2>Editable form and Input with Clear and Reset - Readonly</h2>
+				<h2>Editable form and Input with Clear, Reset and Delete - Readonly</h2>
 				<smoothly-form looks="grid" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
 					<smoothly-input readonly name="First Name" value="John">
 						First name
@@ -174,6 +184,7 @@ export class SmoothlyInputDemo {
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
+					<smoothly-input-clear fill="default" type="form" color="danger" slot="clear" size="icon" shape="rounded" />
 					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
