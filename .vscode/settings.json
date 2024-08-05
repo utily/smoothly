@@ -37,6 +37,7 @@
 	"javascript.format.enable": false,
 	"typescript.format.enable": false,
 	"cSpell.words": [
+		"checkmark",
 		"clearables",
 		"cloudly",
 		"Colorpoint",

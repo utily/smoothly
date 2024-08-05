@@ -4,14 +4,14 @@ import { Color, Fill } from "../../model"
 @Component({
 	tag: "smoothly-toggle-switch",
 	styleUrl: "style.css",
-	shadow: true,
+	scoped: true,
 })
 export class SmoothlyToggleSwitch {
 	@Prop({ reflect: true }) checkmark = true
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) size: "tiny" | "small" | "default" | "large" = "default"
-	@Prop({ reflect: true }) color: Color
+	@Prop({ reflect: true }) color: Color = "medium"
 	@Prop({ reflect: true }) fill: Fill = "clear"
 	@Event() smoothlyToggleSwitchChange: EventEmitter<boolean>
 
