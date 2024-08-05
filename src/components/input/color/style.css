@@ -1,5 +1,7 @@
 :host {
 	display: flex;
+	position: relative;
+	background-color: rgb(var(--smoothly-input-background));
 }
 
 :host>smoothly-input {
@@ -8,9 +10,40 @@
 
 :host div.color-sample {
 	height: 2em;
-	width: 5em;
-	margin-right: 0.25rem;
-	background-color: var(--value);
-	border: rgb(var(--smoothly-input-border)) solid 1px;
-	border-radius: 2px;
+	width: 3em;
+	margin-right: 0.5rem;
+	background-color: var(--hexCode);
+	outline: 1px solid rgb(var(--smoothly-input-border));
+	border-radius: 3px;
+}
+
+:host>div.rgb-sliders {
+	background-color: rgb(var(--smoothly-input-background));
+	position: absolute;
+	padding: 1.5em 0;
+	top: calc(var(--element-height) + .8em);
+	left: 0;
+	box-sizing: border-box;
+	z-index: 10;
+	border: 1px solid rgb(var(--smoothly-input-border));
+}
+
+:host>div.rgb-sliders::before {
+	content: "";
+	transform: translate(2em, -0.55em) rotate(45deg);
+	width: 1em;
+	height: 1em;
+	background-color: rgb(var(--smoothly-input-background));
+	border-top: 1px solid rgb(var(--smoothly-input-border));
+	border-left: 1px solid rgb(var(--smoothly-input-border));
+	position: absolute;
+	z-index: 100;
+	top: 0em
+}
+
+div.rgb-sliders smoothly-input-range {
+	padding: .8em 0
+}
+div.rgb-sliders smoothly-input-range label {
+	width: 4em;
 }
