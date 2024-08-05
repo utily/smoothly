@@ -11,7 +11,7 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
-				<h2>Array in Form</h2>
+				{/* <h2>Array in Form</h2>
 				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log(e.detail)}>
 					<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
 					<smoothly-input-range name="pets.0.age" max={100} step={1}>
@@ -273,12 +273,12 @@ export class SmoothlyInputDemo {
 					<smoothly-item value="10">October</smoothly-item>
 					<smoothly-item value="11">November</smoothly-item>
 					<smoothly-item value="12">December</smoothly-item>
-				</smoothly-input-select>
+				</smoothly-input-select> */}
 				<h2>Color</h2>
 				<smoothly-form looks="border" onSmoothlyFormInput={e => console.log(e.detail)}>
 					<smoothly-input-color name="color">Choose color</smoothly-input-color>
 				</smoothly-form>
-				<h2>Range</h2>
+				{/* <h2>Range</h2>
 				<smoothly-form looks="border">
 					<smoothly-input-range step={1} name="range" outputSide="right">
 						Select and so
@@ -732,7 +732,7 @@ export class SmoothlyInputDemo {
 						Date
 					</smoothly-input-date>
 					<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
-				</smoothly-form>
+				</smoothly-form> */}
 			</Host>
 		)
 	}

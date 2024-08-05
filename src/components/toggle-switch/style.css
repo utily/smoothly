@@ -68,6 +68,5 @@
 }
 
 :host([size=large]) > button > smoothly-icon {
-	
 	font-size: 1.75em;
 }
