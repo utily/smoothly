@@ -3,9 +3,10 @@
 	justify-content: center;
 	text-align: center;
 	cursor: pointer;
+	height: 100%;
 }
 
-:host > div {
+:host>div {
 	overflow-y: auto;
 	height: 100%;
 }
