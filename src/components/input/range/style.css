@@ -76,23 +76,23 @@
 :host>div>input[type=range]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	height: 1.2em;
-	width: .7em;
-	border-radius: 20%;
-	background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--smoothly-color-contrast)) solid;
+	width: 1.2em;
+	border-radius: 100%;
+	background-color: rgb(var(--smoothly-primary-color));
 	cursor: pointer;
 	margin-top: -.45em;
+	border: none;
 	/* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 
 /* Firefox */
 :host>div>input[type=range]::-moz-range-thumb {
-	height: 1.2em;
-	width: .7em;
-	border-radius: 20%;
-	background-color: rgb(var(--smoothly-primary-contrast));
-	border: 1px rgb(var(--smoothly-color-contrast)) solid;
+	height: 0.8em;
+	width: 0.8em;
+	border-radius: 100%;
+	background-color: rgb(var(--smoothly-primary-color));
 	cursor: pointer;
+	border: none;
 }
 
 /*--------------------SLIDER TRACK------------------ */

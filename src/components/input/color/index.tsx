@@ -19,7 +19,7 @@ import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { hexToRGB, RGB, RGBToHex } from "./color"
+import { hexToRGB, HSL, HSLtoRGB, RGB, RGBToHex, RGBtoHSL } from "./color"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -29,24 +29,28 @@ import { hexToRGB, RGB, RGBToHex } from "./color"
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
+	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
 	private initialValue: string | undefined
 	@Prop({ mutable: true }) value: string | undefined = undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop() output: "rgb" | "hex" = "rgb"
 	@Prop() name: string
 	@Element() element: HTMLSmoothlyInputColorElement
 	@State() open = false
+	@State() sliderMode: "rgb" | "hsl" = "rgb"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
+		this.value && this.setInitialValue()
+		this.value && (this.rgb = hexToRGB(this.value))
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: this.output === "rgb" ? this.rgb : this.value ? this.value : undefined })
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.value && this.hexCodeInputHandler(this.value), this.setInitialValue()
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
@@ -90,55 +94,92 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Watch("value")
 	valueChanged(): void {
 		this.changed = this.initialValue !== this.value
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: this.output === "rgb" ? this.rgb : this.value ? this.value : undefined })
 		this.listener.changed?.(this)
+		const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
+		if (this.value && regex.test(this.value)) {
+			this.sliderMode === "rgb" ? (this.rgb = hexToRGB(this.value)) : (this.hsl = RGBtoHSL(hexToRGB(this.value)))
+		} else if (!this.value || !regex.test(this.value)) {
+			this.rgb = { r: undefined, g: undefined, b: undefined }
+			this.hsl = { h: undefined, s: undefined, l: undefined }
+		}
+	}
+	handleSwitchMode(event: CustomEvent) {
+		event.stopPropagation()
+		this.sliderMode = event.detail ? "hsl" : "rgb"
+		if (this.sliderMode === "rgb") {
+			this.value && (this.rgb = hexToRGB(this.value))
+		} else {
+			this.value && (this.hsl = RGBtoHSL(hexToRGB(this.value)))
+		}
 	}
 	sliderInputHandler(event: CustomEvent<Data>) {
 		event.stopPropagation()
+		let temporaryColor = this.sliderMode === "rgb" ? this.rgb : this.hsl
+		type ColorType = HSL | RGB
 		const color = Object.keys(event.detail)[0]
 		if (event.detail[color] !== undefined) {
-			for (const key of Object.keys(this.rgb)) {
+			for (const key of Object.keys(temporaryColor)) {
 				if (key === color)
-					this.rgb = { ...this.rgb, [key]: event.detail[color] }
-				else if (this.rgb[key as keyof RGB] === undefined) {
-					this.rgb = { ...this.rgb, [key]: 0 }
+					temporaryColor = { ...temporaryColor, [key]: event.detail[color] }
+				else if (temporaryColor[key as keyof ColorType] === undefined) {
+					temporaryColor = { ...temporaryColor, [key]: 0 }
 				}
 			}
-			this.value = RGBToHex(this.rgb)
+			if (this.sliderMode === "rgb") {
+				this.rgb = { ...temporaryColor } as RGB
+				this.value = RGBToHex(this.rgb)
+			} else {
+				this.hsl = { ...temporaryColor } as HSL
+				this.value = RGBToHex(HSLtoRGB(this.hsl))
+			}
 		}
 	}
-	hexCodeInputHandler(input: string): void {
-		const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
-		if (input && regex.test(input))
-			this.rgb = hexToRGB(input)
-		else if (!input || !regex.test(input))
-			this.rgb = { r: undefined, g: undefined, b: undefined }
-		this.value = input
+	openDropdown(): void {
+		this.open = !this.open
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--hexCode": this.value, "--element-height": `${this.element.clientHeight}px` }}>
+			<Host
+				style={{
+					"--hexCode": this.value,
+					"--rgb": `${this.rgb}`,
+					"--hsl": `${this.hsl.h} ${this.hsl.s}% ${this.hsl.l}%`,
+					"--hsl-100-s": `${this.hsl.h} 100% 50%`,
+					"--hsl-0-s": `${this.hsl.h} 0% 50%`,
+					"--hsl-s-thumb-color": `${this.hsl.h} ${this.hsl.s}% 50%`,
+					"--element-height": `${this.element.clientHeight}px`,
+				}}>
 				<smoothly-input
 					value={this.value}
 					name={this.name}
 					looks={this.looks}
 					type={"hex-color"}
 					readonly={this.readonly}
-					onClick={() => !this.readonly && (this.open = !this.open)}
-					onSmoothlyInput={event => (event?.stopPropagation(), this.hexCodeInputHandler(event.detail[this.name]))}>
+					onClick={() => !this.readonly && this.openDropdown()}
+					onSmoothlyInput={event => (event?.stopPropagation(), (this.value = event.detail[this.name]))}>
 					<slot />
 					<div slot="end" class="color-sample"></div>
 				</smoothly-input>
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
-						{Object.entries(this.rgb).map(([key, value]) => (
+						<smoothly-toggle-switch
+							onSmoothlyToggleSwitchChange={event => this.handleSwitchMode(event)}
+							size="tiny"
+							checkmark={false}
+							selected={this.sliderMode === "hsl"}
+						/>
+						{Object.entries(this.sliderMode === "rgb" ? this.rgb : this.hsl).map(([key, value]) => (
 							<smoothly-input-range
 								name={key}
-								min={0}
-								max={255}
-								value={value}
+								min={key === "h" ? 1 : 0}
+								max={key === "h" ? 360 : key === "s" || key === "l" ? 100 : 255}
+								value={value ? Math.round(value) : value}
 								step={1}
 								outputSide="right"
+								valueText={
+									this.sliderMode === "hsl" && key !== "h" ? `${value ? Math.round(value) : value} %` : undefined
+								}
 								onSmoothlyInput={event => this.sliderInputHandler(event)}>
 								{key.toUpperCase()}
 							</smoothly-input-range>
