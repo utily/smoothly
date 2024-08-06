@@ -271,14 +271,19 @@ export namespace Components {
         "value": string | undefined;
     }
     interface SmoothlyInputDate {
+        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
-        "disabled": boolean;
+        "edit": (editable: boolean) => Promise<void>;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": Date;
         "min": Date;
         "name": string;
         "open": boolean;
+        "readonly": boolean;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "value"?: Date;
     }
@@ -1268,6 +1273,7 @@ declare global {
         "smoothlyValueChange": Date;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputDateElement extends Components.SmoothlyInputDate, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputDateElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateElement, ev: SmoothlyInputDateCustomEvent<HTMLSmoothlyInputDateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2409,17 +2415,19 @@ declare namespace LocalJSX {
         "value"?: string | undefined;
     }
     interface SmoothlyInputDate {
+        "changed"?: boolean;
         "color"?: Color;
-        "disabled"?: boolean;
         "looks"?: Looks;
         "max"?: Date;
         "min"?: Date;
         "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputDateCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
+        "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: Date;
     }
