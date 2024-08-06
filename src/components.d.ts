@@ -13,6 +13,7 @@ import { tidily, Type } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
+import { isly } from "isly";
 import { Editable } from "./components/input/Editable";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
@@ -26,6 +27,7 @@ export { tidily, Type } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
+export { isly } from "isly";
 export { Editable } from "./components/input/Editable";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
@@ -181,6 +183,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "flaw": isly.Flaw;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name"?: string;
@@ -190,6 +193,8 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validate": () => Promise<boolean>;
+        "validator": (data: Readonly<Data>) => Promise<boolean> | boolean;
         "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -2324,6 +2329,7 @@ declare namespace LocalJSX {
         "action"?: string;
         "changed"?: boolean;
         "color"?: Color;
+        "flaw"?: isly.Flaw;
         "looks"?: Looks;
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
@@ -2336,6 +2342,7 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validator"?: (data: Readonly<Data>) => Promise<boolean> | boolean;
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {

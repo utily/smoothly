@@ -113,8 +113,11 @@ export class SmoothlyInputDemo {
 					Delayed
 				</smoothly-input>
 				<h2>Editable form and Input with Clear, Reset and Delete - Readonly</h2>
-				<smoothly-form looks="grid" readonly action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
-					<smoothly-input readonly name="First Name" value="John">
+				<smoothly-form
+					looks="grid"
+					readonly /* action="https://api.toiletapi.com/6b12fd2f-e896-46f9-b38f-25cf42cee4b4" */
+				>
+					<smoothly-input /* readonly */ name="First Name" value="John">
 						First name
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
@@ -156,7 +159,7 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="12">December</smoothly-item>
 						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 					</smoothly-input-select>
-					<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
+					<smoothly-input-select name="select-icon" showSelected={false}>
 						<smoothly-item value="folder" selected>
 							<smoothly-icon size="small" name="folder-outline" />
 						</smoothly-item>
@@ -164,10 +167,6 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="small" name="camera-outline" />
 						</smoothly-item>
 					</smoothly-input-select>
-					<smoothly-input-checkbox name="checkbox">Check the box</smoothly-input-checkbox>
-					<smoothly-input-checkbox name="checkbox2" checked>
-						Check the box 2
-					</smoothly-input-checkbox>
 					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()}></smoothly-input-date-range>
 					<smoothly-input-date name="date">
 						Date

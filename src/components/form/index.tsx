@@ -13,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { http } from "cloudly-http"
+import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
@@ -20,15 +21,17 @@ import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
+import { Validatable } from "../input/Validatable"
 
 @Component({
 	tag: "smoothly-form",
 	styleUrl: "style.css",
 })
-export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, Editable {
+export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, Editable, Validatable {
 	@Element() element: HTMLSmoothlyFormElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
+	@Prop({ reflect: true, mutable: true }) flaw: isly.Flaw
 	@Prop() action?: string
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
@@ -36,6 +39,8 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop() name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
+	@Prop() validator: (data: Readonly<Data>) => Promise<boolean> | boolean = async value =>
+		Object.values(value).filter(v => v).length > 0
 	@State() processing?: Promise<boolean>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyFormInput: EventEmitter<Data>
@@ -159,32 +164,31 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.inputs.forEach(input => {
-			Clearable.is(input) && input.clear()
-		})
+		this.inputs.forEach(input => Clearable.is(input) && input.clear())
 		this.smoothlyFormClear.emit()
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.edit(editable)
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.edit(editable))
 		this.readonly = !editable
 		this.smoothlyFormEdit.emit(editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.reset()
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.reset())
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.smoothlyFormReset.emit()
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.setInitialValue()
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.setInitialValue())
+	}
+	@Method()
+	async validate(): Promise<boolean> {
+		return (
+			(await this.validator(this.value)) &&
+			[...this.inputs.values()].every(async input => (Validatable.is(input) ? await input.validate() : true))
+		)
 	}
 	render() {
 		return (

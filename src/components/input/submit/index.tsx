@@ -2,6 +2,7 @@ import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode
 import { Color, Fill, Icon } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
+import { Validatable } from "../Validatable"
 
 @Component({
 	tag: "smoothly-input-submit",
@@ -22,14 +23,15 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop() toolTip = this.delete ? "Remove" : "Submit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
-	componentWillLoad(): void {
+
+	async componentWillLoad(): Promise<void> {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Submittable.is(parent) && Editable.type.is(parent)) {
 				this.parent = parent
 				parent.listen("changed", async p => {
 					this.display = !p.readonly
-					this.disabled =
-						!this.delete && (p.readonly || Object.values(p.value).filter(val => val).length < 1 || !p.changed)
+					const valid = Validatable.is(p) ? await p.validate() : true
+					this.disabled = !this.delete && (p.readonly || !valid || !p.changed)
 				})
 			}
 		})
