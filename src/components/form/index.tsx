@@ -13,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { http } from "cloudly-http"
+import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
@@ -20,6 +21,7 @@ import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
+import { Validatable } from "../input/Validatable"
 
 @Component({
 	tag: "smoothly-form",
@@ -29,6 +31,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Element() element: HTMLSmoothlyFormElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
+	@Prop({ reflect: true, mutable: true }) flaw: isly.Flaw
 	@Prop() action?: string
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
@@ -36,6 +39,8 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop() name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
+	@Prop() validator: (data: Readonly<Data>) => Promise<isly.Flaw | undefined> = async value =>
+		Object.keys(value).length > 0 ? undefined : { type: "object", message: "At least one input must be set." }
 	@State() processing?: Promise<boolean>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyFormInput: EventEmitter<Data>
@@ -53,6 +58,32 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+
+	@Watch("flaw")
+	async flawChange(flaw?: isly.Flaw) {
+		console.log("smoothly-form.setFlaw", flaw)
+		if (flaw) {
+			this.setFlaw(flaw)
+		} else {
+			// TODO remove
+		}
+	}
+
+	setFlaw(flaw: isly.Flaw) {
+		if (typeof flaw.property == "string") {
+			const input = this.inputs.get(flaw.property)
+			if (Editable.Element.is(input)) {
+				input.flaw = flaw
+				// if (input instanceof HTMLElement) {
+				// 	const flawElement = document.createElement("smoothly-input-flaw") as HTMLSmoothlyInputFlawElement
+				// 	flawElement.color = "danger"
+				// 	flawElement.value = flaw
+				// 	input.parentNode?.insertBefore(flawElement, input)
+				// }
+			}
+		}
+		flaw.flaws?.forEach(f => this.setFlaw(f))
 	}
 
 	@Method()
@@ -103,6 +134,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		event.stopPropagation()
 		event.detail(this.readonly)
 	}
+
 	@Method()
 	async submit(remove?: boolean): Promise<void> {
 		this.processing = new Promise(resolve => {
@@ -159,32 +191,35 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.inputs.forEach(input => {
-			Clearable.is(input) && input.clear()
-		})
+		this.inputs.forEach(input => Clearable.is(input) && input.clear())
 		this.smoothlyFormClear.emit()
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.edit(editable)
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.edit(editable))
 		this.readonly = !editable
 		this.smoothlyFormEdit.emit(editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.reset()
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.reset())
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.smoothlyFormReset.emit()
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.setInitialValue()
-		})
+		this.inputs.forEach(input => Editable.Element.type.is(input) && input.setInitialValue())
+	}
+	@Method()
+	async validate(): Promise<boolean> {
+		const flaw = Data.fromFlaw(await this.validator(this.value))
+		return (
+			[...this.inputs.entries()].every(([name, input]) => {
+				if ("warning" in input && typeof input.warning == "string")
+					input.warning = Data.get(flaw, name)
+				return Validatable.is(input) ? input.validate() : true
+			}) && Object.keys(flaw).length == 0
+		)
 	}
 	render() {
 		return (
@@ -194,6 +229,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 					<fieldset>
 						<slot></slot>
 					</fieldset>
+					<smoothly-input-flaw color="danger" value={this.flaw}></smoothly-input-flaw>
 					<div>
 						<slot name="clear" />
 						<slot name="edit" />

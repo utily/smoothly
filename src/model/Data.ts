@@ -17,8 +17,22 @@ export namespace Data {
 			valueType
 		)
 	)
-
-	export function set(data: Data, [head, ...tail]: string[], value: Value): Data {
+	export function get(data: Data, name: string | string[]): Data[string] {
+		return getHelper(data, typeof name == "string" ? name.split(".") : name)
+	}
+	function getHelper(d: Data, [head, ...tail]: string[]): Data[string] {
+		const current = d[head ?? ""]
+		return !tail.length
+			? current
+			: getHelper(
+					typeof current == "object" && !Array.isArray(current) && !(current instanceof Blob) ? current : {},
+					tail
+			  )
+	}
+	export function set(data: Data, name: string | string[], value: Value): Data {
+		return setHelper(data, typeof name == "string" ? name.split(".") : name, value)
+	}
+	function setHelper(data: Data, [head, ...tail]: string[], value: Value): Data {
 		const current = data[head ?? ""]
 		return {
 			...data,
@@ -39,9 +53,9 @@ export namespace Data {
 	}
 	export function convertArrays(data: any): Data {
 		return isArrayRecord(data)
-			? Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {
-					arr[k] = convertArrays(v)
-					return arr
+			? Object.entries(data).reduce((r: Data[], [k, v]: [`${number}`, any]) => {
+					r[k] = convertArrays(v)
+					return r
 			  }, [])
 			: isly.object().is(data)
 			? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
@@ -49,5 +63,14 @@ export namespace Data {
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
+	}
+	export function fromFlaw(flaw: isly.Flaw | undefined, property: Exclude<keyof isly.Flaw, "flaws"> = "message"): Data {
+		return !flaw
+			? {}
+			: {
+					[flaw.property ?? ""]: flaw.flaws
+						? flaw.flaws.map(f => fromFlaw(f, property)).reduce((r, c) => ({ ...r, ...c }), {})
+						: flaw[property],
+			  }
 	}
 }

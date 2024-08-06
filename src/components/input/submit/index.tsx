@@ -1,5 +1,6 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
-import { Color, Fill, Icon } from "../../../model"
+import { isly } from "isly"
+import { Color, Data, Fill, Icon } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
 
@@ -15,6 +16,10 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop() icon: Icon | false = "checkmark-outline"
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
+	@Prop() validate: (value: Data) => true | isly.Flaw = value => ({
+		type: "Data",
+		message: "At least one property must be defined.",
+	})
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true, mutable: true }) display = false
 	@Prop({ reflect: true }) shape?: "rounded"
@@ -28,8 +33,11 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 				this.parent = parent
 				parent.listen("changed", async p => {
 					this.display = !p.readonly
-					this.disabled =
-						!this.delete && (p.readonly || Object.values(p.value).filter(val => val).length < 1 || !p.changed)
+					const valid = this.validate(p.value)
+					this.disabled = !this.delete && (p.readonly || !isly.Flaw.is(valid) || !p.changed)
+					if (valid !== true) {
+						p.flaw = valid
+					}
 				})
 			}
 		})

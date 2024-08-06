@@ -164,10 +164,6 @@ export class SmoothlyInputDemo {
 							<smoothly-icon size="small" name="camera-outline" />
 						</smoothly-item>
 					</smoothly-input-select>
-					<smoothly-input-checkbox name="checkbox">Check the box</smoothly-input-checkbox>
-					<smoothly-input-checkbox name="checkbox2" checked>
-						Check the box 2
-					</smoothly-input-checkbox>
 					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()}></smoothly-input-date-range>
 					<smoothly-input-date name="date">
 						Date

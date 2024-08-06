@@ -13,6 +13,7 @@ export namespace Editable {
 		readonly: boolean
 		listen: Editable.Listen
 		setInitialValue: () => void
+		flaw?: isly.Flaw
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
@@ -21,6 +22,7 @@ export namespace Editable {
 			listen: isly.function<Listen>(),
 			reset: isly.function<Reset>(),
 			setInitialValue: isly.function(),
+			flaw: isly.Flaw.type.optional(),
 		})
 		export const is = type.is
 	}

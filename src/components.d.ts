@@ -13,6 +13,7 @@ import { tidily, Type } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
+import { isly } from "isly";
 import { Editable } from "./components/input/Editable";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
@@ -26,6 +27,7 @@ export { tidily, Type } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
+export { isly } from "isly";
 export { Editable } from "./components/input/Editable";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
@@ -181,6 +183,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "flaw": isly.Flaw;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name"?: string;
@@ -190,6 +193,8 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validate": () => Promise<boolean>;
+        "validator": (data: Readonly<Data>) => Promise<isly.Flaw | undefined>;
         "value": Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -338,6 +343,10 @@ export namespace Components {
         "showLabel": boolean;
         "value"?: File;
     }
+    interface SmoothlyInputFlaw {
+        "color": Color;
+        "value"?: isly.Flaw;
+    }
     interface SmoothlyInputMonth {
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -435,6 +444,7 @@ export namespace Components {
         "size": "flexible" | "small" | "large" | "icon";
         "toolTip": string;
         "type": "link" | "button";
+        "validate": (value: Data) => true | isly.Flaw;
     }
     interface SmoothlyItem {
         "deselectable": boolean;
@@ -1358,6 +1368,12 @@ declare global {
         prototype: HTMLSmoothlyInputFileElement;
         new (): HTMLSmoothlyInputFileElement;
     };
+    interface HTMLSmoothlyInputFlawElement extends Components.SmoothlyInputFlaw, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputFlawElement: {
+        prototype: HTMLSmoothlyInputFlawElement;
+        new (): HTMLSmoothlyInputFlawElement;
+    };
     interface HTMLSmoothlyInputMonthElementEventMap {
         "smoothlyInput": Data;
         "smoothlyInputLoad": (parent: HTMLElement) => void;
@@ -2095,6 +2111,7 @@ declare global {
         "smoothly-input-demo-controlled-form": HTMLSmoothlyInputDemoControlledFormElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
+        "smoothly-input-flaw": HTMLSmoothlyInputFlawElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
@@ -2324,6 +2341,7 @@ declare namespace LocalJSX {
         "action"?: string;
         "changed"?: boolean;
         "color"?: Color;
+        "flaw"?: isly.Flaw;
         "looks"?: Looks;
         "name"?: string;
         "onNotice"?: (event: SmoothlyFormCustomEvent<Notice>) => void;
@@ -2336,6 +2354,7 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validator"?: (data: Readonly<Data>) => Promise<isly.Flaw | undefined>;
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFrame {
@@ -2480,6 +2499,10 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "value"?: File;
     }
+    interface SmoothlyInputFlaw {
+        "color"?: Color;
+        "value"?: isly.Flaw;
+    }
     interface SmoothlyInputMonth {
         "color"?: Color;
         "inCalendar"?: boolean;
@@ -2577,6 +2600,7 @@ declare namespace LocalJSX {
         "size"?: "flexible" | "small" | "large" | "icon";
         "toolTip"?: string;
         "type"?: "link" | "button";
+        "validate"?: (value: Data) => true | isly.Flaw;
     }
     interface SmoothlyItem {
         "deselectable"?: boolean;
@@ -2870,6 +2894,7 @@ declare namespace LocalJSX {
         "smoothly-input-demo-controlled-form": SmoothlyInputDemoControlledForm;
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
+        "smoothly-input-flaw": SmoothlyInputFlaw;
         "smoothly-input-month": SmoothlyInputMonth;
         "smoothly-input-radio": SmoothlyInputRadio;
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
@@ -2979,6 +3004,7 @@ declare module "@stencil/core" {
             "smoothly-input-demo-controlled-form": LocalJSX.SmoothlyInputDemoControlledForm & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoControlledFormElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
+            "smoothly-input-flaw": LocalJSX.SmoothlyInputFlaw & JSXBase.HTMLAttributes<HTMLSmoothlyInputFlawElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;

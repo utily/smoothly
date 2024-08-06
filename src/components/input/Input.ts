@@ -16,12 +16,14 @@ export namespace Input {
 		looks: Looks
 		defined?: boolean
 		binary?: Binary
+		warning?: string
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
 			value: isly.union<Required<Element>["value"], Data, Data[string]>(Data.type, Data.valueType).optional(),
 			color: Color.type.optional(),
 			name: isly.string(),
+			warning: isly.string().optional(),
 			looks: Looks.type,
 			defined: isly.boolean().optional(),
 			binary: isly.function<Binary>().optional(),
