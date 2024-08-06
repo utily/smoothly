@@ -482,14 +482,14 @@ export namespace Components {
     interface SmoothlyNextTableBody {
     }
     interface SmoothlyNextTableCell {
-        "span": number;
+        "span"?: number;
     }
     interface SmoothlyNextTableDemoFiltered {
     }
     interface SmoothlyNextTableExpandableCell {
         "close": () => Promise<void>;
         "open": boolean;
-        "span": number;
+        "span"?: number;
     }
     interface SmoothlyNextTableExpandableRow {
         "open": boolean;

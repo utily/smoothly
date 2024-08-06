@@ -6,11 +6,11 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyNextTableCell {
-	@Prop({ reflect: true }) span = 1
+	@Prop({ reflect: true }) span?: number = 1
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--smoothly-table-cell-span": this.span.toString(10) }}>
+			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
 				<slot />
 			</Host>
 		)
