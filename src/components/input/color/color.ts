@@ -37,7 +37,7 @@ export function RGBToHex(rgb: RGB): string {
 	return "#" + hex
 }
 export function RGBtoHSL({ r, g, b }: RGB): HSL {
-	let h, s, l
+	let h: number | undefined, s: number | undefined, l: number | undefined
 	if (r !== undefined && g !== undefined && b !== undefined) {
 		r /= 255
 		g /= 255
@@ -50,7 +50,6 @@ export function RGBtoHSL({ r, g, b }: RGB): HSL {
 		} else {
 			const d = max - min
 			s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-
 			switch (max) {
 				case r:
 					h = (g - b) / d + (g < b ? 6 : 0)
@@ -73,15 +72,15 @@ export function RGBtoHSL({ r, g, b }: RGB): HSL {
 	return { h, s, l }
 }
 export function HSLtoRGB({ h, s, l }: HSL): RGB {
-	let r = 0,
-		g = 0,
-		b = 0
+	let r = 0
+	let g = 0
+	let b = 0
 	if (h !== undefined && s !== undefined && l !== undefined) {
 		s /= 100
 		l /= 100
-		const c = (1 - Math.abs(2 * l - 1)) * s,
-			x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
-			m = l - c / 2
+		const c = (1 - Math.abs(2 * l - 1)) * s
+		const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
+		const m = l - c / 2
 		if (0 <= h && h < 60) {
 			r = c
 			g = x
