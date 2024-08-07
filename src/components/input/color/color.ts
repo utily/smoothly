@@ -9,7 +9,6 @@ export type HSL = {
 	l: number | undefined
 }
 export function hexToRGB(hex: string): RGB {
-	console.log("hexToRGB")
 	hex = hex.replace(/^#/, "")
 	if (hex.length === 3) {
 		hex = hex
