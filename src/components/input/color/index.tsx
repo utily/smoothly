@@ -146,33 +146,35 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	sliderInputHandler(event: CustomEvent<Data>): void {
 		event.stopPropagation()
+		const color = Object.keys(event.detail)[0]
+		if (event.detail[color] === undefined)
+			return
 		let temporaryColor = this.sliderMode === "rgb" ? this.rgb : this.hsl
 		type ColorType = HSL | RGB
-		const color = Object.keys(event.detail)[0]
-		if (event.detail[color] !== undefined) {
-			for (const key of Object.keys(temporaryColor)) {
-				if (key === color)
-					temporaryColor = { ...temporaryColor, [key]: event.detail[color] }
-				else if (
-					(key === "l" || key === "s") &&
-					(temporaryColor[key as keyof ColorType] === undefined ||
-						temporaryColor[key as keyof ColorType] === 0 ||
-						temporaryColor[key as keyof ColorType] === 100)
-				) {
-					temporaryColor = { ...temporaryColor, [key]: 50 }
-				} else if (temporaryColor[key as keyof ColorType] === undefined) {
-					temporaryColor = { ...temporaryColor, [key]: 0 }
-				}
+		for (const key of Object.keys(temporaryColor)) {
+			if (key === color)
+				temporaryColor = { ...temporaryColor, [key]: event.detail[color] }
+			else if (
+				key === "l" &&
+				(temporaryColor[key as keyof ColorType] === undefined ||
+					temporaryColor[key as keyof ColorType] === 0 ||
+					temporaryColor[key as keyof ColorType] === 100)
+			) {
+				temporaryColor = { ...temporaryColor, [key]: 50 }
+			} else if (key === "s" && temporaryColor[key as keyof ColorType] === 0) {
+				temporaryColor = { ...temporaryColor, [key]: 50 }
+			} else if (temporaryColor[key as keyof ColorType] === undefined) {
+				temporaryColor = { ...temporaryColor, [key]: 0 }
 			}
-			if (this.sliderMode === "rgb") {
-				this.rgb = { ...temporaryColor } as RGB
-				this.hsl = RGBtoHSL(this.rgb)
-				this.hexInputHandler(RGBToHex(this.rgb))
-			} else {
-				this.hsl = { ...temporaryColor } as HSL
-				this.rgb = HSLtoRGB(this.hsl)
-				this.hexInputHandler(RGBToHex(HSLtoRGB(this.hsl)))
-			}
+		}
+		if (this.sliderMode === "rgb") {
+			this.rgb = { ...temporaryColor } as RGB
+			this.hsl = RGBtoHSL(this.rgb)
+			this.hexInputHandler(RGBToHex(this.rgb))
+		} else {
+			this.hsl = { ...temporaryColor } as HSL
+			this.rgb = HSLtoRGB(this.hsl)
+			this.hexInputHandler(RGBToHex(HSLtoRGB(this.hsl)))
 		}
 	}
 	openDropdown(): void {
