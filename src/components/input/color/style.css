@@ -104,7 +104,7 @@ div.rgb-sliders smoothly-input-range>div>input[name=s]::-webkit-slider-thumb {
 }
 
 /* --------------------L------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-track
+div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-track,
 div.rgb-sliders smoothly-input-range>div>input[name=l]::-webkit-slider-runnable-track {
 	background: linear-gradient(to right, black, white)
 }
