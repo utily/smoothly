@@ -9,7 +9,6 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
-	border-radius: var(--smoothly-input-border-radius);
 }
 :host.open {
 	border-radius: var(--smoothly-input-border-radius) var(--smoothly-input-border-radius) 0 0;
