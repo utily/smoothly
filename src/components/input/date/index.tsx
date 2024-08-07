@@ -92,7 +92,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Method()
 	async setInitialValue() {
-		this.value = this.initialValue
+		this.initialValue = this.value
 		this.changed = false
 	}
 	@Listen("smoothlyDateSet")
