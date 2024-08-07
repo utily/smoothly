@@ -39,6 +39,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop() name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
+	// TODO change validator to return Flaw | undefined in the future that can be used for warning messages on form and input
 	@Prop() validator: (data: Readonly<Data>) => Promise<boolean> | boolean = async value =>
 		Object.values(value).filter(v => v).length > 0
 	@State() processing?: Promise<boolean>
