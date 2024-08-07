@@ -43,12 +43,9 @@ export function RGBtoHSL({ r, g, b }: RGB): HSL {
 		r /= 255
 		g /= 255
 		b /= 255
-
-		const max = Math.max(r, g, b),
-			min = Math.min(r, g, b)
-
+		const max = Math.max(r, g, b)
+		const min = Math.min(r, g, b)
 		l = (max + min) / 2
-
 		if (max === min) {
 			h = s = 0
 		} else {
@@ -68,10 +65,8 @@ export function RGBtoHSL({ r, g, b }: RGB): HSL {
 				default:
 					h = 0
 			}
-
 			h /= 6
 		}
-
 		h = h * 360
 		s = s * 100
 		l = l * 100
@@ -82,15 +77,12 @@ export function HSLtoRGB({ h, s, l }: HSL): RGB {
 	let r = 0,
 		g = 0,
 		b = 0
-
 	if (h !== undefined && s !== undefined && l !== undefined) {
 		s /= 100
 		l /= 100
-
 		const c = (1 - Math.abs(2 * l - 1)) * s,
 			x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
 			m = l - c / 2
-
 		if (0 <= h && h < 60) {
 			r = c
 			g = x
@@ -116,7 +108,6 @@ export function HSLtoRGB({ h, s, l }: HSL): RGB {
 			g = 0
 			b = x
 		}
-
 		r = (r + m) * 255
 		g = (g + m) * 255
 		b = (b + m) * 255
