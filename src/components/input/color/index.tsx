@@ -207,6 +207,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch
+							title={`${this.sliderMode === "rgb" ? "To HSL" : "To RGB"}`}
 							onSmoothlyToggleSwitchChange={event => this.handleSwitchMode(event)}
 							size="tiny"
 							checkmark={false}
