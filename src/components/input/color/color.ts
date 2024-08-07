@@ -37,7 +37,6 @@ export function RGBToHex(rgb: RGB): string {
 	hexPairs.every(pair => pair[0] === pair[1]) && (hex = hexPairs.map(pair => pair[0]).join(""))
 	return "#" + hex
 }
-
 export function RGBtoHSL({ r, g, b }: RGB): HSL {
 	let h, s, l
 	if (r !== undefined && g !== undefined && b !== undefined) {
@@ -79,8 +78,7 @@ export function RGBtoHSL({ r, g, b }: RGB): HSL {
 	}
 	return { h, s, l }
 }
-export function HSLtoRGB(hsl: HSL): RGB {
-	let { h, s, l } = hsl
+export function HSLtoRGB({ h, s, l }: HSL): RGB {
 	let r = 0,
 		g = 0,
 		b = 0

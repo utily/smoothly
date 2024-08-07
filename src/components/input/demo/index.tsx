@@ -11,7 +11,7 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
-				{/* <h2>Array in Form</h2>
+				<h2>Array in Form</h2>
 				<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log(e.detail)}>
 					<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
 					<smoothly-input-range name="pets.0.age" max={100} step={1}>
@@ -136,11 +136,11 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-item slot="options" value={"third"}>
 							Label 3
 						</smoothly-input-radio-item>
-					</smoothly-input-radio> 
-				<smoothly-input-color name="color" value={"#479f56"} output="rgb">
-					Color
-				</smoothly-input-color>
-				<smoothly-input-select menuHeight="7.5items" placeholder="Select..." multiple name="select-month">
+					</smoothly-input-radio>
+					<smoothly-input-color name="color" value={"#479f56"} output="rgb">
+						Color
+					</smoothly-input-color>
+					<smoothly-input-select menuHeight="7.5items" placeholder="Select..." multiple name="select-month">
 						<label slot="label">Month</label>
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
@@ -725,12 +725,6 @@ export class SmoothlyInputDemo {
 						Date
 					</smoothly-input-date>
 					<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
-				</smoothly-form> */}
-				<smoothly-form looks="border" onSmoothlyFormInput={e => console.log(e.detail)}>
-					<smoothly-input-color output="hex" value="#eed412" name="color1">
-						Choose color
-					</smoothly-input-color>
-					<smoothly-input-color name="color2">Choose color</smoothly-input-color>
 				</smoothly-form>
 			</Host>
 		)
