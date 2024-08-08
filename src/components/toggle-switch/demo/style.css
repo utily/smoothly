@@ -1,9 +1,9 @@
-:host>div{
+:host>div {
 	display: grid;
 	grid-template-columns: repeat(5, max-content);
-	gap:1em;
+	gap: 1em;
 }
+
 :host>div>span>p {
 	margin: 0;
 }
-
