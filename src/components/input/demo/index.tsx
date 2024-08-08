@@ -641,7 +641,7 @@ export class SmoothlyInputDemo {
 						max="2025-12-30"
 						showLabel={false}
 						style={{
-							"--border-radius": "4px",
+							"--smoothly-input-border-radius": "0.5rem",
 							"--padding": "0 0.75em",
 							"--input-width": "12ch",
 						}}></smoothly-input-date-range>
@@ -692,7 +692,7 @@ export class SmoothlyInputDemo {
 							max="2025-12-30"
 							showLabel={false}
 							style={{
-								"--border-radius": "4px",
+								"--smoothly-input-border-radius": "0.5rem",
 								"--padding": "0 0.75em",
 								"--input-width": "12ch",
 							}}
@@ -731,7 +731,7 @@ export class SmoothlyInputDemo {
 							max="2025-12-30"
 							showLabel={false}
 							style={{
-								"--border-radius": "4px",
+								"--smoothly-input-border-radius": "0.5rem",
 								"--padding": "0 0.75em",
 								"--input-width": "12ch",
 							}}
