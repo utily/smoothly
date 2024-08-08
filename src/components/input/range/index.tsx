@@ -35,6 +35,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop() max = 100000
 	@Prop() name = "range"
 	@Prop() labelText?: string
+	@Prop() valueText?: string
 	@Prop() step: number | "any" = "any"
 	@Prop() outputSide: "right" | "left" = "left"
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -74,8 +75,8 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Watch("value")
 	valueChanged(): void {
 		this.changed = this.initialValue !== this.value
-		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.listener.changed?.(this)
+		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	inputHandler(event: Event): void {
 		event.target instanceof HTMLInputElement &&
@@ -98,7 +99,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 					<label htmlFor={this.name}>
 						<slot />
 					</label>
-					<output htmlFor={this.name}>{this.value ?? "—"}</output>
+					<output htmlFor={this.name}>{this.valueText ? this.valueText : this.value ?? "—"}</output>
 					<input
 						name={this.name}
 						part="range"

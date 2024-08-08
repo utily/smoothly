@@ -137,7 +137,7 @@ export class SmoothlyInputDemo {
 							Label 3
 						</smoothly-input-radio-item>
 					</smoothly-input-radio>
-					<smoothly-input-color name="color" value={"#479f56"}>
+					<smoothly-input-color name="color" value={"#479f56"} output="rgb">
 						Color
 					</smoothly-input-color>
 					<smoothly-input-select menuHeight="7.5items" placeholder="Select..." multiple name="select-month">

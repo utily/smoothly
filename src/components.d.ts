@@ -265,6 +265,7 @@ export namespace Components {
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
+        "output": "rgb" | "hex";
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -388,6 +389,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "step": number | "any";
         "value": number | undefined;
+        "valueText"?: string;
     }
     interface SmoothlyInputReset {
         "color"?: Color;
@@ -2411,6 +2413,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "output"?: "rgb" | "hex";
         "readonly"?: boolean;
         "value"?: string | undefined;
     }
@@ -2529,6 +2532,7 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "step"?: number | "any";
         "value"?: number | undefined;
+        "valueText"?: string;
     }
     interface SmoothlyInputReset {
         "color"?: Color;
