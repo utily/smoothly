@@ -44,12 +44,18 @@
 
 :host>li>a>smoothly-icon {
 	align-self: inherit;
-	margin-bottom: 1em;
+}
+:host[icon]>li>a>.label {
+	display: none;
 }
 
 @media screen and (max-width: 900px) {
 	:host>li>a {
 		padding: 0;
+	}
+	:host[icon]>li>a>.label {
+		display: unset;
+		padding: 0 1rem;
 	}
 
 	:host>li>a {
