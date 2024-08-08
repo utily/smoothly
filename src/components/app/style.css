@@ -62,10 +62,6 @@ smoothly-app>smoothly-notifier>header>h1>a {
 	white-space: nowrap;
 }
 
-smoothly-app>smoothly-notifier>header>nav>ul li a {
-	line-height: 1.6cm;
-}
-
 smoothly-app>smoothly-notifier>header>nav>ul {
 	width: 100%;
 }
@@ -101,8 +97,8 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 
 @media screen and (max-width: 900px) {
 	smoothly-app>smoothly-notifier>header>nav {
-		width: 50dvw;
-		max-width: 15rem;
+		width: fit-content;
+		max-width: 100%;
 		top: 100%;
 		position: absolute;
 		max-height: calc(100dvh - var(--header-height));
@@ -124,7 +120,6 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 
 	smoothly-app>smoothly-notifier>header>nav>ul li {
 		margin-right: 0;
-		margin-bottom: 1em;
 		width: 100%;
 	}
 

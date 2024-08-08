@@ -48,7 +48,8 @@ export class SmoothlyAppRoom {
 			<Host>
 				<li>
 					<a href={typeof this.path == "string" ? this.path : this.path.pathname} onClick={e => this.clickHandler(e)}>
-						{this.icon ? <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon> : this.label}
+						{this.icon && <smoothly-icon name={this.icon} toolTip={this.label}></smoothly-icon>}
+						{this.label && <span class="label">{this.label}</span>}
 					</a>
 				</li>
 				<div ref={e => (this.contentElement = e)}>
