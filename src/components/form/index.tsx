@@ -13,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { http } from "cloudly-http"
+import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
@@ -30,6 +31,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop() action?: string
+	@Prop() validator?: isly.Type<any>
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
@@ -61,9 +63,31 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		listener(this)
 	}
 	@Watch("value")
-	watchValue() {
+	async watchValue() {
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+		if (this.validator) {
+			const flaws = this.validator
+				?.flaw(this.value)
+				.flaws?.reduce((r: Record<string, isly.Flaw>, f) => (f.property ? { ...r, [f.property]: f } : r), {})
+			for (const [property, input] of this.inputs.entries()) {
+				this.validate(flaws, property, input)
+			}
+		}
 		this.listeners.changed?.forEach(l => l(this))
+	}
+	validate(flaws: Record<string, isly.Flaw> | undefined, property: string, input: Input.Element) {
+		if (property.includes(".")) {
+			const [key, ...rest] = property.split(".")
+			const nestedFlaws = flaws?.[key]?.flaws ?? []
+			this.validate(
+				nestedFlaws.reduce((r: Record<string, isly.Flaw>, f) => (f.property ? { ...r, [f.property]: f } : r), {}),
+				rest.join("."),
+				input
+			)
+		} else {
+			const flaw = flaws?.[property]
+			input && (input.invalid = !!flaw)
+		}
 	}
 	@Watch("readonly")
 	watchReadonly() {

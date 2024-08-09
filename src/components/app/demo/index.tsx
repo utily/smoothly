@@ -39,6 +39,9 @@ export class SmoothlyAppDemo {
 						</smoothly-button>
 					</div>
 				</smoothly-app-room>
+				<smoothly-app-room path="/form" label="Form">
+					<smoothly-form-demo />
+				</smoothly-app-room>
 				<smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
 				</smoothly-app-room>

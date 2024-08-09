@@ -13,6 +13,7 @@ import { tidily, Type } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
+import { isly } from "isly";
 import { Editable } from "./components/input/Editable";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
@@ -26,6 +27,7 @@ export { tidily, Type } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
+export { isly } from "isly";
 export { Editable } from "./components/input/Editable";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
@@ -190,7 +192,12 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validator"?: isly.Type<any>;
         "value": Readonly<Data>;
+    }
+    interface SmoothlyFormDemo {
+    }
+    interface SmoothlyFormDemoTyped {
     }
     interface SmoothlyFrame {
         "name": string;
@@ -219,6 +226,7 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
+        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
@@ -276,6 +284,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": Date;
@@ -294,6 +303,7 @@ export namespace Components {
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
+        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max"?: isoly.Date;
@@ -411,6 +421,7 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
         "inCalendar": boolean;
+        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
@@ -1160,6 +1171,18 @@ declare global {
     var HTMLSmoothlyFormElement: {
         prototype: HTMLSmoothlyFormElement;
         new (): HTMLSmoothlyFormElement;
+    };
+    interface HTMLSmoothlyFormDemoElement extends Components.SmoothlyFormDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoElement: {
+        prototype: HTMLSmoothlyFormDemoElement;
+        new (): HTMLSmoothlyFormDemoElement;
+    };
+    interface HTMLSmoothlyFormDemoTypedElement extends Components.SmoothlyFormDemoTyped, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoTypedElement: {
+        prototype: HTMLSmoothlyFormDemoTypedElement;
+        new (): HTMLSmoothlyFormDemoTypedElement;
     };
     interface HTMLSmoothlyFrameElementEventMap {
         "trigger": Trigger;
@@ -2084,6 +2107,8 @@ declare global {
         "smoothly-filter-select": HTMLSmoothlyFilterSelectElement;
         "smoothly-filter-toggle": HTMLSmoothlyFilterToggleElement;
         "smoothly-form": HTMLSmoothlyFormElement;
+        "smoothly-form-demo": HTMLSmoothlyFormDemoElement;
+        "smoothly-form-demo-typed": HTMLSmoothlyFormDemoTypedElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
@@ -2338,7 +2363,12 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
+        "validator"?: isly.Type<any>;
         "value"?: Readonly<Data>;
+    }
+    interface SmoothlyFormDemo {
+    }
+    interface SmoothlyFormDemoTyped {
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -2365,6 +2395,7 @@ declare namespace LocalJSX {
         "currency"?: isoly.Currency;
         "delay"?: number;
         "disabled"?: boolean;
+        "invalid"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
@@ -2420,6 +2451,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputDate {
         "changed"?: boolean;
         "color"?: Color;
+        "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: Date;
         "min"?: Date;
@@ -2438,6 +2470,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "color"?: Color;
         "end"?: isoly.Date | undefined;
+        "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -2552,6 +2585,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "defined"?: boolean;
         "inCalendar"?: boolean;
+        "invalid"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple"?: boolean;
@@ -2861,6 +2895,8 @@ declare namespace LocalJSX {
         "smoothly-filter-select": SmoothlyFilterSelect;
         "smoothly-filter-toggle": SmoothlyFilterToggle;
         "smoothly-form": SmoothlyForm;
+        "smoothly-form-demo": SmoothlyFormDemo;
+        "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
@@ -2970,6 +3006,8 @@ declare module "@stencil/core" {
             "smoothly-filter-select": LocalJSX.SmoothlyFilterSelect & JSXBase.HTMLAttributes<HTMLSmoothlyFilterSelectElement>;
             "smoothly-filter-toggle": LocalJSX.SmoothlyFilterToggle & JSXBase.HTMLAttributes<HTMLSmoothlyFilterToggleElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
+            "smoothly-form-demo": LocalJSX.SmoothlyFormDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoElement>;
+            "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;

@@ -26,6 +26,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) currency?: isoly.Currency
+	@Prop() invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
@@ -323,7 +324,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	render() {
 		return (
 			<Host
-				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
+				class={{
+					"has-value": this.state?.value != undefined && this.state?.value != "",
+					invalid: !!this.invalid,
+				}}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
 				<div>
