@@ -14,6 +14,7 @@ import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
+import { Warnings } from "./components/input/Warnings";
 import { Editable } from "./components/input/Editable";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
@@ -28,6 +29,7 @@ export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
+export { Warnings } from "./components/input/Warnings";
 export { Editable } from "./components/input/Editable";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
@@ -192,7 +194,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
         "type"?: "update" | "change" | "fetch" | "create";
-        "validator"?: isly.Type<any>;
+        "validator"?: isly.Type<any> | ((data: Data) => Promise<Warnings>);
         "value": Readonly<Data>;
     }
     interface SmoothlyFormDemo {
@@ -226,7 +228,6 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
-        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "name": string;
@@ -240,6 +241,7 @@ export namespace Components {
         "showLabel": boolean;
         "type": tidily.Type;
         "value": any;
+        "warning"?: boolean;
     }
     interface SmoothlyInputCheckbox {
         "changed": boolean;
@@ -286,7 +288,6 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": Date;
@@ -298,6 +299,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "value"?: Date;
+        "warning"?: boolean;
     }
     interface SmoothlyInputDateRange {
         "changed": boolean;
@@ -305,7 +307,6 @@ export namespace Components {
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
-        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max"?: isoly.Date;
@@ -317,6 +318,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "start": isoly.Date | undefined;
+        "warning"?: boolean;
     }
     interface SmoothlyInputDemo {
     }
@@ -425,7 +427,6 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
         "inCalendar": boolean;
-        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
@@ -439,6 +440,7 @@ export namespace Components {
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
         "showSelected"?: boolean;
+        "warning"?: boolean;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
@@ -2381,7 +2383,7 @@ declare namespace LocalJSX {
         "prevent"?: boolean;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
-        "validator"?: isly.Type<any>;
+        "validator"?: isly.Type<any> | ((data: Data) => Promise<Warnings>);
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFormDemo {
@@ -2413,7 +2415,6 @@ declare namespace LocalJSX {
         "currency"?: isoly.Currency;
         "delay"?: number;
         "disabled"?: boolean;
-        "invalid"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
@@ -2428,6 +2429,7 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "type"?: tidily.Type;
         "value"?: any;
+        "warning"?: boolean;
     }
     interface SmoothlyInputCheckbox {
         "changed"?: boolean;
@@ -2471,7 +2473,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputDate {
         "changed"?: boolean;
         "color"?: Color;
-        "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: Date;
         "min"?: Date;
@@ -2485,12 +2486,12 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: Date;
+        "warning"?: boolean;
     }
     interface SmoothlyInputDateRange {
         "changed"?: boolean;
         "color"?: Color;
         "end"?: isoly.Date | undefined;
-        "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -2503,6 +2504,7 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;
+        "warning"?: boolean;
     }
     interface SmoothlyInputDemo {
     }
@@ -2607,7 +2609,6 @@ declare namespace LocalJSX {
         "color"?: Color;
         "defined"?: boolean;
         "inCalendar"?: boolean;
-        "invalid"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple"?: boolean;
@@ -2623,6 +2624,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
         "searchDisabled"?: boolean;
         "showSelected"?: boolean;
+        "warning"?: boolean;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;

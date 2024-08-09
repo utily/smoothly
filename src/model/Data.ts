@@ -17,7 +17,6 @@ export namespace Data {
 			valueType
 		)
 	)
-
 	export function set(data: Data, [head, ...tail]: string[], value: Value): Data {
 		const current = data[head ?? ""]
 		return {

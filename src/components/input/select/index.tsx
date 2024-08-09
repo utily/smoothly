@@ -35,7 +35,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
-	@Prop() invalid?: boolean = false
+	@Prop() warning?: boolean = false
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
@@ -309,7 +309,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return (
 			<Host
 				tabIndex={0}
-				class={{ "has-value": this.selected.length !== 0, open: this.open, invalid: !!this.invalid }}
+				class={{ "has-value": this.selected.length !== 0, open: this.open, invalid: !!this.warning }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}

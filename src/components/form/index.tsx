@@ -21,6 +21,7 @@ import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
 import { Looks } from "../input/Looks"
 import { Submittable } from "../input/Submittable"
+import { Warnings } from "../input/Warnings"
 
 @Component({
 	tag: "smoothly-form",
@@ -31,7 +32,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) value: Readonly<Data> = {}
 	@Prop() action?: string
-	@Prop() validator?: isly.Type<any>
+	@Prop() validator?: isly.Type<any> | ((data: Data) => Promise<Warnings>)
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
@@ -65,7 +66,10 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Watch("value")
 	async watchValue() {
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
-		if (this.validator) {
+		if (typeof this.validator == "function") {
+			const warnings = await this.validator(this.value)
+			this.inputs.forEach(input => (input.warning = Warnings.get(warnings, input.name)))
+		} else if (this.validator) {
 			const flaws = this.validator
 				?.flaw(this.value)
 				.flaws?.reduce((r: Record<string, isly.Flaw>, f) => (f.property ? { ...r, [f.property]: f } : r), {})
