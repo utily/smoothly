@@ -15,17 +15,11 @@ export class SmoothlyInputDemo {
 					<h2>Array in Form</h2>
 					<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log(e.detail)}>
 						<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
-						<smoothly-input-range name="pets.0.age" max={100} step={1}>
-							First Pet's Age
-						</smoothly-input-range>
+						<smoothly-input-range name="pets.0.age" max={100} step={1} label="First Pet's Age" />
 						<smoothly-input name="pets.1.name">Second Pet's Name</smoothly-input>
-						<smoothly-input-range name="pets.1.age" max={100} step={1}>
-							Second Pet's Age
-						</smoothly-input-range>
+						<smoothly-input-range name="pets.1.age" max={100} step={1} label="Second Pet's Age" />
 						<smoothly-input name="pets.2.name">Third Pet's Name</smoothly-input>
-						<smoothly-input-range name="pets.2.age" max={100} step={1}>
-							Third Pet's Age
-						</smoothly-input-range>
+						<smoothly-input-range name="pets.2.age" max={100} step={1} label="Third Pet's Age" />
 						<smoothly-input-submit slot="submit"></smoothly-input-submit>
 					</smoothly-form>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
@@ -154,9 +148,7 @@ export class SmoothlyInputDemo {
 							Date
 							<smoothly-input-clear slot="end"></smoothly-input-clear>
 						</smoothly-input-date>
-						<smoothly-input-range step={1} name="range3" value={20000}>
-							Select
-						</smoothly-input-range>
+						<smoothly-input-range step={1} name="range3" value={20} label="Range" />
 						<smoothly-input-file name={"profile"} placeholder={"Click or drag your profile picture here..."}>
 							<span slot={"label"}>Profile</span>
 							<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
@@ -236,9 +228,7 @@ export class SmoothlyInputDemo {
 						<smoothly-input-checkbox name="checkbox2" checked>
 							Check the box 2
 						</smoothly-input-checkbox>
-						<smoothly-input-range step={1} name="range3" value={20000}>
-							Select
-						</smoothly-input-range>
+						<smoothly-input-range step={1} name="range3" value={20} label="Range" />
 						<smoothly-input-edit
 							fill="default"
 							type="button"
@@ -272,24 +262,6 @@ export class SmoothlyInputDemo {
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
 					</smoothly-input-select>
-					<h2>Color</h2>
-					<smoothly-form looks="border">
-						<smoothly-input-color name="color">Choose color</smoothly-input-color>
-					</smoothly-form>
-					<h2>Range</h2>
-					<smoothly-form looks="border">
-						<smoothly-input-range step={1} name="range" outputSide="right">
-							Select and so
-						</smoothly-input-range>
-						<smoothly-input-range step={1} name="range2">
-							Select with really really long label
-							<smoothly-icon name="checkmark-circle" slot="start" />
-							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
-						</smoothly-input-range>
-						<smoothly-input-range step={1} name="range3">
-							Select
-						</smoothly-input-range>
-					</smoothly-form>
 					<h2>Duration</h2>
 					<smoothly-form looks="border">
 						<smoothly-input
@@ -719,6 +691,8 @@ export class SmoothlyInputDemo {
 						</smoothly-input-date>
 						<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
 					</smoothly-form>
+					<smoothly-input-range-demo />
+					<smoothly-input-color-demo />
 				</div>
 			</Host>
 		)

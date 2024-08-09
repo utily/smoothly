@@ -3,7 +3,6 @@
 * {
 	box-sizing: border-box;
 }
-
 :host {
 	position: relative;
 	width: 100%;
@@ -11,52 +10,53 @@
 	align-items: center;
 	display: flex;
 	background-color: rgb(var(--smoothly-input-background));
-	padding: 0 .4em;
+	padding-right: .5em;
 }
-
-:host :nth-child(2) {
-	margin-left: 0.2em;
-}
-
 :host>div {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding: 1.1em 0 .1em 0;
 }
-
+:host>div>smoothly-input {
+	width: 12em;
+}
+:host>div>smoothly-input:focus {
+	outline: none;
+	border: none
+}
+:host>div>smoothly-input label {
+	white-space: nowrap;
+}
 :host.output-side-right>div {
 	padding: 0;
 }
-
-:host>div>output {
-	min-width: 4em;
+:host.output-side-right>div>smoothly-input {
 	text-align: center;
-	margin-left: .5em
+	margin-left: .5em;
+	border: none;
+	box-sizing: border-box;
+	width: 5em;
+	order: 3;
+	margin: 0;
 }
-
-:host>div>label {
-	position: absolute;
-	display: block;
-	white-space: nowrap;
+:host.output-side-right>div>smoothly-display,
+:host:not(.output-side-right)>div>label {
+	display: none;
+}
+:host.output-side-right>div>smoothly-input input {
+	padding: 0;
 	text-align: center;
-	top: .5em;
-	left: 0;
-	font-size: .6em;
 }
-
+:host.output-side-right>div>smoothly-input label {
+	width: 100%;
+}
 :host.output-side-right>div>label {
 	position: static;
 	font-size: inherit;
 	text-align: center;
 	margin: 0 .5em
-}
-
-:host.output-side-right>div>output {
-	order: 3;
-	margin: 0;
 }
 
 /*--------------------Reset browserspecific CSS------------------ */
@@ -126,4 +126,10 @@
 :host[readonly],
 :host[readonly] * {
 	cursor: not-allowed
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
