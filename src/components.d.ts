@@ -192,6 +192,10 @@ export namespace Components {
         "type"?: "update" | "change" | "fetch" | "create";
         "value": Readonly<Data>;
     }
+    interface SmoothlyFormDemo {
+    }
+    interface SmoothlyFormDemoTyped {
+    }
     interface SmoothlyFrame {
         "name": string;
         "origin": string | undefined;
@@ -1165,6 +1169,18 @@ declare global {
         prototype: HTMLSmoothlyFormElement;
         new (): HTMLSmoothlyFormElement;
     };
+    interface HTMLSmoothlyFormDemoElement extends Components.SmoothlyFormDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoElement: {
+        prototype: HTMLSmoothlyFormDemoElement;
+        new (): HTMLSmoothlyFormDemoElement;
+    };
+    interface HTMLSmoothlyFormDemoTypedElement extends Components.SmoothlyFormDemoTyped, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoTypedElement: {
+        prototype: HTMLSmoothlyFormDemoTypedElement;
+        new (): HTMLSmoothlyFormDemoTypedElement;
+    };
     interface HTMLSmoothlyFrameElementEventMap {
         "trigger": Trigger;
         "message2": Message<any>;
@@ -2100,6 +2116,8 @@ declare global {
         "smoothly-filter-select": HTMLSmoothlyFilterSelectElement;
         "smoothly-filter-toggle": HTMLSmoothlyFilterToggleElement;
         "smoothly-form": HTMLSmoothlyFormElement;
+        "smoothly-form-demo": HTMLSmoothlyFormDemoElement;
+        "smoothly-form-demo-typed": HTMLSmoothlyFormDemoTypedElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
         "smoothly-icon": HTMLSmoothlyIconElement;
         "smoothly-icon-demo": HTMLSmoothlyIconDemoElement;
@@ -2357,6 +2375,10 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
         "value"?: Readonly<Data>;
+    }
+    interface SmoothlyFormDemo {
+    }
+    interface SmoothlyFormDemoTyped {
     }
     interface SmoothlyFrame {
         "name"?: string;
@@ -2883,6 +2905,8 @@ declare namespace LocalJSX {
         "smoothly-filter-select": SmoothlyFilterSelect;
         "smoothly-filter-toggle": SmoothlyFilterToggle;
         "smoothly-form": SmoothlyForm;
+        "smoothly-form-demo": SmoothlyFormDemo;
+        "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
         "smoothly-frame": SmoothlyFrame;
         "smoothly-icon": SmoothlyIcon;
         "smoothly-icon-demo": SmoothlyIconDemo;
@@ -2994,6 +3018,8 @@ declare module "@stencil/core" {
             "smoothly-filter-select": LocalJSX.SmoothlyFilterSelect & JSXBase.HTMLAttributes<HTMLSmoothlyFilterSelectElement>;
             "smoothly-filter-toggle": LocalJSX.SmoothlyFilterToggle & JSXBase.HTMLAttributes<HTMLSmoothlyFilterToggleElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
+            "smoothly-form-demo": LocalJSX.SmoothlyFormDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoElement>;
+            "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
             "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
             "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;

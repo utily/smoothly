@@ -12,8 +12,6 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<div class="forms">
-					<smoothly-input-range-demo />
-					<smoothly-input-color-demo />
 					<h2>Array in Form</h2>
 					<smoothly-form looks="line" onSmoothlyFormSubmit={e => console.log(e.detail)}>
 						<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
@@ -715,6 +713,8 @@ export class SmoothlyInputDemo {
 						</smoothly-input-date>
 						<smoothly-input-submit slot="submit" color="success" fill="solid" size="icon"></smoothly-input-submit>
 					</smoothly-form>
+					<smoothly-input-range-demo />
+					<smoothly-input-color-demo />
 				</div>
 			</Host>
 		)
