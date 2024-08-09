@@ -26,11 +26,11 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
-	@Element() element: HTMLSmoothlyInputRangeElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
-	private input?: Input.Element
+	private input?: HTMLSmoothlyInputElement
+	private initialValue: number | undefined = undefined
+	@Element() element: HTMLSmoothlyInputRangeElement
 	@Prop({ mutable: true }) value: number | undefined = undefined
-	private initialValue = this.value
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -53,6 +53,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 			return
 		})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.value && (this.initialValue = this.value)
 		this.valueChanged()
 	}
 	@Listen("smoothlyInputLoad")
@@ -118,10 +119,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				<div>
 					<label htmlFor={this.name}>{this.label}</label>
 					<smoothly-input
+						ref={e => (this.input = e)}
 						looks={undefined}
 						showLabel={this.outputSide === "left"}
 						type={this.type}
-						onSmoothlyInputLoad={e => ((this.input = e.target), this.inputHandler(e))}
+						onSmoothlyInputLoad={e => (e.stopPropagation(), this.inputHandler(e))}
 						onSmoothlyBlur={e => this.inputHandler(e)}
 						onSmoothlyInput={e => {
 							e.stopPropagation()
