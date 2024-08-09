@@ -271,6 +271,8 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "value": string | undefined;
     }
+    interface SmoothlyInputColorDemo {
+    }
     interface SmoothlyInputDate {
         "changed": boolean;
         "clear": () => Promise<void>;
@@ -377,7 +379,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "edit": (editable: boolean) => Promise<void>;
-        "labelText"?: string;
+        "label": string;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
         "max": number;
@@ -387,9 +389,11 @@ export namespace Components {
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
-        "step": number | "any";
+        "step"?: number;
+        "type": Extract<tidily.Type, "text" | "percent">;
         "value": number | undefined;
-        "valueText"?: string;
+    }
+    interface SmoothlyInputRangeDemo {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
@@ -1270,6 +1274,12 @@ declare global {
         prototype: HTMLSmoothlyInputColorElement;
         new (): HTMLSmoothlyInputColorElement;
     };
+    interface HTMLSmoothlyInputColorDemoElement extends Components.SmoothlyInputColorDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputColorDemoElement: {
+        prototype: HTMLSmoothlyInputColorDemoElement;
+        new (): HTMLSmoothlyInputColorDemoElement;
+    };
     interface HTMLSmoothlyInputDateElementEventMap {
         "smoothlyInputLoad": (parent: HTMLElement) => void;
         "smoothlyValueChange": Date;
@@ -1437,6 +1447,12 @@ declare global {
     var HTMLSmoothlyInputRangeElement: {
         prototype: HTMLSmoothlyInputRangeElement;
         new (): HTMLSmoothlyInputRangeElement;
+    };
+    interface HTMLSmoothlyInputRangeDemoElement extends Components.SmoothlyInputRangeDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputRangeDemoElement: {
+        prototype: HTMLSmoothlyInputRangeDemoElement;
+        new (): HTMLSmoothlyInputRangeDemoElement;
     };
     interface HTMLSmoothlyInputResetElementEventMap {
         "smoothlyInputLoad": (parent: HTMLElement) => void;
@@ -2091,6 +2107,7 @@ declare global {
         "smoothly-input-checkbox": HTMLSmoothlyInputCheckboxElement;
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
         "smoothly-input-color": HTMLSmoothlyInputColorElement;
+        "smoothly-input-color-demo": HTMLSmoothlyInputColorDemoElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
@@ -2101,6 +2118,7 @@ declare global {
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
         "smoothly-input-range": HTMLSmoothlyInputRangeElement;
+        "smoothly-input-range-demo": HTMLSmoothlyInputRangeDemoElement;
         "smoothly-input-reset": HTMLSmoothlyInputResetElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-input-submit": HTMLSmoothlyInputSubmitElement;
@@ -2417,6 +2435,8 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "value"?: string | undefined;
     }
+    interface SmoothlyInputColorDemo {
+    }
     interface SmoothlyInputDate {
         "changed"?: boolean;
         "color"?: Color;
@@ -2519,7 +2539,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputRange {
         "changed"?: boolean;
-        "labelText"?: string;
+        "label"?: string;
         "looks"?: Looks;
         "max"?: number;
         "min"?: number;
@@ -2530,9 +2550,11 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "outputSide"?: "right" | "left";
         "readonly"?: boolean;
-        "step"?: number | "any";
+        "step"?: number;
+        "type"?: Extract<tidily.Type, "text" | "percent">;
         "value"?: number | undefined;
-        "valueText"?: string;
+    }
+    interface SmoothlyInputRangeDemo {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
@@ -2868,6 +2890,7 @@ declare namespace LocalJSX {
         "smoothly-input-checkbox": SmoothlyInputCheckbox;
         "smoothly-input-clear": SmoothlyInputClear;
         "smoothly-input-color": SmoothlyInputColor;
+        "smoothly-input-color-demo": SmoothlyInputColorDemo;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
@@ -2878,6 +2901,7 @@ declare namespace LocalJSX {
         "smoothly-input-radio": SmoothlyInputRadio;
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
         "smoothly-input-range": SmoothlyInputRange;
+        "smoothly-input-range-demo": SmoothlyInputRangeDemo;
         "smoothly-input-reset": SmoothlyInputReset;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-input-submit": SmoothlyInputSubmit;
@@ -2977,6 +3001,7 @@ declare module "@stencil/core" {
             "smoothly-input-checkbox": LocalJSX.SmoothlyInputCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
             "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
+            "smoothly-input-color-demo": LocalJSX.SmoothlyInputColorDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
@@ -2987,6 +3012,7 @@ declare module "@stencil/core" {
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
             "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
+            "smoothly-input-range-demo": LocalJSX.SmoothlyInputRangeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeDemoElement>;
             "smoothly-input-reset": LocalJSX.SmoothlyInputReset & JSXBase.HTMLAttributes<HTMLSmoothlyInputResetElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;

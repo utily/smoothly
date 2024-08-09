@@ -17,7 +17,7 @@
 :host>div.rgb-sliders {
 	background-color: rgb(var(--smoothly-input-background));
 	position: absolute;
-	padding: 1em 0;
+	padding: 1em 1em 1em 0;
 	top: calc(var(--element-height) + .8em);
 	left: 0;
 	box-sizing: border-box;
@@ -51,31 +51,43 @@ div.rgb-sliders smoothly-input-range label {
 /* -------------RGB SLIDERS------------------- */
 
 /* --------------------R------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=r]::-webkit-slider-runnable-track,
+div.rgb-sliders smoothly-input-range>div>input[name=r]::-webkit-slider-runnable-track {
+	background: linear-gradient(to left, rgb(255, var(--rgb-g), var(--rgb-b)), rgb(0, var(--rgb-g), var(--rgb-b)))
+}
 div.rgb-sliders smoothly-input-range>div>input[name=r]::-moz-range-track {
 	background: linear-gradient(to left, rgb(255, var(--rgb-g), var(--rgb-b)), rgb(0, var(--rgb-g), var(--rgb-b)))
 }
-div.rgb-sliders smoothly-input-range>div>input[name=r]::-moz-range-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=r]::-moz-range-thumb {
+	background-color: red;
+}
 div.rgb-sliders smoothly-input-range>div>input[name=r]::-webkit-slider-thumb {
 	background-color: red;
 }
 
 /* --------------------G------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=g]::-webkit-slider-runnable-track,
+div.rgb-sliders smoothly-input-range>div>input[name=g]::-webkit-slider-runnable-track {
+	background: linear-gradient(to left, rgb(var(--rgb-r), 255, var(--rgb-b)), rgb(var(--rgb-r), 0, var(--rgb-b)))
+}
 div.rgb-sliders smoothly-input-range>div>input[name=g]::-moz-range-track {
 	background: linear-gradient(to left, rgb(var(--rgb-r), 255, var(--rgb-b)), rgb(var(--rgb-r), 0, var(--rgb-b)))
 }
-div.rgb-sliders smoothly-input-range>div>input[name=g]::-moz-range-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=g]::-moz-range-thumb {
+	background-color: green;
+}
 div.rgb-sliders smoothly-input-range>div>input[name=g]::-webkit-slider-thumb {
 	background-color: green;
 }
 
 /* --------------------B------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=b]::-webkit-slider-runnable-track,
+div.rgb-sliders smoothly-input-range>div>input[name=b]::-webkit-slider-runnable-track {
+	background: linear-gradient(to left, rgb(var(--rgb-r), var(--rgb-g), 255), rgb(var(--rgb-r), var(--rgb-g), 0))
+}
 div.rgb-sliders smoothly-input-range>div>input[name=b]::-moz-range-track {
 	background: linear-gradient(to left, rgb(var(--rgb-r), var(--rgb-g), 255), rgb(var(--rgb-r), var(--rgb-g), 0))
 }
-div.rgb-sliders smoothly-input-range>div>input[name=b]::-moz-range-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=b]::-moz-range-thumb { 
+	background-color: blue;
+}
 div.rgb-sliders smoothly-input-range>div>input[name=b]::-webkit-slider-thumb  {
 	background-color: blue;
 }
@@ -83,32 +95,44 @@ div.rgb-sliders smoothly-input-range>div>input[name=b]::-webkit-slider-thumb  {
 /* -------------HSL SLIDERS------------------- */
 
 /* --------------------H------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=h]::-webkit-slider-runnable-track,
+div.rgb-sliders smoothly-input-range>div>input[name=h]::-webkit-slider-runnable-track {
+	background: linear-gradient(to right, hsla(0, 100%, 50%, 1),hsla(10, 100%, 50%, 1),hsla(20, 100%, 50%, 1),hsla(30, 100%, 50%, 1),hsla(40, 100%, 50%, 1),hsla(50, 100%, 50%, 1),hsla(60, 100%, 50%, 1),hsla(70, 100%, 50%, 1),hsla(80, 100%, 50%, 1),hsla(90, 100%, 50%, 1),hsla(100, 100%, 50%, 1),hsla(110, 100%, 50%, 1),hsla(120, 100%, 50%, 1),hsla(130, 100%, 50%, 1),hsla(140, 100%, 50%, 1),hsla(150, 100%, 50%, 1),hsla(160, 100%, 50%, 1),hsla(170, 100%, 50%, 1),hsla(180, 100%, 50%, 1),hsla(190, 100%, 50%, 1),hsla(200, 100%, 50%, 1),hsla(210, 100%, 50%, 1),hsla(220, 100%, 50%, 1),hsla(230, 100%, 50%, 1),hsla(240, 100%, 50%, 1),hsla(250, 100%, 50%, 1),hsla(260, 100%, 50%, 1),hsla(270, 100%, 50%, 1),hsla(280, 100%, 50%, 1),hsla(290, 100%, 50%, 1),hsla(300, 100%, 50%, 1),hsla(310, 100%, 50%, 1),hsla(320, 100%, 50%, 1),hsla(330, 100%, 50%, 1),hsla(340, 100%, 50%, 1),hsla(350, 100%, 50%, 1),hsla(360, 100%, 50%, 1));
+}
 div.rgb-sliders smoothly-input-range>div>input[name=h]::-moz-range-track {
 	background: linear-gradient(to right, hsla(0, 100%, 50%, 1),hsla(10, 100%, 50%, 1),hsla(20, 100%, 50%, 1),hsla(30, 100%, 50%, 1),hsla(40, 100%, 50%, 1),hsla(50, 100%, 50%, 1),hsla(60, 100%, 50%, 1),hsla(70, 100%, 50%, 1),hsla(80, 100%, 50%, 1),hsla(90, 100%, 50%, 1),hsla(100, 100%, 50%, 1),hsla(110, 100%, 50%, 1),hsla(120, 100%, 50%, 1),hsla(130, 100%, 50%, 1),hsla(140, 100%, 50%, 1),hsla(150, 100%, 50%, 1),hsla(160, 100%, 50%, 1),hsla(170, 100%, 50%, 1),hsla(180, 100%, 50%, 1),hsla(190, 100%, 50%, 1),hsla(200, 100%, 50%, 1),hsla(210, 100%, 50%, 1),hsla(220, 100%, 50%, 1),hsla(230, 100%, 50%, 1),hsla(240, 100%, 50%, 1),hsla(250, 100%, 50%, 1),hsla(260, 100%, 50%, 1),hsla(270, 100%, 50%, 1),hsla(280, 100%, 50%, 1),hsla(290, 100%, 50%, 1),hsla(300, 100%, 50%, 1),hsla(310, 100%, 50%, 1),hsla(320, 100%, 50%, 1),hsla(330, 100%, 50%, 1),hsla(340, 100%, 50%, 1),hsla(350, 100%, 50%, 1),hsla(360, 100%, 50%, 1));
 }
-div.rgb-sliders smoothly-input-range>div>input[name=h]::-webkit-slider-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=h]::-webkit-slider-thumb {
+	background-color: hsl(var(--hsl-h), 100%, 50%)
+}
 div.rgb-sliders smoothly-input-range>div>input[name=h]::-moz-range-thumb {
-		background-color: hsl(var(--hsl-h), 100%, 50%)
+	background-color: hsl(var(--hsl-h), 100%, 50%)
 }
 
 
 /* --------------------S------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=s]::-webkit-slider-runnable-track,
+div.rgb-sliders smoothly-input-range>div>input[name=s]::-webkit-slider-runnable-track { 
+	background: linear-gradient(to right, hsl(var(--hsl-h), 0%, 50%), hsl(var(--hsl-h), 100%, 50%)); 
+}
 div.rgb-sliders smoothly-input-range>div>input[name=s]::-moz-range-track {
 	background: linear-gradient(to right, hsl(var(--hsl-h), 0%, 50%), hsl(var(--hsl-h), 100%, 50%)); 
 }
-div.rgb-sliders smoothly-input-range>div>input[name=s]::-moz-range-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=s]::-moz-range-thumb {
+	background-color: hsl(var(--hsl-h), var(--hsl-s), 50%)
+}
 div.rgb-sliders smoothly-input-range>div>input[name=s]::-webkit-slider-thumb {
 	background-color: hsl(var(--hsl-h), var(--hsl-s), 50%)
 }
 
 /* --------------------L------------------- */
-div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-track,
+div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-track {
+	background: linear-gradient(to right, black, white)
+}
 div.rgb-sliders smoothly-input-range>div>input[name=l]::-webkit-slider-runnable-track {
 	background: linear-gradient(to right, black, white)
 }
-div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-thumb,
+div.rgb-sliders smoothly-input-range>div>input[name=l]::-moz-range-thumb {
+	background-color: #777;
+}
 div.rgb-sliders smoothly-input-range>div>input[name=l]::-webkit-slider-thumb {
 	background-color: #777;
 }

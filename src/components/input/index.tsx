@@ -252,6 +252,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				this.processKey(event, backend)
 			} else if (event.key == "ArrowUp" || event.key == "ArrowDown")
 				event.preventDefault()
+			else if (event.key == "Enter")
+				this.smoothlyBlur.emit()
 		}
 	}
 	onPaste(event: ClipboardEvent) {
