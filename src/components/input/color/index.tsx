@@ -225,8 +225,8 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 							<smoothly-input-range
 								style={this.sliderMode != "hsl" ? { display: "none" } : {}}
 								name={key}
-								min={key === "h" ? 1 : 0}
-								max={key === "h" ? 360 : 1}
+								min={0}
+								max={key === "h" ? 359 : 1}
 								type={key === "s" || key === "l" ? "percent" : "text"}
 								value={(key === "s" || key === "l") && value ? value / 100 : value}
 								step={key === "s" || key === "l" ? 0.01 : 1}
