@@ -10,6 +10,7 @@
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
 }
+
 :host.open {
 	border-radius: var(--smoothly-input-border-radius) var(--smoothly-input-border-radius) 0 0;
 }
@@ -46,10 +47,10 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-right: .4em;
+	margin-right: .2em;
 }
 
-:host>div.icons::slotted(smoothly-icon) {
+:host>div.icons::slotted(smoothly-icon):not("color") {
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
@@ -61,6 +62,13 @@
 	filter: opacity(100%);
 }
 
+:host.invalid>div>smoothly-icon.invalid {
+	display: block;
+}
+
+:host>div>smoothly-icon.invalid {
+	display: none
+}
 
 :host>div.icons::slotted(smoothly-input-reset) {
 	padding-right: .2em;
@@ -141,4 +149,8 @@
 
 :host>div.options.hidden {
 	display: none;
+}
+
+:host.invalid>div>smoothly-icon {
+	display: block;
 }
