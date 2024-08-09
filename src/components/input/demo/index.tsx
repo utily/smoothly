@@ -24,19 +24,11 @@ export class SmoothlyInputDemo {
 					</smoothly-form>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 					<h2>input-date-range outside from</h2>
-					<smoothly-input-date-range
-						looks="border"
-						start={isoly.Date.now()}
-						end={isoly.Date.now()}
-						onSmoothlyInput={e => console.log("dateRange: ", e)}>
+					<smoothly-input-date-range looks="border" start={isoly.Date.now()} end={isoly.Date.now()}>
 						Date Range
 						<smoothly-input-clear slot="end" size="icon"></smoothly-input-clear>
 					</smoothly-input-date-range>
-					<smoothly-input-date-range
-						looks="border"
-						start={isoly.Date.now()}
-						end={isoly.Date.now()}
-						onSmoothlyInput={e => console.log("dateRange: ", e)}>
+					<smoothly-input-date-range looks="border" start={isoly.Date.now()} end={isoly.Date.now()}>
 						Date Range
 						<smoothly-input-reset slot="end" size="icon"></smoothly-input-reset>
 					</smoothly-input-date-range>
@@ -52,7 +44,7 @@ export class SmoothlyInputDemo {
 					</smoothly-form>
 					<h2>Select</h2>
 					<div class="select-div">
-						<smoothly-input-select name="select-dessert" looks="border" onSmoothlyInput={e => console.log(e.detail)}>
+						<smoothly-input-select name="select-dessert" looks="border">
 							<label slot="label">Select with clear button</label>
 							<smoothly-item value="1">Ice cream</smoothly-item>
 							<smoothly-item value="2">Sponge cake</smoothly-item>
@@ -61,11 +53,7 @@ export class SmoothlyInputDemo {
 							<smoothly-item value="5">Chocolate fondue</smoothly-item>
 							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 						</smoothly-input-select>
-						<smoothly-input-select
-							multiple
-							name="select-dessert-multiple"
-							looks="border"
-							onSmoothlyInput={e => console.log(e.detail)}>
+						<smoothly-input-select multiple name="select-dessert-multiple" looks="border">
 							<label slot="label">Select multiple with reset button</label>
 							<smoothly-item value="ice cream">Ice cream</smoothly-item>
 							<smoothly-item value="sponge cake">Sponge cake</smoothly-item>
@@ -78,11 +66,7 @@ export class SmoothlyInputDemo {
 							</smoothly-item>
 							<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 						</smoothly-input-select>
-						<smoothly-input-select
-							name="spirit-animals"
-							looks="border"
-							mutable
-							onSmoothlyInput={e => console.log(e.detail)}>
+						<smoothly-input-select name="spirit-animals" looks="border" mutable>
 							<label slot="label">Select or add new options</label>
 							<smoothly-item value="manatee">Manatee</smoothly-item>
 							<smoothly-item value="narwhal">Narwhal</smoothly-item>
@@ -90,11 +74,7 @@ export class SmoothlyInputDemo {
 								Cthulu
 							</smoothly-item>
 						</smoothly-input-select>
-						<smoothly-input-select
-							name="select-icon"
-							clearable={false}
-							showSelected={false}
-							onSmoothlyInput={e => console.log("Form Readonly", e.detail)}>
+						<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 							<smoothly-item value="folder" selected>
 								<smoothly-icon size="small" name="folder-outline" />
 							</smoothly-item>
@@ -291,7 +271,6 @@ export class SmoothlyInputDemo {
 							value={this.duration}
 							onSmoothlyInput={e => {
 								const duration = e.detail.duration
-								console.log("event duration", duration)
 								this.duration = duration
 							}}>
 							Duration
@@ -303,7 +282,6 @@ export class SmoothlyInputDemo {
 							placeholder="-hh:mm"
 							onSmoothlyInput={e => {
 								const duration = e.detail.duration
-								console.log("event duration", duration)
 								this.duration = duration
 							}}>
 							Duration

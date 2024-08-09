@@ -13,6 +13,7 @@ export namespace Input {
 		value?: Data[string]
 		color?: Color
 		name: string
+		invalid?: boolean
 		looks: Looks
 		defined?: boolean
 		binary?: Binary
@@ -22,6 +23,7 @@ export namespace Input {
 			value: isly.union<Required<Element>["value"], Data, Data[string]>(Data.type, Data.valueType).optional(),
 			color: Color.type.optional(),
 			name: isly.string(),
+			invalid: isly.boolean().optional(),
 			looks: Looks.type,
 			defined: isly.boolean().optional(),
 			binary: isly.function<Binary>().optional(),

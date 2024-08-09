@@ -30,6 +30,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop() invalid?: boolean = false
 	private initialValue?: Date
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: Date
@@ -109,6 +110,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					onFocus={() => !this.readonly && (this.open = !this.open)}
 					onClick={() => !this.readonly && (this.open = !this.open)}
 					readonly={this.readonly}
+					invalid={this.invalid}
 					type="date"
 					value={this.value}
 					showLabel={this.showLabel}
