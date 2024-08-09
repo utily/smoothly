@@ -132,7 +132,10 @@
 }
 
 :host>div.options::slotted(smoothly-item) {
-	padding: .7em;
+	padding: .7em .7em .7em .5em;
+}
+:host>div.options::slotted(smoothly-item:has(smoothly-icon)) {
+	padding: .7em .7em .7em .4em;
 }
 
 :host>div.options::slotted(smoothly-item:not([selectable])) {
