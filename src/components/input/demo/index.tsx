@@ -180,7 +180,7 @@ export class SmoothlyInputDemo {
 						<smoothly-input readonly name="First Name" value="John">
 							First name
 						</smoothly-input>
-						<smoothly-input name="Last name" value="Doe">
+						<smoothly-input showLabel={false} name="Last name" value="Doe">
 							Last name
 							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
 						</smoothly-input>
