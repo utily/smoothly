@@ -121,11 +121,10 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		return (
 			<Host>
 				<slot name="start" />
-				<slot />
-				<div class="input-group">
+				<div>
 					<slot name="label" />
-					<div>
-						<slot name="options" />
+					<div class="options">
+						<slot />
 					</div>
 				</div>
 				<slot name="end" />
