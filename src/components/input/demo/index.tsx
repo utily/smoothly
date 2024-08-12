@@ -101,16 +101,12 @@ export class SmoothlyInputDemo {
 							<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 						</smoothly-input>
 						<smoothly-input-radio clearable name="radioFirstInput">
-							<p slot="label">Clearable</p>
-							<smoothly-input-radio-item slot="options" value={"first"}>
-								Label 1
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item selected slot="options" value={"second"}>
+							<label slot="label">Clearable</label>
+							<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
+							<smoothly-input-radio-item selected value={"second"}>
 								Label 2
 							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"third"}>
-								Label 3
-							</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
 						</smoothly-input-radio>
 						<smoothly-input-color name="color" value={"#479f56"} output="rgb">
 							Color
@@ -189,16 +185,12 @@ export class SmoothlyInputDemo {
 							<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
 						</smoothly-input>
 						<smoothly-input-radio clearable name="radioFirstInput">
-							<p slot="label">Clearable</p>
-							<smoothly-input-radio-item slot="options" value={"first"}>
-								Label 1
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item selected slot="options" value={"second"}>
+							<label slot="label">Clearable</label>
+							<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
+							<smoothly-input-radio-item selected value={"second"}>
 								Label 2
 							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"third"}>
-								Label 3
-							</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
 						</smoothly-input-radio>
 						<smoothly-input-color name="color">Color</smoothly-input-color>
 						<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
@@ -532,38 +524,22 @@ export class SmoothlyInputDemo {
 					<smoothly-form onSmoothlyFormSubmit={e => console.log(e.detail)} looks="border">
 						<smoothly-input-radio clearable name="radioFirstInput">
 							<smoothly-icon name="checkmark-circle" slot="start" />
-							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
-							<p slot="label">Clearable</p>
-							<smoothly-input-radio-item slot="options" value={"first"}>
-								Label 1
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item selected slot="options" value={"second"}>
+							<label slot="label">Clearable</label>
+							<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
+							<smoothly-input-radio-item selected value={"second"}>
 								Label 2
 							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"third"}>
-								Label 3
-							</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
+							<smoothly-input-clear size="icon" slot="end" />
 						</smoothly-input-radio>
 						<smoothly-input-radio name="radioSecondInput">
-							<p slot="label">Not clearable</p>
-							<smoothly-input-radio-item slot="options" value={"first"}>
-								Label 1
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"second"}>
-								Label 2
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"third"}>
-								Label 3
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"fourth"}>
-								Label 4
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"fifth"}>
-								Label 5
-							</smoothly-input-radio-item>
-							<smoothly-input-radio-item slot="options" value={"sixth"}>
-								Label 6
-							</smoothly-input-radio-item>
+							<label slot="label">Not clearable</label>
+							<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"second"}>Label 2</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"fourth"}>Label 4</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"fifth"}>Label 5</smoothly-input-radio-item>
+							<smoothly-input-radio-item value={"sixth"}>Label 6</smoothly-input-radio-item>
 						</smoothly-input-radio>
 					</smoothly-form>
 					<smoothly-back-to-top />
