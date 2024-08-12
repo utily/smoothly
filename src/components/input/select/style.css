@@ -9,6 +9,7 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
+	padding: 0 0.5em;
 }
 
 :host.open {
@@ -25,12 +26,16 @@
 	min-height: 2.7em;
 	display: flex;
 	cursor: pointer;
-	padding: .7em;
+	padding: 1.2em 0em 0.2em 0em;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
 	gap: 1em;
 	text-overflow: ellipsis;
+}
+
+:host:not(:has([slot=label]))>div.select-display  {
+	padding: .6em 0;
 }
 
 :host[readonly]>div.select-display {
@@ -62,6 +67,11 @@
 	filter: opacity(100%);
 }
 
+smoothly-icon[name=caret-down-outline],
+smoothly-icon[name=caret-forward-outline] {
+	opacity: .7;
+}
+
 :host.invalid>div>smoothly-icon.invalid {
 	display: block;
 }
@@ -76,8 +86,8 @@
 
 :host::slotted([slot=label]) {
 	position: absolute;
-	left: 0.4em;
-	top: 0.6em;
+	left: 0.5em;
+	top: 0;
 	opacity: 0.8;
 	transform-origin: top left;
 	transition: transform 100ms ease;
@@ -85,8 +95,8 @@
 
 :host.has-value::slotted([slot=label]),
 :host:not(.has-value)[placeholder]::slotted([slot=label]) {
-	top: 0.4em;
-	transform: scale(0.6);
+	top: 0.2em;
+	transform: scale(0.8);
 }
 
 :host.has-value:has([slot=label])>div.select-display,
@@ -94,14 +104,6 @@
 	overflow: hidden;
 	width: 100%;
 }
-
-:host:not([in-calendar]).has-value:has([slot=label])>div.select-display,
-:host:not([in-calendar]):not(.has-value)[placeholder]>div.select-display {
-	padding-bottom: .1em;
-	padding-left: .8em;
-	padding-top: 1.1em;
-}
-
 :host>.options {
 	display: flex;
 	flex-direction: column;
@@ -132,7 +134,11 @@
 }
 
 :host>div.options::slotted(smoothly-item) {
-	padding: .7em;
+	padding: .7em .7em .7em calc(.7em - 5px);
+}
+
+:host:not(:has([slot=label]))>div.options::slotted(smoothly-item:has(smoothly-icon)) {
+	padding: .7em .7em .7em calc(.6em - 5px);
 }
 
 :host>div.options::slotted(smoothly-item:not([selectable])) {
