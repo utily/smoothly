@@ -73,10 +73,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
-	@Listen("click", { target: "window" })
-	onWindowClick(event: Event): void {
-		!event.composedPath().includes(this.element) && this.open && (this.open = false)
-	}
 	@Method()
 	async clear(): Promise<void> {
 		this.rgb = { r: undefined, g: undefined, b: undefined }
@@ -190,14 +186,14 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				<smoothly-input
 					value={this.value}
 					name={this.name}
-					looks={this.looks}
+					looks={undefined}
 					type={"hex-color"}
 					readonly={this.readonly}
-					onClick={() => !this.readonly && this.openDropdown()}
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexInputHandler(event.detail[this.name]))}>
 					<slot />
-					<div slot="end" class="color-sample"></div>
 				</smoothly-input>
+				<div class="color-sample" />
+				<smoothly-icon name="options-outline" size="small" onClick={() => !this.readonly && this.openDropdown()} />
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch

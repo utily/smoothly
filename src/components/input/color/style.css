@@ -1,7 +1,12 @@
+@import "../shared.css";
+
 :host {
 	display: flex;
 	position: relative;
 	background-color: rgb(var(--smoothly-input-background));
+	align-items: center;
+	justify-content: center;
+	padding-right: .5em;
 }
 :host>smoothly-input {
 	width: 100%;
@@ -23,6 +28,11 @@
 	box-sizing: border-box;
 	z-index: 10;
 	border: 1px solid rgb(var(--smoothly-input-border));
+}
+smoothly-input  {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 :host>div.rgb-sliders::before {
 	content: "";
