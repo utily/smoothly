@@ -73,6 +73,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
+	@Listen("click", { target: "window" })
+	onWindowClick(event: Event): void {
+		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
 	@Method()
 	async clear(): Promise<void> {
 		this.rgb = { r: undefined, g: undefined, b: undefined }
@@ -170,6 +174,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	openDropdown(): void {
 		this.open = !this.open
 	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host
