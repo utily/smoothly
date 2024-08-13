@@ -29,11 +29,6 @@
 	z-index: 10;
 	border: 1px solid rgb(var(--smoothly-input-border));
 }
-smoothly-input  {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 :host>div.rgb-sliders::before {
 	content: "";
 	transform: translate(2em, -0.55em) rotate(45deg);
