@@ -1,13 +1,13 @@
 :host([selected]) {
 	background-color: rgb(var(--smoothly-input-selected-background));
 	color: rgb(var(--smoothly-input-selected-foreground));
-	border-left: 5px solid rgb(var(--smoothly-input-selected-border));
+	border-left: .3em solid rgb(var(--smoothly-input-selected-border));
 }
 
 :host {
 	padding: 0.5em;
 	cursor: pointer;
-	border-left: 5px solid transparent;
+	border-left: .3em solid transparent;
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));

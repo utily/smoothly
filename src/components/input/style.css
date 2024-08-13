@@ -75,8 +75,8 @@
 :host:not([readonly]):not(.has-value)[placeholder]>div>label,
 :host.has-value>div>label,
 :host:not([readonly]):not(.has-value):focus-within>div>label {
-	top: 0.3em;
-	transform: scale(0.7);
+	top: 0.2em;
+	transform: scale(0.8);
 }
 
 :host>div>input:focus {
