@@ -479,6 +479,14 @@ export namespace Components {
         "name": string;
         "offset": string;
     }
+    interface SmoothlyMenu {
+        "color"?: Color;
+        "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
+        "height"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "looks": Looks;
+        "onKeyDown": (event: KeyboardEvent) => Promise<void>;
+        "searchable": boolean;
+    }
     interface SmoothlyNextDemo {
     }
     interface SmoothlyNextDemoColspan {
@@ -799,6 +807,10 @@ export interface SmoothlyItemCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyLoadMoreCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyLoadMoreElement;
+}
+export interface SmoothlyMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyMenuElement;
 }
 export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1583,6 +1595,24 @@ declare global {
         prototype: HTMLSmoothlyLoadMoreElement;
         new (): HTMLSmoothlyLoadMoreElement;
     };
+    interface HTMLSmoothlyMenuElementEventMap {
+        "smoothlyInput": Data;
+        "smoothlyInputLooks": (looks: Looks, color: Color) => void;
+    }
+    interface HTMLSmoothlyMenuElement extends Components.SmoothlyMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyMenuElement, ev: SmoothlyMenuCustomEvent<HTMLSmoothlyMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyMenuElement, ev: SmoothlyMenuCustomEvent<HTMLSmoothlyMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyMenuElement: {
+        prototype: HTMLSmoothlyMenuElement;
+        new (): HTMLSmoothlyMenuElement;
+    };
     interface HTMLSmoothlyNextDemoElement extends Components.SmoothlyNextDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyNextDemoElement: {
@@ -2155,6 +2185,7 @@ declare global {
         "smoothly-label": HTMLSmoothlyLabelElement;
         "smoothly-lazy": HTMLSmoothlyLazyElement;
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
+        "smoothly-menu": HTMLSmoothlyMenuElement;
         "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
         "smoothly-next-demo-colspan": HTMLSmoothlyNextDemoColspanElement;
         "smoothly-next-demo-group": HTMLSmoothlyNextDemoGroupElement;
@@ -2670,6 +2701,14 @@ declare namespace LocalJSX {
         "offset"?: string;
         "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
     }
+    interface SmoothlyMenu {
+        "color"?: Color;
+        "height"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "looks"?: Looks;
+        "onSmoothlyInput"?: (event: SmoothlyMenuCustomEvent<Data>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyMenuCustomEvent<(looks: Looks, color: Color) => void>) => void;
+        "searchable"?: boolean;
+    }
     interface SmoothlyNextDemo {
     }
     interface SmoothlyNextDemoColspan {
@@ -2953,6 +2992,7 @@ declare namespace LocalJSX {
         "smoothly-label": SmoothlyLabel;
         "smoothly-lazy": SmoothlyLazy;
         "smoothly-load-more": SmoothlyLoadMore;
+        "smoothly-menu": SmoothlyMenu;
         "smoothly-next-demo": SmoothlyNextDemo;
         "smoothly-next-demo-colspan": SmoothlyNextDemoColspan;
         "smoothly-next-demo-group": SmoothlyNextDemoGroup;
@@ -3066,6 +3106,7 @@ declare module "@stencil/core" {
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
             "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
+            "smoothly-menu": LocalJSX.SmoothlyMenu & JSXBase.HTMLAttributes<HTMLSmoothlyMenuElement>;
             "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
             "smoothly-next-demo-colspan": LocalJSX.SmoothlyNextDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoColspanElement>;
             "smoothly-next-demo-group": LocalJSX.SmoothlyNextDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoGroupElement>;
