@@ -134,11 +134,7 @@ smoothly-icon[name=caret-forward-outline] {
 }
 
 :host>div.options::slotted(smoothly-item) {
-	padding: .7em .7em .7em calc(.7em - 5px);
-}
-
-:host:not(:has([slot=label]))>div.options::slotted(smoothly-item:has(smoothly-icon)) {
-	padding: .7em .7em .7em calc(.6em - 5px);
+	padding: .7em .7em .7em .25em;
 }
 
 :host>div.options::slotted(smoothly-item:not([selectable])) {
