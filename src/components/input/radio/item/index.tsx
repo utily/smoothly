@@ -29,7 +29,7 @@ export class SmoothlyInputRadioItem {
 				<input name={this.name} type="radio" checked={this.selected} />
 				<smoothly-icon
 					name={this.selected ? "checkmark-circle" : "ellipse-outline"}
-					size="medium"
+					size="small"
 					fill="outline"
 					color={this.selected ? "success" : "medium"}
 					toolTip="Select"
