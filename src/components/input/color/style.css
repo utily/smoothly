@@ -1,7 +1,12 @@
+@import "../shared.css";
+
 :host {
 	display: flex;
 	position: relative;
 	background-color: rgb(var(--smoothly-input-background));
+	align-items: center;
+	justify-content: center;
+	padding-right: .5em;
 }
 :host>smoothly-input {
 	width: 100%;
