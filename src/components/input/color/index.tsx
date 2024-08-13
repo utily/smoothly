@@ -14,12 +14,13 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { HSL } from "../../../model/Color/HSL"
+import { RGB } from "../../../model/Color/RGB"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { hexToRGB, HSL, HSLtoRGB, RGB, RGBToHex, RGBtoHSL } from "./color"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -46,7 +47,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.value && this.setInitialValue()
-		this.value && (this.rgb = hexToRGB(this.value))
+		this.value && (this.rgb = Color.Hex.toRGB(this.value))
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInput.emit({
 			[this.name]:
@@ -124,9 +125,9 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		event.stopPropagation()
 		this.sliderMode = event.detail ? "hsl" : "rgb"
 		if (this.sliderMode === "rgb") {
-			this.value && (this.rgb = hexToRGB(this.value))
+			this.value && (this.rgb = Color.Hex.toRGB(this.value))
 		} else {
-			this.value && (this.hsl = RGBtoHSL(hexToRGB(this.value)))
+			this.value && (this.hsl = Color.RGB.toHSL(Color.Hex.toRGB(this.value)))
 		}
 	}
 	hexInputHandler(value: string): void {
@@ -134,10 +135,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 			const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
 			if (value && regex.test(value)) {
 				if (this.sliderMode === "hsl" || this.rgb.r === undefined) {
-					this.rgb = hexToRGB(value)
+					this.rgb = Color.Hex.toRGB(value)
 				}
 				if (this.sliderMode === "rgb" || this.hsl.h === undefined) {
-					this.hsl = RGBtoHSL(hexToRGB(value))
+					this.hsl = Color.RGB.toHSL(Color.Hex.toRGB(value))
 				}
 			} else if (!value || !regex.test(value)) {
 				this.rgb = { r: undefined, g: undefined, b: undefined }
@@ -162,12 +163,12 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					temporaryColor = { ...temporaryColor, [key]: 0 }
 			if (this.sliderMode === "rgb") {
 				this.rgb = { ...temporaryColor } as RGB
-				this.hsl = RGBtoHSL(this.rgb)
-				this.hexInputHandler(RGBToHex(this.rgb))
+				this.hsl = Color.RGB.toHSL(this.rgb)
+				this.hexInputHandler(Color.RGB.toHex(this.rgb))
 			} else {
 				this.hsl = { ...temporaryColor } as HSL
-				this.rgb = HSLtoRGB(this.hsl)
-				this.hexInputHandler(RGBToHex(HSLtoRGB(this.hsl)))
+				this.rgb = Color.HSL.toRGB(this.hsl)
+				this.hexInputHandler(Color.RGB.toHex(Color.HSL.toRGB(this.hsl)))
 			}
 		}
 	}
