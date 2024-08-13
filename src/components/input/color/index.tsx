@@ -34,6 +34,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	private initialValue: string | undefined
 	@Prop({ mutable: true }) value: string | undefined = undefined
 	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() output: "rgb" | "hex" = "rgb"
@@ -48,7 +49,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	componentWillLoad(): void | Promise<void> {
 		this.value && this.setInitialValue()
 		this.value && (this.rgb = Color.Hex.toRGB(this.value))
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
 		this.smoothlyInput.emit({
 			[this.name]:
 				this.output === "rgb"
@@ -193,13 +194,19 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					value={this.value}
 					name={this.name}
 					looks={undefined}
+					color={this.color}
 					type={"hex-color"}
 					readonly={this.readonly}
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexInputHandler(event.detail[this.name]))}>
 					<slot />
 				</smoothly-input>
 				<div class="color-sample" />
-				<smoothly-icon name="options-outline" size="small" onClick={() => !this.readonly && this.openDropdown()} />
+				<smoothly-icon
+					color={this.color}
+					name="options-outline"
+					size="small"
+					onClick={() => !this.readonly && this.openDropdown()}
+				/>
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch
@@ -215,6 +222,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 								name={key}
 								min={0}
 								max={255}
+								color={undefined}
 								type={"text"}
 								value={value}
 								step={1}
@@ -229,6 +237,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 								name={key}
 								min={0}
 								max={key === "h" ? 359 : 1}
+								color={undefined}
 								type={key === "s" || key === "l" ? "percent" : "text"}
 								value={(key === "s" || key === "l") && value ? value / 100 : value}
 								step={key === "s" || key === "l" ? 0.01 : 1}
