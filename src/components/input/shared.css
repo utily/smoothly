@@ -29,6 +29,7 @@
 :host[looks="grid"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="grid"] {
 	border: rgb(var(--smoothly-input-border)) solid .5px;
+	margin: -1px -1px 0 0;
 }
 
 :host[looks="grid"][readonly] {
