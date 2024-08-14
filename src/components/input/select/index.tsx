@@ -31,7 +31,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
-	private optionsDiv?: HTMLDivElement
+	private menuElement?: HTMLSmoothlyMenuElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -53,7 +53,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() mutable = false
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
-	@State() filter = ""
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
@@ -84,6 +83,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 			)
 		}
+		console.log("componentDidRender", this.element)
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
@@ -202,7 +202,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)
-		this.filter = ""
 	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
@@ -215,95 +214,38 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
-		if (!this.searchDisabled) {
-			event.stopPropagation()
-			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
-				event.preventDefault()
-			if (this.open) {
-				switch (event.key) {
-					case "ArrowUp":
-						visibleItems && this.move(-1)
-						break
-					case "ArrowDown":
-						visibleItems && this.move(1)
-						break
-					case "Escape":
-						if (this.filter == "")
-							this.open = false
-						else
-							this.filter = ""
-						break
-					case "Backspace":
-						this.filter = this.filter.slice(0, -1)
-						break
-					case "Enter":
-						const result = this.items.find(item => item.marked)
-						if (result?.value)
-							result.selected = !result.selected
-						if (!this.multiple) {
-							this.open = false
-							this.filter = ""
-						}
-						break
-					case "Tab":
+		event.stopPropagation()
+		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
+			event.preventDefault()
+		if (this.open) {
+			switch (event.key) {
+				case "Escape":
+					this.open = false
+					break
+				case "Enter":
+					const result = this.items.find(item => item.marked)
+					if (result?.value)
+						result.selected = !result.selected
+					if (!this.multiple) {
 						this.open = false
-						break
-					default:
-						if (event.key.length == 1)
-							this.filter += event.key
-						break
-				}
-			} else {
-				switch (event.key) {
-					case "Enter":
-					case " ":
-						this.handleShowOptions()
-						break
-					case "ArrowDown":
-						this.handleShowOptions()
-						this.move(1)
-						break
-					case "ArrowUp":
-						this.handleShowOptions()
-						this.move(-1)
-						break
-					case "Tab":
-						break
-					default:
-						this.handleShowOptions()
-						if (event.key.length == 1)
-							this.filter += event.key
-						break
-				}
+					}
+					break
+				case "Tab":
+					this.open = false
+					break
 			}
-		}
+		} else if (event.key != "Tab")
+			this.handleShowOptions()
+		this.menuElement?.onKeyDown(event)
 	}
-	private move(direction: -1 | 1): void {
-		let markedIndex = this.items.findIndex(item => item.marked)
-		if (markedIndex == -1)
-			markedIndex = 0
-		else {
-			this.items[markedIndex].marked = false
-			markedIndex = (markedIndex + direction + this.items.length) % this.items.length
-		}
-		if (this.items.some(item => !item.hidden))
-			while (this.items[markedIndex].hidden) {
-				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
-			}
-		this.items[markedIndex].marked = true
-		this.scrollTo(this.items[markedIndex])
-	}
-	private scrollTo(item: HTMLSmoothlyItemElement) {
-		this.optionsDiv?.scrollTo({ top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2 })
-	}
+	/* TODO
 	private addItem() {
 		this.addedItems = this.addedItems.concat(
 			<smoothly-item value={this.filter} selected>
 				{this.filter}
 			</smoothly-item>
 		)
-	}
+	} */
 
 	render(): VNode | VNode[] {
 		return (
@@ -326,39 +268,16 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					<smoothly-icon class="invalid" name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
 				</div>
 				<slot name="label" />
-				<div
-					class={{ hidden: !this.open, options: true }}
-					ref={(el: HTMLDivElement) => {
-						this.optionsDiv = el
+				<smoothly-menu
+					class={{ hidden: !this.open }}
+					searchable={!this.searchDisabled}
+					height={this.menuHeight}
+					ref={(el: HTMLSmoothlyMenuElement) => {
+						this.menuElement = el
 					}}>
-					{this.filter.length > 0 && (
-						<smoothly-item selectable={false}>
-							<smoothly-icon name="search-outline" size="small" />
-							{this.filter}
-							<smoothly-icon
-								name="backspace-outline"
-								size="small"
-								onClick={e => {
-									e.stopPropagation()
-									this.filter = ""
-									this.element.focus()
-								}}
-							/>
-							{this.mutable && (
-								<smoothly-icon
-									name="add"
-									size="small"
-									onClick={e => {
-										e.stopPropagation()
-										this.addItem()
-									}}
-								/>
-							)}
-						</smoothly-item>
-					)}
 					<slot />
 					{this.addedItems}
-				</div>
+				</smoothly-menu>
 			</Host>
 		)
 	}

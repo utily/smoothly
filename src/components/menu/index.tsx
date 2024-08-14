@@ -46,7 +46,6 @@ export class SmoothlyInputSelect implements ComponentWillLoad {
 				const height = `${this.itemHeight * +(this.height.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 				this.element?.style.setProperty("--menu-height", height)
 			}
-			this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 		}
 	}
 	@Method()
@@ -98,7 +97,6 @@ export class SmoothlyInputSelect implements ComponentWillLoad {
 					this.filter += event.key
 				break
 		}
-		event.stopPropagation()
 	}
 	private move(direction: -1 | 1): void {
 		let markedIndex = this.items.findIndex(item => item.marked)
@@ -123,7 +121,7 @@ export class SmoothlyInputSelect implements ComponentWillLoad {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				{this.filter.length > 0 && (
+				{this.filter.length > 0 && this.searchable && (
 					<smoothly-item selectable={false}>
 						<smoothly-icon name="search-outline" size="small" />
 						{this.filter}

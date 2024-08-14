@@ -55,6 +55,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 			filter && this.selectable
 				? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
 				: false
+		console.log("filter item hidden", filter, this.element.hidden, this.element.innerText)
 	}
 	render(): VNode | VNode[] {
 		return (
