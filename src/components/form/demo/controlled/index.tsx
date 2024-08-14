@@ -4,11 +4,10 @@ import { SmoothlyFormCustomEvent } from "../../../../components"
 import { Data } from "../../../../model"
 
 @Component({
-	tag: "smoothly-input-demo-controlled-form",
-	styleUrl: "style.css",
+	tag: "smoothly-form-demo-controlled",
 	scoped: true,
 })
-export class SmoothlyInputDemoControlledForm {
+export class SmoothlyFormDemoControlled {
 	@State() name = "Initial name"
 	@State() currency: isoly.Currency = "EUR"
 	@State() date: isoly.Date = isoly.Date.now()
@@ -44,6 +43,7 @@ export class SmoothlyInputDemoControlledForm {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<h2>Controlled</h2>
 				<smoothly-form readonly looks={"grid"} onSmoothlyFormSubmit={e => this.submitHandler(e)}>
 					<smoothly-input type={"text"} name={"name"} value={this.name}>
 						Name
