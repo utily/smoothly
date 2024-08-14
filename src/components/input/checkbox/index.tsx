@@ -19,6 +19,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Prop({ mutable: true }) checked = false
 	@Prop() value = this.checked
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
@@ -27,7 +28,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	componentWillLoad(): void | Promise<void> {
 		this.initialValue = this.checked
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})

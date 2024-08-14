@@ -32,6 +32,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Element() element: HTMLSmoothlyInputRangeElement
 	@Prop({ mutable: true }) value: number | undefined = undefined
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() type: Extract<tidily.Type, "text" | "percent"> = "text"
@@ -47,7 +48,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(() => {
 			return
@@ -121,6 +122,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 					<smoothly-input
 						ref={e => (this.input = e)}
 						looks={undefined}
+						color={this.color}
 						showLabel={this.outputSide === "left"}
 						type={this.type}
 						onSmoothlyInputLoad={e => (e.stopPropagation(), this.inputHandler(e))}

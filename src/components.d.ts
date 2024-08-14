@@ -245,6 +245,7 @@ export namespace Components {
         "changed": boolean;
         "checked": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -269,6 +270,7 @@ export namespace Components {
     interface SmoothlyInputColor {
         "changed": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
@@ -370,6 +372,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "clearable"?: boolean;
+        "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks": Looks;
@@ -388,6 +391,7 @@ export namespace Components {
     interface SmoothlyInputRange {
         "changed": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "label": string;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -2432,6 +2436,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputCheckbox {
         "changed"?: boolean;
         "checked"?: boolean;
+        "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
@@ -2456,6 +2461,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputColor {
         "changed"?: boolean;
+        "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputColorCustomEvent<(disabled: boolean) => void>) => void;
@@ -2553,6 +2559,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputRadio {
         "changed"?: boolean;
         "clearable"?: boolean;
+        "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRadioCustomEvent<(disabled: boolean) => void>) => void;
@@ -2572,6 +2579,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputRange {
         "changed"?: boolean;
+        "color"?: Color;
         "label"?: string;
         "looks"?: Looks;
         "max"?: number;
