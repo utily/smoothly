@@ -133,14 +133,14 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	hexInputHandler(value: string): void {
 		if (value !== this.value) {
-			if (value && Color.Hex.is(value)) {
+			if (value && Color.Hex.type.is(value)) {
 				if (this.sliderMode === "hsl" || this.rgb.r === undefined) {
 					this.rgb = Color.Hex.toRGB(value)
 				}
 				if (this.sliderMode === "rgb" || this.hsl.h === undefined) {
 					this.hsl = Color.RGB.toHSL(Color.Hex.toRGB(value))
 				}
-			} else if (!value || !Color.Hex.is(value)) {
+			} else if (!value || !Color.Hex.type.is(value)) {
 				this.rgb = { r: undefined, g: undefined, b: undefined }
 				this.hsl = { h: undefined, s: undefined, l: undefined }
 			}
