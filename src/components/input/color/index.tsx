@@ -133,7 +133,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	hexInputHandler(value: string): void {
 		if (value !== this.value) {
-			// const regex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
 			if (value && Color.Hex.is(value)) {
 				if (this.sliderMode === "hsl" || this.rgb.r === undefined) {
 					this.rgb = Color.Hex.toRGB(value)
