@@ -1,3 +1,4 @@
+import { isly } from "isly"
 import type { RGB } from "./RGB"
 
 export type HSL = {
@@ -6,6 +7,11 @@ export type HSL = {
 	l: number | undefined
 }
 export namespace HSL {
+	export const type = {
+		h: isly.number().optional(),
+		s: isly.number().optional(),
+		l: isly.number().optional(),
+	}
 	export function toRGB({ h, s, l }: HSL): RGB {
 		let r = 0
 		let g = 0
