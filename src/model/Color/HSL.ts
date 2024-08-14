@@ -7,11 +7,11 @@ export type HSL = {
 	l: number | undefined
 }
 export namespace HSL {
-	export const type = {
+	export const type = isly.object<HSL>({
 		h: isly.number().optional(),
 		s: isly.number().optional(),
 		l: isly.number().optional(),
-	}
+	})
 	export function toRGB({ h, s, l }: HSL): RGB {
 		let r = 0
 		let g = 0

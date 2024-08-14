@@ -8,11 +8,11 @@ export type RGB = {
 	b: number | undefined
 }
 export namespace RGB {
-	export const type = {
+	export const type = isly.object<RGB>({
 		r: isly.number().optional(),
 		g: isly.number().optional(),
 		b: isly.number().optional(),
-	}
+	})
 	export function toHex(rgb: RGB): Hex {
 		let hex = ""
 		for (const component of Object.values(rgb)) {
