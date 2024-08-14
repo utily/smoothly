@@ -40,8 +40,8 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
 	componentDidLoad(): void | Promise<void> {
