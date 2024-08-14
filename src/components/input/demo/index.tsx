@@ -13,7 +13,7 @@ export class SmoothlyInputDemo {
 			<Host>
 				<div class="forms">
 					<h2>Menu</h2>
-					<smoothly-menu searchable>
+					<smoothly-menu searchable tabIndex={0}>
 						<smoothly-item value="1">Ice cream</smoothly-item>
 						<smoothly-item value="2">Sponge cake</smoothly-item>
 						<smoothly-item value="3">Cookie</smoothly-item>
