@@ -87,10 +87,13 @@ export class SmoothlyInputSelect implements ComponentWillLoad {
 				break
 			case "Enter":
 				const result = this.items.find(item => item.marked)
-				if (result?.value)
-					result.selected = !result.selected
+				result && (result.selected = !result.selected)
 				break
 			case "Tab":
+				break
+			case " ":
+				if (this.filter.length > 0)
+					this.filter += event.key
 				break
 			default:
 				if (event.key.length == 1)
@@ -111,7 +114,6 @@ export class SmoothlyInputSelect implements ComponentWillLoad {
 				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
 			}
 		this.items[markedIndex].marked = true
-		console.log("selected", this.items[markedIndex])
 		this.scrollTo(this.items[markedIndex])
 	}
 	private scrollTo(item: HTMLSmoothlyItemElement) {

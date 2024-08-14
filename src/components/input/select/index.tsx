@@ -83,7 +83,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
 			)
 		}
-		console.log("componentDidRender", this.element)
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
@@ -172,6 +171,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Listen("smoothlyItemSelect")
 	onItemSelect(event: CustomEvent<HTMLSmoothlyItemElement>): void {
 		event.stopPropagation()
+		console.log("select listen smoothlyItemSelect", event.detail.value)
 		if (this.multiple) {
 			this.selected = event.detail.selected
 				? [...this.selected, event.detail]
@@ -213,8 +213,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				this.selected.length > 0 ? displayString : this.placeholder ? this.placeholder : "")
 	}
 	@Listen("keydown")
-	onKeyDown(event: KeyboardEvent) {
+	async onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
+		await this.menuElement?.onKeyDown(event)
 		if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
 			event.preventDefault()
 		if (this.open) {
@@ -223,20 +224,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					this.open = false
 					break
 				case "Enter":
-					const result = this.items.find(item => item.marked)
-					if (result?.value)
-						result.selected = !result.selected
-					if (!this.multiple) {
+					if (!this.multiple)
 						this.open = false
-					}
 					break
 				case "Tab":
 					this.open = false
 					break
 			}
-		} else if (event.key != "Tab")
+		} else if (event.key != "Tab" && event.key != "Shift")
 			this.handleShowOptions()
-		this.menuElement?.onKeyDown(event)
 	}
 	/* TODO
 	private addItem() {
