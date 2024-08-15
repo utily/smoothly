@@ -62,7 +62,6 @@ export class SmoothlyFormDemoAll {
 						Check the box 2
 					</smoothly-input-checkbox>
 					<smoothly-input-range step={1} name="range3" value={20} label="Range" />
-					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
 					<smoothly-input-range name="pets.0.age" max={100} step={1}>
 						First Pet's Age

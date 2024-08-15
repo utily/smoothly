@@ -202,6 +202,8 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-item value={"fifth"}>Label 5</smoothly-input-radio-item>
 						<smoothly-input-radio-item value={"sixth"}>Label 6</smoothly-input-radio-item>
 					</smoothly-input-radio>
+					<smoothly-input-range-demo />
+					<smoothly-input-color-demo />
 					<smoothly-back-to-top />
 				</div>
 			</Host>
