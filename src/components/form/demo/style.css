@@ -1,8 +1,10 @@
-:host>div {
-	margin: auto;
-	width: 40%;
+:host {
+	display: flex;
+	margin-top: 2em;
+	margin-bottom: 10em;
 }
 
-:host>div>* {
-	margin: 2em;
+:host>div {
+	margin: auto;
+	width: 50%;
 }
