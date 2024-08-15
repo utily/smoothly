@@ -1,4 +1,5 @@
 import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
+import { isScrollable } from "./isScrollable"
 
 @Component({
 	tag: "smoothly-load-more",
@@ -6,15 +7,43 @@ import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Pr
 	scoped: true,
 })
 export class LoadMore implements ComponentWillLoad {
+	private scrollableParent?: HTMLElement
 	@Element() element: HTMLSmoothlyLoadMoreElement
 	@Prop() offset = "0"
+	@Prop() triggerMode: "scroll" | "intersection" = "intersection"
 	@Prop() name = ""
 	@Prop() multiple = false
 	@Event() smoothlyLoadMore: EventEmitter<string>
 
+	checkInView() {
+		const rect = this.element.getBoundingClientRect()
+		const containerRect = this.scrollableParent?.getBoundingClientRect()
+		if (containerRect && rect && rect.top >= containerRect.top && containerRect.bottom >= rect.bottom) {
+			this.smoothlyLoadMore.emit(this.name)
+		}
+	}
+
+	connectedCallback() {
+		if (this.triggerMode == "scroll") {
+			this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
+			this.findScrollableParent()
+			this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
+		}
+	}
+	findScrollableParent() {
+		let parent: HTMLElement | null = this.element.parentElement
+		while (parent && !isScrollable(parent))
+			parent = parent.parentElement
+		this.scrollableParent = parent && isScrollable(parent) ? parent : undefined
+	}
+
 	componentWillLoad(): void {
-		const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
-		observer.observe(this.element)
+		if (this.triggerMode == "scroll")
+			this.checkInView()
+		else if (this.triggerMode == "intersection") {
+			const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
+			observer.observe(this.element)
+		}
 	}
 
 	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
