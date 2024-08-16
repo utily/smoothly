@@ -98,6 +98,16 @@ export class SmoothlyInputDemo {
 							</smoothly-item>
 						</smoothly-input-select>
 					</div>
+					<smoothly-load-more
+						style={{ background: "red", height: "30px" }}
+						// multiple
+						onSmoothlyLoadMoreEnter={() => {
+							console.log("Enter")
+						}}
+						onSmoothlyLoadMoreLeave={() => {
+							console.log("Leave")
+						}}
+					/>
 					<h2>Delayed</h2>
 					<smoothly-input name="Delayed" delay={2}>
 						Delayed

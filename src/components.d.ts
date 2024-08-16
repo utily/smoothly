@@ -1615,7 +1615,8 @@ declare global {
         new (): HTMLSmoothlyLazyElement;
     };
     interface HTMLSmoothlyLoadMoreElementEventMap {
-        "smoothlyLoadMore": string;
+        "smoothlyLoadMoreEnter": string;
+        "smoothlyLoadMoreLeave": string;
     }
     interface HTMLSmoothlyLoadMoreElement extends Components.SmoothlyLoadMore, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyLoadMoreElementEventMap>(type: K, listener: (this: HTMLSmoothlyLoadMoreElement, ev: SmoothlyLoadMoreCustomEvent<HTMLSmoothlyLoadMoreElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2734,7 +2735,8 @@ declare namespace LocalJSX {
         "multiple"?: boolean;
         "name"?: string;
         "offset"?: string;
-        "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
+        "onSmoothlyLoadMoreEnter"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
+        "onSmoothlyLoadMoreLeave"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
     }
     interface SmoothlyNextDemo {
     }

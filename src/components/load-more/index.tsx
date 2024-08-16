@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-load-more",
@@ -10,7 +10,10 @@ export class LoadMore implements ComponentWillLoad {
 	@Prop() offset = "0"
 	@Prop() name = ""
 	@Prop() multiple = false
-	@Event() smoothlyLoadMore: EventEmitter<string>
+	@State() entered = false
+	@State() left = false
+	@Event() smoothlyLoadMoreEnter: EventEmitter<string>
+	@Event() smoothlyLoadMoreLeave: EventEmitter<string>
 
 	componentWillLoad(): void {
 		const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
@@ -19,9 +22,15 @@ export class LoadMore implements ComponentWillLoad {
 
 	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
 		if (entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) {
-			this.smoothlyLoadMore.emit(this.name)
-			!this.multiple && (observer.unobserve(this.element), observer.disconnect())
+			this.smoothlyLoadMoreEnter.emit(this.name)
+			this.entered = true
+		} else {
+			if ((entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 1) == 0) {
+				this.smoothlyLoadMoreLeave.emit(this.name)
+				this.left = true
+			}
 		}
+		!this.multiple && this.entered && this.left && (observer.unobserve(this.element), observer.disconnect())
 	}
 
 	render(): VNode | VNode[] {

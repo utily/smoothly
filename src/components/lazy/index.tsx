@@ -18,7 +18,7 @@ export class SmoothlyLazy {
 		return (
 			<Host>
 				<slot name="before" />
-				<smoothly-load-more onSmoothlyLoadMore={e => this.loadMoreHandler(e)} />
+				<smoothly-load-more onSmoothlyLoadMoreEnter={e => this.loadMoreHandler(e)} />
 				{this.show && (typeof this.content == "function" ? <this.content /> : this.content)}
 				<slot />
 			</Host>
