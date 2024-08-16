@@ -15,21 +15,17 @@ export class LoadMore implements ComponentWillLoad {
 	@Prop() multiple = false
 	@Event() smoothlyLoadMore: EventEmitter<string>
 
-	checkInView() {
+	checkInView(): boolean {
+		let result = false
 		const rect = this.element.getBoundingClientRect()
 		const containerRect = this.scrollableParent?.getBoundingClientRect()
 		if (containerRect && rect && rect.top >= containerRect.top && containerRect.bottom >= rect.bottom) {
 			this.smoothlyLoadMore.emit(this.name)
+			result = true
 		}
+		return result
 	}
 
-	connectedCallback() {
-		if (this.triggerMode == "scroll") {
-			this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
-			this.findScrollableParent()
-			this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
-		}
-	}
 	findScrollableParent() {
 		let parent: HTMLElement | null = this.element.parentElement
 		while (parent && !isScrollable(parent))
@@ -38,9 +34,13 @@ export class LoadMore implements ComponentWillLoad {
 	}
 
 	componentWillLoad(): void {
-		if (this.triggerMode == "scroll")
-			this.checkInView()
-		else if (this.triggerMode == "intersection") {
+		if (this.triggerMode == "scroll") {
+			const triggered = this.checkInView()
+			if (this.multiple || (!this.multiple && !triggered)) {
+				this.findScrollableParent()
+				this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
+			}
+		} else if (this.triggerMode == "intersection") {
 			const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
 			observer.observe(this.element)
 		}
