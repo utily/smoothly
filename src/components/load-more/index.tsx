@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
+import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
 import { isScrollable } from "./isScrollable"
 
 @Component({
@@ -13,18 +13,14 @@ export class LoadMore implements ComponentWillLoad {
 	@Prop() triggerMode: "scroll" | "intersection" = "intersection"
 	@Prop() name = ""
 	@Prop() multiple = false
+	@State() inView: boolean
 	@Event() smoothlyLoadMore: EventEmitter<string>
 
-	checkInView(): boolean {
-		let result = false
-		const rect = this.element.getBoundingClientRect()
-		const containerRect = this.scrollableParent?.getBoundingClientRect()
-		if (containerRect && rect && rect.top >= containerRect.top && containerRect.bottom >= rect.bottom) {
+	checkInView() {
+		if (this.inView) {
 			this.smoothlyLoadMore.emit(this.name)
-			result = true
 			!this.multiple && this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
 		}
-		return result
 	}
 
 	findScrollableParent() {
@@ -35,20 +31,23 @@ export class LoadMore implements ComponentWillLoad {
 	}
 
 	componentWillLoad(): void {
+		const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
+		observer.observe(this.element)
+	}
+
+	componentDidLoad() {
 		if (this.triggerMode == "scroll") {
-			this.findScrollableParent()
-			const triggered = this.checkInView()
-			if (this.multiple || (!this.multiple && !triggered)) {
+			this.inView && this.smoothlyLoadMore.emit(this.name)
+			if (this.multiple || (!this.multiple && !this.inView)) {
+				this.findScrollableParent()
 				this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
 			}
-		} else if (this.triggerMode == "intersection") {
-			const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
-			observer.observe(this.element)
 		}
 	}
 
 	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
-		if (entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) {
+		this.inView = (entries.find(entry => entry.target == this.element)?.intersectionRatio ?? 0) > 0
+		if (this.inView) {
 			this.smoothlyLoadMore.emit(this.name)
 			!this.multiple && (observer.unobserve(this.element), observer.disconnect())
 		}
