@@ -22,6 +22,7 @@ export class LoadMore implements ComponentWillLoad {
 		if (containerRect && rect && rect.top >= containerRect.top && containerRect.bottom >= rect.bottom) {
 			this.smoothlyLoadMore.emit(this.name)
 			result = true
+			!this.multiple && this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
 		}
 		return result
 	}
@@ -35,9 +36,9 @@ export class LoadMore implements ComponentWillLoad {
 
 	componentWillLoad(): void {
 		if (this.triggerMode == "scroll") {
+			this.findScrollableParent()
 			const triggered = this.checkInView()
 			if (this.multiple || (!this.multiple && !triggered)) {
-				this.findScrollableParent()
 				this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
 			}
 		} else if (this.triggerMode == "intersection") {
