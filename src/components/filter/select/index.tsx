@@ -22,12 +22,14 @@ export class SmoothlyFilterSelect implements Filter {
 	@Prop() menuHeight?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined
 	@Prop() multiple = false
 	@Prop() type: "array" | "string" = "string"
-	@Prop() looks: Looks = "plain"
+	@Prop({ mutable: true }) looks: Looks = "plain"
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
-	async componentDidLoad() {
+	componentWillLoad() {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
+	async componentDidLoad() {
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
 	}
 	@Listen("smoothlyInputLoad")
