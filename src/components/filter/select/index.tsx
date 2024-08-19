@@ -26,8 +26,10 @@ export class SmoothlyFilterSelect implements Filter {
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
-	async componentDidLoad() {
+	componentWillLoad() {
 		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+	}
+	async componentDidLoad() {
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
 	}
 	@Listen("smoothlyInputLoad")
