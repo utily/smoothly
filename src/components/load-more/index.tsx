@@ -19,7 +19,6 @@ export class LoadMore implements ComponentWillLoad {
 	checkInView() {
 		if (this.inView) {
 			this.smoothlyLoadMore.emit(this.name)
-			!this.multiple && this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
 		}
 	}
 
@@ -40,7 +39,7 @@ export class LoadMore implements ComponentWillLoad {
 			this.inView && this.smoothlyLoadMore.emit(this.name)
 			if (this.multiple || (!this.multiple && !this.inView)) {
 				this.findScrollableParent()
-				this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this))
+				this.scrollableParent?.addEventListener("scroll", this.checkInView.bind(this), { once: !this.multiple })
 			}
 		}
 	}
