@@ -19,7 +19,6 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true, mutable: true }) disabled = false
 	@Prop({ reflect: true, mutable: true }) display = false
 	@Prop({ reflect: true }) shape?: "rounded"
-	@Prop({ reflect: true }) type: "link" | "button" = "button"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop() toolTip = this.delete ? "Remove" : "Submit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -50,7 +49,6 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						size={this.size}
 						shape={this.shape}
 						expand={this.expand}
-						type={this.type}
 						color={this.color ?? "danger"}
 						fill={this.fill}
 						onSmoothlyConfirm={() => this.clickHandler()}>
@@ -61,7 +59,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 					<smoothly-button
 						disabled={this.disabled}
 						size={this.size}
-						type={this.type}
+						type={"button"}
 						shape={this.shape}
 						expand={this.expand}
 						color={this.color ?? "success"}

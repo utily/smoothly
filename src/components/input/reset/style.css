@@ -1,9 +1,5 @@
 @import "../../button/style.css";
 
-:host {
-	display: flex;
-}
-
 :host(:not([display])) {
 	display: none;
 }

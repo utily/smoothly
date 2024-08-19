@@ -15,7 +15,6 @@ export class SmoothlyButtonConfirm {
 	@Prop() fill?: Fill
 	@Prop({ reflect: true }) disabled = false
 	@Prop() shape?: "rounded"
-	@Prop() type: "link" | "button" = "button"
 	@Prop() size: "small" | "large" | "icon" | "flexible"
 	@State() clickTimeStamp: number | undefined
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
@@ -44,7 +43,7 @@ export class SmoothlyButtonConfirm {
 					shape={this.shape}
 					color={"warning"}
 					disabled={this.disabled}
-					type={this.type}
+					type={"button"}
 					onClick={event => this.clickHandler(event)}>
 					<smoothly-icon name={"alert-outline"} fill="solid" color="warning" size="tiny" />
 				</smoothly-button>
@@ -55,7 +54,7 @@ export class SmoothlyButtonConfirm {
 					shape={this.shape}
 					color={this.color}
 					disabled={this.disabled}
-					type={this.type}
+					type={"button"}
 					onClick={event => this.clickHandler(event)}>
 					<slot />
 				</smoothly-button>
