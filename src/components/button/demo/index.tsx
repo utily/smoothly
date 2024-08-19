@@ -14,7 +14,10 @@ export class SmoothlyButtonDemo {
 						Delete
 					</smoothly-button-confirm>
 					<smoothly-button-confirm name="confirm-icon" shape="rounded" color="success" size="icon">
-						<smoothly-icon name="checkmark-outline" size="small" />
+						<smoothly-icon name="checkmark-outline" size="tiny" />
+					</smoothly-button-confirm>
+					<smoothly-button-confirm name="confirm-icon" shape="rounded" color="danger" size="icon" fill="outline">
+						<smoothly-icon name="trash-outline" size="tiny" fill="outline" />
 					</smoothly-button-confirm>
 				</div>
 				<h4>Toggle button</h4>
