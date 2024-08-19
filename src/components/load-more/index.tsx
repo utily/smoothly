@@ -3,13 +3,11 @@ import { isScrollable } from "./isScrollable"
 
 @Component({
 	tag: "smoothly-load-more",
-	styleUrl: "style.css",
 	scoped: true,
 })
 export class LoadMore implements ComponentWillLoad {
 	private scrollableParent?: HTMLElement
 	@Element() element: HTMLSmoothlyLoadMoreElement
-	@Prop() offset = "0"
 	@Prop() triggerMode: "scroll" | "intersection" = "intersection"
 	@Prop() name = ""
 	@Prop() multiple = false
@@ -53,6 +51,6 @@ export class LoadMore implements ComponentWillLoad {
 	}
 
 	render(): VNode | VNode[] {
-		return <Host style={{ "--offset": `${this.offset}` }} />
+		return <Host />
 	}
 }
