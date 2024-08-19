@@ -2,7 +2,9 @@
 	background: none;
 }
 :host {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 :host[rotate] {
 	--rotate: rotate(var(--rotation, 0deg));

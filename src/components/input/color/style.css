@@ -19,6 +19,9 @@
 	outline: 1px solid rgb(var(--smoothly-input-border));
 	border-radius: 3px;
 }
+:host[readonly] smoothly-icon[name=options-outline] {
+	filter: opacity(60%)
+}
 :host>div.rgb-sliders {
 	background-color: rgb(var(--smoothly-input-background));
 	position: absolute;
