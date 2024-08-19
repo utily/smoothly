@@ -90,12 +90,11 @@ export class SmoothlyInputCheckboxDemo {
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
 					<smoothly-input-clear fill="default" type="form" color="warning" slot="clear" size="icon" shape="rounded" />
-					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
+					<smoothly-input-edit fill="default" type="form" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
 					<smoothly-input-submit
 						fill="default"
-						type="button"
 						color="success"
 						slot="submit"
 						size="icon"

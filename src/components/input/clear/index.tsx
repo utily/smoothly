@@ -11,7 +11,7 @@ import { Input } from "../Input"
 	scoped: true,
 })
 export class SmoothlyInputClear {
-	@Prop({ reflect: true }) color?: Color
+	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
 	@Prop({ reflect: true, mutable: true }) disabled = false

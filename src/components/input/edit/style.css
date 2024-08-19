@@ -8,6 +8,13 @@
 	opacity: 0.5;
 }
 
+:host([type="input"])::slotted(smoothly-button>button) {
+	cursor: pointer;
+	filter: opacity(60%);
+	--smoothly-button-foreground: var(--smoothly-input-foreground);
+	background-color: transparent;
+}
+
 :host smoothly-icon.default {
 	transform: translate(.1em, -.1em);
 }

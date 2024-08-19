@@ -7,3 +7,7 @@ smoothly-button-demo > section > div {
 	display: flex;
 	align-items: center;
 }
+
+smoothly-button-demo smoothly-button {
+	margin: .2em .5em;
+}

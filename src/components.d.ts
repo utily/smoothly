@@ -83,7 +83,6 @@ export namespace Components {
         "name": string;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
-        "type": "link" | "button";
     }
     interface SmoothlyButtonDemo {
     }
@@ -345,7 +344,7 @@ export namespace Components {
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "toolTip": string;
-        "type": "link" | "button";
+        "type": "form" | "input";
     }
     interface SmoothlyInputFile {
         "accept"?: string;
@@ -467,7 +466,6 @@ export namespace Components {
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "toolTip": string;
-        "type": "link" | "button";
     }
     interface SmoothlyItem {
         "deselectable": boolean;
@@ -2317,7 +2315,6 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyButtonConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
-        "type"?: "link" | "button";
     }
     interface SmoothlyButtonDemo {
     }
@@ -2591,7 +2588,7 @@ declare namespace LocalJSX {
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "toolTip"?: string;
-        "type"?: "link" | "button";
+        "type"?: "form" | "input";
     }
     interface SmoothlyInputFile {
         "accept"?: string;
@@ -2711,7 +2708,6 @@ declare namespace LocalJSX {
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "toolTip"?: string;
-        "type"?: "link" | "button";
     }
     interface SmoothlyItem {
         "deselectable"?: boolean;

@@ -63,28 +63,21 @@ export class SmoothlyFormDemoAll {
 					</smoothly-input-checkbox>
 					<smoothly-input-range step={1} name="range3" value={20} label="Range" />
 					<smoothly-input name="pets.0.name">First Pet's Name</smoothly-input>
-					<smoothly-input-range name="pets.0.age" max={100} step={1}>
-						First Pet's Age
-					</smoothly-input-range>
+					<smoothly-input-range name="pets.0.age" max={100} step={1} label="First Pet's Age" />
 					<smoothly-input name="pets.1.name">Second Pet's Name</smoothly-input>
-					<smoothly-input-range name="pets.1.age" max={100} step={1}>
-						Second Pet's Age
-					</smoothly-input-range>
+					<smoothly-input-range name="pets.1.age" max={100} step={1} label="Second Pet's Age" />
 					<smoothly-input name="pets.2.name">Third Pet's Name</smoothly-input>
-					<smoothly-input-range name="pets.2.age" max={100} step={1}>
-						Third Pet's Age
-					</smoothly-input-range>
+					<smoothly-input-range name="pets.2.age" max={100} step={1} label="Third Pet's Age" />
 					<smoothly-input-file name={"profile"} placeholder={"Click or drag your profile picture here..."}>
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
 					<smoothly-input-clear fill="default" type="form" color="warning" slot="clear" size="icon" shape="rounded" />
-					<smoothly-input-edit fill="default" type="button" color="tertiary" slot="edit" size="icon" shape="rounded" />
+					<smoothly-input-edit fill="default" type="form" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
 					<smoothly-input-submit
 						fill="default"
-						type="button"
 						color="success"
 						slot="submit"
 						size="icon"
