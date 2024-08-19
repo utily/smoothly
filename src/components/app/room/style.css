@@ -4,6 +4,7 @@
 	text-align: center;
 	cursor: pointer;
 	height: 100%;
+	position: relative;
 }
 
 :host>div {
@@ -48,6 +49,29 @@
 :host[icon]>li>a>.label {
 	display: none;
 }
+:host([icon][label]):hover::before,
+:host([icon][label]):hover::after {
+	position: absolute;
+	color: rgb(var(--smoothly-color-contrast));
+	background-color: rgb(var(--smoothly-color-tint));
+	border-radius: 0.25rem;
+	pointer-events: none;
+}
+:host([icon][label]):hover::before {
+	content: "";
+  bottom: -1.75rem;
+  transform: rotate(45deg);
+  width: 1.25em;
+  height: 1.25em;
+}
+:host([icon][label]):hover::after {
+	content: attr(label);
+	white-space: nowrap;
+	bottom: -3.25rem;
+	padding: .5rem 1rem;
+	border-radius: .25rem;
+}
+
 
 @media screen and (max-width: 900px) {
 	:host>li>a {
@@ -63,5 +87,9 @@
 		margin-right: -1.5rem;
 		padding-left: 1.5rem;
 		padding-right: 1.5rem;
+	}
+	:host([icon][label]):hover::before,
+	:host([icon][label]):hover::after {
+		content: unset;
 	}
 }
