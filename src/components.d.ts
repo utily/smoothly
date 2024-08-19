@@ -487,7 +487,6 @@ export namespace Components {
     interface SmoothlyLoadMore {
         "multiple": boolean;
         "name": string;
-        "offset": string;
         "triggerMode": "scroll" | "intersection";
     }
     interface SmoothlyNextDemo {
@@ -2730,7 +2729,6 @@ declare namespace LocalJSX {
     interface SmoothlyLoadMore {
         "multiple"?: boolean;
         "name"?: string;
-        "offset"?: string;
         "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
         "triggerMode"?: "scroll" | "intersection";
     }
