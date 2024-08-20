@@ -316,7 +316,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<slot name="end" />
-					{this.looks == "border" && (
+					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
 							ref={element => (this.toggle = element)}
 							size="tiny"
