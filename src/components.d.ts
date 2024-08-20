@@ -335,6 +335,8 @@ export namespace Components {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyInputDemoStandard {
+    }
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled": boolean;
@@ -1406,6 +1408,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyInputDemoStandardElement extends Components.SmoothlyInputDemoStandard, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputDemoStandardElement: {
+        prototype: HTMLSmoothlyInputDemoStandardElement;
+        new (): HTMLSmoothlyInputDemoStandardElement;
+    };
     interface HTMLSmoothlyInputEditElementEventMap {
         "smoothlyInputLoad": (parent: HTMLElement) => void;
     }
@@ -2193,6 +2201,7 @@ declare global {
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
@@ -2576,6 +2585,8 @@ declare namespace LocalJSX {
         "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDemo {
+    }
+    interface SmoothlyInputDemoStandard {
     }
     interface SmoothlyInputEdit {
         "color"?: Color;
@@ -3007,6 +3018,7 @@ declare namespace LocalJSX {
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
@@ -3126,6 +3138,7 @@ declare module "@stencil/core" {
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;

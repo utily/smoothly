@@ -7,8 +7,10 @@
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-	padding-left: 0.4rem;
+	padding-left: 0.5rem;
 	background-color: rgb(var(--smoothly-input-background));
+	box-sizing: border-box;
+	min-height: 3rem;
 }
 
 :host>div>div.mask {
@@ -55,7 +57,7 @@
 :host>label::slotted(*) {
 	display: block;
 	width: 100%;
-	font-size: 0.65em;
+	font-size: 0.8rem;
 	opacity: 0.8;
 }
 

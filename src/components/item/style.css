@@ -11,6 +11,8 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
+	box-sizing: border-box;
+	min-height: 3rem;
 }
 
 :host::slotted(*) {

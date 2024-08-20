@@ -5,10 +5,12 @@
 	align-items: center;
 	flex-direction: row;
 	position: relative;
-	gap: .5em;
-	padding: .6em;
+	gap: .5rem;
+	padding: .5rem;
 	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-input-background));
+	box-sizing: border-box;
+	min-height: 3rem;
 }
 
 :host>smoothly-icon {
@@ -20,8 +22,8 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	height: 1.2em;
-	width: 1.2em;
+	height: 1.25rem;
+	width: 1.25rem;
 	border: 1px solid black;
 	display: block;
 }

@@ -1,0 +1,106 @@
+:host {
+	width: 50%;
+	margin: auto;
+}
+
+:host h2,
+:host p {
+	margin: .5rem 0;
+}
+div.input-wrapper {
+	display: grid;
+	margin-top: 1rem;
+	grid-template-columns: 2fr 1fr;
+	gap: 1rem;
+	position: relative;
+	justify-content: space-around;
+}
+div.input-wrapper > [name] {
+	grid-column: 1 / 2;
+}
+div.input-wrapper > .width {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px dashed black;
+}
+div.input-wrapper > .height {
+	align-content: center;
+	grid-column: 2 / 3;
+	border-left: 1px dashed black;
+	padding-left: 1rem;
+	content: "hello";
+}
+div.input-wrapper > .left-padding {
+	width: 0.5rem;
+	grid-column: 1 / 2;
+	white-space: nowrap;
+	overflow: visible;
+	position: relative;
+	cursor: default;
+}
+div.input-wrapper > .left-padding::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	top: 1.5rem;
+	bottom: -1rem;
+	border: 1px  dashed black;
+	z-index: 2;
+}
+div.input-wrapper > .left-padding:hover::before { 
+	bottom: -100vh;
+}
+
+
+/* --- vertical --- */
+
+:host.vertical {
+	width: 100%;
+	row-gap: 0;
+	position: relative;
+}
+:host.vertical > div.input-wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 14rem);
+	gap: .5rem;
+}
+:host.vertical > div.input-wrapper > .width,
+:host.vertical > div.input-wrapper > .height,
+:host.vertical > div.input-wrapper > .left-padding {
+	display: none;
+}
+
+
+:host.vertical > div.input-wrapper > .guide-lines::before,
+:host.vertical > div.input-wrapper > .guide-lines::after {
+	content: "";
+	pointer-events: none;
+	right: 0;
+	width: 100vw;
+	position: absolute;
+	z-index: 2;
+	border-top: 1px dotted black;
+}
+
+:host:not(.vertical) .guide-lines {
+	display: none;
+}
+
+.guide-lines {
+	text-align: end;
+	justify-self: center;
+  align-content: center;
+}
+
+.guide-lines::before {
+	top: 1rem;
+}
+.guide-lines::after {
+	top: 2rem;
+}
+.guide-lines.show-label::before {
+	top: 1.05rem;
+}
+.guide-lines.show-label::after {
+	top: 2.3rem;
+}
