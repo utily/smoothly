@@ -1,4 +1,5 @@
-import { Component, h, Host, Prop, State } from "@stencil/core"
+import { Component, Element, h, Host, Prop, State } from "@stencil/core"
+import { Scrollable } from "../../model/Scrollable"
 
 @Component({
 	tag: "smoothly-back-to-top",
@@ -6,13 +7,16 @@ import { Component, h, Host, Prop, State } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyBackToTop {
+	private scrollableParent?: HTMLElement
+	@Element() element: HTMLSmoothlyBackToTopElement
 	@Prop() opacity = "0.5"
 	@Prop() bottom = "1rem"
 	@Prop() right = "1rem"
 	@State() visible: boolean
 	componentWillLoad() {
-		window.addEventListener("scroll", () => {
-			this.visible = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20
+		this.scrollableParent = Scrollable.findParent(this.element)
+		this.scrollableParent?.addEventListener("scroll", () => {
+			this.visible = (this.scrollableParent?.scrollTop ?? 0) > 20
 		})
 	}
 	render() {
@@ -26,7 +30,7 @@ export class SmoothlyBackToTop {
 			<Host
 				style={cssVariables}
 				onClick={() =>
-					window.scrollTo({
+					this.scrollableParent?.scrollTo({
 						top: 0,
 						left: 0,
 						behavior: "smooth",
