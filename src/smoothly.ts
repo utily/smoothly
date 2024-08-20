@@ -18,5 +18,6 @@ export {
 	Data,
 	redirect,
 	Submit,
+	Scrollable,
 } from "./model"
 export { Cosmetic } from "./utilities"
