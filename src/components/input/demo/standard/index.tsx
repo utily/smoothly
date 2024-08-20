@@ -29,11 +29,7 @@ export class SmoothlyInputDemoStandard {
 						Height of input should be <code>3rem</code> including border. This is should result in a 48 pixel height at
 						100% zoom, assuming a root font-size of 16 pixels.
 					</p>
-					<smoothly-form
-						looks={"grid"}
-						onSmoothlyFormInput={(e: CustomEvent<Options>) => {
-							this.options = e.detail
-						}}>
+					<smoothly-form looks={"grid"} onSmoothlyFormInput={(e: CustomEvent<Options>) => (this.options = e.detail)}>
 						<smoothly-input-select name="looks">
 							<span slot="label">Looks</span>
 							{Looks.types.map(l => (
@@ -50,7 +46,7 @@ export class SmoothlyInputDemoStandard {
 							))}
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-select>
-						<smoothly-input-checkbox name="vertical">vertical</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="vertical">Vertical Layout</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="showLabel" checked={this.options.showLabel}>
 							Show Label
 						</smoothly-input-checkbox>
