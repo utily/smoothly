@@ -1,7 +1,6 @@
 :host {
 	font-family: monospace;
 	position: relative;
-	word-wrap: anywhere;
 }
 :host[hidden] {
 	display: none;
