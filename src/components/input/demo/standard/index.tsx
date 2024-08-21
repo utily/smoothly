@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, Element, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 import { Color } from "../../../../model"
 import { Looks } from "../../Looks"
@@ -17,8 +17,17 @@ type Options = {
 	scoped: true,
 })
 export class SmoothlyInputDemoStandard {
+	@Element() element: HTMLElement
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() options: Options = { showLabel: true }
+
+	componentDidRender() {
+		const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize.replace("px", ""))
+		this.element.querySelectorAll(".height").forEach((el: HTMLDivElement) => {
+			const height = el.clientHeight
+			el.innerHTML = `<b>${height / rootFontSize}rem</b> (${height}pixels)`
+		})
+	}
 
 	render() {
 		return (
@@ -63,7 +72,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Text</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-select
 						name="month"
@@ -85,7 +94,7 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-item value="12">December</smoothly-item>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-select>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-checkbox
 						looks={this.options.looks}
@@ -93,7 +102,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}>
 						Check
 					</smoothly-input-checkbox>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-radio looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
@@ -104,13 +113,13 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-radio>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-file looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-file>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-range
 						label={this.options.showLabel ? "Range" : undefined}
@@ -119,19 +128,19 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-range>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-color looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
 						{this.options.showLabel && <span>Color</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-color>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-date looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 
 					<smoothly-input-date-range
 						looks={this.options.looks}
@@ -140,7 +149,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>
-					<div class="height">3rem</div>
+					<div class="height"></div>
 					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>
 						{this.options.showLabel ? "Aligned labels & values" : "Center values"}
 					</div>
