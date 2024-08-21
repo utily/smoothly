@@ -10,6 +10,7 @@
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
 	padding: 0 0.5em;
+	min-height: 3rem;
 }
 
 :host.open {
