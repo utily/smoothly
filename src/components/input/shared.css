@@ -2,11 +2,6 @@
 	box-sizing: border-box;
 	border-radius: var(--smoothly-input-border-radius);
 }
-:host[readonly] {
-	color: rgba(var(--smoothly-input-foreground), 0.7);
-	fill: rgba(var(--smoothly-input-foreground), 0.7);
-	stroke: rgba(var(--smoothly-input-foreground), 0.7);
-}
 
 :host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
