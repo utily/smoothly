@@ -145,7 +145,8 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-date-range
 						looks={this.options.looks}
 						readonly={this.options.readonly}
-						color={this.options.color}>
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>
