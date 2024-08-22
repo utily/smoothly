@@ -16,7 +16,6 @@
 
 :host([type=link]) {
 	display: inline;
-	border: none;
 }
 
 :host([disabled]) {
@@ -84,7 +83,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: none;
 }
 
 :host([size=flexible])>button {
@@ -108,13 +106,13 @@
 	color: rgb(var(--smoothly-button-foreground));
 	fill: rgb(var(--smoothly-button-foreground));
 	stroke: rgb(var(--smoothly-button-foreground));
-	border: 1px solid rgb(var(--smoothly-button-foreground));
+	border-color: rgb(var(--smoothly-button-foreground));
 }
 
 :host(:not([fill=clear]))>button:hover,
 :host()>button:focus-visible,
 :host([fill=outline]):active>button::before {
-	border: solid 1px rgb(var(--smoothly-button-focus-border));
+	border-color: rgb(var(--smoothly-button-focus-color));
 }
 
 :host([fill=outline])>button:hover::before,
