@@ -39,6 +39,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() output: "rgb" | "hex" = "rgb"
 	@Prop() name: string
+	@Prop({ reflect: true }) showLabel = true
 	@Element() element: HTMLSmoothlyInputColorElement
 	@State() open = false
 	@State() sliderMode: "rgb" | "hsl" = "rgb"
@@ -195,6 +196,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					looks={undefined}
 					color={this.color}
 					type={"hex-color"}
+					showLabel={this.showLabel}
 					readonly={this.readonly}
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexInputHandler(event.detail[this.name]))}>
 					<slot />

@@ -142,7 +142,11 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-range>
 					<div class="height"></div>
 
-					<smoothly-input-color looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-color
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Color</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-color>

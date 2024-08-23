@@ -292,6 +292,7 @@ export namespace Components {
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "showLabel": boolean;
         "value": string | undefined;
     }
     interface SmoothlyInputColorDemo {
@@ -2544,6 +2545,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "output"?: "rgb" | "hex";
         "readonly"?: boolean;
+        "showLabel"?: boolean;
         "value"?: string | undefined;
     }
     interface SmoothlyInputColorDemo {
