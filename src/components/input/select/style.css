@@ -24,14 +24,13 @@
 
 :host>div.select-display {
 	box-sizing: border-box;
-	min-height: 2.7em;
 	display: flex;
 	cursor: pointer;
-	padding: 1.2em 0em 0.2em 0em;
+	padding: 1.25rem 0 .25rem 0;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
-	gap: 1em;
+	gap: 1rem;
 	text-overflow: ellipsis;
 }
 
@@ -88,8 +87,8 @@ smoothly-icon[name=caret-forward-outline] {
 
 :host::slotted([slot=label]) {
 	position: absolute;
-	left: 0.5em;
-	top: .6em;
+	left: .5rem;
+	top: .6rem;
 	opacity: 0.8;
 	transform-origin: top left;
 	transition: transform 100ms ease;

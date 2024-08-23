@@ -21,7 +21,14 @@ export class SmoothlyInputDemoStandard {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() options: Options = { showLabel: true }
 
+	connectedCallback() {
+		this.updateInputHeightText()
+	}
 	componentDidRender() {
+		this.updateInputHeightText()
+	}
+
+	updateInputHeightText() {
 		const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize.replace("px", ""))
 		this.element.querySelectorAll(".height").forEach((el: HTMLDivElement) => {
 			const height = el.clientHeight
@@ -116,7 +123,11 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-radio>
 					<div class="height"></div>
 
-					<smoothly-input-file looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-file
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-file>
