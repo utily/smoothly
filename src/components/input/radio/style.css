@@ -8,7 +8,7 @@
 	box-sizing: border-box;
 	min-height: 3rem;
 }
-:host>div {
+:host[show-label]>div {
 	position: relative;
 	padding: 1.25rem 0 .25rem 0;
 }

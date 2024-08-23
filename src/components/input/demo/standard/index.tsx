@@ -112,7 +112,11 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-checkbox>
 					<div class="height"></div>
 
-					<smoothly-input-radio looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-radio
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
 						<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
 						<smoothly-input-radio-item selected value={"second"}>

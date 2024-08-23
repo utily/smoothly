@@ -35,6 +35,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Prop() clearable?: boolean
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop() name: string
+	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
