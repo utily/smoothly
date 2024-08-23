@@ -35,8 +35,12 @@
 	display: flex;
 	align-items: center;
 	padding-bottom: 0.2rem;
-	column-gap: 1ch;
 }
+
+:host:not([show-label])>smoothly-button:not(:empty) {
+	margin-right: 1ch;
+}
+
 :host([show-label]) > div.input {
 	display: flex;
 	padding: 1.25rem 0 .25rem 0;
@@ -58,7 +62,8 @@
 	transition: transform 100ms ease;
 }
 
-:host.has-value>label {
+:host.has-value>label,
+:host[placeholder]>label {
 	top: 0.2em;
   transform: scale(0.8);
 }

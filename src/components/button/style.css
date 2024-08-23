@@ -35,6 +35,10 @@
 	gap: 0.5rem;
 	box-sizing: border-box;
 }
+:host>a:empty,
+:host>button:empty {
+	border-width: 0;
+}
 
 :host>button {
 	font-weight: bold;
