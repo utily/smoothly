@@ -31,11 +31,17 @@
 	padding: 0;
 }
 
-:host>div.input {
+:host:not([show-label])>div.input {
 	display: flex;
 	align-items: center;
 	padding-bottom: 0.2rem;
 	column-gap: 1ch;
+}
+:host([show-label]) > div.input {
+	display: flex;
+	padding: 1.25rem 0 .25rem 0;
+	height: 100%;
+	box-sizing: border-box;
 }
 
 :host>div>smoothly-button {
@@ -44,21 +50,17 @@
 }
 
 :host>label {
-	padding-top: 0.4rem;
-	display: flex;
-	width: 100%;
-	align-items: baseline;
-	justify-content: flex-start;
-	color: rgb(var(--smoothly-input-foreground));
-	cursor: inherit;
-
+	position: absolute;
+	left: .5rem;
+	top: .6rem;
+	opacity: 0.8;
+	transform-origin: top left;
+	transition: transform 100ms ease;
 }
 
-:host>label::slotted(*) {
-	display: block;
-	width: 100%;
-	font-size: 0.8rem;
-	opacity: 0.8;
+:host.has-value>label {
+	top: 0.2em;
+  transform: scale(0.8);
 }
 
 :host:not([show-label]) label {
