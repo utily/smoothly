@@ -9,6 +9,7 @@ type Options = {
 	color?: Color
 	vertical?: boolean
 	showLabel?: boolean
+	placeholder?: boolean
 }
 
 @Component({
@@ -37,6 +38,7 @@ export class SmoothlyInputDemoStandard {
 	}
 
 	render() {
+		const placeholder = this.options.placeholder ? "placeholder" : undefined
 		return (
 			<Host class={{ vertical: !!this.options.vertical }}>
 				<div class="description">
@@ -66,6 +68,9 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-checkbox name="showLabel" checked={this.options.showLabel}>
 							Show Label
 						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="placeholder" checked={this.options.placeholder}>
+							Placeholder
+						</smoothly-input-checkbox>
 					</smoothly-form>
 				</div>
 				<div class="input-wrapper">
@@ -74,6 +79,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input
 						name="text"
 						looks={this.options.looks}
+						placeholder={placeholder}
 						readonly={this.options.readonly}
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
@@ -85,6 +91,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-select
 						name="month"
 						looks={this.options.looks}
+						placeholder={placeholder}
 						readonly={this.options.readonly}
 						color={this.options.color}>
 						{this.options.showLabel && <label slot="label">Select</label>}
@@ -131,6 +138,7 @@ export class SmoothlyInputDemoStandard {
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}
+						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
@@ -170,6 +178,7 @@ export class SmoothlyInputDemoStandard {
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}
+						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
