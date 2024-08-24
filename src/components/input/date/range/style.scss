@@ -6,6 +6,7 @@
 	display: flex;
 	width: fit-content;
 	background-color: rgb(var(--smoothly-input-background));
+	min-height: 3rem;
 
 	&:focus-within smoothly-input {
 		outline: none;
