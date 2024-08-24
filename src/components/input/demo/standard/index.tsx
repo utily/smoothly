@@ -10,6 +10,7 @@ type Options = {
 	vertical?: boolean
 	showLabel?: boolean
 	placeholder?: boolean
+	borderRadius?: number
 }
 
 @Component({
@@ -71,9 +72,17 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-checkbox name="placeholder" checked={this.options.placeholder}>
 							Placeholder
 						</smoothly-input-checkbox>
+						<smoothly-input-range
+							label={"Border Radius (rem)"}
+							name={"borderRadius"}
+							value={this.options.borderRadius}
+							min={0}
+							max={2}
+							step={0.25}
+						/>
 					</smoothly-form>
 				</div>
-				<div class="input-wrapper">
+				<div class="input-wrapper" style={{ "--smoothly-input-border-radius": `${this.options.borderRadius}rem` }}>
 					<div class="width">100%</div>
 					<div class="left-padding">0.5rem - left padding</div>
 					<smoothly-input
