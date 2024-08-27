@@ -6,6 +6,7 @@ import { Scrollable } from "../../model/Scrollable"
 	scoped: true,
 })
 export class LoadMore {
+	private observer: IntersectionObserver
 	private scrollableParent?: HTMLElement
 	@Element() element: HTMLSmoothlyLoadMoreElement
 	@Prop() triggerMode: "scroll" | "intersection" = "intersection"
@@ -20,8 +21,8 @@ export class LoadMore {
 	}
 
 	connectedCallback() {
-		const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
-		observer.observe(this.element)
+		this.observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
+		this.observer.observe(this.element)
 		if (this.triggerMode == "scroll") {
 			this.inView && this.smoothlyLoadMore.emit(this.name)
 			if (this.multiple || (!this.multiple && !this.inView)) {
@@ -33,6 +34,7 @@ export class LoadMore {
 
 	disconnectedCallback() {
 		this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
+		this.observer.disconnect()
 	}
 
 	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
