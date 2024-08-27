@@ -46,3 +46,38 @@
 :host[looks="transparent"]:focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
 }
+
+/* --- label --- */
+
+:host {
+	--input-min-height: 3rem;
+	--input-padding-side: .5rem;
+	--input-value-padding-top: 1.25rem;
+	--input-value-padding-bottom: .25rem;
+	--input-label-top: .6rem;
+	--input-floating-label-top: .2rem;
+	--input-floating-label-scale: .8;
+	--input-transform-origin: top left;
+	--input-transition: transform 100ms ease; 
+}
+
+:host ::slotted([slot=label]),
+:host .label {
+	position: absolute;
+	top: .6rem;
+	opacity: 0.8;
+	user-select: none;
+	cursor: inherit;
+	transform-origin: top left;
+	transition: transform 100ms ease;
+}
+
+:host.floating-label ::slotted([slot=label]),
+:host.has-value ::slotted([slot=label]),
+:host[placeholder] ::slotted([slot=label]),
+:host.has-value .label,
+:host[placeholder] .label,
+:host:not([readonly]):focus-within .label.float-on-focus {
+	top: .2rem;
+	transform: scale(0.8);
+}

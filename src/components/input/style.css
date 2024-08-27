@@ -22,14 +22,7 @@
 }
 
 :host>div>label {
-	position: absolute;
 	left: 0.5rem;
-	top: 0.6rem;
-	opacity: 0.8;
-	user-select: none;
-	cursor: inherit;
-	transform-origin: top left;
-	transition: transform 100ms ease;
 }
 
 :host:not([show-label])>div>label {
@@ -70,13 +63,6 @@
 :host>div>label {
 	z-index: 1;
 	pointer-events: none;
-}
-
-:host:not([readonly]):not(.has-value)[placeholder]>div>label,
-:host.has-value>div>label,
-:host:not([readonly]):not(.has-value):focus-within>div>label {
-	top: 0.2em;
-	transform: scale(0.8);
 }
 
 :host>div>input:focus {

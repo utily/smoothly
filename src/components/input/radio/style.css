@@ -12,13 +12,6 @@
 	position: relative;
 	padding: 1.25rem 0 .25rem 0;
 }
-:host>div>label {
-	left: 0;
-	top: 0.2em;
-	opacity: 0.8;
-	position: absolute;
-	font-size: .8em;
-}
 :host>div,
 :host>div>div.options {
 	display: flex;

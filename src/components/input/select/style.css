@@ -85,19 +85,8 @@ smoothly-icon[name=caret-forward-outline] {
 	padding-right: .2em;
 }
 
-:host::slotted([slot=label]) {
-	position: absolute;
+:host .label {
 	left: .5rem;
-	top: .6rem;
-	opacity: 0.8;
-	transform-origin: top left;
-	transition: transform 100ms ease;
-}
-
-:host.has-value::slotted([slot=label]),
-:host:not(.has-value)[placeholder]::slotted([slot=label]) {
-	top: 0.2em;
-	transform: scale(0.8);
 }
 
 :host.has-value:has([slot=label])>div.select-display,

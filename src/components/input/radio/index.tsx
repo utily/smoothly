@@ -121,7 +121,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 
 	render(): VNode | VNode[] {
 		return (
-			<Host>
+			<Host class="floating-label">
 				<slot name="start" />
 				<div>
 					<slot name="label" />
