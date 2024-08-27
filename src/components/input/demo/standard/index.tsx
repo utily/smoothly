@@ -9,6 +9,8 @@ type Options = {
 	color?: Color
 	vertical?: boolean
 	showLabel?: boolean
+	placeholder?: boolean
+	borderRadius?: number
 }
 
 @Component({
@@ -37,6 +39,7 @@ export class SmoothlyInputDemoStandard {
 	}
 
 	render() {
+		const placeholder = this.options.placeholder ? "placeholder" : undefined
 		return (
 			<Host class={{ vertical: !!this.options.vertical }}>
 				<div class="description">
@@ -66,14 +69,26 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-checkbox name="showLabel" checked={this.options.showLabel}>
 							Show Label
 						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="placeholder" checked={this.options.placeholder}>
+							Placeholder
+						</smoothly-input-checkbox>
+						<smoothly-input-range
+							label={"Border Radius (rem)"}
+							name={"borderRadius"}
+							value={this.options.borderRadius}
+							min={0}
+							max={2}
+							step={0.25}
+						/>
 					</smoothly-form>
 				</div>
-				<div class="input-wrapper">
+				<div class="input-wrapper" style={{ "--smoothly-input-border-radius": `${this.options.borderRadius}rem` }}>
 					<div class="width">100%</div>
 					<div class="left-padding">0.5rem - left padding</div>
 					<smoothly-input
 						name="text"
 						looks={this.options.looks}
+						placeholder={placeholder}
 						readonly={this.options.readonly}
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
@@ -85,6 +100,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-select
 						name="month"
 						looks={this.options.looks}
+						placeholder={placeholder}
 						readonly={this.options.readonly}
 						color={this.options.color}>
 						{this.options.showLabel && <label slot="label">Select</label>}
@@ -131,6 +147,7 @@ export class SmoothlyInputDemoStandard {
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}
+						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
@@ -170,6 +187,7 @@ export class SmoothlyInputDemoStandard {
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}
+						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
