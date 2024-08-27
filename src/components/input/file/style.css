@@ -10,7 +10,6 @@
 	padding-left: 0.5rem;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
-	min-height: 3rem;
 }
 
 :host>div>div.mask {

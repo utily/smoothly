@@ -8,7 +8,6 @@
 	overflow: hidden;
 	background-color: rgb(var(--smoothly-input-background));
 	color: rgb(var(--smoothly-input-foreground));
-	min-height: 3rem;
 }
 
 :host[hidden] {
