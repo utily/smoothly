@@ -176,39 +176,35 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		})
 		if (await this.processing) {
 			this.type == "create" && (await this.clear())
-			this.setInitialValue()
-			this.readonlyAtLoad && this.edit(!this.readonlyAtLoad)
+			await this.setInitialValue()
+			this.readonlyAtLoad && (await this.edit(!this.readonlyAtLoad))
 		}
 		this.processing = undefined
 	}
 	@Method()
 	async clear(): Promise<void> {
-		this.inputs.forEach(input => {
-			Clearable.is(input) && input.clear()
-		})
+		await Promise.all([...this.inputs.values()].map(async input => Clearable.is(input) && input.clear()))
 		this.smoothlyFormClear.emit()
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.edit(editable)
-		})
+		await Promise.all(
+			[...this.inputs.values()].map(async input => Editable.Element.type.is(input) && input.edit(editable))
+		)
 		this.readonly = !editable
 		this.smoothlyFormEdit.emit(editable)
 	}
 	@Method()
 	async reset(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.reset()
-		})
+		await Promise.all([...this.inputs.values()].map(input => Editable.Element.type.is(input) && input.reset()))
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		this.smoothlyFormReset.emit()
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.inputs.forEach(input => {
-			Editable.Element.type.is(input) && input.setInitialValue()
-		})
+		await Promise.all(
+			[...this.inputs.values()].map(input => Editable.Element.type.is(input) && input.setInitialValue())
+		)
 	}
 	render() {
 		return (
