@@ -8,7 +8,6 @@
 	overflow: hidden;
 	background-color: rgb(var(--smoothly-input-background));
 	color: rgb(var(--smoothly-input-foreground));
-	min-height: 3rem;
 }
 
 :host[hidden] {
@@ -22,26 +21,19 @@
 }
 
 :host>div>label {
-	position: absolute;
-	left: 0.5rem;
-	top: 0.6rem;
-	opacity: 0.8;
-	user-select: none;
-	cursor: inherit;
-	transform-origin: top left;
-	transition: transform 100ms ease;
-}
-
-:host:not([show-label])>div>label {
-	display: none;
+	left: var(--input-padding-side);
 }
 
 :host:not([show-label])>div>input {
-	padding: 0.75em .5em;
+	padding: 0 var(--input-padding-side);
 }
 
 :host>div>input {
-	padding: 1.25rem .5rem 0.25rem .5rem;
+	padding: 
+		var(--input-value-padding-top) 
+		var(--input-padding-side) 
+		var(--input-value-padding-bottom) 
+		var(--input-padding-side);
 	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
@@ -70,13 +62,6 @@
 :host>div>label {
 	z-index: 1;
 	pointer-events: none;
-}
-
-:host:not([readonly]):not(.has-value)[placeholder]>div>label,
-:host.has-value>div>label,
-:host:not([readonly]):not(.has-value):focus-within>div>label {
-	top: 0.2em;
-	transform: scale(0.8);
 }
 
 :host>div>input:focus {

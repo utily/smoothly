@@ -1,4 +1,9 @@
 :host {
+	--input-padding-side: .5rem;
+	--input-value-padding-top: 1.25rem;
+	--input-value-padding-bottom: .25rem;
+	--input-min-height: 3rem;
+	min-height: var(--input-min-height);
 	box-sizing: border-box;
 	border-radius: var(--smoothly-input-border-radius);
 }
@@ -45,4 +50,31 @@
 
 :host[looks="transparent"]:focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
+}
+
+/* --- label --- */
+
+:host ::slotted([slot=label]),
+:host .label {
+	position: absolute;
+	top: .6rem;
+	opacity: 0.8;
+	user-select: none;
+	cursor: inherit;
+	transform-origin: top left;
+	transition: transform 100ms ease;
+}
+
+:host.floating-label ::slotted([slot=label]),
+:host.has-value ::slotted([slot=label]),
+:host[placeholder] ::slotted([slot=label]),
+:host.has-value .label,
+:host[placeholder] .label,
+:host:not([readonly]):focus-within .label.float-on-focus {
+	top: .2rem;
+	transform: scale(0.8);
+}
+
+:host:not([show-label]):not(.show-label) .label {
+	display: none;
 }

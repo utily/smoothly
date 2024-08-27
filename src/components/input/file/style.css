@@ -10,7 +10,6 @@
 	padding-left: 0.5rem;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
-	min-height: 3rem;
 }
 
 :host>div>div.mask {
@@ -31,11 +30,21 @@
 	padding: 0;
 }
 
-:host>div.input {
+:host:not([show-label])>div.input {
 	display: flex;
 	align-items: center;
 	padding-bottom: 0.2rem;
-	column-gap: 1ch;
+}
+
+:host:not([show-label])>smoothly-button:not(:empty) {
+	margin-right: 1ch;
+}
+
+:host([show-label]) > div.input {
+	display: flex;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	height: 100%;
+	box-sizing: border-box;
 }
 
 :host>div>smoothly-button {
@@ -44,25 +53,7 @@
 }
 
 :host>label {
-	padding-top: 0.4rem;
-	display: flex;
-	width: 100%;
-	align-items: baseline;
-	justify-content: flex-start;
-	color: rgb(var(--smoothly-input-foreground));
-	cursor: inherit;
-
-}
-
-:host>label::slotted(*) {
-	display: block;
-	width: 100%;
-	font-size: 0.8rem;
-	opacity: 0.8;
-}
-
-:host:not([show-label]) label {
-	display: none;
+	left: var(--input-padding-side);
 }
 
 :host,

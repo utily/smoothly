@@ -9,8 +9,7 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
-	padding: 0 0.5em;
-	min-height: 3rem;
+	padding: 0 var(--input-padding-side);
 }
 
 :host.open {
@@ -24,14 +23,13 @@
 
 :host>div.select-display {
 	box-sizing: border-box;
-	min-height: 2.7em;
 	display: flex;
 	cursor: pointer;
-	padding: 1.2em 0em 0.2em 0em;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
-	gap: 1em;
+	gap: 1rem;
 	text-overflow: ellipsis;
 }
 
@@ -86,19 +84,8 @@ smoothly-icon[name=caret-forward-outline] {
 	padding-right: .2em;
 }
 
-:host::slotted([slot=label]) {
-	position: absolute;
-	left: 0.5em;
-	top: .6em;
-	opacity: 0.8;
-	transform-origin: top left;
-	transition: transform 100ms ease;
-}
-
-:host.has-value::slotted([slot=label]),
-:host:not(.has-value)[placeholder]::slotted([slot=label]) {
-	top: 0.2em;
-	transform: scale(0.8);
+:host .label {
+	left: .5rem;
 }
 
 :host.has-value:has([slot=label])>div.select-display,

@@ -21,7 +21,14 @@ export class SmoothlyInputDemoStandard {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() options: Options = { showLabel: true }
 
+	connectedCallback() {
+		this.updateInputHeightText()
+	}
 	componentDidRender() {
+		this.updateInputHeightText()
+	}
+
+	updateInputHeightText() {
 		const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize.replace("px", ""))
 		this.element.querySelectorAll(".height").forEach((el: HTMLDivElement) => {
 			const height = el.clientHeight
@@ -105,7 +112,11 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-checkbox>
 					<div class="height"></div>
 
-					<smoothly-input-radio looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-radio
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
 						<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
 						<smoothly-input-radio-item selected value={"second"}>
@@ -116,7 +127,11 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-radio>
 					<div class="height"></div>
 
-					<smoothly-input-file looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-file
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-file>
@@ -131,13 +146,21 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-range>
 					<div class="height"></div>
 
-					<smoothly-input-color looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-color
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Color</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-color>
 					<div class="height"></div>
 
-					<smoothly-input-date looks={this.options.looks} readonly={this.options.readonly} color={this.options.color}>
+					<smoothly-input-date
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>

@@ -65,6 +65,7 @@
 :host>section>smoothly-input {
 	min-width: 15rem;
 	background-color: transparent;
+	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
 :host>section>span {

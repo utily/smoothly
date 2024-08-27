@@ -12,7 +12,6 @@
 	background-color: rgb(var(--smoothly-input-background));
 	padding-right: .5em;
 	box-sizing: border-box;
-	min-height: 3rem;
 }
 :host>div {
 	position: relative;
@@ -23,6 +22,7 @@
 }
 :host>div>smoothly-input {
 	width: 12em;
+	--input-min-height: calc(3rem - 2px);
 }
 :host>div>smoothly-input:focus {
 	outline: none;
@@ -36,7 +36,7 @@
 }
 :host.output-side-right>div>smoothly-input {
 	text-align: center;
-	margin-left: .5em;
+	margin-left: var(--input-padding-side);
 	border: none;
 	box-sizing: border-box;
 	width: 5em;
@@ -58,7 +58,7 @@
 	position: static;
 	font-size: inherit;
 	text-align: center;
-	margin: 0 .5em
+	margin: 0 var(--input-padding-side);
 }
 
 /*--------------------Reset browserspecific CSS------------------ */

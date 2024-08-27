@@ -6,11 +6,9 @@
 	flex-direction: row;
 	position: relative;
 	gap: .5rem;
-	padding: .5rem;
-	box-sizing: border-box;
+	padding: 0 var(--input-padding-side);
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
-	min-height: 3rem;
 }
 
 :host>smoothly-icon {

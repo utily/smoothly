@@ -7,11 +7,12 @@
 	max-width: 100vw;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
-	min-height: 3rem;
+	min-height: var(--input-min-height);
 }
 
 :host>smoothly-input {
 	width: 100%;
+	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
 :host>smoothly-input>div>input {
@@ -73,6 +74,5 @@
 		top: 4em;
 		background-color: rgb(var(--smoothly-input-background));
 		max-width: 22em;
-
 	}
 }

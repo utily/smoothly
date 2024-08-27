@@ -352,7 +352,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						onKeyDown={e => this.onKeyDown(e)}
 						ref={(el: HTMLInputElement) => (this.inputElement = el)}
 						onPaste={e => this.onPaste(e)}></input>
-					<label htmlFor={this.name}>
+					<label class={"label float-on-focus"} htmlFor={this.name}>
 						<slot />
 					</label>
 					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>

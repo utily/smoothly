@@ -115,7 +115,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 
 	render(): VNode | VNode[] {
 		return (
-			<Host class={{ "output-side-right": this.outputSide === "right" }}>
+			<Host
+				class={{
+					"output-side-right": this.outputSide === "right",
+					"show-label": this.outputSide === "left" && !!this.label,
+				}}>
 				<slot name="start" />
 				<div>
 					<label htmlFor={this.name}>{this.label}</label>
@@ -123,13 +127,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						ref={e => (this.input = e)}
 						looks={undefined}
 						color={this.color}
-						showLabel={this.outputSide === "left"}
+						showLabel={this.outputSide === "left" && !!this.label}
 						type={this.type}
 						onSmoothlyInputLoad={e => (e.stopPropagation(), this.inputHandler(e))}
 						onSmoothlyBlur={e => this.inputHandler(e)}
-						onSmoothlyInput={e => {
-							e.stopPropagation()
-						}}
+						onSmoothlyInput={e => e.stopPropagation()}
 						value={this.type == "percent" ? this.value : this.value?.toString()}
 						placeholder={this.outputSide === "right" ? "-" : undefined}
 						readonly={this.readonly}>
