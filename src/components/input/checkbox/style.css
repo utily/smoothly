@@ -7,7 +7,6 @@
 	position: relative;
 	gap: .5rem;
 	padding: 0 var(--input-padding-side);
-	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
 	min-height: 3rem;
