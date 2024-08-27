@@ -1,11 +1,12 @@
-import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
 import { Scrollable } from "../../model/Scrollable"
 
 @Component({
 	tag: "smoothly-load-more",
 	scoped: true,
 })
-export class LoadMore implements ComponentWillLoad {
+export class LoadMore {
+	private observer: IntersectionObserver
 	private scrollableParent?: HTMLElement
 	@Element() element: HTMLSmoothlyLoadMoreElement
 	@Prop() triggerMode: "scroll" | "intersection" = "intersection"
@@ -20,6 +21,8 @@ export class LoadMore implements ComponentWillLoad {
 	}
 
 	connectedCallback() {
+		this.observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
+		this.observer.observe(this.element)
 		if (this.triggerMode == "scroll") {
 			this.inView && this.smoothlyLoadMore.emit(this.name)
 			if (this.multiple || (!this.multiple && !this.inView)) {
@@ -31,11 +34,7 @@ export class LoadMore implements ComponentWillLoad {
 
 	disconnectedCallback() {
 		this.scrollableParent?.removeEventListener("scroll", this.checkInView.bind(this))
-	}
-
-	componentWillLoad(): void {
-		const observer = new IntersectionObserver((entries, observer) => this.observationHandler(observer, entries))
-		observer.observe(this.element)
+		this.observer.disconnect()
 	}
 
 	observationHandler(observer: IntersectionObserver, entries: IntersectionObserverEntry[]): void {
