@@ -81,3 +81,7 @@
 	top: .2rem;
 	transform: scale(0.8);
 }
+
+:host:not([show-label]):not(.show-label) .label {
+	display: none;
+}

@@ -57,11 +57,6 @@
 	left: .5rem;
 }
 
-
-:host:not([show-label]) label {
-	display: none;
-}
-
 :host,
 :host * {
 	cursor: pointer;

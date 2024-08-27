@@ -115,7 +115,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 
 	render(): VNode | VNode[] {
 		return (
-			<Host class={{ "output-side-right": this.outputSide === "right" }}>
+			<Host
+				class={{
+					"output-side-right": this.outputSide === "right",
+					"show-label": this.outputSide === "left" && !!this.label,
+				}}>
 				<slot name="start" />
 				<div>
 					<label htmlFor={this.name}>{this.label}</label>
