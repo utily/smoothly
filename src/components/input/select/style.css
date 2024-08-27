@@ -9,7 +9,7 @@
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
-	padding: 0 0.5em;
+	padding: 0 var(--input-padding-side);
 	min-height: 3rem;
 }
 
@@ -26,7 +26,7 @@
 	box-sizing: border-box;
 	display: flex;
 	cursor: pointer;
-	padding: 1.25rem 0 .25rem 0;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;

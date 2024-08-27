@@ -43,7 +43,7 @@
 
 :host([show-label]) > div.input {
 	display: flex;
-	padding: 1.25rem 0 .25rem 0;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
 	height: 100%;
 	box-sizing: border-box;
 }
@@ -54,7 +54,7 @@
 }
 
 :host>label {
-	left: .5rem;
+	left: var(--input-padding-side);
 }
 
 :host,

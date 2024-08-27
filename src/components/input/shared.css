@@ -1,4 +1,7 @@
 :host {
+	--input-padding-side: .5rem;
+	--input-value-padding-top: 1.25rem;
+	--input-value-padding-bottom: .25rem;
 	box-sizing: border-box;
 	border-radius: var(--smoothly-input-border-radius);
 }
@@ -48,18 +51,6 @@
 }
 
 /* --- label --- */
-
-:host {
-	--input-min-height: 3rem;
-	--input-padding-side: .5rem;
-	--input-value-padding-top: 1.25rem;
-	--input-value-padding-bottom: .25rem;
-	--input-label-top: .6rem;
-	--input-floating-label-top: .2rem;
-	--input-floating-label-scale: .8;
-	--input-transform-origin: top left;
-	--input-transition: transform 100ms ease; 
-}
 
 :host ::slotted([slot=label]),
 :host .label {

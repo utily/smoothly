@@ -4,13 +4,13 @@
 	background-color: rgb(var(--smoothly-input-background));
 	display: flex;
 	align-items: center;
-	padding: 0 .5em;
+	padding: 0 var(--input-padding-side);
 	box-sizing: border-box;
 	min-height: 3rem;
 }
 :host[show-label]>div {
 	position: relative;
-	padding: 1.25rem 0 .25rem 0;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
 }
 :host>div,
 :host>div>div.options {

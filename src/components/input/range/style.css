@@ -36,7 +36,7 @@
 }
 :host.output-side-right>div>smoothly-input {
 	text-align: center;
-	margin-left: .5em;
+	margin-left: var(--input-padding-side);
 	border: none;
 	box-sizing: border-box;
 	width: 5em;
@@ -58,7 +58,7 @@
 	position: static;
 	font-size: inherit;
 	text-align: center;
-	margin: 0 .5em
+	margin: 0 var(--input-padding-side);
 }
 
 /*--------------------Reset browserspecific CSS------------------ */
