@@ -33,7 +33,8 @@
 	text-overflow: ellipsis;
 }
 
-:host:not(:has([slot=label]))>div.select-display  {
+:host:not(:has([slot=label]))>div.select-display,
+:host:not([show-label])>div.select-display  {
 	padding: .6em 0;
 	align-items: center;
 }
@@ -88,7 +89,7 @@ smoothly-icon[name=caret-forward-outline] {
 	left: .5rem;
 }
 
-:host.has-value:has([slot=label])>div.select-display,
+:host.has-value:has([slot=label]:not(:empty))>div.select-display,
 :host:not(.has-value)[placeholder]>div.select-display {
 	overflow: hidden;
 	width: 100%;
@@ -107,6 +108,7 @@ smoothly-icon[name=caret-forward-outline] {
 	left: 0;
 	right: 0;
 	border-radius: 0 0 var(--smoothly-input-border-radius) var(--smoothly-input-border-radius);
+	min-width: fit-content;
 }
 
 :host[looks=border]>div.options {

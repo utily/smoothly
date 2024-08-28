@@ -380,6 +380,7 @@ export namespace Components {
         "readonly": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "showLabel": boolean;
         "value"?: isoly.Date;
     }
     interface SmoothlyInputRadio {
@@ -457,6 +458,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
+        "showLabel": boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
@@ -2631,6 +2633,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks: Looks, color: Color) => void>) => void;
         "previous"?: boolean;
         "readonly"?: boolean;
+        "showLabel"?: boolean;
         "value"?: isoly.Date;
     }
     interface SmoothlyInputRadio {
@@ -2708,6 +2711,7 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "searchDisabled"?: boolean;
+        "showLabel"?: boolean;
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {

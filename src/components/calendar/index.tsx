@@ -71,6 +71,7 @@ export class Calendar {
 				inCalendar
 				next
 				previous
+				showLabel={false}
 				onSmoothlyInput={e => {
 					e.stopPropagation()
 					"month" in e.detail && typeof e.detail.month == "string" && (this.month = e.detail.month)

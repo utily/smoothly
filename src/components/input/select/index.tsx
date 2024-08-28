@@ -39,6 +39,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true }) showLabel = true
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) inCalendar = false
