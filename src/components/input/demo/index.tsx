@@ -98,26 +98,22 @@ export class SmoothlyInputDemo {
 								<smoothly-icon size="small" name="camera-outline" />
 							</smoothly-item>
 						</smoothly-input-select>
+						<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
+							<label slot="label">Month multiple select</label>
+							<smoothly-item value="1">January</smoothly-item>
+							<smoothly-item value="2">February</smoothly-item>
+							<smoothly-item value="3">March</smoothly-item>
+							<smoothly-item value="4">April</smoothly-item>
+							<smoothly-item value="5">May</smoothly-item>
+							<smoothly-item value="6">June</smoothly-item>
+							<smoothly-item value="7">July</smoothly-item>
+							<smoothly-item value="8">August</smoothly-item>
+							<smoothly-item value="9">September</smoothly-item>
+							<smoothly-item value="10">October</smoothly-item>
+							<smoothly-item value="11">November</smoothly-item>
+							<smoothly-item value="12">December</smoothly-item>
+						</smoothly-input-select>
 					</div>
-					<h2>Delayed</h2>
-					<smoothly-input name="Delayed" delay={2}>
-						Delayed
-					</smoothly-input>
-					<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
-						<label slot="label">Month multiple select</label>
-						<smoothly-item value="1">January</smoothly-item>
-						<smoothly-item value="2">February</smoothly-item>
-						<smoothly-item value="3">March</smoothly-item>
-						<smoothly-item value="4">April</smoothly-item>
-						<smoothly-item value="5">May</smoothly-item>
-						<smoothly-item value="6">June</smoothly-item>
-						<smoothly-item value="7">July</smoothly-item>
-						<smoothly-item value="8">August</smoothly-item>
-						<smoothly-item value="9">September</smoothly-item>
-						<smoothly-item value="10">October</smoothly-item>
-						<smoothly-item value="11">November</smoothly-item>
-						<smoothly-item value="12">December</smoothly-item>
-					</smoothly-input-select>
 					<h2>Duration</h2>
 					<smoothly-input
 						name="duration"

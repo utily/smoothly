@@ -233,7 +233,6 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "currency"?: isoly.Currency;
-        "delay": number;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
@@ -2491,7 +2490,6 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "color"?: Color;
         "currency"?: isoly.Currency;
-        "delay"?: number;
         "disabled"?: boolean;
         "invalid"?: boolean;
         "looks"?: Looks;
