@@ -189,7 +189,7 @@ export class SmoothlyDisplayDemo {
 								}}
 								value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
-						<dt>Display JSON (collapsed)</dt>
+						<dt>Display JSON</dt>
 						<dd>
 							<smoothly-display-demo-json />
 						</dd>
