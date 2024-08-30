@@ -122,7 +122,7 @@ export namespace Components {
     interface SmoothlyDialogDemo {
     }
     interface SmoothlyDisplay {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
@@ -137,12 +137,14 @@ export namespace Components {
     }
     interface SmoothlyDisplayDemo {
     }
+    interface SmoothlyDisplayDemoJson {
+    }
     interface SmoothlyDisplayJson {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "value": any;
     }
     interface SmoothlyDisplayJsonObject {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "value": Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
@@ -1060,6 +1062,12 @@ declare global {
     var HTMLSmoothlyDisplayDemoElement: {
         prototype: HTMLSmoothlyDisplayDemoElement;
         new (): HTMLSmoothlyDisplayDemoElement;
+    };
+    interface HTMLSmoothlyDisplayDemoJsonElement extends Components.SmoothlyDisplayDemoJson, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayDemoJsonElement: {
+        prototype: HTMLSmoothlyDisplayDemoJsonElement;
+        new (): HTMLSmoothlyDisplayDemoJsonElement;
     };
     interface HTMLSmoothlyDisplayJsonElement extends Components.SmoothlyDisplayJson, HTMLStencilElement {
     }
@@ -2176,6 +2184,7 @@ declare global {
         "smoothly-display": HTMLSmoothlyDisplayElement;
         "smoothly-display-amount": HTMLSmoothlyDisplayAmountElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
+        "smoothly-display-demo-json": HTMLSmoothlyDisplayDemoJsonElement;
         "smoothly-display-json": HTMLSmoothlyDisplayJsonElement;
         "smoothly-display-json-object": HTMLSmoothlyDisplayJsonObjectElement;
         "smoothly-display-json-primitive": HTMLSmoothlyDisplayJsonPrimitiveElement;
@@ -2371,7 +2380,7 @@ declare namespace LocalJSX {
     interface SmoothlyDialogDemo {
     }
     interface SmoothlyDisplay {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
@@ -2387,12 +2396,14 @@ declare namespace LocalJSX {
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
+    interface SmoothlyDisplayDemoJson {
+    }
     interface SmoothlyDisplayJson {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "value"?: any;
     }
     interface SmoothlyDisplayJsonObject {
-        "collapsed"?: boolean;
+        "collapseDepth"?: number;
         "value"?: Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
@@ -2998,6 +3009,7 @@ declare namespace LocalJSX {
         "smoothly-display": SmoothlyDisplay;
         "smoothly-display-amount": SmoothlyDisplayAmount;
         "smoothly-display-demo": SmoothlyDisplayDemo;
+        "smoothly-display-demo-json": SmoothlyDisplayDemoJson;
         "smoothly-display-json": SmoothlyDisplayJson;
         "smoothly-display-json-object": SmoothlyDisplayJsonObject;
         "smoothly-display-json-primitive": SmoothlyDisplayJsonPrimitive;
@@ -3118,6 +3130,7 @@ declare module "@stencil/core" {
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
             "smoothly-display-amount": LocalJSX.SmoothlyDisplayAmount & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayAmountElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-display-demo-json": LocalJSX.SmoothlyDisplayDemoJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoJsonElement>;
             "smoothly-display-json": LocalJSX.SmoothlyDisplayJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
             "smoothly-display-json-object": LocalJSX.SmoothlyDisplayJsonObject & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
             "smoothly-display-json-primitive": LocalJSX.SmoothlyDisplayJsonPrimitive & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
