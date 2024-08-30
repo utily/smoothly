@@ -16,7 +16,7 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 	private length: number
 
 	componentWillLoad() {
-		this.open = typeof this.collapseDepth == "undefined" ? true : this.collapseDepth > 0
+		this.open = typeof this.collapseDepth == "number" ? this.collapseDepth > 0 : true
 		if (Array.isArray(this.value)) {
 			this.openBracket = "["
 			this.closeBracket = "]"
@@ -30,7 +30,7 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 	}
 
 	render(): VNode {
-		const nextCollapseDepth = typeof this.collapseDepth == "undefined" ? undefined : Math.max(this.collapseDepth - 1, 0)
+		const nextCollapseDepth = typeof this.collapseDepth == "number" ? Math.max(this.collapseDepth - 1, 0) : undefined
 		return (
 			<Host class={{ empty: this.empty, open: this.open }}>
 				<span class="open-bracket" onClick={() => (this.open = !this.open)}>
