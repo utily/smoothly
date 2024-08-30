@@ -189,7 +189,7 @@ export class SmoothlyDisplayDemo {
 								}}
 								value="2022-07-07T12:15Z"></smoothly-display>
 						</dd>
-						<dt>Display JSON</dt>
+						<dt>Display JSON (collapsed)</dt>
 						<dd>
 							<smoothly-display
 								type="json"
@@ -207,7 +207,9 @@ export class SmoothlyDisplayDemo {
 										longString:
 											"pepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakor",
 									},
-								}}></smoothly-display>
+								}}
+								collapsed
+							/>
 						</dd>
 						<dt>Display amount</dt>
 						<dd>

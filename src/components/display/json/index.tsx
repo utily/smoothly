@@ -8,8 +8,9 @@ import { JsonValue } from "./JsonValue"
 })
 export class SmoothlyDisplayJson {
 	@Prop() value: any
+	@Prop() collapsed?: boolean
 
 	render(): VNode {
-		return <JsonValue value={this.value}></JsonValue>
+		return <JsonValue value={this.value} collapsed={this.collapsed}></JsonValue>
 	}
 }

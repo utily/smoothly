@@ -8,13 +8,15 @@ import { JsonValue } from "../JsonValue"
 })
 export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 	@Prop() value: Record<string, any> | any[]
-	@Prop({ reflect: true, mutable: true }) open = true
+	@Prop() collapsed?: boolean
+	@State() open: boolean
 	@State() empty: boolean
 	private openBracket: string = ""
 	private closeBracket: string = ""
 	private length: number
 
 	componentWillLoad() {
+		this.open = !this.collapsed
 		if (Array.isArray(this.value)) {
 			this.openBracket = "["
 			this.closeBracket = "]"
@@ -29,7 +31,7 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 
 	render(): VNode {
 		return (
-			<Host class={{ empty: this.empty }}>
+			<Host class={{ empty: this.empty, open: this.open }}>
 				<span class="open-bracket" onClick={() => (this.open = !this.open)}>
 					{this.openBracket}
 				</span>
@@ -37,14 +39,14 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 					{Array.isArray(this.value)
 						? this.value.map((v, index) => (
 								<div class="indent">
-									<JsonValue value={v}></JsonValue>
+									<JsonValue value={v} collapsed={this.collapsed}></JsonValue>
 									{index < this.length - 1 ? "," : ""}
 								</div>
 						  ))
 						: Object.entries(this.value).map(([k, v], index) => (
 								<div class="indent">
 									{<smoothly-display-json-record-key value={k}></smoothly-display-json-record-key>}:{" "}
-									{<JsonValue value={v}></JsonValue>}
+									{<JsonValue value={v} collapsed={this.collapsed}></JsonValue>}
 									{index < this.length - 1 ? "," : ""}
 								</div>
 						  ))}

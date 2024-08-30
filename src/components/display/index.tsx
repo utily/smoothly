@@ -11,6 +11,7 @@ export class SmoothlyDisplay {
 	@Prop() type: Type | "json"
 	@Prop() label?: string
 	@Prop() value?: any
+	@Prop() collapsed?: boolean
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
 	@Prop() format?: DateTime.Format
@@ -19,7 +20,7 @@ export class SmoothlyDisplay {
 		const type = this.type
 		switch (type) {
 			case "json":
-				result = <smoothly-display-json value={this.value}></smoothly-display-json>
+				result = <smoothly-display-json value={this.value} collapsed={this.collapsed}></smoothly-display-json>
 				break
 			default:
 				result = format(this.value, type)

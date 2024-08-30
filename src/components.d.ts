@@ -122,6 +122,7 @@ export namespace Components {
     interface SmoothlyDialogDemo {
     }
     interface SmoothlyDisplay {
+        "collapsed"?: boolean;
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
@@ -137,10 +138,11 @@ export namespace Components {
     interface SmoothlyDisplayDemo {
     }
     interface SmoothlyDisplayJson {
+        "collapsed"?: boolean;
         "value": any;
     }
     interface SmoothlyDisplayJsonObject {
-        "open": boolean;
+        "collapsed"?: boolean;
         "value": Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
@@ -2369,6 +2371,7 @@ declare namespace LocalJSX {
     interface SmoothlyDialogDemo {
     }
     interface SmoothlyDisplay {
+        "collapsed"?: boolean;
         "country"?: CountryCode.Alpha2;
         "currency"?: Currency;
         "format"?: DateTime.Format;
@@ -2385,10 +2388,11 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyDisplayJson {
+        "collapsed"?: boolean;
         "value"?: any;
     }
     interface SmoothlyDisplayJsonObject {
-        "open"?: boolean;
+        "collapsed"?: boolean;
         "value"?: Record<string, any> | any[];
     }
     interface SmoothlyDisplayJsonPrimitive {
