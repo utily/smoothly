@@ -10,7 +10,7 @@
 	padding-left: 1rem;
 	border-left: 1px solid rgb(var(--smoothly-light-shade));
 }
-:host(:not([open])) .content {
+:host(:not(.open)) .content {
 	display: none;
 }
 .open-bracket::after {
@@ -22,9 +22,9 @@
 	font-size: 0.8em;
 }
 
-:host(:not([open]):not(.empty))>.open-bracket::after {
+:host(:not(.open):not(.empty))>.open-bracket::after {
 	content: " ▶-◀ ";
 }
-:host([open]:not(.empty))>.open-bracket::after {
+:host(.open:not(.empty))>.open-bracket::after {
 	content: " ▼ ";
 }

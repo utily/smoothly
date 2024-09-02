@@ -191,23 +191,7 @@ export class SmoothlyDisplayDemo {
 						</dd>
 						<dt>Display JSON</dt>
 						<dd>
-							<smoothly-display
-								type="json"
-								value={{
-									name: "stringy",
-									nested: {
-										age: 109,
-										array: ["one", "two", "three", { name: "four" }],
-										emptyObject: {},
-										emptyArray: [],
-										truthy: true,
-										falsy: false,
-										null: null,
-										notDefined: undefined,
-										longString:
-											"pepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakorpepparkakor",
-									},
-								}}></smoothly-display>
+							<smoothly-display-demo-json />
 						</dd>
 						<dt>Display amount</dt>
 						<dd>
