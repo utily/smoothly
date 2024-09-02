@@ -33,7 +33,7 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 		const nextCollapseDepth = typeof this.collapseDepth == "number" ? Math.max(this.collapseDepth - 1, 0) : undefined
 		return (
 			<Host class={{ empty: this.empty, open: this.open }}>
-				<span class="open-bracket" onClick={() => (this.open = !this.open)}>
+				<span class="open-bracket" onClick={() => (this.open = !this.open)} data-length={this.length}>
 					{this.openBracket}
 				</span>
 				<span class="content">

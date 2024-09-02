@@ -23,7 +23,7 @@
 }
 
 :host(:not(.open):not(.empty))>.open-bracket::after {
-	content: " ▶-◀ ";
+	content: " ▶ " attr(data-length) " ◀ ";
 }
 :host(.open:not(.empty))>.open-bracket::after {
 	content: " ▼ ";
