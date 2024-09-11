@@ -44,3 +44,7 @@
 	width: 4em;
 	height: 4em;
 }
+:host::slotted(svg) {
+	/* this is needed for svg to work on safari */
+	width: 100%;
+}
