@@ -124,15 +124,6 @@ export class Action {
 		return result
 	}
 
-	getSelection(event: InputEvent): tidily.Selection {
-		const input = event.target as HTMLInputElement
-		return {
-			start: input.selectionStart ?? 0,
-			end: input.selectionEnd ?? 0,
-			direction: input.selectionDirection ?? undefined,
-		}
-	}
-
 	private select(state: tidily.State, from: number, to: number, direction?: tidily.Direction): void {
 		state.selection.start = from
 		state.selection.end = to
