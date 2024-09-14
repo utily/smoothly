@@ -12,6 +12,7 @@ import { getLocale } from "./getLocale"
 export class SmoothlyInputNext implements ComponentWillLoad {
 	@Prop({ reflect: true }) type: tidily.Type = "text"
 	@Prop() currency?: isoly.Currency
+	@Prop({ mutable: true }) value: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	private action: Action
 

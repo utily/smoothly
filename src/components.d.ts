@@ -389,6 +389,7 @@ export namespace Components {
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
         "type": tidily.Type;
+        "value": any;
     }
     interface SmoothlyInputRadio {
         "changed": boolean;
@@ -2663,6 +2664,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
         "type"?: tidily.Type;
+        "value"?: any;
     }
     interface SmoothlyInputRadio {
         "changed"?: boolean;
