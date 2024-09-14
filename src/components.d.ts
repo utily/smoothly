@@ -419,6 +419,7 @@ export namespace Components {
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
         "type": tidily.Type;
+        "value": any;
     }
     interface SmoothlyInputPriceDemo {
     }
@@ -2808,6 +2809,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
         "type"?: tidily.Type;
+        "value"?: any;
     }
     interface SmoothlyInputPriceDemo {
     }
