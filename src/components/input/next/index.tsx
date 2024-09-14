@@ -17,7 +17,6 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 
 	@Watch("type")
 	typeChange(): void {
-		// TODO remove previous action listeners if exists. - this.action?.detach(this.inputElement)
 		switch (this.type) {
 			case "price":
 				this.action = Action.create("price", this.currency)
