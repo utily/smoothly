@@ -44,20 +44,9 @@ export class Action {
 	}
 	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: EventHandler | undefined }> = {
 		beforeinput: {
-			insertText: (event, state) => {
-				event.preventDefault()
-				if (typeof event.data == "string")
-					for (const c of event.data)
-						this.formatter.allowed(c, state) && this.replace(state, c)
-				return state
-			},
-			insertFromPaste: (event, state) => {
-				event.preventDefault()
-				if (typeof event.data == "string")
-					for (const c of event.data)
-						this.formatter.allowed(c, state) && this.replace(state, c)
-				return state
-			},
+			insertText: (event, state) => this.insert(event, state),
+			insertFromPaste: (event, state) => this.insert(event, state),
+			insertFromDrop: (event, state) => this.insert(event, state),
 			deleteContentBackward: (event, state) => {
 				event.preventDefault()
 				if (state.selection.start == state.selection.end)
@@ -92,7 +81,6 @@ export class Action {
 				this.erase(state)
 				return state
 			},
-			// insertFromDrop - TODO
 			// historyUndo - TODO
 			// historyRedo - TODO
 			// insertLineBreak - TODO
@@ -107,6 +95,13 @@ export class Action {
 		},
 	}
 
+	private insert(event: InputEvent, unformatted: tidily.State) {
+		event.preventDefault()
+		if (typeof event.data == "string")
+			for (const c of event.data)
+				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c)
+		return unformatted
+	}
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
 		const cursorPosition = tidily.Selection.getCursor(formattedState.selection)
 		const adjacentIndex = getAdjacentWordBreakIndex(formattedState.value, cursorPosition, direction)
