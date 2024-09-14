@@ -28,7 +28,7 @@ export class Action {
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
-		const unformatted = this.unformattedState(state)
+		const unformatted = this.unformatState(state)
 		const result =
 			event.type == "beforeinput" || event.type == "input"
 				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
@@ -110,7 +110,7 @@ export class Action {
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
 		const cursorPosition = tidily.Selection.getCursor(formattedState.selection)
 		const adjacentIndex = getAdjacentWordBreakIndex(formattedState.value, cursorPosition, direction)
-		const result = this.unformattedState({
+		const result = this.unformatState({
 			...formattedState,
 			selection: {
 				start: Math.min(cursorPosition, adjacentIndex),
@@ -148,7 +148,7 @@ export class Action {
 		state.selection.end = state.selection.start
 	}
 
-	public unformattedState(formattedState: tidily.State) {
+	public unformatState(formattedState: tidily.State) {
 		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
 	}
 	public formatState(unformattedState: tidily.State) {
