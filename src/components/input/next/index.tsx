@@ -1,4 +1,4 @@
-import { Component, ComponentWillLoad, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Component, ComponentWillLoad, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Action } from "./Action"
@@ -10,7 +10,6 @@ import { getLocale } from "./getLocale"
 	scoped: true,
 })
 export class SmoothlyInputNext implements ComponentWillLoad {
-	private inputElement: HTMLInputElement
 	@Prop({ reflect: true }) type: tidily.Type = "text"
 	@Prop() currency?: isoly.Currency
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
@@ -35,25 +34,18 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 			selection: { start: 0, end: 0, direction: "none" },
 		})
 	}
-	componentDidLoad() {
-		// TODO remove any previous listeners - this.action.attach(this.inputElement)
-		this.inputElement.addEventListener("beforeinput", (event: InputEvent) => {
-			this.state = this.action.onEvent(event, this.state)
+	@Listen("input")
+	@Listen("beforeinput")
+	onEvent(event: InputEvent) {
+		this.state = this.action.onEvent(event, this.state)
+		if (event.type == "beforeinput")
 			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, this.state)
-		})
-		this.inputElement.addEventListener("input", (event: InputEvent) => {
-			this.state = this.action.onEvent(event, this.state)
-		})
 	}
 
 	render() {
 		return (
 			<Host>
-				<input
-					ref={(e: HTMLInputElement) => (this.inputElement = e)}
-					type={this.state.type}
-					inputMode={this.state.inputmode}
-					placeholder={this.type}></input>
+				<input type={this.state.type} inputMode={this.state.inputmode} placeholder={this.type}></input>
 				<pre style={{ margin: "0" }}>{this.state.value}</pre>
 			</Host>
 		)
