@@ -24,13 +24,16 @@ export class Action {
 	}
 
 	public onEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const input = event.target as HTMLInputElement
+		state.selection.start = input.selectionStart ?? state.selection.start
+		state.selection.end = input.selectionEnd ?? state.selection.end
+		state.selection.direction = input.selectionDirection ?? state.selection.direction
 		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
 		const result =
 			event.type == "beforeinput" || event.type == "input"
 				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
 				: state
 		const formatted = this.formatState(result)
-		const input = event.target as HTMLInputElement
 		if (event.defaultPrevented) {
 			input.value = formatted.value
 			input.selectionStart = formatted.selection.start
@@ -74,7 +77,7 @@ export class Action {
 				event.preventDefault()
 				return this.deleteWord(formattedState, "backward")
 			},
-			deleteWordForward: (event, _, formattedState) => {
+			deleteWordForward: (event, unformatted, formattedState) => {
 				// TODO - exception for password
 				event.preventDefault()
 				return this.deleteWord(formattedState, "forward")
@@ -105,9 +108,19 @@ export class Action {
 				direction: "none",
 			},
 		})
-		result.value = result.value.substring(0, result.selection.start) + result.value.substring(result.selection.end)
+		const value = result.value.substring(0, result.selection.start) + result.value.substring(result.selection.end)
+		result.value = value
 		result.selection.end = result.selection.start
 		return result
+	}
+
+	getSelection(event: InputEvent): tidily.Selection {
+		const input = event.target as HTMLInputElement
+		return {
+			start: input.selectionStart ?? 0,
+			end: input.selectionEnd ?? 0,
+			direction: input.selectionDirection ?? undefined,
+		}
 	}
 
 	public updateSelectionFromElement(input: HTMLInputElement, state: tidily.State) {
