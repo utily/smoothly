@@ -6,7 +6,7 @@ type Formatter = tidily.Formatter & tidily.Converter<any>
 type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
 export class Action {
-	constructor(private formatter: Formatter) {}
+	constructor(private formatter: Formatter, private type: tidily.Type) {}
 	static create(type: "price", currency?: isoly.Currency): Action
 	static create(type: tidily.Type, locale?: isoly.Locale): Action
 	static create(type: tidily.Type, extra?: any): Action {
@@ -20,7 +20,7 @@ export class Action {
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		return new Action(result || tidily.get("text")!)
+		return new Action(result || tidily.get("text")!, type)
 	}
 
 	public onEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
@@ -72,15 +72,21 @@ export class Action {
 				this.erase(state)
 				return state
 			},
-			deleteWordBackward: (event, _, formattedState) => {
-				// TODO - exception for password
-				event.preventDefault()
-				return this.deleteWord(formattedState, "backward")
+			deleteWordBackward: (event, unformatted, formattedState) => {
+				let result = unformatted
+				if (this.type != "password") {
+					event.preventDefault()
+					result = this.deleteWord(formattedState, "backward")
+				}
+				return result
 			},
 			deleteWordForward: (event, unformatted, formattedState) => {
-				// TODO - exception for password
-				event.preventDefault()
-				return this.deleteWord(formattedState, "forward")
+				let result = unformatted
+				if (this.type != "password") {
+					event.preventDefault()
+					result = this.deleteWord(formattedState, "forward")
+				}
+				return result
 			},
 			deleteByCut: (_, state) => {
 				this.erase(state)
@@ -94,6 +100,10 @@ export class Action {
 		input: {
 			insertReplacementText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
 			insertCompositionText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
+			deleteWordBackward: (event, state) =>
+				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
+			deleteWordForward: (event, state) =>
+				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
 		},
 	}
 
