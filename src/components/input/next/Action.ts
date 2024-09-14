@@ -28,7 +28,7 @@ export class Action {
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
-		const unformatted = this.unformattedState(this.updateSelectionFromElement(event.target as HTMLInputElement, state))
+		const unformatted = this.unformattedState(state)
 		const result =
 			event.type == "beforeinput" || event.type == "input"
 				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
@@ -121,17 +121,6 @@ export class Action {
 			end: input.selectionEnd ?? 0,
 			direction: input.selectionDirection ?? undefined,
 		}
-	}
-
-	public updateSelectionFromElement(input: HTMLInputElement, state: tidily.State) {
-		return this.createState({
-			value: state.value,
-			selection: {
-				start: input.selectionStart ?? 0,
-				end: input.selectionEnd ?? 0,
-				direction: input.selectionDirection ?? undefined,
-			},
-		})
 	}
 
 	private select(state: tidily.State, from: number, to: number, direction?: tidily.Direction): void {
