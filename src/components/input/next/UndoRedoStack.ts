@@ -19,6 +19,11 @@ export class UndoRedoStack {
 	redo() {
 		this.index = Math.max(this.index + 1, this.states.length - 1)
 	}
+
+	get stack() {
+		return this.states.map((s, i) => (i == this.index ? `<strong>${s.value}</strong>` : `${s.value}`))
+	}
+
 	private clearTop() {
 		this.states = this.states.splice(0, this.index + 1)
 	}

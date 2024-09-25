@@ -1,11 +1,13 @@
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { getAdjacentWordBreakIndex } from "./adjacentWordBreak"
+import { UndoRedoStack } from "./UndoRedoStack"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
 export class Action {
+	public undoStack: UndoRedoStack = new UndoRedoStack()
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
 	static create(type: "price", currency?: isoly.Currency): Action
 	static create(type: tidily.Type, locale?: isoly.Locale): Action
@@ -33,6 +35,13 @@ export class Action {
 			event.type == "beforeinput" || event.type == "input"
 				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
 				: state
+
+		if (
+			((event.type == "beforeinput" && event.defaultPrevented) || event.type == "input") &&
+			event.inputType != "undoHistory" &&
+			event.inputType != "redoHistory"
+		)
+			this.undoStack.pushState(unformatted)
 		const formatted = this.formatState(result)
 		if (event.defaultPrevented) {
 			input.value = formatted.value
@@ -81,8 +90,16 @@ export class Action {
 				this.erase(state)
 				return state
 			},
-			// historyUndo - TODO
-			// historyRedo - TODO
+			historyUndo: event => {
+				this.undoStack.undo()
+				event.preventDefault()
+				return this.undoStack.state
+			},
+			historyRedo: event => {
+				this.undoStack.redo()
+				event.preventDefault()
+				return this.undoStack.state
+			},
 			// insertLineBreak - TODO
 		},
 		input: {

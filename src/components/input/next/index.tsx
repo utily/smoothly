@@ -47,6 +47,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 			<Host>
 				<input type={this.state.type} inputMode={this.state.inputmode} placeholder={this.type}></input>
 				<pre style={{ margin: "0" }}>{this.state.value}</pre>
+				<pre style={{ margin: "0" }}>{this.action.undoStack.stack.join(", ")}</pre>
 			</Host>
 		)
 	}
