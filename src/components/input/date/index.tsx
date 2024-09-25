@@ -106,6 +106,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 			<Host>
 				<smoothly-input
 					color={this.color}
+					looks={this.looks == "transparent" ? this.looks : undefined}
 					name={this.name}
 					onFocus={() => !this.readonly && (this.open = !this.open)}
 					onClick={() => !this.readonly && (this.open = !this.open)}
@@ -119,16 +120,16 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						e.stopPropagation()
 						this.value = e.detail[this.name]
 					}}>
-					<slot></slot>
+					<slot />
 				</smoothly-input>
 				<span class="icons">
-					<slot name={"end"}></slot>
+					<slot name={"end"} />
 				</span>
 				{this.open &&
 					!this.readonly && [
-						<div onClick={() => (this.open = false)}></div>,
+						<div onClick={() => (this.open = false)} />,
 						<nav>
-							<div class="arrow"></div>
+							<div class="arrow" />
 							<smoothly-calendar
 								doubleInput={false}
 								value={this.value ?? Date.now()}
