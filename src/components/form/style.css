@@ -32,6 +32,10 @@ smoothly-form[looks="border"] > form > fieldset,
 smoothly-form[looks="transparent"] > form > fieldset {
 	gap: 2em
 }
+smoothly-form[looks="grid"] > form > fieldset {
+	padding: 1px;
+	gap: 1px;
+}
 
 smoothly-form > form > div:not(:empty) {
 	display: flex;
