@@ -40,15 +40,17 @@
 	border: none;
 }
 
+:host[looks="transparent"][readonly],
 :host[looks="transparent"]:not(:focus-within) {
 	background-color: transparent;
 }
 
+:host[looks="transparent"][readonly]>input,
 :host[looks="transparent"]:not(:focus-within)>input {
 	background: transparent;
 }
 
-:host[looks="transparent"]:focus-within {
+:host[looks="transparent"]:not([readonly]):focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
 }
 
