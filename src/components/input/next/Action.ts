@@ -23,6 +23,13 @@ export class Action {
 		return new Action(result || tidily.get("text")!, type)
 	}
 
+	public onBlur(event: FocusEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const result = this.createState(state)
+		const input = event.target as HTMLInputElement
+		input.value = result.value
+		return result
+	}
+
 	public onEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const input = event.target as HTMLInputElement
 		state.selection.start = input.selectionStart ?? state.selection.start
@@ -33,7 +40,7 @@ export class Action {
 			event.type == "beforeinput" || event.type == "input"
 				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
 				: state
-		const formatted = this.formatState(result)
+		const formatted = this.partialFormatState(result)
 		if (event.defaultPrevented) {
 			input.value = formatted.value
 			input.selectionStart = formatted.selection.start
@@ -136,6 +143,9 @@ export class Action {
 
 	public unformatState(formattedState: tidily.State) {
 		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
+	}
+	public partialFormatState(unformattedState: tidily.State) {
+		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
 	}
 	public formatState(unformattedState: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(unformattedState))
