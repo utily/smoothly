@@ -12,7 +12,12 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
-				<smoothly-input-next></smoothly-input-next>
+				{/* <input></input> */}
+				<smoothly-input-next type="price" currency="EUR"></smoothly-input-next>
+				<smoothly-input type="price" currency="EUR">
+					price
+				</smoothly-input>
+				{/* <smoothly-input-next></smoothly-input-next>
 				<smoothly-input>text</smoothly-input>
 				<smoothly-input-next type="password"></smoothly-input-next>
 				<smoothly-input type="password">password</smoothly-input>
@@ -27,7 +32,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input-next type="phone"></smoothly-input-next>
 				<smoothly-input type="phone">phone</smoothly-input>
 				<smoothly-input-next type="integer"></smoothly-input-next>
-				<smoothly-input type="integer">integer</smoothly-input>
+				<smoothly-input type="integer">integer</smoothly-input> */}
 			</Host>
 		)
 	}

@@ -45,7 +45,12 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	render() {
 		return (
 			<Host>
-				<input type={this.state.type} inputMode={this.state.inputmode} placeholder={this.type}></input>
+				<input
+					type={this.state.type}
+					inputMode={this.state.inputmode}
+					placeholder={this.type}
+					onBlur={event => (this.state = this.action.onBlur(event, this.state))}
+				/>
 				<pre style={{ margin: "0" }}>{this.state.value}</pre>
 			</Host>
 		)
