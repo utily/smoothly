@@ -37,7 +37,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 	@Listen("input")
 	@Listen("beforeinput")
 	onEvent(event: InputEvent) {
-		this.state = this.action.onEvent(event, this.state)
+		this.state = this.action.onInputEvent(event, this.state)
 		if (event.type == "beforeinput")
 			console.log(event.inputType, (event.target as HTMLInputElement).value, event, event.data, this.state)
 	}
@@ -49,9 +49,13 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
+					onFocus={event => (this.state = this.action.onFocus(event, this.state))}
 					onBlur={event => (this.state = this.action.onBlur(event, this.state))}
 				/>
-				<pre style={{ margin: "0" }}>{this.state.value}</pre>
+				<pre style={{ margin: "0" }}>
+					{this.state.value}
+					<span class="remainder">{this.action.formattedRemainder(this.state)}</span>
+				</pre>
 			</Host>
 		)
 	}

@@ -6,3 +6,10 @@
 :host > input {
 	width: 100%;
 }
+
+:host .remainder {
+	opacity: 0.6;
+}
+:host:not(:focus-within) .remainder {
+	display: none;
+}
