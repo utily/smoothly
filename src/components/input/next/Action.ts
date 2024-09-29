@@ -160,7 +160,4 @@ export class Action {
 	public createState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
-	public formattedRemainder(state: tidily.State) {
-		return this.formatter.formattedRemainder(tidily.StateEditor.copy(state))
-	}
 }
