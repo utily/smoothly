@@ -54,7 +54,7 @@ export class SmoothlyInputNext implements ComponentWillLoad {
 				/>
 				<pre style={{ margin: "0" }}>
 					{this.state.value}
-					<span class="remainder">{this.action.formattedRemainder(this.state)}</span>
+					<span class="remainder">{this.state.remainder}</span>
 				</pre>
 			</Host>
 		)
