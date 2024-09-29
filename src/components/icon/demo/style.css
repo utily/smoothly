@@ -25,8 +25,8 @@
 	position: absolute;
 	white-space: nowrap;
 	bottom: 100%;
-	background: black;
-	color: white;
+	background: rgb(var(--smoothly-default-contrast));
+	color: rgb(var(--smoothly-default-color));
 	padding: 0.25rem 1rem;
 	z-index: 1;
 	pointer-events: none;
