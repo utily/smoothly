@@ -58,24 +58,26 @@ export class SmoothlyIconDemo {
 				</smoothly-form>
 				<h1>Icons</h1>
 				<div class="icons">
-					{Icon.Name.values
-						.filter(name => !this.display.filter || name.includes(this.display.filter))
-						.map((name): Icon => (this.display.variant ? `${name}-${this.display.variant}` : name))
-						.map(name => (
-							<smoothly-icon
-								name={name}
-								toolTip={name}
-								data-name={name}
-								color={this.props.color}
-								flip={this.props.flip}
-								size={this.props.size}
-								rotate={this.props.rotate}
-								onClick={() => {
-									navigator.clipboard.writeText(name)
-									this.notice.emit(Notice.succeeded(`Copied "${name}"`))
-								}}
-							/>
-						))}
+					{[
+						...Icon.Name.values
+							.filter(name => !this.display.filter || name.includes(this.display.filter))
+							.map((name): Icon => (this.display.variant ? `${name}-${this.display.variant}` : name)),
+						...Icon.Logo.values.filter(name => !this.display.filter || name.includes(this.display.filter)),
+					].map(name => (
+						<smoothly-icon
+							name={name}
+							toolTip={name}
+							data-name={name}
+							color={this.props.color}
+							flip={this.props.flip}
+							size={this.props.size}
+							rotate={this.props.rotate}
+							onClick={() => {
+								navigator.clipboard.writeText(name)
+								this.notice.emit(Notice.succeeded(`Copied "${name}"`))
+							}}
+						/>
+					))}
 				</div>
 			</Host>
 		)
