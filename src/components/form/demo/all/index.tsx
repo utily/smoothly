@@ -13,7 +13,10 @@ export class SmoothlyFormDemoAll {
 					looks="grid"
 					type="create"
 					readonly
-					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4">
+					action="https://api.toiletapi.com/upload/6b12fd2f-e896-46f9-b38f-25cf42cee4b4"
+					onSmoothlyFormSubmit={e => {
+						Object.entries(e.detail.value).forEach(([key, value]) => console.log(key, value))
+					}}>
 					<smoothly-input readonly name="First Name" value="John">
 						First name
 					</smoothly-input>
@@ -72,16 +75,14 @@ export class SmoothlyFormDemoAll {
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />
 					</smoothly-input-file>
+					<smoothly-input type="duration" name="duration" value={{}}>
+						Duration
+					</smoothly-input>
 					<smoothly-input-clear fill="default" type="form" color="warning" slot="clear" size="icon" shape="rounded" />
 					<smoothly-input-edit fill="default" type="form" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
-					<smoothly-input-submit
-						fill="default"
-						color="success"
-						slot="submit"
-						size="icon"
-						shape="rounded"></smoothly-input-submit>
+					<smoothly-input-submit fill="default" color="success" slot="submit" size="icon" shape="rounded" />
 				</smoothly-form>
 			</Host>
 		)

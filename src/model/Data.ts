@@ -34,6 +34,11 @@ export namespace Data {
 	export function deepen(data: Record<string, Value>): Data {
 		return merge({}, data)
 	}
+	// function isArrayRecord(d: any): d is Record<`${number}`, any> {
+	// 	return (
+	// 		isly.object().is(d) && (keys => !!keys.length && keys.every(k => parseInt(k).toString() == k))(Object.keys(d))
+	// 	)
+	// }
 	function isArrayRecord(d: any): d is Record<`${number}`, any> {
 		return isly.object().is(d) && Object.keys(d).every(k => parseInt(k).toString() == k)
 	}
