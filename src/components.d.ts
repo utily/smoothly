@@ -751,6 +751,10 @@ export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFrameElement;
 }
+export interface SmoothlyIconDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyIconDemoElement;
+}
 export interface SmoothlyInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputElement;
@@ -1277,7 +1281,18 @@ declare global {
         prototype: HTMLSmoothlyIconElement;
         new (): HTMLSmoothlyIconElement;
     };
+    interface HTMLSmoothlyIconDemoElementEventMap {
+        "notice": Notice;
+    }
     interface HTMLSmoothlyIconDemoElement extends Components.SmoothlyIconDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyIconDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyIconDemoElement, ev: SmoothlyIconDemoCustomEvent<HTMLSmoothlyIconDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyIconDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyIconDemoElement, ev: SmoothlyIconDemoCustomEvent<HTMLSmoothlyIconDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyIconDemoElement: {
         prototype: HTMLSmoothlyIconDemoElement;
@@ -2499,6 +2514,7 @@ declare namespace LocalJSX {
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
+        "onNotice"?: (event: SmoothlyIconDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyInput {
         "autocomplete"?: boolean;
