@@ -29,7 +29,7 @@ describe("Data", () => {
 		expect(output).toEqual(["zero", "one", undefined, "three"])
 	})
 	it("Data.set multiple", () => {
-		const input = {
+		const input: any = {
 			"name.last": "Smith",
 			"name.first": "John",
 			"address.city": "Uppsala",
@@ -42,9 +42,10 @@ describe("Data", () => {
 			"pets.0.type": "dog",
 			"pets.2.type": "turtle",
 			"pets.2.name": "Speedster",
+			"work.duration": {},
 		}
 		const output = Data.deepen(input)
-		expect({
+		expect(output).toEqual({
 			address: {
 				city: "Uppsala",
 				zip: "75320",
@@ -59,6 +60,7 @@ describe("Data", () => {
 				1: { name: "Mr Meow", type: "cat" },
 				2: { name: "Speedster", type: "turtle" },
 			},
+			work: { duration: {} },
 		})
 		const outputWithArrays = Data.convertArrays(output)
 		expect(outputWithArrays).toEqual({
@@ -76,6 +78,7 @@ describe("Data", () => {
 				{ name: "Mr Meow", type: "cat" },
 				{ name: "Speedster", type: "turtle" },
 			],
+			work: { duration: {} },
 		})
 	})
 })

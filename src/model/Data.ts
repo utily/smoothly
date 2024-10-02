@@ -35,7 +35,9 @@ export namespace Data {
 		return merge({}, data)
 	}
 	function isArrayRecord(d: any): d is Record<`${number}`, any> {
-		return isly.object().is(d) && Object.keys(d).every(k => parseInt(k).toString() == k)
+		return (
+			isly.object().is(d) && (keys => !!keys.length && keys.every(k => parseInt(k).toString() == k))(Object.keys(d))
+		)
 	}
 	export function convertArrays(data: any): Data {
 		return isArrayRecord(data)
