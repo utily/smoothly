@@ -1,5 +1,7 @@
 :host {
 	display: block;
+	width: clamp(200px, 100%, 1200px);
+	margin: auto;
 }
 :host([hidden]) {
 	display: none;
@@ -8,6 +10,24 @@
 	display: flex;
 	flex-flow: row wrap;
 }
-:host > div > * {
-	margin: 0.5cm;
+
+:host > div > smoothly-icon {
+	padding: 1rem;
+	position: relative;
+}
+
+:host > div > smoothly-icon:hover {
+	scale: 1.5;
+}
+
+:host > div > smoothly-icon:hover::after {
+	content: attr(data-name);
+	position: absolute;
+	white-space: nowrap;
+	bottom: 100%;
+	background: rgb(var(--smoothly-default-contrast));
+	color: rgb(var(--smoothly-default-color));
+	padding: 0.25rem 1rem;
+	z-index: 1;
+	pointer-events: none;
 }
