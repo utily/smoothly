@@ -55,6 +55,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			event.detail(this)
 		}
 	}
+	@Watch("currency")
 	@Watch("type")
 	typeChange(): void {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined

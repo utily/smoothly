@@ -201,6 +201,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input-radio>
 					<smoothly-input-range-demo />
 					<smoothly-input-color-demo />
+					<smoothly-input-price-demo />
 					<smoothly-back-to-top />
 				</div>
 			</Host>
