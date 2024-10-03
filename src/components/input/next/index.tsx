@@ -39,6 +39,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	componentWillLoad() {
 		this.typeChange()
 		const value = this.action.toString(this.value) || ""
+		this.lastValue = this.value
 		const start = value.length
 		this.state = this.action.createState({
 			value,
@@ -58,8 +59,10 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	}
 	@Watch("value")
 	valueChange(value: any, before: any) {
-		if (this.lastValue != value)
+		if (this.lastValue != value) {
+			this.lastValue = value
 			this.state = this.action.setValue(this.state, value)
+		}
 
 		if (value != before)
 			this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
