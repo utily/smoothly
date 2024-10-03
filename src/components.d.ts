@@ -388,6 +388,8 @@ export namespace Components {
     }
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
+        "looks": Looks;
+        "name": string;
         "type": tidily.Type;
         "value": any;
     }
@@ -797,6 +799,10 @@ export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyInputNextCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputNextElement;
 }
 export interface SmoothlyInputRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1506,7 +1512,19 @@ declare global {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
     };
+    interface HTMLSmoothlyInputNextElementEventMap {
+        "smoothlyInput": Data;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
     interface HTMLSmoothlyInputNextElement extends Components.SmoothlyInputNext, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputNextElement: {
         prototype: HTMLSmoothlyInputNextElement;
@@ -2688,6 +2706,10 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: HTMLElement) => void>) => void;
         "type"?: tidily.Type;
         "value"?: any;
     }
