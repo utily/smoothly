@@ -258,6 +258,7 @@ export namespace Icon {
 			"lock-closed",
 			"lock-open",
 			"log-in",
+			"log-out",
 			"magnet",
 			"mail-open",
 			"mail",
@@ -512,7 +513,7 @@ export namespace Icon {
 			"logo-twitch",
 			"logo-twitter",
 			"logo-usd",
-			"log-out",
+
 			"logo-web-component",
 			"logo-venmo",
 			"logo-whatsapp",
