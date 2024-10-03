@@ -168,4 +168,19 @@ export class Action {
 	public createState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
+	public toString(value: any): string {
+		return this.formatter.toString(value)
+	}
+	public setValue(
+		formattedState: Readonly<tidily.State> & tidily.Settings,
+		value: any
+	): Readonly<tidily.State> & tidily.Settings {
+		return {
+			...formattedState,
+			value: this.createState({ value: this.formatter.toString(value), selection: formattedState.selection }).value,
+		}
+	}
+	public getValue(formattedState: tidily.State): any {
+		return this.formatter.fromString(this.unformatState(formattedState).value)
+	}
 }
