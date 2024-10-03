@@ -5,6 +5,14 @@ import { getAdjacentWordBreakIndex } from "./adjacentWordBreak"
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
+/**
+Alternative names:
+- EventToStateHandler
+- EventHandler
+- InputStateManager
+- InputHandler
+- InputStateController
+ */
 export class Action {
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
 	static create(type: "price", currency?: isoly.Currency): Action
