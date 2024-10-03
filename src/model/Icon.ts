@@ -513,7 +513,6 @@ export namespace Icon {
 			"logo-twitch",
 			"logo-twitter",
 			"logo-usd",
-
 			"logo-web-component",
 			"logo-venmo",
 			"logo-whatsapp",
