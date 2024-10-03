@@ -8,7 +8,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputPriceDemo {
 	@State() currencies: isoly.Currency[] = ["EUR", "USD", "GBP"]
-	@State() currency: isoly.Currency = "USD"
+	@State() currency?: isoly.Currency = "USD"
 
 	render(): VNode | VNode[] {
 		return (
@@ -16,7 +16,9 @@ export class SmoothlyInputPriceDemo {
 				<h2>State demo on smoothly-input</h2>
 				<p>This demo/test the internal state of the smoothly-input component.</p>
 				<p>The currency of the price should update when switching between the currencies.</p>
-				<smoothly-input-radio name={"currency"} onSmoothlyInput={e => (this.currency = e.detail.currency as any)}>
+				<smoothly-input-radio
+					name={"currency"}
+					onSmoothlyInput={e => (this.currency = isoly.Currency.is(e.detail.currency) ? e.detail.currency : undefined)}>
 					{this.currencies.map(currency => (
 						<smoothly-input-radio-item key={currency} selected={currency == this.currency} value={currency}>
 							{currency}
