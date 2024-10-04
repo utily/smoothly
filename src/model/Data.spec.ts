@@ -44,7 +44,6 @@ describe("Data", () => {
 			"pets.2.type": "turtle",
 			"pets.2.name": "Speedster",
 			"work.duration": {},
-			// file: new File(["PDF"], "my file"),
 			"receipts.0.file": file,
 		}
 		const output = Data.deepen(input)
