@@ -45,7 +45,7 @@ export namespace Data {
 					arr[k] = convertArrays(v)
 					return arr
 			  }, [])
-			: isly.object().is(data)
+			: isly.object().is(data) && !(data instanceof Blob || data instanceof File)
 			? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
 			: data
 	}

@@ -29,6 +29,7 @@ describe("Data", () => {
 		expect(output).toEqual(["zero", "one", undefined, "three"])
 	})
 	it("Data.set multiple", () => {
+		const file = new File(["PDF"], "my file")
 		const input: any = {
 			"name.last": "Smith",
 			"name.first": "John",
@@ -43,6 +44,8 @@ describe("Data", () => {
 			"pets.2.type": "turtle",
 			"pets.2.name": "Speedster",
 			"work.duration": {},
+			// file: new File(["PDF"], "my file"),
+			"receipts.0.file": file,
 		}
 		const output = Data.deepen(input)
 		expect(output).toEqual({
@@ -60,6 +63,7 @@ describe("Data", () => {
 				1: { name: "Mr Meow", type: "cat" },
 				2: { name: "Speedster", type: "turtle" },
 			},
+			receipts: { 0: { file } },
 			work: { duration: {} },
 		})
 		const outputWithArrays = Data.convertArrays(output)
@@ -79,6 +83,7 @@ describe("Data", () => {
 				{ name: "Speedster", type: "turtle" },
 			],
 			work: { duration: {} },
+			receipts: [{ file }],
 		})
 	})
 })
