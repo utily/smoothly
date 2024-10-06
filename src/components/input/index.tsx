@@ -235,6 +235,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				event.key == "End"
 			) {
 				event.preventDefault()
+				console.log("process", event)
 				this.processKey(event, backend)
 			} else if (event.key == "ArrowUp" || event.key == "ArrowDown")
 				event.preventDefault()

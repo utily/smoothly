@@ -31,6 +31,18 @@ export class Action {
 		return new Action(result || tidily.get("text")!, type)
 	}
 
+	public onKeyDown(
+		event: KeyboardEvent,
+		state: Readonly<tidily.State> & tidily.Settings
+	): Readonly<tidily.State> & tidily.Settings {
+		// TODO
+		const input = event.target as HTMLInputElement
+		state.selection.start = input.selectionStart ?? state.selection.start
+		state.selection.end = input.selectionEnd ?? state.selection.end
+		state.selection.direction = input.selectionDirection ?? state.selection.direction
+		return this.partialFormatState(state)
+	}
+
 	public onFocus(event: FocusEvent, state: tidily.State) {
 		const result = this.partialFormatState(this.unformatState(state))
 		const input = event.target as HTMLInputElement

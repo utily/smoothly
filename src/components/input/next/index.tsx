@@ -69,6 +69,8 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	}
 
 	render() {
+		const minSelection = Math.min(this.state.selection.start, this.state.selection.end)
+		const maxSelection = Math.max(this.state.selection.start, this.state.selection.end)
 		return (
 			<Host>
 				<input
@@ -77,11 +79,14 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
+					onKeyUp={event => (this.state = this.action.onKeyDown(event, this.state))}
 					onFocus={event => (this.state = this.action.onFocus(event, this.state))}
 					onBlur={event => (this.state = this.action.onBlur(event, this.state))}
 				/>
 				<pre style={{ margin: "0" }}>
-					{this.state.value}
+					<span style={{ color: "red" }}>{this.state.value.slice(0, minSelection)}</span>
+					<span style={{ backgroundColor: "lightgreen" }}>{this.state.value.slice(minSelection, maxSelection)}</span>
+					<span style={{ color: "blue" }}>{this.state.value.slice(maxSelection, this.state.value.length)}</span>
 					<span class="remainder">{this.state.remainder}</span>
 				</pre>
 			</Host>
