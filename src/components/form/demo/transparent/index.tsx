@@ -9,7 +9,7 @@ export class SmoothlyFormDemoTransparent {
 		return (
 			<Host>
 				<h2>Transparent</h2>
-				<smoothly-form looks={"transparent"}>
+				<smoothly-form looks={"transparent"} onSmoothlyFormSubmit={e => console.log(e.detail.value)}>
 					<smoothly-input-file name={"file"}>
 						<span slot={"label"}>File</span>
 						<smoothly-icon slot={"button"} name={"folder-open-outline"} size={"small"} />
@@ -30,6 +30,7 @@ export class SmoothlyFormDemoTransparent {
 							<smoothly-icon name={"bus-outline"} />
 						</smoothly-item>
 					</smoothly-input-select>
+					<smoothly-input-submit icon={"checkbox-outline"} />
 				</smoothly-form>
 			</Host>
 		)
