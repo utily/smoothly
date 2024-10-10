@@ -386,6 +386,13 @@ export namespace Components {
         "showLabel": boolean;
         "value"?: isoly.Date;
     }
+    interface SmoothlyInputNext {
+        "currency"?: isoly.Currency;
+        "looks": Looks;
+        "name": string;
+        "type": tidily.Type;
+        "value": any;
+    }
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
@@ -792,6 +799,10 @@ export interface SmoothlyInputFileCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputMonthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputMonthElement;
+}
+export interface SmoothlyInputNextCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputNextElement;
 }
 export interface SmoothlyInputRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1500,6 +1511,24 @@ declare global {
     var HTMLSmoothlyInputMonthElement: {
         prototype: HTMLSmoothlyInputMonthElement;
         new (): HTMLSmoothlyInputMonthElement;
+    };
+    interface HTMLSmoothlyInputNextElementEventMap {
+        "smoothlyInput": Data;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+    }
+    interface HTMLSmoothlyInputNextElement extends Components.SmoothlyInputNext, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyInputNextElement: {
+        prototype: HTMLSmoothlyInputNextElement;
+        new (): HTMLSmoothlyInputNextElement;
     };
     interface HTMLSmoothlyInputPriceDemoElement extends Components.SmoothlyInputPriceDemo, HTMLStencilElement {
     }
@@ -2242,6 +2271,7 @@ declare global {
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
+        "smoothly-input-next": HTMLSmoothlyInputNextElement;
         "smoothly-input-price-demo": HTMLSmoothlyInputPriceDemoElement;
         "smoothly-input-radio": HTMLSmoothlyInputRadioElement;
         "smoothly-input-radio-item": HTMLSmoothlyInputRadioItemElement;
@@ -2674,6 +2704,15 @@ declare namespace LocalJSX {
         "showLabel"?: boolean;
         "value"?: isoly.Date;
     }
+    interface SmoothlyInputNext {
+        "currency"?: isoly.Currency;
+        "looks"?: Looks;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: HTMLElement) => void>) => void;
+        "type"?: tidily.Type;
+        "value"?: any;
+    }
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
@@ -3071,6 +3110,7 @@ declare namespace LocalJSX {
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-next": SmoothlyInputNext;
         "smoothly-input-price-demo": SmoothlyInputPriceDemo;
         "smoothly-input-radio": SmoothlyInputRadio;
         "smoothly-input-radio-item": SmoothlyInputRadioItem;
@@ -3193,6 +3233,7 @@ declare module "@stencil/core" {
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-next": LocalJSX.SmoothlyInputNext & JSXBase.HTMLAttributes<HTMLSmoothlyInputNextElement>;
             "smoothly-input-price-demo": LocalJSX.SmoothlyInputPriceDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputPriceDemoElement>;
             "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
             "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;

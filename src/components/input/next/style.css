@@ -1,0 +1,12 @@
+:host {
+	display: block;
+	margin: 1rem;
+}
+
+:host > input {
+	width: 100%;
+}
+
+:host .remainder {
+	opacity: 0.6;
+}
