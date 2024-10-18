@@ -13,8 +13,8 @@ export class SmoothlyFormDemoPrices {
 					<smoothly-input type="price" name="no">
 						No currency
 					</smoothly-input>
-					<smoothly-input type="price" name="crowns" currency="SEK">
-						SEK
+					<smoothly-input type="price" name="crowns" currency="SEK" toInteger>
+						SEK (toInteger)
 					</smoothly-input>
 					<smoothly-input type="price" name="usDollar" currency="USD">
 						USD
