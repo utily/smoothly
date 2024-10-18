@@ -32,12 +32,12 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() errorMessage?: string
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
+	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	parent: Editable | undefined
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
 	private lastValue: any
-	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	private uneditable = this.readonly
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
@@ -79,7 +79,12 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.formatter = result || tidily.get("text")!
 	}
-	private newState(state: tidily.State) {
+	private partialFormattedState(state: tidily.State) {
+		return this.formatter.partialFormat(
+			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state)))
+		)
+	}
+	private formattedState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	@Watch("value")
@@ -89,7 +94,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.lastValue = value
 			this.state = {
 				...this.state,
-				value: this.newState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
+				value: this.formattedState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
 			}
 		}
 		if (value != before)
@@ -104,8 +109,14 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	onCurrency() {
 		this.state = {
 			...this.state,
-			value: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).value,
-			pattern: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).pattern,
+			value: this.formattedState({
+				value: this.formatter.toString(this.value),
+				selection: this.state.selection,
+			}).value,
+			pattern: this.formattedState({
+				value: this.formatter.toString(this.value),
+				selection: this.state.selection,
+			}).pattern,
 		}
 	}
 	componentWillLoad() {
@@ -113,7 +124,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		const value = this.formatter.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value
 		const start = value.length
-		this.state = this.newState({
+		this.state = this.formattedState({
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
@@ -192,16 +203,14 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async setSelectionRange(start: number, end: number, direction?: tidily.Direction) {
-		this.state = this.newState({
+		this.state = this.formattedState({
 			...this.state,
 			selection: { start, end, direction: direction ?? this.state.selection.direction },
 		})
-		const after = this.formatter.format(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
-		)
-		this.updateBackend(after, this.inputElement)
+		this.updateBackend(this.state, this.inputElement)
 	}
 	onBlur(event: FocusEvent) {
+		this.state = this.formattedState(this.state)
 		this.smoothlyBlur.emit()
 		const value = typeof this.value == "string" ? this.value.trim() : this.value
 		this.smoothlyInput.emit({ [this.name]: value })
@@ -209,9 +218,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.smoothlyChange.emit({ [this.name]: this.value })
 	}
 	onFocus(event: FocusEvent) {
-		const after = this.formatter.format(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })))
-		)
+		const after = this.partialFormattedState(this.state)
 		if (event.target)
 			this.updateBackend(after, event.target as HTMLInputElement, false)
 	}
@@ -226,7 +233,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				direction: backend.selectionDirection ?? "none",
 			},
 		}
-		const after = this.newState({ ...this.state })
+		const after = this.partialFormattedState({ ...this.state })
 		this.updateBackend(after, backend)
 	}
 	onKeyDown(event: KeyboardEvent) {
@@ -252,7 +259,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				event.key == "End"
 			) {
 				event.preventDefault()
-				this.processKey(event, backend)
+				this.processKey(event, backend, "partial")
 			} else if (event.key == "ArrowUp" || event.key == "ArrowDown")
 				event.preventDefault()
 			else if (event.key == "Enter")
@@ -268,17 +275,17 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	onInput(event: InputEvent) {
 		if (event.inputType == "insertReplacementText") {
-			this.processKey({ key: "a", ctrlKey: true }, event.target as HTMLInputElement)
-			;[...(event.data ?? "")].forEach(c => this.processKey({ key: c }, event.target as HTMLInputElement))
+			this.processKey({ key: "a", ctrlKey: true }, event.target as HTMLInputElement, "partial")
+			;[...(event.data ?? "")].forEach(c => this.processKey({ key: c }, event.target as HTMLInputElement, "partial"))
 		} else {
 			const backend = event.target as HTMLInputElement
 			let data = backend.value
 			if (data) {
 				event.preventDefault()
-				this.processKey({ key: "a", ctrlKey: true }, backend)
+				this.processKey({ key: "a", ctrlKey: true }, backend, "partial")
 				data = this.expiresAutocompleteFix(backend, data)
 				for (const letter of data)
-					this.processKey({ key: letter }, backend)
+					this.processKey({ key: letter }, backend, "partial")
 			}
 		}
 	}
@@ -295,13 +302,13 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	private processPaste(pasted: string, backend: HTMLInputElement) {
 		if (!this.readonly) {
-			const after = tidily.Action.paste(this.formatter, this.state, pasted)
+			const after = tidily.Action.paste(this.formatter, this.state, "partial", pasted)
 			this.updateBackend(after, backend)
 		}
 	}
-	private processKey(event: tidily.Action, backend: HTMLInputElement) {
+	private processKey(event: tidily.Action, backend: HTMLInputElement, formatted: "formatted" | "partial") {
 		if (!this.readonly) {
-			const after = tidily.Action.apply(this.formatter, this.state, event)
+			const after = tidily.Action.apply(this.formatter, this.state, formatted, event)
 			this.updateBackend(after, backend)
 		}
 	}
@@ -325,6 +332,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.formatter.unformat(tidily.StateEditor.copy({ ...this.state })).value
 		)
 	}
+
 	render() {
 		return (
 			<Host
@@ -332,6 +340,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start" />
 				<div>
+					<div class={"ghost"}>
+						<div class={"value"}>{this.state?.value}</div>
+						<div class={"remainder"}>{this.state?.remainder}</div>
+					</div>
 					<input
 						color={this.color}
 						name={this.name}
