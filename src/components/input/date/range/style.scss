@@ -30,18 +30,8 @@
 	min-width: 18em;
 }
 
-:host>div {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	width: 100vw;
-	height: 100vh;
-	z-index: 2;
-}
-
-:host>nav>div.arrow {
+:host>nav>smoothly-calendar::before {
+	content: "";
 	position: absolute;
 	box-sizing: border-box;
 	top: 1px;
