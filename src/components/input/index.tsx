@@ -2,6 +2,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
+import { Action } from "./Action"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
@@ -302,13 +303,13 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	private processPaste(pasted: string, backend: HTMLInputElement) {
 		if (!this.readonly) {
-			const after = tidily.Action.paste(this.formatter, this.state, "partial", pasted)
+			const after = Action.paste(this.formatter, this.state, "partial", pasted)
 			this.updateBackend(after, backend)
 		}
 	}
-	private processKey(event: tidily.Action, backend: HTMLInputElement, formatted: "formatted" | "partial") {
+	private processKey(event: Action, backend: HTMLInputElement, formatted: "formatted" | "partial") {
 		if (!this.readonly) {
-			const after = tidily.Action.apply(this.formatter, this.state, formatted, event)
+			const after = Action.apply(this.formatter, this.state, formatted, event)
 			this.updateBackend(after, backend)
 		}
 	}
