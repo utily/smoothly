@@ -34,7 +34,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop() validator?: isly.Type<any>
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
-	@Prop({ reflect: true, attribute: "looks" }) looks: Looks = "plain"
+	@Prop({ reflect: true, attribute: "looks" }) looks?: Looks
 	@Prop() name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
@@ -94,7 +94,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		this.listeners.changed?.forEach(l => l(this))
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>) {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks, color?: Color) => void>) {
 		event.stopPropagation()
 		event.detail(this.looks, this.color)
 	}

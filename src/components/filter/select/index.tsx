@@ -22,12 +22,12 @@ export class SmoothlyFilterSelect implements Filter {
 	@Prop() menuHeight?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined
 	@Prop() multiple = false
 	@Prop() type: "array" | "string" = "string"
-	@Prop({ mutable: true }) looks: Looks = "plain"
+	@Prop({ mutable: true }) looks?: Looks
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks) => void>
 	componentWillLoad() {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
 	}
 	async componentDidLoad() {
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
@@ -42,7 +42,7 @@ export class SmoothlyFilterSelect implements Filter {
 		)
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks) => void>): void {
 		if (event.target != this.element) {
 			event.stopPropagation()
 			event.detail(this.looks)

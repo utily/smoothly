@@ -11,7 +11,7 @@ export class SmoothlyInputRadioItem {
 	@Element() element: HTMLInputElement
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) selected = false
-	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
+	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ mutable: true }) name: string
 	@Event() smoothlySelect: EventEmitter<Selectable>
 	@Event() smoothlyRadioButtonRegister: EventEmitter<(name: string) => void>

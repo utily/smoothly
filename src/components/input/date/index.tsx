@@ -26,7 +26,7 @@ import { Looks } from "../Looks"
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -41,13 +41,15 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyValueChange: EventEmitter<Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	componentWillLoad(): void {
 		this.setInitialValue()
 		this.smoothlyInputLoad.emit(_ => {})
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
 	@Method()

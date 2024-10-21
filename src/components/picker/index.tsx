@@ -31,7 +31,7 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	private initialValue = new Map<any, Option>()
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Element() element: HTMLSmoothlyPickerElement
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) open = false
@@ -44,13 +44,13 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	@Event() smoothlyPickerLoaded: EventEmitter<Controls>
 	@Event() smoothlyInput: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	private controls?: Controls
 
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.smoothlyInputLoad.emit(() => {
 			return
@@ -77,7 +77,7 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 			this.smoothlyPickerLoaded.emit(this.controls)
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks) => void>): void {
 		if (event.target != this.element) {
 			event.stopPropagation()
 			event.detail(this.looks)
