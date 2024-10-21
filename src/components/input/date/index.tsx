@@ -133,7 +133,6 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				</span>
 				{this.open && !this.readonly && (
 					<nav>
-						<div class="arrow" />
 						<smoothly-calendar
 							doubleInput={false}
 							value={this.value ?? Date.now()}
