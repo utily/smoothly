@@ -30,6 +30,9 @@
 
 :host>div>div.ghost {
 	position: absolute;
+  box-sizing: border-box;
+  align-content: center;
+	height: 100%;
 	padding: 
 		var(--input-value-padding-top) 
 		var(--input-padding-side) 
