@@ -38,7 +38,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() invalid?: boolean = false
 	@Prop() name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -57,13 +57,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() filter = ""
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})

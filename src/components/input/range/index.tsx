@@ -31,7 +31,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	private initialValue: number | undefined = undefined
 	@Element() element: HTMLSmoothlyInputRangeElement
 	@Prop({ mutable: true }) value: number | undefined = undefined
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -43,12 +43,12 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop() outputSide: "right" | "left" = "left"
 	@Prop() label: string
 	@State() showInput = false
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(() => {
 			return

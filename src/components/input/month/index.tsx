@@ -30,7 +30,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Element() element: HTMLSmoothlyInputMonthElement
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
 	@Prop({ reflect: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop() name: string
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
@@ -40,13 +40,13 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	private year?: HTMLSmoothlyInputSelectElement
 	private month?: HTMLSmoothlyInputSelectElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
 	componentWillLoad(): void {
-		this.smoothlyInputLooks.emit(looks => (this.looks = looks))
+		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.valueChanged()
@@ -98,7 +98,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		}
 	}
 	@Listen("smoothlyInputLooks")
-	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks, color: Color | undefined) => void>): void {
+	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks, color?: Color) => void>): void {
 		if (event.target != this.element) {
 			event.stopPropagation()
 			event.detail(this.looks, this.color)

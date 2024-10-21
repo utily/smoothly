@@ -33,7 +33,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
 	private initialValue: string | undefined
 	@Prop({ mutable: true }) value: string | undefined = undefined
-	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
+	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -43,14 +43,14 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Element() element: HTMLSmoothlyInputColorElement
 	@State() open = false
 	@State() sliderMode: "rgb" | "hsl" = "rgb"
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.value && this.setInitialValue()
 		this.value && (this.rgb = Color.Hex.toRGB(this.value))
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({
 			[this.name]:
 				this.output === "rgb"

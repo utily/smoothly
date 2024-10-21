@@ -34,7 +34,7 @@ export interface Controls {
 })
 export class SmoothlyPickerMenu {
 	@Element() element: HTMLSmoothlyPickerMenuElement
-	@Prop() looks: Looks
+	@Prop() looks?: Looks
 	@Prop({ reflect: true }) open = false
 	@Prop({ reflect: true }) multiple = false
 	@Prop({ reflect: true }) mutable = false

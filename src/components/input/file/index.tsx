@@ -27,14 +27,14 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() accept?: string
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) camera: "front" | "back"
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) value?: File
 	@Prop({ mutable: true, reflect: true }) placeholder: string | undefined
 	@State() dragging = false
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -50,7 +50,9 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	}
 
 	componentWillLoad(): void {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))

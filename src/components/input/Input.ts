@@ -14,7 +14,7 @@ export namespace Input {
 		color?: Color
 		name: string
 		invalid?: boolean
-		looks: Looks
+		looks?: Looks
 		defined?: boolean
 		binary?: Binary
 	}

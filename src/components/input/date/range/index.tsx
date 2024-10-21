@@ -16,7 +16,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Element() element: HTMLElement
 	@Prop() name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) start: isoly.Date | undefined
@@ -33,14 +33,16 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@State() open: boolean
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	componentWillLoad() {
 		this.setInitialValue()
 		this.updateValue()
 		this.smoothlyInputLoad.emit(_ => {})
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}

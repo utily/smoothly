@@ -30,18 +30,18 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	initialValue?: Selectable
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
-	@Prop({ mutable: true, reflect: true }) looks: Looks = "plain"
+	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop() clearable?: boolean
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop() name: string
 	@Prop({ reflect: true }) showLabel = true
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), (this.color = color)))
+		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}

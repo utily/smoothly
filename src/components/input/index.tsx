@@ -14,7 +14,7 @@ import { Looks } from "./Looks"
 })
 export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ reflect: true, mutable: true }) looks: Looks = "plain"
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ reflect: true }) type: tidily.Type = "text"
@@ -37,7 +37,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	private uneditable = this.readonly
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
-	@Event() smoothlyInputLooks: EventEmitter<(looks: Looks, color: Color) => void>
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyBlur: EventEmitter<void>
@@ -113,7 +113,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			value,
 			selection: { start, end: start, direction: "none" },
 		})
-		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = looks), !this.color && (this.color = color)))
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		this.smoothlyInputLoad.emit(() => {
 			return
 		})
