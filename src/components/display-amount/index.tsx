@@ -1,7 +1,7 @@
 import { Component, Prop } from "@stencil/core"
 import { isoly } from "isoly"
 
-// DEPRECATED use <smoothly-display type="amount"> instead
+// DEPRECATED use <smoothly-display type="price"> instead
 @Component({
 	tag: "smoothly-display-amount",
 	styleUrl: "style.css",

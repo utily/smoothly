@@ -12,6 +12,7 @@ export class SmoothlyDisplay {
 	@Prop() label?: string
 	@Prop() value?: any
 	@Prop() collapseDepth?: number
+	@Prop() toInteger?: boolean
 	@Prop() currency?: Currency
 	@Prop() country?: CountryCode.Alpha2
 	@Prop() format?: DateTime.Format
@@ -35,7 +36,7 @@ export class SmoothlyDisplay {
 				result = format(this.value, type, this.country)
 				break
 			case "price":
-				result = format(this.value, type, this.currency)
+				result = format(this.value, type, { currency: this.currency, toInteger: this.toInteger })
 				break
 			case "date":
 				result = get(this.type as Type, getLocale())?.toString(this.value)

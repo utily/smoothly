@@ -24,6 +24,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) placeholder: string | undefined
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
+	@Prop() toInteger?: boolean
 	@Prop({ reflect: true }) currency?: isoly.Currency
 	@Prop() invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
@@ -61,7 +62,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
 		switch (this.type) {
 			case "price":
-				result = tidily.get("price", this.currency)
+				result = tidily.get("price", { currency: this.currency, toInteger: this.toInteger })
 				break
 			default:
 				result = tidily.get(this.type, getLocale())

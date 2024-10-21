@@ -56,59 +56,59 @@ export class SmoothlyDisplayDemo {
 						</dd>
 						<dt>text</dt>
 						<dd>
-							<smoothly-display type="text" value="text"></smoothly-display>
+							<smoothly-display type="text" value="text" />
 						</dd>
 						<dt>postal code</dt>
 						<dd>
-							<smoothly-display type="postal-code" value="752 31"></smoothly-display>
+							<smoothly-display type="postal-code" value="752 31" />
 						</dd>
 						<dt>password</dt>
 						<dd>
-							<smoothly-display type="password" value="password"></smoothly-display>
+							<smoothly-display type="password" value="password" />
 						</dd>
 						<dt>email</dt>
 						<dd>
-							<smoothly-display type="email" value="test@example.com"></smoothly-display>
+							<smoothly-display type="email" value="test@example.com" />
 						</dd>
 						<dt>price</dt>
 						<dd>
-							<smoothly-display type="price" value="13.37" currency="SEK"></smoothly-display>
+							<smoothly-display type="price" value="13.37" currency="SEK" />
 						</dd>
-						<dt>display amount without decimals</dt>
+						<dt>price without decimals</dt>
 						<dd>
-							<smoothly-display-amount amount={200} currency="SEK" toInteger={true}></smoothly-display-amount>
+							<smoothly-display type={"price"} value={200} currency="SEK" toInteger />
 						</dd>
-						<dt>display amount with decimals if they are set, otherwise no decimal</dt>
+						<dt>price with decimals if they are set, otherwise no decimal</dt>
 						<dd>
-							<smoothly-display-amount amount={200.2} currency="SEK" toInteger={true}></smoothly-display-amount>
+							<smoothly-display type={"price"} value={200.2} currency="SEK" toInteger />
 						</dd>
-						<dt>display amount with decimals</dt>
+						<dt>price with decimals</dt>
 						<dd>
-							<smoothly-display-amount amount={200.2} currency="SEK"></smoothly-display-amount>
+							<smoothly-display type={"price"} value={200.2} currency="SEK" />
 						</dd>
 						<dt>percent</dt>
 						<dd>
-							<smoothly-display type="percent" value="42"></smoothly-display>
+							<smoothly-display type="percent" value="42" />
 						</dd>
 						<dt>phone</dt>
 						<dd>
-							<smoothly-display type="phone" value="0101881108"></smoothly-display>
+							<smoothly-display type="phone" value="0101881108" />
 						</dd>
 						<dt>card number</dt>
 						<dd>
-							<smoothly-display type="card-number" value="4111111111111111"></smoothly-display>
+							<smoothly-display type="card-number" value="4111111111111111" />
 						</dd>
 						<dt>card expires</dt>
 						<dd>
-							<smoothly-display type="card-expires" value="7/22"></smoothly-display>
+							<smoothly-display type="card-expires" value="7/22" />
 						</dd>
 						<dt>card csc</dt>
 						<dd>
-							<smoothly-display type="card-csc" value="987"></smoothly-display>
+							<smoothly-display type="card-csc" value="987" />
 						</dd>
 						<dt>date</dt>
 						<dd>
-							<smoothly-display type="date" value="2022-07-07"></smoothly-display>
+							<smoothly-display type="date" value="2022-07-07" />
 						</dd>
 						<dt>date time</dt>
 						<dd>
@@ -122,7 +122,8 @@ export class SmoothlyDisplayDemo {
 									minute: "numeric",
 									second: "numeric",
 								}}
-								value="2022-07-07T02:02:02Z"></smoothly-display>
+								value="2022-07-07T02:02:02Z"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
@@ -135,7 +136,8 @@ export class SmoothlyDisplayDemo {
 									minute: "2-digit",
 									second: "2-digit",
 								}}
-								value="2022-07-07T02:02:02Z"></smoothly-display>
+								value="2022-07-07T02:02:02Z"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
@@ -148,7 +150,8 @@ export class SmoothlyDisplayDemo {
 									minute: "numeric",
 									second: "numeric",
 								}}
-								value="2022-07-07T12:22:24Z"></smoothly-display>
+								value="2022-07-07T12:22:24Z"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
@@ -161,19 +164,22 @@ export class SmoothlyDisplayDemo {
 									minute: "numeric",
 									second: "numeric",
 								}}
-								value="2022-07-07T12:22:24Z"></smoothly-display>
+								value="2022-07-07T12:22:24Z"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
 								type="date-time"
 								format={{ year: "numeric", month: "short", day: "numeric" }}
-								value="2022-07-07T00:00+02:00"></smoothly-display>
+								value="2022-07-07T00:00+02:00"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
 								type="date-time"
 								format={{ year: "2-digit", month: "numeric", day: "numeric" }}
-								value="2022-07-07T00:00+02:00"></smoothly-display>
+								value="2022-07-07T00:00+02:00"
+							/>
 						</dd>
 						<dd>
 							<smoothly-display
@@ -187,7 +193,8 @@ export class SmoothlyDisplayDemo {
 									second: "2-digit",
 									timeZone: "Europe/Stockholm",
 								}}
-								value="2022-07-07T12:15Z"></smoothly-display>
+								value="2022-07-07T12:15Z"
+							/>
 						</dd>
 						<dt>Display JSON</dt>
 						<dd>
@@ -201,16 +208,17 @@ export class SmoothlyDisplayDemo {
 				</fieldset>
 				<h2>With labels</h2>
 				<dd>
-					<smoothly-display label="Today" type="date" value={isoly.Date.now()}></smoothly-display>
-					<smoothly-display label="Total amount" type="price" currency="SEK" value={6789}></smoothly-display>
-					<smoothly-display label="Total amount" type="price" currency="GBP" value={678.9}></smoothly-display>
+					<smoothly-display label="Today" type="date" value={isoly.Date.now()} />
+					<smoothly-display label="Total amount" type="price" currency="SEK" value={6789} />
+					<smoothly-display label="Total amount" type="price" currency="GBP" value={678.9} />
 					<smoothly-display
 						label="Logs"
 						type="json"
 						value={[
 							{ type: "trace", message: "Hello" },
 							{ type: "error", message: "Oh no!" },
-						]}></smoothly-display>
+						]}
+					/>
 				</dd>
 				<fieldset>
 					<h2>Test of different kinds of notifier</h2>

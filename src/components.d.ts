@@ -127,6 +127,7 @@ export namespace Components {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "label"?: string;
+        "toInteger"?: boolean;
         "type": Type | "json";
         "value"?: any;
     }
@@ -252,6 +253,7 @@ export namespace Components {
         "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
         "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
+        "toInteger"?: boolean;
         "type": tidily.Type;
         "value": any;
     }
@@ -2409,6 +2411,7 @@ declare namespace LocalJSX {
         "currency"?: Currency;
         "format"?: DateTime.Format;
         "label"?: string;
+        "toInteger"?: boolean;
         "type"?: Type | "json";
         "value"?: any;
     }
@@ -2544,6 +2547,7 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "showLabel"?: boolean;
+        "toInteger"?: boolean;
         "type"?: tidily.Type;
         "value"?: any;
     }
