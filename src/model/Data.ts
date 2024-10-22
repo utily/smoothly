@@ -1,7 +1,7 @@
 import { isly } from "isly"
 
 type Value = string | number | boolean | Blob | undefined
-export type Data = { [name: string]: Data | Value | Value[] }
+export type Data = { [name: string]: Data | Data[] | Value | Value[] }
 export namespace Data {
 	export const valueType = isly.union<Value, string, number, boolean, Blob, undefined>(
 		isly.string(),
@@ -51,5 +51,32 @@ export namespace Data {
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
+	}
+	export function remove(data: Data, name: string): any {
+		const keys = name.split(".")
+		removeKey(data, keys)
+		return data
+	}
+
+	function removeKey(target: any, [head, ...tail]: string[]): boolean {
+		if (tail.length === 0) {
+			// If we reached the last key in the path, delete it.
+			if (target && typeof target === "object" && head in target) {
+				delete target[head]
+			}
+		} else {
+			// Traverse deeper into the object.
+			if (target && typeof target === "object" && head in target) {
+				const child = target[head]
+
+				if (removeKey(child, tail)) {
+					// If the child object becomes empty, delete the key from the parent.
+					delete target[head]
+				}
+			}
+		}
+
+		// Check if the object is now empty after the deletion.
+		return target && typeof target === "object" && Object.keys(target).length === 0
 	}
 }
