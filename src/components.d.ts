@@ -213,6 +213,8 @@ export namespace Components {
     }
     interface SmoothlyFormDemoLogin {
     }
+    interface SmoothlyFormDemoPet {
+    }
     interface SmoothlyFormDemoPrices {
     }
     interface SmoothlyFormDemoTransparent {
@@ -1300,6 +1302,12 @@ declare global {
         prototype: HTMLSmoothlyFormDemoLoginElement;
         new (): HTMLSmoothlyFormDemoLoginElement;
     };
+    interface HTMLSmoothlyFormDemoPetElement extends Components.SmoothlyFormDemoPet, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoPetElement: {
+        prototype: HTMLSmoothlyFormDemoPetElement;
+        new (): HTMLSmoothlyFormDemoPetElement;
+    };
     interface HTMLSmoothlyFormDemoPricesElement extends Components.SmoothlyFormDemoPrices, HTMLStencilElement {
     }
     var HTMLSmoothlyFormDemoPricesElement: {
@@ -1361,7 +1369,8 @@ declare global {
     };
     interface HTMLSmoothlyInputElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
-        "smoothlyInputLoad": (parent: Editable) => void;
+        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputRemove": (parent: HTMLElement) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyBlur": void;
         "smoothlyChange": Record<string, any>;
@@ -2285,6 +2294,7 @@ declare global {
         "smoothly-form-demo-date": HTMLSmoothlyFormDemoDateElement;
         "smoothly-form-demo-date-range": HTMLSmoothlyFormDemoDateRangeElement;
         "smoothly-form-demo-login": HTMLSmoothlyFormDemoLoginElement;
+        "smoothly-form-demo-pet": HTMLSmoothlyFormDemoPetElement;
         "smoothly-form-demo-prices": HTMLSmoothlyFormDemoPricesElement;
         "smoothly-form-demo-transparent": HTMLSmoothlyFormDemoTransparentElement;
         "smoothly-form-demo-typed": HTMLSmoothlyFormDemoTypedElement;
@@ -2569,6 +2579,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFormDemoLogin {
     }
+    interface SmoothlyFormDemoPet {
+    }
     interface SmoothlyFormDemoPrices {
     }
     interface SmoothlyFormDemoTransparent {
@@ -2609,6 +2621,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyInputRemove"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;
@@ -3125,6 +3138,7 @@ declare namespace LocalJSX {
         "smoothly-form-demo-date": SmoothlyFormDemoDate;
         "smoothly-form-demo-date-range": SmoothlyFormDemoDateRange;
         "smoothly-form-demo-login": SmoothlyFormDemoLogin;
+        "smoothly-form-demo-pet": SmoothlyFormDemoPet;
         "smoothly-form-demo-prices": SmoothlyFormDemoPrices;
         "smoothly-form-demo-transparent": SmoothlyFormDemoTransparent;
         "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
@@ -3249,6 +3263,7 @@ declare module "@stencil/core" {
             "smoothly-form-demo-date": LocalJSX.SmoothlyFormDemoDate & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateElement>;
             "smoothly-form-demo-date-range": LocalJSX.SmoothlyFormDemoDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateRangeElement>;
             "smoothly-form-demo-login": LocalJSX.SmoothlyFormDemoLogin & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
+            "smoothly-form-demo-pet": LocalJSX.SmoothlyFormDemoPet & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPetElement>;
             "smoothly-form-demo-prices": LocalJSX.SmoothlyFormDemoPrices & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
             "smoothly-form-demo-transparent": LocalJSX.SmoothlyFormDemoTransparent & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
             "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;

@@ -39,6 +39,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
+	@Event() smoothlyInputRemove: EventEmitter<(parent: HTMLElement) => void> // Wont work because element disconnects
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
