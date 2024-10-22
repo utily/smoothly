@@ -489,8 +489,8 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyLabel {
-        "description": string;
-        "hue": number;
+        "description"?: string;
+        "hue"?: number;
         "shape": "rectangle" | "rounded";
     }
     interface SmoothlyLazy {

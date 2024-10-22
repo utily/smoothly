@@ -85,7 +85,6 @@ export class SmoothlyInputDemo {
 						<smoothly-input-select name="spirit-animals" looks="border" mutable>
 							<label slot="label">Select or add new options</label>
 							<smoothly-item value="manatee">Manatee</smoothly-item>
-							<smoothly-item value="narwhal">Narwhal</smoothly-item>
 							<smoothly-item selected value="cthulu">
 								Cthulu
 							</smoothly-item>
