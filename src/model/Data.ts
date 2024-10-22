@@ -57,26 +57,17 @@ export namespace Data {
 		removeKey(data, keys)
 		return data
 	}
-
-	function removeKey(target: any, [head, ...tail]: string[]): boolean {
+	function removeKey(current: any, [head, ...tail]: string[]) {
 		if (tail.length === 0) {
-			// If we reached the last key in the path, delete it.
-			if (target && typeof target === "object" && head in target) {
-				delete target[head]
-			}
-		} else {
-			// Traverse deeper into the object.
-			if (target && typeof target === "object" && head in target) {
-				const child = target[head]
-
-				if (removeKey(child, tail)) {
-					// If the child object becomes empty, delete the key from the parent.
-					delete target[head]
-				}
-			}
+			if (typeof current === "object" && head in current)
+				delete current[head]
+		} else if (typeof current === "object" && head in current) {
+			removeKey(current[head], tail)
+			if (isEmpty(current[head]))
+				delete current[head]
 		}
-
-		// Check if the object is now empty after the deletion.
-		return target && typeof target === "object" && Object.keys(target).length === 0
+	}
+	function isEmpty(current: any): boolean {
+		return typeof current === "object" && Object.keys(current).length === 0
 	}
 }
