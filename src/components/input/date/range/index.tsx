@@ -76,6 +76,10 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}
+	@Listen("click", { target: "window" })
+	onWindowClick(event: Event): void {
+		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
 		this.listener[property] = listener
@@ -129,10 +133,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 				<span class={"icons"}>
 					<slot name={"end"}></slot>
 				</span>
-				{this.open && <div onClick={() => (this.open = false)} />}
 				{this.open && (
 					<nav>
-						<div class="arrow" />
 						<smoothly-calendar
 							doubleInput={true}
 							onSmoothlyValueChange={e => e.stopPropagation()}

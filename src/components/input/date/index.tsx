@@ -85,6 +85,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 			event.detail(this)
 		}
 	}
+	@Listen("click", { target: "window" })
+	onWindowClick(event: Event): void {
+		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
 	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
@@ -127,29 +131,26 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				<span class="icons">
 					<slot name={"end"} />
 				</span>
-				{this.open &&
-					!this.readonly && [
-						<div onClick={() => (this.open = false)} />,
-						<nav>
-							<div class="arrow" />
-							<smoothly-calendar
-								doubleInput={false}
-								value={this.value ?? Date.now()}
-								onSmoothlyValueChange={event => {
-									this.value = event.detail
-									event.stopPropagation()
-								}}
-								max={this.max}
-								min={this.min}>
-								<div slot={"year-label"}>
-									<slot name={"year-label"} />
-								</div>
-								<div slot={"month-label"}>
-									<slot name={"month-label"} />
-								</div>
-							</smoothly-calendar>
-						</nav>,
-					]}
+				{this.open && !this.readonly && (
+					<nav>
+						<smoothly-calendar
+							doubleInput={false}
+							value={this.value ?? Date.now()}
+							onSmoothlyValueChange={event => {
+								this.value = event.detail
+								event.stopPropagation()
+							}}
+							max={this.max}
+							min={this.min}>
+							<div slot={"year-label"}>
+								<slot name={"year-label"} />
+							</div>
+							<div slot={"month-label"}>
+								<slot name={"month-label"} />
+							</div>
+						</smoothly-calendar>
+					</nav>
+				)}
 			</Host>
 		)
 	}
