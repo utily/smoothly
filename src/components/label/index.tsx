@@ -6,8 +6,8 @@ import { Component, h, Host, Prop } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyLabel {
-	@Prop() hue: number
-	@Prop() description: string
+	@Prop() hue?: number
+	@Prop() description?: string
 	@Prop({ reflect: true }) shape: "rectangle" | "rounded"
 
 	render() {
@@ -15,7 +15,7 @@ export class SmoothlyLabel {
 			<Host
 				title={this.description}
 				style={{
-					"--hue": this.hue.toString(),
+					"--hue": this.hue?.toString(),
 				}}>
 				<slot></slot>
 			</Host>

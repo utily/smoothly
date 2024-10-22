@@ -346,6 +346,9 @@ export class SmoothlyDisplayDemo {
 							{l.name}
 						</smoothly-label>
 					))}
+					<smoothly-label color="primary" description="Using colors" shape={"rectangle"}>
+						Primary
+					</smoothly-label>
 				</fieldset>
 			</main>,
 		]
