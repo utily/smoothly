@@ -7,6 +7,7 @@ import { Component, Fragment, h, Host, State, VNode } from "@stencil/core"
 })
 export class SmoothlyFormDemoPet {
 	@State() hasOwner = false
+	@State() value: any
 
 	render(): VNode | VNode[] {
 		return (
@@ -15,7 +16,7 @@ export class SmoothlyFormDemoPet {
 				<smoothly-form
 					looks="border"
 					onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}
-					onSmoothlyFormInput={e => console.log("Pet.SmoothlyFormInput", e.detail)}>
+					onSmoothlyFormInput={e => (this.value = { ...e.detail })}>
 					<smoothly-input type="text" name="name">
 						Name
 					</smoothly-input>
@@ -56,6 +57,7 @@ export class SmoothlyFormDemoPet {
 					</smoothly-tabs>
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 				</smoothly-form>
+				<smoothly-display type="json" value={this.value} />
 			</Host>
 		)
 	}
