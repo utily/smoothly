@@ -10,12 +10,6 @@ export class SmoothlyTabs {
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() selectedTab: EventEmitter<string>
 
-	@Listen("smoothlyTabLoad")
-	loadHandler(event: CustomEvent) {
-		event.stopPropagation()
-		this.element.after(event.detail)
-	}
-
 	@Listen("expansionOpen")
 	openChanged(event: CustomEvent) {
 		event.stopPropagation()
@@ -32,6 +26,7 @@ export class SmoothlyTabs {
 	render() {
 		return (
 			<Host>
+				<div class="line" />
 				<slot></slot>
 			</Host>
 		)

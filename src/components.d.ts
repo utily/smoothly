@@ -1968,7 +1968,6 @@ declare global {
     };
     interface HTMLSmoothlyTabElementEventMap {
         "expansionOpen": HTMLDivElement;
-        "smoothlyTabLoad": HTMLDivElement;
     }
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyTabElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabElement, ev: SmoothlyTabCustomEvent<HTMLSmoothlyTabElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2950,7 +2949,6 @@ declare namespace LocalJSX {
     interface SmoothlyTab {
         "label"?: string;
         "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLDivElement>) => void;
-        "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<HTMLDivElement>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTable {

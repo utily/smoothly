@@ -46,32 +46,12 @@ export class SmoothlyFormDemoPet {
 							<smoothly-input type={"text"} name="dog.breed">
 								Breed
 							</smoothly-input>
-							{/* <smoothly-input-select name="dog.size">
-								<span slot="label">Size</span>
-								{["small", "medium", "large"].map(size => (
-									<smoothly-item value={size}>{size}</smoothly-item>
-								))}
-							</smoothly-input-select>
-							<smoothly-input-checkbox name="cat.neutered">Neutered</smoothly-input-checkbox> */}
 						</smoothly-tab>
 						<smoothly-tab label="Cat">
-							<smoothly-input-select name="cat.environment">
-								<span slot="label">Environment</span>
-								{["indoor", "outdoor", "both"].map(environment => (
-									<smoothly-item value={environment}>{environment}</smoothly-item>
-								))}
-							</smoothly-input-select>
-							{/* <smoothly-input-checkbox name="cat.declawed">Declawed</smoothly-input-checkbox> */}
+							<smoothly-input name={"cat.favoriteFood"}>Favorite Food</smoothly-input>
 						</smoothly-tab>
 						<smoothly-tab label="Bird">
-							<smoothly-input-radio name="bird.talks">
-								<span slot="label">Can talks</span>
-								<smoothly-input-radio-item value="yes">Yes</smoothly-input-radio-item>
-								<smoothly-input-radio-item value="no">No</smoothly-input-radio-item>
-							</smoothly-input-radio>
-							{/* <smoothly-input-range name="bird.wingspan" min={1} max={200} step={1}>
-								Wingspan (cm)
-							</smoothly-input-range> */}
+							<smoothly-input name={"bird.species"}>Species</smoothly-input>
 						</smoothly-tab>
 					</smoothly-tabs>
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />

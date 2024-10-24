@@ -1,14 +1,22 @@
-:host([open]) {
-	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
-	box-sizing: border-box;
-	margin-bottom: -3px;
+:host {
+	display: contents;
 }
 :host > label {
 	display: block;
 	padding: .5rem;
 	background-color: transparent;
+	grid-column: span 1;
 	width: auto;
-}
-:host > label:hover {
+  margin: auto;
 	cursor: pointer;
+}
+:host([open]) > label {
+	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
+	margin-bottom: -3px;
+	position: relative;
+}
+
+:host > div {
+	grid-row: 3 / 4;
+	grid-column: 1 / -1;
 }

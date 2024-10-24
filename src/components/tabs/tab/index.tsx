@@ -12,7 +12,6 @@ export class SmoothlyTab {
 	@Prop() label: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() expansionOpen: EventEmitter<HTMLDivElement>
-	@Event() smoothlyTabLoad: EventEmitter<HTMLDivElement>
 
 	@Watch("open")
 	async openHandler() {
@@ -43,10 +42,6 @@ export class SmoothlyTab {
 
 	componentDidLoad(): void {
 		this.openHandler()
-		if (this.expansionElement) {
-			console.log("tab -> expansionElement🏓🏓🏓🏓", this.label, this.expansionElement)
-			this.smoothlyTabLoad.emit(this.expansionElement)
-		}
 	}
 	render() {
 		return (
