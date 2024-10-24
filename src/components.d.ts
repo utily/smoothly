@@ -192,6 +192,7 @@ export namespace Components {
         "name"?: string;
         "prevent": boolean;
         "readonly": boolean;
+        "removeInput": (name: string) => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
@@ -208,6 +209,8 @@ export namespace Components {
     interface SmoothlyFormDemoControlled {
     }
     interface SmoothlyFormDemoLogin {
+    }
+    interface SmoothlyFormDemoPet {
     }
     interface SmoothlyFormDemoPrices {
     }
@@ -247,6 +250,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -268,6 +272,7 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "value": boolean;
@@ -295,6 +300,7 @@ export namespace Components {
         "name": string;
         "output": "rgb" | "hex";
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -315,6 +321,7 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -334,6 +341,7 @@ export namespace Components {
         "name": string;
         "placeholder": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -367,6 +375,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -383,6 +392,7 @@ export namespace Components {
         "next": boolean;
         "previous": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -400,6 +410,7 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -424,6 +435,7 @@ export namespace Components {
         "name": string;
         "outputSide": "right" | "left";
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "step"?: number;
@@ -461,6 +473,7 @@ export namespace Components {
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
@@ -567,6 +580,7 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
@@ -1243,6 +1257,12 @@ declare global {
         prototype: HTMLSmoothlyFormDemoLoginElement;
         new (): HTMLSmoothlyFormDemoLoginElement;
     };
+    interface HTMLSmoothlyFormDemoPetElement extends Components.SmoothlyFormDemoPet, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoPetElement: {
+        prototype: HTMLSmoothlyFormDemoPetElement;
+        new (): HTMLSmoothlyFormDemoPetElement;
+    };
     interface HTMLSmoothlyFormDemoPricesElement extends Components.SmoothlyFormDemoPrices, HTMLStencilElement {
     }
     var HTMLSmoothlyFormDemoPricesElement: {
@@ -1305,6 +1325,7 @@ declare global {
     interface HTMLSmoothlyInputElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputRemove": (parent: HTMLElement) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyBlur": void;
         "smoothlyChange": Record<string, any>;
@@ -1947,6 +1968,7 @@ declare global {
     };
     interface HTMLSmoothlyTabElementEventMap {
         "expansionOpen": HTMLDivElement;
+        "smoothlyTabLoad": void;
     }
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyTabElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabElement, ev: SmoothlyTabCustomEvent<HTMLSmoothlyTabElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2225,6 +2247,7 @@ declare global {
         "smoothly-form-demo-card": HTMLSmoothlyFormDemoCardElement;
         "smoothly-form-demo-controlled": HTMLSmoothlyFormDemoControlledElement;
         "smoothly-form-demo-login": HTMLSmoothlyFormDemoLoginElement;
+        "smoothly-form-demo-pet": HTMLSmoothlyFormDemoPetElement;
         "smoothly-form-demo-prices": HTMLSmoothlyFormDemoPricesElement;
         "smoothly-form-demo-transparent": HTMLSmoothlyFormDemoTransparentElement;
         "smoothly-form-demo-typed": HTMLSmoothlyFormDemoTypedElement;
@@ -2503,6 +2526,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFormDemoLogin {
     }
+    interface SmoothlyFormDemoPet {
+    }
     interface SmoothlyFormDemoPrices {
     }
     interface SmoothlyFormDemoTransparent {
@@ -2543,6 +2568,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyInputRemove"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;
@@ -2924,6 +2950,7 @@ declare namespace LocalJSX {
     interface SmoothlyTab {
         "label"?: string;
         "onExpansionOpen"?: (event: SmoothlyTabCustomEvent<HTMLDivElement>) => void;
+        "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<void>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTable {
@@ -3056,6 +3083,7 @@ declare namespace LocalJSX {
         "smoothly-form-demo-card": SmoothlyFormDemoCard;
         "smoothly-form-demo-controlled": SmoothlyFormDemoControlled;
         "smoothly-form-demo-login": SmoothlyFormDemoLogin;
+        "smoothly-form-demo-pet": SmoothlyFormDemoPet;
         "smoothly-form-demo-prices": SmoothlyFormDemoPrices;
         "smoothly-form-demo-transparent": SmoothlyFormDemoTransparent;
         "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
@@ -3178,6 +3206,7 @@ declare module "@stencil/core" {
             "smoothly-form-demo-card": LocalJSX.SmoothlyFormDemoCard & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoCardElement>;
             "smoothly-form-demo-controlled": LocalJSX.SmoothlyFormDemoControlled & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoControlledElement>;
             "smoothly-form-demo-login": LocalJSX.SmoothlyFormDemoLogin & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
+            "smoothly-form-demo-pet": LocalJSX.SmoothlyFormDemoPet & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPetElement>;
             "smoothly-form-demo-prices": LocalJSX.SmoothlyFormDemoPrices & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
             "smoothly-form-demo-transparent": LocalJSX.SmoothlyFormDemoTransparent & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
             "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
