@@ -19,9 +19,7 @@ export class SmoothlyTab {
 			this.smoothlyTabOpen.emit(this.label)
 
 		if (!this.open) {
-			console.log("tab -> remove inputs 🏓🏓🏓🏓🌸", Object.values(this.inputs))
 			await Promise.all(Object.values(this.inputs).map(input => input.removeSelf()))
-			console.log("tab -> removed inputs 🏓🏓🏓🏓✅", this.label)
 		}
 	}
 	@Listen("click")
@@ -29,13 +27,15 @@ export class SmoothlyTab {
 		e.stopPropagation()
 		this.open = true
 	}
+	componentDidLoad(): void {
+		this.openHandler()
+	}
 	connectedCallback() {
 		this.smoothlyTabLoad.emit()
 	}
 
 	@Listen("smoothlyInputLoad")
 	onInputLoad(event: CustomEvent) {
-		console.log("tab -> smoothlyInputLoad🏓🏓🏓🏓", Input.Element.is(event.target), event.target)
 		if (Input.Element.is(event.target)) {
 			this.inputs[event.target.name] = event.target
 			if (!this.open)
@@ -43,9 +43,6 @@ export class SmoothlyTab {
 		}
 	}
 
-	componentDidLoad(): void {
-		this.openHandler()
-	}
 	render() {
 		return (
 			<Host>
