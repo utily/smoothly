@@ -1,17 +1,6 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Method,
-	Prop,
-	State,
-	VNode,
-	Watch,
-} from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, State, VNode, Watch } from "@stencil/core"
 import { Color } from "../../../model"
+import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -22,7 +11,7 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, Editable {
+export class SmoothlyInputFile implements Input, Clearable, Editable {
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() accept?: string
@@ -38,6 +27,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	private parent?: HTMLElement
 	private listener: { changed?: (parent: Editable) => Promise<void> }
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
@@ -49,7 +39,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		return this.transfer.files
 	}
 
-	async componentWillLoad(): Promise<void> {
+	async connectedCallback() {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
@@ -61,6 +51,16 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	async getValue(): Promise<File | undefined> {
 		return this.value
 	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
+	}
+
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined

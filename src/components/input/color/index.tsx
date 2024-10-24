@@ -1,6 +1,5 @@
 import {
 	Component,
-	ComponentWillLoad,
 	Element,
 	Event,
 	EventEmitter,
@@ -16,6 +15,7 @@ import {
 import { Color, Data } from "../../../model"
 import { HSL } from "../../../model/Color/HSL"
 import { RGB } from "../../../model/Color/RGB"
+import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
@@ -27,7 +27,8 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
+export class SmoothlyInputColor implements Input, Clearable, Editable {
+	private parent?: Editable
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
@@ -47,13 +48,22 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	async componentWillLoad(): Promise<void> {
+	async connectedCallback(): Promise<void> {
 		this.value && this.setInitialValue()
 		this.value && (this.rgb = Color.Hex.toRGB(this.value))
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {

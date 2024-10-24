@@ -1,6 +1,5 @@
 import {
 	Component,
-	ComponentWillLoad,
 	Element,
 	Event,
 	EventEmitter,
@@ -15,6 +14,7 @@ import {
 } from "@stencil/core"
 import { tidily } from "tidily"
 import { Color } from "../../../model"
+import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -25,10 +25,11 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
+export class SmoothlyInputRange implements Input, Clearable, Editable {
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
+	private parent?: Editable
 	@Element() element: HTMLSmoothlyInputRangeElement
 	@Prop({ mutable: true }) value: number | undefined = undefined
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -47,13 +48,22 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	componentWillLoad(): void | Promise<void> {
+	connectedCallback(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.value && (this.initialValue = this.value)
 		this.valueChanged()
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>) {

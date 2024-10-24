@@ -1,17 +1,6 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Method,
-	Prop,
-	VNode,
-	Watch,
-} from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, VNode, Watch } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -23,7 +12,8 @@ import { Selectable } from "./Selected"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
+export class SmoothlyInputRadio implements Input, Clearable, Editable {
+	private parent?: Editable
 	private active?: Selectable
 	private valueReceivedOnLoad = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -40,15 +30,22 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	componentWillLoad(): void | Promise<void> {
+	connectedCallback(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
-	}
-	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.initialValue = this.active
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	@Listen("smoothlyRadioButtonRegister")
 	handleRegister(event: CustomEvent<(name: string) => void>) {

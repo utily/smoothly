@@ -1,6 +1,5 @@
 import {
 	Component,
-	ComponentDidLoad,
 	Element,
 	Event,
 	EventEmitter,
@@ -14,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Notice, Option } from "../../model"
+import { SmoothlyForm } from "../form"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -26,7 +26,7 @@ import { Controls } from "./menu"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidLoad {
+export class SmoothlyPicker implements Clearable, Editable, Input {
 	private valueReceivedOnLoad = false
 	private initialValue = new Map<any, Option>()
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -48,12 +48,22 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	private controls?: Controls
+	private parent?: Editable
 
-	componentWillLoad(): void | Promise<void> {
+	connectedCallback(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.listener.changed?.(this)
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 
 	@Method()

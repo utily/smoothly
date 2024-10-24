@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, W
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
+import { SmoothlyForm } from "../form"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
@@ -30,6 +31,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
+	private parent?: Editable
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -106,7 +108,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			pattern: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).pattern,
 		}
 	}
-	componentWillLoad() {
+	async connectedCallback() {
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value
@@ -118,9 +120,18 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {

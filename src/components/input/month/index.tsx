@@ -1,21 +1,9 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Element,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Method,
-	Prop,
-	VNode,
-	Watch,
-} from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, VNode, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { Data } from "../../../model"
 import { Color } from "../../../model"
 import * as generate from "../../calendar/generate"
+import { SmoothlyForm } from "../../form"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -25,7 +13,7 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
+export class SmoothlyInputMonth implements Input, Editable {
 	changed: boolean
 	@Element() element: HTMLSmoothlyInputMonthElement
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
@@ -41,15 +29,25 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
+	private parent?: HTMLElement
 	private year?: HTMLSmoothlyInputSelectElement
 	private month?: HTMLSmoothlyInputSelectElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 
-	componentWillLoad(): void {
+	connectedCallback(): void {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.valueChanged()
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	@Watch("value")
 	valueChanged(): void {

@@ -1,6 +1,5 @@
 import {
 	Component,
-	ComponentWillLoad,
 	Element,
 	Event,
 	EventEmitter,
@@ -14,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { SmoothlyForm } from "../../form"
 import { Item } from "../../item/Item"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -24,7 +24,8 @@ import { Looks } from "../Looks"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
+export class SmoothlyInputSelect implements Input, Editable, Clearable {
+	private parent?: Editable
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -62,13 +63,22 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
-	componentWillLoad(): void | Promise<void> {
+	connectedCallback(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	componentDidLoad(): void | Promise<void> {
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])

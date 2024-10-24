@@ -192,6 +192,7 @@ export namespace Components {
         "name"?: string;
         "prevent": boolean;
         "readonly": boolean;
+        "removeInput": (name: string) => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
@@ -254,6 +255,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -276,6 +278,7 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "value": boolean;
@@ -304,6 +307,7 @@ export namespace Components {
         "name": string;
         "output": "rgb" | "hex";
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -325,6 +329,7 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -345,6 +350,7 @@ export namespace Components {
         "name": string;
         "placeholder": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -379,6 +385,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -396,6 +403,7 @@ export namespace Components {
         "next": boolean;
         "previous": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -414,6 +422,7 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
@@ -439,6 +448,7 @@ export namespace Components {
         "name": string;
         "outputSide": "right" | "left";
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "step"?: number;
@@ -477,6 +487,7 @@ export namespace Components {
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
@@ -584,6 +595,7 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
