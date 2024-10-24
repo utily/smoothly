@@ -43,6 +43,9 @@ export class SmoothlyTab {
 		}
 	}
 
+	componentDidLoad(): void {
+		this.openHandler()
+	}
 	render() {
 		return (
 			<Host>
