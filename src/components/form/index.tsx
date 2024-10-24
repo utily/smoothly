@@ -59,9 +59,9 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 
 	@Method()
 	async removeInput(name: string) {
-		console.log("form.removeInput", name)
 		this.value = Data.remove(this.value, name)
 		this.inputs.delete(name)
+		console.log("form.removeInput🟪🟪🟪🟪", name, this.value)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -126,7 +126,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 				this.contentType = "form-data"
 			this.value = Data.merge(this.value, { [event.target.name]: event.target.value })
 			this.inputs.set(event.target.name, event.target)
-			console.log("form.smoothlyInputLoad", event.target.name, this.value)
+			console.log("form.smoothlyInputLoad🟪🟪🟪🟪", event.target.name, this.value)
 		}
 	}
 	@Listen("smoothlyFormDisable")

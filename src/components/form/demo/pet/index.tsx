@@ -41,29 +41,18 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input>
 						</Fragment>
 					)}
-					{/*
-						TODO: Should work with just disconnecting the input with a condition && <smoothly-input />
-
-						TODO: Make input-remove work for smoothly-tabs 
-						Add dog, cat, bird examples
-						dog.breed, dog.size, dog.neutered
-						cat.environment, cat.declawed
-						bird.talks, bird.wingspan
-
-						TODO: input-remove should work with smoothly-summary
-					*/}
-					{/* <smoothly-tabs>
+					<smoothly-tabs>
 						<smoothly-tab label="Dog" open>
 							<smoothly-input type={"text"} name="dog.breed">
 								Breed
 							</smoothly-input>
-							<smoothly-input-select name="dog.size">
+							{/* <smoothly-input-select name="dog.size">
 								<span slot="label">Size</span>
 								{["small", "medium", "large"].map(size => (
 									<smoothly-item value={size}>{size}</smoothly-item>
 								))}
 							</smoothly-input-select>
-							<smoothly-input-checkbox name="cat.neutered">Neutered</smoothly-input-checkbox>
+							<smoothly-input-checkbox name="cat.neutered">Neutered</smoothly-input-checkbox> */}
 						</smoothly-tab>
 						<smoothly-tab label="Cat">
 							<smoothly-input-select name="cat.environment">
@@ -72,7 +61,7 @@ export class SmoothlyFormDemoPet {
 									<smoothly-item value={environment}>{environment}</smoothly-item>
 								))}
 							</smoothly-input-select>
-							<smoothly-input-checkbox name="cat.declawed">Declawed</smoothly-input-checkbox>
+							{/* <smoothly-input-checkbox name="cat.declawed">Declawed</smoothly-input-checkbox> */}
 						</smoothly-tab>
 						<smoothly-tab label="Bird">
 							<smoothly-input-radio name="bird.talks">
@@ -80,11 +69,11 @@ export class SmoothlyFormDemoPet {
 								<smoothly-input-radio-item value="yes">Yes</smoothly-input-radio-item>
 								<smoothly-input-radio-item value="no">No</smoothly-input-radio-item>
 							</smoothly-input-radio>
-							<smoothly-input-range name="bird.wingspan" min={1} max={200} step={1}>
+							{/* <smoothly-input-range name="bird.wingspan" min={1} max={200} step={1}>
 								Wingspan (cm)
-							</smoothly-input-range>
+							</smoothly-input-range> */}
 						</smoothly-tab>
-					</smoothly-tabs> */}
+					</smoothly-tabs>
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 				</smoothly-form>
 			</Host>

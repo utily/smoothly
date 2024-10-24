@@ -9,11 +9,18 @@ export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() selectedTab: EventEmitter<string>
+
+	@Listen("smoothlyTabLoad")
+	loadHandler(event: CustomEvent) {
+		event.stopPropagation()
+		this.element.after(event.detail)
+	}
+
 	@Listen("expansionOpen")
 	openChanged(event: CustomEvent) {
 		event.stopPropagation()
 		this.selectedElement = event.target as HTMLSmoothlyTabElement
-		this.element.after(event.detail)
+		// this.element.after(event.detail)
 		this.selectedTab.emit(this.selectedElement.label)
 	}
 	@Watch("selectedElement")
