@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
+import { SmoothlyForm } from "../../../form"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -35,16 +36,27 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-
-	componentWillLoad() {
-		this.setInitialValue()
-		this.updateValue()
-		this.smoothlyInputLoad.emit(_ => {})
+	private parent?: HTMLElement
+	connectedCallback() {
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+	componentWillLoad() {
+		this.setInitialValue()
+		this.updateValue()
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {

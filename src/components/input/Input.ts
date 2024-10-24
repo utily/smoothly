@@ -17,6 +17,7 @@ export namespace Input {
 		looks?: Looks
 		defined?: boolean
 		binary?: Binary
+		removeSelf: () => Promise<void>
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
@@ -27,6 +28,7 @@ export namespace Input {
 			looks: Looks.type,
 			defined: isly.boolean().optional(),
 			binary: isly.function<Binary>().optional(),
+			removeSelf: isly.function<() => Promise<void>>(),
 		})
 		export const is = type.is
 	}

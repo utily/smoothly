@@ -13,6 +13,7 @@ import {
 } from "@stencil/core"
 import { Date } from "isoly"
 import { Color } from "../../../model"
+import { SmoothlyForm } from "../../form"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -31,6 +32,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() invalid?: boolean = false
+	private parent?: HTMLElement
 	private initialValue?: Date
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: Date
@@ -46,11 +48,22 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 
 	componentWillLoad(): void {
 		this.setInitialValue()
-		this.smoothlyInputLoad.emit(_ => {})
+	}
+	connectedCallback(): void {
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+	async disconnectedCallback() {
+		await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		if (this.parent instanceof SmoothlyForm) {
+			await this.parent.removeInput(this.name)
+		}
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
