@@ -20,7 +20,6 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable {
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true }) checked = false
-	@Prop() value = this.checked
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true }) disabled: boolean
@@ -59,7 +58,10 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable {
 		this.listener[property] = listener
 		listener(this)
 	}
-
+	@Method()
+	async getValue() {
+		return this.checked
+	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable

@@ -65,6 +65,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable {
 			await this.parent.removeInput(this.name)
 		}
 	}
+	@Method()
+	async getValue() {
+		return this.value
+	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
 		if (event.target != this.element)

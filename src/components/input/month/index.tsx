@@ -53,6 +53,10 @@ export class SmoothlyInputMonth implements Input, Editable {
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
+	@Method()
+	async getValue() {
+		return this.value
+	}
 	private adjustMonth(delta: number): void {
 		if (!this.readonly) {
 			const date = isoly.Date.parse(this.value ?? isoly.Date.now())

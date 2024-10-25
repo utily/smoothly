@@ -82,6 +82,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private newState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
+	@Method()
+	async getValue() {
+		return this.value
+	}
 	@Watch("value")
 	async valueWatcher(value: any, before: any) {
 		this.changed = this.initialValue !== this.value
@@ -135,7 +139,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Method()
 	async addSelf() {
 		this.smoothlyInputLoad.emit((parent: HTMLElement) => (this.parent = parent))
-		this.smoothlyInput.emit({ [this.name]: typeof this.value == "string" ? this.value.trim() : this.value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
@@ -202,9 +206,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		)
 		this.updateBackend(after, this.inputElement)
 	}
-	onBlur(event: FocusEvent) {
+	async onBlur(event: FocusEvent) {
 		this.smoothlyBlur.emit()
-		const value = typeof this.value == "string" ? this.value.trim() : this.value
+		const value = await this.getValue()
 		this.smoothlyInput.emit({ [this.name]: value })
 		if (this.initialValue != this.value)
 			this.smoothlyChange.emit({ [this.name]: this.value })

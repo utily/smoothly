@@ -60,7 +60,10 @@ export class SmoothlyInputFile implements Input, Clearable, Editable {
 			await this.parent.removeInput(this.name)
 		}
 	}
-
+	@Method()
+	async getValue() {
+		return this.value
+	}
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined

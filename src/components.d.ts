@@ -282,7 +282,6 @@ export namespace Components {
         "removeSelf": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
-        "value": boolean;
     }
     interface SmoothlyInputCheckboxDemo {
     }
@@ -2656,7 +2655,6 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "readonly"?: boolean;
-        "value"?: boolean;
     }
     interface SmoothlyInputCheckboxDemo {
     }

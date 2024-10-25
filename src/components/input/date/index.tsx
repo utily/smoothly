@@ -109,6 +109,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
 	@Method()
+	async getValue() {
+		return this.value
+	}
+	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
 	}

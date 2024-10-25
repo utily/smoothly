@@ -63,6 +63,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
+	@Method()
+	async getValue() {
+		return !this.multiple && this.selected[0]
+			? this.selected[0].value
+			: this.multiple && this.selected.length > 0
+			? this.selected.map(item => item.value)
+			: undefined
+	}
+
 	connectedCallback(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))

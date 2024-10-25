@@ -89,6 +89,12 @@ export class SmoothlyPicker implements Clearable, Editable, Input {
 		if (this.controls)
 			this.smoothlyPickerLoaded.emit(this.controls)
 	}
+	@Method()
+	async getValue() {
+		return this.multiple
+			? Array.from(this.selected.values(), option => option.value)
+			: Array.from(this.selected.values(), option => option.value)[0]
+	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks) => void>): void {
 		if (event.target != this.element) {
