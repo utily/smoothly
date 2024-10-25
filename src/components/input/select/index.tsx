@@ -67,6 +67,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
+
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
@@ -76,18 +77,19 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	}
 	@Method()
 	async removeSelf() {
-		if (this.parent instanceof SmoothlyForm) {
+		if (this.parent instanceof SmoothlyForm)
 			await this.parent.removeInput(this.name)
 	}
 	@Method()
 	async addSelf() {
-		this.smoothlyInputLoad.emit((parent: HTMLElement) => (this.parent = parent))
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		const value =
 			!this.multiple && this.selected[0]
 				? this.selected[0].value
 				: this.multiple && this.selected.length > 0
 				? this.selected.map(item => item.value)
 				: undefined
+
 		this.smoothlyInput.emit({ [this.name]: value })
 	}
 	componentDidLoad(): void | Promise<void> {

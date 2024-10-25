@@ -202,4 +202,17 @@ describe("Data", () => {
 			},
 		})
 	})
+	it.each([
+		["address.zip", true],
+		["address", true],
+		["address.street", true],
+		["address.middle", false],
+		["address.middle.street", false],
+		["address.street.street", false],
+		["zip", false],
+		["street", false],
+		["postalCode", false],
+	])("Data.included", (name: string, included: boolean) => {
+		expect(Data.included({ address: { street: undefined, zip: "123" } }, name)).toEqual(included)
+	})
 })

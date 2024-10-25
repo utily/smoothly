@@ -106,10 +106,8 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		if (Input.Element.is(event.target) && this.inputs.has(event.target.name)) {
-			this.value = Data.merge(this.value, event.detail)
-			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
-		}
+		this.value = Data.merge(this.value, event.detail)
+		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
 	}
 	@Listen("smoothlyFormSubmit", { target: "window" })
 	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
@@ -128,7 +126,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 				this.contentType = "form-data"
 			this.value = Data.merge(this.value, { [event.target.name]: await event.target.getValue() })
 			this.inputs.set(event.target.name, event.target)
-			// console.log("form.smoothlyInputLoad🟪🟪🟪🟪", event.target.name, this.value)
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
 		}
 	}

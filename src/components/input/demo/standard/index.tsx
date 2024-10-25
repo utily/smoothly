@@ -39,10 +39,10 @@ export class SmoothlyInputDemoStandard {
 	}
 
 	render() {
-		const placeholder = this.options.placeholder ? "placeholder" : undefined
+		// const placeholder = this.options.placeholder ? "placeholder" : undefined
 		return (
 			<Host class={{ vertical: !!this.options.vertical }}>
-				<div class="description">
+				{/* <div class="description">
 					<h2>Input Standard</h2>
 					<p>
 						Height of input should be <code>3rem</code> including border. This is should result in a 48 pixel height at
@@ -196,7 +196,7 @@ export class SmoothlyInputDemoStandard {
 					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>
 						{this.options.showLabel ? "Aligned labels & values" : "Center values"}
 					</div>
-				</div>
+				</div> */}
 			</Host>
 		)
 	}

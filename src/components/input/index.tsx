@@ -129,11 +129,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async removeSelf() {
-		console.log("smoothly-input -> remove", this.name, "🌸🌸🌸🌸🌸")
-		if (this.parent instanceof SmoothlyForm) {
+		if (this.parent instanceof SmoothlyForm)
 			await this.parent.removeInput(this.name)
-			console.log("smoothly-input -> removed", this.name, "✅✅✅✅✅")
-		}
 	}
 	@Method()
 	async addSelf() {

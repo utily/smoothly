@@ -470,6 +470,7 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
+        "addSelf": () => Promise<void>;
         "changed": boolean;
         "clear": () => Promise<void>;
         "clearable": boolean;

@@ -70,4 +70,14 @@ export namespace Data {
 	function isEmpty(current: any): boolean {
 		return typeof current === "object" && Object.keys(current).length === 0
 	}
+	export function included(data: Data, name: string): boolean {
+		return isKeyIn(data, name.split("."))
+	}
+	function isKeyIn(data: any, [head, ...tail]: string[]): boolean {
+		return typeof data === "object" && tail.length === 0
+			? head in data
+			: typeof data === "object" && head in data
+			? isKeyIn(data[head], tail)
+			: false
+	}
 }

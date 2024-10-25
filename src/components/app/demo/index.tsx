@@ -12,9 +12,9 @@ export class SmoothlyAppDemo {
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-app-room path="/root" label="root">
+				{/* <smoothly-app-room path="/root" label="root">
 					<smoothly-theme-demo />
-				</smoothly-app-room>
+				</smoothly-app-room> */}
 				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
@@ -42,9 +42,9 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/form" label="Form">
 					<smoothly-form-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/input" label="Input">
+				{/* <smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
-				</smoothly-app-room>
+				</smoothly-app-room> */}
 				<smoothly-app-room path="/button" label="Button">
 					<smoothly-button-demo />
 				</smoothly-app-room>
@@ -57,9 +57,9 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/table" label="Table">
 					<smoothly-table-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/next" label="Next">
+				{/* <smoothly-app-room path="/next" label="Next">
 					<smoothly-next-demo />
-				</smoothly-app-room>
+				</smoothly-app-room> */}
 				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">
 					<smoothly-tabs-demo />
 				</smoothly-app-room>
