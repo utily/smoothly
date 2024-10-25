@@ -78,7 +78,17 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 	async removeSelf() {
 		if (this.parent instanceof SmoothlyForm) {
 			await this.parent.removeInput(this.name)
-		}
+	}
+	@Method()
+	async addSelf() {
+		this.smoothlyInputLoad.emit((parent: HTMLElement) => (this.parent = parent))
+		const value =
+			!this.multiple && this.selected[0]
+				? this.selected[0].value
+				: this.multiple && this.selected.length > 0
+				? this.selected.map(item => item.value)
+				: undefined
+		this.smoothlyInput.emit({ [this.name]: value })
 	}
 	componentDidLoad(): void | Promise<void> {
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])
@@ -175,8 +185,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 			event.stopPropagation()
 			event.target.deselectable = !this.required
 			this.items.push(event.target as HTMLSmoothlyItemElement)
+			event.detail(this)
 		}
-		event.detail(this)
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {

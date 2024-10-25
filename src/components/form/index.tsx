@@ -106,8 +106,10 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Listen("smoothlyInput")
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		this.value = Data.merge(this.value, event.detail)
-		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		if (Input.Element.is(event.target) && this.inputs.has(event.target.name)) {
+			this.value = Data.merge(this.value, event.detail)
+			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		}
 	}
 	@Listen("smoothlyFormSubmit", { target: "window" })
 	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
