@@ -7,6 +7,7 @@ import { Component, Fragment, h, Host, State, VNode } from "@stencil/core"
 })
 export class SmoothlyFormDemoPet {
 	@State() hasOwner = false
+	@State() owner: { firstName?: string; lastName?: string } = {}
 	@State() value: any
 
 	render(): VNode | VNode[] {
@@ -34,10 +35,18 @@ export class SmoothlyFormDemoPet {
 					</smoothly-input-checkbox>
 					{this.hasOwner && (
 						<Fragment>
-							<smoothly-input type="text" name="owner.firstName">
+							<smoothly-input
+								type="text"
+								name="owner.firstName"
+								value={this.owner.firstName}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, firstName: e.detail["owner.firstName"] })}>
 								Owner First Name
 							</smoothly-input>
-							<smoothly-input type="text" name="owner.lastName">
+							<smoothly-input
+								type="text"
+								name="owner.lastName"
+								value={this.owner.lastName}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, lastName: e.detail["owner.lastName"] })}>
 								Owner Last Name
 							</smoothly-input>
 						</Fragment>
