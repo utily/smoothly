@@ -18,9 +18,9 @@ export class SmoothlyTab {
 		if (this.open)
 			this.smoothlyTabOpen.emit(this.label)
 
-		if (!this.open) {
-			await Promise.all(Object.values(this.inputs).map(input => input.removeSelf()))
-		}
+		this.open
+			? await Promise.all(Object.values(this.inputs).map(input => input.addSelf?.()))
+			: await Promise.all(Object.values(this.inputs).map(input => input.removeSelf()))
 	}
 	@Listen("click")
 	onClick(e: UIEvent) {

@@ -135,6 +135,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			console.log("smoothly-input -> removed", this.name, "✅✅✅✅✅")
 		}
 	}
+	@Method()
+	async addSelf() {
+		this.smoothlyInputLoad.emit((parent: HTMLElement) => (this.parent = parent))
+		this.smoothlyInput.emit({ [this.name]: typeof this.value == "string" ? this.value.trim() : this.value })
+	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {
 			this.inputElement.focus()

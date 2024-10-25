@@ -240,6 +240,7 @@ export namespace Components {
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
+        "addSelf": () => Promise<void>;
         "autocomplete": boolean;
         "changed": boolean;
         "clear": () => Promise<void>;
