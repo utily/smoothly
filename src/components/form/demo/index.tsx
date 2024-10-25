@@ -9,16 +9,14 @@ export class SmoothlyFormDemo {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<div>
-					{/* <smoothly-form-demo-all /> */}
-					<smoothly-form-demo-pet />
-					{/* <smoothly-form-demo-card /> */}
-					{/* <smoothly-form-demo-login /> */}
-					{/* <smoothly-form-demo-prices /> */}
-					{/* <smoothly-form-demo-typed /> */}
-					{/* <smoothly-form-demo-transparent /> */}
-					{/* <smoothly-form-demo-controlled /> */}
-				</div>
+				{/* <smoothly-form-demo-all /> */}
+				<smoothly-form-demo-pet />
+				{/* <smoothly-form-demo-card /> */}
+				{/* <smoothly-form-demo-login /> */}
+				{/* <smoothly-form-demo-prices /> */}
+				{/* <smoothly-form-demo-typed /> */}
+				{/* <smoothly-form-demo-transparent /> */}
+				{/* <smoothly-form-demo-controlled /> */}
 			</Host>
 		)
 	}
