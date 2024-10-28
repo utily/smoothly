@@ -6,7 +6,6 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@s
 	scoped: true,
 })
 export class SmoothlyTab {
-	expansionElement?: HTMLDivElement
 	@Prop() label: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() smoothlyTabOpen: EventEmitter<string>
@@ -14,9 +13,8 @@ export class SmoothlyTab {
 
 	@Watch("open")
 	openHandler() {
-		if (this.expansionElement && this.open) {
+		if (this.open)
 			this.smoothlyTabOpen.emit(this.label)
-		}
 	}
 	@Listen("click")
 	onClick(e: UIEvent) {
@@ -35,7 +33,7 @@ export class SmoothlyTab {
 				<div>
 					<label>{this.label}</label>
 				</div>
-				<div ref={e => (this.expansionElement = e)} hidden={!this.open}>
+				<div hidden={!this.open}>
 					<slot />
 				</div>
 			</Host>
