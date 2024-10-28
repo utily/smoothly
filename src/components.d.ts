@@ -650,6 +650,7 @@ export namespace Components {
     interface SmoothlyTableTesting {
     }
     interface SmoothlyTabs {
+        "filled": boolean;
     }
     interface SmoothlyTabsDemo {
     }
@@ -2965,6 +2966,7 @@ declare namespace LocalJSX {
     interface SmoothlyTableTesting {
     }
     interface SmoothlyTabs {
+        "filled"?: boolean;
         "onSelectedTab"?: (event: SmoothlyTabsCustomEvent<string>) => void;
     }
     interface SmoothlyTabsDemo {

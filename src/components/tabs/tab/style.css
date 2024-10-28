@@ -1,13 +1,7 @@
-:host([open]) {
-	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
-	box-sizing: border-box;
-	margin-bottom: -3px;
-}
 :host > label {
 	display: block;
 	padding: .5rem;
-	background-color: transparent;
-	width: auto;
+	text-align: center;
 }
 :host > label:hover {
 	cursor: pointer;

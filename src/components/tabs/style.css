@@ -4,3 +4,20 @@
 	justify-content: space-around;
 	border-bottom: 3px solid rgb(var(--smoothly-default-shade));
 }
+:host>smoothly-tab[open] {
+	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
+	margin-bottom: -3px;
+}
+:host[filled]>smoothly-tab[open] {
+	background-color: rgb(var(--smoothly-primary-color));
+}
+:host[filled]>smoothly-tab:not([open]) {
+	background-color: rgb(var(--smoothly-default-shade));
+}
+:host:not([filled])>smoothly-tab {
+	background-color: transparent;
+}
+:host[filled]>smoothly-tab {
+	flex: 1;
+}
+
