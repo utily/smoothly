@@ -4,12 +4,8 @@
 :host[hidden] {
 	display: none;
 }
-button:focus {
-	outline: none;
-}
-smoothly-selector {
-	outline: none;
-}
-button {
-	display: block;
+:host > * {
+	margin: auto;
+	max-width: 1200px;
+	width: 100%;
 }
