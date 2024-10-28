@@ -20,9 +20,11 @@ export class SmoothlyTabs {
 
 	@Listen("smoothlyTabOpen")
 	openChanged(event: CustomEvent) {
-		event.stopPropagation()
-		this.selectedElement = event.target as HTMLSmoothlyTabElement
-		this.smoothlyTabOpen.emit(event.detail)
+		if (event.target != this.element) {
+			event.stopPropagation()
+			this.selectedElement = event.target as HTMLSmoothlyTabElement
+			this.smoothlyTabOpen.emit(event.detail)
+		}
 	}
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyTabElement, old: HTMLSmoothlyTabElement) {
