@@ -9,13 +9,13 @@ export class SmoothlyTab {
 	expansionElement?: HTMLDivElement
 	@Prop() label: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
-	@Event() expansionOpen: EventEmitter<HTMLDivElement>
+	@Event() smoothlyTabOpen: EventEmitter<string>
 	@Event() smoothlyTabLoad: EventEmitter<void>
 
 	@Watch("open")
 	openHandler() {
 		if (this.expansionElement && this.open) {
-			this.expansionOpen.emit(this.expansionElement)
+			this.smoothlyTabOpen.emit(this.label)
 		}
 	}
 	@Listen("click")
