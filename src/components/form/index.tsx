@@ -56,12 +56,30 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
-
+	@Listen("smoothlyInputLoad")
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
+		event.stopPropagation()
+		event.detail(this)
+		if (Input.Element.is(event.target)) {
+			if (await event.target.binary?.())
+				this.contentType = "form-data"
+			this.value = Data.merge(this.value, { [event.target.name]: await event.target.getValue() })
+			this.inputs.set(event.target.name, event.target)
+			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		}
+	}
+	@Listen("smoothlyInput")
+	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
+		this.value = Data.merge(this.value, event.detail)
+		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+	}
 	@Method()
 	async removeInput(name: string) {
-		this.value = Data.remove(this.value, name)
-		this.inputs.delete(name)
-		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		if (this.element?.isConnected) {
+			this.value = Data.remove(this.value, name)
+			this.inputs.delete(name)
+			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		}
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -104,11 +122,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		event.stopPropagation()
 		event.detail(this.looks, this.color)
 	}
-	@Listen("smoothlyInput")
-	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
-		this.value = Data.merge(this.value, event.detail)
-		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
-	}
 	@Listen("smoothlyFormSubmit", { target: "window" })
 	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
 		event.target == this.element && event.detail.result(false)
@@ -116,18 +129,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Listen("smoothlyFormSubmit")
 	submitHandler(event: SmoothlyFormCustomEvent<Submit>): void {
 		this.action && event.stopPropagation()
-	}
-	@Listen("smoothlyInputLoad")
-	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyForm) => void>): Promise<void> {
-		event.stopPropagation()
-		event.detail(this)
-		if (Input.Element.is(event.target)) {
-			if (await event.target.binary?.())
-				this.contentType = "form-data"
-			this.value = Data.merge(this.value, { [event.target.name]: await event.target.getValue() })
-			this.inputs.set(event.target.name, event.target)
-			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
-		}
 	}
 	@Listen("smoothlyFormDisable")
 	async smoothlyFormDisableHandler(event: CustomEvent): Promise<void> {

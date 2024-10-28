@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
@@ -14,6 +14,7 @@ import { Looks } from "./Looks"
 	scoped: true,
 })
 export class SmoothlyInput implements Clearable, Input, Editable {
+	@Element() element: HTMLSmoothlyInputElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
@@ -129,7 +130,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.listener.changed?.(this)
 	}
 	async disconnectedCallback() {
-		await this.removeSelf()
+		if (!this.element.isConnected)
+			await this.removeSelf()
 	}
 	@Method()
 	async removeSelf() {

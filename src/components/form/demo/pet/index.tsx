@@ -18,7 +18,7 @@ export class SmoothlyFormDemoPet {
 					looks="border"
 					onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}
 					onSmoothlyFormInput={e => (this.value = { ...e.detail })}>
-					{/* <smoothly-input type="text" name="name">
+					<smoothly-input type="text" name="name">
 						Name
 					</smoothly-input>
 					<smoothly-input type="integer" name="age">
@@ -32,7 +32,7 @@ export class SmoothlyFormDemoPet {
 							e.stopPropagation()
 						}}>
 						Has Owner
-					</smoothly-input-checkbox>*/}
+					</smoothly-input-checkbox>
 					{this.hasOwner && (
 						<Fragment>
 							<smoothly-input

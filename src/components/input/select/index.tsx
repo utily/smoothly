@@ -82,7 +82,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable {
 		this.listener.changed?.(this)
 	}
 	async disconnectedCallback() {
-		await this.removeSelf()
+		if (!this.element.isConnected)
+			await this.removeSelf()
 	}
 	@Method()
 	async removeSelf() {
