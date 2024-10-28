@@ -27,11 +27,11 @@ export class SmoothlyTab {
 		e.stopPropagation()
 		this.open = true
 	}
-	componentDidLoad(): void {
-		this.openHandler()
-	}
 	connectedCallback() {
 		this.smoothlyTabLoad.emit()
+	}
+	componentDidLoad(): void {
+		this.openHandler()
 	}
 
 	@Listen("smoothlyInputLoad")
