@@ -10,6 +10,8 @@ export class SmoothlyTab {
 	@Prop() label: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Event() expansionOpen: EventEmitter<HTMLDivElement>
+	@Event() smoothlyTabLoad: EventEmitter<void>
+
 	@Watch("open")
 	openHandler() {
 		if (this.expansionElement && this.open) {
@@ -21,6 +23,9 @@ export class SmoothlyTab {
 		e.stopPropagation()
 		this.open = true
 	}
+	connectedCallback() {
+		this.smoothlyTabLoad.emit()
+	}
 	componentDidLoad(): void {
 		this.openHandler()
 	}
@@ -29,7 +34,7 @@ export class SmoothlyTab {
 			<Host>
 				<label>{this.label}</label>
 				<div ref={e => (this.expansionElement = e)} hidden={!this.open}>
-					<slot></slot>
+					<slot />
 				</div>
 			</Host>
 		)
