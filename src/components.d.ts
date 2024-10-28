@@ -879,6 +879,10 @@ export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T>
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
 }
+export interface SmoothlyTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTabsElement;
+}
 export interface SmoothlyToggleSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyToggleSwitchElement;
@@ -2059,7 +2063,18 @@ declare global {
         prototype: HTMLSmoothlyTableTestingElement;
         new (): HTMLSmoothlyTableTestingElement;
     };
+    interface HTMLSmoothlyTabsElementEventMap {
+        "smoothlyTabOpen": string;
+    }
     interface HTMLSmoothlyTabsElement extends Components.SmoothlyTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTabsElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabsElement, ev: SmoothlyTabsCustomEvent<HTMLSmoothlyTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTabsElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabsElement, ev: SmoothlyTabsCustomEvent<HTMLSmoothlyTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTabsElement: {
         prototype: HTMLSmoothlyTabsElement;
@@ -2952,6 +2967,7 @@ declare namespace LocalJSX {
     interface SmoothlyTableTesting {
     }
     interface SmoothlyTabs {
+        "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;
     }
     interface SmoothlyTabsDemo {
     }

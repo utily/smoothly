@@ -1,4 +1,4 @@
-import { Component, Element, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -9,7 +9,7 @@ export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
 	@State() tabs: HTMLElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
-	@State() smoothlyTabOpen: EventEmitter<string>
+	@Event() smoothlyTabOpen: EventEmitter<string>
 
 	@Listen("smoothlyTabLoad")
 	onInputLoad(event: CustomEvent) {
