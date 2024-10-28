@@ -7,14 +7,24 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch 
 })
 export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
+	@State() tabs: HTMLElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
-	@Event() selectedTab: EventEmitter<string>
-	@Listen("expansionOpen")
+	@Event() smoothlyTabOpen: EventEmitter<string>
+
+	@Listen("smoothlyTabLoad")
+	onInputLoad(event: CustomEvent) {
+		if (event.target instanceof HTMLElement && !this.tabs.includes(event.target)) {
+			this.tabs = [...this.tabs, event.target]
+		}
+	}
+
+	@Listen("smoothlyTabOpen")
 	openChanged(event: CustomEvent) {
-		event.stopPropagation()
-		this.selectedElement = event.target as HTMLSmoothlyTabElement
-		this.element.after(event.detail)
-		this.selectedTab.emit(this.selectedElement.label)
+		if (event.target != this.element) {
+			event.stopPropagation()
+			this.selectedElement = event.target as HTMLSmoothlyTabElement
+			this.smoothlyTabOpen.emit(event.detail)
+		}
 	}
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyTabElement, old: HTMLSmoothlyTabElement) {
@@ -24,7 +34,7 @@ export class SmoothlyTabs {
 
 	render() {
 		return (
-			<Host>
+			<Host style={{ "--tabs": `${this.tabs.length}` }}>
 				<slot></slot>
 			</Host>
 		)

@@ -1,14 +1,28 @@
-:host([open]) {
-	border-bottom: 3px solid rgb(var(--smoothly-primary-color));
-	box-sizing: border-box;
-	margin-bottom: -3px;
+:host {
+	display: contents;
+	--line-width: 3px;
 }
-:host > label {
+:host > div:first-child {
+	grid-column: span 1;
+	background-color: transparent;
+	border-bottom-color: rgb(var(--smoothly-default-shade));
+	border-bottom-width: var(--line-width);
+	border-bottom-style: solid;
+}
+:host > div:first-child > label {
 	display: block;
 	padding: .5rem;
-	background-color: transparent;
-	width: auto;
-}
-:host > label:hover {
+	width: fit-content;
+  margin: auto;
 	cursor: pointer;
+}
+:host([open]) > div:first-child > label {
+	border-bottom: var(--line-width) solid rgb(var(--smoothly-primary-color));
+	margin-bottom: calc(-1 * var(--line-width));
+	position: relative;
+}
+
+:host > div:nth-child(2) {
+	grid-row: 2 / 3;
+	grid-column: 1 / -1;
 }

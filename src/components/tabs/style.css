@@ -1,6 +1,5 @@
 :host {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	border-bottom: 3px solid rgb(var(--smoothly-default-shade));
+	display: grid;
+	grid-template-columns: repeat(var(--tabs), auto);
+	grid-template-rows: auto auto;
 }
