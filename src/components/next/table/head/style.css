@@ -12,10 +12,9 @@
 	stroke: rgb(var(--smoothly-table-header-foreground));
 	fill: rgb(var(--smoothly-table-header-foreground));
 	font-weight: bold;
+	transition: box-shadow 0.3s ease;
 }
 
 :host.scrolled {
-	/* outline: 10px solid red; */
-	--smoothly-table-header-shadow: 0 0.25rem 0.25rem rgba(var(--smoothly-dark-shade), 0.5);
 	box-shadow: var(--smoothly-table-header-shadow);
 }

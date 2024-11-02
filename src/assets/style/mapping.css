@@ -5,10 +5,10 @@ smoothly-color {
 	--smoothly-table-foreground: var(--smoothly-default-contrast);
 	--smoothly-table-background: var(--smoothly-default-color);
 
-	--smoothly-table-header-foreground: var(--smoothly-dark-contrast);
-	--smoothly-table-header-background: var(--smoothly-dark-color);
+	--smoothly-table-header-foreground: var(--smoothly-default-contrast);
+	--smoothly-table-header-background: var(--smoothly-default-color);
 
-	--smoothly-table-header-shadow: 0 0.5rem 0.5rem rgb(0,0,0,0.5);
+	--smoothly-table-header-shadow: 0 0.5rem 0.5rem -0.25rem rgba(var(--smoothly-dark-shade), 0.3);
 
 	--smoothly-table-footer-foreground: var(--smoothly-light-contrast);
 	--smoothly-table-footer-background: var(--smoothly-light-color);
