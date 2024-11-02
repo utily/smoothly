@@ -13,3 +13,9 @@
 	fill: rgb(var(--smoothly-table-header-foreground));
 	font-weight: bold;
 }
+
+:host.scrolled {
+	/* outline: 10px solid red; */
+	--smoothly-table-header-shadow: 0 0.25rem 0.25rem rgba(var(--smoothly-dark-shade), 0.5);
+	box-shadow: var(--smoothly-table-header-shadow);
+}
