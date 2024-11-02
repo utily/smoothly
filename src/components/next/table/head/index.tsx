@@ -8,16 +8,23 @@ import { Scrollable } from "../../../../model"
 })
 export class SmoothlyNextTableHead {
 	@Element() element: HTMLSmoothlyNextTableElement
-	private scrollParent?: HTMLElement
 	@State() scrolled?: boolean
+	private scrollParent?: HTMLElement
+	private onScroll = (event: Event) => {
+		if (event.target instanceof HTMLElement) {
+			this.scrollParent = event.target
+			const parentRect = this.scrollParent.getBoundingClientRect()
+			const elementRect = this.element.getBoundingClientRect()
+			this.scrolled = parentRect.top == elementRect.top
+		}
+	}
 
 	connectedCallback() {
 		this.scrollParent = Scrollable.findParent(this.element)
-		this.scrollParent?.addEventListener("scroll", event => {
-			const parent = event.target as HTMLElement
-			const relativeX = this.element.offsetTop - parent.offsetTop
-			this.scrolled = relativeX <= parent.scrollTop
-		})
+		this.scrollParent?.addEventListener("scroll", this.onScroll)
+	}
+	disconnectedCallback() {
+		this.scrollParent?.removeEventListener("scroll", this.onScroll)
 	}
 
 	render(): VNode | VNode[] {
