@@ -71,6 +71,8 @@ export class Calendar {
 				inCalendar
 				next
 				previous
+				min={this.min}
+				max={this.max}
 				showLabel={false}
 				onSmoothlyInput={e => {
 					e.stopPropagation()

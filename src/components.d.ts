@@ -379,6 +379,8 @@ export namespace Components {
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name": string;
         "next": boolean;
         "previous": boolean;
@@ -2668,6 +2670,8 @@ declare namespace LocalJSX {
         "color"?: Color;
         "inCalendar"?: boolean;
         "looks"?: Looks;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name"?: string;
         "next"?: boolean;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputMonthCustomEvent<(disabled: boolean) => void>) => void;

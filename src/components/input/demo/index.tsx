@@ -47,7 +47,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input-date-range>
 					<h2>Date</h2>
 					<smoothly-input-date>Date</smoothly-input-date>
-					<smoothly-input-date showLabel={false} value="2021-10-28" max="2021-12-30" min="2021-10-10">
+					<smoothly-input-date showLabel={false} value="2021-10-28" max="2022-10-30" min="2021-10-10">
 						Date
 					</smoothly-input-date>
 					<smoothly-input-date value="2021-10-28">

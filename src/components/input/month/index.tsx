@@ -35,6 +35,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false
+	@Prop() min?: isoly.Date
+	@Prop() max?: isoly.Date
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInput: EventEmitter<Data>
@@ -135,7 +137,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					<div slot={"label"}>
 						<slot name={"year-label"} />
 					</div>
-					{generate.years(this.value ?? isoly.Date.now()).map(year => (
+					{generate.years(this.value ?? isoly.Date.now(), this.min, this.max).map(year => (
 						<smoothly-item key={year.date} value={year.date} selected={year.selected || this.value == year.date}>
 							{year.name}
 						</smoothly-item>
