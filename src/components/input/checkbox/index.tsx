@@ -13,6 +13,7 @@ import { Looks } from "../Looks"
 export class SmoothlyInputCheckbox implements Input, Clearable, Editable, ComponentWillLoad {
 	private initialValue?: any
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private mouseDownPosition?: { x: number; y: number }
 	@Prop() name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -65,12 +66,16 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		this.smoothlyInput.emit({ [this.name]: this.checked })
 		this.listener.changed?.(this)
 	}
-	inputHandler() {
+	click() {
 		!this.disabled && !this.readonly && (this.checked = !this.checked)
 	}
 	render() {
 		return (
-			<Host onClick={() => this.inputHandler()}>
+			<Host
+				onMouseDown={(e: MouseEvent) => (this.mouseDownPosition = { x: e.clientX, y: e.clientY })}
+				onMouseUp={(e: MouseEvent) =>
+					this.mouseDownPosition?.x == e.clientX && this.mouseDownPosition.y == e.clientY && this.click()
+				}>
 				<input type="checkbox" checked={this.checked} />
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
 				<label>
