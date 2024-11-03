@@ -26,9 +26,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-date-range
 						name="testing"
 						start={isoly.Date.now()}
-						end={isoly.Date.nextMonth(isoly.Date.now())}
-						min="2021-10-10"
-						max="2024-12-30">
+						end={isoly.Date.nextMonth(isoly.Date.now())}>
 						<smoothly-input-reset slot="end" size="icon"></smoothly-input-reset>
 					</smoothly-input-date-range>
 					<smoothly-input-date-range
