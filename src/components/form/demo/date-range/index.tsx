@@ -27,6 +27,7 @@ export class SmoothlyFormDemoDateRange {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<h2>Date-range input</h2>
 				<smoothly-form
 					looks={"border"}
 					type={"create"}
