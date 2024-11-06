@@ -10,13 +10,14 @@ export class SmoothlyFormDemo {
 		return (
 			<Host>
 				<div>
-					<smoothly-form-demo-all />
+					<smoothly-form-demo-date />
+					{/* <smoothly-form-demo-all />
 					<smoothly-form-demo-card />
 					<smoothly-form-demo-login />
 					<smoothly-form-demo-prices />
 					<smoothly-form-demo-typed />
 					<smoothly-form-demo-transparent />
-					<smoothly-form-demo-controlled />
+					<smoothly-form-demo-controlled /> */}
 				</div>
 			</Host>
 		)
