@@ -4,14 +4,14 @@ import { isly } from "isly"
 import { Notice, Submit } from "../../../../model"
 
 @Component({
-	tag: "smoothly-form-demo-date",
+	tag: "smoothly-form-demo-date-range",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyFormDemoDate {
+export class SmoothlyFormDemoDateRange {
 	@Event() notice: EventEmitter<Notice>
-	private validator = isly.object<{ date: isoly.Date }>({
-		date: isly.fromIs("isoly.Date", isoly.Date.is),
+	private validator = isly.object<{ range: isoly.DateRange }>({
+		range: isly.fromIs("isoly.DateRange", isoly.DateRange.is),
 	})
 	async submitHandler(event: CustomEvent<Submit>): Promise<void> {
 		event.stopPropagation()
@@ -32,7 +32,7 @@ export class SmoothlyFormDemoDate {
 					type={"create"}
 					validator={this.validator}
 					onSmoothlyFormSubmit={e => this.submitHandler(e)}>
-					<smoothly-input-date name={"date"}>{"Date"}</smoothly-input-date>
+					<smoothly-input-date-range name={"range"}>{"Range"}</smoothly-input-date-range>
 					<smoothly-input-submit slot={"submit"}>
 						<smoothly-icon name={"checkmark-outline"} />
 					</smoothly-input-submit>

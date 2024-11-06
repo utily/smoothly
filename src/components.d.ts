@@ -209,6 +209,8 @@ export namespace Components {
     }
     interface SmoothlyFormDemoDate {
     }
+    interface SmoothlyFormDemoDateRange {
+    }
     interface SmoothlyFormDemoLogin {
     }
     interface SmoothlyFormDemoPrices {
@@ -757,6 +759,10 @@ export interface SmoothlyFormDemoDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFormDemoDateElement;
 }
+export interface SmoothlyFormDemoDateRangeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyFormDemoDateRangeElement;
+}
 export interface SmoothlyFrameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyFrameElement;
@@ -1259,6 +1265,23 @@ declare global {
     var HTMLSmoothlyFormDemoDateElement: {
         prototype: HTMLSmoothlyFormDemoDateElement;
         new (): HTMLSmoothlyFormDemoDateElement;
+    };
+    interface HTMLSmoothlyFormDemoDateRangeElementEventMap {
+        "notice": Notice;
+    }
+    interface HTMLSmoothlyFormDemoDateRangeElement extends Components.SmoothlyFormDemoDateRange, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyFormDemoDateRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyFormDemoDateRangeElement, ev: SmoothlyFormDemoDateRangeCustomEvent<HTMLSmoothlyFormDemoDateRangeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyFormDemoDateRangeElementEventMap>(type: K, listener: (this: HTMLSmoothlyFormDemoDateRangeElement, ev: SmoothlyFormDemoDateRangeCustomEvent<HTMLSmoothlyFormDemoDateRangeElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyFormDemoDateRangeElement: {
+        prototype: HTMLSmoothlyFormDemoDateRangeElement;
+        new (): HTMLSmoothlyFormDemoDateRangeElement;
     };
     interface HTMLSmoothlyFormDemoLoginElement extends Components.SmoothlyFormDemoLogin, HTMLStencilElement {
     }
@@ -2249,6 +2272,7 @@ declare global {
         "smoothly-form-demo-card": HTMLSmoothlyFormDemoCardElement;
         "smoothly-form-demo-controlled": HTMLSmoothlyFormDemoControlledElement;
         "smoothly-form-demo-date": HTMLSmoothlyFormDemoDateElement;
+        "smoothly-form-demo-date-range": HTMLSmoothlyFormDemoDateRangeElement;
         "smoothly-form-demo-login": HTMLSmoothlyFormDemoLoginElement;
         "smoothly-form-demo-prices": HTMLSmoothlyFormDemoPricesElement;
         "smoothly-form-demo-transparent": HTMLSmoothlyFormDemoTransparentElement;
@@ -2528,6 +2552,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFormDemoDate {
         "onNotice"?: (event: SmoothlyFormDemoDateCustomEvent<Notice>) => void;
+    }
+    interface SmoothlyFormDemoDateRange {
+        "onNotice"?: (event: SmoothlyFormDemoDateRangeCustomEvent<Notice>) => void;
     }
     interface SmoothlyFormDemoLogin {
     }
@@ -3085,6 +3112,7 @@ declare namespace LocalJSX {
         "smoothly-form-demo-card": SmoothlyFormDemoCard;
         "smoothly-form-demo-controlled": SmoothlyFormDemoControlled;
         "smoothly-form-demo-date": SmoothlyFormDemoDate;
+        "smoothly-form-demo-date-range": SmoothlyFormDemoDateRange;
         "smoothly-form-demo-login": SmoothlyFormDemoLogin;
         "smoothly-form-demo-prices": SmoothlyFormDemoPrices;
         "smoothly-form-demo-transparent": SmoothlyFormDemoTransparent;
@@ -3208,6 +3236,7 @@ declare module "@stencil/core" {
             "smoothly-form-demo-card": LocalJSX.SmoothlyFormDemoCard & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoCardElement>;
             "smoothly-form-demo-controlled": LocalJSX.SmoothlyFormDemoControlled & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoControlledElement>;
             "smoothly-form-demo-date": LocalJSX.SmoothlyFormDemoDate & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateElement>;
+            "smoothly-form-demo-date-range": LocalJSX.SmoothlyFormDemoDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateRangeElement>;
             "smoothly-form-demo-login": LocalJSX.SmoothlyFormDemoLogin & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
             "smoothly-form-demo-prices": LocalJSX.SmoothlyFormDemoPrices & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
             "smoothly-form-demo-transparent": LocalJSX.SmoothlyFormDemoTransparent & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
