@@ -46,7 +46,6 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 
 	componentWillLoad(): void {
 		this.setInitialValue()
-
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
