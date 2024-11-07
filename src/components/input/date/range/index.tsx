@@ -39,12 +39,13 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	componentWillLoad() {
 		this.setInitialValue()
 		this.updateValue()
-		this.smoothlyInputLoad.emit(_ => {})
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
+		this.smoothlyInputLoad.emit(_ => {})
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.listener.changed?.(this)
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {

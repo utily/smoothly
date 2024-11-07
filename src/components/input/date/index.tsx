@@ -46,11 +46,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 
 	componentWillLoad(): void {
 		this.setInitialValue()
-		this.smoothlyInputLoad.emit(_ => {})
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
+		this.smoothlyInputLoad.emit(_ => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.listener.changed?.(this)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
