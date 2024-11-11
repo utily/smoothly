@@ -320,7 +320,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				}}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start"></slot>
-				<div>
+				<div class="input">
 					<input
 						color={this.color}
 						name={this.name}

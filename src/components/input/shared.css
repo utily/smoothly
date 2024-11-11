@@ -46,8 +46,10 @@
 }
 
 :host[looks="transparent"][readonly]>input,
-:host[looks="transparent"]:not(:focus-within)>input {
-	background: transparent;
+:host[looks="transparent"][readonly]>div.input>input,
+:host[looks="transparent"]:not(:focus-within)>input,
+:host[looks="transparent"]:not(:focus-within)>div.input>input {
+	background-color: transparent;
 }
 
 :host[looks="transparent"]:not([readonly]):focus-within {

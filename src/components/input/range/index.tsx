@@ -139,6 +139,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 					</smoothly-input>
 					<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()}></smoothly-display>
 					<input
+						class={"input"}
 						name={this.name}
 						part="range"
 						type="range"
