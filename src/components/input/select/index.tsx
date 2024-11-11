@@ -58,7 +58,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 
@@ -66,9 +66,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}

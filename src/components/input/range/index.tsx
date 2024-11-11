@@ -45,20 +45,18 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@State() showInput = false
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.value && (this.initialValue = this.value)
 		this.valueChanged()
 	}
 	@Listen("smoothlyInputLoad")
-	smoothlyInputLoadHandler(event: CustomEvent<(parent: unknown) => void>) {
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>) {
 		if (event.target != this.element) {
 			event.stopPropagation()
 			event.detail(this)

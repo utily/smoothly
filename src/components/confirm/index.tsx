@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State, VNode } from "@stencil/core"
 import { Color, Data, Fill } from "../../model"
+import { Editable } from "../input/Editable"
 
 @Component({
 	tag: "smoothly-button-confirm",
@@ -17,7 +18,7 @@ export class SmoothlyButtonConfirm {
 	@Prop() shape?: "rounded"
 	@Prop() size: "small" | "large" | "icon" | "flexible"
 	@State() clickTimeStamp: number | undefined
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyConfirm: EventEmitter<Data>
 
 	clickHandler(event: MouseEvent): void {

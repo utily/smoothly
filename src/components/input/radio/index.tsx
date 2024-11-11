@@ -38,7 +38,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
@@ -47,9 +47,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 		this.initialValue = this.active
 	}
 	@Listen("smoothlyRadioButtonRegister")

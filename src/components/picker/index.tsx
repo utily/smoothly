@@ -46,15 +46,13 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	@Event() smoothlyChange: EventEmitter<Record<string, any | any[]>> // multiple -> any[]
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	private controls?: Controls
 
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 		this.listener.changed?.(this)
 	}
 

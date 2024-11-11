@@ -21,7 +21,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop() toolTip = this.delete ? "Remove" : "Submit"
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Submittable.is(parent) && Editable.type.is(parent)) {

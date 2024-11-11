@@ -38,7 +38,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInput: EventEmitter<Data>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	private year?: HTMLSmoothlyInputSelectElement
@@ -105,7 +105,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		}
 	}
 	@Listen("smoothlyInputLoad")
-	async smoothlyInputLoadHandler(event: CustomEvent<(parent: unknown) => void>): Promise<void> {
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>): Promise<void> {
 		if (event.target != this.element)
 			event.stopPropagation()
 	}

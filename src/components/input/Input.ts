@@ -1,10 +1,11 @@
 import { EventEmitter } from "@stencil/core"
 import { isly } from "isly"
 import { Color, Data } from "../../model"
+import { Editable } from "./Editable"
 import { Looks } from "./Looks"
 
 export interface Input extends Input.Element {
-	smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	smoothlyInput: EventEmitter<Data>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 }

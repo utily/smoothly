@@ -13,6 +13,7 @@ import {
 	VNode,
 	Watch,
 } from "@stencil/core"
+import { Editable } from "../input/Editable"
 import { Item } from "./Item"
 
 @Component({
@@ -28,7 +29,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop({ reflect: true }) selectable = true
 	@Prop() deselectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	@Listen("click")
 	clickHandler(): void {
@@ -40,9 +41,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.smoothlyItemSelect.emit(this.element)
 	}
 	componentWillLoad(): void {
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 	}
 	componentDidLoad(): void {
 		if (this.selected && this.selectable)

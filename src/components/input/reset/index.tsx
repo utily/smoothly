@@ -21,7 +21,7 @@ export class SmoothlyInputReset {
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	@Prop() tooltip = "Reset"
 	private parent?: Editable.Element
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	async componentWillLoad() {
 		this.smoothlyInputLoad.emit(parent => {
