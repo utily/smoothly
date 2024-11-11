@@ -18,7 +18,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
 	@Prop() toolTip = "Edit"
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Editable.type.is(parent)) {

@@ -8,13 +8,13 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
 import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/button/Button";
+import { Editable } from "./components/input/Editable";
 import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 import { tidily, Type } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
-import { Editable } from "./components/input/Editable";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
@@ -22,13 +22,13 @@ import { Slot } from "./components/picker/slot-elements/index";
 export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
+export { Editable } from "./components/input/Editable";
 export { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
 export { tidily, Type } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
-export { Editable } from "./components/input/Editable";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
 export { Controls as Controls1 } from "./components/picker/menu/index";
@@ -969,7 +969,7 @@ declare global {
         new (): HTMLSmoothlyButtonElement;
     };
     interface HTMLSmoothlyButtonConfirmElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyConfirm": Data;
     }
     interface HTMLSmoothlyButtonConfirmElement extends Components.SmoothlyButtonConfirm, HTMLStencilElement {
@@ -1350,7 +1350,7 @@ declare global {
     };
     interface HTMLSmoothlyInputElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyBlur": void;
         "smoothlyChange": Record<string, any>;
@@ -1373,7 +1373,7 @@ declare global {
     interface HTMLSmoothlyInputCheckboxElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Data;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputCheckboxElement extends Components.SmoothlyInputCheckbox, HTMLStencilElement {
@@ -1397,7 +1397,7 @@ declare global {
         new (): HTMLSmoothlyInputCheckboxDemoElement;
     };
     interface HTMLSmoothlyInputClearElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyInputClearElement extends Components.SmoothlyInputClear, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputClearElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputClearElement, ev: SmoothlyInputClearCustomEvent<HTMLSmoothlyInputClearElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1416,7 +1416,7 @@ declare global {
     interface HTMLSmoothlyInputColorElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputColorElement extends Components.SmoothlyInputColor, HTMLStencilElement {
@@ -1440,7 +1440,7 @@ declare global {
         new (): HTMLSmoothlyInputColorDemoElement;
     };
     interface HTMLSmoothlyInputDateElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": Date;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
@@ -1462,7 +1462,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateRangeElementEventMap {
         "smoothlyInput": { [name: string]: isoly.DateRange | undefined };
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1493,7 +1493,7 @@ declare global {
         new (): HTMLSmoothlyInputDemoStandardElement;
     };
     interface HTMLSmoothlyInputEditElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyInputEditElement extends Components.SmoothlyInputEdit, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputEditElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputEditElement, ev: SmoothlyInputEditCustomEvent<HTMLSmoothlyInputEditElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1512,7 +1512,7 @@ declare global {
     interface HTMLSmoothlyInputFileElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputFileElement extends Components.SmoothlyInputFile, HTMLStencilElement {
@@ -1531,7 +1531,7 @@ declare global {
     };
     interface HTMLSmoothlyInputMonthElementEventMap {
         "smoothlyInput": Data;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
     }
@@ -1558,7 +1558,7 @@ declare global {
     interface HTMLSmoothlyInputRadioElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Data;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputRadioElement extends Components.SmoothlyInputRadio, HTMLStencilElement {
@@ -1596,7 +1596,7 @@ declare global {
     interface HTMLSmoothlyInputRangeElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
     interface HTMLSmoothlyInputRangeElement extends Components.SmoothlyInputRange, HTMLStencilElement {
@@ -1620,7 +1620,7 @@ declare global {
         new (): HTMLSmoothlyInputRangeDemoElement;
     };
     interface HTMLSmoothlyInputResetElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyInputResetElement extends Components.SmoothlyInputReset, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputResetElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputResetElement, ev: SmoothlyInputResetCustomEvent<HTMLSmoothlyInputResetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1639,7 +1639,7 @@ declare global {
     interface HTMLSmoothlyInputSelectElementEventMap {
         "smoothlyInput": Data;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyItemSelect": HTMLSmoothlyItemElement;
     }
@@ -1658,7 +1658,7 @@ declare global {
         new (): HTMLSmoothlyInputSelectElement;
     };
     interface HTMLSmoothlyInputSubmitElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyInputSubmitElement extends Components.SmoothlyInputSubmit, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputSubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSubmitElement, ev: SmoothlyInputSubmitCustomEvent<HTMLSmoothlyInputSubmitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1676,7 +1676,7 @@ declare global {
     };
     interface HTMLSmoothlyItemElementEventMap {
         "smoothlyItemSelect": HTMLSmoothlyItemElement;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyItemElement, ev: SmoothlyItemCustomEvent<HTMLSmoothlyItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1858,7 +1858,7 @@ declare global {
         "smoothlyChange": Record<string, any | any[]>;
         "smoothlyInputLooks": (looks?: Looks) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerElement, ev: SmoothlyPickerCustomEvent<HTMLSmoothlyPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1958,7 +1958,7 @@ declare global {
         new (): HTMLSmoothlySpinnerElement;
     };
     interface HTMLSmoothlySubmitElementEventMap {
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlySubmitElement extends Components.SmoothlySubmit, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlySubmitElementEventMap>(type: K, listener: (this: HTMLSmoothlySubmitElement, ev: SmoothlySubmitCustomEvent<HTMLSmoothlySubmitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2409,7 +2409,7 @@ declare namespace LocalJSX {
         "fill"?: Fill;
         "name"?: string;
         "onSmoothlyConfirm"?: (event: SmoothlyButtonConfirmCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyButtonConfirmCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyButtonConfirmCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
     }
@@ -2596,7 +2596,7 @@ declare namespace LocalJSX {
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -2615,7 +2615,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputCheckboxCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "readonly"?: boolean;
         "value"?: boolean;
@@ -2628,7 +2628,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
         "tooltip"?: string;
@@ -2641,7 +2641,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputColorCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "output"?: "rgb" | "hex";
         "readonly"?: boolean;
@@ -2660,7 +2660,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
         "open"?: boolean;
@@ -2679,7 +2679,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange | undefined }>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "placeholder"?: string;
         "readonly"?: boolean;
@@ -2696,7 +2696,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "toolTip"?: string;
@@ -2711,7 +2711,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputFileCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputFileCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputFileCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -2726,7 +2726,7 @@ declare namespace LocalJSX {
         "next"?: boolean;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputMonthCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputMonthCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "previous"?: boolean;
         "readonly"?: boolean;
@@ -2743,7 +2743,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRadioCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRadioCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputRadioCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputRadioCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRadioCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "readonly"?: boolean;
         "showLabel"?: boolean;
@@ -2767,7 +2767,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "outputSide"?: "right" | "left";
         "readonly"?: boolean;
@@ -2783,7 +2783,7 @@ declare namespace LocalJSX {
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputResetCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputResetCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "tooltip"?: string;
@@ -2803,7 +2803,7 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
         "placeholder"?: string | any;
@@ -2821,7 +2821,7 @@ declare namespace LocalJSX {
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "icon"?: Icon | false;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
         "toolTip"?: string;
@@ -2829,7 +2829,7 @@ declare namespace LocalJSX {
     interface SmoothlyItem {
         "deselectable"?: boolean;
         "marked"?: boolean;
-        "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;
         "selectable"?: boolean;
         "selected"?: boolean;
@@ -2915,7 +2915,7 @@ declare namespace LocalJSX {
         "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
         "onSmoothlyFormDisable"?: (event: SmoothlyPickerCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyPickerCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyPickerCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyPickerCustomEvent<(looks?: Looks) => void>) => void;
         "onSmoothlyPickerLoaded"?: (event: SmoothlyPickerCustomEvent<Controls>) => void;
         "open"?: boolean;
@@ -2963,7 +2963,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
-        "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: Editable) => void>) => void;
         "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";

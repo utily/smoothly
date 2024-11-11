@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { Color, Fill } from "../../model"
 import { Button } from "../button/Button"
+import { Editable } from "../input/Editable"
 import { Submittable } from "../input/Submittable"
 
 @Component({
@@ -18,7 +19,7 @@ export class SmoothlySubmit {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() prevent = true
 	private parent?: Submittable
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	async componentWillLoad() {
 		this.smoothlyInputLoad.emit(parent => {

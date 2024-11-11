@@ -38,7 +38,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private uneditable = this.readonly
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
@@ -116,9 +116,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {
-			return
-		})
+		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}

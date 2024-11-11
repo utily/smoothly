@@ -32,7 +32,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@State() value?: isoly.DateRange
 	@State() open: boolean
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 

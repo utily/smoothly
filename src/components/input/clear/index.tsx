@@ -21,7 +21,7 @@ export class SmoothlyInputClear {
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	@Prop() tooltip = "Clear"
 	private parent?: Clearable | (Clearable & Editable)
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	async componentWillLoad() {
 		this.smoothlyInputLoad.emit(parent => {

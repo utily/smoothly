@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
 import { selectively } from "selectively"
 import { isly } from "isly"
+import { Editable } from "../../input/Editable"
 import { Looks } from "../../input/Looks"
 import { Filter } from "../Filter"
 
@@ -33,7 +34,7 @@ export class SmoothlyFilterSelect implements Filter {
 		this.smoothlyFilterUpdate.emit(this.update.bind(this))
 	}
 	@Listen("smoothlyInputLoad")
-	async smoothlyInputLoadHandler(event: CustomEvent<(parent: any) => void>): Promise<void> {
+	async smoothlyInputLoadHandler(_: CustomEvent<(parent: Editable) => void>): Promise<void> {
 		;(await this.selectElement?.getItems())?.forEach(item =>
 			this.items.set(item.value, {
 				state: this.property.split(".").reduceRight((r, e) => ({ [e]: r }), item.value),
