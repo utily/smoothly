@@ -15,6 +15,7 @@ import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
+import { RGB } from "./model/Color/RGB";
 import { Selectable } from "./components/input/radio/Selected";
 import { Controls } from "./components/picker/menu";
 import { Controls as Controls1 } from "./components/picker/menu/index";
@@ -29,6 +30,7 @@ export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
+export { RGB } from "./model/Color/RGB";
 export { Selectable } from "./components/input/radio/Selected";
 export { Controls } from "./components/picker/menu";
 export { Controls as Controls1 } from "./components/picker/menu/index";
@@ -245,7 +247,7 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
-        "getValue": () => Promise<any>;
+        "getValue": () => Promise<any | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -296,7 +298,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<string | { r: number | undefined; g: number | undefined; b: number | undefined; } | undefined>;
+        "getValue": () => Promise<RGB | string | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -314,7 +316,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<string | undefined>;
+        "getValue": () => Promise<Date | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -334,7 +336,7 @@ export namespace Components {
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
-        "getValue": () => Promise<{ start: string; end: string; } | undefined>;
+        "getValue": () => Promise<isoly.DateRange | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -407,7 +409,7 @@ export namespace Components {
         "clearable"?: boolean;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<any>;
+        "getValue": () => Promise<any | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -464,7 +466,7 @@ export namespace Components {
         "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
-        "getValue": () => Promise<any>;
+        "getValue": () => Promise<any | any[] | undefined>;
         "inCalendar": boolean;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -574,7 +576,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<any>;
+        "getValue": () => Promise<any | any[] | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "multiple": boolean;
