@@ -11,6 +11,7 @@ export class SmoothlyFormDemo {
 			<Host>
 				<div>
 					<smoothly-form-demo-all />
+					<smoothly-form-demo-pet />
 					<smoothly-form-demo-card />
 					<smoothly-form-demo-login />
 					<smoothly-form-demo-prices />
