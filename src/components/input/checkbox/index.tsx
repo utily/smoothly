@@ -36,6 +36,10 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		this.listener.changed?.(this)
 	}
 	@Method()
+	async getValue(): Promise<boolean> {
+		return this.checked
+	}
+	@Method()
 	async clear(): Promise<void> {
 		!this.disabled && !this.readonly && (this.checked = false)
 	}
@@ -59,9 +63,9 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		this.changed = false
 	}
 	@Watch("checked")
-	elementCheck(): void {
+	async elementCheck() {
 		this.changed = this.initialValue !== this.checked
-		this.smoothlyInput.emit({ [this.name]: this.checked })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
 	click() {

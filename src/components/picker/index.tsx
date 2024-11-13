@@ -56,12 +56,17 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 		this.listener.changed?.(this)
 	}
 
-	@Watch("selected")
-	selectedChanged(): void {
+	@Method()
+	async getValue(): Promise<any | any[] | undefined> {
 		const selected = Array.from(this.selected.values(), option => option.value)
+		return this.multiple ? selected : selected.at(0)
+	}
+
+	@Watch("selected")
+	async selectedChanged(): Promise<void> {
 		this.changed = !this.areValuesEqual(this.selected, this.initialValue)
-		this.smoothlyInput.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
-		this.smoothlyChange.emit({ [this.name]: this.multiple ? selected : selected.at(0) })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+		this.smoothlyChange.emit({ [this.name]: await this.getValue() })
 		this.display = Array.from(this.selected.values(), option => {
 			const span = document.createElement("span")
 			option.slotted.forEach(node => span.appendChild(node.cloneNode(true)))

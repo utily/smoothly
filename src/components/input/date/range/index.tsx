@@ -82,6 +82,10 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
 	@Method()
+	async getValue(): Promise<isoly.DateRange | undefined> {
+		return this.start && this.end ? { start: this.start, end: this.end } : undefined
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
 		this.listener[property] = listener
 		listener(this)

@@ -63,6 +63,10 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		}
 	}
 	@Method()
+	async getValue(): Promise<isoly.Date | undefined> {
+		return this.value
+	}
+	@Method()
 	async clear(): Promise<void> {
 		this.year?.clear()
 		this.month?.clear()

@@ -45,6 +45,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	@Method()
+	async getValue(): Promise<any | undefined> {
+		return this.value
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
@@ -76,7 +80,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	@Watch("value")
-	valueWatcher(value: any, before: any) {
+	async valueWatcher(value: any, before: any) {
 		this.changed = this.initialValue !== this.value
 		if (this.lastValue != value) {
 			this.lastValue = value
@@ -85,11 +89,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				value: this.newState({ value: this.formatter.toString(value), selection: this.state.selection }).value,
 			}
 		}
-		if (value != before) {
-			if (typeof value == "string")
-				value = value.trim()
-			this.smoothlyInput.emit({ [this.name]: value })
-		}
+		if (value != before)
+			this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
 	@Watch("readonly")
@@ -142,7 +143,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	async setInitialValue(): Promise<void> {
 		this.changed = false
 		this.initialValue = this.value
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
 	@Method()
 	async getFormData(name: string): Promise<Record<string, any>> {

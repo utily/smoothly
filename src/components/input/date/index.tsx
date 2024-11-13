@@ -54,6 +54,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.listener.changed?.(this)
 	}
 	@Method()
+	async getValue(): Promise<Date | undefined> {
+		return this.value
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
 		this.listener[property] = listener
 		listener(this)

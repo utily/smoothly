@@ -88,6 +88,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
+	async getValue(): Promise<any | any[] | undefined> {
+		return !this.multiple && this.selected[0]
+			? this.selected[0].value
+			: this.multiple && this.selected.length > 0
+			? this.selected.map(item => item.value)
+			: undefined
+	}
+	@Method()
 	async getItems(): Promise<HTMLSmoothlyItemElement[]> {
 		return this.items
 	}
@@ -126,16 +134,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.initialValue = [...this.selected]
 	}
 	@Watch("selected")
-	onSelectedChange() {
+	async onSelectedChange() {
 		this.initialValueHandled && (this.changed = !this.areValuesEqual(this.selected, this.initialValue))
 		this.defined = this.selected.length > 0
-		const value =
-			!this.multiple && this.selected[0]
-				? this.selected[0].value
-				: this.multiple && this.selected.length > 0
-				? this.selected.map(item => item.value)
-				: undefined
-		this.smoothlyInput.emit({ [this.name]: value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
 	@Watch("required")

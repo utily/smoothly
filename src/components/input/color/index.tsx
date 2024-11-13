@@ -47,22 +47,11 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	componentWillLoad(): void | Promise<void> {
+	async componentWillLoad(): Promise<void> {
 		this.value && this.setInitialValue()
 		this.value && (this.rgb = Color.Hex.toRGB(this.value))
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
-		this.smoothlyInput.emit({
-			[this.name]:
-				this.output === "rgb"
-					? {
-							r: this.rgb.r === undefined ? undefined : Math.round(this.rgb.r),
-							g: this.rgb.g === undefined ? undefined : Math.round(this.rgb.g),
-							b: this.rgb.b === undefined ? undefined : Math.round(this.rgb.b),
-					  }
-					: this.value
-					? this.value
-					: undefined,
-		})
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
@@ -79,6 +68,18 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
+	@Method()
+	async getValue(): Promise<RGB | string | undefined> {
+		return this.output === "rgb"
+			? {
+					r: this.rgb.r === undefined ? undefined : Math.round(this.rgb.r),
+					g: this.rgb.g === undefined ? undefined : Math.round(this.rgb.g),
+					b: this.rgb.b === undefined ? undefined : Math.round(this.rgb.b),
+			  }
+			: this.value
+			? this.value
+			: undefined
 	}
 	@Method()
 	async clear(): Promise<void> {
@@ -107,20 +108,9 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.open = false
 	}
 	@Watch("value")
-	valueChanged(): void {
+	async valueChanged(): Promise<void> {
 		this.changed = this.initialValue !== this.value
-		this.smoothlyInput.emit({
-			[this.name]:
-				this.output === "rgb"
-					? {
-							r: this.rgb.r === undefined ? undefined : Math.round(this.rgb.r),
-							g: this.rgb.g === undefined ? undefined : Math.round(this.rgb.g),
-							b: this.rgb.b === undefined ? undefined : Math.round(this.rgb.b),
-					  }
-					: this.value
-					? this.value
-					: undefined,
-		})
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
 	handleSwitchMode(event: CustomEvent): void {

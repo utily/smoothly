@@ -11,7 +11,7 @@ export interface Input extends Input.Element {
 }
 export namespace Input {
 	export interface Element {
-		value?: Data[string]
+		getValue: GetValue
 		color?: Color
 		name: string
 		invalid?: boolean
@@ -21,7 +21,7 @@ export namespace Input {
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
-			value: isly.union<Required<Element>["value"], Data, Data[string]>(Data.type, Data.valueType).optional(),
+			getValue: isly.function<GetValue>(),
 			color: Color.type.optional(),
 			name: isly.string(),
 			invalid: isly.boolean().optional(),
@@ -31,6 +31,7 @@ export namespace Input {
 		})
 		export const is = type.is
 	}
+	export type GetValue = () => Promise<any>
 	export type Binary = () => Promise<boolean>
 	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })
 	export const type = Element.type.extend<Input>({

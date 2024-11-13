@@ -245,6 +245,7 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getFormData": (name: string) => Promise<Record<string, any>>;
+        "getValue": () => Promise<any>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -268,6 +269,7 @@ export namespace Components {
         "color"?: Color;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<boolean>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -294,6 +296,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<string | { r: number | undefined; g: number | undefined; b: number | undefined; } | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -311,6 +314,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<string | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -330,6 +334,7 @@ export namespace Components {
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
+        "getValue": () => Promise<{ start: string; end: string; } | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -366,6 +371,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<File | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -380,6 +386,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<isoly.Date | undefined>;
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -400,6 +407,7 @@ export namespace Components {
         "clearable"?: boolean;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<any>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "name": string;
@@ -420,6 +428,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<number | undefined>;
         "label": string;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
@@ -455,6 +464,7 @@ export namespace Components {
         "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
+        "getValue": () => Promise<any>;
         "inCalendar": boolean;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -564,6 +574,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<any>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
         "multiple": boolean;

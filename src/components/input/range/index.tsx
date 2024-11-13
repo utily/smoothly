@@ -68,6 +68,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 			event.stopPropagation()
 	}
 	@Method()
+	async getValue(): Promise<number | undefined> {
+		return this.value
+	}
+	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
 	}

@@ -49,15 +49,18 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		return this.transfer.files
 	}
 
-	componentWillLoad(): void {
+	async componentWillLoad(): Promise<void> {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.smoothlyInputLoad.emit(() => {})
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
-
+	@Method()
+	async getValue(): Promise<File | undefined> {
+		return this.value
+	}
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
@@ -86,9 +89,9 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	}
 
 	@Watch("value")
-	valueChanged(): void {
+	async valueChanged(): Promise<void> {
 		this.changed = this.initialValue !== this.value
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
 
 	inputHandler(event: Event): void {

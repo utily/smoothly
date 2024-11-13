@@ -83,6 +83,10 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		listener(this)
 	}
 	@Method()
+	async getValue(): Promise<any | undefined> {
+		return this.value
+	}
+	@Method()
 	async clear(): Promise<void> {
 		if (this.clearable) {
 			this.active?.select(false)
@@ -107,9 +111,9 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.valueChanged()
 	}
 	@Watch("value")
-	valueChanged(): void {
+	async valueChanged(): Promise<void> {
 		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)
-		this.smoothlyInput.emit({ [this.name]: this.value })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
 	@Watch("readonly")
