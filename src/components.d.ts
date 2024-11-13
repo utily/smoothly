@@ -1382,7 +1382,7 @@ declare global {
     };
     interface HTMLSmoothlyInputElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyInputRemove": (parent: HTMLElement) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyBlur": void;

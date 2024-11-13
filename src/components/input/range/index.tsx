@@ -65,10 +65,6 @@ export class SmoothlyInputRange implements Input, Clearable, Editable {
 			await this.parent.removeInput(this.name)
 		}
 	}
-	@Method()
-	async getValue() {
-		return this.value
-	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>) {
 		if (event.target != this.element) {

@@ -47,10 +47,6 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable {
 			await this.parent.removeInput(this.name)
 		}
 	}
-	@Method()
-	async getValue() {
-		return this.value
-	}
 	@Listen("smoothlyRadioButtonRegister")
 	handleRegister(event: CustomEvent<(name: string) => void>) {
 		event.stopPropagation()

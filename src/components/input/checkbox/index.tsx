@@ -59,10 +59,6 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable {
 		listener(this)
 	}
 	@Method()
-	async getValue() {
-		return this.checked
-	}
-	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
 	}

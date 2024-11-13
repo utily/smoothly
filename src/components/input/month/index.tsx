@@ -29,7 +29,7 @@ export class SmoothlyInputMonth implements Input, Editable {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
-	private parent?: HTMLElement
+	private parent?: Editable
 	private year?: HTMLSmoothlyInputSelectElement
 	private month?: HTMLSmoothlyInputSelectElement
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -52,10 +52,6 @@ export class SmoothlyInputMonth implements Input, Editable {
 	@Watch("value")
 	valueChanged(): void {
 		this.smoothlyInput.emit({ [this.name]: this.value })
-	}
-	@Method()
-	async getValue() {
-		return this.value
 	}
 	private adjustMonth(delta: number): void {
 		if (!this.readonly) {

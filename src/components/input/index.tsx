@@ -140,7 +140,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async addSelf() {
-		this.smoothlyInputLoad.emit((parent: HTMLElement) => (this.parent = parent))
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
 	componentDidRender() {
