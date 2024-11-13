@@ -1,4 +1,4 @@
-import { Component, h, Host, State, VNode } from "@stencil/core"
+import { Component, h, Host, State, VNode, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-form-demo-pet",
@@ -6,7 +6,14 @@ import { Component, h, Host, State, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyFormDemoPet {
+	@State() hasOwner = false
+	@State() owner: { firstName?: string; lastName?: string } = {}
 	@State() value: any
+
+	@Watch("value")
+	valueChange() {
+		console.log("valueChange", this.value)
+	}
 
 	render(): VNode | VNode[] {
 		return (

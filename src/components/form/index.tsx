@@ -12,6 +12,7 @@ import {
 	State,
 	Watch,
 } from "@stencil/core"
+import { isoly } from "isoly"
 import { http } from "cloudly-http"
 import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
@@ -56,7 +57,12 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
-
+	@Method()
+	async removeInput(name: string) {
+		this.value = Data.remove(this.value, name)
+		this.inputs.delete(name)
+		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		;(this.listeners[property] ??= []).push(listener)
@@ -120,6 +126,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 				this.contentType = "form-data"
 			const inputValue = await event.target.getValue() // Needs to await value separately to avoid race condition
 			this.value = Data.merge(this.value, { [event.target.name]: inputValue })
+			console.log("smoothlyInputLoad listen", event.target.name, Data.keys(this.value), this.value)
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
 			this.inputs.set(event.target.name, event.target)
 		}

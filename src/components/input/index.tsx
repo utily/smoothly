@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
@@ -6,6 +6,7 @@ import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
+// import { removeInput } from "./removeInput"
 
 @Component({
 	tag: "smoothly-input",
@@ -13,6 +14,7 @@ import { Looks } from "./Looks"
 	scoped: true,
 })
 export class SmoothlyInput implements Clearable, Input, Editable {
+	@Element() element: HTMLSmoothlyInputElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
@@ -30,6 +32,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
+	parent?: Editable
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false
@@ -105,7 +108,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			pattern: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).pattern,
 		}
 	}
-	componentWillLoad() {
+	connectedCallback() {
+		console.log("connectedCallback", this.name)
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value
@@ -117,9 +121,17 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.removeSelf()
+	}
+	@Method()
+	async removeSelf() {
+		// removeInput(this)
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {

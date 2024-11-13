@@ -39,6 +39,9 @@ export namespace Data {
 			isly.object().is(d) && (keys => !!keys.length && keys.every(k => parseInt(k).toString() == k))(Object.keys(d))
 		)
 	}
+	export function keys(data: any, preKey = ""): string[] {
+		return typeof data == "object" ? Object.keys(data).flatMap(k => keys(data[k], `${preKey}${k}.`)) : [preKey]
+	}
 	export function convertArrays(data: any): Data {
 		return isArrayRecord(data)
 			? Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {
@@ -51,5 +54,23 @@ export namespace Data {
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
+	}
+	export function remove(data: Data, name: string): any {
+		const keys = name.split(".")
+		removeKey(data, keys)
+		return data
+	}
+	function removeKey(current: any, [head, ...tail]: string[]) {
+		if (tail.length === 0) {
+			if (typeof current === "object" && head in current)
+				delete current[head]
+		} else if (typeof current === "object" && head in current) {
+			removeKey(current[head], tail)
+			if (isEmpty(current[head]))
+				delete current[head]
+		}
+	}
+	function isEmpty(current: any): boolean {
+		return typeof current === "object" && Object.keys(current).length === 0
 	}
 }

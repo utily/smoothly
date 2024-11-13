@@ -28,6 +28,30 @@ describe("Data", () => {
 		const output = Data.convertArrays(input)
 		expect(output).toEqual(["zero", "one", undefined, "three"])
 	})
+	it.only("Data.merge undefined values", () => {
+		let data: any = Data.merge({}, { name: undefined })
+		expect("name" in data).toBe(true)
+
+		data = Data.merge(data, { age: undefined })
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+
+		data = Data.merge(data, { "cat.favoriteFood": undefined })
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+		expect("turtle" in data).toBe(false)
+		expect("cat" in data).toBe(true)
+		expect("cat" in data && "favoriteFood" in data["cat"]).toBe(true)
+
+		data = Data.merge(data, { "dog.breed": undefined })
+		console.log(Data.keys(data))
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+		expect("turtle" in data).toBe(false)
+		expect("cat" in data).toBe(true)
+		expect("cat" in data && "favoriteFood" in data["cat"]).toBe(true)
+		expect("dog" in data && "breed" in data["dog"]).toBe(true)
+	})
 	it("Data.set multiple", () => {
 		const file = new File(["PDF"], "my file")
 		const input: any = {
