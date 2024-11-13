@@ -54,7 +54,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.listener.changed?.(this)
 	}
 	@Method()
-	async getValue() {
+	async getValue(): Promise<Date | undefined> {
 		return this.value
 	}
 	@Method()

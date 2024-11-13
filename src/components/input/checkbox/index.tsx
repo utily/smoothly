@@ -36,7 +36,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		this.listener.changed?.(this)
 	}
 	@Method()
-	async getValue() {
+	async getValue(): Promise<boolean> {
 		return this.checked
 	}
 	@Method()

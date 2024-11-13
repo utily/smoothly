@@ -88,7 +88,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 	}
 	@Method()
-	async getValue() {
+	async getValue(): Promise<any | any[] | undefined> {
 		return !this.multiple && this.selected[0]
 			? this.selected[0].value
 			: this.multiple && this.selected.length > 0

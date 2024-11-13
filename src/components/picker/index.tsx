@@ -57,7 +57,7 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 	}
 
 	@Method()
-	async getValue() {
+	async getValue(): Promise<any | any[] | undefined> {
 		const selected = Array.from(this.selected.values(), option => option.value)
 		return this.multiple ? selected : selected.at(0)
 	}

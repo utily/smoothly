@@ -70,7 +70,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
 	@Method()
-	async getValue() {
+	async getValue(): Promise<RGB | string | undefined> {
 		return this.output === "rgb"
 			? {
 					r: this.rgb.r === undefined ? undefined : Math.round(this.rgb.r),

@@ -83,7 +83,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		listener(this)
 	}
 	@Method()
-	async getValue(): Promise<any> {
+	async getValue(): Promise<any | undefined> {
 		return this.value
 	}
 	@Method()
