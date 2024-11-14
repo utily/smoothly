@@ -118,7 +118,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		if (Input.Element.is(event.target)) {
 			if (await event.target.binary?.())
 				this.contentType = "form-data"
-			this.value = Data.merge(this.value, { [event.target.name]: await event.target.getValue() })
 			const inputValue = await event.target.getValue()
 			this.value = Data.merge(this.value, { [event.target.name]: inputValue })
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
