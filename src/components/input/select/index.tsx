@@ -19,7 +19,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
+
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
@@ -95,11 +95,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Method()
 	async register() {
-		addInputFromForm(this)
+		Input.formAdd(this)
 	}
 	@Method()
 	async unregister() {
-		removeInputFromForm(this)
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<any | any[] | undefined> {

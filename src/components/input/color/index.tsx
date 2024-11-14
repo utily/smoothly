@@ -21,7 +21,6 @@ import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -77,11 +76,11 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	@Method()
 	async register() {
-		addInputFromForm(this)
+		Input.formAdd(this)
 	}
 	@Method()
 	async unregister() {
-		removeInputFromForm(this)
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<RGB | string | undefined> {

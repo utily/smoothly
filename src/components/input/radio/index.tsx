@@ -17,7 +17,6 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 import { Selectable } from "./Selected"
 
 @Component({
@@ -92,11 +91,11 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	@Method()
 	async register() {
-		addInputFromForm(this)
+		Input.formAdd(this)
 	}
 	@Method()
 	async unregister() {
-		removeInputFromForm(this)
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<any | undefined> {

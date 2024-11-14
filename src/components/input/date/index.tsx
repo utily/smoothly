@@ -17,7 +17,6 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 
 @Component({
 	tag: "smoothly-input-date",
@@ -61,11 +60,11 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Method()
 	async register() {
-		addInputFromForm(this)
+		Input.formAdd(this)
 	}
 	@Method()
 	async unregister() {
-		removeInputFromForm(this)
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<Date | undefined> {
