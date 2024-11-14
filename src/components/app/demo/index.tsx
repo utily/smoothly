@@ -8,11 +8,11 @@ export class SmoothlyAppDemo {
 	app?: HTMLSmoothlyAppElement
 	render() {
 		return (
-			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
+			<smoothly-app color="dark" label="Smoothly Demo" home="/form" ref={e => (this.app = e)}>
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
 					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
 				</smoothly-trigger>
-				<smoothly-app-room path="/root" label="root">
+				{/* <smoothly-app-room path="/root" label="root">
 					<smoothly-theme-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/links" label="Links">
@@ -38,11 +38,11 @@ export class SmoothlyAppDemo {
 							action link
 						</smoothly-button>
 					</div>
-				</smoothly-app-room>
+				</smoothly-app-room> */}
 				<smoothly-app-room path="/form" label="Form">
 					<smoothly-form-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/input" label="Input">
+				{/* <smoothly-app-room path="/input" label="Input">
 					<smoothly-input-demo />
 				</smoothly-app-room>
 				<smoothly-app-room path="/button" label="Button">
@@ -88,7 +88,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>
 				</smoothly-app-room>
-				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
+				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room> */}
 			</smoothly-app>
 		)
 	}
