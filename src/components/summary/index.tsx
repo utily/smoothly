@@ -25,6 +25,7 @@ export class SmoothlySummary {
 	}
 
 	@Listen("smoothlyInputLoad")
+	@Listen("smoothlyInput")
 	onInputLoad(event: CustomEvent) {
 		if (Input.Element.is(event.target)) {
 			this.inputs[event.target.name] = event.target
