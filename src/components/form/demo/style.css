@@ -6,5 +6,6 @@
 
 :host>div {
 	margin: auto;
-	width: 50%;
+	width: 1200px;
+	max-width: 100%;
 }

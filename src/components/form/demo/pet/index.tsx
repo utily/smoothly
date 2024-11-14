@@ -16,6 +16,7 @@ export class SmoothlyFormDemoPet {
 		ownedRange?: isoly.DateRange
 		favoriteHat?: string
 		favoriteColor?: RGB
+		favoritePizza?: string
 	} = {}
 	@State() value: any
 
@@ -91,6 +92,19 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, favoriteColor: e.detail["owner.favoriteColor"] })}>
 								Owner's Favorite Color
 							</smoothly-input-color>
+							<smoothly-input-radio
+								name="owner.favoritePizza"
+								value={this.owner.favoritePizza}
+								onSmoothlyInput={e =>
+									(this.owner = { ...this.owner, favoritePizza: e.detail["owner.favoritePizza"] as string })
+								}>
+								<span slot="label">Owner's Favorite Pizza</span>
+								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (
+									<smoothly-input-radio-item value={value} key={index}>
+										{value}
+									</smoothly-input-radio-item>
+								))}
+							</smoothly-input-radio>
 						</Fragment>
 					)}
 					<smoothly-tabs>

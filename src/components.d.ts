@@ -425,9 +425,11 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputRadioItem {
