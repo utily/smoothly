@@ -148,8 +148,8 @@ export class SmoothlyFormDemoPet {
 					<smoothly-summary>
 						<span slot="summary">Summary</span>
 						<div slot="content">
-							<smoothly-input type="text" name="summary.text">
-								Summary Text
+							<smoothly-input type="price" name="summary.price" currency="EUR">
+								Summary Price
 							</smoothly-input>
 							<smoothly-input-file name="summary.picture">
 								<span slot="label">Summary picture</span>
