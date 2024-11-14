@@ -257,6 +257,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;

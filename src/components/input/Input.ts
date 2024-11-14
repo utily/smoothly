@@ -11,6 +11,8 @@ export interface Input extends Input.Element {
 }
 export namespace Input {
 	export interface Element {
+		register?: () => Promise<void>
+		unregister?: () => Promise<void>
 		getValue: GetValue
 		color?: Color
 		name: string
@@ -21,6 +23,8 @@ export namespace Input {
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
+			register: isly.function<() => Promise<void>>().optional(),
+			unregister: isly.function<() => Promise<void>>().optional(),
 			getValue: isly.function<GetValue>(),
 			color: Color.type.optional(),
 			name: isly.string(),

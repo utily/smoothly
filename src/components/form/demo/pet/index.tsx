@@ -57,6 +57,16 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input>
 						</Fragment>
 					)}
+					<smoothly-tabs>
+						<smoothly-tab label="Dog">
+							<smoothly-input type={"text"} name="dog.breed">
+								Breed
+							</smoothly-input>
+						</smoothly-tab>
+						<smoothly-tab label="Cat" open>
+							<smoothly-input name={"cat.favoriteFood"}>Favorite Food</smoothly-input>
+						</smoothly-tab>
+					</smoothly-tabs>
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 				</smoothly-form>
 				<smoothly-display type="json" value={this.value} />
