@@ -12,7 +12,6 @@ import {
 	State,
 	Watch,
 } from "@stencil/core"
-import { isoly } from "isoly"
 import { http } from "cloudly-http"
 import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
