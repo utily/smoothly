@@ -352,10 +352,12 @@ export namespace Components {
         "name": string;
         "placeholder": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "start": isoly.Date | undefined;
+        "unregister": () => Promise<void>;
     }
     interface SmoothlyInputDemo {
     }

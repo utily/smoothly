@@ -1,4 +1,5 @@
 import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core"
+import { isoly } from "isoly"
 
 @Component({
 	tag: "smoothly-form-demo-pet",
@@ -7,7 +8,7 @@ import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core
 })
 export class SmoothlyFormDemoPet {
 	@State() hasOwner = false
-	@State() owner: { firstName?: string; lastName?: string; birthday?: string } = {}
+	@State() owner: { firstName?: string; lastName?: string; birthday?: string; ownedRange?: isoly.DateRange } = {}
 	@State() value: any
 
 	@Watch("value")
@@ -61,6 +62,13 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, birthday: e.detail["owner.birthday"] })}>
 								Owner birthday
 							</smoothly-input-date>
+							<smoothly-input-date-range
+								name="owner.ownedRange"
+								start={this.owner.ownedRange?.start}
+								end={this.owner.ownedRange?.end}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
+								Owner ownedRange
+							</smoothly-input-date-range>
 						</Fragment>
 					)}
 					<smoothly-tabs>
