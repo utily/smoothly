@@ -66,6 +66,9 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, lastName: e.detail["owner.lastName"] })}>
 								Owner Last Name
 							</smoothly-input>
+							<smoothly-input-file name="owner.picture">
+								<span slot="label">Owner picture</span>
+							</smoothly-input-file>
 							<smoothly-input-date
 								name="owner.birthday"
 								value={this.owner.birthday}

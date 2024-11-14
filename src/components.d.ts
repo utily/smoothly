@@ -392,9 +392,11 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value"?: File;
     }
     interface SmoothlyInputMonth {

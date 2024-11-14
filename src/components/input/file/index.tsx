@@ -1,6 +1,7 @@
 import {
 	Component,
 	ComponentWillLoad,
+	Element,
 	Event,
 	EventEmitter,
 	h,
@@ -16,6 +17,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 
 @Component({
 	tag: "smoothly-input-file",
@@ -23,6 +25,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, Editable {
+	@Element() element: HTMLSmoothlyInputFileElement
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() accept?: string
@@ -38,6 +41,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	parent?: Editable
 	private listener: { changed?: (parent: Editable) => Promise<void> }
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
@@ -54,8 +58,20 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		addInputFromForm(this)
+	}
+	@Method()
+	async unregister() {
+		removeInputFromForm(this)
 	}
 	@Method()
 	async getValue(): Promise<File | undefined> {
