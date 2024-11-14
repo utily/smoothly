@@ -108,7 +108,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			pattern: this.newState({ value: this.formatter.toString(this.value), selection: this.state.selection }).pattern,
 		}
 	}
-	connectedCallback() {
+	componentWillLoad() {
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value
