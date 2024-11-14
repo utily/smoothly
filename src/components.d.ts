@@ -281,8 +281,10 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "unregister": () => Promise<void>;
         "value": boolean;
     }
     interface SmoothlyInputCheckboxDemo {

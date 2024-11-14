@@ -17,6 +17,7 @@ export class SmoothlyFormDemoPet {
 		favoriteHat?: string
 		favoriteColor?: RGB
 		favoritePizza?: string
+		hasPet?: boolean
 	} = {}
 	@State() value: any
 
@@ -105,6 +106,12 @@ export class SmoothlyFormDemoPet {
 									</smoothly-input-radio-item>
 								))}
 							</smoothly-input-radio>
+							<smoothly-input-checkbox
+								name="owner.hasPet"
+								checked={this.owner.hasPet}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, hasPet: e.detail["owner.hasPet"] as boolean })}>
+								Has Pet
+							</smoothly-input-checkbox>
 						</Fragment>
 					)}
 					<smoothly-tabs>
