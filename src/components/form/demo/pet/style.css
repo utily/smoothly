@@ -6,6 +6,7 @@
 	grid-column-gap: 2rem;
 }
 
+:host > smoothly-form smoothly-summary,
 :host > smoothly-form smoothly-tabs {
 	flex-basis: 100%;
 }
