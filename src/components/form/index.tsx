@@ -58,9 +58,11 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Method()
 	async removeInput(name: string) {
-		this.value = Data.remove(this.value, name)
-		this.inputs.delete(name)
-		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		if (this.element.isConnected) {
+			this.value = Data.remove(this.value, name)
+			this.inputs.delete(name)
+			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		}
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
