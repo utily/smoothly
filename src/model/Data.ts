@@ -49,7 +49,7 @@ export namespace Data {
 			? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
 			: data
 	}
-	export function merge(data: Data, changes: Record<string, any>): Data {
+	export function merge(changes: Record<string, any>, data: Data): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
 	}
 }
