@@ -28,7 +28,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
-	parent?: Editable
+	parent: Editable | undefined
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }

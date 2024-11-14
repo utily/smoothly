@@ -26,7 +26,7 @@ import { Selectable } from "./Selected"
 })
 export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputRadioElement
-	parent?: Editable
+	parent: Editable | undefined
 	private active?: Selectable
 	private valueReceivedOnLoad = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}

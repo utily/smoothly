@@ -607,8 +607,10 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "unregister": () => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerDemo {

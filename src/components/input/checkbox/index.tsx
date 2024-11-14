@@ -12,7 +12,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputCheckbox implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputCheckboxElement
-	parent?: Editable
+	parent: Editable | undefined
 	private initialValue?: any
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private mouseDownPosition?: { x: number; y: number }

@@ -26,7 +26,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	@Prop({ mutable: true }) changed = false
-	parent?: Editable
+	parent: Editable | undefined
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date

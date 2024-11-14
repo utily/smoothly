@@ -26,7 +26,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
-	parent?: Editable
+	parent: Editable | undefined
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}

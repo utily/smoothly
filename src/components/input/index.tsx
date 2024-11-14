@@ -31,7 +31,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) changed = false
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
-	parent?: Editable
+	parent: Editable | undefined
 	private inputElement: HTMLInputElement
 	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
 	private keepFocusOnReRender = false

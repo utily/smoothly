@@ -40,7 +40,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
-	parent?: Editable
+	parent: Editable | undefined
 	private listener: { changed?: (parent: Editable) => Promise<void> }
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement

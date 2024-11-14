@@ -26,7 +26,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
-	parent?: Editable
+	parent: Editable | undefined
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
