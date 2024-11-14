@@ -1,4 +1,4 @@
-import { Component, h, Host, State, VNode, Watch } from "@stencil/core"
+import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-form-demo-pet",
@@ -30,10 +30,33 @@ export class SmoothlyFormDemoPet {
 					<smoothly-input type="integer" name="age">
 						Age (Years)
 					</smoothly-input>
-					<smoothly-input type={"text"} name="owner.firstName">
-						Owners First Name
-					</smoothly-input>
-					<smoothly-input name={"owner.lastName"}>Owners Last Name</smoothly-input>
+					<smoothly-input-checkbox
+						name="hasOwner"
+						onSmoothlyInputLoad={e => e.stopPropagation()}
+						onSmoothlyInput={e => {
+							this.hasOwner = e.detail.hasOwner as boolean
+							e.stopPropagation()
+						}}>
+						Has Owner
+					</smoothly-input-checkbox>
+					{this.hasOwner && (
+						<Fragment>
+							<smoothly-input
+								type="text"
+								name="owner.firstName"
+								value={this.owner.firstName}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, firstName: e.detail["owner.firstName"] })}>
+								Owner First Name
+							</smoothly-input>
+							<smoothly-input
+								type="text"
+								name="owner.lastName"
+								value={this.owner.lastName}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, lastName: e.detail["owner.lastName"] })}>
+								Owner Last Name
+							</smoothly-input>
+						</Fragment>
+					)}
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 				</smoothly-form>
 				<smoothly-display type="json" value={this.value} />
