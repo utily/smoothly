@@ -6,7 +6,7 @@ import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
-import { removeInput } from "./removeInput"
+import { removeInputFromForm } from "./removeInputFromForm"
 
 @Component({
 	tag: "smoothly-input",
@@ -127,11 +127,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
-			await this.removeSelf()
+			await this.unregister()
 	}
 	@Method()
-	async removeSelf() {
-		removeInput(this)
+	async unregister() {
+		removeInputFromForm(this)
 	}
 	componentDidRender() {
 		if (this.keepFocusOnReRender) {

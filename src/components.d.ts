@@ -257,7 +257,6 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
-        "removeSelf": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -266,6 +265,7 @@ export namespace Components {
         "showLabel": boolean;
         "toInteger"?: boolean;
         "type": tidily.Type;
+        "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputCheckbox {
