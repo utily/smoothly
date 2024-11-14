@@ -26,6 +26,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
+	parent?: Editable
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
@@ -50,7 +51,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.value && (this.initialValue = this.value)
 		this.valueChanged()
@@ -66,6 +67,18 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
 		if (event.target != this.element)
 			event.stopPropagation()
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<number | undefined> {

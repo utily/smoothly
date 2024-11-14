@@ -14,6 +14,7 @@ export class SmoothlyFormDemoPet {
 		lastName?: string
 		birthday?: string
 		ownedRange?: isoly.DateRange
+		height?: number
 		favoriteHat?: string
 		favoriteColor?: RGB
 		favoritePizza?: string
@@ -77,6 +78,14 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
 								Owner ownedRange
 							</smoothly-input-date-range>
+							<smoothly-input-range
+								name="owner.height"
+								step={1}
+								max={250}
+								value={this.owner.height}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, height: e.detail["owner.height"] })}>
+								Owner's Height
+							</smoothly-input-range>
 							<smoothly-input-select name="owner.favoriteHat">
 								<span slot="label">Owner's Favorite Hat</span>
 								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
@@ -156,6 +165,7 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input-file>
 							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
 							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>
+							<smoothly-input-range name="summary.height">Height</smoothly-input-range>
 							<smoothly-input-select name="summary.favoriteHat">
 								<span slot="label">Summary's Favorite Hat</span>
 								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (

@@ -456,10 +456,12 @@ export namespace Components {
         "name": string;
         "outputSide": "right" | "left";
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "step"?: number;
         "type": Extract<tidily.Type, "text" | "percent">;
+        "unregister": () => Promise<void>;
         "value": number | undefined;
     }
     interface SmoothlyInputRangeDemo {
