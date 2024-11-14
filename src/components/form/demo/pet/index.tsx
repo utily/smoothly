@@ -174,7 +174,8 @@ export class SmoothlyFormDemoPet {
 									</smoothly-item>
 								))}
 							</smoothly-input-select>
-							<smoothly-input-color name="summary.favoriteColor">Summary's Favorite Color</smoothly-input-color>
+							<smoothly-input-month name="summary.month">Summary Month</smoothly-input-month>
+							<smoothly-input-color name="summary.color">Summary Color</smoothly-input-color>
 							<smoothly-input-radio name="summary.favoritePizza">
 								<span slot="label">Summary's Favorite Pizza</span>
 								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (

@@ -411,9 +411,11 @@ export namespace Components {
         "next": boolean;
         "previous": boolean;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value"?: isoly.Date;
     }
     interface SmoothlyInputPriceDemo {
