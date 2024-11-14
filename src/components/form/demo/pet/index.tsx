@@ -7,7 +7,7 @@ import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core
 })
 export class SmoothlyFormDemoPet {
 	@State() hasOwner = false
-	@State() owner: { firstName?: string; lastName?: string } = {}
+	@State() owner: { firstName?: string; lastName?: string; birthday?: string } = {}
 	@State() value: any
 
 	@Watch("value")
@@ -55,6 +55,12 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, lastName: e.detail["owner.lastName"] })}>
 								Owner Last Name
 							</smoothly-input>
+							<smoothly-input-date
+								name="owner.birthday"
+								value={this.owner.birthday}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, birthday: e.detail["owner.birthday"] })}>
+								Owner birthday
+							</smoothly-input-date>
 						</Fragment>
 					)}
 					<smoothly-tabs>
