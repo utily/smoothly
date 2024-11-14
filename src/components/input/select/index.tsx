@@ -19,12 +19,14 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
+	parent?: Editable
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -66,7 +68,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
@@ -86,6 +88,18 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			)
 		}
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		addInputFromForm(this)
+	}
+	@Method()
+	async unregister() {
+		removeInputFromForm(this)
 	}
 	@Method()
 	async getValue(): Promise<any | any[] | undefined> {

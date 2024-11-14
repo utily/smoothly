@@ -486,12 +486,14 @@ export namespace Components {
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "showSelected"?: boolean;
+        "unregister": () => Promise<void>;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;

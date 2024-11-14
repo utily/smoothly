@@ -8,7 +8,13 @@ import { isoly } from "isoly"
 })
 export class SmoothlyFormDemoPet {
 	@State() hasOwner = false
-	@State() owner: { firstName?: string; lastName?: string; birthday?: string; ownedRange?: isoly.DateRange } = {}
+	@State() owner: {
+		firstName?: string
+		lastName?: string
+		birthday?: string
+		ownedRange?: isoly.DateRange
+		favoriteHat?: string
+	} = {}
 	@State() value: any
 
 	@Watch("value")
@@ -69,6 +75,14 @@ export class SmoothlyFormDemoPet {
 								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
 								Owner ownedRange
 							</smoothly-input-date-range>
+							<smoothly-input-select name="owner.favoriteHat">
+								<span slot="label">Owner's Favorite Hat</span>
+								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
+									<smoothly-item value={value} key={index} selected={this.owner.favoriteHat == value}>
+										{value}
+									</smoothly-item>
+								))}
+							</smoothly-input-select>
 						</Fragment>
 					)}
 					<smoothly-tabs>
