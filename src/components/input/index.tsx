@@ -109,7 +109,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		}
 	}
 	connectedCallback() {
-		console.log("connectedCallback", this.name)
 		this.typeChange()
 		const value = this.formatter.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value

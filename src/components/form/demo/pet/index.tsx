@@ -21,11 +21,6 @@ export class SmoothlyFormDemoPet {
 	} = {}
 	@State() value: any
 
-	@Watch("value")
-	valueChange() {
-		console.log("valueChange", this.value)
-	}
-
 	render(): VNode | VNode[] {
 		return (
 			<Host>
@@ -122,16 +117,64 @@ export class SmoothlyFormDemoPet {
 							<smoothly-input type={"text"} name="dog.breed">
 								Breed
 							</smoothly-input>
+							<smoothly-input-file name="dog.picture">
+								<span slot="label">Dog picture</span>
+							</smoothly-input-file>
+							<smoothly-input-date name="dog.birthday">Dog birthday</smoothly-input-date>
+							<smoothly-input-date-range name="dog.dateRange">Dog date range</smoothly-input-date-range>
+							<smoothly-input-select name="dog.favoriteHat">
+								<span slot="label">Dog's Favorite Hat</span>
+								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
+									<smoothly-item value={value} key={index}>
+										{value}
+									</smoothly-item>
+								))}
+							</smoothly-input-select>
+							<smoothly-input-color name="dog.favoriteColor">Dog's Favorite Color</smoothly-input-color>
+							<smoothly-input-radio name="dog.favoritePizza">
+								<span slot="label">Dog's Favorite Pizza</span>
+								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (
+									<smoothly-input-radio-item value={value} key={index}>
+										{value}
+									</smoothly-input-radio-item>
+								))}
+							</smoothly-input-radio>
+							<smoothly-input-checkbox name="dog.hasPet">Has Pet</smoothly-input-checkbox>
 						</smoothly-tab>
 						<smoothly-tab label="Cat" open>
 							<smoothly-input name={"cat.favoriteFood"}>Favorite Food</smoothly-input>
 						</smoothly-tab>
 					</smoothly-tabs>
 					<smoothly-summary>
-						<span slot="summary">Has nickname</span>
-						<smoothly-input slot="content" type="text" name="name.nick">
-							Nickname
-						</smoothly-input>
+						<span slot="summary">Summary</span>
+						<div slot="content">
+							<smoothly-input type="text" name="summary.text">
+								Summary Text
+							</smoothly-input>
+							<smoothly-input-file name="summary.picture">
+								<span slot="label">Summary picture</span>
+							</smoothly-input-file>
+							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
+							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>
+							<smoothly-input-select name="summary.favoriteHat">
+								<span slot="label">Summary's Favorite Hat</span>
+								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
+									<smoothly-item value={value} key={index}>
+										{value}
+									</smoothly-item>
+								))}
+							</smoothly-input-select>
+							<smoothly-input-color name="summary.favoriteColor">Summary's Favorite Color</smoothly-input-color>
+							<smoothly-input-radio name="summary.favoritePizza">
+								<span slot="label">Summary's Favorite Pizza</span>
+								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (
+									<smoothly-input-radio-item value={value} key={index}>
+										{value}
+									</smoothly-input-radio-item>
+								))}
+							</smoothly-input-radio>
+							<smoothly-input-checkbox name="summary.hasPet">Has Pet</smoothly-input-checkbox>
+						</div>
 					</smoothly-summary>
 					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 				</smoothly-form>
