@@ -1,4 +1,4 @@
-import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core"
+import { Component, Fragment, h, Host, State, VNode } from "@stencil/core"
 import { isoly } from "isoly"
 import { RGB } from "../../../../model/Color/RGB"
 
