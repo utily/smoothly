@@ -1,5 +1,6 @@
 import { Component, Fragment, h, Host, State, VNode, Watch } from "@stencil/core"
 import { isoly } from "isoly"
+import { RGB } from "../../../../model/Color/RGB"
 
 @Component({
 	tag: "smoothly-form-demo-pet",
@@ -14,6 +15,7 @@ export class SmoothlyFormDemoPet {
 		birthday?: string
 		ownedRange?: isoly.DateRange
 		favoriteHat?: string
+		favoriteColor?: RGB
 	} = {}
 	@State() value: any
 
@@ -83,6 +85,12 @@ export class SmoothlyFormDemoPet {
 									</smoothly-item>
 								))}
 							</smoothly-input-select>
+							<smoothly-input-color
+								name="owner.favoriteColor"
+								value={this.owner.favoriteColor ? RGB.toHex(this.owner.favoriteColor) : undefined}
+								onSmoothlyInput={e => (this.owner = { ...this.owner, favoriteColor: e.detail["owner.favoriteColor"] })}>
+								Owner's Favorite Color
+							</smoothly-input-color>
 						</Fragment>
 					)}
 					<smoothly-tabs>

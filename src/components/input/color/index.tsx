@@ -21,6 +21,7 @@ import { Editable } from "../Editable"
 import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { addInputFromForm, removeInputFromForm } from "../removeInputFromForm"
 
 @Component({
 	tag: "smoothly-input-color",
@@ -28,6 +29,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
+	parent?: Editable
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
@@ -52,7 +54,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.value && (this.rgb = Color.Hex.toRGB(this.value))
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
 	@Listen("smoothlyInputLooks")
@@ -68,6 +70,18 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		addInputFromForm(this)
+	}
+	@Method()
+	async unregister() {
+		removeInputFromForm(this)
 	}
 	@Method()
 	async getValue(): Promise<RGB | string | undefined> {

@@ -309,9 +309,11 @@ export namespace Components {
         "name": string;
         "output": "rgb" | "hex";
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value": string | undefined;
     }
     interface SmoothlyInputColorDemo {
