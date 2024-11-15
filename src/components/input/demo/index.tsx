@@ -14,7 +14,7 @@ export class SmoothlyInputDemo {
 	render() {
 		return (
 			<Host>
-				<smoothly-form onSmoothlyFormInput={e => console.log(e.detail)}>
+				<smoothly-form /* onSmoothlyFormInput={e => console.log(e.detail)} */>
 					<smoothly-input-next name={"price"} type="price" currency="EUR"></smoothly-input-next>
 					<smoothly-input type="price" currency="EUR">
 						price
@@ -27,7 +27,7 @@ export class SmoothlyInputDemo {
 					</smoothly-button>
 					<smoothly-input-next name={"text"}></smoothly-input-next>
 					<smoothly-input>text</smoothly-input>
-					{/* <smoothly-input-next name={"password"} type="password"></smoothly-input-next>
+					<smoothly-input-next name={"password"} type="password"></smoothly-input-next>
 					<smoothly-input type="password">password</smoothly-input>
 					<smoothly-input-next name={"cardNumber"} type="card-number"></smoothly-input-next>
 					<smoothly-input type="card-number">card-number</smoothly-input>
@@ -40,7 +40,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-next name={"phone"} type="phone"></smoothly-input-next>
 					<smoothly-input type="phone">phone</smoothly-input>
 					<smoothly-input-next name={"integer"} type="integer"></smoothly-input-next>
-					<smoothly-input type="integer">integer</smoothly-input> */}
+					<smoothly-input type="integer">integer</smoothly-input>
 				</smoothly-form>
 			</Host>
 		)

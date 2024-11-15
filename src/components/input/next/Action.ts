@@ -3,7 +3,7 @@ import { tidily } from "tidily"
 import { getAdjacentWordBreakIndex } from "./adjacentWordBreak"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
-type EventHandler = (event: InputEvent, unformatted: tidily.State, formatted: tidily.State) => tidily.State
+type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
 /**
 Alternative names:
@@ -31,6 +31,45 @@ export class Action {
 		return new Action(result || tidily.get("text")!, type)
 	}
 
+	public onKeyDown(
+		event: KeyboardEvent,
+		state: Readonly<tidily.State> & tidily.Settings
+	): Readonly<tidily.State> & tidily.Settings {
+		let result: Readonly<tidily.State> & tidily.Settings = state
+		const handler = this.keydownHandlers[event.key]
+		if (handler) {
+			const input = event.target as HTMLInputElement
+			state.selection.start = input.selectionStart ?? state.selection.start
+			state.selection.end = input.selectionEnd ?? state.selection.end
+			state.selection.direction = input.selectionDirection ?? state.selection.direction
+			const unformatted = handler(event, this.unformatState(state), state)
+			const formatted = this.partialFormatState(unformatted)
+			if (event.defaultPrevented) {
+				input.selectionStart = formatted.selection.start
+				input.selectionEnd = formatted.selection.end
+				input.selectionDirection = formatted.selection.direction ?? null
+			}
+			result = formatted
+		}
+		return result
+	}
+	keydownHandlers: { [key: string]: Handler<KeyboardEvent> | undefined } = {
+		ArrowLeft: (event, state) => (event.ctrlKey || event.metaKey ? state : this.moveCursor(event, state)),
+		ArrowRight: (event, state) => (event.ctrlKey || event.metaKey ? state : this.moveCursor(event, state)),
+	}
+
+	moveCursor(event: KeyboardEvent, state: tidily.State): tidily.State {
+		event.preventDefault()
+		let cursor = tidily.Selection.getCursor(state.selection)
+		let stalk = tidily.Selection.getStalker(state.selection)
+		cursor = Math.min(Math.max(cursor + (event.key == "ArrowLeft" ? -1 : 1), 0), state.value.length)
+		stalk = event.shiftKey ? stalk : cursor
+		state.selection.direction = stalk < cursor ? "forward" : stalk > cursor ? "backward" : "none"
+		state.selection.start = Math.min(stalk, cursor)
+		state.selection.end = Math.max(stalk, cursor)
+		return state
+	}
+
 	public onFocus(event: FocusEvent, state: tidily.State) {
 		const result = this.partialFormatState(this.unformatState(state))
 		const input = event.target as HTMLInputElement
@@ -50,10 +89,9 @@ export class Action {
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
-		const unformatted = this.unformatState(state)
 		const result =
 			event.type == "beforeinput" || event.type == "input"
-				? this.eventHandlers[event.type][event.inputType]?.(event, unformatted, state) ?? state
+				? this.eventHandlers[event.type][event.inputType]?.(event, this.unformatState(state), state) ?? state
 				: state
 		const formatted = this.partialFormatState(result)
 		if (event.defaultPrevented) {
@@ -64,7 +102,7 @@ export class Action {
 		}
 		return formatted
 	}
-	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: EventHandler | undefined }> = {
+	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: Handler<InputEvent> | undefined }> = {
 		beforeinput: {
 			insertText: (event, state) => this.insert(event, state),
 			insertFromPaste: (event, state) => this.insert(event, state),

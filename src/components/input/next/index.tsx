@@ -110,6 +110,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
+					onKeyDown={event => (this.state = this.action.onKeyDown(event, this.state))}
 					onFocus={event => (this.state = this.action.onFocus(event, this.state))}
 					onBlur={event => (this.state = this.action.onBlur(event, this.state))}
 				/>
