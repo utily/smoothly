@@ -38,17 +38,17 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 				</span>
 				<span class="content">
 					{Array.isArray(this.value)
-						? this.value.map((v, index) => (
+						? this.value.map(v => (
 								<div class="indent">
 									<JsonValue value={v} collapseDepth={nextCollapseDepth}></JsonValue>
-									{index < this.length - 1 ? "," : ""}
+									<span class="comma">,</span>
 								</div>
 						  ))
-						: Object.entries(this.value).map(([k, v], index) => (
+						: Object.entries(this.value).map(([k, v]) => (
 								<div class="indent">
 									{<smoothly-display-json-record-key value={k}></smoothly-display-json-record-key>}:{" "}
 									{<JsonValue value={v} collapseDepth={nextCollapseDepth}></JsonValue>}
-									{index < this.length - 1 ? "," : ""}
+									<span class="comma">,</span>
 								</div>
 						  ))}
 				</span>
