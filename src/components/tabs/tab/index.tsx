@@ -18,8 +18,8 @@ export class SmoothlyTab {
 		if (this.open)
 			this.smoothlyTabOpen.emit(this.label)
 		this.open
-			? await Promise.all(Object.values(this.inputs).map(input => input.register?.()))
-			: await Promise.all(Object.values(this.inputs).map(input => input.unregister?.()))
+			? await Promise.all(Object.values(this.inputs).map(input => input.register()))
+			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
 	}
 	@Listen("click")
 	onClick(e: UIEvent) {

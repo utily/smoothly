@@ -19,8 +19,8 @@ export class SmoothlySummary {
 			this.open = event.target.open
 			this.smoothlySummaryOpen.emit(this.open)
 			this.open
-				? await Promise.all(Object.values(this.inputs).map(input => input.register?.()))
-				: await Promise.all(Object.values(this.inputs).map(input => input.unregister?.()))
+				? await Promise.all(Object.values(this.inputs).map(input => input.register()))
+				: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
 		}
 	}
 
