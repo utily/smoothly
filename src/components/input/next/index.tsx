@@ -1,7 +1,21 @@
-import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	State,
+	Watch,
+} from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Data } from "../../../model"
+import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 import { Action } from "./Action"
@@ -13,6 +27,8 @@ import { getLocale } from "./getLocale"
 	scoped: true,
 })
 export class SmoothlyInputNext implements ComponentWillLoad, Input {
+	@Element() element: HTMLSmoothlyInputNextElement
+	parent: Editable | undefined
 	private action: Action
 	@Prop({ mutable: true }) name: string
 	@Prop({ reflect: true, mutable: true }) looks: Looks
@@ -22,7 +38,24 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	private lastValue: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@Event() smoothlyInput: EventEmitter<Data>
-	@Event() smoothlyInputLoad: EventEmitter<(parent: HTMLElement) => void>
+	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
+
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
+	}
+	@Method()
+	async getValue(): Promise<any> {
+		return this.value
+	}
 
 	@Watch("currency")
 	@Watch("type")

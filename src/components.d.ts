@@ -418,9 +418,12 @@ export namespace Components {
     }
     interface SmoothlyInputNext {
         "currency"?: isoly.Currency;
+        "getValue": () => Promise<any>;
         "looks": Looks;
         "name": string;
+        "register": () => Promise<void>;
         "type": tidily.Type;
+        "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputPriceDemo {
@@ -1608,7 +1611,7 @@ declare global {
     };
     interface HTMLSmoothlyInputNextElementEventMap {
         "smoothlyInput": Data;
-        "smoothlyInputLoad": (parent: HTMLElement) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
     }
     interface HTMLSmoothlyInputNextElement extends Components.SmoothlyInputNext, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2829,7 +2832,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Data>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: HTMLElement) => void>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: Editable) => void>) => void;
         "type"?: tidily.Type;
         "value"?: any;
     }
