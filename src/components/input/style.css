@@ -54,9 +54,6 @@
 :host[invalid]>div>smoothly-icon {
 	display: block;
 	z-index: 2;
-}
-
-:host[invalid]>div>smoothly-icon:hover {
 	cursor: pointer;
 }
 
