@@ -27,6 +27,7 @@ import { Controls } from "./menu"
 	scoped: true,
 })
 export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidLoad {
+	parent: Editable | undefined
 	private valueReceivedOnLoad = false
 	private initialValue = new Map<any, Option>()
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -55,7 +56,18 @@ export class SmoothlyPicker implements Clearable, Editable, Input, ComponentDidL
 		this.smoothlyInputLoad.emit(() => {})
 		this.listener.changed?.(this)
 	}
-
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
+	}
 	@Method()
 	async getValue(): Promise<any | any[] | undefined> {
 		const selected = Array.from(this.selected.values(), option => option.value)

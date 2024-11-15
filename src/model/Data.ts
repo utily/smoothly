@@ -1,7 +1,7 @@
 import { isly } from "isly"
 
 type Value = string | number | boolean | Blob | undefined
-export type Data = { [name: string]: Data | Value | Value[] }
+export type Data = { [name: string]: Data | Data[] | Value | Value[] }
 export namespace Data {
 	export const valueType = isly.union<Value, string, number, boolean, Blob, undefined>(
 		isly.string(),
@@ -51,5 +51,23 @@ export namespace Data {
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
+	}
+	export function remove(data: Data, name: string): any {
+		const keys = name.split(".")
+		removeKey(data, keys)
+		return data
+	}
+	function removeKey(current: any, [head, ...tail]: string[]) {
+		if (tail.length === 0) {
+			if (typeof current === "object" && head in current)
+				delete current[head]
+		} else if (typeof current === "object" && head in current) {
+			removeKey(current[head], tail)
+			if (isEmpty(current[head]))
+				delete current[head]
+		}
+	}
+	function isEmpty(current: any): boolean {
+		return typeof current === "object" && Object.keys(current).length === 0
 	}
 }

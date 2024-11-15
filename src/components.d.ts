@@ -194,6 +194,7 @@ export namespace Components {
         "name"?: string;
         "prevent": boolean;
         "readonly": boolean;
+        "removeInput": (name: string) => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
@@ -256,6 +257,7 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -264,6 +266,7 @@ export namespace Components {
         "showLabel": boolean;
         "toInteger"?: boolean;
         "type": tidily.Type;
+        "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputCheckbox {
@@ -278,8 +281,10 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "unregister": () => Promise<void>;
         "value": boolean;
     }
     interface SmoothlyInputCheckboxDemo {
@@ -306,9 +311,11 @@ export namespace Components {
         "name": string;
         "output": "rgb" | "hex";
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value": string | undefined;
     }
     interface SmoothlyInputColorDemo {
@@ -327,9 +334,11 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value"?: Date;
     }
     interface SmoothlyInputDateRange {
@@ -347,10 +356,12 @@ export namespace Components {
         "name": string;
         "placeholder": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "start": isoly.Date | undefined;
+        "unregister": () => Promise<void>;
     }
     interface SmoothlyInputDemo {
     }
@@ -381,9 +392,11 @@ export namespace Components {
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value"?: File;
     }
     interface SmoothlyInputMonth {
@@ -398,9 +411,11 @@ export namespace Components {
         "next": boolean;
         "previous": boolean;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value"?: isoly.Date;
     }
     interface SmoothlyInputPriceDemo {
@@ -416,9 +431,11 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
+        "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputRadioItem {
@@ -441,10 +458,12 @@ export namespace Components {
         "name": string;
         "outputSide": "right" | "left";
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "step"?: number;
         "type": Extract<tidily.Type, "text" | "percent">;
+        "unregister": () => Promise<void>;
         "value": number | undefined;
     }
     interface SmoothlyInputRangeDemo {
@@ -479,12 +498,14 @@ export namespace Components {
         "name": string;
         "placeholder"?: string | any;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "showSelected"?: boolean;
+        "unregister": () => Promise<void>;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
@@ -586,8 +607,10 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "readonly": boolean;
+        "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "unregister": () => Promise<void>;
         "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
     }
     interface SmoothlyPickerDemo {

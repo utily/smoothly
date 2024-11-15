@@ -56,7 +56,14 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 	}
-
+	@Method()
+	async removeInput(name: string) {
+		if (this.element.isConnected) {
+			this.value = Data.remove(this.value, name)
+			this.inputs.delete(name)
+			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+		}
+	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		;(this.listeners[property] ??= []).push(listener)

@@ -28,6 +28,29 @@ describe("Data", () => {
 		const output = Data.convertArrays(input)
 		expect(output).toEqual(["zero", "one", undefined, "three"])
 	})
+	it.only("Data.merge undefined values", () => {
+		let data: any = Data.merge({}, { name: undefined })
+		expect("name" in data).toBe(true)
+
+		data = Data.merge(data, { age: undefined })
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+
+		data = Data.merge(data, { "cat.favoriteFood": undefined })
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+		expect("turtle" in data).toBe(false)
+		expect("cat" in data).toBe(true)
+		expect("cat" in data && "favoriteFood" in data["cat"]).toBe(true)
+
+		data = Data.merge(data, { "dog.breed": undefined })
+		expect("name" in data).toBe(true)
+		expect("age" in data).toBe(true)
+		expect("turtle" in data).toBe(false)
+		expect("cat" in data).toBe(true)
+		expect("cat" in data && "favoriteFood" in data["cat"]).toBe(true)
+		expect("dog" in data && "breed" in data["dog"]).toBe(true)
+	})
 	it("Data.set multiple", () => {
 		const file = new File(["PDF"], "my file")
 		const input: any = {
@@ -83,6 +106,122 @@ describe("Data", () => {
 			],
 			work: { duration: {} },
 			receipts: [{ file }],
+		})
+	})
+	it("Data.remove", () => {
+		const input = {
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			address: {
+				city: "Uppsala",
+				zip: "75320",
+				street: undefined,
+			},
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
+		}
+
+		let output = Data.remove(input, "address.city")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			address: {
+				zip: "75320",
+				street: undefined,
+			},
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
+		})
+
+		output = Data.remove(input, "name.middle") // Should not change anything
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			address: {
+				zip: "75320",
+				street: undefined,
+			},
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
+		})
+
+		output = Data.remove(output, "address.street")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			address: {
+				zip: "75320",
+			},
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
+		})
+
+		output = Data.remove(output, "address.zip")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			pets: [
+				{ name: "Barky", type: "dog" },
+				{ name: "Mr Meow", type: "cat" },
+				{ name: "Speedster", type: "turtle" },
+			],
+		})
+
+		output = Data.remove(output, "pets.1.type")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			pets: [{ name: "Barky", type: "dog" }, { name: "Mr Meow" }, { name: "Speedster", type: "turtle" }],
+		})
+
+		output = Data.remove(output, "pets.2")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			pets: [{ name: "Barky", type: "dog" }, { name: "Mr Meow" }],
+		})
+
+		output = Data.remove(output, "pets.1")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
+			pets: [{ name: "Barky", type: "dog" }],
+		})
+
+		output = Data.remove(output, "pets.0")
+		expect(output).toEqual({
+			name: {
+				last: "Smith",
+				first: "John",
+			},
 		})
 	})
 })

@@ -31,6 +31,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() invalid?: boolean = false
+	parent: Editable | undefined
 	private initialValue?: Date
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: Date
@@ -49,9 +50,21 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(_ => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<Date | undefined> {

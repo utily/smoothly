@@ -27,6 +27,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	changed: boolean
+	parent: Editable | undefined
 	@Element() element: HTMLSmoothlyInputMonthElement
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
 	@Prop({ reflect: true }) color?: Color
@@ -47,7 +48,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 
 	componentWillLoad(): void {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.valueChanged()
 	}
@@ -61,6 +62,18 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 			date.setMonth(date.getMonth() + delta)
 			this.value = isoly.Date.create(date)
 		}
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<isoly.Date | undefined> {

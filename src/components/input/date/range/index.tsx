@@ -26,6 +26,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	@Prop({ mutable: true }) changed = false
+	parent: Editable | undefined
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
@@ -42,7 +43,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
-		this.smoothlyInputLoad.emit(_ => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
@@ -80,6 +81,18 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<isoly.DateRange | undefined> {

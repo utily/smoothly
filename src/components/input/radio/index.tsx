@@ -1,6 +1,7 @@
 import {
 	Component,
 	ComponentWillLoad,
+	Element,
 	Event,
 	EventEmitter,
 	h,
@@ -24,6 +25,8 @@ import { Selectable } from "./Selected"
 	scoped: true,
 })
 export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
+	@Element() element: HTMLSmoothlyInputRadioElement
+	parent: Editable | undefined
 	private active?: Selectable
 	private valueReceivedOnLoad = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -47,7 +50,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
-		this.smoothlyInputLoad.emit(() => {})
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.initialValue = this.active
 	}
 	@Listen("smoothlyRadioButtonRegister")
@@ -81,6 +84,18 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
+	}
+	async disconnectedCallback() {
+		if (!this.element.isConnected)
+			await this.unregister()
+	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
 	}
 	@Method()
 	async getValue(): Promise<any | undefined> {

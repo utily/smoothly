@@ -1,6 +1,7 @@
 import { EventEmitter } from "@stencil/core"
 import { isly } from "isly"
 import { Color, Data } from "../../model"
+import { SmoothlyForm } from "../form"
 import { Editable } from "./Editable"
 import { Looks } from "./Looks"
 
@@ -8,9 +9,12 @@ export interface Input extends Input.Element {
 	smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	smoothlyInput: EventEmitter<Data>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
+	parent: Editable | undefined
 }
 export namespace Input {
 	export interface Element {
+		register: () => Promise<void>
+		unregister: () => Promise<void>
 		getValue: GetValue
 		color?: Color
 		name: string
@@ -21,6 +25,8 @@ export namespace Input {
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
+			register: isly.function<() => Promise<void>>(),
+			unregister: isly.function<() => Promise<void>>(),
 			getValue: isly.function<GetValue>(),
 			color: Color.type.optional(),
 			name: isly.string(),
@@ -38,6 +44,16 @@ export namespace Input {
 		smoothlyInputLoad: EventEmitter,
 		smoothlyInput: EventEmitter,
 		smoothlyInputForm: EventEmitter.optional(),
+		parent: Editable.type.optional(),
 	})
 	export const is = type.is
+
+	export function formRemove(self: Input) {
+		if (self.parent instanceof SmoothlyForm) {
+			self.parent.removeInput(self.name)
+		}
+	}
+	export function formAdd(self: Input) {
+		self.smoothlyInputLoad.emit(parent => (self.parent = parent))
+	}
 }
