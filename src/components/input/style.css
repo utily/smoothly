@@ -51,12 +51,10 @@
 	top: 0.6em;
 }
 
-:host.invalid>div>smoothly-icon {
+:host[invalid]>div>smoothly-icon {
 	display: block;
-}
-
-:host>div>input:invalid+label+smoothly-icon {
-	display: block;
+	z-index: 2;
+	cursor: pointer;
 }
 
 :host>div>label {
