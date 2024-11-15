@@ -27,8 +27,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop() toInteger?: boolean
 	@Prop({ reflect: true }) currency?: isoly.Currency
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
+	@Prop() errorMessage?: string
 	@State() formatter: tidily.Formatter & tidily.Converter<any>
 	@State() initialValue?: any
 	parent: Editable | undefined
@@ -327,12 +328,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	render() {
 		return (
 			<Host
-				class={{
-					"has-value": this.state?.value != undefined && this.state?.value != "",
-					invalid: !!this.invalid,
-				}}
+				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
-				<slot name="start"></slot>
+				<slot name="start" />
 				<div>
 					<input
 						color={this.color}
@@ -352,13 +350,14 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						onBlur={e => this.onBlur(e)}
 						onKeyDown={e => this.onKeyDown(e)}
 						ref={(el: HTMLInputElement) => (this.inputElement = el)}
-						onPaste={e => this.onPaste(e)}></input>
+						onPaste={e => this.onPaste(e)}
+					/>
 					<label class={"label float-on-focus"} htmlFor={this.name}>
 						<slot />
 					</label>
-					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
+					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small" toolTip={this.errorMessage} />
 				</div>
-				<slot name="end"></slot>
+				<slot name="end" />
 			</Host>
 		)
 	}
