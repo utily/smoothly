@@ -35,7 +35,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop() type?: "update" | "change" | "fetch" | "create" = this.action ? "create" : undefined
 	@Prop({ mutable: true }) readonly = false
 	@Prop({ reflect: true, attribute: "looks" }) looks?: Looks
-	@Prop() name?: string
+	@Prop({ reflect: true }) name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
 	@State() processing?: Promise<boolean>

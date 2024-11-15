@@ -38,7 +38,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() output: "rgb" | "hex" = "rgb"
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Element() element: HTMLSmoothlyInputColorElement
 	@State() open = false

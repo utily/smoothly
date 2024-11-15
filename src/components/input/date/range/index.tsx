@@ -14,7 +14,7 @@ import { Color, Data } from "./../../../../model"
 })
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Element() element: HTMLElement
-	@Prop() name: string = "dateRange"
+	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) readonly = false

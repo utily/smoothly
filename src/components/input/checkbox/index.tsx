@@ -14,7 +14,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	private initialValue?: any
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private mouseDownPosition?: { x: number; y: number }
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ mutable: true }) checked = false

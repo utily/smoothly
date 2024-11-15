@@ -38,7 +38,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop() type: Extract<tidily.Type, "text" | "percent"> = "text"
 	@Prop() min = 0
 	@Prop() max = 100
-	@Prop() name = "range"
+	@Prop({ reflect: true }) name = "range"
 	@Prop() step?: number
 	@Prop() outputSide: "right" | "left" = "left"
 	@Prop() label: string
