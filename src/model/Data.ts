@@ -1,7 +1,7 @@
 import { isly } from "isly"
 
 type Value = string | number | boolean | Blob | undefined
-export type Data = { [name: string]: Data | Value | Value[] }
+export type Data = { [name: string]: Data | Data[] | Value | Value[] }
 export namespace Data {
 	export const valueType = isly.union<Value, string, number, boolean, Blob, undefined>(
 		isly.string(),
