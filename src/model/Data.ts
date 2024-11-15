@@ -39,9 +39,6 @@ export namespace Data {
 			isly.object().is(d) && (keys => !!keys.length && keys.every(k => parseInt(k).toString() == k))(Object.keys(d))
 		)
 	}
-	export function keys(data: any, preKey = ""): string[] {
-		return typeof data == "object" ? Object.keys(data).flatMap(k => keys(data[k], `${preKey}${k}.`)) : [preKey]
-	}
 	export function convertArrays(data: any): Data {
 		return isArrayRecord(data)
 			? Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {

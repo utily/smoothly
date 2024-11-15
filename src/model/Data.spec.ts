@@ -44,7 +44,6 @@ describe("Data", () => {
 		expect("cat" in data && "favoriteFood" in data["cat"]).toBe(true)
 
 		data = Data.merge(data, { "dog.breed": undefined })
-		console.log(Data.keys(data))
 		expect("name" in data).toBe(true)
 		expect("age" in data).toBe(true)
 		expect("turtle" in data).toBe(false)
