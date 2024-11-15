@@ -14,7 +14,7 @@ export class SmoothlyCheckbox implements Clearable {
 	@Prop({ mutable: true, reflect: true }) intermediate = false
 	@Prop({ reflect: true }) unavailable = false
 	@Prop({ reflect: true }) disabled = false
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop() value: any
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@State() t: langly.Translate

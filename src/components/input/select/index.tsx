@@ -36,7 +36,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() invalid?: boolean = false
-	@Prop() name = "selected"
+	@Prop({ reflect: true }) name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) showLabel = true

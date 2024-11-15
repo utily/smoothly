@@ -6,7 +6,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
 	scoped: true,
 })
 export class TableHeader {
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	render() {
 		return (
 			<Host>

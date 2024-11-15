@@ -31,7 +31,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
 	@Prop({ reflect: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false

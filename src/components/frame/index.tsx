@@ -8,7 +8,7 @@ import { Message, Trigger } from "../../model"
 })
 export class SmoothlyFrame {
 	@Prop() url: string
-	@Prop() name: string
+	@Prop({ reflect: true }) name: string
 	@Event() trigger: EventEmitter<Trigger>
 	@Event() message2: EventEmitter<Message<any>>
 	@Element() element?: HTMLElement
