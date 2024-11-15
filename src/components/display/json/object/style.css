@@ -13,6 +13,9 @@
 :host(:not(.open)) .content {
 	display: none;
 }
+:host>.content>.indent:last-child>.comma {
+	display: none;
+}
 .open-bracket::after {
 	background-color: rgb(var(--smoothly-light-color));
 	color: rgb(var(--smoothly-light-shade));
