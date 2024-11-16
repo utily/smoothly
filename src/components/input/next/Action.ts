@@ -210,13 +210,16 @@ export class Action {
 		return this.formatter.toString(value)
 	}
 	public setValue(
+		inputElement: HTMLInputElement,
 		formattedState: Readonly<tidily.State> & tidily.Settings,
 		value: any
 	): Readonly<tidily.State> & tidily.Settings {
-		return {
+		const result = {
 			...formattedState,
 			value: this.createState({ value: this.formatter.toString(value), selection: formattedState.selection }).value,
 		}
+		inputElement.value = result.value
+		return result
 	}
 	public getValue(formattedState: tidily.State): any {
 		return this.formatter.fromString(this.unformatState(formattedState).value)

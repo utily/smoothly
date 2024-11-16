@@ -30,6 +30,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	@Element() element: HTMLSmoothlyInputNextElement
 	parent: Editable | undefined
 	private action: Action
+	private inputElement: HTMLInputElement | undefined
 	@Prop({ mutable: true }) name: string
 	@Prop({ reflect: true, mutable: true }) looks: Looks
 	@Prop({ reflect: true }) type: tidily.Type = "text"
@@ -92,9 +93,9 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	}
 	@Watch("value")
 	valueChange(value: any, before: any) {
-		if (this.lastValue != value) {
+		if (this.lastValue != value && this.inputElement) {
 			this.lastValue = value
-			this.state = this.action.setValue(this.state, value)
+			this.state = this.action.setValue(this.inputElement, this.state, value)
 		}
 
 		if (value != before)
@@ -105,6 +106,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 		return (
 			<Host>
 				<input
+					ref={el => (this.inputElement = el ?? this.inputElement)}
 					name={this.name}
 					type={this.state.type}
 					inputMode={this.state.inputmode}
