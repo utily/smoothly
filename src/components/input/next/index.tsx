@@ -54,7 +54,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	}
 	@Method()
 	async getValue(): Promise<any> {
-		return this.value
+		return this.action.getValue(this.state)
 	}
 
 	@Watch("currency")
@@ -106,7 +106,6 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 			<Host>
 				<input
 					name={this.name}
-					value={this.state?.value}
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
