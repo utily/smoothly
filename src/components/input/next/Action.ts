@@ -200,9 +200,6 @@ export class Action {
 	public partialFormatState(unformattedState: tidily.State) {
 		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
 	}
-	public formatState(unformattedState: tidily.State) {
-		return this.formatter.format(tidily.StateEditor.copy(unformattedState))
-	}
 	public createState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
