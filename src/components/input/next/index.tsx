@@ -38,6 +38,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 	@Prop() currency?: isoly.Currency
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) changed = false
+	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
@@ -136,6 +137,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
 					autocomplete={this.state.autocomplete ?? "off"}
+					disabled={this.disabled}
 					readOnly={this.readonly}
 					pattern={this.state.pattern?.source}
 					onKeyDown={event => (this.state = this.action.onKeyDown(event, this.state))}
