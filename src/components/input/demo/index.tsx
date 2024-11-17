@@ -15,11 +15,11 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<smoothly-form /* onSmoothlyFormInput={e => console.log(e.detail)} */>
-					<smoothly-input-next name={"price"} type="price" currency="EUR"></smoothly-input-next>
+					<smoothly-input-next value={12.5} name={"price"} type="price" currency="EUR"></smoothly-input-next>
 					<smoothly-input type="price" currency="EUR">
 						price
 					</smoothly-input>
-					<smoothly-input-next name={"date"} type="date" value={this.date}></smoothly-input-next>
+					<smoothly-input-next name={"date"} type="date" value={this.date ?? "2023-05-11"}></smoothly-input-next>
 					<smoothly-button
 						color="light"
 						onClick={() => (this.date = this.date ? isoly.Date.next(this.date) : isoly.Date.now())}>
@@ -29,9 +29,9 @@ export class SmoothlyInputDemo {
 					<smoothly-input>text</smoothly-input>
 					<smoothly-input-next name={"password"} type="password"></smoothly-input-next>
 					<smoothly-input type="password">password</smoothly-input>
-					<smoothly-input-next name={"cardNumber"} type="card-number"></smoothly-input-next>
+					<smoothly-input-next value={"41111111"} name={"cardNumber"} type="card-number"></smoothly-input-next>
 					<smoothly-input type="card-number">card-number</smoothly-input>
-					<smoothly-input-next name={"cardExpires"} type="card-expires"></smoothly-input-next>
+					<smoothly-input-next value={[5, 11]} name={"cardExpires"} type="card-expires"></smoothly-input-next>
 					<smoothly-input type="card-expires">card-expires</smoothly-input>
 					<smoothly-input-next name={"cardCsc"} type="card-csc"></smoothly-input-next>
 					<smoothly-input type="card-csc">card-csc</smoothly-input>

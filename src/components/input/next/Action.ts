@@ -194,17 +194,26 @@ export class Action {
 		state.selection.end = state.selection.start
 	}
 
-	public unformatState(formattedState: tidily.State) {
+	private unformatState(formattedState: tidily.State) {
 		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
 	}
-	public partialFormatState(unformattedState: tidily.State) {
+	private partialFormatState(unformattedState: tidily.State) {
 		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
 	}
-	public createState(state: tidily.State) {
+	private createState(state: tidily.State) {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
-	public toString(value: any): string {
+	private toString(value: any): string {
 		return this.formatter.toString(value)
+	}
+	public initialState(value: any): Readonly<tidily.State> & tidily.Settings {
+		const stringValue = this.toString(value) || ""
+		const start = stringValue.length
+		const state = this.createState({
+			value: stringValue,
+			selection: { start, end: start, direction: "none" },
+		})
+		return state
 	}
 	public setValue(
 		inputElement: HTMLInputElement,

@@ -101,13 +101,12 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 	}
 	componentWillLoad() {
 		this.typeChange()
-		const value = this.action.toString(this.value) || ""
 		this.lastValue = this.initialValue = this.value
-		const start = value.length
-		this.state = this.action.createState({
-			value,
-			selection: { start, end: start, direction: "none" },
-		})
+		this.state = this.action.initialState(this.value)
+	}
+	componentDidLoad() {
+		if (this.inputElement)
+			this.action.setValue(this.inputElement, this.state, this.value)
 	}
 	@Listen("input")
 	@Listen("beforeinput")
