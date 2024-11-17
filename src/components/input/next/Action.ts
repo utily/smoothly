@@ -155,14 +155,14 @@ export class Action {
 		},
 	}
 
-	private insert(event: InputEvent, unformatted: tidily.State) {
+	private insert(event: InputEvent, unformatted: tidily.State): tidily.State {
 		event.preventDefault()
 		if (typeof event.data == "string")
 			for (const c of event.data)
 				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c)
 		return unformatted
 	}
-	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward") {
+	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward"): tidily.State {
 		const cursorPosition = tidily.Selection.getCursor(formattedState.selection)
 		const adjacentIndex = getAdjacentWordBreakIndex(formattedState.value, cursorPosition, direction)
 		const result = this.unformatState({
@@ -187,20 +187,20 @@ export class Action {
 	private erase(state: tidily.State): void {
 		this.replace(state, "")
 	}
-	private replace(state: tidily.State, insertString: string) {
+	private replace(state: tidily.State, insertString: string): void {
 		state.value =
 			state.value.substring(0, state.selection.start) + insertString + state.value.substring(state.selection.end)
 		state.selection.start = state.selection.start + insertString.length
 		state.selection.end = state.selection.start
 	}
 
-	private unformatState(formattedState: tidily.State) {
+	private unformatState(formattedState: tidily.State): tidily.State {
 		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
 	}
-	private partialFormatState(unformattedState: tidily.State) {
+	private partialFormatState(unformattedState: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
 	}
-	private createState(state: tidily.State) {
+	private createState(state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	private toString(value: any): string {
