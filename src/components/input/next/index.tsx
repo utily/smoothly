@@ -117,7 +117,6 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 
 	@Watch("state")
 	stateChange() {
-		console.log("state change", this.type, this.state.value, this.action.getValue(this.state))
 		this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
 	}
 	@Watch("value")
@@ -140,6 +139,9 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 					type={this.state.type}
 					inputMode={this.state.inputmode}
 					placeholder={this.type}
+					autocomplete={this.state.autocomplete ?? "off"}
+					readOnly={this.readonly}
+					pattern={this.state.pattern?.source}
 					onKeyDown={event => (this.state = this.action.onKeyDown(event, this.state))}
 					onFocus={event => (this.state = this.action.onFocus(event, this.state))}
 					onBlur={event => (this.state = this.action.onBlur(event, this.state))}
