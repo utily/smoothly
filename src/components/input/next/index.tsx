@@ -124,7 +124,6 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 			this.lastValue = value
 			this.state = this.action.setValue(this.inputElement, this.state, value)
 		}
-
 		if (value != before)
 			this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
 	}
