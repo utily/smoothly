@@ -14,7 +14,6 @@ import {
 } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
-import { Data } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -40,10 +39,9 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
-	private lastValue: any
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
@@ -101,12 +99,13 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 	}
 	componentWillLoad() {
 		this.typeChange()
-		this.lastValue = this.initialValue = this.value
+		this.initialValue = this.value
 		this.state = this.action.initialState(this.value)
+		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 	}
 	componentDidLoad() {
 		if (this.inputElement)
-			this.action.setValue(this.inputElement, this.state, this.value)
+			this.state = this.action.setValue(this.inputElement, this.state, this.value)
 	}
 	@Listen("input")
 	@Listen("beforeinput")
@@ -119,13 +118,12 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 		this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
 	}
 	@Watch("value")
-	valueChange(value: any, before: any) {
-		if (this.lastValue != value && this.inputElement) {
-			this.lastValue = value
+	valueChange(value: any) {
+		const lastValue = this.action.getValue(this.state)
+		if (lastValue != value && this.inputElement) {
 			this.state = this.action.setValue(this.inputElement, this.state, value)
-		}
-		if (value != before)
 			this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
+		}
 	}
 
 	render() {

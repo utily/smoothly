@@ -1617,7 +1617,7 @@ declare global {
         new (): HTMLSmoothlyInputMonthElement;
     };
     interface HTMLSmoothlyInputNextElementEventMap {
-        "smoothlyInput": Data;
+        "smoothlyInput": Record<string, any>;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -2841,7 +2841,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputNextCustomEvent<(disabled: boolean) => void>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Data>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: Editable) => void>) => void;
         "readonly"?: boolean;
         "type"?: tidily.Type;
