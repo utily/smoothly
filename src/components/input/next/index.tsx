@@ -15,6 +15,7 @@ import {
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Data } from "../../../model"
+import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -26,20 +27,25 @@ import { getLocale } from "./getLocale"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputNext implements ComponentWillLoad, Input {
+export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Clearable {
 	@Element() element: HTMLSmoothlyInputNextElement
 	parent: Editable | undefined
 	private action: Action
 	private inputElement: HTMLInputElement | undefined
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) name: string
 	@Prop({ reflect: true, mutable: true }) looks: Looks
 	@Prop({ reflect: true }) type: tidily.Type = "text"
 	@Prop() currency?: isoly.Currency
 	@Prop({ mutable: true }) value: any
+	@Prop({ mutable: true }) changed = false
+	@Prop({ mutable: true, reflect: true }) readonly = false
 	private lastValue: any
+	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
+	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -57,6 +63,29 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	async getValue(): Promise<any> {
 		return this.action.getValue(this.state)
 	}
+	@Method()
+	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
+		this.listener[property] = listener
+		listener(this)
+	}
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		this.readonly = !editable
+	}
+	@Method()
+	async clear(): Promise<void> {
+		this.value = undefined
+	}
+	@Method()
+	async reset(): Promise<void> {
+		this.value = this.initialValue
+	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.changed = false
+		this.initialValue = this.value
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+	}
 
 	@Watch("currency")
 	@Watch("type")
@@ -73,7 +102,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input {
 	componentWillLoad() {
 		this.typeChange()
 		const value = this.action.toString(this.value) || ""
-		this.lastValue = this.value
+		this.lastValue = this.initialValue = this.value
 		const start = value.length
 		this.state = this.action.createState({
 			value,
