@@ -417,18 +417,27 @@ export namespace Components {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputNext {
+        "autocomplete": boolean;
         "changed": boolean;
         "clear": () => Promise<void>;
+        "color"?: Color;
         "currency"?: isoly.Currency;
+        "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
+        "errorMessage"?: string;
         "getValue": () => Promise<any>;
+        "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
-        "looks": Looks;
+        "looks"?: Looks;
         "name": string;
+        "placeholder": string | undefined;
         "readonly": boolean;
         "register": () => Promise<void>;
+        "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "showLabel": boolean;
+        "toInteger"?: boolean;
         "type": tidily.Type;
         "unregister": () => Promise<void>;
         "value": any;
@@ -1617,9 +1626,10 @@ declare global {
         new (): HTMLSmoothlyInputMonthElement;
     };
     interface HTMLSmoothlyInputNextElementEventMap {
-        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyInput": Record<string, any>;
     }
     interface HTMLSmoothlyInputNextElement extends Components.SmoothlyInputNext, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputNextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputNextElement, ev: SmoothlyInputNextCustomEvent<HTMLSmoothlyInputNextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2836,14 +2846,24 @@ declare namespace LocalJSX {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputNext {
+        "autocomplete"?: boolean;
         "changed"?: boolean;
+        "color"?: Color;
         "currency"?: isoly.Currency;
+        "disabled"?: boolean;
+        "errorMessage"?: string;
+        "invalid"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputNextCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputNextCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputNextCustomEvent<(parent: Editable) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputNextCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "placeholder"?: string | undefined;
         "readonly"?: boolean;
+        "required"?: boolean;
+        "showLabel"?: boolean;
+        "toInteger"?: boolean;
         "type"?: tidily.Type;
         "value"?: any;
     }

@@ -15,7 +15,7 @@ Alternative names:
  */
 export class Action {
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
-	static create(type: "price", currency?: isoly.Currency): Action
+	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): Action
 	static create(type: tidily.Type, locale?: isoly.Locale): Action
 	static create(type: tidily.Type, extra?: any): Action {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined

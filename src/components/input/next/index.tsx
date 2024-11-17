@@ -1,19 +1,7 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Element,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Method,
-	Prop,
-	State,
-	Watch,
-} from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
+import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -26,25 +14,34 @@ import { getLocale } from "./getLocale"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Clearable {
+export class SmoothlyInputNext implements Clearable, Input, Editable {
 	@Element() element: HTMLSmoothlyInputNextElement
-	parent: Editable | undefined
-	private action: Action
-	private inputElement: HTMLInputElement | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	@Prop({ reflect: true, mutable: true }) color?: Color
+	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ mutable: true }) name: string
-	@Prop({ reflect: true, mutable: true }) looks: Looks
-	@Prop({ reflect: true }) type: tidily.Type = "text"
-	@Prop() currency?: isoly.Currency
 	@Prop({ mutable: true }) value: any
-	@Prop({ mutable: true }) changed = false
+	@Prop({ reflect: true }) type: tidily.Type = "text"
+	@Prop({ reflect: true }) required = false
+	@Prop({ reflect: true }) showLabel = true
+	@Prop() autocomplete = true
+	@Prop({ reflect: true }) placeholder: string | undefined
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
+	@Prop() toInteger?: boolean
+	@Prop({ reflect: true }) currency?: isoly.Currency
+	@Prop({ reflect: true }) invalid?: boolean = false
+	@Prop({ mutable: true }) changed = false
+	@Prop() errorMessage?: string
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
-	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	parent: Editable | undefined
+	private inputElement: HTMLInputElement | undefined
+	private action: Action
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -91,7 +88,7 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 	typeChange(): void {
 		switch (this.type) {
 			case "price":
-				this.action = Action.create("price", this.currency)
+				this.action = Action.create("price", { currency: this.currency, toInteger: this.toInteger })
 				break
 			default:
 				this.action = Action.create(this.type, getLocale())
@@ -102,7 +99,12 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 		this.typeChange()
 		this.initialValue = this.value
 		this.state = this.action.initialState(this.value)
+		this.smoothlyInputLooks.emit(
+			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
+		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
+		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.listener.changed?.(this)
 	}
 	componentDidLoad() {
 		if (this.inputElement)
@@ -135,8 +137,9 @@ export class SmoothlyInputNext implements ComponentWillLoad, Input, Editable, Cl
 					name={this.name}
 					type={this.state.type}
 					inputMode={this.state.inputmode}
-					placeholder={this.type}
-					autocomplete={this.state.autocomplete ?? "off"}
+					placeholder={this.type /* this.placeholder */}
+					required={this.required}
+					autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
 					disabled={this.disabled}
 					readOnly={this.readonly}
 					pattern={this.state.pattern?.source}
