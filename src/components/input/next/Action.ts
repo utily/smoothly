@@ -1,6 +1,6 @@
 import { isoly } from "isoly"
 import { tidily } from "tidily"
-import { getAdjacentWordBreakIndex } from "./adjacentWordBreak"
+import { Adjacent } from "../Adjacent"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
@@ -78,7 +78,7 @@ export class Action {
 	}
 
 	public onBlur(event: FocusEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
-		const result = this.createState(state)
+		const result = this.createFormattedState(state)
 		const input = event.target as HTMLInputElement
 		input.value = result.value
 		return result
@@ -164,7 +164,7 @@ export class Action {
 	}
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward"): tidily.State {
 		const cursorPosition = tidily.Selection.getCursor(formattedState.selection)
-		const adjacentIndex = getAdjacentWordBreakIndex(formattedState.value, cursorPosition, direction)
+		const adjacentIndex = Adjacent.getWordBreakIndex(formattedState.value, cursorPosition, direction)
 		const result = this.unformatState({
 			...formattedState,
 			selection: {
@@ -200,7 +200,7 @@ export class Action {
 	private partialFormatState(unformattedState: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
 	}
-	private createState(state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+	private createFormattedState(state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	private toString(value: any): string {
@@ -209,7 +209,7 @@ export class Action {
 	public initialState(value: any): Readonly<tidily.State> & tidily.Settings {
 		const stringValue = this.toString(value) || ""
 		const start = stringValue.length
-		const state = this.createState({
+		const state = this.createFormattedState({
 			value: stringValue,
 			selection: { start, end: start, direction: "none" },
 		})
@@ -222,7 +222,8 @@ export class Action {
 	): Readonly<tidily.State> & tidily.Settings {
 		const result = {
 			...formattedState,
-			value: this.createState({ value: this.formatter.toString(value), selection: formattedState.selection }).value,
+			value: this.createFormattedState({ value: this.formatter.toString(value), selection: formattedState.selection })
+				.value,
 		}
 		inputElement.value = result.value
 		return result
