@@ -95,6 +95,10 @@ export class SmoothlyInputNext implements Clearable, Input, Editable {
 				break
 		}
 	}
+	@Watch("readonly")
+	readonlyChange() {
+		this.listener.changed?.(this)
+	}
 	componentWillLoad() {
 		this.typeChange()
 		this.initialValue = this.value
@@ -109,6 +113,13 @@ export class SmoothlyInputNext implements Clearable, Input, Editable {
 	componentDidLoad() {
 		if (this.inputElement)
 			this.state = this.action.setValue(this.inputElement, this.state, this.value)
+	}
+	@Listen("smoothlyInputLoad")
+	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputNext) => void>): Promise<void> {
+		if (!(event.target && "name" in event.target && event.target.name == this.name)) {
+			event.stopPropagation()
+			event.detail(this)
+		}
 	}
 	@Listen("input")
 	@Listen("beforeinput")
