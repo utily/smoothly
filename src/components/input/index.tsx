@@ -36,8 +36,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	parent: Editable | undefined
 	private inputElement: HTMLInputElement
-	/** On re-render the input will blur. This boolean is meant to keep track of if input should keep its focus. */
-	private keepFocusOnReRender = false
 	private lastValue: any
 	private uneditable = this.readonly
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -148,12 +146,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	async unregister() {
 		Input.formRemove(this)
 	}
-	componentDidRender() {
-		if (this.keepFocusOnReRender) {
-			this.inputElement.focus()
-			this.keepFocusOnReRender = false
-		}
-	}
 	@Method()
 	async clear(): Promise<void> {
 		!this.uneditable && (this.value = undefined)
@@ -172,45 +164,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.initialValue = this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
-	@Method()
-	async getFormData(name: string): Promise<Record<string, any>> {
-		const result: Record<string, any> = {}
-		const form = document.forms.namedItem(name)
-		if (form) {
-			const elements = form.elements
-			for (let i = 0; i < elements.length; i++) {
-				const element = elements.item(i)
-				if (this.hasNameAndValue(element) && element.name)
-					result[element.name] = element.value
-			}
-			// Overwrite values with values from smoothly-input
-			const smoothlyInputs = form.getElementsByTagName("smoothly-input")
-			for (let i = 0; i < smoothlyInputs.length; i++) {
-				const element = smoothlyInputs.item(i)
-				if (this.hasNameAndValue(element) && element.name)
-					result[element.name] = element.value
-			}
-		}
-		return result
-	}
-	hasNameAndValue(element: any): element is { name: string; value: string } {
-		return (
-			typeof (element as { name?: string }).name == "string" && typeof (element as { value?: string }).value == "string"
-		)
-	}
-	@Method()
-	async setKeepFocusOnReRender(keepFocus: boolean) {
-		this.keepFocusOnReRender = keepFocus
-	}
-	@Method()
-	async setSelectionRange(start: number, end: number, direction?: tidily.Direction) {
-		this.state = this.formattedState({
-			...this.state,
-			selection: { start, end, direction: direction ?? this.state.selection.direction },
-		})
-		this.updateBackend(this.state, this.inputElement)
-	}
-	onBlur(event: FocusEvent) {
+	onBlur(_: FocusEvent) {
 		this.state = this.formattedState(this.state)
 		this.smoothlyBlur.emit()
 		const value = typeof this.value == "string" ? this.value.trim() : this.value

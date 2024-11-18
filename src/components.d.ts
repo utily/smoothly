@@ -250,7 +250,6 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
-        "getFormData": (name: string) => Promise<Record<string, any>>;
         "getValue": () => Promise<any | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -262,8 +261,6 @@ export namespace Components {
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
-        "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
         "toInteger"?: boolean;
         "type": tidily.Type;
@@ -833,6 +830,10 @@ export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateRangeElement;
+}
+export interface SmoothlyInputDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDemoElement;
 }
 export interface SmoothlyInputEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1525,7 +1526,18 @@ declare global {
         prototype: HTMLSmoothlyInputDateRangeElement;
         new (): HTMLSmoothlyInputDateRangeElement;
     };
+    interface HTMLSmoothlyInputDemoElementEventMap {
+        "notice": Notice;
+    }
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDemoElement: {
         prototype: HTMLSmoothlyInputDemoElement;
@@ -2736,6 +2748,7 @@ declare namespace LocalJSX {
         "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDemo {
+        "onNotice"?: (event: SmoothlyInputDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyInputDemoStandard {
     }
