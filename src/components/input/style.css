@@ -28,6 +28,28 @@
 	padding: 0 var(--input-padding-side);
 }
 
+:host>div>div.ghost {
+	position: absolute;
+  box-sizing: border-box;
+  align-content: center;
+	height: 100%;
+	padding: 
+		var(--input-value-padding-top) 
+		var(--input-padding-side) 
+		var(--input-value-padding-bottom) 
+		var(--input-padding-side);
+}
+:host>div>div.ghost>div.value {
+	display: inline;
+	pointer-events: none;
+	opacity: 0;
+}
+:host>div>div.ghost>div.remainder {
+	display: inline;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
 :host>div>input {
 	padding: 
 		var(--input-value-padding-top) 

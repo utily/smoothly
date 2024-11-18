@@ -83,7 +83,7 @@
 		"langly": "2.0.9",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.11",
-		"tidily": "^0.1.15",
+		"tidily": "^0.2.0",
 		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {

@@ -199,7 +199,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			!this.showSelected && event.detail.selected && (event.detail.hidden = true)
 		}
 		this.displaySelected()
-		this.element.focus()
 	}
 	@Watch("open")
 	onClosed(): void {
