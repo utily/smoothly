@@ -2,10 +2,10 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
+import { getLocale } from "../../model/getLocale"
 import { Action } from "./Action"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
-import { getLocale } from "./getLocale"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
 
