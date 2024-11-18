@@ -301,6 +301,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						<div class={"remainder"}>{this.state?.remainder}</div>
 					</div>
 					<input
+						ref={(el: HTMLInputElement) => (this.inputElement = el)}
 						color={this.color}
 						name={this.name}
 						type={this.state?.type}
@@ -312,12 +313,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						value={this.state?.value}
-						onInput={(e: InputEvent) => this.onInput(e)}
+						onInput={e => this.onInput(e)}
 						onFocus={e => this.onFocus(e)}
 						onClick={e => this.onClick(e)}
 						onBlur={e => this.onBlur(e)}
 						onKeyDown={e => this.onKeyDown(e)}
-						ref={(el: HTMLInputElement) => (this.inputElement = el)}
 						onPaste={e => this.onPaste(e)}
 					/>
 					<label class={"label float-on-focus"} htmlFor={this.name}>
