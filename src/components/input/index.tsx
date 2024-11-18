@@ -5,6 +5,7 @@ import { Color } from "../../model"
 import { Action } from "./Action"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
+import { getLocale } from "./getLocale"
 import { Input } from "./Input"
 import { Looks } from "./Looks"
 
@@ -328,9 +329,4 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			</Host>
 		)
 	}
-}
-
-function getLocale(): isoly.Locale | undefined {
-	const result = navigator.language
-	return isoly.Locale.is(result) ? result : isoly.Language.is(result) ? isoly.Locale.toLocale(result) : undefined
 }
