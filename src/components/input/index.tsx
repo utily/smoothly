@@ -268,7 +268,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.updateBackend(after, backend)
 		}
 	}
-	updateBackend(
+	private updateBackend(
 		after: Readonly<tidily.State> & Readonly<tidily.Settings>,
 		backend: HTMLInputElement,
 		setSelection = true

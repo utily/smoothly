@@ -1,6 +1,5 @@
-import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
+import { Component, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
-import { Notice } from "../../../model"
 
 @Component({
 	tag: "smoothly-input-demo",
@@ -10,18 +9,11 @@ import { Notice } from "../../../model"
 export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
-	@Event() notice: EventEmitter<Notice>
 
 	render() {
 		return (
 			<Host>
-				<smoothly-input
-					name="name"
-					type="text"
-					placeholder="Name"
-					onSmoothlyInput={e => this.notice.emit(Notice.succeeded("Value: " + e.detail.name))}
-				/>
-				{/* <smoothly-input-demo-standard />
+				<smoothly-input-demo-standard />
 				<div class="inputs">
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
@@ -220,7 +212,7 @@ export class SmoothlyInputDemo {
 					<smoothly-input-color-demo />
 					<smoothly-input-price-demo />
 					<smoothly-back-to-top />
-				</div> */}
+				</div>
 			</Host>
 		)
 	}

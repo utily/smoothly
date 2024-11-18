@@ -831,10 +831,6 @@ export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateRangeElement;
 }
-export interface SmoothlyInputDemoCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyInputDemoElement;
-}
 export interface SmoothlyInputEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputEditElement;
@@ -1526,18 +1522,7 @@ declare global {
         prototype: HTMLSmoothlyInputDateRangeElement;
         new (): HTMLSmoothlyInputDateRangeElement;
     };
-    interface HTMLSmoothlyInputDemoElementEventMap {
-        "notice": Notice;
-    }
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDemoElement: {
         prototype: HTMLSmoothlyInputDemoElement;
@@ -2748,7 +2733,6 @@ declare namespace LocalJSX {
         "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDemo {
-        "onNotice"?: (event: SmoothlyInputDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyInputDemoStandard {
     }
