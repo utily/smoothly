@@ -56,6 +56,32 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.listener[property] = listener
 		listener(this)
 	}
+	@Method()
+	async register() {
+		Input.formAdd(this)
+	}
+	@Method()
+	async unregister() {
+		Input.formRemove(this)
+	}
+	@Method()
+	async clear(): Promise<void> {
+		!this.uneditable && (this.value = undefined)
+	}
+	@Method()
+	async edit(editable: boolean): Promise<void> {
+		!this.uneditable && (this.readonly = !editable)
+	}
+	@Method()
+	async reset(): Promise<void> {
+		!this.uneditable && (this.value = this.initialValue)
+	}
+	@Method()
+	async setInitialValue(): Promise<void> {
+		this.changed = false
+		this.initialValue = this.value
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+	}
 	@Listen("smoothlyInputLoad")
 	async SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
 		if (!(event.target && "name" in event.target && event.target.name == this.name)) {
@@ -79,16 +105,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.formatter = result || tidily.get("text")!
 	}
-	private partialFormattedState(state: tidily.State) {
-		return this.formatter.partialFormat(
-			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state)))
-		)
-	}
-	private formattedState(state: tidily.State) {
-		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
-	}
 	@Watch("value")
-	async valueWatcher(value: any, before: any) {
+	async valueChange(value: any, before: any) {
 		this.changed = this.initialValue !== this.value
 		if (this.lastValue != value) {
 			this.lastValue = value
@@ -102,11 +120,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.listener.changed?.(this)
 	}
 	@Watch("readonly")
-	watchingReadonly() {
+	readonlyChange() {
 		this.listener.changed?.(this)
 	}
 	@Watch("currency")
-	onCurrency() {
+	currencyChange() {
 		this.state = {
 			...this.state,
 			value: this.formattedState({
@@ -139,31 +157,13 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		if (!this.element.isConnected)
 			await this.unregister()
 	}
-	@Method()
-	async register() {
-		Input.formAdd(this)
+	private partialFormattedState(state: tidily.State) {
+		return this.formatter.partialFormat(
+			tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state)))
+		)
 	}
-	@Method()
-	async unregister() {
-		Input.formRemove(this)
-	}
-	@Method()
-	async clear(): Promise<void> {
-		!this.uneditable && (this.value = undefined)
-	}
-	@Method()
-	async edit(editable: boolean): Promise<void> {
-		!this.uneditable && (this.readonly = !editable)
-	}
-	@Method()
-	async reset(): Promise<void> {
-		!this.uneditable && (this.value = this.initialValue)
-	}
-	@Method()
-	async setInitialValue(): Promise<void> {
-		this.changed = false
-		this.initialValue = this.value
-		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+	private formattedState(state: tidily.State) {
+		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
 	}
 	onBlur(_: FocusEvent) {
 		this.state = this.formattedState(this.state)
