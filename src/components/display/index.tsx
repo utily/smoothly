@@ -1,6 +1,7 @@
 import { Component, h, Prop } from "@stencil/core"
-import { CountryCode, Currency, DateTime, Language, Locale } from "isoly"
+import { CountryCode, Currency, DateTime } from "isoly"
 import { format, get, Type } from "tidily"
+import { getLocale } from "../../model"
 
 @Component({
 	tag: "smoothly-display",
@@ -52,8 +53,4 @@ export class SmoothlyDisplay {
 		}
 		return this.label ? [<div>{this.label}</div>, result] : result
 	}
-}
-function getLocale(): Locale | undefined {
-	const result = navigator.language
-	return Locale.is(result) ? result : Language.is(result) ? Locale.toLocale(result) : undefined
 }

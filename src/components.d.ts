@@ -250,7 +250,6 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
-        "getFormData": (name: string) => Promise<Record<string, any>>;
         "getValue": () => Promise<any | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -262,8 +261,6 @@ export namespace Components {
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
-        "setKeepFocusOnReRender": (keepFocus: boolean) => Promise<void>;
-        "setSelectionRange": (start: number, end: number, direction?: tidily.Direction) => Promise<void>;
         "showLabel": boolean;
         "toInteger"?: boolean;
         "type": tidily.Type;
