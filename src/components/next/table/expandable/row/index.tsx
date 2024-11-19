@@ -8,14 +8,14 @@ import { Component, Event, EventEmitter, h, Host, Prop, VNode, Watch } from "@st
 export class SmoothlyNextTableExpandableRow {
 	private div?: HTMLDivElement
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Event() smoothlyRowExpandChange: EventEmitter<boolean>
+	@Event() smoothlyNextTableExpandableRowChange: EventEmitter<boolean>
 
 	clickHandler(event: MouseEvent): void {
 		;(this.div && event.composedPath().includes(this.div)) || (this.open = !this.open)
 	}
 	@Watch("open")
 	openChange() {
-		this.smoothlyRowExpandChange.emit(this.open)
+		this.smoothlyNextTableExpandableRowChange.emit(this.open)
 	}
 
 	render(): VNode | VNode[] {

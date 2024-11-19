@@ -10,7 +10,7 @@ export class SmoothlyNextTableExpandableCell {
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Event() smoothlyNextTableExpandableCellOpen: EventEmitter<void>
 	@Event() smoothlyNextTableExpandableCellRegister: EventEmitter<void>
-	@Event() smoothlyCellExpandChange: EventEmitter<boolean>
+	@Event() smoothlyNextTableExpandableCellChange: EventEmitter<boolean>
 	componentWillLoad(): void {
 		this.smoothlyNextTableExpandableCellRegister.emit()
 	}
@@ -23,7 +23,7 @@ export class SmoothlyNextTableExpandableCell {
 	}
 	@Watch("open")
 	openChange() {
-		this.smoothlyCellExpandChange.emit(this.open)
+		this.smoothlyNextTableExpandableCellChange.emit(this.open)
 		if (this.open)
 			this.smoothlyNextTableExpandableCellOpen.emit()
 	}
