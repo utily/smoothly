@@ -8,9 +8,8 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } f
 export class SmoothlyNextTableExpandableCell {
 	@Prop({ reflect: true }) span?: number = 1
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Event() smoothlyNextTableExpandableCellOpen: EventEmitter<void>
-	@Event() smoothlyNextTableExpandableCellRegister: EventEmitter<void>
 	@Event() smoothlyNextTableExpandableCellChange: EventEmitter<boolean>
+	@Event() smoothlyNextTableExpandableCellRegister: EventEmitter<void>
 	componentWillLoad(): void {
 		this.smoothlyNextTableExpandableCellRegister.emit()
 	}
@@ -24,8 +23,6 @@ export class SmoothlyNextTableExpandableCell {
 	@Watch("open")
 	openChange() {
 		this.smoothlyNextTableExpandableCellChange.emit(this.open)
-		if (this.open)
-			this.smoothlyNextTableExpandableCellOpen.emit()
 	}
 
 	render(): VNode | VNode[] {
