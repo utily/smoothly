@@ -13,11 +13,11 @@ export class SmoothlyNextTableRow {
 		event.stopPropagation()
 		this.expandableCells.add(event.target)
 	}
-	@Listen("smoothlyNextTableExpandableCellOpened")
-	smoothlyNextTableExpandableCellOpenedHandler(event: SmoothlyNextTableExpandableCellCustomEvent<void>): void {
-		event.stopPropagation()
-		for (const cell of this.expandableCells)
-			event.target != cell && cell.close()
+	@Listen("smoothlyNextTableExpandableCellChange")
+	smoothlyNextTableExpandableCellChangeHandler(event: SmoothlyNextTableExpandableCellCustomEvent<boolean>): void {
+		if (event.detail)
+			for (const cell of this.expandableCells)
+				event.target != cell && cell.close()
 	}
 
 	render(): VNode | VNode[] {

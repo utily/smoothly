@@ -879,6 +879,10 @@ export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEve
     detail: T;
     target: HTMLSmoothlyNextTableExpandableCellElement;
 }
+export interface SmoothlyNextTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNextTableExpandableRowElement;
+}
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
@@ -1824,7 +1828,7 @@ declare global {
         new (): HTMLSmoothlyNextTableDemoFilteredElement;
     };
     interface HTMLSmoothlyNextTableExpandableCellElementEventMap {
-        "smoothlyNextTableExpandableCellOpened": void;
+        "smoothlyNextTableExpandableCellChange": boolean;
         "smoothlyNextTableExpandableCellRegister": void;
     }
     interface HTMLSmoothlyNextTableExpandableCellElement extends Components.SmoothlyNextTableExpandableCell, HTMLStencilElement {
@@ -1841,7 +1845,18 @@ declare global {
         prototype: HTMLSmoothlyNextTableExpandableCellElement;
         new (): HTMLSmoothlyNextTableExpandableCellElement;
     };
+    interface HTMLSmoothlyNextTableExpandableRowElementEventMap {
+        "smoothlyNextTableExpandableRowChange": boolean;
+    }
     interface HTMLSmoothlyNextTableExpandableRowElement extends Components.SmoothlyNextTableExpandableRow, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNextTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableRowElement, ev: SmoothlyNextTableExpandableRowCustomEvent<HTMLSmoothlyNextTableExpandableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNextTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableRowElement, ev: SmoothlyNextTableExpandableRowCustomEvent<HTMLSmoothlyNextTableExpandableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyNextTableExpandableRowElement: {
         prototype: HTMLSmoothlyNextTableExpandableRowElement;
@@ -2925,12 +2940,13 @@ declare namespace LocalJSX {
     interface SmoothlyNextTableDemoFiltered {
     }
     interface SmoothlyNextTableExpandableCell {
-        "onSmoothlyNextTableExpandableCellOpened"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
+        "onSmoothlyNextTableExpandableCellChange"?: (event: SmoothlyNextTableExpandableCellCustomEvent<boolean>) => void;
         "onSmoothlyNextTableExpandableCellRegister"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
         "open"?: boolean;
         "span"?: number;
     }
     interface SmoothlyNextTableExpandableRow {
+        "onSmoothlyNextTableExpandableRowChange"?: (event: SmoothlyNextTableExpandableRowCustomEvent<boolean>) => void;
         "open"?: boolean;
     }
     interface SmoothlyNextTableFoot {
