@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-expandable-cell",
@@ -8,8 +8,9 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode } from "@s
 export class SmoothlyNextTableExpandableCell {
 	@Prop({ reflect: true }) span?: number = 1
 	@Prop({ mutable: true, reflect: true }) open = false
-	@Event() smoothlyNextTableExpandableCellOpened: EventEmitter<void>
+	@Event() smoothlyNextTableExpandableCellOpen: EventEmitter<void>
 	@Event() smoothlyNextTableExpandableCellRegister: EventEmitter<void>
+	@Event() smoothlyCellExpandChange: EventEmitter<boolean>
 	componentWillLoad(): void {
 		this.smoothlyNextTableExpandableCellRegister.emit()
 	}
@@ -19,7 +20,12 @@ export class SmoothlyNextTableExpandableCell {
 	}
 	clickHandler(): void {
 		this.open = !this.open
-		this.smoothlyNextTableExpandableCellOpened.emit()
+	}
+	@Watch("open")
+	openChange() {
+		this.smoothlyCellExpandChange.emit(this.open)
+		if (this.open)
+			this.smoothlyNextTableExpandableCellOpen.emit()
 	}
 
 	render(): VNode | VNode[] {

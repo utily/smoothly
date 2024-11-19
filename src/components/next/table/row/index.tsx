@@ -13,8 +13,8 @@ export class SmoothlyNextTableRow {
 		event.stopPropagation()
 		this.expandableCells.add(event.target)
 	}
-	@Listen("smoothlyNextTableExpandableCellOpened")
-	smoothlyNextTableExpandableCellOpenedHandler(event: SmoothlyNextTableExpandableCellCustomEvent<void>): void {
+	@Listen("smoothlyNextTableExpandableCellOpen")
+	smoothlyNextTableExpandableCellOpenHandler(event: SmoothlyNextTableExpandableCellCustomEvent<void>): void {
 		event.stopPropagation()
 		for (const cell of this.expandableCells)
 			event.target != cell && cell.close()
