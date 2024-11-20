@@ -60,11 +60,12 @@
 :host>nav>div {
 	display: flex;
 	border-top: 1px solid rgb(var(--smoothly-input-border));
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 }
 :host>nav>div>smoothly-input-select {
-	width: fit-content;
+	width: 4rem;
+	min-width: fit-content;
 }
 
 @media screen and (min-width: 400px) {
