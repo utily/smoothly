@@ -28,6 +28,7 @@
 	background-color: rgb(var(--smoothly-input-background));
 	max-width: 22em;
 	min-width: 18em;
+	border: 1px solid rgb(var(--smoothly-input-border));
 }
 
 :host>nav>smoothly-calendar::before {

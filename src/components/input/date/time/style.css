@@ -1,4 +1,4 @@
-@import "../shared.css";
+@import "../../shared.css";
 
 :host {
 	display: flex;
@@ -33,8 +33,8 @@
 	z-index: 10;
 	top: 4em;
 	background-color: rgb(var(--smoothly-input-background));
-	min-width: 18em;
 	border: 1px solid rgb(var(--smoothly-input-border));
+	min-width: 18em;
 }
 
 :host>nav>smoothly-calendar::before {
@@ -56,6 +56,12 @@
 	flex-direction: row;
 	align-items: center;
 	margin-right: .2em;
+}
+:host>nav>div {
+	display: flex;
+}
+:host>nav>div>smoothly-input-select {
+	width: 49%;
 }
 
 @media screen and (min-width: 400px) {

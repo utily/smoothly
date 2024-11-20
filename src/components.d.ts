@@ -95,7 +95,7 @@ export namespace Components {
         "min": Date;
         "month"?: Date;
         "start"?: Date;
-        "value": Date;
+        "value"?: Date;
     }
     interface SmoothlyCheckbox {
         "checked": boolean;
@@ -360,6 +360,27 @@ export namespace Components {
         "showLabel": boolean;
         "start": isoly.Date | undefined;
         "unregister": () => Promise<void>;
+    }
+    interface SmoothlyInputDateTime {
+        "changed": boolean;
+        "clear": () => Promise<void>;
+        "color"?: Color;
+        "edit": (editable: boolean) => Promise<void>;
+        "getValue": () => Promise<DateTime | undefined>;
+        "invalid"?: boolean;
+        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
+        "looks"?: Looks;
+        "max": DateTime;
+        "min": DateTime;
+        "name": string;
+        "open": boolean;
+        "readonly": boolean;
+        "register": () => Promise<void>;
+        "reset": () => Promise<void>;
+        "setInitialValue": () => Promise<void>;
+        "showLabel": boolean;
+        "unregister": () => Promise<void>;
+        "value"?: DateTime;
     }
     interface SmoothlyInputDemo {
     }
@@ -830,6 +851,10 @@ export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateRangeElement;
+}
+export interface SmoothlyInputDateTimeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDateTimeElement;
 }
 export interface SmoothlyInputEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1525,6 +1550,27 @@ declare global {
     var HTMLSmoothlyInputDateRangeElement: {
         prototype: HTMLSmoothlyInputDateRangeElement;
         new (): HTMLSmoothlyInputDateRangeElement;
+    };
+    interface HTMLSmoothlyInputDateTimeElementEventMap {
+        "smoothlyInputLoad": (parent: Editable) => void;
+        "smoothlyValueChange": DateTime;
+        "smoothlyInput": Record<string, any>;
+        "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+    }
+    interface HTMLSmoothlyInputDateTimeElement extends Components.SmoothlyInputDateTime, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDateTimeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateTimeElement, ev: SmoothlyInputDateTimeCustomEvent<HTMLSmoothlyInputDateTimeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDateTimeElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateTimeElement, ev: SmoothlyInputDateTimeCustomEvent<HTMLSmoothlyInputDateTimeElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyInputDateTimeElement: {
+        prototype: HTMLSmoothlyInputDateTimeElement;
+        new (): HTMLSmoothlyInputDateTimeElement;
     };
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
     }
@@ -2346,6 +2392,7 @@ declare global {
         "smoothly-input-color-demo": HTMLSmoothlyInputColorDemoElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
+        "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
@@ -2746,6 +2793,24 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;
+    }
+    interface SmoothlyInputDateTime {
+        "changed"?: boolean;
+        "color"?: Color;
+        "invalid"?: boolean;
+        "looks"?: Looks;
+        "max"?: DateTime;
+        "min"?: DateTime;
+        "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputDateTimeCustomEvent<(disabled: boolean) => void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputDateTimeCustomEvent<(parent: Editable) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputDateTimeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<DateTime>) => void;
+        "open"?: boolean;
+        "readonly"?: boolean;
+        "showLabel"?: boolean;
+        "value"?: DateTime;
     }
     interface SmoothlyInputDemo {
     }
@@ -3191,6 +3256,7 @@ declare namespace LocalJSX {
         "smoothly-input-color-demo": SmoothlyInputColorDemo;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
+        "smoothly-input-date-time": SmoothlyInputDateTime;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
         "smoothly-input-edit": SmoothlyInputEdit;
@@ -3316,6 +3382,7 @@ declare module "@stencil/core" {
             "smoothly-input-color-demo": LocalJSX.SmoothlyInputColorDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
+            "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
