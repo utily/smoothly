@@ -91,11 +91,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Watch("hour")
 	@Watch("minute")
 	dateTimeChange() {
-		let result = typeof this.date == "string" ? this.date : "YYYY-MM-DD"
-		result += " "
-		result += typeof this.hour == "number" ? `${this.hour}`.padStart(2, "0") : "hh"
-		result += ":"
-		result += this.minute != undefined ? `${this.minute}`.padStart(2, "0") : "mm"
+		let result: string | undefined
+		if (this.date || typeof this.hour == "number" || typeof this.minute == "number") {
+			result = typeof this.date == "string" ? this.date : "YYYY-MM-DD"
+			result += " "
+			result += typeof this.hour == "number" ? `${this.hour}`.padStart(2, "0") : "hh"
+			result += ":"
+			result += this.minute != undefined ? `${this.minute}`.padStart(2, "0") : "mm"
+		}
 		this.stringValue = result
 		const value =
 			this.date && typeof this.hour == "number" && typeof this.minute == "number"
@@ -158,7 +161,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	}
 	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<Date>) {
-		// this.open = false
 		event.stopPropagation()
 	}
 	render() {
@@ -204,7 +206,11 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 							<smoothly-input-select
 								name={"hour"}
 								menuHeight="6items"
-								onSmoothlyInput={e => (this.hour = e.detail.hour as number | undefined)}>
+								placeholder={"hh"}
+								onSmoothlyInput={e => {
+									e.stopPropagation()
+									this.hour = e.detail.hour as number | undefined
+								}}>
 								<span slot={"label"}>Hour</span>
 								{Array.from({ length: 24 }).map((_, i) => (
 									<smoothly-item value={i} selected={this.hour == i}>
@@ -212,10 +218,15 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 									</smoothly-item>
 								))}
 							</smoothly-input-select>
+							:
 							<smoothly-input-select
 								name={"minute"}
 								menuHeight="6items"
-								onSmoothlyInput={e => (this.minute = e.detail.minute as number | undefined)}>
+								placeholder={"mm"}
+								onSmoothlyInput={e => {
+									e.stopPropagation()
+									this.minute = e.detail.minute as number | undefined
+								}}>
 								<span slot={"label"}>Minute</span>
 								{Array.from({ length: 60 }).map((_, i) => (
 									<smoothly-item value={i} selected={this.minute == i}>
