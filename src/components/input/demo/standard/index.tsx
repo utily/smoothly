@@ -95,7 +95,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Text</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-select
 						name="month"
@@ -118,7 +118,7 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-item value="12">December</smoothly-item>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-select>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-checkbox
 						looks={this.options.looks}
@@ -126,7 +126,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}>
 						Check
 					</smoothly-input-checkbox>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-radio
 						looks={this.options.looks}
@@ -141,7 +141,7 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-radio>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-file
 						looks={this.options.looks}
@@ -152,7 +152,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-file>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-range
 						label={this.options.showLabel ? "Range" : undefined}
@@ -161,7 +161,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-range>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-color
 						looks={this.options.looks}
@@ -171,7 +171,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Color</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-color>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-date
 						looks={this.options.looks}
@@ -181,7 +181,7 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>
-					<div class="height"></div>
+					<div class="height" />
 
 					<smoothly-input-date-range
 						looks={this.options.looks}
@@ -192,7 +192,17 @@ export class SmoothlyInputDemoStandard {
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>
-					<div class="height"></div>
+					<div class="height" />
+
+					<smoothly-input-date-time
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
+						DateTime
+						<smoothly-input-clear slot="end" />
+					</smoothly-input-date-time>
+					<div class="height" />
 					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>
 						{this.options.showLabel ? "Aligned labels & values" : "Center values"}
 					</div>
