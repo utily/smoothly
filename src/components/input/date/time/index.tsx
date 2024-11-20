@@ -44,6 +44,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@State() hour?: number
 	@State() minute?: number
 	@State() stringValue?: string
+	@State() placeholder?: string
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<DateTime>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -87,26 +88,22 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.listener[property] = listener
 		listener(this)
 	}
-
-	@Method()
-	async clear(): Promise<void> {
-		this.date = undefined
-		this.hour = undefined
-		this.minute = undefined
-	}
 	@Watch("date")
 	@Watch("hour")
 	@Watch("minute")
 	dateTimeChange() {
 		let result: string | undefined
-		if (this.date || typeof this.hour == "number" || typeof this.minute == "number") {
+		const partiallyDefined = !!this.date || typeof this.hour == "number" || typeof this.minute == "number"
+		const fullyDefined = !!this.date && typeof this.hour == "number" && typeof this.minute == "number"
+		if (partiallyDefined) {
 			result = typeof this.date == "string" ? this.date : "YYYY-MM-DD"
 			result += " "
 			result += typeof this.hour == "number" ? `${this.hour}`.padStart(2, "0") : "hh"
 			result += ":"
 			result += this.minute != undefined ? `${this.minute}`.padStart(2, "0") : "mm"
 		}
-		this.stringValue = result
+		this.stringValue = fullyDefined ? result : undefined
+		this.placeholder = partiallyDefined ? result : undefined
 		const value =
 			this.date && typeof this.hour == "number" && typeof this.minute == "number"
 				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}`
@@ -123,10 +120,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 			this.date = DateTime.getDate(next)
 			this.hour = DateTime.getHour(next)
 			this.minute = DateTime.getMinute(next)
-		} else {
-			this.date = undefined
-			this.hour = undefined
-			this.minute = undefined
 		}
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
@@ -158,6 +151,12 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.readonly = !editable
 	}
 	@Method()
+	async clear(): Promise<void> {
+		this.date = undefined
+		this.hour = undefined
+		this.minute = undefined
+	}
+	@Method()
 	async reset() {
 		this.value = this.initialValue
 	}
@@ -183,6 +182,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					invalid={this.invalid}
 					type="text" // TODO switch to "date-time" when tidily formatter works
 					value={this.stringValue}
+					placeholder={this.placeholder}
 					showLabel={this.showLabel}
 					onSmoothlyInputLoad={e => e.stopPropagation()}
 					onSmoothlyInput={e => e.stopPropagation()}>
