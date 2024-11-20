@@ -59,6 +59,13 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
 	}
+	componentDidLoad() {
+		// tidily formatter for date-time does not work at all - so don't allow focus until it works.
+		this.element.querySelector("input")?.addEventListener("focus", event => {
+			if (event.target instanceof HTMLInputElement)
+				event.target.blur()
+		})
+	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()
