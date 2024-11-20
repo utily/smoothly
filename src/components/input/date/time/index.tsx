@@ -60,7 +60,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.listener.changed?.(this)
 	}
 	componentDidLoad() {
-		// tidily formatter for date-time does not work at all - so don't allow focus until it works.
+		// TODO remove this when tidily date-time formatter works
 		this.element.querySelector("input")?.addEventListener("focus", event => {
 			if (event.target instanceof HTMLInputElement)
 				event.target.blur()
@@ -181,7 +181,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onClick={() => !this.readonly && (this.open = !this.open)}
 					readonly={this.readonly}
 					invalid={this.invalid}
-					type="text"
+					type="text" // TODO switch to "date-time" when tidily formatter works
 					value={this.stringValue}
 					showLabel={this.showLabel}
 					onSmoothlyInputLoad={e => e.stopPropagation()}
