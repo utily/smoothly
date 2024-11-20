@@ -15,6 +15,11 @@ export class SmoothlyInputDemo {
 			<Host>
 				<smoothly-input-demo-standard />
 				<div class="inputs">
+					<smoothly-input-scroll-picker menuHeight={"7items"}>
+						{Array.from({ length: 16 }).map((_, i) => (
+							<smoothly-item value={i}>{i}</smoothly-item>
+						))}
+					</smoothly-input-scroll-picker>
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
 					<h2>Date Range</h2>

@@ -480,6 +480,24 @@ export namespace Components {
         "tooltip": string;
         "type": "form" | "input";
     }
+    interface SmoothlyInputScrollPicker {
+        "clearable": boolean;
+        "color"?: Color;
+        "defined": boolean;
+        "inCalendar": boolean;
+        "invalid"?: boolean;
+        "looks"?: Looks;
+        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "multiple": boolean;
+        "mutable": boolean;
+        "name": string;
+        "placeholder"?: string | any;
+        "readonly": boolean;
+        "required": boolean;
+        "searchDisabled": boolean;
+        "showLabel": boolean;
+        "showSelected"?: boolean;
+    }
     interface SmoothlyInputSelect {
         "changed": boolean;
         "clear": () => Promise<void>;
@@ -800,6 +818,10 @@ export interface SmoothlyInputRangeCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputResetCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputResetElement;
+}
+export interface SmoothlyInputScrollPickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputScrollPickerElement;
 }
 export interface SmoothlyInputSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1601,6 +1623,27 @@ declare global {
         prototype: HTMLSmoothlyInputResetElement;
         new (): HTMLSmoothlyInputResetElement;
     };
+    interface HTMLSmoothlyInputScrollPickerElementEventMap {
+        "smoothlyInput": Data;
+        "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
+        "smoothlyInputLoad": (parent: Editable) => void;
+        "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyItemSelect": HTMLSmoothlyItemElement;
+    }
+    interface HTMLSmoothlyInputScrollPickerElement extends Components.SmoothlyInputScrollPicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputScrollPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputScrollPickerElement, ev: SmoothlyInputScrollPickerCustomEvent<HTMLSmoothlyInputScrollPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputScrollPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputScrollPickerElement, ev: SmoothlyInputScrollPickerCustomEvent<HTMLSmoothlyInputScrollPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyInputScrollPickerElement: {
+        prototype: HTMLSmoothlyInputScrollPickerElement;
+        new (): HTMLSmoothlyInputScrollPickerElement;
+    };
     interface HTMLSmoothlyInputSelectElementEventMap {
         "smoothlyInput": Data;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
@@ -2117,6 +2160,7 @@ declare global {
         "smoothly-input-range": HTMLSmoothlyInputRangeElement;
         "smoothly-input-range-demo": HTMLSmoothlyInputRangeDemoElement;
         "smoothly-input-reset": HTMLSmoothlyInputResetElement;
+        "smoothly-input-scroll-picker": HTMLSmoothlyInputScrollPickerElement;
         "smoothly-input-select": HTMLSmoothlyInputSelectElement;
         "smoothly-input-submit": HTMLSmoothlyInputSubmitElement;
         "smoothly-item": HTMLSmoothlyItemElement;
@@ -2601,6 +2645,29 @@ declare namespace LocalJSX {
         "tooltip"?: string;
         "type"?: "form" | "input";
     }
+    interface SmoothlyInputScrollPicker {
+        "clearable"?: boolean;
+        "color"?: Color;
+        "defined"?: boolean;
+        "inCalendar"?: boolean;
+        "invalid"?: boolean;
+        "looks"?: Looks;
+        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "multiple"?: boolean;
+        "mutable"?: boolean;
+        "name"?: string;
+        "onSmoothlyFormDisable"?: (event: SmoothlyInputScrollPickerCustomEvent<(disabled: boolean) => void>) => void;
+        "onSmoothlyInput"?: (event: SmoothlyInputScrollPickerCustomEvent<Data>) => void;
+        "onSmoothlyInputLoad"?: (event: SmoothlyInputScrollPickerCustomEvent<(parent: Editable) => void>) => void;
+        "onSmoothlyInputLooks"?: (event: SmoothlyInputScrollPickerCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyInputScrollPickerCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "placeholder"?: string | any;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "searchDisabled"?: boolean;
+        "showLabel"?: boolean;
+        "showSelected"?: boolean;
+    }
     interface SmoothlyInputSelect {
         "changed"?: boolean;
         "clearable"?: boolean;
@@ -2880,6 +2947,7 @@ declare namespace LocalJSX {
         "smoothly-input-range": SmoothlyInputRange;
         "smoothly-input-range-demo": SmoothlyInputRangeDemo;
         "smoothly-input-reset": SmoothlyInputReset;
+        "smoothly-input-scroll-picker": SmoothlyInputScrollPicker;
         "smoothly-input-select": SmoothlyInputSelect;
         "smoothly-input-submit": SmoothlyInputSubmit;
         "smoothly-item": SmoothlyItem;
@@ -2992,6 +3060,7 @@ declare module "@stencil/core" {
             "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
             "smoothly-input-range-demo": LocalJSX.SmoothlyInputRangeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeDemoElement>;
             "smoothly-input-reset": LocalJSX.SmoothlyInputReset & JSXBase.HTMLAttributes<HTMLSmoothlyInputResetElement>;
+            "smoothly-input-scroll-picker": LocalJSX.SmoothlyInputScrollPicker & JSXBase.HTMLAttributes<HTMLSmoothlyInputScrollPickerElement>;
             "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
             "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
             "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;

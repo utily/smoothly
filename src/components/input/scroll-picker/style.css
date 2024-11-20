@@ -1,0 +1,92 @@
+@import "../shared.css";
+
+:host {
+	display: flex;
+	/* justify-content: space-between; */
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	position: relative;
+	background-color: rgb(var(--smoothly-input-background));
+	padding: 0 var(--input-padding-side);
+}
+
+:host.open {
+	border-radius: var(--smoothly-input-border-radius) var(--smoothly-input-border-radius) 0 0;
+}
+
+:host>div.select-display {
+	outline: 2px solid teal;
+	box-sizing: border-box;
+	display: flex;
+	cursor: pointer;
+	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	overflow: hidden;
+	width: 100%;
+	white-space: nowrap;
+	gap: 1rem;
+	text-overflow: ellipsis;
+}
+
+:host.has-value:has([slot=label]:not(:empty))>div.select-display,
+:host:not(.has-value)[placeholder]>div.select-display {
+	overflow: hidden;
+	width: 100%;
+}
+
+:host>.options {
+	outline: 2px solid red;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	/* top: var(--element-height); */
+	scroll-snap-type: y mandatory;
+	padding: 5rem 0;
+  top: -5rem;
+	bottom: -5rem;
+	z-index: 10;
+	max-height: var(--menu-height, unset);
+	overflow-x: hidden;
+	overflow-y: auto;
+	/* background-color: rgb(var(--smoothly-input-background)); */
+	left: 0;
+	right: 0;
+	border-radius: 0 0 var(--smoothly-input-border-radius) var(--smoothly-input-border-radius);
+	min-width: fit-content;
+	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
+	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
+}
+:host[looks="grid"]>div.options,
+:host[looks=border]>div.options,
+:host[looks="transparent"]>div.options {
+	left: -1px;
+	right: -1px;
+}
+
+:host>div.options::slotted(smoothly-item) {
+	/* outline: 2px solid purple; */
+	padding: .7em .7em .7em .25em;
+	text-align: center;
+	scroll-snap-align: center;
+	background-color: none;
+}
+
+:host>div.options::slotted(smoothly-item:not([selectable])) {
+	display: flex;
+	gap: 1em;
+	background-color: rgba(var(--smoothly-primary-tint), .5);
+	color: var(--smoothly-color-contrast)
+}
+
+:host>div.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+:host>div.options.hidden {
+	display: none;
+}
+
+:host.invalid>div>smoothly-icon {
+	display: block;
+}
