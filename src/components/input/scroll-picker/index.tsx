@@ -6,12 +6,14 @@ import {
 	EventEmitter,
 	h,
 	Host,
+	Listen,
 	Prop,
 	State,
 	VNode,
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { Item } from "../../item/Item"
 import { Editable } from "../Editable"
 import { Looks } from "../Looks"
 
@@ -46,6 +48,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
 	@State() open = false
+	@State() index?: number
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
@@ -103,6 +106,44 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 			(this.displaySelectedElement.innerHTML =
 				this.selected.length > 0 ? displayString : this.placeholder ? this.placeholder : "")
 	}
+	@Listen("smoothlyInputLoad")
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputScrollPicker) => void>): Promise<void> {
+		if (
+			event.target &&
+			(("name" in event.target && event.target.name !== this.name) ||
+				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
+		) {
+			event.stopPropagation()
+		} else if (Item.Element.is(event.target)) {
+			event.stopPropagation()
+			event.target.deselectable = !this.required
+			this.items.push(event.target as HTMLSmoothlyItemElement)
+		}
+		event.detail(this)
+	}
+	onWheel(e: WheelEvent) {
+		e.preventDefault()
+		e.deltaY > 0
+			? (this.index = Math.min(this.items.length - 1, (this.index ?? 0) + 1))
+			: (this.index = Math.max(0, (this.index ?? 0) - 1))
+	}
+
+	@Watch("index")
+	indexChange() {
+		if (typeof this.index == "number") {
+			const item = this.items[this.index]
+			console.log("index change", this.index, item)
+			item && this.scrollTo(item)
+			this.items.map(item => (item.marked = false))
+			item.marked = true
+		}
+	}
+	scrollTo(item: HTMLElement) {
+		this.optionsDiv?.scrollTo({
+			behavior: "smooth",
+			top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2,
+		})
+	}
 
 	render(): VNode | VNode[] {
 		return (
@@ -120,9 +161,10 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 				</div>
 				<div
 					class={{ /* hidden: !this.open, */ options: true }}
-					ref={(el: HTMLDivElement) => {
-						this.optionsDiv = el
-					}}>
+					ref={(el: HTMLDivElement) => (this.optionsDiv = el)}
+					onWheel={e => this.onWheel(e)}
+					onTouchStart={e => {}}
+					onTouchMove={e => {}}>
 					{this.filter.length > 0 && (
 						<smoothly-item selectable={false}>
 							<smoothly-icon name="search-outline" size="small" />
