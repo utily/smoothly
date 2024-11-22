@@ -47,7 +47,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	@Method()
-	async getValue(): Promise<any> {
+	async getValue(): Promise<any | undefined> {
 		return this.stateHandler.getValue(this.state)
 	}
 	@Method()
