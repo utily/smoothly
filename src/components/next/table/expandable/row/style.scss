@@ -6,13 +6,29 @@
 	grid-template-columns: subgrid;
 	grid-template-rows: auto 0fr;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
+	position: relative;
+}
+
+:host>div.overlay:empty {
+	display: none;
+}
+
+:host>div.overlay {
+	// outline: 2px solid pink;
+	// position: relative;
+	// grid-column: 1 / -1;
+	// grid-row: 1 / -1;
+	// width: 100%;
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
 }
 
 :host::slotted(*) {
 	cursor: pointer;
 }
 
-:host:has(>:not(:last-child):hover)> :not(:last-child) {
+:host:has(>:not(.detail, .overlay):hover)> :not(.detail, .overlay) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -26,7 +42,7 @@
 	grid-template-rows: 0fr 1fr;
 }
 
-:host>div:last-child {
+:host>div.detail {
 	grid-column: 1 / -1;
 	cursor: default;
 	position: relative;
@@ -35,25 +51,25 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host> :first-child:not(:last-child) {
+:host> :first-child:not(.detail) {
 	@include arrow;
 }
 
-:host:has(>:not(:last-child):hover)> :first-child:not(:last-child) {
+:host:has(>:not(.detail):hover)> :first-child:not(.detail) {
 	@include arrow-hover;
 
 }
 
-:host[open]> :first-child:not(:last-child) {
+:host[open]> :first-child:not(.detail) {
 	@include arrow-open;
 }
 
-:host[open]>div:last-child {
+:host[open]>div.detail {
 	overflow: visible;
 	padding: 0.3rem 1.1rem;
 }
 
-:host>div:last-child::before {
+:host>div.detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -68,7 +84,7 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host>div:last-child::after {
+:host>div.detail::after {
 	content: "";
 	position: absolute;
 	display: flex;

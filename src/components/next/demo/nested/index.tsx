@@ -27,6 +27,9 @@ export class SmoothlyNextDemoNested {
 					<smoothly-next-table-body>
 						{data.map(entry => (
 							<smoothly-next-table-expandable-row>
+								{entry.name == "Riddle Reilly" && (
+									<smoothly-spinner slot="overlay" color={"light"} size={"small"} overlay />
+								)}
 								<smoothly-next-demo-nested-inner color="secondary" data={entry.friends} slot={"detail"} />
 								<smoothly-next-table-cell>{entry.id}</smoothly-next-table-cell>
 								<smoothly-next-table-cell>{entry.registered}</smoothly-next-table-cell>
