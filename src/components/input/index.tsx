@@ -3,10 +3,10 @@ import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
 import { getLocale } from "../../model/getLocale"
-import { Action } from "./Action"
 import { Clearable } from "./Clearable"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
+import { InputStateHandler } from "./InputStateHandler"
 import { Looks } from "./Looks"
 
 @Component({
@@ -32,10 +32,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@Prop() errorMessage?: string
-	@State() action: Action
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	parent: Editable | undefined
+	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
 	private uneditable = this.readonly
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
@@ -48,7 +48,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 
 	@Method()
 	async getValue(): Promise<any> {
-		return this.action.getValue(this.state)
+		return this.stateHandler.getValue(this.state)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
@@ -93,24 +93,27 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	typeChange(): void {
 		switch (this.type) {
 			case "price":
-				this.action = Action.create("price", { currency: this.currency, toInteger: this.toInteger })
+				this.stateHandler = InputStateHandler.create("price", {
+					currency: this.currency,
+					toInteger: this.toInteger,
+				})
 				break
 			default:
-				this.action = Action.create(this.type, getLocale())
+				this.stateHandler = InputStateHandler.create(this.type, getLocale())
 				break
 		}
-		this.state = this.action.initialState(this.value)
+		this.state = this.stateHandler.initialState(this.value)
 	}
 	@Watch("state")
 	stateChange() {
-		this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
+		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 	}
 	@Watch("value")
 	valueChange(value: any) {
-		const lastValue = this.action.getValue(this.state)
+		const lastValue = this.stateHandler.getValue(this.state)
 		if (lastValue != value && this.inputElement) {
-			this.state = this.action.setValue(this.inputElement, this.state, value)
-			this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
+			this.state = this.stateHandler.setValue(this.inputElement, this.state, value)
+			this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 		}
 	}
 	@Watch("readonly")
@@ -129,7 +132,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	componentDidLoad() {
 		if (this.inputElement)
-			this.state = this.action.setValue(this.inputElement, this.state, this.value)
+			this.state = this.stateHandler.setValue(this.inputElement, this.state, this.value)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -138,7 +141,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Listen("input")
 	@Listen("beforeinput")
 	onEvent(event: InputEvent) {
-		this.state = this.action.onInputEvent(event, this.state)
+		this.state = this.stateHandler.onInputEvent(event, this.state)
 	}
 
 	render() {
@@ -165,18 +168,18 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={event => {
-							this.state = this.action.onKeyDown(event, this.state)
+							this.state = this.stateHandler.onKeyDown(event, this.state)
 							if (event.key == "Enter")
 								this.smoothlyBlur.emit() // TODO: this should be replaced by a smoothlyKeydown event
 						}}
-						onFocus={event => (this.state = this.action.onFocus(event, this.state))}
+						onFocus={event => (this.state = this.stateHandler.onFocus(event, this.state))}
 						onBlur={event => {
-							const lastValue = this.action.getValue(this.state)
-							this.state = this.action.onBlur(event, this.state)
+							const lastValue = this.stateHandler.getValue(this.state)
+							this.state = this.stateHandler.onBlur(event, this.state)
 							this.smoothlyBlur.emit()
-							this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
-							if (lastValue != this.action.getValue(this.state))
-								this.smoothlyChange.emit({ [this.name]: this.action.getValue(this.state) })
+							this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+							if (lastValue != this.stateHandler.getValue(this.state))
+								this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 						}}
 					/>
 					<label class={"label float-on-focus"} htmlFor={this.name}>

@@ -5,19 +5,11 @@ import { Adjacent } from "./Adjacent"
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
-/**
-Alternative names:
-- EventToStateHandler
-- EventHandler
-- InputStateManager
-- InputHandler
-- InputStateController
- */
-export class Action {
+export class InputStateHandler {
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
-	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): Action
-	static create(type: tidily.Type, locale?: isoly.Locale): Action
-	static create(type: tidily.Type, extra?: any): Action {
+	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): InputStateHandler
+	static create(type: tidily.Type, locale?: isoly.Locale): InputStateHandler
+	static create(type: tidily.Type, extra?: any): InputStateHandler {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
 		switch (type) {
 			case "price":
@@ -28,7 +20,7 @@ export class Action {
 				break
 		}
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		return new Action(result || tidily.get("text")!, type)
+		return new InputStateHandler(result || tidily.get("text")!, type)
 	}
 
 	public onKeyDown(
