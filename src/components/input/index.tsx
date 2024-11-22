@@ -164,9 +164,20 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						disabled={this.disabled}
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
-						onKeyDown={event => (this.state = this.action.onKeyDown(event, this.state))}
+						onKeyDown={event => {
+							this.state = this.action.onKeyDown(event, this.state)
+							if (event.key == "Enter")
+								this.smoothlyBlur.emit() // TODO: this should be replaced by a smoothlyKeydown event
+						}}
 						onFocus={event => (this.state = this.action.onFocus(event, this.state))}
-						onBlur={event => (this.state = this.action.onBlur(event, this.state))}
+						onBlur={event => {
+							const lastValue = this.action.getValue(this.state)
+							this.state = this.action.onBlur(event, this.state)
+							this.smoothlyBlur.emit()
+							this.smoothlyInput.emit({ [this.name]: this.action.getValue(this.state) })
+							if (lastValue != this.action.getValue(this.state))
+								this.smoothlyChange.emit({ [this.name]: this.action.getValue(this.state) })
+						}}
 					/>
 					<label class={"label float-on-focus"} htmlFor={this.name}>
 						<slot />
