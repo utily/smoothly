@@ -1,144 +1,234 @@
-import { Direction, Formatter, Selection, Settings, State, StateEditor } from "tidily"
+import { isoly } from "isoly"
+import { tidily } from "tidily"
 import { Adjacent } from "./Adjacent"
 
-export interface Action {
-	key: string
-	repeat?: boolean
-	ctrlKey?: boolean
-	shiftKey?: boolean
-	altKey?: boolean
-	metaKey?: boolean
-}
+type Formatter = tidily.Formatter & tidily.Converter<any>
+type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
-export namespace Action {
-	export function apply(
-		formatter: Formatter,
-		state: Readonly<State>,
-		formatted: "formatted" | "partial",
-		action?: Action
-	): Readonly<State> & Readonly<Settings> {
-		let result = State.copy(formatter.unformat(StateEditor.copy(state)))
-
-		if ((state as any).autocomplete == "cc-exp" && /^\d\d \/$/g.test(state.value))
-			action?.key && (action.key = "Backspace")
-		if (action) {
-			if (action.ctrlKey || action.metaKey) {
-				if (action.key == "a")
-					select(result, 0, result.value.length, "forward")
-				else if (["ArrowLeft", "ArrowRight"].includes(action.key) && (state as any)?.type != "password")
-					result = ctrlArrow(formatter, state, action)
-				else if (["Delete", "Backspace"].includes(action.key) && (state as any)?.type != "password")
-					result = ctrlRemove(formatter, state, action)
-			} else if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(action.key))
-				arrowHomeEnd(result, action)
-			else if (["Delete", "Backspace"].includes(action.key)) {
-				result.selection.start == result.selection.end &&
-					select(
-						result,
-						result.selection.start + (action.key == "Backspace" ? -1 : 0),
-						result.selection.end + (action.key == "Delete" ? 1 : 0)
-					)
-				erase(result)
-			} else if (action.key != "Unidentified") {
-				erase(result)
-				formatter.allowed(action.key, result) && replace(result, action.key)
-			}
+/**
+Alternative names:
+- EventToStateHandler
+- EventHandler
+- InputStateManager
+- InputHandler
+- InputStateController
+ */
+export class Action {
+	constructor(private formatter: Formatter, private type: tidily.Type) {}
+	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): Action
+	static create(type: tidily.Type, locale?: isoly.Locale): Action
+	static create(type: tidily.Type, extra?: any): Action {
+		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
+		switch (type) {
+			case "price":
+				result = tidily.get("price", extra)
+				break
+			default:
+				result = tidily.get(type, extra)
+				break
 		}
-		return formatted == "formatted"
-			? formatter.format(StateEditor.copy(result))
-			: formatter.partialFormat(StateEditor.copy(result))
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		return new Action(result || tidily.get("text")!, type)
 	}
 
-	export function paste(
-		formatter: Formatter,
-		state: Readonly<State>,
-		formatted: "formatted" | "partial",
-		pasted: string
-	) {
-		const result = State.copy(formatter.unformat(StateEditor.copy(state)))
-		replace(result, pasted)
-		return formatted == "formatted"
-			? formatter.format(StateEditor.copy(result))
-			: formatter.partialFormat(StateEditor.copy(result))
+	public onKeyDown(
+		event: KeyboardEvent,
+		state: Readonly<tidily.State> & tidily.Settings
+	): Readonly<tidily.State> & tidily.Settings {
+		let result: Readonly<tidily.State> & tidily.Settings = state
+		const handler = this.keydownHandlers[event.key]
+		if (handler) {
+			const input = event.target as HTMLInputElement
+			state.selection.start = input.selectionStart ?? state.selection.start
+			state.selection.end = input.selectionEnd ?? state.selection.end
+			state.selection.direction = input.selectionDirection ?? state.selection.direction
+			const unformatted = handler(event, this.unformatState(state), state)
+			const formatted = this.partialFormatState(unformatted)
+			if (event.defaultPrevented) {
+				input.selectionStart = formatted.selection.start
+				input.selectionEnd = formatted.selection.end
+				input.selectionDirection = formatted.selection.direction ?? null
+			}
+			result = formatted
+		}
+		return result
+	}
+	keydownHandlers: { [key: string]: Handler<KeyboardEvent> | undefined } = {
+		ArrowLeft: (event, state) => (event.ctrlKey || event.metaKey ? state : this.moveCursor(event, state)),
+		ArrowRight: (event, state) => (event.ctrlKey || event.metaKey ? state : this.moveCursor(event, state)),
 	}
 
-	function ctrlArrow(formatter: Formatter, state: Readonly<State>, action: Action): Readonly<State> {
-		let cursorPosition = Selection.getCursor(state.selection)
-		let stalkPosition = Selection.getStalker(state.selection)
-		cursorPosition = Adjacent.getWordBreakIndex(
-			state.value,
-			cursorPosition,
-			action.key == "ArrowLeft" ? "backward" : "forward"
-		)
-		stalkPosition = action.shiftKey ? stalkPosition : cursorPosition
-		return State.copy(
-			formatter.unformat(
-				StateEditor.copy({
-					...state,
-					selection: {
-						start: Math.min(stalkPosition, cursorPosition),
-						end: Math.max(stalkPosition, cursorPosition),
-						direction:
-							stalkPosition < cursorPosition ? "forward" : stalkPosition > cursorPosition ? "backward" : "none",
-					},
-				})
-			)
-		)
+	moveCursor(event: KeyboardEvent, state: tidily.State): tidily.State {
+		event.preventDefault()
+		let cursor = tidily.Selection.getCursor(state.selection)
+		let stalk = tidily.Selection.getStalker(state.selection)
+		cursor = Math.min(Math.max(cursor + (event.key == "ArrowLeft" ? -1 : 1), 0), state.value.length)
+		stalk = event.shiftKey ? stalk : cursor
+		state.selection.direction = stalk < cursor ? "forward" : stalk > cursor ? "backward" : "none"
+		state.selection.start = Math.min(stalk, cursor)
+		state.selection.end = Math.max(stalk, cursor)
+		return state
 	}
-	function ctrlRemove(formatter: Formatter, state: Readonly<State>, action: Action): Readonly<State> {
-		const cursorPosition = Selection.getCursor(state.selection)
-		const adjacentIndex = Adjacent.getWordBreakIndex(
-			state.value,
-			cursorPosition,
-			action.key == "Backspace" ? "backward" : "forward"
-		)
-		const result = State.copy(
-			formatter.unformat(
-				StateEditor.copy({
-					...state,
-					selection: {
-						start: Math.min(cursorPosition, adjacentIndex),
-						end: Math.max(cursorPosition, adjacentIndex),
-						direction: "none",
-					},
-				})
-			)
-		)
-		result.value = result.value.substring(0, result.selection.start) + result.value.substring(result.selection.end)
+
+	public onFocus(event: FocusEvent, state: tidily.State) {
+		const result = this.partialFormatState(this.unformatState(state))
+		const input = event.target as HTMLInputElement
+		input.value = result.value
+		return result
+	}
+
+	public onBlur(event: FocusEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const result = this.createFormattedState(state)
+		const input = event.target as HTMLInputElement
+		input.value = result.value
+		return result
+	}
+
+	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const input = event.target as HTMLInputElement
+		state.selection.start = input.selectionStart ?? state.selection.start
+		state.selection.end = input.selectionEnd ?? state.selection.end
+		state.selection.direction = input.selectionDirection ?? state.selection.direction
+		const result =
+			event.type == "beforeinput" || event.type == "input"
+				? this.eventHandlers[event.type][event.inputType]?.(event, this.unformatState(state), state) ?? state
+				: state
+		const formatted = this.partialFormatState(result)
+		if (event.defaultPrevented) {
+			input.value = formatted.value
+			input.selectionStart = formatted.selection.start
+			input.selectionEnd = formatted.selection.end
+			input.selectionDirection = formatted.selection.direction ?? null
+		}
+		return formatted
+	}
+	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: Handler<InputEvent> | undefined }> = {
+		beforeinput: {
+			insertText: (event, state) => this.insert(event, state),
+			insertFromPaste: (event, state) => this.insert(event, state),
+			insertFromDrop: (event, state) => this.insert(event, state),
+			deleteContentBackward: (event, state) => {
+				event.preventDefault()
+				if (state.selection.start == state.selection.end)
+					this.select(state, state.selection.start - 1, state.selection.end)
+				this.erase(state)
+				return state
+			},
+			deleteContentForward: (event, state) => {
+				event.preventDefault()
+				if (state.selection.start == state.selection.end)
+					this.select(state, state.selection.start, state.selection.end + 1)
+				this.erase(state)
+				return state
+			},
+			deleteWordBackward: (event, unformatted, formattedState) => {
+				let result = unformatted
+				if (this.type != "password") {
+					event.preventDefault()
+					result = this.deleteWord(formattedState, "backward")
+				}
+				return result
+			},
+			deleteWordForward: (event, unformatted, formattedState) => {
+				let result = unformatted
+				if (this.type != "password") {
+					event.preventDefault()
+					result = this.deleteWord(formattedState, "forward")
+				}
+				return result
+			},
+			deleteByCut: (_, state) => {
+				this.erase(state)
+				return state
+			},
+			// historyUndo - TODO
+			// historyRedo - TODO
+			// insertLineBreak - TODO
+		},
+		input: {
+			insertReplacementText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
+			insertCompositionText: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
+			deleteWordBackward: (event, state) =>
+				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
+			deleteWordForward: (event, state) =>
+				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
+		},
+	}
+
+	private insert(event: InputEvent, unformatted: tidily.State): tidily.State {
+		event.preventDefault()
+		if (typeof event.data == "string")
+			for (const c of event.data)
+				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c)
+		return unformatted
+	}
+	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward"): tidily.State {
+		const cursorPosition = tidily.Selection.getCursor(formattedState.selection)
+		const adjacentIndex = Adjacent.getWordBreakIndex(formattedState.value, cursorPosition, direction)
+		const result = this.unformatState({
+			...formattedState,
+			selection: {
+				start: Math.min(cursorPosition, adjacentIndex),
+				end: Math.max(cursorPosition, adjacentIndex),
+				direction: "none",
+			},
+		})
+		const value = result.value.substring(0, result.selection.start) + result.value.substring(result.selection.end)
+		result.value = value
 		result.selection.end = result.selection.start
 		return result
 	}
-	function arrowHomeEnd(state: State, action: Action) {
-		let cursorPosition = Selection.getCursor(state.selection)
-		let stalkPosition = Selection.getStalker(state.selection)
-		cursorPosition =
-			action.key == "Home"
-				? 0
-				: action.key == "End"
-				? state.value.length
-				: state.selection.start == state.selection.end || action.shiftKey
-				? Math.min(Math.max(cursorPosition + (action.key == "ArrowLeft" ? -1 : 1), 0), state.value.length)
-				: action.key == "ArrowLeft"
-				? state.selection.start
-				: state.selection.end
-		stalkPosition = action.shiftKey ? stalkPosition : cursorPosition
-		state.selection.direction =
-			stalkPosition < cursorPosition ? "forward" : stalkPosition > cursorPosition ? "backward" : "none"
-		state.selection.start = Math.min(stalkPosition, cursorPosition)
-		state.selection.end = Math.max(stalkPosition, cursorPosition)
-	}
-	function select(state: State, from: number, to: number, direction?: Direction): void {
+
+	private select(state: tidily.State, from: number, to: number, direction?: tidily.Direction): void {
 		state.selection.start = from
 		state.selection.end = to
 		direction && (state.selection.direction = direction)
 	}
-	function erase(state: State): void {
-		replace(state, "")
+	private erase(state: tidily.State): void {
+		this.replace(state, "")
 	}
-	function replace(state: State, insertString: string): void {
+	private replace(state: tidily.State, insertString: string): void {
 		state.value =
 			state.value.substring(0, state.selection.start) + insertString + state.value.substring(state.selection.end)
 		state.selection.start = state.selection.start + insertString.length
 		state.selection.end = state.selection.start
+	}
+
+	private unformatState(formattedState: tidily.State): tidily.State {
+		return tidily.State.copy(this.formatter.unformat(tidily.StateEditor.copy(formattedState)))
+	}
+	private partialFormatState(unformattedState: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		return this.formatter.partialFormat(tidily.StateEditor.copy(unformattedState))
+	}
+	private createFormattedState(state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		return this.formatter.format(tidily.StateEditor.copy(this.formatter.unformat(tidily.StateEditor.copy(state))))
+	}
+	private toString(value: any): string {
+		return this.formatter.toString(value)
+	}
+	public initialState(value: any): Readonly<tidily.State> & tidily.Settings {
+		const stringValue = this.toString(value) || ""
+		const start = stringValue.length
+		const state = this.createFormattedState({
+			value: stringValue,
+			selection: { start, end: start, direction: "none" },
+		})
+		return state
+	}
+	public setValue(
+		inputElement: HTMLInputElement,
+		formattedState: Readonly<tidily.State> & tidily.Settings,
+		value: any
+	): Readonly<tidily.State> & tidily.Settings {
+		const result = {
+			...formattedState,
+			value: this.createFormattedState({ value: this.formatter.toString(value), selection: formattedState.selection })
+				.value,
+		}
+		inputElement.value = result.value
+		return result
+	}
+	public getValue(formattedState: tidily.State): any {
+		return this.formatter.fromString(this.unformatState(formattedState).value)
 	}
 }
