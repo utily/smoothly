@@ -494,6 +494,7 @@ export namespace Components {
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
+        "ordered"?: boolean;
         "placeholder"?: string | any;
         "readonly": boolean;
         "register": () => Promise<void>;
@@ -2867,6 +2868,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "ordered"?: boolean;
         "placeholder"?: string | any;
         "readonly"?: boolean;
         "required"?: boolean;

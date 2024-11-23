@@ -145,6 +145,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					ordered
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}
@@ -167,6 +168,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					ordered
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}

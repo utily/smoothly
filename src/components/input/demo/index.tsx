@@ -98,6 +98,16 @@ export class SmoothlyInputDemo {
 								<smoothly-icon size="small" name="camera-outline" />
 							</smoothly-item>
 						</smoothly-input-select>
+						<smoothly-input-select ordered menuHeight="7.5items" placeholder="Select..." name="select-month">
+							<label slot="label">Alphabet ordered select</label>
+							{Array.from({ length: 26 })
+								.map((_, i) => String.fromCharCode(i + 65))
+								.map(char => (
+									<smoothly-item value={char} selected={char == "H"}>
+										{char}
+									</smoothly-item>
+								))}
+						</smoothly-input-select>
 						<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 							<label slot="label">Month multiple select</label>
 							<smoothly-item value="1">January</smoothly-item>
