@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Fragment, h, Prop, State, Watch } from "@stencil/core"
 import { Date, DateRange } from "isoly"
 import * as generate from "./generate"
 
@@ -64,66 +64,72 @@ export class Calendar {
 		}
 	}
 	render() {
-		return [
-			<smoothly-input-month
-				name="month"
-				value={this.month ?? this.value}
-				inCalendar
-				next
-				previous
-				showLabel={false}
-				onSmoothlyInput={e => {
-					e.stopPropagation()
-					"month" in e.detail && typeof e.detail.month == "string" && (this.month = e.detail.month)
-				}}>
-				<div slot={"year-label"}>
-					<slot name={"year-label"} />
-				</div>
-				<div slot={"month-label"}>
-					<slot name={"month-label"} />
-				</div>
-			</smoothly-input-month>,
-			<table>
-				<thead>
-					<tr>
-						{generate.weekdays().map(day => (
-							<th>{day}</th>
-						))}
-					</tr>
-				</thead>
-				{generate.month(this.month ?? this.value).map(week => (
-					<tr>
-						{week.map(date => (
-							<td
-								tabindex={1}
-								onMouseOver={() => {
-									!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
-										? undefined
-										: this.onHover(date)
-								}}
-								onClick={
-									(this.min || this.max) && (date < this.min || date > this.max) ? undefined : () => this.onClick(date)
-								}
-								class={(date == this.value ? ["selected"] : [])
-									.concat(
-										...(date == Date.now() ? ["today"] : []),
-										Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
-										this.doubleInput
-											? this.start == date || this.end == date
-												? ["selected"]
-												: date >= (this.start ?? "") && date <= (this.end ?? "")
-												? ["dateRange"]
-												: []
-											: ""
-									)
-									.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
-									.join(" ")}>
-								{date.substring(8, 10)}
-							</td>
-						))}
-					</tr>
-				))}
-			</table>,
-		]
+		return (
+			<Fragment>
+				<smoothly-input-month
+					name="month"
+					value={this.month ?? this.value}
+					min={this.min}
+					max={this.max}
+					inCalendar
+					next
+					previous
+					showLabel={false}
+					onSmoothlyInput={e => {
+						e.stopPropagation()
+						"month" in e.detail && typeof e.detail.month == "string" && (this.month = e.detail.month)
+					}}>
+					<div slot={"year-label"}>
+						<slot name={"year-label"} />
+					</div>
+					<div slot={"month-label"}>
+						<slot name={"month-label"} />
+					</div>
+				</smoothly-input-month>
+				<table>
+					<thead>
+						<tr>
+							{generate.weekdays().map(day => (
+								<th>{day}</th>
+							))}
+						</tr>
+					</thead>
+					{generate.month(this.month ?? this.value).map(week => (
+						<tr>
+							{week.map(date => (
+								<td
+									tabindex={1}
+									onMouseOver={() => {
+										!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
+											? undefined
+											: this.onHover(date)
+									}}
+									onClick={
+										(this.min || this.max) && (date < this.min || date > this.max)
+											? undefined
+											: () => this.onClick(date)
+									}
+									class={(date == this.value ? ["selected"] : [])
+										.concat(
+											...(date == Date.now() ? ["today"] : []),
+											Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
+											this.doubleInput
+												? this.start == date || this.end == date
+													? ["selected"]
+													: date >= (this.start ?? "") && date <= (this.end ?? "")
+													? ["dateRange"]
+													: []
+												: ""
+										)
+										.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
+										.join(" ")}>
+									{date.substring(8, 10)}
+								</td>
+							))}
+						</tr>
+					))}
+				</table>
+			</Fragment>
+		)
 	}
 }
