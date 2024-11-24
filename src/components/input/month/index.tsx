@@ -137,7 +137,12 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					size={"tiny"}
 					color={this.color}
 					fill={"default"}
-					class={{ disabled: this.readonly }}
+					class={{
+						disabled:
+							this.readonly ||
+							(!!this.min &&
+								isoly.Date.firstOfMonth(this.min) > isoly.Date.previousMonth(this.value ?? isoly.Date.now())),
+					}}
 					onClick={() => this.adjustMonth(-1)}
 				/>
 				<smoothly-input-select
@@ -189,7 +194,11 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					size={"tiny"}
 					color={this.color}
 					fill={"default"}
-					class={{ disabled: this.readonly }}
+					class={{
+						disabled:
+							this.readonly ||
+							(!!this.max && isoly.Date.lastOfMonth(this.max) < isoly.Date.nextMonth(this.value ?? isoly.Date.now())),
+					}}
 					onClick={() => this.adjustMonth(1)}
 				/>
 			</Host>
