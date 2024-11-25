@@ -104,6 +104,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.formatter = result || tidily.get("text")!
+		if (this.state)
+			this.state = this.formattedState(this.state)
 	}
 	@Watch("value")
 	async valueChange(value: any, before: any) {
