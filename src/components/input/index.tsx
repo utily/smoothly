@@ -292,7 +292,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 
 	render() {
-		console.log("type?", this.state.type)
 		return (
 			<Host
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
