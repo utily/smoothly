@@ -4,6 +4,7 @@ import { tidily } from "tidily"
 import { Color } from "../../model"
 import { getLocale } from "../../model/getLocale"
 import { Clearable } from "./Clearable"
+import { Deep } from "./Deep"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
 import { InputStateHandler } from "./InputStateHandler"
@@ -111,7 +112,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("value")
 	valueChange(value: any) {
 		const lastValue = this.stateHandler.getValue(this.state)
-		if (lastValue != value && this.inputElement) {
+		if (Deep.notEqual(lastValue, value) && this.inputElement) {
 			this.state = this.stateHandler.setValue(this.inputElement, this.state, value)
 			this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 		}
@@ -132,7 +133,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	componentDidLoad() {
 		if (this.inputElement)
-			this.state = this.stateHandler.setValue(this.inputElement, this.state, this.value)
+			this.inputElement.value = this.state.value
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -178,7 +179,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 							this.state = this.stateHandler.onBlur(event, this.state)
 							this.smoothlyBlur.emit()
 							this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-							if (lastValue != this.stateHandler.getValue(this.state))
+							if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state)))
 								this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 						}}
 					/>
