@@ -405,6 +405,8 @@ export namespace Components {
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
+        "max": isoly.Date;
+        "min": isoly.Date;
         "name": string;
         "next": boolean;
         "previous": boolean;
@@ -494,6 +496,7 @@ export namespace Components {
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
+        "ordered"?: boolean;
         "placeholder"?: string | any;
         "readonly": boolean;
         "register": () => Promise<void>;
@@ -2783,6 +2786,8 @@ declare namespace LocalJSX {
         "color"?: Color;
         "inCalendar"?: boolean;
         "looks"?: Looks;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name"?: string;
         "next"?: boolean;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputMonthCustomEvent<(disabled: boolean) => void>) => void;
@@ -2867,6 +2872,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "ordered"?: boolean;
         "placeholder"?: string | any;
         "readonly"?: boolean;
         "required"?: boolean;

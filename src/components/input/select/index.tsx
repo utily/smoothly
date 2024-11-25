@@ -45,6 +45,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) inCalendar = false
+	@Prop({ reflect: true }) ordered?: boolean
 	@Prop() multiple = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) changed = false
@@ -54,6 +55,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() required = false
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
+	private lastOpen = false
 	@State() open = false
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
@@ -88,6 +90,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			)
 		}
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
+
+		if (this.ordered && !this.multiple && this.open && !this.lastOpen) {
+			this.scrollToSelected()
+		}
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -201,11 +207,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displaySelected()
 	}
 	@Watch("open")
-	onClosed(): void {
-		if (!this.open) {
+	onClosed(open: boolean, before: boolean): void {
+		this.lastOpen = before
+		if (!open) {
 			const markedItem = this.items.find(item => item.marked)
-			if (markedItem)
+			if (markedItem) {
 				markedItem.marked = false
+			}
 		}
 	}
 	handleShowOptions(event?: Event): void {
@@ -295,6 +303,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			}
 		}
 	}
+	private scrollToSelected() {
+		const selectedItem = this.items.find(item => item.selected)
+		if (selectedItem) {
+			this.items.map(item => (item.marked = false))
+			selectedItem.marked = true
+			this.scrollTo(selectedItem, "instant")
+		}
+	}
 	private move(direction: -1 | 1): void {
 		let markedIndex = this.items.findIndex(item => item.marked)
 		if (markedIndex == -1)
@@ -308,10 +324,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
 			}
 		this.items[markedIndex].marked = true
-		this.scrollTo(this.items[markedIndex])
+		this.scrollTo(this.items[markedIndex], "smooth")
 	}
-	private scrollTo(item: HTMLSmoothlyItemElement) {
-		this.optionsDiv?.scrollTo({ top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2 })
+	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
+		this.optionsDiv?.scrollTo({
+			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsDiv?.clientHeight ?? 0) / 2,
+			behavior,
+		})
 	}
 	private addItem() {
 		this.addedItems = this.addedItems.concat(
@@ -339,14 +358,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
 						/>
 					)}
-					<smoothly-icon class="invalid" name="alert-circle" color="danger" fill="clear" size="small"></smoothly-icon>
+					<smoothly-icon class="invalid" name="alert-circle" color="danger" fill="clear" size="small" />
 				</div>
 				<slot name="label" />
-				<div
-					class={{ hidden: !this.open, options: true }}
-					ref={(el: HTMLDivElement) => {
-						this.optionsDiv = el
-					}}>
+				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
 					{this.filter.length > 0 && (
 						<smoothly-item selectable={false}>
 							<smoothly-icon name="search-outline" size="small" />

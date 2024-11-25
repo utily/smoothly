@@ -34,6 +34,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
+	@Prop({ mutable: true }) max: isoly.Date
+	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false
 	@Prop({ reflect: true }) inCalendar = false
@@ -135,7 +137,12 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					size={"tiny"}
 					color={this.color}
 					fill={"default"}
-					class={{ disabled: this.readonly }}
+					class={{
+						disabled:
+							this.readonly ||
+							(!!this.min &&
+								isoly.Date.firstOfMonth(this.min) > isoly.Date.previousMonth(this.value ?? isoly.Date.now())),
+					}}
 					onClick={() => this.adjustMonth(-1)}
 				/>
 				<smoothly-input-select
@@ -145,6 +152,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					ordered
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}
@@ -152,7 +160,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					<div slot={"label"}>
 						<slot name={"year-label"} />
 					</div>
-					{generate.years(this.value ?? isoly.Date.now()).map(year => (
+					{generate.years(this.value ?? isoly.Date.now(), this.min, this.max).map(year => (
 						<smoothly-item key={year.date} value={year.date} selected={year.selected || this.value == year.date}>
 							{year.name}
 						</smoothly-item>
@@ -167,6 +175,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					changed={this.changed}
 					menuHeight="5.5items"
 					required
+					ordered
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}
@@ -185,7 +194,11 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					size={"tiny"}
 					color={this.color}
 					fill={"default"}
-					class={{ disabled: this.readonly }}
+					class={{
+						disabled:
+							this.readonly ||
+							(!!this.max && isoly.Date.lastOfMonth(this.max) < isoly.Date.nextMonth(this.value ?? isoly.Date.now())),
+					}}
 					onClick={() => this.adjustMonth(1)}
 				/>
 			</Host>
