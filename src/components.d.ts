@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
+import { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/button/Button";
 import { Editable } from "./components/input/Editable";
@@ -17,10 +17,7 @@ import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
 import { RGB } from "./model/Color/RGB";
 import { Selectable } from "./components/input/radio/Selected";
-import { Controls } from "./components/picker/menu";
-import { Controls as Controls1 } from "./components/picker/menu/index";
-import { Slot } from "./components/picker/slot-elements/index";
-export { Color, Data, Fill, Icon, Message, Notice, Option, Submit, Trigger } from "./model";
+export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
 export { Editable } from "./components/input/Editable";
@@ -32,9 +29,6 @@ export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
 export { RGB } from "./model/Color/RGB";
 export { Selectable } from "./components/input/radio/Selected";
-export { Controls } from "./components/picker/menu";
-export { Controls as Controls1 } from "./components/picker/menu/index";
-export { Slot } from "./components/picker/slot-elements/index";
 export namespace Components {
     interface SmoothlyApp {
         "color": Color;
@@ -596,50 +590,6 @@ export namespace Components {
     interface SmoothlyNotifier {
         "icon": boolean;
     }
-    interface SmoothlyPicker {
-        "changed": boolean;
-        "clear": () => Promise<void>;
-        "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<any | any[] | undefined>;
-        "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
-        "looks"?: Looks;
-        "multiple": boolean;
-        "mutable": boolean;
-        "name": string;
-        "open": boolean;
-        "readonly": boolean;
-        "register": () => Promise<void>;
-        "reset": () => Promise<void>;
-        "setInitialValue": () => Promise<void>;
-        "unregister": () => Promise<void>;
-        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
-    }
-    interface SmoothlyPickerDemo {
-    }
-    interface SmoothlyPickerMenu {
-        "looks"?: Looks;
-        "multiple": boolean;
-        "mutable": boolean;
-        "open": boolean;
-        "readonly": boolean;
-        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
-    }
-    interface SmoothlyPickerOption {
-        "clickHandler": () => Promise<void>;
-        "position": number;
-        "required": boolean;
-        "search": string[];
-        "selected": boolean;
-        "value": any;
-        "visible": boolean;
-    }
-    interface SmoothlySlotElements {
-        "clone": boolean;
-        "nodes"?: Node | Node[];
-    }
-    interface SmoothlySlottedElements {
-        "clone": boolean;
-    }
     interface SmoothlySpinner {
         "overlay": boolean;
         "size": "small" | "icon" | "medium" | "large";
@@ -889,26 +839,6 @@ export interface SmoothlyNextTableExpandableRowCustomEvent<T> extends CustomEven
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
-}
-export interface SmoothlyPickerCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyPickerElement;
-}
-export interface SmoothlyPickerMenuCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyPickerMenuElement;
-}
-export interface SmoothlyPickerOptionCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyPickerOptionElement;
-}
-export interface SmoothlySlotElementsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlySlotElementsElement;
-}
-export interface SmoothlySlottedElementsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlySlottedElementsElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1912,105 +1842,6 @@ declare global {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
     };
-    interface HTMLSmoothlyPickerElementEventMap {
-        "smoothlyPickerLoaded": Controls;
-        "smoothlyInput": Record<string, any | any[]>;
-        "smoothlyChange": Record<string, any | any[]>;
-        "smoothlyInputLooks": (looks?: Looks) => void;
-        "smoothlyFormDisable": (disabled: boolean) => void;
-        "smoothlyInputLoad": (parent: Editable) => void;
-    }
-    interface HTMLSmoothlyPickerElement extends Components.SmoothlyPicker, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerElement, ev: SmoothlyPickerCustomEvent<HTMLSmoothlyPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyPickerElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerElement, ev: SmoothlyPickerCustomEvent<HTMLSmoothlyPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyPickerElement: {
-        prototype: HTMLSmoothlyPickerElement;
-        new (): HTMLSmoothlyPickerElement;
-    };
-    interface HTMLSmoothlyPickerDemoElement extends Components.SmoothlyPickerDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlyPickerDemoElement: {
-        prototype: HTMLSmoothlyPickerDemoElement;
-        new (): HTMLSmoothlyPickerDemoElement;
-    };
-    interface HTMLSmoothlyPickerMenuElementEventMap {
-        "notice": Notice;
-        "smoothlyPickerMenuLoaded": Controls1;
-    }
-    interface HTMLSmoothlyPickerMenuElement extends Components.SmoothlyPickerMenu, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyPickerMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerMenuElement, ev: SmoothlyPickerMenuCustomEvent<HTMLSmoothlyPickerMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyPickerMenuElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerMenuElement, ev: SmoothlyPickerMenuCustomEvent<HTMLSmoothlyPickerMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyPickerMenuElement: {
-        prototype: HTMLSmoothlyPickerMenuElement;
-        new (): HTMLSmoothlyPickerMenuElement;
-    };
-    interface HTMLSmoothlyPickerOptionElementEventMap {
-        "smoothlyPickerOptionLoad": Option.Load;
-        "smoothlyPickerOptionLoaded": Option;
-        "smoothlyPickerOptionChange": Option;
-    }
-    interface HTMLSmoothlyPickerOptionElement extends Components.SmoothlyPickerOption, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyPickerOptionElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerOptionElement, ev: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyPickerOptionElementEventMap>(type: K, listener: (this: HTMLSmoothlyPickerOptionElement, ev: SmoothlyPickerOptionCustomEvent<HTMLSmoothlyPickerOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyPickerOptionElement: {
-        prototype: HTMLSmoothlyPickerOptionElement;
-        new (): HTMLSmoothlyPickerOptionElement;
-    };
-    interface HTMLSmoothlySlotElementsElementEventMap {
-        "smoothlySlotEmpty": Slot;
-    }
-    interface HTMLSmoothlySlotElementsElement extends Components.SmoothlySlotElements, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlySlotElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlotElementsElement, ev: SmoothlySlotElementsCustomEvent<HTMLSmoothlySlotElementsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlySlotElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlotElementsElement, ev: SmoothlySlotElementsCustomEvent<HTMLSmoothlySlotElementsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlySlotElementsElement: {
-        prototype: HTMLSmoothlySlotElementsElement;
-        new (): HTMLSmoothlySlotElementsElement;
-    };
-    interface HTMLSmoothlySlottedElementsElementEventMap {
-        "smoothlySlottedChange": Node[];
-    }
-    interface HTMLSmoothlySlottedElementsElement extends Components.SmoothlySlottedElements, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlySlottedElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlottedElementsElement, ev: SmoothlySlottedElementsCustomEvent<HTMLSmoothlySlottedElementsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlySlottedElementsElementEventMap>(type: K, listener: (this: HTMLSmoothlySlottedElementsElement, ev: SmoothlySlottedElementsCustomEvent<HTMLSmoothlySlottedElementsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlySlottedElementsElement: {
-        prototype: HTMLSmoothlySlottedElementsElement;
-        new (): HTMLSmoothlySlottedElementsElement;
-    };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
     var HTMLSmoothlySpinnerElement: {
@@ -2384,12 +2215,6 @@ declare global {
         "smoothly-next-table-row-group": HTMLSmoothlyNextTableRowGroupElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
-        "smoothly-picker": HTMLSmoothlyPickerElement;
-        "smoothly-picker-demo": HTMLSmoothlyPickerDemoElement;
-        "smoothly-picker-menu": HTMLSmoothlyPickerMenuElement;
-        "smoothly-picker-option": HTMLSmoothlyPickerOptionElement;
-        "smoothly-slot-elements": HTMLSmoothlySlotElementsElement;
-        "smoothly-slotted-elements": HTMLSmoothlySlottedElementsElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
@@ -2974,54 +2799,6 @@ declare namespace LocalJSX {
     interface SmoothlyNotifier {
         "icon"?: boolean;
     }
-    interface SmoothlyPicker {
-        "changed"?: boolean;
-        "looks"?: Looks;
-        "multiple"?: boolean;
-        "mutable"?: boolean;
-        "name"?: string;
-        "onSmoothlyChange"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
-        "onSmoothlyFormDisable"?: (event: SmoothlyPickerCustomEvent<(disabled: boolean) => void>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyPickerCustomEvent<Record<string, any | any[]>>) => void;
-        "onSmoothlyInputLoad"?: (event: SmoothlyPickerCustomEvent<(parent: Editable) => void>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyPickerCustomEvent<(looks?: Looks) => void>) => void;
-        "onSmoothlyPickerLoaded"?: (event: SmoothlyPickerCustomEvent<Controls>) => void;
-        "open"?: boolean;
-        "readonly"?: boolean;
-        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
-    }
-    interface SmoothlyPickerDemo {
-    }
-    interface SmoothlyPickerMenu {
-        "looks"?: Looks;
-        "multiple"?: boolean;
-        "mutable"?: boolean;
-        "onNotice"?: (event: SmoothlyPickerMenuCustomEvent<Notice>) => void;
-        "onSmoothlyPickerMenuLoaded"?: (event: SmoothlyPickerMenuCustomEvent<Controls1>) => void;
-        "open"?: boolean;
-        "readonly"?: boolean;
-        "validator"?: (value: string) => boolean | { result: boolean; notice: Notice };
-    }
-    interface SmoothlyPickerOption {
-        "onSmoothlyPickerOptionChange"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
-        "onSmoothlyPickerOptionLoad"?: (event: SmoothlyPickerOptionCustomEvent<Option.Load>) => void;
-        "onSmoothlyPickerOptionLoaded"?: (event: SmoothlyPickerOptionCustomEvent<Option>) => void;
-        "position"?: number;
-        "required"?: boolean;
-        "search"?: string[];
-        "selected"?: boolean;
-        "value"?: any;
-        "visible"?: boolean;
-    }
-    interface SmoothlySlotElements {
-        "clone"?: boolean;
-        "nodes"?: Node | Node[];
-        "onSmoothlySlotEmpty"?: (event: SmoothlySlotElementsCustomEvent<Slot>) => void;
-    }
-    interface SmoothlySlottedElements {
-        "clone"?: boolean;
-        "onSmoothlySlottedChange"?: (event: SmoothlySlottedElementsCustomEvent<Node[]>) => void;
-    }
     interface SmoothlySpinner {
         "overlay"?: boolean;
         "size"?: "small" | "icon" | "medium" | "large";
@@ -3232,12 +3009,6 @@ declare namespace LocalJSX {
         "smoothly-next-table-row-group": SmoothlyNextTableRowGroup;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
-        "smoothly-picker": SmoothlyPicker;
-        "smoothly-picker-demo": SmoothlyPickerDemo;
-        "smoothly-picker-menu": SmoothlyPickerMenu;
-        "smoothly-picker-option": SmoothlyPickerOption;
-        "smoothly-slot-elements": SmoothlySlotElements;
-        "smoothly-slotted-elements": SmoothlySlottedElements;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
@@ -3357,12 +3128,6 @@ declare module "@stencil/core" {
             "smoothly-next-table-row-group": LocalJSX.SmoothlyNextTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowGroupElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
-            "smoothly-picker": LocalJSX.SmoothlyPicker & JSXBase.HTMLAttributes<HTMLSmoothlyPickerElement>;
-            "smoothly-picker-demo": LocalJSX.SmoothlyPickerDemo & JSXBase.HTMLAttributes<HTMLSmoothlyPickerDemoElement>;
-            "smoothly-picker-menu": LocalJSX.SmoothlyPickerMenu & JSXBase.HTMLAttributes<HTMLSmoothlyPickerMenuElement>;
-            "smoothly-picker-option": LocalJSX.SmoothlyPickerOption & JSXBase.HTMLAttributes<HTMLSmoothlyPickerOptionElement>;
-            "smoothly-slot-elements": LocalJSX.SmoothlySlotElements & JSXBase.HTMLAttributes<HTMLSmoothlySlotElementsElement>;
-            "smoothly-slotted-elements": LocalJSX.SmoothlySlottedElements & JSXBase.HTMLAttributes<HTMLSmoothlySlottedElementsElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;

@@ -7,7 +7,6 @@ export {
 	Message,
 	Notice,
 	Trigger,
-	Option,
 	Listenable,
 	HasListenable,
 	WithListenable,
