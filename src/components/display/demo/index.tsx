@@ -200,10 +200,6 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-display-demo-json />
 						</dd>
-						<dt>Display amount</dt>
-						<dd>
-							<smoothly-display-amount currency="SEK" amount="1289.5"></smoothly-display-amount>
-						</dd>
 					</dl>
 				</fieldset>
 				<h2>With labels</h2>
