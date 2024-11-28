@@ -23,7 +23,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) type: tidily.Type = "text"
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) showLabel = true
-	@Prop() autocomplete = true
+	@Prop() autocomplete?: Exclude<tidily.Settings["autocomplete"], undefined>
 	@Prop({ reflect: true }) placeholder: string | undefined
 	@Prop() disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
@@ -310,7 +310,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						inputmode={this.state?.inputmode}
 						placeholder={this.placeholder}
 						required={this.required}
-						autocomplete={this.autocomplete ? this.state?.autocomplete : "off"}
+						autocomplete={this.autocomplete ?? this.state?.autocomplete}
 						disabled={this.disabled}
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
