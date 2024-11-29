@@ -33,8 +33,14 @@
 	grid-column: 2;
 }
 
-@media screen and (min-width: 900px) {
-	:host>details>summary:hover {
-		cursor: pointer;
+@media (prefers-reduced-motion) { 
+	:host>details>summary>smoothly-icon {
+		transition: none;
+	}
+}
+ /* chromium specific */
+@supports selector(details::details-content) {
+	:host>details::details-content {
+		grid-column: 2;
 	}
 }
