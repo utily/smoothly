@@ -28,7 +28,10 @@
 :host>details[open]>summary>smoothly-icon {
 	transform: rotate(90deg);
 }
-
+/* Chromium specific */
+:host>details[open]::details-content {
+	grid-column: 2;
+}
 :host>details::slotted([slot=content]) {
 	grid-column: 2;
 }
