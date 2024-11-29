@@ -32,6 +32,12 @@
 	grid-column: 2;
 }
 
+@media (prefers-reduced-motion) { 
+	:host>details>summary>smoothly-icon {
+		transition: none;
+	}
+}
+
 @supports selector(details::details-content) and (interpolate-size: allow-keywords) {
 	:host {
 		interpolate-size: allow-keywords;
@@ -48,8 +54,9 @@
 		height: auto;
 	}
 
-	:host>details:focus-within>summary {
-		outline: 2px solid purple;
-		outline-offset: 2px;
+	@media (prefers-reduced-motion) { 
+		:host>details::details-content {
+			transition: none;
+		}
 	}
 }
