@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: auto 1fr;
 	column-gap: 0.3rem;
+	interpolate-size: allow-keywords;
 }
 
 :host>details {
@@ -28,12 +29,21 @@
 :host>details[open]>summary>smoothly-icon {
 	transform: rotate(90deg);
 }
-/* Chromium specific */
-:host>details[open]::details-content {
-	grid-column: 2;
-}
 :host>details::slotted([slot=content]) {
 	grid-column: 2;
+}
+
+/* Chromium specific */
+:host>details::details-content {
+	grid-column: 2;
+	height: 0;
+	overflow-y: hidden;
+	transition: height 0.2s, content-visibility 0.2s;
+	transition-behavior: allow-discrete;
+}
+:host>details[open]::details-content {
+	grid-column: 2;
+	height: auto;
 }
 
 @media screen and (min-width: 900px) {
