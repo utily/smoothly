@@ -14,6 +14,7 @@
 	grid-column: 1/-1;
 	list-style: none;
 	align-items: center;
+	cursor: pointer;
 }
 
 :host>details>summary>smoothly-icon {
@@ -21,7 +22,7 @@
 	opacity: 0.3;
 }
 
-:host:hover details>summary>smoothly-icon {
+:host>details>summary:hover>smoothly-icon {
 	opacity: 1;
 }
 
