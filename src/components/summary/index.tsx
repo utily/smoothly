@@ -38,10 +38,10 @@ export class SmoothlySummary {
 		return (
 			<details onToggle={e => this.toggleHandler(e)} open={this.open}>
 				<summary>
-					<smoothly-icon name="caret-forward" color={this.color} fill={this.fill} size={this.size}></smoothly-icon>
-					<slot name="summary"></slot>
+					<smoothly-icon name="caret-forward" color={this.color} fill={this.fill} size={this.size} />
+					<slot name="summary" />
 				</summary>
-				<slot name="content"></slot>
+				<slot name="content" />
 			</details>
 		)
 	}

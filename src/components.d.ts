@@ -231,7 +231,7 @@ export namespace Components {
     interface SmoothlyIconDemo {
     }
     interface SmoothlyInput {
-        "autocomplete": boolean;
+        "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -2455,7 +2455,7 @@ declare namespace LocalJSX {
         "onNotice"?: (event: SmoothlyIconDemoCustomEvent<Notice>) => void;
     }
     interface SmoothlyInput {
-        "autocomplete"?: boolean;
+        "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
         "changed"?: boolean;
         "color"?: Color;
         "currency"?: isoly.Currency;
