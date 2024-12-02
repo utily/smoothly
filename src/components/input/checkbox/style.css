@@ -43,3 +43,11 @@
 	border-color: rgb(var(--smoothly-color-contrast), 0.3);
 	color: rgb(var(--smoothly-color-contrast), 0.4);
 }
+
+:host[looks="transparent"] {
+	background-color: transparent;
+}
+/* overwrite shared.css styling */
+:host[looks="transparent"]:not([readonly]):focus-within {
+	outline-color: transparent;
+}
