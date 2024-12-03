@@ -109,20 +109,13 @@ export class Calendar {
 											? undefined
 											: () => this.onClick(date)
 									}
-									class={(date == this.value ? ["selected"] : [])
-										.concat(
-											...(date == Date.now() ? ["today"] : []),
-											Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
-											this.doubleInput
-												? this.start == date || this.end == date
-													? ["selected"]
-													: date >= (this.start ?? "") && date <= (this.end ?? "")
-													? ["dateRange"]
-													: []
-												: ""
-										)
-										.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
-										.join(" ")}>
+									class={{
+										selected: date == this.value || (this.doubleInput && (date == this.start || date == this.end)),
+										today: date == Date.now(),
+										currentMonth: Date.firstOfMonth(this.month ?? this.value ?? Date.now()) == Date.firstOfMonth(date),
+										dateRange: this.doubleInput && date > (this.start ?? "") && date < (this.end ?? ""),
+										disable: (!!this.min && date < this.min) || (!!this.max && date > this.max),
+									}}>
 									{date.substring(8, 10)}
 								</td>
 							))}
