@@ -17,14 +17,17 @@
 :host>table>thead>tr>th,
 :host>table>tr>td {
 	text-align: center;
-	position: relative;
 	padding: 0.5em;
 	min-width: 2em;
 	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-input-background));
-	color:rgb(var(--smoothly-input-foreground));
-	cursor: pointer;
+	color: rgb(var(--smoothly-input-foreground));
+	-webkit-user-select: none;
 	user-select: none;
+}
+:host>table>tr>td {
+	position: relative;
+	cursor: pointer;
 }
 
 :host>table>tr>td.currentMonth {

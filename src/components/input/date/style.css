@@ -3,7 +3,6 @@
 :host {
 	display: flex;
 	position: relative;
-	cursor: pointer;
 	max-width: 100vw;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
