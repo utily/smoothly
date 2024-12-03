@@ -11,7 +11,7 @@ export class Calendar {
 	private frozenDate: Date
 	@Element() element: HTMLTableRowElement
 	@Prop({ mutable: true }) month?: Date
-	@Prop({ mutable: true }) value: Date = Date.now()
+	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
 	@Prop({ mutable: true }) max: Date
@@ -94,7 +94,7 @@ export class Calendar {
 							))}
 						</tr>
 					</thead>
-					{generate.month(this.month ?? this.value).map(week => (
+					{generate.month(this.month ?? this.value ?? Date.now()).map(week => (
 						<tr>
 							{week.map(date => (
 								<td

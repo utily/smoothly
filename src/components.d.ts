@@ -89,7 +89,7 @@ export namespace Components {
         "min": Date;
         "month"?: Date;
         "start"?: Date;
-        "value": Date;
+        "value"?: Date;
     }
     interface SmoothlyCheckbox {
         "checked": boolean;

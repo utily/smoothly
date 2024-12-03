@@ -153,7 +153,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					<nav>
 						<smoothly-calendar
 							doubleInput={false}
-							value={this.value ?? Date.now()}
+							value={this.value}
 							onSmoothlyValueChange={event => {
 								this.value = event.detail
 								event.stopPropagation()
