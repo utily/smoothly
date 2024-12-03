@@ -20,6 +20,7 @@
 	position: relative;
 	padding: 0.5em;
 	min-width: 2em;
+	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-input-background));
 	color:rgb(var(--smoothly-input-foreground));
 	cursor: pointer;
@@ -63,7 +64,7 @@
 
 :host>table>tr>td.today::before {
 	content: "";
-	inset: 1px;
+	inset: 2px;
 	position: absolute;
 	border: 1px solid currentColor;
 }
