@@ -63,6 +63,9 @@ export class Calendar {
 			}
 		}
 	}
+	private withinLimit(date: Date) {
+		return (!this.min || date >= this.min) && (!this.max || date <= this.max)
+	}
 	render() {
 		return (
 			<Fragment>
@@ -99,22 +102,14 @@ export class Calendar {
 							{week.map(date => (
 								<td
 									tabindex={1}
-									onMouseOver={() => {
-										!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
-											? undefined
-											: this.onHover(date)
-									}}
-									onClick={
-										(this.min || this.max) && (date < this.min || date > this.max)
-											? undefined
-											: () => this.onClick(date)
-									}
+									onMouseOver={() => (this.withinLimit(date) ? this.onHover(date) : undefined)}
+									onClick={this.withinLimit(date) ? () => this.onClick(date) : undefined}
 									class={{
 										selected: date == this.value || (this.doubleInput && (date == this.start || date == this.end)),
 										today: date == Date.now(),
 										currentMonth: Date.firstOfMonth(this.month ?? this.value ?? Date.now()) == Date.firstOfMonth(date),
 										dateRange: this.doubleInput && date > (this.start ?? "") && date < (this.end ?? ""),
-										disable: (!!this.min && date < this.min) || (!!this.max && date > this.max),
+										disable: !this.withinLimit(date),
 									}}>
 									{date.substring(8, 10)}
 								</td>
