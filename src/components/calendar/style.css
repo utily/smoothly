@@ -17,6 +17,7 @@
 :host>table>thead>tr>th,
 :host>table>tr>td {
 	text-align: center;
+	position: relative;
 	padding: 0.5em;
 	min-width: 2em;
 	background-color: rgb(var(--smoothly-input-background));
@@ -60,9 +61,11 @@
 	background: rgb(var(--smoothly-primary-color));
 }
 
-:host>table>tr>td:not(.selected, .dateRange):not(:hover).today {
-	background: rgb(var(--smoothly-medium-tint));
-	color: rgb(var(--smoothly-medium-contrast));
+:host>table>tr>td.today::before {
+	content: "";
+	inset: 1px;
+	position: absolute;
+	border: 1px solid currentColor;
 }
 
 :host>table>tr>td.dateRange {
