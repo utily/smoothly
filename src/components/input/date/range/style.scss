@@ -4,7 +4,6 @@
 	position: relative;
 	cursor: pointer;
 	display: flex;
-	width: fit-content;
 	background-color: rgb(var(--smoothly-input-background));
 
 	&:focus-within smoothly-input {
