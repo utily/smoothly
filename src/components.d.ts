@@ -89,7 +89,7 @@ export namespace Components {
         "min": Date;
         "month"?: Date;
         "start"?: Date;
-        "value": Date;
+        "value"?: Date;
     }
     interface SmoothlyCheckbox {
         "checked": boolean;
@@ -394,8 +394,8 @@ export namespace Components {
         "inCalendar": boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
-        "max": isoly.Date;
-        "min": isoly.Date;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name": string;
         "next": boolean;
         "previous": boolean;

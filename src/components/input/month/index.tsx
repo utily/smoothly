@@ -9,6 +9,7 @@ import {
 	Listen,
 	Method,
 	Prop,
+	State,
 	VNode,
 	Watch,
 } from "@stencil/core"
@@ -34,12 +35,14 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) value?: isoly.Date = isoly.Date.now()
-	@Prop({ mutable: true }) max: isoly.Date
-	@Prop({ mutable: true }) min: isoly.Date
+	@Prop({ mutable: true }) max?: isoly.Date
+	@Prop({ mutable: true }) min?: isoly.Date
 	@Prop({ reflect: true }) next = false
 	@Prop({ reflect: true }) previous = false
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) showLabel = true
+	@State() allowPreviousMonth = true
+	@State() allowNextMonth = true
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -68,6 +71,20 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()
+	}
+	@Watch("value")
+	@Watch("min")
+	setAllowPreviousMonth() {
+		const previousMonth = isoly.Date.previousMonth(this.value ?? isoly.Date.now()).substring(0, 7)
+		const minMonth = this.min?.substring(0, 7)
+		this.allowPreviousMonth = !minMonth || previousMonth >= minMonth
+	}
+	@Watch("value")
+	@Watch("max")
+	setAllowNextMonth() {
+		const nextMonth = isoly.Date.nextMonth(this.value ?? isoly.Date.now()).substring(0, 7)
+		const maxMonth = this.max?.substring(0, 7)
+		this.allowNextMonth = !maxMonth || nextMonth <= maxMonth
 	}
 	@Method()
 	async register() {
@@ -138,12 +155,9 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					color={this.color}
 					fill={"default"}
 					class={{
-						disabled:
-							this.readonly ||
-							(!!this.min &&
-								isoly.Date.firstOfMonth(this.min) > isoly.Date.previousMonth(this.value ?? isoly.Date.now())),
+						disabled: this.readonly || !this.allowPreviousMonth,
 					}}
-					onClick={() => this.adjustMonth(-1)}
+					onClick={() => this.allowPreviousMonth && this.adjustMonth(-1)}
 				/>
 				<smoothly-input-select
 					ref={e => (this.year = e)}
@@ -195,11 +209,9 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					color={this.color}
 					fill={"default"}
 					class={{
-						disabled:
-							this.readonly ||
-							(!!this.max && isoly.Date.lastOfMonth(this.max) < isoly.Date.nextMonth(this.value ?? isoly.Date.now())),
+						disabled: this.readonly || !this.allowNextMonth,
 					}}
-					onClick={() => this.adjustMonth(1)}
+					onClick={() => this.allowNextMonth && this.adjustMonth(1)}
 				/>
 			</Host>
 		)

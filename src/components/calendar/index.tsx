@@ -11,7 +11,7 @@ export class Calendar {
 	private frozenDate: Date
 	@Element() element: HTMLTableRowElement
 	@Prop({ mutable: true }) month?: Date
-	@Prop({ mutable: true }) value: Date = Date.now()
+	@Prop({ mutable: true }) value?: Date
 	@Prop({ mutable: true }) start?: Date
 	@Prop({ mutable: true }) end?: Date
 	@Prop({ mutable: true }) max: Date
@@ -63,6 +63,9 @@ export class Calendar {
 			}
 		}
 	}
+	private withinLimit(date: Date) {
+		return (!this.min || date >= this.min) && (!this.max || date <= this.max)
+	}
 	render() {
 		return (
 			<Fragment>
@@ -94,35 +97,20 @@ export class Calendar {
 							))}
 						</tr>
 					</thead>
-					{generate.month(this.month ?? this.value).map(week => (
+					{generate.month(this.month ?? this.value ?? Date.now()).map(week => (
 						<tr>
 							{week.map(date => (
 								<td
 									tabindex={1}
-									onMouseOver={() => {
-										!this.doubleInput && (this.min || this.max) && (date < this.min || date > this.max)
-											? undefined
-											: this.onHover(date)
-									}}
-									onClick={
-										(this.min || this.max) && (date < this.min || date > this.max)
-											? undefined
-											: () => this.onClick(date)
-									}
-									class={(date == this.value ? ["selected"] : [])
-										.concat(
-											...(date == Date.now() ? ["today"] : []),
-											Date.firstOfMonth(this.month ?? this.value) == Date.firstOfMonth(date) ? ["currentMonth"] : [],
-											this.doubleInput
-												? this.start == date || this.end == date
-													? ["selected"]
-													: date >= (this.start ?? "") && date <= (this.end ?? "")
-													? ["dateRange"]
-													: []
-												: ""
-										)
-										.concat(...(this.min || this.max ? (date < this.min || date > this.max ? ["disable"] : []) : ""))
-										.join(" ")}>
+									onMouseOver={() => (this.withinLimit(date) ? this.onHover(date) : undefined)}
+									onClick={this.withinLimit(date) ? () => this.onClick(date) : undefined}
+									class={{
+										selected: date == this.value || (this.doubleInput && (date == this.start || date == this.end)),
+										today: date == Date.now(),
+										currentMonth: Date.firstOfMonth(this.month ?? this.value ?? Date.now()) == Date.firstOfMonth(date),
+										dateRange: this.doubleInput && date > (this.start ?? "") && date < (this.end ?? ""),
+										disable: !this.withinLimit(date),
+									}}>
 									{date.substring(8, 10)}
 								</td>
 							))}

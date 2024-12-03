@@ -23,14 +23,11 @@
 :host>smoothly-icon {
 	display: flex;
 	align-self: center;
-}
-:host >smoothly-icon.disabled {
-	opacity: 0.5;
-	pointer-events: none;
-}
-:host >smoothly-icon:hover,
-:host >div>smoothly-input-select>*:hover {
 	cursor: pointer;
+}
+:host>smoothly-icon.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 
