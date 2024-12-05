@@ -144,6 +144,8 @@ export class InputStateHandler {
 				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
 			deleteWordForward: (event, state) =>
 				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
+			// Chrome will dispatch an input event without inputType when auto-filling
+			undefined: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
 		},
 	}
 
