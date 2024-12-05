@@ -63,7 +63,7 @@
 	left: -1em;
 	width: 1em;
 	background-color: rgb(var(--smoothly-table-expanded-background));
-	border-left: 0.3em solid rgb(var(--smoothly-table-border));
+	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));
 	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
