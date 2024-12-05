@@ -173,14 +173,16 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 							if (event.key == "Enter")
 								this.smoothlyBlur.emit() // TODO: this should be replaced by a smoothlyKeydown event
 						}}
-						onFocus={event => (this.state = this.stateHandler.onFocus(event, this.state))}
+						onFocus={event => !this.readonly && (this.state = this.stateHandler.onFocus(event, this.state))}
 						onBlur={event => {
-							const lastValue = this.stateHandler.getValue(this.state)
-							this.state = this.stateHandler.onBlur(event, this.state)
-							this.smoothlyBlur.emit()
-							this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-							if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state)))
-								this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+							if (!this.readonly) {
+								const lastValue = this.stateHandler.getValue(this.state)
+								this.state = this.stateHandler.onBlur(event, this.state)
+								this.smoothlyBlur.emit()
+								this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+								if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state)))
+									this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+							}
 						}}
 					/>
 					<label class={"label float-on-focus"} htmlFor={this.name}>
