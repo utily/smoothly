@@ -46,6 +46,9 @@ smoothly-app>smoothly-notifier>header>nav>ul {
 	margin: 0;
 }
 
+smoothly-app:not([label])>smoothly-notifier>header>h1 {
+	display: none;
+}
 smoothly-app>smoothly-notifier>header>h1 {
 	margin-left: 1rem;
 	margin-bottom: 0.8em;
