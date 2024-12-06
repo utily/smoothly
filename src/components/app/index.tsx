@@ -11,7 +11,7 @@ type Room = {
 	scoped: false,
 })
 export class SmoothlyApp {
-	@Prop() label = "App"
+	@Prop({ reflect: true }) label?: string
 	@Prop() color: Color
 	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
@@ -89,15 +89,15 @@ export class SmoothlyApp {
 					<h1>
 						<a href={""}>{this.label}</a>
 					</h1>
-					<slot name="header"></slot>
+					<slot name="header" />
 					<nav ref={e => (this.navElement = e)} class={{ "menu-open": this.menuOpen }}>
 						<ul>
 							<div class={"nav-start-container"}>
-								<slot name="nav-start"></slot>
+								<slot name="nav-start" />
 							</div>
-							<slot> </slot>
+							<slot />
 							<div class={"nav-end-container"}>
-								<slot name="nav-end"></slot>
+								<slot name="nav-end" />
 							</div>
 						</ul>
 					</nav>
@@ -108,7 +108,7 @@ export class SmoothlyApp {
 						onSmoothlyVisibleStatus={e => this.burgerVisibilityHandler(e)}
 					/>
 				</header>
-				<main ref={e => (this.mainElement = e)}></main>
+				<main ref={e => (this.mainElement = e)} />
 			</smoothly-notifier>
 		)
 	}
