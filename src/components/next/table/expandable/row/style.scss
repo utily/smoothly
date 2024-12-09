@@ -10,6 +10,7 @@
 
 :host::slotted(*) {
 	cursor: pointer;
+	z-index: 0;
 }
 
 :host:has(>:not(:last-child):hover)> :not(:last-child) {
