@@ -47,12 +47,12 @@
 
 :host>table>tr>td:nth-child(6),
 :host>table>tr>td:nth-child(7) {
-	color: rgb(var(--smoothly-danger-color));
+	color: rgb(var(--smoothly-calendar-weekend-foreground, var(--smoothly-danger-color)));
 }
 
 :host>table>tr>td:nth-child(6):not(.currentMonth),
 :host>table>tr>td:nth-child(7):not(.currentMonth) {
-	color: rgba(var(--smoothly-danger-color), var(--other-month-opacity));
+	color: rgba(var(--smoothly-calendar-weekend-foreground, var(--smoothly-danger-color)), var(--other-month-opacity));
 }
 
 :host>table>tr>td:not(.selected, .disable):hover {
