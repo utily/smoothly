@@ -1,17 +1,17 @@
 @import "../color/style.css";
 
 :host {
-	--border-radius: 0.5rem;
+	--smoothly-button-border-radius: 0.5rem;
 	display: inline-block;
 	box-sizing: border-box;
-	border-radius: var(--border-radius);
+	border-radius: var(--smoothly-button-border-radius);
 	cursor: pointer;
 	border: none;
 	outline: none;
 	position: relative;
 }
 :host([shape=rounded]) {
-	--border-radius: 2rem;
+	--smoothly-button-border-radius: 2rem;
 }
 
 :host([type=link]) {
@@ -45,7 +45,7 @@
 	justify-content: center;
 	height: 100%;
 	width: 100%;
-	border-radius: var(--border-radius);
+	border-radius: var(--smoothly-button-border-radius);
 	align-items: center;
 }
 
@@ -102,7 +102,7 @@
 :host([expand=full]) {
 	border-left: none;
 	border-right: none;
-	--border-radius: 0;
+	--smoothly-button-border-radius: 0;
 }
 
 :host([fill=outline])>button {
@@ -126,7 +126,7 @@
 	position: absolute;
 	border: 2px solid rgb(var(--smoothly-button-focus-border));
 	inset: -1px;
-	border-radius: var(--border-radius);
+	border-radius: var(--smoothly-button-border-radius);
 }
 
 :host(:not([fill=clear]):not([fill=outline]))>button:hover,

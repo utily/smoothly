@@ -58,6 +58,5 @@
 
 	--smoothly-shadow: 0 0 4px 2px rgba(var(--smoothly-color-contrast), 0.25);
 	--smoothly-shadow-strong: 0 0 4px 4px rgba(var(--smoothly-light-color), 0.25);
-	--input-width: 18rem;
 	--table-width: 100%;
 }
