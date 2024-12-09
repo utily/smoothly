@@ -41,7 +41,6 @@ export class SmoothlyInputDemo {
 						showLabel={false}
 						style={{
 							"--smoothly-input-border-radius": "0.5rem",
-							"--padding": "0 0.75em",
 						}}>
 						<smoothly-input-clear slot="end" size="icon"></smoothly-input-clear>
 					</smoothly-input-date-range>
