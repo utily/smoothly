@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, VNode } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-row-group",
@@ -8,9 +8,11 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 export class SmoothlyNextTableRowGroup {
 	@Prop({ reflect: true }) align = false
 	@Prop({ reflect: true, mutable: true }) open = false
+	@Event() smoothlyNextTableRowGroupChange: EventEmitter<boolean>
 
 	clickHandler(): void {
 		this.open = !this.open
+		this.smoothlyNextTableRowGroupChange.emit(this.open)
 	}
 
 	render(): VNode | VNode[] {
