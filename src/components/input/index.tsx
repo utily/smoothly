@@ -45,6 +45,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
+	@Event() smoothlyKeydown: EventEmitter<any>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 
 	@Method()
@@ -170,6 +171,13 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
+							this.smoothlyKeydown.emit({
+								key: event.key,
+								ctrl: event.ctrlKey,
+								shift: event.shiftKey,
+								meta: event.metaKey,
+								alt: event.altKey,
+							})
 							if (event.key == "Enter")
 								this.smoothlyBlur.emit() // TODO: this should be replaced by a smoothlyKeydown event
 						}}
