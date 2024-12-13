@@ -19,7 +19,7 @@ export class SmoothlyModal {
 
 	render() {
 		return (
-			<Host>
+			<Host role="alertdialog">
 				<div class="modal">
 					<div class="header">
 						<slot name="header" />
