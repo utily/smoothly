@@ -4,7 +4,7 @@
 
 :root {
 	--smoothly-font-family: "Open Sans", Verdana;
-	--smoothly-semitransparent: .8;
+	--smoothly-semitransparent: .5;
 
 	--smoothly-default-tint: 246, 249, 254;
 	--smoothly-default-color: 255, 255, 255;

@@ -531,6 +531,11 @@ export namespace Components {
         "name": string;
         "triggerMode": "scroll" | "intersection";
     }
+    interface SmoothlyModal {
+        "closable": boolean;
+        "color": Color | undefined;
+        "open": boolean;
+    }
     interface SmoothlyNextDemo {
     }
     interface SmoothlyNextDemoColspan {
@@ -823,6 +828,10 @@ export interface SmoothlyLoadMoreCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyLoadMoreElement;
 }
+export interface SmoothlyModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyModalElement;
+}
 export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNextTableExpandableCellElement;
@@ -830,6 +839,10 @@ export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEve
 export interface SmoothlyNextTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNextTableExpandableRowElement;
+}
+export interface SmoothlyNextTableRowGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNextTableRowGroupElement;
 }
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1689,6 +1702,23 @@ declare global {
         prototype: HTMLSmoothlyLoadMoreElement;
         new (): HTMLSmoothlyLoadMoreElement;
     };
+    interface HTMLSmoothlyModalElementEventMap {
+        "smoothlyModalChange": boolean;
+    }
+    interface HTMLSmoothlyModalElement extends Components.SmoothlyModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyModalElementEventMap>(type: K, listener: (this: HTMLSmoothlyModalElement, ev: SmoothlyModalCustomEvent<HTMLSmoothlyModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyModalElementEventMap>(type: K, listener: (this: HTMLSmoothlyModalElement, ev: SmoothlyModalCustomEvent<HTMLSmoothlyModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyModalElement: {
+        prototype: HTMLSmoothlyModalElement;
+        new (): HTMLSmoothlyModalElement;
+    };
     interface HTMLSmoothlyNextDemoElement extends Components.SmoothlyNextDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyNextDemoElement: {
@@ -1802,7 +1832,18 @@ declare global {
         prototype: HTMLSmoothlyNextTableRowElement;
         new (): HTMLSmoothlyNextTableRowElement;
     };
+    interface HTMLSmoothlyNextTableRowGroupElementEventMap {
+        "smoothlyNextTableRowGroupChange": boolean;
+    }
     interface HTMLSmoothlyNextTableRowGroupElement extends Components.SmoothlyNextTableRowGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyNextTableRowGroupElement: {
         prototype: HTMLSmoothlyNextTableRowGroupElement;
@@ -2185,6 +2226,7 @@ declare global {
         "smoothly-label": HTMLSmoothlyLabelElement;
         "smoothly-lazy": HTMLSmoothlyLazyElement;
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
+        "smoothly-modal": HTMLSmoothlyModalElement;
         "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
         "smoothly-next-demo-colspan": HTMLSmoothlyNextDemoColspanElement;
         "smoothly-next-demo-group": HTMLSmoothlyNextDemoGroupElement;
@@ -2725,6 +2767,12 @@ declare namespace LocalJSX {
         "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
         "triggerMode"?: "scroll" | "intersection";
     }
+    interface SmoothlyModal {
+        "closable"?: boolean;
+        "color"?: Color | undefined;
+        "onSmoothlyModalChange"?: (event: SmoothlyModalCustomEvent<boolean>) => void;
+        "open"?: boolean;
+    }
     interface SmoothlyNextDemo {
     }
     interface SmoothlyNextDemoColspan {
@@ -2771,6 +2819,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextTableRowGroup {
         "align"?: boolean;
+        "onSmoothlyNextTableRowGroupChange"?: (event: SmoothlyNextTableRowGroupCustomEvent<boolean>) => void;
         "open"?: boolean;
     }
     interface SmoothlyNotification {
@@ -2973,6 +3022,7 @@ declare namespace LocalJSX {
         "smoothly-label": SmoothlyLabel;
         "smoothly-lazy": SmoothlyLazy;
         "smoothly-load-more": SmoothlyLoadMore;
+        "smoothly-modal": SmoothlyModal;
         "smoothly-next-demo": SmoothlyNextDemo;
         "smoothly-next-demo-colspan": SmoothlyNextDemoColspan;
         "smoothly-next-demo-group": SmoothlyNextDemoGroup;
@@ -3091,6 +3141,7 @@ declare module "@stencil/core" {
             "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
             "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
+            "smoothly-modal": LocalJSX.SmoothlyModal & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
             "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
             "smoothly-next-demo-colspan": LocalJSX.SmoothlyNextDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoColspanElement>;
             "smoothly-next-demo-group": LocalJSX.SmoothlyNextDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoGroupElement>;
