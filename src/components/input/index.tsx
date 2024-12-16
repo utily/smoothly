@@ -103,7 +103,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				this.stateHandler = InputStateHandler.create(this.type, getLocale())
 				break
 		}
-		this.state = this.stateHandler.initialState(this.value)
+		this.state = this.stateHandler.initialState(this.value ?? this.state?.value)
 	}
 	@Watch("state")
 	stateChange() {
