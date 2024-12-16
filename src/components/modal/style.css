@@ -28,7 +28,6 @@
 	box-shadow: var(--smoothly-modal-shadow);
 }
 :host > div.modal > div.header:empty,
-:host > div.modal > div.content:empty,
 :host > div.modal > div.actions:empty {
 	display: none;
 }
@@ -37,6 +36,7 @@
 	justify-content: space-between;
 	align-items: center;
 }
+:host > div.modal > *,
 :host > div.modal > div.header > * {
 	margin-block: 0;
 }

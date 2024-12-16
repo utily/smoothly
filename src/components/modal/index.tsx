@@ -34,9 +34,7 @@ export class SmoothlyModal {
 							/>
 						)}
 					</div>
-					<div class="content">
-						<slot />
-					</div>
+					<slot />
 					<div class="actions">
 						<slot name="actions" />
 					</div>
