@@ -831,6 +831,10 @@ export interface SmoothlyNextTableExpandableRowCustomEvent<T> extends CustomEven
     detail: T;
     target: HTMLSmoothlyNextTableExpandableRowElement;
 }
+export interface SmoothlyNextTableRowGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNextTableRowGroupElement;
+}
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
@@ -1802,7 +1806,18 @@ declare global {
         prototype: HTMLSmoothlyNextTableRowElement;
         new (): HTMLSmoothlyNextTableRowElement;
     };
+    interface HTMLSmoothlyNextTableRowGroupElementEventMap {
+        "smoothlyNextTableRowGroupChange": boolean;
+    }
     interface HTMLSmoothlyNextTableRowGroupElement extends Components.SmoothlyNextTableRowGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyNextTableRowGroupElement: {
         prototype: HTMLSmoothlyNextTableRowGroupElement;
@@ -2771,6 +2786,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNextTableRowGroup {
         "align"?: boolean;
+        "onSmoothlyNextTableRowGroupChange"?: (event: SmoothlyNextTableRowGroupCustomEvent<boolean>) => void;
         "open"?: boolean;
     }
     interface SmoothlyNotification {
