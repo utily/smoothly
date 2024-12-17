@@ -68,9 +68,10 @@
 	filter: opacity(100%);
 }
 
-smoothly-icon[name=caret-down-outline],
-smoothly-icon[name=caret-forward-outline] {
+:host>div.icons>smoothly-icon[name=caret-down-outline],
+:host>div.icons>smoothly-icon[name=caret-forward-outline] {
 	opacity: .7;
+	cursor: pointer;
 }
 
 :host.invalid>div>smoothly-icon.invalid {
