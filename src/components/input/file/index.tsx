@@ -155,17 +155,22 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						<slot name={"button"} />
 					</smoothly-button>
 					<span>{this.value?.name ?? this.placeholder}</span>
-					<div class={"mask"} onDrop={e => this.dropHandler(e)} onDragLeave={e => this.dragLeaveHandler(e)} />
+					<div class={"mask"} onDrop={e => this.dropHandler(e)} onDragLeave={e => this.dragLeaveHandler(e)}>
+						<smoothly-icon name={"document-attach-outline"} />
+					</div>
 					<input
 						ref={element => (this.input = element)}
 						type={"file"}
+						value={this.value?.name}
 						capture={this.camera == "back" ? "environment" : "user"}
 						accept={this.accept ?? (!this.camera ? undefined : "image/jpeg")}
 						files={this.files}
 						onInput={e => this.inputHandler(e)}
 					/>
 				</div>
-				<slot />
+				<div class="end" onClick={(e: MouseEvent) => e.stopPropagation()}>
+					<slot name="end" />
+				</div>
 			</Host>
 		)
 	}

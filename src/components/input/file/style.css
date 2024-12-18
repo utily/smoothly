@@ -7,7 +7,7 @@
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-	padding-left: 0.5rem;
+	padding-left: var(--input-padding-side);
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
 }
@@ -16,14 +16,19 @@
 	position: absolute;
 	inset: 0;
 	color: rgb(var(--smoothly-hover-contrast));
-	background-color: rgb(var(--smoothly-input-hover-background));
+	background-color: rgb(var(--smoothly-input-hover-background), 0.5);
+	border-radius: var(--smoothly-input-border-radius);
+	border: 0.25rem dashed rgb(var(--smoothly-input-hover-background));
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 :host:not(.dragging)>div>div.mask {
 	display: none;
 }
 
-:host>div>input {
+:host>div.input>input {
 	overflow: hidden;
 	height: 0;
 	width: 0;
@@ -42,12 +47,12 @@
 
 :host([show-label]) > div.input {
 	display: flex;
-	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 	height: 100%;
 	box-sizing: border-box;
+	flex-grow: 1;
 }
-
-:host>div>smoothly-button {
+:host>div.input>smoothly-button {
 	margin: 0;
 	border: none;
 }
