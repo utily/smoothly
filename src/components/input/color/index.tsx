@@ -211,6 +211,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					size="small"
 					onClick={() => !this.readonly && this.openDropdown()}
 				/>
+				<div>
+					{/* Extra div needed otherwise stencil sets hidden on the slot for no apparent reason */}
+					<slot name="end" />
+				</div>
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch

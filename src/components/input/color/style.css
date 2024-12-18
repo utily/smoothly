@@ -6,7 +6,6 @@
 	background-color: rgb(var(--smoothly-input-background));
 	align-items: center;
 	justify-content: center;
-	padding-right: .5em;
 }
 :host>smoothly-input {
 	width: 100%;
@@ -19,6 +18,9 @@
 	background-color: var(--hexCode);
 	outline: 1px solid rgb(var(--smoothly-input-border));
 	border-radius: 3px;
+}
+:host smoothly-icon[name=options-outline] {
+	padding-right: var(--input-padding-side);
 }
 :host[readonly] smoothly-icon[name=options-outline] {
 	filter: opacity(60%)
