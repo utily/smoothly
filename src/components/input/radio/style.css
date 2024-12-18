@@ -4,7 +4,7 @@
 	background-color: rgb(var(--smoothly-input-background));
 	display: flex;
 	align-items: center;
-	padding: 0 var(--input-padding-side);
+	padding-left: var(--input-padding-side);
 	box-sizing: border-box;
 }
 :host[show-label]>div {
@@ -19,10 +19,6 @@
 :host::slotted([slot=end]) {
 	margin-right: 0;
 	margin-left: auto;
-}
-
-:host::slotted([slot=end]) button {
-	padding: 0;
 }
 
 :host[readonly] smoothly-input-radio-item * {
