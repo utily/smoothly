@@ -67,11 +67,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.listener.changed?.(this)
 	}
 	@Listen("smoothlyInputLoad")
-	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
-		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
-			event.stopPropagation()
-			event.detail(this)
-		}
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
+		Input.registerSubAction(this, event)
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {

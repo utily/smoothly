@@ -56,4 +56,11 @@ export namespace Input {
 	export function formAdd(self: Input) {
 		self.smoothlyInputLoad.emit(parent => (self.parent = parent))
 	}
+	/* For adding clear, edit, reset that is inside input etc. - should be called on smoothlyInputLoad */
+	export function registerSubAction(self: Input & Editable, event: CustomEvent<(parent: Editable) => void>) {
+		if (!(event.target && "name" in event.target && event.target.name === self.name)) {
+			event.stopPropagation()
+			event.detail(self)
+		}
+	}
 }

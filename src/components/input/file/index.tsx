@@ -6,6 +6,7 @@ import {
 	EventEmitter,
 	h,
 	Host,
+	Listen,
 	Method,
 	Prop,
 	State,
@@ -41,7 +42,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> }
+	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	private initialValue: SmoothlyInputFile["value"]
@@ -79,6 +80,10 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
+	}
+	@Listen("smoothlyInputLoad")
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputFile) => void>): void {
+		Input.registerSubAction(this, event)
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {

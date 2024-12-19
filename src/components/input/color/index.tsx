@@ -62,9 +62,8 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLoad")
-	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): void {
-		if (event.target != this.element)
-			event.stopPropagation()
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputColor) => void>): void {
+		Input.registerSubAction(this, event)
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
