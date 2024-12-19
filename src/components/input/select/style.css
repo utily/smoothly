@@ -54,9 +54,6 @@
 	flex-direction: row;
 	align-items: center;
 }
-:host>div.icons>* {
-	outline: 2px solid red;
-}
 
 :host>div.icons::slotted(smoothly-icon):not("color") {
 	color: rgb(var(--smoothly-input-foreground));
@@ -75,6 +72,7 @@
 	opacity: .7;
 	cursor: pointer;
 	height: 100%;
+	padding-inline: var(--input-padding-side);
 }
 
 :host.invalid>div>smoothly-icon.invalid {
