@@ -18,7 +18,6 @@ import { HSL } from "../../../model/Color/HSL"
 import { RGB } from "../../../model/Color/RGB"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
-import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
