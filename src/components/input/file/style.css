@@ -15,13 +15,15 @@
 :host>div>div.mask {
 	position: absolute;
 	inset: 0;
-	color: rgb(var(--smoothly-hover-contrast));
-	background-color: rgb(var(--smoothly-input-hover-background), 0.5);
+	background-color: rgb(var(--smoothly-input-hover-foreground), 0.6);
 	border-radius: var(--smoothly-input-border-radius);
 	border: 0.25rem dashed rgb(var(--smoothly-input-hover-background));
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+:host>div>div.mask>smoothly-icon {
+	color: rgb(var(--smoothly-input-hover-background));
 }
 
 :host:not(.dragging)>div>div.mask {
