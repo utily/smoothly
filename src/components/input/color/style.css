@@ -11,17 +11,25 @@
 	width: 100%;
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
-:host div.color-sample {
-}
 :host smoothly-icon[name=options-outline] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 2em;
-	background-color: var(--hexCode);
+	background: var(--hexCode, linear-gradient(
+		135deg,
+		oklch(0.75 0.2 30) 0%, 
+		oklch(0.75 0.2 90) 16.7%, 
+		oklch(0.75 0.2 150) 33.3%, 
+		oklch(0.75 0.2 210) 50%, 
+		oklch(0.75 0.2 270) 66.7%, 
+		oklch(0.75 0.2 330) 83.3%, 
+		oklch(0.75 0.2 30) 100%
+	));
+	/* background-color: var(--hexCode); */
 	outline: 1px solid rgb(var(--smoothly-input-border));
 	border-radius: 3px;
-	padding-inline: 0.5rem;
+	padding-inline: 0.25rem;
 	margin-inline: var(--input-padding-side);
 	color: var(--contrast-color);
 }

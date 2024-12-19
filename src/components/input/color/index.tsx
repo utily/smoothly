@@ -182,7 +182,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		return (
 			<Host
 				style={{
-					"--hexCode": this.value,
+					"--hexCode": this.value ?? "",
 					"--rgb-r": `${Math.round(this.rgb.r ?? 0)}`,
 					"--rgb-g": `${Math.round(this.rgb.g ?? 0)}`,
 					"--rgb-b": `${Math.round(this.rgb.b ?? 0)}`,
@@ -190,7 +190,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					"--hsl-s": `${Math.round(this.hsl.s ?? 0)}%`,
 					"--hsl-l": `${Math.round(this.hsl.l ?? 0)}%`,
 					"--element-height": `${this.element.clientHeight}px`,
-					"--contrast-color": typeof this.hsl?.l == "undefined" ? undefined : this.hsl.l < 50 ? "white" : "black",
+					"--contrast-color": typeof this.hsl?.l == "undefined" ? "white" : this.hsl.l < 50 ? "white" : "black",
 				}}>
 				<smoothly-input
 					value={this.value}
@@ -208,7 +208,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				<smoothly-icon
 					color={this.color}
 					name="options-outline"
-					size="small"
+					size="medium"
 					onClick={() => !this.readonly && this.openDropdown()}
 				/>
 				<div>
