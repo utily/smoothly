@@ -29,7 +29,9 @@
 :host:not(.dragging)>div>div.mask {
 	display: none;
 }
-
+:host>div>span {
+	flex-grow: 1;
+}
 :host>div.input>input {
 	overflow: hidden;
 	height: 0;
@@ -61,6 +63,10 @@
 
 :host>label {
 	left: var(--input-padding-side);
+}
+:host > smoothly-icon[name="camera-outline"],
+:host > smoothly-icon[name="folder-open-outline"] {
+	margin-inline: var(--input-padding-side);
 }
 
 :host,

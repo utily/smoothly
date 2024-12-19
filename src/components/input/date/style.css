@@ -17,6 +17,9 @@
 :host>smoothly-input>div>input {
 	cursor: pointer;
 }
+:host>smoothly-input smoothly-icon[slot="end"] {
+	margin-inline: var(--input-padding-side);
+}
 
 :host[readonly],
 :host[readonly]>smoothly-input>div>input {

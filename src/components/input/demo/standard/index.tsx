@@ -11,6 +11,7 @@ type Options = {
 	showLabel?: boolean
 	placeholder?: boolean
 	borderRadius?: number
+	clear?: boolean
 }
 
 @Component({
@@ -72,6 +73,9 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-checkbox name="placeholder" checked={this.options.placeholder}>
 							Placeholder
 						</smoothly-input-checkbox>
+						<smoothly-input-checkbox name="clear" checked={this.options.clear}>
+							Clear
+						</smoothly-input-checkbox>
 						<smoothly-input-range
 							label={"Border Radius (rem)"}
 							name={"borderRadius"}
@@ -93,7 +97,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Text</span>}
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input>
 					<div class="height" />
 
@@ -116,7 +120,7 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-item value="10">October</smoothly-item>
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-select>
 					<div class="height" />
 
@@ -141,7 +145,7 @@ export class SmoothlyInputDemoStandard {
 							Label 2
 						</smoothly-input-radio-item>
 						<smoothly-input-radio-item value={"third"}>Label 3</smoothly-input-radio-item>
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-radio>
 					<div class="height" />
 
@@ -152,7 +156,7 @@ export class SmoothlyInputDemoStandard {
 						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-file>
 					<div class="height" />
 
@@ -161,7 +165,7 @@ export class SmoothlyInputDemoStandard {
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}>
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-range>
 					<div class="height" />
 
@@ -171,7 +175,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Color</span>}
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-color>
 					<div class="height" />
 
@@ -181,7 +185,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date</span>}
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-date>
 					<div class="height" />
 
@@ -192,7 +196,7 @@ export class SmoothlyInputDemoStandard {
 						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date Range</span>}
-						<smoothly-input-clear slot="end" />
+						{this.options.clear && <smoothly-input-clear slot="end" />}
 					</smoothly-input-date-range>
 					<div class="height" />
 					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>

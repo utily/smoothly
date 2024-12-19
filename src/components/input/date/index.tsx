@@ -142,9 +142,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						this.value = e.detail[this.name]
 					}}>
 					<slot />
+					<smoothly-icon slot="end" name="today-outline" size="medium" />
 				</smoothly-input>
 				<span class="icons">
-					<slot name={"end"} />
+					<slot name={"end"}>{/* <smoothly-icon name="today-outline" /> */}</slot>
 				</span>
 				{this.open && !this.readonly && (
 					<nav>

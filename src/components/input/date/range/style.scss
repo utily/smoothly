@@ -53,8 +53,13 @@
 
 :host>section>smoothly-input {
 	min-width: 15rem;
+	flex-grow: 1;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
+}
+
+:host>section>smoothly-input>smoothly-icon[slot="end"] {
+	margin-inline: var(--input-padding-side);
 }
 
 :host>section>span {

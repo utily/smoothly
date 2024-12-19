@@ -142,7 +142,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 							e.stopPropagation()
 							this.inputHandler(e.detail)
 						}}>
-						<slot></slot>
+						<slot />
+						<smoothly-icon slot="end" name="calendar-outline" size="medium" />
 					</smoothly-input>
 				</section>
 				<span class={"icons"}>

@@ -190,6 +190,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					"--hsl-s": `${Math.round(this.hsl.s ?? 0)}%`,
 					"--hsl-l": `${Math.round(this.hsl.l ?? 0)}%`,
 					"--element-height": `${this.element.clientHeight}px`,
+					"--contrast-color": typeof this.hsl?.l == "undefined" ? undefined : this.hsl.l < 50 ? "white" : "black",
 				}}>
 				<smoothly-input
 					value={this.value}
@@ -202,7 +203,8 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexInputHandler(event.detail[this.name]))}>
 					<slot />
 				</smoothly-input>
-				<div class="color-sample" />
+				{/* <div class="color-sample">
+				</div> */}
 				<smoothly-icon
 					color={this.color}
 					name="options-outline"

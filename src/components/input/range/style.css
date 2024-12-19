@@ -18,6 +18,7 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	padding-right: 0.5rem;
 }
 :host>div>smoothly-input {
 	width: 12em;
