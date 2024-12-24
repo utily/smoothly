@@ -116,9 +116,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.listener.changed?.(this)
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
-	inputHandler(event: Event): void {
-		event.stopPropagation()
-		const value = !event ? this.value : event.target && "value" in event.target ? Number(event.target.value) : undefined
+	setValue(value: number | undefined): void {
 		if (value == undefined)
 			this.value = undefined
 		else if (value < this.min)
@@ -144,11 +142,18 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						ref={e => (this.input = e)}
 						looks={undefined}
 						color={this.color}
+						name={this.name}
 						showLabel={this.outputSide === "left" && !!this.label}
 						type={this.type}
-						onSmoothlyInputLoad={e => (e.stopPropagation(), this.inputHandler(e))}
-						onSmoothlyBlur={e => this.inputHandler(e)}
-						onSmoothlyInput={e => e.stopPropagation()}
+						onSmoothlyInputLoad={async e => {
+							e.stopPropagation()
+							this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
+						}}
+						onSmoothlyBlur={e => e.stopPropagation()}
+						onSmoothlyInput={async e => {
+							e.stopPropagation()
+							this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
+						}}
 						value={this.type == "percent" ? this.value : this.value?.toString()}
 						placeholder={this.outputSide === "right" ? "-" : undefined}
 						readonly={this.readonly}>
@@ -163,7 +168,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						max={this.max}
 						step={this.step ?? "any"}
 						disabled={this.readonly}
-						onInput={event => this.inputHandler(event)}
+						onInput={event => {
+							event.stopPropagation()
+							this.setValue((event.target as HTMLInputElement).valueAsNumber)
+						}}
 						value={this.value ?? this.min}
 					/>
 					<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()}></smoothly-display>
