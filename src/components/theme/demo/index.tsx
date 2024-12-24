@@ -14,6 +14,7 @@ export class SmoothlyThemeDemo {
 					<smoothly-item selected value="assets/style/smoothly.css">
 						Smoothly
 					</smoothly-item>
+					<smoothly-item value="assets/style/smoothly-dark.css">Smoothly Dark Theme</smoothly-item>
 					<smoothly-item value="https://app.issuefab.com/assets/style/index.css">Issuefab</smoothly-item>
 					<smoothly-item value="https://app.proquse.com/assets/style/index.css">Proquse</smoothly-item>
 					<smoothly-item value="https://app.weekmeter.com/assets/style/index.css">Weekmeter</smoothly-item>
@@ -27,6 +28,7 @@ export class SmoothlyThemeDemo {
 					<smoothly-theme-colors />
 					<smoothly-theme-guide />
 				</span>
+				<smoothly-theme-dark-toggle />
 				<smoothly-button type="link" link="/redirect">
 					To redirect
 				</smoothly-button>

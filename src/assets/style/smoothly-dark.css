@@ -1,0 +1,51 @@
+
+@import "./mapping.css";
+@import "./common.css";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+	--smoothly-light-contrast: 241, 243, 243;
+	--smoothly-light-shade: 144, 144, 137;
+	--smoothly-light-color: 39, 39, 37;
+	--smoothly-light-tint: 39, 39, 37;
+	--smoothly-medium-contrast: 38, 38, 38;
+	--smoothly-medium-shade: 242, 242, 243;
+	--smoothly-medium-color: 129, 136, 141;
+	--smoothly-medium-tint: 97, 103, 107;
+	--smoothly-dark-contrast: 38, 38, 38;
+	--smoothly-dark-shade: 242, 242, 242;
+	--smoothly-dark-color: 242, 242, 242;
+	--smoothly-dark-tint: 153, 153, 153;
+	--smoothly-danger-contrast: 38, 38, 38;
+	--smoothly-danger-shade: 249, 235, 236;
+	--smoothly-danger-color: 183, 52, 64;
+	--smoothly-danger-tint: 140, 38, 48;
+	--smoothly-warning-contrast: 241, 243, 243;
+	--smoothly-warning-shade: 239, 203, 108;
+	--smoothly-warning-color: 170, 128, 19;
+	--smoothly-warning-tint: 101, 76, 11;
+	--smoothly-success-contrast: 38, 38, 38;
+	--smoothly-success-shade: 239, 246, 239;
+	--smoothly-success-color: 97, 160, 90;
+	--smoothly-success-tint: 74, 121, 68;
+	--smoothly-tertiary-contrast: 38, 38, 38;
+	--smoothly-tertiary-shade: 234, 248, 250;
+	--smoothly-tertiary-color: 86, 198, 215;
+	--smoothly-tertiary-tint: 44, 167, 186;
+	--smoothly-secondary-contrast: 38, 38, 38;
+	--smoothly-secondary-shade: 242, 242, 243;
+	--smoothly-secondary-color: 99, 105, 110;
+	--smoothly-secondary-tint: 76, 79, 82;
+	--smoothly-primary-contrast: 38, 38, 38;
+	--smoothly-primary-shade: 232, 242, 252;
+	--smoothly-primary-color: 50, 132, 220;
+	--smoothly-primary-tint: 30, 99, 174;
+	--smoothly-default-contrast: 242, 242, 242;
+	--smoothly-default-shade: 18, 30, 59;
+	--smoothly-default-color: 38, 38, 38;
+	--smoothly-default-tint: 14, 32, 63;
+	--smoothly-color-tint: 14, 32, 63;
+	--smoothly-color-shade: 18, 30, 59;
+	--smoothly-color-contrast: 242, 242, 242;
+	--smoothly-color: 38, 38, 38;
+}

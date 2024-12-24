@@ -62,4 +62,11 @@ export namespace RGB {
 		}
 		return { h, s, l }
 	}
+	export function round({ r, g, b }: RGB): RGB {
+		return {
+			r: r ? Math.round(r) : undefined,
+			g: g ? Math.round(g) : undefined,
+			b: b ? Math.round(b) : undefined,
+		}
+	}
 }

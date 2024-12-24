@@ -655,6 +655,8 @@ export namespace Components {
     }
     interface SmoothlyThemeColors {
     }
+    interface SmoothlyThemeDarkToggle {
+    }
     interface SmoothlyThemeDemo {
     }
     interface SmoothlyThemeGuide {
@@ -2071,6 +2073,12 @@ declare global {
         prototype: HTMLSmoothlyThemeColorsElement;
         new (): HTMLSmoothlyThemeColorsElement;
     };
+    interface HTMLSmoothlyThemeDarkToggleElement extends Components.SmoothlyThemeDarkToggle, HTMLStencilElement {
+    }
+    var HTMLSmoothlyThemeDarkToggleElement: {
+        prototype: HTMLSmoothlyThemeDarkToggleElement;
+        new (): HTMLSmoothlyThemeDarkToggleElement;
+    };
     interface HTMLSmoothlyThemeDemoElement extends Components.SmoothlyThemeDemo, HTMLStencilElement {
     }
     var HTMLSmoothlyThemeDemoElement: {
@@ -2264,6 +2272,7 @@ declare global {
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
         "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
+        "smoothly-theme-dark-toggle": HTMLSmoothlyThemeDarkToggleElement;
         "smoothly-theme-demo": HTMLSmoothlyThemeDemoElement;
         "smoothly-theme-guide": HTMLSmoothlyThemeGuideElement;
         "smoothly-theme-picker": HTMLSmoothlyThemePickerElement;
@@ -2911,6 +2920,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyThemeColors {
     }
+    interface SmoothlyThemeDarkToggle {
+    }
     interface SmoothlyThemeDemo {
     }
     interface SmoothlyThemeGuide {
@@ -3060,6 +3071,7 @@ declare namespace LocalJSX {
         "smoothly-theme-color": SmoothlyThemeColor;
         "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
         "smoothly-theme-colors": SmoothlyThemeColors;
+        "smoothly-theme-dark-toggle": SmoothlyThemeDarkToggle;
         "smoothly-theme-demo": SmoothlyThemeDemo;
         "smoothly-theme-guide": SmoothlyThemeGuide;
         "smoothly-theme-picker": SmoothlyThemePicker;
@@ -3179,6 +3191,7 @@ declare module "@stencil/core" {
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
             "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
+            "smoothly-theme-dark-toggle": LocalJSX.SmoothlyThemeDarkToggle & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDarkToggleElement>;
             "smoothly-theme-demo": LocalJSX.SmoothlyThemeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDemoElement>;
             "smoothly-theme-guide": LocalJSX.SmoothlyThemeGuide & JSXBase.HTMLAttributes<HTMLSmoothlyThemeGuideElement>;
             "smoothly-theme-picker": LocalJSX.SmoothlyThemePicker & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
