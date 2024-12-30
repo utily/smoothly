@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest"
 import { Deep } from "./Deep"
 
 describe("Deep", () => {

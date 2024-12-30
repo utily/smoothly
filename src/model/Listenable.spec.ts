@@ -1,6 +1,7 @@
 // TODO: Should be imported with
 // import * as model from "../model/index"
 // But test fails because of test not handling ESM-module of imported libraries.
+import { describe, expect, it } from "vitest"
 import { Listenable, ListenerBatch, WithListenable } from "./Listenable"
 import { StateBase } from "./StateBase"
 
