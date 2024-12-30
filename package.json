@@ -13,11 +13,11 @@
 	},
 	"homepage": "https://github.com/utily/smoothly/tree/master-1.0",
 	"private": false,
+	"main": "dist/index.cjs.js",
 	"type": "module",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
 	"unpkg": "dist/smoothly/smoothly.esm.js",
-	"main": "./dist/cjs/index.js",
 	"module": "./dist/mjs/index.js",
 	"types": "./dist/types/index.d.ts",
 	"exports": {
