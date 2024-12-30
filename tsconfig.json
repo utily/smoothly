@@ -2,19 +2,22 @@
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
-		"declaration": false,
+		"declaration": true,
 		"experimentalDecorators": true,
 		"lib": [
 			"dom",
 			"es2017"
 		],
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"module": "esnext",
 		"target": "es2017",
 		"noUnusedLocals": true,
 		"noUnusedParameters": false,
 		"noImplicitAny": true,
 		"removeComments": true,
+		"skipLibCheck": true,
+		"outDir": "dist/mjs",
+		"declarationDir": "./dist/types",
 		"preserveConstEnums": true,
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitThis": true,
@@ -23,6 +26,11 @@
 		"resolveJsonModule": true,
 		"jsx": "react",
 		"jsxFactory": "h",
+		"types": [
+			"node",
+			"vitest/globals"
+		],
+		"baseUrl": ".",
 		"plugins": [
 			{
 			"name": "typescript-tslint-plugin",
