@@ -59,13 +59,12 @@
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.11",
 		"tidily": "^0.2.0",
-		"urlpattern-polyfill": "^8.0.2",
-		"vite-tsconfig-paths": "^5.1.4"
+		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {
+		"@types/node": "^22.10.2",
 		"@stencil/core": "^4.18.3",
 		"@stencil/sass": "^3.0.12",
-		"@types/node": "^22.10.2",
 		"@types/pvutils": "^1.0.4",
 		"@typescript-eslint/eslint-plugin": "8.18.1",
 		"@typescript-eslint/parser": "8.18.1",
