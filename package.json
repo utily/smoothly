@@ -47,7 +47,7 @@
 		"start": "stencil build --dev --watch --serve",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
 		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-		"test": "vitest --run",
+		"test": "vitest --run --allowOnly",
 		"coverage": "vitest --coverage",
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
