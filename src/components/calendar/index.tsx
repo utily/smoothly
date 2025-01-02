@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, Element, Event, EventEmitter, Fragment, h, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import * as generate from "./generate"

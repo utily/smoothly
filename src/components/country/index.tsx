@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Element, h, Host, Prop, State } from "@stencil/core"
 import { isoly } from "isoly"
 import { getLanguage } from "langly"
