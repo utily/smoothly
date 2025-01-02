@@ -9,8 +9,8 @@ import { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./mod
 import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/button/Button";
 import { Editable } from "./components/input/Editable";
-import { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
-import { tidily, Type } from "tidily";
+import { isoly } from "isoly";
+import { tidily } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
@@ -21,8 +21,8 @@ export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./mod
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
 export { Editable } from "./components/input/Editable";
-export { CountryCode, Currency, Date, DateRange, DateTime, isoly } from "isoly";
-export { tidily, Type } from "tidily";
+export { isoly } from "isoly";
+export { tidily } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
@@ -84,12 +84,12 @@ export namespace Components {
     }
     interface SmoothlyCalendar {
         "doubleInput": boolean;
-        "end"?: Date;
-        "max": Date;
-        "min": Date;
-        "month"?: Date;
-        "start"?: Date;
-        "value"?: Date;
+        "end"?: isoly.Date;
+        "max": isoly.Date;
+        "min": isoly.Date;
+        "month"?: isoly.Date;
+        "start"?: isoly.Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyCheckbox {
         "checked": boolean;
@@ -107,7 +107,7 @@ export namespace Components {
     }
     interface SmoothlyCountry {
         "text": "alpha2" | "name" | "none";
-        "value": CountryCode.Alpha2;
+        "value": isoly.CountryCode.Alpha2;
     }
     interface SmoothlyDialog {
         "closable": boolean;
@@ -119,12 +119,12 @@ export namespace Components {
     }
     interface SmoothlyDisplay {
         "collapseDepth"?: number;
-        "country"?: CountryCode.Alpha2;
-        "currency"?: Currency;
-        "format"?: DateTime.Format;
+        "country"?: isoly.CountryCode.Alpha2;
+        "currency"?: isoly.Currency;
+        "format"?: isoly.DateTime.Format;
         "label"?: string;
         "toInteger"?: boolean;
-        "type": Type | "json";
+        "type": tidily.Type | "json";
         "value"?: any;
     }
     interface SmoothlyDisplayDemo {
@@ -312,12 +312,12 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<Date | undefined>;
+        "getValue": () => Promise<isoly.Date | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
-        "max": Date;
-        "min": Date;
+        "max": isoly.Date;
+        "min": isoly.Date;
         "name": string;
         "open": boolean;
         "readonly": boolean;
@@ -326,7 +326,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "unregister": () => Promise<void>;
-        "value"?: Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
         "changed": boolean;
@@ -974,11 +974,11 @@ declare global {
         new (): HTMLSmoothlyButtonDemoElement;
     };
     interface HTMLSmoothlyCalendarElementEventMap {
-        "smoothlyValueChange": Date;
-        "smoothlyStartChange": Date;
-        "smoothlyEndChange": Date;
-        "smoothlyDateSet": Date;
-        "smoothlyDateRangeSet": DateRange;
+        "smoothlyValueChange": isoly.Date;
+        "smoothlyStartChange": isoly.Date;
+        "smoothlyEndChange": isoly.Date;
+        "smoothlyDateSet": isoly.Date;
+        "smoothlyDateRangeSet": isoly.DateRange;
     }
     interface HTMLSmoothlyCalendarElement extends Components.SmoothlyCalendar, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyCalendarElementEventMap>(type: K, listener: (this: HTMLSmoothlyCalendarElement, ev: SmoothlyCalendarCustomEvent<HTMLSmoothlyCalendarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1422,7 +1422,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
-        "smoothlyValueChange": Date;
+        "smoothlyValueChange": isoly.Date;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -2333,17 +2333,17 @@ declare namespace LocalJSX {
     }
     interface SmoothlyCalendar {
         "doubleInput"?: boolean;
-        "end"?: Date;
-        "max"?: Date;
-        "min"?: Date;
-        "month"?: Date;
-        "onSmoothlyDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<DateRange>) => void;
-        "onSmoothlyDateSet"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onSmoothlyEndChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onSmoothlyStartChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyCalendarCustomEvent<Date>) => void;
-        "start"?: Date;
-        "value"?: Date;
+        "end"?: isoly.Date;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
+        "month"?: isoly.Date;
+        "onSmoothlyDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<isoly.DateRange>) => void;
+        "onSmoothlyDateSet"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
+        "onSmoothlyEndChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
+        "onSmoothlyStartChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
+        "onSmoothlyValueChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
+        "start"?: isoly.Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyCheckbox {
         "checked"?: boolean;
@@ -2360,7 +2360,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyCountry {
         "text"?: "alpha2" | "name" | "none";
-        "value"?: CountryCode.Alpha2;
+        "value"?: isoly.CountryCode.Alpha2;
     }
     interface SmoothlyDialog {
         "closable"?: boolean;
@@ -2372,12 +2372,12 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplay {
         "collapseDepth"?: number;
-        "country"?: CountryCode.Alpha2;
-        "currency"?: Currency;
-        "format"?: DateTime.Format;
+        "country"?: isoly.CountryCode.Alpha2;
+        "currency"?: isoly.Currency;
+        "format"?: isoly.DateTime.Format;
         "label"?: string;
         "toInteger"?: boolean;
-        "type"?: Type | "json";
+        "type"?: tidily.Type | "json";
         "value"?: any;
     }
     interface SmoothlyDisplayDemo {
@@ -2569,18 +2569,18 @@ declare namespace LocalJSX {
         "color"?: Color;
         "invalid"?: boolean;
         "looks"?: Looks;
-        "max"?: Date;
-        "min"?: Date;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<Date>) => void;
+        "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "showLabel"?: boolean;
-        "value"?: Date;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
         "changed"?: boolean;

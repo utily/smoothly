@@ -54,11 +54,11 @@
 	"dependencies": {
 		"cloudly-http": "^0.1.7",
 		"isly": "^0.1.20",
-		"isoly": "^2.3.10",
-		"langly": "2.0.9",
+		"isoly": "^3.0.2",
+		"langly": "2.0.10",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.11",
-		"tidily": "^0.2.0",
+		"tidily": "^0.2.2",
 		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {

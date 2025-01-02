@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, Element, Event, EventEmitter, Fragment, h, Prop, State, Watch } from "@stencil/core"
-import { Date, DateRange } from "isoly"
+import { isoly } from "isoly"
 import * as generate from "./generate"
 
 @Component({
@@ -8,31 +9,31 @@ import * as generate from "./generate"
 	scoped: true,
 })
 export class Calendar {
-	private frozenDate: Date
+	private frozenDate: isoly.Date
 	@Element() element: HTMLTableRowElement
-	@Prop({ mutable: true }) month?: Date
-	@Prop({ mutable: true }) value?: Date
-	@Prop({ mutable: true }) start?: Date
-	@Prop({ mutable: true }) end?: Date
-	@Prop({ mutable: true }) max: Date
-	@Prop({ mutable: true }) min: Date
+	@Prop({ mutable: true }) month?: isoly.Date
+	@Prop({ mutable: true }) value?: isoly.Date
+	@Prop({ mutable: true }) start?: isoly.Date
+	@Prop({ mutable: true }) end?: isoly.Date
+	@Prop({ mutable: true }) max: isoly.Date
+	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) doubleInput: boolean
-	@Event() smoothlyValueChange: EventEmitter<Date>
-	@Event() smoothlyStartChange: EventEmitter<Date>
-	@Event() smoothlyEndChange: EventEmitter<Date>
-	@Event() smoothlyDateSet: EventEmitter<Date>
-	@Event() smoothlyDateRangeSet: EventEmitter<DateRange>
+	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
+	@Event() smoothlyStartChange: EventEmitter<isoly.Date>
+	@Event() smoothlyEndChange: EventEmitter<isoly.Date>
+	@Event() smoothlyDateSet: EventEmitter<isoly.Date>
+	@Event() smoothlyDateRangeSet: EventEmitter<isoly.DateRange>
 	@State() firstSelected: boolean
 	@Watch("start")
-	onStart(next: Date) {
+	onStart(next: isoly.Date) {
 		this.smoothlyStartChange.emit(next)
 	}
 	@Watch("end")
-	onEnd(next: Date) {
+	onEnd(next: isoly.Date) {
 		this.smoothlyEndChange.emit(next)
 	}
 	private clickCounter = 0
-	private onClick(date: Date) {
+	private onClick(date: isoly.Date) {
 		this.smoothlyValueChange.emit((this.value = date))
 		this.clickCounter += 1
 		if (this.doubleInput) {
@@ -52,7 +53,7 @@ export class Calendar {
 			this.end &&
 			this.smoothlyDateRangeSet.emit({ start: this.start, end: this.end })
 	}
-	private onHover(date: Date) {
+	private onHover(date: isoly.Date) {
 		if (this.doubleInput && this.clickCounter % 2 == 1) {
 			if (date < this.frozenDate) {
 				this.start = date
@@ -63,7 +64,7 @@ export class Calendar {
 			}
 		}
 	}
-	private withinLimit(date: Date) {
+	private withinLimit(date: isoly.Date) {
 		return (!this.min || date >= this.min) && (!this.max || date <= this.max)
 	}
 	render() {
@@ -97,7 +98,7 @@ export class Calendar {
 							))}
 						</tr>
 					</thead>
-					{generate.month(this.month ?? this.value ?? Date.now()).map(week => (
+					{generate.month(this.month ?? this.value ?? isoly.Date.now()).map(week => (
 						<tr>
 							{week.map(date => (
 								<td
@@ -106,8 +107,10 @@ export class Calendar {
 									onClick={this.withinLimit(date) ? () => this.onClick(date) : undefined}
 									class={{
 										selected: date == this.value || (this.doubleInput && (date == this.start || date == this.end)),
-										today: date == Date.now(),
-										currentMonth: Date.firstOfMonth(this.month ?? this.value ?? Date.now()) == Date.firstOfMonth(date),
+										today: date == isoly.Date.now(),
+										currentMonth:
+											isoly.Date.firstOfMonth(this.month ?? this.value ?? isoly.Date.now()) ==
+											isoly.Date.firstOfMonth(date),
 										dateRange: this.doubleInput && date > (this.start ?? "") && date < (this.end ?? ""),
 										disable: !this.withinLimit(date),
 									}}>

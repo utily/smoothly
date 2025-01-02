@@ -1,0 +1,11 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		// Should be at least an empty array. 
+		// If more types are added make sure to add them to `tsconfig.cjs.json` and `tsconfig.json` as well.
+		"types": []
+	},
+	"exclude": [
+		"**/*.spec.ts"
+	]
+}
