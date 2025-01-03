@@ -2,11 +2,7 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"module": "CommonJS",
-		// where cjs is omitted. point package.json `exports` (require) field to these.
-		// if a `main` field is declared in package.json point it to these as well.
 		"outDir": "dist/cjs",
-		// should include at least "node".
-		// If more types are added make sure to add them to `tsconfig.json` and `tsconfig.mjs.json` as well.
 		"types": [
 			"node"
 		]
