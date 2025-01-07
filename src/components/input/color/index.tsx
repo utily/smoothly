@@ -18,7 +18,6 @@ import { HSL } from "../../../model/Color/HSL"
 import { RGB } from "../../../model/Color/RGB"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
-import { SmoothlyInput } from "../index"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 
@@ -62,9 +61,8 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLoad")
-	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): void {
-		if (event.target != this.element)
-			event.stopPropagation()
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputColor) => void>): void {
+		Input.registerSubAction(this, event)
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
@@ -211,6 +209,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					size="small"
 					onClick={() => !this.readonly && this.openDropdown()}
 				/>
+				<div>
+					{/* Extra div needed otherwise stencil sets hidden on the slot for no apparent reason */}
+					<slot name="end" />
+				</div>
 				{this.open && !this.readonly && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch
