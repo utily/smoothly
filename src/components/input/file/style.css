@@ -15,15 +15,15 @@
 :host>div>div.drag-overlay {
 	position: absolute;
 	inset: 0;
-	background-color: rgb(var(--smoothly-input-hover-foreground), 0.6);
+	background-color: rgb(var(--smoothly-input-hover-background), 0.6);
 	border-radius: var(--smoothly-input-border-radius);
-	border: 0.25rem dashed rgb(var(--smoothly-input-hover-background));
+	border: 0.25rem dashed rgb(var(--smoothly-input-hover-foreground));
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 :host>div>div.drag-overlay>smoothly-icon {
-	color: rgb(var(--smoothly-input-hover-background));
+	color: rgb(var(--smoothly-input-hover-foreground));
 }
 
 :host:not(.dragging)>div>div.drag-overlay {
