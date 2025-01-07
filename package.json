@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.2.1-alpha.25",
+	"version": "1.2.1-alpha.27",
 	"description": "Web component library written in Stencil.",
 	"author": "Utily",
 	"license": "MIT",
@@ -15,21 +15,25 @@
 	"private": false,
 	"main": "dist/index.cjs.js",
 	"type": "module",
+	"module": "dist/index.js",
+	"types": "dist/types/index.d.ts",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
-	"unpkg": "dist/smoothly/smoothly.esm.js",
-	"module": "./dist/mjs/index.js",
-	"types": "./dist/types/index.d.ts",
 	"exports": {
 		".": {
 			"import": {
-				"default": "./dist/mjs/index.js",
+				"default": "./dist/smoothly/index.esm.js",
 				"types": "./dist/types/index.d.ts"
 			},
 			"require": {
-				"default": "./dist/cjs/index.js",
+				"default": "./dist/smoothly/index.cjs.js",
 				"types": "./dist/types/index.d.ts"
 			}
+		},
+		"./loader": {
+			"import": "./loader/index.js",
+			"require": "./loader/index.cjs",
+			"types": "./loader/index.d.ts"
 		}
 	},
 	"files": [
@@ -47,7 +51,7 @@
 		"start": "stencil build --dev --watch --serve",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
 		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-		"test": "vitest --run --allowOnly",
+		"test": "vitest --run --allowOnly --environment jsdom",
 		"coverage": "vitest --coverage",
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
@@ -62,9 +66,9 @@
 		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.2",
 		"@stencil/core": "^4.18.3",
 		"@stencil/sass": "^3.0.12",
+		"@types/node": "^22.10.2",
 		"@types/pvutils": "^1.0.4",
 		"@typescript-eslint/eslint-plugin": "^7.13.1",
 		"@typescript-eslint/parser": "^7.13.1",
@@ -72,6 +76,7 @@
 		"eslint": "^8.56.0",
 		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20240618",
 		"eslint-plugin-simple-import-sort": "^12.1.0",
+		"jsdom": "^25.0.1",
 		"prettierx": "github:utily/prettierx#utily-20240618",
 		"typescript": "5.7.2",
 		"vitest": "^2.1.8",
