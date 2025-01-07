@@ -82,7 +82,3 @@
 :host:not([show-label]):not(.show-label) .label {
 	display: none;
 }
-
-:host [slot=end] {
-	outline: 2px solid orange;
-}
