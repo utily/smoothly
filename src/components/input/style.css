@@ -88,10 +88,6 @@
 	outline: none;
 }
 
-:host::slotted([slot=end]) button {
-	padding: 0;
-}
-
 :host>div>input:-webkit-autofill,
 :host>div>input:-webkit-autofill:hover,
 :host>div>input:-webkit-autofill:focus,
