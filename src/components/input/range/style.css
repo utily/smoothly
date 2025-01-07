@@ -10,15 +10,15 @@
 	align-items: center;
 	display: flex;
 	background-color: rgb(var(--smoothly-input-background));
-	padding-right: .5em;
 	box-sizing: border-box;
 }
-:host>div {
+:host>div:not([slot]) {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	padding-right: var(--input-padding-side);
 }
 :host>div>smoothly-input {
 	width: 12em;

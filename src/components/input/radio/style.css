@@ -4,12 +4,12 @@
 	background-color: rgb(var(--smoothly-input-background));
 	display: flex;
 	align-items: center;
-	padding: 0 var(--input-padding-side);
+	padding-left: var(--input-padding-side);
 	box-sizing: border-box;
 }
 :host[show-label]>div {
 	position: relative;
-	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
 :host>div,
 :host>div>div.options {
@@ -19,10 +19,6 @@
 :host::slotted([slot=end]) {
 	margin-right: 0;
 	margin-left: auto;
-}
-
-:host::slotted([slot=end]) button {
-	padding: 0;
 }
 
 :host[readonly] smoothly-input-radio-item * {
