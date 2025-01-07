@@ -11,7 +11,7 @@ import {
 	Prop,
 	Watch,
 } from "@stencil/core"
-import { Date } from "isoly"
+import { isoly } from "isoly"
 import { Color } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -32,15 +32,15 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() invalid?: boolean = false
 	parent: Editable | undefined
-	private initialValue?: Date
+	private initialValue?: isoly.Date
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
-	@Prop({ mutable: true }) value?: Date
+	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) open: boolean
-	@Prop({ mutable: true }) max: Date
-	@Prop({ mutable: true }) min: Date
+	@Prop({ mutable: true }) max: isoly.Date
+	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
-	@Event() smoothlyValueChange: EventEmitter<Date>
+	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -67,7 +67,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<Date | undefined> {
+	async getValue(): Promise<isoly.Date | undefined> {
 		return this.value
 	}
 	@Method()
@@ -81,7 +81,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.value = undefined
 	}
 	@Watch("value")
-	onStart(next: Date) {
+	onStart(next: isoly.Date) {
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
 		this.listener.changed?.(this)
@@ -118,7 +118,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.changed = false
 	}
 	@Listen("smoothlyDateSet")
-	dateSetHandler(event: CustomEvent<Date>) {
+	dateSetHandler(event: CustomEvent<isoly.Date>) {
 		this.open = false
 		event.stopPropagation()
 	}

@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.2.1-alpha.23",
+	"version": "1.2.1-alpha.24",
 	"description": "Web component library written in Stencil.",
 	"author": "Utily",
 	"license": "MIT",
@@ -15,20 +15,21 @@
 	"private": false,
 	"main": "dist/index.cjs.js",
 	"type": "module",
-	"module": "dist/index.js",
-	"types": "dist/types/index.d.ts",
 	"collection": "dist/collection/collection-manifest.json",
 	"collection:main": "dist/collection/index.js",
 	"unpkg": "dist/smoothly/smoothly.esm.js",
+	"module": "./dist/mjs/index.js",
+	"types": "./dist/types/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/smoothly/smoothly.esm.js",
-			"require": "./dist/smoothly/smoothly.cjs.js"
-		},
-		"./loader": {
-			"import": "./loader/index.js",
-			"require": "./loader/index.cjs",
-			"types": "./loader/index.d.ts"
+			"import": {
+				"default": "./dist/mjs/index.js",
+				"types": "./dist/types/index.d.ts"
+			},
+			"require": {
+				"default": "./dist/cjs/index.js",
+				"types": "./dist/types/index.d.ts"
+			}
 		}
 	},
 	"files": [
@@ -41,66 +42,39 @@
 	"github": {
 		"release": true
 	},
-	"jest": {
-		"globals": {
-			"ts-jest": {
-				"tsconfig": "tsconfig.json"
-			}
-		},
-		"transform": {
-			"^.+\\.(j|t)sx?$": "ts-jest"
-		},
-		"transformIgnorePatterns": [
-			"<rootDir>/node_modules/(?!(cryptly|authly|isoly|gracely|cloudly-http|cloudly-router|cloudly-rest)/.*)"
-		],
-		"testEnvironment": "node",
-		"testRegex": "((\\.|/)(test|spec))(\\.|\\/.+)(jsx?|tsx?)$",
-		"testPathIgnorePatterns": [
-			"node_modules/",
-			"dist/"
-		],
-		"collectCoverageFrom": [
-			"**/*.{ts,tsx,js,jsx}",
-			"!**/node_modules/**",
-			"!**/dist/**"
-		],
-		"preset": "ts-jest",
-		"testMatch": null
-	},
 	"scripts": {
 		"build": "stencil build",
 		"start": "stencil build --dev --watch --serve",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
 		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-		"test": "stencil test --spec --e2e",
-		"test.watch": "stencil test --spec --e2e --watchAll",
+		"test": "vitest --run --allowOnly",
+		"coverage": "vitest --coverage",
 		"clean": "rm -rf .stencil/ dist/ node_modules/ loader/ www/"
 	},
 	"dependencies": {
 		"cloudly-http": "^0.1.7",
 		"isly": "^0.1.20",
-		"isoly": "^2.3.10",
-		"langly": "2.0.9",
+		"isoly": "^3.0.2",
+		"langly": "2.0.10",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.11",
-		"tidily": "^0.2.0",
+		"tidily": "^0.2.2",
 		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {
+		"@types/node": "^22.10.2",
 		"@stencil/core": "^4.18.3",
 		"@stencil/sass": "^3.0.12",
-		"@types/jest": "^29.5.12",
 		"@types/pvutils": "^1.0.4",
 		"@typescript-eslint/eslint-plugin": "^7.13.1",
 		"@typescript-eslint/parser": "^7.13.1",
+		"@vitest/coverage-istanbul": "^2.1.8",
 		"eslint": "^8.56.0",
 		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20240618",
 		"eslint-plugin-simple-import-sort": "^12.1.0",
-		"jest": "^29.7.0",
-		"jest-cli": "^29.7.0",
 		"prettierx": "github:utily/prettierx#utily-20240618",
-		"puppeteer": "^22.12.0",
-		"typescript": "^5.5.2",
+		"typescript": "5.7.2",
+		"vitest": "^2.1.8",
 		"web-file-polyfill": "^1.0.4"
 	}
 }

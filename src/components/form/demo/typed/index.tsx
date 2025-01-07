@@ -21,7 +21,7 @@ export class SmoothlyFormDemoTyped {
 					</smoothly-input>
 					<smoothly-input-select name="country">
 						<span slot="label">Country</span>
-						{isoly.CountryCode.Alpha2.types.map(country => (
+						{isoly.CountryCode.Alpha2.values.map(country => (
 							<smoothly-item value={country}>{isoly.CountryCode.Name.en.from(country)}</smoothly-item>
 						))}
 					</smoothly-input-select>

@@ -2,6 +2,7 @@
 	"recommendations": [
 		"dbaeumer.vscode-eslint",
 		"stylelint.vscode-stylelint",
-		"magnusg93.css-comma-color"
+		"magnusg93.css-comma-color",
+		"vitest.explorer",
 	]
 }
