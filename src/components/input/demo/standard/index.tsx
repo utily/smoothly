@@ -157,6 +157,7 @@ export class SmoothlyInputDemoStandard {
 					<div class="height"></div>
 
 					<smoothly-input-range
+						name={"range"}
 						label={this.options.showLabel ? "Range" : undefined}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
