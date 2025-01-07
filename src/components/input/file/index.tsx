@@ -160,7 +160,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						<slot name={"button"} />
 					</smoothly-button>
 					<span>{this.value?.name ?? this.placeholder}</span>
-					<div class={"mask"} onDrop={e => this.dropHandler(e)} onDragLeave={e => this.dragLeaveHandler(e)}>
+					<div class={"drag-overlay"} onDrop={e => this.dropHandler(e)} onDragLeave={e => this.dragLeaveHandler(e)}>
 						<smoothly-icon name={"document-attach-outline"} />
 					</div>
 					<input
