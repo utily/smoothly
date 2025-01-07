@@ -31,7 +31,7 @@ export namespace Input {
 			color: Color.type.optional(),
 			name: isly.string(),
 			invalid: isly.boolean().optional(),
-			looks: Looks.type,
+			looks: Looks.type.optional(),
 			defined: isly.boolean().optional(),
 			binary: isly.function<Binary>().optional(),
 		})
