@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.2.1-alpha.26",
+	"version": "1.2.1-alpha.27",
 	"description": "Web component library written in Stencil.",
 	"author": "Utily",
 	"license": "MIT",
@@ -29,7 +29,7 @@
 				"default": "./dist/smoothly/index.cjs.js",
 				"types": "./dist/types/index.d.ts"
 			}
-			},
+		},
 		"./loader": {
 			"import": "./loader/index.js",
 			"require": "./loader/index.cjs",
