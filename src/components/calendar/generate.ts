@@ -1,4 +1,4 @@
-import * as isoly from "isoly"
+import { isoly } from "isoly"
 
 export function month(date: isoly.Date): isoly.Date[][] {
 	const d = new Date(date)

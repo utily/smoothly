@@ -1,6 +1,6 @@
 import { Component, h, Prop } from "@stencil/core"
-import { CountryCode, Currency, DateTime } from "isoly"
-import { format, get, Type } from "tidily"
+import { isoly } from "isoly"
+import { tidily } from "tidily"
 import { getLocale } from "../../model"
 
 @Component({
@@ -9,14 +9,14 @@ import { getLocale } from "../../model"
 	scoped: true,
 })
 export class SmoothlyDisplay {
-	@Prop() type: Type | "json"
+	@Prop() type: tidily.Type | "json"
 	@Prop() label?: string
 	@Prop() value?: any
 	@Prop() collapseDepth?: number
 	@Prop() toInteger?: boolean
-	@Prop() currency?: Currency
-	@Prop() country?: CountryCode.Alpha2
-	@Prop() format?: DateTime.Format
+	@Prop() currency?: isoly.Currency
+	@Prop() country?: isoly.CountryCode.Alpha2
+	@Prop() format?: isoly.DateTime.Format
 	render() {
 		let result: string | HTMLElement | undefined
 		const type = this.type
@@ -25,30 +25,30 @@ export class SmoothlyDisplay {
 				result = <smoothly-display-json value={this.value} collapseDepth={this.collapseDepth}></smoothly-display-json>
 				break
 			default:
-				result = format(this.value, type)
+				result = tidily.format(this.value, type)
 				break
 			case "email":
-				result = <a href={"mailto:" + this.value}>{format(this.value, type)}</a>
+				result = <a href={"mailto:" + this.value}>{tidily.format(this.value, type)}</a>
 				break
 			case "phone":
-				result = <a href={"tel:" + this.value}>{format(this.value, type, this.country)}</a>
+				result = <a href={"tel:" + this.value}>{tidily.format(this.value, type, this.country)}</a>
 				break
 			case "postal-code":
-				result = format(this.value, type, this.country)
+				result = tidily.format(this.value, type, this.country)
 				break
 			case "price":
-				result = format(this.value, type, { currency: this.currency, toInteger: this.toInteger })
+				result = tidily.format(this.value, type, { currency: this.currency, toInteger: this.toInteger })
 				break
 			case "date":
-				result = get(this.type as Type, getLocale())?.toString(this.value)
+				result = tidily.get(this.type as tidily.Type, getLocale())?.toString(this.value)
 				break
 			case "duration":
-				result = format(this.value, type) || "0"
+				result = tidily.format(this.value, type) || "0"
 				break
 			case "date-time":
 				result = this.format
-					? DateTime.localize(this.value, this.format, getLocale())
-					: get(this.type as Type, getLocale())?.toString(this.value)
+					? isoly.DateTime.localize(this.value, this.format, getLocale())
+					: tidily.get(this.type as tidily.Type, getLocale())?.toString(this.value)
 				break
 		}
 		return this.label ? [<div>{this.label}</div>, result] : result
