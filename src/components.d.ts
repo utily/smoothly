@@ -437,6 +437,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<number | undefined>;
         "label": string;
@@ -2676,6 +2677,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputRange {
         "changed"?: boolean;
         "color"?: Color;
+        "defined"?: boolean;
         "label"?: string;
         "looks"?: Looks;
         "max"?: number;

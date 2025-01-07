@@ -35,6 +35,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
+	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() type: Extract<tidily.Type, "text" | "percent"> = "text"
 	@Prop() min = 0
@@ -111,6 +112,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		const decimals = !this.step ? undefined : this.step.toString().split(".")[1]?.length ?? 0
 		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
 		this.changed = this.initialValue !== this.value
+		this.defined = typeof this.value === "number"
 		this.listener.changed?.(this)
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}

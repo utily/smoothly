@@ -97,11 +97,8 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 			event.stopPropagation()
 	}
 	@Listen("smoothlyInputLoad")
-	SmoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDate) => void>): void {
-		if (!(event.target && "name" in event.target && event.target.name === this.name)) {
-			event.stopPropagation()
-			event.detail(this)
-		}
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDate) => void>): void {
+		Input.registerSubAction(this, event)
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {

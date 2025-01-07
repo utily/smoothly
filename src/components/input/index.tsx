@@ -66,7 +66,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		!this.uneditable && (this.value = undefined)
+		!this.uneditable && (this.state = this.stateHandler.initialState(undefined))
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -74,7 +74,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async reset(): Promise<void> {
-		!this.uneditable && (this.value = this.initialValue)
+		!this.uneditable && (this.state = this.stateHandler.initialState(this.initialValue))
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
@@ -84,10 +84,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
-		if (!(event.target && "name" in event.target && event.target.name == this.name)) {
-			event.stopPropagation()
-			event.detail(this)
-		}
+		Input.registerSubAction(this, event)
 	}
 	@Watch("currency")
 	@Watch("type")
