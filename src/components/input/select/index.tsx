@@ -186,7 +186,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			event.target.deselectable = !this.required
 			this.items.push(event.target as HTMLSmoothlyItemElement)
 		}
-		event.detail(this)
+		Input.registerSubAction(this, event)
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {

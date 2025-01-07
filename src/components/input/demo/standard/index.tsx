@@ -129,6 +129,8 @@ export class SmoothlyInputDemoStandard {
 					<div class="height"></div>
 
 					<smoothly-input-radio
+						name="radio"
+						clearable
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						color={this.options.color}
