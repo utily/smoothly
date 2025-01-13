@@ -52,4 +52,6 @@ smoothly-color {
 	--smoothly-modal-border: var(--smoothly-default-shade);
 	--smoothly-modal-border-radius: 0.5rem;
 	--smoothly-modal-shadow: 0 0.5rem 1rem -0.5rem rgba(var(--smoothly-dark-shade), 0.2);
+	--smoothly-modal-width: 30rem;
+	--smoothly-modal-max-height: calc(100dvh - 2rem);
 }

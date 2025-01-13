@@ -20,7 +20,7 @@ export class SmoothlyDialogDemo {
 				</smoothly-button>
 
 				<smoothly-modal closable open={this.openModal} onSmoothlyModalChange={e => (this.openModal = e.detail)}>
-					{<h2 slot="header">Modal</h2>}
+					<h2 slot="header">Modal</h2>
 					<span>Are you sure you want to confirm this action?</span>
 					<smoothly-button slot="actions" color="success">
 						Confirm
