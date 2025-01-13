@@ -46,6 +46,7 @@
 :host > div.modal > div.header > smoothly-icon:not([slot="header"]) {
 	cursor: pointer;
 	opacity: 0.7;
+	color: rgb(var(--smoothly-default-contrast));
 }
 :host > div.modal > div.header > smoothly-icon:not([slot="header"]):hover {
 	opacity: 1;
