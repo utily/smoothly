@@ -9,6 +9,7 @@
   height: 100%;
 	background-color: rgba(var(--smoothly-modal-backdrop));
 	color: rgb(var(--smoothly-modal-foreground));
+	z-index: 5;
 }
 :host:not([open]),
 :host[hidden] {
@@ -20,14 +21,15 @@
 	flex-direction: column;
 	padding: 2rem;
 	gap: 1.5rem;
-	width: var(--smoothly-modal-width);
-	max-width: 100dvw;
+	width: var(--smoothly-modal-width, 40rem);
+	max-width: calc(100dvw - 1rem);
 	height: fit-content;
 	max-height: min(var(--smoothly-modal-max-height), 100dvh);
 	background: rgb(var(--smoothly-modal-background, var(--smoothly-color)));
 	border: 1px solid rgb(var(--smoothly-modal-border));
 	border-radius: var(--smoothly-modal-border-radius);
 	box-shadow: var(--smoothly-modal-shadow);
+	box-sizing: border-box;
 }
 :host > div.modal > div.header:empty,
 :host > div.modal > div.actions:empty {
