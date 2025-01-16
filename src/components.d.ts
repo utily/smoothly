@@ -534,7 +534,6 @@ export namespace Components {
     }
     interface SmoothlyModal {
         "closable": boolean;
-        "color": Color | undefined;
         "open": boolean;
     }
     interface SmoothlyNextDemo {
@@ -2771,7 +2770,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyModal {
         "closable"?: boolean;
-        "color"?: Color | undefined;
         "onSmoothlyModalChange"?: (event: SmoothlyModalCustomEvent<boolean>) => void;
         "open"?: boolean;
     }

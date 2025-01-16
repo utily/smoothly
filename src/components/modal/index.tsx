@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
-import { Color } from "../../model"
 
 @Component({
 	tag: "smoothly-modal",
@@ -7,7 +6,6 @@ import { Color } from "../../model"
 	scoped: true,
 })
 export class SmoothlyModal {
-	@Prop({ reflect: true }) color: Color | undefined
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) closable = false
 	@Event() smoothlyModalChange: EventEmitter<boolean>
@@ -23,16 +21,7 @@ export class SmoothlyModal {
 				<div class="modal">
 					<div class="header">
 						<slot name="header" />
-						{this.closable && (
-							<smoothly-icon
-								name="close-outline"
-								fill="solid"
-								color={this.color}
-								onClick={() => {
-									this.open = false
-								}}
-							/>
-						)}
+						{this.closable && <smoothly-icon name="close-outline" fill="solid" onClick={() => (this.open = false)} />}
 					</div>
 					<slot />
 					<div class="actions">

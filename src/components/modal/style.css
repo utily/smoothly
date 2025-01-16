@@ -9,6 +9,7 @@
   height: 100%;
 	background-color: rgba(var(--smoothly-modal-backdrop));
 	color: rgb(var(--smoothly-modal-foreground));
+	z-index: 5;
 }
 :host:not([open]),
 :host[hidden] {
@@ -20,12 +21,15 @@
 	flex-direction: column;
 	padding: 2rem;
 	gap: 1.5rem;
-	max-width: 40rem;
+	width: var(--smoothly-modal-width, 40rem);
+	max-width: calc(100dvw - 1rem);
 	height: fit-content;
+	max-height: min(var(--smoothly-modal-max-height), 100dvh);
 	background: rgb(var(--smoothly-modal-background, var(--smoothly-color)));
 	border: 1px solid rgb(var(--smoothly-modal-border));
 	border-radius: var(--smoothly-modal-border-radius);
 	box-shadow: var(--smoothly-modal-shadow);
+	box-sizing: border-box;
 }
 :host > div.modal > div.header:empty,
 :host > div.modal > div.actions:empty {
@@ -40,12 +44,16 @@
 :host > div.modal > div.header > * {
 	margin-block: 0;
 }
+:host > div.modal > *:not(.header):not(.actions) {
+	overflow-y: auto;
+}
 :host > div.modal > div.header:not(:has([slot="header"])) {
 	justify-content: end;
 }
 :host > div.modal > div.header > smoothly-icon:not([slot="header"]) {
 	cursor: pointer;
 	opacity: 0.7;
+	color: rgb(var(--smoothly-default-contrast));
 }
 :host > div.modal > div.header > smoothly-icon:not([slot="header"]):hover {
 	opacity: 1;
