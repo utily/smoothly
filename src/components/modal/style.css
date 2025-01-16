@@ -46,6 +46,7 @@
 }
 :host > div.modal > *:not(.header):not(.actions) {
 	overflow-y: auto;
+	scrollbar-gutter: stable;
 }
 :host > div.modal > div.header:not(:has([slot="header"])) {
 	justify-content: end;
