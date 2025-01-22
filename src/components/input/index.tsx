@@ -66,7 +66,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		!this.uneditable && (this.state = this.stateHandler.initialState(undefined))
+		if (!this.uneditable) {
+			this.state = this.stateHandler.initialState(undefined)
+			this.value = this.stateHandler.getValue(this.state)
+		}
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -74,7 +77,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async reset(): Promise<void> {
-		!this.uneditable && (this.state = this.stateHandler.initialState(this.initialValue))
+		if (!this.uneditable) {
+			this.state = this.stateHandler.initialState(this.initialValue)
+			this.value = this.stateHandler.getValue(this.state)
+		}
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
