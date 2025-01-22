@@ -53,7 +53,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.initialValue = this.active
 	}
-	@Listen("smoothlyRadioButtonRegister")
+	@Listen("smoothlyRadioItemRegister")
 	handleRegister(event: CustomEvent<(name: string) => void>) {
 		event.stopPropagation()
 		event.detail(this.name)

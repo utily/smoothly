@@ -10,13 +10,13 @@ import { Selectable } from "../Selected"
 export class SmoothlyInputRadioItem {
 	@Element() element: HTMLInputElement
 	@Prop({ mutable: true }) value: any
-	@Prop({ mutable: true }) selected = false
+	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ mutable: true }) name: string
 	@Event() smoothlySelect: EventEmitter<Selectable>
-	@Event() smoothlyRadioButtonRegister: EventEmitter<(name: string) => void>
+	@Event() smoothlyRadioItemRegister: EventEmitter<(name: string) => void>
 	componentWillLoad(): void | Promise<void> {
-		this.smoothlyRadioButtonRegister.emit(name => (this.name = name))
+		this.smoothlyRadioItemRegister.emit(name => (this.name = name))
 		this.selected && this.inputHandler()
 	}
 	inputHandler(): void {
