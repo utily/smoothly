@@ -31,7 +31,7 @@ export class SmoothlyInputDemoStandard {
 	}
 
 	updateInputHeightText() {
-		const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize.replace("px", ""))
+		const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize?.replace("px", ""))
 		this.element.querySelectorAll(".height").forEach((el: HTMLDivElement) => {
 			const height = el.clientHeight
 			el.innerHTML = `<b>${height / rootFontSize}rem</b> (${height}pixels)`
