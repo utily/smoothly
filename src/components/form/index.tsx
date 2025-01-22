@@ -9,7 +9,6 @@ import {
 	Listen,
 	Method,
 	Prop,
-	State,
 	Watch,
 } from "@stencil/core"
 import { http } from "cloudly-http"
@@ -38,7 +37,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop({ reflect: true }) name?: string
 	@Prop() prevent = true
 	@Prop({ mutable: true }) changed = false
-	@State() processing?: Promise<boolean>
+	@Prop({ mutable: true }) processing?: Promise<boolean>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyFormInput: EventEmitter<Data>
 	@Event() smoothlyFormSubmit: EventEmitter<Submit>
