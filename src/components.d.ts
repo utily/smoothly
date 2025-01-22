@@ -1558,7 +1558,7 @@ declare global {
     };
     interface HTMLSmoothlyInputRadioItemElementEventMap {
         "smoothlySelect": Selectable;
-        "smoothlyRadioButtonRegister": (name: string) => void;
+        "smoothlyRadioItemRegister": (name: string) => void;
     }
     interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputRadioItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioItemElement, ev: SmoothlyInputRadioItemCustomEvent<HTMLSmoothlyInputRadioItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2668,7 +2668,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputRadioItem {
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyRadioButtonRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(name: string) => void>) => void;
+        "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(name: string) => void>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputRadioItemCustomEvent<Selectable>) => void;
         "selected"?: boolean;
         "value"?: any;
