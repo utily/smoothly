@@ -534,6 +534,7 @@ export namespace Components {
         "triggerMode": "scroll" | "intersection";
     }
     interface SmoothlyModal {
+        "align": "top" | "center";
         "closable": boolean;
         "open": boolean;
     }
@@ -2771,6 +2772,7 @@ declare namespace LocalJSX {
         "triggerMode"?: "scroll" | "intersection";
     }
     interface SmoothlyModal {
+        "align"?: "top" | "center";
         "closable"?: boolean;
         "onSmoothlyModalChange"?: (event: SmoothlyModalCustomEvent<boolean>) => void;
         "open"?: boolean;

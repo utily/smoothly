@@ -8,6 +8,7 @@ import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/c
 export class SmoothlyModal {
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop({ reflect: true }) closable = false
+	@Prop({ reflect: true }) align: "top" | "center" = "center"
 	@Event() smoothlyModalChange: EventEmitter<boolean>
 
 	@Watch("open")
