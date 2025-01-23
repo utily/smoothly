@@ -66,7 +66,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async clear(): Promise<void> {
-		!this.uneditable && (this.state = this.stateHandler.initialState(undefined))
+		if (!this.uneditable && this.inputElement) {
+			this.state = this.stateHandler.setValue(this.inputElement, this.state, undefined)
+		}
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -74,7 +76,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async reset(): Promise<void> {
-		!this.uneditable && (this.state = this.stateHandler.initialState(this.initialValue))
+		if (!this.uneditable && this.inputElement) {
+			this.state = this.stateHandler.setValue(this.inputElement, this.state, this.initialValue)
+		}
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
@@ -91,10 +95,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	typeChange(): void {
 		switch (this.type) {
 			case "price":
-				this.stateHandler = InputStateHandler.create("price", {
-					currency: this.currency,
-					toInteger: this.toInteger,
-				})
+				this.stateHandler = InputStateHandler.create("price", { currency: this.currency, toInteger: this.toInteger })
 				break
 			default:
 				this.stateHandler = InputStateHandler.create(this.type, getLocale())
@@ -105,6 +106,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+		this.listener.changed?.(this)
 	}
 	@Watch("value")
 	valueChange(value: any) {
