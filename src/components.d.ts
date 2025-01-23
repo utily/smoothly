@@ -182,6 +182,7 @@ export namespace Components {
         "looks"?: Looks;
         "name"?: string;
         "prevent": boolean;
+        "processing"?: Promise<boolean>;
         "readonly": boolean;
         "removeInput": (name: string) => Promise<void>;
         "reset": () => Promise<void>;
@@ -2448,6 +2449,7 @@ declare namespace LocalJSX {
         "onSmoothlyFormReset"?: (event: SmoothlyFormCustomEvent<void>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Submit>) => void;
         "prevent"?: boolean;
+        "processing"?: Promise<boolean>;
         "readonly"?: boolean;
         "type"?: "update" | "change" | "fetch" | "create";
         "validator"?: isly.Type<any>;
