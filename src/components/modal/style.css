@@ -2,7 +2,6 @@
 	position: fixed;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	top: 0;
   left: 0;
   width: 100%;
@@ -14,6 +13,12 @@
 :host:not([open]),
 :host[hidden] {
 	display: none;
+}
+:host[align=center] {
+	align-items: center;
+}
+:host[align=top]>div.modal{
+	margin-top: calc((100dvh - var(--smoothly-modal-max-height)) / 2);
 }
 
 :host>div.modal {
