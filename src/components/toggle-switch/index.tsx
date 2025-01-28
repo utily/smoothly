@@ -23,7 +23,7 @@ export class SmoothlyToggleSwitch {
 	render() {
 		return (
 			<Host>
-				<button disabled={this.disabled} onClick={() => this.handleClick()}>
+				<button type="button" disabled={this.disabled} onClick={() => this.handleClick()}>
 					<smoothly-icon
 						color={this.color}
 						name={!this.checkmark ? "ellipse" : this.selected ? "checkmark-circle" : "close-circle"}
