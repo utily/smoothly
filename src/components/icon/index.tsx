@@ -22,6 +22,7 @@ export class SmoothlyIcon {
 		await this.nameChanged()
 	}
 	@Watch("name")
+	@Watch("toolTip")
 	async nameChanged() {
 		if (this.name != "empty") {
 			const promise = (this.latestPromise = Icon.load(this.name))
