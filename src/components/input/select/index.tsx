@@ -187,6 +187,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.items.push(event.target as HTMLSmoothlyItemElement)
 		}
 		Input.registerSubAction(this, event)
+		this.displaySelected()
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
@@ -232,10 +233,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
 	displaySelected(): void {
-		const displayString: string = "<div>" + this.selected.map(option => option.innerHTML).join("</div><div>") + "</div>"
+		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
 		this.displaySelectedElement &&
-			(this.displaySelectedElement.innerHTML =
-				this.selected.length > 0 ? displayString : this.placeholder ? this.placeholder : "")
+			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : this.placeholder ?? "")
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
