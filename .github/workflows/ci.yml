@@ -18,8 +18,7 @@ jobs:
           path: '**/node_modules'
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
-      - run: npm run build
-      - run: git diff --exit-code components.d.ts || echo "❌ components.d.ts is outdated! Run 'npm run build' and commit the changes." && exit 1
+      - run: npm run build:check
   test:
     name: Test
     runs-on: ubuntu-latest
