@@ -21,6 +21,7 @@ export class SmoothlyIcon {
 	async componentWillLoad() {
 		await this.nameChanged()
 	}
+	@Watch("toolTip")
 	@Watch("name")
 	async nameChanged() {
 		if (this.name != "empty") {
