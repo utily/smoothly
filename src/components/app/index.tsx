@@ -13,6 +13,7 @@ type Room = {
 export class SmoothlyApp {
 	@Prop({ reflect: true }) label?: string
 	@Prop() color: Color
+	@Prop() testPropToSeeIfComponentsDTsReactsWhenNotUpdated?: string
 	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
