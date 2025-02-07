@@ -251,6 +251,7 @@ export namespace Components {
         "required": boolean;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        "setSelection": (start: number, end: number) => Promise<void>;
         "setValue": (value: any) => Promise<void>;
         "showLabel": boolean;
         "toInteger"?: boolean;

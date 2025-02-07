@@ -225,4 +225,16 @@ export class InputStateHandler {
 	public getValue(formattedState: tidily.State): any {
 		return this.formatter.fromString(this.unformatState(formattedState).value)
 	}
+	public setSelection(
+		inputElement: HTMLInputElement,
+		formattedState: Readonly<tidily.State> & tidily.Settings,
+		start: number,
+		end: number
+	) {
+		inputElement.focus()
+		inputElement.selectionStart = start
+		inputElement.selectionEnd = end
+		this.select(formattedState, start, end)
+		return formattedState
+	}
 }
