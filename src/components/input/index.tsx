@@ -57,6 +57,16 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.state = this.stateHandler.setValue(this.inputElement, this.state, value)
 	}
 	@Method()
+	async setSelection(start: number, end: number): Promise<void> {
+		if (this.inputElement)
+			this.state = this.stateHandler.setSelection(
+				this.inputElement,
+				this.state,
+				start,
+				end < 0 ? this.inputElement.value.length + end + 1 : end
+			)
+	}
+	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
 		this.listener[property] = listener
 		listener(this)
