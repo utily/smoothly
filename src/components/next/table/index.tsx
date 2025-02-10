@@ -9,6 +9,11 @@ import { SmoothlyNextTableExpandableCellCustomEvent } from "../../../components"
 export class SmoothlyNextTable {
 	@Prop() columns = 1
 
+	@Listen("smoothlyNextTableExpandableRowChange")
+	smoothlyNextTableExpandableRowChange(event: SmoothlyNextTableExpandableCellCustomEvent<boolean>): void {
+		event.stopPropagation()
+	}
+
 	@Listen("smoothlyNextTableExpandableCellChange")
 	smoothlyNextTableExpandableCellChange(event: SmoothlyNextTableExpandableCellCustomEvent<boolean>): void {
 		event.stopPropagation()
