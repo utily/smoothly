@@ -24,6 +24,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) type: tidily.Type = "text"
 	@Prop({ reflect: true }) required = false
 	@Prop({ reflect: true }) showLabel = true
+	@Prop() autoFocus: boolean = false
 	@Prop() autocomplete?: Exclude<tidily.Settings["autocomplete"], undefined>
 	@Prop({ reflect: true }) placeholder: string | undefined
 	@Prop() disabled = false
@@ -181,6 +182,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						autocomplete={this.autocomplete ?? this.state?.autocomplete}
 						disabled={this.disabled}
 						readOnly={this.readonly}
+						autofocus={this.autoFocus}
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
@@ -189,6 +191,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						}}
 						onFocus={event => !this.readonly && (this.state = this.stateHandler.onFocus(event, this.state))}
 						onBlur={event => {
+							console.log("onBlur")
 							if (!this.readonly) {
 								const lastValue = this.stateHandler.getValue(this.state)
 								this.state = this.stateHandler.onBlur(event, this.state)
