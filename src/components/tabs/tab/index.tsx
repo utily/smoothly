@@ -22,8 +22,7 @@ export class SmoothlyTab {
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
 	}
 	@Listen("click")
-	onClick(e: UIEvent) {
-		e.stopPropagation()
+	onClick() {
 		this.open = true
 	}
 	connectedCallback() {
