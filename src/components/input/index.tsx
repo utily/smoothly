@@ -147,10 +147,32 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.listener.changed?.(this)
 	}
 	componentDidLoad() {
+		this.name == "autofocus" && console.log("didLoad", this.inputElement, this.inputElement?.isConnected)
 		if (this.inputElement)
 			this.inputElement.value = this.state.value
 	}
+	private focusFunction?: () => void
+	connectedCallback() {
+		this.name == "autofocus" &&
+			console.log("connected", this.inputElement, this.inputElement?.isConnected, this.focusFunction)
+		if (this.autoFocus) {
+			this.inputElement?.focus()
+			this.focusFunction = () => {
+				console.log("focusFunction", this.inputElement, this.inputElement?.isConnected)
+				this.inputElement?.focus()
+			}
+		}
+	}
+	componentDidRender() {
+		this.name == "autofocus" &&
+			console.log("didRender", this.inputElement, this.inputElement?.isConnected, this.focusFunction)
+		if (this.focusFunction && this.inputElement?.isConnected) {
+			this.focusFunction()
+			this.focusFunction = undefined
+		}
+	}
 	async disconnectedCallback() {
+		this.name == "autofocus" && console.log("disconnected", this.inputElement, this.inputElement?.isConnected)
 		if (!this.element.isConnected)
 			await this.unregister()
 	}
@@ -182,7 +204,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						autocomplete={this.autocomplete ?? this.state?.autocomplete}
 						disabled={this.disabled}
 						readOnly={this.readonly}
-						autofocus={this.autoFocus}
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)

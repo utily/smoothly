@@ -14,7 +14,7 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<smoothly-input name="normal">Text</smoothly-input>
-				<smoothly-input name="normal" autoFocus>
+				<smoothly-input name="autofocus" autoFocus>
 					AutoFocus here!
 				</smoothly-input>
 			</Host>
