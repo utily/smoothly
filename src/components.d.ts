@@ -240,7 +240,6 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
-        "focus": () => Promise<void>;
         "getValue": () => Promise<any | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -251,6 +250,7 @@ export namespace Components {
         "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
+        "setFocus": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "setSelection": (start: number, end: number) => Promise<void>;
         "setValue": (value: any) => Promise<void>;
