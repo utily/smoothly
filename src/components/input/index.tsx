@@ -57,7 +57,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.state = this.stateHandler.setValue(this.inputElement, this.state, value)
 	}
 	@Method()
-	async focus(): Promise<void> {
+	async setFocus(): Promise<void> {
 		this.inputElement?.focus()
 	}
 	@Method()
