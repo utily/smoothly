@@ -207,6 +207,7 @@ export class SmoothlyDisplayDemo {
 								value={`name,age,city
 Alice,25,New York
 Bob,30,London
+Charlie,35,Paris
 `}
 							/>
 						</dd>

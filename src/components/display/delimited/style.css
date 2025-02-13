@@ -1,8 +1,18 @@
 :host {
-	outline: 2px solid red;
+	display: grid;
+	grid-template-columns: repeat(var(--columns), auto);
 }
 :host > div {
 	display: grid;
+	grid-column: 1 / -1;
+	grid-template-columns: subgrid;
+}
+:host span:not(.separator) {
+	font-weight: bold;
+	color: rgb(var(--smoothly-default-contrast));
+}
+:host .separator {
+	color: rgba(var(--smoothly-default-contrast), 0.8);
 }
 :host > div > span:last-of-type > .separator {
 	display: none;
