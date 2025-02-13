@@ -1,0 +1,9 @@
+:host {
+	outline: 2px solid red;
+}
+:host > div {
+	display: grid;
+}
+:host > div > span:last-of-type > .separator {
+	display: none;
+}

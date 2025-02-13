@@ -200,6 +200,16 @@ export class SmoothlyDisplayDemo {
 						<dd>
 							<smoothly-display-demo-json />
 						</dd>
+						<dt>Display Delimited</dt>
+						<dd>
+							<smoothly-display
+								type={"delimited"}
+								value={`name,age,city
+Alice,25,New York
+Bob,30,London
+`}
+							/>
+						</dd>
 					</dl>
 				</fieldset>
 				<h2>With labels</h2>

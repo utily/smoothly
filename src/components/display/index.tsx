@@ -9,10 +9,12 @@ import { getLocale } from "../../model"
 	scoped: true,
 })
 export class SmoothlyDisplay {
-	@Prop() type: tidily.Type | "json"
+	@Prop() type: tidily.Type | "json" | "delimited"
 	@Prop() label?: string
 	@Prop() value?: any
 	@Prop() collapseDepth?: number
+	@Prop() separator?: string
+	@Prop() rowSeparator?: string
 	@Prop() toInteger?: boolean
 	@Prop() currency?: isoly.Currency
 	@Prop() country?: isoly.CountryCode.Alpha2
@@ -21,8 +23,13 @@ export class SmoothlyDisplay {
 		let result: string | HTMLElement | undefined
 		const type = this.type
 		switch (type) {
+			case "delimited":
+				result = (
+					<smoothly-display-delimited value={this.value} separator={this.separator} rowSeparator={this.rowSeparator} />
+				)
+				break
 			case "json":
-				result = <smoothly-display-json value={this.value} collapseDepth={this.collapseDepth}></smoothly-display-json>
+				result = <smoothly-display-json value={this.value} collapseDepth={this.collapseDepth} />
 				break
 			default:
 				result = tidily.format(this.value, type)

@@ -123,9 +123,16 @@ export namespace Components {
         "currency"?: isoly.Currency;
         "format"?: isoly.DateTime.Format;
         "label"?: string;
+        "rowSeparator"?: string;
+        "separator"?: string;
         "toInteger"?: boolean;
-        "type": tidily.Type | "json";
+        "type": tidily.Type | "json" | "delimited";
         "value"?: any;
+    }
+    interface SmoothlyDisplayDelimited {
+        "rowSeparator": string;
+        "separator": string;
+        "value"?: string;
     }
     interface SmoothlyDisplayDemo {
     }
@@ -1045,6 +1052,12 @@ declare global {
     var HTMLSmoothlyDisplayElement: {
         prototype: HTMLSmoothlyDisplayElement;
         new (): HTMLSmoothlyDisplayElement;
+    };
+    interface HTMLSmoothlyDisplayDelimitedElement extends Components.SmoothlyDisplayDelimited, HTMLStencilElement {
+    }
+    var HTMLSmoothlyDisplayDelimitedElement: {
+        prototype: HTMLSmoothlyDisplayDelimitedElement;
+        new (): HTMLSmoothlyDisplayDelimitedElement;
     };
     interface HTMLSmoothlyDisplayDemoElementEventMap {
         "notice": Notice;
@@ -2180,6 +2193,7 @@ declare global {
         "smoothly-dialog": HTMLSmoothlyDialogElement;
         "smoothly-dialog-demo": HTMLSmoothlyDialogDemoElement;
         "smoothly-display": HTMLSmoothlyDisplayElement;
+        "smoothly-display-delimited": HTMLSmoothlyDisplayDelimitedElement;
         "smoothly-display-demo": HTMLSmoothlyDisplayDemoElement;
         "smoothly-display-demo-json": HTMLSmoothlyDisplayDemoJsonElement;
         "smoothly-display-json": HTMLSmoothlyDisplayJsonElement;
@@ -2381,9 +2395,16 @@ declare namespace LocalJSX {
         "currency"?: isoly.Currency;
         "format"?: isoly.DateTime.Format;
         "label"?: string;
+        "rowSeparator"?: string;
+        "separator"?: string;
         "toInteger"?: boolean;
-        "type"?: tidily.Type | "json";
+        "type"?: tidily.Type | "json" | "delimited";
         "value"?: any;
+    }
+    interface SmoothlyDisplayDelimited {
+        "rowSeparator"?: string;
+        "separator"?: string;
+        "value"?: string;
     }
     interface SmoothlyDisplayDemo {
         "onNotice"?: (event: SmoothlyDisplayDemoCustomEvent<Notice>) => void;
@@ -2978,6 +2999,7 @@ declare namespace LocalJSX {
         "smoothly-dialog": SmoothlyDialog;
         "smoothly-dialog-demo": SmoothlyDialogDemo;
         "smoothly-display": SmoothlyDisplay;
+        "smoothly-display-delimited": SmoothlyDisplayDelimited;
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-display-demo-json": SmoothlyDisplayDemoJson;
         "smoothly-display-json": SmoothlyDisplayJson;
@@ -3097,6 +3119,7 @@ declare module "@stencil/core" {
             "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
             "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
             "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
+            "smoothly-display-delimited": LocalJSX.SmoothlyDisplayDelimited & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDelimitedElement>;
             "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
             "smoothly-display-demo-json": LocalJSX.SmoothlyDisplayDemoJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoJsonElement>;
             "smoothly-display-json": LocalJSX.SmoothlyDisplayJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
