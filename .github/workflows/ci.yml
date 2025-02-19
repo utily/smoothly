@@ -59,4 +59,4 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm audit
+      - run: npm audit --omit=dev
