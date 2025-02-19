@@ -19,7 +19,7 @@ export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type,
 			<slot name="end" />
 		</a>
 	) : (
-		<button type={type ?? "button"} disabled={disabled}>
+		<button type={type} disabled={disabled}>
 			<slot name="start" />
 			<slot />
 			{children}
