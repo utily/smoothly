@@ -3,27 +3,27 @@ import { redirect } from "../../model"
 
 export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type, link }, children) => {
 	return disabled && (link || type == "link") ? (
-		<slot></slot>
+		<slot />
 	) : type == "link" ? (
 		<a href={link} onClick={!link || !local(link) ? undefined : e => (e.preventDefault(), redirect(convert(link)))}>
-			<slot name="start"></slot>
-			<slot></slot>
+			<slot name="start" />
+			<slot />
 			{children}
-			<slot name="end"></slot>
+			<slot name="end" />
 		</a>
 	) : type == "download" ? (
 		<a href={link} target="_blank" download>
-			<slot name="start"></slot>
-			<slot></slot>
+			<slot name="start" />
+			<slot />
 			{children}
-			<slot name="end"></slot>
+			<slot name="end" />
 		</a>
 	) : (
-		<button type="button" disabled={disabled}>
-			<slot name="start"></slot>
-			<slot></slot>
+		<button type={type ?? "button"} disabled={disabled}>
+			<slot name="start" />
+			<slot />
 			{children}
-			<slot name="end"></slot>
+			<slot name="end" />
 		</button>
 	)
 }
@@ -45,7 +45,7 @@ function local(path: string): boolean {
 export namespace Button {
 	export interface Properties {
 		disabled: boolean
-		type: "link" | "button" | "download"
+		type: "link" | "button" | "download" | "submit"
 		link?: string
 	}
 }
