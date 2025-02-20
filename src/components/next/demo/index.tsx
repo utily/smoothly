@@ -9,6 +9,7 @@ export class SmoothlyNextDemo {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<smoothly-next-demo-filler-row-demo />
 				<smoothly-next-demo-group />
 				<smoothly-next-demo-colspan />
 				<smoothly-next-demo-simple />
