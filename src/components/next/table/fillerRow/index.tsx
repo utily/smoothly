@@ -1,4 +1,4 @@
-import { Component, h, Prop, VNode } from "@stencil/core"
+import { Component, h, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-next-table-filler-row",
@@ -6,7 +6,6 @@ import { Component, h, Prop, VNode } from "@stencil/core"
 	scoped: true,
 })
 export class SmoothlyNextTableFillerRow {
-	@Prop({ reflect: true }) span?: number = 1
 
 	render(): VNode | VNode[] {
 		return (
