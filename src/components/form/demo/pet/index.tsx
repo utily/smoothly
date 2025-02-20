@@ -132,7 +132,7 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input-file>
 							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
 							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>
-							<smoothly-input-range name="summary.height">Height</smoothly-input-range>
+							<smoothly-input-range name="summary.height" label={"Height"} />
 							<smoothly-input-select name="summary.favoriteHat">
 								<span slot="label">Summary's Favorite Hat</span>
 								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
@@ -141,7 +141,9 @@ export class SmoothlyFormDemoPet {
 									</smoothly-item>
 								))}
 							</smoothly-input-select>
-							<smoothly-input-month name="summary.month">Summary Month</smoothly-input-month>
+							<smoothly-input-month name="summary.month">
+								<span slot={"month-label"}>Summary month</span>
+							</smoothly-input-month>
 							<smoothly-input-color name="summary.color">Summary Color</smoothly-input-color>
 							<smoothly-input-radio name="summary.favoritePizza">
 								<span slot="label">Summary's Favorite Pizza</span>
