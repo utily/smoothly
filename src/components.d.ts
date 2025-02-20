@@ -580,7 +580,6 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyNextTableFillerRow {
-        "span"?: number;
     }
     interface SmoothlyNextTableFoot {
     }
@@ -2840,7 +2839,6 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyNextTableFillerRow {
-        "span"?: number;
     }
     interface SmoothlyNextTableFoot {
     }
