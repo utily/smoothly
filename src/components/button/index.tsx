@@ -12,7 +12,7 @@ export class SmoothlyButton {
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
 	@Prop({ reflect: true }) disabled = false
-	@Prop({ reflect: true }) type: Button.Properties["type"] = "button"
+	@Prop({ reflect: true }) type: Button.Properties["type"]
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop() link?: string
