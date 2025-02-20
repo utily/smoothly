@@ -7,7 +7,7 @@ import { Component, h, Prop, VNode } from "@stencil/core"
 })
 export class SmoothlyNextTableFillerRow {
 	@Prop({ reflect: true }) span?: number = 1
-	
+
 	render(): VNode | VNode[] {
 		return (
 			<smoothly-next-table-row>
