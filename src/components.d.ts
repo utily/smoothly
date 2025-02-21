@@ -15,6 +15,7 @@ import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
+import { Key } from "./components/input/Key";
 import { RGB } from "./model/Color/RGB";
 import { Selectable } from "./components/input/radio/Selected";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
@@ -27,6 +28,7 @@ export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
+export { Key } from "./components/input/Key";
 export { RGB } from "./model/Color/RGB";
 export { Selectable } from "./components/input/radio/Selected";
 export namespace Components {
@@ -1342,6 +1344,7 @@ declare global {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
+        "smoothlyKeydown": Key;
         "smoothlyBlur": void;
         "smoothlyChange": Record<string, any>;
         "smoothlyInput": Record<string, any>;
@@ -2536,6 +2539,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyKeydown"?: (event: SmoothlyInputCustomEvent<Key>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;

@@ -14,6 +14,7 @@ import {
 import { http } from "cloudly-http"
 import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
+import { Key } from "../../components/input/Key"
 import { Color, Data, Notice, Submit } from "../../model"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
@@ -108,6 +109,13 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	async smoothlyInputHandler(event: CustomEvent<Record<string, any>>): Promise<void> {
 		this.value = Data.merge(this.value, event.detail)
 		this.smoothlyFormInput.emit(Data.convertArrays(this.value))
+	}
+	@Listen("smoothlyKeydown")
+	async smoothlyKeydownHandler(event: CustomEvent<Key>): Promise<void> {
+		if (event.detail.key == "Enter" && this.inputs.has(event.detail.name)) {
+			event.stopPropagation()
+			await this.submit()
+		}
 	}
 	@Listen("smoothlyFormSubmit", { target: "window" })
 	windowSubmitHandler(event: SmoothlyFormCustomEvent<Submit>): void {

@@ -8,6 +8,7 @@ import { Deep } from "./Deep"
 import { Editable } from "./Editable"
 import { Input } from "./Input"
 import { InputStateHandler } from "./InputStateHandler"
+import { Key } from "./Key"
 import { Looks } from "./Looks"
 
 @Component({
@@ -43,6 +44,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
+	@Event() smoothlyKeydown: EventEmitter<Key>
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -188,8 +190,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
-							if (event.key == "Enter")
-								this.smoothlyBlur.emit() // TODO: this should be replaced by a smoothlyKeydown event
+							if (!this.readonly && !this.disabled)
+								this.smoothlyKeydown.emit(Key.create(this.name, event))
 						}}
 						onFocus={event => !this.readonly && (this.state = this.stateHandler.onFocus(event, this.state))}
 						onBlur={event => {

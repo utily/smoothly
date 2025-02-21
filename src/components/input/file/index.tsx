@@ -156,7 +156,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 					<slot name={"label"} />
 				</label>
 				<div class="input">
-					<smoothly-button color={this.color} fill={"clear"} size="flexible">
+					<smoothly-button type={"button"} color={this.color} fill={"clear"} size="flexible">
 						<slot name={"button"} />
 					</smoothly-button>
 					<span>{this.value?.name ?? this.placeholder}</span>
