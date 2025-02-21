@@ -112,7 +112,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Listen("smoothlyKeydown")
 	async smoothlyKeydownHandler(event: CustomEvent<Key>): Promise<void> {
-		if (event.detail.key == "Enter" && [...this.inputs.keys()].includes(event.detail.name)) {
+		if (event.detail.key == "Enter" && this.inputs.has(event.detail.name)) {
 			event.stopPropagation()
 			await this.submit()
 		}
