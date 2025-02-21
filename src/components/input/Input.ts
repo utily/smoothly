@@ -3,11 +3,13 @@ import { isly } from "isly"
 import { Color, Data } from "../../model"
 import { SmoothlyForm } from "../form"
 import { Editable } from "./Editable"
+import { Key } from "./Key"
 import { Looks } from "./Looks"
 
 export interface Input extends Input.Element {
 	smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	smoothlyInput: EventEmitter<Data>
+	smoothlyKeydown?: EventEmitter<Key>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 	parent: Editable | undefined
 }
@@ -43,6 +45,7 @@ export namespace Input {
 	export const type = Element.type.extend<Input>({
 		smoothlyInputLoad: EventEmitter,
 		smoothlyInput: EventEmitter,
+		smoothlyKeydown: EventEmitter.optional(),
 		smoothlyInputForm: EventEmitter.optional(),
 		parent: Editable.type.optional(),
 	})
