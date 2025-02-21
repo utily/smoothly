@@ -24,21 +24,17 @@ export class SmoothlyFilterField {
 	}
 	render() {
 		return (
-			<Host
-			// TODO: Add this when onSmoothlyBlur stops triggering on enter.
-			// onKeyDown={(e: KeyboardEvent) =>
-			// 	e.key == "Enter" && this.filterFieldEmit()
-			// }
-			>
+			<Host>
 				<smoothly-input
 					name="filter"
 					ref={e => (this.input = e)}
 					value={this.criteria.toString()}
 					onSmoothlyInputLooks={e => e.stopPropagation()}
-					onSmoothlyBlur={e => {
+					onSmoothlyKeydown={e => {
 						e.stopPropagation()
-						this.filterFieldEmit()
+						e.detail.key == "Enter" && this.filterFieldEmit()
 					}}
+					onSmoothlyBlur={e => e.stopPropagation()}
 					onSmoothlyFormDisable={e => e.stopPropagation()}
 					onSmoothlyInputLoad={e => e.stopPropagation()}
 					onSmoothlyChange={e => e.stopPropagation()}
