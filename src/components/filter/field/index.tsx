@@ -27,7 +27,7 @@ export class SmoothlyFilterField {
 			<Host
 			// TODO: Add this when onSmoothlyBlur stops triggering on enter.
 			// onKeyDown={(e: KeyboardEvent) =>
-			// 	e.key == "Enter" && (console.log("onSmoothlyBlur", Math.random()), this.filterFieldEmit())
+			// 	e.key == "Enter" && this.filterFieldEmit()
 			// }
 			>
 				<smoothly-input
@@ -37,7 +37,6 @@ export class SmoothlyFilterField {
 					onSmoothlyInputLooks={e => e.stopPropagation()}
 					onSmoothlyBlur={e => {
 						e.stopPropagation()
-						console.log("onSmoothlyBlur", Math.random())
 						this.filterFieldEmit()
 					}}
 					onSmoothlyFormDisable={e => e.stopPropagation()}
