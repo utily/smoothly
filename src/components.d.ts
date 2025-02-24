@@ -212,6 +212,8 @@ export namespace Components {
     }
     interface SmoothlyFormDemoPrices {
     }
+    interface SmoothlyFormDemoSchedule {
+    }
     interface SmoothlyFormDemoTransparent {
     }
     interface SmoothlyFormDemoTyped {
@@ -1288,6 +1290,12 @@ declare global {
         prototype: HTMLSmoothlyFormDemoPricesElement;
         new (): HTMLSmoothlyFormDemoPricesElement;
     };
+    interface HTMLSmoothlyFormDemoScheduleElement extends Components.SmoothlyFormDemoSchedule, HTMLStencilElement {
+    }
+    var HTMLSmoothlyFormDemoScheduleElement: {
+        prototype: HTMLSmoothlyFormDemoScheduleElement;
+        new (): HTMLSmoothlyFormDemoScheduleElement;
+    };
     interface HTMLSmoothlyFormDemoTransparentElement extends Components.SmoothlyFormDemoTransparent, HTMLStencilElement {
     }
     var HTMLSmoothlyFormDemoTransparentElement: {
@@ -2221,6 +2229,7 @@ declare global {
         "smoothly-form-demo-login": HTMLSmoothlyFormDemoLoginElement;
         "smoothly-form-demo-pet": HTMLSmoothlyFormDemoPetElement;
         "smoothly-form-demo-prices": HTMLSmoothlyFormDemoPricesElement;
+        "smoothly-form-demo-schedule": HTMLSmoothlyFormDemoScheduleElement;
         "smoothly-form-demo-transparent": HTMLSmoothlyFormDemoTransparentElement;
         "smoothly-form-demo-typed": HTMLSmoothlyFormDemoTypedElement;
         "smoothly-frame": HTMLSmoothlyFrameElement;
@@ -2500,6 +2509,8 @@ declare namespace LocalJSX {
     interface SmoothlyFormDemoPet {
     }
     interface SmoothlyFormDemoPrices {
+    }
+    interface SmoothlyFormDemoSchedule {
     }
     interface SmoothlyFormDemoTransparent {
     }
@@ -3026,6 +3037,7 @@ declare namespace LocalJSX {
         "smoothly-form-demo-login": SmoothlyFormDemoLogin;
         "smoothly-form-demo-pet": SmoothlyFormDemoPet;
         "smoothly-form-demo-prices": SmoothlyFormDemoPrices;
+        "smoothly-form-demo-schedule": SmoothlyFormDemoSchedule;
         "smoothly-form-demo-transparent": SmoothlyFormDemoTransparent;
         "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
         "smoothly-frame": SmoothlyFrame;
@@ -3147,6 +3159,7 @@ declare module "@stencil/core" {
             "smoothly-form-demo-login": LocalJSX.SmoothlyFormDemoLogin & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
             "smoothly-form-demo-pet": LocalJSX.SmoothlyFormDemoPet & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPetElement>;
             "smoothly-form-demo-prices": LocalJSX.SmoothlyFormDemoPrices & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
+            "smoothly-form-demo-schedule": LocalJSX.SmoothlyFormDemoSchedule & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoScheduleElement>;
             "smoothly-form-demo-transparent": LocalJSX.SmoothlyFormDemoTransparent & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
             "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
             "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;

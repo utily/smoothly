@@ -74,7 +74,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
 		if (this.validator) {
 			const flaws = this.validator
-				?.flaw(this.value)
+				?.flaw(Data.convertArrays(this.value))
 				.flaws?.reduce((r: Record<string, isly.Flaw>, f) => (f.property ? { ...r, [f.property]: f } : r), {})
 			for (const [property, input] of this.inputs.entries()) {
 				this.validate(flaws, property, input)

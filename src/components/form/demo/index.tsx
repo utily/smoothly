@@ -18,6 +18,7 @@ export class SmoothlyFormDemo {
 					<smoothly-form-demo-typed />
 					<smoothly-form-demo-transparent />
 					<smoothly-form-demo-date />
+					<smoothly-form-demo-schedule />
 					<smoothly-form-demo-date-range />
 					<smoothly-form-demo-controlled />
 				</div>
