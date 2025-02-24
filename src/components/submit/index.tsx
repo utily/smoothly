@@ -4,6 +4,7 @@ import { Button } from "../button/Button"
 import { Editable } from "../input/Editable"
 import { Submittable } from "../input/Submittable"
 
+// DEPRECATED - use smoothly-input-submit instead
 @Component({
 	tag: "smoothly-submit",
 	styleUrl: "./style.css",
@@ -22,6 +23,9 @@ export class SmoothlySubmit {
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	async componentWillLoad() {
+		console.warn(
+			`smoothly-submit is deprecated, use smoothly-input-submit instead.\n <smoothly-button type="submit"> can also be used if you're using a regular form.`
+		)
 		this.smoothlyInputLoad.emit(parent => {
 			if (Submittable.is(parent)) {
 				this.parent = parent
