@@ -259,7 +259,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							this.filter = ""
 						break
 					case "Backspace":
-						this.filter = this.filter.slice(0, -1)
+						this.filter = event.ctrlKey ? "" : this.filter.slice(0, -1)
 						break
 					case "Enter":
 						const result = this.items.find(item => item.marked)
@@ -312,19 +312,16 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	private move(direction: -1 | 1): void {
-		let markedIndex = this.items.findIndex(item => item.marked)
+		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
+		let markedIndex = selectableItems.findIndex(item => item.marked)
 		if (markedIndex == -1)
 			markedIndex = 0
 		else {
-			this.items[markedIndex].marked = false
-			markedIndex = (markedIndex + direction + this.items.length) % this.items.length
+			selectableItems[markedIndex].marked = false
+			markedIndex = (markedIndex + direction + selectableItems.length) % selectableItems.length
 		}
-		if (this.items.some(item => !item.hidden))
-			while (this.items[markedIndex].hidden) {
-				markedIndex = (markedIndex + direction + this.items.length) % this.items.length
-			}
-		this.items[markedIndex].marked = true
-		this.scrollTo(this.items[markedIndex], "smooth")
+		selectableItems[markedIndex].marked = true
+		this.scrollTo(selectableItems[markedIndex], "smooth")
 	}
 	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
 		this.optionsDiv?.scrollTo({
@@ -363,7 +360,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<slot name="label" />
 				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
 					{this.filter.length > 0 && (
-						<smoothly-item selectable={false} class="search-item">
+						<div class="search-preview">
 							<smoothly-icon name="search-outline" size="small" />
 							{this.filter}
 							<smoothly-icon
@@ -385,7 +382,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 									}}
 								/>
 							)}
-						</smoothly-item>
+						</div>
 					)}
 					<slot />
 					{this.addedItems}

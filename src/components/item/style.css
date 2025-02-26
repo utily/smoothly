@@ -28,10 +28,10 @@
 	stroke: rgb(var(--smoothly-input-foreground));
 }
 
-:host([marked]),
-:host:hover,
-:host([marked])::slotted(*),
-:host:hover::slotted(*) {
+:host:not([disabled])[marked],
+:host:not([disabled]):hover,
+:host:not([disabled])[marked]::slotted(*),
+:host:not([disabled]):hover::slotted(*) {
 	background-color: rgb(var(--smoothly-input-hover-background));
 	color: rgb(var(--smoothly-input-hover-foreground));
 	fill: rgb(var(--smoothly-input-hover-foreground));
