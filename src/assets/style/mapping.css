@@ -21,7 +21,7 @@ smoothly-color {
 	--smoothly-table-expanded-foreground: var(--smoothly-default-contrast);
 	--smoothly-table-expanded-background: var(--smoothly-default-tint);
 	
-	/* smoothly-input */
+	/* smoothly inputs */
 	--smoothly-input-foreground: var(--smoothly-default-contrast);
 	--smoothly-input-background: var(--smoothly-default-tint);
 	--smoothly-input-border: var(--smoothly-default-shade);
@@ -31,14 +31,21 @@ smoothly-color {
 	--smoothly-input-hover-background: var(--smoothly-primary-tint);
 	--smoothly-input-hover-foreground: var(--smoothly-primary-contrast);
 
-	--smoothly-input-selected-background: var(--smoothly-primary-color);
-	--smoothly-input-selected-border: var(--smoothly-primary-shade);
-	--smoothly-input-selected-foreground: var(--smoothly-primary-contrast);
+	/* smoothly-item */
+	--smoothly-item-foreground: var(--smoothly-default-contrast);
+	--smoothly-item-background: var(--smoothly-default-tint);
 
-	--smoothly-input-disabled-background: var(--smoothly-default-shade);
-  --smoothly-input-disabled-foreground: var(--smoothly-default-contrast), 50%;
-	--smoothly-input-disabled-opacity: 0.6;
-	
+	--smoothly-item-hover-background: var(--smoothly-primary-tint);
+	--smoothly-item-hover-foreground: var(--smoothly-primary-contrast);
+
+	--smoothly-item-selected-background: var(--smoothly-primary-color);
+	--smoothly-item-selected-border: var(--smoothly-primary-shade);
+	--smoothly-item-selected-foreground: var(--smoothly-primary-contrast);
+
+	--smoothly-item-disabled-background: var(--smoothly-default-shade);
+  --smoothly-item-disabled-foreground: var(--smoothly-default-contrast), 50%;
+	--smoothly-item-disabled-opacity: 0.6;
+
 	/* smoothly-button */
 	--smoothly-button-background: var(--smoothly-color);
 	--smoothly-button-foreground: var(--smoothly-color-shade);
