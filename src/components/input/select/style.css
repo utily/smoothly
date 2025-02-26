@@ -127,7 +127,9 @@
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
-	color: var(--smoothly-color-contrast);
+	color: rgb(var(--smoothly-color-contrast));
+	fill: rgb(var(--smoothly-color-contrast));
+	stroke: rgb(var(--smoothly-color-contrast));
 }
 
 :host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] {

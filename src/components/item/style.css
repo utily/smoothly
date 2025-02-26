@@ -8,6 +8,7 @@
 :host([disabled])::slotted(*) {
 	background-color: rgb(var(--smoothly-input-disabled-background));
 	color: rgb(var(--smoothly-input-disabled-foreground));
+	opacity: var(--smoothly-input-disabled-opacity);
 	cursor: not-allowed;
 }
 
