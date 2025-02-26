@@ -62,7 +62,9 @@ export class SmoothlyInputDemo {
 						<smoothly-input-select name="select-dessert" looks="border">
 							<label slot="label">Select with clear button</label>
 							<smoothly-item value="1">Ice cream</smoothly-item>
-							<smoothly-item value="2">Sponge cake</smoothly-item>
+							<smoothly-item value="2" selectable={false}>
+								Sponge cake
+							</smoothly-item>
 							<smoothly-item value="3">Cookie</smoothly-item>
 							<smoothly-item value="4">Croissant</smoothly-item>
 							<smoothly-item value="5">Chocolate fondue</smoothly-item>

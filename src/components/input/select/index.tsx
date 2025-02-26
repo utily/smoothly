@@ -363,7 +363,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<slot name="label" />
 				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
 					{this.filter.length > 0 && (
-						<smoothly-item selectable={false}>
+						<smoothly-item selectable={false} class="search-item">
 							<smoothly-icon name="search-outline" size="small" />
 							{this.filter}
 							<smoothly-icon

@@ -122,14 +122,14 @@
 	padding: .7em .7em .7em .25em;
 }
 
-:host>div.options::slotted(smoothly-item:not([selectable])) {
+:host>div.options::slotted(smoothly-item.search-item) {
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
-	color: var(--smoothly-color-contrast)
+	color: var(--smoothly-color-contrast);
 }
 
-:host>div.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
+:host>div.options>smoothly-item.search-item>smoothly-icon[name="backspace-outline"] {
 	margin-left: auto;
 	margin-right: 0;
 }

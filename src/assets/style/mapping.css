@@ -21,11 +21,11 @@ smoothly-color {
 	--smoothly-table-expanded-foreground: var(--smoothly-default-contrast);
 	--smoothly-table-expanded-background: var(--smoothly-default-tint);
 	
-	/* smoothly input */
+	/* smoothly-input */
 	--smoothly-input-foreground: var(--smoothly-default-contrast);
 	--smoothly-input-background: var(--smoothly-default-tint);
 	--smoothly-input-border: var(--smoothly-default-shade);
-	--smoothly-input-border-readonly: var(--smoothly-input-border), 50% ;
+	--smoothly-input-border-readonly: var(--smoothly-input-border), 50%;
 	--smoothly-input-border-radius: 0;
 
 	--smoothly-input-hover-background: var(--smoothly-primary-tint);
@@ -34,6 +34,9 @@ smoothly-color {
 	--smoothly-input-selected-background: var(--smoothly-primary-color);
 	--smoothly-input-selected-border: var(--smoothly-primary-shade);
 	--smoothly-input-selected-foreground: var(--smoothly-primary-contrast);
+
+	--smoothly-input-disabled-background: var(--smoothly-default-shade);
+  --smoothly-input-disabled-foreground: var(--smoothly-default-contrast), 50%;
 	
 	/* smoothly-button */
 	--smoothly-button-background: var(--smoothly-color);

@@ -518,6 +518,7 @@ export namespace Components {
     }
     interface SmoothlyItem {
         "deselectable": boolean;
+        "disabled": boolean;
         "filter": (filter: string) => Promise<void>;
         "marked": boolean;
         "selectable": boolean;
@@ -2774,6 +2775,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyItem {
         "deselectable"?: boolean;
+        "disabled"?: boolean;
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;

@@ -27,13 +27,14 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop({ reflect: true, mutable: true }) selected: boolean = false
 	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Prop({ reflect: true }) selectable = true
+	@Prop({ reflect: true }) disabled = false
 	@Prop() deselectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	@Listen("click")
 	clickHandler(): void {
-		if (this.selectable && (!this.selected || this.deselectable))
+		if (this.selectable && !this.disabled && (!this.selected || this.deselectable))
 			this.selected = !this.selected
 	}
 	@Watch("selected")
@@ -44,7 +45,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.smoothlyInputLoad.emit(() => {})
 	}
 	componentDidLoad(): void {
-		if (this.selected && this.selectable)
+		if (this.selected && this.selectable && !this.disabled)
 			this.smoothlyItemSelect.emit(this.element)
 	}
 	@Method()

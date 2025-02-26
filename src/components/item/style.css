@@ -4,6 +4,13 @@
 	border-left: .3em solid rgb(var(--smoothly-input-selected-border));
 }
 
+:host([disabled]),
+:host([disabled])::slotted(*) {
+	background-color: rgb(var(--smoothly-input-disabled-background));
+	color: rgb(var(--smoothly-input-disabled-foreground));
+	cursor: not-allowed;
+}
+
 :host {
 	padding: 0.5em;
 	cursor: pointer;
@@ -22,15 +29,10 @@
 }
 
 :host([marked]),
-:host:hover {
-	background-color: rgb(var(--smoothly-input-hover-background));
-	color: rgb(var(--smoothly-input-hover-foreground));
-	fill: rgb(var(--smoothly-input-hover-foreground));
-	stroke: rgb(var(--smoothly-input-hover-foreground));
-}
-
+:host:hover,
 :host([marked])::slotted(*),
 :host:hover::slotted(*) {
+	background-color: rgb(var(--smoothly-input-hover-background));
 	color: rgb(var(--smoothly-input-hover-foreground));
 	fill: rgb(var(--smoothly-input-hover-foreground));
 	stroke: rgb(var(--smoothly-input-hover-foreground));
