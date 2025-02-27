@@ -1,37 +1,40 @@
 :host([selected]) {
-	background-color: rgb(var(--smoothly-input-selected-background));
-	color: rgb(var(--smoothly-input-selected-foreground));
-	border-left: .3em solid rgb(var(--smoothly-input-selected-border));
+	background-color: rgb(var(--smoothly-item-selected-background));
+	color: rgb(var(--smoothly-item-selected-foreground));
+	border-left: .3em solid rgb(var(--smoothly-item-selected-border));
+}
+
+:host([disabled]),
+:host([disabled])::slotted(*) {
+	background-color: rgb(var(--smoothly-item-disabled-background));
+	color: rgb(var(--smoothly-item-disabled-foreground));
+	opacity: var(--smoothly-item-disabled-opacity);
+	cursor: not-allowed;
 }
 
 :host {
 	padding: 0.5em;
 	cursor: pointer;
 	border-left: .3em solid transparent;
-	color: rgb(var(--smoothly-input-foreground));
-	fill: rgb(var(--smoothly-input-foreground));
-	stroke: rgb(var(--smoothly-input-foreground));
+	color: rgb(var(--smoothly-item-foreground));
+	fill: rgb(var(--smoothly-item-foreground));
+	stroke: rgb(var(--smoothly-item-foreground));
 	box-sizing: border-box;
 	min-height: 3rem;
 }
 
 :host::slotted(*) {
-	color: rgb(var(--smoothly-input-foreground));
-	fill: rgb(var(--smoothly-input-foreground));
-	stroke: rgb(var(--smoothly-input-foreground));
+	color: rgb(var(--smoothly-item-foreground));
+	fill: rgb(var(--smoothly-item-foreground));
+	stroke: rgb(var(--smoothly-item-foreground));
 }
 
-:host([marked]),
-:host:hover {
-	background-color: rgb(var(--smoothly-input-hover-background));
-	color: rgb(var(--smoothly-input-hover-foreground));
-	fill: rgb(var(--smoothly-input-hover-foreground));
-	stroke: rgb(var(--smoothly-input-hover-foreground));
-}
-
-:host([marked])::slotted(*),
-:host:hover::slotted(*) {
-	color: rgb(var(--smoothly-input-hover-foreground));
-	fill: rgb(var(--smoothly-input-hover-foreground));
-	stroke: rgb(var(--smoothly-input-hover-foreground));
+:host:not([disabled])[marked],
+:host:not([disabled]):hover,
+:host:not([disabled])[marked]::slotted(*),
+:host:not([disabled]):hover::slotted(*) {
+	background-color: rgb(var(--smoothly-item-hover-background));
+	color: rgb(var(--smoothly-item-hover-foreground));
+	fill: rgb(var(--smoothly-item-hover-foreground));
+	stroke: rgb(var(--smoothly-item-hover-foreground));
 }

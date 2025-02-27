@@ -118,18 +118,21 @@
 	right: -1px;
 }
 
-:host>div.options::slotted(smoothly-item) {
+:host>div.options::slotted(smoothly-item),
+:host>div.options::slotted(div.search-preview) {
 	padding: .7em .7em .7em .25em;
 }
 
-:host>div.options::slotted(smoothly-item:not([selectable])) {
+:host>div.options::slotted(div.search-preview) {
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
-	color: var(--smoothly-color-contrast)
+	color: rgb(var(--smoothly-color-contrast));
+	fill: rgb(var(--smoothly-color-contrast));
+	stroke: rgb(var(--smoothly-color-contrast));
 }
 
-:host>div.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
+:host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] {
 	margin-left: auto;
 	margin-right: 0;
 }

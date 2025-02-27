@@ -26,14 +26,14 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean = false
 	@Prop({ reflect: true, mutable: true }) marked: boolean
-	@Prop({ reflect: true }) selectable = true
+	@Prop({ reflect: true }) disabled = false
 	@Prop() deselectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 
 	@Listen("click")
 	clickHandler(): void {
-		if (this.selectable && (!this.selected || this.deselectable))
+		if (!this.disabled && (!this.selected || this.deselectable))
 			this.selected = !this.selected
 	}
 	@Watch("selected")
@@ -44,16 +44,15 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.smoothlyInputLoad.emit(() => {})
 	}
 	componentDidLoad(): void {
-		if (this.selected && this.selectable)
+		if (this.selected && !this.disabled)
 			this.smoothlyItemSelect.emit(this.element)
 	}
 	@Method()
 	async filter(filter: string): Promise<void> {
 		const value = typeof this.value === "string" ? this.value : JSON.stringify(this.value ?? "")
-		this.element.hidden =
-			filter && this.selectable
-				? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
-				: false
+		this.element.hidden = filter
+			? !(value.includes(filter) || this.element.innerText.toLowerCase().includes(filter))
+			: false
 	}
 	render(): VNode | VNode[] {
 		return (
