@@ -252,6 +252,7 @@ export namespace Components {
         "register": () => Promise<void>;
         "required": boolean;
         "reset": () => Promise<void>;
+        "setCustomInitialValue": (value: any) => Promise<void>;
         "setFocus": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "setSelection": (start: number, end: number) => Promise<void>;
