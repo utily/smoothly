@@ -1,6 +1,6 @@
 import { Component, ComponentWillLoad, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/core"
 import { isly } from "isly"
-import { Color, Fill, Icon } from "../../../model"
+import { Color, Data, Fill, Icon } from "../../../model"
 import { Editable } from "../Editable"
 import { Submittable } from "../Submittable"
 
@@ -31,7 +31,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 					this.disabled =
 						!this.delete &&
 						(p.readonly ||
-							("validator" in p && p.validator instanceof isly.Type && !p.validator?.is(p.value)) ||
+							("validator" in p && p.validator instanceof isly.Type && !p.validator?.is(Data.convertArrays(p.value))) ||
 							!p.changed)
 				})
 			}
