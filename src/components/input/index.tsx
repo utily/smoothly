@@ -107,6 +107,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.initialValue = this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
+	@Method()
+	async setCustomInitialValue(value: any): Promise<void> {
+		this.initialValue = value
+	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInput) => void>): Promise<void> {
 		Input.registerSubAction(this, event)
