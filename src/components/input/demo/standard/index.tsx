@@ -68,7 +68,7 @@ export class SmoothlyInputDemoStandard {
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-select>
 						<smoothly-input-checkbox name="vertical">Vertical Layout</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="showLabel" checked={true}>
+						<smoothly-input-checkbox name="showLabel" checked>
 							Show Label
 						</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="placeholder">Placeholder</smoothly-input-checkbox>
