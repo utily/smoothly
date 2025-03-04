@@ -16,7 +16,7 @@
 
 :host>.smoothly-input-container {
 	position: relative;
-	width: 100%;
+	flex-grow: 1;
 	height: 100%;
 }
 
@@ -70,6 +70,7 @@
 	display: none;
 	z-index: 2;
 	cursor: pointer;
+	padding: 0.5rem;
 }
 
 :host[invalid]>.smoothly-invalid {
