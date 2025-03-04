@@ -70,7 +70,6 @@
 	display: none;
 	z-index: 2;
 	cursor: pointer;
-	box-sizing: content-box;
 }
 
 :host[invalid]>.smoothly-invalid {

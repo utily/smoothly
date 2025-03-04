@@ -5,6 +5,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	box-sizing: content-box;
 }
 :host[rotate] {
 	--rotate: rotate(var(--rotation, 0deg));

@@ -72,7 +72,6 @@
 	opacity: .7;
 	cursor: pointer;
 	height: 100%;
-	box-sizing: content-box;
 	padding-inline: var(--input-padding-side);
 }
 
