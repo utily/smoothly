@@ -485,6 +485,7 @@ export namespace Components {
         "color"?: Color;
         "defined": boolean;
         "edit": (editable: boolean) => Promise<void>;
+        "errorMessage"?: string;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
         "getValue": () => Promise<any | any[] | undefined>;
         "inCalendar": boolean;
@@ -2751,6 +2752,7 @@ declare namespace LocalJSX {
         "clearable"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
+        "errorMessage"?: string;
         "inCalendar"?: boolean;
         "invalid"?: boolean;
         "looks"?: Looks;

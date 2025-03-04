@@ -72,15 +72,15 @@
 	opacity: .7;
 	cursor: pointer;
 	height: 100%;
-	box-sizing: content-box;
 	padding-inline: var(--input-padding-side);
 }
 
-:host.invalid>div>smoothly-icon.invalid {
+:host[invalid]>div>smoothly-icon.smoothly-invalid {
 	display: block;
+	padding: 0.5rem;
 }
 
-:host>div>smoothly-icon.invalid {
+:host>div>smoothly-icon.smoothly-invalid {
 	display: none
 }
 
@@ -139,8 +139,4 @@
 
 :host>div.options.hidden {
 	display: none;
-}
-
-:host.invalid>div>smoothly-icon {
-	display: block;
 }

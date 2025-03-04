@@ -33,7 +33,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) currency?: isoly.Currency
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
-	@Prop() errorMessage?: string
+	@Prop({ reflect: true }) errorMessage?: string
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	parent: Editable | undefined
@@ -175,7 +175,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				class={{ "has-value": this.state?.value != undefined && this.state?.value != "" }}
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start" />
-				<div>
+				<div class="smoothly-input-container">
 					<div class={"ghost"}>
 						<div class={"value"}>{this.state?.value}</div>
 						<div class={"remainder"}>{this.state?.remainder}</div>
@@ -212,8 +212,15 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 					<label class={"label float-on-focus"} htmlFor={this.name}>
 						<slot />
 					</label>
-					<smoothly-icon name="alert-circle" color="danger" fill="clear" size="small" toolTip={this.errorMessage} />
 				</div>
+				<smoothly-icon
+					class="smoothly-invalid"
+					name="alert-circle"
+					color="danger"
+					fill="clear"
+					size="small"
+					toolTip={this.errorMessage}
+				/>
 				<slot name="end" />
 			</Host>
 		)
