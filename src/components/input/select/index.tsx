@@ -348,14 +348,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					{this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
-					<slot name="end" />
-					{this.looks == "border" && !this.readonly && (
-						<smoothly-icon
-							ref={element => (this.toggle = element)}
-							size="tiny"
-							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
-						/>
-					)}
 					<smoothly-icon
 						class="smoothly-invalid"
 						name="alert-circle"
@@ -364,6 +356,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						size="small"
 						toolTip={this.errorMessage}
 					/>
+					<slot name="end" />
+					{this.looks == "border" && !this.readonly && (
+						<smoothly-icon
+							ref={element => (this.toggle = element)}
+							size="tiny"
+							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
+						/>
+					)}
 				</div>
 				<slot name="label" />
 				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
