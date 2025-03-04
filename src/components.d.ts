@@ -547,56 +547,6 @@ export namespace Components {
         "closable": boolean;
         "open": boolean;
     }
-    interface SmoothlyNextDemo {
-    }
-    interface SmoothlyNextDemoColspan {
-    }
-    interface SmoothlyNextDemoFillerRowDemo {
-    }
-    interface SmoothlyNextDemoGroup {
-    }
-    interface SmoothlyNextDemoNested {
-    }
-    interface SmoothlyNextDemoNestedInner {
-        "data"?: {
-		id: number
-		name: string
-		age: number
-		balance: number
-	}[];
-    }
-    interface SmoothlyNextDemoSimple {
-    }
-    interface SmoothlyNextTable {
-        "columns": number;
-    }
-    interface SmoothlyNextTableBody {
-    }
-    interface SmoothlyNextTableCell {
-        "span"?: number;
-    }
-    interface SmoothlyNextTableDemoFiltered {
-    }
-    interface SmoothlyNextTableExpandableCell {
-        "close": () => Promise<void>;
-        "open": boolean;
-        "span"?: number;
-    }
-    interface SmoothlyNextTableExpandableRow {
-        "open": boolean;
-    }
-    interface SmoothlyNextTableFillerRow {
-    }
-    interface SmoothlyNextTableFoot {
-    }
-    interface SmoothlyNextTableHead {
-    }
-    interface SmoothlyNextTableRow {
-    }
-    interface SmoothlyNextTableRowGroup {
-        "align": boolean;
-        "open": boolean;
-    }
     interface SmoothlyNotification {
         "closable": boolean;
         "icon": boolean;
@@ -627,6 +577,56 @@ export namespace Components {
     }
     interface SmoothlyTab {
         "label": string;
+        "open": boolean;
+    }
+    interface SmoothlyTable {
+        "columns": number;
+    }
+    interface SmoothlyTableBody {
+    }
+    interface SmoothlyTableCell {
+        "span"?: number;
+    }
+    interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableDemoColspan {
+    }
+    interface SmoothlyTableDemoFillerRow {
+    }
+    interface SmoothlyTableDemoFiltered {
+    }
+    interface SmoothlyTableDemoGroup {
+    }
+    interface SmoothlyTableDemoNested {
+    }
+    interface SmoothlyTableDemoNestedInner {
+        "data"?: {
+		id: number
+		name: string
+		age: number
+		balance: number
+	}[];
+    }
+    interface SmoothlyTableDemoSimple {
+    }
+    interface SmoothlyTableExpandableCell {
+        "close": () => Promise<void>;
+        "open": boolean;
+        "span"?: number;
+    }
+    interface SmoothlyTableExpandableRow {
+        "open": boolean;
+    }
+    interface SmoothlyTableFillerRow {
+    }
+    interface SmoothlyTableFoot {
+    }
+    interface SmoothlyTableHead {
+    }
+    interface SmoothlyTableRow {
+    }
+    interface SmoothlyTableRowGroup {
+        "align": boolean;
         "open": boolean;
     }
     interface SmoothlyTabs {
@@ -819,18 +819,6 @@ export interface SmoothlyModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyModalElement;
 }
-export interface SmoothlyNextTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyNextTableExpandableCellElement;
-}
-export interface SmoothlyNextTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyNextTableExpandableRowElement;
-}
-export interface SmoothlyNextTableRowGroupCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyNextTableRowGroupElement;
-}
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
@@ -846,6 +834,18 @@ export interface SmoothlySummaryCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyTabCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTabElement;
+}
+export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableExpandableCellElement;
+}
+export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyTableRowGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableRowGroupElement;
 }
 export interface SmoothlyTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1701,148 +1701,6 @@ declare global {
         prototype: HTMLSmoothlyModalElement;
         new (): HTMLSmoothlyModalElement;
     };
-    interface HTMLSmoothlyNextDemoElement extends Components.SmoothlyNextDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoElement: {
-        prototype: HTMLSmoothlyNextDemoElement;
-        new (): HTMLSmoothlyNextDemoElement;
-    };
-    interface HTMLSmoothlyNextDemoColspanElement extends Components.SmoothlyNextDemoColspan, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoColspanElement: {
-        prototype: HTMLSmoothlyNextDemoColspanElement;
-        new (): HTMLSmoothlyNextDemoColspanElement;
-    };
-    interface HTMLSmoothlyNextDemoFillerRowDemoElement extends Components.SmoothlyNextDemoFillerRowDemo, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoFillerRowDemoElement: {
-        prototype: HTMLSmoothlyNextDemoFillerRowDemoElement;
-        new (): HTMLSmoothlyNextDemoFillerRowDemoElement;
-    };
-    interface HTMLSmoothlyNextDemoGroupElement extends Components.SmoothlyNextDemoGroup, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoGroupElement: {
-        prototype: HTMLSmoothlyNextDemoGroupElement;
-        new (): HTMLSmoothlyNextDemoGroupElement;
-    };
-    interface HTMLSmoothlyNextDemoNestedElement extends Components.SmoothlyNextDemoNested, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoNestedElement: {
-        prototype: HTMLSmoothlyNextDemoNestedElement;
-        new (): HTMLSmoothlyNextDemoNestedElement;
-    };
-    interface HTMLSmoothlyNextDemoNestedInnerElement extends Components.SmoothlyNextDemoNestedInner, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoNestedInnerElement: {
-        prototype: HTMLSmoothlyNextDemoNestedInnerElement;
-        new (): HTMLSmoothlyNextDemoNestedInnerElement;
-    };
-    interface HTMLSmoothlyNextDemoSimpleElement extends Components.SmoothlyNextDemoSimple, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextDemoSimpleElement: {
-        prototype: HTMLSmoothlyNextDemoSimpleElement;
-        new (): HTMLSmoothlyNextDemoSimpleElement;
-    };
-    interface HTMLSmoothlyNextTableElement extends Components.SmoothlyNextTable, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableElement: {
-        prototype: HTMLSmoothlyNextTableElement;
-        new (): HTMLSmoothlyNextTableElement;
-    };
-    interface HTMLSmoothlyNextTableBodyElement extends Components.SmoothlyNextTableBody, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableBodyElement: {
-        prototype: HTMLSmoothlyNextTableBodyElement;
-        new (): HTMLSmoothlyNextTableBodyElement;
-    };
-    interface HTMLSmoothlyNextTableCellElement extends Components.SmoothlyNextTableCell, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableCellElement: {
-        prototype: HTMLSmoothlyNextTableCellElement;
-        new (): HTMLSmoothlyNextTableCellElement;
-    };
-    interface HTMLSmoothlyNextTableDemoFilteredElement extends Components.SmoothlyNextTableDemoFiltered, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableDemoFilteredElement: {
-        prototype: HTMLSmoothlyNextTableDemoFilteredElement;
-        new (): HTMLSmoothlyNextTableDemoFilteredElement;
-    };
-    interface HTMLSmoothlyNextTableExpandableCellElementEventMap {
-        "smoothlyNextTableExpandableCellChange": boolean;
-        "smoothlyNextTableExpandableCellRegister": void;
-    }
-    interface HTMLSmoothlyNextTableExpandableCellElement extends Components.SmoothlyNextTableExpandableCell, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyNextTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableCellElement, ev: SmoothlyNextTableExpandableCellCustomEvent<HTMLSmoothlyNextTableExpandableCellElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyNextTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableCellElement, ev: SmoothlyNextTableExpandableCellCustomEvent<HTMLSmoothlyNextTableExpandableCellElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyNextTableExpandableCellElement: {
-        prototype: HTMLSmoothlyNextTableExpandableCellElement;
-        new (): HTMLSmoothlyNextTableExpandableCellElement;
-    };
-    interface HTMLSmoothlyNextTableExpandableRowElementEventMap {
-        "smoothlyNextTableExpandableRowChange": boolean;
-    }
-    interface HTMLSmoothlyNextTableExpandableRowElement extends Components.SmoothlyNextTableExpandableRow, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyNextTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableRowElement, ev: SmoothlyNextTableExpandableRowCustomEvent<HTMLSmoothlyNextTableExpandableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyNextTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableExpandableRowElement, ev: SmoothlyNextTableExpandableRowCustomEvent<HTMLSmoothlyNextTableExpandableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyNextTableExpandableRowElement: {
-        prototype: HTMLSmoothlyNextTableExpandableRowElement;
-        new (): HTMLSmoothlyNextTableExpandableRowElement;
-    };
-    interface HTMLSmoothlyNextTableFillerRowElement extends Components.SmoothlyNextTableFillerRow, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableFillerRowElement: {
-        prototype: HTMLSmoothlyNextTableFillerRowElement;
-        new (): HTMLSmoothlyNextTableFillerRowElement;
-    };
-    interface HTMLSmoothlyNextTableFootElement extends Components.SmoothlyNextTableFoot, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableFootElement: {
-        prototype: HTMLSmoothlyNextTableFootElement;
-        new (): HTMLSmoothlyNextTableFootElement;
-    };
-    interface HTMLSmoothlyNextTableHeadElement extends Components.SmoothlyNextTableHead, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableHeadElement: {
-        prototype: HTMLSmoothlyNextTableHeadElement;
-        new (): HTMLSmoothlyNextTableHeadElement;
-    };
-    interface HTMLSmoothlyNextTableRowElement extends Components.SmoothlyNextTableRow, HTMLStencilElement {
-    }
-    var HTMLSmoothlyNextTableRowElement: {
-        prototype: HTMLSmoothlyNextTableRowElement;
-        new (): HTMLSmoothlyNextTableRowElement;
-    };
-    interface HTMLSmoothlyNextTableRowGroupElementEventMap {
-        "smoothlyNextTableRowGroupChange": boolean;
-    }
-    interface HTMLSmoothlyNextTableRowGroupElement extends Components.SmoothlyNextTableRowGroup, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyNextTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyNextTableRowGroupElement, ev: SmoothlyNextTableRowGroupCustomEvent<HTMLSmoothlyNextTableRowGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyNextTableRowGroupElement: {
-        prototype: HTMLSmoothlyNextTableRowGroupElement;
-        new (): HTMLSmoothlyNextTableRowGroupElement;
-    };
     interface HTMLSmoothlyNotificationElementEventMap {
         "remove": Notice;
     }
@@ -1923,6 +1781,148 @@ declare global {
     var HTMLSmoothlyTabElement: {
         prototype: HTMLSmoothlyTabElement;
         new (): HTMLSmoothlyTabElement;
+    };
+    interface HTMLSmoothlyTableElement extends Components.SmoothlyTable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableElement: {
+        prototype: HTMLSmoothlyTableElement;
+        new (): HTMLSmoothlyTableElement;
+    };
+    interface HTMLSmoothlyTableBodyElement extends Components.SmoothlyTableBody, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableBodyElement: {
+        prototype: HTMLSmoothlyTableBodyElement;
+        new (): HTMLSmoothlyTableBodyElement;
+    };
+    interface HTMLSmoothlyTableCellElement extends Components.SmoothlyTableCell, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableCellElement: {
+        prototype: HTMLSmoothlyTableCellElement;
+        new (): HTMLSmoothlyTableCellElement;
+    };
+    interface HTMLSmoothlyTableDemoElement extends Components.SmoothlyTableDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoElement: {
+        prototype: HTMLSmoothlyTableDemoElement;
+        new (): HTMLSmoothlyTableDemoElement;
+    };
+    interface HTMLSmoothlyTableDemoColspanElement extends Components.SmoothlyTableDemoColspan, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoColspanElement: {
+        prototype: HTMLSmoothlyTableDemoColspanElement;
+        new (): HTMLSmoothlyTableDemoColspanElement;
+    };
+    interface HTMLSmoothlyTableDemoFillerRowElement extends Components.SmoothlyTableDemoFillerRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoFillerRowElement: {
+        prototype: HTMLSmoothlyTableDemoFillerRowElement;
+        new (): HTMLSmoothlyTableDemoFillerRowElement;
+    };
+    interface HTMLSmoothlyTableDemoFilteredElement extends Components.SmoothlyTableDemoFiltered, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoFilteredElement: {
+        prototype: HTMLSmoothlyTableDemoFilteredElement;
+        new (): HTMLSmoothlyTableDemoFilteredElement;
+    };
+    interface HTMLSmoothlyTableDemoGroupElement extends Components.SmoothlyTableDemoGroup, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoGroupElement: {
+        prototype: HTMLSmoothlyTableDemoGroupElement;
+        new (): HTMLSmoothlyTableDemoGroupElement;
+    };
+    interface HTMLSmoothlyTableDemoNestedElement extends Components.SmoothlyTableDemoNested, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoNestedElement: {
+        prototype: HTMLSmoothlyTableDemoNestedElement;
+        new (): HTMLSmoothlyTableDemoNestedElement;
+    };
+    interface HTMLSmoothlyTableDemoNestedInnerElement extends Components.SmoothlyTableDemoNestedInner, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoNestedInnerElement: {
+        prototype: HTMLSmoothlyTableDemoNestedInnerElement;
+        new (): HTMLSmoothlyTableDemoNestedInnerElement;
+    };
+    interface HTMLSmoothlyTableDemoSimpleElement extends Components.SmoothlyTableDemoSimple, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoSimpleElement: {
+        prototype: HTMLSmoothlyTableDemoSimpleElement;
+        new (): HTMLSmoothlyTableDemoSimpleElement;
+    };
+    interface HTMLSmoothlyTableExpandableCellElementEventMap {
+        "smoothlyTableExpandableCellChange": boolean;
+        "smoothlyTableExpandableCellRegister": void;
+    }
+    interface HTMLSmoothlyTableExpandableCellElement extends Components.SmoothlyTableExpandableCell, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableCellElement, ev: SmoothlyTableExpandableCellCustomEvent<HTMLSmoothlyTableExpandableCellElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableCellElement, ev: SmoothlyTableExpandableCellCustomEvent<HTMLSmoothlyTableExpandableCellElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableExpandableCellElement: {
+        prototype: HTMLSmoothlyTableExpandableCellElement;
+        new (): HTMLSmoothlyTableExpandableCellElement;
+    };
+    interface HTMLSmoothlyTableExpandableRowElementEventMap {
+        "smoothlyTableExpandableRowChange": boolean;
+    }
+    interface HTMLSmoothlyTableExpandableRowElement extends Components.SmoothlyTableExpandableRow, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableRowElement, ev: SmoothlyTableExpandableRowCustomEvent<HTMLSmoothlyTableExpandableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableExpandableRowElement, ev: SmoothlyTableExpandableRowCustomEvent<HTMLSmoothlyTableExpandableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableExpandableRowElement: {
+        prototype: HTMLSmoothlyTableExpandableRowElement;
+        new (): HTMLSmoothlyTableExpandableRowElement;
+    };
+    interface HTMLSmoothlyTableFillerRowElement extends Components.SmoothlyTableFillerRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFillerRowElement: {
+        prototype: HTMLSmoothlyTableFillerRowElement;
+        new (): HTMLSmoothlyTableFillerRowElement;
+    };
+    interface HTMLSmoothlyTableFootElement extends Components.SmoothlyTableFoot, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFootElement: {
+        prototype: HTMLSmoothlyTableFootElement;
+        new (): HTMLSmoothlyTableFootElement;
+    };
+    interface HTMLSmoothlyTableHeadElement extends Components.SmoothlyTableHead, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableHeadElement: {
+        prototype: HTMLSmoothlyTableHeadElement;
+        new (): HTMLSmoothlyTableHeadElement;
+    };
+    interface HTMLSmoothlyTableRowElement extends Components.SmoothlyTableRow, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableRowElement: {
+        prototype: HTMLSmoothlyTableRowElement;
+        new (): HTMLSmoothlyTableRowElement;
+    };
+    interface HTMLSmoothlyTableRowGroupElementEventMap {
+        "smoothlyTableRowGroupChange": boolean;
+    }
+    interface HTMLSmoothlyTableRowGroupElement extends Components.SmoothlyTableRowGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableRowGroupElement, ev: SmoothlyTableRowGroupCustomEvent<HTMLSmoothlyTableRowGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableRowGroupElement, ev: SmoothlyTableRowGroupCustomEvent<HTMLSmoothlyTableRowGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableRowGroupElement: {
+        prototype: HTMLSmoothlyTableRowGroupElement;
+        new (): HTMLSmoothlyTableRowGroupElement;
     };
     interface HTMLSmoothlyTabsElementEventMap {
         "smoothlyTabOpen": string;
@@ -2122,30 +2122,30 @@ declare global {
         "smoothly-lazy": HTMLSmoothlyLazyElement;
         "smoothly-load-more": HTMLSmoothlyLoadMoreElement;
         "smoothly-modal": HTMLSmoothlyModalElement;
-        "smoothly-next-demo": HTMLSmoothlyNextDemoElement;
-        "smoothly-next-demo-colspan": HTMLSmoothlyNextDemoColspanElement;
-        "smoothly-next-demo-filler-row-demo": HTMLSmoothlyNextDemoFillerRowDemoElement;
-        "smoothly-next-demo-group": HTMLSmoothlyNextDemoGroupElement;
-        "smoothly-next-demo-nested": HTMLSmoothlyNextDemoNestedElement;
-        "smoothly-next-demo-nested-inner": HTMLSmoothlyNextDemoNestedInnerElement;
-        "smoothly-next-demo-simple": HTMLSmoothlyNextDemoSimpleElement;
-        "smoothly-next-table": HTMLSmoothlyNextTableElement;
-        "smoothly-next-table-body": HTMLSmoothlyNextTableBodyElement;
-        "smoothly-next-table-cell": HTMLSmoothlyNextTableCellElement;
-        "smoothly-next-table-demo-filtered": HTMLSmoothlyNextTableDemoFilteredElement;
-        "smoothly-next-table-expandable-cell": HTMLSmoothlyNextTableExpandableCellElement;
-        "smoothly-next-table-expandable-row": HTMLSmoothlyNextTableExpandableRowElement;
-        "smoothly-next-table-filler-row": HTMLSmoothlyNextTableFillerRowElement;
-        "smoothly-next-table-foot": HTMLSmoothlyNextTableFootElement;
-        "smoothly-next-table-head": HTMLSmoothlyNextTableHeadElement;
-        "smoothly-next-table-row": HTMLSmoothlyNextTableRowElement;
-        "smoothly-next-table-row-group": HTMLSmoothlyNextTableRowGroupElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
+        "smoothly-table": HTMLSmoothlyTableElement;
+        "smoothly-table-body": HTMLSmoothlyTableBodyElement;
+        "smoothly-table-cell": HTMLSmoothlyTableCellElement;
+        "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
+        "smoothly-table-demo-colspan": HTMLSmoothlyTableDemoColspanElement;
+        "smoothly-table-demo-filler-row": HTMLSmoothlyTableDemoFillerRowElement;
+        "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
+        "smoothly-table-demo-group": HTMLSmoothlyTableDemoGroupElement;
+        "smoothly-table-demo-nested": HTMLSmoothlyTableDemoNestedElement;
+        "smoothly-table-demo-nested-inner": HTMLSmoothlyTableDemoNestedInnerElement;
+        "smoothly-table-demo-simple": HTMLSmoothlyTableDemoSimpleElement;
+        "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
+        "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
+        "smoothly-table-filler-row": HTMLSmoothlyTableFillerRowElement;
+        "smoothly-table-foot": HTMLSmoothlyTableFootElement;
+        "smoothly-table-head": HTMLSmoothlyTableHeadElement;
+        "smoothly-table-row": HTMLSmoothlyTableRowElement;
+        "smoothly-table-row-group": HTMLSmoothlyTableRowGroupElement;
         "smoothly-tabs": HTMLSmoothlyTabsElement;
         "smoothly-tabs-demo": HTMLSmoothlyTabsDemoElement;
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
@@ -2666,59 +2666,6 @@ declare namespace LocalJSX {
         "onSmoothlyModalChange"?: (event: SmoothlyModalCustomEvent<boolean>) => void;
         "open"?: boolean;
     }
-    interface SmoothlyNextDemo {
-    }
-    interface SmoothlyNextDemoColspan {
-    }
-    interface SmoothlyNextDemoFillerRowDemo {
-    }
-    interface SmoothlyNextDemoGroup {
-    }
-    interface SmoothlyNextDemoNested {
-    }
-    interface SmoothlyNextDemoNestedInner {
-        "data"?: {
-		id: number
-		name: string
-		age: number
-		balance: number
-	}[];
-    }
-    interface SmoothlyNextDemoSimple {
-    }
-    interface SmoothlyNextTable {
-        "columns"?: number;
-    }
-    interface SmoothlyNextTableBody {
-    }
-    interface SmoothlyNextTableCell {
-        "span"?: number;
-    }
-    interface SmoothlyNextTableDemoFiltered {
-    }
-    interface SmoothlyNextTableExpandableCell {
-        "onSmoothlyNextTableExpandableCellChange"?: (event: SmoothlyNextTableExpandableCellCustomEvent<boolean>) => void;
-        "onSmoothlyNextTableExpandableCellRegister"?: (event: SmoothlyNextTableExpandableCellCustomEvent<void>) => void;
-        "open"?: boolean;
-        "span"?: number;
-    }
-    interface SmoothlyNextTableExpandableRow {
-        "onSmoothlyNextTableExpandableRowChange"?: (event: SmoothlyNextTableExpandableRowCustomEvent<boolean>) => void;
-        "open"?: boolean;
-    }
-    interface SmoothlyNextTableFillerRow {
-    }
-    interface SmoothlyNextTableFoot {
-    }
-    interface SmoothlyNextTableHead {
-    }
-    interface SmoothlyNextTableRow {
-    }
-    interface SmoothlyNextTableRowGroup {
-        "align"?: boolean;
-        "onSmoothlyNextTableRowGroupChange"?: (event: SmoothlyNextTableRowGroupCustomEvent<boolean>) => void;
-        "open"?: boolean;
-    }
     interface SmoothlyNotification {
         "closable"?: boolean;
         "icon"?: boolean;
@@ -2754,6 +2701,59 @@ declare namespace LocalJSX {
         "label"?: string;
         "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<void>) => void;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabCustomEvent<string>) => void;
+        "open"?: boolean;
+    }
+    interface SmoothlyTable {
+        "columns"?: number;
+    }
+    interface SmoothlyTableBody {
+    }
+    interface SmoothlyTableCell {
+        "span"?: number;
+    }
+    interface SmoothlyTableDemo {
+    }
+    interface SmoothlyTableDemoColspan {
+    }
+    interface SmoothlyTableDemoFillerRow {
+    }
+    interface SmoothlyTableDemoFiltered {
+    }
+    interface SmoothlyTableDemoGroup {
+    }
+    interface SmoothlyTableDemoNested {
+    }
+    interface SmoothlyTableDemoNestedInner {
+        "data"?: {
+		id: number
+		name: string
+		age: number
+		balance: number
+	}[];
+    }
+    interface SmoothlyTableDemoSimple {
+    }
+    interface SmoothlyTableExpandableCell {
+        "onSmoothlyTableExpandableCellChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
+        "onSmoothlyTableExpandableCellRegister"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
+        "open"?: boolean;
+        "span"?: number;
+    }
+    interface SmoothlyTableExpandableRow {
+        "onSmoothlyTableExpandableRowChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
+        "open"?: boolean;
+    }
+    interface SmoothlyTableFillerRow {
+    }
+    interface SmoothlyTableFoot {
+    }
+    interface SmoothlyTableHead {
+    }
+    interface SmoothlyTableRow {
+    }
+    interface SmoothlyTableRowGroup {
+        "align"?: boolean;
+        "onSmoothlyTableRowGroupChange"?: (event: SmoothlyTableRowGroupCustomEvent<boolean>) => void;
         "open"?: boolean;
     }
     interface SmoothlyTabs {
@@ -2883,30 +2883,30 @@ declare namespace LocalJSX {
         "smoothly-lazy": SmoothlyLazy;
         "smoothly-load-more": SmoothlyLoadMore;
         "smoothly-modal": SmoothlyModal;
-        "smoothly-next-demo": SmoothlyNextDemo;
-        "smoothly-next-demo-colspan": SmoothlyNextDemoColspan;
-        "smoothly-next-demo-filler-row-demo": SmoothlyNextDemoFillerRowDemo;
-        "smoothly-next-demo-group": SmoothlyNextDemoGroup;
-        "smoothly-next-demo-nested": SmoothlyNextDemoNested;
-        "smoothly-next-demo-nested-inner": SmoothlyNextDemoNestedInner;
-        "smoothly-next-demo-simple": SmoothlyNextDemoSimple;
-        "smoothly-next-table": SmoothlyNextTable;
-        "smoothly-next-table-body": SmoothlyNextTableBody;
-        "smoothly-next-table-cell": SmoothlyNextTableCell;
-        "smoothly-next-table-demo-filtered": SmoothlyNextTableDemoFiltered;
-        "smoothly-next-table-expandable-cell": SmoothlyNextTableExpandableCell;
-        "smoothly-next-table-expandable-row": SmoothlyNextTableExpandableRow;
-        "smoothly-next-table-filler-row": SmoothlyNextTableFillerRow;
-        "smoothly-next-table-foot": SmoothlyNextTableFoot;
-        "smoothly-next-table-head": SmoothlyNextTableHead;
-        "smoothly-next-table-row": SmoothlyNextTableRow;
-        "smoothly-next-table-row-group": SmoothlyNextTableRowGroup;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
         "smoothly-tab": SmoothlyTab;
+        "smoothly-table": SmoothlyTable;
+        "smoothly-table-body": SmoothlyTableBody;
+        "smoothly-table-cell": SmoothlyTableCell;
+        "smoothly-table-demo": SmoothlyTableDemo;
+        "smoothly-table-demo-colspan": SmoothlyTableDemoColspan;
+        "smoothly-table-demo-filler-row": SmoothlyTableDemoFillerRow;
+        "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
+        "smoothly-table-demo-group": SmoothlyTableDemoGroup;
+        "smoothly-table-demo-nested": SmoothlyTableDemoNested;
+        "smoothly-table-demo-nested-inner": SmoothlyTableDemoNestedInner;
+        "smoothly-table-demo-simple": SmoothlyTableDemoSimple;
+        "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
+        "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
+        "smoothly-table-filler-row": SmoothlyTableFillerRow;
+        "smoothly-table-foot": SmoothlyTableFoot;
+        "smoothly-table-head": SmoothlyTableHead;
+        "smoothly-table-row": SmoothlyTableRow;
+        "smoothly-table-row-group": SmoothlyTableRowGroup;
         "smoothly-tabs": SmoothlyTabs;
         "smoothly-tabs-demo": SmoothlyTabsDemo;
         "smoothly-theme-color": SmoothlyThemeColor;
@@ -2995,30 +2995,30 @@ declare module "@stencil/core" {
             "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
             "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
             "smoothly-modal": LocalJSX.SmoothlyModal & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
-            "smoothly-next-demo": LocalJSX.SmoothlyNextDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoElement>;
-            "smoothly-next-demo-colspan": LocalJSX.SmoothlyNextDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoColspanElement>;
-            "smoothly-next-demo-filler-row-demo": LocalJSX.SmoothlyNextDemoFillerRowDemo & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoFillerRowDemoElement>;
-            "smoothly-next-demo-group": LocalJSX.SmoothlyNextDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoGroupElement>;
-            "smoothly-next-demo-nested": LocalJSX.SmoothlyNextDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedElement>;
-            "smoothly-next-demo-nested-inner": LocalJSX.SmoothlyNextDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoNestedInnerElement>;
-            "smoothly-next-demo-simple": LocalJSX.SmoothlyNextDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyNextDemoSimpleElement>;
-            "smoothly-next-table": LocalJSX.SmoothlyNextTable & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableElement>;
-            "smoothly-next-table-body": LocalJSX.SmoothlyNextTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableBodyElement>;
-            "smoothly-next-table-cell": LocalJSX.SmoothlyNextTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableCellElement>;
-            "smoothly-next-table-demo-filtered": LocalJSX.SmoothlyNextTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableDemoFilteredElement>;
-            "smoothly-next-table-expandable-cell": LocalJSX.SmoothlyNextTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableCellElement>;
-            "smoothly-next-table-expandable-row": LocalJSX.SmoothlyNextTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableExpandableRowElement>;
-            "smoothly-next-table-filler-row": LocalJSX.SmoothlyNextTableFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFillerRowElement>;
-            "smoothly-next-table-foot": LocalJSX.SmoothlyNextTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableFootElement>;
-            "smoothly-next-table-head": LocalJSX.SmoothlyNextTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableHeadElement>;
-            "smoothly-next-table-row": LocalJSX.SmoothlyNextTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowElement>;
-            "smoothly-next-table-row-group": LocalJSX.SmoothlyNextTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyNextTableRowGroupElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
+            "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
+            "smoothly-table-body": LocalJSX.SmoothlyTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyTableBodyElement>;
+            "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
+            "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-demo-colspan": LocalJSX.SmoothlyTableDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoColspanElement>;
+            "smoothly-table-demo-filler-row": LocalJSX.SmoothlyTableDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
+            "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
+            "smoothly-table-demo-group": LocalJSX.SmoothlyTableDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
+            "smoothly-table-demo-nested": LocalJSX.SmoothlyTableDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedElement>;
+            "smoothly-table-demo-nested-inner": LocalJSX.SmoothlyTableDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedInnerElement>;
+            "smoothly-table-demo-simple": LocalJSX.SmoothlyTableDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoSimpleElement>;
+            "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
+            "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
+            "smoothly-table-filler-row": LocalJSX.SmoothlyTableFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableFillerRowElement>;
+            "smoothly-table-foot": LocalJSX.SmoothlyTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyTableFootElement>;
+            "smoothly-table-head": LocalJSX.SmoothlyTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
+            "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
             "smoothly-tabs": LocalJSX.SmoothlyTabs & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
             "smoothly-tabs-demo": LocalJSX.SmoothlyTabsDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
