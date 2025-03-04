@@ -14,15 +14,15 @@ export class SmoothlyAppRoom {
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
-	@Event() smoothlyRoomSelected: EventEmitter<{ history: boolean }>
-	@Event() smoothlyRoomLoaded: EventEmitter<{ selected: boolean }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean }>
+	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	private contentElement?: HTMLElement
 
 	componentWillLoad() {
 		this.selected = (typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(
 			window.location
 		)
-		this.smoothlyRoomLoaded.emit({ selected: this.selected })
+		this.smoothlyRoomLoad.emit({ selected: this.selected })
 	}
 
 	@Method()
@@ -33,7 +33,7 @@ export class SmoothlyAppRoom {
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
 		if (selected)
-			this.smoothlyRoomSelected.emit({ history: !!options?.history })
+			this.smoothlyRoomSelect.emit({ history: !!options?.history })
 	}
 
 	clickHandler(event: MouseEvent) {

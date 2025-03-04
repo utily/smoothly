@@ -38,10 +38,10 @@ export class SmoothlyApp {
 			room => room?.element.path != this.selected?.element.path && room?.element.setSelected(false)
 		)
 		const content = await this.selected?.element.getContent()
-		if (this.mainElement && content) {
-			this.mainElement.innerHTML = ""
-			this.mainElement.appendChild(content)
-		}
+		requestAnimationFrame(() => {
+			if (this.mainElement && content)
+				this.mainElement.replaceChildren(content)
+		})
 	}
 	burgerVisibilityHandler(event: CustomEvent<boolean>) {
 		this.burgerVisibility = event.detail
@@ -54,7 +54,7 @@ export class SmoothlyApp {
 	async locationChangeHandler(event: PopStateEvent) {
 		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
 	}
-	@Listen("smoothlyRoomSelected")
+	@Listen("smoothlyRoomSelect")
 	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) {
 		this.selected = { element: event.target }
 		if (this.burgerVisibility)
@@ -66,7 +66,7 @@ export class SmoothlyApp {
 			window.history.pushState({ smoothlyPath: path }, "", location.href)
 		}
 	}
-	@Listen("smoothlyRoomLoaded")
+	@Listen("smoothlyRoomLoad")
 	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) {
 		const room = (this.rooms[event.target.path.toString()] = { element: event.target })
 		if (room.element.selected) {
@@ -76,11 +76,8 @@ export class SmoothlyApp {
 	}
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
-		if (this.burgerVisibility)
-			if (event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
-				!this.menuOpen
-			else
-				this.menuOpen = false
+		if (this.burgerVisibility && !event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
+			this.menuOpen = false
 	}
 	render() {
 		return (
