@@ -76,11 +76,11 @@
 	padding-inline: var(--input-padding-side);
 }
 
-:host.invalid>div>smoothly-icon.invalid {
+:host[invalid]>div>smoothly-icon.smoothly-invalid {
 	display: block;
 }
 
-:host>div>smoothly-icon.invalid {
+:host>div>smoothly-icon.smoothly-invalid {
 	display: none
 }
 
@@ -141,6 +141,6 @@
 	display: none;
 }
 
-:host.invalid>div>smoothly-icon {
+:host[invalid]>div>smoothly-icon {
 	display: block;
 }
