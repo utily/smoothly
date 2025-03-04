@@ -87,7 +87,7 @@ export class SmoothlyApp {
 						<a href={""}>{this.label}</a>
 					</h1>
 					<slot name="header" />
-					<nav ref={e => (this.navElement = e)} class={{ "menu-open": this.menuOpen }}>
+					<nav ref={e => (this.navElement = e)}>
 						<ul>
 							<div class={"nav-start-container"}>
 								<slot name="nav-start" />
