@@ -1,36 +1,30 @@
-import { Component, h, Listen, Prop } from "@stencil/core"
+import { Component, h, Host, Listen, VNode } from "@stencil/core"
+import { SmoothlyTableExpandableCellCustomEvent } from "../../../components"
 
 @Component({
 	tag: "smoothly-table-row",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class TableRow {
-	private element?: HTMLElement
-	@Prop({ reflect: true, mutable: true }) open = false
-	expansions: HTMLSmoothlyTableExpandableCellElement[] = []
-	@Listen("smoothlyExpansionLoad")
-	onExpansionLoad(event: CustomEvent<void>) {
-		this.expansions.push(event.target as HTMLSmoothlyTableExpandableCellElement)
+export class SmoothlyTableRow {
+	private expandableCells = new Set<HTMLSmoothlyTableExpandableCellElement>()
+	@Listen("smoothlyTableExpandableCellRegister")
+	smoothlyTableExpandableCellRegisterHandler(event: SmoothlyTableExpandableCellCustomEvent<void>): void {
+		event.stopPropagation()
+		this.expandableCells.add(event.target)
 	}
-	@Listen("smoothlyExpandableChange")
-	onExpansionChange() {
-		this.open = this.expansions.some(expansion => expansion.open)
-	}
-	@Listen("smoothlyExpansionOpen")
-	onExpansionOpen(event: CustomEvent<HTMLElement | undefined>) {
-		this.expansions.forEach(cell => {
-			if (cell != event.target)
-				cell.open = false
-		})
+	@Listen("smoothlyTableExpandableCellChange")
+	smoothlyTableExpandableCellChangeHandler(event: SmoothlyTableExpandableCellCustomEvent<boolean>): void {
 		if (event.detail)
-			this.element?.after(event.detail)
+			for (const cell of this.expandableCells)
+				event.target != cell && cell.close()
 	}
-	render() {
+
+	render(): VNode | VNode[] {
 		return (
-			<div ref={e => (this.element = e)}>
-				<slot></slot>
-			</div>
+			<Host>
+				<slot />
+			</Host>
 		)
 	}
 }

@@ -40,6 +40,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 		const cats = this.cats && selectively.filter(this.criteria, this.cats)
 		return (
 			<Host>
+				<smoothly-display type="text" value="Filtered" />
 				<smoothly-filter>
 					<smoothly-filter-toggle
 						properties={{ ["nested.pattern"]: "Ticked", breed: "" }}
@@ -67,7 +68,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						toolTip="Colored cats"
 						slot="bar"
 					/>
-					<smoothly-filter-select label="coat" property="nested.coat" slot="bar" multiple={false}>
+					<smoothly-filter-select menuHeight="5items" label="coat" property="nested.coat" slot="bar" multiple={false}>
 						{this.cats &&
 							Object.values(
 								this.cats.reduce<Record<string, Cat>>(
@@ -85,7 +86,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 					</smoothly-filter-select>
 					<div slot="detail">
 						<smoothly-form looks="border">
-							<smoothly-filter-select label="coat" property="nested.coat" multiple>
+							<smoothly-filter-select menuHeight="5items" label="coat" property="nested.coat" multiple>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>(
@@ -101,7 +102,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 											)
 									)}
 							</smoothly-filter-select>
-							<smoothly-filter-select label="breed" property="breed" multiple={false}>
+							<smoothly-filter-select menuHeight="5items" label="breed" property="breed" multiple={false}>
 								{this.cats &&
 									Object.values(
 										this.cats.reduce<Record<string, Cat>>((r, cat) => (cat.breed ? { ...r, [cat.breed]: cat } : r), {})
@@ -114,7 +115,12 @@ export class TableDemoFiltered implements ComponentWillLoad {
 											)
 									)}
 							</smoothly-filter-select>
-							<smoothly-filter-select label="names" property="nested.names" multiple={true} type="array">
+							<smoothly-filter-select
+								menuHeight="5items"
+								label="names"
+								property="nested.names"
+								multiple={true}
+								type="array">
 								{Object.keys(
 									Object.values(names)
 										.flat()
@@ -133,13 +139,15 @@ export class TableDemoFiltered implements ComponentWillLoad {
 				{!cats ? (
 					"Failed to load data."
 				) : (
-					<smoothly-table>
-						<smoothly-table-row>
-							<smoothly-table-header>{this.selector.render(cats)}</smoothly-table-header>
-							<smoothly-table-header>Breed</smoothly-table-header>
-							<smoothly-table-header>Coat</smoothly-table-header>
-							<smoothly-table-header>Price</smoothly-table-header>
-						</smoothly-table-row>
+					<smoothly-table columns={4}>
+						<smoothly-table-head>
+							<smoothly-table-row>
+								<smoothly-table-cell>{this.selector.render(cats)}</smoothly-table-cell>
+								<smoothly-table-cell>Breed</smoothly-table-cell>
+								<smoothly-table-cell>Coat</smoothly-table-cell>
+								<smoothly-table-cell>Price</smoothly-table-cell>
+							</smoothly-table-row>
+						</smoothly-table-head>
 						{cats.map(cat => (
 							<smoothly-table-row>
 								<smoothly-table-cell>{this.selector.render(cat)}</smoothly-table-cell>
@@ -156,15 +164,17 @@ export class TableDemoFiltered implements ComponentWillLoad {
 								</smoothly-table-cell>
 							</smoothly-table-row>
 						))}
-						<smoothly-table-footer>
-							<td colSpan={5}>
-								<smoothly-display
-									type="text"
-									value={`Selected: ${
-										this.selector.selected.length != 0 ? this.selector.selected.length : cats ? cats.length : "?"
-									}`}></smoothly-display>
-							</td>
-						</smoothly-table-footer>
+						<smoothly-table-foot>
+							<smoothly-table-row>
+								<smoothly-table-cell span={3}>
+									<smoothly-display
+										type="text"
+										value={`Selected: ${
+											this.selector.selected.length != 0 ? this.selector.selected.length : cats ? cats.length : "?"
+										}`}></smoothly-display>
+								</smoothly-table-cell>
+							</smoothly-table-row>
+						</smoothly-table-foot>
 					</smoothly-table>
 				)}
 			</Host>

@@ -1,57 +1,30 @@
-import {
-	Component,
-	ComponentWillLoad,
-	Element,
-	Event,
-	EventEmitter,
-	h,
-	Host,
-	Listen,
-	Prop,
-	State,
-	Watch,
-} from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, VNode, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-expandable-row",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
-export class TableExpandableRow implements ComponentWillLoad {
-	@Element() element: HTMLSmoothlyTableRowElement
-	@State() allowSpotlight = true
-	@State() spotlight = true
-	@Prop({ mutable: true, reflect: true }) open: boolean
-	@Event() smoothlyExpansionOpen: EventEmitter<HTMLElement>
-	@Event() smoothlyExpandableChange: EventEmitter<boolean>
-	@Event() smoothlyExpandableLoad: EventEmitter<{ allowSpotlight: (allowed: boolean) => void }>
+export class SmoothlyTableExpandableRow {
+	private div?: HTMLDivElement
+	@Prop({ mutable: true, reflect: true }) open = false
+	@Event() smoothlyTableExpandableRowChange: EventEmitter<boolean>
 
+	clickHandler(event: MouseEvent): void {
+		;(this.div && event.composedPath().includes(this.div)) || (this.open = !this.open)
+	}
 	@Watch("open")
-	@Watch("allowSpotlight")
-	handleSpotlight() {
-		this.spotlight = this.open && this.allowSpotlight
+	openChange() {
+		this.smoothlyTableExpandableRowChange.emit(this.open)
 	}
-	componentWillLoad() {
-		this.smoothlyExpandableLoad.emit({
-			allowSpotlight: (allowed: boolean) => (this.allowSpotlight = allowed),
-		})
-	}
-	@Listen("smoothlyTableLoad")
-	handleTableLoaded(event: CustomEvent<(owner: EventTarget) => void>) {
-		event.stopPropagation()
-		event.detail(this.element)
-	}
-	render() {
+
+	render(): VNode | VNode[] {
 		return (
-			<Host>
-				<div onClick={() => (this.open = !this.open)}>
-					<slot></slot>
+			<Host onClick={(e: MouseEvent) => this.clickHandler(e)}>
+				<slot></slot>
+				<div ref={e => (this.div = e)}>
+					<slot name="detail" />
 				</div>
-				<tr class={{ spotlight: this.spotlight }}>
-					<td colSpan={999}>
-						<slot name="detail"></slot>
-					</td>
-				</tr>
 			</Host>
 		)
 	}

@@ -1,7 +1,7 @@
 :root,
 *[color],
 smoothly-color {
-	/* smoothly-next-table */
+	/* smoothly-table */
 	--smoothly-table-foreground: var(--smoothly-default-contrast);
 	--smoothly-table-background: var(--smoothly-default-color);
 

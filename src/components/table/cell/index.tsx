@@ -1,20 +1,17 @@
-import { Component, h, Host } from "@stencil/core"
+import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-cell",
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class TableCell {
-	render() {
+export class SmoothlyTableCell {
+	@Prop({ reflect: true }) span?: number = 1
+
+	render(): VNode | VNode[] {
 		return (
-			<Host>
-				<div>
-					<div>
-						<slot></slot>
-					</div>
-					<smoothly-icon name="caret-forward-outline" size="tiny" />
-				</div>
+			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
+				<slot />
 			</Host>
 		)
 	}

@@ -1,12 +1,33 @@
 :host {
-	display: block;
-	width: 80%;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-areas:
+		"header filter"
+		"main main";
+	margin-bottom: 50em;
 }
 
-smoothly-table-cell:nth-of-type(2) {
-	text-align: right;
+:host>smoothly-display {
+	font-size: 2em;
+	grid-area: header;
 }
 
-td {
-	padding-left: 1.5em;
+:host>smoothly-filter {
+	margin-left: auto;
+	grid-area: filter;
+	height: fit-content;
+}
+
+:host>* {
+	margin-bottom: 2rem;
+	grid-area: main;
+}
+
+:host>smoothly-table {
+	grid-template-columns: min-content repeat(calc(var(--columns) - 1), auto);
+}
+
+smoothly-table>smoothly-table-row>smoothly-table-cell:nth-of-type(2),
+:host>smoothly-table>smoothly-table-head>smoothly-table-row>smoothly-table-cell:nth-of-type(4) {
+	justify-content: end;
 }
