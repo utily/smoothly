@@ -877,8 +877,8 @@ declare global {
         new (): HTMLSmoothlyAppDemoElement;
     };
     interface HTMLSmoothlyAppRoomElementEventMap {
-        "smoothlyRoomSelected": { history: boolean };
-        "smoothlyRoomLoaded": { selected: boolean };
+        "smoothlyRoomSelect": { history: boolean };
+        "smoothlyRoomLoad": { selected: boolean };
     }
     interface HTMLSmoothlyAppRoomElement extends Components.SmoothlyAppRoom, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyAppRoomElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppRoomElement, ev: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2177,8 +2177,8 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "icon"?: Icon;
         "label"?: string;
-        "onSmoothlyRoomLoaded"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
-        "onSmoothlyRoomSelected"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
+        "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
+        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
     }
