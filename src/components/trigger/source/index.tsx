@@ -24,6 +24,6 @@ export class SmoothlyTriggerSource {
 		)
 	}
 	render() {
-		return <slot></slot>
+		return <slot />
 	}
 }

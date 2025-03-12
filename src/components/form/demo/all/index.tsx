@@ -22,11 +22,11 @@ export class SmoothlyFormDemoAll {
 					</smoothly-input>
 					<smoothly-input showLabel={false} name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end" />
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
-						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
+						<smoothly-input-reset size="icon" slot="end" />
 					</smoothly-input>
 					<smoothly-input-radio clearable name="radioFirstInput">
 						<label slot="label">Clearable</label>

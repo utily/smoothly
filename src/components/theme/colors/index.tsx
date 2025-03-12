@@ -20,6 +20,6 @@ export class SmoothlyThemeColors {
 				"dark",
 				"default",
 			] as const
-		).map(color => <smoothly-theme-color color={color}></smoothly-theme-color>)
+		).map(color => <smoothly-theme-color color={color} />)
 	}
 }

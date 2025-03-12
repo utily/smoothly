@@ -20,7 +20,7 @@ export class SmoothlyToggle {
 	render() {
 		return (
 			<button type="button">
-				<slot name="icon-slot"></slot>
+				<slot name="icon-slot" />
 				<slot>{this.name}</slot>
 			</button>
 		)

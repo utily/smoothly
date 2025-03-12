@@ -28,7 +28,8 @@ export class SmoothlyToggleSwitch {
 						color={this.color}
 						name={!this.checkmark ? "ellipse" : this.selected ? "checkmark-circle" : "close-circle"}
 						fill="clear"
-						class={{ selected: this.selected }}></smoothly-icon>
+						class={{ selected: this.selected }}
+					/>
 				</button>
 			</Host>
 		)

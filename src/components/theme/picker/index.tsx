@@ -19,7 +19,7 @@ export class SmoothlyThemePicker {
 							element.href = e.detail.theme
 					}}>
 					<label slot="label">Select theme</label>
-					<slot></slot>
+					<slot />
 				</smoothly-input-select>
 			</Host>
 		)

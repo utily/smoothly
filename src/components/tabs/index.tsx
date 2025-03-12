@@ -35,7 +35,7 @@ export class SmoothlyTabs {
 	render() {
 		return (
 			<Host style={{ "--tabs": `${this.tabs.length}` }}>
-				<slot></slot>
+				<slot />
 			</Host>
 		)
 	}

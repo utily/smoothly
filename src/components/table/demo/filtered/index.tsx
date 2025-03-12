@@ -160,7 +160,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 									<div slot="detail">Pattern: {cat.pattern}</div>
 								</smoothly-table-expandable-cell>
 								<smoothly-table-cell>
-									<smoothly-display type="price" value={cat.price} currency="SEK"></smoothly-display>
+									<smoothly-display type="price" value={cat.price} currency="SEK" />
 								</smoothly-table-cell>
 							</smoothly-table-row>
 						))}
@@ -171,7 +171,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 										type="text"
 										value={`Selected: ${
 											this.selector.selected.length != 0 ? this.selector.selected.length : cats ? cats.length : "?"
-										}`}></smoothly-display>
+										}`}
+									/>
 								</smoothly-table-cell>
 							</smoothly-table-row>
 						</smoothly-table-foot>

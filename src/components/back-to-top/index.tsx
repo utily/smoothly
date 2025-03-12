@@ -36,7 +36,7 @@ export class SmoothlyBackToTop {
 						behavior: "smooth",
 					})
 				}>
-				<smoothly-icon name="caret-up-outline"></smoothly-icon>
+				<smoothly-icon name="caret-up-outline" />
 			</Host>
 		)
 	}

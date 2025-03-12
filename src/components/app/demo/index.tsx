@@ -10,7 +10,7 @@ export class SmoothlyAppDemo {
 		return (
 			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
 				<smoothly-trigger slot="nav-start" type="link" name="logout">
-					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium"></smoothly-icon>
+					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium" />
 				</smoothly-trigger>
 				<smoothly-app-room path="/root" label="root">
 					<smoothly-theme-demo />
@@ -60,11 +60,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">
 					<smoothly-tabs-demo />
 				</smoothly-app-room>
-				<smoothly-app-room
-					path="/icon"
-					label="Icon"
-					content={<smoothly-icon-demo />}
-					slot="nav-end"></smoothly-app-room>
+				<smoothly-app-room path="/icon" label="Icon" content={<smoothly-icon-demo />} slot="nav-end" />
 				<smoothly-app-room path="/redirect" label="Redirect" slot="nav-end">
 					<smoothly-button type="link" link="/input">
 						To input

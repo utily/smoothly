@@ -138,7 +138,7 @@ export class SmoothlyFilterSelect implements Filter {
 						{[this.label.slice(0, 1).toUpperCase(), this.label.slice(1, this.label.length)].join("")}
 					</span>
 				)}
-				<slot name="items"></slot>
+				<slot name="items" />
 			</smoothly-input-select>
 		)
 	}

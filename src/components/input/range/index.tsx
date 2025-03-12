@@ -159,7 +159,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						readonly={this.readonly}>
 						{this.label}
 					</smoothly-input>
-					<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()}></smoothly-display>
+					<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />
 					<input
 						name={this.name}
 						part="range"
@@ -174,7 +174,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						}}
 						value={this.value ?? this.min}
 					/>
-					<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()}></smoothly-display>
+					<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()} />
 				</div>
 				<slot name="end" />
 			</Host>

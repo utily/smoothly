@@ -10,6 +10,6 @@ export class SmoothlyColor {
 	@Prop({ reflect: true }) color?: Color
 
 	render() {
-		return <slot></slot>
+		return <slot />
 	}
 }

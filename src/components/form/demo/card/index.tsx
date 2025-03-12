@@ -13,7 +13,7 @@ export class SmoothlyFormDemoCard {
 					<smoothly-input type="card-number" name="card">
 						Card #
 					</smoothly-input>
-					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid"></smoothly-input-submit>
+					<smoothly-input-submit size="icon" slot="submit" color="success" fill="solid" />
 					<smoothly-input type="card-expires" name="expires">
 						Expires
 					</smoothly-input>

@@ -11,6 +11,6 @@ export class SmoothlyDisplayJson {
 	@Prop() collapseDepth?: number
 
 	render(): VNode {
-		return <JsonValue value={this.value} collapseDepth={this.collapseDepth}></JsonValue>
+		return <JsonValue value={this.value} collapseDepth={this.collapseDepth} />
 	}
 }

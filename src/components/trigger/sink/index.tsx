@@ -25,6 +25,6 @@ export class SmoothlyTriggerSink {
 		}
 	}
 	render() {
-		return <slot></slot>
+		return <slot />
 	}
 }

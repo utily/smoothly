@@ -64,7 +64,7 @@ export class SmoothlyCheckbox implements Clearable {
 					}
 				/>
 				<label htmlFor={this.name}>
-					<slot></slot>
+					<slot />
 				</label>
 				<div class={"expansion"}>
 					<slot name="expansion" />

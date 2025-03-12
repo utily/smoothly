@@ -16,11 +16,11 @@ export class SmoothlyInputCheckboxDemo {
 					</smoothly-input>
 					<smoothly-input name="Last name" value="Doe">
 						Last name
-						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end" />
 					</smoothly-input>
 					<smoothly-input type="phone" name="Phone" value={"777888999"}>
 						Phone
-						<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
+						<smoothly-input-reset size="icon" slot="end" />
 					</smoothly-input>
 					<smoothly-input-radio clearable name="radioFirstInput">
 						<p slot="label">Clearable</p>
@@ -51,7 +51,7 @@ export class SmoothlyInputCheckboxDemo {
 						<smoothly-item value="10">October</smoothly-item>
 						<smoothly-item value="11">November</smoothly-item>
 						<smoothly-item value="12">December</smoothly-item>
-						<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
+						<smoothly-input-clear size="icon" slot="end" />
 					</smoothly-input-select>
 					<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 						<smoothly-item value="folder" selected>
@@ -65,10 +65,10 @@ export class SmoothlyInputCheckboxDemo {
 					<smoothly-input-checkbox name="checkbox2" checked>
 						Check the box 2
 					</smoothly-input-checkbox>
-					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()}></smoothly-input-date-range>
+					<smoothly-input-date-range start={isoly.Date.now()} end={isoly.Date.now()} />
 					<smoothly-input-date name="date">
 						Date
-						<smoothly-input-clear slot="end"></smoothly-input-clear>
+						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>
 					<smoothly-input-range step={1} name="range3" value={20000}>
 						Select
@@ -93,12 +93,7 @@ export class SmoothlyInputCheckboxDemo {
 					<smoothly-input-edit fill="default" type="form" color="tertiary" slot="edit" size="icon" shape="rounded" />
 					<smoothly-input-reset fill="default" type="form" color="warning" slot="reset" size="icon" shape="rounded" />
 					<smoothly-input-submit delete slot="delete" color="danger" size="icon" shape="rounded" />
-					<smoothly-input-submit
-						fill="default"
-						color="success"
-						slot="submit"
-						size="icon"
-						shape="rounded"></smoothly-input-submit>
+					<smoothly-input-submit fill="default" color="success" slot="submit" size="icon" shape="rounded" />
 				</smoothly-form>
 			</Host>
 		)

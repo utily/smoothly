@@ -31,8 +31,8 @@ export class SmoothlyFormDemoPrices {
 					<smoothly-input type="price" name="Palladium" currency="XPD">
 						{"XPD (Palladium)"}
 					</smoothly-input>
-					<smoothly-input-reset slot="reset" fill="default" type="form" color="warning"></smoothly-input-reset>
-					<smoothly-input-submit slot="submit"></smoothly-input-submit>
+					<smoothly-input-reset slot="reset" fill="default" type="form" color="warning" />
+					<smoothly-input-submit slot="submit" />
 				</smoothly-form>
 			</Host>
 		)

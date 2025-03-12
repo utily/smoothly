@@ -26,17 +26,17 @@ export class SmoothlyTrigger {
 		switch (this.type) {
 			case "link":
 				result = this.disabled ? (
-					<slot></slot>
+					<slot />
 				) : (
 					<a onClick={e => this.onClick(e)}>
-						<slot></slot>
+						<slot />
 					</a>
 				)
 				break
 			case "button":
 				result = (
 					<button disabled={this.disabled} name={this.name}>
-						<slot></slot>
+						<slot />
 					</button>
 				)
 				break
