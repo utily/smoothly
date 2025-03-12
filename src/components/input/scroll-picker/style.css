@@ -37,8 +37,9 @@
 :host>.options {
 	outline: 2px solid red;
 	display: flex;
-	flex-direction: column;
-	position: absolute;
+	height: calc(3rem * 5);
+	width: 100%;
+	position: relative;
 	/* top: var(--element-height); */
 	scroll-snap-type: y mandatory;
 	/* padding: 5rem 0; */
@@ -46,7 +47,7 @@
 	/* bottom: -5rem; */
 	z-index: 10;
 	/* max-height: var(--menu-height, unset); */
-	max-height: 12rem;
+	/* max-height: 12rem; */
 	overflow-x: hidden;
 	overflow-y: clip;
 	/* background-color: rgb(var(--smoothly-input-background)); */
@@ -67,7 +68,12 @@
 	outline: 2px solid purple;
 }
 :host>div.options>.item {
+	position: absolute;
+	transition: all 1s ease-in;
 	padding: .7em .7em .7em .25em;
+	height: 3rem;
+	box-sizing: border-box;
+	min-width: 100%;
 	text-align: center;
 	scroll-snap-align: center;
 	background-color: none;

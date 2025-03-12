@@ -168,9 +168,6 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 				}}
 				style={{ "--menu-height": "20rem" }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
-					{this.placeholder}
-				</div>
 				<div
 					class={{ /* hidden: !this.open, */ options: true }}
 					ref={(el: HTMLDivElement) => (this.optionsDiv = el)}
@@ -179,8 +176,11 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 					onTouchMove={e => {}}>
 					{Array.from({ length: 7 })
 						.map((_, i) => i + this.value - 3)
-						.map(value => (
-							<div key={value} class={{ item: true, selected: value == this.value }}>
+						.map((value, index) => (
+							<div
+								key={value}
+								class={{ item: true, selected: value == this.value }}
+								style={{ transform: `translateY(${index * 3}rem)` }}>
 								{value}
 							</div>
 						))}
