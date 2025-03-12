@@ -32,6 +32,10 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop() invalid?: boolean = false
+	@Prop() min!: number
+	@Prop() max!: number
+	@Prop() value!: number
+	@State() index?: number
 	@Prop({ reflect: true }) name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -48,10 +52,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
 	@State() open = false
-	@State() index?: number
 	@State() selected: HTMLSmoothlyItemElement[] = []
-	@State() filter = ""
-	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
@@ -95,7 +96,6 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)
-		this.filter = ""
 	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
@@ -123,26 +123,38 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	}
 	onWheel(e: WheelEvent) {
 		e.preventDefault()
-		e.deltaY > 0
-			? (this.index = Math.min(this.items.length - 1, (this.index ?? 0) + 1))
-			: (this.index = Math.max(0, (this.index ?? 0) - 1))
+		// e.deltaY > 0
+		// 	? (this.index = Math.min(this.items.length - 1, (this.index ?? 0) + 1))
+		// 	: (this.index = Math.max(0, (this.index ?? 0) - 1))
+		e.deltaY > 0 ? this.value++ : this.value--
 	}
 
-	@Watch("index")
-	indexChange() {
-		if (typeof this.index == "number") {
-			const item = this.items[this.index]
-			console.log("index change", this.index, item)
-			item && this.scrollTo(item)
-			this.items.map(item => (item.marked = false))
-			item.marked = true
-		}
-	}
-	scrollTo(item: HTMLElement) {
-		this.optionsDiv?.scrollTo({
-			behavior: "smooth",
-			top: item.offsetTop + item.offsetHeight - (this.optionsDiv?.clientHeight ?? 0) / 2,
-		})
+	// @Watch("index")
+	// indexChange() {
+	// 	if (typeof this.index == "number") {
+	// 		const item = this.items[this.index]
+	// 		console.log("index change", this.index, item)
+	// 		item && this.scrollTo(item)
+	// 		this.items.map(item => (item.marked = false))
+	// 		item.marked = true
+	// 	}
+	// }
+	// scrollTo(item: HTMLElement) {
+	// 	this.optionsDiv?.scrollTo({
+	// 		behavior: "smooth",
+	// 		top: item.offsetTop + item.offsetHeight - (this.optionsDiv?.clientHeight ?? 0) / 2,
+	// 	})
+	// }
+	componentDidLoad() {
+		// if (this.optionsDiv) {
+		// 	const range = 5
+		// 	const divs: HTMLElement[] = []
+		// 	for (let i = this.value - range; i < this.value + range; i++) {
+		// 		const div = document.createElement("div")
+		// 		div.replace()
+		// 	}
+		// 	this.optionsDiv.replaceChildren()
+		// }
 	}
 
 	render(): VNode | VNode[] {
@@ -165,23 +177,13 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 					onWheel={e => this.onWheel(e)}
 					onTouchStart={e => {}}
 					onTouchMove={e => {}}>
-					{this.filter.length > 0 && (
-						<div>
-							<smoothly-icon name="search-outline" size="small" />
-							{this.filter}
-							<smoothly-icon
-								name="backspace-outline"
-								size="small"
-								onClick={e => {
-									e.stopPropagation()
-									this.filter = ""
-									this.element.focus()
-								}}
-							/>
-						</div>
-					)}
-					<slot />
-					{this.addedItems}
+					{Array.from({ length: 7 })
+						.map((_, i) => i + this.value - 3)
+						.map(value => (
+							<div key={value} class={{ item: true, selected: value == this.value }}>
+								{value}
+							</div>
+						))}
 				</div>
 			</Host>
 		)

@@ -487,7 +487,9 @@ export namespace Components {
         "inCalendar": boolean;
         "invalid"?: boolean;
         "looks"?: Looks;
+        "max": number;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "min": number;
         "multiple": boolean;
         "mutable": boolean;
         "name": string;
@@ -497,6 +499,7 @@ export namespace Components {
         "searchDisabled": boolean;
         "showLabel": boolean;
         "showSelected"?: boolean;
+        "value": number;
     }
     interface SmoothlyInputSelect {
         "changed": boolean;
@@ -2652,7 +2655,9 @@ declare namespace LocalJSX {
         "inCalendar"?: boolean;
         "invalid"?: boolean;
         "looks"?: Looks;
+        "max": number;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "min": number;
         "multiple"?: boolean;
         "mutable"?: boolean;
         "name"?: string;
@@ -2667,6 +2672,7 @@ declare namespace LocalJSX {
         "searchDisabled"?: boolean;
         "showLabel"?: boolean;
         "showSelected"?: boolean;
+        "value": number;
     }
     interface SmoothlyInputSelect {
         "changed"?: boolean;

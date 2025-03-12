@@ -41,13 +41,14 @@
 	position: absolute;
 	/* top: var(--element-height); */
 	scroll-snap-type: y mandatory;
-	padding: 5rem 0;
-  top: -5rem;
-	bottom: -5rem;
+	/* padding: 5rem 0; */
+  /* top: -5rem; */
+	/* bottom: -5rem; */
 	z-index: 10;
-	max-height: var(--menu-height, unset);
+	/* max-height: var(--menu-height, unset); */
+	max-height: 12rem;
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: clip;
 	/* background-color: rgb(var(--smoothly-input-background)); */
 	left: 0;
 	right: 0;
@@ -62,25 +63,21 @@
 	left: -1px;
 	right: -1px;
 }
-
-:host>div.options::slotted(smoothly-item) {
-	/* outline: 2px solid purple; */
+:host>div.options>.item.selected {
+	outline: 2px solid purple;
+}
+:host>div.options>.item {
 	padding: .7em .7em .7em .25em;
 	text-align: center;
 	scroll-snap-align: center;
 	background-color: none;
 }
 
-:host>div.options::slotted(smoothly-item:not([selectable])) {
+:host>div.options>.item {
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
 	color: var(--smoothly-color-contrast)
-}
-
-:host>div.options>smoothly-item:not([selectable])>smoothly-icon[name="backspace-outline"] {
-	margin-left: auto;
-	margin-right: 0;
 }
 
 :host>div.options.hidden {
