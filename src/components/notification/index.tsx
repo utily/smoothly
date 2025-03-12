@@ -66,11 +66,11 @@ export class Notification {
 			<Host color={this.properties[0]} fill="solid">
 				{this.closable && (
 					<smoothly-trigger fill="clear" name="close">
-						<smoothly-icon name="close-circle-outline"></smoothly-icon>
+						<smoothly-icon name="close-circle-outline" />
 					</smoothly-trigger>
 				)}
 				<span class={this.icon ? "icon" : "clean"}>
-					{this.icon && <smoothly-icon name={this.properties[1]}></smoothly-icon>}
+					{this.icon && <smoothly-icon name={this.properties[1]} />}
 					<p>{this.notice.message}</p>
 				</span>
 			</Host>

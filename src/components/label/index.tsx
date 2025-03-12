@@ -17,7 +17,7 @@ export class SmoothlyLabel {
 				style={{
 					"--hue": this.hue?.toString(),
 				}}>
-				<slot></slot>
+				<slot />
 			</Host>
 		)
 	}

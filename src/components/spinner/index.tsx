@@ -25,7 +25,8 @@ export class SmoothlySpinner {
 						stroke-linecap="round"
 						cx={`${30 + strokeWidth / 2}`}
 						cy={`${30 + strokeWidth / 2}`}
-						r="30"></circle>
+						r="30"
+					/>
 				</svg>
 			</Host>
 		)

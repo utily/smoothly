@@ -16,8 +16,8 @@ export class SmoothlyFormDemoLogin {
 					<smoothly-input type="password" name="password">
 						Password
 					</smoothly-input>
-					<smoothly-input-reset slot="reset" type="form" size="icon" color="warning"></smoothly-input-reset>
-					<smoothly-input-submit slot="submit"></smoothly-input-submit>
+					<smoothly-input-reset slot="reset" type="form" size="icon" color="warning" />
+					<smoothly-input-submit slot="submit" />
 				</smoothly-form>
 			</Host>
 		)

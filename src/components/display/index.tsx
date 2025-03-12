@@ -22,7 +22,7 @@ export class SmoothlyDisplay {
 		const type = this.type
 		switch (type) {
 			case "json":
-				result = <smoothly-display-json value={this.value} collapseDepth={this.collapseDepth}></smoothly-display-json>
+				result = <smoothly-display-json value={this.value} collapseDepth={this.collapseDepth} />
 				break
 			default:
 				result = tidily.format(this.value, type)

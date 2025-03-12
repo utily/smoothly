@@ -262,15 +262,16 @@ export class SmoothlyDisplayDemo {
 								"--spinner-background": "200,255,200",
 								"--spinner-background-opacity": "0.2",
 								"--spinner-color": "0,130,0",
-							}}></smoothly-spinner>
+							}}
+						/>
 					</div>
 					<div style={{ width: "fit-content" }}>
 						Medium
-						<smoothly-spinner size="medium"></smoothly-spinner>
+						<smoothly-spinner size="medium" />
 					</div>
 					<div style={{ width: "fit-content" }}>
 						Small
-						<smoothly-spinner size="small"></smoothly-spinner>
+						<smoothly-spinner size="small" />
 					</div>
 					<div>
 						Icon sized spinner on button
@@ -283,9 +284,9 @@ export class SmoothlyDisplayDemo {
 									this.downloadingSpinner = true
 									setTimeout(() => (this.downloadingSpinner = false), 3000)
 								}}>
-								{!this.downloadingSpinner && <smoothly-icon name="download-outline"></smoothly-icon>}
+								{!this.downloadingSpinner && <smoothly-icon name="download-outline" />}
 								{this.downloadingSpinner && (
-									<smoothly-spinner size="icon" style={{ "--spinner-background-opacity": "0" }}></smoothly-spinner>
+									<smoothly-spinner size="icon" style={{ "--spinner-background-opacity": "0" }} />
 								)}
 							</smoothly-button>
 						))}
@@ -300,15 +301,16 @@ export class SmoothlyDisplayDemo {
 								"--spinner-background": "255,200,255",
 								"--spinner-background-opacity": "0.5",
 								"--spinner-color": "0,130,0",
-							}}></smoothly-spinner>
+							}}
+						/>
 					</div>
 					<div style={{ position: "relative", height: "10em" }}>
 						Medium Overlay Spinner
-						<smoothly-spinner overlay color="secondary" size="medium"></smoothly-spinner>
+						<smoothly-spinner overlay color="secondary" size="medium" />
 					</div>
 					<div style={{ position: "relative", height: "10em" }}>
 						Small Overlay Spinner
-						<smoothly-spinner overlay size="small"></smoothly-spinner>
+						<smoothly-spinner overlay size="small" />
 					</div>
 				</fieldset>
 				<fieldset>
@@ -324,7 +326,7 @@ export class SmoothlyDisplayDemo {
 					<smoothly-summary color="danger" fill="clear">
 						<div slot="summary" style={{ display: "flex", gap: "0.3rem" }}>
 							<span>Person</span>
-							<smoothly-icon name="person" color="light" fill="clear" size="tiny"></smoothly-icon>
+							<smoothly-icon name="person" color="light" fill="clear" size="tiny" />
 						</div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>

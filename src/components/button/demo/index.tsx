@@ -22,26 +22,26 @@ export class SmoothlyButtonDemo {
 				</div>
 				<h4>Toggle button</h4>
 				<smoothly-toggle>
-					<smoothly-icon name="card" fill="solid" slot="icon-slot"></smoothly-icon>
+					<smoothly-icon name="card" fill="solid" slot="icon-slot" />
 				</smoothly-toggle>
 				<smoothly-toggle>
-					<smoothly-icon name="briefcase" slot="icon-slot"></smoothly-icon>
+					<smoothly-icon name="briefcase" slot="icon-slot" />
 				</smoothly-toggle>
 				<smoothly-toggle>
-					<smoothly-icon name="airplane" slot="icon-slot"></smoothly-icon>
+					<smoothly-icon name="airplane" slot="icon-slot" />
 				</smoothly-toggle>
 				<smoothly-toggle-switch-demo />
 				<h4>Links with icons</h4>
 				<smoothly-button type="link">
-					<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+					<smoothly-icon name="checkmark-circle" slot="start" />
 					type link
 				</smoothly-button>
 				<smoothly-button type="button" color="warning" fill="default">
-					<smoothly-icon name="call" slot="start"></smoothly-icon>
+					<smoothly-icon name="call" slot="start" />
 					<a href="https://google.com">link</a>
 				</smoothly-button>
 				<smoothly-button link="https://google.com" type="link">
-					<smoothly-icon name="arrow-forward" slot="end"></smoothly-icon>
+					<smoothly-icon name="arrow-forward" slot="end" />
 					link + type link
 				</smoothly-button>
 				<h4>Size and Color test</h4>
@@ -82,57 +82,57 @@ export class SmoothlyButtonDemo {
 				<h4>Fill examples</h4>
 				<div>
 					<smoothly-button shape="rounded" color="primary" fill="solid">
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="start" />
 						Fill Solid
 					</smoothly-button>
 					<smoothly-button shape="rounded" color="secondary" fill="outline">
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="start" />
 						Fill Outline
 					</smoothly-button>
 					<smoothly-button shape="rounded" color="tertiary" fill="clear">
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="start" />
 						Fill Clear
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="success" fill="solid">
-						<smoothly-icon name="basketball"></smoothly-icon>
+						<smoothly-icon name="basketball" />
 					</smoothly-button>
 				</div>
 				<h4>Buttons with Icon in "start"</h4>
 				<div>
 					<smoothly-button shape="rounded" fill="solid" color="warning">
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="start" />
 						Check
 					</smoothly-button>
 					<smoothly-button shape="rounded" fill="solid" color="secondary">
-						<smoothly-icon name="basketball" slot="start"></smoothly-icon>
+						<smoothly-icon name="basketball" slot="start" />
 						Check
 					</smoothly-button>
 					<smoothly-button shape="rounded" fill="solid" color="success">
-						<smoothly-icon name="call" slot="start"></smoothly-icon>
+						<smoothly-icon name="call" slot="start" />
 						Check
 					</smoothly-button>
 					<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
-						<smoothly-icon name="call"></smoothly-icon>
+						<smoothly-icon name="call" />
 					</smoothly-button>
 					<smoothly-button size="flexible" fill="solid" color="success">
-						<smoothly-icon name="airplane"></smoothly-icon>
+						<smoothly-icon name="airplane" />
 					</smoothly-button>
 				</div>
 				<h4>Buttons with Icon in "end"</h4>
 				<smoothly-button fill="solid" color="light">
 					Go Forward
-					<smoothly-icon name="arrow-forward" slot="end"></smoothly-icon>
+					<smoothly-icon name="arrow-forward" slot="end" />
 				</smoothly-button>
 				<h4>Test for icon button</h4>
 				<div>
 					<smoothly-button size="icon" fill="solid" shape="rounded" color="success">
-						<smoothly-icon name="call"></smoothly-icon>
+						<smoothly-icon name="call" />
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="warning" fill="solid">
-						<smoothly-icon name="search-outline"></smoothly-icon>
+						<smoothly-icon name="search-outline" />
 					</smoothly-button>
 					<smoothly-button size="icon" shape="rounded" color="secondary">
-						<smoothly-icon name="checkmark-circle"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" />
 					</smoothly-button>
 				</div>
 				<h4>Link examples</h4>

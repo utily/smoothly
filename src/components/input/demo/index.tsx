@@ -23,14 +23,15 @@ export class SmoothlyInputDemo {
 						start={isoly.Date.now()}
 						end={isoly.Date.nextMonth(isoly.Date.now())}
 						min="2021-10-01"
-						max="2025-01-31"></smoothly-input-date-range>
+						max="2025-01-31"
+					/>
 					<smoothly-input-date-range
 						name="testing"
 						start={isoly.Date.now()}
 						end={isoly.Date.nextMonth(isoly.Date.now())}
 						min="2021-10-10"
 						max="2024-12-30">
-						<smoothly-input-reset slot="end" size="icon"></smoothly-input-reset>
+						<smoothly-input-reset slot="end" size="icon" />
 					</smoothly-input-date-range>
 					<smoothly-input-date-range
 						looks="grid"
@@ -42,7 +43,7 @@ export class SmoothlyInputDemo {
 						style={{
 							"--smoothly-input-border-radius": "0.5rem",
 						}}>
-						<smoothly-input-clear slot="end" size="icon"></smoothly-input-clear>
+						<smoothly-input-clear slot="end" size="icon" />
 					</smoothly-input-date-range>
 					<h2>Date</h2>
 					<smoothly-input-date>Date</smoothly-input-date>
@@ -51,11 +52,11 @@ export class SmoothlyInputDemo {
 					</smoothly-input-date>
 					<smoothly-input-date value="2021-10-28">
 						Date
-						<smoothly-input-reset slot="end" size="icon"></smoothly-input-reset>
+						<smoothly-input-reset slot="end" size="icon" />
 					</smoothly-input-date>
 					<smoothly-input-date value="2021-10-28">
 						Date
-						<smoothly-input-clear slot="end" size="icon"></smoothly-input-clear>
+						<smoothly-input-clear slot="end" size="icon" />
 					</smoothly-input-date>
 					<h2>Select</h2>
 					<div class="select-div">
@@ -69,7 +70,7 @@ export class SmoothlyInputDemo {
 							<smoothly-item value="4">Cookie</smoothly-item>
 							<smoothly-item value="5">Croissant</smoothly-item>
 							<smoothly-item value="6">Chocolate fondue</smoothly-item>
-							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
+							<smoothly-input-clear size="icon" slot="end" />
 						</smoothly-input-select>
 						<smoothly-input-select multiple name="select-dessert-multiple" looks="border">
 							<label slot="label">Select multiple with reset button</label>
@@ -82,7 +83,7 @@ export class SmoothlyInputDemo {
 							<smoothly-item selected value="chocolate fondue">
 								Chocolate fondue
 							</smoothly-item>
-							<smoothly-input-reset size="icon" slot="end"></smoothly-input-reset>
+							<smoothly-input-reset size="icon" slot="end" />
 						</smoothly-input-select>
 						<smoothly-input-select name="spirit-animals" looks="border" mutable>
 							<label slot="label">Select or add new options</label>
@@ -131,10 +132,7 @@ export class SmoothlyInputDemo {
 						type="duration"
 						placeholder="hh:mm"
 						value={this.duration}
-						onSmoothlyInput={e => {
-							const duration = e.detail.duration
-							this.duration = duration
-						}}>
+						onSmoothlyInput={e => (this.duration = e.detail.duration)}>
 						Duration
 					</smoothly-input>
 					<smoothly-input
@@ -147,6 +145,19 @@ export class SmoothlyInputDemo {
 							this.duration = duration
 						}}>
 						Duration
+					</smoothly-input>
+					<h2>Integer with Min/Max</h2>
+					<smoothly-input name="days" type="integer" min={0} max={365}>
+						Days per year (0-365)
+					</smoothly-input>
+					<smoothly-input name="hour" type="integer" min={0} max={23}>
+						Hours per day (0-23)
+					</smoothly-input>
+					<smoothly-input name="minute" type="integer" min={0} max={59}>
+						Minutes per hour (0-59)
+					</smoothly-input>
+					<smoothly-input name="minute" type="integer" min={18} max={120}>
+						Age (18-120)
 					</smoothly-input>
 					<h2>Invalid text with warning icon and tooltip</h2>
 					<smoothly-input
@@ -165,12 +176,12 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="identifier-camel">Camel</smoothly-input>
 					<h2>Input Alternatives</h2>
 					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
-						<smoothly-icon name="checkmark-circle" slot="start"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="start" />
 						First Name
 					</smoothly-input>
 					<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
 						Last Name
-						<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>
 					<smoothly-input
 						type="text"
@@ -178,14 +189,10 @@ export class SmoothlyInputDemo {
 						placeholder="Smith"
 						onSmoothlyChange={e => console.log("smoothly change event")}>
 						Last Name
-						<smoothly-icon name="checkmark-circle" slot="end"></smoothly-icon>
+						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>
-					<smoothly-input placeholder="test"></smoothly-input>
-					<smoothly-input-submit
-						slot="submit"
-						fill="solid"
-						onSubmit={(e: Event) => alert(e)}
-						color="success"></smoothly-input-submit>
+					<smoothly-input placeholder="test" />
+					<smoothly-input-submit slot="submit" fill="solid" onSubmit={(e: Event) => alert(e)} color="success" />
 					<h4>Smoothly checkboxes</h4>
 					<div class="checkbox-group">
 						<smoothly-input-checkbox disabled name="first-checkbox">
@@ -195,7 +202,7 @@ export class SmoothlyInputDemo {
 						<smoothly-input-checkbox name="second-checkbox" checked>
 							<smoothly-icon name="checkmark-circle" slot="start" size="tiny" />
 							second
-							<smoothly-input-clear size="icon" slot="end"></smoothly-input-clear>
+							<smoothly-input-clear size="icon" slot="end" />
 						</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="third-checkbox">3rd</smoothly-input-checkbox>
 					</div>
