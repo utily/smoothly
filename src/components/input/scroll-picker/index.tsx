@@ -141,7 +141,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	scrollTo(item: HTMLElement) {
 		this.optionsDiv?.scrollTo({
 			behavior: "smooth",
-			top: item.offsetTop - (this.optionsDiv?.clientHeight ?? 0) / 2,
+			top: item.offsetTop + item.offsetHeight - (this.optionsDiv?.clientHeight ?? 0) / 2,
 		})
 	}
 
@@ -166,7 +166,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 					onTouchStart={e => {}}
 					onTouchMove={e => {}}>
 					{this.filter.length > 0 && (
-						<smoothly-item selectable={false}>
+						<div>
 							<smoothly-icon name="search-outline" size="small" />
 							{this.filter}
 							<smoothly-icon
@@ -178,7 +178,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 									this.element.focus()
 								}}
 							/>
-						</smoothly-item>
+						</div>
 					)}
 					<slot />
 					{this.addedItems}
