@@ -248,6 +248,8 @@ export namespace Components {
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
+        "max"?: number;
+        "min"?: number;
         "name": string;
         "placeholder": string | undefined;
         "readonly": boolean;
@@ -2395,6 +2397,8 @@ declare namespace LocalJSX {
         "errorMessage"?: string;
         "invalid"?: boolean;
         "looks"?: Looks;
+        "max"?: number;
+        "min"?: number;
         "name"?: string;
         "onSmoothlyBlur"?: (event: SmoothlyInputCustomEvent<void>) => void;
         "onSmoothlyChange"?: (event: SmoothlyInputCustomEvent<Record<string, any>>) => void;
