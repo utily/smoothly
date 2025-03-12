@@ -366,7 +366,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<isoly.Date | undefined>;
+        "getValue": () => Promise<isoly.DateTime | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;

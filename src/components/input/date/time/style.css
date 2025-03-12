@@ -10,7 +10,6 @@
 }
 
 :host>smoothly-input {
-	width: 100%;
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
@@ -53,6 +52,25 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	/* flex-grow: 1; */
+  /* justify-content: end; */
+}
+:host>smoothly-input[name="date"] {
+	width: 12rem;
+}
+:host>smoothly-input[name="hour"] {
+	width: 4rem;
+}
+:host>smoothly-input[name="minute"] {
+	min-width: 4rem;
+	flex-grow: 1;
+}
+:host>span.colon {
+	padding: 
+		var(--input-value-padding-top) 
+		var(--input-padding-side) 
+		var(--input-value-padding-bottom) 
+		var(--input-padding-side);
 }
 
 @media screen and (min-width: 400px) {

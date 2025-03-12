@@ -71,8 +71,12 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<isoly.Date | undefined> {
-		return this.value
+	async getValue(): Promise<isoly.DateTime | undefined> {
+		const value =
+			this.date && typeof this.hour == "number" && typeof this.minute == "number"
+				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}`
+				: undefined
+		return isoly.DateTime.is(value) ? value : undefined
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
@@ -83,22 +87,9 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
-	}
-	@Watch("date")
-	@Watch("hour")
-	@Watch("minute")
-	dateTimeChange() {
-		const value =
-			this.date && typeof this.hour == "number" && typeof this.minute == "number"
-				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}`
-				: undefined
-		if (
-			typeof value != typeof this.value ||
-			(isoly.DateTime.is(value) &&
-				isoly.DateTime.is(this.value) &&
-				isoly.DateTime.span(value, this.value, "minutes").minutes != 0)
-		)
-			this.value = value
+		this.date = undefined
+		this.hour = undefined
+		this.minute = undefined
 	}
 	@Watch("value")
 	valueChange(value?: isoly.DateTime) {
@@ -135,21 +126,28 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	}
 	@Method()
 	async reset() {
-		this.value = this.initialValue
+		if (isoly.DateTime.is(this.initialValue)) {
+			this.date = isoly.DateTime.getDate(this.initialValue)
+			this.hour = isoly.DateTime.getHour(this.initialValue)
+			this.minute = isoly.DateTime.getMinute(this.initialValue)
+		} else {
+			this.date = undefined
+			this.hour = undefined
+			this.minute = undefined
+		}
 	}
 	@Method()
 	async setInitialValue() {
-		this.initialValue = this.value
+		this.initialValue = await this.getValue()
 		this.changed = false
 	}
 	render() {
-		console.log("date time", this.date, this.hour, this.minute)
 		return (
 			<Host>
 				<smoothly-input
 					color={this.color}
 					looks={this.looks == "transparent" ? this.looks : undefined}
-					name={this.name}
+					name={"date"}
 					onFocus={() => !this.readonly && (this.open = !this.open)}
 					onClick={() => !this.readonly && (this.open = !this.open)}
 					readonly={this.readonly}
@@ -160,7 +158,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onSmoothlyInputLoad={e => e.stopPropagation()}
 					onSmoothlyInput={e => {
 						e.stopPropagation()
-						this.date = e.detail[this.name]
+						this.date = e.detail.date
 					}}>
 					<slot />
 				</smoothly-input>
@@ -176,6 +174,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 						this.hour = e.detail.hour
 					}}
 				/>
+				<span class="colon">:</span>
 				<smoothly-input
 					name="minute"
 					type="integer"
@@ -197,7 +196,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 							doubleInput={false}
 							value={this.value}
 							onSmoothlyValueChange={e => {
-								this.value = e.detail
+								this.date = e.detail
 								e.stopPropagation()
 							}}
 							onSmoothlyDateSet={e => {
