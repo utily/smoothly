@@ -366,12 +366,12 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<isoly.DateTime | undefined>;
+        "getValue": () => Promise<isoly.Date | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
-        "max": isoly.DateTime;
-        "min": isoly.DateTime;
+        "max": isoly.Date;
+        "min": isoly.Date;
         "name": string;
         "open": boolean;
         "readonly": boolean;
@@ -380,7 +380,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "unregister": () => Promise<void>;
-        "value"?: isoly.DateTime;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDemo {
     }
@@ -1465,7 +1465,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateTimeElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
-        "smoothlyValueChange": isoly.DateTime;
+        "smoothlyValueChange": isoly.Date;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -2533,18 +2533,18 @@ declare namespace LocalJSX {
         "color"?: Color;
         "invalid"?: boolean;
         "looks"?: Looks;
-        "max"?: isoly.DateTime;
-        "min"?: isoly.DateTime;
+        "max"?: isoly.Date;
+        "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateTimeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateTimeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateTimeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.DateTime>) => void;
+        "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "showLabel"?: boolean;
-        "value"?: isoly.DateTime;
+        "value"?: isoly.Date;
     }
     interface SmoothlyInputDemo {
     }

@@ -3,7 +3,6 @@
 :host {
 	display: flex;
 	position: relative;
-	cursor: pointer;
 	max-width: 100vw;
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
@@ -33,7 +32,6 @@
 	z-index: 10;
 	top: 4em;
 	background-color: rgb(var(--smoothly-input-background));
-	border: 1px solid rgb(var(--smoothly-input-border));
 	min-width: 18em;
 }
 
@@ -55,17 +53,6 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-right: .2em;
-}
-:host>nav>div {
-	display: flex;
-	border-top: 1px solid rgb(var(--smoothly-input-border));
-	justify-content: center;
-	align-items: center;
-}
-:host>nav>div>smoothly-input-select {
-	width: 4rem;
-	min-width: fit-content;
 }
 
 @media screen and (min-width: 400px) {
