@@ -164,6 +164,7 @@ export class SmoothlyFormDemoPet {
 							<smoothly-input-file name="dog.picture">
 								<span slot="label">Dog picture</span>
 							</smoothly-input-file>
+							<smoothly-input-date-time name="dog.lastWalk">Time of last walk</smoothly-input-date-time>
 							<smoothly-input-date name="dog.birthday">Dog birthday</smoothly-input-date>
 							<smoothly-input-date-range name="dog.dateRange">Dog date range</smoothly-input-date-range>
 							<smoothly-input-select name="dog.favoriteHat">

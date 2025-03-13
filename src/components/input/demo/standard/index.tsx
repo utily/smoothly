@@ -188,6 +188,18 @@ export class SmoothlyInputDemoStandard {
 					</smoothly-input-date>
 					<div class="height" />
 
+					<smoothly-input-date-time
+						looks={this.options.looks}
+						readonly={this.options.readonly}
+						invalid={this.options.invalid}
+						errorMessage={this.options.errorMessage}
+						color={this.options.color}
+						showLabel={this.options.showLabel}>
+						DateTime
+						<smoothly-input-clear slot="end" />
+					</smoothly-input-date-time>
+					<div class="height" />
+
 					<smoothly-input-date-range
 						looks={this.options.looks}
 						readonly={this.options.readonly}
@@ -199,6 +211,7 @@ export class SmoothlyInputDemoStandard {
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>
 					<div class="height" />
+
 					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>
 						{this.options.showLabel ? "Aligned labels & values" : "Center values"}
 					</div>
