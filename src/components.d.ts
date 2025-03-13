@@ -370,8 +370,6 @@ export namespace Components {
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
-        "max": isoly.Date;
-        "min": isoly.Date;
         "name": string;
         "open": boolean;
         "readonly": boolean;
@@ -2533,8 +2531,6 @@ declare namespace LocalJSX {
         "color"?: Color;
         "invalid"?: boolean;
         "looks"?: Looks;
-        "max"?: isoly.Date;
-        "min"?: isoly.Date;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateTimeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;

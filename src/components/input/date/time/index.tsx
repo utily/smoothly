@@ -37,8 +37,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) open: boolean
-	@Prop({ mutable: true }) max: isoly.Date
-	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) showLabel = true
 	@State() date?: isoly.Date
 	@State() hour?: number
@@ -213,9 +211,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 							onSmoothlyDateSet={e => {
 								this.open = false
 								e.stopPropagation()
-							}}
-							max={this.max}
-							min={this.min}>
+							}}>
 							<div slot={"year-label"}>
 								<slot name={"year-label"} />
 							</div>
