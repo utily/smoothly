@@ -230,7 +230,7 @@ export namespace Components {
         "flip"?: "x" | "y";
         "name": Icon | "empty";
         "rotate"?: number;
-        "size": "tiny" | "small" | "medium" | "large" | "xlarge";
+        "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {

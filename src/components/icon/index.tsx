@@ -11,7 +11,7 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop({ reflect: true }) name: Icon | "empty" = "empty"
-	@Prop({ reflect: true }) size: "tiny" | "small" | "medium" | "large" | "xlarge" = "medium"
+	@Prop({ reflect: true }) size?: "tiny" | "small" | "medium" | "large" | "xlarge"
 	@Prop({ reflect: true }) rotate?: number
 	@Prop({ reflect: true }) flip?: "x" | "y"
 	@Prop() toolTip?: string

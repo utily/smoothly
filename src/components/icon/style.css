@@ -26,24 +26,23 @@
 	display: none;
 }
 :host[size=tiny] {
-	width: 1.2em;
-	height: 1.2em;
+	--smoothly-icon-size: 1.2rem;
 }
 :host[size=small] {
-	width: 1.4em;
-	height: 1.4em;
+	--smoothly-icon-size: 1.4rem;
 }
 :host[size=medium] {
-	width: 1.8em;
-	height: 1.8em;
+	--smoothly-icon-size: 1.8rem;
 }
 :host[size=large] {
-	width: 2.8em;
-	height: 2.8em;
+	--smoothly-icon-size: 2.8rem;
 }
 :host[size=xlarge] {
-	width: 4em;
-	height: 4em;
+	--smoothly-icon-size: 4rem;
+}
+:host {
+	width: var(--smoothly-icon-size, 1.8rem);
+	height: var(--smoothly-icon-size, 1.8rem);
 }
 :host::slotted(svg) {
 	/* this is needed for svg to work on safari */
