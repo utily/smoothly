@@ -4,7 +4,9 @@
 :host > button {
 	width: 100%;
 	height: 100%;
-	padding-inline: 0.125rem;
+	display: flex;
+	align-items: center;
+	padding-inline: 0;
 	cursor: pointer;
 	border: none;
 	border-radius: 3em;
@@ -32,7 +34,7 @@
 	background-color: rgb(var(--smoothly-success-tint));
 }
 :host([selected]) > button > smoothly-icon {
-	transform: translateX(calc(var(--width) - var(--height)));
+	transform: translateX(100%);
 }
 :host([size=tiny]) {
 	--height: 1.25rem;
@@ -50,7 +52,7 @@
 	height: var(--height);
 	--width: calc(var(--height) * 2);
 	width: var(--width);
-	--icon-size: calc(var(--height) - 0.25rem);
+	--icon-size: calc(var(--height));
 }
 :host > button > smoothly-icon {
 	--smoothly-icon-size: var(--icon-size);
