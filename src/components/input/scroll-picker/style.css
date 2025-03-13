@@ -65,11 +65,12 @@
 	right: -1px;
 }
 :host>div.options::slotted(.item.selected) {
-	outline: 2px solid purple;
+	background-color: purple;
+	color: white;
 }
 :host>div.options::slotted(.item) {
 	position: absolute;
-	transition: all 0.2s linear;
+	transition: transform 0.2s linear;
 	padding: .7em .7em .7em .25em;
 	height: 3rem;
 	box-sizing: border-box;
