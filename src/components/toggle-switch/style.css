@@ -1,15 +1,10 @@
 :host {
 	display: block;
-	width: 3.6em;
-	height: 1.8em;
 }
 :host > button {
 	width: 100%;
 	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
+	padding-inline: 0.125rem;
 	cursor: pointer;
 	border: none;
 	border-radius: 3em;
@@ -22,11 +17,8 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	position: absolute;
-	left: 0;
 	fill: rgb(var(--smoothly-color-contrast));
 	stroke: rgb(var(--smoothly-color-contrast));
-	font-size: 1.2em;
 	transition: 100ms ease-in-out;
 }
 :host([selected][checkmark]) > button > smoothly-icon{
@@ -40,26 +32,26 @@
 	background-color: rgb(var(--smoothly-success-tint));
 }
 :host([selected]) > button > smoothly-icon {
-	transform: translateX(100%);
+	transform: translateX(calc(var(--width) - var(--height)));
 }
 :host([size=tiny]) {
-	width: 2.4em;
-	height: 1.2em;
+	--height: 1.25rem;
 }
 :host([size=small]) {
-	width: 3.05em;
-	height: 1.5em;
+	--height: 1.5rem;
+}
+:host([size=default]) {
+	--height: 2rem;
 }
 :host([size=large]) {
-	width: 5.2em;
-	height: 2.5em;
+	--height: 2.5rem;
 }
-:host([size=tiny]) > button > smoothly-icon {
-	font-size: .8em;
+:host {
+	height: var(--height);
+	--width: calc(var(--height) * 2);
+	width: var(--width);
+	--icon-size: calc(var(--height) - 0.25rem);
 }
-:host([size=small]) > button > smoothly-icon {
-	font-size: 1em;
-}
-:host([size=large]) > button > smoothly-icon {
-	font-size: 1.75em;
+:host > button > smoothly-icon {
+	--smoothly-icon-size: var(--icon-size);
 }
