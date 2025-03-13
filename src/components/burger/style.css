@@ -1,22 +1,22 @@
-:host([visible]){
+:host([visible]) {
 display: flex;
 justify-content: center;
 align-items: center;
 height: 100%;
 }
-:host([visible]) .burger smoothly-icon{
-	font-size: 1.7em;
+:host([visible]) .burger smoothly-icon {
+	--smoothly-icon-size: 3rem;
 	cursor: pointer;
 	margin-right: 1em;
 }
 :host:not([visible]){
 	display: none;
 }
-:host:not([open]) smoothly-icon{
+:host:not([open]) smoothly-icon {
 	transform: rotate(0deg);
 	transition: transform 100ms ease-in-out;
 }
-:host([open]) smoothly-icon{
+:host([open]) smoothly-icon {
 	transform: rotate(-90deg);
 	transition: transform 100ms ease-in-out;
 }
