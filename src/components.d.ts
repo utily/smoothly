@@ -230,7 +230,7 @@ export namespace Components {
         "flip"?: "x" | "y";
         "name": Icon | "empty";
         "rotate"?: number;
-        "size": "tiny" | "small" | "medium" | "large";
+        "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
@@ -650,13 +650,6 @@ export namespace Components {
     }
     interface SmoothlyThemePicker {
         "element": string;
-    }
-    interface SmoothlyToggle {
-        "disabled": boolean;
-        "name": string;
-        "selected": boolean;
-        "shape": "rounded";
-        "value"?: any;
     }
     interface SmoothlyToggleSwitch {
         "checkmark": boolean;
@@ -1985,12 +1978,6 @@ declare global {
         prototype: HTMLSmoothlyThemePickerElement;
         new (): HTMLSmoothlyThemePickerElement;
     };
-    interface HTMLSmoothlyToggleElement extends Components.SmoothlyToggle, HTMLStencilElement {
-    }
-    var HTMLSmoothlyToggleElement: {
-        prototype: HTMLSmoothlyToggleElement;
-        new (): HTMLSmoothlyToggleElement;
-    };
     interface HTMLSmoothlyToggleSwitchElementEventMap {
         "smoothlyToggleSwitchChange": boolean;
     }
@@ -2156,7 +2143,6 @@ declare global {
         "smoothly-theme-demo": HTMLSmoothlyThemeDemoElement;
         "smoothly-theme-guide": HTMLSmoothlyThemeGuideElement;
         "smoothly-theme-picker": HTMLSmoothlyThemePickerElement;
-        "smoothly-toggle": HTMLSmoothlyToggleElement;
         "smoothly-toggle-switch": HTMLSmoothlyToggleSwitchElement;
         "smoothly-toggle-switch-demo": HTMLSmoothlyToggleSwitchDemoElement;
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
@@ -2382,7 +2368,7 @@ declare namespace LocalJSX {
         "flip"?: "x" | "y";
         "name"?: Icon | "empty";
         "rotate"?: number;
-        "size"?: "tiny" | "small" | "medium" | "large";
+        "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
@@ -2781,13 +2767,6 @@ declare namespace LocalJSX {
     interface SmoothlyThemePicker {
         "element"?: string;
     }
-    interface SmoothlyToggle {
-        "disabled"?: boolean;
-        "name"?: string;
-        "selected"?: boolean;
-        "shape"?: "rounded";
-        "value"?: any;
-    }
     interface SmoothlyToggleSwitch {
         "checkmark"?: boolean;
         "color"?: Color;
@@ -2919,7 +2898,6 @@ declare namespace LocalJSX {
         "smoothly-theme-demo": SmoothlyThemeDemo;
         "smoothly-theme-guide": SmoothlyThemeGuide;
         "smoothly-theme-picker": SmoothlyThemePicker;
-        "smoothly-toggle": SmoothlyToggle;
         "smoothly-toggle-switch": SmoothlyToggleSwitch;
         "smoothly-toggle-switch-demo": SmoothlyToggleSwitchDemo;
         "smoothly-trigger": SmoothlyTrigger;
@@ -3031,7 +3009,6 @@ declare module "@stencil/core" {
             "smoothly-theme-demo": LocalJSX.SmoothlyThemeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDemoElement>;
             "smoothly-theme-guide": LocalJSX.SmoothlyThemeGuide & JSXBase.HTMLAttributes<HTMLSmoothlyThemeGuideElement>;
             "smoothly-theme-picker": LocalJSX.SmoothlyThemePicker & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
-            "smoothly-toggle": LocalJSX.SmoothlyToggle & JSXBase.HTMLAttributes<HTMLSmoothlyToggleElement>;
             "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
             "smoothly-toggle-switch-demo": LocalJSX.SmoothlyToggleSwitchDemo & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchDemoElement>;
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;

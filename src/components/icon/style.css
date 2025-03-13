@@ -1,4 +1,4 @@
-:host[size] {
+:host[fill] {
 	background: none;
 }
 :host {
@@ -26,24 +26,23 @@
 	display: none;
 }
 :host[size=tiny] {
-	width: 1.2em;
-	height: 1.2em;
+	--smoothly-icon-size: 1.2em;
 }
 :host[size=small] {
-	width: 1.4em;
-	height: 1.4em;
+	--smoothly-icon-size: 1.4em;
 }
 :host[size=medium] {
-	width: 1.8em;
-	height: 1.8em;
+	--smoothly-icon-size: 1.8em;
 }
 :host[size=large] {
-	width: 2.8em;
-	height: 2.8em;
+	--smoothly-icon-size: 2.8em;
 }
 :host[size=xlarge] {
-	width: 4em;
-	height: 4em;
+	--smoothly-icon-size: 4em;
+}
+:host {
+	width: var(--smoothly-icon-size, 1.8em);
+	height: var(--smoothly-icon-size, 1.8em);
 }
 :host::slotted(svg) {
 	/* this is needed for svg to work on safari */
