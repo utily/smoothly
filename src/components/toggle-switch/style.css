@@ -50,10 +50,8 @@
 }
 :host {
 	height: var(--height);
-	--width: calc(var(--height) * 2);
-	width: var(--width);
-	--icon-size: calc(var(--height));
+	width: calc(var(--height) * 2);
 }
 :host > button > smoothly-icon {
-	--smoothly-icon-size: var(--icon-size);
+	--smoothly-icon-size: var(--height);
 }
