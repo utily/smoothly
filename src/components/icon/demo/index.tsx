@@ -9,8 +9,12 @@ export class SmoothlyIconDemo {
 	page = 0
 
 	@State() display: { filter?: string; variant?: "outline" | "sharp" } = {}
-	@State() props: { color?: Color; flip?: "x" | "y"; size?: "tiny" | "small" | "medium" | "large"; rotate?: number } =
-		{}
+	@State() props: {
+		color?: Color
+		flip?: "x" | "y"
+		size?: "tiny" | "small" | "medium" | "large" | "xlarge"
+		rotate?: number
+	} = {}
 	@Event() notice: EventEmitter<Notice>
 
 	render() {
@@ -49,6 +53,7 @@ export class SmoothlyIconDemo {
 						<smoothly-item value={"small"}>small</smoothly-item>
 						<smoothly-item value={"medium"}>medium</smoothly-item>
 						<smoothly-item value={"large"}>large</smoothly-item>
+						<smoothly-item value={"xlarge"}>xlarge</smoothly-item>
 						<smoothly-input-clear slot={"end"} />
 					</smoothly-input-select>
 					<smoothly-input-range name="rotate" step={1} min={-180} max={180} value={0}>

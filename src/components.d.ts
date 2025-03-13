@@ -230,7 +230,7 @@ export namespace Components {
         "flip"?: "x" | "y";
         "name": Icon | "empty";
         "rotate"?: number;
-        "size": "tiny" | "small" | "medium" | "large";
+        "size": "tiny" | "small" | "medium" | "large" | "xlarge";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
@@ -2382,7 +2382,7 @@ declare namespace LocalJSX {
         "flip"?: "x" | "y";
         "name"?: Icon | "empty";
         "rotate"?: number;
-        "size"?: "tiny" | "small" | "medium" | "large";
+        "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
         "toolTip"?: string;
     }
     interface SmoothlyIconDemo {
