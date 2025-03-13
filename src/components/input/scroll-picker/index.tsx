@@ -34,7 +34,7 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	@Prop() invalid?: boolean = false
 	@Prop() min!: number
 	@Prop() max!: number
-	@Prop() value!: number
+	@Prop({ mutable: true }) value!: number
 	@State() index?: number
 	@Prop({ reflect: true }) name = "selected"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -123,10 +123,23 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	}
 	onWheel(e: WheelEvent) {
 		e.preventDefault()
-		// e.deltaY > 0
-		// 	? (this.index = Math.min(this.items.length - 1, (this.index ?? 0) + 1))
-		// 	: (this.index = Math.max(0, (this.index ?? 0) - 1))
 		e.deltaY > 0 ? this.value++ : this.value--
+		const moveBy = e.deltaY > 0 ? -1 : 1
+		requestAnimationFrame(() => this.moveItems(moveBy))
+	}
+	moveItems(moveBy: number) {
+		if (this.optionsDiv) {
+			for (let i = 0; i < this.optionsDiv.children.length; i++) {
+				const item = this.optionsDiv.children[i] as HTMLElement
+				console.log("item", item, this.value)
+				const newPosition = Number(item.getAttribute("data-position")) + moveBy
+				item.setAttribute("data-position", newPosition.toString())
+				item.getAttribute("data-value") == this.value.toString()
+					? item.classList.add("selected")
+					: item.classList.remove("selected")
+				item.style.transform = `translateY(${(2 + newPosition) * 3}rem)`
+			}
+		}
 	}
 
 	// @Watch("index")
@@ -146,15 +159,21 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 	// 	})
 	// }
 	componentDidLoad() {
-		// if (this.optionsDiv) {
-		// 	const range = 5
-		// 	const divs: HTMLElement[] = []
-		// 	for (let i = this.value - range; i < this.value + range; i++) {
-		// 		const div = document.createElement("div")
-		// 		div.replace()
-		// 	}
-		// 	this.optionsDiv.replaceChildren()
-		// }
+		console.log("component did load", this.optionsDiv)
+		if (this.optionsDiv) {
+			const range = 5
+			for (let i = this.value - range; i < this.value + range; i++) {
+				const div = document.createElement("div")
+				div.classList.add("item")
+				div.innerText = i.toString()
+				this.value == i && div.classList.add("selected")
+				const position = i - this.value
+				div.setAttribute("data-value", i.toString())
+				div.setAttribute("data-position", position.toString())
+				div.style.transform = `translateY(${(2 + position) * 3}rem)`
+				this.optionsDiv.appendChild(div)
+			}
+		}
 	}
 
 	render(): VNode | VNode[] {
@@ -168,22 +187,14 @@ export class SmoothlyInputScrollPicker implements ComponentWillLoad {
 				}}
 				style={{ "--menu-height": "20rem" }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
+				<div>{this.value}</div>
 				<div
 					class={{ /* hidden: !this.open, */ options: true }}
 					ref={(el: HTMLDivElement) => (this.optionsDiv = el)}
 					onWheel={e => this.onWheel(e)}
 					onTouchStart={e => {}}
 					onTouchMove={e => {}}>
-					{Array.from({ length: 7 })
-						.map((_, i) => i + this.value - 3)
-						.map((value, index) => (
-							<div
-								key={value}
-								class={{ item: true, selected: value == this.value }}
-								style={{ transform: `translateY(${index * 3}rem)` }}>
-								{value}
-							</div>
-						))}
+					<slot />
 				</div>
 			</Host>
 		)

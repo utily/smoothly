@@ -64,12 +64,12 @@
 	left: -1px;
 	right: -1px;
 }
-:host>div.options>.item.selected {
+:host>div.options::slotted(.item.selected) {
 	outline: 2px solid purple;
 }
-:host>div.options>.item {
+:host>div.options::slotted(.item) {
 	position: absolute;
-	transition: all 1s ease-in;
+	transition: all 0.2s linear;
 	padding: .7em .7em .7em .25em;
 	height: 3rem;
 	box-sizing: border-box;
@@ -79,7 +79,7 @@
 	background-color: none;
 }
 
-:host>div.options>.item {
+:host>div.options::slotted(.item) {
 	display: flex;
 	gap: 1em;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
