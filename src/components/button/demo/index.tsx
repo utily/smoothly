@@ -20,17 +20,6 @@ export class SmoothlyButtonDemo {
 						<smoothly-icon name="trash-outline" size="tiny" fill="outline" />
 					</smoothly-button-confirm>
 				</div>
-				<h4>Toggle button</h4>
-				<smoothly-toggle>
-					<smoothly-icon name="card" fill="solid" slot="icon-slot" />
-				</smoothly-toggle>
-				<smoothly-toggle>
-					<smoothly-icon name="briefcase" slot="icon-slot" />
-				</smoothly-toggle>
-				<smoothly-toggle>
-					<smoothly-icon name="airplane" slot="icon-slot" />
-				</smoothly-toggle>
-				<smoothly-toggle-switch-demo />
 				<h4>Links with icons</h4>
 				<smoothly-button type="link">
 					<smoothly-icon name="checkmark-circle" slot="start" />
