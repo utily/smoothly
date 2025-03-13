@@ -366,10 +366,13 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
+        "errorMessage"?: string;
         "getValue": () => Promise<isoly.DateTime | undefined>;
         "invalid"?: boolean;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
         "looks"?: Looks;
+        "max"?: isoly.DateTime;
+        "min"?: isoly.DateTime;
         "name": string;
         "open": boolean;
         "readonly": boolean;
@@ -2529,8 +2532,11 @@ declare namespace LocalJSX {
     interface SmoothlyInputDateTime {
         "changed"?: boolean;
         "color"?: Color;
+        "errorMessage"?: string;
         "invalid"?: boolean;
         "looks"?: Looks;
+        "max"?: isoly.DateTime;
+        "min"?: isoly.DateTime;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateTimeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;

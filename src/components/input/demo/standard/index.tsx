@@ -191,6 +191,8 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-date-time
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						invalid={this.options.invalid}
+						errorMessage={this.options.errorMessage}
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						DateTime

@@ -72,6 +72,15 @@
 		var(--input-value-padding-bottom) 
 		var(--input-padding-side);
 }
+:host>.icons>.smoothly-invalid {
+	display: none;
+	z-index: 2;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+:host[invalid]>.icons>.smoothly-invalid {
+	display: flex;
+}
 
 @media screen and (min-width: 400px) {
 	:host>nav {

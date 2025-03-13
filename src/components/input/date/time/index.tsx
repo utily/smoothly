@@ -31,13 +31,16 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
+	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.DateTime
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	@Prop({ mutable: true }) value?: isoly.DateTime
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
+	@Prop() min?: isoly.DateTime
+	@Prop() max?: isoly.DateTime
 	@State() date?: isoly.Date
 	@State() hour?: number
 	@State() minute?: number
@@ -160,7 +163,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onFocus={() => !this.readonly && (this.open = !this.open)}
 					onClick={() => !this.readonly && (this.open = !this.open)}
 					readonly={this.readonly}
-					invalid={this.invalid}
 					type="date"
 					value={this.date}
 					showLabel={this.showLabel}
@@ -197,6 +199,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					}}
 				/>
 				<span class="icons">
+					<smoothly-icon
+						class="smoothly-invalid"
+						name="alert-circle"
+						color="danger"
+						fill="clear"
+						size="small"
+						toolTip={this.errorMessage}
+					/>
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
@@ -204,6 +214,8 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 						<smoothly-calendar
 							doubleInput={false}
 							value={this.value}
+							min={this.min ? isoly.DateTime.getDate(this.min) : undefined}
+							max={this.max ? isoly.DateTime.getDate(this.max) : undefined}
 							onSmoothlyValueChange={e => {
 								this.date = e.detail
 								e.stopPropagation()
