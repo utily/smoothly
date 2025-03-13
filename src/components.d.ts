@@ -378,7 +378,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "unregister": () => Promise<void>;
-        "value"?: isoly.Date;
+        "value"?: isoly.DateTime;
     }
     interface SmoothlyInputDemo {
     }
@@ -1463,7 +1463,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateTimeElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
-        "smoothlyValueChange": isoly.Date;
+        "smoothlyValueChange": isoly.DateTime;
         "smoothlyInput": Record<string, any>;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -2536,11 +2536,11 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateTimeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateTimeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.Date>) => void;
+        "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.DateTime>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
         "showLabel"?: boolean;
-        "value"?: isoly.Date;
+        "value"?: isoly.DateTime;
     }
     interface SmoothlyInputDemo {
     }

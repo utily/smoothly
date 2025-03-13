@@ -33,16 +33,16 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop() invalid?: boolean = false
 	parent: Editable | undefined
-	private initialValue?: isoly.Date
+	private initialValue?: isoly.DateTime
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
-	@Prop({ mutable: true }) value?: isoly.Date
+	@Prop({ mutable: true }) value?: isoly.DateTime
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
 	@State() date?: isoly.Date
 	@State() hour?: number
 	@State() minute?: number
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
-	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
+	@Event() smoothlyValueChange: EventEmitter<isoly.DateTime>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
