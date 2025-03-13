@@ -74,7 +74,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	async getValue(): Promise<isoly.DateTime | undefined> {
 		const value =
 			this.date && typeof this.hour == "number" && typeof this.minute == "number"
-				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}`
+				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}:00.000Z`
 				: undefined
 		return isoly.DateTime.is(value) ? value : undefined
 	}
@@ -91,6 +91,17 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.hour = undefined
 		this.minute = undefined
 	}
+
+	@Watch("date")
+	@Watch("hour")
+	@Watch("minute")
+	async handleChange() {
+		const value = await this.getValue()
+		this.smoothlyValueChange.emit(value)
+		this.smoothlyInput.emit({ [this.name]: value })
+		this.listener.changed?.(this)
+	}
+
 	@Watch("value")
 	valueChange(value?: isoly.DateTime) {
 		if (isoly.DateTime.is(value)) {
