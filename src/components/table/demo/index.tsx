@@ -9,6 +9,7 @@ export class SmoothlyTableDemo {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
+				<smoothly-table-demo-lazy />
 				<smoothly-table-demo-filler-row />
 				<smoothly-table-demo-group />
 				<smoothly-table-demo-colspan />

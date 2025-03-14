@@ -621,6 +621,8 @@ export namespace Components {
     }
     interface SmoothlyTableDemoGroup {
     }
+    interface SmoothlyTableDemoLazy {
+    }
     interface SmoothlyTableDemoNested {
     }
     interface SmoothlyTableDemoNestedInner {
@@ -652,6 +654,10 @@ export namespace Components {
     interface SmoothlyTableRowGroup {
         "align": boolean;
         "open": boolean;
+    }
+    interface SmoothlyTableRowLazy {
+        "data": any[];
+        "row": (entry: any) => VNode | VNode[];
     }
     interface SmoothlyTabs {
     }
@@ -1872,6 +1878,12 @@ declare global {
         prototype: HTMLSmoothlyTableDemoGroupElement;
         new (): HTMLSmoothlyTableDemoGroupElement;
     };
+    interface HTMLSmoothlyTableDemoLazyElement extends Components.SmoothlyTableDemoLazy, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableDemoLazyElement: {
+        prototype: HTMLSmoothlyTableDemoLazyElement;
+        new (): HTMLSmoothlyTableDemoLazyElement;
+    };
     interface HTMLSmoothlyTableDemoNestedElement extends Components.SmoothlyTableDemoNested, HTMLStencilElement {
     }
     var HTMLSmoothlyTableDemoNestedElement: {
@@ -1965,6 +1977,12 @@ declare global {
     var HTMLSmoothlyTableRowGroupElement: {
         prototype: HTMLSmoothlyTableRowGroupElement;
         new (): HTMLSmoothlyTableRowGroupElement;
+    };
+    interface HTMLSmoothlyTableRowLazyElement extends Components.SmoothlyTableRowLazy, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableRowLazyElement: {
+        prototype: HTMLSmoothlyTableRowLazyElement;
+        new (): HTMLSmoothlyTableRowLazyElement;
     };
     interface HTMLSmoothlyTabsElementEventMap {
         "smoothlyTabOpen": string;
@@ -2173,6 +2191,7 @@ declare global {
         "smoothly-table-demo-filler-row": HTMLSmoothlyTableDemoFillerRowElement;
         "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-demo-group": HTMLSmoothlyTableDemoGroupElement;
+        "smoothly-table-demo-lazy": HTMLSmoothlyTableDemoLazyElement;
         "smoothly-table-demo-nested": HTMLSmoothlyTableDemoNestedElement;
         "smoothly-table-demo-nested-inner": HTMLSmoothlyTableDemoNestedInnerElement;
         "smoothly-table-demo-simple": HTMLSmoothlyTableDemoSimpleElement;
@@ -2183,6 +2202,7 @@ declare global {
         "smoothly-table-head": HTMLSmoothlyTableHeadElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-row-group": HTMLSmoothlyTableRowGroupElement;
+        "smoothly-table-row-lazy": HTMLSmoothlyTableRowLazyElement;
         "smoothly-tabs": HTMLSmoothlyTabsElement;
         "smoothly-tabs-demo": HTMLSmoothlyTabsDemoElement;
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
@@ -2778,6 +2798,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableDemoGroup {
     }
+    interface SmoothlyTableDemoLazy {
+    }
     interface SmoothlyTableDemoNested {
     }
     interface SmoothlyTableDemoNestedInner {
@@ -2812,6 +2834,10 @@ declare namespace LocalJSX {
         "align"?: boolean;
         "onSmoothlyTableRowGroupChange"?: (event: SmoothlyTableRowGroupCustomEvent<boolean>) => void;
         "open"?: boolean;
+    }
+    interface SmoothlyTableRowLazy {
+        "data"?: any[];
+        "row"?: (entry: any) => VNode | VNode[];
     }
     interface SmoothlyTabs {
         "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;
@@ -2948,6 +2974,7 @@ declare namespace LocalJSX {
         "smoothly-table-demo-filler-row": SmoothlyTableDemoFillerRow;
         "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-demo-group": SmoothlyTableDemoGroup;
+        "smoothly-table-demo-lazy": SmoothlyTableDemoLazy;
         "smoothly-table-demo-nested": SmoothlyTableDemoNested;
         "smoothly-table-demo-nested-inner": SmoothlyTableDemoNestedInner;
         "smoothly-table-demo-simple": SmoothlyTableDemoSimple;
@@ -2958,6 +2985,7 @@ declare namespace LocalJSX {
         "smoothly-table-head": SmoothlyTableHead;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-row-group": SmoothlyTableRowGroup;
+        "smoothly-table-row-lazy": SmoothlyTableRowLazy;
         "smoothly-tabs": SmoothlyTabs;
         "smoothly-tabs-demo": SmoothlyTabsDemo;
         "smoothly-theme-color": SmoothlyThemeColor;
@@ -3060,6 +3088,7 @@ declare module "@stencil/core" {
             "smoothly-table-demo-filler-row": LocalJSX.SmoothlyTableDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
             "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-demo-group": LocalJSX.SmoothlyTableDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
+            "smoothly-table-demo-lazy": LocalJSX.SmoothlyTableDemoLazy & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoLazyElement>;
             "smoothly-table-demo-nested": LocalJSX.SmoothlyTableDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedElement>;
             "smoothly-table-demo-nested-inner": LocalJSX.SmoothlyTableDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedInnerElement>;
             "smoothly-table-demo-simple": LocalJSX.SmoothlyTableDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoSimpleElement>;
@@ -3070,6 +3099,7 @@ declare module "@stencil/core" {
             "smoothly-table-head": LocalJSX.SmoothlyTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
+            "smoothly-table-row-lazy": LocalJSX.SmoothlyTableRowLazy & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowLazyElement>;
             "smoothly-tabs": LocalJSX.SmoothlyTabs & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
             "smoothly-tabs-demo": LocalJSX.SmoothlyTabsDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
