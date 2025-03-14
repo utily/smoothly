@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
-import { Color, Icon, Notice } from "../../../model"
+import { Color, Fill, Icon, Notice } from "../../../model"
 @Component({
 	tag: "smoothly-icon-demo",
 	styleUrl: "./style.css",
@@ -11,6 +11,7 @@ export class SmoothlyIconDemo {
 	@State() display: { filter?: string; variant?: "outline" | "sharp" } = {}
 	@State() props: {
 		color?: Color
+		fill?: Fill
 		flip?: "x" | "y"
 		size?: "tiny" | "small" | "medium" | "large" | "xlarge"
 		rotate?: number
@@ -34,10 +35,17 @@ export class SmoothlyIconDemo {
 				<smoothly-form onSmoothlyFormInput={e => (this.props = e.detail)}>
 					<smoothly-input-select name={"color"}>
 						<span slot={"label"}>Color</span>
-						{Color.types.map(color => (
+						{Color.values.map(color => (
 							<smoothly-item value={color} color={color}>
 								{color}
 							</smoothly-item>
+						))}
+						<smoothly-input-clear slot={"end"} />
+					</smoothly-input-select>
+					<smoothly-input-select name={"fill"}>
+						<span slot={"label"}>Fill</span>
+						{Fill.values.map(fill => (
+							<smoothly-item value={fill}>{fill}</smoothly-item>
 						))}
 						<smoothly-input-clear slot={"end"} />
 					</smoothly-input-select>
@@ -74,6 +82,7 @@ export class SmoothlyIconDemo {
 							toolTip={name}
 							data-name={name}
 							color={this.props.color}
+							fill={this.props.fill}
 							flip={this.props.flip}
 							size={this.props.size}
 							rotate={this.props.rotate}
