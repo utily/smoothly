@@ -34,7 +34,7 @@ export class SmoothlyIconDemo {
 				<smoothly-form onSmoothlyFormInput={e => (this.props = e.detail)}>
 					<smoothly-input-select name={"color"}>
 						<span slot={"label"}>Color</span>
-						{Color.types.map(color => (
+						{Color.values.map(color => (
 							<smoothly-item value={color} color={color}>
 								{color}
 							</smoothly-item>

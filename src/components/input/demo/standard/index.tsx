@@ -53,14 +53,14 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-form looks={"grid"} onSmoothlyFormInput={(e: CustomEvent<Options>) => (this.options = e.detail)}>
 						<smoothly-input-select name="looks">
 							<span slot="label">Looks</span>
-							{Looks.types.map(l => (
+							{Looks.values.map(l => (
 								<smoothly-item value={l}>{l}</smoothly-item>
 							))}
 						</smoothly-input-select>
 						<smoothly-input-checkbox name="readonly">Readonly</smoothly-input-checkbox>
 						<smoothly-input-select name="color">
 							<span slot="label">Color</span>
-							{Color.types.map(c => (
+							{Color.values.map(c => (
 								<smoothly-item value={c}>
 									<span color={c}>{c}</span>
 								</smoothly-item>

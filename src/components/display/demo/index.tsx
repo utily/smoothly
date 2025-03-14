@@ -275,7 +275,7 @@ export class SmoothlyDisplayDemo {
 					</div>
 					<div>
 						Icon sized spinner on button
-						{Color.types.map(color => (
+						{Color.values.map(color => (
 							<smoothly-button
 								size="icon"
 								color={color}

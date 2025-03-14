@@ -3,13 +3,13 @@ import { Hex as ColorHex } from "./Hex"
 import { HSL as ColorHSL } from "./HSL"
 import { RGB as ColorRGB } from "./RGB"
 
-export type Color = typeof Color.types[number]
+export type Color = typeof Color.values[number]
 
 export namespace Color {
 	export import Hex = ColorHex
 	export import HSL = ColorHSL
 	export import RGB = ColorRGB
-	export const types = [
+	export const values = [
 		"default",
 		"primary",
 		"secondary",
@@ -21,6 +21,6 @@ export namespace Color {
 		"medium",
 		"dark",
 	] as const
-	export const type = isly.string(types)
+	export const type = isly.string(values)
 	export const is = type.is
 }
