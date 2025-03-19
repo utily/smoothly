@@ -22,11 +22,11 @@ export class Notifier {
 		return (
 			<Host>
 				<slot />
-				<aside>
+				<div class="smoothly-notifier-wrapper">
 					{this.notices.map(n => (
 						<smoothly-notification notice={n} icon={this.icon} />
 					))}
-				</aside>
+				</div>
 			</Host>
 		)
 	}
