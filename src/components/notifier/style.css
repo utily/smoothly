@@ -4,7 +4,8 @@
 :host[hidden] {
 	display: none;
 }
-:host > aside {
+:host > .smoothly-notifier-wrapper {
+	pointer-events: none;
 	display: flex;
 	flex-wrap: wrap-reverse;
 	align-content: stretch;
@@ -13,4 +14,8 @@
 	left: 0;
 	text-align: center;
 	z-index: 100;
+}
+
+:host > .smoothly-notifier-wrapper > smoothly-notification {
+	pointer-events: all;
 }
