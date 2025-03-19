@@ -8,6 +8,7 @@
 :host > .top-spacer {
 	outline: 2px solid red;
 	grid-column: 1 / -1;
+	height: var(--top-height-spacer);
 }
 
 :host:has(smoothly-table-expandable-cell) {

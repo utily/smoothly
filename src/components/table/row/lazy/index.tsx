@@ -30,9 +30,8 @@ export class SmoothlyTableRowLazy {
 	}
 
 	onScroll(event: MouseEvent) {
-		// console.log("scroll", event)
-
 		this.debounce(() => {
+			console.log("scroll", event)
 			let firstVisibleRowIndex: number
 			for (let i = this.from; i <= this.to; i++) {
 				const row = this.rows[i]
@@ -41,6 +40,12 @@ export class SmoothlyTableRowLazy {
 				if (bottomVisible) {
 					firstVisibleRowIndex = i
 					console.log("first", firstVisibleRowIndex, row)
+					const rowTop = row.getBoundingClientRect().top
+					const hostTop = this.element.getBoundingClientRect().top
+					this.topSpacerHeight = rowTop - hostTop
+					console.log("topSpaceHeight", this.topSpacerHeight)
+					// this.topSpacerHeight
+					// this.from = firstVisibleRowIndex
 					break
 				}
 			}
