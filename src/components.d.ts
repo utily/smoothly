@@ -657,7 +657,7 @@ export namespace Components {
     }
     interface SmoothlyTableRowLazy {
         "data": any[];
-        "row": (entry: any) => VNode | VNode[];
+        "row": (entry: any, index: number) => VNode;
     }
     interface SmoothlyTabs {
     }
@@ -2837,7 +2837,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableRowLazy {
         "data"?: any[];
-        "row"?: (entry: any) => VNode | VNode[];
+        "row"?: (entry: any, index: number) => VNode;
     }
     interface SmoothlyTabs {
         "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;

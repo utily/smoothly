@@ -12,4 +12,22 @@ export namespace Scrollable {
 			parent = parent.parentElement
 		return parent && is(parent) ? parent : undefined
 	}
+
+	export function isBottomVisible(element?: HTMLElement): boolean {
+		let result = false
+		if (element) {
+			const { bottom } = element.getBoundingClientRect()
+			result = bottom <= window.innerHeight && bottom >= 0
+		}
+		return result
+	}
+
+	export function isTopVisible(element?: HTMLElement): boolean {
+		let result = false
+		if (element) {
+			const { top } = element.getBoundingClientRect()
+			result = top <= window.innerHeight && top >= 0
+		}
+		return result
+	}
 }

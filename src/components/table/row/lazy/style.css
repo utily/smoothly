@@ -5,6 +5,10 @@
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
+:host > .top-spacer {
+	outline: 2px solid red;
+	grid-column: 1 / -1;
+}
 
 :host:has(smoothly-table-expandable-cell) {
 	grid-template-rows: auto 0fr 0fr;
