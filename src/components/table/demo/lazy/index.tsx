@@ -23,8 +23,8 @@ export class SmoothlyTableDemoLazy {
 					<smoothly-table-body>
 						<smoothly-table-row-lazy
 							data={cats}
-							row={(cat: Cat) => (
-								<smoothly-table-row>
+							row={(cat: Cat, _, refCallback) => (
+								<smoothly-table-row ref={refCallback}>
 									<smoothly-table-expandable-cell>
 										{cat.breed}
 										<div slot="detail">

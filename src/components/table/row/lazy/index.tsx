@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Prop, State, VNode, Watch } from "@stencil/core"
+import { Component, Element, h, Host, Prop, State, VNode } from "@stencil/core"
 import { Scrollable } from "../../../../model"
 
 @Component({
@@ -8,10 +8,11 @@ import { Scrollable } from "../../../../model"
 })
 export class SmoothlyTableRowLazy {
 	private scrollableParent?: HTMLElement
-	private rows: Record<number, VNode | undefined> = {}
+	private rows: Record<number, HTMLElement> = {}
+	private debounceTimer: NodeJS.Timeout
 	@Element() element: HTMLSmoothlyTableRowLazyElement
 	@Prop() data: any[]
-	@Prop() row: (entry: any, index: number) => VNode
+	@Prop() row: (entry: any, index: number, refCallback: (el?: HTMLElement) => void) => VNode
 	@State() topSpacerHeight: number = 0
 	@State() from: number = 0
 	@State() to: number = 25
@@ -21,16 +22,39 @@ export class SmoothlyTableRowLazy {
 		this.scrollableParent?.addEventListener("scroll", this.onScroll.bind(this))
 	}
 
-	@Watch("from")
-	fromChange(from: number, oldFrom: number) {
-		const oldRows = this.rows[oldFrom]
-		const oldRow = Array.isArray(oldRows) ? oldRows[0] : oldRows
-		oldRow?.$elm$
+	debounce(func: () => void, wait: number = 300) {
+		clearTimeout(this.debounceTimer)
+		this.debounceTimer = setTimeout(() => {
+			func.apply(this)
+		}, wait)
 	}
 
-	onScroll(event: Event) {
+	onScroll(event: MouseEvent) {
+		// console.log("scroll", event)
+
+		this.debounce(() => {
+			let firstVisibleRowIndex: number
+			for (let i = this.from; i <= this.to; i++) {
+				const row = this.rows[i]
+				const bottomVisible = Scrollable.isBottomVisible(row)
+				console.log("row", i, bottomVisible, row)
+				if (bottomVisible) {
+					firstVisibleRowIndex = i
+					console.log("first", firstVisibleRowIndex, row)
+					break
+				}
+			}
+		})
 		// TODO - debounce
+		// Find first rendered row
+		// 		change from
+		// 		updateTopSpacerHeight
+		// Find last rendered row
+		// 		change to
 		// Update from and to
+	}
+	componentDidLoad() {
+		console.log("rows", this.rows)
 	}
 
 	render(): VNode {
@@ -39,8 +63,7 @@ export class SmoothlyTableRowLazy {
 				<div class="top-spacer" style={{ "--top-height-spacer": `${this.topSpacerHeight}px` }} />
 				{this.data.slice(this.from, this.to).map((data, i) => {
 					const index = this.from + i
-					this.rows[index] = this.row(data, index)
-					return this.rows[index]
+					return this.row(data, index, el => (el ? (this.rows[index] = el) : delete this.rows[index]))
 				})}
 			</Host>
 		)
