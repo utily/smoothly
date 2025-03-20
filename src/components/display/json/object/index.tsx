@@ -52,7 +52,7 @@ export class SmoothlyDisplayJsonObject implements ComponentWillLoad {
 								</div>
 						  ))}
 				</span>
-				<span>{this.closeBracket}</span>
+				<span class="close-bracket">{this.closeBracket}</span>
 			</Host>
 		)
 	}
