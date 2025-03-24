@@ -8,7 +8,7 @@
 
 .indent {
 	padding-left: 1rem;
-	border-left: 1px solid rgb(var(--smoothly-light-shade));
+	border-left: 1px solid rgba(var(--smoothly-default-contrast), 0.3);
 }
 :host(:not(.open)) .content {
 	display: none;
@@ -16,13 +16,21 @@
 :host>.content>.indent:last-child>.comma {
 	display: none;
 }
-.open-bracket::after {
+:host .open-bracket {
+	cursor: pointer;
+}
+:host .open-bracket::after {
 	background-color: rgb(var(--smoothly-light-color));
 	color: rgb(var(--smoothly-light-shade));
+	border: 1px solid rgb(var(--smoothly-light-color));
 	white-space: pre;
 	border-radius: 0.25rem;
 	font-weight: bold;
 	font-size: 0.8em;
+}
+:host > .open-bracket:hover::after {
+	color: rgb(var(--smoothly-default-contrast));
+	border-color: rgb(var(--smoothly-light-shade));
 }
 
 :host(:not(.open):not(.empty))>.open-bracket::after {
@@ -30,4 +38,11 @@
 }
 :host(.open:not(.empty))>.open-bracket::after {
 	content: " ▼ ";
+}
+:host > .open-bracket:hover,
+:host > .open-bracket:hover~.close-bracket {
+	font-weight: bold;
+}
+:host > .open-bracket:hover+.content>.indent {
+	border-left-color: rgb(var(--smoothly-default-contrast));
 }
