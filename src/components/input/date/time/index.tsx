@@ -177,6 +177,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					name="hour"
 					type="integer"
 					max={23}
+					pad={2}
 					value={this.hour}
 					placeholder="hh"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
@@ -190,6 +191,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					name="minute"
 					type="integer"
 					max={59}
+					pad={2}
 					value={this.minute}
 					placeholder="mm"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
