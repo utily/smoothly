@@ -1,9 +1,9 @@
-name: "Bump"
+name: "Bump Minor"
 
 on:
   push:
     branches:
-      - "master-0"
+      - "master"
 jobs:
   bump-version:
     name: "Bump Version"
@@ -20,11 +20,12 @@ jobs:
         uses: "actions/setup-node@v3"
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
       - name: "Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
         with:
-          tag-prefix: "release-"
+          tag-prefix: 'release-'
+          default: 'minor'
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
