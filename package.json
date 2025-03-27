@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "0.3.69",
+	"version": "0.4.0",
 	"description": "Web component library written in Stencil.",
 	"author": "Utily",
 	"license": "MIT",
