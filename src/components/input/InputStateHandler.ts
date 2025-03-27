@@ -8,7 +8,7 @@ type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted:
 export class InputStateHandler {
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
 	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): InputStateHandler
-	static create(type: "integer", integerOptions: { min?: number; max?: number }): InputStateHandler
+	static create(type: "integer", integerOptions: { min?: number; max?: number; pad?: number }): InputStateHandler
 	static create(type: tidily.Type, locale?: isoly.Locale): InputStateHandler
 	static create(type: tidily.Type, extra?: any): InputStateHandler {
 		let result: (tidily.Formatter & tidily.Converter<any>) | undefined
