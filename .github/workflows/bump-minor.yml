@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "master"
+      - "master-0"
 jobs:
   bump-version:
     name: "Bump Version"
