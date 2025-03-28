@@ -655,6 +655,7 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTabs {
+        "tabs": "always" | "multiple";
     }
     interface SmoothlyTabsDemo {
     }
@@ -2817,6 +2818,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTabs {
         "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;
+        "tabs"?: "always" | "multiple";
     }
     interface SmoothlyTabsDemo {
     }
