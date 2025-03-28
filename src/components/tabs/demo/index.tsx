@@ -11,10 +11,10 @@ export class SmoothlyTabsDemo {
 	render() {
 		return (
 			<Host>
-				<smoothly-tabs hideTabsIfSingle>
+				<smoothly-tabs tabs="multiple">
 					<smoothly-tab label="Single Tab" open>
-						<strong>Single Tab content here.</strong> If only one tab is available setting <code>hideTabsIfSingle</code>{" "}
-						to <code>true</code> will hide the tab navigation and display the single tab's content directly.
+						<strong>Single Tab content here.</strong> If only one tab is available setting <code>tabs</code> to{" "}
+						<code>"multiple"</code> will hide the tab navigation and display the single tab's content directly.
 						{!this.extraTab && (
 							<div>
 								<smoothly-button color="primary" onClick={() => (this.extraTab = true)}>

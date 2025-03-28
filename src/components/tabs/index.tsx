@@ -7,15 +7,15 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, 
 })
 export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
-	@Prop({ reflect: true }) hideTabsIfSingle: boolean
-	@State() tabs: HTMLElement[] = []
+	@Prop({ reflect: true }) tabs: "always" | "multiple" = "always"
+	@State() tabElements: HTMLElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
 
 	@Listen("smoothlyTabLoad")
 	onInputLoad(event: CustomEvent) {
-		if (event.target instanceof HTMLElement && !this.tabs.includes(event.target)) {
-			this.tabs = [...this.tabs, event.target]
+		if (event.target instanceof HTMLElement && !this.tabElements.includes(event.target)) {
+			this.tabElements = [...this.tabElements, event.target]
 		}
 	}
 
@@ -36,8 +36,8 @@ export class SmoothlyTabs {
 	render() {
 		return (
 			<Host
-				class={{ "hide-tabs": this.hideTabsIfSingle && this.tabs.length == 1 }}
-				style={{ "--tabs": `${this.tabs.length}` }}>
+				class={{ "hide-tabs": this.tabs == "multiple" && this.tabElements.length == 1 }}
+				style={{ "--tabs": `${this.tabElements.length}` }}>
 				<slot />
 			</Host>
 		)
