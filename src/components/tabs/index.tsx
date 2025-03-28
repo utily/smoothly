@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -7,6 +7,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch 
 })
 export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
+	@Prop({ reflect: true }) hideTabsIfSingle: boolean
 	@State() tabs: HTMLElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
@@ -34,7 +35,9 @@ export class SmoothlyTabs {
 
 	render() {
 		return (
-			<Host style={{ "--tabs": `${this.tabs.length}` }}>
+			<Host
+				class={{ "hide-tabs": this.hideTabsIfSingle && this.tabs.length == 1 }}
+				style={{ "--tabs": `${this.tabs.length}` }}>
 				<slot />
 			</Host>
 		)
