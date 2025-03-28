@@ -251,6 +251,7 @@ export namespace Components {
         "max"?: number;
         "min"?: number;
         "name": string;
+        "pad"?: number;
         "placeholder": string | undefined;
         "readonly": boolean;
         "register": () => Promise<void>;
@@ -2443,6 +2444,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyKeydown"?: (event: SmoothlyInputCustomEvent<Key>) => void;
+        "pad"?: number;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "required"?: boolean;
