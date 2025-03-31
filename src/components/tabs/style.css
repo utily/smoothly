@@ -3,3 +3,6 @@
 	grid-template-columns: repeat(var(--tabs), auto);
 	grid-template-rows: auto auto;
 }
+:host.hide-tabs::slotted(smoothly-tab>div:first-child) {
+	display: none;
+}

@@ -9,13 +9,34 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
-				<smoothly-trigger slot="nav-start" type="link" name="logout">
-					<smoothly-icon toolTip={"Log out"} name="log-out" size="medium" />
-				</smoothly-trigger>
-				<smoothly-app-room path="/root" label="root">
-					<smoothly-theme-demo />
+				<smoothly-app-room path="/">
+					<section style={{ padding: "1em", maxWidth: "32em", margin: "0 auto" }}>
+						<header>
+							<h1>Welcome</h1>
+						</header>
+						<p>
+							Smoothly is a component library written in <a href="http://stenciljs.com">Stencil</a>. It can therefore be
+							used across web based frontend toolchains such as React, Vue, Angular, Svelte, and even plain HTML.
+						</p>
+						<p>
+							This is particularly useful when trying to unifying the user experience across projects written in
+							different technology stacks. It is also written to minimize the amount of code you need to write to
+							achieve a nice user experience.
+						</p>
+					</section>
 				</smoothly-app-room>
-				<smoothly-app-room path="/links" label="Links">
+				<smoothly-app-room path="/form" label="Forms" content={<smoothly-form-demo />} />
+				<smoothly-app-room path="/input" label="Inputs" content={<smoothly-input-demo />} />
+				<smoothly-app-room path="/table" label="Tables" content={<smoothly-table-demo />} />
+				<smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
+				<smoothly-app-room path="/icon" label="Icons" content={<smoothly-icon-demo />} />
+				<smoothly-app-room path="/theme" label="Theming" content={<smoothly-theme-demo />} />
+				<smoothly-app-room path="/dialog" label="Dialogs" content={<smoothly-dialog-demo />} slot="nav-end" />
+				<smoothly-app-room path="/display" label="Display" content={<smoothly-display-demo />} slot="nav-end" />
+				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">
+					<smoothly-tabs-demo />
+				</smoothly-app-room>
+				<smoothly-app-room path="/links" label="Links" slot="nav-end">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">
@@ -39,28 +60,6 @@ export class SmoothlyAppDemo {
 						</smoothly-button>
 					</div>
 				</smoothly-app-room>
-				<smoothly-app-room path="/form" label="Form">
-					<smoothly-form-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/input" label="Input">
-					<smoothly-input-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/button" label="Button">
-					<smoothly-button-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/dialog" label="Dialog">
-					<smoothly-dialog-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/display" label="Display" icon="eye-outline">
-					<smoothly-display-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/table" label="Table">
-					<smoothly-table-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">
-					<smoothly-tabs-demo />
-				</smoothly-app-room>
-				<smoothly-app-room path="/icon" label="Icon" content={<smoothly-icon-demo />} slot="nav-end" />
 				<smoothly-app-room path="/redirect" label="Redirect" slot="nav-end">
 					<smoothly-button type="link" link="/input">
 						To input

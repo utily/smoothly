@@ -8,4 +8,11 @@
 	margin: auto;
 	max-width: 1200px;
 	width: 100%;
+	margin-block: 5rem;
+}
+:host code {
+	color: rgb(var(--smoothly-medium-contrast));
+	background-color: rgb(var(--smoothly-medium-color));
+	padding-inline: 0.25rem;
+	border-radius: 0.25rem;
 }
