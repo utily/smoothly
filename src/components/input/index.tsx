@@ -33,6 +33,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) currency?: isoly.Currency
 	@Prop() min?: number
 	@Prop() max?: number
+	@Prop() pad?: number
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) errorMessage?: string
@@ -125,7 +126,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				this.stateHandler = InputStateHandler.create("price", { currency: this.currency, toInteger: this.toInteger })
 				break
 			case "integer":
-				this.stateHandler = InputStateHandler.create("integer", { min: this.min, max: this.max })
+				this.stateHandler = InputStateHandler.create("integer", { min: this.min, max: this.max, pad: this.pad })
 				break
 			default:
 				this.stateHandler = InputStateHandler.create(this.type, getLocale())
