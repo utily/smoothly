@@ -9,6 +9,7 @@ import { isoly } from "isoly"
 export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
+	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 	render() {
 		return (
@@ -126,6 +127,29 @@ export class SmoothlyInputDemo {
 							<smoothly-item value="11">November</smoothly-item>
 							<smoothly-item value="12">December</smoothly-item>
 						</smoothly-input-select>
+						<div class="select-div-row">
+							<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
+								<smoothly-item value="folder" selected>
+									<smoothly-icon size="small" name="folder-outline" />
+								</smoothly-item>
+								<smoothly-item value="camera">
+									<smoothly-icon size="small" name="camera-outline" />
+								</smoothly-item>
+								<smoothly-item value="boat">
+									<smoothly-icon size="small" name="boat-outline" />
+								</smoothly-item>
+							</smoothly-input-select>
+							<smoothly-input-select name="select-number" clearable={false}>
+								{this.numbers.map(number => (
+									<smoothly-item value="number" selected={number === 3}>
+										{number}
+									</smoothly-item>
+								))}
+							</smoothly-input-select>
+							<smoothly-input name="name" value="Sten Qvist">
+								Name
+							</smoothly-input>
+						</div>
 					</div>
 					<h2>Duration</h2>
 					<smoothly-input

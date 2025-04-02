@@ -25,7 +25,7 @@
 	box-sizing: border-box;
 	display: flex;
 	cursor: pointer;
-	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	padding: var(--input-value-padding-top) .8rem var(--input-value-padding-bottom) 0;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
@@ -35,7 +35,7 @@
 
 :host:not(:has([slot=label]))>div.select-display,
 :host:not([show-label])>div.select-display  {
-	padding: .6em 0;
+	padding: .6rem .8rem .6rem 0;
 	align-items: center;
 }
 
@@ -60,7 +60,6 @@
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
 	filter: opacity(60%);
-
 }
 
 :host:hover>div.icons::slotted(smoothly-icon) {
@@ -120,12 +119,12 @@
 
 :host>div.options::slotted(smoothly-item),
 :host>div.options::slotted(div.search-preview) {
-	padding: .7em .7em .7em .25em;
+	padding: .7rem .7rem .7rem .25rem;
 }
 
 :host>div.options::slotted(div.search-preview) {
 	display: flex;
-	gap: 1em;
+	gap: 1rem;
 	background-color: rgba(var(--smoothly-primary-tint), .5);
 	color: rgb(var(--smoothly-color-contrast));
 	fill: rgb(var(--smoothly-color-contrast));
