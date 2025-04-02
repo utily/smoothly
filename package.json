@@ -1,6 +1,6 @@
 {
 	"name": "smoothly",
-	"version": "1.2.1-alpha.68",
+	"version": "1.7.0",
 	"description": "Web component library written in Stencil.",
 	"author": "Utily",
 	"license": "MIT",
@@ -63,7 +63,7 @@
 		"langly": "2.0.10",
 		"normalize.css": "^8.0.1",
 		"selectively": "^2.0.11",
-		"tidily": "^0.2.3",
+		"tidily": "^0.2.5",
 		"urlpattern-polyfill": "^8.0.2"
 	},
 	"devDependencies": {

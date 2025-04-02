@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -7,14 +7,15 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, State, Watch 
 })
 export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
-	@State() tabs: HTMLElement[] = []
+	@Prop({ reflect: true }) tabs: "always" | "multiple" = "always"
+	@State() tabElements: HTMLElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
 
 	@Listen("smoothlyTabLoad")
 	onInputLoad(event: CustomEvent) {
-		if (event.target instanceof HTMLElement && !this.tabs.includes(event.target)) {
-			this.tabs = [...this.tabs, event.target]
+		if (event.target instanceof HTMLElement && !this.tabElements.includes(event.target)) {
+			this.tabElements = [...this.tabElements, event.target]
 		}
 	}
 
@@ -34,7 +35,9 @@ export class SmoothlyTabs {
 
 	render() {
 		return (
-			<Host style={{ "--tabs": `${this.tabs.length}` }}>
+			<Host
+				class={{ "hide-tabs": this.tabs == "multiple" && this.tabElements.length == 1 }}
+				style={{ "--tabs": `${this.tabElements.length}` }}>
 				<slot />
 			</Host>
 		)
