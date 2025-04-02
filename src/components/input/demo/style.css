@@ -5,6 +5,14 @@
 	margin-bottom: 10rem;
 }
 
+:host .select-div-row {
+	display: flex;
+}
+
+:host .select-div-row smoothly-input {
+ flex: 1;
+}
+
 smoothly-input-demo-standard {
 	margin-bottom: 2rem;
 }

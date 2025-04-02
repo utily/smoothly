@@ -25,7 +25,7 @@
 	box-sizing: border-box;
 	display: flex;
 	cursor: pointer;
-	padding: var(--input-value-padding-top) 0 var(--input-value-padding-bottom) 0;
+	padding: var(--input-value-padding-top) .8em var(--input-value-padding-bottom) 0;
 	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
@@ -35,7 +35,7 @@
 
 :host:not(:has([slot=label]))>div.select-display,
 :host:not([show-label])>div.select-display  {
-	padding: .6em 0;
+	padding: .6rem .8em .6em 0;
 	align-items: center;
 }
 
@@ -60,7 +60,6 @@
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
 	filter: opacity(60%);
-
 }
 
 :host:hover>div.icons::slotted(smoothly-icon) {
