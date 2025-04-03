@@ -7,7 +7,9 @@ export namespace Icon {
 	}
 	const cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	async function fetch(url: string): Promise<string | undefined> {
-		const response = await globalThis.fetch(url)
+		const response = await globalThis.fetch(url, {
+			headers: { link: `<https://ionicons.pages.dev>; rel="preconnect"` },
+		})
 		return response.ok ? response.text() : undefined
 	}
 	export async function load(name: string): Promise<string | undefined> {
