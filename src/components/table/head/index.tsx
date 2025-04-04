@@ -28,10 +28,6 @@ export class SmoothlyTableHead {
 	}
 
 	render(): VNode | VNode[] {
-		return (
-			<Host class={{ scrolled: !!this.scrolled }}>
-				<slot />
-			</Host>
-		)
+		return <Host class={{ scrolled: !!this.scrolled }}></Host>
 	}
 }
