@@ -1,5 +1,5 @@
 import { Component, h, Host, VNode } from "@stencil/core"
-import { data } from "./data"
+// import { data } from "./data"
 
 @Component({
 	tag: "smoothly-table-demo-nested",
@@ -11,7 +11,7 @@ export class SmoothlyTableDemoNested {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Nested" />
-				<table>
+				{/* <table>
 					<thead>
 						<tr>
 							<td>Id</td>
@@ -25,7 +25,7 @@ export class SmoothlyTableDemoNested {
 						</tr>
 					</thead>
 					<tbody>
-						{Array.from({ length: Math.floor(10000 / data.length) }).flatMap(() =>
+						{Array.from({ length: Math.floor(2000 / data.length) }).flatMap(() =>
 							data.map(entry => (
 								<tr>
 									<td>{entry.id}</td>
@@ -46,7 +46,7 @@ export class SmoothlyTableDemoNested {
 							<td>Footer Cell</td>
 						</tr>
 					</trow>
-				</table>
+				</table> */}
 				<smoothly-display type="text" value="Nested" />
 			</Host>
 		)
