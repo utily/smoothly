@@ -20,10 +20,6 @@ export class SmoothlyTable {
 	}
 
 	render(): VNode | VNode[] {
-		return (
-			<Host style={{ "--columns": this.columns.toString() }}>
-				<slot />
-			</Host>
-		)
+		return <Host style={{ "--columns": this.columns.toString() }}></Host>
 	}
 }
