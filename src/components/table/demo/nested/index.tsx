@@ -11,43 +11,43 @@ export class SmoothlyTableDemoNested {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Nested" />
-				<smoothly-table color="primary" columns={8}>
-					<smoothly-table-head>
-						<smoothly-table-row>
-							<smoothly-table-cell>Id</smoothly-table-cell>
-							<smoothly-table-cell>Registered</smoothly-table-cell>
-							<smoothly-table-cell>Name</smoothly-table-cell>
-							<smoothly-table-cell>Age</smoothly-table-cell>
-							<smoothly-table-cell>Balance</smoothly-table-cell>
-							<smoothly-table-cell>EyeColor</smoothly-table-cell>
-							<smoothly-table-cell>Gender</smoothly-table-cell>
-							<smoothly-table-cell>Company</smoothly-table-cell>
-						</smoothly-table-row>
-					</smoothly-table-head>
-					<smoothly-table-body>
-						{Array.from({ length: 20 }).flatMap(() =>
+				<table>
+					<thead>
+						<tr>
+							<td>Id</td>
+							<td>Registered</td>
+							<td>Name</td>
+							<td>Age</td>
+							<td>Balance</td>
+							<td>EyeColor</td>
+							<td>Gender</td>
+							<td>Company</td>
+						</tr>
+					</thead>
+					<tbody>
+						{Array.from({ length: Math.floor(10000 / data.length) }).flatMap(() =>
 							data.map(entry => (
-								<smoothly-table-row>
-									{/* <smoothly-table-demo-nested-inner color="secondary" data={entry.friends} slot={"detail"} /> */}
-									<smoothly-table-cell>{entry.id}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.registered}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.name}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.age}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.balance}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.eyeColor}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.gender}</smoothly-table-cell>
-									<smoothly-table-cell>{entry.company}</smoothly-table-cell>
-								</smoothly-table-row>
+								<tr>
+									<td>{entry.id}</td>
+									<td>{entry.registered}</td>
+									<td>{entry.name}</td>
+									<td>{entry.age}</td>
+									<td>{entry.balance}</td>
+									<td>{entry.eyeColor}</td>
+									<td>{entry.gender}</td>
+									<td>{entry.company}</td>
+								</tr>
 							))
 						)}
-					</smoothly-table-body>
-					<smoothly-table-foot>
-						<smoothly-table-row>
-							<smoothly-table-cell>Footer Cell</smoothly-table-cell>
-							<smoothly-table-cell>Footer Cell</smoothly-table-cell>
-						</smoothly-table-row>
-					</smoothly-table-foot>
-				</smoothly-table>
+					</tbody>
+					<trow>
+						<tr>
+							<td>Footer Cell</td>
+							<td>Footer Cell</td>
+						</tr>
+					</trow>
+				</table>
+				<smoothly-display type="text" value="Nested" />
 			</Host>
 		)
 	}

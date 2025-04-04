@@ -1,9 +1,0 @@
-:host {
-	display: block;
-}
-:host>smoothly-display {
-	font-size: 2em;
-}
-:host>* {
-	margin-bottom: 2rem;
-}

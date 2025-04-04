@@ -49,7 +49,7 @@
 	"scripts": {
 		"build": "stencil build",
 		"check-dts": "git diff --exit-code src/components.d.ts || (echo '❌ components.d.ts is outdated! Run \"npm run build\" and commit the changes.' && exit 1)",
-		"start": "stencil build --dev --watch --serve",
+		"start": "stencil build --watch --serve",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
 		"fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
 		"test": "vitest --run --allowOnly --environment jsdom",

@@ -34,21 +34,21 @@ export class SmoothlyTableDemoSimple {
 								</smoothly-table-expandable-cell>
 							</smoothly-table-row>
 						))}
-						<smoothly-table-expandable-row>
-							<div slot={"detail"}>
-								Content
-								<br />
-								of
-								<br />
-								the
-								<br />
-								expandable
-								<br />
-								row
-							</div>
-							<smoothly-table-cell>Cell1 in expandable row</smoothly-table-cell>
-							<smoothly-table-cell>Cell2 in expandable row</smoothly-table-cell>
-						</smoothly-table-expandable-row>
+
+						<div slot={"detail"}>
+							Content
+							<br />
+							of
+							<br />
+							the
+							<br />
+							expandable
+							<br />
+							row
+						</div>
+						<smoothly-table-cell>Cell1 in expandable row</smoothly-table-cell>
+						<smoothly-table-cell>Cell2 in expandable row</smoothly-table-cell>
+
 						<smoothly-table-row>
 							<smoothly-table-cell>Cell5</smoothly-table-cell>
 							<smoothly-table-expandable-cell>
