@@ -700,6 +700,9 @@ export namespace Components {
     interface SmoothlyTriggerSource {
         "listen": string;
     }
+    interface TableCell {
+        "value"?: string;
+    }
 }
 export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2090,6 +2093,12 @@ declare global {
         prototype: HTMLSmoothlyTriggerSourceElement;
         new (): HTMLSmoothlyTriggerSourceElement;
     };
+    interface HTMLTableCellElement extends Components.TableCell, HTMLStencilElement {
+    }
+    var HTMLTableCellElement: {
+        prototype: HTMLTableCellElement;
+        new (): HTMLTableCellElement;
+    };
     interface HTMLElementTagNameMap {
         "smoothly-app": HTMLSmoothlyAppElement;
         "smoothly-app-demo": HTMLSmoothlyAppDemoElement;
@@ -2197,6 +2206,7 @@ declare global {
         "smoothly-trigger": HTMLSmoothlyTriggerElement;
         "smoothly-trigger-sink": HTMLSmoothlyTriggerSinkElement;
         "smoothly-trigger-source": HTMLSmoothlyTriggerSourceElement;
+        "table-cell": HTMLTableCellElement;
     }
 }
 declare namespace LocalJSX {
@@ -2866,6 +2876,9 @@ declare namespace LocalJSX {
         "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
+    interface TableCell {
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "smoothly-app": SmoothlyApp;
         "smoothly-app-demo": SmoothlyAppDemo;
@@ -2973,6 +2986,7 @@ declare namespace LocalJSX {
         "smoothly-trigger": SmoothlyTrigger;
         "smoothly-trigger-sink": SmoothlyTriggerSink;
         "smoothly-trigger-source": SmoothlyTriggerSource;
+        "table-cell": TableCell;
     }
 }
 export { LocalJSX as JSX };
@@ -3085,6 +3099,7 @@ declare module "@stencil/core" {
             "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
             "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
             "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
+            "table-cell": LocalJSX.TableCell & JSXBase.HTMLAttributes<HTMLTableCellElement>;
         }
     }
 }

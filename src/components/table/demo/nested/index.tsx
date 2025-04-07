@@ -14,36 +14,36 @@ export class SmoothlyTableDemoNested {
 				<table>
 					<thead>
 						<tr>
-							<td>Id</td>
-							<td>Registered</td>
-							<td>Name</td>
-							<td>Age</td>
-							<td>Balance</td>
-							<td>EyeColor</td>
-							<td>Gender</td>
-							<td>Company</td>
+							<table-cell value="Id" />
+							<table-cell value="Registered" />
+							<table-cell value="Name" />
+							<table-cell value="Age" />
+							<table-cell value="Balance" />
+							<table-cell value="EyeColor" />
+							<table-cell value="Gender" />
+							<table-cell value="Company" />
 						</tr>
 					</thead>
 					<tbody>
-						{Array.from({ length: Math.floor(2000 / data.length) }).flatMap(() =>
+						{Array.from({ length: Math.floor(5000 / data.length) }).flatMap(() =>
 							data.map(entry => (
 								<tr>
-									<td>{entry.id}</td>
-									<td>{entry.registered}</td>
-									<td>{entry.name}</td>
-									<td>{entry.age}</td>
-									<td>{entry.balance}</td>
-									<td>{entry.eyeColor}</td>
-									<td>{entry.gender}</td>
-									<td>{entry.company}</td>
+									<table-cell value={entry.id} />
+									<table-cell value={entry.registered} />
+									<table-cell value={entry.name} />
+									<table-cell value={String(entry.age)} />
+									<table-cell value={String(entry.balance)} />
+									<table-cell value={entry.eyeColor} />
+									<table-cell value={entry.gender} />
+									<table-cell value={entry.company} />
 								</tr>
 							))
 						)}
 					</tbody>
 					<trow>
 						<tr>
-							<td>Footer Cell</td>
-							<td>Footer Cell</td>
+							<table-cell value="Footer Cell" />
+							<table-cell value="Footer Cell" />
 						</tr>
 					</trow>
 				</table>
