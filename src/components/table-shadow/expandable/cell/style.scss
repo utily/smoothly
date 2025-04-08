@@ -14,37 +14,27 @@
 	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
+	cursor: pointer;
 	@include arrow;
-
 	&:hover {
 		@include arrow-hover;
 	}
 }
 
-:host([open])>div.content {
-	@include arrow-open;
-}
-
-:host>div.content:hover {
+:host .content:hover {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 	stroke: rgb(var(--smoothly-table-hover-foreground));
 	fill: rgb(var(--smoothly-table-hover-foreground));
 }
 
-:host>div:first-child {
-	cursor: pointer;
+:host([open]) .content {
+	@include arrow-open;
 }
 
-:host>div.detail {
-	grid-column: 1 / -1;
-	grid-row: 2;
-	position: relative;
-}
-
-:host([open])>div.content {
+:host([open]) .content {
 	box-shadow: 1px 1px 1px -1px rgb(var(--smoothly-table-border)) inset,
-		-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
+	-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
 }
 
 :host([open])>div {
@@ -54,7 +44,13 @@
 	fill: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host>div.detail::before {
+:host .detail {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	position: relative;
+}
+
+:host .detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -69,7 +65,7 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host>div.detail::after {
+:host .detail::after {
 	content: "";
 	position: absolute;
 	display: flex;

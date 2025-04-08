@@ -11,12 +11,9 @@
 :host .content {
 	display: contents;
 	cursor: pointer;
-	&:hover {
-		background-color: rgb(var(--smoothly-table-hover-background));
-		color: rgb(var(--smoothly-table-hover-foreground));
-	} 
 }
 
+:host .content:hover,
 :host .content:hover ::slotted(smoothly-table-shadow-cell) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
