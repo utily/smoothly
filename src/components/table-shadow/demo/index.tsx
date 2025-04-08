@@ -13,8 +13,9 @@ export class SmoothlyTableDemo {
 				<smoothly-table-shadow-demo-group />
 				<smoothly-table-shadow-demo-colspan />
 				<smoothly-table-shadow-demo-simple />
-				<smoothly-table-shadow-demo-nested />
+
 				<smoothly-table-shadow-demo-filtered />
+				<smoothly-table-shadow-demo-nested />
 			</Host>
 		)
 	}

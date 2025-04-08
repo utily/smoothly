@@ -25,19 +25,21 @@ export class SmoothlyTableShadowDemoNested {
 						</smoothly-table-shadow-row>
 					</smoothly-table-shadow-head>
 					<smoothly-table-shadow-body>
-						{data.map(entry => (
-							<smoothly-table-shadow-expandable-row>
-								<smoothly-table-shadow-demo-nested-inner color="secondary" data={entry.friends} slot={"detail"} />
-								<smoothly-table-shadow-cell>{entry.id}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.registered}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.name}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.age}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.balance}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.eyeColor}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.gender}</smoothly-table-shadow-cell>
-								<smoothly-table-shadow-cell>{entry.company}</smoothly-table-shadow-cell>
-							</smoothly-table-shadow-expandable-row>
-						))}
+						{Array.from({ length: Math.floor(2000 / data.length) }).flatMap(() => {
+							data.map(entry => (
+								<smoothly-table-shadow-expandable-row>
+									<smoothly-table-shadow-demo-nested-inner color="secondary" data={entry.friends} slot={"detail"} />
+									<smoothly-table-shadow-cell>{entry.id}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.registered}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.name}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.age}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.balance}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.eyeColor}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.gender}</smoothly-table-shadow-cell>
+									<smoothly-table-shadow-cell>{entry.company}</smoothly-table-shadow-cell>
+								</smoothly-table-shadow-expandable-row>
+							))
+						})}
 					</smoothly-table-shadow-body>
 					<smoothly-table-shadow-foot>
 						<smoothly-table-shadow-row>

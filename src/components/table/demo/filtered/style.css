@@ -4,7 +4,6 @@
 	grid-template-areas:
 		"header filter"
 		"main main";
-	margin-bottom: 50em;
 }
 
 :host>smoothly-display {
