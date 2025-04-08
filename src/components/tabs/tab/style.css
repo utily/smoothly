@@ -30,6 +30,7 @@
 }
 :host > div:first-child > label[data-smoothly-tooltip]:hover::after {
 	content: attr(data-smoothly-tooltip);
+	font-size: 0.9rem;
 	position: absolute;
 	top: calc(100% + 0.25rem);
 	padding: 0.5rem 0.75rem;
