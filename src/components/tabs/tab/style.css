@@ -9,17 +9,34 @@
 	border-bottom-width: var(--line-width);
 	border-bottom-style: solid;
 }
+:host([disabled]) > div:first-child {
+	color: rgba(var(--smoothly-default-contrast), 0.6);
+}
+:host([disabled]) > div:first-child > label {
+	cursor: not-allowed;
+}
 :host > div:first-child > label {
-	display: block;
+	display: flex;
+	justify-content: center;
 	padding: .5rem;
 	width: fit-content;
   margin: auto;
 	cursor: pointer;
+	position: relative;
 }
 :host([open]) > div:first-child > label {
 	border-bottom: var(--line-width) solid rgb(var(--smoothly-primary-color));
 	margin-bottom: calc(-1 * var(--line-width));
-	position: relative;
+}
+:host > div:first-child > label[data-smoothly-tooltip]:hover::after {
+	content: attr(data-smoothly-tooltip);
+	position: absolute;
+	top: calc(100% + 0.25rem);
+	padding: 0.5rem 0.75rem;
+	border-radius: 0.5rem;
+	background-color: rgb(var(--smoothly-medium-color));
+	color: rgb(var(--smoothly-medium-contrast));
+	white-space: nowrap;
 }
 
 :host > div:nth-child(2) {

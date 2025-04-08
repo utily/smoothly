@@ -602,8 +602,10 @@ export namespace Components {
         "size": "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyTab {
+        "disabled": boolean;
         "label": string;
         "open": boolean;
+        "tooltip": string;
     }
     interface SmoothlyTable {
         "columns": number;
@@ -2760,10 +2762,12 @@ declare namespace LocalJSX {
         "size"?: "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyTab {
+        "disabled"?: boolean;
         "label"?: string;
         "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<void>) => void;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabCustomEvent<string>) => void;
         "open"?: boolean;
+        "tooltip"?: string;
     }
     interface SmoothlyTable {
         "columns"?: number;
