@@ -9,7 +9,7 @@ export class SmoothlyAppDemo {
 	render() {
 		return (
 			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>
-				<smoothly-app-room path="/">
+				{/* <smoothly-app-room path="/">
 					<section style={{ padding: "1em", maxWidth: "32em", margin: "0 auto" }}>
 						<header>
 							<h1>Welcome</h1>
@@ -26,9 +26,10 @@ export class SmoothlyAppDemo {
 					</section>
 				</smoothly-app-room>
 				<smoothly-app-room path="/form" label="Forms" content={<smoothly-form-demo />} />
-				<smoothly-app-room path="/input" label="Inputs" content={<smoothly-input-demo />} />
+				<smoothly-app-room path="/input" label="Inputs" content={<smoothly-input-demo />} /> */}
+				<smoothly-app-room path="/shadow" label="Shadow" content={<smoothly-table-shadow-demo />} />
 				<smoothly-app-room path="/table" label="Tables" content={<smoothly-table-demo />} />
-				<smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
+				{/* <smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
 				<smoothly-app-room path="/icon" label="Icons" content={<smoothly-icon-demo />} />
 				<smoothly-app-room path="/theme" label="Theming" content={<smoothly-theme-demo />} />
 				<smoothly-app-room path="/dialog" label="Dialogs" content={<smoothly-dialog-demo />} slot="nav-end" />
@@ -80,7 +81,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/hidden">
 					<p>hello world!</p>
 				</smoothly-app-room>
-				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room>
+				<smoothly-app-room path="/redirect/nested">this is a nested room</smoothly-app-room> */}
 			</smoothly-app>
 		)
 	}
