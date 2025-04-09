@@ -9,7 +9,9 @@ import { Input } from "../../input/Input"
 export class SmoothlyTab {
 	private inputs: Record<string, Input.Element> = {}
 	@Prop() label: string
+	@Prop() tooltip: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
+	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyTabOpen: EventEmitter<string>
 	@Event() smoothlyTabLoad: EventEmitter<void>
 
@@ -20,10 +22,6 @@ export class SmoothlyTab {
 		this.open
 			? await Promise.all(Object.values(this.inputs).map(input => input.register()))
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
-	}
-	@Listen("click")
-	onClick() {
-		this.open = true
 	}
 	connectedCallback() {
 		this.smoothlyTabLoad.emit()
@@ -43,8 +41,8 @@ export class SmoothlyTab {
 	render() {
 		return (
 			<Host>
-				<div>
-					<label>{this.label}</label>
+				<div onClick={() => !this.disabled && (this.open = true)}>
+					<label data-smoothly-tooltip={this.tooltip}>{this.label}</label>
 				</div>
 				<div hidden={!this.open}>
 					<slot />

@@ -31,11 +31,13 @@ export class SmoothlyTabsDemo {
 				</smoothly-tabs>
 
 				<smoothly-tabs>
-					<smoothly-tab label="test1" open>
+					<smoothly-tab label="test1" tooltip="Tooltip for test1" open>
 						Hello world!
 					</smoothly-tab>
 					<smoothly-tab label="test2">this is a test message!</smoothly-tab>
-					<smoothly-tab label="test3">this is a test message again!</smoothly-tab>
+					<smoothly-tab label="Disabled tab" tooltip="Tooltip for test3" disabled>
+						this is a test message again!
+					</smoothly-tab>
 				</smoothly-tabs>
 			</Host>
 		)
