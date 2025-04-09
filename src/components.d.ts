@@ -665,14 +665,6 @@ export namespace Components {
     }
     interface SmoothlyTableShadowDemo {
     }
-    interface SmoothlyTableShadowDemoColspan {
-    }
-    interface SmoothlyTableShadowDemoFillerRow {
-    }
-    interface SmoothlyTableShadowDemoFiltered {
-    }
-    interface SmoothlyTableShadowDemoGroup {
-    }
     interface SmoothlyTableShadowDemoNested {
     }
     interface SmoothlyTableShadowDemoNestedInner {
@@ -682,8 +674,6 @@ export namespace Components {
 		age: number
 		balance: number
 	}[];
-    }
-    interface SmoothlyTableShadowDemoSimple {
     }
     interface SmoothlyTableShadowExpandableCell {
         "close": () => Promise<void>;
@@ -2055,30 +2045,6 @@ declare global {
         prototype: HTMLSmoothlyTableShadowDemoElement;
         new (): HTMLSmoothlyTableShadowDemoElement;
     };
-    interface HTMLSmoothlyTableShadowDemoColspanElement extends Components.SmoothlyTableShadowDemoColspan, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableShadowDemoColspanElement: {
-        prototype: HTMLSmoothlyTableShadowDemoColspanElement;
-        new (): HTMLSmoothlyTableShadowDemoColspanElement;
-    };
-    interface HTMLSmoothlyTableShadowDemoFillerRowElement extends Components.SmoothlyTableShadowDemoFillerRow, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableShadowDemoFillerRowElement: {
-        prototype: HTMLSmoothlyTableShadowDemoFillerRowElement;
-        new (): HTMLSmoothlyTableShadowDemoFillerRowElement;
-    };
-    interface HTMLSmoothlyTableShadowDemoFilteredElement extends Components.SmoothlyTableShadowDemoFiltered, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableShadowDemoFilteredElement: {
-        prototype: HTMLSmoothlyTableShadowDemoFilteredElement;
-        new (): HTMLSmoothlyTableShadowDemoFilteredElement;
-    };
-    interface HTMLSmoothlyTableShadowDemoGroupElement extends Components.SmoothlyTableShadowDemoGroup, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableShadowDemoGroupElement: {
-        prototype: HTMLSmoothlyTableShadowDemoGroupElement;
-        new (): HTMLSmoothlyTableShadowDemoGroupElement;
-    };
     interface HTMLSmoothlyTableShadowDemoNestedElement extends Components.SmoothlyTableShadowDemoNested, HTMLStencilElement {
     }
     var HTMLSmoothlyTableShadowDemoNestedElement: {
@@ -2090,12 +2056,6 @@ declare global {
     var HTMLSmoothlyTableShadowDemoNestedInnerElement: {
         prototype: HTMLSmoothlyTableShadowDemoNestedInnerElement;
         new (): HTMLSmoothlyTableShadowDemoNestedInnerElement;
-    };
-    interface HTMLSmoothlyTableShadowDemoSimpleElement extends Components.SmoothlyTableShadowDemoSimple, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableShadowDemoSimpleElement: {
-        prototype: HTMLSmoothlyTableShadowDemoSimpleElement;
-        new (): HTMLSmoothlyTableShadowDemoSimpleElement;
     };
     interface HTMLSmoothlyTableShadowExpandableCellElementEventMap {
         "smoothlyTableExpandableCellChange": boolean;
@@ -2394,13 +2354,8 @@ declare global {
         "smoothly-table-shadow-body": HTMLSmoothlyTableShadowBodyElement;
         "smoothly-table-shadow-cell": HTMLSmoothlyTableShadowCellElement;
         "smoothly-table-shadow-demo": HTMLSmoothlyTableShadowDemoElement;
-        "smoothly-table-shadow-demo-colspan": HTMLSmoothlyTableShadowDemoColspanElement;
-        "smoothly-table-shadow-demo-filler-row": HTMLSmoothlyTableShadowDemoFillerRowElement;
-        "smoothly-table-shadow-demo-filtered": HTMLSmoothlyTableShadowDemoFilteredElement;
-        "smoothly-table-shadow-demo-group": HTMLSmoothlyTableShadowDemoGroupElement;
         "smoothly-table-shadow-demo-nested": HTMLSmoothlyTableShadowDemoNestedElement;
         "smoothly-table-shadow-demo-nested-inner": HTMLSmoothlyTableShadowDemoNestedInnerElement;
-        "smoothly-table-shadow-demo-simple": HTMLSmoothlyTableShadowDemoSimpleElement;
         "smoothly-table-shadow-expandable-cell": HTMLSmoothlyTableShadowExpandableCellElement;
         "smoothly-table-shadow-expandable-row": HTMLSmoothlyTableShadowExpandableRowElement;
         "smoothly-table-shadow-filler-row": HTMLSmoothlyTableShadowFillerRowElement;
@@ -3050,14 +3005,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableShadowDemo {
     }
-    interface SmoothlyTableShadowDemoColspan {
-    }
-    interface SmoothlyTableShadowDemoFillerRow {
-    }
-    interface SmoothlyTableShadowDemoFiltered {
-    }
-    interface SmoothlyTableShadowDemoGroup {
-    }
     interface SmoothlyTableShadowDemoNested {
     }
     interface SmoothlyTableShadowDemoNestedInner {
@@ -3067,8 +3014,6 @@ declare namespace LocalJSX {
 		age: number
 		balance: number
 	}[];
-    }
-    interface SmoothlyTableShadowDemoSimple {
     }
     interface SmoothlyTableShadowExpandableCell {
         "onSmoothlyTableExpandableCellChange"?: (event: SmoothlyTableShadowExpandableCellCustomEvent<boolean>) => void;
@@ -3243,13 +3188,8 @@ declare namespace LocalJSX {
         "smoothly-table-shadow-body": SmoothlyTableShadowBody;
         "smoothly-table-shadow-cell": SmoothlyTableShadowCell;
         "smoothly-table-shadow-demo": SmoothlyTableShadowDemo;
-        "smoothly-table-shadow-demo-colspan": SmoothlyTableShadowDemoColspan;
-        "smoothly-table-shadow-demo-filler-row": SmoothlyTableShadowDemoFillerRow;
-        "smoothly-table-shadow-demo-filtered": SmoothlyTableShadowDemoFiltered;
-        "smoothly-table-shadow-demo-group": SmoothlyTableShadowDemoGroup;
         "smoothly-table-shadow-demo-nested": SmoothlyTableShadowDemoNested;
         "smoothly-table-shadow-demo-nested-inner": SmoothlyTableShadowDemoNestedInner;
-        "smoothly-table-shadow-demo-simple": SmoothlyTableShadowDemoSimple;
         "smoothly-table-shadow-expandable-cell": SmoothlyTableShadowExpandableCell;
         "smoothly-table-shadow-expandable-row": SmoothlyTableShadowExpandableRow;
         "smoothly-table-shadow-filler-row": SmoothlyTableShadowFillerRow;
@@ -3373,13 +3313,8 @@ declare module "@stencil/core" {
             "smoothly-table-shadow-body": LocalJSX.SmoothlyTableShadowBody & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowBodyElement>;
             "smoothly-table-shadow-cell": LocalJSX.SmoothlyTableShadowCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowCellElement>;
             "smoothly-table-shadow-demo": LocalJSX.SmoothlyTableShadowDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoElement>;
-            "smoothly-table-shadow-demo-colspan": LocalJSX.SmoothlyTableShadowDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoColspanElement>;
-            "smoothly-table-shadow-demo-filler-row": LocalJSX.SmoothlyTableShadowDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoFillerRowElement>;
-            "smoothly-table-shadow-demo-filtered": LocalJSX.SmoothlyTableShadowDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoFilteredElement>;
-            "smoothly-table-shadow-demo-group": LocalJSX.SmoothlyTableShadowDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoGroupElement>;
             "smoothly-table-shadow-demo-nested": LocalJSX.SmoothlyTableShadowDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoNestedElement>;
             "smoothly-table-shadow-demo-nested-inner": LocalJSX.SmoothlyTableShadowDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoNestedInnerElement>;
-            "smoothly-table-shadow-demo-simple": LocalJSX.SmoothlyTableShadowDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowDemoSimpleElement>;
             "smoothly-table-shadow-expandable-cell": LocalJSX.SmoothlyTableShadowExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowExpandableCellElement>;
             "smoothly-table-shadow-expandable-row": LocalJSX.SmoothlyTableShadowExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowExpandableRowElement>;
             "smoothly-table-shadow-filler-row": LocalJSX.SmoothlyTableShadowFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableShadowFillerRowElement>;

@@ -10,7 +10,7 @@ export class SmoothlyTableShadowDemoNested {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-display type="text" value="Nested" />
+				<smoothly-display type="text" value="Nested shadow DOM table" />
 				<smoothly-table color="primary" columns={8}>
 					<smoothly-table-shadow-head>
 						<smoothly-table-shadow-row>
@@ -25,7 +25,7 @@ export class SmoothlyTableShadowDemoNested {
 						</smoothly-table-shadow-row>
 					</smoothly-table-shadow-head>
 					<smoothly-table-shadow-body>
-						{Array.from({ length: Math.floor(2000 / data.length) }).flatMap(() => {
+						{Array.from({ length: Math.floor(200 / data.length) }).flatMap(() =>
 							data.map(entry => (
 								<smoothly-table-shadow-expandable-row>
 									<smoothly-table-shadow-demo-nested-inner color="secondary" data={entry.friends} slot={"detail"} />
@@ -39,7 +39,7 @@ export class SmoothlyTableShadowDemoNested {
 									<smoothly-table-shadow-cell>{entry.company}</smoothly-table-shadow-cell>
 								</smoothly-table-shadow-expandable-row>
 							))
-						})}
+						)}
 					</smoothly-table-shadow-body>
 					<smoothly-table-shadow-foot>
 						<smoothly-table-shadow-row>

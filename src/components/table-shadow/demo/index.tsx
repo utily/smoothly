@@ -9,12 +9,6 @@ export class SmoothlyTableDemo {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-table-shadow-demo-filler-row />
-				<smoothly-table-shadow-demo-group />
-				<smoothly-table-shadow-demo-colspan />
-				<smoothly-table-shadow-demo-simple />
-
-				<smoothly-table-shadow-demo-filtered />
 				<smoothly-table-shadow-demo-nested />
 			</Host>
 		)
