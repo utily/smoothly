@@ -649,6 +649,11 @@ export namespace Components {
     }
     interface SmoothlyTableFoot {
     }
+    interface SmoothlyTableFunctional {
+        "columns": number;
+    }
+    interface SmoothlyTableFunctionalDemo {
+    }
     interface SmoothlyTableHead {
     }
     interface SmoothlyTableRow {
@@ -1942,6 +1947,18 @@ declare global {
         prototype: HTMLSmoothlyTableFootElement;
         new (): HTMLSmoothlyTableFootElement;
     };
+    interface HTMLSmoothlyTableFunctionalElement extends Components.SmoothlyTableFunctional, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalElement: {
+        prototype: HTMLSmoothlyTableFunctionalElement;
+        new (): HTMLSmoothlyTableFunctionalElement;
+    };
+    interface HTMLSmoothlyTableFunctionalDemoElement extends Components.SmoothlyTableFunctionalDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalDemoElement: {
+        prototype: HTMLSmoothlyTableFunctionalDemoElement;
+        new (): HTMLSmoothlyTableFunctionalDemoElement;
+    };
     interface HTMLSmoothlyTableHeadElement extends Components.SmoothlyTableHead, HTMLStencilElement {
     }
     var HTMLSmoothlyTableHeadElement: {
@@ -2185,6 +2202,8 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-filler-row": HTMLSmoothlyTableFillerRowElement;
         "smoothly-table-foot": HTMLSmoothlyTableFootElement;
+        "smoothly-table-functional": HTMLSmoothlyTableFunctionalElement;
+        "smoothly-table-functional-demo": HTMLSmoothlyTableFunctionalDemoElement;
         "smoothly-table-head": HTMLSmoothlyTableHeadElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-row-group": HTMLSmoothlyTableRowGroupElement;
@@ -2813,6 +2832,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableFoot {
     }
+    interface SmoothlyTableFunctional {
+        "columns"?: number;
+    }
+    interface SmoothlyTableFunctionalDemo {
+    }
     interface SmoothlyTableHead {
     }
     interface SmoothlyTableRow {
@@ -2965,6 +2989,8 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-filler-row": SmoothlyTableFillerRow;
         "smoothly-table-foot": SmoothlyTableFoot;
+        "smoothly-table-functional": SmoothlyTableFunctional;
+        "smoothly-table-functional-demo": SmoothlyTableFunctionalDemo;
         "smoothly-table-head": SmoothlyTableHead;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-row-group": SmoothlyTableRowGroup;
@@ -3077,6 +3103,8 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-filler-row": LocalJSX.SmoothlyTableFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableFillerRowElement>;
             "smoothly-table-foot": LocalJSX.SmoothlyTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyTableFootElement>;
+            "smoothly-table-functional": LocalJSX.SmoothlyTableFunctional & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalElement>;
+            "smoothly-table-functional-demo": LocalJSX.SmoothlyTableFunctionalDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalDemoElement>;
             "smoothly-table-head": LocalJSX.SmoothlyTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
