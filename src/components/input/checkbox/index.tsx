@@ -41,6 +41,10 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		if (!this.element.isConnected)
 			await this.unregister()
 	}
+	@Watch("name")
+	nameChange(_: string | undefined, oldName: string | undefined) {
+		Input.formRename(this, oldName)
+	}
 	@Method()
 	async register() {
 		Input.formAdd(this)

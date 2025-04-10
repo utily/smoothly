@@ -100,6 +100,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (!this.element.isConnected)
 			await this.unregister()
 	}
+	@Watch("name")
+	nameChange(_: string | undefined, oldName: string | undefined) {
+		Input.formRename(this, oldName)
+	}
 	@Method()
 	async register() {
 		Input.formAdd(this)
