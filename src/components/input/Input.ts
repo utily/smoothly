@@ -51,14 +51,19 @@ export namespace Input {
 	})
 	export const is = type.is
 
-	export function formRemove(self: Input) {
-		if (self.parent instanceof SmoothlyForm) {
-			self.parent.removeInput(self.name)
-		}
+	export function formRemove(self: Input, name?: string) {
+		if (self.parent instanceof SmoothlyForm)
+			self.parent.removeInput(name ?? self.name)
 	}
 	export function formAdd(self: Input) {
 		self.smoothlyInputLoad.emit(parent => (self.parent = parent))
 	}
+	export function formRename(self: Input, oldName?: string) {
+		if (oldName)
+			formRemove(self, oldName)
+		formAdd(self)
+	}
+
 	/* For adding clear, edit, reset that is inside input etc. - should be called on smoothlyInputLoad */
 	export function registerSubAction(self: Input & Editable, event: CustomEvent<(parent: Editable) => void>) {
 		if (!(event.target && "name" in event.target && event.target.name === self.name)) {

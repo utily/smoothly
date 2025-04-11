@@ -86,6 +86,10 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		const maxMonth = this.max?.substring(0, 7)
 		this.allowNextMonth = !maxMonth || nextMonth <= maxMonth
 	}
+	@Watch("name")
+	nameChange(_: string | undefined, oldName: string | undefined) {
+		Input.formRename(this, oldName)
+	}
 	@Method()
 	async register() {
 		Input.formAdd(this)

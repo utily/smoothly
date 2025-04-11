@@ -80,6 +80,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.listener[property] = listener
 		listener(this)
 	}
+	@Watch("name")
+	nameChange(_: string | undefined, oldName: string | undefined) {
+		Input.formRename(this, oldName)
+	}
 	@Method()
 	async register() {
 		Input.formAdd(this)
