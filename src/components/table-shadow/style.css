@@ -1,0 +1,7 @@
+:host {
+	display: grid;
+	grid-template-columns: repeat(var(--columns), auto);
+	color: rgb(var(--smoothly-table-foreground));
+	stroke: rgb(var(--smoothly-table-foreground));
+	fill: rgb(var(--smoothly-table-foreground));
+}
