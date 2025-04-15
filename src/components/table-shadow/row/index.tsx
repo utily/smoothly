@@ -2,11 +2,11 @@ import { Component, h, Host, Listen, VNode } from "@stencil/core"
 import { SmoothlyTableExpandableCellCustomEvent } from "../../../components"
 
 @Component({
-	tag: "smoothly-table-row",
+	tag: "smoothly-table-shadow-row",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
-export class SmoothlyTableRow {
+export class SmoothlyTableShadowRow {
 	private expandableCells = new Set<HTMLSmoothlyTableExpandableCellElement>()
 	@Listen("smoothlyTableExpandableCellRegister")
 	smoothlyTableExpandableCellRegisterHandler(event: SmoothlyTableExpandableCellCustomEvent<void>): void {
@@ -21,6 +21,10 @@ export class SmoothlyTableRow {
 	}
 
 	render(): VNode | VNode[] {
-		return <Host></Host>
+		return (
+			<Host>
+				<slot />
+			</Host>
+		)
 	}
 }

@@ -2,11 +2,11 @@ import { Component, h, Host, Listen, Prop, VNode } from "@stencil/core"
 import { SmoothlyTableExpandableCellCustomEvent } from "../../components"
 
 @Component({
-	tag: "smoothly-table",
+	tag: "smoothly-table-shadow",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
-export class SmoothlyTable {
+export class SmoothlyTableShadow {
 	@Prop() columns = 1
 
 	@Listen("smoothlyTableExpandableRowChange")
@@ -20,6 +20,10 @@ export class SmoothlyTable {
 	}
 
 	render(): VNode | VNode[] {
-		return <Host style={{ "--columns": this.columns.toString() }}></Host>
+		return (
+			<Host style={{ "--columns": this.columns.toString() }}>
+				<slot />
+			</Host>
+		)
 	}
 }

@@ -1,0 +1,12 @@
+:host {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: subgrid;
+	position: sticky;
+	z-index: 1;
+	bottom: 0;
+	background-color: rgb(var(--smoothly-table-footer-background));
+	color: rgb(var(--smoothly-table-footer-foreground));
+	stroke: rgb(var(--smoothly-table-footer-foreground));
+	fill: rgb(var(--smoothly-table-footer-foreground));
+}
