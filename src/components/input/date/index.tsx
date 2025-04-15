@@ -59,6 +59,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		if (!this.element.isConnected)
 			await this.unregister()
 	}
+	@Watch("name")
+	nameChange(_: string | undefined, oldName: string | undefined) {
+		Input.formRename(this, oldName)
+	}
 	@Method()
 	async register() {
 		Input.formAdd(this)
