@@ -21,10 +21,6 @@ export class SmoothlyTableRow {
 	}
 
 	render(): VNode | VNode[] {
-		return (
-			<Host>
-				<slot />
-			</Host>
-		)
+		return <Host></Host>
 	}
 }

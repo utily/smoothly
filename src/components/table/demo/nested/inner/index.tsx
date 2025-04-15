@@ -18,19 +18,19 @@ export class SmoothlyTableDemoNestedInner {
 				<smoothly-table columns={4}>
 					<smoothly-table-head>
 						<smoothly-table-row>
-							<smoothly-table-cell>Id</smoothly-table-cell>
-							<smoothly-table-cell>Name</smoothly-table-cell>
-							<smoothly-table-cell>Age</smoothly-table-cell>
-							<smoothly-table-cell>Balance</smoothly-table-cell>
+							<p>Id</p>
+							<p>Name</p>
+							<p>Age</p>
+							<p>Balance</p>
 						</smoothly-table-row>
 					</smoothly-table-head>
 					<smoothly-table-body>
 						{this.data?.map(entry => (
 							<smoothly-table-expandable-row>
-								<smoothly-table-cell>{entry.id}</smoothly-table-cell>
-								<smoothly-table-cell>{entry.name}</smoothly-table-cell>
-								<smoothly-table-cell>{entry.age}</smoothly-table-cell>
-								<smoothly-table-cell>{entry.balance}</smoothly-table-cell>
+								<p>{entry.id}</p>
+								<p>{entry.name}</p>
+								<p>{entry.age}</p>
+								<p>{entry.balance}</p>
 							</smoothly-table-expandable-row>
 						))}
 					</smoothly-table-body>

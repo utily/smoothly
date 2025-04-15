@@ -649,6 +649,39 @@ export namespace Components {
     }
     interface SmoothlyTableFoot {
     }
+    interface SmoothlyTableFunctional {
+        "columns": number;
+    }
+    interface SmoothlyTableFunctionalBody {
+    }
+    interface SmoothlyTableFunctionalDemo {
+    }
+    interface SmoothlyTableFunctionalDemoNested {
+    }
+    interface SmoothlyTableFunctionalDemoNestedInner {
+        "data"?: {
+		id: number
+		name: string
+		age: number
+		balance: number
+	}[];
+    }
+    interface SmoothlyTableFunctionalExpandableCell {
+        "close": () => Promise<void>;
+        "open": boolean;
+        "span"?: number;
+    }
+    interface SmoothlyTableFunctionalExpandableRow {
+        "open": boolean;
+    }
+    interface SmoothlyTableFunctionalFoot {
+    }
+    interface SmoothlyTableFunctionalHead {
+    }
+    interface SmoothlyTableFunctionalRowGroup {
+        "align": boolean;
+        "open": boolean;
+    }
     interface SmoothlyTableHead {
     }
     interface SmoothlyTableRow {
@@ -908,6 +941,18 @@ export interface SmoothlyTableExpandableCellCustomEvent<T> extends CustomEvent<T
 export interface SmoothlyTableExpandableRowCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTableExpandableRowElement;
+}
+export interface SmoothlyTableFunctionalExpandableCellCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableFunctionalExpandableCellElement;
+}
+export interface SmoothlyTableFunctionalExpandableRowCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableFunctionalExpandableRowElement;
+}
+export interface SmoothlyTableFunctionalRowGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTableFunctionalRowGroupElement;
 }
 export interface SmoothlyTableRowGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1994,6 +2039,100 @@ declare global {
         prototype: HTMLSmoothlyTableFootElement;
         new (): HTMLSmoothlyTableFootElement;
     };
+    interface HTMLSmoothlyTableFunctionalElement extends Components.SmoothlyTableFunctional, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalElement: {
+        prototype: HTMLSmoothlyTableFunctionalElement;
+        new (): HTMLSmoothlyTableFunctionalElement;
+    };
+    interface HTMLSmoothlyTableFunctionalBodyElement extends Components.SmoothlyTableFunctionalBody, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalBodyElement: {
+        prototype: HTMLSmoothlyTableFunctionalBodyElement;
+        new (): HTMLSmoothlyTableFunctionalBodyElement;
+    };
+    interface HTMLSmoothlyTableFunctionalDemoElement extends Components.SmoothlyTableFunctionalDemo, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalDemoElement: {
+        prototype: HTMLSmoothlyTableFunctionalDemoElement;
+        new (): HTMLSmoothlyTableFunctionalDemoElement;
+    };
+    interface HTMLSmoothlyTableFunctionalDemoNestedElement extends Components.SmoothlyTableFunctionalDemoNested, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalDemoNestedElement: {
+        prototype: HTMLSmoothlyTableFunctionalDemoNestedElement;
+        new (): HTMLSmoothlyTableFunctionalDemoNestedElement;
+    };
+    interface HTMLSmoothlyTableFunctionalDemoNestedInnerElement extends Components.SmoothlyTableFunctionalDemoNestedInner, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalDemoNestedInnerElement: {
+        prototype: HTMLSmoothlyTableFunctionalDemoNestedInnerElement;
+        new (): HTMLSmoothlyTableFunctionalDemoNestedInnerElement;
+    };
+    interface HTMLSmoothlyTableFunctionalExpandableCellElementEventMap {
+        "smoothlyTableExpandableCellChange": boolean;
+        "smoothlyTableExpandableCellRegister": void;
+    }
+    interface HTMLSmoothlyTableFunctionalExpandableCellElement extends Components.SmoothlyTableFunctionalExpandableCell, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableFunctionalExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalExpandableCellElement, ev: SmoothlyTableFunctionalExpandableCellCustomEvent<HTMLSmoothlyTableFunctionalExpandableCellElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableFunctionalExpandableCellElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalExpandableCellElement, ev: SmoothlyTableFunctionalExpandableCellCustomEvent<HTMLSmoothlyTableFunctionalExpandableCellElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableFunctionalExpandableCellElement: {
+        prototype: HTMLSmoothlyTableFunctionalExpandableCellElement;
+        new (): HTMLSmoothlyTableFunctionalExpandableCellElement;
+    };
+    interface HTMLSmoothlyTableFunctionalExpandableRowElementEventMap {
+        "smoothlyTableExpandableRowChange": boolean;
+    }
+    interface HTMLSmoothlyTableFunctionalExpandableRowElement extends Components.SmoothlyTableFunctionalExpandableRow, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableFunctionalExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalExpandableRowElement, ev: SmoothlyTableFunctionalExpandableRowCustomEvent<HTMLSmoothlyTableFunctionalExpandableRowElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableFunctionalExpandableRowElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalExpandableRowElement, ev: SmoothlyTableFunctionalExpandableRowCustomEvent<HTMLSmoothlyTableFunctionalExpandableRowElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableFunctionalExpandableRowElement: {
+        prototype: HTMLSmoothlyTableFunctionalExpandableRowElement;
+        new (): HTMLSmoothlyTableFunctionalExpandableRowElement;
+    };
+    interface HTMLSmoothlyTableFunctionalFootElement extends Components.SmoothlyTableFunctionalFoot, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalFootElement: {
+        prototype: HTMLSmoothlyTableFunctionalFootElement;
+        new (): HTMLSmoothlyTableFunctionalFootElement;
+    };
+    interface HTMLSmoothlyTableFunctionalHeadElement extends Components.SmoothlyTableFunctionalHead, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTableFunctionalHeadElement: {
+        prototype: HTMLSmoothlyTableFunctionalHeadElement;
+        new (): HTMLSmoothlyTableFunctionalHeadElement;
+    };
+    interface HTMLSmoothlyTableFunctionalRowGroupElementEventMap {
+        "smoothlyTableRowGroupChange": boolean;
+    }
+    interface HTMLSmoothlyTableFunctionalRowGroupElement extends Components.SmoothlyTableFunctionalRowGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTableFunctionalRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalRowGroupElement, ev: SmoothlyTableFunctionalRowGroupCustomEvent<HTMLSmoothlyTableFunctionalRowGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTableFunctionalRowGroupElementEventMap>(type: K, listener: (this: HTMLSmoothlyTableFunctionalRowGroupElement, ev: SmoothlyTableFunctionalRowGroupCustomEvent<HTMLSmoothlyTableFunctionalRowGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyTableFunctionalRowGroupElement: {
+        prototype: HTMLSmoothlyTableFunctionalRowGroupElement;
+        new (): HTMLSmoothlyTableFunctionalRowGroupElement;
+    };
     interface HTMLSmoothlyTableHeadElement extends Components.SmoothlyTableHead, HTMLStencilElement {
     }
     var HTMLSmoothlyTableHeadElement: {
@@ -2349,6 +2488,16 @@ declare global {
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
         "smoothly-table-filler-row": HTMLSmoothlyTableFillerRowElement;
         "smoothly-table-foot": HTMLSmoothlyTableFootElement;
+        "smoothly-table-functional": HTMLSmoothlyTableFunctionalElement;
+        "smoothly-table-functional-body": HTMLSmoothlyTableFunctionalBodyElement;
+        "smoothly-table-functional-demo": HTMLSmoothlyTableFunctionalDemoElement;
+        "smoothly-table-functional-demo-nested": HTMLSmoothlyTableFunctionalDemoNestedElement;
+        "smoothly-table-functional-demo-nested-inner": HTMLSmoothlyTableFunctionalDemoNestedInnerElement;
+        "smoothly-table-functional-expandable-cell": HTMLSmoothlyTableFunctionalExpandableCellElement;
+        "smoothly-table-functional-expandable-row": HTMLSmoothlyTableFunctionalExpandableRowElement;
+        "smoothly-table-functional-foot": HTMLSmoothlyTableFunctionalFootElement;
+        "smoothly-table-functional-head": HTMLSmoothlyTableFunctionalHeadElement;
+        "smoothly-table-functional-row-group": HTMLSmoothlyTableFunctionalRowGroupElement;
         "smoothly-table-head": HTMLSmoothlyTableHeadElement;
         "smoothly-table-row": HTMLSmoothlyTableRowElement;
         "smoothly-table-row-group": HTMLSmoothlyTableRowGroupElement;
@@ -2990,6 +3139,42 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableFoot {
     }
+    interface SmoothlyTableFunctional {
+        "columns"?: number;
+    }
+    interface SmoothlyTableFunctionalBody {
+    }
+    interface SmoothlyTableFunctionalDemo {
+    }
+    interface SmoothlyTableFunctionalDemoNested {
+    }
+    interface SmoothlyTableFunctionalDemoNestedInner {
+        "data"?: {
+		id: number
+		name: string
+		age: number
+		balance: number
+	}[];
+    }
+    interface SmoothlyTableFunctionalExpandableCell {
+        "onSmoothlyTableExpandableCellChange"?: (event: SmoothlyTableFunctionalExpandableCellCustomEvent<boolean>) => void;
+        "onSmoothlyTableExpandableCellRegister"?: (event: SmoothlyTableFunctionalExpandableCellCustomEvent<void>) => void;
+        "open"?: boolean;
+        "span"?: number;
+    }
+    interface SmoothlyTableFunctionalExpandableRow {
+        "onSmoothlyTableExpandableRowChange"?: (event: SmoothlyTableFunctionalExpandableRowCustomEvent<boolean>) => void;
+        "open"?: boolean;
+    }
+    interface SmoothlyTableFunctionalFoot {
+    }
+    interface SmoothlyTableFunctionalHead {
+    }
+    interface SmoothlyTableFunctionalRowGroup {
+        "align"?: boolean;
+        "onSmoothlyTableRowGroupChange"?: (event: SmoothlyTableFunctionalRowGroupCustomEvent<boolean>) => void;
+        "open"?: boolean;
+    }
     interface SmoothlyTableHead {
     }
     interface SmoothlyTableRow {
@@ -3185,6 +3370,16 @@ declare namespace LocalJSX {
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
         "smoothly-table-filler-row": SmoothlyTableFillerRow;
         "smoothly-table-foot": SmoothlyTableFoot;
+        "smoothly-table-functional": SmoothlyTableFunctional;
+        "smoothly-table-functional-body": SmoothlyTableFunctionalBody;
+        "smoothly-table-functional-demo": SmoothlyTableFunctionalDemo;
+        "smoothly-table-functional-demo-nested": SmoothlyTableFunctionalDemoNested;
+        "smoothly-table-functional-demo-nested-inner": SmoothlyTableFunctionalDemoNestedInner;
+        "smoothly-table-functional-expandable-cell": SmoothlyTableFunctionalExpandableCell;
+        "smoothly-table-functional-expandable-row": SmoothlyTableFunctionalExpandableRow;
+        "smoothly-table-functional-foot": SmoothlyTableFunctionalFoot;
+        "smoothly-table-functional-head": SmoothlyTableFunctionalHead;
+        "smoothly-table-functional-row-group": SmoothlyTableFunctionalRowGroup;
         "smoothly-table-head": SmoothlyTableHead;
         "smoothly-table-row": SmoothlyTableRow;
         "smoothly-table-row-group": SmoothlyTableRowGroup;
@@ -3310,6 +3505,16 @@ declare module "@stencil/core" {
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
             "smoothly-table-filler-row": LocalJSX.SmoothlyTableFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableFillerRowElement>;
             "smoothly-table-foot": LocalJSX.SmoothlyTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyTableFootElement>;
+            "smoothly-table-functional": LocalJSX.SmoothlyTableFunctional & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalElement>;
+            "smoothly-table-functional-body": LocalJSX.SmoothlyTableFunctionalBody & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalBodyElement>;
+            "smoothly-table-functional-demo": LocalJSX.SmoothlyTableFunctionalDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalDemoElement>;
+            "smoothly-table-functional-demo-nested": LocalJSX.SmoothlyTableFunctionalDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalDemoNestedElement>;
+            "smoothly-table-functional-demo-nested-inner": LocalJSX.SmoothlyTableFunctionalDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalDemoNestedInnerElement>;
+            "smoothly-table-functional-expandable-cell": LocalJSX.SmoothlyTableFunctionalExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalExpandableCellElement>;
+            "smoothly-table-functional-expandable-row": LocalJSX.SmoothlyTableFunctionalExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalExpandableRowElement>;
+            "smoothly-table-functional-foot": LocalJSX.SmoothlyTableFunctionalFoot & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalFootElement>;
+            "smoothly-table-functional-head": LocalJSX.SmoothlyTableFunctionalHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalHeadElement>;
+            "smoothly-table-functional-row-group": LocalJSX.SmoothlyTableFunctionalRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableFunctionalRowGroupElement>;
             "smoothly-table-head": LocalJSX.SmoothlyTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
             "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
             "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;

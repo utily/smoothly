@@ -29,6 +29,7 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/input" label="Inputs" content={<smoothly-input-demo />} />
 				<smoothly-app-room path="/table" label="Tables" content={<smoothly-table-demo />} />
 				<smoothly-app-room path="/shadow" label="Shadow" content={<smoothly-table-shadow-demo />} />
+				<smoothly-app-room path="/functional" label="Functional" content={<smoothly-table-functional-demo />} />
 				<smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
 				<smoothly-app-room path="/icon" label="Icons" content={<smoothly-icon-demo />} />
 				<smoothly-app-room path="/theme" label="Theming" content={<smoothly-theme-demo />} />

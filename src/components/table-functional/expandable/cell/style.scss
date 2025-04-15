@@ -1,0 +1,79 @@
+@import "../arrow.scss";
+
+:host {
+	display: contents;
+}
+
+:host>div {
+	padding: 0.3rem 1.1rem;
+}
+
+:host .content {
+	grid-column: span var(--smoothly-table-cell-span, 1);
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	white-space: nowrap;
+	cursor: pointer;
+	@include arrow;
+	&:hover {
+		@include arrow-hover;
+	}
+}
+
+:host .content:hover {
+	background-color: rgb(var(--smoothly-table-hover-background));
+	color: rgb(var(--smoothly-table-hover-foreground));
+	stroke: rgb(var(--smoothly-table-hover-foreground));
+	fill: rgb(var(--smoothly-table-hover-foreground));
+}
+
+:host([open]) .content {
+	@include arrow-open;
+}
+
+:host([open]) .content {
+	box-shadow: 1px 1px 1px -1px rgb(var(--smoothly-table-border)) inset,
+	-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
+}
+
+:host([open])>div {
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	color: rgb(var(--smoothly-table-expanded-foreground));
+	stroke: rgb(var(--smoothly-table-expanded-foreground));
+	fill: rgb(var(--smoothly-table-expanded-foreground));
+}
+
+:host .detail {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	position: relative;
+}
+
+:host .detail::before {
+	content: "";
+	position: absolute;
+	display: flex;
+	box-sizing: border-box;
+	top: 0;
+	bottom: 0;
+	left: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));
+	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
+
+:host .detail::after {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	right: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
