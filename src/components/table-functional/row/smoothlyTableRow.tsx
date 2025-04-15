@@ -1,6 +1,4 @@
-import { FunctionalComponent, h, VNode } from "@stencil/core"
-
-export const SmoothlyTableFunctionalRow: FunctionalComponent = (children: VNode[]) => {
-	console.log("SmoothlyTableFunctionalRow", children)
+import { FunctionalComponent, h } from "@stencil/core"
+export const SmoothlyTableFunctionalRow: FunctionalComponent = (props, children) => {
 	return <div class="smoothly-table-functional-row">{children}</div>
 }

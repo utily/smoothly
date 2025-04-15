@@ -1,6 +1,5 @@
 import { Component, h, Host, VNode } from "@stencil/core"
 import { SmoothlyTableFunctionalCell } from "../cell/smoothlyTableCell"
-import { SmoothlyTableFunctionalExpandableCell } from "../expandable/cell/smoothlyTableExpandableCell"
 import { SmoothlyTableFunctionalExpandableRow } from "../expandable/row/smoothlyTableExpandableRow"
 import { SmoothlyTableFunctionalRow } from "../row/smoothlyTableRow"
 import { data } from "./data"
@@ -13,7 +12,7 @@ export class SmoothlyTableFunctionalDemo {
 	render(): VNode | VNode[] {
 		return (
 			<Host>
-				<smoothly-table-functional columns={10}>
+				<smoothly-table-functional columns={9}>
 					<SmoothlyTableFunctionalRow>
 						<SmoothlyTableFunctionalCell>Id</SmoothlyTableFunctionalCell>
 						<SmoothlyTableFunctionalCell>Registered</SmoothlyTableFunctionalCell>
@@ -35,21 +34,17 @@ export class SmoothlyTableFunctionalDemo {
 								<SmoothlyTableFunctionalCell>{entry.eyeColor}</SmoothlyTableFunctionalCell>
 								<SmoothlyTableFunctionalCell>{entry.gender}</SmoothlyTableFunctionalCell>
 								<SmoothlyTableFunctionalCell>{entry.company}</SmoothlyTableFunctionalCell>
+								<smoothly-table-functional-demo-nested-inner data={entry.friends} />
 							</SmoothlyTableFunctionalExpandableRow>
 						))
 					)}
 					<SmoothlyTableFunctionalRow>
-						<SmoothlyTableFunctionalExpandableCell>
+						<SmoothlyTableFunctionalCell>
 							<span>Id</span>
+						</SmoothlyTableFunctionalCell>
+						<SmoothlyTableFunctionalCell>
 							<span>This is an id</span>
-						</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Registered</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Name</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Age</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Balance</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Eye color</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Gender</SmoothlyTableFunctionalExpandableCell>
-						<SmoothlyTableFunctionalExpandableCell>Company</SmoothlyTableFunctionalExpandableCell>
+						</SmoothlyTableFunctionalCell>
 					</SmoothlyTableFunctionalRow>
 				</smoothly-table-functional>
 			</Host>

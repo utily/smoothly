@@ -16,9 +16,10 @@
 	display: grid;
 	grid-template-columns: subgrid;
 	box-sizing: border-box;
-	border-style: solid;
+	border-bottom: 1px solid rgb(var(--smoothly-table-foreground))
+	/* border-style: solid;
 	border-color: rgb(var(--smoothly-table-foreground)) transparent transparent transparent;
-	border-width: 1px 1px 0 1px;
+	border-width: 1px 1px 0 1px; */
 }
 :host .smoothly-table-functional-row:has(.smoothly-table-functional-row-detail.smoothly-open) {
 	background-color: rgb(var(--smoothly-table-expanded-background));
@@ -49,6 +50,14 @@
 	grid-template-rows: auto 1fr 0fr;
 }
 
+:host .smoothly-table-functional-row.smoothly-open {
+	border: solid 1px rgb(var(--smoothly-table-foreground)), transparent, transparent,solid 1px rgb(var(--smoothly-table-foreground));
+}
+
+:host .smoothly-open {
+	background-color: pink;
+}
+
 :host .smoothly-table-functional-row-detail.smoothly-open::before {
 	content: "";
 	position: absolute;
@@ -59,12 +68,15 @@
 	left: -1em;
 	width: 1em;
 	background-color: rgb(var(--smoothly-table-expanded-background));
-	border-style: solid;
-	border-color: rgb(var(--smoothly-table-foreground));
-	border-width: 1px 0 1px 1px;
 	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));
+	border-top: solid 1px rgb(var(--smoothly-table-foreground));
+	border-bottom: solid 1px rgb(var(--smoothly-table-foreground));
+
+	/* border-color: rgb(var(--smoothly-table-foreground));
+	border-width: 1px 0 1px 1px;
+	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));*/
 	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
-		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+		0px 0px 1px 0px rgb(var(--smoothly-table-border)); 
 }
 :host .smoothly-table-functional-row-detail.smoothly-open::after {
 	content: "";
