@@ -5,6 +5,12 @@
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
+:host::slotted(*) {
+	grid-column: span var(--smoothly-table-cell-span, 1);
+	align-items: center;
+	padding: 0.3rem 1.1rem;
+	white-space: nowrap;
+}
 
 :host:has(smoothly-table-expandable-cell) {
 	grid-template-rows: auto 0fr 0fr;

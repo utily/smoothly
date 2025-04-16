@@ -625,9 +625,9 @@ export namespace Components {
     }
     interface SmoothlyTableDemoGroup {
     }
-    interface SmoothlyTableDemoNested {
+    interface SmoothlyTableDemoNestedNoCell {
     }
-    interface SmoothlyTableDemoNestedInner {
+    interface SmoothlyTableDemoNestedNoCellInner {
         "data"?: {
 		id: number
 		name: string
@@ -1877,17 +1877,17 @@ declare global {
         prototype: HTMLSmoothlyTableDemoGroupElement;
         new (): HTMLSmoothlyTableDemoGroupElement;
     };
-    interface HTMLSmoothlyTableDemoNestedElement extends Components.SmoothlyTableDemoNested, HTMLStencilElement {
+    interface HTMLSmoothlyTableDemoNestedNoCellElement extends Components.SmoothlyTableDemoNestedNoCell, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableDemoNestedElement: {
-        prototype: HTMLSmoothlyTableDemoNestedElement;
-        new (): HTMLSmoothlyTableDemoNestedElement;
+    var HTMLSmoothlyTableDemoNestedNoCellElement: {
+        prototype: HTMLSmoothlyTableDemoNestedNoCellElement;
+        new (): HTMLSmoothlyTableDemoNestedNoCellElement;
     };
-    interface HTMLSmoothlyTableDemoNestedInnerElement extends Components.SmoothlyTableDemoNestedInner, HTMLStencilElement {
+    interface HTMLSmoothlyTableDemoNestedNoCellInnerElement extends Components.SmoothlyTableDemoNestedNoCellInner, HTMLStencilElement {
     }
-    var HTMLSmoothlyTableDemoNestedInnerElement: {
-        prototype: HTMLSmoothlyTableDemoNestedInnerElement;
-        new (): HTMLSmoothlyTableDemoNestedInnerElement;
+    var HTMLSmoothlyTableDemoNestedNoCellInnerElement: {
+        prototype: HTMLSmoothlyTableDemoNestedNoCellInnerElement;
+        new (): HTMLSmoothlyTableDemoNestedNoCellInnerElement;
     };
     interface HTMLSmoothlyTableDemoSimpleElement extends Components.SmoothlyTableDemoSimple, HTMLStencilElement {
     }
@@ -2178,8 +2178,8 @@ declare global {
         "smoothly-table-demo-filler-row": HTMLSmoothlyTableDemoFillerRowElement;
         "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-demo-group": HTMLSmoothlyTableDemoGroupElement;
-        "smoothly-table-demo-nested": HTMLSmoothlyTableDemoNestedElement;
-        "smoothly-table-demo-nested-inner": HTMLSmoothlyTableDemoNestedInnerElement;
+        "smoothly-table-demo-nested-no-cell": HTMLSmoothlyTableDemoNestedNoCellElement;
+        "smoothly-table-demo-nested-no-cell-inner": HTMLSmoothlyTableDemoNestedNoCellInnerElement;
         "smoothly-table-demo-simple": HTMLSmoothlyTableDemoSimpleElement;
         "smoothly-table-expandable-cell": HTMLSmoothlyTableExpandableCellElement;
         "smoothly-table-expandable-row": HTMLSmoothlyTableExpandableRowElement;
@@ -2787,9 +2787,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableDemoGroup {
     }
-    interface SmoothlyTableDemoNested {
+    interface SmoothlyTableDemoNestedNoCell {
     }
-    interface SmoothlyTableDemoNestedInner {
+    interface SmoothlyTableDemoNestedNoCellInner {
         "data"?: {
 		id: number
 		name: string
@@ -2958,8 +2958,8 @@ declare namespace LocalJSX {
         "smoothly-table-demo-filler-row": SmoothlyTableDemoFillerRow;
         "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-demo-group": SmoothlyTableDemoGroup;
-        "smoothly-table-demo-nested": SmoothlyTableDemoNested;
-        "smoothly-table-demo-nested-inner": SmoothlyTableDemoNestedInner;
+        "smoothly-table-demo-nested-no-cell": SmoothlyTableDemoNestedNoCell;
+        "smoothly-table-demo-nested-no-cell-inner": SmoothlyTableDemoNestedNoCellInner;
         "smoothly-table-demo-simple": SmoothlyTableDemoSimple;
         "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
         "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
@@ -3070,8 +3070,8 @@ declare module "@stencil/core" {
             "smoothly-table-demo-filler-row": LocalJSX.SmoothlyTableDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
             "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-demo-group": LocalJSX.SmoothlyTableDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
-            "smoothly-table-demo-nested": LocalJSX.SmoothlyTableDemoNested & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedElement>;
-            "smoothly-table-demo-nested-inner": LocalJSX.SmoothlyTableDemoNestedInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedInnerElement>;
+            "smoothly-table-demo-nested-no-cell": LocalJSX.SmoothlyTableDemoNestedNoCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellElement>;
+            "smoothly-table-demo-nested-no-cell-inner": LocalJSX.SmoothlyTableDemoNestedNoCellInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellInnerElement>;
             "smoothly-table-demo-simple": LocalJSX.SmoothlyTableDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoSimpleElement>;
             "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
             "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;

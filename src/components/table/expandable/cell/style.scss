@@ -10,7 +10,6 @@
 
 :host>div.content {
 	grid-column: span var(--smoothly-table-cell-span, 1);
-	display: flex;
 	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
@@ -18,18 +17,15 @@
 
 	&:hover {
 		@include arrow-hover;
+		background-color: rgb(var(--smoothly-table-hover-background));
+		color: rgb(var(--smoothly-table-hover-foreground));
+		stroke: rgb(var(--smoothly-table-hover-foreground));
+		fill: rgb(var(--smoothly-table-hover-foreground));
 	}
 }
 
 :host[open]>div.content {
 	@include arrow-open;
-}
-
-:host>div.content:hover {
-	background-color: rgb(var(--smoothly-table-hover-background));
-	color: rgb(var(--smoothly-table-hover-foreground));
-	stroke: rgb(var(--smoothly-table-hover-foreground));
-	fill: rgb(var(--smoothly-table-hover-foreground));
 }
 
 :host>div:first-child {

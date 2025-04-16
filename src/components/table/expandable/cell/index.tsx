@@ -27,8 +27,8 @@ export class SmoothlyTableExpandableCell {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
-				<div onClick={() => this.clickHandler()} class={"content"}>
+			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }} onClick={() => this.clickHandler()}>
+				<div class={"content"}>
 					<slot />
 				</div>
 				<div class={"detail"}>
