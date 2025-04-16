@@ -1,11 +1,11 @@
 import { Component, Event, EventEmitter, h, Host, Method, Prop, VNode, Watch } from "@stencil/core"
-
 @Component({
 	tag: "smoothly-table-expandable-cell",
 	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyTableExpandableCell {
+	private detailElement?: HTMLDivElement
 	@Prop({ reflect: true }) span?: number = 1
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Event() smoothlyTableExpandableCellChange: EventEmitter<boolean>
@@ -17,8 +17,8 @@ export class SmoothlyTableExpandableCell {
 	async close(): Promise<void> {
 		this.open = false
 	}
-	clickHandler(): void {
-		this.open = !this.open
+	clickHandler(event: MouseEvent): void {
+		this.detailElement && !event.composedPath().includes(this.detailElement) && (this.open = !this.open)
 	}
 	@Watch("open")
 	openChange() {
@@ -27,11 +27,13 @@ export class SmoothlyTableExpandableCell {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }} onClick={() => this.clickHandler()}>
+			<Host
+				style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}
+				onClick={(e: MouseEvent) => this.clickHandler(e)}>
 				<div class={"content"}>
 					<slot />
 				</div>
-				<div class={"detail"}>
+				<div class={"detail"} ref={(el: HTMLDivElement) => (this.detailElement = el)}>
 					<slot name={"detail"} />
 				</div>
 			</Host>
