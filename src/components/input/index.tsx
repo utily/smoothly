@@ -27,7 +27,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() autocomplete?: Exclude<tidily.Settings["autocomplete"], undefined>
 	@Prop({ reflect: true }) placeholder: string | undefined
-	@Prop() disabled = false
+	@Prop({ reflect: true }) disabled = false
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop() toInteger?: boolean
 	@Prop({ reflect: true }) currency?: isoly.Currency
