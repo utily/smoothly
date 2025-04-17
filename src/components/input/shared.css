@@ -53,6 +53,12 @@
 :host[looks="transparent"]:not([readonly]):focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
 }
+:host([disabled]) {
+	cursor: not-allowed;
+	--smoothly-input-foreground: var(--smoothly-input-disabled-foreground);
+	--smoothly-input-background: var(--smoothly-input-disabled-background);
+	--smoothly-input-border: var(--smoothly-input-disabled-border);
+}
 
 /* --- label --- */
 

@@ -45,6 +45,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) ordered?: boolean
 	@Prop() multiple = false
@@ -229,6 +230,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
 		!this.readonly &&
+			!this.disabled &&
 			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)

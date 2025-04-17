@@ -6,6 +6,7 @@ import { Looks } from "../../Looks"
 type Options = {
 	looks?: Looks
 	readonly?: boolean
+	disabled?: boolean
 	color?: Color
 	vertical?: boolean
 	showLabel?: boolean
@@ -67,6 +68,7 @@ export class SmoothlyInputDemoStandard {
 							))}
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-select>
+						<smoothly-input-checkbox name="disabled">Disabled</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="vertical">Vertical Layout</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="showLabel" checked>
 							Show Label
@@ -89,6 +91,7 @@ export class SmoothlyInputDemoStandard {
 						invalid={this.options.invalid}
 						errorMessage={this.options.errorMessage}
 						readonly={this.options.readonly}
+						disabled={this.options.disabled}
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Text</span>}
@@ -103,6 +106,7 @@ export class SmoothlyInputDemoStandard {
 						invalid={this.options.invalid}
 						errorMessage={this.options.errorMessage}
 						readonly={this.options.readonly}
+						disabled={this.options.disabled}
 						color={this.options.color}>
 						{this.options.showLabel && <label slot="label">Select</label>}
 						<smoothly-item value="1">January</smoothly-item>
@@ -124,6 +128,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-checkbox
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						disabled={this.options.disabled}
 						color={this.options.color}>
 						Check
 					</smoothly-input-checkbox>
@@ -134,6 +139,7 @@ export class SmoothlyInputDemoStandard {
 						clearable
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
@@ -149,6 +155,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-file
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						color={this.options.color}
 						placeholder={placeholder}
 						showLabel={this.options.showLabel}>
@@ -162,6 +169,7 @@ export class SmoothlyInputDemoStandard {
 						label={this.options.showLabel ? "Range" : undefined}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						color={this.options.color}>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-range>
@@ -170,6 +178,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-color
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Color</span>}
@@ -180,6 +189,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-date
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						invalid={this.options.invalid}
 						color={this.options.color}
 						showLabel={this.options.showLabel}>
@@ -191,6 +201,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-date-time
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						invalid={this.options.invalid}
 						errorMessage={this.options.errorMessage}
 						color={this.options.color}
@@ -203,6 +214,7 @@ export class SmoothlyInputDemoStandard {
 					<smoothly-input-date-range
 						looks={this.options.looks}
 						readonly={this.options.readonly}
+						// TODO - disabled
 						invalid={this.options.invalid}
 						color={this.options.color}
 						placeholder={placeholder}
