@@ -18,6 +18,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) start: isoly.Date | undefined
 	@Prop({ mutable: true }) end: isoly.Date | undefined
@@ -64,6 +65,11 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Watch("value")
 	valueChanged() {
 		this.changed = this.initialStart != this.start || this.initialEnd != this.end
+		this.listener.changed?.(this)
+	}
+	@Watch("disabled")
+	@Watch("readonly")
+	watchingReadonly(): void {
 		this.listener.changed?.(this)
 	}
 	@Listen("smoothlyInputLoad")
@@ -129,11 +135,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		const locale = navigator.language as isoly.Locale
 		return (
 			<Host tabindex={0}>
-				<section onClick={() => !this.readonly && (this.open = !this.open)}>
+				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
 					<smoothly-input
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
 						readonly={this.readonly}
+						disabled={this.disabled}
 						value={
 							this.start && this.end
 								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
