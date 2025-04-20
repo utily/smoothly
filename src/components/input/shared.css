@@ -8,7 +8,6 @@
 	border-radius: var(--smoothly-input-border-radius);
 }
 
-:host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
 	border: rgb(var(--smoothly-input-border)) solid 1px;
 }
@@ -17,7 +16,6 @@
 	border: transparent solid 1px;
 }
 
-:host[looks="line"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="line"] {
 	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
 }
