@@ -133,6 +133,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
+	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)
