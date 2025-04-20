@@ -151,6 +151,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
 		}
 	}
+	@Watch("disabled")
 	@Watch("readonly")
 	readonlyChange() {
 		this.listener.changed?.(this)
