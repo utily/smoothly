@@ -10,12 +10,12 @@
 	}
 }
 
-:host>section>smoothly-input>div>input {
+:host:not([readonly])>section>smoothly-input {
 	cursor: pointer;
 }
 
-:host[readonly],
-:host[readonly]>section>smoothly-input>div>input {
+:host[disabled],
+:host[disabled]>section>smoothly-input {
 	cursor: not-allowed;
 }
 
