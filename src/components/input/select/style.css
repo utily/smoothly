@@ -24,7 +24,6 @@
 :host>div.select-display {
 	box-sizing: border-box;
 	display: flex;
-	cursor: pointer;
 	padding: var(--input-value-padding-top) .8rem var(--input-value-padding-bottom) 0;
 	overflow: hidden;
 	width: 100%;
@@ -32,15 +31,14 @@
 	gap: 1rem;
 	text-overflow: ellipsis;
 }
+:host:not([readonly]):not([disabled])>div.select-display {
+	cursor: pointer;
+}
 
 :host:not(:has([slot=label]))>div.select-display,
 :host:not([show-label])>div.select-display  {
 	padding: .6rem .8rem .6rem 0;
 	align-items: center;
-}
-
-:host[readonly]>div.select-display {
-	cursor: not-allowed;
 }
 
 :host>div.select-display smoothly-icon {
@@ -62,9 +60,12 @@
 :host>div.icons>smoothly-icon[name=caret-down-outline],
 :host>div.icons>smoothly-icon[name=caret-forward-outline] {
 	opacity: .7;
-	cursor: pointer;
 	height: 100%;
 	padding-inline: var(--input-padding-side);
+}
+:host:not([readonly]):not([disabled])>div.icons>smoothly-icon[name=caret-down-outline],
+:host:not([readonly]):not([disabled])>div.icons>smoothly-icon[name=caret-forward-outline] {
+	cursor: pointer;
 }
 
 :host[invalid]>div>smoothly-icon.smoothly-invalid {
