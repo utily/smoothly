@@ -37,6 +37,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() type: Extract<tidily.Type, "text" | "percent"> = "text"
 	@Prop() min = 0
 	@Prop() max = 100
@@ -120,6 +121,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.listener.changed?.(this)
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
+	@Watch("disabled")
+	@Watch("readonly")
+	watchingReadonly(): void {
+		this.listener.changed?.(this)
+	}
 	setValue(value: number | undefined): void {
 		if (value == undefined)
 			this.value = undefined
@@ -160,7 +166,8 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						}}
 						value={this.type == "percent" ? this.value : this.value?.toString()}
 						placeholder={this.outputSide === "right" ? "-" : undefined}
-						readonly={this.readonly}>
+						readonly={this.readonly}
+						disabled={this.disabled}>
 						{this.label}
 					</smoothly-input>
 					<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />
@@ -171,7 +178,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						min={this.min}
 						max={this.max}
 						step={this.step ?? "any"}
-						disabled={this.readonly}
+						disabled={this.readonly || this.disabled}
 						onInput={event => {
 							event.stopPropagation()
 							this.setValue((event.target as HTMLInputElement).valueAsNumber)

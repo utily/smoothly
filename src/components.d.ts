@@ -477,6 +477,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "defined": boolean;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<number | undefined>;
         "label": string;
@@ -2641,6 +2642,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
+        "disabled"?: boolean;
         "label"?: string;
         "looks"?: Looks;
         "max"?: number;
