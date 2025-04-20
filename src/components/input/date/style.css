@@ -14,12 +14,12 @@
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
-:host>smoothly-input>div>input {
+:host:not([readonly])>smoothly-input>div>input {
 	cursor: pointer;
 }
 
-:host[readonly],
-:host[readonly]>smoothly-input>div>input {
+:host[disabled],
+:host[disabled]>smoothly-input>div>input {
 	cursor: not-allowed;
 }
 
