@@ -45,12 +45,13 @@
 
 :host[looks="transparent"][readonly]>input,
 :host[looks="transparent"]:not(:focus-within)>input {
-	background: transparent;
+	background-color: transparent;
 }
 
 :host[looks="transparent"]:not([readonly]):focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
 }
+
 :host([disabled]) {
 	cursor: not-allowed;
 	user-select: none;
