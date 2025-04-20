@@ -21,6 +21,6 @@
 	margin-left: auto;
 }
 
-:host[readonly] smoothly-input-radio-item * {
+:host[disabled] smoothly-input-radio-item * {
 	cursor: not-allowed;
 }
