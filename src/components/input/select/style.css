@@ -55,13 +55,6 @@
 	align-items: center;
 }
 
-:host>div.icons::slotted(smoothly-icon):not("color") {
-	color: rgb(var(--smoothly-input-foreground));
-	fill: rgb(var(--smoothly-input-foreground));
-	stroke: rgb(var(--smoothly-input-foreground));
-	filter: opacity(60%);
-}
-
 :host:hover>div.icons::slotted(smoothly-icon) {
 	filter: opacity(100%);
 }
