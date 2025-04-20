@@ -3,14 +3,22 @@
 	align-items: center;
 	position: relative;
 }
-
-:host:hover>* {
+smoothly-input-radio:not([disabled]) :host>* {
 	cursor: pointer;
+}
+smoothly-input-radio[disabled] :host>* {
+	cursor: not-allowed;
 }
 
 :host>input:focus-visible+smoothly-icon {
 	outline: 2px solid rgb(var(--smoothly-primary-color));
 	border-radius: 1px;
+}
+:host>smoothly-icon {
+	--smoothly-color-contrast: var(--smoothly-input-foreground);
+}
+smoothly-input-radio:not([disabled]) :host>smoothly-icon[name=checkmark-circle] {
+	--smoothly-color-contrast: var(--smoothly-success-color);
 }
 
 :host>input {

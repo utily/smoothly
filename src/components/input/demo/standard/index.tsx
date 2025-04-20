@@ -138,7 +138,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
-						// TODO - disabled
+						disabled={this.options.disabled}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
 						<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>

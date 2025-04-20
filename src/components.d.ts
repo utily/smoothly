@@ -449,6 +449,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "clearable"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<any | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -2611,6 +2612,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRadioCustomEvent<(disabled: boolean) => void>) => void;
