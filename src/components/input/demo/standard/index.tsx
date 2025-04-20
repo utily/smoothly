@@ -4,16 +4,15 @@ import { Color } from "../../../../model"
 import { Looks } from "../../Looks"
 
 type Options = {
+	color?: Color
 	looks?: Looks
+	borderRadius?: number
 	readonly?: boolean
 	disabled?: boolean
-	color?: Color
-	vertical?: boolean
-	showLabel?: boolean
-	placeholder?: boolean
 	invalid?: boolean
 	errorMessage?: string
-	borderRadius?: number
+	showLabel?: boolean
+	placeholder?: string
 }
 
 @Component({
@@ -42,9 +41,8 @@ export class SmoothlyInputDemoStandard {
 	}
 
 	render() {
-		const placeholder = this.options.placeholder ? "placeholder" : undefined
 		return (
-			<Host class={{ vertical: !!this.options.vertical }}>
+			<Host>
 				<div class="description">
 					<h2>Input Standard</h2>
 					<p>
@@ -52,13 +50,6 @@ export class SmoothlyInputDemoStandard {
 						100% zoom, assuming a root font-size of 16 pixels.
 					</p>
 					<smoothly-form looks={"grid"} onSmoothlyFormInput={(e: CustomEvent<Options>) => (this.options = e.detail)}>
-						<smoothly-input-select name="looks">
-							<span slot="label">Looks</span>
-							{Looks.values.map(l => (
-								<smoothly-item value={l}>{l}</smoothly-item>
-							))}
-						</smoothly-input-select>
-						<smoothly-input-checkbox name="readonly">Readonly</smoothly-input-checkbox>
 						<smoothly-input-select name="color">
 							<span slot="label">Color</span>
 							{Color.values.map(c => (
@@ -68,32 +59,38 @@ export class SmoothlyInputDemoStandard {
 							))}
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-select>
+						<smoothly-input-select name="looks">
+							<span slot="label">Looks</span>
+							{Looks.values.map(l => (
+								<smoothly-item value={l}>{l}</smoothly-item>
+							))}
+						</smoothly-input-select>
+						<smoothly-input-range label={"Border Radius (rem)"} name={"borderRadius"} min={0} max={2} step={0.25} />
+						<smoothly-input-checkbox name="readonly">Readonly</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="disabled">Disabled</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="vertical">Vertical Layout</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="showLabel" checked>
-							Show Label
-						</smoothly-input-checkbox>
-						<smoothly-input-checkbox name="placeholder">Placeholder</smoothly-input-checkbox>
 						<smoothly-input-checkbox name="invalid">Invalid</smoothly-input-checkbox>
 						<smoothly-input name="errorMessage" value="This is not a valid value">
 							Error Message
 						</smoothly-input>
-						<smoothly-input-range label={"Border Radius (rem)"} name={"borderRadius"} min={0} max={2} step={0.25} />
+						<smoothly-input-checkbox name="showLabel" checked>
+							Show Label
+						</smoothly-input-checkbox>
+						<smoothly-input name="placeholder">Placeholder</smoothly-input>
 					</smoothly-form>
 				</div>
 				<div class="input-wrapper" style={{ "--smoothly-input-border-radius": `${this.options.borderRadius}rem` }}>
-					<div class="width">100%</div>
-					<div class="left-padding">0.5rem - left padding</div>
+					<div class="width">width: 100%</div>
+					<div class="left-padding">padding-left: 0.5rem</div>
 					<smoothly-input
 						name="text"
+						color={this.options.color}
 						looks={this.options.looks}
-						placeholder={placeholder}
-						invalid={this.options.invalid}
-						errorMessage={this.options.errorMessage}
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}
-						color={this.options.color}
-						showLabel={this.options.showLabel}>
+						invalid={this.options.invalid}
+						errorMessage={this.options.errorMessage}
+						showLabel={this.options.showLabel}
+						placeholder={this.options.placeholder}>
 						{this.options.showLabel && <span>Text</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input>
@@ -101,13 +98,13 @@ export class SmoothlyInputDemoStandard {
 
 					<smoothly-input-select
 						name="month"
+						color={this.options.color}
 						looks={this.options.looks}
-						placeholder={placeholder}
-						invalid={this.options.invalid}
-						errorMessage={this.options.errorMessage}
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}
-						color={this.options.color}>
+						invalid={this.options.invalid}
+						errorMessage={this.options.errorMessage}
+						placeholder={this.options.placeholder}>
 						{this.options.showLabel && <label slot="label">Select</label>}
 						<smoothly-item value="1">January</smoothly-item>
 						<smoothly-item value="2">February</smoothly-item>
@@ -126,21 +123,22 @@ export class SmoothlyInputDemoStandard {
 					<div class="height" />
 
 					<smoothly-input-checkbox
+						name={"checkbox"}
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
-						disabled={this.options.disabled}
-						color={this.options.color}>
+						disabled={this.options.disabled}>
 						Check
 					</smoothly-input-checkbox>
 					<div class="height" />
 
 					<smoothly-input-radio
-						name="radio"
+						name={"radio"}
 						clearable
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
-						color={this.options.color}
 						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <label slot="label">Radio</label>}
 						<smoothly-input-radio-item value={"first"}>Label 1</smoothly-input-radio-item>
@@ -153,12 +151,15 @@ export class SmoothlyInputDemoStandard {
 					<div class="height" />
 
 					<smoothly-input-file
+						name={"file"}
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
-						color={this.options.color}
-						placeholder={placeholder}
-						showLabel={this.options.showLabel}>
+						// TODO - invalid
+						// TODO - errorMessage
+						showLabel={this.options.showLabel}
+						placeholder={this.options.placeholder}>
 						{this.options.showLabel && <span slot={"label"}>File</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-file>
@@ -166,67 +167,81 @@ export class SmoothlyInputDemoStandard {
 
 					<smoothly-input-range
 						name={"range"}
-						label={this.options.showLabel ? "Range" : undefined}
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
-						color={this.options.color}>
+						// TODO - invalid
+						// TODO - errorMessage
+						label={this.options.showLabel ? "Range" : undefined}
+						// TODO - disabled
+						// TODO - placeholder
+					>
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-range>
 					<div class="height" />
 
 					<smoothly-input-color
+						name={"color"}
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
-						color={this.options.color}
-						showLabel={this.options.showLabel}>
+						// TODO - invalid
+						// TODO - errorMessage
+						showLabel={this.options.showLabel}
+						// TODO - placeholder
+					>
 						{this.options.showLabel && <span>Color</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-color>
 					<div class="height" />
 
 					<smoothly-input-date
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
 						invalid={this.options.invalid}
-						color={this.options.color}
-						showLabel={this.options.showLabel}>
+						// TODO - errorMessage
+						showLabel={this.options.showLabel}
+						// TODO - placeholder
+					>
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>
 					<div class="height" />
 
 					<smoothly-input-date-time
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
 						invalid={this.options.invalid}
 						errorMessage={this.options.errorMessage}
-						color={this.options.color}
-						showLabel={this.options.showLabel}>
+						showLabel={this.options.showLabel}
+						// TODO - placeholder
+					>
 						DateTime
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-time>
 					<div class="height" />
 
 					<smoothly-input-date-range
+						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						// TODO - disabled
 						invalid={this.options.invalid}
-						color={this.options.color}
-						placeholder={placeholder}
-						showLabel={this.options.showLabel}>
+						// TODO - errorMessage
+						placeholder={this.options.placeholder}
+						showLabel={this.options.showLabel}
+						// TODO - placeholder
+					>
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>
 					<div class="height" />
-
-					<div class={{ "guide-lines": true, "show-label": !!this.options.showLabel }}>
-						{this.options.showLabel ? "Aligned labels & values" : "Center values"}
-					</div>
 				</div>
 			</Host>
 		)
