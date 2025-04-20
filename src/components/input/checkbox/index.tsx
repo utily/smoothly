@@ -96,7 +96,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 				onMouseUp={(e: MouseEvent) =>
 					this.mouseDownPosition?.x == e.clientX && this.mouseDownPosition.y == e.clientY && this.click()
 				}>
-				<input type="checkbox" checked={this.checked} />
+				<input type="checkbox" checked={this.checked} disabled={this.disabled} />
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
 				<label>
 					<slot />
