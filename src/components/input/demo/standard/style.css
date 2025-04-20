@@ -7,6 +7,9 @@
 :host p {
 	margin: .5rem 0;
 }
+:host smoothly-input-range[name=borderRadius] {
+	flex-basis: 100%;
+}
 div.input-wrapper {
 	display: grid;
 	margin-top: 1rem;
@@ -49,58 +52,4 @@ div.input-wrapper > .left-padding::before {
 }
 div.input-wrapper > .left-padding:hover::before { 
 	bottom: -100vh;
-}
-
-
-/* --- vertical --- */
-
-:host.vertical {
-	width: 100%;
-	row-gap: 0;
-	position: relative;
-}
-:host.vertical > div.input-wrapper {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, 14rem);
-	gap: .5rem;
-}
-:host.vertical > div.input-wrapper > .width,
-:host.vertical > div.input-wrapper > .height,
-:host.vertical > div.input-wrapper > .left-padding {
-	display: none;
-}
-
-
-:host.vertical > div.input-wrapper > .guide-lines::before,
-:host.vertical > div.input-wrapper > .guide-lines::after {
-	content: "";
-	pointer-events: none;
-	right: 0;
-	width: 100vw;
-	position: absolute;
-	z-index: 2;
-	border-top: 1px dotted black;
-}
-
-:host:not(.vertical) .guide-lines {
-	display: none;
-}
-
-.guide-lines {
-	text-align: end;
-	justify-self: center;
-  align-content: center;
-}
-
-.guide-lines::before {
-	top: 1rem;
-}
-.guide-lines::after {
-	top: 2rem;
-}
-.guide-lines.show-label::before {
-	top: 1.05rem;
-}
-.guide-lines.show-label::after {
-	top: 2.3rem;
 }
