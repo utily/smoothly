@@ -31,6 +31,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
@@ -118,6 +119,11 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.smoothlyInput.emit({ [this.name]: value })
 		this.listener.changed?.(this)
 	}
+	@Watch("disabled")
+	@Watch("readonly")
+	watchingReadonly(): void {
+		this.listener.changed?.(this)
+	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
 		if (event.target != this.element)
@@ -164,9 +170,10 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					color={this.color}
 					looks={this.looks == "transparent" ? this.looks : undefined}
 					name={"date"}
-					onFocus={() => !this.readonly && (this.open = !this.open)}
-					onClick={() => !this.readonly && (this.open = !this.open)}
+					onFocus={() => !this.readonly && !this.disabled && (this.open = !this.open)}
+					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}
 					readonly={this.readonly}
+					disabled={this.disabled}
 					type="date"
 					value={this.date}
 					showLabel={this.showLabel}
@@ -183,6 +190,8 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					max={23}
 					pad={2}
 					value={this.hour}
+					readonly={this.readonly}
+					disabled={this.disabled}
 					placeholder="hh"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
 					onSmoothlyInput={e => {
@@ -197,6 +206,8 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					max={59}
 					pad={2}
 					value={this.minute}
+					readonly={this.readonly}
+					disabled={this.disabled}
 					placeholder="mm"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
 					onSmoothlyInput={e => {
