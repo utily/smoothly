@@ -3,7 +3,7 @@
 	align-items: center;
 	position: relative;
 }
-smoothly-input-radio:not([disabled]) :host>* {
+smoothly-input-radio:not([disabled]):not([readonly]) :host>* {
 	cursor: pointer;
 }
 smoothly-input-radio[disabled] :host>* {
@@ -17,7 +17,7 @@ smoothly-input-radio[disabled] :host>* {
 :host>smoothly-icon {
 	--smoothly-color-contrast: var(--smoothly-input-foreground);
 }
-smoothly-input-radio:not([disabled]) :host>smoothly-icon[name=checkmark-circle] {
+smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=checkmark-circle] {
 	--smoothly-color-contrast: var(--smoothly-success-color);
 }
 
