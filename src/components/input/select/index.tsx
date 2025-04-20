@@ -175,6 +175,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		value = value.toLowerCase()
 		await Promise.all(this.items.map(item => item.filter(value)))
 	}
+	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)
