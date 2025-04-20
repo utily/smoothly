@@ -18,6 +18,7 @@ export namespace Input {
 		register: () => Promise<void>
 		unregister: () => Promise<void>
 		getValue: GetValue
+		disabled?: boolean
 		color?: Color
 		name: string
 		invalid?: boolean
@@ -30,6 +31,7 @@ export namespace Input {
 			register: isly.function<() => Promise<void>>(),
 			unregister: isly.function<() => Promise<void>>(),
 			getValue: isly.function<GetValue>(),
+			disabled: isly.boolean().optional(),
 			color: Color.type.optional(),
 			name: isly.string(),
 			invalid: isly.boolean().optional(),
