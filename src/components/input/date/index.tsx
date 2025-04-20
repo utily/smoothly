@@ -30,6 +30,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
@@ -91,6 +92,11 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.smoothlyInput.emit({ [this.name]: next })
 		this.listener.changed?.(this)
 	}
+	@Watch("disabled")
+	@Watch("readonly")
+	watchingReadonly(): void {
+		this.listener.changed?.(this)
+	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
 		if (event.target != this.element)
@@ -134,9 +140,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					color={this.color}
 					looks={this.looks == "transparent" ? this.looks : undefined}
 					name={this.name}
-					onFocus={() => !this.readonly && (this.open = !this.open)}
-					onClick={() => !this.readonly && (this.open = !this.open)}
+					onFocus={() => !this.readonly && !this.disabled && (this.open = !this.open)}
+					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}
 					readonly={this.readonly}
+					disabled={this.disabled}
 					errorMessage={this.errorMessage}
 					invalid={this.invalid}
 					type="date"
