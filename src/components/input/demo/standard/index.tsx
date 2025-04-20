@@ -198,10 +198,11 @@ export class SmoothlyInputDemoStandard {
 					<div class="height" />
 
 					<smoothly-input-date
+						name={"date"}
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
-						// TODO - disabled
+						disabled={this.options.disabled}
 						invalid={this.options.invalid}
 						// TODO - errorMessage
 						showLabel={this.options.showLabel}
@@ -213,6 +214,7 @@ export class SmoothlyInputDemoStandard {
 					<div class="height" />
 
 					<smoothly-input-date-time
+						name={"dateTime"}
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
@@ -228,6 +230,7 @@ export class SmoothlyInputDemoStandard {
 					<div class="height" />
 
 					<smoothly-input-date-range
+						name={"dateRange"}
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
