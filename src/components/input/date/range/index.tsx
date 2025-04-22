@@ -134,7 +134,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	render() {
 		const locale = navigator.language as isoly.Locale
 		return (
-			<Host tabindex={0}>
+			<Host tabindex={this.disabled ? undefined : 0}>
 				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
 					<smoothly-input
 						type="text" // TODO: date-range tidily thing

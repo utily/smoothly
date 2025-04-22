@@ -153,7 +153,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		return (
 			<Host
 				class={{ dragging: this.dragging, "has-value": !!this.value }}
-				tabindex={0}
+				tabindex={this.disabled ? undefined : 0}
 				onClick={(e: MouseEvent) => this.clickHandler(e)}
 				onDragOver={(e: DragEvent) => this.dragOverHandler(e)}
 				onDragEnter={(e: DragEvent) => this.dragEnterHandler(e)}>
@@ -161,7 +161,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 					<slot name={"label"} />
 				</label>
 				<div class="input">
-					<smoothly-button type={"button"} color={this.color} fill={"clear"} size="flexible">
+					<smoothly-button disabled={this.disabled} type={"button"} color={this.color} fill={"clear"} size="flexible">
 						<slot name={"button"} />
 					</smoothly-button>
 					<span>{this.value?.name ?? this.placeholder}</span>
@@ -169,6 +169,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						<smoothly-icon name={"document-attach-outline"} />
 					</div>
 					<input
+						onFocus={() => console.log("focus file input!")}
 						ref={element => (this.input = element)}
 						type={"file"}
 						disabled={this.disabled}
