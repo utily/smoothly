@@ -186,7 +186,7 @@ export class SmoothlyInputDemoStandard {
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
-						// TODO - disabled
+						disabled={this.options.disabled}
 						// TODO - invalid
 						// TODO - errorMessage
 						showLabel={this.options.showLabel}

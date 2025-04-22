@@ -303,6 +303,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<RGB | string | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -2493,6 +2494,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputColor {
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputColorCustomEvent<(disabled: boolean) => void>) => void;
