@@ -28,6 +28,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Element() element: HTMLSmoothlyInputFileElement
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() accept?: string
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -131,7 +132,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 			this.value = event.dataTransfer.files[0]
 	}
 	clickHandler(event: MouseEvent): void {
-		if (!this.readonly && !event.composedPath().find(target => target == this.input)) {
+		if (!this.readonly && !this.disabled && !event.composedPath().find(target => target == this.input)) {
 			this.input?.click()
 		}
 	}
@@ -141,7 +142,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	}
 	dragEnterHandler(event: DragEvent): void {
 		event.preventDefault()
-		!this.readonly && (this.dragging = true)
+		!this.readonly && !this.disabled && (this.dragging = true)
 	}
 	dragLeaveHandler(event: DragEvent): void {
 		event.stopPropagation()
@@ -170,6 +171,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 					<input
 						ref={element => (this.input = element)}
 						type={"file"}
+						disabled={this.disabled}
 						capture={this.camera == "back" ? "environment" : "user"}
 						accept={this.accept ?? (!this.camera ? undefined : "image/jpeg")}
 						files={this.files}
