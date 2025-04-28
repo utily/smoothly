@@ -1,6 +1,7 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
+import { ChildListener } from "../../ChildListener"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -28,7 +29,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() min?: isoly.Date
 	@Prop({ mutable: true }) changed = false
 	parent: Editable | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
 	@State() value?: isoly.DateRange
@@ -47,7 +48,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {
@@ -65,12 +66,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Watch("value")
 	valueChanged() {
 		this.changed = this.initialStart != this.start || this.initialEnd != this.end
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
@@ -107,8 +108,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
-		this.listener[property] = listener
-		listener(this)
+		// TODO remove
 	}
 	@Method()
 	async edit(editable: boolean) {

@@ -3,6 +3,7 @@ import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
 import { getLocale } from "../../model/getLocale"
+import { ChildListener } from "./ChildListener"
 import { Clearable } from "./Clearable"
 import { Deep } from "./Deep"
 import { Editable } from "./Editable"
@@ -43,7 +44,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
 	private uneditable = this.readonly
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -77,8 +78,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+		// TODO remove
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -141,7 +141,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Watch("value")
 	valueChange(value: any) {
@@ -154,7 +154,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("disabled")
 	@Watch("readonly")
 	readonlyChange() {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	componentWillLoad() {
 		this.typeChange()
@@ -164,7 +164,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	componentDidLoad() {
 		if (this.inputElement)

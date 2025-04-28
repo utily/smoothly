@@ -13,6 +13,7 @@ import {
 } from "@stencil/core"
 import { isoly } from "isoly"
 import { Color } from "../../../model"
+import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -35,7 +36,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.Date
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: isoly.Date
@@ -54,7 +55,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -78,8 +79,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
-		this.listener[property] = listener
-		listener(this)
+		// TODO remove
 	}
 
 	@Method()
@@ -90,12 +90,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	onStart(next: isoly.Date) {
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {

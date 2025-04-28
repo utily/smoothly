@@ -13,6 +13,7 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
+import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -29,7 +30,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	parent: Editable | undefined
 	private active?: Selectable
 	private valueReceivedOnLoad = false
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	initialValue?: Selectable
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
@@ -47,7 +48,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
@@ -80,8 +81,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+		// TODO rewmove
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -131,12 +131,12 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	async valueChanged(): Promise<void> {
 		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 
 	render(): VNode | VNode[] {

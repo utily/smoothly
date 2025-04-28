@@ -16,6 +16,7 @@ import {
 import { Color, Data } from "../../../model"
 import { HSL } from "../../../model/Color/HSL"
 import { RGB } from "../../../model/Color/RGB"
+import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -28,7 +29,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
 	private initialValue: string | undefined
@@ -80,7 +81,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Method()
 	async register() {
@@ -110,8 +111,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+		// TODO - remove
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -132,7 +132,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	async valueChanged(): Promise<void> {
 		this.changed = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	handleSwitchMode(event: CustomEvent): void {
 		event.stopPropagation()

@@ -30,7 +30,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	parent: Editable | undefined
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
 	public childListener = ChildListener.create(this)
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
@@ -76,7 +75,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
 		this.childListener.publish()
 	}
 	componentDidLoad(): void | Promise<void> {
@@ -130,8 +128,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+		// TODO - remove
 	}
 	@Method()
 	async reset(): Promise<void> {
@@ -167,7 +164,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.initialValueHandled && (this.changed = !this.areValuesEqual(this.selected, this.initialValue))
 		this.defined = this.selected.length > 0
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.listener.changed?.(this)
 		this.childListener.publish()
 	}
 	@Watch("required")
@@ -182,7 +178,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
 		this.childListener.publish()
 	}
 	@Listen("smoothlyInputLoad")

@@ -15,6 +15,7 @@ import {
 } from "@stencil/core"
 import { tidily } from "tidily"
 import { Color } from "../../../model"
+import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -27,7 +28,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
 	@Element() element: HTMLSmoothlyInputRangeElement
@@ -96,8 +97,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	}
 	@Method()
 	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+		// TODO rmove
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -118,13 +118,13 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
 		this.changed = this.initialValue !== this.value
 		this.defined = typeof this.value === "number"
-		this.listener.changed?.(this)
+		this.childListener.publish()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	setValue(value: number | undefined): void {
 		if (value == undefined)
