@@ -127,10 +127,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return this.items
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO - remove
-	}
-	@Method()
 	async reset(): Promise<void> {
 		this.selected.forEach(item => (item.selected = item.hidden = false))
 		this.initialValue.forEach(item => (item.selected = true))

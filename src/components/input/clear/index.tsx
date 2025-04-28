@@ -29,9 +29,7 @@ export class SmoothlyInputClear {
 			if (Clearable.is(parent)) {
 				this.parent = parent
 				if (Editable.Element.is(parent)) {
-					/* --- */
-					parent.childListener?.subscribe(async p => {
-						console.log("running listener!", p, this.element)
+					parent.childListener.subscribe(async p => {
 						if (Input.is(p)) {
 							this.display =
 								!p.readonly && !p.disabled && (typeof p.defined == "boolean" ? p.defined : Boolean(await p.getValue()))
@@ -41,17 +39,6 @@ export class SmoothlyInputClear {
 							this.display = !p.readonly
 						}
 					})
-					/* --- */
-
-					// parent.listen("changed", async p => {
-					// 	if (Input.is(p)) {
-					// 		this.display = !p.readonly && (typeof p.defined == "boolean" ? p.defined : Boolean(await p.getValue()))
-					// 	}
-					// 	if (p instanceof SmoothlyForm) {
-					// 		this.disabled = p.readonly || Object.values(p.value).filter(val => val).length < 1
-					// 		this.display = !p.readonly
-					// 	}
-					// })
 				}
 			}
 		})

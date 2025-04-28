@@ -109,10 +109,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		this.month?.clear()
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO remove
-	}
-	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
 	}

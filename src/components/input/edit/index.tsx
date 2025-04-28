@@ -23,7 +23,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Editable.type.is(parent)) {
 				this.parent = parent
-				parent.listen("changed", async p => {
+				parent.childListener.subscribe(async p => {
 					this.display = p.readonly
 				})
 			}

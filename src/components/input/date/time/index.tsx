@@ -86,11 +86,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		return isoly.DateTime.is(value) ? value : undefined
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
-		// TODO rwemove
-	}
-
-	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
 		this.date = undefined

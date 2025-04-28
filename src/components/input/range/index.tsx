@@ -96,10 +96,6 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.value = undefined
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO rmove
-	}
-	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
 	}

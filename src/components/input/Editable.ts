@@ -5,7 +5,7 @@ import { ChildListener } from "./ChildListener"
 export interface Editable extends Editable.Element {
 	changed: boolean
 	value?: any
-	childListener?: ChildListener
+	childListener: ChildListener
 	smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 }
 export namespace Editable {
@@ -13,14 +13,12 @@ export namespace Editable {
 		edit: Editable.Edit
 		reset: Editable.Reset
 		readonly: boolean
-		listen: Editable.Listen
 		setInitialValue: () => void
 	}
 	export namespace Element {
 		export const type = isly.object<Element>({
 			edit: isly.function(),
 			readonly: isly.boolean(),
-			listen: isly.function<Listen>(),
 			reset: isly.function<Reset>(),
 			setInitialValue: isly.function(),
 		})
@@ -33,7 +31,7 @@ export namespace Editable {
 	export const type = Element.type.extend<Editable>({
 		changed: isly.boolean(),
 		value: isly.any().optional(),
-		childListener: isly.fromIs("ChildListener", (v): v is ChildListener => v instanceof ChildListener).optional(),
+		childListener: isly.fromIs("ChildListener", (v): v is ChildListener => v instanceof ChildListener),
 		smoothlyFormDisable: EventEmitter,
 	})
 	export const is = type.is

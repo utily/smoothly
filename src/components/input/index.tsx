@@ -76,10 +76,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				end < 0 ? this.inputElement.value.length + end + 1 : end
 			)
 	}
-	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO remove
-	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
 		Input.formRename(this, oldName)

@@ -93,10 +93,6 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		Input.registerSubAction(this, event)
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO remove
-	}
-	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
 	}

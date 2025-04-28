@@ -79,10 +79,6 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		}
 		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
 	}
-	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO rewmove
-	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()

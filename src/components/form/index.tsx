@@ -16,6 +16,7 @@ import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Key } from "../../components/input/Key"
 import { Color, Data, Notice, Submit } from "../../model"
+import { ChildListener } from "../input/ChildListener"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -49,9 +50,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
-	private listeners: {
-		changed?: ((parent: Editable) => Promise<void>)[]
-	} = {}
+	public childListener = ChildListener.create(this)
 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
@@ -64,11 +63,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
 		}
 	}
-	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		;(this.listeners[property] ??= []).push(listener)
-		listener(this)
-	}
 	@Watch("value")
 	async watchValue() {
 		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
@@ -80,7 +74,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 				this.validate(flaws, property, input)
 			}
 		}
-		this.listeners.changed?.forEach(l => l(this))
+		this.childListener.publish()
 	}
 	validate(flaws: Record<string, isly.Flaw> | undefined, property: string, input: Input.Element) {
 		if (property.includes(".")) {
@@ -98,7 +92,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Watch("readonly")
 	watchReadonly() {
-		this.listeners.changed?.forEach(l => l(this))
+		this.childListener.publish()
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks, color?: Color) => void>) {

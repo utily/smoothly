@@ -63,11 +63,6 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		!this.disabled && !this.readonly && (this.checked = false)
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		// TODO - remove
-	}
-
-	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable
 	}

@@ -107,10 +107,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		return this.start && this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
-		// TODO remove
-	}
-	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
 	}
