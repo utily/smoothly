@@ -37,6 +37,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() output: "rgb" | "hex" = "rgb"
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
@@ -75,6 +76,11 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
 		Input.formRename(this, oldName)
+	}
+	@Watch("disabled")
+	@Watch("readonly")
+	watchingReadonly(): void {
+		this.listener.changed?.(this)
 	}
 	@Method()
 	async register() {
@@ -197,12 +203,13 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				}}>
 				<smoothly-input
 					value={this.value}
-					name={this.name}
-					looks={undefined}
 					color={this.color}
+					looks={undefined}
+					name={this.name}
 					type={"hex-color"}
-					showLabel={this.showLabel}
 					readonly={this.readonly}
+					disabled={this.disabled}
+					showLabel={this.showLabel}
 					onSmoothlyInput={event => (event?.stopPropagation(), this.hexInputHandler(event.detail[this.name]))}>
 					<slot />
 				</smoothly-input>
@@ -211,13 +218,13 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					color={this.color}
 					name="options-outline"
 					size="small"
-					onClick={() => !this.readonly && this.openDropdown()}
+					onClick={() => !this.readonly && !this.disabled && this.openDropdown()}
 				/>
 				<div>
 					{/* Extra div needed otherwise stencil sets hidden on the slot for no apparent reason */}
 					<slot name="end" />
 				</div>
-				{this.open && !this.readonly && (
+				{this.open && !this.readonly && !this.disabled && (
 					<div class="rgb-sliders">
 						<smoothly-toggle-switch
 							title={`${this.sliderMode === "rgb" ? "To HSL" : "To RGB"}`}

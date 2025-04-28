@@ -37,6 +37,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop() clearable?: boolean
 	@Prop({ mutable: true, reflect: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
@@ -65,7 +66,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Listen("smoothlySelect")
 	smoothlyRadioInputHandler(event: CustomEvent<Selectable>): void {
 		event.stopPropagation()
-		if (!this.readonly || !this.valueReceivedOnLoad) {
+		if ((!this.readonly && !this.disabled) || !this.valueReceivedOnLoad) {
 			if (this.clearable && this.active?.value === event.detail.value)
 				this.clear()
 			else if (this.active?.value !== event.detail.value) {
@@ -132,6 +133,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
 	}
+	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)

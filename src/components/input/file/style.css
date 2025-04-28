@@ -64,12 +64,12 @@
 	left: var(--input-padding-side);
 }
 
-:host,
-:host * {
+:host:not([readonly]),
+:host:not([readonly]) * {
 	cursor: pointer;
 }
 
-:host[readonly],
-:host[readonly] * {
+:host[disabled],
+:host[disabled] * {
 	cursor: not-allowed;
 }

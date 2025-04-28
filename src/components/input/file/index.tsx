@@ -28,6 +28,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Element() element: HTMLSmoothlyInputFileElement
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() accept?: string
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -131,7 +132,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 			this.value = event.dataTransfer.files[0]
 	}
 	clickHandler(event: MouseEvent): void {
-		if (!this.readonly && !event.composedPath().find(target => target == this.input)) {
+		if (!this.readonly && !this.disabled && !event.composedPath().find(target => target == this.input)) {
 			this.input?.click()
 		}
 	}
@@ -141,7 +142,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	}
 	dragEnterHandler(event: DragEvent): void {
 		event.preventDefault()
-		!this.readonly && (this.dragging = true)
+		!this.readonly && !this.disabled && (this.dragging = true)
 	}
 	dragLeaveHandler(event: DragEvent): void {
 		event.stopPropagation()
@@ -152,7 +153,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		return (
 			<Host
 				class={{ dragging: this.dragging, "has-value": !!this.value }}
-				tabindex={0}
+				tabindex={this.disabled ? undefined : 0}
 				onClick={(e: MouseEvent) => this.clickHandler(e)}
 				onDragOver={(e: DragEvent) => this.dragOverHandler(e)}
 				onDragEnter={(e: DragEvent) => this.dragEnterHandler(e)}>
@@ -160,7 +161,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 					<slot name={"label"} />
 				</label>
 				<div class="input">
-					<smoothly-button type={"button"} color={this.color} fill={"clear"} size="flexible">
+					<smoothly-button disabled={this.disabled} type={"button"} color={this.color} fill={"clear"} size="flexible">
 						<slot name={"button"} />
 					</smoothly-button>
 					<span>{this.value?.name ?? this.placeholder}</span>
@@ -168,8 +169,10 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						<smoothly-icon name={"document-attach-outline"} />
 					</div>
 					<input
+						onFocus={() => console.log("focus file input!")}
 						ref={element => (this.input = element)}
 						type={"file"}
+						disabled={this.disabled}
 						capture={this.camera == "back" ? "environment" : "user"}
 						accept={this.accept ?? (!this.camera ? undefined : "image/jpeg")}
 						files={this.files}

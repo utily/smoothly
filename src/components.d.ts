@@ -303,6 +303,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<RGB | string | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -323,6 +324,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.Date | undefined>;
@@ -345,6 +347,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
         "getValue": () => Promise<isoly.DateRange | undefined>;
@@ -367,6 +370,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.DateTime | undefined>;
@@ -407,6 +411,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<File | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -449,6 +454,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "clearable"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<any | undefined>;
         "listen": (property: "changed", listener: (parent: Editable) => Promise<void>) => Promise<void>;
@@ -473,6 +479,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "defined": boolean;
+        "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<number | undefined>;
         "label": string;
@@ -510,6 +517,7 @@ export namespace Components {
         "clearable": boolean;
         "color"?: Color;
         "defined": boolean;
+        "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
@@ -2486,6 +2494,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputColor {
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputColorCustomEvent<(disabled: boolean) => void>) => void;
@@ -2502,6 +2511,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputDate {
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "errorMessage"?: string;
         "invalid"?: boolean;
         "looks"?: Looks;
@@ -2521,6 +2531,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputDateRange {
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
         "invalid"?: boolean;
         "looks"?: Looks;
@@ -2539,6 +2550,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputDateTime {
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "errorMessage"?: string;
         "invalid"?: boolean;
         "looks"?: Looks;
@@ -2576,6 +2588,7 @@ declare namespace LocalJSX {
         "camera"?: "front" | "back";
         "changed"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputFileCustomEvent<(disabled: boolean) => void>) => void;
@@ -2610,6 +2623,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
+        "disabled"?: boolean;
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRadioCustomEvent<(disabled: boolean) => void>) => void;
@@ -2632,6 +2646,7 @@ declare namespace LocalJSX {
         "changed"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
+        "disabled"?: boolean;
         "label"?: string;
         "looks"?: Looks;
         "max"?: number;
@@ -2666,6 +2681,7 @@ declare namespace LocalJSX {
         "clearable"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
+        "disabled"?: boolean;
         "errorMessage"?: string;
         "inCalendar"?: boolean;
         "invalid"?: boolean;

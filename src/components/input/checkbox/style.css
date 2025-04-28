@@ -9,6 +9,8 @@
 	padding: 0 var(--input-padding-side);
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
+	background-color: rgb(var(--smoothly-input-background));
+	color: rgb(var(--smoothly-input-foreground));
 }
 
 :host>smoothly-icon {
@@ -22,26 +24,23 @@
 	appearance: none;
 	height: 1.25rem;
 	width: 1.25rem;
-	border: 1px solid black;
+	border: 1px solid rgb(var(--smoothly-input-foreground));
+	color: rgb(var(--smoothly-input-foreground));
 	display: block;
 }
 
-:host:not([readonly]),
-:host:not([readonly])>* {
+:host:not([readonly]):not([disabled]),
+:host:not([readonly]):not([disabled])>* {
 	cursor: pointer;
 }
 
-:host([readonly]),
-:host([readonly])>* {
+:host([disabled]),
+:host([disabled])>* {
 	cursor: not-allowed;
 }
 
-
-:host[disabled]>input,
-:host[disabled]>smoothly-icon {
-	cursor: not-allowed;
-	border-color: rgb(var(--smoothly-color-contrast), 0.3);
-	color: rgb(var(--smoothly-color-contrast), 0.4);
+:host>smoothly-icon { 
+	--smoothly-color-contrast: var(--smoothly-input-foreground);
 }
 
 :host[looks="transparent"] {

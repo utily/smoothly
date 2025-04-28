@@ -8,7 +8,6 @@
 	border-radius: var(--smoothly-input-border-radius);
 }
 
-:host[looks="border"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="border"] {
 	border: rgb(var(--smoothly-input-border)) solid 1px;
 }
@@ -17,7 +16,6 @@
 	border: transparent solid 1px;
 }
 
-:host[looks="line"]::slotted(smoothly-picker-menu smoothly-input),
 :host[looks="line"] {
 	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
 }
@@ -47,11 +45,18 @@
 
 :host[looks="transparent"][readonly]>input,
 :host[looks="transparent"]:not(:focus-within)>input {
-	background: transparent;
+	background-color: transparent;
 }
 
 :host[looks="transparent"]:not([readonly]):focus-within {
 	outline: 1px solid rgb(var(--smoothly-input-border));
+}
+
+:host([disabled]) {
+	cursor: not-allowed;
+	--smoothly-input-foreground: var(--smoothly-input-disabled-foreground);
+	--smoothly-input-background: var(--smoothly-input-disabled-background);
+	--smoothly-input-border: var(--smoothly-input-disabled-border);
 }
 
 /* --- label --- */

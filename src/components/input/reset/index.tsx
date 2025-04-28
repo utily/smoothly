@@ -30,7 +30,7 @@ export class SmoothlyInputReset {
 				this.readonlyAtLoad = parent.readonly
 				parent.listen("changed", async p => {
 					if (Input.is(p)) {
-						this.display = p.readonly ? false : p.changed
+						this.display = p.readonly || p.defined ? false : p.changed
 					}
 					if (p instanceof SmoothlyForm) {
 						this.display = !p.readonly

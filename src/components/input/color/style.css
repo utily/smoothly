@@ -22,8 +22,12 @@
 :host smoothly-icon[name=options-outline] {
 	padding-right: var(--input-padding-side);
 }
-:host[readonly] smoothly-icon[name=options-outline] {
-	filter: opacity(60%)
+:host[readonly] smoothly-icon[name=options-outline],
+:host[disabled] smoothly-icon[name=options-outline] {
+	display: none;
+}
+:host:not([readonly]):not([disabled]) smoothly-icon[name=options-outline] {
+	cursor: pointer;
 }
 :host>div.rgb-sliders {
 	background-color: rgb(var(--smoothly-input-background));

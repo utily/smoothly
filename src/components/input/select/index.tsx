@@ -45,6 +45,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ reflect: true, mutable: true }) showSelected?: boolean = true
 	@Prop({ reflect: true, mutable: true }) readonly = false
+	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) ordered?: boolean
 	@Prop() multiple = false
@@ -174,6 +175,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		value = value.toLowerCase()
 		await Promise.all(this.items.map(item => item.filter(value)))
 	}
+	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)
@@ -229,6 +231,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
 		!this.readonly &&
+			!this.disabled &&
 			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
 			!wasButtonClicked &&
 			(this.open = !this.open)
@@ -345,7 +348,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				tabIndex={0}
+				tabIndex={this.disabled ? undefined : 0}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>

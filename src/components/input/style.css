@@ -65,12 +65,17 @@
 	font-size: 1rem;
 	font-family: var(--smoothly-font-family);
 }
+:host([disabled])>.smoothly-input-container>input {
+	cursor: not-allowed;
+}
 
 :host>.smoothly-invalid {
 	display: none;
 	z-index: 2;
-	cursor: pointer;
 	padding: 0.5rem;
+}
+:host:not([disabled])>.smoothly-invalid {
+	cursor: pointer;
 }
 
 :host[invalid]>.smoothly-invalid {
