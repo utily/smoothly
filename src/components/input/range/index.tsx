@@ -28,7 +28,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
 	@Element() element: HTMLSmoothlyInputRangeElement
@@ -94,6 +94,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {

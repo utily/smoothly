@@ -36,7 +36,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.Date
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: isoly.Date
@@ -76,6 +76,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Method()
 	async getValue(): Promise<isoly.Date | undefined> {
 		return this.value
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async clear(): Promise<void> {

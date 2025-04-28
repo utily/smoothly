@@ -44,7 +44,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
 	private uneditable = this.readonly
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -75,6 +75,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				start,
 				end < 0 ? this.inputElement.value.length + end + 1 : end
 			)
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {

@@ -50,7 +50,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
@@ -62,6 +62,10 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 			this.inputs.delete(name)
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
 		}
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Watch("value")
 	async watchValue() {

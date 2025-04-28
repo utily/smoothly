@@ -30,7 +30,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	parent: Editable | undefined
 	private active?: Selectable
 	private valueReceivedOnLoad = false
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	initialValue?: Selectable
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
@@ -78,6 +78,10 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 			}
 		}
 		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)

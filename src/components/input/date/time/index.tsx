@@ -37,7 +37,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.DateTime
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	@Prop({ mutable: true }) value?: isoly.DateTime
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
@@ -84,6 +84,10 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 				? `${this.date}T${`${this.hour}`.padStart(2, "0")}:${`${this.minute}`.padStart(2, "0")}:00.000Z`
 				: undefined
 		return isoly.DateTime.is(value) ? value : undefined
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async clear(): Promise<void> {

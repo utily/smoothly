@@ -30,7 +30,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	parent: Editable | undefined
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
@@ -125,6 +125,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Method()
 	async getItems(): Promise<HTMLSmoothlyItemElement[]> {
 		return this.items
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async reset(): Promise<void> {

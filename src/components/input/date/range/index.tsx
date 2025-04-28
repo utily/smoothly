@@ -29,7 +29,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() min?: isoly.Date
 	@Prop({ mutable: true }) changed = false
 	parent: Editable | undefined
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
 	@State() value?: isoly.DateRange
@@ -105,6 +105,10 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Method()
 	async getValue(): Promise<isoly.DateRange | undefined> {
 		return this.start && this.end ? { start: this.start, end: this.end } : undefined
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean) {

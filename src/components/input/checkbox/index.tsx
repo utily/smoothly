@@ -15,7 +15,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Element() element: HTMLSmoothlyInputCheckboxElement
 	parent: Editable | undefined
 	private initialValue?: any
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private mouseDownPosition?: { x: number; y: number }
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
@@ -62,6 +62,11 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	async clear(): Promise<void> {
 		!this.disabled && !this.readonly && (this.checked = false)
 	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
+	}
+
 	@Method()
 	async edit(editable: boolean): Promise<void> {
 		this.readonly = !editable

@@ -29,7 +29,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
 	private initialValue: string | undefined
@@ -108,6 +108,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		this.rgb = { r: undefined, g: undefined, b: undefined }
 		this.hsl = { h: undefined, s: undefined, l: undefined }
 		this.value = undefined
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {

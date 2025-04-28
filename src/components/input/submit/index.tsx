@@ -26,7 +26,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Submittable.is(parent) && Editable.type.is(parent)) {
 				this.parent = parent
-				parent.childListener.subscribe(async p => {
+				parent.listen(async p => {
 					this.display = !p.readonly
 					this.disabled =
 						!this.delete &&

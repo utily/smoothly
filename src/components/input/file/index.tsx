@@ -44,7 +44,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
-	public childListener = ChildListener.create(this)
+	private childListener = ChildListener.create(this)
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	private initialValue: SmoothlyInputFile["value"]
@@ -91,6 +91,10 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputFile) => void>): void {
 		Input.registerSubAction(this, event)
+	}
+	@Method()
+	async listen(listener: Editable.Listener): Promise<void> {
+		this.childListener.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
