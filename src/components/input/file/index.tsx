@@ -43,7 +43,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private observer = Editable.Observer.create(this)
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
 	private initialValue: SmoothlyInputFile["value"]
@@ -61,6 +61,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
+		this.observer.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -91,9 +92,8 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		Input.registerSubAction(this, event)
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
@@ -117,6 +117,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	async valueChanged(): Promise<void> {
 		this.changed = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+		this.observer.publish()
 	}
 
 	inputHandler(event: Event): void {

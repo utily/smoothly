@@ -28,7 +28,7 @@ export class SmoothlyInputReset {
 			if (Editable.Element.type.is(parent)) {
 				this.parent = parent
 				this.readonlyAtLoad = parent.readonly
-				parent.listen("changed", async p => {
+				parent.listen(async p => {
 					if (Input.is(p)) {
 						this.display = p.readonly || p.defined ? false : p.changed
 					}

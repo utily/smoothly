@@ -14,7 +14,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Element() element: HTMLSmoothlyInputCheckboxElement
 	parent: Editable | undefined
 	private initialValue?: any
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private observer = Editable.Observer.create(this)
 	private mouseDownPosition?: { x: number; y: number }
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
@@ -35,7 +35,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -62,9 +62,8 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		!this.disabled && !this.readonly && (this.checked = false)
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 
 	@Method()
@@ -84,7 +83,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	async elementCheck() {
 		this.changed = this.initialValue !== this.checked
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	click() {
 		!this.disabled && !this.readonly && (this.checked = !this.checked)

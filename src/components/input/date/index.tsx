@@ -35,7 +35,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.Date
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ mutable: true }) max: isoly.Date
@@ -54,7 +54,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -77,11 +77,9 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		return this.value
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>) {
-		this.listener[property] = listener
-		listener(this)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
-
 	@Method()
 	async clear(): Promise<void> {
 		this.value = undefined
@@ -90,12 +88,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	onStart(next: isoly.Date) {
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {

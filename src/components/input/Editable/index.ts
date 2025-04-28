@@ -1,12 +1,18 @@
 import { EventEmitter } from "@stencil/core"
 import { isly } from "isly"
+import { Listener as ObserverListener, Observer as EditableObserver } from "./Observer"
 
 export interface Editable extends Editable.Element {
 	changed: boolean
 	value?: any
 	smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 }
+
 export namespace Editable {
+	export const Observer = EditableObserver
+	export namespace Observer {
+		export type Listener = ObserverListener
+	}
 	export interface Element {
 		edit: Editable.Edit
 		reset: Editable.Reset
@@ -24,7 +30,7 @@ export namespace Editable {
 		})
 		export const is = type.is
 	}
-	export type Listen = (property: "changed", listener: (parent: Editable) => Promise<void>) => void
+	export type Listen = (listener: Observer.Listener) => void
 	export type Edit = (editable: boolean) => Promise<void>
 	export type Reset = () => Promise<void>
 	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })

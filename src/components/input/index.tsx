@@ -43,7 +43,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
 	private uneditable = this.readonly
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private observer = Editable.Observer.create(this)
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -76,9 +76,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			)
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -141,7 +140,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	@Watch("value")
 	valueChange(value: any) {
@@ -154,7 +153,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("disabled")
 	@Watch("readonly")
 	readonlyChange() {
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	componentWillLoad() {
 		this.typeChange()
@@ -164,7 +163,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.listener.changed?.(this)
+		this.observer.publish()
 	}
 	componentDidLoad() {
 		if (this.inputElement)

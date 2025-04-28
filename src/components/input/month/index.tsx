@@ -49,7 +49,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	private year?: HTMLSmoothlyInputSelectElement
 	private month?: HTMLSmoothlyInputSelectElement
-	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	private observer = Editable.Observer.create(this)
 
 	componentWillLoad(): void {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
@@ -108,9 +108,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		this.month?.clear()
 	}
 	@Method()
-	async listen(property: "changed", listener: (parent: Editable) => Promise<void>): Promise<void> {
-		this.listener[property] = listener
-		listener(this)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {
