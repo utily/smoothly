@@ -13,7 +13,6 @@ import {
 	Watch,
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
-import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -30,7 +29,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	parent: Editable | undefined
 	private active?: Selectable
 	private valueReceivedOnLoad = false
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	initialValue?: Selectable
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
@@ -48,7 +47,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	componentDidLoad(): void | Promise<void> {
 		!this.valueReceivedOnLoad && this.smoothlyInput.emit({ [this.name]: this.value })
@@ -80,8 +79,8 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -131,12 +130,12 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	async valueChanged(): Promise<void> {
 		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 
 	render(): VNode | VNode[] {

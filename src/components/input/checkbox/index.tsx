@@ -1,6 +1,5 @@
 import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 import { Color, Data } from "../../../model"
-import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -15,7 +14,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Element() element: HTMLSmoothlyInputCheckboxElement
 	parent: Editable | undefined
 	private initialValue?: any
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	private mouseDownPosition?: { x: number; y: number }
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
@@ -36,7 +35,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -63,8 +62,8 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		!this.disabled && !this.readonly && (this.checked = false)
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 
 	@Method()
@@ -84,7 +83,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	async elementCheck() {
 		this.changed = this.initialValue !== this.checked
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	click() {
 		!this.disabled && !this.readonly && (this.checked = !this.checked)

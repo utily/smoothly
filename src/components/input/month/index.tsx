@@ -17,7 +17,6 @@ import { isoly } from "isoly"
 import { Data } from "../../../model"
 import { Color } from "../../../model"
 import * as generate from "../../calendar/generate"
-import { ChildListener } from "../ChildListener"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
@@ -50,7 +49,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	private year?: HTMLSmoothlyInputSelectElement
 	private month?: HTMLSmoothlyInputSelectElement
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 
 	componentWillLoad(): void {
 		this.smoothlyInputLooks.emit(looks => (this.looks = this.looks ?? looks))
@@ -109,8 +108,8 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		this.month?.clear()
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean): Promise<void> {

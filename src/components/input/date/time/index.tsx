@@ -14,7 +14,6 @@ import {
 } from "@stencil/core"
 import { isoly } from "isoly"
 import { Color } from "../../../../model"
-import { ChildListener } from "../../ChildListener"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -37,7 +36,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	private initialValue?: isoly.DateTime
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.DateTime
 	@Prop({ mutable: true }) open: boolean
 	@Prop({ reflect: true }) showLabel = true
@@ -59,7 +58,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -86,8 +85,8 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		return isoly.DateTime.is(value) ? value : undefined
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async clear(): Promise<void> {
@@ -104,7 +103,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		const value = await this.getValue()
 		this.smoothlyValueChange.emit(value)
 		this.smoothlyInput.emit({ [this.name]: value })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 
 	@Watch("value")
@@ -116,12 +115,12 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		}
 		this.smoothlyValueChange.emit(value)
 		this.smoothlyInput.emit({ [this.name]: value })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {

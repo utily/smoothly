@@ -3,7 +3,6 @@ import { isoly } from "isoly"
 import { tidily } from "tidily"
 import { Color } from "../../model"
 import { getLocale } from "../../model/getLocale"
-import { ChildListener } from "./ChildListener"
 import { Clearable } from "./Clearable"
 import { Deep } from "./Deep"
 import { Editable } from "./Editable"
@@ -44,7 +43,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
 	private uneditable = this.readonly
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -77,8 +76,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 			)
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -141,7 +140,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Watch("value")
 	valueChange(value: any) {
@@ -154,7 +153,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("disabled")
 	@Watch("readonly")
 	readonlyChange() {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	componentWillLoad() {
 		this.typeChange()
@@ -164,7 +163,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	componentDidLoad() {
 		if (this.inputElement)

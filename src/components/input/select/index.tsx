@@ -15,7 +15,6 @@ import {
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
 import { Item } from "../../item/Item"
-import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -30,7 +29,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	parent: Editable | undefined
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
@@ -75,7 +74,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	componentDidLoad(): void | Promise<void> {
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])
@@ -127,8 +126,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return this.items
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async reset(): Promise<void> {
@@ -164,7 +163,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.initialValueHandled && (this.changed = !this.areValuesEqual(this.selected, this.initialValue))
 		this.defined = this.selected.length > 0
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Watch("required")
 	onRequiredChange(): void {
@@ -178,7 +177,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {

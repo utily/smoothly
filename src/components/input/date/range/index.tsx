@@ -1,7 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { tidily } from "tidily"
-import { ChildListener } from "../../ChildListener"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -29,7 +28,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() min?: isoly.Date
 	@Prop({ mutable: true }) changed = false
 	parent: Editable | undefined
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
 	@State() value?: isoly.DateRange
@@ -48,7 +47,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
 	inputHandler(data: Data) {
@@ -66,12 +65,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Watch("value")
 	valueChanged() {
 		this.changed = this.initialStart != this.start || this.initialEnd != this.end
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Watch("disabled")
 	@Watch("readonly")
 	watchingReadonly(): void {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateRange) => void>): void {
@@ -107,8 +106,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		return this.start && this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Method()
 	async edit(editable: boolean) {

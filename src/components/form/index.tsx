@@ -16,7 +16,6 @@ import { isly } from "isly"
 import { SmoothlyFormCustomEvent } from "../../components"
 import { Key } from "../../components/input/Key"
 import { Color, Data, Notice, Submit } from "../../model"
-import { ChildListener } from "../input/ChildListener"
 import { Clearable } from "../input/Clearable"
 import { Editable } from "../input/Editable"
 import { Input } from "../input/Input"
@@ -50,7 +49,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
-	private childListener = ChildListener.create(this)
+	private observer = Editable.Observer.create(this)
 
 	componentWillLoad(): void {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
@@ -64,8 +63,8 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		}
 	}
 	@Method()
-	async listen(listener: Editable.Listener): Promise<void> {
-		this.childListener.subscribe(listener)
+	async listen(listener: Editable.Observer.Listener): Promise<void> {
+		this.observer.subscribe(listener)
 	}
 	@Watch("value")
 	async watchValue() {
@@ -78,7 +77,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 				this.validate(flaws, property, input)
 			}
 		}
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	validate(flaws: Record<string, isly.Flaw> | undefined, property: string, input: Input.Element) {
 		if (property.includes(".")) {
@@ -96,7 +95,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Watch("readonly")
 	watchReadonly() {
-		this.childListener.publish()
+		this.observer.publish()
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks?: Looks, color?: Color) => void>) {

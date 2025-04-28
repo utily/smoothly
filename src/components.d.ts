@@ -180,7 +180,7 @@ export namespace Components {
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name"?: string;
         "prevent": boolean;
@@ -246,7 +246,7 @@ export namespace Components {
         "errorMessage"?: string;
         "getValue": () => Promise<any | undefined>;
         "invalid"?: boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max"?: number;
         "min"?: number;
@@ -276,7 +276,7 @@ export namespace Components {
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<boolean>;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
@@ -306,7 +306,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<RGB | string | undefined>;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
         "output": "rgb" | "hex";
@@ -329,7 +329,7 @@ export namespace Components {
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.Date | undefined>;
         "invalid"?: boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max": isoly.Date;
         "min": isoly.Date;
@@ -352,7 +352,7 @@ export namespace Components {
         "end": isoly.Date | undefined;
         "getValue": () => Promise<isoly.DateRange | undefined>;
         "invalid"?: boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -375,7 +375,7 @@ export namespace Components {
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.DateTime | undefined>;
         "invalid"?: boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max"?: isoly.DateTime;
         "min"?: isoly.DateTime;
@@ -414,7 +414,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<File | undefined>;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
         "placeholder": string | undefined;
@@ -432,7 +432,7 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<isoly.Date | undefined>;
         "inCalendar": boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -457,7 +457,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<any | undefined>;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
         "readonly": boolean;
@@ -483,7 +483,7 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<number | undefined>;
         "label": string;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max": number;
         "min": number;
@@ -524,7 +524,7 @@ export namespace Components {
         "getValue": () => Promise<any | any[] | undefined>;
         "inCalendar": boolean;
         "invalid"?: boolean;
-        "listen": (listener: Editable.Listener) => Promise<void>;
+        "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
         "multiple": boolean;

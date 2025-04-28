@@ -1,13 +1,12 @@
-import { Editable } from "./Editable"
+import { Editable } from "."
 
-export type Callback = (parent: Editable) => Promise<void>
+export type Listener = (parent: Editable) => Promise<void>
 
-export class ChildListener {
+export class Observer {
+	private callbacks: Listener[] = []
 	constructor(private parent: Editable) {}
 
-	private callbacks: Callback[] = []
-
-	async subscribe(callback: Callback) {
+	async subscribe(callback: Listener) {
 		this.callbacks.push(callback)
 		await callback(this.parent)
 	}
@@ -17,6 +16,6 @@ export class ChildListener {
 	}
 
 	static create(parent: Editable) {
-		return new ChildListener(parent)
+		return new Observer(parent)
 	}
 }
