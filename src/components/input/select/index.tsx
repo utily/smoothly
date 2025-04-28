@@ -15,6 +15,7 @@ import {
 } from "@stencil/core"
 import { Color, Data } from "../../../model"
 import { Item } from "../../item/Item"
+import { ChildListener } from "../ChildListener"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
@@ -30,6 +31,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private listener: { changed?: (parent: Editable) => Promise<void> } = {}
+	public childListener = ChildListener.create(this)
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
@@ -75,6 +77,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	componentDidLoad(): void | Promise<void> {
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])
@@ -165,6 +168,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.defined = this.selected.length > 0
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Watch("required")
 	onRequiredChange(): void {
@@ -179,6 +183,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("readonly")
 	watchingReadonly(): void {
 		this.listener.changed?.(this)
+		this.childListener.publish()
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {

@@ -1,9 +1,11 @@
 import { EventEmitter } from "@stencil/core"
 import { isly } from "isly"
+import { ChildListener } from "./ChildListener"
 
 export interface Editable extends Editable.Element {
 	changed: boolean
 	value?: any
+	childListener?: ChildListener
 	smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 }
 export namespace Editable {
@@ -31,6 +33,7 @@ export namespace Editable {
 	export const type = Element.type.extend<Editable>({
 		changed: isly.boolean(),
 		value: isly.any().optional(),
+		childListener: isly.fromIs("ChildListener", (v): v is ChildListener => v instanceof ChildListener).optional(),
 		smoothlyFormDisable: EventEmitter,
 	})
 	export const is = type.is
