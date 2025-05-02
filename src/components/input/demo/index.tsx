@@ -18,7 +18,9 @@ export class SmoothlyInputDemo {
 				<div class="inputs">
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
-					<smoothly-input-date-time name="someDateTime">DateTime</smoothly-input-date-time>
+					<smoothly-input-date-time name="someDateTime" value={isoly.DateTime.now()}>
+						DateTime
+					</smoothly-input-date-time>
 					<h2>Date Range</h2>
 					<smoothly-input-date-range
 						name="testing"
