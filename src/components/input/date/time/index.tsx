@@ -59,6 +59,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.observer.publish()
+		this.valueChange(this.value)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
