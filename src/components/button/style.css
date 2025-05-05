@@ -12,6 +12,12 @@
 :host([shape=rounded]) {
 	--smoothly-button-border-radius: 2rem;
 }
+:host([size=small]:not([size=flexible])) {
+	--smoothly-button-min-height: 2.5rem;
+}
+:host([size=large]:not([size=flexible])) {
+	--smoothly-button-min-height: 3.5rem;
+}
 
 :host([type=link]) {
 	display: inline;
@@ -24,8 +30,9 @@
 
 :host>a,
 :host>button {
-	font-size: 110%;
+	/* font-size: 110%; */
 	font-weight: 400;
+	min-height: var(--smoothly-button-min-height);
 	border: 1px solid transparent;
 	outline: none;
 	background-color: transparent;
@@ -33,6 +40,7 @@
 	display: inline-flex;
 	gap: 0.5rem;
 	box-sizing: border-box;
+	font-size: var(--smoothly-button-font-size, 1rem);
 }
 :host>a:empty,
 :host>button:empty {
@@ -49,8 +57,9 @@
 }
 
 :host(:not([size=icon]):not([size=flexible]))>button {
-	padding: 0.8em;
-	min-width: 8em;
+	padding-inline: 0.75rem;
+	min-height: var(--smoothly-button-min-height, 3rem);
+	min-width: 8rem;
 }
 
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon)>button {
@@ -65,14 +74,6 @@
 	text-align: center;
 	text-decoration: inherit;
 	width: calc(100% - 0.6em);
-}
-
-:host([size=small])>button {
-	font-size: 100%;
-}
-
-:host([size=large])>button {
-	font-size: 130%;
 }
 
 :host(:not([size=icon])) {
