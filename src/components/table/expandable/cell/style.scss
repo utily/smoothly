@@ -10,6 +10,7 @@
 
 :host>div.content {
 	grid-column: span var(--smoothly-table-cell-span, 1);
+	display: flex;
 	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
