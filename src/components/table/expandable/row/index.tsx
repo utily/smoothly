@@ -21,7 +21,6 @@ export class SmoothlyTableExpandableRow {
 	render(): VNode | VNode[] {
 		return (
 			<Host onClick={(e: MouseEvent) => this.clickHandler(e)}>
-				<slot />
 				<div class={"detail"} ref={e => (this.div = e)}>
 					<slot name="detail" />
 				</div>

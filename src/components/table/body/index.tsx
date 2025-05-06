@@ -7,10 +7,6 @@ import { Component, h, Host, VNode } from "@stencil/core"
 })
 export class SmoothlyTableBody {
 	render(): VNode | VNode[] {
-		return (
-			<Host>
-				<slot />
-			</Host>
-		)
+		return <Host></Host>
 	}
 }
