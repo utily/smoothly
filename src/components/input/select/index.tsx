@@ -138,7 +138,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.changed = false
 		this.open && this.handleShowOptions()
 	}
-
+	@Method()
+	async syncSelectedDisplay(): Promise<void> {
+		await new Promise(requestAnimationFrame) // wait for children to be fully rendered in DOM
+		this.selected = this.items.filter(item => item.selected)
+		this.displaySelected()
+	}
 	@Method()
 	async clear(): Promise<void> {
 		if (this.clearable) {
