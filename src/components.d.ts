@@ -18,6 +18,7 @@ import { isly } from "isly";
 import { Key } from "./components/input/Key";
 import { RGB } from "./model/Color/RGB";
 import { Selectable } from "./components/input/radio/Selected";
+import { SmoothlyInputRadio } from "./components/input/radio/index";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
@@ -31,6 +32,7 @@ export { isly } from "isly";
 export { Key } from "./components/input/Key";
 export { RGB } from "./model/Color/RGB";
 export { Selectable } from "./components/input/radio/Selected";
+export { SmoothlyInputRadio } from "./components/input/radio/index";
 export namespace Components {
     interface SmoothlyApp {
         "color": Color;
@@ -1596,7 +1598,7 @@ declare global {
     };
     interface HTMLSmoothlyInputRadioItemElementEventMap {
         "smoothlySelect": Selectable;
-        "smoothlyRadioItemRegister": (name: string) => void;
+        "smoothlyRadioItemRegister": (parent: SmoothlyInputRadio) => void;
     }
     interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputRadioItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputRadioItemElement, ev: SmoothlyInputRadioItemCustomEvent<HTMLSmoothlyInputRadioItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2638,7 +2640,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputRadioItem {
         "looks"?: Looks;
         "name"?: string;
-        "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(name: string) => void>) => void;
+        "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(parent: SmoothlyInputRadio) => void>) => void;
         "onSmoothlySelect"?: (event: SmoothlyInputRadioItemCustomEvent<Selectable>) => void;
         "selected"?: boolean;
         "value"?: any;
