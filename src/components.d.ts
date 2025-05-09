@@ -542,6 +542,7 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "showLabel": boolean;
         "showSelected"?: boolean;
+        "syncSelectedDisplay": () => Promise<void>;
         "unregister": () => Promise<void>;
     }
     interface SmoothlyInputSubmit {
