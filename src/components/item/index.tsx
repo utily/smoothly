@@ -22,6 +22,7 @@ import { Item } from "./Item"
 	scoped: true,
 })
 export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
+	private mutationObserver: MutationObserver
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean = false
@@ -30,6 +31,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	@Prop() deselectable = true
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
+	@Event() smoothlyItemDOMChange: EventEmitter<void>
 
 	@Listen("click")
 	clickHandler(): void {
@@ -44,6 +46,9 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.smoothlyInputLoad.emit(() => {})
 	}
 	componentDidLoad(): void {
+		this.mutationObserver = new MutationObserver(() => this.smoothlyItemDOMChange.emit())
+		this.mutationObserver.observe(this.element, { childList: true, subtree: true, characterData: true })
+
 		if (this.selected && !this.disabled)
 			this.smoothlyItemSelect.emit(this.element)
 	}

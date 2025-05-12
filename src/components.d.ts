@@ -1697,6 +1697,7 @@ declare global {
     interface HTMLSmoothlyItemElementEventMap {
         "smoothlyItemSelect": HTMLSmoothlyItemElement;
         "smoothlyInputLoad": (parent: Editable) => void;
+        "smoothlyItemDOMChange": void;
     }
     interface HTMLSmoothlyItemElement extends Components.SmoothlyItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyItemElementEventMap>(type: K, listener: (this: HTMLSmoothlyItemElement, ev: SmoothlyItemCustomEvent<HTMLSmoothlyItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2723,6 +2724,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: Editable) => void>) => void;
+        "onSmoothlyItemDOMChange"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;
         "selected"?: boolean;
         "value"?: any;

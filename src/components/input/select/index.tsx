@@ -199,6 +199,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && this.handleShowOptions()
 	}
+	@Listen("smoothlyItemDOMChange")
+	onItemDomChange(e: CustomEvent) {
+		e.stopPropagation()
+		const item = e.target as HTMLSmoothlyItemElement
+		if (item.selected)
+			this.displaySelected()
+	}
 	@Listen("smoothlyItemSelect")
 	onItemSelect(event: CustomEvent<HTMLSmoothlyItemElement>): void {
 		event.stopPropagation()
