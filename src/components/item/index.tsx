@@ -46,10 +46,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.smoothlyInputLoad.emit(() => {})
 	}
 	componentDidLoad(): void {
-		this.mutationObserver = new MutationObserver((mutations, observer) => {
-			console.log("item DOM change", mutations, observer)
-			this.smoothlyItemDOMChange.emit()
-		})
+		this.mutationObserver = new MutationObserver(() => this.smoothlyItemDOMChange.emit())
 		this.mutationObserver.observe(this.element, { childList: true, subtree: true, characterData: true })
 
 		if (this.selected && !this.disabled)

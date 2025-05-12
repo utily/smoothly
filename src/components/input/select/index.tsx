@@ -203,7 +203,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onItemDomChange(e: CustomEvent) {
 		e.stopPropagation()
 		const item = e.target as HTMLSmoothlyItemElement
-		console.log("smoothlyItemDOMChange", item)
 		if (item.selected)
 			this.displaySelected()
 	}

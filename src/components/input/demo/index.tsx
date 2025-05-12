@@ -7,7 +7,6 @@ import { isoly } from "isoly"
 	scoped: true,
 })
 export class SmoothlyInputDemo {
-	@State() number?: number
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
 	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -65,7 +64,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input-date>
 					<h2>Select</h2>
 					<div class="select-div">
-						{/* <smoothly-input-select name="select-dessert" looks="border">
+						<smoothly-input-select name="select-dessert" looks="border">
 							<label slot="label">Select with clear button</label>
 							<smoothly-item value="1">Ice cream</smoothly-item>
 							<smoothly-item value="2">Sponge cake</smoothly-item>
@@ -114,26 +113,23 @@ export class SmoothlyInputDemo {
 										{char}
 									</smoothly-item>
 								))}
-						</smoothly-input-select> */}
-						<smoothly-button color="success" fill="solid" onClick={() => (this.number = (this.number ?? 0) + 1)}>
-							Increment
-						</smoothly-button>
+						</smoothly-input-select>
 						<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 							<label slot="label">Month multiple select</label>
-							<smoothly-item value="1">January {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="2">February {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="3">March {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="4">April {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="5">May{this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="6">June {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="7">July {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="8">August {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="9">September {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="10">October {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="11">November {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
-							<smoothly-item value="12">December {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
+							<smoothly-item value="1">January</smoothly-item>
+							<smoothly-item value="2">February</smoothly-item>
+							<smoothly-item value="3">March</smoothly-item>
+							<smoothly-item value="4">April</smoothly-item>
+							<smoothly-item value="5">May</smoothly-item>
+							<smoothly-item value="6">June</smoothly-item>
+							<smoothly-item value="7">July</smoothly-item>
+							<smoothly-item value="8">August</smoothly-item>
+							<smoothly-item value="9">September</smoothly-item>
+							<smoothly-item value="10">October</smoothly-item>
+							<smoothly-item value="11">November</smoothly-item>
+							<smoothly-item value="12">December</smoothly-item>
 						</smoothly-input-select>
-						{/* <div class="select-div-row">
+						<div class="select-div-row">
 							<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 								<smoothly-item value="folder" selected>
 									<smoothly-icon size="small" name="folder-outline" />
@@ -155,7 +151,7 @@ export class SmoothlyInputDemo {
 							<smoothly-input name="name" value="Sten Qvist">
 								Name
 							</smoothly-input>
-						</div> */}
+						</div>
 					</div>
 					<h2>Duration</h2>
 					<smoothly-input
