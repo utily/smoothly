@@ -65,7 +65,7 @@ export class SmoothlyInputDemo {
 					</smoothly-input-date>
 					<h2>Select</h2>
 					<div class="select-div">
-						<smoothly-input-select name="select-dessert" looks="border">
+						{/* <smoothly-input-select name="select-dessert" looks="border">
 							<label slot="label">Select with clear button</label>
 							<smoothly-item value="1">Ice cream</smoothly-item>
 							<smoothly-item value="2">Sponge cake</smoothly-item>
@@ -114,7 +114,7 @@ export class SmoothlyInputDemo {
 										{char}
 									</smoothly-item>
 								))}
-						</smoothly-input-select>
+						</smoothly-input-select> */}
 						<smoothly-button color="success" fill="solid" onClick={() => (this.number = (this.number ?? 0) + 1)}>
 							Increment
 						</smoothly-button>
@@ -133,7 +133,7 @@ export class SmoothlyInputDemo {
 							<smoothly-item value="11">November {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
 							<smoothly-item value="12">December {this.number ? <span>{this.number}</span> : undefined}</smoothly-item>
 						</smoothly-input-select>
-						<div class="select-div-row">
+						{/* <div class="select-div-row">
 							<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 								<smoothly-item value="folder" selected>
 									<smoothly-icon size="small" name="folder-outline" />
@@ -155,7 +155,7 @@ export class SmoothlyInputDemo {
 							<smoothly-input name="name" value="Sten Qvist">
 								Name
 							</smoothly-input>
-						</div>
+						</div> */}
 					</div>
 					<h2>Duration</h2>
 					<smoothly-input
