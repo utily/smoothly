@@ -25,6 +25,7 @@
 }
 :host > span > p {
 	text-align: left;
+	white-space: pre-wrap;
 }
 :host[hidden] {
 	display: none;
