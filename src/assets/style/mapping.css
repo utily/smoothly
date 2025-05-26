@@ -49,6 +49,10 @@ smoothly-color {
   --smoothly-item-disabled-foreground: var(--smoothly-default-contrast), 50%;
 	--smoothly-item-disabled-opacity: 0.6;
 
+	/* smoothly-tab */
+	--smoothly-tab-hover-background: var(--smoothly-default-tint);
+	--smoothly-tab-active-line: var(--smoothly-primary-color);
+
 	/* smoothly-button */
 	--smoothly-button-background: var(--smoothly-color);
 	--smoothly-button-foreground: var(--smoothly-color-shade);

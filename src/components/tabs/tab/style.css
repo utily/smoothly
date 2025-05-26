@@ -1,12 +1,13 @@
 :host {
 	display: contents;
-	--line-width: 3px;
+	--smoothly-tab-line-width: 2px;
+	--smoothly-tab-line-width-active: 5px;
 }
 :host > div:first-child {
 	grid-column: span 1;
 	background-color: transparent;
 	border-bottom-color: rgb(var(--smoothly-default-shade));
-	border-bottom-width: var(--line-width);
+	border-bottom-width: var(--smoothly-tab-line-width);
 	border-bottom-style: solid;
 }
 :host([disabled]) > div:first-child {
@@ -18,15 +19,27 @@
 :host > div:first-child > label {
 	display: flex;
 	justify-content: center;
-	padding: .5rem;
+	padding: 0.5rem 1rem;
 	width: fit-content;
+	border-radius: 0.5rem 0.5rem 0 0;
   margin: auto;
 	cursor: pointer;
 	position: relative;
 }
+:host:not([disabled]) > div:first-child > label:hover {
+	background-color: rgb(var(--smoothly-tab-hover-background, var(--smoothly-default-shade)));
+}
 :host([open]) > div:first-child > label {
-	border-bottom: var(--line-width) solid rgb(var(--smoothly-primary-color));
-	margin-bottom: calc(-1 * var(--line-width));
+	
+	font-weight: bold;
+}
+:host([open]) > div:first-child > label::before {
+	content: '';
+	position: absolute;
+	height: var(--smoothly-tab-line-width-active);
+	background-color: rgb(var(--smoothly-tab-active-line, var(--smoothly-primary-color)));
+	inset-inline: 0;
+	bottom: calc(-1 * var(--smoothly-tab-line-width));
 }
 :host > div:first-child > label[data-smoothly-tooltip]:hover::after {
 	content: attr(data-smoothly-tooltip);
