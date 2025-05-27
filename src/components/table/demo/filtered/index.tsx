@@ -131,8 +131,8 @@ export class TableDemoFiltered implements ComponentWillLoad {
 									</smoothly-item>
 								))}
 							</smoothly-filter-select>
-							<smoothly-filter-input label="Coat" property="coat" />
-							<smoothly-filter-input label="Nested Coat" property="nested.coat" />
+							<smoothly-filter-input label="Coat" property="coat" match="starts" />
+							<smoothly-filter-input label="Nested Coat" property="nested.coat" match="exact" />
 						</smoothly-form>
 					</div>
 				</smoothly-filter>

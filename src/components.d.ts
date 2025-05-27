@@ -157,6 +157,7 @@ export namespace Components {
     }
     interface SmoothlyFilterInput {
         "label": string;
+        "match": "includes" | "exact" | "starts" | "ends";
         "placeholder": string;
         "property": string;
     }
@@ -2347,6 +2348,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyFilterInput {
         "label"?: string;
+        "match"?: "includes" | "exact" | "starts" | "ends";
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Update>) => void;
         "placeholder"?: string;

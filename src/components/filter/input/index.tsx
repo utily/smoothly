@@ -14,6 +14,7 @@ export class SmoothlyFilterInput implements Filter {
 	@Prop() label: string
 	@Prop() property: string
 	@Prop() placeholder: string
+	@Prop() match: "includes" | "exact" | "starts" | "ends" = "includes"
 	@Event() smoothlyFilterUpdate: EventEmitter<Filter.Update>
 	@Event() smoothlyFilterManipulate: EventEmitter<Filter.Manipulate>
 	componentDidLoad() {
@@ -61,9 +62,22 @@ export class SmoothlyFilterInput implements Filter {
 		this.smoothlyFilterManipulate.emit(manipulate.bind(this))
 	}
 	private getCriteria(needle: string): selectively.Rule | undefined {
-		return this.property
-			.split(".")
-			.reduceRight((r: selectively.Rule, e) => selectively.property(e, r), selectively.includes(needle))
+		let value: selectively.Rule
+		switch (this.match) {
+			case "includes":
+				value = selectively.includes(needle)
+				break
+			case "exact":
+				value = selectively.is(needle)
+				break
+			case "starts":
+				value = selectively.startsWith(needle)
+				break
+			case "ends":
+				value = selectively.endsWith(needle)
+				break
+		}
+		return this.property.split(".").reduceRight((r: selectively.Rule, e) => selectively.property(e, r), value)
 	}
 	findInstanceOf(criteria: selectively.Criteria, property: string): boolean {
 		const [key, ...rest] = property.split(".")
