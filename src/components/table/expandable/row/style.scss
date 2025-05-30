@@ -8,7 +8,12 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host::slotted(:not(.detail)) {
+:host a { 
+	display: contents;
+}
+
+:host::slotted(:not(.detail)):not(a),
+:host::slotted(a>*) {
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
@@ -17,7 +22,8 @@
 	white-space: nowrap;
 }
 
-:host:has(>:not(:last-child):hover)> :not(:last-child) {
+:host:has(>:not(:last-child):hover),
+:host a:has(>:not(:last-child):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -44,16 +50,18 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host> :first-child:not(:last-child) {
+:host> :first-child,
+:host a> :first-child {
 	@include arrow;
 }
 
-:host:has(>:not(:last-child):hover)> :first-child:not(:last-child) {
+:host:has(>:hover)> :first-child,
+:host>a:has(>:hover)> :first-child {
 	@include arrow-hover;
-
 }
 
-:host[open]> :first-child:not(:last-child) {
+:host[open]> :first-child,
+:host[open] a > :first-child {
 	@include arrow-open;
 }
 
