@@ -8,7 +8,15 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host::slotted(:not(.detail)) {
+:host>.smoothly-row { 
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column: 1 / -1;
+}
+
+:host::slotted(:not(.detail)):not(.smoothly-row),
+:host>::slotted(.smoothly-row>*) {
+	grid: subgrid;
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
@@ -17,7 +25,8 @@
 	white-space: nowrap;
 }
 
-:host:has(>:not(:last-child):hover)> :not(:last-child) {
+:host:has(>:not(:last-child):hover),
+:host>.smoothly-row:has(>:not(:last-child):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -44,16 +53,18 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host> :first-child:not(:last-child) {
+:host> :first-child,
+:host>.smoothly-row> :first-child {
 	@include arrow;
 }
 
-:host:has(>:not(:last-child):hover)> :first-child:not(:last-child) {
+:host:has(>:hover)> :first-child,
+:host>.smoothly-row:has(>:hover)> :first-child {
 	@include arrow-hover;
-
 }
 
-:host[open]> :first-child:not(:last-child) {
+:host[open]> :first-child,
+:host[open]>.smoothly-row>:first-child {
 	@include arrow-open;
 }
 
