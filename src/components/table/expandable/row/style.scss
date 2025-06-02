@@ -8,12 +8,12 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host a { 
+:host>a { 
 	display: contents;
 }
 
 :host::slotted(:not(.detail)):not(a),
-:host::slotted(a>*) {
+:host>::slotted(a>*) {
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
@@ -23,7 +23,7 @@
 }
 
 :host:has(>:not(:last-child):hover),
-:host a:has(>:not(:last-child):hover) {
+:host>a:has(>:not(:last-child):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -51,7 +51,7 @@
 }
 
 :host> :first-child,
-:host a> :first-child {
+:host>a> :first-child {
 	@include arrow;
 }
 
@@ -61,7 +61,7 @@
 }
 
 :host[open]> :first-child,
-:host[open] a > :first-child {
+:host[open]>a>:first-child {
 	@include arrow-open;
 }
 
