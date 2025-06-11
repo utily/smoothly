@@ -1,9 +1,12 @@
-import { Component, h } from "@stencil/core"
+import { Component, h, State } from "@stencil/core"
+import { Fill } from "../../../model"
 @Component({
 	tag: "smoothly-button-demo",
 	styleUrl: "style.css",
 })
 export class SmoothlyButtonDemo {
+	@State() fill: Fill = "solid"
+
 	render() {
 		return [
 			<h2>Buttons</h2>,
@@ -35,38 +38,46 @@ export class SmoothlyButtonDemo {
 					link + type link
 				</smoothly-button>
 				<h4>Size and Color test</h4>
-				<smoothly-button color="primary" fill="solid" size="small" shape="rounded">
+				<smoothly-input-radio name="fill" onSmoothlyInput={e => (this.fill = e.detail.fill as any as Fill)}>
+					<span slot="label">Fill</span>
+					{Fill.values.map(fill => (
+						<smoothly-input-radio-item value={fill} selected={this.fill == fill}>
+							{fill}
+						</smoothly-input-radio-item>
+					))}
+				</smoothly-input-radio>
+				<smoothly-button color="primary" fill={this.fill} size="small" shape="rounded">
 					Color Primary + Small
 				</smoothly-button>
-				<smoothly-button color="secondary" fill="solid" shape="rounded">
+				<smoothly-button color="secondary" fill={this.fill} shape="rounded">
 					Color Secondary + Default
 				</smoothly-button>
-				<smoothly-button color="warning" fill="solid" size="large">
+				<smoothly-button color="warning" fill={this.fill} size="large">
 					Color Warning + Large
 				</smoothly-button>
-				<smoothly-button color="danger" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="danger" fill={this.fill} size="small" shape="rounded">
 					Color Danger + Small
 				</smoothly-button>
-				<smoothly-button color="success" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="success" fill={this.fill} size="small" shape="rounded">
 					Color Success + Small
 				</smoothly-button>
-				<smoothly-button color="tertiary" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="tertiary" fill={this.fill} size="small" shape="rounded">
 					Color Tertiary + Small
 				</smoothly-button>
-				<smoothly-button color="dark" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="dark" fill={this.fill} size="small" shape="rounded">
 					Color Dark + Small
 				</smoothly-button>
-				<smoothly-button color="medium" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="medium" fill={this.fill} size="small" shape="rounded">
 					Color Medium + Small
 				</smoothly-button>
-				<smoothly-button color="light" fill="solid" size="small" shape="rounded">
+				<smoothly-button color="light" fill={this.fill} size="small" shape="rounded">
 					Color Light + Small
 				</smoothly-button>
 				<h4>Expand examples</h4>
-				<smoothly-button color="secondary" fill="solid" expand="full">
+				<smoothly-button color="secondary" fill={this.fill} expand="full">
 					Color Secondary + Default
 				</smoothly-button>
-				<smoothly-button color="warning" fill="solid" expand="block">
+				<smoothly-button color="warning" fill={this.fill} expand="block">
 					Color Warning + Large
 				</smoothly-button>
 				<h4>Fill examples</h4>
