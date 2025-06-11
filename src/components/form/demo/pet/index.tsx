@@ -156,8 +156,8 @@ export class SmoothlyFormDemoPet {
 							<smoothly-input-checkbox name="summary.hasPet">Has Pet</smoothly-input-checkbox>
 						</div>
 					</smoothly-summary>
-					<smoothly-tabs>
-						<smoothly-tab label="Dog">
+					<smoothly-tabs onSmoothlyTabOpen={e => console.log("Tab opened:", e.detail)}>
+						<smoothly-tab label="Dog" name="dog">
 							<smoothly-input type={"text"} name="dog.breed">
 								Breed
 							</smoothly-input>
@@ -186,7 +186,7 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input-radio>
 							<smoothly-input-checkbox name="dog.hasPet">Has Pet</smoothly-input-checkbox>
 						</smoothly-tab>
-						<smoothly-tab label="Cat" open>
+						<smoothly-tab label="Cat" name="cat" open>
 							<smoothly-input name={"cat.favoriteFood"}>Favorite Food</smoothly-input>
 						</smoothly-tab>
 					</smoothly-tabs>

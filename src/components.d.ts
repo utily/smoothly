@@ -614,6 +614,7 @@ export namespace Components {
     interface SmoothlyTab {
         "disabled": boolean;
         "label": string;
+        "name": string;
         "open": boolean;
         "tooltip": string;
     }
@@ -2784,6 +2785,7 @@ declare namespace LocalJSX {
     interface SmoothlyTab {
         "disabled"?: boolean;
         "label"?: string;
+        "name"?: string;
         "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<void>) => void;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabCustomEvent<string>) => void;
         "open"?: boolean;

@@ -9,6 +9,7 @@ import { Input } from "../../input/Input"
 export class SmoothlyTab {
 	private inputs: Record<string, Input.Element> = {}
 	@Prop() label: string
+	@Prop() name: string
 	@Prop() tooltip: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Prop({ reflect: true }) disabled: boolean
@@ -18,7 +19,7 @@ export class SmoothlyTab {
 	@Watch("open")
 	async openHandler() {
 		if (this.open)
-			this.smoothlyTabOpen.emit(this.label)
+			this.smoothlyTabOpen.emit(this.name)
 		this.open
 			? await Promise.all(Object.values(this.inputs).map(input => input.register()))
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
