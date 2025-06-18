@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { isSmoothlyTabElement } from "./isSmoothlyTabElement"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -20,10 +19,14 @@ export class SmoothlyTabs {
 		}
 	}
 
+	private isSmoothlyTabElement(element: any): element is HTMLSmoothlyTabElement {
+		return element?.tagName == "SMOOTHLY-TAB"
+	}
+
 	@Listen("smoothlyTabOpen")
 	openChanged(event: CustomEvent) {
 		const target = event.target
-		if (isSmoothlyTabElement(target)) {
+		if (this.isSmoothlyTabElement(target)) {
 			event.stopPropagation()
 			this.selectedElement = target
 			this.smoothlyTabOpen.emit(event.detail)
