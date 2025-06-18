@@ -227,7 +227,7 @@ export class InputStateHandler {
 		return result
 	}
 	public getValue(formattedState: tidily.State): any {
-		return this.formatter.fromString(this.unformatState(formattedState).value).replace(/(\r|\n|\t)/g, "")
+		return this.formatter.fromString(this.unformatState(formattedState).value)
 	}
 	public setSelection(
 		inputElement: HTMLInputElement,
