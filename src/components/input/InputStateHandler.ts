@@ -157,7 +157,7 @@ export class InputStateHandler {
 		event.preventDefault()
 		if (typeof event.data == "string")
 			for (const c of event.data)
-				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c)
+				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c.replace(/(\r|\n|\t)/g, ""))
 		return unformatted
 	}
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward"): tidily.State {
