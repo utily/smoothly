@@ -7,21 +7,23 @@ import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, W
 })
 export class SmoothlyTabs {
 	@Prop({ reflect: true }) tabs: "always" | "multiple" = "always"
-	@State() tabElements: HTMLElement[] = []
+	@State() tabElements: HTMLSmoothlyTabElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
 
 	@Method()
 	async removeTab(tab: HTMLSmoothlyTabElement) {
-		console.debug(`Removing tab: ${tab.label || tab.name || "Unnamed Tab"}`, this.tabElements.length)
 		this.tabElements = this.tabElements.filter(element => element !== tab)
-		console.debug(`Removed tab: ${tab.label || tab.name || "Unnamed Tab"}`, this.tabElements.length)
+		if (tab.open) {
+			const firstOpenableTab = this.tabElements.find(element => !element.disabled)
+			firstOpenableTab && (firstOpenableTab.open = true)
+		}
 	}
 
 	@Listen("smoothlyTabLoad")
 	onInputLoad(event: CustomEvent<(smoothlyTabs: SmoothlyTabs) => void>) {
 		event.stopPropagation()
-		if (event.target instanceof HTMLElement && !this.tabElements.includes(event.target)) {
+		if (this.isSmoothlyTabElement(event.target) && !this.tabElements.includes(event.target)) {
 			event.detail(this)
 			this.tabElements = [...this.tabElements, event.target]
 		}
