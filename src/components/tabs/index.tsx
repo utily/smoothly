@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -7,14 +7,24 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } f
 })
 export class SmoothlyTabs {
 	@Prop({ reflect: true }) tabs: "always" | "multiple" = "always"
-	@State() tabElements: HTMLElement[] = []
+	@State() tabElements: HTMLSmoothlyTabElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
 
+	@Method()
+	async removeTab(tab: HTMLSmoothlyTabElement) {
+		this.tabElements = this.tabElements.filter(element => element !== tab)
+		if (tab.open) {
+			const firstOpenableTab = this.tabElements.find(element => !element.disabled)
+			firstOpenableTab && (firstOpenableTab.open = true)
+		}
+	}
+
 	@Listen("smoothlyTabLoad")
-	onInputLoad(event: CustomEvent) {
+	onInputLoad(event: CustomEvent<(smoothlyTabs: SmoothlyTabs) => void>) {
 		event.stopPropagation()
-		if (event.target instanceof HTMLElement && !this.tabElements.includes(event.target)) {
+		if (this.isSmoothlyTabElement(event.target) && !this.tabElements.includes(event.target)) {
+			event.detail(this)
 			this.tabElements = [...this.tabElements, event.target]
 		}
 	}

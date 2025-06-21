@@ -1,5 +1,6 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 import { Input } from "../../input/Input"
+import { SmoothlyTabs } from ".."
 
 @Component({
 	tag: "smoothly-tab",
@@ -8,13 +9,15 @@ import { Input } from "../../input/Input"
 })
 export class SmoothlyTab {
 	private inputs: Record<string, Input.Element> = {}
+	private smoothlyTabs: SmoothlyTabs
+	@Element() element: HTMLSmoothlyTabElement
 	@Prop() label: string
 	@Prop() name: string
 	@Prop() tooltip: string
 	@Prop({ mutable: true, reflect: true }) open: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Event() smoothlyTabOpen: EventEmitter<string>
-	@Event() smoothlyTabLoad: EventEmitter<void>
+	@Event() smoothlyTabLoad: EventEmitter<(smoothlyTabs: SmoothlyTabs) => void>
 
 	@Watch("open")
 	async openHandler() {
@@ -25,7 +28,10 @@ export class SmoothlyTab {
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
 	}
 	connectedCallback() {
-		this.smoothlyTabLoad.emit()
+		this.smoothlyTabLoad.emit((smoothlyTabs: SmoothlyTabs) => (this.smoothlyTabs = smoothlyTabs))
+	}
+	disconnectedCallback() {
+		this.smoothlyTabs.removeTab(this.element)
 	}
 	async componentDidLoad() {
 		await this.openHandler()
