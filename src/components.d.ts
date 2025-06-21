@@ -19,6 +19,7 @@ import { Key } from "./components/input/Key";
 import { RGB } from "./model/Color/RGB";
 import { Selectable } from "./components/input/radio/Selected";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
+import { SmoothlyTabs } from "./components/tabs";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
@@ -33,6 +34,7 @@ export { Key } from "./components/input/Key";
 export { RGB } from "./model/Color/RGB";
 export { Selectable } from "./components/input/radio/Selected";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
+export { SmoothlyTabs } from "./components/tabs";
 export namespace Components {
     interface SmoothlyApp {
         "color": Color;
@@ -669,6 +671,7 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTabs {
+        "removeTab": (tab: HTMLSmoothlyTabElement) => Promise<void>;
         "tabs": "always" | "multiple";
     }
     interface SmoothlyTabsDemo {
@@ -1825,7 +1828,7 @@ declare global {
     };
     interface HTMLSmoothlyTabElementEventMap {
         "smoothlyTabOpen": string;
-        "smoothlyTabLoad": void;
+        "smoothlyTabLoad": (smoothlyTabs: SmoothlyTabs) => void;
     }
     interface HTMLSmoothlyTabElement extends Components.SmoothlyTab, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyTabElementEventMap>(type: K, listener: (this: HTMLSmoothlyTabElement, ev: SmoothlyTabCustomEvent<HTMLSmoothlyTabElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2786,7 +2789,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "label"?: string;
         "name"?: string;
-        "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<void>) => void;
+        "onSmoothlyTabLoad"?: (event: SmoothlyTabCustomEvent<(smoothlyTabs: SmoothlyTabs) => void>) => void;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabCustomEvent<string>) => void;
         "open"?: boolean;
         "tooltip"?: string;

@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-tabs",
@@ -11,10 +11,18 @@ export class SmoothlyTabs {
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
 
+	@Method()
+	async removeTab(tab: HTMLSmoothlyTabElement) {
+		console.debug(`Removing tab: ${tab.label || tab.name || "Unnamed Tab"}`, this.tabElements.length)
+		this.tabElements = this.tabElements.filter(element => element !== tab)
+		console.debug(`Removed tab: ${tab.label || tab.name || "Unnamed Tab"}`, this.tabElements.length)
+	}
+
 	@Listen("smoothlyTabLoad")
-	onInputLoad(event: CustomEvent) {
+	onInputLoad(event: CustomEvent<(smoothlyTabs: SmoothlyTabs) => void>) {
 		event.stopPropagation()
 		if (event.target instanceof HTMLElement && !this.tabElements.includes(event.target)) {
+			event.detail(this)
 			this.tabElements = [...this.tabElements, event.target]
 		}
 	}
