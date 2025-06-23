@@ -1,7 +1,8 @@
 :host {
 	font-family: monospace;
 	display: inline;
-	word-wrap: anywhere;
+	overflow-wrap: anywhere;
+	white-space: pre-wrap;
 }
 :host[hidden] {
 	display: none;
