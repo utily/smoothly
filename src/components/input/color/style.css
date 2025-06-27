@@ -10,7 +10,7 @@
 :host>smoothly-input {
 	width: 100%;
 	--input-min-height: calc(var(--input-min-height) - 2px);
-	--smoothly-input-border-active: none;
+	--smoothly-input-border-focus: none;
 }
 :host div.color-sample {
 	height: 2em;

@@ -23,7 +23,7 @@
 :host>div>smoothly-input {
 	width: 12em;
 	--input-min-height: calc(3rem - 2px);
-	--smoothly-input-border-active: none;
+	--smoothly-input-border-focus: none;
 }
 :host>div>smoothly-input label {
 	white-space: nowrap;
