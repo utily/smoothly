@@ -32,8 +32,7 @@
 :host([looks="line"]:not([readonly]):not([disabled]):focus-within)::before {
 	content: "";
 	position: absolute;
-	inset-inline: 0;
-	bottom: 0;
+	inset: 0;
 	border-bottom: 2px solid rgb(var(--smoothly-input-border-focus));
 	z-index: 10;
 }
