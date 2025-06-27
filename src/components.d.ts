@@ -89,7 +89,6 @@ export namespace Components {
     interface SmoothlyButtonDemo {
     }
     interface SmoothlyButtonDemoStandard {
-        "props": Options;
     }
     interface SmoothlyCalendar {
         "doubleInput": boolean;
@@ -2285,7 +2284,6 @@ declare namespace LocalJSX {
     interface SmoothlyButtonDemo {
     }
     interface SmoothlyButtonDemoStandard {
-        "props"?: Options;
     }
     interface SmoothlyCalendar {
         "doubleInput"?: boolean;

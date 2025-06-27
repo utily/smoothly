@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, h, Host, State, Watch } from "@stencil/core"
 import { Color, Fill, Icon } from "../../../../model"
 import { Button } from "../../Button"
 
@@ -18,7 +18,20 @@ type Options = {
 	scoped: true,
 })
 export class SmoothlyButtonDemoStandard {
-	@Prop() props: Options = {}
+	@State() props: Options = {}
+	@State() heightText: string = ""
+	@State() lastButton?: HTMLElement
+
+	@Watch("props")
+	updateInputHeightText() {
+		setTimeout(() => {
+			const rootFontSize = Number(getComputedStyle(document.documentElement).fontSize.replace("px", ""))
+			if (this.lastButton) {
+				const heightPx = this.lastButton.clientHeight
+				this.heightText = `${heightPx / rootFontSize}rem (${heightPx}px)`
+			}
+		}, 100)
+	}
 
 	render() {
 		return (
@@ -70,8 +83,9 @@ export class SmoothlyButtonDemoStandard {
 				</smoothly-form>
 				<h3>Standard Buttons</h3>
 				<div class="buttons">
-					{Color.values.map(color => (
+					{Color.values.map((color, index, colors) => (
 						<smoothly-button
+							ref={el => colors.length - 1 == index && (this.lastButton = el)}
 							color={color}
 							fill={this.props.fill}
 							disabled={this.props.disabled}
@@ -83,6 +97,7 @@ export class SmoothlyButtonDemoStandard {
 							{this.props.text?.useColor ? color : this.props.text?.value}
 						</smoothly-button>
 					))}
+					<div class="height-text">{this.heightText}</div>
 				</div>
 			</Host>
 		)
