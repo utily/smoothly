@@ -1,0 +1,90 @@
+import { Component, h, Host, Prop } from "@stencil/core"
+import { Color, Fill, Icon } from "../../../../model"
+import { Button } from "../../Button"
+
+type Options = {
+	fill?: Fill
+	disabled?: boolean
+	type?: Button.Properties["type"]
+	size?: "small" | "large" | "icon" | "flexible"
+	rounded?: boolean
+	icon?: Icon
+	text?: { value: string; useColor?: boolean }
+}
+
+@Component({
+	tag: "smoothly-button-demo-standard",
+	styleUrl: "style.css",
+	scoped: true,
+})
+export class SmoothlyButtonDemoStandard {
+	@Prop() props: Options = {}
+
+	render() {
+		return (
+			<Host>
+				<smoothly-form onSmoothlyFormInput={e => (this.props = e.detail)} looks="grid">
+					<smoothly-input-checkbox name="text.useColor" checked>
+						Use Color as Text
+					</smoothly-input-checkbox>
+					<smoothly-input-select name="size">
+						<span slot="label">Size</span>
+						{["small", "large", "icon", "flexible"].map(size => (
+							<smoothly-item value={size} key={size}>
+								{size}
+							</smoothly-item>
+						))}
+					</smoothly-input-select>
+					<smoothly-input name="text.value" value="Button">
+						Text
+						<smoothly-input-clear slot="end" />
+					</smoothly-input>
+					<smoothly-input-select name="fill">
+						<span slot="label">Fill</span>
+						{Fill.values.map(fill => (
+							<smoothly-item value={fill} key={fill}>
+								{fill}
+							</smoothly-item>
+						))}
+					</smoothly-input-select>
+					<smoothly-input-checkbox name="disabled">Disabled</smoothly-input-checkbox>
+					<smoothly-input-select name="type">
+						<span slot="label">Type</span>
+						{["button", "submit", "reset", "link"].map(type => (
+							<smoothly-item value={type} key={type}>
+								{type}
+							</smoothly-item>
+						))}
+					</smoothly-input-select>
+					<smoothly-input-checkbox name="rounded">Rounded</smoothly-input-checkbox>
+					<smoothly-input-select name="icon" menuHeight="8items">
+						<span slot="label">Icon</span>
+						{Icon.Name.values.map(icon => (
+							<smoothly-item value={icon} key={icon}>
+								<smoothly-icon name={icon} size="small" />
+								{icon}
+							</smoothly-item>
+						))}
+						<smoothly-input-clear slot="end" />
+					</smoothly-input-select>
+				</smoothly-form>
+				<h3>Standard Buttons</h3>
+				<div class="buttons">
+					{Color.values.map(color => (
+						<smoothly-button
+							color={color}
+							fill={this.props.fill}
+							disabled={this.props.disabled}
+							shape={this.props.rounded ? "rounded" : undefined}
+							size={this.props.size}
+							type={this.props.type}
+							key={color}>
+							{this.props.icon ? <smoothly-icon name={this.props.icon} /> : undefined}
+							{this.props.text?.useColor ? color : this.props.text?.value}
+						</smoothly-button>
+					))}
+				</div>
+			</Host>
+		)
+	}
+}

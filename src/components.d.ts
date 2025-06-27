@@ -88,6 +88,9 @@ export namespace Components {
     }
     interface SmoothlyButtonDemo {
     }
+    interface SmoothlyButtonDemoStandard {
+        "props": Options;
+    }
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: isoly.Date;
@@ -987,6 +990,12 @@ declare global {
     var HTMLSmoothlyButtonDemoElement: {
         prototype: HTMLSmoothlyButtonDemoElement;
         new (): HTMLSmoothlyButtonDemoElement;
+    };
+    interface HTMLSmoothlyButtonDemoStandardElement extends Components.SmoothlyButtonDemoStandard, HTMLStencilElement {
+    }
+    var HTMLSmoothlyButtonDemoStandardElement: {
+        prototype: HTMLSmoothlyButtonDemoStandardElement;
+        new (): HTMLSmoothlyButtonDemoStandardElement;
     };
     interface HTMLSmoothlyCalendarElementEventMap {
         "smoothlyValueChange": isoly.Date;
@@ -2118,6 +2127,7 @@ declare global {
         "smoothly-button": HTMLSmoothlyButtonElement;
         "smoothly-button-confirm": HTMLSmoothlyButtonConfirmElement;
         "smoothly-button-demo": HTMLSmoothlyButtonDemoElement;
+        "smoothly-button-demo-standard": HTMLSmoothlyButtonDemoStandardElement;
         "smoothly-calendar": HTMLSmoothlyCalendarElement;
         "smoothly-checkbox": HTMLSmoothlyCheckboxElement;
         "smoothly-color": HTMLSmoothlyColorElement;
@@ -2273,6 +2283,9 @@ declare namespace LocalJSX {
         "size"?: "small" | "large" | "icon" | "flexible";
     }
     interface SmoothlyButtonDemo {
+    }
+    interface SmoothlyButtonDemoStandard {
+        "props"?: Options;
     }
     interface SmoothlyCalendar {
         "doubleInput"?: boolean;
@@ -2908,6 +2921,7 @@ declare namespace LocalJSX {
         "smoothly-button": SmoothlyButton;
         "smoothly-button-confirm": SmoothlyButtonConfirm;
         "smoothly-button-demo": SmoothlyButtonDemo;
+        "smoothly-button-demo-standard": SmoothlyButtonDemoStandard;
         "smoothly-calendar": SmoothlyCalendar;
         "smoothly-checkbox": SmoothlyCheckbox;
         "smoothly-color": SmoothlyColor;
@@ -3020,6 +3034,7 @@ declare module "@stencil/core" {
             "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
             "smoothly-button-confirm": LocalJSX.SmoothlyButtonConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyButtonConfirmElement>;
             "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
+            "smoothly-button-demo-standard": LocalJSX.SmoothlyButtonDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoStandardElement>;
             "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
             "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
             "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
