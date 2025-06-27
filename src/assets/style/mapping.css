@@ -25,6 +25,7 @@ smoothly-color {
 	--smoothly-input-foreground: var(--smoothly-default-contrast);
 	--smoothly-input-background: var(--smoothly-default-tint);
 	--smoothly-input-border: var(--smoothly-default-shade);
+	--smoothly-input-border-focus: var(--smoothly-primary-color);
 	--smoothly-input-disabled-foreground: var(--smoothly-default-contrast);
 	--smoothly-input-disabled-background: var(--smoothly-default-shade);
 	--smoothly-input-disabled-border: var(--smoothly-default-shade);
