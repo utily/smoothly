@@ -14,25 +14,22 @@
 :host([looks="border"]:not([readonly]):not([disabled]):focus-within) {
 	outline: 2px solid rgb(var(--smoothly-input-border-focus));
 }
-
 :host[looks="border"][readonly] {
 	border: transparent solid 1px;
 }
 
 :host[looks="line"] {
 	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
+	position: relative;
 }
-
 :host[looks="line"][readonly] {
 	border-bottom: transparent solid 1px;
-}
-:host([looks="line"]:not([readonly]):not([disabled]):focus-within) {
-	position: relative;
 }
 :host([looks="line"]:not([readonly]):not([disabled]):focus-within)::before {
 	content: "";
 	position: absolute;
 	inset: 0;
+	pointer-events: none;
 	border-bottom: 2px solid rgb(var(--smoothly-input-border-focus));
 	z-index: 10;
 }
