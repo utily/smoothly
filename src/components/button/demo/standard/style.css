@@ -14,7 +14,7 @@
 }
 
 :host .height-text {
-	border-left: 3px dashed rgb(var(--smoothly-default-contrast));
+	border-left: 3px dotted rgb(var(--smoothly-default-contrast));
 	padding-inline: 1rem;
 	align-content: center;
 }
