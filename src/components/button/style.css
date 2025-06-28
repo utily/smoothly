@@ -89,15 +89,15 @@
 :host {
 	--content-height: var(--button-font-size, 0);
 }
+:host:has(smoothly-icon) {
+	--content-height: var(--smoothly-icon-size);
+}
 :host>button {
 	padding-block: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
 	padding-inline: 0.5rem;
 }
 :host([size=icon])>button {
 	padding-inline: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
-}
-:host:has(smoothly-icon) {
-	--content-height: var(--smoothly-icon-size);
 }
 
 :host([type=button])>a {
