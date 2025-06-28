@@ -74,8 +74,7 @@ export class SmoothlyButtonDemoStandard {
 						<span slot="label">Icon</span>
 						{Icon.Name.values.map(icon => (
 							<smoothly-item value={icon} key={icon}>
-								<smoothly-icon name={icon} size="small" />
-								{icon}
+								<smoothly-icon name={icon} size="small" toolTip={icon} />
 							</smoothly-item>
 						))}
 						<smoothly-input-clear slot="end" />
