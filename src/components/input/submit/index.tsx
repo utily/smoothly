@@ -53,7 +53,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						fill={this.fill}
 						onSmoothlyConfirm={() => this.clickHandler()}>
 						<slot />
-						<smoothly-icon name="trash-outline" fill="solid" size="tiny" />
+						<smoothly-icon name="trash-outline" fill="solid" />
 					</smoothly-button-confirm>
 				) : (
 					<smoothly-button
@@ -66,7 +66,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						fill={this.fill}
 						onClick={() => this.clickHandler()}>
 						<slot />
-						{this.icon && <smoothly-icon name={this.icon} fill="solid" size="tiny" />}
+						{this.icon && <smoothly-icon name={this.icon} fill="solid" />}
 					</smoothly-button>
 				)}
 			</Host>
