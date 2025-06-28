@@ -52,8 +52,10 @@
 	min-width: 8rem;
 }
 
-:host(:not([size])),
 :host([size=small]) {
+	--button-font-size: 1rem;
+}
+:host(:not([size])) {
 	--button-font-size: 1.1rem;
 }
 :host([size=large]) {
