@@ -61,20 +61,17 @@
 	--button-font-size: 1.3rem;
 }
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon[size=tiny]) {
-	--smoothly-icon-size: 1rem;
-}
-:host([size=large]) {
-	--smoothly-icon-size: 1.25rem;
+	--smoothly-icon-size: 1.2rem;
 }
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon[size=small]) {
-	--smoothly-icon-size: 1.25rem;
+	--smoothly-icon-size: 1.4rem;
 }
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon),
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon[size=medium]) {
-	--smoothly-icon-size: 1.75rem;
+	--smoothly-icon-size: 1.8rem;
 }
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon[size=tiny]) {
-	--smoothly-icon-size: 2.75rem;
+	--smoothly-icon-size: 2.8rem;
 }
 :host(:not([size=icon]):not([size=flexible])):has(smoothly-icon[size=xlarge]) {
 	--smoothly-icon-size: 4rem;
@@ -84,7 +81,10 @@
 	--target-height: 3rem;
 }
 :host([size=large]) {
-	--target-height: 4rem;
+	--target-height: 3.5rem;
+}
+:host([size=large])>button {
+	padding-inline: 1.25rem;
 }
 :host {
 	--content-height: var(--button-font-size, 0);

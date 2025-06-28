@@ -27,16 +27,16 @@
 	display: none;
 }
 :host[size=tiny] {
-	--smoothly-icon-size: 1rem;
+	--smoothly-icon-size: 1.2rem;
 }
 :host[size=small] {
-	--smoothly-icon-size: 1.25rem;
+	--smoothly-icon-size: 1.4rem;
 }
 :host[size=medium] {
-	--smoothly-icon-size: 1.75rem;
+	--smoothly-icon-size: 1.8rem;
 }
 :host[size=large] {
-	--smoothly-icon-size: 2.75rem;
+	--smoothly-icon-size: 2.8rem;
 }
 :host[size=xlarge] {
 	--smoothly-icon-size: 4rem;
