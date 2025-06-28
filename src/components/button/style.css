@@ -116,10 +116,6 @@
 	width: calc(100% - 0.5rem);
 }
 
-:host(:not([size=icon])) {
-	min-width: 8rem;
-}
-
 :host([size=flexible]) {
 	min-width: unset;
 	padding: 0;
