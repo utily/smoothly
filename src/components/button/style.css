@@ -76,8 +76,10 @@
 :host(:not([size=flexible])):has(smoothly-icon[size=xlarge]) {
 	--smoothly-icon-size: 4rem;
 }
-:host,
 :host([size=small]) {
+	--target-height: 2.5rem;
+}
+:host {
 	--target-height: 3rem;
 }
 :host([size=large]) {
