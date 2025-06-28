@@ -50,7 +50,7 @@ export class SmoothlyButtonConfirm {
 						name={"alert-outline"}
 						fill={this.fill}
 						color="warning"
-						size={this.size === "icon" ? "tiny" : "small"}
+						// size={this.size === "icon" ? "tiny" : "small"}
 					/>
 				</smoothly-button>
 				<smoothly-button
