@@ -52,40 +52,14 @@
 :host(:not([size=icon]):not([size=flexible]))>button {
 	min-width: 8rem;
 }
-
-:host([size=icon]) {
-	--target-height: 3rem;
-}
-:host([size=icon])>button {
-	padding: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
+:host {
+	--content-height: var(--button-font-size, 0);
 }
 :host>button {
 	padding-block: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
 }
-:host([size=small]) {
-	--button-font-size: 1rem;
-	--target-height: 2.5rem;
-}
-:host([size=small])>button {
-	padding-inline: 0.75rem;
-}
 
-:host(:not([size])) {
-	--button-font-size: 1.1rem;
-	--target-height: 3rem;
-}
-:host(:not([size]))>button {
-	padding-inline: 1rem;
-}
-
-:host([size=large]) {
-	--button-font-size: 1.3rem;
-	--target-height: 3.5rem;
-}
-:host([size=large])>button {
-	padding-inline: 1.25rem;
-}
-
+/* icon */
 :host(:not([size=flexible])):has(smoothly-icon[size=tiny]) {
 	--smoothly-icon-size: 1.2rem;
 }
@@ -102,13 +76,43 @@
 :host(:not([size=flexible])):has(smoothly-icon[size=xlarge]) {
 	--smoothly-icon-size: 4rem;
 }
-
-:host {
-	--content-height: var(--button-font-size, 0);
+:host([size=icon]) {
+	--target-height: 3rem;
+}
+:host([size=icon])>button {
+	padding: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
 }
 :host:has(smoothly-icon) {
 	--content-height: var(--smoothly-icon-size);
 }
+
+/* small */
+:host([size=small]) {
+	--button-font-size: 1rem;
+	--target-height: 2.5rem;
+}
+:host([size=small])>button {
+	padding-inline: 0.75rem;
+}
+
+/* medium */
+:host(:not([size])) {
+	--button-font-size: 1.1rem;
+	--target-height: 3rem;
+}
+:host(:not([size]))>button {
+	padding-inline: 1rem;
+}
+
+/* large */
+:host([size=large]) {
+	--button-font-size: 1.3rem;
+	--target-height: 3.5rem;
+}
+:host([size=large])>button {
+	padding-inline: 1.25rem;
+}
+
 
 :host([type=button])>a {
 	text-align: center;
