@@ -5,6 +5,7 @@ import { Button } from "../../Button"
 type Options = {
 	fill?: Fill
 	disabled?: boolean
+	expand?: "block" | "full"
 	type?: Button.Properties["type"]
 	size?: "small" | "large" | "icon" | "flexible"
 	rounded?: boolean
@@ -52,6 +53,12 @@ export class SmoothlyButtonDemoStandard {
 						Text
 						<smoothly-input-clear slot="end" />
 					</smoothly-input>
+					<smoothly-input-radio name="expand" clearable>
+						<span slot="label">Expand</span>
+						<smoothly-input-radio-item value="block">block</smoothly-input-radio-item>
+						<smoothly-input-radio-item value="full">full</smoothly-input-radio-item>
+						<smoothly-input-clear slot="end" />
+					</smoothly-input-radio>
 					<smoothly-input-select name="fill">
 						<span slot="label">Fill</span>
 						{Fill.values.map(fill => (
@@ -86,6 +93,7 @@ export class SmoothlyButtonDemoStandard {
 						<smoothly-button
 							ref={el => colors.length - 1 == index && (this.lastButton = el)}
 							color={color}
+							expand={this.props.expand}
 							fill={this.props.fill}
 							disabled={this.props.disabled}
 							shape={this.props.rounded ? "rounded" : undefined}
