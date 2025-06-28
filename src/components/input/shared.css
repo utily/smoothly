@@ -7,6 +7,9 @@
 	box-sizing: border-box;
 	border-radius: var(--smoothly-input-border-radius);
 }
+:host smoothly-icon:not([size]) {
+	--smoothly-icon-size: 1.2rem
+}
 
 :host[looks="border"] {
 	border: rgb(var(--smoothly-input-border)) solid 1px;
