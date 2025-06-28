@@ -70,7 +70,7 @@
 :host(:not([size=flexible])):has(smoothly-icon[size=medium]) {
 	--smoothly-icon-size: 1.8rem;
 }
-:host(:not([size=flexible])):has(smoothly-icon[size=tiny]) {
+:host(:not([size=flexible])):has(smoothly-icon[size=large]) {
 	--smoothly-icon-size: 2.8rem;
 }
 :host(:not([size=flexible])):has(smoothly-icon[size=xlarge]) {
