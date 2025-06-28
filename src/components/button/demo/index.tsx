@@ -7,7 +7,6 @@ export class SmoothlyButtonDemo {
 	render() {
 		return (
 			<Host>
-				<h2>Buttons</h2>
 				<section>
 					<smoothly-button-demo-standard />
 				</section>

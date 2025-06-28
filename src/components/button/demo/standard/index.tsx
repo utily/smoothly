@@ -37,6 +37,7 @@ export class SmoothlyButtonDemoStandard {
 	render() {
 		return (
 			<Host>
+				<h2>Button Standard</h2>
 				<smoothly-form onSmoothlyFormInput={e => (this.props = e.detail)} looks="grid">
 					<smoothly-input-checkbox name="text.useColor" checked>
 						Use Color as Text
@@ -87,7 +88,6 @@ export class SmoothlyButtonDemoStandard {
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-select>
 				</smoothly-form>
-				<h3>Standard Buttons</h3>
 				<div class="buttons">
 					{Color.values.map((color, index, colors) => (
 						<smoothly-button
