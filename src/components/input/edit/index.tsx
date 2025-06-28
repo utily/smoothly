@@ -46,7 +46,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 					color={this.color}
 					fill={this.fill ?? (this.type == "input" ? "clear" : undefined)}>
 					<slot />
-					<smoothly-icon class="default" name="create-outline" size="tiny" />
+					<smoothly-icon class="default" name="create-outline" />
 				</smoothly-button>
 			</Host>
 		)
