@@ -50,8 +50,7 @@
 }
 
 :host(:not([size=icon]):not([size=flexible]))>button {
-	/* padding: calc(1rem - 1px); */
-	/* min-width: 8rem; */
+	min-width: 8rem;
 }
 
 :host(:not([size])),
@@ -93,7 +92,6 @@
 :host>button {
 	padding-block: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
 	padding-inline: 0.5rem;
-	min-width: 8rem;
 }
 :host:has(smoothly-icon) {
 	--content-height: var(--smoothly-icon-size);
