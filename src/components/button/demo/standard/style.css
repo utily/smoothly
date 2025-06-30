@@ -1,0 +1,18 @@
+:host smoothly-input-select smoothly-item {
+	display: flex;
+}
+
+:host .buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+:host .buttons > smoothly-button {
+	margin-block: 0;
+}
+
+:host .height-text {
+	border-left: 3px dotted rgb(var(--smoothly-default-contrast));
+	padding-inline: 1rem;
+	align-content: center;
+}
