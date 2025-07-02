@@ -379,37 +379,35 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					)}
 				</div>
 				<slot name="label" />
-				{this.open && (
-					<div class={"options"} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
-						{this.filter.length > 0 && (
-							<div class="search-preview">
-								<smoothly-icon name="search-outline" size="small" />
-								{this.filter}
+				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
+					{this.filter.length > 0 && (
+						<div class="search-preview">
+							<smoothly-icon name="search-outline" size="small" />
+							{this.filter}
+							<smoothly-icon
+								name="backspace-outline"
+								size="small"
+								onClick={e => {
+									e.stopPropagation()
+									this.filter = ""
+									this.element.focus()
+								}}
+							/>
+							{this.mutable && (
 								<smoothly-icon
-									name="backspace-outline"
+									name="add"
 									size="small"
 									onClick={e => {
 										e.stopPropagation()
-										this.filter = ""
-										this.element.focus()
+										this.addItem()
 									}}
 								/>
-								{this.mutable && (
-									<smoothly-icon
-										name="add"
-										size="small"
-										onClick={e => {
-											e.stopPropagation()
-											this.addItem()
-										}}
-									/>
-								)}
-							</div>
-						)}
-						<slot />
-						{this.addedItems}
-					</div>
-				)}
+							)}
+						</div>
+					)}
+					{this.open && <slot />}
+					{this.addedItems}
+				</div>
 			</Host>
 		)
 	}
