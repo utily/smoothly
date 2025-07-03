@@ -30,8 +30,8 @@
 	display: block;
 }
 
-:host:not([readonly]):not([disabled]),
-:host:not([readonly]):not([disabled])>* {
+:host:not([readonly]):not([disabled])>input,
+:host:not([readonly]):not([disabled])>label {
 	cursor: pointer;
 }
 
