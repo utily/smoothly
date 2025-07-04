@@ -15,7 +15,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	parent: Editable | undefined
 	private initialValue?: any
 	private observer = Editable.Observer.create(this)
-	private mouseDownPosition?: { x: number; y: number }
+	private id: string
 	@Prop({ reflect: true }) name: string
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
@@ -36,6 +36,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.observer.publish()
+		this.id = "id-" + Math.random().toString(36).substr(2, 9)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -88,19 +89,18 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 			this.observer.publish()
 		}
 	}
-	click() {
-		!this.disabled && !this.readonly && (this.checked = !this.checked)
-	}
 	render() {
 		return (
-			<Host
-				onMouseDown={(e: MouseEvent) => (this.mouseDownPosition = { x: e.clientX, y: e.clientY })}
-				onMouseUp={(e: MouseEvent) =>
-					this.mouseDownPosition?.x == e.clientX && this.mouseDownPosition.y == e.clientY && this.click()
-				}>
-				<input type="checkbox" checked={this.checked} disabled={this.disabled} />
+			<Host>
+				<input
+					type="checkbox"
+					id={this.id}
+					checked={this.checked}
+					disabled={this.disabled || this.readonly}
+					onChange={e => (this.checked = (e.target as HTMLInputElement).checked)}
+				/>
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
-				<label>
+				<label htmlFor={this.id}>
 					<slot />
 				</label>
 			</Host>
