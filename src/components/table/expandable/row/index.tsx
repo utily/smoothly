@@ -11,7 +11,12 @@ export class SmoothlyTableExpandableRow {
 	@Event() smoothlyTableExpandableRowChange: EventEmitter<boolean>
 
 	clickHandler(event: MouseEvent): void {
-		;(this.div && event.composedPath().includes(this.div)) || (this.open = !this.open)
+		const clickedOnDetail = this.div && event.composedPath().includes(this.div)
+		if (!clickedOnDetail) {
+			const selection = window.getSelection()?.toString().trim()
+			if ((selection?.length ?? 0) == 0)
+				this.open = !this.open
+		}
 	}
 	@Watch("open")
 	openChange() {

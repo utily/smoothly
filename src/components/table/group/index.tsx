@@ -11,8 +11,11 @@ export class SmoothlyTableRowGroup {
 	@Event() smoothlyTableRowGroupChange: EventEmitter<boolean>
 
 	clickHandler(): void {
-		this.open = !this.open
-		this.smoothlyTableRowGroupChange.emit(this.open)
+		const selection = window.getSelection()?.toString().trim()
+		if ((selection?.length ?? 0) == 0) {
+			this.open = !this.open
+			this.smoothlyTableRowGroupChange.emit(this.open)
+		}
 	}
 
 	render(): VNode | VNode[] {
