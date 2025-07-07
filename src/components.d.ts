@@ -178,7 +178,7 @@ export namespace Components {
         "icon": Icon;
         "not": boolean;
         "properties": Record<string, string>;
-        "toolTip": string;
+        "tooltip": string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -237,7 +237,7 @@ export namespace Components {
         "name": Icon | "empty";
         "rotate"?: number;
         "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
-        "toolTip"?: string;
+        "tooltip"?: string;
     }
     interface SmoothlyIconDemo {
     }
@@ -407,7 +407,7 @@ export namespace Components {
         "fill"?: Fill;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
-        "toolTip": string;
+        "tooltip": string;
         "type": "form" | "input";
     }
     interface SmoothlyInputFile {
@@ -558,7 +558,7 @@ export namespace Components {
         "icon": Icon | false;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
-        "toolTip": string;
+        "tooltip": string;
     }
     interface SmoothlyItem {
         "deselectable": boolean;
@@ -2386,7 +2386,7 @@ declare namespace LocalJSX {
         "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Manipulate>) => void;
         "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Update>) => void;
         "properties"?: Record<string, string>;
-        "toolTip"?: string;
+        "tooltip"?: string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -2448,7 +2448,7 @@ declare namespace LocalJSX {
         "name"?: Icon | "empty";
         "rotate"?: number;
         "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
-        "toolTip"?: string;
+        "tooltip"?: string;
     }
     interface SmoothlyIconDemo {
         "onNotice"?: (event: SmoothlyIconDemoCustomEvent<Notice>) => void;
@@ -2598,7 +2598,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
-        "toolTip"?: string;
+        "tooltip"?: string;
         "type"?: "form" | "input";
     }
     interface SmoothlyInputFile {
@@ -2732,7 +2732,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
-        "toolTip"?: string;
+        "tooltip"?: string;
     }
     interface SmoothlyItem {
         "deselectable"?: boolean;

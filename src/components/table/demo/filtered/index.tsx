@@ -45,19 +45,19 @@ export class TableDemoFiltered implements ComponentWillLoad {
 					<smoothly-filter-toggle
 						properties={{ ["nested.pattern"]: "Ticked", breed: "" }}
 						icon="add"
-						toolTip="Nested Ticked"
+						tooltip="Nested Ticked"
 						slot="bar"
 					/>
 					<smoothly-filter-toggle
 						properties={{ pattern: "Ticked", breed: "" }}
 						icon="paw"
-						toolTip="Ticked cats"
+						tooltip="Ticked cats"
 						slot="bar"
 					/>
 					<smoothly-filter-toggle
 						properties={{ breed: "Bombay", pattern: "Solid" }}
 						icon="radio-button-on"
-						toolTip="Solid bombay cats"
+						tooltip="Solid bombay cats"
 						slot="bar"
 					/>
 					<smoothly-filter-toggle
@@ -65,7 +65,7 @@ export class TableDemoFiltered implements ComponentWillLoad {
 						not
 						active
 						icon="alert"
-						toolTip="Colored cats"
+						tooltip="Colored cats"
 						slot="bar"
 					/>
 					<smoothly-filter-select menuHeight="5items" label="coat" property="nested.coat" slot="bar" multiple={false}>

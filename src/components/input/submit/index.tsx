@@ -20,7 +20,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 	@Prop({ reflect: true, mutable: true }) display = false
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
-	@Prop() toolTip = this.delete ? "Remove" : "Submit"
+	@Prop() tooltip = this.delete ? "Remove" : "Submit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -43,7 +43,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host title={this.toolTip}>
+			<Host title={this.tooltip}>
 				{this.delete == true ? (
 					<smoothly-button-confirm
 						size={this.size}

@@ -53,7 +53,7 @@ export class SmoothlyFilter {
 				{this.criteria.toString() != "" && (
 					<smoothly-icon
 						name={"close"}
-						toolTip={"Clear all filters"}
+						tooltip={"Clear all filters"}
 						size="small"
 						onClick={() => {
 							this.clear()
@@ -65,7 +65,7 @@ export class SmoothlyFilter {
 				</div>
 				<smoothly-icon
 					name={this.expanded ? "options" : "options-outline"}
-					toolTip={(this.expanded ? "Hide" : "Show") + " additional filters"}
+					tooltip={(this.expanded ? "Hide" : "Show") + " additional filters"}
 					size="small"
 					onClick={() => {
 						this.expanded = !this.expanded

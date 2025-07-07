@@ -229,7 +229,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 					color="danger"
 					fill="clear"
 					size="small"
-					toolTip={this.errorMessage}
+					tooltip={this.errorMessage}
 				/>
 				<slot name="end" />
 			</Host>
