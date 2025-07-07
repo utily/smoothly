@@ -25,7 +25,7 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async nameChanged() {
 		if (this.name == "empty") {
-			this.updateDocument()
+			this.updateSvg()
 			return
 		}
 
@@ -36,7 +36,7 @@ export class SmoothlyIcon {
 
 		if (result) {
 			const svgElement = this.cleanSvg(result)
-			this.updateDocument(svgElement)
+			this.updateSvg(svgElement)
 		}
 	}
 
@@ -65,7 +65,7 @@ export class SmoothlyIcon {
 		}
 		return svgElement ?? undefined
 	}
-	updateDocument(svg?: SVGElement) {
+	updateSvg(svg?: SVGElement) {
 		svg
 			? this.element.replaceChildren(svg)
 			: (this.element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
