@@ -17,7 +17,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true }) type: "form" | "input" = "input"
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon"
-	@Prop() toolTip = "Edit"
+	@Prop() tooltip = "Edit"
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(parent => {
@@ -36,7 +36,7 @@ export class SmoothlyInputEdit implements ComponentWillLoad {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host title={this.toolTip}>
+			<Host title={this.tooltip}>
 				<smoothly-button
 					disabled={this.disabled}
 					size={this.size}

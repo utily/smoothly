@@ -15,13 +15,13 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) size?: "tiny" | "small" | "medium" | "large" | "xlarge"
 	@Prop({ reflect: true }) rotate?: number
 	@Prop({ reflect: true }) flip?: "x" | "y"
-	@Prop() toolTip?: string
+	@Prop() tooltip?: string
 	@State() latestPromise: Promise<string | undefined>
 
 	async componentWillLoad() {
 		await this.nameChanged()
 	}
-	@Watch("toolTip")
+	@Watch("tooltip")
 	@Watch("name")
 	async nameChanged() {
 		if (this.name == "empty") {
@@ -51,14 +51,14 @@ export class SmoothlyIcon {
 			svgElement.removeAttribute("height")
 
 			const titleElement = svgElement.querySelector("title")
-			if (!this.toolTip) {
+			if (!this.tooltip) {
 				titleElement?.remove()
 			} else {
 				if (titleElement) {
-					titleElement.textContent = this.toolTip
+					titleElement.textContent = this.tooltip
 				} else {
 					const newTitleElement = document.createElement("title")
-					newTitleElement.textContent = this.toolTip
+					newTitleElement.textContent = this.tooltip
 					svgElement.appendChild(newTitleElement)
 				}
 			}

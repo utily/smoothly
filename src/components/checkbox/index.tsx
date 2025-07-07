@@ -50,7 +50,7 @@ export class SmoothlyCheckbox implements Clearable {
 		return (
 			<Host>
 				<smoothly-icon
-					toolTip={this.t(!this.checked ? "Select" : "De-select")}
+					tooltip={this.t(!this.checked ? "Select" : "De-select")}
 					onClick={() => this.toggle()}
 					size={this.size}
 					name={

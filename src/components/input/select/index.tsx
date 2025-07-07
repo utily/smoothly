@@ -367,7 +367,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						color="danger"
 						fill="clear"
 						size="small"
-						toolTip={this.errorMessage}
+						tooltip={this.errorMessage}
 					/>
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (

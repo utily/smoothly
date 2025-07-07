@@ -79,7 +79,7 @@ export class SmoothlyIconDemo {
 					].map(name => (
 						<smoothly-icon
 							name={name}
-							toolTip={name}
+							tooltip={name}
 							data-name={name}
 							color={this.props.color}
 							fill={this.props.fill}

@@ -11,7 +11,7 @@ import { Filter } from "../Filter"
 export class SmoothlyFilterToggle {
 	@Prop() icon: Icon
 	@Prop() properties: Record<string, string>
-	@Prop() toolTip: string
+	@Prop() tooltip: string
 	@Prop() not: boolean
 	@Prop({ reflect: true }) flip = false
 	@Prop({ mutable: true }) active = false
@@ -95,7 +95,7 @@ export class SmoothlyFilterToggle {
 				fill="clear"
 				color={this.active ? "success" : "medium"}
 				name={(this.active ? `${this.icon}` : `${this.icon}-outline`) as Icon}
-				toolTip={this.toolTip}
+				tooltip={this.tooltip}
 				onClick={() => this.activeHandler(true)}
 			/>
 		)

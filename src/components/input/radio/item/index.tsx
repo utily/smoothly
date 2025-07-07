@@ -36,7 +36,7 @@ export class SmoothlyInputRadioItem {
 		return (
 			<Host onClick={() => this.inputHandler()}>
 				<input name={this.name} type="radio" checked={this.selected} disabled={this.disabled} />
-				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" toolTip="Select" />
+				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" tooltip="Select" />
 				<label>
 					<slot />
 				</label>

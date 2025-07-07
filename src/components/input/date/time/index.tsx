@@ -221,7 +221,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 						color="danger"
 						fill="clear"
 						size="small"
-						toolTip={this.errorMessage}
+						tooltip={this.errorMessage}
 					/>
 					<slot name={"end"} />
 				</span>
