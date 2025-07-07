@@ -41,17 +41,34 @@ export class SmoothlyIcon {
 	}
 
 	private cleanSvg(svg: string): string {
-		svg = svg
-			?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
-			.replace(` width="512" height="512"`, "")
-			.replace(/stroke:#000;/gi, "")
-		if (!this.toolTip)
-			svg = svg?.replace(/<title>.*<\/title>/, "")
-		else if (svg?.includes("<title>"))
-			svg = svg.replace(/(<title>).*(<\/title>)/, `<title>${this.toolTip}</title>`)
-		else
-			svg = svg?.replace(/(.*>)(<\/svg>$)/, `$1<title>${this.toolTip}</title>$2`)
-		return svg
+		console.log("Cleaning SVG", this.name, svg)
+		const parser = new DOMParser()
+		const document = parser.parseFromString(svg, "image/svg+xml")
+		const svgElement = document.querySelector("svg")
+
+		if (svgElement) {
+			svgElement.setAttribute("role", "img")
+			svgElement.removeAttribute("width")
+			svgElement.removeAttribute("height")
+			svgElement.querySelectorAll("[stroke]").forEach(el => {
+				if (el.getAttribute("stroke")?.toLowerCase() === "#000")
+					el.removeAttribute("stroke")
+			})
+
+			const titleElement = svgElement.querySelector("title")
+			if (!this.toolTip) {
+				titleElement?.remove()
+			} else {
+				if (titleElement) {
+					titleElement.textContent = this.toolTip
+				} else {
+					const newTitleElement = document.createElement("title")
+					newTitleElement.textContent = this.toolTip
+					svgElement.appendChild(newTitleElement)
+				}
+			}
+		}
+		return svgElement?.outerHTML ?? ""
 	}
 	updateDocument(svg?: string) {
 		this.document =
