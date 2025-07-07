@@ -41,7 +41,6 @@ export class SmoothlyIcon {
 	}
 
 	private cleanSvg(svg: string): string {
-		console.log("Cleaning SVG", this.name, svg)
 		const parser = new DOMParser()
 		const document = parser.parseFromString(svg, "image/svg+xml")
 		const svgElement = document.querySelector("svg")
@@ -50,10 +49,6 @@ export class SmoothlyIcon {
 			svgElement.setAttribute("role", "img")
 			svgElement.removeAttribute("width")
 			svgElement.removeAttribute("height")
-			svgElement.querySelectorAll("[stroke]").forEach(el => {
-				if (el.getAttribute("stroke")?.toLowerCase() === "#000")
-					el.removeAttribute("stroke")
-			})
 
 			const titleElement = svgElement.querySelector("title")
 			if (!this.toolTip) {
