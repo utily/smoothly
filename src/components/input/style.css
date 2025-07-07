@@ -24,7 +24,8 @@
 	left: var(--input-padding-side);
 }
 
-:host:not([show-label])>div>input {
+:host:not([show-label])>.smoothly-input-container>input,
+:host:not([show-label])>.smoothly-input-container>.ghost {
 	padding: 0 var(--input-padding-side);
 }
 
