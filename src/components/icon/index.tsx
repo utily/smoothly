@@ -66,17 +66,11 @@ export class SmoothlyIcon {
 		return svgElement ?? undefined
 	}
 	updateDocument(svg?: SVGElement) {
-		if (svg) {
-			this.element.replaceChildren(svg)
-		} else {
-			const emptySvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-			emptySvg.setAttribute("viewBox", "0 0 512 512")
-			const titleElement = document.createElementNS("http://www.w3.org/2000/svg", "title")
-			titleElement.textContent = "Empty"
-			emptySvg.appendChild(titleElement)
-			this.element.replaceChildren(emptySvg)
-			return
-		}
+		svg
+			? this.element.replaceChildren(svg)
+			: (this.element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<title>Empty</title>
+				</svg>`)
 	}
 
 	render() {
