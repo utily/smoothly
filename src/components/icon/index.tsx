@@ -26,18 +26,20 @@ export class SmoothlyIcon {
 	async nameChanged() {
 		if (this.name == "empty") {
 			this.updateDocument()
-		} else {
-			const promise = (this.latestPromise = Icon.load(this.name))
-			let result = await promise
+			return
+		}
 
-			if (promise == this.latestPromise) {
-				if (result) {
-					result = this.cleanSvg(result)
-					this.updateDocument(result)
-				}
-			}
+		const promise = (this.latestPromise = Icon.load(this.name))
+		let result = await promise
+		if (promise != this.latestPromise)
+			return
+
+		if (result) {
+			result = this.cleanSvg(result)
+			this.updateDocument(result)
 		}
 	}
+
 	private cleanSvg(svg: string): string {
 		svg = svg
 			?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
