@@ -35,12 +35,12 @@ export class SmoothlyIcon {
 			return
 
 		if (result) {
-			const svgElement = this.cleanSvg(result)
+			const svgElement = this.sanitizeSvg(result)
 			this.updateSvg(svgElement)
 		}
 	}
 
-	private cleanSvg(svg: string): SVGElement | undefined {
+	private sanitizeSvg(svg: string): SVGElement | undefined {
 		const parser = new DOMParser()
 		const document = parser.parseFromString(svg, "image/svg+xml")
 		const svgElement = document.querySelector("svg")
