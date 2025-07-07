@@ -251,6 +251,7 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<any | undefined>;
+        "ghostText"?: string;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
@@ -2460,6 +2461,7 @@ declare namespace LocalJSX {
         "currency"?: isoly.Currency;
         "disabled"?: boolean;
         "errorMessage"?: string;
+        "ghostText"?: string;
         "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: number;

@@ -40,7 +40,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 
 	componentWillLoad() {
 		this.setInitialValue()
-		this.updateValue()
+		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
@@ -57,10 +57,15 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 			this.end = split[1]
 		}
 	}
-	@Watch("start")
-	@Watch("end")
-	updateValue() {
-		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
+	@Watch("open")
+	openChanged() {
+		if (!this.open) {
+			if ((this.start || this.end) && !this.value) {
+				this.start = undefined
+				this.end = undefined
+				this.value = undefined
+			}
+		}
 	}
 	@Watch("value")
 	valueChanged() {
@@ -117,21 +122,28 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	async reset() {
 		this.start = this.initialStart
 		this.end = this.initialEnd
+		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
 	async setInitialValue() {
 		this.initialStart = this.start
 		this.initialEnd = this.end
+		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
 		this.changed = false
 	}
 	@Method()
 	async clear(): Promise<void> {
 		this.start = undefined
 		this.end = undefined
+		this.value = undefined
 		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
 		const locale = navigator.language as isoly.Locale
+		const formatted =
+			this.start && this.end
+				? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
+				: undefined
 		return (
 			<Host tabindex={this.disabled ? undefined : 0}>
 				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
@@ -140,13 +152,10 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						name="dateRangeInput"
 						readonly={this.readonly}
 						disabled={this.disabled}
-						value={
-							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
-								: undefined
-						}
+						value={this.value ? formatted : undefined}
+						ghostText={!this.value ? formatted : undefined}
 						invalid={this.invalid}
-						placeholder={this.placeholder}
+						placeholder={this.start || this.end ? undefined : this.placeholder}
 						showLabel={this.showLabel}
 						onSmoothlyInput={e => {
 							e.stopPropagation()
@@ -166,6 +175,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 							onSmoothlyStartChange={e => {
 								e.stopPropagation()
 								this.start = e.detail
+								this.value = undefined
+								this.smoothlyInput.emit({ [this.name]: this.value })
 							}}
 							onSmoothlyEndChange={e => {
 								e.stopPropagation()
@@ -174,8 +185,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 							onSmoothlyDateSet={e => e.stopPropagation()}
 							onSmoothlyDateRangeSet={e => {
 								e.stopPropagation()
-								this.open = false
+								this.value = e.detail
 								this.smoothlyInput.emit({ [this.name]: e.detail })
+								this.open = false
 							}}
 							value={this.start}
 							start={this.start}

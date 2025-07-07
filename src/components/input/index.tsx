@@ -34,6 +34,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() min?: number
 	@Prop() max?: number
 	@Prop() pad?: number
+	@Prop() ghostText?: string
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) errorMessage?: string
@@ -188,7 +189,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				<div class="smoothly-input-container">
 					<div class={"ghost"}>
 						<div class={"value"}>{this.state?.value}</div>
-						<div class={"remainder"}>{this.state?.remainder}</div>
+						<div class={"remainder"}>{this.ghostText ?? this.state?.remainder}</div>
 					</div>
 					<input
 						ref={(el: HTMLInputElement) => (this.inputElement = el)}
