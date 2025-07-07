@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, h, Host, Prop, State, Watch } from "@stencil/core"
 import { Color, Fill } from "../../model"
 import { Icon } from "../../model"
 
@@ -8,6 +8,7 @@ import { Icon } from "../../model"
 	scoped: true,
 })
 export class SmoothlyIcon {
+	@Element() element: HTMLElement
 	@Prop({ reflect: true }) color: Color
 	@Prop({ reflect: true }) fill: Fill = "solid"
 	@Prop({ reflect: true }) name: Icon | "empty" = "empty"
@@ -16,7 +17,6 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) flip?: "x" | "y"
 	@Prop() toolTip?: string
 	@State() latestPromise: Promise<string | undefined>
-	@State() document?: string
 
 	async componentWillLoad() {
 		await this.nameChanged()
@@ -24,34 +24,56 @@ export class SmoothlyIcon {
 	@Watch("toolTip")
 	@Watch("name")
 	async nameChanged() {
-		if (this.name != "empty") {
-			const promise = (this.latestPromise = Icon.load(this.name))
-			let result = await promise
-			if (promise == this.latestPromise) {
-				result = result
-					?.replace(/(?<=^<svg\s?)/, `$& role="img"`)
-					.replace(` width="512" height="512"`, "")
-					.replace(/stroke:#000;/gi, "")
-				if (!this.toolTip)
-					result = result?.replace(/<title>.*<\/title>/, "")
-				else if (result?.includes("<title>"))
-					result = result.replace(/(<title>).*(<\/title>)/, `<title>${this.toolTip}</title>`)
-				else
-					result = result?.replace(/(.*>)(<\/svg>$)/, `$1<title>${this.toolTip}</title>$2`)
-				this.updateDocument(result)
-			}
-		} else
-			this.updateDocument()
+		if (this.name == "empty") {
+			this.updateSvg()
+			return
+		}
+
+		const promise = (this.latestPromise = Icon.load(this.name))
+		const result = await promise
+		if (promise != this.latestPromise)
+			return
+
+		if (result) {
+			const svgElement = this.sanitizeSvg(result)
+			this.updateSvg(svgElement)
+		}
 	}
-	updateDocument(document?: string) {
-		this.document =
-			document ??
-			`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-		<title>Empty</title>
-		</svg>`
+
+	private sanitizeSvg(svg: string): SVGElement | undefined {
+		const parser = new DOMParser()
+		const document = parser.parseFromString(svg, "image/svg+xml")
+		const svgElement = document.querySelector("svg")
+
+		if (svgElement) {
+			svgElement.setAttribute("role", "img")
+			svgElement.removeAttribute("width")
+			svgElement.removeAttribute("height")
+
+			const titleElement = svgElement.querySelector("title")
+			if (!this.toolTip) {
+				titleElement?.remove()
+			} else {
+				if (titleElement) {
+					titleElement.textContent = this.toolTip
+				} else {
+					const newTitleElement = document.createElement("title")
+					newTitleElement.textContent = this.toolTip
+					svgElement.appendChild(newTitleElement)
+				}
+			}
+		}
+		return svgElement ?? undefined
+	}
+	updateSvg(svg?: SVGElement) {
+		svg
+			? this.element.replaceChildren(svg)
+			: (this.element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<title>Empty</title>
+				</svg>`)
 	}
 
 	render() {
-		return <Host innerHTML={this.document} style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
+		return <Host style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
 	}
 }
