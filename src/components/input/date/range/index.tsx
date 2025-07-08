@@ -108,7 +108,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	@Method()
 	async getValue(): Promise<isoly.DateRange | undefined> {
-		return this.start && this.end ? { start: this.start, end: this.end } : undefined
+		return this.value
 	}
 	@Method()
 	async listen(listener: Editable.Observer.Listener): Promise<void> {
