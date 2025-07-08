@@ -95,6 +95,7 @@
 :host.has-value .label,
 :host[placeholder] .label,
 :host[readonly] .label,
+:host[ghost-text] .label,
 :host:not([readonly]):focus-within .label.float-on-focus {
 	top: .2rem;
 	transform: scale(0.8);

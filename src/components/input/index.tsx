@@ -34,7 +34,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() min?: number
 	@Prop() max?: number
 	@Prop() pad?: number
-	@Prop() ghostText?: string
+	@Prop({ reflect: true }) ghostText?: string
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) errorMessage?: string
