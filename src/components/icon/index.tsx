@@ -49,19 +49,6 @@ export class SmoothlyIcon {
 			svgElement.setAttribute("role", "img")
 			svgElement.removeAttribute("width")
 			svgElement.removeAttribute("height")
-
-			const titleElement = svgElement.querySelector("title")
-			if (!this.tooltip) {
-				titleElement?.remove()
-			} else {
-				if (titleElement) {
-					titleElement.textContent = this.tooltip
-				} else {
-					const newTitleElement = document.createElement("title")
-					newTitleElement.textContent = this.tooltip
-					svgElement.appendChild(newTitleElement)
-				}
-			}
 		}
 		return svgElement ?? undefined
 	}
@@ -74,6 +61,6 @@ export class SmoothlyIcon {
 	}
 
 	render() {
-		return <Host style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
+		return <Host title={this.tooltip} style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
 	}
 }
