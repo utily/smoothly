@@ -74,6 +74,7 @@ export namespace Components {
         "link"?: string;
         "shape"?: "rounded";
         "size": "small" | "large" | "icon" | "flexible";
+        "tooltip"?: string;
         "type": Button.Properties["type"];
     }
     interface SmoothlyButtonConfirm {
@@ -2301,6 +2302,7 @@ declare namespace LocalJSX {
         "link"?: string;
         "shape"?: "rounded";
         "size"?: "small" | "large" | "icon" | "flexible";
+        "tooltip"?: string;
         "type"?: Button.Properties["type"];
     }
     interface SmoothlyButtonConfirm {
