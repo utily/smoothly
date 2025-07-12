@@ -163,7 +163,6 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						onSmoothlyInput={async e => {
 							e.stopPropagation()
 							this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
-							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 						}}
 						value={this.type == "percent" ? this.value : this.value?.toString()}
 						placeholder={this.outputSide === "right" ? "-" : undefined}

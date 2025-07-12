@@ -10,8 +10,9 @@ export class SmoothlyInputDemoUserInput {
 	@State() selectIndex?: number
 	@State() checkboxChecked: boolean
 	@State() radioIndex?: number
+	@State() rangeValue?: number
 
-	nextIndex(index?: number): number {
+	increment(index?: number): number {
 		return index === undefined ? 0 : (index + 1) % this.values.length
 	}
 
@@ -26,7 +27,7 @@ export class SmoothlyInputDemoUserInput {
 					<br />
 					Check the console to see the details of each <code>smoothlyUserInput</code> event.
 				</p>
-				<smoothly-button color="primary" onClick={() => (this.textIndex = this.nextIndex(this.textIndex))}>
+				<smoothly-button color="primary" onClick={() => (this.textIndex = this.increment(this.textIndex))}>
 					Change text
 				</smoothly-button>
 				<smoothly-input
@@ -36,7 +37,7 @@ export class SmoothlyInputDemoUserInput {
 					Text input
 				</smoothly-input>
 
-				<smoothly-button onClick={() => (this.selectIndex = this.nextIndex(this.selectIndex))} color="primary">
+				<smoothly-button onClick={() => (this.selectIndex = this.increment(this.selectIndex))} color="primary">
 					Next select item
 				</smoothly-button>
 				<smoothly-input-select
@@ -60,10 +61,10 @@ export class SmoothlyInputDemoUserInput {
 					Checkbox input
 				</smoothly-input-checkbox>
 
-				<smoothly-button color="primary" onClick={() => (this.radioIndex = this.nextIndex(this.radioIndex))}>
+				<smoothly-button color="primary" onClick={() => (this.radioIndex = this.increment(this.radioIndex))}>
 					Next radio item
 				</smoothly-button>
-				{/* Bug: radio has bugs when changing programmatically - TODO: change to using a regular radio input as underlying controls */}
+				{/* Bug: radio has bugs when changing programmatically - TODO: consider changing to using a regular radio input as underlying controls */}
 				<smoothly-input-radio
 					name="demo-user-input-radio"
 					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
@@ -74,6 +75,21 @@ export class SmoothlyInputDemoUserInput {
 						</smoothly-input-radio-item>
 					))}
 				</smoothly-input-radio>
+
+				{/* Not sure how to test smoothly-input-file */}
+
+				<smoothly-button color="primary" onClick={() => (this.rangeValue = this.increment(this.rangeValue))}>
+					Next range value
+				</smoothly-button>
+				<smoothly-input-range
+					name="demo-user-input-range"
+					step={1}
+					min={0}
+					max={this.values.length}
+					value={this.rangeValue}
+					onSmoothlyUserInput={e => console.debug("smoothlyInputUserInput", e.detail.name, e.detail.value)}>
+					<span slot="label">Range input</span>
+				</smoothly-input-range>
 			</Host>
 		)
 	}
