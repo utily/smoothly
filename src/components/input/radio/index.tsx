@@ -17,7 +17,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { Selectable } from "./Selected"
+import { RadioItemSelect } from "./RadioItemSelect"
 
 @Component({
 	tag: "smoothly-input-radio",
@@ -27,10 +27,10 @@ import { Selectable } from "./Selected"
 export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputRadioElement
 	parent: Editable | undefined
-	private active?: Selectable
+	private active?: RadioItemSelect
 	private valueReceivedOnLoad = false
 	private observer = Editable.Observer.create(this)
-	initialValue?: Selectable
+	initialValue?: RadioItemSelect
 	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
@@ -42,6 +42,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Prop({ reflect: true }) showLabel = true
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
@@ -63,8 +64,8 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRadio) => void>): void {
 		Input.registerSubAction(this, event)
 	}
-	@Listen("smoothlySelect")
-	smoothlyRadioInputHandler(event: CustomEvent<Selectable>): void {
+	@Listen("smoothlyRadioItemSelect")
+	smoothlyRadioInputHandler(event: CustomEvent<RadioItemSelect>): void {
 		event.stopPropagation()
 		if ((!this.readonly && !this.disabled) || !this.valueReceivedOnLoad) {
 			if (this.clearable && this.active?.value === event.detail.value)
@@ -76,6 +77,8 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 				this.active.select(true)
 			}
 		}
+		if (event.detail.userInitiated)
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
 	}
 	@Method()

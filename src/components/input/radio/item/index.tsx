@@ -2,7 +2,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Prop, State, VNode } 
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
 import { SmoothlyInputRadio } from "../index"
-import { Selectable } from "../Selected"
+import { RadioItemSelect } from "../RadioItemSelect"
 
 @Component({
 	tag: "smoothly-input-radio-item",
@@ -16,7 +16,7 @@ export class SmoothlyInputRadioItem {
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ mutable: true }) name: string
 	@State() disabled?: boolean
-	@Event() smoothlySelect: EventEmitter<Selectable>
+	@Event() smoothlyRadioItemSelect: EventEmitter<RadioItemSelect>
 	@Event() smoothlyRadioItemRegister: EventEmitter<(parent: SmoothlyInputRadio) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyRadioItemRegister.emit(parent => {
@@ -26,15 +26,20 @@ export class SmoothlyInputRadioItem {
 					this.disabled = p.disabled
 			})
 		})
-		this.selected && this.inputHandler()
+		this.selected && this.inputHandler(false)
 	}
-	inputHandler(): void {
-		this.smoothlySelect.emit({ value: this.value, selected: this.selected, select: s => (this.selected = s) })
+	inputHandler(userInitiated: boolean): void {
+		this.smoothlyRadioItemSelect.emit({
+			value: this.value,
+			selected: this.selected,
+			select: s => (this.selected = s),
+			userInitiated,
+		})
 	}
 
 	render(): VNode | VNode[] {
 		return (
-			<Host onClick={() => this.inputHandler()}>
+			<Host onClick={() => this.inputHandler(true)}>
 				<input name={this.name} type="radio" checked={this.selected} disabled={this.disabled} />
 				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" tooltip="Select" />
 				<label>

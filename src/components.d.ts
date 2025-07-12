@@ -18,7 +18,7 @@ import { isly } from "isly";
 import { Key } from "./components/input/Key";
 import { Input } from "./components/input/Input";
 import { RGB } from "./model/Color/RGB";
-import { Selectable } from "./components/input/radio/Selected";
+import { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
 import { SmoothlyTabs } from "./components/tabs";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
@@ -34,7 +34,7 @@ export { isly } from "isly";
 export { Key } from "./components/input/Key";
 export { Input } from "./components/input/Input";
 export { RGB } from "./model/Color/RGB";
-export { Selectable } from "./components/input/radio/Selected";
+export { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
 export { SmoothlyTabs } from "./components/tabs";
 export namespace Components {
@@ -1645,7 +1645,7 @@ declare global {
         new (): HTMLSmoothlyInputRadioElement;
     };
     interface HTMLSmoothlyInputRadioItemElementEventMap {
-        "smoothlySelect": Selectable;
+        "smoothlyRadioItemSelect": RadioItemSelect;
         "smoothlyRadioItemRegister": (parent: SmoothlyInputRadio) => void;
     }
     interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
@@ -2701,7 +2701,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(parent: SmoothlyInputRadio) => void>) => void;
-        "onSmoothlySelect"?: (event: SmoothlyInputRadioItemCustomEvent<Selectable>) => void;
+        "onSmoothlyRadioItemSelect"?: (event: SmoothlyInputRadioItemCustomEvent<RadioItemSelect>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
