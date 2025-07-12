@@ -46,6 +46,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@State() sliderMode: "rgb" | "hsl" = "rgb"
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	async componentWillLoad(): Promise<void> {
@@ -156,6 +157,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				this.hsl = { h: undefined, s: undefined, l: undefined }
 			}
 			this.value = value
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 		}
 	}
 	sliderInputHandler(event: CustomEvent<Data>): void {

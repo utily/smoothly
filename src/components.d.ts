@@ -1431,6 +1431,7 @@ declare global {
     interface HTMLSmoothlyInputColorElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -2529,6 +2530,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputColorCustomEvent<Input.UserInput>) => void;
         "output"?: "rgb" | "hex";
         "readonly"?: boolean;
         "showLabel"?: boolean;
