@@ -16,8 +16,9 @@ import { Filter } from "./components/filter/Filter";
 import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
 import { Key } from "./components/input/Key";
+import { Input } from "./components/input/Input";
 import { RGB } from "./model/Color/RGB";
-import { Selectable } from "./components/input/radio/Selected";
+import { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
 import { SmoothlyTabs } from "./components/tabs";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
@@ -31,8 +32,9 @@ export { Filter } from "./components/filter/Filter";
 export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
 export { Key } from "./components/input/Key";
+export { Input } from "./components/input/Input";
 export { RGB } from "./model/Color/RGB";
-export { Selectable } from "./components/input/radio/Selected";
+export { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
 export { SmoothlyTabs } from "./components/tabs";
 export namespace Components {
@@ -290,7 +292,7 @@ export namespace Components {
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "unregister": () => Promise<void>;
-        "value": boolean;
+        "value"?: Record<"true" | "false", any>;
     }
     interface SmoothlyInputCheckboxDemo {
     }
@@ -398,6 +400,8 @@ export namespace Components {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputDemoStandard {
+    }
+    interface SmoothlyInputDemoUserInput {
     }
     interface SmoothlyInputEdit {
         "color"?: Color;
@@ -1366,6 +1370,7 @@ declare global {
         "smoothlyBlur": void;
         "smoothlyChange": Record<string, any>;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
     }
     interface HTMLSmoothlyInputElement extends Components.SmoothlyInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputElement, ev: SmoothlyInputCustomEvent<HTMLSmoothlyInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1384,6 +1389,7 @@ declare global {
     interface HTMLSmoothlyInputCheckboxElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Data;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1427,6 +1433,7 @@ declare global {
     interface HTMLSmoothlyInputColorElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1454,6 +1461,7 @@ declare global {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": isoly.Date;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1473,6 +1481,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateRangeElementEventMap {
         "smoothlyInput": { [name: string]: isoly.DateRange | undefined };
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -1495,6 +1504,7 @@ declare global {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": isoly.DateTime;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1524,6 +1534,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoStandardElement;
         new (): HTMLSmoothlyInputDemoStandardElement;
     };
+    interface HTMLSmoothlyInputDemoUserInputElement extends Components.SmoothlyInputDemoUserInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputDemoUserInputElement: {
+        prototype: HTMLSmoothlyInputDemoUserInputElement;
+        new (): HTMLSmoothlyInputDemoUserInputElement;
+    };
     interface HTMLSmoothlyInputEditElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
     }
@@ -1544,6 +1560,7 @@ declare global {
     interface HTMLSmoothlyInputFileElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1563,6 +1580,7 @@ declare global {
     };
     interface HTMLSmoothlyInputMonthElementEventMap {
         "smoothlyInput": Data;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
@@ -1590,6 +1608,7 @@ declare global {
     interface HTMLSmoothlyInputRadioElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Data;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1608,7 +1627,7 @@ declare global {
         new (): HTMLSmoothlyInputRadioElement;
     };
     interface HTMLSmoothlyInputRadioItemElementEventMap {
-        "smoothlySelect": Selectable;
+        "smoothlyRadioItemSelect": RadioItemSelect;
         "smoothlyRadioItemRegister": (parent: SmoothlyInputRadio) => void;
     }
     interface HTMLSmoothlyInputRadioItemElement extends Components.SmoothlyInputRadioItem, HTMLStencilElement {
@@ -1628,6 +1647,7 @@ declare global {
     interface HTMLSmoothlyInputRangeElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -1670,6 +1690,7 @@ declare global {
     };
     interface HTMLSmoothlyInputSelectElementEventMap {
         "smoothlyInput": Data;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -1707,7 +1728,7 @@ declare global {
         new (): HTMLSmoothlyInputSubmitElement;
     };
     interface HTMLSmoothlyItemElementEventMap {
-        "smoothlyItemSelect": HTMLSmoothlyItemElement;
+        "smoothlyItemSelect": { userInitiated: boolean; item: HTMLSmoothlyItemElement };
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyItemDOMChange": void;
     }
@@ -2172,6 +2193,7 @@ declare global {
         "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
+        "smoothly-input-demo-user-input": HTMLSmoothlyInputDemoUserInputElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
@@ -2472,6 +2494,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyKeydown"?: (event: SmoothlyInputCustomEvent<Key>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputCustomEvent<Input.UserInput>) => void;
         "pad"?: number;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
@@ -2492,8 +2515,9 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputCheckboxCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputCheckboxCustomEvent<Input.UserInput>) => void;
         "readonly"?: boolean;
-        "value"?: boolean;
+        "value"?: Record<"true" | "false", any>;
     }
     interface SmoothlyInputCheckboxDemo {
     }
@@ -2519,6 +2543,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputColorCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputColorCustomEvent<Input.UserInput>) => void;
         "output"?: "rgb" | "hex";
         "readonly"?: boolean;
         "showLabel"?: boolean;
@@ -2540,6 +2565,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputDateCustomEvent<Input.UserInput>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
@@ -2560,6 +2586,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: isoly.DateRange | undefined }>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputDateRangeCustomEvent<Input.UserInput>) => void;
         "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;
@@ -2579,6 +2606,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateTimeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateTimeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputDateTimeCustomEvent<Input.UserInput>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.DateTime>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
@@ -2588,6 +2616,8 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemo {
     }
     interface SmoothlyInputDemoStandard {
+    }
+    interface SmoothlyInputDemoUserInput {
     }
     interface SmoothlyInputEdit {
         "color"?: Color;
@@ -2613,6 +2643,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputFileCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputFileCustomEvent<Input.UserInput>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "showLabel"?: boolean;
@@ -2630,6 +2661,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputMonthCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputMonthCustomEvent<Input.UserInput>) => void;
         "previous"?: boolean;
         "readonly"?: boolean;
         "showLabel"?: boolean;
@@ -2648,6 +2680,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputRadioCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRadioCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRadioCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputRadioCustomEvent<Input.UserInput>) => void;
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: any;
@@ -2656,7 +2689,7 @@ declare namespace LocalJSX {
         "looks"?: Looks;
         "name"?: string;
         "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(parent: SmoothlyInputRadio) => void>) => void;
-        "onSmoothlySelect"?: (event: SmoothlyInputRadioItemCustomEvent<Selectable>) => void;
+        "onSmoothlyRadioItemSelect"?: (event: SmoothlyInputRadioItemCustomEvent<RadioItemSelect>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
@@ -2674,6 +2707,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputRangeCustomEvent<Input.UserInput>) => void;
         "outputSide"?: "right" | "left";
         "readonly"?: boolean;
         "step"?: number;
@@ -2713,6 +2747,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputSelectCustomEvent<Input.UserInput>) => void;
         "ordered"?: boolean;
         "placeholder"?: string | any;
         "readonly"?: boolean;
@@ -2740,7 +2775,7 @@ declare namespace LocalJSX {
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyItemDOMChange"?: (event: SmoothlyItemCustomEvent<void>) => void;
-        "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<{ userInitiated: boolean; item: HTMLSmoothlyItemElement }>) => void;
         "selected"?: boolean;
         "value"?: any;
     }
@@ -2965,6 +3000,7 @@ declare namespace LocalJSX {
         "smoothly-input-date-time": SmoothlyInputDateTime;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
+        "smoothly-input-demo-user-input": SmoothlyInputDemoUserInput;
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
@@ -3078,6 +3114,7 @@ declare module "@stencil/core" {
             "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
+            "smoothly-input-demo-user-input": LocalJSX.SmoothlyInputDemoUserInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoUserInputElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;

@@ -44,6 +44,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	@State() allowPreviousMonth = true
 	@State() allowNextMonth = true
 	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
@@ -173,6 +174,13 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}
+					onSmoothlyUserInput={e => {
+						const month = e.detail.value
+						if (month && isoly.Date.is(month)) {
+							const value = isoly.Date.firstOfMonth(month)
+							this.smoothlyUserInput.emit({ name: this.name, value })
+						}
+					}}
 					searchDisabled>
 					<div slot={"label"}>
 						<slot name={"year-label"} />
@@ -196,6 +204,13 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					inCalendar={this.inCalendar}
 					showLabel={this.showLabel}
 					onSmoothlyInput={e => this.inputHandler(e)}
+					onSmoothlyUserInput={e => {
+						const year = e.detail.value
+						if (year && isoly.Date.is(year)) {
+							const value = isoly.Date.firstOfMonth(year)
+							this.smoothlyUserInput.emit({ name: this.name, value })
+						}
+					}}
 					searchDisabled>
 					<div slot={"label"}>
 						<slot name={"month-label"} />
@@ -211,9 +226,7 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					size={"tiny"}
 					color={this.color}
 					fill={"default"}
-					class={{
-						disabled: this.readonly || !this.allowNextMonth,
-					}}
+					class={{ disabled: this.readonly || !this.allowNextMonth }}
 					onClick={() => this.allowNextMonth && this.adjustMonth(1)}
 				/>
 			</Host>
