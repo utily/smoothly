@@ -36,7 +36,7 @@ export class SmoothlyInputDemoUserInput {
 						Check the console to see the details of each <code>smoothlyUserInput</code> event.
 					</p>
 				</div>
-				<smoothly-button color="primary" onClick={() => (this.textIndex = this.increment(this.textIndex))}>
+				<smoothly-button color="tertiary" onClick={() => (this.textIndex = this.increment(this.textIndex))}>
 					Change text
 				</smoothly-button>
 				<smoothly-input
@@ -47,7 +47,7 @@ export class SmoothlyInputDemoUserInput {
 					Text input
 				</smoothly-input>
 
-				<smoothly-button onClick={() => (this.selectIndex = this.increment(this.selectIndex))} color="primary">
+				<smoothly-button onClick={() => (this.selectIndex = this.increment(this.selectIndex))} color="tertiary">
 					Next select item
 				</smoothly-button>
 				<smoothly-input-select
@@ -62,7 +62,7 @@ export class SmoothlyInputDemoUserInput {
 					))}
 				</smoothly-input-select>
 
-				<smoothly-button color="primary" onClick={() => (this.checkboxChecked = !this.checkboxChecked)}>
+				<smoothly-button color="tertiary" onClick={() => (this.checkboxChecked = !this.checkboxChecked)}>
 					Toggle checkbox
 				</smoothly-button>
 				<smoothly-input-checkbox
@@ -73,7 +73,7 @@ export class SmoothlyInputDemoUserInput {
 					Checkbox input
 				</smoothly-input-checkbox>
 
-				<smoothly-button color="primary" onClick={() => (this.radioIndex = this.increment(this.radioIndex))}>
+				<smoothly-button color="tertiary" onClick={() => (this.radioIndex = this.increment(this.radioIndex))}>
 					Next radio item
 				</smoothly-button>
 				{/* Bug: radio has bugs when changing programmatically - TODO: consider changing to using a regular radio input as underlying controls */}
@@ -91,7 +91,7 @@ export class SmoothlyInputDemoUserInput {
 
 				{/* Not sure how to test smoothly-input-file */}
 
-				<smoothly-button color="primary" onClick={() => (this.rangeValue = this.increment(this.rangeValue))}>
+				<smoothly-button color="tertiary" onClick={() => (this.rangeValue = this.increment(this.rangeValue))}>
 					Next range value
 				</smoothly-button>
 				<smoothly-input-range
@@ -105,7 +105,7 @@ export class SmoothlyInputDemoUserInput {
 					onSmoothlyUserInput={e => console.debug("smoothlyInputUserInput", e.detail.name, e.detail.value)}
 				/>
 
-				<smoothly-button color="primary" onClick={() => (this.colorIndex = this.increment(this.colorIndex))}>
+				<smoothly-button color="tertiary" onClick={() => (this.colorIndex = this.increment(this.colorIndex))}>
 					Next color
 				</smoothly-button>
 				<smoothly-input-color
@@ -117,7 +117,7 @@ export class SmoothlyInputDemoUserInput {
 				</smoothly-input-color>
 
 				<smoothly-button
-					color="primary"
+					color="tertiary"
 					onClick={() => (this.dateValue = this.dateValue ? isoly.Date.next(this.dateValue) : isoly.Date.now())}>
 					Next day
 				</smoothly-button>
@@ -130,7 +130,7 @@ export class SmoothlyInputDemoUserInput {
 				</smoothly-input-date>
 
 				<smoothly-button
-					color="primary"
+					color="tertiary"
 					onClick={() =>
 						(this.datetimeValue = this.datetimeValue
 							? isoly.DateTime.nextDay(this.datetimeValue)
@@ -147,7 +147,7 @@ export class SmoothlyInputDemoUserInput {
 				</smoothly-input-date-time>
 
 				<smoothly-button
-					color="primary"
+					color="tertiary"
 					onClick={() =>
 						(this.dateRangeValue = this.dateRangeValue
 							? { start: isoly.Date.next(this.dateRangeValue.start), end: isoly.Date.next(this.dateRangeValue.end) }
