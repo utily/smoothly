@@ -402,6 +402,8 @@ export namespace Components {
     }
     interface SmoothlyInputDemoStandard {
     }
+    interface SmoothlyInputDemoUserInput {
+    }
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled": boolean;
@@ -1564,6 +1566,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoStandardElement;
         new (): HTMLSmoothlyInputDemoStandardElement;
     };
+    interface HTMLSmoothlyInputDemoUserInputElement extends Components.SmoothlyInputDemoUserInput, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputDemoUserInputElement: {
+        prototype: HTMLSmoothlyInputDemoUserInputElement;
+        new (): HTMLSmoothlyInputDemoUserInputElement;
+    };
     interface HTMLSmoothlyInputEditElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
     }
@@ -2217,6 +2225,7 @@ declare global {
         "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
+        "smoothly-input-demo-user-input": HTMLSmoothlyInputDemoUserInputElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
         "smoothly-input-file": HTMLSmoothlyInputFileElement;
         "smoothly-input-month": HTMLSmoothlyInputMonthElement;
@@ -2644,6 +2653,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputDemoStandard {
     }
+    interface SmoothlyInputDemoUserInput {
+    }
     interface SmoothlyInputEdit {
         "color"?: Color;
         "disabled"?: boolean;
@@ -3025,6 +3036,7 @@ declare namespace LocalJSX {
         "smoothly-input-date-time": SmoothlyInputDateTime;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
+        "smoothly-input-demo-user-input": SmoothlyInputDemoUserInput;
         "smoothly-input-edit": SmoothlyInputEdit;
         "smoothly-input-file": SmoothlyInputFile;
         "smoothly-input-month": SmoothlyInputMonth;
@@ -3138,6 +3150,7 @@ declare module "@stencil/core" {
             "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
+            "smoothly-input-demo-user-input": LocalJSX.SmoothlyInputDemoUserInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoUserInputElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
             "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
             "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
