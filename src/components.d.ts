@@ -1634,6 +1634,7 @@ declare global {
     interface HTMLSmoothlyInputRangeElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -2685,6 +2686,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputRangeCustomEvent<Input.UserInput>) => void;
         "outputSide"?: "right" | "left";
         "readonly"?: boolean;
         "step"?: number;
