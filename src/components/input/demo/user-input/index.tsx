@@ -27,7 +27,7 @@ export class SmoothlyInputDemoUserInput {
 		return (
 			<Host>
 				<div>
-					<h2>User Input</h2>
+					<h2>User Input Event</h2>
 					<p>
 						These inputs demonstrate how user input is handled. The <code>smoothlyUserInput</code> event fires only when
 						the user interacts with an input, not when its value is changed programmatically (such as by clicking the
