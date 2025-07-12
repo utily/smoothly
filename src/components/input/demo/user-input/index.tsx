@@ -11,6 +11,8 @@ export class SmoothlyInputDemoUserInput {
 	@State() checkboxChecked: boolean
 	@State() radioIndex?: number
 	@State() rangeValue?: number
+	private readonly colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff"]
+	@State() colorIndex?: number
 
 	increment(index?: number): number {
 		return index === undefined ? 0 : (index + 1) % this.values.length
@@ -87,9 +89,19 @@ export class SmoothlyInputDemoUserInput {
 					min={0}
 					max={this.values.length}
 					value={this.rangeValue}
-					onSmoothlyUserInput={e => console.debug("smoothlyInputUserInput", e.detail.name, e.detail.value)}>
-					<span slot="label">Range input</span>
-				</smoothly-input-range>
+					label={"Range Input"}
+					onSmoothlyUserInput={e => console.debug("smoothlyInputUserInput", e.detail.name, e.detail.value)}
+				/>
+
+				<smoothly-button color="primary" onClick={() => (this.colorIndex = this.increment(this.colorIndex))}>
+					Next color
+				</smoothly-button>
+				<smoothly-input-color
+					name="demo-user-input-color"
+					value={typeof this.colorIndex == "number" ? this.colors[this.colorIndex] : undefined}
+					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					Color input
+				</smoothly-input-color>
 			</Host>
 		)
 	}
