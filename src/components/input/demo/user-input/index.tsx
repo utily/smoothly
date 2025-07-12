@@ -134,6 +134,23 @@ export class SmoothlyInputDemoUserInput {
 					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
 					Date time input
 				</smoothly-input-date-time>
+
+				<smoothly-button
+					color="primary"
+					onClick={() =>
+						(this.dateRangeValue = this.dateRangeValue
+							? { start: isoly.Date.next(this.dateRangeValue.start), end: isoly.Date.next(this.dateRangeValue.end) }
+							: { start: isoly.Date.now(), end: isoly.Date.next(isoly.Date.now(), 10) })
+					}>
+					Next date range
+				</smoothly-button>
+				<smoothly-input-date-range
+					name="demo-user-input-daterange"
+					start={this.dateRangeValue?.start}
+					end={this.dateRangeValue?.end}
+					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					Date range input
+				</smoothly-input-date-range>
 			</Host>
 		)
 	}
