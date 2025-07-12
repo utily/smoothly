@@ -1523,6 +1523,7 @@ declare global {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": isoly.DateTime;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -2630,6 +2631,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputDateTimeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputDateTimeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateTimeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputDateTimeCustomEvent<Input.UserInput>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.DateTime>) => void;
         "open"?: boolean;
         "readonly"?: boolean;
