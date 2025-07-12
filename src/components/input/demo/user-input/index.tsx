@@ -118,6 +118,22 @@ export class SmoothlyInputDemoUserInput {
 					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
 					Date input
 				</smoothly-input-date>
+
+				<smoothly-button
+					color="primary"
+					onClick={() =>
+						(this.datetimeValue = this.datetimeValue
+							? isoly.DateTime.nextDay(this.datetimeValue)
+							: isoly.DateTime.now())
+					}>
+					Next date time
+				</smoothly-button>
+				<smoothly-input-date-time
+					name="demo-user-input-datetime"
+					value={this.datetimeValue}
+					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					Date time input
+				</smoothly-input-date-time>
 			</Host>
 		)
 	}

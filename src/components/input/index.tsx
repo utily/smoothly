@@ -224,8 +224,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 								this.state = this.stateHandler.onBlur(event, this.state)
 								this.smoothlyBlur.emit()
 								this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-								if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state)))
+								if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state))) {
 									this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+									this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
+								}
 							}
 						}}
 					/>

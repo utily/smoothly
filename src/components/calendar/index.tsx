@@ -81,7 +81,8 @@ export class Calendar {
 					onSmoothlyInput={e => {
 						e.stopPropagation()
 						"month" in e.detail && typeof e.detail.month == "string" && (this.month = e.detail.month)
-					}}>
+					}}
+					onSmoothlyUserInput={e => e.stopPropagation()}>
 					<div slot={"year-label"}>
 						<slot name={"year-label"} />
 					</div>
