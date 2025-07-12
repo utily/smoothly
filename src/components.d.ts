@@ -1580,6 +1580,7 @@ declare global {
     interface HTMLSmoothlyInputFileElementEventMap {
         "smoothlyInputLooks": (looks?: Looks, color?: Color) => void;
         "smoothlyInput": Record<string, any>;
+        "smoothlyUserInput": Input.UserInput;
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
     }
@@ -2657,6 +2658,7 @@ declare namespace LocalJSX {
         "onSmoothlyInput"?: (event: SmoothlyInputFileCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputFileCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
+        "onSmoothlyUserInput"?: (event: SmoothlyInputFileCustomEvent<Input.UserInput>) => void;
         "placeholder"?: string | undefined;
         "readonly"?: boolean;
         "showLabel"?: boolean;
