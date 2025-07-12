@@ -43,7 +43,7 @@ export class SmoothlyInputDemoUserInput {
 					looks="border"
 					name="demo-user-input-text"
 					value={this.textIndex === undefined ? "" : this.values[this.textIndex]}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Text input
 				</smoothly-input>
 
@@ -53,7 +53,7 @@ export class SmoothlyInputDemoUserInput {
 				<smoothly-input-select
 					looks="border"
 					name="demo-user-input-select"
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					<span slot="label">Select input</span>
 					{this.values.map((value, index) => (
 						<smoothly-item value={index} selected={index == this.selectIndex}>
@@ -69,7 +69,7 @@ export class SmoothlyInputDemoUserInput {
 					looks="border"
 					name="demo-user-input-checkbox"
 					checked={this.checkboxChecked}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Checkbox input
 				</smoothly-input-checkbox>
 
@@ -80,7 +80,7 @@ export class SmoothlyInputDemoUserInput {
 				<smoothly-input-radio
 					looks="border"
 					name="demo-user-input-radio"
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					<span slot="label">Radio input</span>
 					{this.values.map((value, index) => (
 						<smoothly-input-radio-item value={value} selected={index == this.radioIndex}>
@@ -102,7 +102,7 @@ export class SmoothlyInputDemoUserInput {
 					max={this.values.length}
 					value={this.rangeValue}
 					label={"Range Input"}
-					onSmoothlyUserInput={e => console.debug("smoothlyInputUserInput", e.detail.name, e.detail.value)}
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}
 				/>
 
 				<smoothly-button color="tertiary" onClick={() => (this.colorIndex = this.increment(this.colorIndex))}>
@@ -112,7 +112,7 @@ export class SmoothlyInputDemoUserInput {
 					looks="border"
 					name="demo-user-input-color"
 					value={typeof this.colorIndex == "number" ? this.colors[this.colorIndex] : undefined}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Color input
 				</smoothly-input-color>
 
@@ -125,7 +125,7 @@ export class SmoothlyInputDemoUserInput {
 					looks="border"
 					name="demo-user-input-date"
 					value={this.dateValue}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Date input
 				</smoothly-input-date>
 
@@ -142,7 +142,7 @@ export class SmoothlyInputDemoUserInput {
 					looks="border"
 					name="demo-user-input-datetime"
 					value={this.datetimeValue}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Date time input
 				</smoothly-input-date-time>
 
@@ -160,7 +160,7 @@ export class SmoothlyInputDemoUserInput {
 					name="demo-user-input-daterange"
 					start={this.dateRangeValue?.start}
 					end={this.dateRangeValue?.end}
-					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					onSmoothlyUserInput={e => console.debug(e.type, e.detail.name, e.detail.value)}>
 					Date range input
 				</smoothly-input-date-range>
 			</Host>
