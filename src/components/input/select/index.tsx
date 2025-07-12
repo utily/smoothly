@@ -63,6 +63,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() filter = ""
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
@@ -207,18 +208,18 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.displaySelected()
 	}
 	@Listen("smoothlyItemSelect")
-	onItemSelect(event: CustomEvent<HTMLSmoothlyItemElement>): void {
+	async onItemSelect(event: CustomEvent<{ userInitiated: boolean; item: HTMLSmoothlyItemElement }>): Promise<void> {
 		event.stopPropagation()
+		const item = event.detail.item
 		if (this.multiple) {
-			this.selected = event.detail.selected
-				? [...this.selected, event.detail]
-				: this.selected.filter(item => item.selected)
-		} else if (event.detail.selected || !this.items.some(e => e.selected)) {
+			this.selected = item.selected ? [...this.selected, item] : this.selected.filter(item => item.selected)
+		} else if (item.selected || !this.items.some(e => e.selected)) {
 			this.selected[0] && (this.selected[0].hidden = this.selected[0].selected = false)
-			this.selected = !event.detail.selected ? this.selected.filter(item => item.selected) : [event.detail]
-			!this.showSelected && event.detail.selected && (event.detail.hidden = true)
+			this.selected = !item.selected ? this.selected.filter(item => item.selected) : [item]
+			!this.showSelected && item.selected && (item.hidden = true)
 		}
 		this.displaySelected()
+		this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 	}
 	@Watch("open")
 	onClosed(open: boolean, before: boolean): void {

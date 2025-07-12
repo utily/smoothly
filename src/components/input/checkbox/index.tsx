@@ -21,11 +21,12 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ mutable: true }) checked = false
-	@Prop() value = this.checked
+	@Prop() value?: Record<"true" | "false", any>
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Data>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
@@ -56,7 +57,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	}
 	@Method()
 	async getValue(): Promise<boolean> {
-		return this.checked
+		return this.value ? this.value[`${!!this.checked}`] : this.checked
 	}
 	@Method()
 	async clear(): Promise<void> {
@@ -97,7 +98,10 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 					id={this.id}
 					checked={this.checked}
 					disabled={this.disabled || this.readonly}
-					onChange={e => (this.checked = (e.target as HTMLInputElement).checked)}
+					onChange={async e => {
+						this.checked = (e.target as HTMLInputElement).checked
+						this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+					}}
 				/>
 				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
 				<label htmlFor={this.id}>

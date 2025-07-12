@@ -23,24 +23,28 @@ import { Item } from "./Item"
 })
 export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 	private mutationObserver: MutationObserver
+	private userInitiated = false
 	@Element() element: HTMLSmoothlyItemElement
 	@Prop() value: any
 	@Prop({ reflect: true, mutable: true }) selected: boolean = false
 	@Prop({ reflect: true, mutable: true }) marked: boolean
 	@Prop({ reflect: true }) disabled = false
 	@Prop() deselectable = true
-	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
+	@Event() smoothlyItemSelect: EventEmitter<{ userInitiated: boolean; item: HTMLSmoothlyItemElement }>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyItemDOMChange: EventEmitter<void>
 
 	@Listen("click")
 	clickHandler(): void {
-		if (!this.disabled && (!this.selected || this.deselectable))
+		if (!this.disabled && (!this.selected || this.deselectable)) {
+			this.userInitiated = true
 			this.selected = !this.selected
+		}
 	}
 	@Watch("selected")
 	selectedWatcher(): void {
-		this.smoothlyItemSelect.emit(this.element)
+		this.smoothlyItemSelect.emit({ userInitiated: this.userInitiated, item: this.element })
+		this.userInitiated = false
 	}
 	componentWillLoad(): void {
 		this.smoothlyInputLoad.emit(() => {})
@@ -50,7 +54,7 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.mutationObserver.observe(this.element, { childList: true, subtree: true, characterData: true })
 
 		if (this.selected && !this.disabled)
-			this.smoothlyItemSelect.emit(this.element)
+			this.smoothlyItemSelect.emit({ userInitiated: false, item: this.element })
 	}
 	@Method()
 	async filter(filter: string): Promise<void> {

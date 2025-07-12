@@ -53,6 +53,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 
 	@Method()
 	async getValue(): Promise<any | undefined> {
@@ -209,8 +210,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						disabled={this.disabled}
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
-						onKeyDown={event => {
+						onKeyDown={async event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
+							this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 							if (!this.readonly && !this.disabled)
 								this.smoothlyKeydown.emit(Key.create(this.name, event))
 						}}
