@@ -1,4 +1,5 @@
 import { Component, h, Host, State } from "@stencil/core"
+import { isoly } from "isoly"
 
 @Component({
 	tag: "smoothly-input-demo-user-input",
@@ -13,6 +14,9 @@ export class SmoothlyInputDemoUserInput {
 	@State() rangeValue?: number
 	private readonly colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff"]
 	@State() colorIndex?: number
+	@State() dateValue?: isoly.Date
+	@State() datetimeValue?: isoly.DateTime
+	@State() dateRangeValue?: isoly.DateRange
 
 	increment(index?: number): number {
 		return index === undefined ? 0 : (index + 1) % this.values.length
@@ -102,6 +106,18 @@ export class SmoothlyInputDemoUserInput {
 					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
 					Color input
 				</smoothly-input-color>
+
+				<smoothly-button
+					color="primary"
+					onClick={() => (this.dateValue = this.dateValue ? isoly.Date.next(this.dateValue) : isoly.Date.now())}>
+					Next day
+				</smoothly-button>
+				<smoothly-input-date
+					name="demo-user-input-date"
+					value={this.dateValue}
+					onSmoothlyUserInput={e => console.debug("smoothlyUserInput", e.detail.name, e.detail.value)}>
+					Date input
+				</smoothly-input-date>
 			</Host>
 		)
 	}
