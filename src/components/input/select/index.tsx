@@ -219,7 +219,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			!this.showSelected && item.selected && (item.hidden = true)
 		}
 		this.displaySelected()
-		this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+		if (event.detail.userInitiated)
+			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 	}
 	@Watch("open")
 	onClosed(open: boolean, before: boolean): void {
