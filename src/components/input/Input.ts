@@ -9,7 +9,7 @@ import { Looks } from "./Looks"
 export interface Input extends Input.Element {
 	smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	smoothlyInput: EventEmitter<Data> // Used for smoothly-form
-	smoothlyUserInput?: EventEmitter<Input.UserInput> // Make required
+	smoothlyUserInput: EventEmitter<Input.UserInput>
 	smoothlyKeydown?: EventEmitter<Key>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 	parent: Editable | undefined
