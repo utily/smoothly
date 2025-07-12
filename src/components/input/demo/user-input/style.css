@@ -1,5 +1,5 @@
 :host {
-	max-width: min(100%, 48rem);
+	max-width: min(100%, 56rem);
 	margin-inline: auto;
 	display: grid;
 	grid-template-columns: 12rem 1fr;
