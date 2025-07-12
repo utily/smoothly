@@ -44,6 +44,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
@@ -151,6 +152,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					onSmoothlyInput={e => {
 						e.stopPropagation()
 						this.value = e.detail[this.name]
+						this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 					}}>
 					<slot />
 				</smoothly-input>
@@ -164,6 +166,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 							value={this.value}
 							onSmoothlyValueChange={event => {
 								this.value = event.detail
+								this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 								event.stopPropagation()
 							}}
 							max={this.max}
