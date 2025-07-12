@@ -152,7 +152,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					onSmoothlyInput={e => {
 						e.stopPropagation()
 						this.value = e.detail[this.name]
-						this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+					}}
+					onSmoothlyUserInput={e => {
+						e.stopPropagation()
+						this.smoothlyUserInput.emit({ name: this.name, value: this.getValue() })
 					}}>
 					<slot />
 				</smoothly-input>
