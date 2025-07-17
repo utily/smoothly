@@ -17,10 +17,10 @@ export class SmoothlyButtonDemo {
 							Delete
 						</smoothly-button-confirm>
 						<smoothly-button-confirm name="confirm-icon" shape="rounded" color="success" size="icon">
-							<smoothly-icon name="checkmark-outline" size="tiny" />
+							<smoothly-icon name="checkmark-outline" />
 						</smoothly-button-confirm>
 						<smoothly-button-confirm name="confirm-icon" shape="rounded" color="danger" size="icon" fill="outline">
-							<smoothly-icon name="trash-outline" size="tiny" fill="outline" />
+							<smoothly-icon name="trash-outline" fill="outline" />
 						</smoothly-button-confirm>
 					</div>
 					<smoothly-toggle-switch-demo />
