@@ -42,8 +42,8 @@
 	--smoothly-icon-size: 4rem;
 }
 :host {
-	width: var(--smoothly-icon-size, 1.75rem);
-	height: var(--smoothly-icon-size, 1.75rem);
+	width: var(--smoothly-icon-size, 1.8rem);
+	height: var(--smoothly-icon-size, 1.8rem);
 }
 :host::slotted(svg) {
 	/* this is needed for svg to work on safari */
