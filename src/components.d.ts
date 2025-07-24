@@ -326,6 +326,9 @@ export namespace Components {
     }
     interface SmoothlyInputColorDemo {
     }
+    interface SmoothlyInputCopy {
+        "value"?: string;
+    }
     interface SmoothlyInputDate {
         "changed": boolean;
         "clear": () => Promise<void>;
@@ -1450,6 +1453,12 @@ declare global {
         prototype: HTMLSmoothlyInputColorDemoElement;
         new (): HTMLSmoothlyInputColorDemoElement;
     };
+    interface HTMLSmoothlyInputCopyElement extends Components.SmoothlyInputCopy, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputCopyElement: {
+        prototype: HTMLSmoothlyInputCopyElement;
+        new (): HTMLSmoothlyInputCopyElement;
+    };
     interface HTMLSmoothlyInputDateElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": isoly.Date;
@@ -2167,6 +2176,7 @@ declare global {
         "smoothly-input-clear": HTMLSmoothlyInputClearElement;
         "smoothly-input-color": HTMLSmoothlyInputColorElement;
         "smoothly-input-color-demo": HTMLSmoothlyInputColorDemoElement;
+        "smoothly-input-copy": HTMLSmoothlyInputCopyElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
@@ -2525,6 +2535,9 @@ declare namespace LocalJSX {
         "value"?: string | undefined;
     }
     interface SmoothlyInputColorDemo {
+    }
+    interface SmoothlyInputCopy {
+        "value"?: string;
     }
     interface SmoothlyInputDate {
         "changed"?: boolean;
@@ -2960,6 +2973,7 @@ declare namespace LocalJSX {
         "smoothly-input-clear": SmoothlyInputClear;
         "smoothly-input-color": SmoothlyInputColor;
         "smoothly-input-color-demo": SmoothlyInputColorDemo;
+        "smoothly-input-copy": SmoothlyInputCopy;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-date-time": SmoothlyInputDateTime;
@@ -3073,6 +3087,7 @@ declare module "@stencil/core" {
             "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
             "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
             "smoothly-input-color-demo": LocalJSX.SmoothlyInputColorDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
+            "smoothly-input-copy": LocalJSX.SmoothlyInputCopy & JSXBase.HTMLAttributes<HTMLSmoothlyInputCopyElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
