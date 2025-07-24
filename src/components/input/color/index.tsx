@@ -46,6 +46,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@State() sliderMode: "rgb" | "hsl" = "rgb"
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	async componentWillLoad(): Promise<void> {
@@ -142,7 +143,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 			this.value && (this.hsl = Color.RGB.toHSL(Color.Hex.toRGB(this.value)))
 		}
 	}
-	hexInputHandler(value: string): void {
+	async hexInputHandler(value: string): Promise<void> {
 		if (value !== this.value) {
 			if (value && Color.Hex.type.is(value)) {
 				if (this.sliderMode === "hsl" || this.rgb.r === undefined) {
@@ -156,6 +157,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 				this.hsl = { h: undefined, s: undefined, l: undefined }
 			}
 			this.value = value
+			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 		}
 	}
 	sliderInputHandler(event: CustomEvent<Data>): void {
@@ -244,6 +246,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 								step={1}
 								outputSide="right"
 								onSmoothlyInput={event => this.sliderInputHandler(event)}
+								onSmoothlyUserInput={event => event.stopPropagation()}
 								label={key.toUpperCase()}
 							/>
 						))}
@@ -259,6 +262,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 								step={key === "s" || key === "l" ? 0.01 : 1}
 								outputSide="right"
 								onSmoothlyInput={event => this.sliderInputHandler(event)}
+								onSmoothlyUserInput={event => event.stopPropagation()}
 								label={key.toUpperCase()}
 							/>
 						))}

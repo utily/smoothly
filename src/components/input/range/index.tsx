@@ -48,6 +48,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@State() showInput = false
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
@@ -181,6 +182,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 						onInput={event => {
 							event.stopPropagation()
 							this.setValue((event.target as HTMLInputElement).valueAsNumber)
+							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 						}}
 						value={this.value ?? this.min}
 					/>
