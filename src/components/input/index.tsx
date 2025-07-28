@@ -37,8 +37,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) errorMessage?: string
+	@Prop({ reflect: true }) copyable?: boolean
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
+	@State() copied = false
 	parent: Editable | undefined
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
@@ -178,7 +180,12 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	onEvent(event: InputEvent) {
 		this.state = this.stateHandler.onInputEvent(event, this.state)
 	}
-
+	copyText(value?: string) {
+		if (value) {
+			navigator.clipboard.writeText(value)
+			this.copied = true
+		}
+	}
 	render() {
 		return (
 			<Host
@@ -223,6 +230,17 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						<slot />
 					</label>
 				</div>
+				{this.copyable && this.value && (
+					<span class="copyable">
+						<small>{this.copied ? "Copied!" : "Copy"}</small>
+						<smoothly-icon
+							name="copy-outline"
+							size="small"
+							onClick={() => this.copyText(this.value)}
+							onMouseLeave={() => (this.copied = false)}
+						/>
+					</span>
+				)}
 				<smoothly-icon
 					class="smoothly-invalid"
 					name="alert-circle"

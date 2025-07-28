@@ -5,7 +5,6 @@
 	align-items: center;
 	justify-content: center;
 	font-weight: var(--smoothly-font-weight);
-	overflow: hidden;
 	background-color: rgb(var(--smoothly-input-background));
 	color: rgb(var(--smoothly-input-foreground));
 }
@@ -102,4 +101,28 @@
 :host>div>input:-webkit-autofill,
 :host>div>input:-webkit-autofill+label {
 	-webkit-text-fill-color: rgb(var(--smoothly-input-foreground));
+}
+:host>span.copyable {
+	position: relative;
+}
+:host>span.copyable>smoothly-icon {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+
+}
+:host>span.copyable:hover small,
+:host>span.copyable:focus small {
+	display: block;
+}
+:host>span.copyable>small {
+	display: none;
+	width: max-content;
+	border-radius: 0.25rem;
+	padding: 0.2rem 0.3rem;
+	position: absolute;
+	right: -0.5rem;
+	top: -2rem;
+	background-color: rgb(var(--smoothly-default-contrast));
+	color: rgb(var(--smoothly-default-tint));
 }
