@@ -187,7 +187,9 @@ export class SmoothlyInputDemo {
 						Age (18-120)
 					</smoothly-input>
 					<h2>Invalid text with warning icon and tooltip</h2>
+
 					<smoothly-input
+						copyable
 						name="alphanumeric"
 						invalid={!/^[a-zA-Z0-9]+$/.test(this.alphanumeric)}
 						errorMessage={"Only alphanumeric allowed"}
@@ -195,6 +197,7 @@ export class SmoothlyInputDemo {
 						onSmoothlyInput={e => (this.alphanumeric = e.detail.alphanumeric)}>
 						Alphanumeric
 					</smoothly-input>
+
 					<h2>Identifiers</h2>
 					<smoothly-input type="identifier-code">Code</smoothly-input>
 					<smoothly-input type="identifier-attribute">Attribute</smoothly-input>

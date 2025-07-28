@@ -246,6 +246,7 @@ export namespace Components {
         "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
+        "copyable"?: boolean;
         "currency"?: isoly.Currency;
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
@@ -2457,6 +2458,7 @@ declare namespace LocalJSX {
         "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
         "changed"?: boolean;
         "color"?: Color;
+        "copyable"?: boolean;
         "currency"?: isoly.Currency;
         "disabled"?: boolean;
         "errorMessage"?: string;
