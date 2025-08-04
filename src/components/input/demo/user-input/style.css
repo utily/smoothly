@@ -1,0 +1,10 @@
+:host {
+	max-width: min(100%, 56rem);
+	margin-inline: auto;
+	display: grid;
+	grid-template-columns: 12rem 1fr;
+	gap: 1rem;
+}
+:host > div {
+	grid-column: 1 / -1;
+}
