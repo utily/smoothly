@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -10,11 +10,40 @@ export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
 	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	@Event() smoothlyRoomQuery: EventEmitter<{ path: string; query?: string }>
+	@State() query?: string
+
+	@Listen("smoothlyUrlChange", { target: "window" })
+	urlChangeHandler(event: CustomEvent<string>) {
+		const url = new URL(event.detail)
+		if (url.pathname === "/input") {
+			this.query = url.search.replace("?", "")
+			this.smoothlyRoomQuery.emit({ query: this.query, path: window.location.pathname })
+		}
+	}
 
 	render() {
+		console.log("SmoothlyInputDemo render", this.query)
 		return (
 			<Host>
+				<smoothly-button
+					color="warning"
+					onClick={() => this.smoothlyRoomQuery.emit({ query: "a=b", path: window.location.pathname })}>
+					Sätt query
+				</smoothly-button>
+				<smoothly-button
+					color="warning"
+					onClick={() => this.smoothlyRoomQuery.emit({ query: "", path: window.location.pathname })}>
+					Ta bort query
+				</smoothly-button>
+				<smoothly-button
+					color="warning"
+					onClick={() => this.smoothlyRoomQuery.emit({ query: "c=d", path: window.location.pathname })}>
+					Sätt annan query
+				</smoothly-button>
+				<p style={{ width: "100%", height: "4rem", backgroundColor: "pink", fontSize: "2rem" }}>{this.query}</p>
 				<smoothly-input-demo-standard />
+
 				<div class="inputs">
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
@@ -205,19 +234,15 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="identifier-pascal">Pascal</smoothly-input>
 					<smoothly-input type="identifier-camel">Camel</smoothly-input>
 					<h2>Input Alternatives</h2>
-					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.last">
 						<smoothly-icon name="checkmark-circle" slot="start" />
 						First Name
 					</smoothly-input>
-					<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.first">
 						Last Name
 						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>
-					<smoothly-input
-						type="text"
-						name="name.first"
-						placeholder="Smith"
-						onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.first" placeholder="Smith">
 						Last Name
 						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>

@@ -156,7 +156,7 @@ export class SmoothlyFormDemoPet {
 							<smoothly-input-checkbox name="summary.hasPet">Has Pet</smoothly-input-checkbox>
 						</div>
 					</smoothly-summary>
-					<smoothly-tabs onSmoothlyTabOpen={e => console.log("Tab opened:", e.detail)}>
+					<smoothly-tabs>
 						<smoothly-tab label="Dog" name="dog">
 							<smoothly-input type={"text"} name="dog.breed">
 								Breed

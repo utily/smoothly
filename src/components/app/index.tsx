@@ -1,4 +1,4 @@
-import { Component, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { SmoothlyAppRoomCustomEvent } from "../../components"
 import { Color } from "../../model"
 
@@ -16,6 +16,8 @@ export class SmoothlyApp {
 	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
+	@Event() smoothlyUrlChange: EventEmitter<string>
+
 	private burgerVisibility: boolean
 	private burgerElement?: HTMLElement
 	private navElement?: HTMLElement
@@ -27,6 +29,8 @@ export class SmoothlyApp {
 				? this.rooms[this.home]
 				: Object.values(this.rooms).find(room => !room?.element.disabled)
 			)?.element.setSelected(true)
+		// window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
+		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Method()
 	async selectRoom(path: string) {
@@ -55,7 +59,7 @@ export class SmoothlyApp {
 		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
 	}
 	@Listen("smoothlyRoomSelect")
-	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) {
+	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
 		this.selected = { element: event.target }
 		if (this.burgerVisibility)
 			this.menuOpen = false
@@ -63,7 +67,12 @@ export class SmoothlyApp {
 			const path = this.selected.element.path.toString()
 			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
 			location.pathname = path
-			window.history.pushState({ smoothlyPath: path }, "", location.href)
+			window.history.pushState(
+				{ smoothlyPath: path },
+				"",
+				location.href + (event.detail.query ? `?${event.detail.query}` : "")
+			)
+			window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
 		}
 	}
 	@Listen("smoothlyRoomLoad")

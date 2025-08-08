@@ -1,4 +1,15 @@
-import { Component, Event, EventEmitter, FunctionalComponent, h, Host, Method, Prop, VNode } from "@stencil/core"
+import {
+	Component,
+	Event,
+	EventEmitter,
+	FunctionalComponent,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	VNode,
+} from "@stencil/core"
 import "urlpattern-polyfill"
 import { Icon } from "../../../model"
 
@@ -8,14 +19,16 @@ import { Icon } from "../../../model"
 	scoped: true,
 })
 export class SmoothlyAppRoom {
+	private query?: string
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
-	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
+	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
 
 	componentWillLoad() {
@@ -32,8 +45,22 @@ export class SmoothlyAppRoom {
 	@Method()
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
-		if (selected)
-			this.smoothlyRoomSelect.emit({ history: !!options?.history })
+		if (selected) {
+			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query })
+		}
+	}
+	@Listen("smoothlyRoomQuery", { target: "window" })
+	async setQuery(event: CustomEvent<{ query?: string; path: string }>): Promise<void> {
+		if (event.detail.path == this.path && this.query != event.detail.query) {
+			this.query = event.detail.query
+			window.history.pushState(
+				{ smoothlyPath: this.path, smoothlyQuery: this.query },
+				"",
+				`${window.location.pathname}${this.query ? `?${this.query}` : ""}`
+			)
+			window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
+			console.log("smoothlyRoomQuery room:", this.query)
+		}
 	}
 
 	clickHandler(event: MouseEvent) {
