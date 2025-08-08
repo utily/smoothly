@@ -1534,7 +1534,7 @@ declare global {
         new (): HTMLSmoothlyInputDateTimeElement;
     };
     interface HTMLSmoothlyInputDemoElementEventMap {
-        "smoothlyRoomQuery": { path: string; query?: string };
+        "smoothlyUrlUpdate": { path: string; query?: string };
     }
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2621,7 +2621,7 @@ declare namespace LocalJSX {
         "value"?: isoly.DateTime;
     }
     interface SmoothlyInputDemo {
-        "onSmoothlyRoomQuery"?: (event: SmoothlyInputDemoCustomEvent<{ path: string; query?: string }>) => void;
+        "onSmoothlyUrlUpdate"?: (event: SmoothlyInputDemoCustomEvent<{ path: string; query?: string }>) => void;
     }
     interface SmoothlyInputDemoStandard {
     }

@@ -30,14 +30,16 @@ export class SmoothlyAppRoom {
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
-
+	componentDidRender() {
+		this.selected && this.smoothlyUrlChange.emit(window.location.href)
+	}
 	componentWillLoad() {
 		this.selected = (typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(
 			window.location
 		)
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
+		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
 	}
-
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
 		return this.contentElement
@@ -49,7 +51,7 @@ export class SmoothlyAppRoom {
 			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query })
 		}
 	}
-	@Listen("smoothlyRoomQuery", { target: "window" })
+	@Listen("smoothlyUrlUpdate", { target: "window" })
 	async setQuery(event: CustomEvent<{ query?: string; path: string }>): Promise<void> {
 		if (event.detail.path == this.path && this.query != event.detail.query) {
 			this.query = event.detail.query
@@ -58,8 +60,7 @@ export class SmoothlyAppRoom {
 				"",
 				`${window.location.pathname}${this.query ? `?${this.query}` : ""}`
 			)
-			window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
-			console.log("smoothlyRoomQuery room:", this.query)
+			this.smoothlyUrlChange.emit(window.location.href)
 		}
 	}
 

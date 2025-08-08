@@ -17,7 +17,6 @@ export class SmoothlyApp {
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
 	@State() selected?: Room
 	@Event() smoothlyUrlChange: EventEmitter<string>
-
 	private burgerVisibility: boolean
 	private burgerElement?: HTMLElement
 	private navElement?: HTMLElement
@@ -29,8 +28,6 @@ export class SmoothlyApp {
 				? this.rooms[this.home]
 				: Object.values(this.rooms).find(room => !room?.element.disabled)
 			)?.element.setSelected(true)
-		// window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
-		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Method()
 	async selectRoom(path: string) {
@@ -57,6 +54,7 @@ export class SmoothlyApp {
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
 		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
+		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Listen("smoothlyRoomSelect")
 	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
@@ -68,11 +66,10 @@ export class SmoothlyApp {
 			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
 			location.pathname = path
 			window.history.pushState(
-				{ smoothlyPath: path },
+				{ smoothlyPath: path, smoothlyQuery: event.detail.query || "" },
 				"",
 				location.href + (event.detail.query ? `?${event.detail.query}` : "")
 			)
-			window.dispatchEvent(new CustomEvent("smoothlyUrlChange", { detail: window.location.href }))
 		}
 	}
 	@Listen("smoothlyRoomLoad")
@@ -80,7 +77,6 @@ export class SmoothlyApp {
 		const room = (this.rooms[event.target.path.toString()] = { element: event.target })
 		if (room.element.selected) {
 			this.selected = room
-			window.history.replaceState({ smoothlyPath: room.element.path }, "", window.location.href)
 		}
 	}
 	@Listen("click", { target: "window" })

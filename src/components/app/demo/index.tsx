@@ -8,7 +8,7 @@ export class SmoothlyAppDemo {
 	app?: HTMLSmoothlyAppElement
 	@Listen("smoothlyUrlChange", { target: "window" })
 	urlChangeHandler(event: CustomEvent<string>) {
-		console.log("smoothlyUrlChange SmoothlyAppDemo:", event.detail)
+		console.log("smoothlyUrlChange", event.detail)
 	}
 	render() {
 		return (
