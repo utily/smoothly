@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Listen, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -11,40 +11,11 @@ export class SmoothlyInputDemo {
 	@State() alphanumeric: string = "!@##"
 	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string }>
-	@State() query?: string
-	componentWillLoad() {
-		this.query = window.location.search.replace("?", "")
-	}
-	@Listen("smoothlyUrlChange", { target: "window" })
-	urlChangeHandler(event: CustomEvent<string>) {
-		console.count(`smoothlyUrlChange happened ${event.detail}`)
-		const url = new URL(event.detail)
-		if (url.pathname === "/input") {
-			this.query = url.search.replace("?", "")
-		}
-	}
 
 	render() {
 		return (
 			<Host>
-				<smoothly-button
-					color="warning"
-					onClick={() => this.smoothlyUrlUpdate.emit({ query: "a=b", path: window.location.pathname })}>
-					Sätt query
-				</smoothly-button>
-				<smoothly-button
-					color="warning"
-					onClick={() => this.smoothlyUrlUpdate.emit({ query: "", path: window.location.pathname })}>
-					Ta bort query
-				</smoothly-button>
-				<smoothly-button
-					color="warning"
-					onClick={() => this.smoothlyUrlUpdate.emit({ query: "c=d", path: window.location.pathname })}>
-					Sätt annan query
-				</smoothly-button>
-				<p style={{ width: "100%", height: "4rem", backgroundColor: "pink", fontSize: "2rem" }}>{this.query}</p>
 				<smoothly-input-demo-standard />
-
 				<div class="inputs">
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
