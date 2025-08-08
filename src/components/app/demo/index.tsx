@@ -1,4 +1,4 @@
-import { Component, h, Prop } from "@stencil/core"
+import { Component, h, Listen, Prop } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-app-demo",
@@ -6,6 +6,10 @@ import { Component, h, Prop } from "@stencil/core"
 export class SmoothlyAppDemo {
 	@Prop() baseUrl: string
 	app?: HTMLSmoothlyAppElement
+	@Listen("smoothlyUrlChange", { target: "window" })
+	urlChangeHandler(event: CustomEvent<string>) {
+		console.log("smoothlyUrlChange", event.detail)
+	}
 	render() {
 		return (
 			<smoothly-app color="dark" label="Smoothly Demo" home="/root" ref={e => (this.app = e)}>

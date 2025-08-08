@@ -722,6 +722,10 @@ export namespace Components {
         "listen": string;
     }
 }
+export interface SmoothlyAppCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyAppElement;
+}
 export interface SmoothlyAppRoomCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyAppRoomElement;
@@ -813,6 +817,10 @@ export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputDateTimeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateTimeElement;
+}
+export interface SmoothlyInputDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDemoElement;
 }
 export interface SmoothlyInputEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -907,7 +915,18 @@ export interface SmoothlyTriggerSourceCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSmoothlyTriggerSourceElement;
 }
 declare global {
+    interface HTMLSmoothlyAppElementEventMap {
+        "smoothlyUrlChange": string;
+    }
     interface HTMLSmoothlyAppElement extends Components.SmoothlyApp, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyAppElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppElement, ev: SmoothlyAppCustomEvent<HTMLSmoothlyAppElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyAppElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppElement, ev: SmoothlyAppCustomEvent<HTMLSmoothlyAppElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyAppElement: {
         prototype: HTMLSmoothlyAppElement;
@@ -920,8 +939,9 @@ declare global {
         new (): HTMLSmoothlyAppDemoElement;
     };
     interface HTMLSmoothlyAppRoomElementEventMap {
-        "smoothlyRoomSelect": { history: boolean };
+        "smoothlyRoomSelect": { history: boolean; query?: string };
         "smoothlyRoomLoad": { selected: boolean };
+        "smoothlyUrlChange": string;
     }
     interface HTMLSmoothlyAppRoomElement extends Components.SmoothlyAppRoom, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyAppRoomElementEventMap>(type: K, listener: (this: HTMLSmoothlyAppRoomElement, ev: SmoothlyAppRoomCustomEvent<HTMLSmoothlyAppRoomElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1513,7 +1533,18 @@ declare global {
         prototype: HTMLSmoothlyInputDateTimeElement;
         new (): HTMLSmoothlyInputDateTimeElement;
     };
+    interface HTMLSmoothlyInputDemoElementEventMap {
+        "smoothlyUrlUpdate": { path: string; query?: string };
+    }
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDemoElement: {
         prototype: HTMLSmoothlyInputDemoElement;
@@ -2234,6 +2265,7 @@ declare namespace LocalJSX {
         "home"?: string;
         "label"?: string;
         "menuOpen"?: boolean;
+        "onSmoothlyUrlChange"?: (event: SmoothlyAppCustomEvent<string>) => void;
     }
     interface SmoothlyAppDemo {
         "baseUrl"?: string;
@@ -2244,7 +2276,8 @@ declare namespace LocalJSX {
         "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
-        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean }>) => void;
+        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) => void;
+        "onSmoothlyUrlChange"?: (event: SmoothlyAppRoomCustomEvent<string>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
     }
@@ -2588,6 +2621,7 @@ declare namespace LocalJSX {
         "value"?: isoly.DateTime;
     }
     interface SmoothlyInputDemo {
+        "onSmoothlyUrlUpdate"?: (event: SmoothlyInputDemoCustomEvent<{ path: string; query?: string }>) => void;
     }
     interface SmoothlyInputDemoStandard {
     }

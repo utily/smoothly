@@ -1,4 +1,15 @@
-import { Component, Event, EventEmitter, FunctionalComponent, h, Host, Method, Prop, VNode } from "@stencil/core"
+import {
+	Component,
+	Event,
+	EventEmitter,
+	FunctionalComponent,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	VNode,
+} from "@stencil/core"
 import "urlpattern-polyfill"
 import { Icon } from "../../../model"
 
@@ -8,23 +19,27 @@ import { Icon } from "../../../model"
 	scoped: true,
 })
 export class SmoothlyAppRoom {
+	private query?: string
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
-	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
+	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
-
+	componentDidRender() {
+		this.selected && this.smoothlyUrlChange.emit(window.location.href)
+	}
 	componentWillLoad() {
 		this.selected = (typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(
 			window.location
 		)
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
+		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
 	}
-
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
 		return this.contentElement
@@ -32,8 +47,21 @@ export class SmoothlyAppRoom {
 	@Method()
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
-		if (selected)
-			this.smoothlyRoomSelect.emit({ history: !!options?.history })
+		if (selected) {
+			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query })
+		}
+	}
+	@Listen("smoothlyUrlUpdate", { target: "window" })
+	async setQuery(event: CustomEvent<{ query?: string; path: string }>): Promise<void> {
+		if (event.detail.path == this.path && this.query != event.detail.query) {
+			this.query = event.detail.query
+			window.history.pushState(
+				{ smoothlyPath: this.path, smoothlyQuery: this.query },
+				"",
+				`${window.location.pathname}${this.query ? `?${this.query}` : ""}`
+			)
+			this.smoothlyUrlChange.emit(window.location.href)
+		}
 	}
 
 	clickHandler(event: MouseEvent) {

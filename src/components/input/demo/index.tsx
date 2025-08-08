@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -10,6 +10,7 @@ export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
 	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string }>
 
 	render() {
 		return (
@@ -205,19 +206,15 @@ export class SmoothlyInputDemo {
 					<smoothly-input type="identifier-pascal">Pascal</smoothly-input>
 					<smoothly-input type="identifier-camel">Camel</smoothly-input>
 					<h2>Input Alternatives</h2>
-					<smoothly-input type="text" name="name.last" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.last">
 						<smoothly-icon name="checkmark-circle" slot="start" />
 						First Name
 					</smoothly-input>
-					<smoothly-input type="text" name="name.first" onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.first">
 						Last Name
 						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>
-					<smoothly-input
-						type="text"
-						name="name.first"
-						placeholder="Smith"
-						onSmoothlyChange={e => console.log("smoothly change event")}>
+					<smoothly-input type="text" name="name.first" placeholder="Smith">
 						Last Name
 						<smoothly-icon name="checkmark-circle" slot="end" />
 					</smoothly-input>
