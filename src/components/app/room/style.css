@@ -12,15 +12,17 @@
 	height: 100%;
 }
 
+:host[selected=false] {
+	display: none;
+}
+
 :not(:host[label], :host[icon]),
 :host[disabled] {
 	display: none;
 }
 
-:host>div {
-	display: none;
-}
 
+/* 
 :host>li {
 	height: 100%;
 	list-style: none;
@@ -46,10 +48,12 @@
 :host>li>a>smoothly-icon {
 	align-self: inherit;
 }
+
 :host[icon]>li>a>.label {
 	display: none;
-}
-:host([icon][label]):hover::before,
+} */
+
+/* :host([icon][label]):hover::before,
 :host([icon][label]):hover::after {
 	position: absolute;
 	color: rgb(var(--smoothly-color-contrast));
@@ -57,26 +61,29 @@
 	border-radius: 0.25rem;
 	pointer-events: none;
 }
+
 :host([icon][label]):hover::before {
 	content: "";
-  bottom: -1.75rem;
-  transform: rotate(45deg);
-  width: 1.25em;
-  height: 1.25em;
+	bottom: -1.75rem;
+	transform: rotate(45deg);
+	width: 1.25em;
+	height: 1.25em;
 }
+
 :host([icon][label]):hover::after {
 	content: attr(label);
 	white-space: nowrap;
 	bottom: -3.25rem;
 	padding: .5rem 1rem;
 	border-radius: .25rem;
-}
+} */
 
-
+/* 
 @media screen and (max-width: 900px) {
 	:host>li>a {
 		padding: 0;
 	}
+
 	:host[icon]>li>a>.label {
 		display: unset;
 		padding: 0 1rem;
@@ -88,8 +95,9 @@
 		padding-left: 1.5rem;
 		padding-right: 1.5rem;
 	}
+
 	:host([icon][label]):hover::before,
 	:host([icon][label]):hover::after {
 		content: unset;
 	}
-}
+} */

@@ -53,7 +53,7 @@ export namespace Components {
         "icon"?: Icon;
         "label"?: string;
         "path": string | URLPattern;
-        "selected"?: boolean;
+        "selected": boolean;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
     }
     interface SmoothlyBackToTop {

@@ -31,12 +31,12 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
 				<smoothly-app-room path="/icon" label="Icons" content={<smoothly-icon-demo />} />
 				<smoothly-app-room path="/theme" label="Theming" content={<smoothly-theme-demo />} />
-				<smoothly-app-room path="/dialog" label="Dialogs" content={<smoothly-dialog-demo />} slot="nav-end" />
-				<smoothly-app-room path="/display" label="Display" content={<smoothly-display-demo />} slot="nav-end" />
-				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">
+				<smoothly-app-room path="/dialog" label="Dialogs" content={<smoothly-dialog-demo />} />
+				<smoothly-app-room path="/display" label="Display" content={<smoothly-display-demo />} />
+				<smoothly-app-room path="/tabs" label="Tabs">
 					<smoothly-tabs-demo />
 				</smoothly-app-room>
-				<smoothly-app-room path="/links" label="Links" slot="nav-end">
+				<smoothly-app-room path="/links" label="Links">
 					<smoothly-input type="text">Default</smoothly-input>
 					<div style={{ padding: "1em", maxWidth: "12em" }}>
 						<smoothly-button fill="solid" color="danger" link="https://google.com">
@@ -60,7 +60,7 @@ export class SmoothlyAppDemo {
 						</smoothly-button>
 					</div>
 				</smoothly-app-room>
-				<smoothly-app-room path="/redirect" label="Redirect" slot="nav-end">
+				<smoothly-app-room path="/redirect" label="Redirect">
 					<smoothly-button type="link" link="/input">
 						To input
 					</smoothly-button>

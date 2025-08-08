@@ -1,20 +1,22 @@
+
+/*
 smoothly-app {
 	--header-height: 5rem;
 	display: block;
-}
-
+	}
+	
+	smoothly-app[hidden] {
+		display: none;
+	}
+	
+	smoothly-app>smoothly-notifier {
+		height: 100%;
+		background: none;
+	}
 smoothly-app>smoothly-notifier>main {
 	height: calc(100dvh - var(--header-height));
 }
 
-smoothly-app[hidden] {
-	display: none;
-}
-
-smoothly-app>smoothly-notifier {
-	height: 100%;
-	background: none;
-}
 
 header:has(smoothly-burger[visible])>nav>ul smoothly-app-room {
 	width: 100%;
@@ -156,4 +158,4 @@ smoothly-app:not([menu-open])>smoothly-notifier>header>nav {
 smoothly-app>smoothly-notifier>main>div {
 	overflow-y: scroll;
 	height: 100%;
-}
+} */

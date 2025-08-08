@@ -10,9 +10,9 @@ import { Icon } from "../../../model"
 export class SmoothlyAppRoom {
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
-	@Prop({ reflect: true }) disabled: boolean
+	@Prop({ reflect: true }) disabled: boolean = false
 	@Prop() path: string | URLPattern = ""
-	@Prop({ reflect: true, mutable: true }) selected?: boolean
+	@Prop({ reflect: true, mutable: true }) selected: boolean = false
 	@Prop() content?: VNode | FunctionalComponent
 	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
@@ -24,7 +24,6 @@ export class SmoothlyAppRoom {
 		)
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
 	}
-
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
 		return this.contentElement
@@ -36,22 +35,9 @@ export class SmoothlyAppRoom {
 			this.smoothlyRoomSelect.emit({ history: !!options?.history })
 	}
 
-	clickHandler(event: MouseEvent) {
-		if (!event.metaKey && !event.ctrlKey && event.which != 2 && event.button != 1) {
-			event.preventDefault()
-			this.setSelected(true)
-		}
-	}
-
 	render() {
 		return (
 			<Host>
-				<li>
-					<a href={typeof this.path == "string" ? this.path : this.path.pathname} onClick={e => this.clickHandler(e)}>
-						{this.icon && <smoothly-icon name={this.icon} />}
-						{this.label && <span class="label">{this.label}</span>}
-					</a>
-				</li>
 				<div ref={e => (this.contentElement = e)}>
 					{this.content && <smoothly-lazy content={this.content} />}
 					<slot />

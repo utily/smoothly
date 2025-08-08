@@ -1,16 +1,15 @@
-import { Component, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, h, Listen, Method, Prop, State } from "@stencil/core"
 import { SmoothlyAppRoomCustomEvent } from "../../components"
 import { Color } from "../../model"
 
-type Room = {
-	element: HTMLSmoothlyAppRoomElement
-}
+type Room = { element: HTMLSmoothlyAppRoomElement }
 @Component({
 	tag: "smoothly-app",
 	styleUrl: "style.css",
 	scoped: false,
 })
 export class SmoothlyApp {
+	@Element() app: HTMLSmoothlyAppElement
 	@Prop({ reflect: true }) label?: string
 	@Prop() color: Color
 	@Prop() home?: string
@@ -32,17 +31,17 @@ export class SmoothlyApp {
 	async selectRoom(path: string) {
 		this.rooms[path]?.element.setSelected(true)
 	}
-	@Watch("selected")
-	async selectedChanged() {
-		Object.values(this.rooms).forEach(
-			room => room?.element.path != this.selected?.element.path && room?.element.setSelected(false)
-		)
-		const content = await this.selected?.element.getContent()
-		requestAnimationFrame(() => {
-			if (this.mainElement && content)
-				this.mainElement.replaceChildren(content)
-		})
-	}
+	// @Watch("selected")
+	// async selectedChanged() {
+	// 	Object.values(this.rooms).forEach(
+	// 		room => room?.element.path != this.selected?.element.path && room?.element.setSelected(false)
+	// 	)
+	// 	const content = await this.selected?.element.getContent()
+	// 	requestAnimationFrame(() => {
+	// 		if (this.mainElement && content)
+	// 			this.mainElement.replaceChildren(content)
+	// 	})
+	// }
 	burgerVisibilityHandler(event: CustomEvent<boolean>) {
 		this.burgerVisibility = event.detail
 	}
@@ -68,6 +67,7 @@ export class SmoothlyApp {
 	}
 	@Listen("smoothlyRoomLoad")
 	roomLoadedHandler(event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) {
+		console.log("room loaded: ", event.target.path, event.detail.selected)
 		const room = (this.rooms[event.target.path.toString()] = { element: event.target })
 		if (room.element.selected) {
 			this.selected = room
@@ -82,6 +82,7 @@ export class SmoothlyApp {
 	render() {
 		return (
 			<smoothly-notifier>
+				{/* {console.log("children: ", Object.values(this.app.children))} */}
 				<header color={this.color}>
 					<h1>
 						<a href={""}>{this.label}</a>
@@ -89,13 +90,16 @@ export class SmoothlyApp {
 					<slot name="header" />
 					<nav ref={e => (this.navElement = e)}>
 						<ul>
-							<div class={"nav-start-container"}>
-								<slot name="nav-start" />
-							</div>
-							<slot />
-							<div class={"nav-end-container"}>
-								<slot name="nav-end" />
-							</div>
+							{Object.values(this.rooms).map(r => (
+								<li>
+									<a
+										href={typeof r?.element.path == "string" ? r?.element.path : r?.element.path.pathname}
+										onClick={e => {}}>
+										{r?.element.icon && <smoothly-icon name={r?.element.icon} />}
+										{r?.element.label && <span class="label">{r?.element.label}</span>}
+									</a>
+								</li>
+							))}
 						</ul>
 					</nav>
 					<smoothly-burger
@@ -105,7 +109,9 @@ export class SmoothlyApp {
 						onSmoothlyVisibleStatus={e => this.burgerVisibilityHandler(e)}
 					/>
 				</header>
-				<main ref={e => (this.mainElement = e)} />
+				<main ref={e => (this.mainElement = e)}>
+					<slot />
+				</main>
 			</smoothly-notifier>
 		)
 	}
