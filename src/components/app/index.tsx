@@ -65,11 +65,8 @@ export class SmoothlyApp {
 			const path = this.selected.element.path.toString()
 			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
 			location.pathname = path
-			window.history.pushState(
-				{ smoothlyPath: path, smoothlyQuery: event.detail.query || "" },
-				"",
-				location.href + (event.detail.query ? `?${event.detail.query}` : "")
-			)
+			location.search = event.detail.query ? `?${event.detail.query}` : ""
+			window.history.pushState({ smoothlyPath: path, smoothlyQuery: event.detail.query || "" }, "", location.href)
 		}
 	}
 	@Listen("smoothlyRoomLoad")
