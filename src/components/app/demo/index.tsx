@@ -35,6 +35,9 @@ export class SmoothlyAppDemo {
 				<smoothly-app-room path="/button" label="Buttons" content={<smoothly-button-demo />} />
 				<smoothly-app-room path="/icon" label="Icons" content={<smoothly-icon-demo />} />
 				<smoothly-app-room path="/theme" label="Theming" content={<smoothly-theme-demo />} />
+				<smoothly-app-room label="Routing" path="/routing" content={<smoothly-routing-demo />}>
+					<smoothly-app-room path="/routing/:input" content={<smoothly-routing-demo />} />
+				</smoothly-app-room>
 				<smoothly-app-room path="/dialog" label="Dialogs" content={<smoothly-dialog-demo />} slot="nav-end" />
 				<smoothly-app-room path="/display" label="Display" content={<smoothly-display-demo />} slot="nav-end" />
 				<smoothly-app-room path="/tabs" label="Tabs" slot="nav-end">

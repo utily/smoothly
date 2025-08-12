@@ -20,13 +20,14 @@ import { Icon } from "../../../model"
 })
 export class SmoothlyAppRoom {
 	private query?: string
+	private pathParameters?: string
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
-	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string; pathParameters?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
@@ -38,7 +39,7 @@ export class SmoothlyAppRoom {
 			window.location
 		)
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
-		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
+		this.selected && window.history.replaceState({ smoothlyPath: window.location.pathname }, "", window.location.href)
 	}
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
@@ -48,18 +49,28 @@ export class SmoothlyAppRoom {
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
 		if (selected) {
-			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query })
+			this.smoothlyRoomSelect.emit({
+				history: !!options?.history,
+				query: this.query,
+				pathParameters: this.pathParameters,
+			})
 		}
 	}
 	@Listen("smoothlyUrlUpdate", { target: "window" })
-	async setQuery(event: CustomEvent<{ query?: string; path: string }>): Promise<void> {
-		if (event.detail.path == this.path && this.query != event.detail.query) {
-			this.query = event.detail.query
-			window.history.pushState(
-				{ smoothlyPath: this.path, smoothlyQuery: this.query },
-				"",
-				`${window.location.pathname}${this.query ? `?${this.query}` : ""}`
+	async updateUrl(event: CustomEvent<{ path: string; query?: string; pathParameters?: string }>): Promise<void> {
+		if (event.detail.path === (typeof this.path === "string" ? this.path : this.path.pathname)) {
+			const { query, pathParameters } = event.detail
+			typeof query === "string" && this.query != query && (this.query = query)
+			typeof pathParameters === "string" &&
+				this.pathParameters != pathParameters &&
+				(this.pathParameters = pathParameters)
+			const url = new URL(
+				window.location.origin +
+					this.path +
+					(this.pathParameters ? `/${this.pathParameters}` : "") +
+					(this.query ? `?${this.query}` : "")
 			)
+			window.history.pushState({ smoothlyPath: url.pathname, smoothlyQuery: this.query }, "", url.toString())
 			this.smoothlyUrlChange.emit(window.location.href)
 		}
 	}

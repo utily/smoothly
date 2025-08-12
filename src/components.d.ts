@@ -596,6 +596,8 @@ export namespace Components {
     interface SmoothlyNotifier {
         "icon": boolean;
     }
+    interface SmoothlyRoutingDemo {
+    }
     interface SmoothlySpinner {
         "overlay": boolean;
         "size": "small" | "icon" | "medium" | "large";
@@ -818,10 +820,6 @@ export interface SmoothlyInputDateTimeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateTimeElement;
 }
-export interface SmoothlyInputDemoCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyInputDemoElement;
-}
 export interface SmoothlyInputEditCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputEditElement;
@@ -873,6 +871,10 @@ export interface SmoothlyModalCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
+}
+export interface SmoothlyRoutingDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyRoutingDemoElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -939,7 +941,7 @@ declare global {
         new (): HTMLSmoothlyAppDemoElement;
     };
     interface HTMLSmoothlyAppRoomElementEventMap {
-        "smoothlyRoomSelect": { history: boolean; query?: string };
+        "smoothlyRoomSelect": { history: boolean; query?: string; pathParameters?: string };
         "smoothlyRoomLoad": { selected: boolean };
         "smoothlyUrlChange": string;
     }
@@ -1533,18 +1535,7 @@ declare global {
         prototype: HTMLSmoothlyInputDateTimeElement;
         new (): HTMLSmoothlyInputDateTimeElement;
     };
-    interface HTMLSmoothlyInputDemoElementEventMap {
-        "smoothlyUrlUpdate": { path: string; query?: string };
-    }
     interface HTMLSmoothlyInputDemoElement extends Components.SmoothlyInputDemo, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyInputDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDemoElement, ev: SmoothlyInputDemoCustomEvent<HTMLSmoothlyInputDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyInputDemoElement: {
         prototype: HTMLSmoothlyInputDemoElement;
@@ -1825,6 +1816,23 @@ declare global {
     var HTMLSmoothlyNotifierElement: {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
+    };
+    interface HTMLSmoothlyRoutingDemoElementEventMap {
+        "smoothlyUrlUpdate": { path: string; query?: string; pathParameters?: string };
+    }
+    interface HTMLSmoothlyRoutingDemoElement extends Components.SmoothlyRoutingDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyRoutingDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyRoutingDemoElement, ev: SmoothlyRoutingDemoCustomEvent<HTMLSmoothlyRoutingDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyRoutingDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyRoutingDemoElement, ev: SmoothlyRoutingDemoCustomEvent<HTMLSmoothlyRoutingDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyRoutingDemoElement: {
+        prototype: HTMLSmoothlyRoutingDemoElement;
+        new (): HTMLSmoothlyRoutingDemoElement;
     };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
@@ -2222,6 +2230,7 @@ declare global {
         "smoothly-modal": HTMLSmoothlyModalElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
+        "smoothly-routing-demo": HTMLSmoothlyRoutingDemoElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
@@ -2276,7 +2285,7 @@ declare namespace LocalJSX {
         "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
-        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) => void;
+        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParameters?: string }>) => void;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppRoomCustomEvent<string>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
@@ -2621,7 +2630,6 @@ declare namespace LocalJSX {
         "value"?: isoly.DateTime;
     }
     interface SmoothlyInputDemo {
-        "onSmoothlyUrlUpdate"?: (event: SmoothlyInputDemoCustomEvent<{ path: string; query?: string }>) => void;
     }
     interface SmoothlyInputDemoStandard {
     }
@@ -2809,6 +2817,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyNotifier {
         "icon"?: boolean;
+    }
+    interface SmoothlyRoutingDemo {
+        "onSmoothlyUrlUpdate"?: (event: SmoothlyRoutingDemoCustomEvent<{ path: string; query?: string; pathParameters?: string }>) => void;
     }
     interface SmoothlySpinner {
         "overlay"?: boolean;
@@ -3019,6 +3030,7 @@ declare namespace LocalJSX {
         "smoothly-modal": SmoothlyModal;
         "smoothly-notification": SmoothlyNotification;
         "smoothly-notifier": SmoothlyNotifier;
+        "smoothly-routing-demo": SmoothlyRoutingDemo;
         "smoothly-spinner": SmoothlySpinner;
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
@@ -3132,6 +3144,7 @@ declare module "@stencil/core" {
             "smoothly-modal": LocalJSX.SmoothlyModal & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
             "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
+            "smoothly-routing-demo": LocalJSX.SmoothlyRoutingDemo & JSXBase.HTMLAttributes<HTMLSmoothlyRoutingDemoElement>;
             "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;

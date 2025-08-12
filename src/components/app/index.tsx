@@ -53,20 +53,29 @@ export class SmoothlyApp {
 	}
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
-		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
+		const roomPath = `/${event.state.smoothlyPath.split("/").filter((p: string) => p.length > 0)[0]}`
+		this.rooms[roomPath]?.element.setSelected(true, { history: true })
 		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Listen("smoothlyRoomSelect")
-	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
+	roomSelectedHandler(
+		event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParameters?: string }>
+	) {
 		this.selected = { element: event.target }
 		if (this.burgerVisibility)
 			this.menuOpen = false
 		if (!event.detail.history) {
 			const path = this.selected.element.path.toString()
-			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
-			location.pathname = path
+			const location = new URL(
+				window.location.pathname.startsWith(path) ? window.location.href : window.location.origin
+			)
+			location.pathname = path + (event.detail.pathParameters ? `/${event.detail.pathParameters}` : "")
 			location.search = event.detail.query ? `?${event.detail.query}` : ""
-			window.history.pushState({ smoothlyPath: path, smoothlyQuery: event.detail.query || "" }, "", location.href)
+			window.history.pushState(
+				{ smoothlyPath: location.pathname, smoothlyQuery: location.search },
+				"",
+				location.toString()
+			)
 		}
 	}
 	@Listen("smoothlyRoomLoad")
