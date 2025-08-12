@@ -53,7 +53,7 @@ export class SmoothlyAppRoom {
 		}
 	}
 	@Listen("smoothlyUrlUpdate", { target: "window" })
-	async setQuery(event: CustomEvent<{ path: string; query?: string; pathParams?: string }>): Promise<void> {
+	async updateUrl(event: CustomEvent<{ path: string; query?: string; pathParams?: string }>): Promise<void> {
 		if (event.detail.path === (typeof this.path === "string" ? this.path : this.path.pathname)) {
 			const { query, pathParams } = event.detail
 			typeof query === "string" && this.query != query && (this.query = query)
