@@ -47,8 +47,16 @@ export class SmoothlyRoutingDemo {
 					Remove path parameter
 				</smoothly-button>
 				<div>
-					<p>Path param: {this.pathParams} </p>
-					<p>Query params: {this.query}</p>
+					<p>
+						Path param:
+						{typeof this.pathParams === "string" && this.pathParams.length > 0
+							? this.pathParams
+							: "No path params added"}
+					</p>
+					<p>
+						Query params:{" "}
+						{typeof this.query === "string" && this.query.length > 0 ? this.query : "No query params added"}
+					</p>
 				</div>
 			</Host>
 		)
