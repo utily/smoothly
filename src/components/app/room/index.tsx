@@ -20,14 +20,14 @@ import { Icon } from "../../../model"
 })
 export class SmoothlyAppRoom {
 	private query?: string
-	private pathParams?: string
+	private pathParameters?: string
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
-	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string; pathParams?: string }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string; pathParameters?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
@@ -49,19 +49,25 @@ export class SmoothlyAppRoom {
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
 		if (selected) {
-			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query, pathParams: this.pathParams })
+			this.smoothlyRoomSelect.emit({
+				history: !!options?.history,
+				query: this.query,
+				pathParameters: this.pathParameters,
+			})
 		}
 	}
 	@Listen("smoothlyUrlUpdate", { target: "window" })
-	async updateUrl(event: CustomEvent<{ path: string; query?: string; pathParams?: string }>): Promise<void> {
+	async updateUrl(event: CustomEvent<{ path: string; query?: string; pathParameters?: string }>): Promise<void> {
 		if (event.detail.path === (typeof this.path === "string" ? this.path : this.path.pathname)) {
-			const { query, pathParams } = event.detail
+			const { query, pathParameters } = event.detail
 			typeof query === "string" && this.query != query && (this.query = query)
-			typeof pathParams === "string" && this.pathParams != pathParams && (this.pathParams = pathParams)
+			typeof pathParameters === "string" &&
+				this.pathParameters != pathParameters &&
+				(this.pathParameters = pathParameters)
 			const url = new URL(
 				window.location.origin +
 					this.path +
-					(this.pathParams ? `/${this.pathParams}` : "") +
+					(this.pathParameters ? `/${this.pathParameters}` : "") +
 					(this.query ? `?${this.query}` : "")
 			)
 			window.history.pushState({ smoothlyPath: url.pathname, smoothlyQuery: this.query }, "", url.toString())

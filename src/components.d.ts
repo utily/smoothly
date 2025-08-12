@@ -941,7 +941,7 @@ declare global {
         new (): HTMLSmoothlyAppDemoElement;
     };
     interface HTMLSmoothlyAppRoomElementEventMap {
-        "smoothlyRoomSelect": { history: boolean; query?: string; pathParams?: string };
+        "smoothlyRoomSelect": { history: boolean; query?: string; pathParameters?: string };
         "smoothlyRoomLoad": { selected: boolean };
         "smoothlyUrlChange": string;
     }
@@ -1818,7 +1818,7 @@ declare global {
         new (): HTMLSmoothlyNotifierElement;
     };
     interface HTMLSmoothlyRoutingDemoElementEventMap {
-        "smoothlyUrlUpdate": { path: string; query?: string; pathParams?: string };
+        "smoothlyUrlUpdate": { path: string; query?: string; pathParameters?: string };
     }
     interface HTMLSmoothlyRoutingDemoElement extends Components.SmoothlyRoutingDemo, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyRoutingDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyRoutingDemoElement, ev: SmoothlyRoutingDemoCustomEvent<HTMLSmoothlyRoutingDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2285,7 +2285,7 @@ declare namespace LocalJSX {
         "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
-        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParams?: string }>) => void;
+        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParameters?: string }>) => void;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppRoomCustomEvent<string>) => void;
         "path"?: string | URLPattern;
         "selected"?: boolean;
@@ -2819,7 +2819,7 @@ declare namespace LocalJSX {
         "icon"?: boolean;
     }
     interface SmoothlyRoutingDemo {
-        "onSmoothlyUrlUpdate"?: (event: SmoothlyRoutingDemoCustomEvent<{ path: string; query?: string; pathParams?: string }>) => void;
+        "onSmoothlyUrlUpdate"?: (event: SmoothlyRoutingDemoCustomEvent<{ path: string; query?: string; pathParameters?: string }>) => void;
     }
     interface SmoothlySpinner {
         "overlay"?: boolean;

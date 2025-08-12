@@ -7,15 +7,15 @@ import { Component, Event, EventEmitter, h, Host, Listen, State } from "@stencil
 })
 export class SmoothlyRoutingDemo {
 	private path = "/routing"
-	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string; pathParams?: string }>
+	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string; pathParameters?: string }>
 	@State() query?: string
-	@State() pathParams?: string
+	@State() pathParameters?: string
 	componentWillLoad() {
 		if (window.location.pathname.startsWith(this.path)) {
 			this.query = window.location.search.replace("?", "")
-			this.pathParams = window.location.pathname.slice(this.path.length).replace(/^\/+/, "")
-			if (this.query || this.pathParams)
-				this.smoothlyUrlUpdate.emit({ query: this.query, path: this.path, pathParams: this.pathParams })
+			this.pathParameters = window.location.pathname.slice(this.path.length).replace(/^\/+/, "")
+			if (this.query || this.pathParameters)
+				this.smoothlyUrlUpdate.emit({ query: this.query, path: this.path, pathParameters: this.pathParameters })
 		}
 	}
 	@Listen("smoothlyUrlChange", { target: "window" })
@@ -23,7 +23,7 @@ export class SmoothlyRoutingDemo {
 		const url = new URL(event.detail)
 		if (url.pathname.startsWith(this.path)) {
 			this.query = url.search.replace("?", "")
-			this.pathParams = window.location.pathname.slice(this.path.length).replace(/^\/+/, "")
+			this.pathParameters = window.location.pathname.slice(this.path.length).replace(/^\/+/, "")
 		}
 	}
 
@@ -38,19 +38,19 @@ export class SmoothlyRoutingDemo {
 				</smoothly-button>
 				<smoothly-button
 					color="warning"
-					onClick={() => this.smoothlyUrlUpdate.emit({ path: this.path, pathParams: "123" })}>
+					onClick={() => this.smoothlyUrlUpdate.emit({ path: this.path, pathParameters: "123" })}>
 					Add path parameter
 				</smoothly-button>
 				<smoothly-button
 					color="warning"
-					onClick={() => this.smoothlyUrlUpdate.emit({ path: this.path, pathParams: "" })}>
+					onClick={() => this.smoothlyUrlUpdate.emit({ path: this.path, pathParameters: "" })}>
 					Remove path parameter
 				</smoothly-button>
 				<div>
 					<p>
 						Path param:
-						{typeof this.pathParams === "string" && this.pathParams.length > 0
-							? this.pathParams
+						{typeof this.pathParameters === "string" && this.pathParameters.length > 0
+							? this.pathParameters
 							: "No path params added"}
 					</p>
 					<p>

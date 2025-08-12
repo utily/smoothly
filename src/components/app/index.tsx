@@ -58,7 +58,9 @@ export class SmoothlyApp {
 		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Listen("smoothlyRoomSelect")
-	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParams?: string }>) {
+	roomSelectedHandler(
+		event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string; pathParameters?: string }>
+	) {
 		this.selected = { element: event.target }
 		if (this.burgerVisibility)
 			this.menuOpen = false
@@ -67,7 +69,7 @@ export class SmoothlyApp {
 			const location = new URL(
 				window.location.pathname.startsWith(path) ? window.location.href : window.location.origin
 			)
-			location.pathname = path + (event.detail.pathParams ? `/${event.detail.pathParams}` : "")
+			location.pathname = path + (event.detail.pathParameters ? `/${event.detail.pathParameters}` : "")
 			location.search = event.detail.query ? `?${event.detail.query}` : ""
 			window.history.pushState(
 				{ smoothlyPath: location.pathname, smoothlyQuery: location.search },
