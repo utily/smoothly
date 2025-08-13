@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -10,6 +10,7 @@ export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
 	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string }>
 
 	render() {
 		return (
