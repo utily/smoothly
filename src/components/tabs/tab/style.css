@@ -51,6 +51,7 @@
 	background-color: rgb(var(--smoothly-medium-color));
 	color: rgb(var(--smoothly-medium-contrast));
 	white-space: nowrap;
+	z-index: 1;
 }
 
 :host > div:nth-child(2) {
