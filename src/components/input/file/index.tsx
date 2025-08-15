@@ -40,6 +40,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@State() dragging = false
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
@@ -122,15 +123,19 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 
 	inputHandler(event: Event): void {
 		event.stopPropagation()
-		if (this.input?.files?.length)
+		if (this.input?.files?.length) {
 			this.value = this.input?.files[0]
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+		}
 	}
 	dropHandler(event: DragEvent): void {
 		event.preventDefault()
 		event.stopPropagation()
 		this.dragging = false
-		if (event.dataTransfer?.files.length)
+		if (event.dataTransfer?.files.length) {
 			this.value = event.dataTransfer.files[0]
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+		}
 	}
 	clickHandler(event: MouseEvent): void {
 		if (!this.readonly && !this.disabled && !event.composedPath().find(target => target == this.input)) {

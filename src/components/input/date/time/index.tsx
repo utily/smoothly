@@ -48,6 +48,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.DateTime>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
@@ -123,11 +124,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	watchingReadonly(): void {
 		this.observer.publish()
 	}
-	@Listen("smoothlyInput")
-	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
-		if (event.target != this.element)
-			event.stopPropagation()
-	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
 		if (event.target != this.element)
@@ -177,9 +173,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					value={this.date}
 					showLabel={this.showLabel}
 					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
+					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.date = e.detail.date
+						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+					}}
+					onSmoothlyUserInput={async e => {
+						e.stopPropagation()
+						this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}>
 					<slot />
 				</smoothly-input>
@@ -193,9 +194,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					disabled={this.disabled}
 					placeholder="hh"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
+					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.hour = e.detail.hour
+						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+					}}
+					onSmoothlyUserInput={async e => {
+						e.stopPropagation()
+						this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 				/>
 				<span class="colon">:</span>
@@ -209,9 +215,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					disabled={this.disabled}
 					placeholder="mm"
 					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
+					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.minute = e.detail.minute
+						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+					}}
+					onSmoothlyUserInput={async e => {
+						e.stopPropagation()
+						this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 				/>
 				<span class="icons">
@@ -232,13 +243,14 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 							value={this.value ? isoly.DateTime.getDate(this.value) : undefined}
 							min={this.min ? isoly.DateTime.getDate(this.min) : undefined}
 							max={this.max ? isoly.DateTime.getDate(this.max) : undefined}
-							onSmoothlyValueChange={e => {
-								this.date = e.detail
+							onSmoothlyValueChange={async e => {
 								e.stopPropagation()
+								this.date = e.detail
+								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 							}}
 							onSmoothlyDateSet={e => {
-								this.open = false
 								e.stopPropagation()
+								this.open = false
 							}}>
 							<div slot={"year-label"}>
 								<slot name={"year-label"} />
