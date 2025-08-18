@@ -23,7 +23,7 @@
 	display: contents;
 }
 :host[align] > div:first-child > div > * {
-	padding: 0.3rem 1.1rem;
+	padding: 0.5rem 1.1rem;
 }
 
 :host:not([align]) > div:first-child {
@@ -31,7 +31,7 @@
 	display: grid;
 	grid-template-columns: repeat(2, auto);
 	justify-content: space-between;
-	padding: 0.3rem 1.1rem;
+	padding: 0.5rem 1.1rem;
 }
 :host:not([align]) > div:first-child > div:first-child {
 	justify-self: start;

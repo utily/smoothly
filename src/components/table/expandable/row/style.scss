@@ -21,7 +21,7 @@
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	align-items: center;
-	padding: 0.3rem 1.1rem;
+	padding: 0.5rem 1.1rem;
 	white-space: nowrap;
 }
 
@@ -70,7 +70,7 @@
 
 :host[open]>div:last-child {
 	overflow: visible;
-	padding: 0.3rem 1.1rem;
+	padding: 0.5rem 1.1rem;
 }
 
 :host>div:last-child::before {
