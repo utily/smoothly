@@ -8,7 +8,7 @@
 :host::slotted(*) {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	align-items: center;
-	padding: 0.3rem 1.1rem;
+	padding: 0.5rem 1.1rem;
 	white-space: nowrap;
 }
 
