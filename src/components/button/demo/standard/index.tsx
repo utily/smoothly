@@ -11,6 +11,7 @@ type Options = {
 	rounded?: boolean
 	icon?: Icon
 	text?: { value: string; useColor?: boolean }
+	tooltip?: string
 }
 
 @Component({
@@ -87,10 +88,16 @@ export class SmoothlyButtonDemoStandard {
 						))}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-select>
+					<smoothly-input name="tooltip" value="Tooltip">
+						Tooltip
+						<smoothly-input-clear slot="end" />
+					</smoothly-input>
 				</smoothly-form>
 				<div class="buttons">
 					{Color.values.map((color, index, colors) => (
 						<smoothly-button
+							onClick={e => console.log(`Clicked button with color: ${color}`, e)}
+							tooltip={this.props.tooltip}
 							ref={el => colors.length - 1 == index && (this.lastButton = el)}
 							color={color}
 							expand={this.props.expand}
