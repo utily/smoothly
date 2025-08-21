@@ -26,7 +26,11 @@ export class SmoothlyTabs {
 	@Listen("smoothlyTabLoad")
 	onInputLoad(event: CustomEvent<(smoothlyTabs: SmoothlyTabs) => void>) {
 		event.stopPropagation()
-		if (this.isSmoothlyTabElement(event.target) && !this.tabElements.includes(event.target)) {
+		if (
+			this.isSmoothlyTabElement(event.target) &&
+			event.target.parentElement == this.element &&
+			!this.tabElements.includes(event.target)
+		) {
 			event.detail(this)
 			this.tabElements = [...this.tabElements, event.target]
 		}
