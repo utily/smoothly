@@ -9,7 +9,7 @@ import { SmoothlyTabs } from ".."
 })
 export class SmoothlyTab {
 	private inputs: Record<string, Input.Element> = {}
-	private smoothlyTabs: SmoothlyTabs
+	private smoothlyTabs?: SmoothlyTabs
 	@Element() element: HTMLSmoothlyTabElement
 	@Prop() label: string
 	@Prop() name: string
@@ -28,10 +28,13 @@ export class SmoothlyTab {
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
 	}
 	connectedCallback() {
-		this.smoothlyTabLoad.emit((smoothlyTabs: SmoothlyTabs) => (this.smoothlyTabs = smoothlyTabs))
+		this.smoothlyTabLoad.emit((smoothlyTabs: SmoothlyTabs) => {
+			this.smoothlyTabs?.removeTab(this.element)
+			this.smoothlyTabs = smoothlyTabs
+		})
 	}
 	disconnectedCallback() {
-		this.smoothlyTabs.removeTab(this.element)
+		this.smoothlyTabs?.removeTab(this.element)
 	}
 	async componentDidLoad() {
 		await this.openHandler()
