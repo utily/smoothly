@@ -176,7 +176,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.date = e.detail.date
-						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 					onSmoothlyUserInput={async e => {
 						e.stopPropagation()
@@ -197,7 +196,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.hour = e.detail.hour
-						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 					onSmoothlyUserInput={async e => {
 						e.stopPropagation()
@@ -218,7 +216,6 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					onSmoothlyInput={async e => {
 						e.stopPropagation()
 						this.minute = e.detail.minute
-						// this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 					onSmoothlyUserInput={async e => {
 						e.stopPropagation()
