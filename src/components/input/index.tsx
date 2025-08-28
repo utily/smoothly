@@ -53,6 +53,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Event() smoothlyBlur: EventEmitter<void>
 	@Event() smoothlyChange: EventEmitter<Record<string, any>>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 
 	@Method()
 	async getValue(): Promise<any | undefined> {
@@ -179,6 +180,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Listen("beforeinput")
 	onEvent(event: InputEvent) {
 		this.state = this.stateHandler.onInputEvent(event, this.state)
+		if (event.type == "input" || event.defaultPrevented)
+			this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
 	}
 	copyText(value?: string) {
 		if (value) {
@@ -209,7 +212,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						disabled={this.disabled}
 						readOnly={this.readonly}
 						pattern={this.state?.pattern && this.state?.pattern.source}
-						onKeyDown={event => {
+						onKeyDown={async event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
 							if (!this.readonly && !this.disabled)
 								this.smoothlyKeydown.emit(Key.create(this.name, event))
@@ -221,8 +224,10 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 								this.state = this.stateHandler.onBlur(event, this.state)
 								this.smoothlyBlur.emit()
 								this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
-								if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state)))
+								if (Deep.notEqual(lastValue, this.stateHandler.getValue(this.state))) {
 									this.smoothlyChange.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+									this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
+								}
 							}
 						}}
 					/>

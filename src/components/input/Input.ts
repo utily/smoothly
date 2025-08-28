@@ -8,12 +8,14 @@ import { Looks } from "./Looks"
 
 export interface Input extends Input.Element {
 	smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
-	smoothlyInput: EventEmitter<Data>
+	smoothlyInput: EventEmitter<Data> // Used for smoothly-form
+	smoothlyUserInput: EventEmitter<Input.UserInput>
 	smoothlyKeydown?: EventEmitter<Key>
 	smoothlyInputForm?: EventEmitter<Record<string, Data>>
 	parent: Editable | undefined
 }
 export namespace Input {
+	export type UserInput = { name: string; value: any }
 	export interface Element {
 		register: () => Promise<void>
 		unregister: () => Promise<void>
@@ -47,6 +49,7 @@ export namespace Input {
 	export const type = Element.type.extend<Input>({
 		smoothlyInputLoad: EventEmitter,
 		smoothlyInput: EventEmitter,
+		smoothlyUserInput: EventEmitter,
 		smoothlyKeydown: EventEmitter.optional(),
 		smoothlyInputForm: EventEmitter.optional(),
 		parent: Editable.type.optional(),
