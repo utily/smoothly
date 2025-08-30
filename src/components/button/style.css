@@ -60,23 +60,23 @@
 
 /* icon */
 :host(:not([size=flexible])):has(smoothly-icon[size=tiny]) {
-	--smoothly-icon-size: 1.2rem;
+	--smoothly-icon-size: 1rem;
 }
 :host(:not([size=flexible])):has(smoothly-icon[size=small]) {
-	--smoothly-icon-size: 1.4rem;
+	--smoothly-icon-size: 1.2rem;
 }
 :host(:not([size=flexible])):has(smoothly-icon),
 :host(:not([size=flexible])):has(smoothly-icon[size=medium]) {
-	--smoothly-icon-size: 1.8rem;
+	--smoothly-icon-size: 1.4rem;
 }
 :host(:not([size=flexible])):has(smoothly-icon[size=large]) {
-	--smoothly-icon-size: 2.8rem;
+	--smoothly-icon-size: 1.8rem;
 }
 :host(:not([size=flexible])):has(smoothly-icon[size=xlarge]) {
-	--smoothly-icon-size: 4rem;
+	--smoothly-icon-size: 2.8rem;
 }
 :host([size=icon]) {
-	--target-height: 3rem;
+	--target-height: 2.5rem;
 }
 :host([size=icon])>button {
 	padding: calc(((var(--target-height) - var(--content-height)) / 2) - 1px);
@@ -87,8 +87,8 @@
 
 /* small */
 :host([size=small]) {
-	--button-font-size: 1rem;
-	--target-height: 2.5rem;
+	--button-font-size: 0.875rem;
+	--target-height: 2rem;
 }
 :host([size=small])>button {
 	padding-inline: 0.75rem;
@@ -96,8 +96,8 @@
 
 /* medium */
 :host(:not([size])) {
-	--button-font-size: 1.1rem;
-	--target-height: 3rem;
+	--button-font-size: 1rem;
+	--target-height: 2.5rem;
 }
 :host(:not([size]))>button {
 	padding-inline: 1rem;
@@ -105,8 +105,8 @@
 
 /* large */
 :host([size=large]) {
-	--button-font-size: 1.3rem;
-	--target-height: 3.5rem;
+	--button-font-size: 1.1rem;
+	--target-height: 3rem;
 }
 :host([size=large])>button {
 	padding-inline: 1.25rem;
