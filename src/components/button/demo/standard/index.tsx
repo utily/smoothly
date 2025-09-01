@@ -94,13 +94,14 @@ export class SmoothlyButtonDemoStandard {
 							ref={el => colors.length - 1 == index && (this.lastButton = el)}
 							color={color}
 							expand={this.props.expand}
+							icon={this.props.icon}
 							fill={this.props.fill}
 							disabled={this.props.disabled}
 							shape={this.props.rounded ? "rounded" : undefined}
 							size={this.props.size}
 							type={this.props.type}
 							key={color}>
-							{this.props.icon ? <smoothly-icon name={this.props.icon} /> : undefined}
+							{/* {this.props.icon ? <smoothly-icon name={this.props.icon} /> : undefined} */}
 							{this.props.text?.useColor ? color : this.props.text?.value}
 						</smoothly-button>
 					))}
