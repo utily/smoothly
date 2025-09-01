@@ -1,10 +1,10 @@
 import { isly } from "isly"
 import { Data } from "./Data"
 
-export interface Submit {
+export interface Submit<D extends Data = Data> {
 	type?: typeof Submit.values[number]
 	result: (result: boolean) => void
-	value: Data
+	value: D
 }
 export namespace Submit {
 	export const values = ["update", "change", "fetch", "create", "remove"] as const
