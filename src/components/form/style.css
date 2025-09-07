@@ -4,7 +4,6 @@ smoothly-form {
 }
 smoothly-form > form {
 	position: relative;
-	min-width: 15em;
 }
 smoothly-form > form > fieldset {
 	display: flex;
@@ -23,14 +22,15 @@ smoothly-form > form > fieldset {
 }
 smoothly-form > form > fieldset > * {
 	flex-grow: 1;
-	min-width: 10em;
+	min-width: min(100%, var(--smoothly-form-input-min-width, 10rem));
 	flex-basis: 40%;
 }
 
 smoothly-form[looks="line"] > form > fieldset,
 smoothly-form[looks="border"] > form > fieldset,
 smoothly-form[looks="transparent"] > form > fieldset {
-	gap: 2em
+	row-gap: var(--smoothly-form-row-gap, 2rem);
+	column-gap: var(--smoothly-form-column-gap, 2rem);
 }
 smoothly-form[looks="grid"] > form > fieldset {
 	padding: 1px;
