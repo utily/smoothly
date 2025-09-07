@@ -627,6 +627,8 @@ export namespace Components {
         "open": boolean;
         "tooltip": string;
     }
+    interface SmoothlyTabby {
+    }
     interface SmoothlyTable {
         "columns": number;
     }
@@ -1905,6 +1907,12 @@ declare global {
         prototype: HTMLSmoothlyTabElement;
         new (): HTMLSmoothlyTabElement;
     };
+    interface HTMLSmoothlyTabbyElement extends Components.SmoothlyTabby, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTabbyElement: {
+        prototype: HTMLSmoothlyTabbyElement;
+        new (): HTMLSmoothlyTabbyElement;
+    };
     interface HTMLSmoothlyTableElement extends Components.SmoothlyTable, HTMLStencilElement {
     }
     var HTMLSmoothlyTableElement: {
@@ -2248,6 +2256,7 @@ declare global {
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
         "smoothly-tab": HTMLSmoothlyTabElement;
+        "smoothly-tabby": HTMLSmoothlyTabbyElement;
         "smoothly-table": HTMLSmoothlyTableElement;
         "smoothly-table-body": HTMLSmoothlyTableBodyElement;
         "smoothly-table-cell": HTMLSmoothlyTableCellElement;
@@ -2876,6 +2885,8 @@ declare namespace LocalJSX {
         "open"?: boolean;
         "tooltip"?: string;
     }
+    interface SmoothlyTabby {
+    }
     interface SmoothlyTable {
         "columns"?: number;
     }
@@ -3059,6 +3070,7 @@ declare namespace LocalJSX {
         "smoothly-submit": SmoothlySubmit;
         "smoothly-summary": SmoothlySummary;
         "smoothly-tab": SmoothlyTab;
+        "smoothly-tabby": SmoothlyTabby;
         "smoothly-table": SmoothlyTable;
         "smoothly-table-body": SmoothlyTableBody;
         "smoothly-table-cell": SmoothlyTableCell;
@@ -3173,6 +3185,7 @@ declare module "@stencil/core" {
             "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
             "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
+            "smoothly-tabby": LocalJSX.SmoothlyTabby & JSXBase.HTMLAttributes<HTMLSmoothlyTabbyElement>;
             "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
             "smoothly-table-body": LocalJSX.SmoothlyTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyTableBodyElement>;
             "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;

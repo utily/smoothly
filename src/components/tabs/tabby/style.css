@@ -1,0 +1,19 @@
+:host {
+	width: min(100%, 20rem, 100vw);
+	display: flex;
+	justify-content: space-between;
+	outline: 2px solid orange;
+	padding: 0.5rem;
+}
+
+
+:host > div {
+	padding: 0.5rem 1rem;
+	outline: 2px solid red;
+	flex: 0 0 auto;
+	overflow: hidden;
+}
+
+:host > div.selected {
+	flex: 1 1 auto;
+}
