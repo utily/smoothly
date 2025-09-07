@@ -1,9 +1,14 @@
 :host {
 	width: min(100%, 20rem, 100vw);
 	display: flex;
+	 overflow-x: auto;
 	justify-content: space-between;
 	outline: 2px solid orange;
 	padding: 0.5rem;
+	scrollbar-width: none; /* Firefox */
+}
+:host::-webkit-scrollbar {
+  display: none; /* hide scrollbar (Chrome, Safari) */
 }
 
 
@@ -15,5 +20,5 @@
 }
 
 :host > div.selected {
-	flex: 1 1 auto;
+	flex: 1 0 auto;
 }
