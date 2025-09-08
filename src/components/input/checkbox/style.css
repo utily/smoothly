@@ -34,6 +34,9 @@
 :host:not([readonly]):not([disabled])>label {
 	cursor: pointer;
 }
+:host>label:empty {
+	display: none;
+}
 
 :host([disabled]),
 :host([disabled])>* {
