@@ -16,6 +16,9 @@
 	display: flex;
 	gap: 1.5rem;
 }
+:host[direction=column]>div>div.options {
+	flex-direction: column;
+}
 :host::slotted([slot=end]) {
 	margin-right: 0;
 	margin-left: auto;

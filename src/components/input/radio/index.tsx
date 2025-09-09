@@ -35,6 +35,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	@Prop({ mutable: true }) value: any = undefined
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
+	@Prop({ reflect: true }) direction?: "row" | "column"
 	@Prop() clearable?: boolean
 	@Prop({ mutable: true, reflect: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
