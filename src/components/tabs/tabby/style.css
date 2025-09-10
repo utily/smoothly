@@ -1,24 +1,92 @@
 :host {
-	width: min(100%, 20rem, 100vw);
+	width: min(100%, 100vw);
 	display: flex;
-	 overflow-x: auto;
+	row-gap: 2rem;
+	flex-direction: column;
 	justify-content: space-between;
-	outline: 2px solid orange;
-	padding: 0.5rem;
+	/* outline: 2px solid orange; */
+	/* padding: 0.5rem; */
 	scrollbar-width: none; /* Firefox */
 }
 :host::-webkit-scrollbar {
   display: none; /* hide scrollbar (Chrome, Safari) */
 }
 
-
 :host > div {
+	display: flex;
+	overflow-x: auto;
+}
+:host > div > div {
 	padding: 0.5rem 1rem;
-	outline: 2px solid red;
-	flex: 0 0 auto;
+	cursor: pointer;
+}
+
+/* FIRST ROW */
+:host > div:nth-child(1) > div {
+	/* outline: 2px solid red; */
+	flex: 1 0 auto;
+	text-align: center;
+	overflow: hidden;
+	
+	border-bottom: 2px solid rgb(var(--smoothly-default-shade));
+}
+
+:host > div:nth-child(1) > div.selected {
+	/* flex: 1 0 auto; */
+	z-index: 1;
+	box-shadow: 0rem 0.5rem 1rem 0rem rgba(var(--smoothly-dark-shade), 0.2);
+	/* border-bottom: 3px solid rgb(var(--smoothly-tab-active-line, var(--smoothly-primary-color))); */
+	position: relative;
+	border-bottom: 0;
+}
+:host > div:nth-child(1) > div.selected::before {
+	content: "";
+	position: absolute;
+	height: 5px;
+	inset-inline: 0;
+	bottom: 0;
+	background-color: rgb(var(--smoothly-primary-color));
+}
+
+/* SECOND ROW */
+:host > div:nth-child(2) {
+	
+}
+:host > div:nth-child(2) > div {
+	/* outline: 2px solid red; */
+	flex: 1 0 auto;
+	text-align: center;
+	overflow: hidden;
+	border-bottom: 2px solid rgb(var(--smoothly-default-shade));
+	/* box-shadow: inset 0 -0.25rem 0.3rem -0.2rem rgba(var(--smoothly-dark-shade), 0.2); */
+}
+
+:host > div:nth-child(2) > div.selected {
+	/* flex: 1 0 auto; */
+	z-index: 1;
+	box-shadow: 0rem 0.5rem 0.7rem 0rem rgba(var(--smoothly-dark-shade), 0.2);
+	border-bottom: 2px solid transparent;
+}
+
+/* THIRD ROW */
+
+:host > div:nth-child(3) {
+	border-radius: 0.25rem;
+	background-color: rgb(var(--smoothly-light-color));
+	background-color: rgb(var(--smoothly-default-shade));
+	padding: 0.25rem;
+	column-gap: 0.25rem;
+}
+
+:host > div:nth-child(3) > div {
+	flex: 1 0 auto;
+	text-align: center;
 	overflow: hidden;
 }
 
-:host > div.selected {
-	flex: 1 0 auto;
+:host > div:nth-child(3) > div.selected {
+	border-radius: 0.5rem;
+	background-color: rgb(var(--smoothly-default-color));
+	z-index: 1;
+	box-shadow: 0rem 0.5rem 1rem 0rem rgba(var(--smoothly-dark-shade), 0.2);
 }

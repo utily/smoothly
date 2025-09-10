@@ -12,7 +12,10 @@ export class SmoothlyTabsDemo {
 	render() {
 		return (
 			<Host>
-				<smoothly-tabby></smoothly-tabby>
+				<div>
+					<smoothly-tabby></smoothly-tabby>
+					<div>Hello</div>
+				</div>
 			</Host>
 		)
 	}
