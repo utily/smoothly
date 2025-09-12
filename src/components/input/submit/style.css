@@ -7,6 +7,9 @@
 :host(:not([display])) {
 	display: none;
 }
+:host smoothly-button {
+	margin: 0;
+}
 
 :host::slotted(smoothly-button button > * > * + smoothly-icon),
 :host::slotted(smoothly-button-confirm button > * > * + smoothly-icon) {
