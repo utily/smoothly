@@ -1,10 +1,10 @@
 :host {
 	display: block;
 	position: relative;
-	min-width: 30em;
-	min-height: 3em;
+	min-width: min(calc(100% - 1rem), 30rem);
+	min-height: 3rem;
 	border-radius: 5px;
-	margin: 0.5em;
+	margin: 0.5rem;
 }
 :host > span.icon > smoothly-icon,
 :host > span.clean {
