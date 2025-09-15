@@ -110,18 +110,44 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 /* --- STACKED TABLE --- */
 
 smoothly-table.stacked>smoothly-table-body>:host {
+	display: grid;
+	grid-template-columns: 1fr auto; // might change to css variable later
 	box-shadow: 0px 0px 1px 1px rgb(var(--smoothly-table-border));
 }
 
+// smoothly-table.stacked>smoothly-table-body>:host
 smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell {
-	display: flex;
-	// flex-direction: column;
 	padding: 0.25rem 1.1rem;
-	// border-bottom: 1px solid black;
+	display: flex;
 }
 
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell:not([placement]) {
+	grid-column: 1 / -1;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-left] {
+	grid-row: 1;
+	grid-column: 1;
+	align-self: start;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-right] {
+	grid-row: 1;
+	grid-column: 2;
+	align-self: end;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement]>.smoothly-cell-header {
+	display: none;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement] {
+	border-bottom: 1px solid black;
+	padding-block: 0.5rem;
+}
 
 smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button {
+	grid-column: 1 / -1;
 	border-top: 1px solid black;
 	position: relative;
 	height: 3rem;
@@ -132,8 +158,8 @@ smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before
 	top: 50%;
 	left: 50%;
 	position: absolute;
-	border-left: 3px solid red;
-	border-bottom: 3px solid red;
+	border-left: 3px solid black;
+	border-bottom: 3px solid black;
 	transform: translate(-50%, -75%) rotate(-45deg);
 	width: 1rem;
 	height: 1rem;

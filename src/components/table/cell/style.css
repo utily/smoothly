@@ -8,11 +8,10 @@ smoothly-table:not(.stacked) :host {
 
 smoothly-table.stacked :host {
 	display: flex;
-	width: 100%;
 }
 
 smoothly-table.stacked :host>.smoothly-cell-header {
-	font-weight: bold;
-	min-width: var(--smoothly-table-stacked-header-width, 10ch);
+	min-width: var(--smoothly-table-stacked-header-width, 12ch);
+	color: rgb(var(--smoothly-default-contrast), 0.7);
 	margin-bottom: 0.25rem;
 }
