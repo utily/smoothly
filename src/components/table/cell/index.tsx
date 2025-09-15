@@ -8,7 +8,7 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 export class SmoothlyTableCell {
 	@Prop({ reflect: true }) span?: number = 1
 	@Prop({ reflect: true }) header?: string
-	@Prop({ reflect: true }) placement?: "top-left" | "top-center" | "top-right"
+	@Prop({ reflect: true }) cardArea?: "checkbox" | "primary" | "status" | "actions"
 
 	render(): VNode | VNode[] {
 		return (

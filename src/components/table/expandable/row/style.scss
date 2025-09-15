@@ -111,7 +111,7 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 
 smoothly-table.stacked>smoothly-table-body>:host {
 	display: grid;
-	grid-template-columns: 1fr auto auto; // might change to css variable later
+	grid-template-columns: auto 1fr auto auto; // might change to css variable later
 	box-shadow: 0px 0px 1px 1px rgb(var(--smoothly-table-border));
 }
 
@@ -121,33 +121,32 @@ smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell {
 	display: flex;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell:not([placement]) {
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell:not([card-area]) {
 	grid-column: 1 / -1;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-left] {
-	grid-row: 1;
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=checkbox] {
 	grid-column: 1;
-	align-self: start;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-center] {
-	grid-row: 1;
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=primary] {
 	grid-column: 2;
-	align-self: end;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-right] {
-	grid-row: 1;
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=status] {
 	grid-column: 3;
-	align-self: end;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement]>.smoothly-cell-header {
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=actions] {
+	grid-column: 4;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area]>.smoothly-cell-header {
 	display: none;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement] {
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area] {
+	grid-row: 1;
 	border-bottom: 1px solid black;
 	padding-block: 0.5rem;
 }

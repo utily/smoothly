@@ -11,7 +11,7 @@ export class SmoothlyTableDemoNestedNoCell {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Nested" />
-				<smoothly-table color="primary" columns={8} stack-at="48rem">
+				<smoothly-table color="primary" columns={9} stack-at="48rem">
 					<smoothly-table-head>
 						<smoothly-table-row>
 							<div>Id</div>
@@ -22,6 +22,7 @@ export class SmoothlyTableDemoNestedNoCell {
 							<div>EyeColor</div>
 							<div>Gender</div>
 							<div>Company</div>
+							<div></div>
 						</smoothly-table-row>
 					</smoothly-table-head>
 					<smoothly-table-body>
@@ -30,17 +31,23 @@ export class SmoothlyTableDemoNestedNoCell {
 								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
 								<smoothly-table-cell header="Id">{entry.id}</smoothly-table-cell>
 								<smoothly-table-cell header="Registered">{entry.registered}</smoothly-table-cell>
-								<smoothly-table-cell placement="top-left" header="Name">
+								<smoothly-table-cell card-area="primary" header="Name">
 									{entry.name}
 								</smoothly-table-cell>
 								<smoothly-table-cell header="Age">{entry.age}</smoothly-table-cell>
 								<smoothly-table-cell header="Balance">{entry.balance}</smoothly-table-cell>
-								<smoothly-table-cell placement="top-center" header="EyeColor">
+								<smoothly-table-cell card-area="status" header="EyeColor">
 									{entry.eyeColor}
 								</smoothly-table-cell>
 								<smoothly-table-cell header="Gender">{entry.gender}</smoothly-table-cell>
-								<smoothly-table-cell placement="top-right" header="Company">
-									{entry.company}
+								<smoothly-table-cell header="Company">{entry.company}</smoothly-table-cell>
+								<smoothly-table-cell card-area="actions">
+									<smoothly-icon
+										name="trash-bin-outline"
+										color="danger"
+										fill="outline"
+										onClick={() => console.log("Delete", entry.name)}
+									/>
 								</smoothly-table-cell>
 							</smoothly-table-expandable-row>
 						))}
