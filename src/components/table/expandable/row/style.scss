@@ -111,7 +111,7 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 
 smoothly-table.stacked>smoothly-table-body>:host {
 	display: grid;
-	grid-template-columns: 1fr auto; // might change to css variable later
+	grid-template-columns: 1fr auto auto; // might change to css variable later
 	box-shadow: 0px 0px 1px 1px rgb(var(--smoothly-table-border));
 }
 
@@ -131,9 +131,15 @@ smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=t
 	align-self: start;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-right] {
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-center] {
 	grid-row: 1;
 	grid-column: 2;
+	align-self: end;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[placement=top-right] {
+	grid-row: 1;
+	grid-column: 3;
 	align-self: end;
 }
 

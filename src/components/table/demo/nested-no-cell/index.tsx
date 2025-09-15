@@ -35,7 +35,9 @@ export class SmoothlyTableDemoNestedNoCell {
 								</smoothly-table-cell>
 								<smoothly-table-cell header="Age">{entry.age}</smoothly-table-cell>
 								<smoothly-table-cell header="Balance">{entry.balance}</smoothly-table-cell>
-								<smoothly-table-cell header="EyeColor">{entry.eyeColor}</smoothly-table-cell>
+								<smoothly-table-cell placement="top-center" header="EyeColor">
+									{entry.eyeColor}
+								</smoothly-table-cell>
 								<smoothly-table-cell header="Gender">{entry.gender}</smoothly-table-cell>
 								<smoothly-table-cell placement="top-right" header="Company">
 									{entry.company}

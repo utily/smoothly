@@ -637,7 +637,7 @@ export namespace Components {
     }
     interface SmoothlyTableCell {
         "header"?: string;
-        "placement"?: "top-left" | "top-right";
+        "placement"?: "top-left" | "top-center" | "top-right";
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -2891,7 +2891,7 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableCell {
         "header"?: string;
-        "placement"?: "top-left" | "top-right";
+        "placement"?: "top-left" | "top-center" | "top-right";
         "span"?: number;
     }
     interface SmoothlyTableDemo {
