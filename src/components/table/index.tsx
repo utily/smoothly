@@ -8,8 +8,8 @@ import { SmoothlyTableExpandableCellCustomEvent } from "../../components"
 })
 export class SmoothlyTable {
 	@Prop() columns = 1
-	@Prop() stackAt?: string
-	@State() mode: "stacked" | "table" = "table"
+	@Prop({ reflect: true }) cardAt?: string
+	@State() mode: "cards" | "table" = "table"
 
 	@Listen("smoothlyTableExpandableRowChange")
 	smoothlyTableExpandableRowChange(event: SmoothlyTableExpandableCellCustomEvent<boolean>): void {
@@ -22,18 +22,16 @@ export class SmoothlyTable {
 	}
 
 	componentWillLoad() {
-		if (this.stackAt) {
-			const mql = window.matchMedia(`(max-width: ${this.stackAt})`)
-			this.mode = mql.matches ? "stacked" : "table"
-			mql.addEventListener("change", e => {
-				this.mode = e.matches ? "stacked" : "table"
-			})
+		if (this.cardAt) {
+			const mql = window.matchMedia(`(max-width: ${this.cardAt})`)
+			this.mode = mql.matches ? "cards" : "table"
+			mql.addEventListener("change", e => (this.mode = e.matches ? "cards" : "table"))
 		}
 	}
 
 	render(): VNode | VNode[] {
 		return (
-			<Host class={{ stacked: this.mode == "stacked" }} style={{ "--columns": this.columns.toString() }}>
+			<Host class={{ cards: this.mode == "cards" }} style={{ "--columns": this.columns.toString() }}>
 				<slot />
 			</Host>
 		)

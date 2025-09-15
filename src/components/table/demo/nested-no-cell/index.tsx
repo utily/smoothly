@@ -11,7 +11,7 @@ export class SmoothlyTableDemoNestedNoCell {
 		return (
 			<Host>
 				<smoothly-display type="text" value="Nested" />
-				<smoothly-table color="primary" columns={9} stack-at="48rem">
+				<smoothly-table color="primary" columns={9} card-at="48rem">
 					<smoothly-table-head>
 						<smoothly-table-row>
 							<div>Id</div>
@@ -29,18 +29,18 @@ export class SmoothlyTableDemoNestedNoCell {
 						{data.map(entry => (
 							<smoothly-table-expandable-row>
 								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
-								<smoothly-table-cell header="Id">{entry.id}</smoothly-table-cell>
-								<smoothly-table-cell header="Registered">{entry.registered}</smoothly-table-cell>
-								<smoothly-table-cell card-area="primary" header="Name">
+								<smoothly-table-cell label="Id">{entry.id}</smoothly-table-cell>
+								<smoothly-table-cell label="Registered">{entry.registered}</smoothly-table-cell>
+								<smoothly-table-cell card-area="primary" label="Name">
 									{entry.name}
 								</smoothly-table-cell>
-								<smoothly-table-cell header="Age">{entry.age}</smoothly-table-cell>
-								<smoothly-table-cell header="Balance">{entry.balance}</smoothly-table-cell>
-								<smoothly-table-cell card-area="status" header="EyeColor">
+								<smoothly-table-cell label="Age">{entry.age}</smoothly-table-cell>
+								<smoothly-table-cell label="Balance">{entry.balance}</smoothly-table-cell>
+								<smoothly-table-cell card-area="status" label="EyeColor">
 									{entry.eyeColor}
 								</smoothly-table-cell>
-								<smoothly-table-cell header="Gender">{entry.gender}</smoothly-table-cell>
-								<smoothly-table-cell header="Company">{entry.company}</smoothly-table-cell>
+								<smoothly-table-cell label="Gender">{entry.gender}</smoothly-table-cell>
+								<smoothly-table-cell label="Company">{entry.company}</smoothly-table-cell>
 								<smoothly-table-cell card-area="actions">
 									<smoothly-icon
 										name="trash-bin-outline"

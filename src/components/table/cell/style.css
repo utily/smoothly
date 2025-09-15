@@ -1,19 +1,19 @@
-smoothly-table:not(.stacked) :host {
+smoothly-table:not(.cards) :host {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	align-items: center;
-	/* replace with min-height css-var row-min-height? */
-	padding: 0.5rem 1.1rem;
+	padding-inline: 1.1rem;
+	min-height: var(--smoothly-table-row-min-height, 3rem);
 	white-space: nowrap;
 }
 
-smoothly-table.stacked :host {
+smoothly-table.cards :host {
 	display: flex;
 }
 
-smoothly-table.stacked :host>.smoothly-cell-header {
-	/* css-var cell-header-min-width? */
-	min-width: var(--smoothly-table-cell-header-width, 12ch);
-	/* css-var cell-header-color? */
+smoothly-table.cards :host>.smoothly-cell-label {
+	/* css-var card-field-label-min-width? */
+	min-width: var(--smoothly-card-field-label-min-width, 12ch);
+	/* css-var card-label-color? */
 	color: rgb(var(--smoothly-default-contrast), 0.7);
 }

@@ -14,7 +14,7 @@ export class SmoothlyTableExpandableRow {
 	isStacked(eventPath: EventTarget[]): boolean {
 		for (const el of eventPath) {
 			if (el instanceof HTMLElement && el.tagName.toLowerCase() == "smoothly-table") {
-				return el.classList.contains("stacked")
+				return el.classList.contains("cards")
 			}
 		}
 		return false

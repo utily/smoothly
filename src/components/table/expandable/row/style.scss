@@ -14,23 +14,25 @@
 	grid-column: 1 / -1;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host::slotted(:not(.detail)):not(.smoothly-row),
-smoothly-table:not(.stacked)>smoothly-table-body>:host>::slotted(.smoothly-row>*) {
+smoothly-table:not(.cards)>smoothly-table-body>:host::slotted(:not(.detail)):not(.smoothly-row):not(.smoothly-expand-button),
+smoothly-table:not(.cards)>smoothly-table-body>:host>::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
 	grid: subgrid;
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	align-items: center;
-	padding: 0.5rem 1.1rem;
+	padding-inline: 1.1rem;
+	min-height: var(--smoothly-table-cell-min-height, 3rem);
 	white-space: nowrap;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-expand-button {
+smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-expand-button {
 	display: none;
+	visibility: hidden;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host:has(>:not(.detail):hover),
-smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:not(.detail):hover) {
+smoothly-table:not(.cards)>smoothly-table-body>:host:has(>:not(.detail):hover),
+smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row:has(>:not(.detail):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -39,7 +41,7 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:not(.
 	background-color: rgb(var(--smoothly-table-expanded-background));
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host[open] {
+smoothly-table:not(.cards)>smoothly-table-body>:host[open] {
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	grid-template-rows: auto 1fr;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
@@ -60,28 +62,28 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host[open] {
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host> :first-child,
-smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row> :first-child {
+smoothly-table:not(.cards)>smoothly-table-body>:host> :first-child,
+smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row> :first-child {
 	@include arrow;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host:has(>:hover)> :first-child,
-smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:hover)> :first-child {
+smoothly-table:not(.cards)>smoothly-table-body>:host:has(>:hover)> :first-child,
+smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row:has(>:hover)> :first-child {
 	@include arrow-hover;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host[open]> :first-child,
-smoothly-table:not(.stacked)>smoothly-table-body>:host[open]>.smoothly-row>:first-child {
+smoothly-table:not(.cards)>smoothly-table-body>:host[open]> :first-child,
+smoothly-table:not(.cards)>smoothly-table-body>:host[open]>.smoothly-row>:first-child {
 	@include arrow-open;
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host[open]>div.detail {
+smoothly-table:not(.cards)>smoothly-table-body>:host[open]>div.detail {
 	overflow: visible;
-	padding: 0.5rem 1.1rem;
-	outline: 2px solid red;
+	padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
+	padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
+smoothly-table:not(.cards)>smoothly-table-body>:host>div.detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -112,57 +114,67 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 
 /* --- STACKED TABLE --- */
 
-smoothly-table.stacked>smoothly-table-body>:host {
+smoothly-table.cards>smoothly-table-body>:host {
 	display: grid;
 	grid-template-columns: auto 1fr auto auto;
-	/* css-var shadow or color? */
+	/* css-var card-shadow-color? */
 	box-shadow: 0 1px 3px rgba(var(--smoothly-default-contrast), 0.12),
 		0 1px 2px rgba(var(--smoothly-default-contrast), 0.24);
 	border: 1px solid rgb(var(--smoothly-table-border), 0.25);
 	border-radius: 0.5rem;
 }
 
-// smoothly-table.stacked>smoothly-table-body>:host
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell {
-	padding-inline: 1.1rem;
+// smoothly-table.cards>smoothly-table-body>:host
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell {
+	padding-inline: 0.75rem;
 	box-sizing: border-box;
-	/* css-var card-cell-min-height? */
-	min-height: 3rem;
 	display: flex;
 	align-items: center;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell:not([card-area]) {
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell:not([card-area]) {
 	grid-column: 1 / -1;
+	/* css-var card-field-min-height? */
+	min-height: var(--smoothly-card-field-min-height, 3rem);
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area]>.smoothly-cell-header {
-	display: none;
-}
-
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=checkbox] {
-	grid-column: 1;
-}
-
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=primary] {
-	grid-column: 2;
-}
-
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=status] {
-	grid-column: 3;
-}
-
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=actions] {
-	grid-column: 4;
-}
-
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area] {
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area] {
 	grid-row: 1;
 	/* css-var card-border-color? */
 	border-bottom: 1px solid rgb(var(--smoothly-table-border), 0.25);
+	/* css-var card-header-min-height? */
+	min-height: var(--smoothly-card-header-min-height, 3rem);
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button {
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area]>.smoothly-cell-label {
+	display: none;
+}
+
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area=checkbox] {
+	grid-column: 1;
+}
+
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area=primary] {
+	grid-column: 2;
+}
+
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area=status] {
+	grid-column: 3;
+}
+
+smoothly-table.cards>smoothly-table-body>:host>smoothly-table-cell[card-area=actions] {
+	grid-column: 4;
+}
+
+smoothly-table.cards>smoothly-table-body>:host[open]>div.detail {
+	overflow: visible;
+	/* css-var card-detail-padding-block? */
+	padding-block: var(--smoothly-card-detail-block, 0.5rem);
+	/* css-var card-detail-padding-inline? */
+	padding-inline: var(--smoothly-card-detail-inline, 0);
+}
+
+smoothly-table.cards>smoothly-table-body>:host>.smoothly-expand-button {
 	grid-column: 1 / -1;
 	/* css-var card-border-color? */
 	border-top: 1px solid rgb(var(--smoothly-table-border), 0.25);
@@ -170,12 +182,12 @@ smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button {
 	height: 3rem;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before {
+smoothly-table.cards>smoothly-table-body>:host>.smoothly-expand-button::before {
 	content: "";
 	top: 50%;
 	left: 50%;
 	position: absolute;
-	/* css-var arrow color */
+	/* css-var --smoothly-card-expand-arrow-color */
 	border-left: 3px solid rgb(var(--smoothly-table-border), 0.5);
 	border-bottom: 3px solid rgb(var(--smoothly-table-border), 0.5);
 	transform: translate(-50%, -75%) rotate(-45deg);
@@ -183,6 +195,6 @@ smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before
 	height: 0.75rem;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host([open])>.smoothly-expand-button::before {
+smoothly-table.cards>smoothly-table-body>:host([open])>.smoothly-expand-button::before {
 	transform: translate(-50%, -25%) rotate(135deg);
 }

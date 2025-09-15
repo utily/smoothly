@@ -630,14 +630,14 @@ export namespace Components {
         "tooltip": string;
     }
     interface SmoothlyTable {
+        "cardAt"?: string;
         "columns": number;
-        "stackAt"?: string;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
         "cardArea"?: "checkbox" | "primary" | "status" | "actions";
-        "header"?: string;
+        "label"?: string;
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -2884,14 +2884,14 @@ declare namespace LocalJSX {
         "tooltip"?: string;
     }
     interface SmoothlyTable {
+        "cardAt"?: string;
         "columns"?: number;
-        "stackAt"?: string;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
         "cardArea"?: "checkbox" | "primary" | "status" | "actions";
-        "header"?: string;
+        "label"?: string;
         "span"?: number;
     }
     interface SmoothlyTableDemo {
