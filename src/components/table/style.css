@@ -23,10 +23,5 @@
 	display: none;
 }
 :host(.stacked)>smoothly-table-body {
-	row-gap: 2rem;
-}
-
-:host(.stacked)>smoothly-table-body>smoothly-table-expandable-row {
-	/* border: 1px solid orange; */
-	border-radius: 0.5rem;
+	row-gap: 1.5rem;
 }

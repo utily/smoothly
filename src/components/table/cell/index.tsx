@@ -13,7 +13,7 @@ export class SmoothlyTableCell {
 	render(): VNode | VNode[] {
 		return (
 			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
-				{this.header && <span class="smoothly-cell-header">{this.header}</span>}
+				{typeof this.header == "string" && <span class="smoothly-cell-header">{this.header}</span>}
 				<slot />
 			</Host>
 		)

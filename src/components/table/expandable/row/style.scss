@@ -35,8 +35,11 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:not(.
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
 
-smoothly-table:not(.stacked)>smoothly-table-body>:host[open] {
+:host[open] {
 	background-color: rgb(var(--smoothly-table-expanded-background));
+}
+
+smoothly-table:not(.stacked)>smoothly-table-body>:host[open] {
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	grid-template-rows: auto 1fr;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
@@ -111,18 +114,28 @@ smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 
 smoothly-table.stacked>smoothly-table-body>:host {
 	display: grid;
-	grid-template-columns: auto 1fr auto auto; // might change to css variable later
-	box-shadow: 0px 0px 1px 1px rgb(var(--smoothly-table-border));
+	grid-template-columns: auto 1fr auto auto;
+	box-shadow: 0 1px 3px rgba(var(--smoothly-default-contrast), 0.12),
+		0 1px 2px rgba(var(--smoothly-default-contrast), 0.24);
+	border: 1px solid rgb(var(--smoothly-table-border), 0.25);
+	border-radius: 0.5rem;
 }
 
 // smoothly-table.stacked>smoothly-table-body>:host
 smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell {
-	padding: 0.25rem 1.1rem;
+	padding-inline: 1.1rem;
+	box-sizing: border-box;
+	min-height: 3rem;
 	display: flex;
+	align-items: center;
 }
 
 smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell:not([card-area]) {
 	grid-column: 1 / -1;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area]>.smoothly-cell-header {
+	display: none;
 }
 
 smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=checkbox] {
@@ -141,19 +154,14 @@ smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area=a
 	grid-column: 4;
 }
 
-smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area]>.smoothly-cell-header {
-	display: none;
-}
-
 smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell[card-area] {
 	grid-row: 1;
-	border-bottom: 1px solid black;
-	padding-block: 0.5rem;
+	border-bottom: 1px solid rgb(var(--smoothly-table-border), 0.25);
 }
 
 smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button {
 	grid-column: 1 / -1;
-	border-top: 1px solid black;
+	border-top: 1px solid rgb(var(--smoothly-table-border), 0.25);
 	position: relative;
 	height: 3rem;
 }
@@ -163,8 +171,8 @@ smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before
 	top: 50%;
 	left: 50%;
 	position: absolute;
-	border-left: 3px solid black;
-	border-bottom: 3px solid black;
+	border-left: 3px solid rgb(var(--smoothly-table-border), 0.5);
+	border-bottom: 3px solid rgb(var(--smoothly-table-border), 0.5);
 	transform: translate(-50%, -75%) rotate(-45deg);
 	width: 0.75rem;
 	height: 0.75rem;
