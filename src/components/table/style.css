@@ -23,5 +23,5 @@
 	display: none;
 }
 :host(.stacked)>smoothly-table-body {
-	row-gap: 1.5rem;
+	row-gap: 1.5rem; /* css-var */
 }
