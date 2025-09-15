@@ -631,10 +631,13 @@ export namespace Components {
     }
     interface SmoothlyTable {
         "columns": number;
+        "stackAt"?: string;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
+        "header"?: string;
+        "placement"?: "top-left" | "top-right";
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -2882,10 +2885,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTable {
         "columns"?: number;
+        "stackAt"?: string;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
+        "header"?: string;
+        "placement"?: "top-left" | "top-right";
         "span"?: number;
     }
     interface SmoothlyTableDemo {

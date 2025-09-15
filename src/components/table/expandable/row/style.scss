@@ -8,14 +8,14 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host>.smoothly-row { 
+:host>.smoothly-row {
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 }
 
-:host::slotted(:not(.detail)):not(.smoothly-row),
-:host>::slotted(.smoothly-row>*) {
+smoothly-table:not(.stacked)>smoothly-table-body>:host::slotted(:not(.detail)):not(.smoothly-row),
+smoothly-table:not(.stacked)>smoothly-table-body>:host>::slotted(.smoothly-row>*) {
 	grid: subgrid;
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
@@ -25,13 +25,17 @@
 	white-space: nowrap;
 }
 
-:host:has(>:not(:last-child):hover),
-:host>.smoothly-row:has(>:not(:last-child):hover) {
+smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-expand-button {
+	display: none;
+}
+
+smoothly-table:not(.stacked)>smoothly-table-body>:host:has(>:not(.detail):hover),
+smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:not(.detail):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
 
-:host[open] {
+smoothly-table:not(.stacked)>smoothly-table-body>:host[open] {
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	grid-template-rows: auto 1fr;
@@ -44,7 +48,7 @@
 	display: none;
 }
 
-:host>div:last-child {
+:host>div.detail {
 	grid-column: 1 / -1;
 	cursor: default;
 	position: relative;
@@ -53,27 +57,28 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host> :first-child,
-:host>.smoothly-row> :first-child {
+smoothly-table:not(.stacked)>smoothly-table-body>:host> :first-child,
+smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row> :first-child {
 	@include arrow;
 }
 
-:host:has(>:hover)> :first-child,
-:host>.smoothly-row:has(>:hover)> :first-child {
+smoothly-table:not(.stacked)>smoothly-table-body>:host:has(>:hover)> :first-child,
+smoothly-table:not(.stacked)>smoothly-table-body>:host>.smoothly-row:has(>:hover)> :first-child {
 	@include arrow-hover;
 }
 
-:host[open]> :first-child,
-:host[open]>.smoothly-row>:first-child {
+smoothly-table:not(.stacked)>smoothly-table-body>:host[open]> :first-child,
+smoothly-table:not(.stacked)>smoothly-table-body>:host[open]>.smoothly-row>:first-child {
 	@include arrow-open;
 }
 
-:host[open]>div:last-child {
+smoothly-table:not(.stacked)>smoothly-table-body>:host[open]>div.detail {
 	overflow: visible;
 	padding: 0.5rem 1.1rem;
+	outline: 2px solid red;
 }
 
-:host>div:last-child::before {
+smoothly-table:not(.stacked)>smoothly-table-body>:host>div.detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -88,7 +93,7 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host>div:last-child::after {
+:host>div.detail::after {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -99,4 +104,41 @@
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
+
+
+/* --- STACKED TABLE --- */
+
+smoothly-table.stacked>smoothly-table-body>:host {
+	box-shadow: 0px 0px 1px 1px rgb(var(--smoothly-table-border));
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>smoothly-table-cell {
+	display: flex;
+	// flex-direction: column;
+	padding: 0.25rem 1.1rem;
+	// border-bottom: 1px solid black;
+}
+
+
+smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button {
+	border-top: 1px solid black;
+	position: relative;
+	height: 3rem;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before {
+	content: "";
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	border-left: 3px solid red;
+	border-bottom: 3px solid red;
+	transform: translate(-50%, -75%) rotate(-45deg);
+	width: 1rem;
+	height: 1rem;
+}
+
+smoothly-table.stacked>smoothly-table-body>:host([open])>.smoothly-expand-button::before {
+	transform: translate(-50%, -25%) rotate(135deg);
 }
