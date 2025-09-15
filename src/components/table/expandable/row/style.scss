@@ -161,8 +161,8 @@ smoothly-table.stacked>smoothly-table-body>:host>.smoothly-expand-button::before
 	border-left: 3px solid black;
 	border-bottom: 3px solid black;
 	transform: translate(-50%, -75%) rotate(-45deg);
-	width: 1rem;
-	height: 1rem;
+	width: 0.75rem;
+	height: 0.75rem;
 }
 
 smoothly-table.stacked>smoothly-table-body>:host([open])>.smoothly-expand-button::before {
