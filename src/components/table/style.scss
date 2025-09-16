@@ -6,22 +6,20 @@
 	fill: rgb(var(--smoothly-table-foreground));
 }
 
-:host:not(.cards) {
-	display: grid;
-	grid-template-columns: repeat(var(--columns), auto);
-}
-
-:host:not(.cards) .smoothly-cell-label {
-	display: none;
-}
-
 /* Regular table (non-cards) */
 
 :host(:not(.cards)) {
+	display: grid;
+	grid-template-columns: repeat(var(--columns), auto);
+
 
 	& > smoothly-table-body > *,
 	& > smoothly-table-body {
 		& > smoothly-table-expandable-row {
+
+			& > smoothly-table-cell > .smoothly-cell-label {
+				display: none;
+			}
 
 			& > div.detail::before,
 			& > div.detail::after {
@@ -51,6 +49,8 @@
 				color: rgb(var(--smoothly-table-hover-foreground));
 			}
 		}
+
+
 
 		& > smoothly-table-expandable-row[open] {
 			color: rgb(var(--smoothly-table-expanded-foreground));
