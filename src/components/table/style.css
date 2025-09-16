@@ -44,13 +44,13 @@
 	display: flex;
 	align-items: center;
 }
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell:not([card-area]) ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell:not([card-area]),
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell:not([card-area]) {
 	grid-column: 1 / -1;
 	/* css-var card-field-min-height? */
 	min-height: var(--smoothly-card-field-min-height, 3rem);
 }
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area] ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area],
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area] {
 	grid-row: 1;
 	/* css-var card-border-color? */
@@ -58,30 +58,30 @@
 	/* css-var card-header-min-height? */
 	min-height: var(--smoothly-card-header-min-height, 3rem);
 }
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area]>.smoothly-cell-label ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area]>.smoothly-cell-label,
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area]>.smoothly-cell-label {
 	display: none;
 }
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=checkbox] ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=checkbox],
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area=checkbox] {
 	grid-column: 1;
 }
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=primary] ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=primary],
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area=primary] {
 	grid-column: 2;
 }
 
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=status] ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=status],
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area=status] {
 	grid-column: 3;
 }
 
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=actions] ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>smoothly-table-cell[card-area=actions],
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>smoothly-table-cell[card-area=actions] {
 	grid-column: 4;
 }
 
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row[open]>div.detail ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row[open]>div.detail,
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row[open]>div.detail {
 	overflow: visible;
 	/* css-var card-detail-padding-block? */
@@ -90,7 +90,7 @@
 	padding-inline: var(--smoothly-card-detail-inline, 0);
 }
 
-:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>.smoothly-expand-button ,
+:host(.cards)>smoothly-table-body>*>smoothly-table-expandable-row>.smoothly-expand-button,
 :host(.cards)>smoothly-table-body>smoothly-table-expandable-row>.smoothly-expand-button {
 	grid-column: 1 / -1;
 	/* css-var card-border-color? */
