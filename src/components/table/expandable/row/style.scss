@@ -1,5 +1,3 @@
-@import "../arrow.scss";
-
 :host {
 	grid-column: 1 / -1;
 	display: grid;
@@ -31,89 +29,31 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
+/* Regular table (non-cards) */
+
+:host > div.detail::before,
 :host > div.detail::after {
-	content: "";
-	position: absolute;
-	display: flex;
-	top: 0;
-	bottom: 0;
-	right: -1em;
-	width: 1em;
-	background-color: rgb(var(--smoothly-table-expanded-background));
-	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
-		0px 0px 1px 0px rgb(var(--smoothly-table-border));
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host::slotted(:not(.detail)):not(.smoothly-row):not(.smoothly-expand-button),
-smoothly-table:not(.cards) > smoothly-table-body > :host > ::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
-	grid: subgrid;
-	cursor: pointer;
-	grid-column: span var(--smoothly-table-cell-span, 1);
-	display: flex;
-	align-items: center;
-	padding-inline: 1.1rem;
-	min-height: var(--smoothly-table-cell-min-height, 3rem);
-	white-space: nowrap;
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-expand-button {
-	display: none;
-	visibility: hidden;
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host:has(>:not(.detail):hover),
-smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row:has(>:not(.detail):hover) {
-	background-color: rgb(var(--smoothly-table-hover-background));
-	color: rgb(var(--smoothly-table-hover-foreground));
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host[open] {
-	color: rgb(var(--smoothly-table-expanded-foreground));
-	grid-template-rows: auto 1fr;
-	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
-		0px 0px 1px rgb(var(--smoothly-table-border)) inset;
-	grid-template-rows: 0fr 1fr;
-}
-
-
-
-smoothly-table:not(.cards) > smoothly-table-body > :host > :first-child,
-smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row > :first-child {
-	@include arrow;
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host:has(>:hover) > :first-child,
-smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row:has(>:hover) > :first-child {
-	@include arrow-hover;
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host[open] > :first-child,
-smoothly-table:not(.cards) > smoothly-table-body > :host[open] > .smoothly-row > :first-child {
-	@include arrow-open;
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host[open] > div.detail {
-	overflow: visible;
-	padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
-	padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
-}
-
-smoothly-table:not(.cards) > smoothly-table-body > :host > div.detail::before {
-	content: "";
 	position: absolute;
 	display: flex;
 	box-sizing: border-box;
-	top: 0;
-	bottom: 0;
-	left: -1em;
+	inset-block: 0;
 	width: 1em;
+}
+
+:host > div.detail::before {
+	left: -1em;
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));
 	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-/* NOTE: Need To move  styling to table! */
+:host > div.detail::after {
+	right: -1em;
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
 
 /* Stacked Cards */
 

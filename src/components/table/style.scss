@@ -1,3 +1,5 @@
+@import "./expandable/arrow.scss";
+
 :host {
 	color: rgb(var(--smoothly-table-foreground));
 	stroke: rgb(var(--smoothly-table-foreground));
@@ -11,6 +13,72 @@
 
 :host:not(.cards) .smoothly-cell-label {
 	display: none;
+}
+
+/* Regular table (non-cards) */
+
+:host(:not(.cards)) {
+
+	& > smoothly-table-body > *,
+	& > smoothly-table-body {
+		& > smoothly-table-expandable-row {
+
+			& > div.detail::before,
+			& > div.detail::after {
+				content: "";
+			}
+
+			&::slotted(:not(.detail):not(.smoothly-row):not(.smoothly-expand-button)),
+			& > ::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
+				grid: subgrid;
+				cursor: pointer;
+				grid-column: span var(--smoothly-table-cell-span, 1);
+				display: flex;
+				align-items: center;
+				padding-inline: 1.1rem;
+				min-height: var(--smoothly-table-cell-min-height, 3rem);
+				white-space: nowrap;
+			}
+
+			& > .smoothly-expand-button {
+				display: none;
+				visibility: hidden;
+			}
+
+			&:has(>:not(.detail):hover),
+			& > .smoothly-row:has(>:not(.detail):hover) {
+				background-color: rgb(var(--smoothly-table-hover-background));
+				color: rgb(var(--smoothly-table-hover-foreground));
+			}
+		}
+
+		& > smoothly-table-expandable-row[open] {
+			color: rgb(var(--smoothly-table-expanded-foreground));
+			box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
+				0px 0px 1px rgb(var(--smoothly-table-border)) inset;
+		}
+
+		& > smoothly-table-expandable-row > :first-child,
+		& > smoothly-table-expandable-row > .smoothly-row > :first-child {
+			@include arrow;
+		}
+
+		& > smoothly-table-expandable-row:has(>:hover) > :first-child,
+		& > smoothly-table-expandable-row > .smoothly-row:has(>:hover) > :first-child {
+			@include arrow-hover;
+		}
+
+		& > smoothly-table-expandable-row[open] > :first-child,
+		& > smoothly-table-expandable-row[open] > .smoothly-row > :first-child {
+			@include arrow-open;
+		}
+
+		& > smoothly-table-expandable-row[open] > div.detail {
+			overflow: visible;
+			padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
+			padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
+		}
+	}
 }
 
 
