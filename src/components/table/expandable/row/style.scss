@@ -114,3 +114,26 @@ smoothly-table:not(.cards) > smoothly-table-body > :host > div.detail::before {
 }
 
 /* NOTE: Need To move  styling to table! */
+
+/* Stacked Cards */
+
+:host > .smoothly-expand-button {
+	grid-column: 1 / -1;
+	/* css-var card-border-color? */
+	border-top: 1px solid rgb(var(--smoothly-table-border), 0.25);
+	position: relative;
+	height: 3rem;
+
+	&::before {
+		content: "";
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		/* css-var --smoothly-card-expand-arrow-color */
+		border-left: 3px solid rgb(var(--smoothly-table-border), 0.5);
+		border-bottom: 3px solid rgb(var(--smoothly-table-border), 0.5);
+		transform: translate(-50%, -75%) rotate(-45deg);
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+}

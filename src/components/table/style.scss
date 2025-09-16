@@ -14,114 +14,83 @@
 }
 
 
-/* STACKED */
+/* Stacked Cards */
 
 :host(.cards) {
 	display: grid;
-}
 
-:host(.cards) smoothly-table-head {
-	display: none;
-}
+	& > smoothly-table-head {
+		display: none;
+		/* css-var card-gap */
+		row-gap: var(--smoothly-card-row-gap, 1.5rem);
+	}
 
-:host(.cards) > smoothly-table-body {
-	/* css-var card-gap */
-	row-gap: var(--smoothly-card-row-gap, 1.5rem);
-}
+	& > smoothly-table-body > *,
+	& > smoothly-table-body {
+		& > smoothly-table-expandable-row {
+			display: grid;
+			grid-template-columns: auto 1fr auto auto;
+			/* css-var card-shadow-color? */
+			box-shadow: 0 1px 3px rgba(var(--smoothly-default-contrast), 0.12),
+				0 1px 2px rgba(var(--smoothly-default-contrast), 0.24);
+			border: 1px solid rgb(var(--smoothly-table-border), 0.25);
+			/* css-var card-border-radius? */
+			border-radius: var(--smoothly-card-border-radius, 0.5rem);
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row {
-	display: grid;
-	grid-template-columns: auto 1fr auto auto;
-	/* css-var card-shadow-color? */
-	box-shadow: 0 1px 3px rgba(var(--smoothly-default-contrast), 0.12),
-		0 1px 2px rgba(var(--smoothly-default-contrast), 0.24);
-	border: 1px solid rgb(var(--smoothly-table-border), 0.25);
-	border-radius: 0.5rem;
-}
+			& > smoothly-table-cell {
+				/* css-var card-field-padding-inline? */
+				padding-inline: 0.75rem;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell {
-	padding-inline: 0.75rem;
-	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-}
+			& > smoothly-table-cell:not([card-area]) {
+				grid-column: 1 / -1;
+				/* css-var card-field-min-height? */
+				min-height: var(--smoothly-card-field-min-height, 3rem);
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell:not([card-area]),
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell:not([card-area]) {
-	grid-column: 1 / -1;
-	/* css-var card-field-min-height? */
-	min-height: var(--smoothly-card-field-min-height, 3rem);
-}
+			& > smoothly-table-cell[card-area] {
+				grid-row: 1;
+				/* css-var card-border-color? */
+				border-bottom: 1px solid rgb(var(--smoothly-table-border), 0.25);
+				/* css-var card-header-min-height? */
+				min-height: var(--smoothly-card-header-min-height, 3rem);
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area],
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area] {
-	grid-row: 1;
-	/* css-var card-border-color? */
-	border-bottom: 1px solid rgb(var(--smoothly-table-border), 0.25);
-	/* css-var card-header-min-height? */
-	min-height: var(--smoothly-card-header-min-height, 3rem);
-}
+				& > .smoothly-cell-label {
+					display: none;
+				}
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area] > .smoothly-cell-label,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area] > .smoothly-cell-label {
-	display: none;
-}
+			smoothly-table-cell[card-area=checkbox] {
+				grid-column: 1;
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area=checkbox],
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area=checkbox] {
-	grid-column: 1;
-}
+			smoothly-table-cell[card-area=primary] {
+				grid-column: 2;
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area=primary],
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area=primary] {
-	grid-column: 2;
-}
+			smoothly-table-cell[card-area=status] {
+				grid-column: 3;
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area=status],
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area=status] {
-	grid-column: 3;
-}
+			smoothly-table-cell[card-area=actions] {
+				grid-column: 4;
+			}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > smoothly-table-cell[card-area=actions],
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > smoothly-table-cell[card-area=actions] {
-	grid-column: 4;
-}
+		}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row[open] > div.detail,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row[open] > div.detail {
-	overflow: visible;
-	/* css-var card-detail-padding-block? */
-	padding-block: var(--smoothly-card-detail-block, 0.5rem);
-	/* css-var card-detail-padding-inline? */
-	padding-inline: var(--smoothly-card-detail-inline, 0);
-}
+		& > smoothly-table-expandable-row[open] > div.detail {
+			overflow: visible;
+			/* css-var card-detail-padding-block? */
+			padding-block: var(--smoothly-card-detail-block, 0.5rem);
+			/* css-var card-detail-padding-inline? */
+			padding-inline: var(--smoothly-card-detail-inline, 0);
+		}
 
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > .smoothly-expand-button,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > .smoothly-expand-button {
-	grid-column: 1 / -1;
-	/* css-var card-border-color? */
-	border-top: 1px solid rgb(var(--smoothly-table-border), 0.25);
-	position: relative;
-	height: 3rem;
-}
-
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row > .smoothly-expand-button::before,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row > .smoothly-expand-button::before {
-	content: "";
-	top: 50%;
-	left: 50%;
-	position: absolute;
-	/* css-var --smoothly-card-expand-arrow-color */
-	border-left: 3px solid rgb(var(--smoothly-table-border), 0.5);
-	border-bottom: 3px solid rgb(var(--smoothly-table-border), 0.5);
-	transform: translate(-50%, -75%) rotate(-45deg);
-	width: 0.75rem;
-	height: 0.75rem;
-}
-
-:host(.cards) > smoothly-table-body > * > smoothly-table-expandable-row[open] > .smoothly-expand-button::before,
-:host(.cards) > smoothly-table-body > smoothly-table-expandable-row[open] > .smoothly-expand-button::before {
-	transform: translate(-50%, -25%) rotate(135deg);
+		& > smoothly-table-expandable-row[open] > .smoothly-expand-button::before {
+			transform: translate(-50%, -25%) rotate(135deg);
+		}
+	}
 }
