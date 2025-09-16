@@ -25,8 +25,8 @@
 				content: "";
 			}
 
-			&::slotted(:not(.detail):not(.smoothly-row):not(.smoothly-expand-button)),
-			& > ::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
+			& > *:not(.detail):not(.smoothly-row):not(.smoothly-expand-button),
+			& > .smoothly-row > *:not(.smoothly-expand-button) {
 				grid: subgrid;
 				cursor: pointer;
 				grid-column: span var(--smoothly-table-cell-span, 1);
