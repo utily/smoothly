@@ -75,9 +75,6 @@
 				}
 			}
 		}
-
-
-
 	}
 }
 
@@ -147,18 +144,18 @@
 				grid-column: 4;
 			}
 
+			&[open] > div.detail {
+				overflow: visible;
+				/* css-var card-detail-padding-block? */
+				padding-block: var(--smoothly-card-detail-block, 0.5rem);
+				/* css-var card-detail-padding-inline? */
+				padding-inline: var(--smoothly-card-detail-inline, 0);
+			}
+
+			&[open] > .smoothly-expand-button::before {
+				transform: translate(-50%, -25%) rotate(135deg);
+			}
 		}
 
-		& > smoothly-table-expandable-row[open] > div.detail {
-			overflow: visible;
-			/* css-var card-detail-padding-block? */
-			padding-block: var(--smoothly-card-detail-block, 0.5rem);
-			/* css-var card-detail-padding-inline? */
-			padding-inline: var(--smoothly-card-detail-inline, 0);
-		}
-
-		& > smoothly-table-expandable-row[open] > .smoothly-expand-button::before {
-			transform: translate(-50%, -25%) rotate(135deg);
-		}
 	}
 }
