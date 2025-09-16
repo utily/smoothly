@@ -86,6 +86,9 @@
 
 	& > smoothly-table-head {
 		display: none;
+	}
+
+	& > smoothly-table-body {
 		/* css-var card-gap */
 		row-gap: var(--smoothly-card-row-gap, 1.5rem);
 	}
@@ -119,7 +122,7 @@
 			& > smoothly-table-cell[card-area] {
 				grid-row: 1;
 				/* css-var card-border-color? */
-				border-bottom: 1px solid rgb(var(--smoothly-table-border), 0.25);
+				border-bottom: 1px solid rgb(var(--smoothly-card-border, var(--smoothly-table-border)));
 				/* css-var card-header-min-height? */
 				min-height: var(--smoothly-card-header-min-height, 3rem);
 
@@ -128,20 +131,24 @@
 				}
 			}
 
-			smoothly-table-cell[card-area=checkbox] {
+			& > smoothly-table-cell[card-area=checkbox] {
 				grid-column: 1;
 			}
 
-			smoothly-table-cell[card-area=primary] {
+			& > smoothly-table-cell[card-area=primary] {
 				grid-column: 2;
 			}
 
-			smoothly-table-cell[card-area=status] {
+			& > smoothly-table-cell[card-area=status] {
 				grid-column: 3;
 			}
 
-			smoothly-table-cell[card-area=actions] {
+			& > smoothly-table-cell[card-area=actions] {
 				grid-column: 4;
+			}
+
+			& > smoothly-table-cell[card-hidden] {
+				display: none;
 			}
 
 			&[open] > div.detail {

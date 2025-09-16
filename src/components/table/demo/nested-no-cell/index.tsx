@@ -35,11 +35,11 @@ export class SmoothlyTableDemoNestedNoCell {
 									{entry.name}
 								</smoothly-table-cell>
 								<smoothly-table-cell label="Age">{entry.age}</smoothly-table-cell>
-								<smoothly-table-cell label="Balance">{entry.balance}</smoothly-table-cell>
+								<smoothly-table-cell card-hidden>{entry.balance}</smoothly-table-cell>
 								<smoothly-table-cell card-area="status" label="EyeColor">
 									{entry.eyeColor}
 								</smoothly-table-cell>
-								<smoothly-table-cell label="Gender">{entry.gender}</smoothly-table-cell>
+								<smoothly-table-cell card-hidden>{entry.gender}</smoothly-table-cell>
 								<smoothly-table-cell label="Company">{entry.company}</smoothly-table-cell>
 								<smoothly-table-cell card-area="actions">
 									<smoothly-icon
