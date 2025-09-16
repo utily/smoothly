@@ -3,7 +3,7 @@ import { SmoothlyTableExpandableCellCustomEvent } from "../../components"
 
 @Component({
 	tag: "smoothly-table",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyTable {

@@ -8,14 +8,44 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host>.smoothly-row {
+:host[open] {
+	background-color: rgb(var(--smoothly-table-expanded-background));
+}
+
+:host(:not([open])) > div.detail {
+	display: none;
+}
+
+:host > .smoothly-row {
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host::slotted(:not(.detail)):not(.smoothly-row):not(.smoothly-expand-button),
-smoothly-table:not(.cards)>smoothly-table-body>:host>::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
+:host > div.detail {
+	grid-column: 1 / -1;
+	cursor: default;
+	position: relative;
+	overflow: hidden;
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	color: rgb(var(--smoothly-table-expanded-foreground));
+}
+
+:host > div.detail::after {
+	content: "";
+	position: absolute;
+	display: flex;
+	top: 0;
+	bottom: 0;
+	right: -1em;
+	width: 1em;
+	background-color: rgb(var(--smoothly-table-expanded-background));
+	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
+		0px 0px 1px 0px rgb(var(--smoothly-table-border));
+}
+
+smoothly-table:not(.cards) > smoothly-table-body > :host::slotted(:not(.detail)):not(.smoothly-row):not(.smoothly-expand-button),
+smoothly-table:not(.cards) > smoothly-table-body > :host > ::slotted(.smoothly-row>*:not(.smoothly-expand-button)) {
 	grid: subgrid;
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
@@ -26,22 +56,18 @@ smoothly-table:not(.cards)>smoothly-table-body>:host>::slotted(.smoothly-row>*:n
 	white-space: nowrap;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-expand-button {
+smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-expand-button {
 	display: none;
 	visibility: hidden;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host:has(>:not(.detail):hover),
-smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row:has(>:not(.detail):hover) {
+smoothly-table:not(.cards) > smoothly-table-body > :host:has(>:not(.detail):hover),
+smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row:has(>:not(.detail):hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
 
-:host[open] {
-	background-color: rgb(var(--smoothly-table-expanded-background));
-}
-
-smoothly-table:not(.cards)>smoothly-table-body>:host[open] {
+smoothly-table:not(.cards) > smoothly-table-body > :host[open] {
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	grid-template-rows: auto 1fr;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
@@ -49,41 +75,30 @@ smoothly-table:not(.cards)>smoothly-table-body>:host[open] {
 	grid-template-rows: 0fr 1fr;
 }
 
-:host(:not([open]))>div.detail {
-	display: none;
-}
 
-:host>div.detail {
-	grid-column: 1 / -1;
-	cursor: default;
-	position: relative;
-	overflow: hidden;
-	background-color: rgb(var(--smoothly-table-expanded-background));
-	color: rgb(var(--smoothly-table-expanded-foreground));
-}
 
-smoothly-table:not(.cards)>smoothly-table-body>:host> :first-child,
-smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row> :first-child {
+smoothly-table:not(.cards) > smoothly-table-body > :host > :first-child,
+smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row > :first-child {
 	@include arrow;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host:has(>:hover)> :first-child,
-smoothly-table:not(.cards)>smoothly-table-body>:host>.smoothly-row:has(>:hover)> :first-child {
+smoothly-table:not(.cards) > smoothly-table-body > :host:has(>:hover) > :first-child,
+smoothly-table:not(.cards) > smoothly-table-body > :host > .smoothly-row:has(>:hover) > :first-child {
 	@include arrow-hover;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host[open]> :first-child,
-smoothly-table:not(.cards)>smoothly-table-body>:host[open]>.smoothly-row>:first-child {
+smoothly-table:not(.cards) > smoothly-table-body > :host[open] > :first-child,
+smoothly-table:not(.cards) > smoothly-table-body > :host[open] > .smoothly-row > :first-child {
 	@include arrow-open;
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host[open]>div.detail {
+smoothly-table:not(.cards) > smoothly-table-body > :host[open] > div.detail {
 	overflow: visible;
 	padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
 	padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
 }
 
-smoothly-table:not(.cards)>smoothly-table-body>:host>div.detail::before {
+smoothly-table:not(.cards) > smoothly-table-body > :host > div.detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -95,19 +110,6 @@ smoothly-table:not(.cards)>smoothly-table-body>:host>div.detail::before {
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	border-left: 0.3em solid rgb(var(--smoothly-table-detail-border, var(--smoothly-table-border)));
 	box-shadow: 2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
-		0px 0px 1px 0px rgb(var(--smoothly-table-border));
-}
-
-:host>div.detail::after {
-	content: "";
-	position: absolute;
-	display: flex;
-	top: 0;
-	bottom: 0;
-	right: -1em;
-	width: 1em;
-	background-color: rgb(var(--smoothly-table-expanded-background));
-	box-shadow: -2px 0px 0px 0px rgb(var(--smoothly-table-expanded-background)),
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
