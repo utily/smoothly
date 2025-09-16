@@ -12,7 +12,6 @@
 	display: grid;
 	grid-template-columns: repeat(var(--columns), auto);
 
-
 	& > smoothly-table-body > *,
 	& > smoothly-table-body {
 		& > smoothly-table-expandable-row {
