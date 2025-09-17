@@ -16,7 +16,7 @@
 	& > smoothly-table-body {
 		& > smoothly-table-expandable-row {
 
-			& > smoothly-table-cell > .smoothly-cell-label {
+			& > smoothly-table-cell > .smoothly-card-field-label {
 				display: none;
 			}
 
@@ -25,8 +25,8 @@
 				content: "";
 			}
 
-			& > *:not(.detail):not(.smoothly-row):not(.smoothly-expand-button),
-			& > .smoothly-row > *:not(.smoothly-expand-button) {
+			& > *.smoothly-table-cell,
+			& > .smoothly-row > *.smoothly-table-cell {
 				grid: subgrid;
 				cursor: pointer;
 				grid-column: span var(--smoothly-table-cell-span, 1);
@@ -42,19 +42,19 @@
 				visibility: hidden;
 			}
 
-			&:has(>:not(.detail):hover),
-			& > .smoothly-row:has(>:not(.detail):hover) {
+			&:has(>.smoothly-table-cell:hover),
+			& > .smoothly-row:has(>.smoothly-table-cell:hover) {
 				background-color: rgb(var(--smoothly-table-hover-background));
 				color: rgb(var(--smoothly-table-hover-foreground));
 			}
 
-			& > :first-child,
-			& > .smoothly-row > :first-child {
+			& > :is(.smoothly-table-cell):first-child,
+			& > .smoothly-row > :is(.smoothly-table-cell):first-child {
 				@include arrow;
 			}
 
-			&:has(>:hover) > :first-child,
-			& > .smoothly-row:has(>:hover) > :first-child {
+			&:has(>:hover) > :is(.smoothly-table-cell):first-child,
+			& > .smoothly-row:has(>:hover) > :is(.smoothly-table-cell):first-child {
 				@include arrow-hover;
 			}
 
@@ -63,8 +63,8 @@
 				box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
 					0px 0px 1px rgb(var(--smoothly-table-border)) inset;
 
-				& > :first-child,
-				& > .smoothly-row > :first-child {
+				& > :is(.smoothly-table-cell):first-child,
+				& > .smoothly-row > :is(.smoothly-table-cell):first-child {
 					@include arrow-open;
 				}
 
@@ -126,7 +126,7 @@
 				/* css-var card-header-min-height? */
 				min-height: var(--smoothly-card-header-min-height, 3rem);
 
-				& > .smoothly-cell-label {
+				& > .smoothly-card-field-label {
 					display: none;
 				}
 			}

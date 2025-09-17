@@ -638,7 +638,7 @@ export namespace Components {
     interface SmoothlyTableCell {
         "cardArea"?: "checkbox" | "primary" | "status" | "actions";
         "cardHidden"?: boolean;
-        "label"?: string;
+        "cardLabel"?: string;
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -2893,7 +2893,7 @@ declare namespace LocalJSX {
     interface SmoothlyTableCell {
         "cardArea"?: "checkbox" | "primary" | "status" | "actions";
         "cardHidden"?: boolean;
-        "label"?: string;
+        "cardLabel"?: string;
         "span"?: number;
     }
     interface SmoothlyTableDemo {

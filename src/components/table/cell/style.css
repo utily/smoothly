@@ -11,7 +11,7 @@ smoothly-table.cards :host {
 	display: flex;
 }
 
-smoothly-table.cards :host>.smoothly-cell-label {
+smoothly-table.cards :host>.smoothly-card-field-label {
 	/* css-var card-field-label-min-width? */
 	min-width: var(--smoothly-card-field-label-min-width, 12ch);
 	/* css-var card-label-color? */

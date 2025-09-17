@@ -7,14 +7,14 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 })
 export class SmoothlyTableCell {
 	@Prop({ reflect: true }) span?: number = 1
-	@Prop({ reflect: true }) label?: string
+	@Prop({ reflect: true }) cardLabel?: string
 	@Prop({ reflect: true }) cardArea?: "checkbox" | "primary" | "status" | "actions"
 	@Prop({ reflect: true }) cardHidden?: boolean
 
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
-				{typeof this.label == "string" && <span class="smoothly-cell-label">{this.label}</span>}
+			<Host class="smoothly-table-cell" style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}>
+				{typeof this.cardLabel == "string" && <span class="smoothly-card-field-label">{this.cardLabel}</span>}
 				<slot />
 			</Host>
 		)
