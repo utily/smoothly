@@ -14,12 +14,6 @@
 	display: none;
 }
 
-:host > .smoothly-row {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-column: 1 / -1;
-}
-
 :host > div.detail {
 	grid-column: 1 / -1;
 	cursor: default;

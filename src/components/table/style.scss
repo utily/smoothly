@@ -25,15 +25,14 @@
 				content: "";
 			}
 
-			& > *.smoothly-table-cell,
-			& > .smoothly-row > *.smoothly-table-cell {
+			& > *.smoothly-table-cell {
 				grid: subgrid;
 				cursor: pointer;
 				grid-column: span var(--smoothly-table-cell-span, 1);
 				display: flex;
 				align-items: center;
 				padding-inline: 1.1rem;
-				min-height: var(--smoothly-table-cell-min-height, 3rem);
+				min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 				white-space: nowrap;
 			}
 
@@ -42,19 +41,16 @@
 				visibility: hidden;
 			}
 
-			&:has(>.smoothly-table-cell:hover),
-			& > .smoothly-row:has(>.smoothly-table-cell:hover) {
+			&:has(>.smoothly-table-cell:hover) {
 				background-color: rgb(var(--smoothly-table-hover-background));
 				color: rgb(var(--smoothly-table-hover-foreground));
 			}
 
-			& > :is(.smoothly-table-cell):first-child,
-			& > .smoothly-row > :is(.smoothly-table-cell):first-child {
+			& > :is(.smoothly-table-cell):first-child {
 				@include arrow;
 			}
 
-			&:has(>:hover) > :is(.smoothly-table-cell):first-child,
-			& > .smoothly-row:has(>:hover) > :is(.smoothly-table-cell):first-child {
+			&:has(>:hover) > :is(.smoothly-table-cell):first-child {
 				@include arrow-hover;
 			}
 
@@ -63,8 +59,7 @@
 				box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
 					0px 0px 1px rgb(var(--smoothly-table-border)) inset;
 
-				& > :is(.smoothly-table-cell):first-child,
-				& > .smoothly-row > :is(.smoothly-table-cell):first-child {
+				& > :is(.smoothly-table-cell):first-child {
 					@include arrow-open;
 				}
 
