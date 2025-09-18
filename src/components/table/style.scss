@@ -74,7 +74,7 @@
 }
 
 
-/* Stacked Cards */
+/* Stacked/Cards */
 
 :host(.cards) {
 	display: grid;
@@ -150,7 +150,8 @@
 			}
 
 			&[open] > div.detail {
-				overflow: visible;
+				max-width: 100%;
+				overflow-y: auto;
 				/* css-var card-detail-padding-block? */
 				padding-block: var(--smoothly-card-detail-block, 0.5rem);
 				/* css-var card-detail-padding-inline? */
