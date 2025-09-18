@@ -52,8 +52,7 @@
 
 :host > .smoothly-expand-button {
 	grid-column: 1 / -1;
-	/* css-var card-border-color? */
-	border-top: 1px solid rgb(var(--smoothly-table-border), 0.25);
+	border-top: 1px solid rgb(var(--smoothly-card-border-color));
 	position: relative;
 	height: 2.5rem;
 
@@ -62,9 +61,8 @@
 		top: 50%;
 		left: 50%;
 		position: absolute;
-		/* css-var --smoothly-card-expand-arrow-color */
-		border-left: 3px solid rgb(var(--smoothly-table-border), 0.5);
-		border-bottom: 3px solid rgb(var(--smoothly-table-border), 0.5);
+		border-left: 3px solid rgb(var(--smoothly-expand-arrow-color, var(--smoothly-default-contrast)));
+		border-bottom: 3px solid rgb(var(--smoothly-expand-arrow-color, var(--smoothly-default-contrast)));
 		transform: translate(-50%, -75%) rotate(-45deg);
 		width: 0.75rem;
 		height: 0.75rem;
