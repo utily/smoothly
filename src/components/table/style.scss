@@ -90,6 +90,8 @@
 
 	& > smoothly-table-body > *,
 	& > smoothly-table-body {
+
+		& > smoothly-table-row,
 		& > smoothly-table-expandable-row {
 			display: grid;
 			grid-template-columns: auto 1fr auto auto;

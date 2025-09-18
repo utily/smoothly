@@ -4,11 +4,12 @@
 	display: contents;
 }
 
-:host>div {
-	padding: 0.5rem 1.1rem;
+:host > .smoothly-table-cell {
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 }
 
-:host>div.content {
+:host > div.smoothly-table-cell {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	box-sizing: border-box;
@@ -25,37 +26,37 @@
 	}
 }
 
-:host[open]>div.content {
+:host[open] > div.smoothly-table-cell {
 	@include arrow-open;
 }
 
-:host>div:first-child {
+:host > div:first-child {
 	cursor: pointer;
 }
 
-:host>div.detail {
+:host > div.detail {
 	grid-column: 1 / -1;
 	grid-row: 2;
 	position: relative;
 }
 
-:host[open]>div.content {
+:host[open] > div.smoothly-table-cell {
 	box-shadow: 1px 1px 1px -1px rgb(var(--smoothly-table-border)) inset,
 		-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
 }
 
-:host[open]>div {
+:host[open] > div {
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	stroke: rgb(var(--smoothly-table-expanded-foreground));
 	fill: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host:not([open])>div.detail {
+:host:not([open]) > div.detail {
 	display: none;
 }
 
-:host>div.detail::before {
+:host > div.detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -70,7 +71,7 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host>div.detail::after {
+:host > div.detail::after {
 	content: "";
 	position: absolute;
 	display: flex;
