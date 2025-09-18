@@ -154,10 +154,8 @@
 			&[open] > div.detail {
 				max-width: 100%;
 				overflow-y: auto;
-				/* css-var card-detail-padding-block? */
-				padding-block: var(--smoothly-card-detail-block, 0.5rem);
-				/* css-var card-detail-padding-inline? */
-				padding-inline: var(--smoothly-card-detail-inline, 0);
+				padding-block: var(--smoothly-card-detail-padding-block, 0);
+				padding-inline: var(--smoothly-card-detail-padding-inline, 0);
 			}
 
 			&[open] > .smoothly-expand-button::before {
