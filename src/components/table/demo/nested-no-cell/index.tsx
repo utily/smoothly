@@ -29,18 +29,20 @@ export class SmoothlyTableDemoNestedNoCell {
 						{data.map(entry => (
 							<smoothly-table-expandable-row>
 								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
-								<smoothly-table-cell label="Id">{entry.id}</smoothly-table-cell>
-								<smoothly-table-cell label="Registered">{entry.registered}</smoothly-table-cell>
-								<smoothly-table-cell card-area="primary" label="Name">
+								<smoothly-table-cell card-label="Id">{entry.id}</smoothly-table-cell>
+								<smoothly-table-cell card-label="Registered">{entry.registered}</smoothly-table-cell>
+								<smoothly-table-cell card-area="primary" card-label="Name">
 									{entry.name}
 								</smoothly-table-cell>
-								<smoothly-table-cell label="Age">{entry.age}</smoothly-table-cell>
-								<smoothly-table-cell card-hidden>{entry.balance}</smoothly-table-cell>
-								<smoothly-table-cell card-area="status" label="EyeColor">
+								<smoothly-table-cell card-label="Age">{entry.age}</smoothly-table-cell>
+								<smoothly-table-cell card-label="Balance" card-visibility="opened">
+									{entry.balance}
+								</smoothly-table-cell>
+								<smoothly-table-cell card-area="status" card-label="EyeColor">
 									{entry.eyeColor}
 								</smoothly-table-cell>
-								<smoothly-table-cell card-hidden>{entry.gender}</smoothly-table-cell>
-								<smoothly-table-cell label="Company">{entry.company}</smoothly-table-cell>
+								<smoothly-table-cell card-visibility="hidden">{entry.gender}</smoothly-table-cell>
+								<smoothly-table-cell card-label="Company">{entry.company}</smoothly-table-cell>
 								<smoothly-table-cell card-area="actions">
 									<smoothly-icon
 										name="trash-bin-outline"

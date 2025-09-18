@@ -9,7 +9,7 @@ export class SmoothlyTableCell {
 	@Prop({ reflect: true }) span?: number = 1
 	@Prop({ reflect: true }) cardLabel?: string
 	@Prop({ reflect: true }) cardArea?: "checkbox" | "primary" | "status" | "actions"
-	@Prop({ reflect: true }) cardHidden?: boolean
+	@Prop({ reflect: true }) cardVisibility: "always" | "opened" | "hidden" = "always"
 
 	render(): VNode | VNode[] {
 		return (

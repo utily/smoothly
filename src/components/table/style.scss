@@ -116,13 +116,11 @@
 			& > smoothly-table-cell:not([card-area]) {
 				grid-column: 1 / -1;
 				/* css-var card-field-min-height? */
-				min-height: var(--smoothly-card-field-min-height, 3rem);
+				min-height: var(--smoothly-card-field-min-height, 2rem);
 			}
 
 			& > smoothly-table-cell[card-area] {
 				grid-row: 1;
-				/* css-var card-border-color? */
-				border-bottom: 1px solid rgb(var(--smoothly-card-border, var(--smoothly-table-border)));
 				/* css-var card-header-min-height? */
 				min-height: var(--smoothly-card-header-min-height, 3rem);
 
@@ -147,7 +145,11 @@
 				grid-column: 4;
 			}
 
-			& > smoothly-table-cell[card-hidden] {
+			& > smoothly-table-cell[card-visibility=hidden] {
+				display: none;
+			}
+
+			&:not([open]) > smoothly-table-cell[card-visibility=opened] {
 				display: none;
 			}
 
