@@ -8,7 +8,9 @@
 :host::slotted(*) {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	align-items: center;
-	padding: 0.5rem 1.1rem;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.25rem);
+	box-sizing: border-box;
 	white-space: nowrap;
 }
 

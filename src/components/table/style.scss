@@ -1,0 +1,167 @@
+@import "./expandable/arrow.scss";
+
+:host {
+	color: rgb(var(--smoothly-table-foreground));
+	stroke: rgb(var(--smoothly-table-foreground));
+	fill: rgb(var(--smoothly-table-foreground));
+}
+
+/* Regular table (non-cards) */
+
+:host(:not(.cards)) {
+	display: grid;
+	grid-template-columns: repeat(var(--columns), auto);
+
+	& > smoothly-table-body > *,
+	& > smoothly-table-body {
+		& > smoothly-table-expandable-row {
+
+			& > smoothly-table-cell > .smoothly-card-field-label {
+				display: none;
+			}
+
+			& > div.detail::before,
+			& > div.detail::after {
+				content: "";
+			}
+
+			& > *.smoothly-table-cell {
+				grid: subgrid;
+				cursor: pointer;
+				grid-column: span var(--smoothly-table-cell-span, 1);
+				display: flex;
+				align-items: center;
+				padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+				min-height: var(--smoothly-table-cell-min-height, 2.75rem);
+				white-space: nowrap;
+			}
+
+			& > .smoothly-expand-button {
+				display: none;
+				visibility: hidden;
+			}
+
+			&:has(>.smoothly-table-cell:hover) {
+				background-color: rgb(var(--smoothly-table-hover-background));
+				color: rgb(var(--smoothly-table-hover-foreground));
+			}
+
+			& > :is(.smoothly-table-cell):first-child {
+				@include arrow;
+			}
+
+			&:has(>:hover) > :is(.smoothly-table-cell):first-child {
+				@include arrow-hover;
+			}
+
+			&[open] {
+				color: rgb(var(--smoothly-table-expanded-foreground));
+				box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border)),
+					0px 0px 1px rgb(var(--smoothly-table-border)) inset;
+
+				& > :is(.smoothly-table-cell):first-child {
+					@include arrow-open;
+				}
+
+				& > div.detail {
+					overflow: visible;
+					padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
+					padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
+				}
+			}
+		}
+	}
+}
+
+
+/* Stacked/Cards */
+
+:host(.cards) {
+	display: grid;
+
+	& > smoothly-table-head {
+		display: none;
+	}
+
+	& > smoothly-table-body {
+		/* css-var card-gap */
+		row-gap: var(--smoothly-card-row-gap, 1.5rem);
+	}
+
+	& > smoothly-table-body > *,
+	& > smoothly-table-body {
+
+		& > smoothly-table-row,
+		& > smoothly-table-expandable-row {
+			display: grid;
+			grid-template-columns: auto 1fr auto auto;
+			/* css-var card-shadow-color? */
+			box-shadow: 0 1px 3px rgba(var(--smoothly-default-contrast), 0.12),
+				0 1px 2px rgba(var(--smoothly-default-contrast), 0.24);
+			border: 1px solid rgb(var(--smoothly-table-border), 0.25);
+			border-radius: var(--smoothly-card-border-radius, 0.5rem);
+			text-overflow: ellipsis;
+			overflow: hidden;
+
+			& > .smoothly-table-cell {
+				/* css-var card-field-padding-inline? */
+				padding-inline: 0.75rem;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+			}
+
+			& > .smoothly-table-cell:not([card-area]) {
+				grid-column: 1 / -1;
+				/* css-var card-field-min-height? */
+				min-height: var(--smoothly-card-field-min-height, 2rem);
+			}
+
+			& > .smoothly-table-cell[card-area] {
+				grid-row: 1;
+				/* css-var card-header-min-height? */
+				min-height: var(--smoothly-card-header-min-height, 3rem);
+
+				& > .smoothly-card-field-label {
+					display: none;
+				}
+			}
+
+			& > .smoothly-table-cell[card-area=checkbox] {
+				grid-column: 1;
+			}
+
+			& > .smoothly-table-cell[card-area=primary] {
+				grid-column: 2;
+			}
+
+			& > .smoothly-table-cell[card-area=status] {
+				grid-column: 3;
+			}
+
+			& > .smoothly-table-cell[card-area=actions] {
+				grid-column: 4;
+			}
+
+			& > .smoothly-table-cell[card-visibility=hidden] {
+				display: none;
+			}
+
+			&:not([open]) > .smoothly-table-cell[card-visibility=opened] {
+				display: none;
+			}
+
+			&[open] > div.detail {
+				max-width: 100%;
+				overflow-y: auto;
+				padding-block: var(--smoothly-card-detail-padding-block, 0);
+				padding-inline: var(--smoothly-card-detail-padding-inline, 0);
+			}
+
+			&[open] > .smoothly-expand-button::before {
+				transform: translate(-50%, -25%) rotate(135deg);
+			}
+		}
+
+	}
+}

@@ -10,9 +10,9 @@ export class SmoothlyTableDemo {
 		return (
 			<Host>
 				<smoothly-table-demo-filler-row />
-				<smoothly-table-demo-group />
-				<smoothly-table-demo-colspan />
-				<smoothly-table-demo-simple />
+				{/* <smoothly-table-demo-group /> */}
+				{/* <smoothly-table-demo-colspan /> */}
+				{/* <smoothly-table-demo-simple /> */}
 				<smoothly-table-demo-nested-no-cell />
 				<smoothly-table-demo-filtered />
 			</Host>

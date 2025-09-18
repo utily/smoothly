@@ -35,7 +35,7 @@ export class SmoothlyTableExpandableCell {
 			<Host
 				style={{ "--smoothly-table-cell-span": this.span?.toString(10) }}
 				onClick={(e: MouseEvent) => this.clickHandler(e)}>
-				<div class={"content"}>
+				<div class={"smoothly-table-cell"}>
 					<slot />
 				</div>
 				<div class={"detail"} ref={(el: HTMLDivElement) => (this.detailElement = el)}>

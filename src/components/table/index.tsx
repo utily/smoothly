@@ -1,13 +1,15 @@
-import { Component, h, Host, Listen, Prop, VNode } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, VNode } from "@stencil/core"
 import { SmoothlyTableExpandableCellCustomEvent } from "../../components"
 
 @Component({
 	tag: "smoothly-table",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyTable {
 	@Prop() columns = 1
+	@Prop({ reflect: true }) cardAt?: string
+	@State() mode: "cards" | "table" = "table"
 
 	@Listen("smoothlyTableExpandableRowChange")
 	smoothlyTableExpandableRowChange(event: SmoothlyTableExpandableCellCustomEvent<boolean>): void {
@@ -19,9 +21,17 @@ export class SmoothlyTable {
 		event.stopPropagation()
 	}
 
+	componentWillLoad() {
+		if (this.cardAt) {
+			const mql = window.matchMedia(`(max-width: ${this.cardAt})`)
+			this.mode = mql.matches ? "cards" : "table"
+			mql.addEventListener("change", e => (this.mode = e.matches ? "cards" : "table"))
+		}
+	}
+
 	render(): VNode | VNode[] {
 		return (
-			<Host style={{ "--columns": this.columns.toString() }}>
+			<Host class={{ cards: this.mode == "cards" }} style={{ "--columns": this.columns.toString() }}>
 				<slot />
 			</Host>
 		)

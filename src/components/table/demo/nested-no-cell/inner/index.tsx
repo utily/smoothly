@@ -27,10 +27,10 @@ export class SmoothlyTableDemoNestedNoCellInner {
 					<smoothly-table-body>
 						{this.data?.map(entry => (
 							<smoothly-table-expandable-row>
-								<div>{entry.id}</div>
-								<div>{entry.name}</div>
-								<div>{entry.age}</div>
-								<div>{entry.balance}</div>
+								<div class="smoothly-table-cell">{entry.id}</div>
+								<div class="smoothly-table-cell">{entry.name}</div>
+								<div class="smoothly-table-cell">{entry.age}</div>
+								<div class="smoothly-table-cell">{entry.balance}</div>
 							</smoothly-table-expandable-row>
 						))}
 					</smoothly-table-body>

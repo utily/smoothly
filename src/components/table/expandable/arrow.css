@@ -20,7 +20,7 @@
 
 :host::slotted(smoothly-table-cell:first-child:hover)::before,
 :host::slotted(smoothly-table-cell:first-child:has(~ smoothly-table-cell:hover))::before,
-:host>div.content:hover:first-child::before {
+:host>div.smoothly-table-cell:hover:first-child::before {
 	opacity: 1;
 	border-bottom: 1px solid rgb(var(--smoothly-color-contrast));
 	border-right: 1px solid rgb(var(--smoothly-color-contrast));
