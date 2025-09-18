@@ -101,7 +101,7 @@
 			text-overflow: ellipsis;
 			overflow: hidden;
 
-			& > smoothly-table-cell {
+			& > .smoothly-table-cell {
 				/* css-var card-field-padding-inline? */
 				padding-inline: 0.75rem;
 				box-sizing: border-box;
@@ -109,13 +109,13 @@
 				align-items: center;
 			}
 
-			& > smoothly-table-cell:not([card-area]) {
+			& > .smoothly-table-cell:not([card-area]) {
 				grid-column: 1 / -1;
 				/* css-var card-field-min-height? */
 				min-height: var(--smoothly-card-field-min-height, 2rem);
 			}
 
-			& > smoothly-table-cell[card-area] {
+			& > .smoothly-table-cell[card-area] {
 				grid-row: 1;
 				/* css-var card-header-min-height? */
 				min-height: var(--smoothly-card-header-min-height, 3rem);
@@ -125,27 +125,27 @@
 				}
 			}
 
-			& > smoothly-table-cell[card-area=checkbox] {
+			& > .smoothly-table-cell[card-area=checkbox] {
 				grid-column: 1;
 			}
 
-			& > smoothly-table-cell[card-area=primary] {
+			& > .smoothly-table-cell[card-area=primary] {
 				grid-column: 2;
 			}
 
-			& > smoothly-table-cell[card-area=status] {
+			& > .smoothly-table-cell[card-area=status] {
 				grid-column: 3;
 			}
 
-			& > smoothly-table-cell[card-area=actions] {
+			& > .smoothly-table-cell[card-area=actions] {
 				grid-column: 4;
 			}
 
-			& > smoothly-table-cell[card-visibility=hidden] {
+			& > .smoothly-table-cell[card-visibility=hidden] {
 				display: none;
 			}
 
-			&:not([open]) > smoothly-table-cell[card-visibility=opened] {
+			&:not([open]) > .smoothly-table-cell[card-visibility=opened] {
 				display: none;
 			}
 
