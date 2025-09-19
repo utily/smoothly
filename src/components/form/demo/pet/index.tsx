@@ -129,6 +129,7 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input>
 							<smoothly-input-file name="summary.picture">
 								<span slot="label">Summary picture</span>
+								<smoothly-input-clear slot="end" size="icon" />
 							</smoothly-input-file>
 							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
 							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>

@@ -2,6 +2,7 @@
 
 :host {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
 	overflow: hidden;
@@ -72,4 +73,4 @@
 :host[disabled],
 :host[disabled] * {
 	cursor: not-allowed;
-}
+} 
