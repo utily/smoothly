@@ -185,7 +185,9 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						onInput={e => this.inputHandler(e)}
 					/>
 				</div>
-				<slot name="end" />
+				<span onClick={(e: MouseEvent) => e.stopPropagation()}>
+					<slot name="end" />
+				</span>
 			</Host>
 		)
 	}
