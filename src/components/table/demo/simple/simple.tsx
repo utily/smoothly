@@ -34,23 +34,6 @@ export class SmoothlyTableDemoSimple {
 								</smoothly-table-expandable-cell>
 							</smoothly-table-row>
 						))}
-						<smoothly-table-expandable-row>
-							<a class="smoothly-row" href="#" onClick={e => !e.button && e.preventDefault()} target="_blank">
-								<smoothly-table-cell>Cell1 in expandable row</smoothly-table-cell>
-								<smoothly-table-cell>Cell2 in expandable row</smoothly-table-cell>
-							</a>
-							<div slot={"detail"}>
-								Content
-								<br />
-								of
-								<br />
-								the
-								<br />
-								expandable
-								<br />
-								row
-							</div>
-						</smoothly-table-expandable-row>
 						<smoothly-table-row>
 							<smoothly-table-cell>Cell5</smoothly-table-cell>
 							<smoothly-table-expandable-cell>
