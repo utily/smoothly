@@ -38,7 +38,7 @@ export class SmoothlyTableExpandableCell {
 				<div class={"content"}>
 					<slot />
 				</div>
-				<div class={"detail"} ref={(el: HTMLDivElement) => (this.detailElement = el)}>
+				<div class={"smoothly-table-detail"} ref={(el: HTMLDivElement) => (this.detailElement = el)}>
 					<slot name={"detail"} />
 				</div>
 			</Host>

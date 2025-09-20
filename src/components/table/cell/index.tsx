@@ -2,7 +2,6 @@ import { Component, h, Host, Prop, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-table-cell",
-	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyTableCell {
