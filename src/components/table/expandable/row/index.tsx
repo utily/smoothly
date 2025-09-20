@@ -27,7 +27,7 @@ export class SmoothlyTableExpandableRow {
 		return (
 			<Host onClick={(e: MouseEvent) => this.clickHandler(e)}>
 				<slot />
-				<div class={"detail"} ref={e => (this.div = e)}>
+				<div class={"smoothly-table-detail"} ref={e => (this.div = e)}>
 					<slot name="detail" />
 				</div>
 			</Host>
