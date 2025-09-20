@@ -1,4 +1,4 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, State, VNode } from "@stencil/core"
 import { data } from "./data"
 
 @Component({
@@ -7,6 +7,10 @@ import { data } from "./data"
 	scoped: true,
 })
 export class SmoothlyTableDemoNestedNoCell {
+	// Simulate loading state
+	@State() loadingIndex?: number
+	@State() loadedRows: number[] = []
+
 	render(): VNode | VNode[] {
 		return (
 			<Host>
@@ -25,9 +29,21 @@ export class SmoothlyTableDemoNestedNoCell {
 						</smoothly-table-row>
 					</smoothly-table-head>
 					<smoothly-table-body>
-						{data.map(entry => (
-							<smoothly-table-expandable-row>
-								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
+						{data.map((entry, index) => (
+							<smoothly-table-expandable-row
+								onSmoothlyTableExpandableRowChange={event => {
+									if (event.detail) {
+										this.loadingIndex = index
+										setTimeout(() => {
+											this.loadingIndex = undefined
+											this.loadedRows = [...this.loadedRows, index]
+										}, 1500)
+									}
+								}}>
+								{this.loadingIndex === index && <smoothly-spinner overlay size="small" />}
+								{this.loadedRows.includes(index) && (
+									<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
+								)}
 								<div class="smoothly-table-cell">{entry.id}</div>
 								<div class="smoothly-table-cell">{entry.registered}</div>
 								<div class="smoothly-table-cell">{entry.name}</div>

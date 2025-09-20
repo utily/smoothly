@@ -38,7 +38,6 @@
 
 :host > div.smoothly-table-detail {
 	grid-column: 1 / -1;
-	outline: 2px solid orange;
 	cursor: default;
 	position: relative;
 	overflow: hidden;
@@ -46,15 +45,15 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host > :first-child {
+:host > .smoothly-table-cell:first-of-type {
 	@include arrow;
 }
 
-:host:has(>:hover) > :first-child {
+:host:has(>.smoothly-table-cell:hover) > .smoothly-table-cell:first-of-type {
 	@include arrow-hover;
 }
 
-:host[open] > :first-child {
+:host[open] > .smoothly-table-cell:first-of-type {
 	@include arrow-open;
 }
 
