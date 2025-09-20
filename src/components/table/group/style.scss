@@ -42,15 +42,20 @@
 }
 
 :host[align] > div:first-child > div > * {
-	padding: 0.5rem 1.1rem;
+	display: flex;
+	align-items: center;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 }
 
 :host:not([align]) > div:first-child {
 	grid-column: 1 / -1;
 	display: grid;
+	align-items: center;
 	grid-template-columns: repeat(2, auto);
 	justify-content: space-between;
-	padding: 0.5rem 1.1rem;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 }
 
 :host:not([align]) > div:first-child > div:first-child {
