@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, h, Host, Prop, VNode } from "@stencil/c
 
 @Component({
 	tag: "smoothly-table-row-group",
-	styleUrl: "style.css",
+	styleUrl: "style.scss",
 	scoped: true,
 })
 export class SmoothlyTableRowGroup {
