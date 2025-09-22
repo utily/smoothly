@@ -118,11 +118,21 @@
 
 :host>div.options::slotted(div.search-preview) {
 	display: flex;
+	position: sticky;
+	top: 0;
 	gap: 1rem;
-	background-color: rgba(var(--smoothly-primary-tint), .5);
+	background-color: rgb(var(--smoothly-input-background));
 	color: rgb(var(--smoothly-color-contrast));
 	fill: rgb(var(--smoothly-color-contrast));
 	stroke: rgb(var(--smoothly-color-contrast));
+}
+:host>div.options::slotted(div.search-preview)::before {
+	/* Hack to not make the search-preview have opacity without showing what is underneath */
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: rgba(var(--smoothly-primary-tint), 0.5);
+	z-index: -1;
 }
 
 :host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] {
