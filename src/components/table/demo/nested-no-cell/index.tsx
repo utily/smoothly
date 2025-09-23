@@ -1,4 +1,4 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, State, VNode } from "@stencil/core"
 import { data } from "./data"
 
 @Component({
@@ -7,6 +7,10 @@ import { data } from "./data"
 	scoped: true,
 })
 export class SmoothlyTableDemoNestedNoCell {
+	// Simulate loading state
+	@State() loadingIndex?: number
+	@State() loadedRows: number[] = []
+
 	render(): VNode | VNode[] {
 		return (
 			<Host>
@@ -14,35 +18,47 @@ export class SmoothlyTableDemoNestedNoCell {
 				<smoothly-table color="primary" columns={8}>
 					<smoothly-table-head>
 						<smoothly-table-row>
-							<div>Id</div>
-							<div>Registered</div>
-							<div>Name</div>
-							<div>Age</div>
-							<div>Balance</div>
-							<div>EyeColor</div>
-							<div>Gender</div>
-							<div>Company</div>
+							<div class="smoothly-table-cell">Id</div>
+							<div class="smoothly-table-cell">Registered</div>
+							<div class="smoothly-table-cell">Name</div>
+							<div class="smoothly-table-cell">Age</div>
+							<div class="smoothly-table-cell">Balance</div>
+							<div class="smoothly-table-cell">EyeColor</div>
+							<div class="smoothly-table-cell">Gender</div>
+							<div class="smoothly-table-cell">Company</div>
 						</smoothly-table-row>
 					</smoothly-table-head>
 					<smoothly-table-body>
-						{data.map(entry => (
-							<smoothly-table-expandable-row>
-								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
-								<div>{entry.id}</div>
-								<div>{entry.registered}</div>
-								<div>{entry.name}</div>
-								<div>{entry.age}</div>
-								<div>{entry.balance}</div>
-								<div>{entry.eyeColor}</div>
-								<div>{entry.gender}</div>
-								<div>{entry.company}</div>
+						{data.map((entry, index) => (
+							<smoothly-table-expandable-row
+								onSmoothlyTableExpandableRowChange={event => {
+									if (event.detail) {
+										this.loadingIndex = index
+										setTimeout(() => {
+											this.loadingIndex = undefined
+											this.loadedRows = [...this.loadedRows, index]
+										}, 1500)
+									}
+								}}>
+								{this.loadingIndex === index && <smoothly-spinner overlay size="small" />}
+								{this.loadedRows.includes(index) && (
+									<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
+								)}
+								<div class="smoothly-table-cell">{entry.id}</div>
+								<div class="smoothly-table-cell">{entry.registered}</div>
+								<div class="smoothly-table-cell">{entry.name}</div>
+								<div class="smoothly-table-cell">{entry.age}</div>
+								<div class="smoothly-table-cell">{entry.balance}</div>
+								<div class="smoothly-table-cell">{entry.eyeColor}</div>
+								<div class="smoothly-table-cell">{entry.gender}</div>
+								<div class="smoothly-table-cell">{entry.company}</div>
 							</smoothly-table-expandable-row>
 						))}
 					</smoothly-table-body>
 					<smoothly-table-foot>
 						<smoothly-table-row>
-							<div>Footer Cell</div>
-							<div>Footer Cell</div>
+							<div class="smoothly-table-cell">Footer Cell</div>
+							<div class="smoothly-table-cell">Footer Cell</div>
 						</smoothly-table-row>
 					</smoothly-table-foot>
 				</smoothly-table>

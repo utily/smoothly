@@ -8,7 +8,7 @@
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
 
-:host::slotted(:not(.detail)) {
+:host::slotted(.smoothly-table-cell) {
 	grid: subgrid;
 	cursor: pointer;
 	grid-column: span var(--smoothly-table-cell-span, 1);
@@ -18,7 +18,7 @@
 	white-space: nowrap;
 }
 
-:host:has(>:not(:last-child):hover) {
+:host:has(>.smoothly-table-cell:hover) {
 	background-color: rgb(var(--smoothly-table-hover-background));
 	color: rgb(var(--smoothly-table-hover-foreground));
 }
@@ -32,11 +32,11 @@
 	grid-template-rows: 0fr 1fr;
 }
 
-:host(:not([open])) > div.detail {
+:host(:not([open])) > div.smoothly-table-detail {
 	display: none;
 }
 
-:host > div:last-child {
+:host > div.smoothly-table-detail {
 	grid-column: 1 / -1;
 	cursor: default;
 	position: relative;
@@ -45,24 +45,24 @@
 	color: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host > :first-child {
+:host > .smoothly-table-cell:first-of-type {
 	@include arrow;
 }
 
-:host:has(>:hover) > :first-child {
+:host:has(>.smoothly-table-cell:hover) > .smoothly-table-cell:first-of-type {
 	@include arrow-hover;
 }
 
-:host[open] > :first-child {
+:host[open] > .smoothly-table-cell:first-of-type {
 	@include arrow-open;
 }
 
-:host[open] > div:last-child {
+:host[open] > div.smoothly-table-detail {
 	overflow: visible;
 	padding: 0.5rem 1.1rem;
 }
 
-:host > div:last-child::before {
+:host > div.smoothly-table-detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
@@ -77,7 +77,7 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host > div:last-child::after {
+:host > div.smoothly-table-detail::after {
 	content: "";
 	position: absolute;
 	display: flex;

@@ -37,10 +37,10 @@ export class SmoothlyTableDemoFillerRow {
 						) : (
 							this.cats.map(a => (
 								<smoothly-table-row>
-									<smoothly-table-cell>{a.breed}</smoothly-table-cell>
-									<smoothly-table-cell>{a.country}</smoothly-table-cell>
-									<smoothly-table-cell>{a.coat}</smoothly-table-cell>
-									<smoothly-table-cell>{a.origin}</smoothly-table-cell>
+									<div class="smoothly-table-cell">{a.breed}</div>
+									<div class="smoothly-table-cell">{a.country}</div>
+									<div class="smoothly-table-cell">{a.coat}</div>
+									<div class="smoothly-table-cell">{a.origin}</div>
 								</smoothly-table-row>
 							))
 						)}
