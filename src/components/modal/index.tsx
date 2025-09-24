@@ -21,7 +21,7 @@ export class SmoothlyModal {
 			<Host
 				role="alertdialog"
 				onClick={(e: any) => {
-					!e.composedPath().some((el: any) => el.classList?.contains("modal")) && this.closable && (this.open = false)
+					this.closable && !e.composedPath().some((el: any) => el.classList?.contains("modal")) && (this.open = false)
 				}}>
 				<div class="modal">
 					<div class="header">
