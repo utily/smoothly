@@ -14,7 +14,8 @@
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
 	align-items: center;
-	padding: 0.5rem 1.1rem;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 	white-space: nowrap;
 }
 
@@ -59,7 +60,8 @@
 
 :host[open] > div.smoothly-table-detail {
 	overflow: visible;
-	padding: 0.5rem 1.1rem;
+	padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
+	padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
 }
 
 :host > div.smoothly-table-detail::before {

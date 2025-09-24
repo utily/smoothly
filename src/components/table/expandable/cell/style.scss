@@ -4,13 +4,11 @@
 	display: contents;
 }
 
-:host>div {
-	padding: 0.5rem 1.1rem;
-}
-
-:host>div.content {
+:host > div.content {
 	grid-column: span var(--smoothly-table-cell-span, 1);
 	display: flex;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
@@ -25,41 +23,44 @@
 	}
 }
 
-:host[open]>div.content {
+:host[open] > div.content {
 	@include arrow-open;
 }
 
-:host>div:first-child {
+:host > div:first-child {
 	cursor: pointer;
 }
 
-:host>div.detail {
+:host > div.smoothly-table-detail {
 	grid-column: 1 / -1;
 	grid-row: 2;
 	position: relative;
+	padding-block: var(--smoothly-table-detail-padding-block, 0.5rem);
+	padding-inline: var(--smoothly-table-detail-padding-inline, 1.1rem);
 }
 
-:host[open]>div.content {
+:host[open] > div.content {
 	box-shadow: 1px 1px 1px -1px rgb(var(--smoothly-table-border)) inset,
 		-3px -1px 1px -3px rgb(var(--smoothly-table-border)) inset;
 }
 
-:host[open]>div {
+:host[open] > div {
 	background-color: rgb(var(--smoothly-table-expanded-background));
 	color: rgb(var(--smoothly-table-expanded-foreground));
 	stroke: rgb(var(--smoothly-table-expanded-foreground));
 	fill: rgb(var(--smoothly-table-expanded-foreground));
 }
 
-:host:not([open])>div.detail {
+:host:not([open]) > div.smoothly-table-detail {
 	display: none;
 }
 
-:host>div.detail::before {
+:host > div.smoothly-table-detail::before {
 	content: "";
 	position: absolute;
 	display: flex;
 	box-sizing: border-box;
+	z-index: -1;
 	top: 0;
 	bottom: 0;
 	left: -1em;
@@ -70,10 +71,11 @@
 		0px 0px 1px 0px rgb(var(--smoothly-table-border));
 }
 
-:host>div.detail::after {
+:host > div.smoothly-table-detail::after {
 	content: "";
 	position: absolute;
 	display: flex;
+	z-index: -1;
 	top: 0;
 	bottom: 0;
 	right: -1em;

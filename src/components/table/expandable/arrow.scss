@@ -1,5 +1,6 @@
 @mixin arrow {
 	position: relative;
+	padding-left: 1.1rem;
 
 	&::before {
 		content: '';
@@ -7,9 +8,9 @@
 		position: absolute;
 		top: 50%;
 		translate: 0 -50%;
-		height: 0.4em;
-		width: 0.4em;
-		left: 0.3em;
+		height: 0.4rem;
+		width: 0.4rem;
+		left: 0.3rem;
 		border-bottom: 1px solid rgb(var(--smoothly-table-foreground));
 		border-right: 1px solid rgb(var(--smoothly-table-foreground));
 		transition: rotate 200ms ease-in-out;
