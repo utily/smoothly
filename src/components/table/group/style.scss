@@ -1,15 +1,32 @@
+@import "../expandable/arrow.scss";
+
 :host {
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
 	margin-top: 1px;
 }
+
 :host > div:first-child {
+	@include arrow;
 	grid-column: 1 / -1;
 	display: grid;
 	position: relative;
 	cursor: pointer;
+	background-color: rgb(var(--smoothly-default-tint));
+	border-bottom: 1px solid rgb(var(--smoothly-default-shade));
 }
+
+:host > div:first-child:hover {
+	@include arrow-hover;
+	color: rgb(var(--smoothly-table-hover-foreground));
+	background-color: rgb(var(--smoothly-table-hover-background));
+}
+
+:host[open] > div:first-child {
+	@include arrow-open;
+}
+
 :host > div:last-child {
 	grid-column: 1 / -1;
 	display: grid;
@@ -19,9 +36,11 @@
 :host[align] > div:first-child {
 	grid-template-columns: subgrid;
 }
+
 :host[align] > div:first-child > div {
 	display: contents;
 }
+
 :host[align] > div:first-child > div > * {
 	padding: 0.5rem 1.1rem;
 }
@@ -33,11 +52,13 @@
 	justify-content: space-between;
 	padding: 0.5rem 1.1rem;
 }
+
 :host:not([align]) > div:first-child > div:first-child {
 	justify-self: start;
 	display: flex;
 	gap: 1rem;
 }
+
 :host:not([align]) > div:first-child > div:last-child {
 	justify-self: end;
 	display: flex;
@@ -47,39 +68,8 @@
 :host:not([open]) {
 	grid-template-rows: auto 0fr;
 }
+
 :host:not([open]) > div:last-child {
 	grid-row: 2;
 	overflow: hidden;
-}
-
-:host > div:first-child > div:first-child::before {
-	content: '';
-	display: flex;
-	position: absolute;
-	top: 50%;
-	translate: 0 -50%;
-	left: 0.3em;
-	height: 0.4em;
-	width: 0.4em;
-	border-bottom: 1px solid rgb(var(--smoothly-default-contrast));
-	border-right: 1px solid rgb(var(--smoothly-default-contrast));
-	transition: rotate 200ms ease-in-out;
-	rotate: -45deg;
-	opacity: 0.3;
-}
-:host > div:first-child:hover > div:first-child::before {
-	opacity: 1;
-}
-:host[open] > div:first-child > div:first-child::before {
-	rotate: 45deg;
-}
-
-:host > div:first-child {
-	background-color: rgb(var(--smoothly-default-tint));
-}
-:host > div:first-child {
-	border-bottom: 1px solid rgb(var(--smoothly-default-shade));
-}
-:host > div:first-child:hover {
-	background-color: rgb(var(--smoothly-default-shade));
 }
