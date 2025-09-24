@@ -8,13 +8,15 @@
 }
 
 :host > div:first-child {
-	@include arrow;
 	grid-column: 1 / -1;
 	display: grid;
 	position: relative;
 	cursor: pointer;
+	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
+	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 	background-color: rgb(var(--smoothly-default-tint));
 	border-bottom: 1px solid rgb(var(--smoothly-default-shade));
+	@include arrow;
 }
 
 :host > div:first-child:hover {
@@ -54,8 +56,6 @@
 	align-items: center;
 	grid-template-columns: repeat(2, auto);
 	justify-content: space-between;
-	padding-inline: var(--smoothly-table-cell-padding-inline, 1.1rem);
-	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 }
 
 :host:not([align]) > div:first-child > div:first-child {

@@ -21,6 +21,11 @@ smoothly-color {
 	--smoothly-table-expanded-foreground: var(--smoothly-default-contrast);
 	--smoothly-table-expanded-background: var(--smoothly-default-tint);
 	
+	--smoothly-table-cell-padding-inline: 1rem;
+	--smoothly-table-cell-min-height: 3rem;
+	--smoothly-table-detail-padding-block: 0.5rem;
+	--smoothly-table-detail-padding-inline: 1rem;
+
 	/* smoothly inputs */
 	--smoothly-input-foreground: var(--smoothly-default-contrast);
 	--smoothly-input-background: var(--smoothly-default-tint);
