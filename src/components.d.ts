@@ -592,7 +592,9 @@ export namespace Components {
     interface SmoothlyModal {
         "align": "top" | "center";
         "closable": boolean;
+        "closeModal": () => Promise<void>;
         "open": boolean;
+        "openModal": () => Promise<void>;
     }
     interface SmoothlyNotification {
         "closable": boolean;
