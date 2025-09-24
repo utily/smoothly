@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-modal",
@@ -15,18 +15,26 @@ export class SmoothlyModal {
 	openChanged() {
 		this.smoothlyModalChange.emit(this.open)
 	}
+	@Method()
+	async closeModal() {
+		this.open = false
+	}
+	@Method()
+	async openModal() {
+		this.open = true
+	}
 
 	render() {
 		return (
 			<Host
 				role="alertdialog"
 				onClick={(e: any) => {
-					this.closable && !e.composedPath().some((el: any) => el.classList?.contains("modal")) && (this.open = false)
+					this.closable && !e.composedPath().some((el: any) => el.classList?.contains("modal")) && this.closeModal()
 				}}>
 				<div class="modal">
 					<div class="header">
 						<slot name="header" />
-						{this.closable && <smoothly-icon name="close-outline" fill="solid" onClick={() => (this.open = false)} />}
+						{this.closable && <smoothly-icon name="close-outline" fill="solid" onClick={() => this.closeModal()} />}
 					</div>
 					<slot />
 					<div class="actions">
