@@ -380,6 +380,7 @@ export namespace Components {
         "unregister": () => Promise<void>;
     }
     interface SmoothlyInputDateText {
+        "deselect": () => Promise<void>;
         "disabled": boolean;
         "invalid": boolean;
         "locale": isoly.Locale;

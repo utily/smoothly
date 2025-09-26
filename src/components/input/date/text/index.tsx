@@ -85,6 +85,10 @@ export class SmoothlyInputDateRangeText {
 	async select() {
 		InputSelection.selectAll(this.partElements[0])
 	}
+	@Method()
+	async deselect() {
+		this.partElements[this.focusedIndex ?? 0]?.blur()
+	}
 
 	@Listen("beforeinput")
 	beforeInputHandler(e: InputEvent) {
