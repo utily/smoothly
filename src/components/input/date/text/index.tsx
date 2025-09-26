@@ -199,7 +199,9 @@ export class SmoothlyInputDateRangeText {
 								}}
 								key={index}
 								ref={el => (this.partElements[index] = el)}
-								contenteditable></span>
+								contenteditable={!(this.readonly || this.disabled)}>
+								{/* year or month or day written here */}
+							</span>
 							<span class="ghost">
 								{ghost[part].substring(0, ghost[part].length - (this.parts[part]?.length ?? 0))}
 							</span>
