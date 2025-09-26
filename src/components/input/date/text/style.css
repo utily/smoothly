@@ -5,6 +5,7 @@
 	display: block;
 	/* outline: 2px solid red; */
 }
+smoothly-input-date:not(:focus-within) :host:not(.has-text)>.smoothly-date-text-value,
 smoothly-input-date-range:not(:focus-within) :host:not(.has-text)>.smoothly-date-text-value {
 	display: none;
 }
