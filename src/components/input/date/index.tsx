@@ -152,7 +152,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						e.stopPropagation()
 						this.value = e.detail[this.name]
 					}}
-					onSmoothlyInputTextDone={() => {
+					onSmoothlyDateTextDone={() => {
 						this.open = false
 						this.dateTextElement?.deselect()
 					}}>

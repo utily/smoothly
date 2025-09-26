@@ -33,7 +33,9 @@ export class SmoothlyInputDateRangeText {
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: string | undefined }>
-	@Event() smoothlyInputTextDone: EventEmitter<void>
+	@Event() smoothlyDateTextDone: EventEmitter<void>
+	@Event() smoothlyDateGotoPrevious: EventEmitter<void>
+	@Event() smoothlyDateGotoNext: EventEmitter<void>
 
 	componentWillLoad() {
 		this.order = DateFormat.Order.fromLocale(this.locale)
@@ -83,7 +85,7 @@ export class SmoothlyInputDateRangeText {
 
 	@Method()
 	async select() {
-		InputSelection.selectAll(this.partElements[0])
+		this.setFocus(0)
 	}
 	@Method()
 	async deselect() {
@@ -110,7 +112,7 @@ export class SmoothlyInputDateRangeText {
 			e.preventDefault()
 		}
 		if (e.inputType == "insertParagraph" || e.inputType == "insertLineBreak") {
-			this.smoothlyInputTextDone.emit()
+			this.smoothlyDateTextDone.emit()
 			e.preventDefault()
 		}
 	}
@@ -144,7 +146,7 @@ export class SmoothlyInputDateRangeText {
 			}
 		}
 		if (value.length >= DateFormat.Part.length(part)) {
-			InputSelection.selectAll(this.partElements[index + 1])
+			this.setFocus(index + 1)
 		}
 		const roundedValue = DateFormat.Parts.toDate(this.parts)
 		if (roundedValue) {
@@ -152,6 +154,15 @@ export class SmoothlyInputDateRangeText {
 			if (this.parts.D !== roundedParts?.D) {
 				this.setPart("D", roundedParts?.D)
 			}
+		}
+	}
+	setFocus(index: number) {
+		if (index < 0) {
+			this.smoothlyDateGotoPrevious.emit()
+		} else if (index > 2) {
+			this.smoothlyDateGotoNext.emit()
+		} else {
+			InputSelection.selectAll(this.partElements[index])
 		}
 	}
 
@@ -164,7 +175,7 @@ export class SmoothlyInputDateRangeText {
 				}}
 				onClick={(e: MouseEvent) => {
 					if (!this.readonly && !this.disabled && !e.composedPath().includes(this.valueElement!)) {
-						InputSelection.selectAll(this.partElements[0])
+						this.setFocus(0)
 					}
 				}}>
 				<slot name="start" />
@@ -180,7 +191,7 @@ export class SmoothlyInputDateRangeText {
 						<span
 							onClick={e => {
 								if (!this.readonly && !this.disabled) {
-									InputSelection.selectAll(this.partElements[index])
+									this.setFocus(index)
 								}
 							}}>
 							<span
@@ -195,22 +206,22 @@ export class SmoothlyInputDateRangeText {
 								onKeyDown={e => {
 									const text = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
 									if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
-										InputSelection.selectAll(this.partElements[index - 1])
+										this.setFocus(index - 1)
 										e.preventDefault() // Keep selection
 									} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
-										InputSelection.selectAll(this.partElements[index + 1])
+										this.setFocus(index + 1)
 										e.preventDefault() // Keep selection
 									} else if (e.key == "Home" || e.key == "ArrowUp") {
-										InputSelection.selectAll(this.partElements[0])
+										this.setFocus(0)
 										e.preventDefault() // Keep selection
 									} else if (e.key == "End" || e.key == "ArrowDown") {
-										InputSelection.selectAll(this.partElements[2])
+										this.setFocus(2)
 										e.preventDefault() // Keep selection
 									} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
-										InputSelection.selectAll(this.partElements[index - 1])
+										this.setFocus(index - 1)
 										e.preventDefault() // Prevent delete previous part
 									} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
-										InputSelection.selectAll(this.partElements[index + 1])
+										this.setFocus(index + 1)
 										e.preventDefault() // Prevent delete next part
 									}
 								}}
