@@ -24,7 +24,7 @@ export class SmoothlyInputDateRangeText {
 		2: undefined,
 	}
 	@Prop() value?: string
-	@Prop() locale: isoly.Locale = navigator.language as isoly.Locale
+	@Prop() locale: isoly.Locale = "se-SE" //navigator.language as isoly.Locale
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
@@ -44,11 +44,10 @@ export class SmoothlyInputDateRangeText {
 	}
 
 	getMaxDay() {
-		// const month = this.month ? isoly.Date.Month.create(isoly.Date.Month.parse(this.month)) : undefined
-		// const year = this.year ? isoly.Date.Year.create(isoly.Date.Year.parse(this.year)) : undefined
-		// if (isoly.Date.Month.is(month)) {
-		// 	return isoly.Date.Month.length(month, year)
-		// } else
+		if (this.parts.Y && this.parts.M) {
+			const lastDate = isoly.Date.lastOfMonth(`${this.parts.Y.padStart(4, "0")}-${this.parts.M.padStart(2, "0")}-01`)
+			return isoly.Date.getDay(lastDate)
+		}
 		return 31
 	}
 
@@ -142,6 +141,22 @@ export class SmoothlyInputDateRangeText {
 			[part]: value,
 		}
 		if (value.length >= ghost[part].length) {
+			if (part == "D" && parseInt(value) > 28) {
+				const maxDay = this.getMaxDay()
+				if (parseInt(value) > maxDay) {
+					this.parts = {
+						...this.parts,
+						D: maxDay.toString().padStart(2, "0"),
+					}
+					this.partElements[index] && (this.partElements[index]!.innerText = maxDay.toString().padStart(2, "0"))
+					// InputSelection.selectAll(this.partElements[Math.min(index + 1, 2)])
+					InputSelection.setPosition(this.partElements[index], 2)
+				}
+			} else if (part == "M" && parseInt(value) > 12) {
+				// TODO
+			} else if (part == "Y" && parseInt(value) > 9999) {
+				InputSelection.selectAll(this.partElements[index + 1])
+			}
 			InputSelection.selectAll(this.partElements[index + 1])
 		}
 	}

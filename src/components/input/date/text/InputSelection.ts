@@ -1,6 +1,6 @@
 export namespace InputSelection {
-	export function isAtStart(e: KeyboardEvent): boolean {
-		const el = e.currentTarget as HTMLElement
+	export function isAtStart(event: KeyboardEvent): boolean {
+		const el = event.currentTarget as HTMLElement
 		const sel = window.getSelection()
 		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
 			return false
@@ -17,8 +17,8 @@ export namespace InputSelection {
 		return preRange.toString().length === 0
 	}
 
-	export function isAtEnd(e: KeyboardEvent): boolean {
-		const el = e.currentTarget as HTMLElement
+	export function isAtEnd(event: KeyboardEvent): boolean {
+		const el = event.currentTarget as HTMLElement
 		const sel = window.getSelection()
 		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
 			return false
@@ -48,5 +48,26 @@ export namespace InputSelection {
 
 		sel.removeAllRanges()
 		sel.addRange(range) // Apply the selection
+	}
+
+	export function setPosition(el: HTMLElement | undefined, index: number) {
+		if (!el)
+			return
+
+		el.focus()
+
+		const selection = window.getSelection()
+		if (!selection)
+			return
+
+		const range = document.createRange()
+		const textNode = el.firstChild || el
+
+		const position = Math.max(0, Math.min(index, el.innerText.length))
+		range.setStart(textNode, position)
+		range.collapse(true)
+
+		selection.removeAllRanges()
+		selection.addRange(range)
 	}
 }
