@@ -76,7 +76,6 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Method()
 	async getValue(): Promise<isoly.Date | undefined> {
-		console.log("getValue", this.name, this.value)
 		return this.value
 	}
 	@Method()

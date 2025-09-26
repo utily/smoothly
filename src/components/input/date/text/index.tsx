@@ -44,7 +44,6 @@ export class SmoothlyInputDateRangeText {
 	@Watch("parts")
 	partsHandler() {
 		const value = DateFormat.Parts.toDate(this.parts)
-		console.log("value set by parts:", value)
 		if (value !== this.value) {
 			this.value = value
 		}
@@ -53,7 +52,6 @@ export class SmoothlyInputDateRangeText {
 	@Watch("value")
 	valueHandler(newValue: string | undefined) {
 		this.smoothlyInput.emit({ [this.name]: newValue })
-		console.log("newValue:", newValue)
 		if (newValue !== DateFormat.Parts.toDate(this.parts)) {
 			if (newValue) {
 				const newParts = DateFormat.Parts.fromDate(newValue)
@@ -88,25 +86,11 @@ export class SmoothlyInputDateRangeText {
 		InputSelection.selectAll(this.partElements[0])
 	}
 
-	@Listen("beforeinput", { capture: true })
-	beforeInputHandler(e: InputEvent) {
-		// e.preventDefault()
-		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
-		const index = this.focusedIndex ?? 0
-		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
-		console.log("beforeInputHandler", e.inputType, index, part, value, this.parts)
-
-		// if (value.length >= ghost[part].length) {
-		// 	InputSelection.selectAll(this.partElements[index + 1])
-		// }
-	}
 	@Listen("input", { capture: true })
 	inputHandler(e: InputEvent) {
-		// e.preventDefault()
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
 		const index = this.focusedIndex ?? 0
 		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
-		console.log("inputHandler", e.inputType, index, part, value, this.parts)
 		this.parts = {
 			...this.parts,
 			[part]: value,
@@ -168,17 +152,6 @@ export class SmoothlyInputDateRangeText {
 								}}
 								onFocus={() => (this.focusedIndex = index)}
 								onBlur={() => (this.focusedIndex = undefined)}
-								onInput={e => {
-									// e.preventDefault()
-									// const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
-									// this.parts = {
-									// 	...this.parts,
-									// 	[part]: value,
-									// }
-									// if (value.length >= ghost[part].length) {
-									// 	InputSelection.selectAll(this.partElements[index + 1])
-									// }
-								}}
 								onKeyDown={e => {
 									const text = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
 									if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
