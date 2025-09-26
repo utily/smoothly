@@ -9,7 +9,7 @@ import { InputSelection } from "./InputSelection"
 */
 
 @Component({
-	tag: "smoothly-input-date-text",
+	tag: "smoothly-date-text",
 	styleUrl: "./style.css",
 	scoped: true,
 })

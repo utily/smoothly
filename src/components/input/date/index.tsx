@@ -24,7 +24,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
-	private dateTextElement?: HTMLSmoothlyInputDateTextElement
+	private dateTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -140,7 +140,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				tabindex={this.disabled ? undefined : 0}
 				class={{ "has-value": !!this.value }}
 				onClick={(e: MouseEvent) => !this.readonly && !this.disabled && (this.open = !this.open)}>
-				<smoothly-input-date-text
+				<smoothly-date-text
 					ref={el => (this.dateTextElement = el)}
 					locale={this.locale}
 					readonly={this.readonly}
@@ -156,7 +156,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						this.dateTextElement?.deselect()
 					}}>
 					<slot />
-				</smoothly-input-date-text>
+				</smoothly-date-text>
 				<span class="icons">
 					<slot name={"end"} />
 				</span>

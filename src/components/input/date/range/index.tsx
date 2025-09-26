@@ -12,8 +12,8 @@ import { Color } from "./../../../../model"
 	scoped: true,
 })
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
-	private startTextElement?: HTMLSmoothlyInputDateTextElement
-	private endTextElement?: HTMLSmoothlyInputDateTextElement
+	private startTextElement?: HTMLSmoothlyDateTextElement
+	private endTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -131,7 +131,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		return (
 			<Host tabindex={this.disabled ? undefined : 0} class={{ "has-value": !!this.value }}>
 				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
-					<smoothly-input-date-text
+					<smoothly-date-text
 						ref={el => (this.startTextElement = el)}
 						value={this.start}
 						onSmoothlyDateChange={e => {
@@ -147,9 +147,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}>
 						<slot />
-					</smoothly-input-date-text>
+					</smoothly-date-text>
 					<span class="smoothly-date-range-separator"> — </span>
-					<smoothly-input-date-text
+					<smoothly-date-text
 						ref={el => (this.endTextElement = el)}
 						value={this.end}
 						onSmoothlyDateChange={e => {

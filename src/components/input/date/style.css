@@ -9,7 +9,7 @@
 	min-height: var(--input-min-height);
 }
 
-:host >smoothly-input-date-text {
+:host > smoothly-date-text {
 	width: 100%;
 }
 
