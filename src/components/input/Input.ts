@@ -15,7 +15,7 @@ export interface Input extends Input.Element {
 	parent: Editable | undefined
 }
 export namespace Input {
-	export type UserInput = { name: string; value: any }
+	export type UserInput<T = any> = { name: string; value: T }
 	export interface Element {
 		register: () => Promise<void>
 		unregister: () => Promise<void>

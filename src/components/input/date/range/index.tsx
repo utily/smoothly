@@ -1,11 +1,10 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
-import { tidily } from "tidily"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
-import { Color, Data } from "./../../../../model"
+import { Color } from "./../../../../model"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -13,6 +12,8 @@ import { Color, Data } from "./../../../../model"
 	scoped: true,
 })
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
+	private startTextElement?: HTMLSmoothlyDateTextElement
+	private endTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -22,51 +23,56 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) start: isoly.Date | undefined
 	@Prop({ mutable: true }) end: isoly.Date | undefined
-	@Prop() placeholder = "from — to"
+	@Prop() placeholder: string
 	@Prop() invalid?: boolean = false
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	parent: Editable | undefined
 	isDifferentFromInitial = false
+	private hasFocus = false
 	private observer = Editable.Observer.create(this)
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
-	@State() value?: isoly.DateRange
 	@State() open: boolean
-	@Event() smoothlyInput: EventEmitter<{ [name: string]: isoly.DateRange | undefined }>
-	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
+	@Event() smoothlyInput: EventEmitter<{ [name: string]: Partial<isoly.DateRange> | undefined }>
+	@Event() smoothlyUserInput: EventEmitter<Input.UserInput<Partial<isoly.DateRange> | undefined>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 
-	componentWillLoad() {
+	async componentWillLoad() {
 		this.setInitialValue()
-		this.updateValue()
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
-		this.start && this.end && this.smoothlyInput.emit({ [this.name]: { start: this.start, end: this.end } })
+		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.observer.publish()
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
-	inputHandler(data: Data) {
-		const split = "dateRangeInput" in data && typeof data.dateRangeInput == "string" && data.dateRangeInput.split(" - ")
-		if (split && split.length == 2 && isoly.Date.is(split[0]) && isoly.Date.is(split[1])) {
-			this.start = split[0]
-			this.end = split[1]
-		}
-	}
+	// I don't understand the comment above
 	@Watch("start")
-	@Watch("end")
-	updateValue() {
-		this.value = this.start && this.end ? { start: this.start, end: this.end } : undefined
+	startChanged(_: isoly.Date | undefined, oldValue: isoly.Date | undefined) {
+		console.trace("date-range startChanged", this.start, this.end)
+		this.updateValue(oldValue, this.end)
 	}
-	@Watch("value")
-	valueChanged() {
-		this.isDifferentFromInitial = this.initialStart != this.start || this.initialEnd != this.end
-		this.observer.publish()
+	@Watch("end")
+	endChanged(_: isoly.Date | undefined, oldValue: isoly.Date | undefined) {
+		console.log("date-range endChanged", this.start, this.end)
+		this.updateValue(this.start, oldValue)
+	}
+
+	async updateValue(oldStart: isoly.Date | undefined, oldEnd: isoly.Date | undefined) {
+		if (oldStart != this.start || oldEnd != this.end) {
+			this.isDifferentFromInitial = this.initialStart != this.start || this.initialEnd != this.end
+			this.smoothlyInput.emit({ [this.name]: await this.getValue() })
+			this.observer.publish()
+		}
+		if (!this.hasFocus) {
+			this.startTextElement?.setValue(this.start)
+			this.endTextElement?.setValue(this.end)
+		}
 	}
 	@Watch("disabled")
 	@Watch("readonly")
@@ -103,8 +109,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<isoly.DateRange | undefined> {
-		return this.start && this.end ? { start: this.start, end: this.end } : undefined
+	async getValue(): Promise<Partial<isoly.DateRange | undefined>> {
+		return this.start || this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
 	async listen(listener: Editable.Observer.Listener): Promise<void> {
@@ -132,31 +138,76 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
-		const locale = navigator.language as isoly.Locale
 		return (
-			<Host tabindex={this.disabled ? undefined : 0}>
+			<Host
+				onFocusin={() => {
+					console.log("focusin")
+				}}
+				onFocusout={() => {
+					console.log("focusout")
+				}}
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!(this.start || this.end) }}>
 				<span
 					class="smoothly-date-range-input-part"
-					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
-					<smoothly-input
-						type="text" // TODO: date-range tidily thing
-						name="dateRangeInput"
+					onClick={(e: MouseEvent) => {
+						const includesStartTextElement = this.startTextElement && e.composedPath().includes(this.startTextElement)
+						const includesEndTextElement = this.endTextElement && e.composedPath().includes(this.endTextElement)
+						const includesTextElement = includesStartTextElement || includesEndTextElement
+						if (!includesTextElement && !this.readonly && !this.disabled) {
+							this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
+							this.open = !this.open
+						}
+					}}>
+					<slot name="start" />
+					<label class={"label float-on-focus"}>
+						<slot />
+					</label>
+					<smoothly-date-text
+						ref={el => (this.startTextElement = el)}
+						class="start-date-text"
+						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
+						onSmoothlyDateTextChange={async e => {
+							e.stopPropagation()
+							const newValue = e.detail ?? undefined
+							if (this.start != newValue) {
+								this.start = newValue
+								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+							}
+							console.log("onSmoothlyDateTextChange start", newValue, this.start, this.end)
+						}}
+						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
+						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
+						value={this.start}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						value={
-							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
-								: undefined
-						}
 						invalid={this.invalid}
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}
-						onSmoothlyInput={e => {
+					/>
+					<span class="smoothly-date-range-separator"> — </span>
+					<smoothly-date-text
+						ref={el => (this.endTextElement = el)}
+						class="end-date-text"
+						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
+						onSmoothlyDateTextChange={async e => {
 							e.stopPropagation()
-							this.inputHandler(e.detail)
-						}}>
-						<slot />
-					</smoothly-input>
+							const newValue = e.detail ?? undefined
+							if (this.end != newValue) {
+								this.end = newValue
+								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+							}
+							console.log("onSmoothlyDateTextChange end", newValue, this.start, this.end)
+						}}
+						onSmoothlyDateTextPrevious={() => this.startTextElement?.select("end")}
+						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}
+						value={this.end}
+						readonly={this.readonly}
+						disabled={this.disabled}
+						invalid={this.invalid}
+						placeholder={this.placeholder}
+						showLabel={this.showLabel}
+					/>
 				</span>
 				<span class={"icons"}>
 					<slot name={"end"} />

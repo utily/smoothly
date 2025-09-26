@@ -9,6 +9,22 @@
 	min-height: var(--input-min-height);
 }
 
+:host:not(:focus-within):not(.has-value) smoothly-date-text:not(.has-text) {
+	visibility: hidden;
+}
+
+:host>.label {
+	left: var(--input-padding-side);
+}
+:host[show-label] > smoothly-date-text {
+	margin-inline: var(--input-padding-side) auto;
+	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+:host:not([show-label]) > smoothly-date-text {
+	margin-inline: var(--input-padding-side) auto;
+	margin-block: auto;
+}
+
 :host>smoothly-input {
 	width: 100%;
 	--input-min-height: calc(var(--input-min-height) - 2px);

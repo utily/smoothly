@@ -10,6 +10,31 @@
 	}
 }
 
+:host:not(:focus-within):not(.has-value):has(.has-text) smoothly-date-text:not(.has-text),
+:host:not(:focus-within):not(.has-value):has(.has-text) .smoothly-date-range-separator {
+	visibility: hidden;
+}
+
+:host[show-label] smoothly-date-text {
+	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+
+:host:not([show-label]) smoothly-date-text {
+	margin-block: auto;
+}
+
+:host smoothly-date-text.start-date-text {
+	margin-inline: var(--input-padding-side);
+}
+
+:host smoothly-date-text.end-date-text {
+	margin-inline: var(--input-padding-side) auto;
+}
+
+:host[show-label] .smoothly-date-range-separator {
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+
 :host:not([readonly]) > .smoothly-date-range-input-part > smoothly-input {
 	cursor: pointer;
 }

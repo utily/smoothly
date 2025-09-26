@@ -1,0 +1,30 @@
+
+:host {
+	display: block;
+	--ghost-opacity: 0.5;
+	outline: 2px solid red;
+}
+
+:host .label {
+	left: var(--input-padding-side);
+}
+
+:host {
+	display: flex;
+	align-items: center;
+	/* height: 100%; */
+	height: fit-content;
+	box-sizing: border-box;
+}
+
+:host .smoothly-date-text-part:focus {
+	outline: none;
+}
+
+:host .ghost {
+	opacity: var(--ghost-opacity);
+}
+
+:host .smoothly-date-text-part:not(.filled-part) + .ghost + .smoothly-date-separator {
+	opacity: var(--ghost-opacity);
+}

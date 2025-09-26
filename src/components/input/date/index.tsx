@@ -9,6 +9,7 @@ import {
 	Listen,
 	Method,
 	Prop,
+	State,
 	Watch,
 } from "@stencil/core"
 import { isoly } from "isoly"
@@ -24,7 +25,10 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
+	private dateTextElement?: HTMLSmoothlyDateTextElement
+	private calendarElement?: HTMLElement
 	@Element() element: HTMLElement
+	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
@@ -34,6 +38,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
 	isDifferentFromInitial = false
+	private hasFocus = false
 	private initialValue?: isoly.Date
 	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
@@ -41,6 +46,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ mutable: true }) max: isoly.Date
 	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) showLabel = true
+	@State() changed = false
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -86,10 +92,13 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.value = undefined
 	}
 	@Watch("value")
-	onStart(next: isoly.Date) {
+	onValueChange(value: isoly.Date) {
+		if (!this.hasFocus) {
+			this.dateTextElement?.setValue(value)
+		}
 		this.isDifferentFromInitial = this.initialValue != this.value
-		this.smoothlyValueChange.emit(next)
-		this.smoothlyInput.emit({ [this.name]: next })
+		this.smoothlyValueChange.emit(value)
+		this.smoothlyInput.emit({ [this.name]: value })
 		this.observer.publish()
 	}
 	@Watch("disabled")
@@ -135,42 +144,57 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	render() {
 		return (
-			<Host>
-				<smoothly-input
-					color={this.color}
-					looks={this.looks == "transparent" ? this.looks : undefined}
-					name={this.name}
-					onFocus={() => !this.readonly && !this.disabled && (this.open = !this.open)}
-					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}
+			<Host
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!this.value }}
+				onClick={(e: MouseEvent) => {
+					const includesTextElement = this.dateTextElement && e.composedPath().includes(this.dateTextElement)
+					const includesCalendar = this.calendarElement && e.composedPath().includes(this.calendarElement)
+					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar) {
+						this.dateTextElement?.select()
+						this.open = !this.open
+					}
+				}}>
+				<slot name="start" />
+				<label class={"label float-on-focus"}>
+					<slot />
+				</label>
+				<smoothly-date-text
+					ref={el => (this.dateTextElement = el)}
+					locale={this.locale}
 					readonly={this.readonly}
 					disabled={this.disabled}
-					errorMessage={this.errorMessage}
-					invalid={this.invalid}
-					type="date"
-					value={this.value}
 					showLabel={this.showLabel}
-					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
+					value={this.value}
+					onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
+					onSmoothlyDateTextChange={e => {
 						e.stopPropagation()
-						this.value = e.detail[this.name]
+						const newValue = e.detail ?? undefined
+						if (this.value != newValue) {
+							this.value = newValue
+							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+						}
 					}}
-					onSmoothlyUserInput={e => {
-						e.stopPropagation()
-						this.smoothlyUserInput.emit({ name: this.name, value: this.getValue() })
-					}}>
-					<slot />
-				</smoothly-input>
+					onSmoothlyDateTextDone={() => {
+						this.open = false
+						this.dateTextElement?.deselect()
+					}}
+				/>
 				<span class="icons">
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
 					<smoothly-calendar
+						ref={el => (this.calendarElement = el)}
 						doubleInput={false}
 						value={this.value}
 						onSmoothlyValueChange={event => {
-							this.value = event.detail
-							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-							event.stopPropagation()
+							const newValue = event.detail ?? undefined
+							if (this.value != newValue) {
+								this.value = newValue
+								this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+								event.stopPropagation()
+							}
 						}}
 						max={this.max}
 						min={this.min}>
