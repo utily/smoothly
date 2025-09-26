@@ -10,7 +10,7 @@ export namespace DateFormat {
 	export type Part = "Y" | "M" | "D"
 	export type Parts = { [part in Part]?: string }
 	export namespace Part {
-		export function getLength(part: Part): number {
+		export function length(part: Part): number {
 			return ghosts[part].length
 		}
 		export function getGuide(part: Part, filledLength: number | undefined): string {

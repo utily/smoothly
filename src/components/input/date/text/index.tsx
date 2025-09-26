@@ -101,7 +101,7 @@ export class SmoothlyInputDateRangeText {
 			...this.parts,
 			[part]: value,
 		}
-		if (value.length >= DateFormat.Part.getLength(part)) {
+		if (value.length >= DateFormat.Part.length(part)) {
 			if (part == "D" && parseInt(value) > 28) {
 				const maxDay = DateFormat.Parts.maxDay(this.parts)
 				if (parseInt(value) > maxDay) {
@@ -149,7 +149,7 @@ export class SmoothlyInputDateRangeText {
 									"smoothly-date-text-part": true,
 									[`smoothly-date-text-${part}`]: true,
 									focused: this.focusedIndex === index,
-									"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.getLength(part),
+									"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.length(part),
 								}}
 								onFocus={() => (this.focusedIndex = index)}
 								onBlur={() => (this.focusedIndex = undefined)}
