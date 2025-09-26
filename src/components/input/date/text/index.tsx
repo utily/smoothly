@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { DateFormat } from "./DateFormat"
 import { InputSelection } from "./InputSelection"
@@ -14,6 +14,7 @@ import { InputSelection } from "./InputSelection"
 	scoped: true,
 })
 export class SmoothlyInputDateRangeText {
+	private valueElement?: HTMLSpanElement
 	private partElements: { [partIndex in number]: HTMLSpanElement | undefined } = {
 		0: undefined,
 		1: undefined,
@@ -156,17 +157,28 @@ export class SmoothlyInputDateRangeText {
 				class={{
 					"has-text": Object.values(this.parts).some(part => !!part),
 					"has-value": !!this.value,
+				}}
+				onClick={(e: MouseEvent) => {
+					if (!this.readonly && !this.disabled && !e.composedPath().includes(this.valueElement!)) {
+						InputSelection.selectAll(this.partElements[0])
+					}
 				}}>
 				<slot name="start" />
 				<label class={"label float-on-focus"}>
 					<slot />
 				</label>
-				<div
+				<span
+					ref={el => (this.valueElement = el)}
 					class={{
 						"smoothly-date-text-value": true,
 					}}>
 					{[...this.order].map((part: "Y" | "M" | "D", index: number) => (
-						<Fragment>
+						<span
+							onClick={e => {
+								if (!this.readonly && !this.disabled) {
+									InputSelection.selectAll(this.partElements[index])
+								}
+							}}>
 							<span
 								class={{
 									"smoothly-date-text-part": true,
@@ -204,10 +216,10 @@ export class SmoothlyInputDateRangeText {
 								{/* year or month or day written here */}
 							</span>
 							<span class="ghost">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
-							{index < this.order.length - 1 && <span class="separator">{this.separator}</span>}
-						</Fragment>
+							{index < 2 && <span class="separator">{this.separator}</span>}
+						</span>
 					))}
-				</div>
+				</span>
 				<slot name="end" />
 			</Host>
 		)

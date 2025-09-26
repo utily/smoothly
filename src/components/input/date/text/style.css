@@ -6,23 +6,23 @@
 	--ghost-opacity: 0.5;
 	/* outline: 2px solid red; */
 }
-smoothly-input-date:not(:focus-within) :host:not(.has-text)>.smoothly-date-text-value,
-smoothly-input-date-range:not(:focus-within) :host:not(.has-text)>.smoothly-date-text-value {
+smoothly-input-date:not(:focus-within) :host:not(.has-text) .smoothly-date-text-value,
+smoothly-input-date-range:not(:focus-within) :host:not(.has-text) .smoothly-date-text-value {
 	display: none;
 }
 
-:host>.label {
+:host .label {
 	left: var(--input-padding-side);
 }
 
-:host>.smoothly-date-text-value {
+:host .smoothly-date-text-value {
 	display: flex;
 	align-items: center;
 	height: 100%;
 	box-sizing: border-box;
 }
 
-:host[show-label]>.smoothly-date-text-value {
+:host[show-label] >.smoothly-date-text-value {
 	padding-inline: var(--input-padding-side);
 	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
@@ -35,9 +35,9 @@ smoothly-input-date-range:not(:focus-within) :host:not(.has-text)>.smoothly-date
 	outline: none;
 }
 
-:host > .smoothly-date-text-value > .ghost {
+:host > .smoothly-date-text-value .ghost {
 	opacity: var(--ghost-opacity);
 }
-:host > .smoothly-date-text-value > .smoothly-date-text-part:not(.filled-part) + .ghost + .separator {
+:host > .smoothly-date-text-value .smoothly-date-text-part:not(.filled-part) + .ghost + .separator {
 	opacity: var(--ghost-opacity);
 }
