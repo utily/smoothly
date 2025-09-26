@@ -56,21 +56,31 @@ export class SmoothlyInputDateRangeText {
 		console.log("newValue:", newValue)
 		if (newValue !== DateFormat.Parts.toValue(this.parts)) {
 			if (newValue) {
-				const yearIndex = this.order.indexOf("Y")
-				const monthIndex = this.order.indexOf("M")
-				const dayIndex = this.order.indexOf("D")
 				const newParts = DateFormat.Parts.fromValue(newValue)
-				this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts.Y)
-				this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts.M)
-				this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts.D)
-				this.parts = { ...newParts }
+				this.setAllParts(newParts)
 			} else {
-				this.partElements[0] && (this.partElements[0]!.innerText = "")
-				this.partElements[1] && (this.partElements[1]!.innerText = "")
-				this.partElements[2] && (this.partElements[2]!.innerText = "")
-				this.parts = {}
+				this.setAllParts({})
 			}
 		}
+	}
+
+	setAllParts(parts: DateFormat.Parts) {
+		this.parts = parts
+		const yearIndex = this.order.indexOf("Y")
+		const monthIndex = this.order.indexOf("M")
+		const dayIndex = this.order.indexOf("D")
+		this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = parts.Y ?? "")
+		this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = parts.M ?? "")
+		this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = parts.D ?? "")
+	}
+
+	setPart(part: "Y" | "M" | "D", value: string | undefined) {
+		this.parts = {
+			...this.parts,
+			[part]: value,
+		}
+		const index = this.order.indexOf(part)
+		this.partElements[index] && (this.partElements[index]!.innerText = value ?? "")
 	}
 
 	@Method()
@@ -102,24 +112,20 @@ export class SmoothlyInputDateRangeText {
 			[part]: value,
 		}
 		if (value.length >= DateFormat.Part.length(part)) {
-			if (part == "D" && parseInt(value) > 28) {
+			if (part == "D" && parseInt(value) > 28 && value.length >= 2) {
 				const maxDay = DateFormat.Parts.maxDay(this.parts)
 				if (parseInt(value) > maxDay) {
-					this.parts = {
-						...this.parts,
-						D: maxDay.toString().padStart(2, "0"),
-					}
-					this.partElements[index] && (this.partElements[index]!.innerText = maxDay.toString().padStart(2, "0"))
-					// InputSelection.selectAll(this.partElements[Math.min(index + 1, 2)])
+					this.setPart("D", maxDay.toString().padStart(2, "0"))
 					InputSelection.setPosition(this.partElements[index], 2)
 				}
-			} else if ((part == "M" && parseInt(value) > 12) || (value.length == 1 && parseInt(value) > 1)) {
+			} else if (part == "M" && parseInt(value) > 12 && value.length >= 2) {
+				const monthString = "12"
+				this.setPart("M", monthString)
+				InputSelection.setPosition(this.partElements[index], 2)
+			} else if (part == "M" && value.length == 1 && parseInt(value) > 1) {
 				const monthString = Math.min(parseInt(value), 12).toString().padStart(2, "0")
-				this.parts = {
-					...this.parts,
-					M: monthString,
-				}
-				this.partElements[index] && (this.partElements[index]!.innerText = monthString)
+				this.setPart("M", monthString)
+				InputSelection.setPosition(this.partElements[index], 2)
 			} else if (part == "Y" && parseInt(value) > 9999) {
 				InputSelection.selectAll(this.partElements[index + 1])
 			}
