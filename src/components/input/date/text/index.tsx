@@ -22,7 +22,7 @@ export class SmoothlyInputDateRangeText {
 		2: undefined,
 	}
 	@Prop() value?: string
-	@Prop() locale: isoly.Locale = "en-US" // "se-SE" //navigator.language as isoly.Locale
+	@Prop() locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
