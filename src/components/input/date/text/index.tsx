@@ -94,15 +94,22 @@ export class SmoothlyInputDateRangeText {
 	valueHandler(newValue: string | undefined) {
 		this.smoothlyInput.emit({ [this.name]: newValue })
 		console.log("newValue:", newValue)
-		if (newValue && newValue !== this.partsToValue()) {
-			const yearIndex = this.order.indexOf("Y")
-			const monthIndex = this.order.indexOf("M")
-			const dayIndex = this.order.indexOf("D")
-			const newParts = this.valueToParts(newValue)
-			this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts?.Y ?? "")
-			this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts?.M ?? "")
-			this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts?.D ?? "")
-			this.parts = { ...newParts }
+		if (newValue !== this.partsToValue()) {
+			if (newValue) {
+				const yearIndex = this.order.indexOf("Y")
+				const monthIndex = this.order.indexOf("M")
+				const dayIndex = this.order.indexOf("D")
+				const newParts = this.valueToParts(newValue)
+				this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts?.Y ?? "")
+				this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts?.M ?? "")
+				this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts?.D ?? "")
+				this.parts = { ...newParts }
+			} else {
+				this.partElements[0] && (this.partElements[0]!.innerText = "")
+				this.partElements[1] && (this.partElements[1]!.innerText = "")
+				this.partElements[2] && (this.partElements[2]!.innerText = "")
+				this.parts = {}
+			}
 		}
 	}
 
