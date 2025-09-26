@@ -155,7 +155,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						}}>
 						<slot />
 					</smoothly-input> */}
-					<smoothly-input-date-range-text
+					<smoothly-input-date-text
 						value={
 							this.start && this.end
 								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
@@ -172,7 +172,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}>
 						<slot />
-					</smoothly-input-date-range-text>
+					</smoothly-input-date-text>
 				</section>
 				<span class={"icons"}>
 					<slot name={"end"} />

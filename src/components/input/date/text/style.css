@@ -1,29 +1,37 @@
-@import "../../../shared.css";
+@import "../../shared.css";
 
 
 :host {
 	display: block;
 	/* outline: 2px solid red; */
 }
+smoothly-input-date-range:not(:focus-within) :host:not(.has-text)>.smoothly-date-text-value {
+	display: none;
+}
 
 :host>.label {
 	left: var(--input-padding-side);
 }
 
-:host>.smoothly-date-range-text-value {
+:host>.smoothly-date-text-value {
 	display: flex;
 	align-items: center;
 	height: 100%;
 	box-sizing: border-box;
 }
 
-:host[show-label]>.smoothly-date-range-text-value {
+:host[show-label]>.smoothly-date-text-value {
 	padding-inline: var(--input-padding-side);
 	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
-:host:not([show-label])>.smoothly-date-range-text-value {
+:host:not([show-label])>.smoothly-date-text-value {
 	padding-block: 0;
 	padding-inline: var(--input-padding-side);
 }
 
-
+:host .smoothly-date-text-part:focus {
+	outline: none;
+}
+:host .smoothly-date-text-value .ghost {
+	opacity: 0.5;
+}

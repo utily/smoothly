@@ -24,6 +24,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
+	private dateTextElement?: HTMLSmoothlyInputDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -75,6 +76,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Method()
 	async getValue(): Promise<isoly.Date | undefined> {
+		console.log("getValue", this.name, this.value)
 		return this.value
 	}
 	@Method()
@@ -134,8 +136,16 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	render() {
 		return (
-			<Host>
-				<smoothly-input
+			<Host
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!this.value }}
+				onFocus={() => {
+					if (!this.readonly && !this.disabled) {
+						this.dateTextElement?.select()
+						this.open = !this.open
+					}
+				}}>
+				{/* 	<smoothly-input
 					color={this.color}
 					looks={this.looks == "transparent" ? this.looks : undefined}
 					name={this.name}
@@ -158,7 +168,20 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						this.smoothlyUserInput.emit({ name: this.name, value: this.getValue() })
 					}}>
 					<slot />
-				</smoothly-input>
+				</smoothly-input> */}
+				<smoothly-input-date-text
+					ref={el => (this.dateTextElement = el)}
+					name={this.name}
+					readonly={this.readonly}
+					disabled={this.disabled}
+					showLabel={this.showLabel}
+					value={this.value}
+					onSmoothlyInput={e => {
+						e.stopPropagation()
+						this.value = e.detail[this.name]
+					}}>
+					<slot />
+				</smoothly-input-date-text>
 				<span class="icons">
 					<slot name={"end"} />
 				</span>
