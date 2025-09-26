@@ -176,19 +176,27 @@ export class SmoothlyInputDateRangeText {
 									// }
 								}}
 								onKeyDown={e => {
+									const text = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
 									if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
-										e.preventDefault()
 										InputSelection.selectAll(this.partElements[index - 1])
+										e.preventDefault() // Keep selection
 									} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
-										e.preventDefault()
 										InputSelection.selectAll(this.partElements[index + 1])
-									} else if (e.key == "Home") {
+										e.preventDefault() // Keep selection
+									} else if (e.key == "Home" || e.key == "ArrowUp") {
 										InputSelection.selectAll(this.partElements[0])
-									} else if (e.key == "End") {
+										e.preventDefault() // Keep selection
+									} else if (e.key == "End" || e.key == "ArrowDown") {
 										InputSelection.selectAll(this.partElements[2])
+										e.preventDefault() // Keep selection
+									} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
+										InputSelection.selectAll(this.partElements[index - 1])
+										e.preventDefault() // Prevent delete previous part
+									} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
+										InputSelection.selectAll(this.partElements[index + 1])
+										e.preventDefault() // Prevent delete next part
 									}
 								}}
-								onKeyUp={e => {}}
 								key={index}
 								ref={el => (this.partElements[index] = el)}
 								contenteditable></span>
