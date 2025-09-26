@@ -44,10 +44,10 @@ export class SmoothlyInputDateRangeText {
 	}
 
 	getMaxDay() {
-		if (this.parts.Y && this.parts.M && parseInt(this.parts.M) <= 12) {
+		if (this.parts.Y && this.parts.M && parseInt(this.parts.M) >= 1 && parseInt(this.parts.M) <= 12) {
 			const lastDate = isoly.Date.lastOfMonth(`${this.parts.Y.padStart(4, "0")}-${this.parts.M.padStart(2, "0")}-01`)
 			return isoly.Date.getDay(lastDate)
-		} else if (this.parts.M && parseInt(this.parts.M) <= 12) {
+		} else if (this.parts.M && parseInt(this.parts.M) >= 1 && parseInt(this.parts.M) <= 12) {
 			// Assume leap year
 			const lastDate = isoly.Date.lastOfMonth(`2004-${this.parts.M.padStart(2, "0")}-01`)
 			return isoly.Date.getDay(lastDate)
@@ -70,7 +70,9 @@ export class SmoothlyInputDateRangeText {
 				: undefined
 		return year && month && day ? `${year}-${month}-${day}` : undefined
 	}
-	valueToParts(value: string | undefined): DateParts | undefined {
+	valueToParts(value: string): Required<DateParts>
+	valueToParts(value: undefined): undefined
+	valueToParts(value: string | undefined): Required<DateParts> | undefined {
 		if (value) {
 			const year = value.substring(0, 4).padStart(4, "0")
 			const month = value.substring(5, 7).padStart(2, "0")
@@ -103,9 +105,9 @@ export class SmoothlyInputDateRangeText {
 				const monthIndex = this.order.indexOf("M")
 				const dayIndex = this.order.indexOf("D")
 				const newParts = this.valueToParts(newValue)
-				this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts?.Y ?? "")
-				this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts?.M ?? "")
-				this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts?.D ?? "")
+				this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts.Y)
+				this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts.M)
+				this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts.D)
 				this.parts = { ...newParts }
 			} else {
 				this.partElements[0] && (this.partElements[0]!.innerText = "")
@@ -156,8 +158,13 @@ export class SmoothlyInputDateRangeText {
 					// InputSelection.selectAll(this.partElements[Math.min(index + 1, 2)])
 					InputSelection.setPosition(this.partElements[index], 2)
 				}
-			} else if (part == "M" && parseInt(value) > 12) {
-				// TODO
+			} else if ((part == "M" && parseInt(value) > 12) || (value.length == 1 && parseInt(value) > 1)) {
+				const monthString = Math.min(parseInt(value), 12).toString().padStart(2, "0")
+				this.parts = {
+					...this.parts,
+					M: monthString,
+				}
+				this.partElements[index] && (this.partElements[index]!.innerText = monthString)
 			} else if (part == "Y" && parseInt(value) > 9999) {
 				InputSelection.selectAll(this.partElements[index + 1])
 			}
