@@ -1,0 +1,29 @@
+@import "../../../shared.css";
+
+
+:host {
+	display: block;
+	/* outline: 2px solid red; */
+}
+
+:host>.label {
+	left: var(--input-padding-side);
+}
+
+:host>.smoothly-date-range-text-value {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+:host[show-label]>.smoothly-date-range-text-value {
+	padding-inline: var(--input-padding-side);
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+:host:not([show-label])>.smoothly-date-range-text-value {
+	padding-block: 0;
+	padding-inline: var(--input-padding-side);
+}
+
+

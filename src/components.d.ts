@@ -376,6 +376,16 @@ export namespace Components {
         "start": isoly.Date | undefined;
         "unregister": () => Promise<void>;
     }
+    interface SmoothlyInputDateRangeText {
+        "disabled": boolean;
+        "invalid": boolean;
+        "locale"?: isoly.Locale;
+        "name": string;
+        "placeholder": string;
+        "readonly": boolean;
+        "showLabel": boolean;
+        "value"?: string;
+    }
     interface SmoothlyInputDateTime {
         "changed": boolean;
         "clear": () => Promise<void>;
@@ -821,6 +831,10 @@ export interface SmoothlyInputDateCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyInputDateRangeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyInputDateRangeElement;
+}
+export interface SmoothlyInputDateRangeTextCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyInputDateRangeTextElement;
 }
 export interface SmoothlyInputDateTimeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1525,6 +1539,23 @@ declare global {
         prototype: HTMLSmoothlyInputDateRangeElement;
         new (): HTMLSmoothlyInputDateRangeElement;
     };
+    interface HTMLSmoothlyInputDateRangeTextElementEventMap {
+        "smoothlyInput": { [name: string]: string | undefined };
+    }
+    interface HTMLSmoothlyInputDateRangeTextElement extends Components.SmoothlyInputDateRangeText, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyInputDateRangeTextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateRangeTextElement, ev: SmoothlyInputDateRangeTextCustomEvent<HTMLSmoothlyInputDateRangeTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyInputDateRangeTextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateRangeTextElement, ev: SmoothlyInputDateRangeTextCustomEvent<HTMLSmoothlyInputDateRangeTextElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyInputDateRangeTextElement: {
+        prototype: HTMLSmoothlyInputDateRangeTextElement;
+        new (): HTMLSmoothlyInputDateRangeTextElement;
+    };
     interface HTMLSmoothlyInputDateTimeElementEventMap {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyValueChange": isoly.DateTime;
@@ -2226,6 +2257,7 @@ declare global {
         "smoothly-input-color-demo": HTMLSmoothlyInputColorDemoElement;
         "smoothly-input-date": HTMLSmoothlyInputDateElement;
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
+        "smoothly-input-date-range-text": HTMLSmoothlyInputDateRangeTextElement;
         "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
         "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
@@ -2631,6 +2663,17 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;
+    }
+    interface SmoothlyInputDateRangeText {
+        "disabled"?: boolean;
+        "invalid"?: boolean;
+        "locale"?: isoly.Locale;
+        "name"?: string;
+        "onSmoothlyInput"?: (event: SmoothlyInputDateRangeTextCustomEvent<{ [name: string]: string | undefined }>) => void;
+        "placeholder"?: string;
+        "readonly"?: boolean;
+        "showLabel"?: boolean;
+        "value"?: string;
     }
     interface SmoothlyInputDateTime {
         "changed"?: boolean;
@@ -3039,6 +3082,7 @@ declare namespace LocalJSX {
         "smoothly-input-color-demo": SmoothlyInputColorDemo;
         "smoothly-input-date": SmoothlyInputDate;
         "smoothly-input-date-range": SmoothlyInputDateRange;
+        "smoothly-input-date-range-text": SmoothlyInputDateRangeText;
         "smoothly-input-date-time": SmoothlyInputDateTime;
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
@@ -3153,6 +3197,7 @@ declare module "@stencil/core" {
             "smoothly-input-color-demo": LocalJSX.SmoothlyInputColorDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
             "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
+            "smoothly-input-date-range-text": LocalJSX.SmoothlyInputDateRangeText & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeTextElement>;
             "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
             "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
