@@ -1,6 +1,57 @@
 import { isoly } from "isoly"
 
 export namespace DateFormat {
+	export const ghosts = {
+		Y: "YYYY",
+		M: "MM",
+		D: "DD",
+	} as const
+
+	export type Part = "Y" | "M" | "D"
+	export type Parts = { [part in Part]?: string }
+	export namespace Part {
+		export function getLength(part: Part): number {
+			return ghosts[part].length
+		}
+		export function getGuide(part: Part, filledLength: number | undefined): string {
+			const ghost = DateFormat.ghosts[part]
+			if (filledLength === undefined) {
+				return ghost
+			}
+			return ghost.substring(0, ghost.length - filledLength)
+		}
+	}
+	export namespace Parts {
+		export function maxDay(parts: Parts): number {
+			if (parts.Y && parts.M && parseInt(parts.M) >= 1 && parseInt(parts.M) <= 12) {
+				const lastDate = isoly.Date.lastOfMonth(`${parts.Y.padStart(4, "0")}-${parts.M.padStart(2, "0")}-01`)
+				return isoly.Date.getDay(lastDate)
+			} else if (parts.M && parseInt(parts.M) >= 1 && parseInt(parts.M) <= 12) {
+				// Assume leap year
+				const lastDate = isoly.Date.lastOfMonth(`2004-${parts.M.padStart(2, "0")}-01`)
+				return isoly.Date.getDay(lastDate)
+			}
+			return 31
+		}
+		export function toValue(parts: Parts): string | undefined {
+			return parts.Y && parts.Y.length == 4 && parts.M && parts.M.length == 2 && parts.D && parts.D.length == 2
+				? `${parts.Y}-${parts.M}-${parts.D}`
+				: undefined
+		}
+		export function fromValue(value: string): Required<DateFormat.Parts>
+		export function fromValue(value: undefined): undefined
+		export function fromValue(value: string | undefined): Required<DateFormat.Parts> | undefined {
+			if (value) {
+				return {
+					Y: value.substring(0, 4).padStart(4, "0"),
+					M: value.substring(5, 7).padStart(2, "0"),
+					D: value.substring(8, 10).padStart(2, "0"),
+				}
+			}
+			return undefined
+		}
+	}
+
 	export type Order = "YMD" | "DMY" | "MDY"
 
 	export namespace Order {

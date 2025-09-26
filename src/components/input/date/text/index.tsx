@@ -10,8 +10,6 @@ import { InputSelection } from "./InputSelection"
  TODO: Make it editable by splitting the value into two inputs, one for for all necessary combinations of year, month, day.
 */
 
-type DateParts = { [part in "Y" | "M" | "D"]?: string }
-
 @Component({
 	tag: "smoothly-input-date-text",
 	styleUrl: "./style.css",
@@ -31,7 +29,7 @@ export class SmoothlyInputDateRangeText {
 	@Prop({ reflect: true }) placeholder: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ reflect: true }) name: string
-	@State() parts: DateParts = {}
+	@State() parts: DateFormat.Parts = {}
 	@State() order: DateFormat.Order
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
@@ -43,49 +41,9 @@ export class SmoothlyInputDateRangeText {
 		this.value && this.smoothlyInput.emit({ [this.name]: this.value })
 	}
 
-	getMaxDay() {
-		if (this.parts.Y && this.parts.M && parseInt(this.parts.M) >= 1 && parseInt(this.parts.M) <= 12) {
-			const lastDate = isoly.Date.lastOfMonth(`${this.parts.Y.padStart(4, "0")}-${this.parts.M.padStart(2, "0")}-01`)
-			return isoly.Date.getDay(lastDate)
-		} else if (this.parts.M && parseInt(this.parts.M) >= 1 && parseInt(this.parts.M) <= 12) {
-			// Assume leap year
-			const lastDate = isoly.Date.lastOfMonth(`2004-${this.parts.M.padStart(2, "0")}-01`)
-			return isoly.Date.getDay(lastDate)
-		}
-		return 31
-	}
-
-	partsToValue(): string | undefined {
-		const year = this.parts.Y && this.parts.Y.length == 4 ? this.parts.Y.padStart(4, "0") : undefined
-		const month =
-			this.parts.M && this.parts.M.length >= 1 && parseInt(this.parts.M) >= 1 && parseInt(this.parts.M) <= 12
-				? (this.parts.M.length == 1 ? "0" : "") + parseInt(this.parts.M).toString().padStart(2, "0")
-				: undefined
-		const day =
-			this.parts.D &&
-			this.parts.D.length >= 1 &&
-			parseInt(this.parts.D) >= 1 &&
-			parseInt(this.parts.D) <= this.getMaxDay()
-				? (this.parts.D.length == 1 ? "0" : "") + parseInt(this.parts.D).toString().padStart(2, "0")
-				: undefined
-		return year && month && day ? `${year}-${month}-${day}` : undefined
-	}
-	valueToParts(value: string): Required<DateParts>
-	valueToParts(value: undefined): undefined
-	valueToParts(value: string | undefined): Required<DateParts> | undefined {
-		if (value) {
-			return {
-				Y: value.substring(0, 4).padStart(4, "0"),
-				M: value.substring(5, 7).padStart(2, "0"),
-				D: value.substring(8, 10).padStart(2, "0"),
-			}
-		}
-		return undefined
-	}
-
 	@Watch("parts")
 	partsHandler() {
-		const value = this.partsToValue()
+		const value = DateFormat.Parts.toValue(this.parts)
 		console.log("value set by parts:", value)
 		if (value !== this.value) {
 			this.value = value
@@ -96,12 +54,12 @@ export class SmoothlyInputDateRangeText {
 	valueHandler(newValue: string | undefined) {
 		this.smoothlyInput.emit({ [this.name]: newValue })
 		console.log("newValue:", newValue)
-		if (newValue !== this.partsToValue()) {
+		if (newValue !== DateFormat.Parts.toValue(this.parts)) {
 			if (newValue) {
 				const yearIndex = this.order.indexOf("Y")
 				const monthIndex = this.order.indexOf("M")
 				const dayIndex = this.order.indexOf("D")
-				const newParts = this.valueToParts(newValue)
+				const newParts = DateFormat.Parts.fromValue(newValue)
 				this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = newParts.Y)
 				this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = newParts.M)
 				this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = newParts.D)
@@ -143,9 +101,9 @@ export class SmoothlyInputDateRangeText {
 			...this.parts,
 			[part]: value,
 		}
-		if (value.length >= ghost[part].length) {
+		if (value.length >= DateFormat.Part.getLength(part)) {
 			if (part == "D" && parseInt(value) > 28) {
-				const maxDay = this.getMaxDay()
+				const maxDay = DateFormat.Parts.maxDay(this.parts)
 				if (parseInt(value) > maxDay) {
 					this.parts = {
 						...this.parts,
@@ -191,7 +149,7 @@ export class SmoothlyInputDateRangeText {
 									"smoothly-date-text-part": true,
 									[`smoothly-date-text-${part}`]: true,
 									focused: this.focusedIndex === index,
-									"filled-part": (this.parts[part]?.length ?? 0) >= ghost[part].length,
+									"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.getLength(part),
 								}}
 								onFocus={() => (this.focusedIndex = index)}
 								onBlur={() => (this.focusedIndex = undefined)}
@@ -233,9 +191,7 @@ export class SmoothlyInputDateRangeText {
 								contenteditable={!(this.readonly || this.disabled)}>
 								{/* year or month or day written here */}
 							</span>
-							<span class="ghost">
-								{ghost[part].substring(0, ghost[part].length - (this.parts[part]?.length ?? 0))}
-							</span>
+							<span class="ghost">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
 							{index < this.order.length - 1 && <span class="separator">{this.separator}</span>}
 						</Fragment>
 					))}
@@ -245,9 +201,3 @@ export class SmoothlyInputDateRangeText {
 		)
 	}
 }
-
-const ghost = {
-	["Y"]: "YYYY",
-	["M"]: "MM",
-	["D"]: "DD",
-} as const
