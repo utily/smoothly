@@ -77,6 +77,7 @@ export class SmoothlyFormDemoPet {
 								end={this.owner.ownedRange?.end}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
 								Owner ownedRange
+								<smoothly-input-clear slot="end" size="icon" />
 							</smoothly-input-date-range>
 							<smoothly-input-range
 								name="owner.height"

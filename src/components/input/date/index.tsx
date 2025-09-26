@@ -24,7 +24,9 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
+	private dateTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
+	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
@@ -134,31 +136,27 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	render() {
 		return (
-			<Host>
-				<smoothly-input
-					color={this.color}
-					looks={this.looks == "transparent" ? this.looks : undefined}
-					name={this.name}
-					onFocus={() => !this.readonly && !this.disabled && (this.open = !this.open)}
-					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}
+			<Host
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!this.value }}
+				onClick={(e: MouseEvent) => !this.readonly && !this.disabled && (this.open = !this.open)}>
+				<smoothly-date-text
+					ref={el => (this.dateTextElement = el)}
+					locale={this.locale}
 					readonly={this.readonly}
 					disabled={this.disabled}
-					errorMessage={this.errorMessage}
-					invalid={this.invalid}
-					type="date"
-					value={this.value}
 					showLabel={this.showLabel}
-					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
+					value={this.value}
+					onSmoothlyDateChange={e => {
 						e.stopPropagation()
-						this.value = e.detail[this.name]
+						this.value = e.detail
 					}}
-					onSmoothlyUserInput={e => {
-						e.stopPropagation()
-						this.smoothlyUserInput.emit({ name: this.name, value: this.getValue() })
+					onSmoothlyDateTextDone={() => {
+						this.open = false
+						this.dateTextElement?.deselect()
 					}}>
 					<slot />
-				</smoothly-input>
+				</smoothly-date-text>
 				<span class="icons">
 					<slot name={"end"} />
 				</span>

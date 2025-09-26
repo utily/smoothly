@@ -1,11 +1,10 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
-import { tidily } from "tidily"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
-import { Color, Data } from "./../../../../model"
+import { Color } from "./../../../../model"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -13,6 +12,8 @@ import { Color, Data } from "./../../../../model"
 	scoped: true,
 })
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
+	private startTextElement?: HTMLSmoothlyDateTextElement
+	private endTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -22,7 +23,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) showLabel = true
 	@Prop({ mutable: true }) start: isoly.Date | undefined
 	@Prop({ mutable: true }) end: isoly.Date | undefined
-	@Prop() placeholder = "from — to"
+	@Prop() placeholder: string
 	@Prop() invalid?: boolean = false
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
@@ -51,13 +52,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.observer.publish()
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
-	inputHandler(data: Data) {
-		const split = "dateRangeInput" in data && typeof data.dateRangeInput == "string" && data.dateRangeInput.split(" - ")
-		if (split && split.length == 2 && isoly.Date.is(split[0]) && isoly.Date.is(split[1])) {
-			this.start = split[0]
-			this.end = split[1]
-		}
-	}
+	// I don't understand the comment above
+
 	@Watch("start")
 	@Watch("end")
 	updateValue() {
@@ -132,29 +128,43 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
-		const locale = navigator.language as isoly.Locale
 		return (
-			<Host tabindex={this.disabled ? undefined : 0}>
+			<Host tabindex={this.disabled ? undefined : 0} class={{ "has-value": !!this.value }}>
 				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
-					<smoothly-input
-						type="text" // TODO: date-range tidily thing
-						name="dateRangeInput"
+					<smoothly-date-text
+						ref={el => (this.startTextElement = el)}
+						value={this.start}
+						onSmoothlyDateChange={e => {
+							e.stopPropagation()
+							if (this.start != e.detail)
+								this.start = e.detail
+						}}
+						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
+						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						value={
-							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
-								: undefined
-						}
+						invalid={this.invalid}
+						placeholder={this.placeholder}
+						showLabel={this.showLabel}>
+						<slot />
+					</smoothly-date-text>
+					<span class="smoothly-date-range-separator"> — </span>
+					<smoothly-date-text
+						ref={el => (this.endTextElement = el)}
+						value={this.end}
+						onSmoothlyDateChange={e => {
+							e.stopPropagation()
+							if (this.end != e.detail)
+								this.end = e.detail
+						}}
+						onSmoothlyDateTextPrevious={() => this.startTextElement?.select()}
+						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}
+						readonly={this.readonly}
+						disabled={this.disabled}
 						invalid={this.invalid}
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}
-						onSmoothlyInput={e => {
-							e.stopPropagation()
-							this.inputHandler(e.detail)
-						}}>
-						<slot />
-					</smoothly-input>
+					/>
 				</section>
 				<span class={"icons"}>
 					<slot name={"end"} />

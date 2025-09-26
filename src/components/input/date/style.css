@@ -9,6 +9,10 @@
 	min-height: var(--input-min-height);
 }
 
+:host > smoothly-date-text {
+	width: 100%;
+}
+
 :host>smoothly-input {
 	width: 100%;
 	--input-min-height: calc(var(--input-min-height) - 2px);
