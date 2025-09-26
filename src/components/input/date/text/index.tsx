@@ -132,6 +132,10 @@ export class SmoothlyInputDateRangeText {
 					this.setPart("D", maxDay.toString().padStart(2, "0"))
 					InputSelection.setPosition(this.partElements[index], 2)
 				}
+			} else if (value.length == 1 && parseInt(value) > 3) {
+				const dayString = parseInt(value).toString().padStart(2, "0")
+				this.setPart("D", dayString)
+				InputSelection.setPosition(this.partElements[index], 2)
 			}
 		} else if (part == "M") {
 			if (parseInt(value) > 12) {
@@ -156,6 +160,7 @@ export class SmoothlyInputDateRangeText {
 		}
 	}
 	setFocus(index: number) {
+		console.log("setFocus", index)
 		if (index < 0) {
 			this.smoothlyDateTextPrevious.emit()
 		} else if (index > 2) {
