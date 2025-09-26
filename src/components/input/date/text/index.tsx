@@ -74,13 +74,10 @@ export class SmoothlyInputDateRangeText {
 	valueToParts(value: undefined): undefined
 	valueToParts(value: string | undefined): Required<DateParts> | undefined {
 		if (value) {
-			const year = value.substring(0, 4).padStart(4, "0")
-			const month = value.substring(5, 7).padStart(2, "0")
-			const day = value.substring(8, 10).padStart(2, "0")
 			return {
-				Y: year,
-				M: month,
-				D: day,
+				Y: value.substring(0, 4).padStart(4, "0"),
+				M: value.substring(5, 7).padStart(2, "0"),
+				D: value.substring(8, 10).padStart(2, "0"),
 			}
 		}
 		return undefined
