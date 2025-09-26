@@ -6,8 +6,6 @@ import { InputSelection } from "./InputSelection"
 /* 
  The regular input is not suitable for displaying a date range in text mode,
  So we create a custom component for that specific purpose.
- For now it will simply display the value as text and not be editable.
- TODO: Make it editable by splitting the value into two inputs, one for for all necessary combinations of year, month, day.
 */
 
 @Component({
@@ -34,6 +32,7 @@ export class SmoothlyInputDateRangeText {
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: string | undefined }>
+	@Event() smoothlyInputTextDone: EventEmitter<void>
 
 	componentWillLoad() {
 		this.order = DateFormat.Order.fromLocale(this.locale)
@@ -84,6 +83,31 @@ export class SmoothlyInputDateRangeText {
 	@Method()
 	async select() {
 		InputSelection.selectAll(this.partElements[0])
+	}
+
+	@Listen("beforeinput")
+	beforeInputHandler(e: InputEvent) {
+		console.log("beforeInput", e.inputType, e.data)
+		if (
+			((e.inputType == "insertText" || e.inputType == "insertFromPaste") && e.data && /\D/.test(e.data)) ||
+			e.inputType == "insertCompositionText" ||
+			e.inputType == "formatBold" ||
+			e.inputType == "formatItalic" ||
+			e.inputType == "formatUnderline" ||
+			e.inputType == "formatStrikeThrough" ||
+			e.inputType == "formatSuperscript" ||
+			e.inputType == "formatSubscript" ||
+			e.inputType == "historyUndo" ||
+			e.inputType == "historyRedo" ||
+			e.inputType == "deleteByCut" ||
+			e.inputType == "deleteByDrag"
+		) {
+			e.preventDefault()
+		}
+		if (e.inputType == "insertParagraph" || e.inputType == "insertLineBreak") {
+			this.smoothlyInputTextDone.emit()
+			e.preventDefault()
+		}
 	}
 
 	@Listen("input", { capture: true })

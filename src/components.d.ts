@@ -1551,6 +1551,7 @@ declare global {
     };
     interface HTMLSmoothlyInputDateTextElementEventMap {
         "smoothlyInput": { [name: string]: string | undefined };
+        "smoothlyInputTextDone": void;
     }
     interface HTMLSmoothlyInputDateTextElement extends Components.SmoothlyInputDateText, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputDateTextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateTextElement, ev: SmoothlyInputDateTextCustomEvent<HTMLSmoothlyInputDateTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2684,6 +2685,7 @@ declare namespace LocalJSX {
         "locale"?: isoly.Locale;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyInputDateTextCustomEvent<{ [name: string]: string | undefined }>) => void;
+        "onSmoothlyInputTextDone"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
         "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;
