@@ -4,7 +4,7 @@ import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
 import { Looks } from "../../Looks"
-import { Color, Data } from "./../../../../model"
+import { Color } from "./../../../../model"
 
 @Component({
 	tag: "smoothly-input-date-range",
@@ -52,13 +52,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.observer.publish()
 	}
 	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
-	inputHandler(data: Data) {
-		const split = "dateRangeInput" in data && typeof data.dateRangeInput == "string" && data.dateRangeInput.split(" - ")
-		if (split && split.length == 2 && isoly.Date.is(split[0]) && isoly.Date.is(split[1])) {
-			this.start = split[0]
-			this.end = split[1]
-		}
-	}
+	// I don't understand the comment above
+
 	@Watch("start")
 	@Watch("end")
 	updateValue() {
@@ -139,12 +134,13 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-input-date-text
 						ref={el => (this.startTextElement = el)}
 						value={this.start}
-						name="dateRangeInputStart"
-						onSmoothlyInput={e => {
+						onSmoothlyDateChange={e => {
 							e.stopPropagation()
-							this.inputHandler(e.detail)
+							if (this.start != e.detail)
+								this.start = e.detail
 						}}
-						onSmoothlyDateGotoNext={() => this.endTextElement?.select()}
+						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
+						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
 						readonly={this.readonly}
 						disabled={this.disabled}
 						invalid={this.invalid}
@@ -156,12 +152,13 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-input-date-text
 						ref={el => (this.endTextElement = el)}
 						value={this.end}
-						name="dateRangeInputEnd"
-						onSmoothlyInput={e => {
+						onSmoothlyDateChange={e => {
 							e.stopPropagation()
-							this.inputHandler(e.detail)
+							if (this.end != e.detail)
+								this.end = e.detail
 						}}
-						onSmoothlyDateGotoPrevious={() => this.startTextElement?.select()}
+						onSmoothlyDateTextPrevious={() => this.startTextElement?.select()}
+						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}
 						readonly={this.readonly}
 						disabled={this.disabled}
 						invalid={this.invalid}

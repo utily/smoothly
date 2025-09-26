@@ -27,20 +27,19 @@ export class SmoothlyInputDateRangeText {
 	@Prop({ reflect: true }) invalid: boolean
 	@Prop({ reflect: true }) placeholder: string
 	@Prop({ reflect: true }) showLabel = true
-	@Prop({ reflect: true }) name: string
 	@State() parts: DateFormat.Parts = {}
 	@State() order: DateFormat.Order
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
-	@Event() smoothlyInput: EventEmitter<{ [name: string]: string | undefined }> // TODO: Stop using input and just emit value changes
+	@Event() smoothlyDateChange: EventEmitter<isoly.Date | undefined> // TODO: Stop using input and just emit value changes
 	@Event() smoothlyDateTextDone: EventEmitter<void>
-	@Event() smoothlyDateGotoPrevious: EventEmitter<void>
-	@Event() smoothlyDateGotoNext: EventEmitter<void>
+	@Event() smoothlyDateTextPrevious: EventEmitter<void>
+	@Event() smoothlyDateTextNext: EventEmitter<void>
 
 	componentWillLoad() {
 		this.order = DateFormat.Order.fromLocale(this.locale)
 		this.separator = DateFormat.Separator.fromLocale(this.locale)
-		this.value && this.smoothlyInput.emit({ [this.name]: this.value })
+		this.value && this.smoothlyDateChange.emit(this.value)
 	}
 
 	@Watch("parts")
@@ -49,11 +48,11 @@ export class SmoothlyInputDateRangeText {
 		if (value !== this.value) {
 			this.value = value
 		}
-		this.smoothlyInput.emit({ [this.name]: value })
+		this.smoothlyDateChange.emit(value)
 	}
 	@Watch("value")
 	valueHandler(newValue: string | undefined) {
-		this.smoothlyInput.emit({ [this.name]: newValue })
+		this.smoothlyDateChange.emit(newValue)
 		if (newValue !== DateFormat.Parts.toDate(this.parts)) {
 			if (newValue) {
 				const newParts = DateFormat.Parts.fromDate(newValue)
@@ -158,9 +157,9 @@ export class SmoothlyInputDateRangeText {
 	}
 	setFocus(index: number) {
 		if (index < 0) {
-			this.smoothlyDateGotoPrevious.emit()
+			this.smoothlyDateTextPrevious.emit()
 		} else if (index > 2) {
-			this.smoothlyDateGotoNext.emit()
+			this.smoothlyDateTextNext.emit()
 		} else {
 			InputSelection.selectAll(this.partElements[index])
 		}

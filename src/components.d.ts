@@ -384,7 +384,6 @@ export namespace Components {
         "disabled": boolean;
         "invalid": boolean;
         "locale": isoly.Locale;
-        "name": string;
         "placeholder": string;
         "readonly": boolean;
         "select": () => Promise<void>;
@@ -1551,10 +1550,10 @@ declare global {
         new (): HTMLSmoothlyInputDateRangeElement;
     };
     interface HTMLSmoothlyInputDateTextElementEventMap {
-        "smoothlyInput": { [name: string]: string | undefined };
+        "smoothlyDateChange": isoly.Date | undefined;
         "smoothlyDateTextDone": void;
-        "smoothlyDateGotoPrevious": void;
-        "smoothlyDateGotoNext": void;
+        "smoothlyDateTextPrevious": void;
+        "smoothlyDateTextNext": void;
     }
     interface HTMLSmoothlyInputDateTextElement extends Components.SmoothlyInputDateText, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputDateTextElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputDateTextElement, ev: SmoothlyInputDateTextCustomEvent<HTMLSmoothlyInputDateTextElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2686,11 +2685,10 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
-        "name"?: string;
-        "onSmoothlyDateGotoNext"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
-        "onSmoothlyDateGotoPrevious"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
+        "onSmoothlyDateChange"?: (event: SmoothlyInputDateTextCustomEvent<isoly.Date | undefined>) => void;
         "onSmoothlyDateTextDone"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
-        "onSmoothlyInput"?: (event: SmoothlyInputDateTextCustomEvent<{ [name: string]: string | undefined }>) => void;
+        "onSmoothlyDateTextNext"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
+        "onSmoothlyDateTextPrevious"?: (event: SmoothlyInputDateTextCustomEvent<void>) => void;
         "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;

@@ -142,15 +142,14 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				onClick={(e: MouseEvent) => !this.readonly && !this.disabled && (this.open = !this.open)}>
 				<smoothly-input-date-text
 					ref={el => (this.dateTextElement = el)}
-					name={this.name}
 					locale={this.locale}
 					readonly={this.readonly}
 					disabled={this.disabled}
 					showLabel={this.showLabel}
 					value={this.value}
-					onSmoothlyInput={e => {
+					onSmoothlyDateChange={e => {
 						e.stopPropagation()
-						this.value = e.detail[this.name]
+						this.value = e.detail
 					}}
 					onSmoothlyDateTextDone={() => {
 						this.open = false
