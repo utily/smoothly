@@ -32,7 +32,7 @@ export class SmoothlyInputDateRangeText {
 	@State() order: DateFormat.Order
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
-	@Event() smoothlyInput: EventEmitter<{ [name: string]: string | undefined }>
+	@Event() smoothlyInput: EventEmitter<{ [name: string]: string | undefined }> // TODO: Stop using input and just emit value changes
 	@Event() smoothlyDateTextDone: EventEmitter<void>
 	@Event() smoothlyDateGotoPrevious: EventEmitter<void>
 	@Event() smoothlyDateGotoNext: EventEmitter<void>
@@ -231,7 +231,7 @@ export class SmoothlyInputDateRangeText {
 								{/* year or month or day written here */}
 							</span>
 							<span class="ghost">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
-							{index < 2 && <span class="separator">{this.separator}</span>}
+							{index < 2 && <span class="smoothly-date-separator">{this.separator}</span>}
 						</span>
 					))}
 				</span>

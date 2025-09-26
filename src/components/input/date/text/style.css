@@ -38,6 +38,6 @@ smoothly-input-date-range:not(:focus-within) :host:not(.has-text) .smoothly-date
 :host > .smoothly-date-text-value .ghost {
 	opacity: var(--ghost-opacity);
 }
-:host > .smoothly-date-text-value .smoothly-date-text-part:not(.filled-part) + .ghost + .separator {
+:host > .smoothly-date-text-value .smoothly-date-text-part:not(.filled-part) + .ghost + .smoothly-date-separator {
 	opacity: var(--ghost-opacity);
 }

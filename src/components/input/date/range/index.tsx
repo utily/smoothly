@@ -1,6 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
-import { tidily } from "tidily"
 import { Clearable } from "../../Clearable"
 import { Editable } from "../../Editable"
 import { Input } from "../../Input"
@@ -13,6 +12,8 @@ import { Color, Data } from "./../../../../model"
 	scoped: true,
 })
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
+	private startTextElement?: HTMLSmoothlyInputDateTextElement
+	private endTextElement?: HTMLSmoothlyInputDateTextElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -132,40 +133,18 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		this.smoothlyInput.emit({ [this.name]: undefined })
 	}
 	render() {
-		const locale = navigator.language as isoly.Locale
 		return (
 			<Host tabindex={this.disabled ? undefined : 0} class={{ "has-value": !!this.value }}>
 				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
-					{/* <smoothly-input
-						type="text" // TODO: date-range tidily thing
-						name="dateRangeInput"
-						readonly={this.readonly}
-						disabled={this.disabled}
-						value={
-							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
-								: undefined
-						}
-						invalid={this.invalid}
-						placeholder={this.placeholder}
-						showLabel={this.showLabel}
-						onSmoothlyInput={e => {
-							e.stopPropagation()
-							this.inputHandler(e.detail)
-						}}>
-						<slot />
-					</smoothly-input> */}
 					<smoothly-input-date-text
-						value={
-							this.start && this.end
-								? `${tidily.format(this.start, "date", locale)} — ${tidily.format(this.end, "date", locale)}`
-								: undefined
-						}
-						name="dateRangeInput"
+						ref={el => (this.startTextElement = el)}
+						value={this.start}
+						name="dateRangeInputStart"
 						onSmoothlyInput={e => {
 							e.stopPropagation()
 							this.inputHandler(e.detail)
 						}}
+						onSmoothlyDateGotoNext={() => this.endTextElement?.select()}
 						readonly={this.readonly}
 						disabled={this.disabled}
 						invalid={this.invalid}
@@ -173,6 +152,22 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						showLabel={this.showLabel}>
 						<slot />
 					</smoothly-input-date-text>
+					<span class="smoothly-date-range-separator"> — </span>
+					<smoothly-input-date-text
+						ref={el => (this.endTextElement = el)}
+						value={this.end}
+						name="dateRangeInputEnd"
+						onSmoothlyInput={e => {
+							e.stopPropagation()
+							this.inputHandler(e.detail)
+						}}
+						onSmoothlyDateGotoPrevious={() => this.startTextElement?.select()}
+						readonly={this.readonly}
+						disabled={this.disabled}
+						invalid={this.invalid}
+						placeholder={this.placeholder}
+						showLabel={this.showLabel}
+					/>
 				</section>
 				<span class={"icons"}>
 					<slot name={"end"} />

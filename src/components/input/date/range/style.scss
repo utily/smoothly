@@ -10,16 +10,20 @@
 	}
 }
 
-:host:not([readonly])>section>smoothly-input {
+:host[show-label] .smoothly-date-range-separator {
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+
+:host:not([readonly]) > section > smoothly-input {
 	cursor: pointer;
 }
 
 :host[disabled],
-:host[disabled]>section>smoothly-input {
+:host[disabled] > section > smoothly-input {
 	cursor: not-allowed;
 }
 
-:host>nav {
+:host > nav {
 	position: absolute;
 	z-index: 10;
 	top: 4rem;
@@ -28,7 +32,7 @@
 	min-width: 18rem;
 }
 
-:host>nav>smoothly-calendar::before {
+:host > nav > smoothly-calendar::before {
 	content: "";
 	position: absolute;
 	box-sizing: border-box;
@@ -43,7 +47,7 @@
 	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
-:host>section {
+:host > section {
 	display: flex;
 	width: 100%;
 	background-color: var(--smoothly-input-background);
@@ -51,20 +55,20 @@
 	cursor: pointer;
 }
 
-:host>section>smoothly-input {
+:host > section > smoothly-input {
 	min-width: 15rem;
 	width: 100%;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
-:host>section>span {
+:host > section > span {
 	padding-block: 0.5rem;
 	padding-inline: 0.2rem;
 	align-self: center;
 }
 
-:host>span.icons {
+:host > span.icons {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
