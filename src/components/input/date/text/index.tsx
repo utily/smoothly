@@ -24,7 +24,7 @@ export class SmoothlyInputDateRangeText {
 		2: undefined,
 	}
 	@Prop() value?: string
-	@Prop() locale: isoly.Locale = "se-SE" //navigator.language as isoly.Locale
+	@Prop() locale: isoly.Locale = "en-GB" // "en-US" // "se-SE" //navigator.language as isoly.Locale
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
@@ -44,8 +44,12 @@ export class SmoothlyInputDateRangeText {
 	}
 
 	getMaxDay() {
-		if (this.parts.Y && this.parts.M) {
+		if (this.parts.Y && this.parts.M && parseInt(this.parts.M) <= 12) {
 			const lastDate = isoly.Date.lastOfMonth(`${this.parts.Y.padStart(4, "0")}-${this.parts.M.padStart(2, "0")}-01`)
+			return isoly.Date.getDay(lastDate)
+		} else if (this.parts.M && parseInt(this.parts.M) <= 12) {
+			// Assume leap year
+			const lastDate = isoly.Date.lastOfMonth(`2004-${this.parts.M.padStart(2, "0")}-01`)
 			return isoly.Date.getDay(lastDate)
 		}
 		return 31
