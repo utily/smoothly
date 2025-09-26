@@ -22,7 +22,7 @@ export class SmoothlyInputDateRangeText {
 		2: undefined,
 	}
 	@Prop() value?: string
-	@Prop() locale: isoly.Locale = "se-SE" //navigator.language as isoly.Locale
+	@Prop() locale: isoly.Locale = "en-US" // "se-SE" //navigator.language as isoly.Locale
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
@@ -43,7 +43,7 @@ export class SmoothlyInputDateRangeText {
 
 	@Watch("parts")
 	partsHandler() {
-		const value = DateFormat.Parts.toValue(this.parts)
+		const value = DateFormat.Parts.toDate(this.parts)
 		console.log("value set by parts:", value)
 		if (value !== this.value) {
 			this.value = value
@@ -54,9 +54,9 @@ export class SmoothlyInputDateRangeText {
 	valueHandler(newValue: string | undefined) {
 		this.smoothlyInput.emit({ [this.name]: newValue })
 		console.log("newValue:", newValue)
-		if (newValue !== DateFormat.Parts.toValue(this.parts)) {
+		if (newValue !== DateFormat.Parts.toDate(this.parts)) {
 			if (newValue) {
-				const newParts = DateFormat.Parts.fromValue(newValue)
+				const newParts = DateFormat.Parts.fromDate(newValue)
 				this.setAllParts(newParts)
 			} else {
 				this.setAllParts({})
@@ -132,6 +132,13 @@ export class SmoothlyInputDateRangeText {
 		}
 		if (value.length >= DateFormat.Part.length(part)) {
 			InputSelection.selectAll(this.partElements[index + 1])
+		}
+		const roundedValue = DateFormat.Parts.toDate(this.parts)
+		if (roundedValue) {
+			const roundedParts = DateFormat.Parts.fromDate(roundedValue)
+			if (this.parts.D !== roundedParts?.D) {
+				this.setPart("D", roundedParts?.D)
+			}
 		}
 	}
 

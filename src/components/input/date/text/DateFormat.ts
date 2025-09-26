@@ -33,14 +33,17 @@ export namespace DateFormat {
 			}
 			return 31
 		}
-		export function toValue(parts: Parts): string | undefined {
-			return parts.Y && parts.Y.length == 4 && parts.M && parts.M.length == 2 && parts.D && parts.D.length == 2
-				? `${parts.Y}-${parts.M}-${parts.D}`
-				: undefined
+		export function toDate(parts: Parts): isoly.Date | undefined {
+			if (parts.Y && parts.Y.length == 4 && parts.M && parts.M.length == 2 && parts.D && parts.D.length == 2) {
+				const value = `${parts.Y}-${parts.M}-${parts.D}`
+				const lastOfMonth = isoly.Date.lastOfMonth(`${parts.Y}-${parts.M}-01`)
+				return lastOfMonth < value ? lastOfMonth : value
+			}
+			return undefined
 		}
-		export function fromValue(value: string): Required<DateFormat.Parts>
-		export function fromValue(value: undefined): undefined
-		export function fromValue(value: string | undefined): Required<DateFormat.Parts> | undefined {
+		export function fromDate(value: isoly.Date): Required<DateFormat.Parts>
+		export function fromDate(value: undefined): undefined
+		export function fromDate(value: isoly.Date | undefined): Required<DateFormat.Parts> | undefined {
 			if (value) {
 				return {
 					Y: value.substring(0, 4).padStart(4, "0"),
