@@ -22,7 +22,7 @@ export class SmoothlyInputDateRangeText {
 		2: undefined,
 	}
 	@Prop() value?: string
-	@Prop() locale: isoly.Locale = "en-GB" // "en-US" // "se-SE" //navigator.language as isoly.Locale
+	@Prop() locale: isoly.Locale = "se-SE" //navigator.language as isoly.Locale
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
@@ -111,24 +111,26 @@ export class SmoothlyInputDateRangeText {
 			...this.parts,
 			[part]: value,
 		}
-		if (value.length >= DateFormat.Part.length(part)) {
-			if (part == "D" && parseInt(value) > 28 && value.length >= 2) {
+		if (part == "D") {
+			if (value.length >= 2 && parseInt(value) > 28) {
 				const maxDay = DateFormat.Parts.maxDay(this.parts)
 				if (parseInt(value) > maxDay) {
 					this.setPart("D", maxDay.toString().padStart(2, "0"))
 					InputSelection.setPosition(this.partElements[index], 2)
 				}
-			} else if (part == "M" && parseInt(value) > 12 && value.length >= 2) {
+			}
+		} else if (part == "M") {
+			if (parseInt(value) > 12) {
 				const monthString = "12"
 				this.setPart("M", monthString)
 				InputSelection.setPosition(this.partElements[index], 2)
-			} else if (part == "M" && value.length == 1 && parseInt(value) > 1) {
+			} else if (value.length == 1 && parseInt(value) > 1) {
 				const monthString = Math.min(parseInt(value), 12).toString().padStart(2, "0")
 				this.setPart("M", monthString)
 				InputSelection.setPosition(this.partElements[index], 2)
-			} else if (part == "Y" && parseInt(value) > 9999) {
-				InputSelection.selectAll(this.partElements[index + 1])
 			}
+		}
+		if (value.length >= DateFormat.Part.length(part)) {
 			InputSelection.selectAll(this.partElements[index + 1])
 		}
 	}
