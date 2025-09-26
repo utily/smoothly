@@ -168,6 +168,7 @@ export class SmoothlyInputDateRangeText {
 									"smoothly-date-text-part": true,
 									[`smoothly-date-text-${part}`]: true,
 									focused: this.focusedIndex === index,
+									"empty-part": !this.parts[part],
 								}}
 								onFocus={() => (this.focusedIndex = index)}
 								onBlur={() => (this.focusedIndex = undefined)}

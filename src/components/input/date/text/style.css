@@ -21,6 +21,10 @@ smoothly-input-date-range:not(:focus-within) :host:not(.has-text)>.smoothly-date
 	box-sizing: border-box;
 }
 
+:host > .smoothly-date-text-value > .smoothly-date-text-part.empty-part + .ghost + .separator {
+	opacity: 0.5;
+}
+
 :host[show-label]>.smoothly-date-text-value {
 	padding-inline: var(--input-padding-side);
 	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
