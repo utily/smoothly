@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Fragment, h, Host, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { DateFormat } from "./DateFormat"
 import { InputSelection } from "./InputSelection"
@@ -111,6 +111,34 @@ export class SmoothlyInputDateRangeText {
 		InputSelection.selectAll(this.partElements[0])
 	}
 
+	@Listen("beforeinput", { capture: true })
+	beforeInputHandler(e: InputEvent) {
+		// e.preventDefault()
+		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
+		const index = this.focusedIndex ?? 0
+		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+		console.log("beforeInputHandler", e.inputType, index, part, value, this.parts)
+
+		// if (value.length >= ghost[part].length) {
+		// 	InputSelection.selectAll(this.partElements[index + 1])
+		// }
+	}
+	@Listen("input", { capture: true })
+	inputHandler(e: InputEvent) {
+		// e.preventDefault()
+		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
+		const index = this.focusedIndex ?? 0
+		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+		console.log("inputHandler", e.inputType, index, part, value, this.parts)
+		this.parts = {
+			...this.parts,
+			[part]: value,
+		}
+		if (value.length >= ghost[part].length) {
+			InputSelection.selectAll(this.partElements[index + 1])
+		}
+	}
+
 	render() {
 		return (
 			<Host
@@ -137,20 +165,22 @@ export class SmoothlyInputDateRangeText {
 								onFocus={() => (this.focusedIndex = index)}
 								onBlur={() => (this.focusedIndex = undefined)}
 								onInput={e => {
-									e.preventDefault()
-									const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
-									this.parts = {
-										...this.parts,
-										[part]: value,
-									}
-									if (value.length >= ghost[part].length) {
-										InputSelection.selectAll(this.partElements[index + 1])
-									}
+									// e.preventDefault()
+									// const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+									// this.parts = {
+									// 	...this.parts,
+									// 	[part]: value,
+									// }
+									// if (value.length >= ghost[part].length) {
+									// 	InputSelection.selectAll(this.partElements[index + 1])
+									// }
 								}}
-								onKeyUp={e => {
-									if (InputSelection.isAtStart(e) && (e.key == "ArrowLeft" || e.key == "Backspace")) {
+								onKeyDown={e => {
+									if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
+										e.preventDefault()
 										InputSelection.selectAll(this.partElements[index - 1])
-									} else if (InputSelection.isAtEnd(e) && (e.key == "ArrowRight" || e.key == "Delete")) {
+									} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
+										e.preventDefault()
 										InputSelection.selectAll(this.partElements[index + 1])
 									} else if (e.key == "Home") {
 										InputSelection.selectAll(this.partElements[0])
@@ -158,6 +188,7 @@ export class SmoothlyInputDateRangeText {
 										InputSelection.selectAll(this.partElements[2])
 									}
 								}}
+								onKeyUp={e => {}}
 								key={index}
 								ref={el => (this.partElements[index] = el)}
 								contenteditable></span>

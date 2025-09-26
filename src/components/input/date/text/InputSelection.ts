@@ -5,6 +5,10 @@ export namespace InputSelection {
 		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
 			return false
 
+		// Only trigger if there is no selection (caret only)
+		if (!sel.isCollapsed)
+			return false
+
 		const range = sel.getRangeAt(0)
 		const preRange = range.cloneRange()
 		preRange.selectNodeContents(el)
@@ -17,6 +21,10 @@ export namespace InputSelection {
 		const el = e.currentTarget as HTMLElement
 		const sel = window.getSelection()
 		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
+			return false
+
+		// Only trigger if there is no selection (caret only)
+		if (!sel.isCollapsed)
 			return false
 
 		const range = sel.getRangeAt(0)
