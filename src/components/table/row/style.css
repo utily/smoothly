@@ -5,6 +5,8 @@
 	box-sizing: border-box;
 	box-shadow: 0px 1px 1px -1px rgb(var(--smoothly-table-border));
 }
+
+:host .smoothly-table-cell,
 :host::slotted(.smoothly-table-cell) {
 	display: flex;
 	grid-column: span var(--smoothly-table-cell-span, 1);
