@@ -143,7 +143,6 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		const value = this.stateHandler.getValue(this.state)
-		console.log("stateChange", { value, state: this.state, initialValue: this.initialValue })
 		this.changed = Deep.notEqual(this.initialValue, value)
 		this.smoothlyInput.emit({ [this.name]: value })
 		this.observer.publish()

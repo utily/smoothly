@@ -31,8 +31,9 @@ export class SmoothlyFormDemoPet {
 					looks="border"
 					onSmoothlyFormSubmit={(e: CustomEvent) => alert(JSON.stringify(e.detail))}
 					onSmoothlyFormInput={e => (this.value = { ...e.detail })}>
-					<smoothly-input type="text" name="name.first">
+					<smoothly-input type="text" name="name.first" value="magnus">
 						Name
+						<smoothly-input-reset slot="end" size="icon" />
 					</smoothly-input>
 					<smoothly-input type="integer" name="age">
 						Age (Years)
@@ -45,6 +46,7 @@ export class SmoothlyFormDemoPet {
 							e.stopPropagation()
 						}}>
 						Has Owner
+						<smoothly-input-reset slot="end" size="icon" />
 					</smoothly-input-checkbox>
 					{this.hasOwner && (
 						<Fragment>
@@ -54,6 +56,7 @@ export class SmoothlyFormDemoPet {
 								value={this.owner.firstName}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, firstName: e.detail["owner.firstName"] })}>
 								Owner First Name
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input>
 							<smoothly-input
 								type="text"
@@ -77,6 +80,7 @@ export class SmoothlyFormDemoPet {
 								end={this.owner.ownedRange?.end}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
 								Owner ownedRange
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input-date-range>
 							<smoothly-input-range
 								name="owner.height"
@@ -85,6 +89,7 @@ export class SmoothlyFormDemoPet {
 								value={this.owner.height}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, height: e.detail["owner.height"] })}>
 								Owner's Height
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input-range>
 							<smoothly-input-select name="owner.favoriteHat">
 								<span slot="label">Owner's Favorite Hat</span>
@@ -93,12 +98,14 @@ export class SmoothlyFormDemoPet {
 										{value}
 									</smoothly-item>
 								))}
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input-select>
 							<smoothly-input-color
 								name="owner.favoriteColor"
 								value={this.owner.favoriteColor ? RGB.toHex(this.owner.favoriteColor) : undefined}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, favoriteColor: e.detail["owner.favoriteColor"] })}>
 								Owner's Favorite Color
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input-color>
 							<smoothly-input-radio
 								name="owner.favoritePizza"
@@ -110,8 +117,10 @@ export class SmoothlyFormDemoPet {
 								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (
 									<smoothly-input-radio-item value={value} key={index}>
 										{value}
+										<smoothly-input-reset slot="end" size="icon" />
 									</smoothly-input-radio-item>
 								))}
+								<smoothly-input-reset slot="end" size="icon" />
 							</smoothly-input-radio>
 							<smoothly-input-checkbox
 								name="owner.hasPet"

@@ -278,7 +278,6 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputCheckbox {
-        "changed": boolean;
         "checked": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -2543,7 +2542,6 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputCheckbox {
-        "changed"?: boolean;
         "checked"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
