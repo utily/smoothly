@@ -234,29 +234,27 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
-					<nav>
-						<smoothly-calendar
-							doubleInput={false}
-							value={this.value ? isoly.DateTime.getDate(this.value) : undefined}
-							min={this.min ? isoly.DateTime.getDate(this.min) : undefined}
-							max={this.max ? isoly.DateTime.getDate(this.max) : undefined}
-							onSmoothlyValueChange={async e => {
-								e.stopPropagation()
-								this.date = e.detail
-								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
-							}}
-							onSmoothlyDateSet={e => {
-								e.stopPropagation()
-								this.open = false
-							}}>
-							<div slot={"year-label"}>
-								<slot name={"year-label"} />
-							</div>
-							<div slot={"month-label"}>
-								<slot name={"month-label"} />
-							</div>
-						</smoothly-calendar>
-					</nav>
+					<smoothly-calendar
+						doubleInput={false}
+						value={this.value ? isoly.DateTime.getDate(this.value) : undefined}
+						min={this.min ? isoly.DateTime.getDate(this.min) : undefined}
+						max={this.max ? isoly.DateTime.getDate(this.max) : undefined}
+						onSmoothlyValueChange={async e => {
+							e.stopPropagation()
+							this.date = e.detail
+							this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+						}}
+						onSmoothlyDateSet={e => {
+							e.stopPropagation()
+							this.open = false
+						}}>
+						<div slot={"year-label"}>
+							<slot name={"year-label"} />
+						</div>
+						<div slot={"month-label"}>
+							<slot name={"month-label"} />
+						</div>
+					</smoothly-calendar>
 				)}
 			</Host>
 		)

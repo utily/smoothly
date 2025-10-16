@@ -163,25 +163,23 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
-					<nav>
-						<smoothly-calendar
-							doubleInput={false}
-							value={this.value}
-							onSmoothlyValueChange={event => {
-								this.value = event.detail
-								this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-								event.stopPropagation()
-							}}
-							max={this.max}
-							min={this.min}>
-							<div slot={"year-label"}>
-								<slot name={"year-label"} />
-							</div>
-							<div slot={"month-label"}>
-								<slot name={"month-label"} />
-							</div>
-						</smoothly-calendar>
-					</nav>
+					<smoothly-calendar
+						doubleInput={false}
+						value={this.value}
+						onSmoothlyValueChange={event => {
+							this.value = event.detail
+							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+							event.stopPropagation()
+						}}
+						max={this.max}
+						min={this.min}>
+						<div slot={"year-label"}>
+							<slot name={"year-label"} />
+						</div>
+						<div slot={"month-label"}>
+							<slot name={"month-label"} />
+						</div>
+					</smoothly-calendar>
 				)}
 			</Host>
 		)
