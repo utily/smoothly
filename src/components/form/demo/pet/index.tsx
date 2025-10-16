@@ -118,10 +118,8 @@ export class SmoothlyFormDemoPet {
 								{["vesuvio", "capricciosa", "quattro formaggi"].map((value, index) => (
 									<smoothly-input-radio-item value={value} key={index}>
 										{value}
-										<smoothly-input-reset slot="end" size="icon" />
 									</smoothly-input-radio-item>
 								))}
-								<smoothly-input-reset slot="end" />
 							</smoothly-input-radio>
 							<smoothly-input-checkbox
 								name="owner.hasPet"
