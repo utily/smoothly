@@ -46,7 +46,7 @@ export class SmoothlyFormDemoPet {
 							e.stopPropagation()
 						}}>
 						Has Owner
-						<smoothly-input-reset slot="end" size="icon" />
+						<smoothly-input-reset slot="end" />
 					</smoothly-input-checkbox>
 					{this.hasOwner && (
 						<Fragment>
@@ -56,7 +56,7 @@ export class SmoothlyFormDemoPet {
 								value={this.owner.firstName}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, firstName: e.detail["owner.firstName"] })}>
 								Owner First Name
-								<smoothly-input-reset slot="end" size="icon" />
+								<smoothly-input-reset slot="end" />
 							</smoothly-input>
 							<smoothly-input
 								type="text"
@@ -73,6 +73,7 @@ export class SmoothlyFormDemoPet {
 								value={this.owner.birthday}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, birthday: e.detail["owner.birthday"] })}>
 								Owner birthday
+								<smoothly-input-reset slot="end" />
 							</smoothly-input-date>
 							<smoothly-input-date-range
 								name="owner.ownedRange"
@@ -80,7 +81,7 @@ export class SmoothlyFormDemoPet {
 								end={this.owner.ownedRange?.end}
 								onSmoothlyInput={e => (this.owner = { ...this.owner, ownedRange: e.detail["owner.ownedRange"] })}>
 								Owner ownedRange
-								<smoothly-input-reset slot="end" size="icon" />
+								<smoothly-input-reset slot="end" />
 							</smoothly-input-date-range>
 							<smoothly-input-range
 								name="owner.height"

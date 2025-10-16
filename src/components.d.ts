@@ -329,7 +329,6 @@ export namespace Components {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -2588,7 +2587,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
