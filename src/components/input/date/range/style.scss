@@ -10,12 +10,12 @@
 	}
 }
 
-:host:not([readonly]) > section > smoothly-input {
+:host:not([readonly]) > .smoothly-date-range-input-part > smoothly-input {
 	cursor: pointer;
 }
 
 :host[disabled],
-:host[disabled] > section > smoothly-input {
+:host[disabled] > .smoothly-date-range-input-part > smoothly-input {
 	cursor: not-allowed;
 }
 
@@ -42,7 +42,7 @@
 	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
-:host > section {
+:host > .smoothly-date-range-input-part {
 	display: flex;
 	width: 100%;
 	background-color: var(--smoothly-input-background);
@@ -50,14 +50,14 @@
 	cursor: pointer;
 }
 
-:host > section > smoothly-input {
+:host > .smoothly-date-range-input-part > smoothly-input {
 	min-width: 15rem;
 	width: 100%;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
-:host > section > span {
+:host > .smoothly-date-range-input-part > span {
 	padding-block: 0.5rem;
 	padding-inline: 0.2rem;
 	align-self: center;

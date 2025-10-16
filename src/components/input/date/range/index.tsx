@@ -135,7 +135,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		const locale = navigator.language as isoly.Locale
 		return (
 			<Host tabindex={this.disabled ? undefined : 0}>
-				<section onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
+				<span
+					class="smoothly-date-range-input-part"
+					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}>
 					<smoothly-input
 						type="text" // TODO: date-range tidily thing
 						name="dateRangeInput"
@@ -155,7 +157,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						}}>
 						<slot />
 					</smoothly-input>
-				</section>
+				</span>
 				<span class={"icons"}>
 					<slot name={"end"} />
 				</span>
