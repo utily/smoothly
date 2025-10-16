@@ -10,16 +10,16 @@
 	}
 }
 
-:host:not([readonly])>section>smoothly-input {
+:host:not([readonly]) > section > smoothly-input {
 	cursor: pointer;
 }
 
 :host[disabled],
-:host[disabled]>section>smoothly-input {
+:host[disabled] > section > smoothly-input {
 	cursor: not-allowed;
 }
 
-:host>nav {
+:host > smoothly-calendar {
 	position: absolute;
 	z-index: 10;
 	top: 4rem;
@@ -28,14 +28,13 @@
 	min-width: 18rem;
 }
 
-:host>nav>smoothly-calendar::before {
+:host > smoothly-calendar::before {
 	content: "";
 	position: absolute;
-	box-sizing: border-box;
-	top: 1px;
-	left: -7rem;
+	top: -0.55rem;
+	left: 3rem;
 	z-index: 9;
-	transform: translate(10em, -0.55rem) rotate(45deg);
+	transform: rotate(45deg);
 	width: 1rem;
 	height: 1rem;
 	background-color: rgb(var(--smoothly-input-background));
@@ -43,7 +42,7 @@
 	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
-:host>section {
+:host > section {
 	display: flex;
 	width: 100%;
 	background-color: var(--smoothly-input-background);
@@ -51,20 +50,20 @@
 	cursor: pointer;
 }
 
-:host>section>smoothly-input {
+:host > section > smoothly-input {
 	min-width: 15rem;
 	width: 100%;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
-:host>section>span {
+:host > section > span {
 	padding-block: 0.5rem;
 	padding-inline: 0.2rem;
 	align-self: center;
 }
 
-:host>span.icons {
+:host > span.icons {
 	display: flex;
 	flex-direction: row;
 	align-items: center;

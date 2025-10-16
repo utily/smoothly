@@ -160,32 +160,30 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<slot name={"end"} />
 				</span>
 				{this.open && (
-					<nav>
-						<smoothly-calendar
-							doubleInput={true}
-							onSmoothlyValueChange={e => e.stopPropagation()}
-							onSmoothlyStartChange={e => {
-								e.stopPropagation()
-								this.start = e.detail
-							}}
-							onSmoothlyEndChange={e => {
-								e.stopPropagation()
-								this.end = e.detail
-							}}
-							onSmoothlyDateSet={e => e.stopPropagation()}
-							onSmoothlyDateRangeSet={e => {
-								e.stopPropagation()
-								this.open = false
-								this.smoothlyInput.emit({ [this.name]: e.detail })
-								this.smoothlyUserInput.emit({ name: this.name, value: e.detail })
-							}}
-							value={this.start}
-							start={this.start}
-							end={this.end}
-							max={this.max}
-							min={this.min}
-						/>
-					</nav>
+					<smoothly-calendar
+						doubleInput={true}
+						onSmoothlyValueChange={e => e.stopPropagation()}
+						onSmoothlyStartChange={e => {
+							e.stopPropagation()
+							this.start = e.detail
+						}}
+						onSmoothlyEndChange={e => {
+							e.stopPropagation()
+							this.end = e.detail
+						}}
+						onSmoothlyDateSet={e => e.stopPropagation()}
+						onSmoothlyDateRangeSet={e => {
+							e.stopPropagation()
+							this.open = false
+							this.smoothlyInput.emit({ [this.name]: e.detail })
+							this.smoothlyUserInput.emit({ name: this.name, value: e.detail })
+						}}
+						value={this.start}
+						start={this.start}
+						end={this.end}
+						max={this.max}
+						min={this.min}
+					/>
 				)}
 			</Host>
 		)
