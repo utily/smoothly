@@ -246,7 +246,6 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "copyable"?: boolean;
@@ -2516,7 +2515,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
-        "changed"?: boolean;
         "color"?: Color;
         "copyable"?: boolean;
         "currency"?: isoly.Currency;
