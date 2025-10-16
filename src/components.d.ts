@@ -485,7 +485,6 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputRange {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "defined": boolean;
@@ -2730,7 +2729,6 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputRange {
-        "changed"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
         "disabled"?: boolean;

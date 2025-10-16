@@ -27,6 +27,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
+	changed = false
 	private observer = Editable.Observer.create(this)
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
@@ -34,7 +35,6 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Prop({ mutable: true }) value: number | undefined = undefined
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
@@ -60,11 +60,8 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.valueChanged()
 	}
 	@Listen("smoothlyInputLoad")
-	smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>) {
-		if (event.target != this.element) {
-			event.stopPropagation()
-			event.detail(this)
-		}
+	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRange) => void>) {
+		Input.registerSubAction(this, event)
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
@@ -110,14 +107,15 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Method()
 	async setInitialValue(): Promise<void> {
 		this.initialValue = this.value
+		this.changed = false
 		this.valueChanged()
 	}
 	@Watch("value")
 	valueChanged(): void {
 		const decimals = !this.step ? undefined : this.step.toString().split(".")[1]?.length ?? 0
 		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
-		this.changed = this.initialValue !== this.value
-		this.defined = typeof this.value === "number"
+		this.changed = this.initialValue != this.value
+		this.defined = typeof this.value == "number"
 		this.observer.publish()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}

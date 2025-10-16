@@ -28,9 +28,16 @@ export class SmoothlyInputReset {
 			if (Editable.Element.type.is(parent)) {
 				this.parent = parent
 				this.readonlyAtLoad = parent.readonly
+				const name = (parent as any).name
+				const specificName = "summary.height"
+				name == specificName && console.log("reset load", { parent })
 				parent.listen(async p => {
+					name == specificName && console.log("listen", { parent: p, isInput: Input.is(p) })
 					if (Input.is(p)) {
-						this.display = p.readonly || p.defined ? false : p.changed
+						name == specificName &&
+							console.log("reset", { readonly: p.readonly, defined: p.defined, changed: p.changed })
+						const defined = typeof p.defined == "boolean" ? p.defined : Boolean(await p.getValue())
+						this.display = p.readonly || !defined ? false : p.changed
 					}
 					if (p instanceof SmoothlyForm) {
 						this.display = !p.readonly

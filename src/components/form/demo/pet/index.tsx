@@ -121,7 +121,7 @@ export class SmoothlyFormDemoPet {
 										<smoothly-input-reset slot="end" size="icon" />
 									</smoothly-input-radio-item>
 								))}
-								<smoothly-input-reset slot="end" size="icon" />
+								<smoothly-input-reset slot="end" />
 							</smoothly-input-radio>
 							<smoothly-input-checkbox
 								name="owner.hasPet"
@@ -139,11 +139,13 @@ export class SmoothlyFormDemoPet {
 							</smoothly-input>
 							<smoothly-input-file name="summary.picture">
 								<span slot="label">Summary picture</span>
-								<smoothly-input-clear slot="end" size="icon" />
+								<smoothly-input-clear slot="end" />
 							</smoothly-input-file>
 							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
 							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>
-							<smoothly-input-range name="summary.height" label={"Height"} />
+							<smoothly-input-range name="summary.height" label={"Height"}>
+								<smoothly-input-reset slot="end" />
+							</smoothly-input-range>
 							<smoothly-input-select name="summary.favoriteHat">
 								<span slot="label">Summary's Favorite Hat</span>
 								{["🎩 top hat", "🧢 cap", "👒 sun hat", "❌ none"].map((value, index) => (
