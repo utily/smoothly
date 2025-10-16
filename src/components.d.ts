@@ -351,7 +351,6 @@ export namespace Components {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -2606,7 +2605,6 @@ declare namespace LocalJSX {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;

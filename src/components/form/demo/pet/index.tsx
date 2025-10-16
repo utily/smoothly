@@ -142,7 +142,10 @@ export class SmoothlyFormDemoPet {
 								<smoothly-input-clear slot="end" />
 							</smoothly-input-file>
 							<smoothly-input-date name="summary.birthday">Summary birthday</smoothly-input-date>
-							<smoothly-input-date-range name="summary.ownedRange">Summary ownedRange</smoothly-input-date-range>
+							<smoothly-input-date-range name="summary.ownedRange" start="2020-01-01" end="2020-01-15">
+								Summary ownedRange
+								<smoothly-input-reset slot="end" />
+							</smoothly-input-date-range>
 							<smoothly-input-range name="summary.height" label={"Height"}>
 								<smoothly-input-reset slot="end" />
 							</smoothly-input-range>
