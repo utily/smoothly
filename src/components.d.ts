@@ -185,7 +185,6 @@ export namespace Components {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
@@ -308,7 +307,6 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -373,7 +371,6 @@ export namespace Components {
         "unregister": () => Promise<void>;
     }
     interface SmoothlyInputDateTime {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -416,7 +413,6 @@ export namespace Components {
         "accept"?: string;
         "binary": () => Promise<boolean>;
         "camera": "front" | "back";
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -2445,7 +2441,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "changed"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
@@ -2566,7 +2561,6 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
@@ -2623,7 +2617,6 @@ declare namespace LocalJSX {
         "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDateTime {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
@@ -2665,7 +2658,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "accept"?: string;
         "camera"?: "front" | "back";
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
