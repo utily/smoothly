@@ -33,7 +33,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
-	changed = false
+	isDifferentFromInitial = false
 	private initialValue?: isoly.Date
 	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
@@ -87,7 +87,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Watch("value")
 	onStart(next: isoly.Date) {
-		this.changed = this.initialValue != this.value
+		this.isDifferentFromInitial = this.initialValue != this.value
 		this.smoothlyValueChange.emit(next)
 		this.smoothlyInput.emit({ [this.name]: next })
 		this.observer.publish()
@@ -126,7 +126,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Method()
 	async setInitialValue() {
 		this.initialValue = this.value
-		this.changed = false
+		this.isDifferentFromInitial = false
 	}
 	@Listen("smoothlyDateSet")
 	dateSetHandler(event: CustomEvent<isoly.Date>) {

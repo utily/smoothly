@@ -27,7 +27,7 @@ import { RadioItemSelect } from "./RadioItemSelect"
 export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputRadioElement
 	parent: Editable | undefined
-	changed = false
+	isDifferentFromInitial = false
 	private active?: RadioItemSelect
 	private valueReceivedOnLoad = false
 	private observer = Editable.Observer.create(this)
@@ -132,7 +132,7 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	async valueChanged(): Promise<void> {
-		this.valueReceivedOnLoad && (this.changed = this.initialValue?.value !== this.value)
+		this.valueReceivedOnLoad && (this.isDifferentFromInitial = this.initialValue?.value !== this.value)
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.observer.publish()
 	}

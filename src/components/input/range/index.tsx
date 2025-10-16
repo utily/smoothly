@@ -27,7 +27,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputRange implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	changed = false
+	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private input?: HTMLSmoothlyInputElement
 	private initialValue: number | undefined = undefined
@@ -107,14 +107,14 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Method()
 	async setInitialValue(): Promise<void> {
 		this.initialValue = this.value
-		this.changed = false
+		this.isDifferentFromInitial = false
 		this.valueChanged()
 	}
 	@Watch("value")
 	valueChanged(): void {
 		const decimals = !this.step ? undefined : this.step.toString().split(".")[1]?.length ?? 0
 		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
-		this.changed = this.initialValue != this.value
+		this.isDifferentFromInitial = this.initialValue != this.value
 		this.defined = typeof this.value == "number"
 		this.observer.publish()
 		this.smoothlyInput.emit({ [this.name]: this.value })

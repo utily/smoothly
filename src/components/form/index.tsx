@@ -45,7 +45,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Event() smoothlyFormEdit: EventEmitter<boolean>
 	@Event() smoothlyFormClear: EventEmitter<void>
 	@Event() notice: EventEmitter<Notice>
-	changed = false
+	isDifferentFromInitial = false
 	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly
@@ -68,7 +68,9 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	}
 	@Watch("value")
 	async watchValue() {
-		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+		this.isDifferentFromInitial = [...this.inputs.values()].some(input =>
+			Editable.type.is(input) ? input.isDifferentFromInitial : true
+		)
 		if (this.validator) {
 			const flaws = this.validator
 				?.flaw(Data.convertArrays(this.value))
@@ -211,7 +213,9 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Method()
 	async reset(): Promise<void> {
 		await Promise.all([...this.inputs.values()].map(input => Editable.Element.type.is(input) && input.reset()))
-		this.changed = [...this.inputs.values()].some(input => (Editable.type.is(input) ? input.changed : true))
+		this.isDifferentFromInitial = [...this.inputs.values()].some(input =>
+			Editable.type.is(input) ? input.isDifferentFromInitial : true
+		)
 		this.smoothlyFormReset.emit()
 	}
 	@Method()

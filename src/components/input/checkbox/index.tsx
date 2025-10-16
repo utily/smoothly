@@ -24,7 +24,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputCheckbox implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputCheckboxElement
-	changed = false
+	isDifferentFromInitial = false
 	parent: Editable | undefined
 	private initialValue?: any
 	private observer = Editable.Observer.create(this)
@@ -95,7 +95,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Method()
 	async setInitialValue(): Promise<void> {
 		this.initialValue = this.checked
-		this.changed = false
+		this.isDifferentFromInitial = false
 	}
 	@Watch("disabled")
 	@Watch("readonly")
@@ -105,9 +105,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 
 	@Watch("checked")
 	async elementCheck(_: boolean | undefined, before: boolean | undefined) {
-		// Different than initial value
-		this.changed = !!this.initialValue != !!this.checked
-		// Different than before
+		this.isDifferentFromInitial = !!this.initialValue != !!this.checked
 		const changed = !!this.checked != !!before
 		if (changed) {
 			this.smoothlyInput.emit({ [this.name]: await this.getValue() })

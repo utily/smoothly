@@ -40,7 +40,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@State() copied = false
-	changed = false
+	isDifferentFromInitial = false
 	parent: Editable | undefined
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
@@ -112,7 +112,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.changed = false
+		this.isDifferentFromInitial = false
 		this.initialValue = this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
@@ -143,7 +143,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Watch("state")
 	stateChange() {
 		const value = this.stateHandler.getValue(this.state)
-		this.changed = Deep.notEqual(this.initialValue, value)
+		this.isDifferentFromInitial = Deep.notEqual(this.initialValue, value)
 		this.smoothlyInput.emit({ [this.name]: value })
 		this.observer.publish()
 	}

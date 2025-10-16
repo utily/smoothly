@@ -43,7 +43,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
-	changed = false
+	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
@@ -116,7 +116,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 
 	@Watch("value")
 	async valueChanged(): Promise<void> {
-		this.changed = this.initialValue !== this.value
+		this.isDifferentFromInitial = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.observer.publish()
 	}

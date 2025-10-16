@@ -28,7 +28,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
-	changed = false
+	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
@@ -130,7 +130,7 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	async valueChanged(): Promise<void> {
-		this.changed = this.initialValue !== this.value
+		this.isDifferentFromInitial = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.observer.publish()
 	}

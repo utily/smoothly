@@ -27,7 +27,7 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
-	changed: boolean
+	isDifferentFromInitial: boolean
 	parent: Editable | undefined
 	@Element() element: HTMLSmoothlyInputMonthElement
 	@Prop({ reflect: true, mutable: true }) readonly: boolean
