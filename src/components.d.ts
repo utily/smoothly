@@ -458,7 +458,6 @@ export namespace Components {
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "clearable"?: boolean;
         "color"?: Color;
@@ -2702,7 +2701,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
-        "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
         "direction"?: "row" | "column";

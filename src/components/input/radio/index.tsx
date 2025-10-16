@@ -27,11 +27,11 @@ import { RadioItemSelect } from "./RadioItemSelect"
 export class SmoothlyInputRadio implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputRadioElement
 	parent: Editable | undefined
+	changed = false
 	private active?: RadioItemSelect
 	private valueReceivedOnLoad = false
 	private observer = Editable.Observer.create(this)
 	initialValue?: RadioItemSelect
-	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) value: any = undefined
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
