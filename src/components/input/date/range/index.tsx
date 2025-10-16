@@ -139,15 +139,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	render() {
 		return (
-			<Host
-				onFocusin={() => {
-					console.log("focusin")
-				}}
-				onFocusout={() => {
-					console.log("focusout")
-				}}
-				tabindex={this.disabled ? undefined : 0}
-				class={{ "has-value": !!(this.start || this.end) }}>
+			<Host tabindex={this.disabled ? undefined : 0} class={{ "has-value": !!(this.start || this.end) }}>
 				<span
 					class="smoothly-date-range-input-part"
 					onClick={(e: MouseEvent) => {
