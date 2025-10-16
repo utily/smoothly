@@ -27,23 +27,25 @@
 	outline: none;
 }
 
-:host>nav {
+:host>smoothly-calendar {
 	position: absolute;
 	z-index: 10;
-	top: 4em;
+	top: 4rem;
 	background-color: rgb(var(--smoothly-input-background));
-	min-width: 18em;
+	min-width: 18rem;
+	max-width: 22rem;
 }
 
-:host>nav>smoothly-calendar::before {
+:host>smoothly-calendar::before {
 	content: "";
 	box-sizing: border-box;
 	position: absolute;
-	top: 1px;
+	top: -0.55rem;
+	left: 2rem;
 	z-index: 9;
-	transform: translate(2em, -0.55em) rotate(45deg);
-	width: 1em;
-	height: 1em;
+	transform: rotate(45deg);
+	width: 1rem;
+	height: 1rem;
 	background-color: rgb(var(--smoothly-input-background));
 	border-top: 1px solid rgb(var(--smoothly-input-border));
 	border-left: 1px solid rgb(var(--smoothly-input-border));
@@ -79,14 +81,4 @@
 }
 :host[invalid]>.icons>.smoothly-invalid {
 	display: flex;
-}
-
-@media screen and (min-width: 400px) {
-	:host>nav {
-		position: absolute;
-		z-index: 10;
-		top: 4em;
-		background-color: rgb(var(--smoothly-input-background));
-		max-width: 22em;
-	}
 }

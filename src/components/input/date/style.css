@@ -33,6 +33,7 @@
 	top: 4rem;
 	background-color: rgb(var(--smoothly-input-background));
 	min-width: 18rem;
+	max-width: 22rem;
 }
 
 :host>smoothly-calendar::before {
@@ -53,10 +54,4 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-}
-
-@media screen and (min-width: 400px) {
-	:host>smoothly-calendar {
-		max-width: 22rem;
-	}
 }
