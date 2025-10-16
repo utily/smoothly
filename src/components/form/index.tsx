@@ -37,7 +37,6 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Prop({ reflect: true, attribute: "looks" }) looks?: Looks
 	@Prop({ reflect: true }) name?: string
 	@Prop() prevent = true
-	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) processing?: Promise<boolean>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyFormInput: EventEmitter<Data>
@@ -46,6 +45,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 	@Event() smoothlyFormEdit: EventEmitter<boolean>
 	@Event() smoothlyFormClear: EventEmitter<void>
 	@Event() notice: EventEmitter<Notice>
+	changed = false
 	private contentType: "json" | "form-data" = "json"
 	private inputs = new Map<string, Input.Element>()
 	private readonlyAtLoad = this.readonly

@@ -28,6 +28,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputColor implements Input, Clearable, Editable, ComponentWillLoad {
 	parent: Editable | undefined
+	changed = false
 	private observer = Editable.Observer.create(this)
 	private rgb: RGB = { r: undefined, g: undefined, b: undefined }
 	private hsl: HSL = { h: undefined, s: undefined, l: undefined }
@@ -35,7 +36,6 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	@Prop({ mutable: true }) value: string | undefined = undefined
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
-	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() output: "rgb" | "hex" = "rgb"
