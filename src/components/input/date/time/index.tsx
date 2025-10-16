@@ -29,12 +29,12 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
-	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
+	isDifferentFromInitial = false
 	private initialValue?: isoly.DateTime
 	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.DateTime
@@ -156,7 +156,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	@Method()
 	async setInitialValue() {
 		this.initialValue = await this.getValue()
-		this.changed = false
+		this.isDifferentFromInitial = false
 	}
 	render() {
 		return (

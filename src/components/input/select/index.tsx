@@ -27,6 +27,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
 	parent: Editable | undefined
+	isDifferentFromInitial = false
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
@@ -50,7 +51,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) ordered?: boolean
 	@Prop() multiple = false
 	@Prop() clearable = true
-	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
@@ -136,7 +136,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.initialValue.forEach(item => (item.selected = true))
 		this.selected = [...this.initialValue]
 		this.displaySelected()
-		this.changed = false
+		this.isDifferentFromInitial = false
 		this.open && this.handleShowOptions()
 	}
 
@@ -156,12 +156,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.changed = false
+		this.isDifferentFromInitial = false
 		this.initialValue = [...this.selected]
 	}
 	@Watch("selected")
 	async onSelectedChange() {
-		this.initialValueHandled && (this.changed = !this.areValuesEqual(this.selected, this.initialValue))
+		this.initialValueHandled && (this.isDifferentFromInitial = !this.areValuesEqual(this.selected, this.initialValue))
 		this.defined = this.selected.length > 0
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.observer.publish()

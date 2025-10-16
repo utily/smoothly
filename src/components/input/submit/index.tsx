@@ -32,7 +32,7 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 						!this.delete &&
 						(p.readonly ||
 							("validator" in p && p.validator instanceof isly.Type && !p.validator?.is(Data.convertArrays(p.value))) ||
-							!p.changed)
+							!p.isDifferentFromInitial)
 				})
 			}
 		})

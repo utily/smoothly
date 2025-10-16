@@ -26,8 +26,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop() invalid?: boolean = false
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
-	@Prop({ mutable: true }) changed = false
 	parent: Editable | undefined
+	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
@@ -65,7 +65,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	@Watch("value")
 	valueChanged() {
-		this.changed = this.initialStart != this.start || this.initialEnd != this.end
+		this.isDifferentFromInitial = this.initialStart != this.start || this.initialEnd != this.end
 		this.observer.publish()
 	}
 	@Watch("disabled")
@@ -123,7 +123,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	async setInitialValue() {
 		this.initialStart = this.start
 		this.initialEnd = this.end
-		this.changed = false
+		this.isDifferentFromInitial = false
 	}
 	@Method()
 	async clear(): Promise<void> {

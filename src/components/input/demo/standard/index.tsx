@@ -124,11 +124,13 @@ export class SmoothlyInputDemoStandard {
 
 					<smoothly-input-checkbox
 						name={"checkbox"}
+						checked
 						color={this.options.color}
 						looks={this.options.looks}
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}>
 						Check
+						<smoothly-input-reset slot="end" />
 					</smoothly-input-checkbox>
 					<div class="height" />
 

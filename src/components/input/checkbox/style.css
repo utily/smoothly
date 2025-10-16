@@ -6,11 +6,14 @@
 	flex-direction: row;
 	position: relative;
 	gap: .5rem;
-	padding: 0 var(--input-padding-side);
+	padding-inline: var(--input-padding-side);
 	background-color: rgb(var(--smoothly-input-background));
 	box-sizing: border-box;
 	background-color: rgb(var(--smoothly-input-background));
 	color: rgb(var(--smoothly-input-foreground));
+}
+:host:has(>.smoothly-checkbox-end-slot:not(:empty)) {
+	padding-right: 0;
 }
 
 :host>smoothly-icon {
@@ -53,4 +56,11 @@
 /* overwrite shared.css styling */
 :host[looks="transparent"]:not([readonly]):focus-within {
 	outline-color: transparent;
+}
+
+:host>.smoothly-checkbox-end-slot {
+	margin-left: auto;;
+}
+:host>.smoothly-checkbox-end-slot:empty {
+	display: none;
 }

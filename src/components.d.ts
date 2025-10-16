@@ -185,7 +185,6 @@ export namespace Components {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
@@ -246,7 +245,6 @@ export namespace Components {
     }
     interface SmoothlyInput {
         "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "copyable"?: boolean;
@@ -279,7 +277,6 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputCheckbox {
-        "changed": boolean;
         "checked": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -310,7 +307,6 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -331,7 +327,6 @@ export namespace Components {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -354,7 +349,6 @@ export namespace Components {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -377,7 +371,6 @@ export namespace Components {
         "unregister": () => Promise<void>;
     }
     interface SmoothlyInputDateTime {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -420,7 +413,6 @@ export namespace Components {
         "accept"?: string;
         "binary": () => Promise<boolean>;
         "camera": "front" | "back";
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -462,7 +454,6 @@ export namespace Components {
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "clearable"?: boolean;
         "color"?: Color;
@@ -488,7 +479,6 @@ export namespace Components {
         "value": any;
     }
     interface SmoothlyInputRange {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "defined": boolean;
@@ -525,7 +515,6 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "clearable": boolean;
         "color"?: Color;
@@ -2451,7 +2440,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyForm {
         "action"?: string;
-        "changed"?: boolean;
         "color"?: Color;
         "looks"?: Looks;
         "name"?: string;
@@ -2516,7 +2504,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInput {
         "autocomplete"?: Exclude<tidily.Settings["autocomplete"], undefined>;
-        "changed"?: boolean;
         "color"?: Color;
         "copyable"?: boolean;
         "currency"?: isoly.Currency;
@@ -2545,7 +2532,6 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputCheckbox {
-        "changed"?: boolean;
         "checked"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
@@ -2574,7 +2560,6 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
@@ -2592,7 +2577,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
@@ -2613,7 +2597,6 @@ declare namespace LocalJSX {
         "value"?: isoly.Date;
     }
     interface SmoothlyInputDateRange {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
@@ -2633,7 +2616,6 @@ declare namespace LocalJSX {
         "start"?: isoly.Date | undefined;
     }
     interface SmoothlyInputDateTime {
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
@@ -2675,7 +2657,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputFile {
         "accept"?: string;
         "camera"?: "front" | "back";
-        "changed"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "looks"?: Looks;
@@ -2711,7 +2692,6 @@ declare namespace LocalJSX {
     interface SmoothlyInputPriceDemo {
     }
     interface SmoothlyInputRadio {
-        "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
         "direction"?: "row" | "column";
@@ -2736,7 +2716,6 @@ declare namespace LocalJSX {
         "value"?: any;
     }
     interface SmoothlyInputRange {
-        "changed"?: boolean;
         "color"?: Color;
         "defined"?: boolean;
         "disabled"?: boolean;
@@ -2771,7 +2750,6 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputSelect {
-        "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
         "defined"?: boolean;

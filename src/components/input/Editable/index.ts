@@ -3,7 +3,7 @@ import { isly } from "isly"
 import { Listener as ObserverListener, Observer as EditableObserver } from "./Observer"
 
 export interface Editable extends Editable.Element {
-	changed: boolean
+	isDifferentFromInitial: boolean
 	value?: any
 	smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 }
@@ -35,7 +35,7 @@ export namespace Editable {
 	export type Reset = () => Promise<void>
 	const EventEmitter = isly.object<EventEmitter>({ emit: isly.function<EventEmitter["emit"]>() })
 	export const type = Element.type.extend<Editable>({
-		changed: isly.boolean(),
+		isDifferentFromInitial: isly.boolean(),
 		value: isly.any().optional(),
 		smoothlyFormDisable: EventEmitter,
 	})

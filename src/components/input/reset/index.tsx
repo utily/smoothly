@@ -30,11 +30,12 @@ export class SmoothlyInputReset {
 				this.readonlyAtLoad = parent.readonly
 				parent.listen(async p => {
 					if (Input.is(p)) {
-						this.display = p.readonly || p.defined ? false : p.changed
+						const defined = typeof p.defined == "boolean" ? p.defined : Boolean(await p.getValue())
+						this.display = p.readonly || !defined ? false : p.isDifferentFromInitial
 					}
 					if (p instanceof SmoothlyForm) {
 						this.display = !p.readonly
-						this.disabled = !this.readonlyAtLoad && !p.changed
+						this.disabled = !this.readonlyAtLoad && !p.isDifferentFromInitial
 					}
 				})
 			}

@@ -35,12 +35,12 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop() max?: number
 	@Prop() pad?: number
 	@Prop({ reflect: true }) invalid?: boolean = false
-	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true }) errorMessage?: string
 	@Prop({ reflect: true }) copyable?: boolean
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@State() copied = false
+	isDifferentFromInitial = false
 	parent: Editable | undefined
 	private stateHandler: InputStateHandler
 	private inputElement: HTMLInputElement | undefined
@@ -112,7 +112,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async setInitialValue(): Promise<void> {
-		this.changed = false
+		this.isDifferentFromInitial = false
 		this.initialValue = this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 	}
@@ -142,7 +142,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Watch("state")
 	stateChange() {
-		this.smoothlyInput.emit({ [this.name]: this.stateHandler.getValue(this.state) })
+		const value = this.stateHandler.getValue(this.state)
+		this.isDifferentFromInitial = Deep.notEqual(this.initialValue, value)
+		this.smoothlyInput.emit({ [this.name]: value })
 		this.observer.publish()
 	}
 	@Watch("value")
@@ -159,8 +161,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.observer.publish()
 	}
 	componentWillLoad() {
-		this.typeChange()
 		this.initialValue = this.value
+		this.typeChange()
 		this.smoothlyInputLooks.emit(
 			(looks, color) => ((this.looks = this.looks ?? looks), !this.color && (this.color = color))
 		)

@@ -1,4 +1,16 @@
-import { Component, ComponentWillLoad, Element, Event, EventEmitter, h, Host, Method, Prop, Watch } from "@stencil/core"
+import {
+	Component,
+	ComponentWillLoad,
+	Element,
+	Event,
+	EventEmitter,
+	h,
+	Host,
+	Listen,
+	Method,
+	Prop,
+	Watch,
+} from "@stencil/core"
 import { Color, Data } from "../../../model"
 import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
@@ -12,12 +24,12 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputCheckbox implements Input, Clearable, Editable, ComponentWillLoad {
 	@Element() element: HTMLSmoothlyInputCheckboxElement
+	isDifferentFromInitial = false
 	parent: Editable | undefined
 	private initialValue?: any
 	private observer = Editable.Observer.create(this)
 	private id: string
 	@Prop({ reflect: true }) name: string
-	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ mutable: true }) checked = false
@@ -37,11 +49,15 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		)
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		this.observer.publish()
-		this.id = "id-" + Math.random().toString(36).substr(2, 9)
+		this.id = "id-" + Math.random().toString(36).substring(2, 11)
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()
+	}
+	@Listen("smoothlyInputLoad")
+	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputCheckbox) => void>): Promise<void> {
+		Input.registerSubAction(this, event)
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -79,12 +95,18 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Method()
 	async setInitialValue(): Promise<void> {
 		this.initialValue = this.checked
-		this.changed = false
+		this.isDifferentFromInitial = false
 	}
+	@Watch("disabled")
+	@Watch("readonly")
+	async handleDisabledChange(): Promise<void> {
+		this.observer.publish()
+	}
+
 	@Watch("checked")
-	async elementCheck(checked: boolean | undefined, before: boolean | undefined) {
-		this.changed = !!this.initialValue != !!this.checked
-		const changed = !!checked != !!before
+	async elementCheck(_: boolean | undefined, before: boolean | undefined) {
+		this.isDifferentFromInitial = !!this.initialValue != !!this.checked
+		const changed = !!this.checked != !!before
 		if (changed) {
 			this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 			this.observer.publish()
@@ -107,6 +129,9 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 				<label htmlFor={this.id}>
 					<slot />
 				</label>
+				<span class="smoothly-checkbox-end-slot">
+					<slot name="end" />
+				</span>
 			</Host>
 		)
 	}

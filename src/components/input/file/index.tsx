@@ -26,7 +26,6 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, Editable {
 	@Element() element: HTMLSmoothlyInputFileElement
-	@Prop({ mutable: true }) changed = false
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() accept?: string
@@ -44,6 +43,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	parent: Editable | undefined
+	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private transfer: DataTransfer = new DataTransfer()
 	private input?: HTMLInputElement
@@ -116,7 +116,7 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 
 	@Watch("value")
 	async valueChanged(): Promise<void> {
-		this.changed = this.initialValue !== this.value
+		this.isDifferentFromInitial = this.initialValue !== this.value
 		this.smoothlyInput.emit({ [this.name]: await this.getValue() })
 		this.observer.publish()
 	}
