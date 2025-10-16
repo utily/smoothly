@@ -167,7 +167,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					ref={e => (this.year = e)}
 					name={`${this.name}-year`}
 					readonly={this.readonly}
-					changed={this.changed}
 					menuHeight="5.5items"
 					required
 					ordered
@@ -197,7 +196,6 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 					readonly={this.readonly}
 					color={this.color}
 					looks={this.looks}
-					changed={this.changed}
 					menuHeight="5.5items"
 					required
 					ordered

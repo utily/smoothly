@@ -515,7 +515,6 @@ export namespace Components {
         "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
-        "changed": boolean;
         "clear": () => Promise<void>;
         "clearable": boolean;
         "color"?: Color;
@@ -2751,7 +2750,6 @@ declare namespace LocalJSX {
         "type"?: "form" | "input";
     }
     interface SmoothlyInputSelect {
-        "changed"?: boolean;
         "clearable"?: boolean;
         "color"?: Color;
         "defined"?: boolean;

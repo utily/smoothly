@@ -27,6 +27,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
 	parent: Editable | undefined
+	changed = false
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
@@ -50,7 +51,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) ordered?: boolean
 	@Prop() multiple = false
 	@Prop() clearable = true
-	@Prop({ mutable: true }) changed = false
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
 	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
