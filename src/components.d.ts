@@ -338,6 +338,7 @@ export namespace Components {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
+        "alwaysShowFormat": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
         "disabled"?: boolean;
@@ -352,6 +353,7 @@ export namespace Components {
         "min": isoly.Date;
         "name": string;
         "open": boolean;
+        "placeholder"?: string;
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
@@ -2640,6 +2642,7 @@ declare namespace LocalJSX {
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
+        "alwaysShowFormat"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
@@ -2656,6 +2659,7 @@ declare namespace LocalJSX {
         "onSmoothlyUserInput"?: (event: SmoothlyInputDateCustomEvent<Input.UserInput>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
+        "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: isoly.Date;

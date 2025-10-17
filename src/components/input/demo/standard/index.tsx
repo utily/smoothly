@@ -212,8 +212,8 @@ export class SmoothlyInputDemoStandard {
 						invalid={this.options.invalid}
 						// TODO - errorMessage
 						showLabel={this.options.showLabel}
-						// TODO - placeholder
-					>
+						placeholder={this.options.placeholder}
+						alwaysShowFormat={this.options.alwaysShowFormat}>
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>

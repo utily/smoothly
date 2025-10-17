@@ -8,18 +8,27 @@
 	box-sizing: border-box;
 	min-height: var(--input-min-height);
 }
+:host .smoothly-date-placeholder {
+	display: none;
+}
+:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-placeholder {
+	opacity: 0.5;
+	display: block;
+}
 
-:host:not(:focus-within):not(.has-value) smoothly-date-text:not(.has-text) {
+:host:not([always-show-format]):not(:focus-within):not(.has-text) smoothly-date-text {
 	visibility: hidden;
 }
 
 :host>.label {
 	left: var(--input-padding-side);
 }
+:host[show-label] > .smoothly-date-placeholder,
 :host[show-label] > smoothly-date-text {
 	margin-inline: var(--input-padding-side) auto;
 	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
+:host:not([show-label]) > .smoothly-date-placeholder,
 :host:not([show-label]) > smoothly-date-text {
 	margin-inline: var(--input-padding-side) auto;
 	margin-block: auto;

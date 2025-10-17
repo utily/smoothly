@@ -36,6 +36,8 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
+	@Prop({ reflect: true }) placeholder?: string
+	@Prop({ reflect: true }) alwaysShowFormat = false
 	parent: Editable | undefined
 	changed = false
 	isDifferentFromInitial = false
@@ -147,7 +149,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		return (
 			<Host
 				tabindex={this.disabled ? undefined : 0}
-				class={{ "has-value": !!this.value, "has-text": this.hasText }}
+				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowFormat }}
 				onClick={(e: MouseEvent) => {
 					const includesTextElement = this.dateTextElement && e.composedPath().includes(this.dateTextElement)
 					const includesCalendar = this.calendarElement && e.composedPath().includes(this.calendarElement)
@@ -160,6 +162,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				<label class={"label float-on-focus"}>
 					<slot />
 				</label>
+				{this.placeholder && <span class="smoothly-date-placeholder">{this.placeholder}</span>}
 				<smoothly-date-text
 					ref={el => (this.dateTextElement = el)}
 					locale={this.locale}
