@@ -197,8 +197,6 @@ export class SmoothlyInputDateRangeText {
 						<span
 							class={{
 								"smoothly-date-text-part": true,
-								[`smoothly-date-text-${part}`]: true,
-								focused: this.focusedIndex === index,
 								"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.length(part),
 							}}
 							onFocus={() => (this.focusedIndex = index)}
