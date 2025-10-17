@@ -23,7 +23,8 @@
 	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
 
-:host:not([show-label]) smoothly-date-text {
+:host:not([show-label]) smoothly-date-text,
+:host:not([show-label]) .smoothly-date-range-separator {
 	margin-block: auto;
 }
 
