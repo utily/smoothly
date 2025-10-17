@@ -54,12 +54,10 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	// I don't understand the comment above
 	@Watch("start")
 	startChanged(_: isoly.Date | undefined, oldValue: isoly.Date | undefined) {
-		console.trace("date-range startChanged", this.start, this.end)
 		this.updateValue(oldValue, this.end)
 	}
 	@Watch("end")
 	endChanged(_: isoly.Date | undefined, oldValue: isoly.Date | undefined) {
-		console.log("date-range endChanged", this.start, this.end)
 		this.updateValue(this.start, oldValue)
 	}
 
@@ -166,7 +164,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 								this.start = newValue
 								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 							}
-							console.log("onSmoothlyDateTextChange start", newValue, this.start, this.end)
 						}}
 						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
 						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
@@ -189,7 +186,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 								this.end = newValue
 								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 							}
-							console.log("onSmoothlyDateTextChange end", newValue, this.start, this.end)
 						}}
 						onSmoothlyDateTextPrevious={() => this.startTextElement?.select("end")}
 						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}

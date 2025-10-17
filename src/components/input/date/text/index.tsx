@@ -105,7 +105,6 @@ export class SmoothlyInputDateRangeText {
 		const nonDigitData = e.data && /\D/.test(e.data)
 		const hasMaxLength = value.length >= DateFormat.Part.length(part)
 		const noRangedSelection = InputSelection.isCollapsed(e.target as HTMLElement)
-		console.log("beforeInput", e.inputType, e.data)
 		if (
 			(e.inputType == "insertText" || e.inputType == "insertFromPaste") &&
 			(nonDigitData || (hasMaxLength && noRangedSelection))
@@ -177,7 +176,6 @@ export class SmoothlyInputDateRangeText {
 	}
 
 	setFocus(index: number) {
-		console.log("setFocus", index)
 		if (index < 0) {
 			this.smoothlyDateTextPrevious.emit()
 		} else if (index > 2) {
