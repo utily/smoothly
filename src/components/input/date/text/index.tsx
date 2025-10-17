@@ -141,8 +141,10 @@ export class SmoothlyInputDateRangeText {
 				this.setFocus(index + 1)
 			}
 		} else if (part == "M") {
-			if (parseInt(value) > 12) {
-				const monthString = "12"
+			if (value.length == 2) {
+				const monthString = Math.max(1, Math.min(parseInt(value), 12))
+					.toString()
+					.padStart(2, "0")
 				this.setPart("M", monthString)
 				InputSelection.setPosition(this.partElements[index], 2)
 			} else if (value.length == 1 && parseInt(value) > 1) {
