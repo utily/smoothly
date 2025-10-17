@@ -14,6 +14,10 @@
 	left: var(--input-padding-side);
 }
 
+:host .smoothly-date-range-separator {
+	white-space: pre;
+}
+
 :host:not(:focus-within):not(.has-text) smoothly-date-text,
 :host:not(:focus-within):not(.has-text) .smoothly-date-range-separator {
 	visibility: hidden;
@@ -29,11 +33,11 @@
 }
 
 :host smoothly-date-text.start-date-text {
-	margin-inline: var(--input-padding-side);
+	margin-inline: var(--input-padding-side) auto;
 }
 
 :host smoothly-date-text.end-date-text {
-	margin-inline: var(--input-padding-side) auto;
+	margin-inline: auto var(--input-padding-side);
 }
 
 :host[show-label] .smoothly-date-range-separator {

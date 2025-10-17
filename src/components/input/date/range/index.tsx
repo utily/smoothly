@@ -179,7 +179,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						placeholder={this.placeholder}
 						showLabel={this.showLabel}
 					/>
-					<span class="smoothly-date-range-separator"> — </span>
+					<span class="smoothly-date-range-separator"> – </span>
 					<smoothly-date-text
 						ref={el => (this.endTextElement = el)}
 						class="end-date-text"
