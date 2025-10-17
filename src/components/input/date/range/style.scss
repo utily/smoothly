@@ -10,8 +10,12 @@
 	}
 }
 
-:host:not(:focus-within):not(.has-value):has(.has-text) smoothly-date-text:not(.has-text),
-:host:not(:focus-within):not(.has-value):has(.has-text) .smoothly-date-range-separator {
+:host .label {
+	left: var(--input-padding-side);
+}
+
+:host:not(:focus-within):not(.has-text) smoothly-date-text,
+:host:not(:focus-within):not(.has-text) .smoothly-date-range-separator {
 	visibility: hidden;
 }
 
@@ -80,12 +84,6 @@
 	width: 100%;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
-}
-
-:host > .smoothly-date-range-input-part > span {
-	padding-block: 0.5rem;
-	padding-inline: 0.2rem;
-	align-self: center;
 }
 
 :host > span.icons {

@@ -37,6 +37,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	parent: Editable | undefined
+	changed = false
 	isDifferentFromInitial = false
 	private hasFocus = false
 	private initialValue?: isoly.Date
@@ -46,7 +47,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ mutable: true }) max: isoly.Date
 	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) showLabel = true
-	@State() changed = false
+	@State() hasText = false
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -146,7 +147,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		return (
 			<Host
 				tabindex={this.disabled ? undefined : 0}
-				class={{ "has-value": !!this.value }}
+				class={{ "has-value": !!this.value, "has-text": this.hasText }}
 				onClick={(e: MouseEvent) => {
 					const includesTextElement = this.dateTextElement && e.composedPath().includes(this.dateTextElement)
 					const includesCalendar = this.calendarElement && e.composedPath().includes(this.calendarElement)
@@ -166,6 +167,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					disabled={this.disabled}
 					showLabel={this.showLabel}
 					value={this.value}
+					onSmoothlyDateTextHasText={e => (this.hasText = e.detail)}
 					onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
 					onSmoothlyDateTextChange={e => {
 						e.stopPropagation()

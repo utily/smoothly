@@ -34,6 +34,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	private initialStart?: isoly.Date
 	private initialEnd?: isoly.Date
 	@State() open: boolean
+	@State() startHasText = false
+	@State() endHasText = false
 	@Event() smoothlyInput: EventEmitter<{ [name: string]: Partial<isoly.DateRange> | undefined }>
 	@Event() smoothlyUserInput: EventEmitter<Input.UserInput<Partial<isoly.DateRange> | undefined>>
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
@@ -137,7 +139,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	render() {
 		return (
-			<Host tabindex={this.disabled ? undefined : 0} class={{ "has-value": !!(this.start || this.end) }}>
+			<Host
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!(this.start || this.end), "has-text": !!(this.startHasText || this.endHasText) }}>
 				<span
 					class="smoothly-date-range-input-part"
 					onClick={(e: MouseEvent) => {
@@ -156,6 +160,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-date-text
 						ref={el => (this.startTextElement = el)}
 						class="start-date-text"
+						onSmoothlyDateTextHasText={e => (this.startHasText = e.detail)}
 						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
 						onSmoothlyDateTextChange={async e => {
 							e.stopPropagation()
@@ -178,6 +183,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-date-text
 						ref={el => (this.endTextElement = el)}
 						class="end-date-text"
+						onSmoothlyDateTextHasText={e => (this.endHasText = e.detail)}
 						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
 						onSmoothlyDateTextChange={async e => {
 							e.stopPropagation()

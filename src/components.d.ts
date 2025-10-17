@@ -1084,6 +1084,7 @@ declare global {
         new (): HTMLSmoothlyCountryElement;
     };
     interface HTMLSmoothlyDateTextElementEventMap {
+        "smoothlyDateTextHasText": boolean;
         "smoothlyDateTextChange": isoly.Date | undefined;
         "smoothlyDateTextFocusChange": boolean;
         "smoothlyDateTextDone": void;
@@ -2421,6 +2422,7 @@ declare namespace LocalJSX {
         "onSmoothlyDateTextChange"?: (event: SmoothlyDateTextCustomEvent<isoly.Date | undefined>) => void;
         "onSmoothlyDateTextDone"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextFocusChange"?: (event: SmoothlyDateTextCustomEvent<boolean>) => void;
+        "onSmoothlyDateTextHasText"?: (event: SmoothlyDateTextCustomEvent<boolean>) => void;
         "onSmoothlyDateTextNext"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextPrevious"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "placeholder"?: string;

@@ -2,11 +2,6 @@
 :host {
 	display: block;
 	--ghost-opacity: 0.5;
-	outline: 2px solid red;
-}
-
-:host .label {
-	left: var(--input-padding-side);
 }
 
 :host {

@@ -32,6 +32,7 @@ export class SmoothlyInputDateRangeText {
 	@State() order: DateFormat.Order
 	@State() separator: DateFormat.Separator
 	@State() focusedIndex?: number
+	@Event() smoothlyDateTextHasText: EventEmitter<boolean>
 	@Event() smoothlyDateTextChange: EventEmitter<isoly.Date | undefined>
 	@Event() smoothlyDateTextFocusChange: EventEmitter<boolean>
 	@Event() smoothlyDateTextDone: EventEmitter<void>
@@ -53,6 +54,7 @@ export class SmoothlyInputDateRangeText {
 			this.smoothlyDateTextChange.emit(value)
 			this.previousEmittedValue = value
 		}
+		this.smoothlyDateTextHasText.emit(Object.values(this.parts).some(part => !!part))
 	}
 	@Watch("focusedIndex")
 	focusedIndexHandler() {
