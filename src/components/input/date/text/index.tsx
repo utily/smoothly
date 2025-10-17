@@ -129,19 +129,20 @@ export class SmoothlyInputDateRangeText {
 			[part]: value,
 		}
 		if (part == "D") {
-			if (value.length >= 2 && parseInt(value) > 28) {
+			if (value.length >= 2) {
 				const maxDay = DateFormat.Parts.maxDay(this.parts)
-				if (parseInt(value) > maxDay) {
-					this.setPart("D", maxDay.toString().padStart(2, "0"))
-					InputSelection.setPosition(this.partElements[index], 2)
-				}
+				const dayString = Math.max(1, Math.min(parseInt(value), maxDay))
+					.toString()
+					.padStart(2, "0")
+				this.setPart("D", dayString)
+				InputSelection.setPosition(this.partElements[index], 2)
 			} else if (value.length == 1 && parseInt(value) > 3) {
 				const dayString = parseInt(value).toString().padStart(2, "0")
 				this.setPart("D", dayString)
 				this.setFocus(index + 1)
 			}
 		} else if (part == "M") {
-			if (value.length == 2) {
+			if (value.length >= 2) {
 				const monthString = Math.max(1, Math.min(parseInt(value), 12))
 					.toString()
 					.padStart(2, "0")
