@@ -105,7 +105,7 @@ export class SmoothlyInputDateRangeText {
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
 		const value = this.getInnerText(e.target)
 		const nonDigitData = e.data && /\D/.test(e.data)
-		const hasMaxLength = value.length >= DateFormat.Part.length(part)
+		const hasMaxLength = value.length >= DateFormat.Part.lengthOf(part)
 		const noRangedSelection = InputSelection.isCollapsed(e.target as HTMLElement)
 		if (
 			(e.inputType == "insertText" || e.inputType == "insertFromPaste") &&
@@ -140,7 +140,7 @@ export class SmoothlyInputDateRangeText {
 				this.autoAdvancePart(part, numberValue, index, max)
 			}
 		}
-		if (value.length >= DateFormat.Part.length(part)) {
+		if (value.length >= DateFormat.Part.lengthOf(part)) {
 			this.setFocus(index + 1)
 		}
 		const roundedValue = DateFormat.Parts.toDate(this.parts)
@@ -195,7 +195,7 @@ export class SmoothlyInputDateRangeText {
 						<span
 							class={{
 								"smoothly-date-text-part": true,
-								"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.length(part),
+								"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.lengthOf(part),
 							}}
 							onFocus={() => (this.focusedIndex = index)}
 							onBlur={() => (this.focusedIndex = undefined)}
