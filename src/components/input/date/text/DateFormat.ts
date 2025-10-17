@@ -84,6 +84,12 @@ export namespace DateFormat {
 					return "YMD"
 			}
 		}
+		export function getPart(order: Order, index: number): Part {
+			return order.charAt(index) as Part
+		}
+		export function toParts(order: Order): Part[] {
+			return order.split("") as Part[]
+		}
 	}
 
 	export type Separator = "-" | "/" | "."

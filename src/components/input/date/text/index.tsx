@@ -121,7 +121,7 @@ export class SmoothlyInputDateRangeText {
 
 	@Listen("input", { capture: true })
 	inputHandler(e: InputEvent) {
-		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
+		const part = DateFormat.Order.getPart(this.order, this.focusedIndex ?? 0)
 		const index = this.focusedIndex ?? 0
 		const value = this.getInnerText(e.target)
 		this.parts = {
@@ -164,7 +164,7 @@ export class SmoothlyInputDateRangeText {
 	}
 
 	autoAdvanceIfPossible(index: number) {
-		const part = this.order[index] as "Y" | "M" | "D"
+		const part = DateFormat.Order.getPart(this.order, index)
 		const value = this.parts[part] ?? ""
 		if (part == "D" && value.length == 1) {
 			this.autoAdvancePart(part, parseInt(value), index, DateFormat.Parts.maxDay(this.parts))
@@ -186,7 +186,7 @@ export class SmoothlyInputDateRangeText {
 	render() {
 		return (
 			<Host class={{ "has-text": Object.values(this.parts).some(part => !!part) }}>
-				{[...this.order].map((part: "Y" | "M" | "D", index: number) => (
+				{DateFormat.Order.toParts(this.order).map((part, index) => (
 					<span
 						onClick={() => {
 							if (!this.readonly && !this.disabled)
