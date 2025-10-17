@@ -157,6 +157,21 @@ export class SmoothlyInputDateRangeText {
 			}
 		}
 	}
+
+	completePartIfPossible(index: number) {
+		const part = this.order[index] as "Y" | "M" | "D"
+		const value = this.parts[part] ?? ""
+		if (part == "D" && value.length == 1) {
+			if (parseInt(value) > 0) {
+				const dayString = Math.min(parseInt(value), DateFormat.Parts.maxDay(this.parts)).toString().padStart(2, "0")
+				this.setPart("D", dayString)
+			}
+		} else if (part == "M" && value.length == 1) {
+			const monthString = Math.min(parseInt(value), 12).toString().padStart(2, "0")
+			this.setPart("M", monthString)
+		}
+	}
+
 	setFocus(index: number) {
 		console.log("setFocus", index)
 		if (index < 0) {
@@ -189,21 +204,27 @@ export class SmoothlyInputDateRangeText {
 							onKeyDown={e => {
 								const text = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
 								if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
+									this.completePartIfPossible(index)
 									this.setFocus(index - 1)
 									e.preventDefault() // Keep selection
 								} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
+									this.completePartIfPossible(index)
 									this.setFocus(index + 1)
 									e.preventDefault() // Keep selection
 								} else if (e.key == "Home" || e.key == "ArrowUp") {
+									this.completePartIfPossible(index)
 									this.setFocus(0)
 									e.preventDefault() // Keep selection
 								} else if (e.key == "End" || e.key == "ArrowDown") {
+									this.completePartIfPossible(index)
 									this.setFocus(2)
 									e.preventDefault() // Keep selection
 								} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
+									this.completePartIfPossible(index)
 									this.setFocus(index - 1)
 									e.preventDefault() // Prevent delete previous part
 								} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
+									this.completePartIfPossible(index)
 									this.setFocus(index + 1)
 									e.preventDefault() // Prevent delete next part
 								}
