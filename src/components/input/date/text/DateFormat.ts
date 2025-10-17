@@ -87,7 +87,7 @@ export namespace DateFormat {
 		export function getPart(order: Order, index: number): Part {
 			return order.charAt(index) as Part
 		}
-		export function toParts(order: Order): Part[] {
+		export function toArray(order: Order): Part[] {
 			return order.split("") as Part[]
 		}
 	}

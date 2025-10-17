@@ -186,7 +186,7 @@ export class SmoothlyInputDateRangeText {
 	render() {
 		return (
 			<Host class={{ "has-text": Object.values(this.parts).some(part => !!part) }}>
-				{DateFormat.Order.toParts(this.order).map((part, index) => (
+				{DateFormat.Order.toArray(this.order).map((part, index) => (
 					<span
 						onClick={() => {
 							if (!this.readonly && !this.disabled)
