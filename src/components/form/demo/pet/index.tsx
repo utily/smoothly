@@ -13,7 +13,7 @@ export class SmoothlyFormDemoPet {
 		firstName?: string
 		lastName?: string
 		birthday?: string
-		ownedRange?: isoly.DateRange
+		ownedRange?: Partial<isoly.DateRange>
 		height?: number
 		favoriteHat?: string
 		favoriteColor?: RGB

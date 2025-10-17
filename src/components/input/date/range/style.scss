@@ -10,6 +10,49 @@
 	}
 }
 
+:host .label {
+	left: var(--input-padding-side);
+}
+
+:host .smoothly-date-range-separator {
+	white-space: pre;
+}
+
+:host .smoothly-date-range-placeholder {
+	margin-inline: var(--input-padding-side);
+	display: none;
+}
+
+:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-placeholder {
+	display: block;
+	opacity: 0.5;
+}
+
+:host:not([always-show-format]):not(:focus-within):not(.has-text) smoothly-date-text,
+:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-separator {
+	visibility: hidden;
+}
+
+:host smoothly-date-text.start-date-text {
+	margin-inline: var(--input-padding-side) 0;
+}
+
+:host smoothly-date-text.end-date-text {
+	margin-inline: 0 var(--input-padding-side);
+}
+
+:host[show-label] .smoothly-date-range-placeholder,
+:host[show-label] smoothly-date-text,
+:host[show-label] .smoothly-date-range-separator {
+	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+
+:host:not([show-label]) .smoothly-date-range-placeholder,
+:host:not([show-label]) smoothly-date-text,
+:host:not([show-label]) .smoothly-date-range-separator {
+	margin-block: auto;
+}
+
 :host:not([readonly]) > .smoothly-date-range-input-part > smoothly-input {
 	cursor: pointer;
 }
@@ -55,12 +98,6 @@
 	width: 100%;
 	background-color: transparent;
 	--input-min-height: calc(var(--input-min-height) - 2px);
-}
-
-:host > .smoothly-date-range-input-part > span {
-	padding-block: 0.5rem;
-	padding-inline: 0.2rem;
-	align-self: center;
 }
 
 :host > span.icons {
