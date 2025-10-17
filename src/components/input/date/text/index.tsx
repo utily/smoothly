@@ -133,16 +133,11 @@ export class SmoothlyInputDateRangeText {
 			const isDay = part == "D"
 			const max = isDay ? DateFormat.Parts.maxDay(this.parts) : 12
 			const singleDigitThreshold = isDay ? 3 : 1
-			const input = parseInt(value)
-
+			const numberValue = parseInt(value)
 			if (value.length >= 2) {
-				const clamped = Math.max(1, Math.min(input, max))
-				this.setPart(part, clamped.toString().padStart(2, "0"))
-				InputSelection.setPosition(this.partElements[index], 2)
-			} else if (value.length == 1 && input > singleDigitThreshold) {
-				const clamped = Math.max(1, Math.min(input, max))
-				this.setPart(part, clamped.toString().padStart(2, "0"))
-				this.setFocus(index + 1)
+				this.commitPart(part, numberValue, index, max)
+			} else if (value.length == 1 && numberValue > singleDigitThreshold) {
+				this.autoAdvancePart(part, numberValue, index, max)
 			}
 		}
 		if (value.length >= DateFormat.Part.length(part)) {
@@ -157,18 +152,24 @@ export class SmoothlyInputDateRangeText {
 		}
 	}
 
-	completePartIfPossible(index: number) {
+	commitPart(part: DateFormat.Part, value: number, index: number, max: number) {
+		const clamped = Math.max(1, Math.min(value, max))
+		this.setPart(part, clamped.toString().padStart(2, "0"))
+		InputSelection.setPosition(this.partElements[index], 2)
+	}
+	autoAdvancePart(part: DateFormat.Part, value: number, index: number, max: number) {
+		const clamped = Math.max(1, Math.min(value, max))
+		this.setPart(part, clamped.toString().padStart(2, "0"))
+		this.setFocus(index + 1)
+	}
+
+	autoAdvanceIfPossible(index: number) {
 		const part = this.order[index] as "Y" | "M" | "D"
 		const value = this.parts[part] ?? ""
 		if (part == "D" && value.length == 1) {
-			const day = parseInt(value)
-			const maxDay = DateFormat.Parts.maxDay(this.parts)
-			const dayString = Math.max(1, Math.min(day, maxDay)).toString().padStart(2, "0")
-			this.setPart("D", dayString)
+			this.autoAdvancePart(part, parseInt(value), index, DateFormat.Parts.maxDay(this.parts))
 		} else if (part == "M" && value.length == 1) {
-			const month = parseInt(value)
-			const monthString = Math.max(1, Math.min(month, 12)).toString().padStart(2, "0")
-			this.setPart("M", monthString)
+			this.autoAdvancePart(part, parseInt(value), index, 12)
 		}
 	}
 
@@ -201,27 +202,27 @@ export class SmoothlyInputDateRangeText {
 							onKeyDown={(e: KeyboardEvent) => {
 								const text = this.getInnerText(e.target)
 								if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(index - 1)
 									e.preventDefault() // Keep selection
 								} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(index + 1)
 									e.preventDefault() // Keep selection
 								} else if (e.key == "Home" || e.key == "ArrowUp") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(0)
 									e.preventDefault() // Keep selection
 								} else if (e.key == "End" || e.key == "ArrowDown") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(2)
 									e.preventDefault() // Keep selection
 								} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(index - 1)
 									e.preventDefault() // Prevent delete previous part
 								} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
-									this.completePartIfPossible(index)
+									this.autoAdvanceIfPossible(index)
 									this.setFocus(index + 1)
 									e.preventDefault() // Prevent delete next part
 								}
