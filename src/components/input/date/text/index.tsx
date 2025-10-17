@@ -94,10 +94,14 @@ export class SmoothlyInputDateRangeText {
 		this.partElements[this.focusedIndex ?? 0]?.blur()
 	}
 
+	getInnerText(target: EventTarget | null) {
+		return (target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+	}
+
 	@Listen("beforeinput")
 	beforeInputHandler(e: InputEvent) {
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
-		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+		const value = this.getInnerText(e.target)
 		const nonDigitData = e.data && /\D/.test(e.data)
 		const hasMaxLength = value.length >= DateFormat.Part.length(part)
 		const noRangedSelection = InputSelection.isCollapsed(e.target as HTMLElement)
@@ -118,7 +122,7 @@ export class SmoothlyInputDateRangeText {
 	inputHandler(e: InputEvent) {
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
 		const index = this.focusedIndex ?? 0
-		const value = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+		const value = this.getInnerText(e.target)
 		this.parts = {
 			...this.parts,
 			[part]: value,
@@ -201,8 +205,8 @@ export class SmoothlyInputDateRangeText {
 							}}
 							onFocus={() => (this.focusedIndex = index)}
 							onBlur={() => (this.focusedIndex = undefined)}
-							onKeyDown={e => {
-								const text = (e.target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
+							onKeyDown={(e: KeyboardEvent) => {
+								const text = this.getInnerText(e.target)
 								if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
 									this.completePartIfPossible(index)
 									this.setFocus(index - 1)
