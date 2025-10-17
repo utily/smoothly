@@ -125,7 +125,6 @@ export namespace Components {
         "disabled": boolean;
         "invalid": boolean;
         "locale": isoly.Locale;
-        "placeholder": string;
         "readonly": boolean;
         "select": (place?: "start" | "end") => Promise<void>;
         "setValue": (value: isoly.Date | undefined) => Promise<void>;
@@ -2425,7 +2424,6 @@ declare namespace LocalJSX {
         "onSmoothlyDateTextHasText"?: (event: SmoothlyDateTextCustomEvent<boolean>) => void;
         "onSmoothlyDateTextNext"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextPrevious"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
-        "placeholder"?: string;
         "readonly"?: boolean;
         "showLabel"?: boolean;
         "value"?: isoly.Date;

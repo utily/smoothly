@@ -24,7 +24,6 @@ export class SmoothlyInputDateRangeText {
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean
-	@Prop({ reflect: true }) placeholder: string
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() value?: isoly.Date // Only used for initial value
 	@State() parts: DateFormat.Parts = {}
