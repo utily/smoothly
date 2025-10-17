@@ -167,12 +167,13 @@ export class SmoothlyInputDateRangeText {
 		const part = this.order[index] as "Y" | "M" | "D"
 		const value = this.parts[part] ?? ""
 		if (part == "D" && value.length == 1) {
-			if (parseInt(value) > 0) {
-				const dayString = Math.min(parseInt(value), DateFormat.Parts.maxDay(this.parts)).toString().padStart(2, "0")
-				this.setPart("D", dayString)
-			}
+			const day = parseInt(value)
+			const maxDay = DateFormat.Parts.maxDay(this.parts)
+			const dayString = Math.max(1, Math.min(day, maxDay)).toString().padStart(2, "0")
+			this.setPart("D", dayString)
 		} else if (part == "M" && value.length == 1) {
-			const monthString = Math.min(parseInt(value), 12).toString().padStart(2, "0")
+			const month = parseInt(value)
+			const monthString = Math.max(1, Math.min(month, 12)).toString().padStart(2, "0")
 			this.setPart("M", monthString)
 		}
 	}
