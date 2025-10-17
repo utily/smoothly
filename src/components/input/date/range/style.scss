@@ -23,13 +23,13 @@
 	display: none;
 }
 
-:host:not(:focus-within):not(.has-text) .smoothly-date-range-placeholder {
+:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-placeholder {
 	display: block;
 	opacity: 0.5;
 }
 
-:host:not(:focus-within):not(.has-text) smoothly-date-text,
-:host:not(:focus-within):not(.has-text) .smoothly-date-range-separator {
+:host:not([always-show-format]):not(:focus-within):not(.has-text) smoothly-date-text,
+:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-separator {
 	visibility: hidden;
 }
 

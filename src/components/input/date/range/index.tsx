@@ -24,6 +24,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) start: isoly.Date | undefined
 	@Prop({ mutable: true }) end: isoly.Date | undefined
 	@Prop({ reflect: true }) placeholder: string
+	@Prop({ reflect: true }) alwaysShowFormat = false
 	@Prop() invalid?: boolean = false
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
@@ -141,7 +142,11 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		return (
 			<Host
 				tabindex={this.disabled ? undefined : 0}
-				class={{ "has-value": !!(this.start || this.end), "has-text": !!(this.startHasText || this.endHasText) }}>
+				class={{
+					"has-value": !!(this.start || this.end),
+					"has-text": !!(this.startHasText || this.endHasText),
+					"floating-label": this.alwaysShowFormat,
+				}}>
 				<span
 					class="smoothly-date-range-input-part"
 					onClick={(e: MouseEvent) => {
