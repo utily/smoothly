@@ -151,15 +151,13 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 				<span
 					class="smoothly-date-range-input-part"
 					onClick={(e: MouseEvent) => {
-						const includesStartTextElement = this.startTextElement && e.composedPath().includes(this.startTextElement)
-						const includesEndTextElement = this.endTextElement && e.composedPath().includes(this.endTextElement)
+						const includesStartTextElement = !!this.startTextElement && e.composedPath().includes(this.startTextElement)
+						const includesEndTextElement = !!this.endTextElement && e.composedPath().includes(this.endTextElement)
 						const includesTextElement = includesStartTextElement || includesEndTextElement
-						if (!includesTextElement && !this.readonly && !this.disabled) {
+						if (!includesTextElement && !this.readonly && !this.disabled)
 							this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
-						}
-						if (!this.readonly && !this.disabled) {
-							this.open = !this.open
-						}
+						if (!this.readonly && !this.disabled)
+							this.open = !this.open || includesTextElement
 					}}>
 					<slot name="start" />
 					<label class={"label float-on-focus"}>

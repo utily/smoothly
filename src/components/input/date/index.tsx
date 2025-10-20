@@ -151,12 +151,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				tabindex={this.disabled ? undefined : 0}
 				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowFormat }}
 				onClick={(e: MouseEvent) => {
-					const includesTextElement = this.dateTextElement && e.composedPath().includes(this.dateTextElement)
-					const includesCalendar = this.calendarElement && e.composedPath().includes(this.calendarElement)
-					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar) {
+					const includesTextElement = !!this.dateTextElement && e.composedPath().includes(this.dateTextElement)
+					const includesCalendar = !!this.calendarElement && e.composedPath().includes(this.calendarElement)
+					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar)
 						this.dateTextElement?.select()
-						this.open = !this.open
-					}
+					if (!this.readonly && !this.disabled && !includesCalendar)
+						this.open = !this.open || includesTextElement
 				}}>
 				<slot name="start" />
 				<label class={"label float-on-focus"}>
