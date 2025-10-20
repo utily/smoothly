@@ -6,6 +6,10 @@
 	background-color: rgb(var(--smoothly-input-background));
 }
 
+:host [slot=start] {
+	align-self: center;
+}
+
 :host .label {
 	left: var(--input-padding-side);
 }
