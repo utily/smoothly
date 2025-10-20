@@ -4,10 +4,6 @@
 	position: relative;
 	display: flex;
 	background-color: rgb(var(--smoothly-input-background));
-
-	&:focus-within smoothly-input {
-		outline: none;
-	}
 }
 
 :host .label {
@@ -23,14 +19,16 @@
 	display: none;
 }
 
-:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-placeholder {
-	display: block;
-	opacity: 0.5;
-}
+:host:not([always-show-format]):not(:focus-within):not(.has-text) {
+	& .smoothly-date-range-placeholder {
+		display: block;
+		opacity: 0.5;
+	}
 
-:host:not([always-show-format]):not(:focus-within):not(.has-text) smoothly-date-text,
-:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-range-separator {
-	visibility: hidden;
+	& smoothly-date-text,
+	& .smoothly-date-range-separator {
+		visibility: hidden;
+	}
 }
 
 :host smoothly-date-text.start-date-text {
@@ -53,12 +51,11 @@
 	margin-block: auto;
 }
 
-:host:not([readonly]) > .smoothly-date-range-input-part > smoothly-input {
+:host:not([readonly]) {
 	cursor: pointer;
 }
 
-:host[disabled],
-:host[disabled] > .smoothly-date-range-input-part > smoothly-input {
+:host[disabled] {
 	cursor: not-allowed;
 }
 
@@ -91,13 +88,6 @@
 	background-color: var(--smoothly-input-background);
 	border-radius: 0.25rem;
 	cursor: pointer;
-}
-
-:host > .smoothly-date-range-input-part > smoothly-input {
-	min-width: 15rem;
-	width: 100%;
-	background-color: transparent;
-	--input-min-height: calc(var(--input-min-height) - 2px);
 }
 
 :host > span.icons {
