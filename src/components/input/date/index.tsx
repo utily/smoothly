@@ -26,6 +26,7 @@ import { Looks } from "../Looks"
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
 	private dateTextElement?: HTMLSmoothlyDateTextElement
+	private iconsElement?: HTMLElement
 	private calendarElement?: HTMLElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
@@ -153,9 +154,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 				onClick={(e: MouseEvent) => {
 					const includesTextElement = !!this.dateTextElement && e.composedPath().includes(this.dateTextElement)
 					const includesCalendar = !!this.calendarElement && e.composedPath().includes(this.calendarElement)
-					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar)
+					const includesIconsElement = !!this.iconsElement && e.composedPath().includes(this.iconsElement)
+					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement)
 						this.dateTextElement?.select()
-					if (!this.readonly && !this.disabled && !includesCalendar)
+					if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
 						this.open = !this.open || includesTextElement
 				}}>
 				<slot name="start" />
@@ -185,7 +187,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						this.dateTextElement?.deselect()
 					}}
 				/>
-				<span class="icons">
+				<span class="icons" ref={el => (this.iconsElement = el)}>
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
