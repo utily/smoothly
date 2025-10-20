@@ -33,23 +33,12 @@
 	margin-inline: var(--input-padding-side) auto;
 	margin-block: auto;
 }
-
-:host>smoothly-input {
-	width: 100%;
-	--input-min-height: calc(var(--input-min-height) - 2px);
-}
-
-:host:not([readonly])>smoothly-input>div>input {
+:host:not([readonly]) {
 	cursor: pointer;
 }
 
-:host[disabled],
-:host[disabled]>smoothly-input>div>input {
+:host[disabled] {
 	cursor: not-allowed;
-}
-
-:host[looks=transparent] smoothly-input {
-	outline: none;
 }
 
 :host>smoothly-calendar {
