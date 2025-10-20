@@ -5,7 +5,7 @@ import { InputSelection } from "./InputSelection"
 
 @Component({
 	tag: "smoothly-date-text",
-	styleUrl: "./style.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyInputDateRangeText {
