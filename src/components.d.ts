@@ -374,6 +374,7 @@ export namespace Components {
         "getValue": () => Promise<Partial<isoly.DateRange | undefined>>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
+        "locale": isoly.Locale;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
@@ -2672,6 +2673,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
         "invalid"?: boolean;
+        "locale"?: isoly.Locale;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;

@@ -15,6 +15,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	private startTextElement?: HTMLSmoothlyDateTextElement
 	private endTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
+	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
@@ -155,6 +156,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						const includesTextElement = includesStartTextElement || includesEndTextElement
 						if (!includesTextElement && !this.readonly && !this.disabled) {
 							this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
+						}
+						if (!this.readonly && !this.disabled) {
 							this.open = !this.open
 						}
 					}}>
@@ -166,6 +169,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-date-text
 						ref={el => (this.startTextElement = el)}
 						class="start-date-text"
+						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (this.startHasText = e.detail)}
 						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
 						onSmoothlyDateTextChange={async e => {
@@ -188,6 +192,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-date-text
 						ref={el => (this.endTextElement = el)}
 						class="end-date-text"
+						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (this.endHasText = e.detail)}
 						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
 						onSmoothlyDateTextChange={async e => {

@@ -1,7 +1,12 @@
 :host {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 	min-width: 40rem;
 	margin: auto;
-	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+:host :not(smoothly-input-date):not(smoothly-input-date-range) {
+	grid-column: 1 / -1;
 }

@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from "@stencil/core"
+import { Component, Fragment, h, Host, State } from "@stencil/core"
 import { isoly } from "isoly"
 
 @Component({
@@ -8,6 +8,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDateDemo {
 	@State() date?: isoly.Date
+	@State() alwaysShowFormat = false
 
 	render() {
 		return (
@@ -20,12 +21,37 @@ export class SmoothlyInputDateDemo {
 						onClick={() => (this.date = this.date ? isoly.Date.next(this.date) : isoly.Date.now())}>
 						Set date
 					</smoothly-button>
+					<smoothly-input-checkbox
+						looks="transparent"
+						onSmoothlyUserInput={e => {
+							this.alwaysShowFormat = e.detail.value
+							console.log(this.alwaysShowFormat)
+						}}>
+						Always Show Format
+					</smoothly-input-checkbox>
 				</div>
 				{(["en-US", "en-GB", "de-DE", "se-SE"] as isoly.Locale[]).map(locale => (
-					<smoothly-input-date locale={locale} name={locale} looks="border" value={this.date}>
-						{locale}
-						<smoothly-input-clear slot="end" />
-					</smoothly-input-date>
+					<Fragment>
+						<smoothly-input-date
+							locale={locale}
+							name={locale}
+							looks="border"
+							value={this.date}
+							alwaysShowFormat={this.alwaysShowFormat}>
+							{locale}
+							<smoothly-input-clear slot="end" />
+						</smoothly-input-date>
+						<smoothly-input-date-range
+							locale={locale}
+							name={locale + "-range"}
+							looks="border"
+							start={this.date}
+							end={this.date ? isoly.Date.next(this.date) : undefined}
+							alwaysShowFormat={this.alwaysShowFormat}>
+							{locale} Range
+							<smoothly-input-clear slot="end" />
+						</smoothly-input-date-range>
+					</Fragment>
 				))}
 			</Host>
 		)
