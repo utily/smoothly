@@ -3,11 +3,6 @@ import { isoly } from "isoly"
 import { DateFormat } from "./DateFormat"
 import { InputSelection } from "./InputSelection"
 
-/* 
- The regular input is not suitable for displaying a date range in text mode,
- So we create a custom component for that specific purpose.
-*/
-
 @Component({
 	tag: "smoothly-date-text",
 	styleUrl: "./style.css",

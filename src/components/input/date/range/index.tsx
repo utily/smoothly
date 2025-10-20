@@ -54,8 +54,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
 		this.observer.publish()
 	}
-	// TODO: disable search fields in month selectors so that the input becomes typeable and then fix input handler
-	// I don't understand the comment above
 	@Watch("start")
 	startChanged(_: isoly.Date | undefined, oldValue: isoly.Date | undefined) {
 		this.updateValue(oldValue, this.end)

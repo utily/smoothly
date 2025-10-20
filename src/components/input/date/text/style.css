@@ -1,15 +1,6 @@
 
 :host {
-	display: block;
 	--ghost-opacity: 0.5;
-}
-
-:host {
-	display: flex;
-	align-items: center;
-	/* height: 100%; */
-	height: fit-content;
-	box-sizing: border-box;
 }
 
 :host .smoothly-date-text-part:focus {
