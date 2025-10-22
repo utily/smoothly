@@ -128,6 +128,15 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
+	onClick(event: MouseEvent): void {
+		const includesTextElement = !!this.dateTextElement && event.composedPath().includes(this.dateTextElement)
+		const includesCalendar = !!this.calendarElement && event.composedPath().includes(this.calendarElement)
+		const includesIconsElement = !!this.iconsElement && event.composedPath().includes(this.iconsElement)
+		if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement)
+			this.dateTextElement?.select()
+		if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
+			this.open = !this.open || includesTextElement
+	}
 	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
@@ -151,15 +160,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 			<Host
 				tabindex={this.disabled ? undefined : 0}
 				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowFormat }}
-				onClick={(e: MouseEvent) => {
-					const includesTextElement = !!this.dateTextElement && e.composedPath().includes(this.dateTextElement)
-					const includesCalendar = !!this.calendarElement && e.composedPath().includes(this.calendarElement)
-					const includesIconsElement = !!this.iconsElement && e.composedPath().includes(this.iconsElement)
-					if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement)
-						this.dateTextElement?.select()
-					if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
-						this.open = !this.open || includesTextElement
-				}}>
+				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<slot name="start" />
 				<label class={"label float-on-focus"}>
 					<slot />
