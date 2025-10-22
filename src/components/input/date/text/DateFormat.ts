@@ -15,10 +15,7 @@ export namespace DateFormat {
 		}
 		export function getGuide(part: Part, filledLength: number | undefined): string {
 			const ghost = DateFormat.ghosts[part]
-			if (filledLength === undefined) {
-				return ghost
-			}
-			return ghost.substring(0, ghost.length - filledLength)
+			return ghost.substring(0, ghost.length - (filledLength ?? 0))
 		}
 	}
 	export namespace Parts {
