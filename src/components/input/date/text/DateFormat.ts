@@ -19,7 +19,7 @@ export namespace DateFormat {
 		}
 	}
 	export namespace Parts {
-		export function maxDay(parts: Parts): number {
+		export function lastDay(parts: Parts): number {
 			if (parts.Y && parts.M && parseInt(parts.M) >= 1 && parseInt(parts.M) <= 12) {
 				const lastDate = isoly.Date.lastOfMonth(`${parts.Y.padStart(4, "0")}-${parts.M.padStart(2, "0")}-01`)
 				return isoly.Date.getDay(lastDate)

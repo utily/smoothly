@@ -10,8 +10,8 @@ describe("DateFormat", () => {
 		[{ M: "01" }, 31],
 		[{ M: "04" }, 30],
 		[{}, 31],
-	])("Parts.maxDay %p", (parts, expected) => {
-		expect(DateFormat.Parts.maxDay(parts)).toBe(expected)
+	])("Parts.lastDay %p", (parts, expected) => {
+		expect(DateFormat.Parts.lastDay(parts)).toBe(expected)
 	})
 
 	it.each([

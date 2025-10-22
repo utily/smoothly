@@ -125,7 +125,7 @@ export class SmoothlyInputDateRangeText {
 
 		if (["D", "M"].includes(part)) {
 			const isDay = part == "D"
-			const max = isDay ? DateFormat.Parts.maxDay(this.parts) : 12
+			const max = isDay ? DateFormat.Parts.lastDay(this.parts) : 12
 			const singleDigitThreshold = isDay ? 3 : 1
 			const numberValue = parseInt(value)
 			if (value.length >= 2) {
@@ -190,7 +190,7 @@ export class SmoothlyInputDateRangeText {
 		const part = DateFormat.Order.getPart(this.order, index)
 		const value = this.parts[part] ?? ""
 		if (part == "D" && value.length == 1) {
-			this.autoAdvancePart(part, parseInt(value), index, DateFormat.Parts.maxDay(this.parts))
+			this.autoAdvancePart(part, parseInt(value), index, DateFormat.Parts.lastDay(this.parts))
 		} else if (part == "M" && value.length == 1) {
 			this.autoAdvancePart(part, parseInt(value), index, 12)
 		}
