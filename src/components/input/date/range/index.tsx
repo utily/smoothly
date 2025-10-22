@@ -92,6 +92,15 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
+	onClick(event: MouseEvent): void {
+		const includesStartTextElement = !!this.startTextElement && event.composedPath().includes(this.startTextElement)
+		const includesEndTextElement = !!this.endTextElement && event.composedPath().includes(this.endTextElement)
+		const includesTextElement = includesStartTextElement || includesEndTextElement
+		if (!includesTextElement && !this.readonly && !this.disabled)
+			this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
+		if (!this.readonly && !this.disabled)
+			this.open = !this.open || includesTextElement
+	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()
@@ -146,17 +155,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					"has-text": !!(this.startHasText || this.endHasText),
 					"floating-label": this.alwaysShowGuide,
 				}}>
-				<span
-					class="smoothly-date-range-input-part"
-					onClick={(e: MouseEvent) => {
-						const includesStartTextElement = !!this.startTextElement && e.composedPath().includes(this.startTextElement)
-						const includesEndTextElement = !!this.endTextElement && e.composedPath().includes(this.endTextElement)
-						const includesTextElement = includesStartTextElement || includesEndTextElement
-						if (!includesTextElement && !this.readonly && !this.disabled)
-							this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
-						if (!this.readonly && !this.disabled)
-							this.open = !this.open || includesTextElement
-					}}>
+				<span class="smoothly-date-range-input-part" onClick={(e: MouseEvent) => this.onClick(e)}>
 					<slot name="start" />
 					<label class={"label float-on-focus"}>
 						<slot />
