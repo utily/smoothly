@@ -101,6 +101,14 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		if (!this.readonly && !this.disabled)
 			this.open = !this.open || includesTextElement
 	}
+	async onSmoothlyDateTextChange(event: CustomEvent<isoly.Date | undefined>, startOrEnd: "start" | "end") {
+		event.stopPropagation()
+		const newValue = event.detail ?? undefined
+		if (this[startOrEnd] != newValue) {
+			this[startOrEnd] = newValue
+			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+		}
+	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
 			await this.unregister()
@@ -165,16 +173,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						ref={el => (this.startTextElement = el)}
 						class="start-date-text"
 						locale={this.locale}
-						onSmoothlyDateTextHasText={e => (this.startHasText = e.detail)}
-						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
-						onSmoothlyDateTextChange={async e => {
-							e.stopPropagation()
-							const newValue = e.detail ?? undefined
-							if (this.start != newValue) {
-								this.start = newValue
-								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
-							}
-						}}
+						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.startHasText = e.detail))}
+						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateTextChange={e => this.onSmoothlyDateTextChange(e, "start")}
 						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
 						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
 						value={this.start}
@@ -190,14 +191,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (this.endHasText = e.detail)}
 						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
-						onSmoothlyDateTextChange={async e => {
-							e.stopPropagation()
-							const newValue = e.detail ?? undefined
-							if (this.end != newValue) {
-								this.end = newValue
-								this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
-							}
-						}}
+						onSmoothlyDateTextChange={e => this.onSmoothlyDateTextChange(e, "end")}
 						onSmoothlyDateTextPrevious={() => this.startTextElement?.select("end")}
 						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}
 						value={this.end}
@@ -214,14 +208,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					<smoothly-calendar
 						doubleInput={true}
 						onSmoothlyValueChange={e => e.stopPropagation()}
-						onSmoothlyStartChange={e => {
-							e.stopPropagation()
-							this.start = e.detail
-						}}
-						onSmoothlyEndChange={e => {
-							e.stopPropagation()
-							this.end = e.detail
-						}}
+						onSmoothlyStartChange={e => (e.stopPropagation(), (this.start = e.detail))}
+						onSmoothlyEndChange={e => (e.stopPropagation(), (this.end = e.detail))}
 						onSmoothlyDateSet={e => e.stopPropagation()}
 						onSmoothlyDateRangeSet={e => {
 							e.stopPropagation()
