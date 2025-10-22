@@ -145,6 +145,35 @@ export class SmoothlyInputDateRangeText {
 			}
 		}
 	}
+	keyDownHandler(e: KeyboardEvent) {
+		const text = this.getInnerText(e.target)
+		const index = this.focusedIndex ?? 0
+		if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(index - 1)
+			e.preventDefault() // Keep selection
+		} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(index + 1)
+			e.preventDefault() // Keep selection
+		} else if (e.key == "Home" || e.key == "ArrowUp") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(0)
+			e.preventDefault() // Keep selection
+		} else if (e.key == "End" || e.key == "ArrowDown") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(2)
+			e.preventDefault() // Keep selection
+		} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(index - 1)
+			e.preventDefault() // Prevent delete previous part
+		} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
+			this.autoAdvanceIfPossible(index)
+			this.setFocus(index + 1)
+			e.preventDefault() // Prevent delete next part
+		}
+	}
 
 	commitPart(part: DateFormat.Part, value: number, index: number, max: number) {
 		const clamped = Math.max(1, Math.min(value, max))
@@ -193,34 +222,7 @@ export class SmoothlyInputDateRangeText {
 							}}
 							onFocus={() => (this.focusedIndex = index)}
 							onBlur={() => (this.focusedIndex = undefined)}
-							onKeyDown={(e: KeyboardEvent) => {
-								const text = this.getInnerText(e.target)
-								if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(index - 1)
-									e.preventDefault() // Keep selection
-								} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(index + 1)
-									e.preventDefault() // Keep selection
-								} else if (e.key == "Home" || e.key == "ArrowUp") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(0)
-									e.preventDefault() // Keep selection
-								} else if (e.key == "End" || e.key == "ArrowDown") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(2)
-									e.preventDefault() // Keep selection
-								} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(index - 1)
-									e.preventDefault() // Prevent delete previous part
-								} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
-									this.autoAdvanceIfPossible(index)
-									this.setFocus(index + 1)
-									e.preventDefault() // Prevent delete next part
-								}
-							}}
+							onKeyDown={(e: KeyboardEvent) => this.keyDownHandler(e)}
 							key={index}
 							ref={el => (this.partElements[index] = el)}
 							contenteditable={!(this.readonly || this.disabled)}>
