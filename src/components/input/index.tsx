@@ -198,7 +198,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 				onclick={() => this.inputElement?.focus()}>
 				<slot name="start" />
 				<div class="smoothly-input-container">
-					<div class={"ghost"}>
+					<div class={"guide"}>
 						<div class={"value"}>{this.state?.value}</div>
 						<div class={"remainder"}>{this.state?.remainder}</div>
 					</div>

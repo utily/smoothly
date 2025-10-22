@@ -228,7 +228,7 @@ export class SmoothlyInputDateRangeText {
 							contenteditable={!(this.readonly || this.disabled)}>
 							{/* year or month or day written here */}
 						</span>
-						<span class="ghost">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
+						<span class="guide">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
 						{index < 2 && <span class="smoothly-date-separator">{this.separator}</span>}
 					</span>
 				))}

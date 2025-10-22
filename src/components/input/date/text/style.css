@@ -1,16 +1,16 @@
 
 :host {
-	--ghost-opacity: 0.5;
+	--guide-opacity: 0.5;
 }
 
 :host .smoothly-date-text-part:focus {
 	outline: none;
 }
 
-:host .ghost {
-	opacity: var(--ghost-opacity);
+:host .guide {
+	opacity: var(--guide-opacity);
 }
 
-:host .smoothly-date-text-part:not(.filled-part) + .ghost + .smoothly-date-separator {
-	opacity: var(--ghost-opacity);
+:host .smoothly-date-text-part:not(.filled-part) + .guide + .smoothly-date-separator {
+	opacity: var(--guide-opacity);
 }

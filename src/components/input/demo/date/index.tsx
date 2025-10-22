@@ -8,7 +8,7 @@ import { isoly } from "isoly"
 })
 export class SmoothlyInputDateDemo {
 	@State() date?: isoly.Date
-	@State() alwaysShowFormat = false
+	@State() alwaysShowGuide = false
 
 	render() {
 		return (
@@ -24,10 +24,10 @@ export class SmoothlyInputDateDemo {
 					<smoothly-input-checkbox
 						looks="transparent"
 						onSmoothlyUserInput={e => {
-							this.alwaysShowFormat = e.detail.value
-							console.log(this.alwaysShowFormat)
+							this.alwaysShowGuide = e.detail.value
+							console.log(this.alwaysShowGuide)
 						}}>
-						Always Show Format
+						Always Show Guide
 					</smoothly-input-checkbox>
 				</div>
 				{(["en-US", "en-GB", "de-DE", "se-SE"] as isoly.Locale[]).map(locale => (
@@ -37,7 +37,7 @@ export class SmoothlyInputDateDemo {
 							name={locale}
 							looks="border"
 							value={this.date}
-							alwaysShowFormat={this.alwaysShowFormat}>
+							alwaysShowGuide={this.alwaysShowGuide}>
 							{locale}
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-date>
@@ -47,7 +47,7 @@ export class SmoothlyInputDateDemo {
 							looks="border"
 							start={this.date}
 							end={this.date ? isoly.Date.next(this.date) : undefined}
-							alwaysShowFormat={this.alwaysShowFormat}>
+							alwaysShowGuide={this.alwaysShowGuide}>
 							{locale} Range
 							<smoothly-input-clear slot="end" />
 						</smoothly-input-date-range>

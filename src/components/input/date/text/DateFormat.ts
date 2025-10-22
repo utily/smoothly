@@ -1,7 +1,7 @@
 import { isoly } from "isoly"
 
 export namespace DateFormat {
-	export const ghosts = {
+	export const guides = {
 		Y: "YYYY",
 		M: "MM",
 		D: "DD",
@@ -11,11 +11,11 @@ export namespace DateFormat {
 	export type Parts = { [part in Part]?: string }
 	export namespace Part {
 		export function lengthOf(part: Part): number {
-			return ghosts[part].length
+			return guides[part].length
 		}
 		export function getGuide(part: Part, filledLength: number | undefined): string {
-			const ghost = DateFormat.ghosts[part]
-			return ghost.substring(0, ghost.length - (filledLength ?? 0))
+			const guide = DateFormat.guides[part]
+			return guide.substring(0, guide.length - (filledLength ?? 0))
 		}
 	}
 	export namespace Parts {

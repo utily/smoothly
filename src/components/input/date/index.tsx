@@ -38,7 +38,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	@Prop({ reflect: true }) placeholder?: string
-	@Prop({ reflect: true }) alwaysShowFormat = false
+	@Prop({ reflect: true }) alwaysShowGuide = false
 	parent: Editable | undefined
 	changed = false
 	isDifferentFromInitial = false
@@ -159,7 +159,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		return (
 			<Host
 				tabindex={this.disabled ? undefined : 0}
-				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowFormat }}
+				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowGuide }}
 				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<slot name="start" />
 				<label class={"label float-on-focus"}>
