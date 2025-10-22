@@ -16,6 +16,7 @@ export class SmoothlyInputDemo {
 		return (
 			<Host>
 				<smoothly-input-demo-standard />
+				<smoothly-input-date-demo />
 				<smoothly-input-demo-user-input />
 				<div class="inputs">
 					<h2>Calendar</h2>

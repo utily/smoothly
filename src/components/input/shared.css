@@ -92,7 +92,9 @@
 :host.has-value ::slotted([slot=label]),
 :host[placeholder] ::slotted([slot=label]),
 :host[readonly] ::slotted([slot=label]),
+:host.floating-label .label,
 :host.has-value .label,
+:host.has-text .label,
 :host[placeholder] .label,
 :host[readonly] .label,
 :host:not([readonly]):focus-within .label.float-on-focus {

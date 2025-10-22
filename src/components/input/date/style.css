@@ -8,23 +8,37 @@
 	box-sizing: border-box;
 	min-height: var(--input-min-height);
 }
-
-:host>smoothly-input {
-	width: 100%;
-	--input-min-height: calc(var(--input-min-height) - 2px);
+:host .smoothly-date-placeholder {
+	display: none;
+}
+:host:not([always-show-guide]):not(:focus-within):not(.has-text) .smoothly-date-placeholder {
+	opacity: 0.5;
+	display: block;
 }
 
-:host:not([readonly])>smoothly-input>div>input {
+:host:not([always-show-guide]):not(:focus-within):not(.has-text) smoothly-date-text {
+	visibility: hidden;
+}
+
+:host>.label {
+	left: var(--input-padding-side);
+}
+:host[show-label] > .smoothly-date-placeholder,
+:host[show-label] > smoothly-date-text {
+	margin-inline: var(--input-padding-side);
+	margin-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
+}
+:host:not([show-label]) > .smoothly-date-placeholder,
+:host:not([show-label]) > smoothly-date-text {
+	margin-inline: var(--input-padding-side) auto;
+	margin-block: auto;
+}
+:host:not([readonly]) {
 	cursor: pointer;
 }
 
-:host[disabled],
-:host[disabled]>smoothly-input>div>input {
+:host[disabled] {
 	cursor: not-allowed;
-}
-
-:host[looks=transparent] smoothly-input {
-	outline: none;
 }
 
 :host>smoothly-calendar {
@@ -54,4 +68,5 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-left: auto;
 }

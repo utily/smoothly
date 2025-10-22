@@ -27,7 +27,7 @@
 	padding: 0 var(--input-padding-side);
 }
 
-:host>.smoothly-input-container>div.ghost {
+:host>.smoothly-input-container>div.guide {
 	position: absolute;
   box-sizing: border-box;
   align-content: center;
@@ -38,12 +38,12 @@
 		var(--input-value-padding-bottom) 
 		var(--input-padding-side);
 }
-:host>.smoothly-input-container>div.ghost>div.value {
+:host>.smoothly-input-container>div.guide>div.value {
 	display: inline;
 	pointer-events: none;
 	opacity: 0;
 }
-:host>.smoothly-input-container>div.ghost>div.remainder {
+:host>.smoothly-input-container>div.guide>div.remainder {
 	display: inline;
 	pointer-events: none;
 	opacity: 0.5;

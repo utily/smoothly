@@ -13,6 +13,7 @@ type Options = {
 	errorMessage?: string
 	showLabel?: boolean
 	placeholder?: string
+	alwaysShowGuide?: boolean
 }
 
 @Component({
@@ -76,6 +77,9 @@ export class SmoothlyInputDemoStandard {
 							Show Label
 						</smoothly-input-checkbox>
 						<smoothly-input name="placeholder">Placeholder</smoothly-input>
+						<smoothly-input-checkbox name="alwaysShowGuide">
+							Always Show Guide (for date inputs)
+						</smoothly-input-checkbox>
 					</smoothly-form>
 				</div>
 				<div class="input-wrapper" style={{ "--smoothly-input-border-radius": `${this.options.borderRadius}rem` }}>
@@ -208,8 +212,8 @@ export class SmoothlyInputDemoStandard {
 						invalid={this.options.invalid}
 						// TODO - errorMessage
 						showLabel={this.options.showLabel}
-						// TODO - placeholder
-					>
+						placeholder={this.options.placeholder}
+						alwaysShowGuide={this.options.alwaysShowGuide}>
 						{this.options.showLabel && <span>Date</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date>
@@ -240,6 +244,7 @@ export class SmoothlyInputDemoStandard {
 						invalid={this.options.invalid}
 						// TODO - errorMessage
 						placeholder={this.options.placeholder}
+						alwaysShowGuide={this.options.alwaysShowGuide}
 						showLabel={this.options.showLabel}
 						// TODO - placeholder
 					>

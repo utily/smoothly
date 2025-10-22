@@ -9,6 +9,7 @@ import {
 	Listen,
 	Method,
 	Prop,
+	State,
 	Watch,
 } from "@stencil/core"
 import { isoly } from "isoly"
@@ -24,7 +25,11 @@ import { Looks } from "../Looks"
 	scoped: true,
 })
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
+	private dateTextElement?: HTMLSmoothlyDateTextElement
+	private iconsElement?: HTMLElement
+	private calendarElement?: HTMLElement
 	@Element() element: HTMLElement
+	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string
@@ -32,8 +37,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) disabled?: boolean
 	@Prop() invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
+	@Prop({ reflect: true }) placeholder?: string
+	@Prop({ reflect: true }) alwaysShowGuide = false
 	parent: Editable | undefined
+	changed = false
 	isDifferentFromInitial = false
+	private hasFocus = false
 	private initialValue?: isoly.Date
 	private observer = Editable.Observer.create(this)
 	@Prop({ mutable: true }) value?: isoly.Date
@@ -41,6 +50,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ mutable: true }) max: isoly.Date
 	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) showLabel = true
+	@State() hasText = false
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyInput: EventEmitter<Record<string, any>>
@@ -86,10 +96,13 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.value = undefined
 	}
 	@Watch("value")
-	onStart(next: isoly.Date) {
+	onValueChange(value: isoly.Date) {
+		if (!this.hasFocus) {
+			this.dateTextElement?.setValue(value)
+		}
 		this.isDifferentFromInitial = this.initialValue != this.value
-		this.smoothlyValueChange.emit(next)
-		this.smoothlyInput.emit({ [this.name]: next })
+		this.smoothlyValueChange.emit(value)
+		this.smoothlyInput.emit({ [this.name]: value })
 		this.observer.publish()
 	}
 	@Watch("disabled")
@@ -115,6 +128,23 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	onWindowClick(event: Event): void {
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
+	onClick(event: MouseEvent): void {
+		const includesTextElement = !!this.dateTextElement && event.composedPath().includes(this.dateTextElement)
+		const includesCalendar = !!this.calendarElement && event.composedPath().includes(this.calendarElement)
+		const includesIconsElement = !!this.iconsElement && event.composedPath().includes(this.iconsElement)
+		if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement)
+			this.dateTextElement?.select()
+		if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
+			this.open = !this.open || includesTextElement
+	}
+	onUserChangedValue(event: CustomEvent<isoly.Date | undefined>) {
+		event.stopPropagation()
+		const newValue = event.detail ?? undefined // normalize null to undefined
+		if (this.value != newValue) {
+			this.value = newValue
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+		}
+	}
 	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
@@ -135,43 +165,36 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	render() {
 		return (
-			<Host>
-				<smoothly-input
-					color={this.color}
-					looks={this.looks == "transparent" ? this.looks : undefined}
-					name={this.name}
-					onFocus={() => !this.readonly && !this.disabled && (this.open = !this.open)}
-					onClick={() => !this.readonly && !this.disabled && (this.open = !this.open)}
+			<Host
+				tabindex={this.disabled ? undefined : 0}
+				class={{ "has-value": !!this.value, "has-text": this.hasText, "floating-label": this.alwaysShowGuide }}
+				onClick={(e: MouseEvent) => this.onClick(e)}>
+				<slot name="start" />
+				<label class={"label float-on-focus"}>
+					<slot />
+				</label>
+				{this.placeholder && <span class="smoothly-date-placeholder">{this.placeholder}</span>}
+				<smoothly-date-text
+					ref={el => (this.dateTextElement = el)}
+					locale={this.locale}
 					readonly={this.readonly}
 					disabled={this.disabled}
-					errorMessage={this.errorMessage}
-					invalid={this.invalid}
-					type="date"
-					value={this.value}
 					showLabel={this.showLabel}
-					onSmoothlyInputLoad={e => e.stopPropagation()}
-					onSmoothlyInput={e => {
-						e.stopPropagation()
-						this.value = e.detail[this.name]
-					}}
-					onSmoothlyUserInput={e => {
-						e.stopPropagation()
-						this.smoothlyUserInput.emit({ name: this.name, value: this.getValue() })
-					}}>
-					<slot />
-				</smoothly-input>
-				<span class="icons">
+					value={this.value}
+					onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.hasText = e.detail))}
+					onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+					onSmoothlyDateTextChange={e => this.onUserChangedValue(e)}
+					onSmoothlyDateTextDone={e => (e.stopPropagation(), (this.open = false), this.dateTextElement?.deselect())}
+				/>
+				<span class="icons" ref={el => (this.iconsElement = el)}>
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
 					<smoothly-calendar
+						ref={el => (this.calendarElement = el)}
 						doubleInput={false}
 						value={this.value}
-						onSmoothlyValueChange={event => {
-							this.value = event.detail
-							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-							event.stopPropagation()
-						}}
+						onSmoothlyValueChange={e => this.onUserChangedValue(e)}
 						max={this.max}
 						min={this.min}>
 						<div slot={"year-label"}>
