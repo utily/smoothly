@@ -137,6 +137,14 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
 			this.open = !this.open || includesTextElement
 	}
+	onUserChangedValue(event: CustomEvent<isoly.Date | undefined>) {
+		event.stopPropagation()
+		const newValue = event.detail ?? undefined // normalize null to undefined
+		if (this.value != newValue) {
+			this.value = newValue
+			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+		}
+	}
 	@Method()
 	async edit(editable: boolean) {
 		this.readonly = !editable
@@ -173,20 +181,10 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					disabled={this.disabled}
 					showLabel={this.showLabel}
 					value={this.value}
-					onSmoothlyDateTextHasText={e => (this.hasText = e.detail)}
-					onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
-					onSmoothlyDateTextChange={e => {
-						e.stopPropagation()
-						const newValue = e.detail ?? undefined
-						if (this.value != newValue) {
-							this.value = newValue
-							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-						}
-					}}
-					onSmoothlyDateTextDone={() => {
-						this.open = false
-						this.dateTextElement?.deselect()
-					}}
+					onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.hasText = e.detail))}
+					onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+					onSmoothlyDateTextChange={e => this.onUserChangedValue(e)}
+					onSmoothlyDateTextDone={e => (e.stopPropagation(), (this.open = false), this.dateTextElement?.deselect())}
 				/>
 				<span class="icons" ref={el => (this.iconsElement = el)}>
 					<slot name={"end"} />
@@ -196,14 +194,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						ref={el => (this.calendarElement = el)}
 						doubleInput={false}
 						value={this.value}
-						onSmoothlyValueChange={event => {
-							const newValue = event.detail ?? undefined
-							if (this.value != newValue) {
-								this.value = newValue
-								this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-								event.stopPropagation()
-							}
-						}}
+						onSmoothlyValueChange={e => this.onUserChangedValue(e)}
 						max={this.max}
 						min={this.min}>
 						<div slot={"year-label"}>
