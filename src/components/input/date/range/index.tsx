@@ -175,9 +175,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.startHasText = e.detail))}
 						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
-						onSmoothlyDateTextChange={e => this.onSmoothlyDateTextChange(e, "start")}
-						onSmoothlyDateTextNext={() => this.endTextElement?.select()}
-						onSmoothlyDateTextDone={() => this.endTextElement?.select()}
+						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "start"))}
+						onSmoothlyDateTextNext={e => (e.stopPropagation(), this.endTextElement?.select())}
+						onSmoothlyDateTextDone={e => (
+							e.stopPropagation(),
+							this.end ? (this.startTextElement?.deselect(), (this.open = false)) : this.endTextElement?.select()
+						)}
 						value={this.start}
 						readonly={this.readonly}
 						disabled={this.disabled}
@@ -189,11 +192,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						ref={el => (this.endTextElement = el)}
 						class="end-date-text"
 						locale={this.locale}
-						onSmoothlyDateTextHasText={e => (this.endHasText = e.detail)}
-						onSmoothlyDateTextFocusChange={e => (this.hasFocus = e.detail)}
-						onSmoothlyDateTextChange={e => this.onSmoothlyDateTextChange(e, "end")}
-						onSmoothlyDateTextPrevious={() => this.startTextElement?.select("end")}
-						onSmoothlyDateTextDone={() => this.startTextElement?.deselect()}
+						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.endHasText = e.detail))}
+						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "end"))}
+						onSmoothlyDateTextPrevious={e => (e.stopPropagation(), this.startTextElement?.select("end"))}
+						onSmoothlyDateTextNext={e => e.stopPropagation()}
+						onSmoothlyDateTextDone={e => (e.stopPropagation(), this.endTextElement?.deselect(), (this.open = false))}
 						value={this.end}
 						readonly={this.readonly}
 						disabled={this.disabled}
