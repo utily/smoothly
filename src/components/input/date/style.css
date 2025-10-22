@@ -11,12 +11,12 @@
 :host .smoothly-date-placeholder {
 	display: none;
 }
-:host:not([always-show-format]):not(:focus-within):not(.has-text) .smoothly-date-placeholder {
+:host:not([always-show-guide]):not(:focus-within):not(.has-text) .smoothly-date-placeholder {
 	opacity: 0.5;
 	display: block;
 }
 
-:host:not([always-show-format]):not(:focus-within):not(.has-text) smoothly-date-text {
+:host:not([always-show-guide]):not(:focus-within):not(.has-text) smoothly-date-text {
 	visibility: hidden;
 }
 
