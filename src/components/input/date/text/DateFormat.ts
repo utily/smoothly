@@ -10,6 +10,9 @@ export namespace DateFormat {
 	export type Part = "Y" | "M" | "D"
 	export type Parts = { [part in Part]?: string }
 	export namespace Part {
+		export function isComplete(part: Part, value: string | undefined): boolean {
+			return (value?.length ?? 0) >= DateFormat.Part.lengthOf(part)
+		}
 		export function lengthOf(part: Part): number {
 			return guides[part].length
 		}

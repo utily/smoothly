@@ -210,15 +210,11 @@ export class SmoothlyInputDateRangeText {
 		return (
 			<Host class={{ "has-text": Object.values(this.parts).some(part => !!part) }}>
 				{DateFormat.Order.toArray(this.order).map((part, index) => (
-					<span
-						onClick={() => {
-							if (!this.readonly && !this.disabled)
-								this.setFocus(index)
-						}}>
+					<span onClick={() => !this.readonly && !this.disabled && this.setFocus(index)}>
 						<span
 							class={{
 								"smoothly-date-text-part": true,
-								"filled-part": (this.parts[part]?.length ?? 0) >= DateFormat.Part.lengthOf(part),
+								"is-complete": DateFormat.Part.isComplete(part, this.parts[part]),
 							}}
 							onFocus={() => (this.focusedIndex = index)}
 							onBlur={() => (this.focusedIndex = undefined)}
