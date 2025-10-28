@@ -59,7 +59,7 @@ export namespace DateFormat {
 	export type Order = "YMD" | "DMY" | "MDY"
 
 	export namespace Order {
-		export function fromLocale(locale: isoly.Locale): Order {
+		export function fromLocale(locale?: isoly.Locale): Order {
 			switch (locale) {
 				case "en-US":
 					return "MDY"
@@ -94,7 +94,7 @@ export namespace DateFormat {
 
 	export type Separator = "-" | "/" | "."
 	export namespace Separator {
-		export function fromLocale(locale: isoly.Locale): Separator {
+		export function fromLocale(locale?: isoly.Locale): Separator {
 			switch (locale) {
 				case "sq-AL":
 				case "es-AR":

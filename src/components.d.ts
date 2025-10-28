@@ -124,7 +124,7 @@ export namespace Components {
         "deselect": () => Promise<void>;
         "disabled": boolean;
         "invalid": boolean;
-        "locale": isoly.Locale;
+        "locale"?: isoly.Locale;
         "readonly": boolean;
         "select": (place?: "start" | "end") => Promise<void>;
         "setValue": (value: isoly.Date | undefined) => Promise<void>;
@@ -347,7 +347,7 @@ export namespace Components {
         "getValue": () => Promise<isoly.Date | undefined>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
-        "locale": isoly.Locale;
+        "locale"?: isoly.Locale;
         "looks"?: Looks;
         "max": isoly.Date;
         "min": isoly.Date;
@@ -374,7 +374,7 @@ export namespace Components {
         "getValue": () => Promise<Partial<isoly.DateRange | undefined>>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
-        "locale": isoly.Locale;
+        "locale"?: isoly.Locale;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
