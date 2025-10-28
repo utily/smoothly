@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
+import { getLocale } from "../../../../model"
 import { DateFormat } from "./DateFormat"
 import { InputSelection } from "./InputSelection"
 
@@ -15,7 +16,7 @@ export class SmoothlyInputDateRangeText {
 		1: undefined,
 		2: undefined,
 	}
-	@Prop() locale: isoly.Locale = navigator.language as isoly.Locale
+	@Prop() locale?: isoly.Locale = getLocale()
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
 	@Prop({ reflect: true }) invalid: boolean

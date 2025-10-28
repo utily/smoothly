@@ -29,7 +29,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	private iconsElement?: HTMLElement
 	private calendarElement?: HTMLElement
 	@Element() element: HTMLElement
-	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
+	@Prop({ reflect: true }) locale?: isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true }) name: string

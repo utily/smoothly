@@ -15,7 +15,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	private startTextElement?: HTMLSmoothlyDateTextElement
 	private endTextElement?: HTMLSmoothlyDateTextElement
 	@Element() element: HTMLElement
-	@Prop({ reflect: true }) locale: isoly.Locale = navigator.language as isoly.Locale
+	@Prop({ reflect: true }) locale?: isoly.Locale
 	@Prop({ reflect: true }) name: string = "dateRange"
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
