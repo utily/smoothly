@@ -1,13 +1,11 @@
-import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 import { Color, Fill } from "../../model"
-import { Input } from "../input/Input"
 @Component({
 	tag: "smoothly-summary",
 	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlySummary {
-	private inputs: Record<string, Input.Element> = {}
 	@Prop({ mutable: true, reflect: true }) open = false
 	@Prop() color: Color
 	@Prop() fill: Fill = "solid"
@@ -18,19 +16,6 @@ export class SmoothlySummary {
 		if (event.target instanceof HTMLDetailsElement) {
 			this.open = event.target.open
 			this.smoothlySummaryOpen.emit(this.open)
-			this.open
-				? await Promise.all(Object.values(this.inputs).map(input => input.register()))
-				: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
-		}
-	}
-
-	@Listen("smoothlyInputLoad")
-	@Listen("smoothlyInput")
-	onInputLoad(event: CustomEvent) {
-		if (Input.Element.is(event.target)) {
-			this.inputs[event.target.name] = event.target
-			if (!this.open)
-				event.stopPropagation()
 		}
 	}
 
