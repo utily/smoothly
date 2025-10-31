@@ -316,14 +316,14 @@ export class SmoothlyDisplayDemo {
 				<fieldset>
 					<h2>Smoothly summary</h2>
 					<smoothly-summary>
-						<p slot="summary">Some title</p>
+						<span slot="summary">Some title</span>
 						<smoothly-summary slot="content">
-							<p slot="summary">Some other title</p>
-							<p slot="content">
+							<div slot="summary">Some other title</div>
+							<div slot="content">
 								A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot
 								more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more
 								content, yes please. A lot more content, yes please. A lot more content, yes please.
-							</p>
+							</div>
 						</smoothly-summary>
 					</smoothly-summary>
 					<smoothly-summary>

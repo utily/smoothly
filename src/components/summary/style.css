@@ -1,3 +1,7 @@
+:host {
+	display: block;
+}
+
 :host>details>summary {
 	display: flex;
 	column-gap: 0.25rem;
