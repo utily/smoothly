@@ -21,7 +21,7 @@
 }
 
 :host>details::slotted([slot=content]) {
-	margin-left: var(--smoothly-summary-content-indentation, 1.5rem);
+	margin-left: var(--smoothly-summary-content-indent, 1.5rem);
 }
 
 @media (prefers-reduced-motion) { 

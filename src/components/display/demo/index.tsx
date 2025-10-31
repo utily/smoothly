@@ -317,7 +317,14 @@ export class SmoothlyDisplayDemo {
 					<h2>Smoothly summary</h2>
 					<smoothly-summary>
 						<p slot="summary">Some title</p>
-						<p slot="content">Some content</p>
+						<smoothly-summary slot="content">
+							<p slot="summary">Some other title</p>
+							<p slot="content">
+								A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot
+								more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more
+								content, yes please. A lot more content, yes please. A lot more content, yes please.
+							</p>
+						</smoothly-summary>
 					</smoothly-summary>
 					<smoothly-summary>
 						<div slot="summary" style={{ display: "flex", gap: "0.3rem" }}>
@@ -326,14 +333,7 @@ export class SmoothlyDisplayDemo {
 						</div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>
-					<smoothly-summary open>
-						<p slot="summary">Some other title</p>
-						<p slot="content">
-							A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more
-							content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content,
-							yes please. A lot more content, yes please. A lot more content, yes please.
-						</p>
-					</smoothly-summary>
+
 					<h2>Label</h2>
 					{labels.map(l => (
 						<smoothly-label hue={l.hue} description={l.description} shape={"rectangle"}>
