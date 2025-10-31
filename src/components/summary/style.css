@@ -1,17 +1,7 @@
-:host {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	column-gap: 0.3rem;
-}
-
-:host>details {
-	display: contents;
-}
-
 :host>details>summary {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-column: 1/-1;
+	display: flex;
+	column-gap: 0.25rem;
+	width: fit-content;
 	list-style: none;
 	align-items: center;
 	cursor: pointer;
@@ -31,17 +21,11 @@
 }
 
 :host>details::slotted([slot=content]) {
-	grid-column: 2;
+	margin-left: var(--smoothly-summary-content-indentation, 1.5rem);
 }
 
 @media (prefers-reduced-motion) { 
 	:host>details>summary>smoothly-icon {
 		transition: none;
-	}
-}
- /* chromium specific */
-@supports selector(details::details-content) {
-	:host>details::details-content {
-		grid-column: 2;
 	}
 }

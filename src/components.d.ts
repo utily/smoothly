@@ -626,10 +626,7 @@ export namespace Components {
         "type": "link" | "button";
     }
     interface SmoothlySummary {
-        "color": Color;
-        "fill": Fill;
         "open": boolean;
-        "size": "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyTab {
         "disabled": boolean;
@@ -2918,11 +2915,8 @@ declare namespace LocalJSX {
         "type"?: "link" | "button";
     }
     interface SmoothlySummary {
-        "color"?: Color;
-        "fill"?: Fill;
         "onSmoothlySummaryOpen"?: (event: SmoothlySummaryCustomEvent<boolean>) => void;
         "open"?: boolean;
-        "size"?: "tiny" | "small" | "medium" | "large";
     }
     interface SmoothlyTab {
         "disabled"?: boolean;
