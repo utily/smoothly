@@ -316,28 +316,24 @@ export class SmoothlyDisplayDemo {
 				<fieldset>
 					<h2>Smoothly summary</h2>
 					<smoothly-summary>
-						<p slot="summary">Some title</p>
-						<p slot="content">Some content</p>
+						<span slot="summary">Some title</span>
+						<smoothly-summary slot="content">
+							<div slot="summary">Some other title</div>
+							<div slot="content">
+								A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot
+								more content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more
+								content, yes please. A lot more content, yes please. A lot more content, yes please.
+							</div>
+						</smoothly-summary>
 					</smoothly-summary>
-					<smoothly-summary size="large">
-						<p slot="summary">Some title</p>
-						<p slot="content">Some content</p>
-					</smoothly-summary>
-					<smoothly-summary color="danger" fill="clear">
+					<smoothly-summary>
 						<div slot="summary" style={{ display: "flex", gap: "0.3rem" }}>
 							<span>Person</span>
 							<smoothly-icon name="person" color="light" fill="clear" size="tiny" />
 						</div>
 						<p slot="content">Some person information.</p>
 					</smoothly-summary>
-					<smoothly-summary color="danger" fill="clear" open>
-						<p slot="summary">Some other title</p>
-						<p slot="content">
-							A lot more content, yes please. A lot more content, yes please. A lot more content, yes please. A lot more
-							content, yes please. A lot more content, yes please.A lot more content, yes please. A lot more content,
-							yes please. A lot more content, yes please. A lot more content, yes please.
-						</p>
-					</smoothly-summary>
+
 					<h2>Label</h2>
 					{labels.map(l => (
 						<smoothly-label hue={l.hue} description={l.description} shape={"rectangle"}>

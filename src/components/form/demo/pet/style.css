@@ -7,7 +7,6 @@
 }
 
 :host smoothly-input-checkbox[name="hasOwner"],
-:host > smoothly-form smoothly-summary,
 :host > smoothly-form smoothly-tabs {
 	flex-basis: 100%;
 }
