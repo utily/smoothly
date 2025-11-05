@@ -686,6 +686,7 @@ export namespace Components {
         "open": boolean;
     }
     interface SmoothlyTabs {
+        "numberOfTabs": number;
         "removeTab": (tab: HTMLSmoothlyTabElement) => Promise<void>;
         "tabs": "always" | "multiple";
     }
@@ -2981,6 +2982,7 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface SmoothlyTabs {
+        "numberOfTabs"?: number;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;
         "tabs"?: "always" | "multiple";
     }

@@ -8,6 +8,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 export class SmoothlyTabs {
 	@Element() element: HTMLSmoothlyTabsElement
 	@Prop({ reflect: true }) tabs: "always" | "multiple" = "always"
+	@Prop() numberOfTabs: number
 	@State() tabElements: HTMLSmoothlyTabElement[] = []
 	@State() selectedElement: HTMLSmoothlyTabElement
 	@Event() smoothlyTabOpen: EventEmitter<string>
@@ -59,7 +60,7 @@ export class SmoothlyTabs {
 		return (
 			<Host
 				class={{ "hide-tabs": this.tabs == "multiple" && this.tabElements.length == 1 }}
-				style={{ "--tabs": `${this.tabElements.length}` }}>
+				style={{ "--tabs": `${this.numberOfTabs ?? this.tabElements.length}` }}>
 				<slot />
 			</Host>
 		)
