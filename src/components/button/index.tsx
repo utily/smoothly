@@ -4,7 +4,7 @@ import { Button } from "./Button"
 
 @Component({
 	tag: "smoothly-button",
-	styleUrl: "../button/style.css",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyButton {
