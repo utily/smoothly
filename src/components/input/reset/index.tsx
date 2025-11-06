@@ -60,7 +60,7 @@ export class SmoothlyInputReset {
 					fill={this.fill ?? (this.type == "input" ? "clear" : undefined)}
 					onClick={event => this.clickHandler(event)}>
 					<slot />
-					<smoothly-icon flip="x" name="refresh-outline" size="tiny" />
+					<smoothly-icon flip="x" name="refresh-outline" />
 				</smoothly-button>
 			</Host>
 		)
