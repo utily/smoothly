@@ -59,7 +59,7 @@ export class SmoothlyInputClear {
 					color={this.color}
 					fill={this.fill ?? (this.type == "input" ? "clear" : undefined)}>
 					<slot />
-					<smoothly-icon name="close" />
+					<smoothly-icon name="close" size="tiny" />
 				</smoothly-button>
 			</Host>
 		)

@@ -7,9 +7,6 @@
 :host([editable]){
 	opacity: 0.5;
 }
-:host smoothly-button {
-	margin: 0;
-}
 
 :host([type="input"])::slotted(smoothly-button>button) {
 	cursor: pointer;
