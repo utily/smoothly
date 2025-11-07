@@ -11,6 +11,7 @@ import { RadioItemSelect } from "../RadioItemSelect"
 })
 export class SmoothlyInputRadioItem {
 	@Element() element: HTMLInputElement
+	private id: string
 	@Prop({ mutable: true }) value: any
 	@Prop({ mutable: true, reflect: true }) selected = false
 	@Prop({ mutable: true, reflect: true }) looks?: Looks
@@ -27,6 +28,7 @@ export class SmoothlyInputRadioItem {
 			})
 		})
 		this.selected && this.inputHandler(false)
+		this.id = "id-" + Math.random().toString(36).substring(2, 11)
 	}
 	inputHandler(userInitiated: boolean): void {
 		this.smoothlyRadioItemSelect.emit({
@@ -39,12 +41,20 @@ export class SmoothlyInputRadioItem {
 
 	render(): VNode | VNode[] {
 		return (
-			<Host onClick={() => this.inputHandler(true)}>
-				<input name={this.name} type="radio" checked={this.selected} disabled={this.disabled} />
+			<Host>
+				<input
+					id={this.id}
+					name={this.name}
+					type="radio"
+					checked={this.selected}
+					disabled={this.disabled}
+					onClick={() => this.inputHandler(true)}
+				/>
 				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" tooltip="Select" />
-				<label>
+				<label htmlFor={this.id}>
 					<slot />
 				</label>
+				<slot name="content" />
 			</Host>
 		)
 	}

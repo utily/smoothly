@@ -24,13 +24,13 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 :host>input {
 	opacity: 0;
 	z-index: 1;
-	width: 1.5em;
-	height: 1.5em;
+	left: 0;
+	width: 1.4rem;
+	height: 1.4rem;
 	position: absolute;
-	transform: translateX(50%);
 }
 
 :host>label {
-	padding: 0 .3em;
+	padding-inline: 0.25rem;
 	white-space: nowrap;
 }
