@@ -3,9 +3,6 @@
 :host(:not([display])) {
 	display: none;
 }
-:host smoothly-button {
-	margin: 0;
-}
 
 :host([type="input"])::slotted(smoothly-button>button) {
 	cursor: pointer;
