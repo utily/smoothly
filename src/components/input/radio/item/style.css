@@ -39,6 +39,7 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 	grid-area: label;
 	padding-inline: 0.25rem;
 	white-space: nowrap;
+	width: fit-content;
 }
 :host [slot=detail] {
 	grid-area: detail;
