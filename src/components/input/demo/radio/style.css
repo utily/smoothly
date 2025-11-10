@@ -1,0 +1,4 @@
+:host {
+	max-width: min(40rem, 100%);
+	margin-inline: auto;
+}
