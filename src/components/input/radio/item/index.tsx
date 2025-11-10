@@ -54,7 +54,7 @@ export class SmoothlyInputRadioItem {
 				<label htmlFor={this.id}>
 					<slot />
 				</label>
-				<slot name="content" />
+				<slot name="detail" />
 			</Host>
 		)
 	}

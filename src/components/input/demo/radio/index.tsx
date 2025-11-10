@@ -23,7 +23,7 @@ export class SmoothlyInputDemoRadio {
 					<smoothly-input-radio-item value="1" selected>
 						<span>Option 1</span>
 						{this.selected == "1" && (
-							<span slot="content">
+							<span slot="detail">
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 								dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
 								ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
@@ -34,7 +34,7 @@ export class SmoothlyInputDemoRadio {
 					</smoothly-input-radio-item>
 					<smoothly-input-radio-item value="2">
 						<span>Option 2</span>
-						<div slot="content">
+						<div slot="detail">
 							{this.selected == "2" && (
 								<smoothly-tabs>
 									<smoothly-tab label="Dog" name="dog" open>
