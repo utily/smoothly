@@ -164,7 +164,7 @@ export class SmoothlyInputDateRangeText {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
 			e.preventDefault() // Keep selection
-		} else if (cursor.atEnd && key == "ArrowRight") {
+		} else if (cursor.isCollapsed && cursor.atEnd && key == "ArrowRight") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
 			e.preventDefault() // Keep selection
@@ -176,11 +176,11 @@ export class SmoothlyInputDateRangeText {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(2)
 			e.preventDefault() // Keep selection
-		} else if (cursor.atStart && key == "Backspace" && text == "") {
+		} else if (cursor.isCollapsed && cursor.atStart && key == "Backspace" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
 			e.preventDefault() // Prevent delete previous part
-		} else if (cursor.atEnd && key == "Delete" && text == "") {
+		} else if (cursor.isCollapsed && cursor.atEnd && key == "Delete" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
 			e.preventDefault() // Prevent delete next part

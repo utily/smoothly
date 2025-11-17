@@ -25,6 +25,7 @@ export type KeyEventWrapper = {
 	cursor: {
 		atStart: boolean
 		atEnd: boolean
+		isCollapsed: boolean
 	}
 }
 
@@ -62,9 +63,12 @@ export class SmoothlyTextEditable {
 
 	@Method()
 	async selectAll() {
-		const valueLength = this.inputElement?.value.length || 0
 		this.inputElement?.focus()
-		this.inputElement?.setSelectionRange(0, valueLength)
+		// Use requestAnimationFrame to ensure input is focused before setting selection range.
+		requestAnimationFrame(() => {
+			const valueLength = this.inputElement?.value.length || 0
+			this.inputElement?.setSelectionRange(0, valueLength, "forward")
+		})
 	}
 
 	set(value: string) {
@@ -133,8 +137,12 @@ export class SmoothlyTextEditable {
 			shiftKey: e.shiftKey,
 			metaKey: e.metaKey,
 			cursor: {
-				atStart: this.inputElement?.selectionStart === 0,
-				atEnd: this.inputElement?.selectionEnd === this.inputElement?.value.length,
+				atStart: this.inputElement?.selectionStart == 0,
+				atEnd: this.inputElement?.selectionEnd == this.inputElement?.value.length,
+				isCollapsed:
+					this.inputElement!.selectionStart !== null &&
+					this.inputElement!.selectionEnd !== null &&
+					this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
 			},
 		}
 		this.smoothlyTextKeydown.emit(wrapper)
@@ -152,6 +160,7 @@ export class SmoothlyTextEditable {
 					inputMode={this.inputMode}
 					onFocus={() => this.smoothlyTextFocus.emit()}
 					onBlur={() => this.smoothlyTextBlur.emit()}
+					onSelect={e => console.log(e.type, e)}
 					readonly={this.readonly}
 				/>
 			</Host>
