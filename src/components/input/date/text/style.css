@@ -7,6 +7,6 @@
 	opacity: var(--guide-opacity);
 }
 
-:host .smoothly-date-text-part:not(.is-complete) + .guide + .smoothly-date-separator {
+:host smoothly-text-editable:not(.is-complete) + .guide + .smoothly-date-separator {
 	opacity: var(--guide-opacity);
 }

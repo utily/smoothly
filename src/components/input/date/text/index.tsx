@@ -9,7 +9,7 @@ import { DateFormat } from "./DateFormat"
 	styleUrl: "style.css",
 	scoped: true,
 })
-export class SmoothlyInputDateRangeText {
+export class SmoothlyInputDateText {
 	@Element() element: HTMLElement
 	private partElements: { [partIndex in number]: HTMLSmoothlyTextEditableElement | undefined } = {
 		0: undefined,
@@ -222,10 +222,7 @@ export class SmoothlyInputDateRangeText {
 				{DateFormat.Order.toArray(this.order).map((part, index) => (
 					<span onClick={() => !this.readonly && !this.disabled && this.setFocus(index)}>
 						<smoothly-text-editable
-							class={{
-								"smoothly-date-text-part": true,
-								"is-complete": DateFormat.Part.isComplete(part, this.parts[part]),
-							}}
+							class={{ "is-complete": DateFormat.Part.isComplete(part, this.parts[part]) }}
 							ref={el => (this.partElements[index] = el)}
 							inputMode="numeric"
 							focusHandler={() => (this.focusedIndex = index)}
