@@ -695,6 +695,18 @@ export namespace Components {
     }
     interface SmoothlyTabsDemo {
     }
+    interface SmoothlyTextEditable {
+        "inputMode": "text" | "numeric";
+        "onBeforeInput"?: (e: InputEventWrapper) => void;
+        "onBlur"?: () => void;
+        "onFocus"?: () => void;
+        "onInput"?: (e: InputEventWrapper) => void;
+        "onKeyDown"?: (e: KeydownEventWrapper) => void;
+        "readonly": boolean;
+        "selectAll": () => Promise<void>;
+        "setCursorPosition": (position: number) => Promise<void>;
+        "setInputValue": (value: string) => Promise<void>;
+    }
     interface SmoothlyThemeColor {
         "color": Color;
     }
@@ -2115,6 +2127,12 @@ declare global {
         prototype: HTMLSmoothlyTabsDemoElement;
         new (): HTMLSmoothlyTabsDemoElement;
     };
+    interface HTMLSmoothlyTextEditableElement extends Components.SmoothlyTextEditable, HTMLStencilElement {
+    }
+    var HTMLSmoothlyTextEditableElement: {
+        prototype: HTMLSmoothlyTextEditableElement;
+        new (): HTMLSmoothlyTextEditableElement;
+    };
     interface HTMLSmoothlyThemeColorElement extends Components.SmoothlyThemeColor, HTMLStencilElement {
     }
     var HTMLSmoothlyThemeColorElement: {
@@ -2315,6 +2333,7 @@ declare global {
         "smoothly-table-row-group": HTMLSmoothlyTableRowGroupElement;
         "smoothly-tabs": HTMLSmoothlyTabsElement;
         "smoothly-tabs-demo": HTMLSmoothlyTabsDemoElement;
+        "smoothly-text-editable": HTMLSmoothlyTextEditableElement;
         "smoothly-theme-color": HTMLSmoothlyThemeColorElement;
         "smoothly-theme-color-variant": HTMLSmoothlyThemeColorVariantElement;
         "smoothly-theme-colors": HTMLSmoothlyThemeColorsElement;
@@ -2993,6 +3012,15 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTabsDemo {
     }
+    interface SmoothlyTextEditable {
+        "inputMode"?: "text" | "numeric";
+        "onBeforeInput"?: (e: InputEventWrapper) => void;
+        "onBlur"?: () => void;
+        "onFocus"?: () => void;
+        "onInput"?: (e: InputEventWrapper) => void;
+        "onKeyDown"?: (e: KeydownEventWrapper) => void;
+        "readonly"?: boolean;
+    }
     interface SmoothlyThemeColor {
         "color"?: Color;
     }
@@ -3139,6 +3167,7 @@ declare namespace LocalJSX {
         "smoothly-table-row-group": SmoothlyTableRowGroup;
         "smoothly-tabs": SmoothlyTabs;
         "smoothly-tabs-demo": SmoothlyTabsDemo;
+        "smoothly-text-editable": SmoothlyTextEditable;
         "smoothly-theme-color": SmoothlyThemeColor;
         "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
         "smoothly-theme-colors": SmoothlyThemeColors;
@@ -3255,6 +3284,7 @@ declare module "@stencil/core" {
             "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
             "smoothly-tabs": LocalJSX.SmoothlyTabs & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
             "smoothly-tabs-demo": LocalJSX.SmoothlyTabsDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
+            "smoothly-text-editable": LocalJSX.SmoothlyTextEditable & JSXBase.HTMLAttributes<HTMLSmoothlyTextEditableElement>;
             "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
             "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
             "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
