@@ -30,6 +30,7 @@ export class SmoothlyInputDateRangeText {
 	@Event() smoothlyDateTextHasText: EventEmitter<boolean>
 	@Event() smoothlyDateTextChange: EventEmitter<isoly.Date | undefined>
 	@Event() smoothlyDateTextFocusChange: EventEmitter<boolean>
+	@Event() smoothlyDateHasPartialDate: EventEmitter<DateFormat.Parts>
 	@Event() smoothlyDateTextDone: EventEmitter<void>
 	@Event() smoothlyDateTextPrevious: EventEmitter<void>
 	@Event() smoothlyDateTextNext: EventEmitter<void>
@@ -145,6 +146,8 @@ export class SmoothlyInputDateRangeText {
 				this.setPart("D", roundedParts?.D)
 			}
 		}
+		if (this.parts.Y || this.parts.M || this.parts.D)
+			this.smoothlyDateHasPartialDate.emit(this.parts)
 	}
 	keyDownHandler(e: KeyboardEvent) {
 		const text = this.getInnerText(e.target)
