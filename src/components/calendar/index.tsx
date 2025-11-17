@@ -40,7 +40,6 @@ export class Calendar {
 			? yearMonth.M
 			: this.month?.substring(5, 7) ?? isoly.Date.now().substring(5, 7)
 		const date = `${year}-${mon}-01`
-		console.log("jumpTo", date)
 		if (isoly.Date.is(date))
 			this.month = date
 	}
