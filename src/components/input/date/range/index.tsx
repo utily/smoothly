@@ -14,6 +14,7 @@ import { Color } from "./../../../../model"
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	private startTextElement?: HTMLSmoothlyDateTextElement
 	private endTextElement?: HTMLSmoothlyDateTextElement
+	private calendarElement?: HTMLSmoothlyCalendarElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) locale?: isoly.Locale
 	@Prop({ reflect: true }) name: string = "dateRange"
@@ -175,6 +176,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.startHasText = e.detail))}
 						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateHasPartialDate={e => (e.stopPropagation(), this.calendarElement?.jumpTo(e.detail))}
 						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "start"))}
 						onSmoothlyDateTextNext={e => (e.stopPropagation(), this.endTextElement?.select())}
 						onSmoothlyDateTextDone={e => (
@@ -194,6 +196,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.endHasText = e.detail))}
 						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateHasPartialDate={e => (e.stopPropagation(), this.calendarElement?.jumpTo(e.detail))}
 						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "end"))}
 						onSmoothlyDateTextPrevious={e => (e.stopPropagation(), this.startTextElement?.select("end"))}
 						onSmoothlyDateTextNext={e => e.stopPropagation()}
@@ -210,6 +213,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 				</span>
 				{this.open && (
 					<smoothly-calendar
+						ref={el => (this.calendarElement = el)}
 						doubleInput={true}
 						onSmoothlyValueChange={e => e.stopPropagation()}
 						onSmoothlyStartChange={e => (e.stopPropagation(), (this.start = e.detail))}

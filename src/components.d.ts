@@ -10,6 +10,7 @@ import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/button/Button";
 import { Editable } from "./components/input/Editable";
 import { isoly } from "isoly";
+import { DateFormat } from "./components/input/date/text/DateFormat";
 import { tidily } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
@@ -26,6 +27,7 @@ export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
 export { Editable } from "./components/input/Editable";
 export { isoly } from "isoly";
+export { DateFormat } from "./components/input/date/text/DateFormat";
 export { tidily } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
@@ -96,6 +98,7 @@ export namespace Components {
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: isoly.Date;
+        "jumpTo": (yearMonth: { Y?: string; M?: string; }) => Promise<void>;
         "max": isoly.Date;
         "min": isoly.Date;
         "month"?: isoly.Date;
@@ -1088,6 +1091,7 @@ declare global {
         "smoothlyDateTextHasText": boolean;
         "smoothlyDateTextChange": isoly.Date | undefined;
         "smoothlyDateTextFocusChange": boolean;
+        "smoothlyDateHasPartialDate": DateFormat.Parts;
         "smoothlyDateTextDone": void;
         "smoothlyDateTextPrevious": void;
         "smoothlyDateTextNext": void;
@@ -2420,6 +2424,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
+        "onSmoothlyDateHasPartialDate"?: (event: SmoothlyDateTextCustomEvent<DateFormat.Parts>) => void;
         "onSmoothlyDateTextChange"?: (event: SmoothlyDateTextCustomEvent<isoly.Date | undefined>) => void;
         "onSmoothlyDateTextDone"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextFocusChange"?: (event: SmoothlyDateTextCustomEvent<boolean>) => void;

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Fragment, h, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Fragment, h, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import * as generate from "./generate"
 
@@ -31,6 +31,19 @@ export class Calendar {
 	onEnd(next: isoly.Date) {
 		this.smoothlyEndChange.emit(next)
 	}
+	@Method()
+	async jumpTo(yearMonth: { Y?: string; M?: string }) {
+		const year = isoly.Date.Year.is(yearMonth.Y)
+			? yearMonth.Y
+			: this.month?.substring(0, 4) ?? isoly.Date.now().substring(0, 4)
+		const mon = isoly.Date.Month.is(yearMonth.M)
+			? yearMonth.M
+			: this.month?.substring(5, 7) ?? isoly.Date.now().substring(5, 7)
+		const date = `${year}-${mon}-01`
+		if (isoly.Date.is(date))
+			this.month = date
+	}
+
 	private clickCounter = 0
 	private onClick(date: isoly.Date) {
 		this.smoothlyValueChange.emit((this.value = date))
