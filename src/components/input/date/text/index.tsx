@@ -103,10 +103,9 @@ export class SmoothlyInputDateRangeText {
 		return value.replace(/\n/g, "").replace(/\D/g, "")
 	}
 
-	beforeInputHandler(e: CustomEvent<InputEventWrapper>) {
-		const inputApi: InputEventWrapper = e.detail
+	beforeInputHandler(inputApi: InputEventWrapper) {
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
-		const value = this.getInnerText(e.target)
+		const value = this.cleanValue(inputApi.value)
 		const nonDigitData = inputApi.data && /\D/.test(inputApi.data)
 		const isComplete = DateFormat.Part.isComplete(part, value)
 		const noRangedSelection = inputApi.selection.isCollapsed
@@ -114,19 +113,18 @@ export class SmoothlyInputDateRangeText {
 			(inputApi.inputType == "insertText" || inputApi.inputType == "insertFromPaste") &&
 			(nonDigitData || (isComplete && noRangedSelection))
 		) {
-			e.preventDefault()
+			inputApi.preventDefault()
 		}
 		if (inputApi.inputType == "insertParagraph" || inputApi.inputType == "insertLineBreak") {
 			this.smoothlyDateTextDone.emit()
-			e.preventDefault()
+			inputApi.preventDefault()
 		}
 	}
 
-	inputHandler(e: CustomEvent<InputEventWrapper>) {
-		const inputApi: InputEventWrapper = e.detail
+	inputHandler(e: InputEventWrapper) {
 		const part = DateFormat.Order.getPart(this.order, this.focusedIndex ?? 0)
 		const index = this.focusedIndex ?? 0
-		const value = this.cleanValue(inputApi.value)
+		const value = this.cleanValue(e.value)
 		this.parts = {
 			...this.parts,
 			[part]: value,
@@ -156,34 +154,34 @@ export class SmoothlyInputDateRangeText {
 		if (this.parts.Y || this.parts.M || this.parts.D)
 			this.smoothlyDateHasPartialDate.emit(this.parts)
 	}
-	keyDownHandler(e: CustomEvent<KeyEventWrapper>) {
-		const { value, key, cursor } = e.detail
+	keyDownHandler(inputApi: KeyEventWrapper) {
+		const { value, key, cursor } = inputApi
 		const text = this.cleanValue(value)
 		const index = this.focusedIndex ?? 0
 		if (cursor.atStart && key == "ArrowLeft") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
-			e.preventDefault() // Keep selection
+			inputApi.preventDefault() // Keep selection
 		} else if (cursor.isCollapsed && cursor.atEnd && key == "ArrowRight") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
-			e.preventDefault() // Keep selection
+			inputApi.preventDefault() // Keep selection
 		} else if (key == "Home" || key == "ArrowUp") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(0)
-			e.preventDefault() // Keep selection
+			inputApi.preventDefault() // Keep selection
 		} else if (key == "End" || key == "ArrowDown") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(2)
-			e.preventDefault() // Keep selection
+			inputApi.preventDefault() // Keep selection
 		} else if (cursor.isCollapsed && cursor.atStart && key == "Backspace" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
-			e.preventDefault() // Prevent delete previous part
+			inputApi.preventDefault() // Prevent delete previous part
 		} else if (cursor.isCollapsed && cursor.atEnd && key == "Delete" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
-			e.preventDefault() // Prevent delete next part
+			inputApi.preventDefault() // Prevent delete next part
 		}
 	}
 
@@ -229,11 +227,11 @@ export class SmoothlyInputDateRangeText {
 								"is-complete": DateFormat.Part.isComplete(part, this.parts[part]),
 							}}
 							ref={el => (this.partElements[index] = el)}
-							onSmoothlyTextFocus={() => (this.focusedIndex = index)}
-							onSmoothlyTextBlur={() => (this.focusedIndex = undefined)}
-							onSmoothlyTextBeforeInput={(e: CustomEvent<InputEventWrapper>) => this.beforeInputHandler(e)}
-							onSmoothlyTextInput={(e: CustomEvent<InputEventWrapper>) => this.inputHandler(e)}
-							onSmoothlyTextKeydown={(e: CustomEvent<KeyEventWrapper>) => this.keyDownHandler(e)}
+							focusHandler={() => (this.focusedIndex = index)}
+							blurHandler={() => (this.focusedIndex = undefined)}
+							beforeInputHandler={(e: InputEventWrapper) => this.beforeInputHandler(e)}
+							inputHandler={(e: InputEventWrapper) => this.inputHandler(e)}
+							keyDownHandler={(e: KeyEventWrapper) => this.keyDownHandler(e)}
 							key={index}
 							contenteditable={!(this.readonly || this.disabled)}
 						/>
