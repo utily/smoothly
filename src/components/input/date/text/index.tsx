@@ -158,7 +158,7 @@ export class SmoothlyInputDateRangeText {
 		const { value, key, cursor } = inputApi
 		const text = this.cleanValue(value)
 		const index = this.focusedIndex ?? 0
-		if (cursor.atStart && key == "ArrowLeft") {
+		if (cursor.isCollapsed && cursor.atStart && key == "ArrowLeft") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
 			inputApi.preventDefault() // Keep selection

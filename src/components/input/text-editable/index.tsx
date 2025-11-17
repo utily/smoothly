@@ -158,7 +158,7 @@ export class SmoothlyTextEditable {
 		return (
 			<Host>
 				<span class="mirror" ref={el => (this.mirrorElement = el)}>
-					{/* Used to know how wide the input should be */}
+					{/* Mirror span for measuring input width dynamically */}
 				</span>
 				<input
 					ref={el => (this.inputElement = el)}
@@ -166,7 +166,6 @@ export class SmoothlyTextEditable {
 					inputMode={this.inputMode}
 					onFocus={() => this.focusHandler?.()}
 					onBlur={() => this.blurHandler?.()}
-					onSelect={e => console.log(e.type, e)}
 					readonly={this.readonly}
 				/>
 			</Host>
