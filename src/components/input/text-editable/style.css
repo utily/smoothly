@@ -1,5 +1,6 @@
 :host {
 	position: relative;
+	display: inline;
 }
 
 :host .mirror {
@@ -11,4 +12,11 @@
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
+}
+:host input {
+	border: none;
+	padding: 0;
+}
+:host input:focus {
+	outline: none;
 }

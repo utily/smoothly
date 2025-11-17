@@ -22,6 +22,7 @@ import { RGB } from "./model/Color/RGB";
 import { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
 import { SmoothlyTabs } from "./components/tabs";
+import { InputEventWrapper, KeyEventWrapper } from "./components/input/text-editable/index";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
@@ -39,6 +40,7 @@ export { RGB } from "./model/Color/RGB";
 export { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
 export { SmoothlyTabs } from "./components/tabs";
+export { InputEventWrapper, KeyEventWrapper } from "./components/input/text-editable/index";
 export namespace Components {
     interface SmoothlyApp {
         "color": Color;
@@ -697,11 +699,6 @@ export namespace Components {
     }
     interface SmoothlyTextEditable {
         "inputMode": "text" | "numeric";
-        "onBeforeInput"?: (e: InputEventWrapper) => void;
-        "onBlur"?: () => void;
-        "onFocus"?: () => void;
-        "onInput"?: (e: InputEventWrapper) => void;
-        "onKeyDown"?: (e: KeydownEventWrapper) => void;
         "readonly": boolean;
         "selectAll": () => Promise<void>;
         "setCursorPosition": (position: number) => Promise<void>;
@@ -933,6 +930,10 @@ export interface SmoothlyTableRowGroupCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyTabsElement;
+}
+export interface SmoothlyTextEditableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyTextEditableElement;
 }
 export interface SmoothlyToggleSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2127,7 +2128,22 @@ declare global {
         prototype: HTMLSmoothlyTabsDemoElement;
         new (): HTMLSmoothlyTabsDemoElement;
     };
+    interface HTMLSmoothlyTextEditableElementEventMap {
+        "smoothlyTextBeforeInput": InputEventWrapper;
+        "smoothlyTextInput": InputEventWrapper;
+        "smoothlyTextFocus": void;
+        "smoothlyTextBlur": void;
+        "smoothlyTextKeydown": KeyEventWrapper;
+    }
     interface HTMLSmoothlyTextEditableElement extends Components.SmoothlyTextEditable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyTextEditableElementEventMap>(type: K, listener: (this: HTMLSmoothlyTextEditableElement, ev: SmoothlyTextEditableCustomEvent<HTMLSmoothlyTextEditableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyTextEditableElementEventMap>(type: K, listener: (this: HTMLSmoothlyTextEditableElement, ev: SmoothlyTextEditableCustomEvent<HTMLSmoothlyTextEditableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSmoothlyTextEditableElement: {
         prototype: HTMLSmoothlyTextEditableElement;
@@ -3014,11 +3030,11 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTextEditable {
         "inputMode"?: "text" | "numeric";
-        "onBeforeInput"?: (e: InputEventWrapper) => void;
-        "onBlur"?: () => void;
-        "onFocus"?: () => void;
-        "onInput"?: (e: InputEventWrapper) => void;
-        "onKeyDown"?: (e: KeydownEventWrapper) => void;
+        "onSmoothlyTextBeforeInput"?: (event: SmoothlyTextEditableCustomEvent<InputEventWrapper>) => void;
+        "onSmoothlyTextBlur"?: (event: SmoothlyTextEditableCustomEvent<void>) => void;
+        "onSmoothlyTextFocus"?: (event: SmoothlyTextEditableCustomEvent<void>) => void;
+        "onSmoothlyTextInput"?: (event: SmoothlyTextEditableCustomEvent<InputEventWrapper>) => void;
+        "onSmoothlyTextKeydown"?: (event: SmoothlyTextEditableCustomEvent<KeyEventWrapper>) => void;
         "readonly"?: boolean;
     }
     interface SmoothlyThemeColor {

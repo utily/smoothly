@@ -1,8 +1,8 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { isoly } from "isoly"
 import { getLocale } from "../../../../model"
+import { InputEventWrapper, KeyEventWrapper } from "../../text-editable"
 import { DateFormat } from "./DateFormat"
-import { InputSelection } from "./InputSelection"
 
 @Component({
 	tag: "smoothly-date-text",
@@ -11,7 +11,7 @@ import { InputSelection } from "./InputSelection"
 })
 export class SmoothlyInputDateRangeText {
 	@Element() element: HTMLElement
-	private partElements: { [partIndex in number]: HTMLSpanElement | undefined } = {
+	private partElements: { [partIndex in number]: HTMLSmoothlyTextEditableElement | undefined } = {
 		0: undefined,
 		1: undefined,
 		2: undefined,
@@ -72,9 +72,9 @@ export class SmoothlyInputDateRangeText {
 		const yearIndex = this.order.indexOf("Y")
 		const monthIndex = this.order.indexOf("M")
 		const dayIndex = this.order.indexOf("D")
-		this.partElements[yearIndex] && (this.partElements[yearIndex]!.innerText = this.parts.Y ?? "")
-		this.partElements[monthIndex] && (this.partElements[monthIndex]!.innerText = this.parts.M ?? "")
-		this.partElements[dayIndex] && (this.partElements[dayIndex]!.innerText = this.parts.D ?? "")
+		this.partElements[yearIndex]?.setInputValue(this.parts.Y ?? "")
+		this.partElements[monthIndex]?.setInputValue(this.parts.M ?? "")
+		this.partElements[dayIndex]?.setInputValue(this.parts.D ?? "")
 	}
 
 	setPart(part: "Y" | "M" | "D", value: string | undefined) {
@@ -83,7 +83,7 @@ export class SmoothlyInputDateRangeText {
 			[part]: value,
 		}
 		const index = this.order.indexOf(part)
-		this.partElements[index] && (this.partElements[index]!.innerText = value ?? "")
+		this.partElements[index]?.setInputValue(value ?? "")
 	}
 
 	@Method()
@@ -99,31 +99,34 @@ export class SmoothlyInputDateRangeText {
 	getInnerText(target: EventTarget | null) {
 		return (target as HTMLSpanElement).innerText.replace(/\n/g, "").replace(/\D/g, "")
 	}
+	cleanValue(value: string) {
+		return value.replace(/\n/g, "").replace(/\D/g, "")
+	}
 
-	@Listen("beforeinput")
-	beforeInputHandler(e: InputEvent) {
+	beforeInputHandler(e: CustomEvent<InputEventWrapper>) {
+		const inputApi: InputEventWrapper = e.detail
 		const part = this.order[this.focusedIndex ?? 0] as "Y" | "M" | "D"
 		const value = this.getInnerText(e.target)
-		const nonDigitData = e.data && /\D/.test(e.data)
+		const nonDigitData = inputApi.data && /\D/.test(inputApi.data)
 		const isComplete = DateFormat.Part.isComplete(part, value)
-		const noRangedSelection = InputSelection.isCollapsed(e.target as HTMLElement)
+		const noRangedSelection = inputApi.selection.isCollapsed
 		if (
-			(e.inputType == "insertText" || e.inputType == "insertFromPaste") &&
+			(inputApi.inputType == "insertText" || inputApi.inputType == "insertFromPaste") &&
 			(nonDigitData || (isComplete && noRangedSelection))
 		) {
 			e.preventDefault()
 		}
-		if (e.inputType == "insertParagraph" || e.inputType == "insertLineBreak") {
+		if (inputApi.inputType == "insertParagraph" || inputApi.inputType == "insertLineBreak") {
 			this.smoothlyDateTextDone.emit()
 			e.preventDefault()
 		}
 	}
 
-	@Listen("input", { capture: true })
-	inputHandler(e: InputEvent) {
+	inputHandler(e: CustomEvent<InputEventWrapper>) {
+		const inputApi: InputEventWrapper = e.detail
 		const part = DateFormat.Order.getPart(this.order, this.focusedIndex ?? 0)
 		const index = this.focusedIndex ?? 0
-		const value = this.getInnerText(e.target)
+		const value = this.cleanValue(inputApi.value)
 		this.parts = {
 			...this.parts,
 			[part]: value,
@@ -153,30 +156,31 @@ export class SmoothlyInputDateRangeText {
 		if (this.parts.Y || this.parts.M || this.parts.D)
 			this.smoothlyDateHasPartialDate.emit(this.parts)
 	}
-	keyDownHandler(e: KeyboardEvent) {
-		const text = this.getInnerText(e.target)
+	keyDownHandler(e: CustomEvent<KeyEventWrapper>) {
+		const { value, key, cursor } = e.detail
+		const text = this.cleanValue(value)
 		const index = this.focusedIndex ?? 0
-		if (InputSelection.isAtStart(e) && e.key == "ArrowLeft") {
+		if (cursor.atStart && key == "ArrowLeft") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
 			e.preventDefault() // Keep selection
-		} else if (InputSelection.isAtEnd(e) && e.key == "ArrowRight") {
+		} else if (cursor.atEnd && key == "ArrowRight") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
 			e.preventDefault() // Keep selection
-		} else if (e.key == "Home" || e.key == "ArrowUp") {
+		} else if (key == "Home" || key == "ArrowUp") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(0)
 			e.preventDefault() // Keep selection
-		} else if (e.key == "End" || e.key == "ArrowDown") {
+		} else if (key == "End" || key == "ArrowDown") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(2)
 			e.preventDefault() // Keep selection
-		} else if (InputSelection.isAtStart(e) && e.key == "Backspace" && text == "") {
+		} else if (cursor.atStart && key == "Backspace" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index - 1)
 			e.preventDefault() // Prevent delete previous part
-		} else if (InputSelection.isAtEnd(e) && e.key == "Delete" && text == "") {
+		} else if (cursor.atEnd && key == "Delete" && text == "") {
 			this.autoAdvanceIfPossible(index)
 			this.setFocus(index + 1)
 			e.preventDefault() // Prevent delete next part
@@ -186,7 +190,7 @@ export class SmoothlyInputDateRangeText {
 	commitPart(part: DateFormat.Part, value: number, index: number, max: number) {
 		const clamped = Math.max(1, Math.min(value, max))
 		this.setPart(part, clamped.toString().padStart(2, "0"))
-		InputSelection.setPosition(this.partElements[index], 2)
+		this.partElements[index]?.setCursorPosition(2)
 	}
 	autoAdvancePart(part: DateFormat.Part, value: number, index: number, max: number) {
 		const clamped = Math.max(1, Math.min(value, max))
@@ -210,7 +214,7 @@ export class SmoothlyInputDateRangeText {
 		} else if (index > 2) {
 			this.smoothlyDateTextNext.emit()
 		} else {
-			InputSelection.selectAll(this.partElements[index])
+			this.partElements[index]?.selectAll()
 		}
 	}
 
@@ -219,19 +223,20 @@ export class SmoothlyInputDateRangeText {
 			<Host class={{ "has-text": Object.values(this.parts).some(part => !!part) }}>
 				{DateFormat.Order.toArray(this.order).map((part, index) => (
 					<span onClick={() => !this.readonly && !this.disabled && this.setFocus(index)}>
-						<span
+						<smoothly-text-editable
 							class={{
 								"smoothly-date-text-part": true,
 								"is-complete": DateFormat.Part.isComplete(part, this.parts[part]),
 							}}
-							onFocus={() => (this.focusedIndex = index)}
-							onBlur={() => (this.focusedIndex = undefined)}
-							onKeyDown={(e: KeyboardEvent) => this.keyDownHandler(e)}
-							key={index}
 							ref={el => (this.partElements[index] = el)}
-							contenteditable={!(this.readonly || this.disabled)}>
-							{/* year or month or day written here */}
-						</span>
+							onSmoothlyTextFocus={() => (this.focusedIndex = index)}
+							onSmoothlyTextBlur={() => (this.focusedIndex = undefined)}
+							onSmoothlyTextBeforeInput={(e: CustomEvent<InputEventWrapper>) => this.beforeInputHandler(e)}
+							onSmoothlyTextInput={(e: CustomEvent<InputEventWrapper>) => this.inputHandler(e)}
+							onSmoothlyTextKeydown={(e: CustomEvent<KeyEventWrapper>) => this.keyDownHandler(e)}
+							key={index}
+							contenteditable={!(this.readonly || this.disabled)}
+						/>
 						<span class="guide">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
 						{index < 2 && <span class="smoothly-date-separator">{this.separator}</span>}
 					</span>

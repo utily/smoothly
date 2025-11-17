@@ -1,6 +1,6 @@
-import { Component, h, Host, Listen, Method, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop } from "@stencil/core"
 
-type InputEventWrapper = {
+export type InputEventWrapper = {
 	preventDefault: () => void
 	setValue: (value: string) => void
 	value: string
@@ -13,7 +13,7 @@ type InputEventWrapper = {
 	data: string | null
 }
 
-type KeydownEventWrapper = {
+export type KeyEventWrapper = {
 	preventDefault: () => void
 	value: string
 	key: string
@@ -36,6 +36,7 @@ type KeydownEventWrapper = {
 
 @Component({
 	tag: "smoothly-text-editable",
+	styleUrl: "style.css",
 	scoped: true,
 })
 export class SmoothlyTextEditable {
@@ -43,11 +44,11 @@ export class SmoothlyTextEditable {
 	private inputElement: HTMLInputElement | undefined
 	@Prop() readonly: boolean = false
 	@Prop() inputMode: "text" | "numeric" = "text"
-	@Prop() onBeforeInput?: (e: InputEventWrapper) => void
-	@Prop() onInput?: (e: InputEventWrapper) => void
-	@Prop() onFocus?: () => void
-	@Prop() onBlur?: () => void
-	@Prop() onKeyDown?: (e: KeydownEventWrapper) => void
+	@Event() smoothlyTextBeforeInput: EventEmitter<InputEventWrapper>
+	@Event() smoothlyTextInput: EventEmitter<InputEventWrapper>
+	@Event() smoothlyTextFocus: EventEmitter<void>
+	@Event() smoothlyTextBlur: EventEmitter<void>
+	@Event() smoothlyTextKeydown: EventEmitter<KeyEventWrapper>
 
 	@Method()
 	async setInputValue(value: string) {
@@ -68,75 +69,75 @@ export class SmoothlyTextEditable {
 
 	set(value: string) {
 		this.inputElement!.value = value
+		this.updateInputWidth()
+	}
+	updateInputWidth() {
 		this.mirrorElement!.textContent = this.inputElement?.value || "\u200b"
-		this.inputElement!.style.width = this.mirrorElement!.offsetWidth + "px"
+		this.inputElement!.style.width = this.mirrorElement!.offsetWidth + 2 + "px"
 	}
 
 	@Listen("beforeinput")
 	beforeInputHandler(e: InputEvent) {
 		e.stopPropagation()
-		if (this.onBeforeInput) {
-			const wrapper: InputEventWrapper = {
-				preventDefault: () => e.preventDefault(),
-				setValue: (value: string) => this.set(value),
-				value: this.inputElement!.value,
-				selection: {
-					start: this.inputElement!.selectionStart,
-					end: this.inputElement!.selectionEnd,
-					isCollapsed:
-						this.inputElement!.selectionStart !== null &&
-						this.inputElement!.selectionEnd !== null &&
-						this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
-				},
-				inputType: e.inputType,
-				data: e.data,
-			}
-			this.onBeforeInput(wrapper)
+
+		const wrapper: InputEventWrapper = {
+			preventDefault: () => e.preventDefault(),
+			setValue: (value: string) => this.set(value),
+			value: this.inputElement!.value,
+			selection: {
+				start: this.inputElement!.selectionStart,
+				end: this.inputElement!.selectionEnd,
+				isCollapsed:
+					this.inputElement!.selectionStart !== null &&
+					this.inputElement!.selectionEnd !== null &&
+					this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
+			},
+			inputType: e.inputType,
+			data: e.data,
 		}
+		this.smoothlyTextBeforeInput.emit(wrapper)
+		this.updateInputWidth()
 	}
 
 	@Listen("input")
 	inputHandler(e: InputEvent) {
 		e.stopPropagation()
-		if (this.onInput) {
-			const wrapper: InputEventWrapper = {
-				preventDefault: () => e.preventDefault(),
-				setValue: (value: string) => this.set(value),
-				value: this.inputElement?.value || "",
-				selection: {
-					start: this.inputElement!.selectionStart,
-					end: this.inputElement!.selectionEnd,
-					isCollapsed:
-						this.inputElement!.selectionStart !== null &&
-						this.inputElement!.selectionEnd !== null &&
-						this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
-				},
-				inputType: e.inputType,
-				data: e.data,
-			}
-			this.onInput(wrapper)
+		const wrapper: InputEventWrapper = {
+			preventDefault: () => e.preventDefault(),
+			setValue: (value: string) => this.set(value),
+			value: this.inputElement?.value || "",
+			selection: {
+				start: this.inputElement!.selectionStart,
+				end: this.inputElement!.selectionEnd,
+				isCollapsed:
+					this.inputElement!.selectionStart !== null &&
+					this.inputElement!.selectionEnd !== null &&
+					this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
+			},
+			inputType: e.inputType,
+			data: e.data,
 		}
+		this.smoothlyTextInput.emit(wrapper)
+		this.updateInputWidth()
 	}
 
 	@Listen("keydown")
 	keydownHandler(e: KeyboardEvent) {
-		if (this.onKeyDown) {
-			const wrapper: KeydownEventWrapper = {
-				preventDefault: () => e.preventDefault(),
-				value: this.inputElement?.value || "",
-				key: e.key,
-				code: e.code,
-				altKey: e.altKey,
-				ctrlKey: e.ctrlKey,
-				shiftKey: e.shiftKey,
-				metaKey: e.metaKey,
-				cursor: {
-					atStart: this.inputElement?.selectionStart === 0,
-					atEnd: this.inputElement?.selectionEnd === this.inputElement?.value.length,
-				},
-			}
-			this.onKeyDown(wrapper)
+		const wrapper: KeyEventWrapper = {
+			preventDefault: () => e.preventDefault(),
+			value: this.inputElement?.value || "",
+			key: e.key,
+			code: e.code,
+			altKey: e.altKey,
+			ctrlKey: e.ctrlKey,
+			shiftKey: e.shiftKey,
+			metaKey: e.metaKey,
+			cursor: {
+				atStart: this.inputElement?.selectionStart === 0,
+				atEnd: this.inputElement?.selectionEnd === this.inputElement?.value.length,
+			},
 		}
+		this.smoothlyTextKeydown.emit(wrapper)
 	}
 
 	render() {
@@ -149,8 +150,8 @@ export class SmoothlyTextEditable {
 					ref={el => (this.inputElement = el)}
 					type="text"
 					inputMode={this.inputMode}
-					onFocus={() => this.onFocus?.()}
-					onBlur={() => this.onBlur?.()}
+					onFocus={() => this.smoothlyTextFocus.emit()}
+					onBlur={() => this.smoothlyTextBlur.emit()}
 					readonly={this.readonly}
 				/>
 			</Host>

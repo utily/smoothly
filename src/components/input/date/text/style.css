@@ -3,10 +3,6 @@
 	--guide-opacity: 0.5;
 }
 
-:host .smoothly-date-text-part:focus {
-	outline: none;
-}
-
 :host .guide {
 	opacity: var(--guide-opacity);
 }
