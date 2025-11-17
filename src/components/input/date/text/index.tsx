@@ -234,7 +234,7 @@ export class SmoothlyInputDateRangeText {
 							inputHandler={(e: InputEventWrapper) => this.inputHandler(e)}
 							keyDownHandler={(e: KeyEventWrapper) => this.keyDownHandler(e)}
 							key={index}
-							contenteditable={!(this.readonly || this.disabled)}
+							readonly={this.readonly || this.disabled}
 						/>
 						<span class="guide">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
 						{index < 2 && <span class="smoothly-date-separator">{this.separator}</span>}
