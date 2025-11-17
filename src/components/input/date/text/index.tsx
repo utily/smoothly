@@ -227,6 +227,7 @@ export class SmoothlyInputDateRangeText {
 								"is-complete": DateFormat.Part.isComplete(part, this.parts[part]),
 							}}
 							ref={el => (this.partElements[index] = el)}
+							inputMode="numeric"
 							focusHandler={() => (this.focusedIndex = index)}
 							blurHandler={() => (this.focusedIndex = undefined)}
 							beforeInputHandler={(e: InputEventWrapper) => this.beforeInputHandler(e)}
