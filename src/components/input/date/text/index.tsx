@@ -37,9 +37,10 @@ export class SmoothlyInputDateRangeText {
 	componentWillLoad() {
 		this.order = DateFormat.Order.fromLocale(this.locale)
 		this.separator = DateFormat.Separator.fromLocale(this.locale)
+		this.parts = DateFormat.Parts.fromDate(this.value) ?? {}
 	}
-	async componentDidLoad() {
-		await this.setValue(this.value)
+	componentDidLoad() {
+		this.updateInputs()
 	}
 
 	@Watch("parts")
@@ -64,6 +65,9 @@ export class SmoothlyInputDateRangeText {
 
 	setAllParts(parts?: DateFormat.Parts) {
 		this.parts = parts ?? {}
+		this.updateInputs()
+	}
+	updateInputs() {
 		const yearIndex = this.order.indexOf("Y")
 		const monthIndex = this.order.indexOf("M")
 		const dayIndex = this.order.indexOf("D")
