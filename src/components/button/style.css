@@ -72,7 +72,9 @@
 :host(:not([size=icon]):not([size=flexible]))>button {
 	min-width: 8rem;
 }
-
+:host([size=icon]) {
+	--smoothly-icon-size: 1.4rem;
+}
 :host([size=icon])>button {
 	min-height: var(--smoothly-button-height, 2.5rem);
 	min-width: var(--smoothly-button-height, 2.5rem);
