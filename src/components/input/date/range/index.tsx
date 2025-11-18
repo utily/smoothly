@@ -105,7 +105,16 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	async onSmoothlyDateTextChange(event: CustomEvent<isoly.Date | undefined>, startOrEnd: "start" | "end") {
 		event.stopPropagation()
 		const newValue = event.detail ?? undefined
-		if (this[startOrEnd] != newValue) {
+		const start = startOrEnd == "start" ? newValue : this.start
+		const end = startOrEnd == "end" ? newValue : this.end
+		if (isoly.Date.is(start) && isoly.Date.is(end) && start > end) {
+			// Swap values
+			this.start = end
+			this.end = start
+			this.startTextElement?.setValue(this.start)
+			this.endTextElement?.setValue(this.end)
+			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+		} else if (this[startOrEnd] != newValue) {
 			this[startOrEnd] = newValue
 			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 		}
