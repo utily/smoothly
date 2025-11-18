@@ -114,7 +114,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 			this.startTextElement?.setValue(this.start)
 			this.endTextElement?.setValue(this.end)
 			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
-			return
 		} else if (this[startOrEnd] != newValue) {
 			this[startOrEnd] = newValue
 			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
