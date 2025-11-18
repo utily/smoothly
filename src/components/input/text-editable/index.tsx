@@ -80,26 +80,29 @@ export class SmoothlyTextEditable {
 		this.inputElement!.style.width = this.mirrorElement!.offsetWidth + 2 + "px"
 	}
 
+	inputEventToWrapper(e: InputEvent): InputEventWrapper {
+		return {
+			preventDefault: () => e.preventDefault(),
+			setValue: (value: string) => this.set(value),
+			value: this.inputElement!.value,
+			selection: {
+				start: this.inputElement!.selectionStart,
+				end: this.inputElement!.selectionEnd,
+				isCollapsed:
+					this.inputElement!.selectionStart !== null &&
+					this.inputElement!.selectionEnd !== null &&
+					this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
+			},
+			inputType: e.inputType,
+			data: e.data,
+		}
+	}
+
 	@Listen("beforeinput")
 	onBeforeInput(e: InputEvent) {
 		e.stopPropagation()
 		if (this.beforeInputHandler) {
-			const wrapper: InputEventWrapper = {
-				preventDefault: () => e.preventDefault(),
-				setValue: (value: string) => this.set(value),
-				value: this.inputElement!.value,
-				selection: {
-					start: this.inputElement!.selectionStart,
-					end: this.inputElement!.selectionEnd,
-					isCollapsed:
-						this.inputElement!.selectionStart !== null &&
-						this.inputElement!.selectionEnd !== null &&
-						this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
-				},
-				inputType: e.inputType,
-				data: e.data,
-			}
-			this.beforeInputHandler(wrapper)
+			this.beforeInputHandler(this.inputEventToWrapper(e))
 			this.updateInputWidth()
 		}
 	}
@@ -108,22 +111,7 @@ export class SmoothlyTextEditable {
 	onInput(e: InputEvent) {
 		e.stopPropagation()
 		if (this.inputHandler) {
-			const wrapper: InputEventWrapper = {
-				preventDefault: () => e.preventDefault(),
-				setValue: (value: string) => this.set(value),
-				value: this.inputElement?.value || "",
-				selection: {
-					start: this.inputElement!.selectionStart,
-					end: this.inputElement!.selectionEnd,
-					isCollapsed:
-						this.inputElement!.selectionStart !== null &&
-						this.inputElement!.selectionEnd !== null &&
-						this.inputElement!.selectionStart === this.inputElement!.selectionEnd,
-				},
-				inputType: e.inputType,
-				data: e.data,
-			}
-			this.inputHandler(wrapper)
+			this.inputHandler(this.inputEventToWrapper(e))
 			this.updateInputWidth()
 		}
 	}
