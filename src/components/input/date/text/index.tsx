@@ -229,7 +229,8 @@ export class SmoothlyInputDateRangeText {
 							onKeyDown={(e: KeyboardEvent) => this.keyDownHandler(e)}
 							key={index}
 							ref={el => (this.partElements[index] = el)}
-							contenteditable={!(this.readonly || this.disabled)}>
+							contenteditable={!(this.readonly || this.disabled)}
+							inputmode="numeric">
 							{/* year or month or day written here */}
 						</span>
 						<span class="guide">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>
