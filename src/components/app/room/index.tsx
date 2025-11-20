@@ -8,6 +8,7 @@ import {
 	Listen,
 	Method,
 	Prop,
+	State,
 	VNode,
 } from "@stencil/core"
 import "urlpattern-polyfill"
@@ -26,6 +27,7 @@ export class SmoothlyAppRoom {
 	@Prop() path: string | URLPattern = ""
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
+	@State() mobileMode = false
 	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	@Event() smoothlyUrlChange: EventEmitter<string>
@@ -39,6 +41,10 @@ export class SmoothlyAppRoom {
 		)
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
 		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
+	}
+	@Method()
+	setMobileMode(mobile: boolean): void {
+		this.mobileMode = mobile
 	}
 	@Method()
 	async getContent(): Promise<HTMLElement | undefined> {
@@ -73,7 +79,7 @@ export class SmoothlyAppRoom {
 
 	render() {
 		return (
-			<Host>
+			<Host class={{ "smoothly-mobile-mode": this.mobileMode }}>
 				<li>
 					<a href={typeof this.path == "string" ? this.path : this.path.pathname} onClick={e => this.clickHandler(e)}>
 						{this.icon && <smoothly-icon name={this.icon} />}

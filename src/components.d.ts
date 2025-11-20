@@ -45,6 +45,7 @@ export namespace Components {
         "home"?: string;
         "label"?: string;
         "menuOpen": boolean;
+        "navBreakpoint": `${number}${"px" | "em" | "rem"}`;
         "selectRoom": (path: string) => Promise<void>;
     }
     interface SmoothlyAppDemo {
@@ -58,6 +59,7 @@ export namespace Components {
         "label"?: string;
         "path": string | URLPattern;
         "selected"?: boolean;
+        "setMobileMode": (mobile: boolean) => Promise<void>;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
     }
     interface SmoothlyBackToTop {
@@ -68,6 +70,7 @@ export namespace Components {
     interface SmoothlyBurger {
         "mediaQuery": string;
         "open": boolean;
+        "setMobileMode": (mobile: boolean) => Promise<void>;
         "visible": boolean;
     }
     interface SmoothlyButton {
@@ -985,7 +988,6 @@ declare global {
     };
     interface HTMLSmoothlyBurgerElementEventMap {
         "smoothlyNavStatus": boolean;
-        "smoothlyVisibleStatus": boolean;
     }
     interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyBurgerElementEventMap>(type: K, listener: (this: HTMLSmoothlyBurgerElement, ev: SmoothlyBurgerCustomEvent<HTMLSmoothlyBurgerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2334,6 +2336,7 @@ declare namespace LocalJSX {
         "home"?: string;
         "label"?: string;
         "menuOpen"?: boolean;
+        "navBreakpoint"?: `${number}${"px" | "em" | "rem"}`;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppCustomEvent<string>) => void;
     }
     interface SmoothlyAppDemo {
@@ -2358,7 +2361,6 @@ declare namespace LocalJSX {
     interface SmoothlyBurger {
         "mediaQuery"?: string;
         "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
-        "onSmoothlyVisibleStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
         "visible"?: boolean;
     }

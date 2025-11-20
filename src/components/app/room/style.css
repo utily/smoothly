@@ -72,24 +72,22 @@
 	border-radius: .25rem;
 }
 
-
-@media screen and (max-width: 900px) {
-	:host>li>a {
-		padding: 0;
-	}
-	:host[icon]>li>a>.label {
-		display: unset;
-		padding: 0 1rem;
-	}
-
-	:host>li>a {
-		margin-left: -1.5rem;
-		margin-right: -1.5rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-	}
-	:host([icon][label]):hover::before,
-	:host([icon][label]):hover::after {
-		content: unset;
-	}
+/* Mobile mode */
+:host.smoothly-mobile-mode>li>a {
+	padding: 0;
 }
+:host.smoothly-mobile-mode[icon]>li>a>.label {
+	display: unset;
+	padding: 0 1rem;
+}
+:host.smoothly-mobile-mode>li>a {
+	margin-left: -1.5rem;
+	margin-right: -1.5rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+:host.smoothly-mobile-mode[icon][label]:hover::before,
+:host.smoothly-mobile-mode[icon][label]:hover::after {
+	content: unset;
+}
+
