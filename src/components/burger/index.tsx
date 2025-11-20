@@ -7,14 +7,16 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 })
 export class SmoothlyBurger {
 	@Element() element: HTMLSmoothlyBurgerElement
-	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) open = false
+	@Prop({ reflect: true, mutable: true }) open = false
+	@State() visible: boolean
 	@State() history: boolean
 	@Event() smoothlyNavStatus: EventEmitter<boolean>
 
 	@Method()
 	setMobileMode(mobile: boolean): void {
 		this.visible = mobile
+		if (!mobile)
+			this.open = false
 	}
 
 	@Watch("open")
@@ -30,7 +32,7 @@ export class SmoothlyBurger {
 
 	render() {
 		return (
-			<Host>
+			<Host class={{ "smoothly-burger-visible": this.visible }}>
 				<span class="burger">
 					<smoothly-icon name="menu" />
 				</span>

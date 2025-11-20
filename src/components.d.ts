@@ -70,7 +70,6 @@ export namespace Components {
     interface SmoothlyBurger {
         "open": boolean;
         "setMobileMode": (mobile: boolean) => Promise<void>;
-        "visible": boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -2360,7 +2359,6 @@ declare namespace LocalJSX {
     interface SmoothlyBurger {
         "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
-        "visible"?: boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
