@@ -1,11 +1,11 @@
-:host(.smoothly-burger-visible) {
+:host {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 	cursor: pointer;
 }
-:host(.smoothly-burger-visible) smoothly-icon {
+:host smoothly-icon {
 	--smoothly-icon-size: 3rem;
 	margin-right: 1em;
 }

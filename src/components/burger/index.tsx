@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -8,16 +8,7 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Method, Prop,
 export class SmoothlyBurger {
 	@Element() element: HTMLSmoothlyBurgerElement
 	@Prop({ reflect: true, mutable: true }) open = false
-	@State() visible: boolean
-	@State() history: boolean
 	@Event() smoothlyNavStatus: EventEmitter<boolean>
-
-	@Method()
-	setMobileMode(mobile: boolean): void {
-		this.visible = mobile
-		if (!mobile)
-			this.open = false
-	}
 
 	@Watch("open")
 	openChanged() {
@@ -26,13 +17,12 @@ export class SmoothlyBurger {
 
 	@Listen("click")
 	clickHandler() {
-		if (this.visible)
-			this.open = !this.open
+		this.open = !this.open
 	}
 
 	render() {
 		return (
-			<Host class={{ "smoothly-burger-visible": this.visible }}>
+			<Host>
 				<smoothly-icon name="menu" />
 			</Host>
 		)

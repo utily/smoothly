@@ -43,7 +43,7 @@ export class SmoothlyAppRoom {
 		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
 	}
 	@Method()
-	setMobileMode(mobile: boolean): void {
+	async setMobileMode(mobile: boolean) {
 		this.mobileMode = mobile
 	}
 	@Method()

@@ -69,7 +69,6 @@ export namespace Components {
     }
     interface SmoothlyBurger {
         "open": boolean;
-        "setMobileMode": (mobile: boolean) => Promise<void>;
     }
     interface SmoothlyButton {
         "color"?: Color;

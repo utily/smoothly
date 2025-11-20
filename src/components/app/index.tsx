@@ -36,7 +36,8 @@ export class SmoothlyApp {
 		console.log("media query changed", mobileMode)
 		this.mobileMode = mobileMode
 		Object.values(this.rooms).forEach(room => room?.element.setMobileMode(mobileMode))
-		this.burgerElement?.setMobileMode(mobileMode)
+		if (!mobileMode)
+			this.menuOpen = false
 	}
 
 	async componentDidRender() {
