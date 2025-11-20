@@ -1,12 +1,12 @@
 :host(.smoothly-burger-visible) {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
-}
-:host(.smoothly-burger-visible) .burger smoothly-icon {
-	--smoothly-icon-size: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 	cursor: pointer;
+}
+:host(.smoothly-burger-visible) smoothly-icon {
+	--smoothly-icon-size: 3rem;
 	margin-right: 1em;
 }
 :host:not([open]) smoothly-icon {

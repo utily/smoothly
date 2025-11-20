@@ -33,9 +33,7 @@ export class SmoothlyBurger {
 	render() {
 		return (
 			<Host class={{ "smoothly-burger-visible": this.visible }}>
-				<span class="burger">
-					<smoothly-icon name="menu" />
-				</span>
+				<smoothly-icon name="menu" />
 			</Host>
 		)
 	}
