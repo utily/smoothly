@@ -68,7 +68,6 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyBurger {
-        "mediaQuery": string;
         "open": boolean;
         "setMobileMode": (mobile: boolean) => Promise<void>;
         "visible": boolean;
@@ -2359,7 +2358,6 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyBurger {
-        "mediaQuery"?: string;
         "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
         "visible"?: boolean;

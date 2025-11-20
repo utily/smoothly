@@ -16,7 +16,7 @@ smoothly-app>smoothly-notifier {
 	background: none;
 }
 
-header:has(smoothly-burger[visible])>nav>ul smoothly-app-room {
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header:has(smoothly-burger)>nav>ul smoothly-app-room {
 	width: 100%;
 	height: 4em;
 }
@@ -98,10 +98,9 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 	align-self: center;
 }
 
-/* TODO: Remove this. nav visibility should be controlled by smoothly-app that listens to burger event if needed */
-/* smoothly-app:not([menu-open])>smoothly-notifier>header>nav {
+smoothly-app.smoothly-mobile-mode:not([menu-open])>smoothly-notifier>header>nav {
 	display: none;
-} */
+}
 
 smoothly-app>smoothly-notifier>main>div {
 	overflow-y: scroll;

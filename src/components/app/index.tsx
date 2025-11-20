@@ -61,10 +61,6 @@ export class SmoothlyApp {
 				this.mainElement.replaceChildren(content)
 		})
 	}
-	burgerStatusHandler(event: CustomEvent<boolean>) {
-		event.stopPropagation()
-		this.menuOpen = event.detail
-	}
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
 		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
@@ -118,7 +114,7 @@ export class SmoothlyApp {
 						<smoothly-burger
 							ref={e => (this.burgerElement = e)}
 							open={this.menuOpen}
-							onSmoothlyNavStatus={e => this.burgerStatusHandler(e)}
+							onSmoothlyNavStatus={e => (e.stopPropagation(), (this.menuOpen = e.detail))}
 						/>
 					</header>
 					<main ref={e => (this.mainElement = e)} />
