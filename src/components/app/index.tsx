@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 import { SmoothlyAppRoomCustomEvent } from "../../components"
 import { Color } from "../../model"
 
@@ -15,13 +15,31 @@ export class SmoothlyApp {
 	@Prop() color: Color
 	@Prop() home?: string
 	@Prop({ mutable: true, reflect: true }) menuOpen = false
+	@Prop({ reflect: true }) navBreakpoint: `${number}${"px" | "em" | "rem"}` = "48rem"
+	@State() mobileMode = false
 	@State() selected?: Room
 	@Event() smoothlyUrlChange: EventEmitter<string>
-	private burgerVisibility: boolean
-	private burgerElement?: HTMLElement
+	private burgerElement?: HTMLSmoothlyBurgerElement
 	private navElement?: HTMLElement
 	mainElement?: HTMLElement
 	rooms: Record<string, Room | undefined> = {}
+
+	componentWillLoad() {
+		const mediaQuery = window.matchMedia(`(max-width: ${this.navBreakpoint})`)
+		this.mobileMode = mediaQuery.matches
+		mediaQuery.addEventListener("change", e => this.updateMobileMode(e.matches))
+	}
+	componentDidLoad() {
+		this.updateMobileMode(this.mobileMode)
+	}
+	updateMobileMode(mobileMode: boolean) {
+		console.log("media query changed", mobileMode)
+		this.mobileMode = mobileMode
+		Object.values(this.rooms).forEach(room => room?.element.setMobileMode(mobileMode))
+		if (!mobileMode)
+			this.menuOpen = false
+	}
+
 	async componentDidRender() {
 		if (!this.selected && !window.location.search)
 			(this.home && this.rooms[this.home]
@@ -44,13 +62,6 @@ export class SmoothlyApp {
 				this.mainElement.replaceChildren(content)
 		})
 	}
-	burgerVisibilityHandler(event: CustomEvent<boolean>) {
-		this.burgerVisibility = event.detail
-	}
-	burgerStatusHandler(event: CustomEvent<boolean>) {
-		event.stopPropagation()
-		this.menuOpen = event.detail
-	}
 	@Listen("popstate", { target: "window" })
 	async locationChangeHandler(event: PopStateEvent) {
 		this.rooms[event.state.smoothlyPath]?.element.setSelected(true, { history: true })
@@ -59,7 +70,7 @@ export class SmoothlyApp {
 	@Listen("smoothlyRoomSelect")
 	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
 		this.selected = { element: event.target }
-		if (this.burgerVisibility)
+		if (this.mobileMode)
 			this.menuOpen = false
 		if (!event.detail.history) {
 			const path = this.selected.element.path.toString()
@@ -78,37 +89,38 @@ export class SmoothlyApp {
 	}
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
-		if (this.burgerVisibility && !event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
+		if (this.mobileMode && !event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
 			this.menuOpen = false
 	}
 	render() {
 		return (
-			<smoothly-notifier>
-				<header color={this.color}>
-					<h1>
-						<a href={""}>{this.label}</a>
-					</h1>
-					<slot name="header" />
-					<nav ref={e => (this.navElement = e)}>
-						<ul>
-							<div class={"nav-start-container"}>
-								<slot name="nav-start" />
-							</div>
-							<slot />
-							<div class={"nav-end-container"}>
-								<slot name="nav-end" />
-							</div>
-						</ul>
-					</nav>
-					<smoothly-burger
-						ref={e => (this.burgerElement = e)}
-						open={this.menuOpen}
-						onSmoothlyNavStatus={e => this.burgerStatusHandler(e)}
-						onSmoothlyVisibleStatus={e => this.burgerVisibilityHandler(e)}
-					/>
-				</header>
-				<main ref={e => (this.mainElement = e)} />
-			</smoothly-notifier>
+			<Host class={{ "smoothly-mobile-mode": this.mobileMode }}>
+				<smoothly-notifier>
+					<header color={this.color}>
+						<h1>
+							<a href={""}>{this.label}</a>
+						</h1>
+						<slot name="header" />
+						<nav ref={e => (this.navElement = e)}>
+							<ul>
+								<div class={"nav-start-container"}>
+									<slot name="nav-start" />
+								</div>
+								<slot />
+								<div class={"nav-end-container"}>
+									<slot name="nav-end" />
+								</div>
+							</ul>
+						</nav>
+						<smoothly-burger
+							ref={e => (this.burgerElement = e)}
+							open={this.menuOpen}
+							onSmoothlyNavStatus={e => (e.stopPropagation(), (this.menuOpen = e.detail))}
+						/>
+					</header>
+					<main ref={e => (this.mainElement = e)} />
+				</smoothly-notifier>
+			</Host>
 		)
 	}
 }

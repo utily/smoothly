@@ -16,7 +16,7 @@ smoothly-app>smoothly-notifier {
 	background: none;
 }
 
-header:has(smoothly-burger[visible])>nav>ul smoothly-app-room {
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header:has(smoothly-burger)>nav>ul smoothly-app-room {
 	width: 100%;
 	height: 4em;
 }
@@ -98,58 +98,7 @@ smoothly-app>smoothly-notifier>header>nav>ul li a {
 	align-self: center;
 }
 
-@media screen and (max-width: 900px) {
-	smoothly-app>smoothly-notifier>header>nav {
-		width: fit-content;
-		max-width: 100%;
-		top: 100%;
-		position: absolute;
-		max-height: calc(100dvh - var(--header-height));
-		overflow-y: scroll;
-		right: 0;
-		height: auto;
-	}
-
-	smoothly-app>smoothly-notifier>header>nav,
-	smoothly-app>smoothly-notifier>header>nav>ul {
-		flex-direction: column;
-		background-color: rgba(var(--smoothly-color));
-	}
-
-	smoothly-app>smoothly-notifier>header>nav>ul {
-		padding: 1.5rem;
-		box-sizing: border-box;
-	}
-
-	smoothly-app>smoothly-notifier>header>nav>ul li {
-		margin-right: 0;
-		width: 100%;
-	}
-
-	smoothly-app>smoothly-notifier>header>smoothly-burger {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
-
-	smoothly-app>smoothly-notifier>header>nav>ul>[slot="nav-start"] {
-		display: none;
-	}
-
-	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-start-container,
-	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-end-container {
-		flex-direction: column;
-		margin: 0;
-		align-items: start;
-		justify-content: center;
-	}
-
-	smoothly-app>smoothly-notifier>header>nav>ul>div.nav-start-container>*:last-child {
-		margin-bottom: 1em;
-	}
-}
-
-smoothly-app:not([menu-open])>smoothly-notifier>header>nav {
+smoothly-app.smoothly-mobile-mode:not([menu-open])>smoothly-notifier>header>nav {
 	display: none;
 }
 
@@ -157,3 +106,56 @@ smoothly-app>smoothly-notifier>main>div {
 	overflow-y: scroll;
 	height: 100%;
 }
+
+/* Mobile mode */
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav {
+	width: fit-content;
+	max-width: 100%;
+	top: 100%;
+	position: absolute;
+	max-height: calc(100dvh - var(--header-height));
+	overflow-y: scroll;
+	right: 0;
+	height: auto;
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav,
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul {
+	flex-direction: column;
+	background-color: rgba(var(--smoothly-color));
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul {
+	padding: 1.5rem;
+	box-sizing: border-box;
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul li {
+	margin-right: 0;
+	width: 100%;
+}
+smoothly-app:not(.smoothly-mobile-mode)>smoothly-notifier>header>smoothly-burger {
+	display: none;
+}
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>smoothly-burger {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul>[slot="nav-start"] {
+	display: none;
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul>div.nav-start-container,
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul>div.nav-end-container {
+	flex-direction: column;
+	margin: 0;
+	align-items: start;
+	justify-content: center;
+}
+
+smoothly-app.smoothly-mobile-mode>smoothly-notifier>header>nav>ul>div.nav-start-container>*:last-child {
+	margin-bottom: 1em;
+}
+
