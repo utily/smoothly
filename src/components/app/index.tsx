@@ -33,7 +33,6 @@ export class SmoothlyApp {
 		this.updateMobileMode(this.mobileMode)
 	}
 	updateMobileMode(mobileMode: boolean) {
-		console.log("media query changed", mobileMode)
 		this.mobileMode = mobileMode
 		Object.values(this.rooms).forEach(room => room?.element.setMobileMode(mobileMode))
 		if (!mobileMode)
