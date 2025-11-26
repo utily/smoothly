@@ -112,23 +112,23 @@
 }
 :host([multiple][show-checkbox])>div.options>smoothly-item::before {
 	content: "";
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.5rem;
-  border: 1px solid rgb(var(--smoothly-input-foreground));
-  border-radius: var(--smoothly-input-border-radius);
-  vertical-align: middle;
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	margin-right: 0.5rem;
+	border: 1px solid rgb(var(--smoothly-input-foreground));
+	border-radius: 0.15rem;
+	vertical-align: middle;
 }
-:host([multiple][show-checkbox])>div.options>smoothly-item[selected]::after{
+:host([multiple][show-checkbox])>div.options>smoothly-item[selected]::after {
 	content: "✔";
-  position: absolute;
-  left: 0.65rem; 
-  color: rgb(var(--smoothly-item-selected-foreground))
+	position: absolute;
+	left: 0.65rem; 
+	color: rgb(var(--smoothly-item-selected-foreground))
 }
 :host([multiple][show-checkbox])>div.options>smoothly-item[selected]::before,
 :host([multiple][show-checkbox])>div.options>smoothly-item:hover::before {
-  border: 1px solid rgb(var(--smoothly-item-selected-foreground));
+	border: 1px solid rgb(var(--smoothly-item-selected-foreground));
 }
 :host>div.options::slotted(smoothly-item),
 :host>div.options::slotted(div.search-preview) {
