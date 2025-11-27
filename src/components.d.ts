@@ -561,7 +561,6 @@ export namespace Components {
         "reset": () => Promise<void>;
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
-        "showCheckbox": boolean;
         "showLabel": boolean;
         "showSelected"?: boolean;
         "unregister": () => Promise<void>;
@@ -2847,7 +2846,6 @@ declare namespace LocalJSX {
         "readonly"?: boolean;
         "required"?: boolean;
         "searchDisabled"?: boolean;
-        "showCheckbox"?: boolean;
         "showLabel"?: boolean;
         "showSelected"?: boolean;
     }

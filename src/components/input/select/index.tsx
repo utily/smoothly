@@ -50,7 +50,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) ordered?: boolean
 	@Prop({ reflect: true }) multiple = false
-	@Prop({ reflect: true }) showCheckbox = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any

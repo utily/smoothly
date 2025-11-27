@@ -117,12 +117,7 @@ export class SmoothlyInputDemo {
 									</smoothly-item>
 								))}
 						</smoothly-input-select>
-						<smoothly-input-select
-							multiple
-							showCheckbox
-							menuHeight="7.5items"
-							placeholder="Select..."
-							name="select-month">
+						<smoothly-input-select multiple menuHeight="7.5items" placeholder="Select..." name="select-month">
 							<label slot="label">Month multiple select</label>
 							<smoothly-item value="1">January</smoothly-item>
 							<smoothly-item value="2">February</smoothly-item>
