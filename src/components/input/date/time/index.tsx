@@ -239,13 +239,10 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 						value={this.value ? isoly.DateTime.getDate(this.value) : undefined}
 						min={this.min ? isoly.DateTime.getDate(this.min) : undefined}
 						max={this.max ? isoly.DateTime.getDate(this.max) : undefined}
-						onSmoothlyValueChange={async e => {
+						onSmoothlyDateSet={async e => {
 							e.stopPropagation()
 							this.date = e.detail
 							this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
-						}}
-						onSmoothlyDateSet={e => {
-							e.stopPropagation()
 							this.open = false
 						}}>
 						<div slot={"year-label"}>

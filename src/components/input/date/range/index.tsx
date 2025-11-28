@@ -136,7 +136,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<Partial<isoly.DateRange | undefined>> {
+	async getValue(): Promise<Partial<isoly.DateRange> | undefined> {
 		return this.start || this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
@@ -223,14 +223,13 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 				{this.open && (
 					<smoothly-calendar
 						ref={el => (this.calendarElement = el)}
-						doubleInput={true}
-						onSmoothlyValueChange={e => e.stopPropagation()}
-						onSmoothlyStartChange={e => (e.stopPropagation(), (this.start = e.detail))}
-						onSmoothlyEndChange={e => (e.stopPropagation(), (this.end = e.detail))}
+						doubleInput
 						onSmoothlyDateSet={e => e.stopPropagation()}
 						onSmoothlyDateRangeSet={e => {
 							e.stopPropagation()
 							this.open = false
+							this.start = e.detail.start
+							this.end = e.detail.end
 							this.smoothlyInput.emit({ [this.name]: e.detail })
 							this.smoothlyUserInput.emit({ name: this.name, value: e.detail })
 						}}

@@ -195,7 +195,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						ref={el => (this.calendarElement = el)}
 						doubleInput={false}
 						value={this.value}
-						onSmoothlyValueChange={e => (e.stopPropagation(), this.onUserChangedValue(e))}
+						onSmoothlyDateSet={e => (e.stopPropagation(), this.onUserChangedValue(e))}
 						max={this.max}
 						min={this.min}>
 						<div slot={"year-label"}>
