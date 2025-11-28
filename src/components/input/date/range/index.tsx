@@ -225,12 +225,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						ref={el => (this.calendarElement = el)}
 						doubleInput={true}
 						onSmoothlyValueChange={e => e.stopPropagation()}
-						onSmoothlyStartChange={e => (e.stopPropagation(), (this.start = e.detail))}
-						onSmoothlyEndChange={e => (e.stopPropagation(), (this.end = e.detail))}
 						onSmoothlyDateSet={e => e.stopPropagation()}
 						onSmoothlyDateRangeSet={e => {
 							e.stopPropagation()
 							this.open = false
+							this.start = e.detail.start
+							this.end = e.detail.end
 							this.smoothlyInput.emit({ [this.name]: e.detail })
 							this.smoothlyUserInput.emit({ name: this.name, value: e.detail })
 						}}

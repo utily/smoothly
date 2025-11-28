@@ -12,24 +12,29 @@ export class Calendar {
 	@Element() element: HTMLTableRowElement
 	@Prop({ mutable: true }) month?: isoly.Date
 	@Prop({ mutable: true }) value?: isoly.Date
-	@Prop({ mutable: true }) start?: isoly.Date
-	@Prop({ mutable: true }) end?: isoly.Date
+	@Prop() start?: isoly.Date
+	@Prop() end?: isoly.Date
 	@Prop({ mutable: true }) max: isoly.Date
 	@Prop({ mutable: true }) min: isoly.Date
 	@Prop({ reflect: true }) doubleInput: boolean
+	@State() startInternal?: isoly.Date
+	@State() endInternal?: isoly.Date
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
-	@Event() smoothlyStartChange: EventEmitter<isoly.Date>
-	@Event() smoothlyEndChange: EventEmitter<isoly.Date>
 	@Event() smoothlyDateSet: EventEmitter<isoly.Date>
 	@Event() smoothlyDateRangeSet: EventEmitter<isoly.DateRange>
 	@State() firstSelected: boolean
+
+	componentWillLoad() {
+		this.onStart()
+		this.onEnd()
+	}
 	@Watch("start")
-	onStart(next: isoly.Date) {
-		this.smoothlyStartChange.emit(next)
+	onStart() {
+		this.startInternal = this.start
 	}
 	@Watch("end")
-	onEnd(next: isoly.Date) {
-		this.smoothlyEndChange.emit(next)
+	onEnd() {
+		this.endInternal = this.end
 	}
 	@Method()
 	async jumpTo(yearMonth: { Y?: string; M?: string }) {
@@ -49,30 +54,30 @@ export class Calendar {
 		this.smoothlyValueChange.emit((this.value = date))
 		this.clickCounter += 1
 		if (this.doubleInput) {
-			if (this.clickCounter % 2 == 1)
-				this.start = this.end = this.frozenDate = date
-			else {
-				if (this.start && date > this.start)
-					this.end = date
-				else
-					this.start = date
+			if (this.clickCounter % 2 == 1) {
+				this.startInternal = this.endInternal = this.frozenDate = date
+			} else {
+				const start = this.startInternal! > date ? date : this.startInternal
+				const end = this.endInternal! < date ? date : this.endInternal
+				this.startInternal = start
+				this.endInternal = end
 			}
 		}
 		!this.doubleInput && this.smoothlyDateSet.emit(this.value)
 		this.doubleInput &&
 			this.clickCounter % 2 == 0 &&
-			this.start &&
-			this.end &&
-			this.smoothlyDateRangeSet.emit({ start: this.start, end: this.end })
+			this.startInternal &&
+			this.endInternal &&
+			this.smoothlyDateRangeSet.emit({ start: this.startInternal, end: this.endInternal })
 	}
 	private onHover(date: isoly.Date) {
 		if (this.doubleInput && this.clickCounter % 2 == 1) {
 			if (date < this.frozenDate) {
-				this.start = date
-				this.end = this.frozenDate
+				this.startInternal = date
+				this.endInternal = this.frozenDate
 			} else {
-				this.start = this.frozenDate
-				this.end = date
+				this.startInternal = this.frozenDate
+				this.endInternal = date
 			}
 		}
 	}
@@ -119,12 +124,14 @@ export class Calendar {
 									onMouseOver={() => (this.withinLimit(date) ? this.onHover(date) : undefined)}
 									onClick={this.withinLimit(date) ? () => this.onClick(date) : undefined}
 									class={{
-										selected: date == this.value || (this.doubleInput && (date == this.start || date == this.end)),
+										selected:
+											date == this.value ||
+											(this.doubleInput && (date == this.startInternal || date == this.endInternal)),
 										today: date == isoly.Date.now(),
 										currentMonth:
 											isoly.Date.firstOfMonth(this.month ?? this.value ?? isoly.Date.now()) ==
 											isoly.Date.firstOfMonth(date),
-										dateRange: this.doubleInput && date > (this.start ?? "") && date < (this.end ?? ""),
+										dateRange: this.doubleInput && date > (this.startInternal ?? "") && date < (this.endInternal ?? ""),
 										disable: !this.withinLimit(date),
 									}}>
 									{date.substring(8, 10)}
