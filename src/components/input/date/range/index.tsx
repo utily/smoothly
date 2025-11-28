@@ -136,7 +136,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<Partial<isoly.DateRange | undefined>> {
+	async getValue(): Promise<Partial<isoly.DateRange> | undefined> {
 		return this.start || this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
