@@ -126,9 +126,17 @@
 	left: 0.65rem; 
 	color: rgb(var(--smoothly-item-selected-foreground))
 }
-:host[multiple]>div.options>smoothly-item[selected]::before,
-:host[multiple]>div.options>smoothly-item:hover::before {
+:host[multiple]>div.options>smoothly-item[selected]::before {
 	border: 1px solid rgb(var(--smoothly-item-selected-foreground));
+}
+:host[multiple]>div.options>smoothly-item[selected]::after {
+	color: rgb(var(--smoothly-item-selected-foreground));
+}
+:host[multiple]>div.options>smoothly-item:hover::before {
+	border: 1px solid rgb(var(--smoothly-item-hover-foreground));
+}
+:host[multiple]>div.options>smoothly-item:hover::after {
+	color: rgb(var(--smoothly-item-hover-foreground));
 }
 :host>div.options::slotted(smoothly-item),
 :host>div.options::slotted(div.search-preview) {
