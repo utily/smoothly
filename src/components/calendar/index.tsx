@@ -22,7 +22,6 @@ export class Calendar {
 	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyDateSet: EventEmitter<isoly.Date>
 	@Event() smoothlyDateRangeSet: EventEmitter<isoly.DateRange>
-	@State() firstSelected: boolean
 
 	componentWillLoad() {
 		this.onStart()
