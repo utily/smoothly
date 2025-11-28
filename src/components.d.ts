@@ -374,7 +374,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
-        "getValue": () => Promise<Partial<isoly.DateRange | undefined>>;
+        "getValue": () => Promise<Partial<isoly.DateRange> | undefined>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "locale"?: isoly.Locale;
