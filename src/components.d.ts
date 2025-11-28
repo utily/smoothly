@@ -1037,7 +1037,6 @@ declare global {
         new (): HTMLSmoothlyButtonDemoStandardElement;
     };
     interface HTMLSmoothlyCalendarElementEventMap {
-        "smoothlyValueChange": isoly.Date;
         "smoothlyDateSet": isoly.Date;
         "smoothlyDateRangeSet": isoly.DateRange;
     }
@@ -2392,7 +2391,6 @@ declare namespace LocalJSX {
         "month"?: isoly.Date;
         "onSmoothlyDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<isoly.DateRange>) => void;
         "onSmoothlyDateSet"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
         "start"?: isoly.Date;
         "value"?: isoly.Date;
     }

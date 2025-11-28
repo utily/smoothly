@@ -19,7 +19,6 @@ export class Calendar {
 	@Prop({ reflect: true }) doubleInput: boolean
 	@State() startInternal?: isoly.Date
 	@State() endInternal?: isoly.Date
-	@Event() smoothlyValueChange: EventEmitter<isoly.Date>
 	@Event() smoothlyDateSet: EventEmitter<isoly.Date>
 	@Event() smoothlyDateRangeSet: EventEmitter<isoly.DateRange>
 
@@ -50,21 +49,20 @@ export class Calendar {
 
 	private clickCounter = 0
 	private onClick(date: isoly.Date) {
-		this.smoothlyValueChange.emit((this.value = date))
+		this.value = date
+		this.smoothlyDateSet.emit(this.value)
+	}
+	private onClickDoubleInput(date: isoly.Date) {
 		this.clickCounter += 1
-		if (this.doubleInput) {
-			if (this.clickCounter % 2 == 1) {
-				this.startInternal = this.endInternal = this.frozenDate = date
-			} else {
-				const start = this.startInternal! > date ? date : this.startInternal
-				const end = this.endInternal! < date ? date : this.endInternal
-				this.startInternal = start
-				this.endInternal = end
-			}
+		if (this.clickCounter % 2 == 1) {
+			this.startInternal = this.endInternal = this.frozenDate = date
+		} else {
+			const start = this.startInternal! > date ? date : this.startInternal
+			const end = this.endInternal! < date ? date : this.endInternal
+			this.startInternal = start
+			this.endInternal = end
 		}
-		!this.doubleInput && this.smoothlyDateSet.emit(this.value)
-		this.doubleInput &&
-			this.clickCounter % 2 == 0 &&
+		this.clickCounter % 2 == 0 &&
 			this.startInternal &&
 			this.endInternal &&
 			this.smoothlyDateRangeSet.emit({ start: this.startInternal, end: this.endInternal })
@@ -120,8 +118,12 @@ export class Calendar {
 							{week.map(date => (
 								<td
 									tabindex={1}
-									onMouseOver={() => (this.withinLimit(date) ? this.onHover(date) : undefined)}
-									onClick={this.withinLimit(date) ? () => this.onClick(date) : undefined}
+									onMouseOver={this.withinLimit(date) ? () => this.onHover(date) : undefined}
+									onClick={
+										this.withinLimit(date)
+											? () => (this.doubleInput ? this.onClickDoubleInput(date) : this.onClick(date))
+											: undefined
+									}
 									class={{
 										selected:
 											date == this.value ||
