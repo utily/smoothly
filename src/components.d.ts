@@ -374,7 +374,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
-        "getValue": () => Promise<Partial<isoly.DateRange | undefined>>;
+        "getValue": () => Promise<Partial<isoly.DateRange> | undefined>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "locale"?: isoly.Locale;
@@ -1037,9 +1037,6 @@ declare global {
         new (): HTMLSmoothlyButtonDemoStandardElement;
     };
     interface HTMLSmoothlyCalendarElementEventMap {
-        "smoothlyValueChange": isoly.Date;
-        "smoothlyStartChange": isoly.Date;
-        "smoothlyEndChange": isoly.Date;
         "smoothlyDateSet": isoly.Date;
         "smoothlyDateRangeSet": isoly.DateRange;
     }
@@ -2394,9 +2391,6 @@ declare namespace LocalJSX {
         "month"?: isoly.Date;
         "onSmoothlyDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<isoly.DateRange>) => void;
         "onSmoothlyDateSet"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyEndChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyStartChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
         "start"?: isoly.Date;
         "value"?: isoly.Date;
     }
