@@ -204,13 +204,15 @@ export class InputStateHandler {
 	private toString(value: any): string {
 		return this.formatter.toString(value)
 	}
-	public initialState(value: any): Readonly<tidily.State> & tidily.Settings {
+	public initialState(value: any, inputElement?: HTMLInputElement): Readonly<tidily.State> & tidily.Settings {
 		const stringValue = this.toString(value) || ""
 		const start = stringValue.length
 		const state = this.createFormattedState({
 			value: stringValue,
 			selection: { start, end: start, direction: "none" },
 		})
+		if (inputElement)
+			inputElement.value = state.value
 		return state
 	}
 	public setValue(
