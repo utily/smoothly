@@ -8,3 +8,11 @@
 :host > div {
 	grid-column: 1 / -1;
 }
+
+
+/* Mobile */
+@media (max-width: 48rem) {
+	:host {
+		grid-template-columns: 1fr;
+	}
+}
