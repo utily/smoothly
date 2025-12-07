@@ -22,7 +22,7 @@ smoothly-form > form > fieldset {
 }
 smoothly-form > form > fieldset > * {
 	flex-grow: 1;
-	min-width: min(100%, var(--smoothly-form-input-min-width, 10rem));
+	min-width: min(100%, var(--smoothly-form-input-min-width, 14rem));
 	flex-basis: 40%;
 }
 
