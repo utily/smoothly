@@ -1,5 +1,5 @@
 :host {
-	width: 50%;
+	max-width: min(calc(100% - 0.5rem), 48rem);
 	margin: auto;
 }
 
@@ -7,13 +7,16 @@
 :host p {
 	margin: .5rem 0;
 }
+:host > .description {
+	--smoothly-form-input-min-width: 18rem;
+}
 :host smoothly-input-range[name=borderRadius] {
 	flex-basis: 100%;
 }
 div.input-wrapper {
 	display: grid;
 	margin-top: 1rem;
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 1fr 9rem;
 	gap: 1rem;
 	position: relative;
 	justify-content: space-around;

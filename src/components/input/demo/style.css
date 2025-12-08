@@ -18,8 +18,8 @@ smoothly-input-demo-standard {
 }
 
 div.inputs {
+	max-width: min(calc(100% - 2rem), 56rem);
 	margin: auto;
-	width: 50%;
 }
 
 div.inputs>h2:not(:first-child) {
@@ -37,12 +37,13 @@ div.inputs>h2:not(:first-child) {
 
 .select-div {
 	display: flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	gap: 1em;
 	flex-wrap: wrap;
 }
 
-.select-div>smoothly-color>*,
 .select-div>* {
-	flex-basis: 49%;
+	flex-grow: 1;
+	min-width: min(100%, var(--smoothly-form-input-min-width, 18rem));
+	flex-basis: 40%;
 }
