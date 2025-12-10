@@ -5,3 +5,13 @@
 	stroke: rgb(var(--smoothly-table-foreground));
 	fill: rgb(var(--smoothly-table-foreground));
 }
+
+:host smoothly-table smoothly-table-head {
+	top: var(--smoothly-table-cell-min-height);
+	z-index: 1
+}
+
+:host smoothly-table smoothly-table-head:nth-child(2) {
+	top: calc(var(--smoothly-table-cell-min-height) * 2);
+	z-index: 1
+}

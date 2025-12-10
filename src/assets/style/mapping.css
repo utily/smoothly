@@ -66,7 +66,7 @@ smoothly-color {
 	--smoothly-button-focus-border: var(--smoothly-color-shade);
 	--smoothly-button-border-radius: 0.25rem;
 	
-	/* smoothly-calendar */
+	/* smoothly-calendar !!!! */
 	--smoothly-calendar-weekend-foreground: var(--smoothly-danger-color);
 	
 	/* smoothly-modal */
