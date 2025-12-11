@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - "release-*"
+permissions:
+  contents: read
+  id-token: write   # Required for OIDC
 jobs:
   publish:
     name: "Publish"
@@ -12,11 +15,12 @@ jobs:
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v3"
-      - name: "Setup Node"
-        uses: "actions/setup-node@v3"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
       - uses: actions/cache@v3
         with:
           path: '**/node_modules'
@@ -26,7 +30,5 @@ jobs:
       - name: Build
         run: npm run build
       - name: Publish
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc  
-          npm publish --access public --provenance
+        run: npm publish --provenance --access public
         shell: bash
