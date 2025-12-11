@@ -24,4 +24,11 @@ jobs:
       - name: Build
         run: npm run build
       - name: Publish
-        run: npm publish --provenance --access public
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [[ "$VERSION" == *-* ]]; then
+            npm publish --access public --tag prerelease
+          else
+            npm publish --access public
+          fi
+        shell: bash
