@@ -35,7 +35,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	@Prop({ reflect: true }) placeholder?: string
 	@Prop({ reflect: true }) alwaysShowGuide = false
@@ -187,7 +187,15 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onUserChangedValue(e))}
 					onSmoothlyDateTextDone={e => (e.stopPropagation(), (this.open = false), this.dateTextElement?.deselect())}
 				/>
-				<span class="icons" ref={el => (this.iconsElement = el)}>
+				<span class="smoothly-icons" ref={el => (this.iconsElement = el)}>
+					<smoothly-icon
+						class="smoothly-invalid"
+						name="alert-circle"
+						color="danger"
+						fill="clear"
+						size="small"
+						tooltip={this.errorMessage}
+					/>
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
