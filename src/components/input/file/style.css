@@ -57,6 +57,7 @@
 }
 
 :host>div>smoothly-button {
+	--smoothly-button-height: 1.4rem;
 	margin: 0;
 	border: none;
 }
