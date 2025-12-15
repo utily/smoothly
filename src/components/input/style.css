@@ -73,10 +73,6 @@
 	z-index: 2;
 	padding: 0.5rem;
 }
-:host:not([disabled])>.smoothly-invalid {
-	cursor: pointer;
-}
-
 :host[invalid]>.smoothly-invalid {
 	display: flex;
 }

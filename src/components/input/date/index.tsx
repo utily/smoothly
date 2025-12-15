@@ -188,14 +188,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					onSmoothlyDateTextDone={e => (e.stopPropagation(), (this.open = false), this.dateTextElement?.deselect())}
 				/>
 				<span class="smoothly-icons" ref={el => (this.iconsElement = el)}>
-					<smoothly-icon
-						class="smoothly-invalid"
-						name="alert-circle"
-						color="danger"
-						fill="clear"
-						size="small"
-						tooltip={this.errorMessage}
-					/>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (

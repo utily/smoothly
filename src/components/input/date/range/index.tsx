@@ -217,14 +217,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 					/>
 				</span>
 				<span class={"smoothly-icons"}>
-					<smoothly-icon
-						class="smoothly-invalid"
-						name="alert-circle"
-						color="danger"
-						fill="clear"
-						size="small"
-						tooltip={this.errorMessage}
-					/>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && (

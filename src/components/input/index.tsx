@@ -248,14 +248,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						/>
 					</span>
 				)}
-				<smoothly-icon
-					class="smoothly-invalid"
-					name="alert-circle"
-					color="danger"
-					fill="clear"
-					size="small"
-					tooltip={this.errorMessage}
-				/>
+				<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 				<slot name="end" />
 			</Host>
 		)

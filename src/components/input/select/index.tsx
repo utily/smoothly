@@ -363,14 +363,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					{this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
-					<smoothly-icon
-						class="smoothly-invalid"
-						name="alert-circle"
-						color="danger"
-						fill="clear"
-						size="small"
-						tooltip={this.errorMessage}
-					/>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
