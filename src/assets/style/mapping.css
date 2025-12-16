@@ -79,4 +79,13 @@ smoothly-color {
 	--smoothly-modal-shadow: 0 0.5rem 1rem -0.5rem rgba(var(--smoothly-dark-shade), 0.2);
 	--smoothly-modal-width: 30rem;
 	--smoothly-modal-max-height: calc(100dvh - 2rem);
+
+	/* z-index layering */
+	--smoothly-z-index-base: 0; /* Most things - usually not needed */
+  --smoothly-z-index-sticky: 10; /* Sticky headers/footers */
+  --smoothly-z-index-dropdown: 100; /* Short lived, linear list of options, (select/autocomplete) */
+	--smoothly-z-index-floating: 200; /* Floating elements that may overlap others (tooltip, spinner, back-to-top) */
+  --smoothly-z-index-popover: 300; /* No backdrop, includes navigation (calendar/context menus) */
+  --smoothly-z-index-modal: 1000; /* Has backdrop, prevents interaction with rest of UI, traps focus */ 
+  --smoothly-z-index-toast: 2000; /* Topmost layer, auto-dismisses */
 }
