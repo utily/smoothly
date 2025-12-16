@@ -14,7 +14,6 @@
 	left: 0;
 	text-align: center;
 	z-index: var(--smoothly-z-index-toast, 2000);
-	outline: 2px solid red;
 }
 
 :host > .smoothly-notifier-wrapper > smoothly-notification {

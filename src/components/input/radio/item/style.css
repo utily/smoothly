@@ -23,7 +23,6 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 
 :host>input {
 	opacity: 0;
-	outline: 2px solid red;
 	width: 1.5rem;
 	height: 1.5rem;
 	position: absolute;
