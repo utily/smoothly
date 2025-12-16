@@ -8,7 +8,7 @@
   height: 100%;
 	background-color: rgba(var(--smoothly-modal-backdrop));
 	color: rgb(var(--smoothly-modal-foreground));
-	z-index: 5;
+	z-index: var(--smoothly-z-index-modal, 1000);
 }
 :host:not([open]),
 :host[hidden] {
