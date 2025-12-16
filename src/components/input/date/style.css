@@ -43,7 +43,7 @@
 
 :host>smoothly-calendar {
 	position: absolute;
-	z-index: 10;
+	z-index: var(--smoothly-z-index-popover, 300);
 	top: 4rem;
 	background-color: rgb(var(--smoothly-input-background));
 	min-width: 18rem;
@@ -55,7 +55,6 @@
 	position: absolute;
 	left: 2rem;
 	top: -0.55rem;
-	z-index: 9;
 	transform: rotate(45deg);
 	width: 1rem;
 	height: 1rem;
