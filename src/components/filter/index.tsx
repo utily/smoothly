@@ -60,6 +60,7 @@ export class SmoothlyFilter {
 						}}
 					/>
 				)}
+				<div class={this.expanded ? "close" : "hidden"} onClick={() => (this.expanded = !this.expanded)} />
 				<div class={this.expanded ? "container arrow-top" : "hidden"}>
 					<slot name="detail" />
 				</div>
@@ -71,7 +72,6 @@ export class SmoothlyFilter {
 						this.expanded = !this.expanded
 					}}
 				/>
-				<div class={this.expanded ? "close" : "hidden"} onClick={() => (this.expanded = !this.expanded)} />
 			</Host>
 		)
 	}

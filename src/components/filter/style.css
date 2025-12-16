@@ -9,14 +9,10 @@
 	align-items: center;
 }
 
-:host>div::slotted([slot=detail]) {
-	z-index: 5;
-}
-
 :host::slotted([slot=bar]) {
 	pointer-events: auto;
-	margin-left: 0.3em;
-	margin-right: 0.3em;
+	margin-left: 0.3rem;
+	margin-right: 0.3rem;
 
 	&>[looks="plain"] {
 		display: flex;
@@ -31,14 +27,14 @@
 
 :host>smoothly-icon {
 	cursor: pointer;
-	margin-left: 0.3em;
-	margin-right: 0.3em;
+	margin-left: 0.3rem;
+	margin-right: 0.3rem;
 	flex-shrink: 0;
 }
 
 :host>div.close {
 	position: fixed;
-	z-index: 3;
+	z-index: var(--smoothly-z-index-popover, 300);
 	top: 0;
 	left: 0;
 	width: 100dvw;
@@ -53,43 +49,33 @@
 :host>.container {
 	padding: 2em;
 	position: absolute;
-	right: 0.35em;
+	right: 0.35rem;
 	width: fit-content;
 	display: flex;
 	justify-content: center;
 	top: 100%;
+	border: 1px solid rgb(var(--smoothly-medium-tint));
+	border-radius: 0.25rem;
 	width: fit-content;
-	z-index: 4;
+	z-index: var(--smoothly-z-index-popover, 300);
 	background-color: rgb(var(--smoothly-color));
-	margin: 0.8em -2em;
+	margin: 0.8rem -2rem;
 }
 
 /* arrow */
-:host>div.container:before {
+:host>div.container::before {
 	content: "";
-	width: 0.6em;
-	height: 0.6em;
+	width: 0.6rem;
+	height: 0.6rem;
 	transform: rotate(45deg);
 	border-top: 1px solid rgb(var(--smoothly-medium-tint));
 	border-left: 1px solid rgb(var(--smoothly-medium-tint));
 	background-color: rgb(var(--smoothly-color));
 	position: absolute;
-	z-index: 3;
 }
 
 /* arrow placement */
-:host>div.container.arrow-top:before {
-	left: calc(91%);
-	top: -5px;
-}
-
-:host div.container:after {
-	content: "";
-	height: 100%;
-	width: 100%;
-	border: 1px solid rgb(var(--smoothly-medium-tint));
-	border-radius: 0.25em;
-	position: absolute;
-	top: 0;
-	left: 0;
+:host>div.container.arrow-top::before {
+	right: 2.2rem;
+	top: -0.3rem;
 }
