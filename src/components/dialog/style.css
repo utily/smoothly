@@ -6,7 +6,7 @@
   transform: translate(-50%, -50%);
 	width: 100%;
 	height: 100%;
-	z-index: 1;
+	z-index: var(--smoothly-z-index-modal, 1000);
 	/* stylelint-disable-next-line declaration-no-important */
 	background: rgba(var(--smoothly-default-color), var(--smoothly-semitransparent)) !important;
 }
@@ -58,7 +58,7 @@
 	position: absolute;
 	right: -2em;
 	top: -2em;
-	z-index: 1;
+	z-index: var(--smoothly-z-index-modal, 1000);
 	border-color: transparent;
 }
 :host > section > * > smoothly-trigger:hover {
