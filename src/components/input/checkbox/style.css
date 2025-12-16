@@ -18,7 +18,6 @@
 
 :host>smoothly-icon {
 	position: absolute;
-	z-index: 1;
 	pointer-events: none;
 }
 
