@@ -3,7 +3,7 @@
 	opacity: var(--opacity);
 	pointer-events: var(--pointer-events);
 	transition: opacity 400ms;
-	z-index: 3;
+	z-index: var(--smoothly-z-index-floating, 200);
 	border-radius: 50%;
 	box-shadow: var(--smoothly-shadow);
 	height: 3rem;
