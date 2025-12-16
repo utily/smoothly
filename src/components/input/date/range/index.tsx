@@ -27,7 +27,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) end: isoly.Date | undefined
 	@Prop({ reflect: true }) placeholder: string
 	@Prop({ reflect: true }) alwaysShowGuide = false
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
+	@Prop({ reflect: true }) errorMessage?: string
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	parent: Editable | undefined
@@ -195,7 +196,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						value={this.start}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						invalid={this.invalid}
 						showLabel={this.showLabel}
 					/>
 					<span class="smoothly-date-range-separator"> – </span>
@@ -213,11 +213,11 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						value={this.end}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						invalid={this.invalid}
 						showLabel={this.showLabel}
 					/>
 				</span>
-				<span class={"icons"}>
+				<span class={"smoothly-icons"}>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && (

@@ -94,8 +94,17 @@
 	cursor: pointer;
 }
 
-:host > span.icons {
+:host > span.smoothly-icons {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+:host > .smoothly-icons > .smoothly-invalid {
+	display: none;
+	padding: 0.5rem;
+}
+
+:host[invalid] > .smoothly-icons > .smoothly-invalid {
+	display: flex;
 }

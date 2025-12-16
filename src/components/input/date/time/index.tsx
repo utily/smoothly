@@ -223,14 +223,7 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 					}}
 				/>
 				<span class="icons">
-					<smoothly-icon
-						class="smoothly-invalid"
-						name="alert-circle"
-						color="danger"
-						fill="clear"
-						size="small"
-						tooltip={this.errorMessage}
-					/>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (

@@ -126,7 +126,6 @@ export namespace Components {
     interface SmoothlyDateText {
         "deselect": () => Promise<void>;
         "disabled": boolean;
-        "invalid": boolean;
         "locale"?: isoly.Locale;
         "readonly": boolean;
         "select": (place?: "start" | "end") => Promise<void>;
@@ -374,6 +373,7 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
+        "errorMessage"?: string;
         "getValue": () => Promise<Partial<isoly.DateRange> | undefined>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
@@ -2413,7 +2413,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDateText {
         "disabled"?: boolean;
-        "invalid"?: boolean;
         "locale"?: isoly.Locale;
         "onSmoothlyDateHasPartialDate"?: (event: SmoothlyDateTextCustomEvent<DateFormat.Parts>) => void;
         "onSmoothlyDateTextChange"?: (event: SmoothlyDateTextCustomEvent<isoly.Date | undefined>) => void;
@@ -2666,6 +2665,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
+        "errorMessage"?: string;
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
         "looks"?: Looks;
