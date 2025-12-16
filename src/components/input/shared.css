@@ -31,7 +31,7 @@
 	inset: 0;
 	pointer-events: none;
 	border-bottom: 2px solid rgb(var(--smoothly-input-border-focus));
-	z-index: 10;
+	z-index: 1;
 }
 
 :host[looks="grid"] {
@@ -47,7 +47,7 @@
 	position: relative;
 	box-shadow: 0px 0px 0px 2px rgb(var(--smoothly-input-border-focus));
 	outline: none;
-	z-index: 10;
+	z-index: 1;
 }
 
 :host[looks="transparent"] {
