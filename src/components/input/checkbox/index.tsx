@@ -32,7 +32,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled: boolean
-	@Prop({ mutable: true }) checked = false
+	@Prop({ mutable: true, reflect: true }) checked = false
 	@Prop() value?: Record<"true" | "false", any>
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -125,7 +125,7 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 						this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 					}}
 				/>
-				{this.checked && <smoothly-icon name="checkmark-outline" size="tiny" />}
+				{this.checked && <smoothly-icon name="checkmark-sharp" size="tiny" />}
 				<label htmlFor={this.id}>
 					<slot />
 				</label>
