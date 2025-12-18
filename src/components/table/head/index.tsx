@@ -11,7 +11,6 @@ export class SmoothlyTableHead {
 	@Element() element: HTMLSmoothlyTableHeadElement
 	@State() scrolled?: boolean
 	@State() topOffset = 0
-	private intersectionObserver?: IntersectionObserver
 	private scrollParent?: HTMLElement
 	private onScroll = (event: Event) => {
 		if (event.target instanceof HTMLElement) {
@@ -23,7 +22,7 @@ export class SmoothlyTableHead {
 	}
 
 	getTopOffset() {
-		let height = 0
+		let depth = 0
 		let currentElement = this.element
 		while (currentElement) {
 			if (currentElement.tagName.toLowerCase() === "smoothly-table") {
@@ -34,33 +33,28 @@ export class SmoothlyTableHead {
 						el.compareDocumentPosition(this.element) & Node.DOCUMENT_POSITION_FOLLOWING
 					)
 				}) as HTMLElement[]
-				for (const head of heads)
-					height += head.clientHeight || 0
+				for (const head of heads) {
+					depth += Array.from(head.children).filter(el => el.tagName.toLowerCase() === "smoothly-table-row").length
+				}
 			}
 			currentElement = currentElement.parentElement as HTMLSmoothlyTableHeadElement
 		}
-		this.topOffset = height
+		this.topOffset = depth
 	}
 
 	connectedCallback() {
 		this.scrollParent = Scrollable.findParent(this.element)
 		this.scrollParent?.addEventListener("scroll", this.onScroll)
-		this.intersectionObserver = new IntersectionObserver(entries => {
-			for (const entry of entries) {
-				if (entry.isIntersecting) {
-					this.getTopOffset()
-				}
-			}
-		})
-		this.intersectionObserver.observe(this.element)
+		this.getTopOffset()
 	}
 	disconnectedCallback() {
 		this.scrollParent?.removeEventListener("scroll", this.onScroll)
-		this.intersectionObserver?.disconnect()
 	}
 	render(): VNode | VNode[] {
 		return (
-			<Host class={{ scrolled: !!this.scrolled }} style={{ top: `${this.topOffset}px` }}>
+			<Host
+				class={{ scrolled: !!this.scrolled }}
+				style={{ top: `calc(${this.topOffset} * var(--smoothly-table-cell-min-height))` }}>
 				<slot />
 			</Host>
 		)
