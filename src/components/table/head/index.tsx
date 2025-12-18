@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Prop, State, VNode } from "@stencil/core"
+import { Component, Element, h, Host, State, VNode } from "@stencil/core"
 import { Scrollable } from "../../../model"
 
 @Component({
@@ -7,10 +7,9 @@ import { Scrollable } from "../../../model"
 	scoped: true,
 })
 export class SmoothlyTableHead {
-	@Prop() name = ""
 	@Element() element: HTMLSmoothlyTableHeadElement
 	@State() scrolled?: boolean
-	@State() topOffset = 0
+	@State() depth = 0
 	private scrollParent?: HTMLElement
 	private onScroll = (event: Event) => {
 		if (event.target instanceof HTMLElement) {
@@ -20,7 +19,6 @@ export class SmoothlyTableHead {
 			this.scrolled = parentRect.top == elementRect.top
 		}
 	}
-
 	getTopOffset() {
 		let depth = 0
 		let currentElement = this.element
@@ -39,9 +37,8 @@ export class SmoothlyTableHead {
 			}
 			currentElement = currentElement.parentElement as HTMLSmoothlyTableHeadElement
 		}
-		this.topOffset = depth
+		this.depth = depth
 	}
-
 	connectedCallback() {
 		this.scrollParent = Scrollable.findParent(this.element)
 		this.scrollParent?.addEventListener("scroll", this.onScroll)
@@ -54,7 +51,12 @@ export class SmoothlyTableHead {
 		return (
 			<Host
 				class={{ scrolled: !!this.scrolled }}
-				style={{ top: `calc(${this.topOffset} * var(--smoothly-table-cell-min-height))` }}>
+				style={
+					{
+						"--top": `calc(${this.depth} * var(--smoothly-table-cell-min-height))`,
+						"--zIndex": `${10 - this.depth}`,
+					} as any
+				}>
 				<slot />
 			</Host>
 		)

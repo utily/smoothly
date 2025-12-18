@@ -16,7 +16,7 @@ export class SmoothlyTableDemoNestedNoCell {
 			<Host>
 				<smoothly-display type="text" value="Nested" />
 				<smoothly-table color="primary" columns={8}>
-					<smoothly-table-head name="1">
+					<smoothly-table-head>
 						<smoothly-table-row>
 							<div class="smoothly-table-cell">Id</div>
 							<div class="smoothly-table-cell">Registered</div>
@@ -31,20 +31,19 @@ export class SmoothlyTableDemoNestedNoCell {
 					<smoothly-table-body>
 						{data.map((entry, index) => (
 							<smoothly-table-expandable-row
-							// onSmoothlyTableExpandableRowChange={event => {
-							// 	if (event.detail) {
-							// 		this.loadingIndex = index
-							// 		setTimeout(() => {
-							// 			this.loadingIndex = undefined
-							// 			this.loadedRows = [...this.loadedRows, index]
-							// 		}, 1500)
-							// 	}
-							// }}
-							>
-								{/* {this.loadingIndex === index && <smoothly-spinner overlay size="small" />} */}
-								{/* {this.loadedRows.includes(index) && ( */}
-								<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
-								{/* )} */}
+								onSmoothlyTableExpandableRowChange={event => {
+									if (event.detail) {
+										this.loadingIndex = index
+										setTimeout(() => {
+											this.loadingIndex = undefined
+											this.loadedRows = [...this.loadedRows, index]
+										}, 1500)
+									}
+								}}>
+								{this.loadingIndex === index && <smoothly-spinner overlay size="small" />}
+								{this.loadedRows.includes(index) && (
+									<smoothly-table-demo-nested-no-cell-inner color="secondary" data={entry.friends} slot={"detail"} />
+								)}
 								<div class="smoothly-table-cell">{entry.id}</div>
 								<div class="smoothly-table-cell">{entry.registered}</div>
 								<div class="smoothly-table-cell">{entry.name}</div>

@@ -681,7 +681,6 @@ export namespace Components {
     interface SmoothlyTableFoot {
     }
     interface SmoothlyTableHead {
-        "name": string;
     }
     interface SmoothlyTableRow {
     }
@@ -2970,7 +2969,6 @@ declare namespace LocalJSX {
     interface SmoothlyTableFoot {
     }
     interface SmoothlyTableHead {
-        "name"?: string;
     }
     interface SmoothlyTableRow {
     }
