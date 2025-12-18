@@ -10,3 +10,6 @@
 :host smoothly-table-expandable-row {
 	position: relative;
 }
+:host smoothly-table-head {
+background-color: aqua;
+}
