@@ -47,6 +47,7 @@ export class SmoothlyTableHead {
 	disconnectedCallback() {
 		this.scrollParent?.removeEventListener("scroll", this.onScroll)
 	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host
