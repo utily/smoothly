@@ -4,7 +4,7 @@
 	grid-template-columns: subgrid;
 	top: var(--top);
 	position: sticky;
-	z-index: var(--zIndex);
+	z-index: var(--z-index);
 	--smoothly-color: var(--smoothly-table-header-background);
 	--smoothly-color-contrast: var(--smoothly-table-header-foreground);
 	background-color: rgb(var(--smoothly-table-header-background));

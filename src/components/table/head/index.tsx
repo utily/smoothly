@@ -21,18 +21,15 @@ export class SmoothlyTableHead {
 	}
 	getTopOffset() {
 		let depth = 0
-		let currentElement = this.element
+		let currentElement: HTMLElement | null = this.element
 		while (currentElement) {
 			if (currentElement.tagName.toLowerCase() === "smoothly-table") {
-				const heads = Array.from(currentElement.children).filter(el => {
-					return (
-						el.tagName.toLowerCase() === "smoothly-table-head" &&
-						el !== this.element &&
-						el.compareDocumentPosition(this.element) & Node.DOCUMENT_POSITION_FOLLOWING
+				const head = currentElement.querySelector("smoothly-table-head") as HTMLSmoothlyTableHeadElement
+				if (head !== this.element) {
+					const rows = Array.from(
+						head.querySelectorAll("smoothly-table-row") as NodeListOf<HTMLSmoothlyTableHeadElement>
 					)
-				}) as HTMLElement[]
-				for (const head of heads) {
-					depth += Array.from(head.children).filter(el => el.tagName.toLowerCase() === "smoothly-table-row").length
+					depth += rows.length
 				}
 			}
 			currentElement = currentElement.parentElement as HTMLSmoothlyTableHeadElement
@@ -55,7 +52,7 @@ export class SmoothlyTableHead {
 				style={
 					{
 						"--top": `calc(${this.depth} * var(--smoothly-table-cell-min-height))`,
-						"--zIndex": `${10 - this.depth}`,
+						"--z-index": `${10 - this.depth}`,
 					} as any
 				}>
 				<slot />
