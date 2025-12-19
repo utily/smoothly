@@ -2,9 +2,9 @@
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
-	top: 0;
+	top: var(--top);
 	position: sticky;
-	z-index: 3;
+	z-index: var(--z-index);
 	--smoothly-color: var(--smoothly-table-header-background);
 	--smoothly-color-contrast: var(--smoothly-table-header-foreground);
 	background-color: rgb(var(--smoothly-table-header-background));

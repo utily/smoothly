@@ -92,7 +92,7 @@
 	flex-direction: column;
 	position: absolute;
 	top: var(--element-height);
-	z-index: 10;
+	z-index: 20;
 	max-height: var(--menu-height, unset);
 	overflow-x: hidden;
 	overflow-y: auto;
