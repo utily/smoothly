@@ -27,6 +27,7 @@
 	color: rgb(var(--smoothly-input-foreground));
 	display: block;
 }
+:host([checked][looks=transparent])>input, /* Override shared.css transparent styling */
 :host([checked])>input {
 	background-color: rgb(var(--smoothly-input-foreground));
 }
