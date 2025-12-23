@@ -1,0 +1,9 @@
+:host {
+	display: block;
+	max-width: min(calc(100% - 0.5rem), 48rem);
+	margin: auto;
+}
+:host smoothly-input {
+	width: 100%;
+}
+

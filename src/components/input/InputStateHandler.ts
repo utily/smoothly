@@ -80,55 +80,71 @@ export class InputStateHandler {
 		return result
 	}
 
-	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+	private nextFormattedState?: Readonly<tidily.State> & Readonly<tidily.Settings> // Set in beforeinput event - used in input event
+	public onBeforeInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const input = event.target as HTMLInputElement
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
-		const result =
-			event.type == "beforeinput" || event.type == "input"
-				? this.eventHandlers[event.type][event.inputType]?.(event, this.unformatState(state), state) ?? state
-				: state
+
+		const result = this.eventHandlers.beforeinput[event.inputType]?.(event, this.unformatState(state), state) ?? state
 		const formatted = this.partialFormatState(result)
-		if (event.defaultPrevented) {
-			input.value = formatted.value
-			input.selectionStart = formatted.selection.start
-			input.selectionEnd = formatted.selection.end
-			input.selectionDirection = formatted.selection.direction ?? null
-		}
+		this.nextFormattedState = formatted
+		console.log(event.type, this.nextFormattedState)
 		return formatted
+	}
+	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+		const input = event.target as HTMLInputElement
+		if (this.nextFormattedState) {
+			input.value = this.nextFormattedState.value
+			input.selectionStart = this.nextFormattedState.selection.start
+			input.selectionEnd = this.nextFormattedState.selection.end
+			input.selectionDirection = this.nextFormattedState.selection.direction ?? null
+			return this.nextFormattedState
+		} else {
+			// state.selection.start = input.selectionStart ?? state.selection.start
+			// state.selection.end = input.selectionEnd ?? state.selection.end
+			// state.selection.direction = input.selectionDirection ?? state.selection.direction
+
+			const result = this.eventHandlers.input[event.inputType]?.(event, this.unformatState(state), state) ?? state
+
+			const formatted = this.partialFormatState(result)
+			if (event.defaultPrevented) {
+				input.value = formatted.value
+				input.selectionStart = formatted.selection.start
+				input.selectionEnd = formatted.selection.end
+				input.selectionDirection = formatted.selection.direction ?? null
+			}
+			return formatted
+		}
 	}
 	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: Handler<InputEvent> | undefined }> = {
 		beforeinput: {
 			insertText: (event, state) => this.insert(event, state),
 			insertFromPaste: (event, state) => this.insert(event, state),
 			insertFromDrop: (event, state) => this.insert(event, state),
-			deleteContentBackward: (event, state) => {
-				event.preventDefault()
+			deleteContentBackward: (_, state) => {
 				if (state.selection.start == state.selection.end)
 					this.select(state, state.selection.start - 1, state.selection.end)
 				this.erase(state)
 				return state
 			},
-			deleteContentForward: (event, state) => {
-				event.preventDefault()
+			deleteContentForward: (_, state) => {
 				if (state.selection.start == state.selection.end)
 					this.select(state, state.selection.start, state.selection.end + 1)
 				this.erase(state)
 				return state
 			},
-			deleteWordBackward: (event, unformatted, formattedState) => {
+			deleteWordBackward: (_, unformatted, formattedState) => {
 				let result = unformatted
 				if (this.type != "password") {
-					event.preventDefault()
 					result = this.deleteWord(formattedState, "backward")
 				}
 				return result
 			},
-			deleteWordForward: (event, unformatted, formattedState) => {
+			deleteWordForward: (_, unformatted, formattedState) => {
 				let result = unformatted
 				if (this.type != "password") {
-					event.preventDefault()
 					result = this.deleteWord(formattedState, "forward")
 				}
 				return result
@@ -154,7 +170,6 @@ export class InputStateHandler {
 	}
 
 	private insert(event: InputEvent, unformatted: tidily.State): tidily.State {
-		event.preventDefault()
 		if (typeof event.data == "string")
 			for (const c of event.data)
 				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c.replace(/(\r|\n|\t)/g, ""))
