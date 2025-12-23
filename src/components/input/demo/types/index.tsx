@@ -24,7 +24,7 @@ export class SmoothlyInputDemoTypes {
 			<Host>
 				<h3>Input Types</h3>
 				{this.types.map(type => (
-					<smoothly-input name={type} type={type} key={type}>
+					<smoothly-input name={type} type={type} key={type} looks="border">
 						{type}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input>
