@@ -186,7 +186,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	onInput(event: InputEvent) {
 		this.state = this.stateHandler.onInputEvent(event, this.state)
 		this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
-		console.log("updating state!!", this.state)
+		// console.log("updating state!!", this.state)
 	}
 	copyText(value?: string) {
 		if (value) {

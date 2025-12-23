@@ -81,17 +81,16 @@ export class InputStateHandler {
 	}
 
 	private nextFormattedState?: Readonly<tidily.State> & Readonly<tidily.Settings> // Set in beforeinput event - used in input event
-	public onBeforeInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+	public onBeforeInputEvent(event: InputEvent, state: tidily.State) {
 		const input = event.target as HTMLInputElement
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
 
-		const result = this.eventHandlers.beforeinput[event.inputType]?.(event, this.unformatState(state), state) ?? state
-		const formatted = this.partialFormatState(result)
+		const result = this.eventHandlers.beforeinput[event.inputType]?.(event, this.unformatState(state), state)
+		const formatted = result ? this.partialFormatState(result) : undefined
 		this.nextFormattedState = formatted
-		console.log(event.type, this.nextFormattedState)
-		return formatted
+		console.log(event.type, event.inputType, event, this.nextFormattedState)
 	}
 	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const input = event.target as HTMLInputElement
@@ -100,6 +99,7 @@ export class InputStateHandler {
 			input.selectionStart = this.nextFormattedState.selection.start
 			input.selectionEnd = this.nextFormattedState.selection.end
 			input.selectionDirection = this.nextFormattedState.selection.direction ?? null
+			console.log(event.type, event.inputType, "using nextFormattedState", event, this.nextFormattedState)
 			return this.nextFormattedState
 		} else {
 			// state.selection.start = input.selectionStart ?? state.selection.start
@@ -115,6 +115,7 @@ export class InputStateHandler {
 				input.selectionEnd = formatted.selection.end
 				input.selectionDirection = formatted.selection.direction ?? null
 			}
+			console.log(event.type, "new Event", event, formatted)
 			return formatted
 		}
 	}
