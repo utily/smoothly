@@ -95,12 +95,14 @@ export class InputStateHandler {
 	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
 		const input = event.target as HTMLInputElement
 		if (this.nextFormattedState) {
-			input.value = this.nextFormattedState.value
-			input.selectionStart = this.nextFormattedState.selection.start
-			input.selectionEnd = this.nextFormattedState.selection.end
-			input.selectionDirection = this.nextFormattedState.selection.direction ?? null
-			console.log(event.type, event.inputType, "using nextFormattedState", event, this.nextFormattedState)
-			return this.nextFormattedState
+			const result = this.nextFormattedState
+			this.nextFormattedState = undefined
+			input.value = result.value
+			input.selectionStart = result.selection.start
+			input.selectionEnd = result.selection.end
+			input.selectionDirection = result.selection.direction ?? null
+			console.log(event.type, event.inputType, "using nextFormattedState", event, result)
+			return result
 		} else {
 			// state.selection.start = input.selectionStart ?? state.selection.start
 			// state.selection.end = input.selectionEnd ?? state.selection.end
