@@ -171,8 +171,8 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.observer.publish()
 	}
 	componentDidLoad() {
-		if (this.inputElement)
-			this.inputElement.value = this.state.value
+		// if (this.inputElement)
+		// 	this.inputElement.value = this.state.value
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
@@ -184,8 +184,11 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Listen("input")
 	onInput(event: InputEvent) {
-		this.state = this.stateHandler.onInputEvent(event, this.state)
-		this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
+		this.stateHandler.onInputEvent(event, this.state, state => {
+			this.state = state
+			this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
+		})
+		// this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
 		// console.log("updating state!!", this.state)
 	}
 	copyText(value?: string) {

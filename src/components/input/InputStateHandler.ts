@@ -4,6 +4,7 @@ import { Adjacent } from "./Adjacent"
 
 type Formatter = tidily.Formatter & tidily.Converter<any>
 type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
+type CommitState = (state: Readonly<tidily.State> & tidily.Settings) => void
 
 export class InputStateHandler {
 	constructor(private formatter: Formatter, private type: tidily.Type) {}
@@ -79,9 +80,8 @@ export class InputStateHandler {
 		input.value = result.value
 		return result
 	}
-
 	private nextFormattedState?: Readonly<tidily.State> & Readonly<tidily.Settings> // Set in beforeinput event - used in input event
-	public onBeforeInputEvent(event: InputEvent, state: tidily.State) {
+	public onBeforeInputEvent(event: InputEvent, state: tidily.State): void {
 		const input = event.target as HTMLInputElement
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
@@ -92,24 +92,41 @@ export class InputStateHandler {
 		this.nextFormattedState = formatted
 		console.log(event.type, event.inputType, event, this.nextFormattedState)
 	}
-	public onInputEvent(event: InputEvent, state: tidily.State): Readonly<tidily.State> & tidily.Settings {
+	private requestAnimationFrameId: number | undefined
+	private timeoutId: NodeJS.Timeout | undefined
+	public onInputEvent(event: InputEvent, state: tidily.State, commitState: CommitState): void {
 		const input = event.target as HTMLInputElement
-		if (this.nextFormattedState) {
+		if (!event.inputType) {
+			this.requestAnimationFrameId && cancelAnimationFrame(this.requestAnimationFrameId)
+			clearTimeout(this.timeoutId)
+			const valueBeforeRAF = input.value
+
+			this.requestAnimationFrameId = requestAnimationFrame(() => {
+				// this.timeoutId = setTimeout(() => {
+				const newValue = state.value != input.value ? input.value : valueBeforeRAF
+				console.log("autofill?", { state: state.value, inputValue: input.value, valueBeforeRAF, newValue })
+				if (state.value != newValue) {
+					const result = { ...state, value: newValue }
+					const formatted = this.partialFormatState(result)
+					commitState(formatted)
+					console.log(event.type, event.inputType, "autofill", event, result)
+				}
+				// }, 100)
+			})
+		} else if (this.nextFormattedState) {
 			const result = this.nextFormattedState
 			this.nextFormattedState = undefined
+			console.log(event.type, event.inputType, "using nextFormattedState", event, result)
 			input.value = result.value
 			input.selectionStart = result.selection.start
 			input.selectionEnd = result.selection.end
 			input.selectionDirection = result.selection.direction ?? null
-			console.log(event.type, event.inputType, "using nextFormattedState", event, result)
-			return result
+			commitState(result)
 		} else {
-			// state.selection.start = input.selectionStart ?? state.selection.start
-			// state.selection.end = input.selectionEnd ?? state.selection.end
-			// state.selection.direction = input.selectionDirection ?? state.selection.direction
-
+			state.selection.start = input.selectionStart ?? state.selection.start
+			state.selection.end = input.selectionEnd ?? state.selection.end
+			state.selection.direction = input.selectionDirection ?? state.selection.direction
 			const result = this.eventHandlers.input[event.inputType]?.(event, this.unformatState(state), state) ?? state
-
 			const formatted = this.partialFormatState(result)
 			if (
 				input.value != formatted.value ||
@@ -121,9 +138,8 @@ export class InputStateHandler {
 				input.selectionEnd = formatted.selection.end
 				input.selectionDirection = formatted.selection.direction ?? null
 			}
-
 			console.log(event.type, event.inputType, "new Event", event, formatted)
-			return formatted
+			commitState(formatted)
 		}
 	}
 	private eventHandlers: Record<"beforeinput" | "input", { [inputType: string]: Handler<InputEvent> | undefined }> = {
@@ -173,7 +189,7 @@ export class InputStateHandler {
 			deleteWordForward: (event, state) =>
 				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
 			// Chrome will dispatch an input event without inputType when auto-filling
-			undefined: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
+			// undefined: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
 		},
 	}
 
