@@ -111,13 +111,18 @@ export class InputStateHandler {
 			const result = this.eventHandlers.input[event.inputType]?.(event, this.unformatState(state), state) ?? state
 
 			const formatted = this.partialFormatState(result)
-			if (event.defaultPrevented) {
+			if (
+				input.value != formatted.value ||
+				input.selectionStart != formatted.selection.start ||
+				input.selectionEnd != formatted.selection.end
+			) {
 				input.value = formatted.value
 				input.selectionStart = formatted.selection.start
 				input.selectionEnd = formatted.selection.end
 				input.selectionDirection = formatted.selection.direction ?? null
 			}
-			console.log(event.type, "new Event", event, formatted)
+
+			console.log(event.type, event.inputType, "new Event", event, formatted)
 			return formatted
 		}
 	}
