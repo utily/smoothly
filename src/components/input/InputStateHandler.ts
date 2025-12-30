@@ -95,6 +95,7 @@ export class InputStateHandler {
 	public onInputEvent(event: InputEvent, state: tidily.State, commitState: CommitState): void {
 		const input = event.target as HTMLInputElement
 		if (!event.inputType) {
+			// Chrome will dispatch an input event without inputType on autofill (this event is not reliable, but it's be best Chrome provides)
 			const newValue = input.value
 			this.requestAnimationFrameId && cancelAnimationFrame(this.requestAnimationFrameId)
 			clearTimeout(this.timeoutId)
@@ -176,8 +177,6 @@ export class InputStateHandler {
 				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
 			deleteWordForward: (event, state) =>
 				this.type == "password" ? { ...state, value: (event.target as HTMLInputElement).value } : state,
-			// Chrome will dispatch an input event without inputType when auto-filling
-			// undefined: (event, state) => ({ ...state, value: (event.target as HTMLInputElement).value }),
 		},
 	}
 
