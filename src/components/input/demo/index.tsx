@@ -18,6 +18,7 @@ export class SmoothlyInputDemo {
 				<smoothly-input-demo-standard />
 				<smoothly-input-date-demo />
 				<smoothly-input-demo-user-input />
+				<smoothly-input-demo-types />
 				<div class="inputs">
 					<h2>Calendar</h2>
 					<smoothly-input-date name="some-date">Calendar</smoothly-input-date>
