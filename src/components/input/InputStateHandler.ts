@@ -86,11 +86,9 @@ export class InputStateHandler {
 		state.selection.start = input.selectionStart ?? state.selection.start
 		state.selection.end = input.selectionEnd ?? state.selection.end
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
-
-		const result = this.eventHandlers.beforeinput[event.inputType]?.(event, this.unformatState(state), state)
-		const formatted = result ? this.partialFormatState(result) : undefined
+		const unformatted = this.eventHandlers.beforeinput[event.inputType]?.(event, this.unformatState(state), state)
+		const formatted = unformatted ? this.partialFormatState(unformatted) : undefined
 		this.nextFormattedState = formatted
-		console.log(event.type, event.inputType, event, this.nextFormattedState)
 	}
 	private requestAnimationFrameId: number | undefined
 	private timeoutId: NodeJS.Timeout | undefined
@@ -101,16 +99,13 @@ export class InputStateHandler {
 			this.requestAnimationFrameId && cancelAnimationFrame(this.requestAnimationFrameId)
 			clearTimeout(this.timeoutId)
 			this.requestAnimationFrameId = requestAnimationFrame(() => {
-				console.log("autofill?", { lastValue: state.value, newValue })
-				const result = { ...state, value: newValue }
-				const formatted = this.partialFormatState(result)
+				const newState = { ...state, value: newValue }
+				const formatted = this.partialFormatState(newState)
 				commitState(formatted)
-				console.log(event.type, event.inputType, "autofill", event, result)
 			})
 		} else if (this.nextFormattedState) {
 			const newState = this.nextFormattedState
 			this.nextFormattedState = undefined
-			console.log(event.type, event.inputType, "using nextFormattedState", event, newState)
 			input.value = newState.value
 			input.selectionStart = newState.selection.start
 			input.selectionEnd = newState.selection.end
@@ -132,7 +127,6 @@ export class InputStateHandler {
 				input.selectionEnd = formatted.selection.end
 				input.selectionDirection = formatted.selection.direction ?? null
 			}
-			console.log(event.type, event.inputType, "new Event", event, formatted)
 			commitState(formatted)
 		}
 	}
