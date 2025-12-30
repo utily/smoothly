@@ -97,31 +97,25 @@ export class InputStateHandler {
 	public onInputEvent(event: InputEvent, state: tidily.State, commitState: CommitState): void {
 		const input = event.target as HTMLInputElement
 		if (!event.inputType) {
+			const newValue = input.value
 			this.requestAnimationFrameId && cancelAnimationFrame(this.requestAnimationFrameId)
 			clearTimeout(this.timeoutId)
-			const valueBeforeRAF = input.value
-
 			this.requestAnimationFrameId = requestAnimationFrame(() => {
-				// this.timeoutId = setTimeout(() => {
-				const newValue = state.value != input.value ? input.value : valueBeforeRAF
-				console.log("autofill?", { state: state.value, inputValue: input.value, valueBeforeRAF, newValue })
-				if (state.value != newValue) {
-					const result = { ...state, value: newValue }
-					const formatted = this.partialFormatState(result)
-					commitState(formatted)
-					console.log(event.type, event.inputType, "autofill", event, result)
-				}
-				// }, 100)
+				console.log("autofill?", { lastValue: state.value, newValue })
+				const result = { ...state, value: newValue }
+				const formatted = this.partialFormatState(result)
+				commitState(formatted)
+				console.log(event.type, event.inputType, "autofill", event, result)
 			})
 		} else if (this.nextFormattedState) {
-			const result = this.nextFormattedState
+			const newState = this.nextFormattedState
 			this.nextFormattedState = undefined
-			console.log(event.type, event.inputType, "using nextFormattedState", event, result)
-			input.value = result.value
-			input.selectionStart = result.selection.start
-			input.selectionEnd = result.selection.end
-			input.selectionDirection = result.selection.direction ?? null
-			commitState(result)
+			console.log(event.type, event.inputType, "using nextFormattedState", event, newState)
+			input.value = newState.value
+			input.selectionStart = newState.selection.start
+			input.selectionEnd = newState.selection.end
+			input.selectionDirection = newState.selection.direction ?? null
+			commitState(newState)
 		} else {
 			state.selection.start = input.selectionStart ?? state.selection.start
 			state.selection.end = input.selectionEnd ?? state.selection.end
