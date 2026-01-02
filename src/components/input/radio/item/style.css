@@ -1,5 +1,9 @@
 :host {
-	display: flex;
+	display: grid;
+	grid-template-areas: 
+		"check label"
+		"detail detail";
+	grid-template-columns: auto 1fr;
 	align-items: center;
 	position: relative;
 }
@@ -15,6 +19,7 @@ smoothly-input-radio[disabled] :host>* {
 	border-radius: 1px;
 }
 :host>smoothly-icon {
+	grid-area: check;
 	--smoothly-color-contrast: var(--smoothly-input-foreground);
 }
 smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=checkmark-circle] {
@@ -22,15 +27,26 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 }
 
 :host>input {
+	grid-area: check;
 	opacity: 0;
 	z-index: 1;
-	width: 1.5em;
-	height: 1.5em;
+	left: 0;
+	width: 1.4rem;
+	height: 1.4rem;
 	position: absolute;
-	transform: translateX(50%);
 }
-
 :host>label {
-	padding: 0 .3em;
+	grid-area: label;
+	padding-inline: 0.25rem;
 	white-space: nowrap;
+	width: fit-content;
+}
+:host [slot=detail] {
+	grid-area: detail;
+}
+:host[selected] ::slotted([slot="detail"]) {
+  display: block;
+}
+:host ::slotted([slot="detail"]) {
+  display: none;
 }
