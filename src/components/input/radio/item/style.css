@@ -44,3 +44,9 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 :host [slot=detail] {
 	grid-area: detail;
 }
+:host[selected] ::slotted([slot="detail"]) {
+  display: block;
+}
+:host ::slotted([slot="detail"]) {
+  display: none;
+}
