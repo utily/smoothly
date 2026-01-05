@@ -24,14 +24,14 @@ smoothly-app.smoothly-mobile-mode>smoothly-notifier>header:has(smoothly-burger)>
 smoothly-app>smoothly-notifier>header {
 	position: sticky;
 	top: 0;
-	z-index: 5;
+	z-index: 20;
 	width: 100%;
 	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
 	align-items: center;
-	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade));
+	box-shadow: 0 1px 0 0 rgb(var(--smoothly-color-shade)) inset;
 }
 
 smoothly-app>smoothly-notifier>header>nav {
