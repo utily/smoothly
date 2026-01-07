@@ -28,7 +28,6 @@ export class SmoothlyInputRadioItem {
 			})
 		})
 		this.selected && this.inputHandler(false)
-		this.id = "id-" + Math.random().toString(36).substring(2, 11)
 	}
 	inputHandler(userInitiated: boolean): void {
 		this.smoothlyRadioItemSelect.emit({
@@ -43,7 +42,6 @@ export class SmoothlyInputRadioItem {
 		return (
 			<Host>
 				<input
-					id={this.id}
 					name={this.name}
 					type="radio"
 					checked={this.selected}
@@ -51,7 +49,7 @@ export class SmoothlyInputRadioItem {
 					onClick={() => this.inputHandler(true)}
 				/>
 				<smoothly-icon name={this.selected ? "checkmark-circle" : "ellipse-outline"} size="small" tooltip="Select" />
-				<label htmlFor={this.id}>
+				<label>
 					<slot />
 				</label>
 				<slot name="detail" />
