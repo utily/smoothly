@@ -16,11 +16,12 @@ export class SmoothlyInputDemoRadio {
 	render() {
 		return (
 			<Host>
+				<h2>radio input - column direction</h2>
 				<smoothly-input-radio
 					name="radio"
 					direction="column"
 					onSmoothlyInput={e => (this.selected = e.detail.radio as string)}>
-					<smoothly-input-radio-item value="1" selected>
+					<smoothly-input-radio-item value="1">
 						<span>Option 1</span>
 
 						<span slot="detail">
@@ -31,7 +32,7 @@ export class SmoothlyInputDemoRadio {
 							mollit anim id est laborum.
 						</span>
 					</smoothly-input-radio-item>
-					<smoothly-input-radio-item value="2">
+					<smoothly-input-radio-item value="2" selected>
 						<span>Option 2</span>
 						<div slot="detail">
 							<smoothly-tabs>
