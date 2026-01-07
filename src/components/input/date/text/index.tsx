@@ -19,7 +19,6 @@ export class SmoothlyInputDateRangeText {
 	@Prop() locale?: isoly.Locale = getLocale()
 	@Prop({ reflect: true }) readonly: boolean
 	@Prop({ reflect: true }) disabled: boolean
-	@Prop({ reflect: true }) invalid: boolean
 	@Prop({ reflect: true }) showLabel = true
 	@Prop() value?: isoly.Date // Only used for initial value
 	@State() parts: DateFormat.Parts = {}
@@ -30,6 +29,7 @@ export class SmoothlyInputDateRangeText {
 	@Event() smoothlyDateTextHasText: EventEmitter<boolean>
 	@Event() smoothlyDateTextChange: EventEmitter<isoly.Date | undefined>
 	@Event() smoothlyDateTextFocusChange: EventEmitter<boolean>
+	@Event() smoothlyDateHasPartialDate: EventEmitter<DateFormat.Parts>
 	@Event() smoothlyDateTextDone: EventEmitter<void>
 	@Event() smoothlyDateTextPrevious: EventEmitter<void>
 	@Event() smoothlyDateTextNext: EventEmitter<void>
@@ -37,9 +37,10 @@ export class SmoothlyInputDateRangeText {
 	componentWillLoad() {
 		this.order = DateFormat.Order.fromLocale(this.locale)
 		this.separator = DateFormat.Separator.fromLocale(this.locale)
+		this.parts = DateFormat.Parts.fromDate(this.value) ?? {}
 	}
-	async componentDidLoad() {
-		await this.setValue(this.value)
+	componentDidLoad() {
+		this.updateInputs()
 	}
 
 	@Watch("parts")
@@ -64,6 +65,9 @@ export class SmoothlyInputDateRangeText {
 
 	setAllParts(parts?: DateFormat.Parts) {
 		this.parts = parts ?? {}
+		this.updateInputs()
+	}
+	updateInputs() {
 		const yearIndex = this.order.indexOf("Y")
 		const monthIndex = this.order.indexOf("M")
 		const dayIndex = this.order.indexOf("D")
@@ -145,6 +149,8 @@ export class SmoothlyInputDateRangeText {
 				this.setPart("D", roundedParts?.D)
 			}
 		}
+		if (this.parts.Y || this.parts.M || this.parts.D)
+			this.smoothlyDateHasPartialDate.emit(this.parts)
 	}
 	keyDownHandler(e: KeyboardEvent) {
 		const text = this.getInnerText(e.target)
@@ -222,7 +228,8 @@ export class SmoothlyInputDateRangeText {
 							onKeyDown={(e: KeyboardEvent) => this.keyDownHandler(e)}
 							key={index}
 							ref={el => (this.partElements[index] = el)}
-							contenteditable={!(this.readonly || this.disabled)}>
+							contenteditable={!(this.readonly || this.disabled)}
+							inputmode="numeric">
 							{/* year or month or day written here */}
 						</span>
 						<span class="guide">{DateFormat.Part.getGuide(part, this.parts[part]?.length)}</span>

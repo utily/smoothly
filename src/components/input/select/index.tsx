@@ -49,7 +49,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop({ reflect: true }) disabled = false
 	@Prop({ reflect: true }) inCalendar = false
 	@Prop({ reflect: true }) ordered?: boolean
-	@Prop() multiple = false
+	@Prop({ reflect: true }) multiple = false
 	@Prop() clearable = true
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
@@ -363,14 +363,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					{this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
-					<smoothly-icon
-						class="smoothly-invalid"
-						name="alert-circle"
-						color="danger"
-						fill="clear"
-						size="small"
-						tooltip={this.errorMessage}
-					/>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon

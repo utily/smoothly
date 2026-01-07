@@ -23,10 +23,10 @@ export class SmoothlyThemeDemo {
 					<smoothly-item value="https://theme.payfunc.com/light/index.css">Payfunc Light</smoothly-item>
 					<smoothly-item value="https://theme.payfunc.com/dark/index.css">Payfunc Dark</smoothly-item>
 				</smoothly-theme-picker>
-				<span>
+				<div>
 					<smoothly-theme-colors />
 					<smoothly-theme-guide />
-				</span>
+				</div>
 				<smoothly-button type="link" link="/redirect">
 					To redirect
 				</smoothly-button>

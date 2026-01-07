@@ -175,7 +175,6 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 						<smoothly-icon name={"document-attach-outline"} />
 					</div>
 					<input
-						onFocus={() => console.log("focus file input!")}
 						ref={element => (this.input = element)}
 						type={"file"}
 						disabled={this.disabled}

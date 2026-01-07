@@ -43,7 +43,7 @@
 
 :host>smoothly-calendar {
 	position: absolute;
-	z-index: 10;
+	z-index: 20;
 	top: 4rem;
 	background-color: rgb(var(--smoothly-input-background));
 	min-width: 18rem;
@@ -64,9 +64,16 @@
 	border-left: 1px solid rgb(var(--smoothly-input-border));
 }
 
-:host>span.icons {
+:host>.smoothly-icons {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin-left: auto;
+}
+:host>.smoothly-icons>.smoothly-invalid {
+	display: none;
+	padding: 0.5rem;
+}
+:host[invalid]>.smoothly-icons>.smoothly-invalid {
+	display: flex;
 }

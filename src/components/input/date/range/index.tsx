@@ -14,6 +14,7 @@ import { Color } from "./../../../../model"
 export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	private startTextElement?: HTMLSmoothlyDateTextElement
 	private endTextElement?: HTMLSmoothlyDateTextElement
+	private calendarElement?: HTMLSmoothlyCalendarElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) locale?: isoly.Locale
 	@Prop({ reflect: true }) name: string = "dateRange"
@@ -26,7 +27,8 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	@Prop({ mutable: true }) end: isoly.Date | undefined
 	@Prop({ reflect: true }) placeholder: string
 	@Prop({ reflect: true }) alwaysShowGuide = false
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
+	@Prop({ reflect: true }) errorMessage?: string
 	@Prop() max?: isoly.Date
 	@Prop() min?: isoly.Date
 	parent: Editable | undefined
@@ -104,7 +106,16 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	async onSmoothlyDateTextChange(event: CustomEvent<isoly.Date | undefined>, startOrEnd: "start" | "end") {
 		event.stopPropagation()
 		const newValue = event.detail ?? undefined
-		if (this[startOrEnd] != newValue) {
+		const start = startOrEnd == "start" ? newValue : this.start
+		const end = startOrEnd == "end" ? newValue : this.end
+		if (isoly.Date.is(start) && isoly.Date.is(end) && start > end) {
+			// Swap values
+			this.start = end
+			this.end = start
+			this.startTextElement?.setValue(this.start)
+			this.endTextElement?.setValue(this.end)
+			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+		} else if (this[startOrEnd] != newValue) {
 			this[startOrEnd] = newValue
 			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
 		}
@@ -126,7 +137,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<Partial<isoly.DateRange | undefined>> {
+	async getValue(): Promise<Partial<isoly.DateRange> | undefined> {
 		return this.start || this.end ? { start: this.start, end: this.end } : undefined
 	}
 	@Method()
@@ -175,6 +186,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.startHasText = e.detail))}
 						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateHasPartialDate={e => (e.stopPropagation(), this.calendarElement?.jumpTo(e.detail))}
 						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "start"))}
 						onSmoothlyDateTextNext={e => (e.stopPropagation(), this.endTextElement?.select())}
 						onSmoothlyDateTextDone={e => (
@@ -184,7 +196,6 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						value={this.start}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						invalid={this.invalid}
 						showLabel={this.showLabel}
 					/>
 					<span class="smoothly-date-range-separator"> – </span>
@@ -194,6 +205,7 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						locale={this.locale}
 						onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.endHasText = e.detail))}
 						onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
+						onSmoothlyDateHasPartialDate={e => (e.stopPropagation(), this.calendarElement?.jumpTo(e.detail))}
 						onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onSmoothlyDateTextChange(e, "end"))}
 						onSmoothlyDateTextPrevious={e => (e.stopPropagation(), this.startTextElement?.select("end"))}
 						onSmoothlyDateTextNext={e => e.stopPropagation()}
@@ -201,23 +213,23 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 						value={this.end}
 						readonly={this.readonly}
 						disabled={this.disabled}
-						invalid={this.invalid}
 						showLabel={this.showLabel}
 					/>
 				</span>
-				<span class={"icons"}>
+				<span class={"smoothly-icons"}>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && (
 					<smoothly-calendar
-						doubleInput={true}
-						onSmoothlyValueChange={e => e.stopPropagation()}
-						onSmoothlyStartChange={e => (e.stopPropagation(), (this.start = e.detail))}
-						onSmoothlyEndChange={e => (e.stopPropagation(), (this.end = e.detail))}
+						ref={el => (this.calendarElement = el)}
+						doubleInput
 						onSmoothlyDateSet={e => e.stopPropagation()}
 						onSmoothlyDateRangeSet={e => {
 							e.stopPropagation()
 							this.open = false
+							this.start = e.detail.start
+							this.end = e.detail.end
 							this.smoothlyInput.emit({ [this.name]: e.detail })
 							this.smoothlyUserInput.emit({ name: this.name, value: e.detail })
 						}}

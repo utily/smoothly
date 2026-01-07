@@ -7,5 +7,5 @@
 :host>div {
 	margin: auto;
 	width: 1200px;
-	max-width: 100%;
+	max-width: calc(100% - 0.5rem);
 }

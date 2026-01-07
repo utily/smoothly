@@ -16,21 +16,20 @@
 	padding-right: 0;
 }
 
-:host>smoothly-icon {
-	position: absolute;
-	z-index: 1;
-	pointer-events: none;
-}
-
 :host>input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	height: 1.25rem;
 	width: 1.25rem;
+	border-radius: 0.25rem;
 	border: 1px solid rgb(var(--smoothly-input-foreground));
 	color: rgb(var(--smoothly-input-foreground));
 	display: block;
+}
+:host([checked][looks=transparent])>input, /* Override shared.css transparent styling */
+:host([checked])>input {
+	background-color: rgb(var(--smoothly-input-foreground));
 }
 
 :host:not([readonly]):not([disabled])>input,
@@ -46,8 +45,12 @@
 	cursor: not-allowed;
 }
 
-:host>smoothly-icon { 
-	--smoothly-color-contrast: var(--smoothly-input-foreground);
+:host>smoothly-icon {
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+	--smoothly-color-contrast: var(--smoothly-input-background);
+	/* outline: 2px solid blue; */
 }
 
 :host[looks="transparent"] {

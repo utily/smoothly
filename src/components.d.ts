@@ -10,6 +10,7 @@ import { FunctionalComponent, VNode } from "@stencil/core";
 import { Button } from "./components/button/Button";
 import { Editable } from "./components/input/Editable";
 import { isoly } from "isoly";
+import { DateFormat } from "./components/input/date/text/DateFormat";
 import { tidily } from "tidily";
 import { selectively } from "selectively";
 import { Filter } from "./components/filter/Filter";
@@ -26,6 +27,7 @@ export { FunctionalComponent, VNode } from "@stencil/core";
 export { Button } from "./components/button/Button";
 export { Editable } from "./components/input/Editable";
 export { isoly } from "isoly";
+export { DateFormat } from "./components/input/date/text/DateFormat";
 export { tidily } from "tidily";
 export { selectively } from "selectively";
 export { Filter } from "./components/filter/Filter";
@@ -43,6 +45,7 @@ export namespace Components {
         "home"?: string;
         "label"?: string;
         "menuOpen": boolean;
+        "navBreakpoint": `${number}${"px" | "em" | "rem"}`;
         "selectRoom": (path: string) => Promise<void>;
     }
     interface SmoothlyAppDemo {
@@ -56,6 +59,7 @@ export namespace Components {
         "label"?: string;
         "path": string | URLPattern;
         "selected"?: boolean;
+        "setMobileMode": (mobile: boolean) => Promise<void>;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
     }
     interface SmoothlyBackToTop {
@@ -64,9 +68,7 @@ export namespace Components {
         "right": string;
     }
     interface SmoothlyBurger {
-        "mediaQuery": string;
         "open": boolean;
-        "visible": boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -96,6 +98,7 @@ export namespace Components {
     interface SmoothlyCalendar {
         "doubleInput": boolean;
         "end"?: isoly.Date;
+        "jumpTo": (yearMonth: { Y?: string; M?: string; }) => Promise<void>;
         "max": isoly.Date;
         "min": isoly.Date;
         "month"?: isoly.Date;
@@ -123,7 +126,6 @@ export namespace Components {
     interface SmoothlyDateText {
         "deselect": () => Promise<void>;
         "disabled": boolean;
-        "invalid": boolean;
         "locale"?: isoly.Locale;
         "readonly": boolean;
         "select": (place?: "start" | "end") => Promise<void>;
@@ -371,7 +373,8 @@ export namespace Components {
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
         "end": isoly.Date | undefined;
-        "getValue": () => Promise<Partial<isoly.DateRange | undefined>>;
+        "errorMessage"?: string;
+        "getValue": () => Promise<Partial<isoly.DateRange> | undefined>;
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "locale"?: isoly.Locale;
@@ -984,7 +987,6 @@ declare global {
     };
     interface HTMLSmoothlyBurgerElementEventMap {
         "smoothlyNavStatus": boolean;
-        "smoothlyVisibleStatus": boolean;
     }
     interface HTMLSmoothlyBurgerElement extends Components.SmoothlyBurger, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyBurgerElementEventMap>(type: K, listener: (this: HTMLSmoothlyBurgerElement, ev: SmoothlyBurgerCustomEvent<HTMLSmoothlyBurgerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -1037,9 +1039,6 @@ declare global {
         new (): HTMLSmoothlyButtonDemoStandardElement;
     };
     interface HTMLSmoothlyCalendarElementEventMap {
-        "smoothlyValueChange": isoly.Date;
-        "smoothlyStartChange": isoly.Date;
-        "smoothlyEndChange": isoly.Date;
         "smoothlyDateSet": isoly.Date;
         "smoothlyDateRangeSet": isoly.DateRange;
     }
@@ -1090,6 +1089,7 @@ declare global {
         "smoothlyDateTextHasText": boolean;
         "smoothlyDateTextChange": isoly.Date | undefined;
         "smoothlyDateTextFocusChange": boolean;
+        "smoothlyDateHasPartialDate": DateFormat.Parts;
         "smoothlyDateTextDone": void;
         "smoothlyDateTextPrevious": void;
         "smoothlyDateTextNext": void;
@@ -2339,6 +2339,7 @@ declare namespace LocalJSX {
         "home"?: string;
         "label"?: string;
         "menuOpen"?: boolean;
+        "navBreakpoint"?: `${number}${"px" | "em" | "rem"}`;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppCustomEvent<string>) => void;
     }
     interface SmoothlyAppDemo {
@@ -2361,11 +2362,8 @@ declare namespace LocalJSX {
         "right"?: string;
     }
     interface SmoothlyBurger {
-        "mediaQuery"?: string;
         "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
-        "onSmoothlyVisibleStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
         "open"?: boolean;
-        "visible"?: boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
@@ -2402,9 +2400,6 @@ declare namespace LocalJSX {
         "month"?: isoly.Date;
         "onSmoothlyDateRangeSet"?: (event: SmoothlyCalendarCustomEvent<isoly.DateRange>) => void;
         "onSmoothlyDateSet"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyEndChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyStartChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
-        "onSmoothlyValueChange"?: (event: SmoothlyCalendarCustomEvent<isoly.Date>) => void;
         "start"?: isoly.Date;
         "value"?: isoly.Date;
     }
@@ -2427,8 +2422,8 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDateText {
         "disabled"?: boolean;
-        "invalid"?: boolean;
         "locale"?: isoly.Locale;
+        "onSmoothlyDateHasPartialDate"?: (event: SmoothlyDateTextCustomEvent<DateFormat.Parts>) => void;
         "onSmoothlyDateTextChange"?: (event: SmoothlyDateTextCustomEvent<isoly.Date | undefined>) => void;
         "onSmoothlyDateTextDone"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextFocusChange"?: (event: SmoothlyDateTextCustomEvent<boolean>) => void;
@@ -2679,6 +2674,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
+        "errorMessage"?: string;
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
         "looks"?: Looks;

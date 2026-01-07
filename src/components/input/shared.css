@@ -105,3 +105,6 @@
 :host:not([show-label]):not(.show-label) .label {
 	display: none;
 }
+:host smoothly-icon.smoothly-invalid {
+	fill: rgb(var(--smoothly-input-invalid-icon, var(--smoothly-danger-color)));
+}

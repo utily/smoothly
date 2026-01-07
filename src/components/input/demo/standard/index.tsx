@@ -210,7 +210,7 @@ export class SmoothlyInputDemoStandard {
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}
 						invalid={this.options.invalid}
-						// TODO - errorMessage
+						errorMessage={this.options.errorMessage}
 						showLabel={this.options.showLabel}
 						placeholder={this.options.placeholder}
 						alwaysShowGuide={this.options.alwaysShowGuide}>
@@ -242,12 +242,10 @@ export class SmoothlyInputDemoStandard {
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}
 						invalid={this.options.invalid}
-						// TODO - errorMessage
+						errorMessage={this.options.errorMessage}
 						placeholder={this.options.placeholder}
 						alwaysShowGuide={this.options.alwaysShowGuide}
-						showLabel={this.options.showLabel}
-						// TODO - placeholder
-					>
+						showLabel={this.options.showLabel}>
 						{this.options.showLabel && <span>Date Range</span>}
 						<smoothly-input-clear slot="end" />
 					</smoothly-input-date-range>

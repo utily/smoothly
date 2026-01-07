@@ -27,7 +27,7 @@ import { Looks } from "../Looks"
 export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, Editable {
 	private dateTextElement?: HTMLSmoothlyDateTextElement
 	private iconsElement?: HTMLElement
-	private calendarElement?: HTMLElement
+	private calendarElement?: HTMLSmoothlyCalendarElement
 	@Element() element: HTMLElement
 	@Prop({ reflect: true }) locale?: isoly.Locale
 	@Prop({ reflect: true, mutable: true }) color?: Color
@@ -35,7 +35,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	@Prop({ reflect: true }) name: string
 	@Prop({ reflect: true, mutable: true }) readonly = false
 	@Prop({ reflect: true }) disabled?: boolean
-	@Prop() invalid?: boolean = false
+	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	@Prop({ reflect: true }) placeholder?: string
 	@Prop({ reflect: true }) alwaysShowGuide = false
@@ -183,10 +183,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 					value={this.value}
 					onSmoothlyDateTextHasText={e => (e.stopPropagation(), (this.hasText = e.detail))}
 					onSmoothlyDateTextFocusChange={e => (e.stopPropagation(), (this.hasFocus = e.detail))}
-					onSmoothlyDateTextChange={e => this.onUserChangedValue(e)}
+					onSmoothlyDateHasPartialDate={e => (e.stopPropagation(), this.calendarElement?.jumpTo(e.detail))}
+					onSmoothlyDateTextChange={e => (e.stopPropagation(), this.onUserChangedValue(e))}
 					onSmoothlyDateTextDone={e => (e.stopPropagation(), (this.open = false), this.dateTextElement?.deselect())}
 				/>
-				<span class="icons" ref={el => (this.iconsElement = el)}>
+				<span class="smoothly-icons" ref={el => (this.iconsElement = el)}>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name={"end"} />
 				</span>
 				{this.open && !this.readonly && (
@@ -194,7 +196,7 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 						ref={el => (this.calendarElement = el)}
 						doubleInput={false}
 						value={this.value}
-						onSmoothlyValueChange={e => this.onUserChangedValue(e)}
+						onSmoothlyDateSet={e => (e.stopPropagation(), this.onUserChangedValue(e))}
 						max={this.max}
 						min={this.min}>
 						<div slot={"year-label"}>

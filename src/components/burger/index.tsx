@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-burger",
@@ -7,22 +7,8 @@ import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, 
 })
 export class SmoothlyBurger {
 	@Element() element: HTMLSmoothlyBurgerElement
-	@Prop({ mutable: true, reflect: true }) visible: boolean
-	@Prop({ mutable: true, reflect: true }) open = false
-	@Prop({ reflect: true }) mediaQuery = "(max-width: 900px)"
-	@State() history: boolean
+	@Prop({ reflect: true, mutable: true }) open = false
 	@Event() smoothlyNavStatus: EventEmitter<boolean>
-	@Event() smoothlyVisibleStatus: EventEmitter<boolean>
-
-	componentWillLoad() {
-		this.history = window.matchMedia(this.mediaQuery).matches
-		if (!window.matchMedia(this.mediaQuery).matches)
-			this.visible = false
-		else
-			this.visible = true
-		this.smoothlyNavStatus.emit(!this.visible)
-		this.smoothlyVisibleStatus.emit(this.visible)
-	}
 
 	@Watch("open")
 	openChanged() {
@@ -30,34 +16,14 @@ export class SmoothlyBurger {
 	}
 
 	@Listen("click")
-	clickHandler(event: MouseEvent) {
-		if (this.visible)
-			this.open = !this.open
-	}
-
-	@Listen("resize", { target: "window" })
-	resizeHandler() {
-		const result = window.matchMedia(this.mediaQuery).matches
-		if (result != this.history) {
-			if (result) {
-				this.visible = true
-				this.open = false
-			} else {
-				this.visible = false
-				this.open = false
-			}
-			this.smoothlyVisibleStatus.emit(this.visible)
-			this.smoothlyNavStatus.emit(!this.visible)
-		}
-		this.history = result
+	clickHandler() {
+		this.open = !this.open
 	}
 
 	render() {
 		return (
 			<Host>
-				<span class="burger">
-					<smoothly-icon name="menu" />
-				</span>
+				<smoothly-icon name="menu" />
 			</Host>
 		)
 	}

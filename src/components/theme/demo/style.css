@@ -1,7 +1,7 @@
 :host {
-	display: flex;
-	width: 50%;
+	max-width: min(calc(100% - 2rem), 56rem);
 	margin: auto;
+	display: flex;
 	flex-direction: column;
 	gap: 2em;
 	margin-top: 2em;
@@ -11,8 +11,9 @@
 	width: 20em;
 }
 
-:host>span {
+:host>div {
 	display: flex;
 	flex-direction: row;
-	gap: 10em;
+	justify-content: space-between;
+	gap: 1rem;
 }
