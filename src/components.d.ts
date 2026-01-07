@@ -415,6 +415,8 @@ export namespace Components {
     }
     interface SmoothlyInputDemo {
     }
+    interface SmoothlyInputDemoRadio {
+    }
     interface SmoothlyInputDemoStandard {
     }
     interface SmoothlyInputDemoUserInput {
@@ -1601,6 +1603,12 @@ declare global {
         prototype: HTMLSmoothlyInputDemoElement;
         new (): HTMLSmoothlyInputDemoElement;
     };
+    interface HTMLSmoothlyInputDemoRadioElement extends Components.SmoothlyInputDemoRadio, HTMLStencilElement {
+    }
+    var HTMLSmoothlyInputDemoRadioElement: {
+        prototype: HTMLSmoothlyInputDemoRadioElement;
+        new (): HTMLSmoothlyInputDemoRadioElement;
+    };
     interface HTMLSmoothlyInputDemoStandardElement extends Components.SmoothlyInputDemoStandard, HTMLStencilElement {
     }
     var HTMLSmoothlyInputDemoStandardElement: {
@@ -2267,6 +2275,7 @@ declare global {
         "smoothly-input-date-range": HTMLSmoothlyInputDateRangeElement;
         "smoothly-input-date-time": HTMLSmoothlyInputDateTimeElement;
         "smoothly-input-demo": HTMLSmoothlyInputDemoElement;
+        "smoothly-input-demo-radio": HTMLSmoothlyInputDemoRadioElement;
         "smoothly-input-demo-standard": HTMLSmoothlyInputDemoStandardElement;
         "smoothly-input-demo-user-input": HTMLSmoothlyInputDemoUserInputElement;
         "smoothly-input-edit": HTMLSmoothlyInputEditElement;
@@ -2705,6 +2714,8 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemo {
         "onSmoothlyUrlUpdate"?: (event: SmoothlyInputDemoCustomEvent<{ path: string; query?: string }>) => void;
     }
+    interface SmoothlyInputDemoRadio {
+    }
     interface SmoothlyInputDemoStandard {
     }
     interface SmoothlyInputDemoUserInput {
@@ -3086,6 +3097,7 @@ declare namespace LocalJSX {
         "smoothly-input-date-range": SmoothlyInputDateRange;
         "smoothly-input-date-time": SmoothlyInputDateTime;
         "smoothly-input-demo": SmoothlyInputDemo;
+        "smoothly-input-demo-radio": SmoothlyInputDemoRadio;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
         "smoothly-input-demo-user-input": SmoothlyInputDemoUserInput;
         "smoothly-input-edit": SmoothlyInputEdit;
@@ -3202,6 +3214,7 @@ declare module "@stencil/core" {
             "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
             "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
             "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-input-demo-radio": LocalJSX.SmoothlyInputDemoRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoRadioElement>;
             "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
             "smoothly-input-demo-user-input": LocalJSX.SmoothlyInputDemoUserInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoUserInputElement>;
             "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;

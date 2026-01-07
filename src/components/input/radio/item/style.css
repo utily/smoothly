@@ -1,5 +1,6 @@
 :host {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	position: relative;
 }
@@ -29,8 +30,16 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 	position: absolute;
 	transform: translateX(50%);
 }
-
 :host>label {
 	padding: 0 .3em;
 	white-space: nowrap;
 }
+
+:host[selected] ::slotted([slot="detail"]) { 
+	display: block; 
+	width: 100%; 
+} 
+:host ::slotted([slot="detail"]) { 
+	display: none; 
+}
+
