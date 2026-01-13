@@ -32,11 +32,10 @@
   box-sizing: border-box;
   align-content: center;
 	height: 100%;
-	padding: 
-		var(--input-value-padding-top) 
-		var(--input-padding-side) 
-		var(--input-value-padding-bottom) 
-		var(--input-padding-side);
+	padding-inline: var(--input-padding-side);
+}
+:host([show-label])>.smoothly-input-container>div.guide {
+	padding-block: var(--input-value-padding-top) var(--input-value-padding-bottom);
 }
 :host>.smoothly-input-container>div.guide>div.value {
 	display: inline;
