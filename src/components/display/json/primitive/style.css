@@ -8,21 +8,20 @@
 	display: none;
 }
 
-:host(.string), 
-:host(.number),
-:host(.boolean) {
-	font-weight: bold;
-}
 :host(.string) {
-	color: rgb(var(--smoothly-primary-color));
+	font-weight: var(--smoothly-display-json-string-font-weight, bold);
+	color: rgb(var(--smoothly-display-json-string, var(--smoothly-primary-color)));
 }
 :host(.number) {
-	color: rgb(var(--smoothly-secondary-color));
+	font-weight: var(--smoothly-display-json-number-font-weight, bold);
+	color: rgb(var(--smoothly-display-json-number, var(--smoothly-secondary-color)));
 }
 :host(.boolean) {
-	color: rgb(var(--smoothly-tertiary-color));
+	font-weight: var(--smoothly-display-json-boolean-font-weight, bold);
+	color: rgb(var(--smoothly-display-json-boolean, var(--smoothly-tertiary-color)));
 }
 :host(.null),
 :host(.undefined) {
-	color: rgb(var(--smoothly-medium-color));
+	font-weight: var(--smoothly-display-json-undefined-font-weight, normal);
+	color: rgb(var(--smoothly-display-json-undefined, var(--smoothly-medium-color)));
 }
