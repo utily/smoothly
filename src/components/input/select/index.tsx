@@ -230,6 +230,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			if (markedItem) {
 				markedItem.marked = false
 			}
+			this.filter = ""
 		}
 	}
 	handleShowOptions(event?: Event): void {
@@ -252,6 +253,33 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
 		this.displaySelectedElement &&
 			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : this.placeholder ?? "")
+	}
+	onKeyDown(event: KeyboardEvent) {
+		if (!this.searchDisabled && !(event.ctrlKey || event.metaKey || event.altKey)) {
+			const hasVisibleItems = this.items.some(item => item.getAttribute("hidden") === null)
+			if (event.key === "ArrowDown") {
+				event.preventDefault()
+				this.open = true
+				hasVisibleItems && this.move(1)
+			} else if (event.key === "ArrowUp") {
+				event.preventDefault()
+				this.open = true
+				hasVisibleItems && this.move(-1)
+			} else if (event.key === "Escape") {
+				this.open = false
+			} else if (event.key === " ") {
+				this.filter == "" && event.preventDefault()
+				this.open = true
+			} else if (event.key === "Enter") {
+				const markedItem = this.items.find(item => item.marked)
+				if (markedItem?.value)
+					markedItem.selected = !markedItem.selected
+				if (!this.multiple)
+					this.open = false
+			} else if (event.key === "Tab") {
+				this.open = false
+			}
+		}
 	}
 	private scrollToSelected() {
 		const selectedItem = this.items.find(item => item.selected)
@@ -309,13 +337,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				</div>
 				<slot name="label" />
 				<div class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
-					<div class="search-preview">
+					<div class={{ "search-preview": true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
 						<smoothly-icon name="search-outline" size="small" />
 						<input
 							type="text"
 							class="smoothly-filter-input"
 							value={this.filter}
-							onInput={e => (this.filter = (e.target as HTMLInputElement).value)}
+							onKeyDown={e => this.onKeyDown(e)}
+							onInput={e => !this.searchDisabled && (this.filter = (e.target as HTMLInputElement).value)}
 						/>
 						<smoothly-icon
 							name="backspace-outline"
