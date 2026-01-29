@@ -104,13 +104,13 @@
 	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
 	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
 }
-:host[looks="grid"]>div.dropdown,
-:host[looks=border]>div.dropdown,
-:host[looks="transparent"]>div.dropdown {
+:host[looks="grid"]>.dropdown,
+:host[looks=border]>.dropdown,
+:host[looks="transparent"]>.dropdown {
 	left: -1px;
 	right: -1px;
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item::before {
+:host[multiple]>.dropdown>.options-container>smoothly-item::before {
 	content: "";
 	display: inline-block;
 	width: 1rem;
@@ -120,49 +120,56 @@
 	border-radius: 0.15rem;
 	vertical-align: middle;
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item[selected]::after {
+:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::after {
 	content: "✔";
 	position: absolute;
 	left: 0.65rem; 
 	color: rgb(var(--smoothly-item-selected-foreground))
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item[selected]::before {
+:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::before {
 	border: 1px solid rgb(var(--smoothly-item-selected-foreground));
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item[selected]::after {
+:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::after {
 	color: rgb(var(--smoothly-item-selected-foreground));
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item:hover::before {
+:host[multiple]>.dropdown>.options-container>smoothly-item:hover::before {
 	border: 1px solid rgb(var(--smoothly-item-hover-foreground));
 }
-:host[multiple]>div.dropdown>.options-container>smoothly-item:hover::after {
+:host[multiple]>.dropdown>.options-container>smoothly-item:hover::after {
 	color: rgb(var(--smoothly-item-hover-foreground));
 }
-:host>div.dropdown::slotted(.options-container>smoothly-item),
-:host>div.dropdown::slotted(div.search-preview) {
+:host>.dropdown.options-container>smoothly-item,
+:host>.dropdown>.search-preview {
 	padding: .7rem .7rem .7rem .25rem;
 }
 
-:host>div.dropdown::slotted(div.search-preview) {
+:host>.dropdown>.search-preview {
 	display: flex;
 	position: sticky;
 	top: 0;
 	gap: 1rem;
-	background-color: rgb(var(--smoothly-input-background));
+	/* background-color: rgb(var(--smoothly-input-background)); */
+	background-color: rgba(var(--smoothly-primary-tint), 0.5);
 	color: rgb(var(--smoothly-color-contrast));
 	fill: rgb(var(--smoothly-color-contrast));
 	stroke: rgb(var(--smoothly-color-contrast));
 }
-:host>div.dropdown::slotted(div.search-preview)::before {
-	/* Hack to not make the search-preview have opacity without showing what is underneath */
-	content: "";
+:host>.dropdown>.search-preview>.smoothly-filter-input {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	width: 100%;
+	font-size: 1rem;
+	font-family: var(--smoothly-font-family);
+}
+:host>.dropdown>.search-preview:not(.visible) {
 	position: absolute;
-	inset: 0;
-	background-color: rgba(var(--smoothly-primary-tint), 0.5);
-	z-index: -1;
+	left: -9999px;
+	/* opacity: 0; */
+	/* pointer-events: none; */
 }
 
-:host>div.dropdown>div.search-preview>smoothly-icon[name="backspace-outline"] {
+:host>.dropdown>div.search-preview>smoothly-icon[name="backspace-outline"] {
 	margin-left: auto;
 	margin-right: 0;
 }
