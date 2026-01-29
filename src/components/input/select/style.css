@@ -68,7 +68,7 @@
 	cursor: pointer;
 }
 
-:host[invalid]>div>smoothly-icon.smoothly-invalid {
+:host([invalid])>div>smoothly-icon.smoothly-invalid {
 	display: block;
 	padding: 0.5rem;
 }
@@ -104,13 +104,13 @@
 	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
 	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
 }
-:host[looks="grid"]>.dropdown,
-:host[looks=border]>.dropdown,
-:host[looks="transparent"]>.dropdown {
+:host([looks="grid"])>.dropdown,
+:host([looks="border"])>.dropdown,
+:host([looks="transparent"])>.dropdown {
 	left: -1px;
 	right: -1px;
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item::before {
+:host([multiple])>.dropdown>.options-container>smoothly-item::before {
 	content: "";
 	display: inline-block;
 	width: 1rem;
@@ -120,22 +120,22 @@
 	border-radius: 0.15rem;
 	vertical-align: middle;
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::after {
+:host([multiple])>.dropdown>.options-container>smoothly-item[selected]::after {
 	content: "✔";
 	position: absolute;
 	left: 0.65rem; 
 	color: rgb(var(--smoothly-item-selected-foreground))
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::before {
+:host([multiple])>.dropdown>.options-container>smoothly-item[selected]::before {
 	border: 1px solid rgb(var(--smoothly-item-selected-foreground));
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item[selected]::after {
+:host([multiple])>.dropdown>.options-container>smoothly-item[selected]::after {
 	color: rgb(var(--smoothly-item-selected-foreground));
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item:hover::before {
+:host([multiple])>.dropdown>.options-container>smoothly-item:hover::before {
 	border: 1px solid rgb(var(--smoothly-item-hover-foreground));
 }
-:host[multiple]>.dropdown>.options-container>smoothly-item:hover::after {
+:host([multiple])>.dropdown>.options-container>smoothly-item:hover::after {
 	color: rgb(var(--smoothly-item-hover-foreground));
 }
 :host>.dropdown.options-container>smoothly-item,
@@ -148,7 +148,6 @@
 	position: sticky;
 	top: 0;
 	gap: 1rem;
-	/* background-color: rgb(var(--smoothly-input-background)); */
 	background-color: rgba(var(--smoothly-primary-tint), 0.5);
 	color: rgb(var(--smoothly-color-contrast));
 	fill: rgb(var(--smoothly-color-contrast));
