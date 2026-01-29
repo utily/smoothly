@@ -8,21 +8,21 @@
 	border-radius: var(--smoothly-input-border-radius);
 }
 
-:host[looks="border"] {
+:host([looks="border"]) {
 	border: rgb(var(--smoothly-input-border)) solid 1px;
 }
 :host([looks="border"]:not([readonly]):not([disabled]):focus-within) {
 	outline: 2px solid rgb(var(--smoothly-input-border-focus));
 }
-:host[looks="border"][readonly] {
+:host([looks="border"][readonly]) {
 	border: transparent solid 1px;
 }
 
-:host[looks="line"] {
+:host([looks="line"]) {
 	border-bottom: rgb(var(--smoothly-input-border)) solid 1px;
 	position: relative;
 }
-:host[looks="line"][readonly] {
+:host([looks="line"][readonly]) {
 	border-bottom: transparent solid 1px;
 }
 :host([looks="line"]:not([readonly]):not([disabled]):focus-within)::before {
@@ -34,37 +34,37 @@
 	z-index: 10;
 }
 
-:host[looks="grid"] {
+:host([looks="grid"]) {
   flex-grow: 1;
   flex-basis: 40%;
   box-shadow: 0px 0px 0px 1px rgb(var(--smoothly-input-border));
   border: none;
 }
-:host[looks="grid"][readonly] {
+:host([looks="grid"][readonly]) {
 	box-shadow: 0px 0px 0px 1px rgba(var(--smoothly-input-border-readonly));
 }
-:host[looks="grid"]:not([readonly]):not([disabled]):focus-within {
+:host([looks="grid"]:not([readonly]):not([disabled]):focus-within) {
 	position: relative;
 	box-shadow: 0px 0px 0px 2px rgb(var(--smoothly-input-border-focus));
 	outline: none;
 	z-index: 10;
 }
 
-:host[looks="transparent"] {
+:host([looks="transparent"]) {
 	border: none;
 }
 
-:host[looks="transparent"][readonly],
-:host[looks="transparent"]:not(:focus-within) {
+:host([looks="transparent"][readonly]),
+:host([looks="transparent"]:not(:focus-within)) {
 	background-color: transparent;
 }
 
-:host[looks="transparent"][readonly]>input,
-:host[looks="transparent"]:not(:focus-within)>input {
+:host([looks="transparent"][readonly])>input,
+:host([looks="transparent"]:not(:focus-within))>input {
 	background-color: transparent;
 }
 
-:host[looks="transparent"]:not([readonly]):focus-within {
+:host([looks="transparent"]:not([readonly]):focus-within) {
 	outline: 1px solid rgb(var(--smoothly-input-border));
 }
 
@@ -88,16 +88,16 @@
 	transition: transform 100ms ease;
 }
 
-:host.floating-label ::slotted([slot=label]),
-:host.has-value ::slotted([slot=label]),
-:host[placeholder] ::slotted([slot=label]),
-:host[readonly] ::slotted([slot=label]),
-:host.floating-label .label,
-:host.has-value .label,
-:host.has-text .label,
-:host[placeholder] .label,
-:host[readonly] .label,
-:host:not([readonly]):focus-within .label.float-on-focus {
+:host(.floating-label) ::slotted([slot=label]),
+:host(.has-value) ::slotted([slot=label]),
+:host([placeholder]) ::slotted([slot=label]),
+:host([readonly]) ::slotted([slot=label]),
+:host(.floating-label) .label,
+:host(.has-value) .label,
+:host(.has-text) .label,
+:host([placeholder]) .label,
+:host([readonly]) .label,
+:host(:not([readonly]):focus-within) .label.float-on-focus {
 	top: .2rem;
 	transform: scale(0.8);
 }
