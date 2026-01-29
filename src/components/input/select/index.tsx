@@ -34,7 +34,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private displaySelectedElement?: HTMLElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
-	private optionsDiv?: HTMLDivElement
+	private dropdownElement?: HTMLDivElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -340,8 +340,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.scrollTo(selectableItems[markedIndex], "smooth")
 	}
 	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
-		this.optionsDiv?.scrollTo({
-			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsDiv?.clientHeight ?? 0) / 2,
+		this.dropdownElement?.scrollTo({
+			top: item.offsetTop + item.offsetHeight / 2 - (this.dropdownElement?.clientHeight ?? 0) / 2,
 			behavior,
 		})
 	}
@@ -374,11 +374,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					)}
 				</div>
 				<slot name="label" />
-				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
+				<div class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
 					{this.filter.length > 0 && (
 						<div class="search-preview">
 							<smoothly-icon name="search-outline" size="small" />
-							{this.filter}
+							<input type="text" class="smoothly-filter-input" value={this.filter} />
 							<smoothly-icon
 								name="backspace-outline"
 								size="small"
@@ -400,8 +400,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							)}
 						</div>
 					)}
-					<slot />
-					{this.addedItems}
+					<div class={{ "options-container": true, hidden: !this.open }}>
+						<slot />
+						{this.addedItems}
+					</div>
 				</div>
 			</Host>
 		)
