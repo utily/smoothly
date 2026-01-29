@@ -26,9 +26,7 @@ export class SmoothlyTableHead {
 			if (currentElement.tagName.toLowerCase() === "smoothly-table") {
 				const head = currentElement.querySelector("smoothly-table-head") as HTMLSmoothlyTableHeadElement
 				if (head !== this.element) {
-					const rows = Array.from(
-						head.querySelectorAll("smoothly-table-row") as NodeListOf<HTMLSmoothlyTableHeadElement>
-					)
+					const rows = Array.from(head.querySelectorAll(":scope > smoothly-table-row"))
 					depth += rows.length
 				}
 			}
