@@ -327,6 +327,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
+					{/* 
+						// TODO: fix
+					delegatesFocus - focusable element can steal focus here, need to explicitly focus on input, or make clearable not focusable 
+					*/}
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
 							ref={element => (this.toggle = element)}
