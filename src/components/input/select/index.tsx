@@ -23,7 +23,7 @@ import { Looks } from "../Looks"
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
-	shadow: true,
+	shadow: { delegatesFocus: true },
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
 	parent: Editable | undefined
@@ -253,72 +253,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displaySelectedElement &&
 			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : this.placeholder ?? "")
 	}
-	@Listen("keydown")
-	onKeyDown(event: KeyboardEvent) {
-		if (!this.searchDisabled) {
-			event.stopPropagation()
-			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
-				event.preventDefault()
-			if (this.open) {
-				switch (event.key) {
-					case "ArrowUp":
-						visibleItems && this.move(-1)
-						break
-					case "ArrowDown":
-						visibleItems && this.move(1)
-						break
-					case "Escape":
-						if (this.filter == "")
-							this.open = false
-						else
-							this.filter = ""
-						break
-					case "Backspace":
-						this.filter = event.ctrlKey ? "" : this.filter.slice(0, -1)
-						break
-					case "Enter":
-						const result = this.items.find(item => item.marked)
-						if (result?.value)
-							result.selected = !result.selected
-						if (!this.multiple) {
-							this.open = false
-							this.filter = ""
-						}
-						break
-					case "Tab":
-						this.open = false
-						break
-					default:
-						if (event.key.length == 1)
-							this.filter += event.key
-						break
-				}
-			} else {
-				switch (event.key) {
-					case "Enter":
-					case " ":
-						this.handleShowOptions()
-						break
-					case "ArrowDown":
-						this.handleShowOptions()
-						this.move(1)
-						break
-					case "ArrowUp":
-						this.handleShowOptions()
-						this.move(-1)
-						break
-					case "Tab":
-						break
-					default:
-						this.handleShowOptions()
-						if (event.key.length == 1)
-							this.filter += event.key
-						break
-				}
-			}
-		}
-	}
 	private scrollToSelected() {
 		const selectedItem = this.items.find(item => item.selected)
 		if (selectedItem) {
@@ -327,7 +261,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.scrollTo(selectedItem, "instant")
 		}
 	}
-	private move(direction: -1 | 1): void {
+	/* private */ move(direction: -1 | 1): void {
 		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
 		let markedIndex = selectableItems.findIndex(item => item.marked)
 		if (markedIndex == -1)
@@ -375,31 +309,35 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				</div>
 				<slot name="label" />
 				<div class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
-					{this.filter.length > 0 && (
-						<div class="search-preview">
-							<smoothly-icon name="search-outline" size="small" />
-							<input type="text" class="smoothly-filter-input" value={this.filter} />
+					<div class="search-preview">
+						<smoothly-icon name="search-outline" size="small" />
+						<input
+							type="text"
+							class="smoothly-filter-input"
+							value={this.filter}
+							onInput={e => (this.filter = (e.target as HTMLInputElement).value)}
+						/>
+						<smoothly-icon
+							name="backspace-outline"
+							size="small"
+							onClick={e => {
+								e.stopPropagation()
+								this.filter = ""
+								this.element.focus()
+							}}
+						/>
+						{this.mutable && (
 							<smoothly-icon
-								name="backspace-outline"
+								name="add"
 								size="small"
 								onClick={e => {
 									e.stopPropagation()
-									this.filter = ""
-									this.element.focus()
+									this.addItem()
 								}}
 							/>
-							{this.mutable && (
-								<smoothly-icon
-									name="add"
-									size="small"
-									onClick={e => {
-										e.stopPropagation()
-										this.addItem()
-									}}
-								/>
-							)}
-						</div>
-					)}
+						)}
+					</div>
+
 					<div class={{ "options-container": true, hidden: !this.open }}>
 						<slot />
 						{this.addedItems}
