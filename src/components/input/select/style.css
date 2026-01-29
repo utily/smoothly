@@ -163,10 +163,8 @@
 	font-family: var(--smoothly-font-family);
 }
 :host>.dropdown>.search-preview:not(.visible) {
-	position: absolute;
-	left: -9999px;
-	/* opacity: 0; */
-	/* pointer-events: none; */
+	position: fixed;
+	left: -9999px; /* Hide offscreen - Preferred by ARIA  */
 }
 
 :host>.dropdown>div.search-preview>smoothly-icon[name="backspace-outline"] {
