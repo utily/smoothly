@@ -142,7 +142,10 @@
 :host>.dropdown>.search-preview {
 	padding: .7rem .7rem .7rem .25rem;
 }
-
+:host(:not(.open))>.dropdown {
+	background-color: transparent;
+	border: none;
+}
 :host>.dropdown>.search-preview {
 	display: flex;
 	position: sticky;
