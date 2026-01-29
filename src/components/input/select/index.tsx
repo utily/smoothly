@@ -23,7 +23,7 @@ import { Looks } from "../Looks"
 @Component({
 	tag: "smoothly-input-select",
 	styleUrl: "style.css",
-	scoped: true,
+	shadow: true,
 })
 export class SmoothlyInputSelect implements Input, Editable, Clearable, ComponentWillLoad {
 	parent: Editable | undefined
