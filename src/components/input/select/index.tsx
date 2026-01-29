@@ -289,7 +289,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.scrollTo(selectedItem, "instant")
 		}
 	}
-	/* private */ move(direction: -1 | 1): void {
+	private move(direction: -1 | 1): void {
 		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
 		let markedIndex = selectableItems.findIndex(item => item.marked)
 		if (markedIndex == -1)
