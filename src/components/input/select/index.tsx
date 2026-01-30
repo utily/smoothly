@@ -321,25 +321,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				tabIndex={this.disabled ? undefined : 0}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
-					{this.placeholder}
-				</div>
-				<div class="icons" ref={element => (this.iconsDiv = element)}>
-					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
-					<slot name="end" />
-					{/* 
-						// TODO: fix
-					delegatesFocus - focusable element can steal focus here, need to explicitly focus on input, or make clearable not focusable 
-					*/}
-					{this.looks == "border" && !this.readonly && (
-						<smoothly-icon
-							ref={element => (this.toggle = element)}
-							size="tiny"
-							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
-						/>
-					)}
-				</div>
-				<slot name="label" />
 				<div class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
 					<div class={{ "search-preview": true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
 						<smoothly-icon name="search-outline" size="small" />
@@ -376,6 +357,21 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						{this.addedItems}
 					</div>
 				</div>
+				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
+					{this.placeholder}
+				</div>
+				<div class="icons" ref={element => (this.iconsDiv = element)}>
+					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
+					<slot name="end" />
+					{this.looks == "border" && !this.readonly && (
+						<smoothly-icon
+							ref={element => (this.toggle = element)}
+							size="tiny"
+							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
+						/>
+					)}
+				</div>
+				<slot name="label" />
 			</Host>
 		)
 	}
