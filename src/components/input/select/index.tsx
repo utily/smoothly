@@ -239,11 +239,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		const clickedItem = event
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		!this.readonly &&
+		if (
+			!this.readonly &&
 			!this.disabled &&
 			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
-			!wasButtonClicked &&
-			(this.open = !this.open)
+			!wasButtonClicked
+		)
+			this.open = !this.open
 		this.filter = ""
 	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
@@ -321,8 +323,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				tabIndex={this.disabled ? undefined : 0}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<div class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
-					<div class={{ "search-preview": true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
+				<div part="dropdown" class={{ dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
+					<div
+						part="search"
+						class={{ search: true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
 						<smoothly-icon name="search-outline" size="small" />
 						<input
 							// Dropdown first in DOM so delegatesFocus works
@@ -352,15 +356,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							/>
 						)}
 					</div>
-					<div part="options-container" class={{ "options-container": true, hidden: !this.open }}>
+					<div part="listbox" class={{ listbox: true, hidden: !this.open }}>
 						<slot />
 						{this.addedItems}
 					</div>
 				</div>
-				<div class="select-display" part="select-display" ref={element => (this.displaySelectedElement = element)}>
+				<div part="trigger" class="trigger" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons" ref={element => (this.iconsDiv = element)}>
+				<div part="icons" class="icons" ref={element => (this.iconsDiv = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
