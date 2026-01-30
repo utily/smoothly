@@ -352,13 +352,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							/>
 						)}
 					</div>
-
-					<div class={{ "options-container": true, hidden: !this.open }}>
+					<div part="options-container" class={{ "options-container": true, hidden: !this.open }}>
 						<slot />
 						{this.addedItems}
 					</div>
 				</div>
-				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
+				<div class="select-display" part="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsDiv = element)}>
