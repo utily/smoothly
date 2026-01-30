@@ -76,7 +76,6 @@
 }
 
 /* --- label --- */
-
 :host ::slotted([slot=label]),
 :host .label {
 	position: absolute;
@@ -102,7 +101,7 @@
 	transform: scale(0.8);
 }
 
-:host:not([show-label]):not(.show-label) .label {
+:host(:not([show-label]):not(.show-label)) .label {
 	display: none;
 }
 :host smoothly-icon.smoothly-invalid {

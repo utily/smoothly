@@ -81,6 +81,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selected && !this.initialValueHandled && (this.initialValue = [...this.selected])
 		this.initialValueHandled = true
 		this.onSelectedChange()
+		const labelSlot = this.element.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')
+		labelSlot?.addEventListener("slotchange", () => this.updateLabelStatus())
+		this.updateLabelStatus()
 	}
 	componentDidRender(): void | Promise<void> {
 		this.itemHeight === undefined && (this.itemHeight = this.items.find(item => item.clientHeight > 0)?.clientHeight)
@@ -97,6 +100,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (this.ordered && !this.multiple && this.open && !this.lastOpen) {
 			this.scrollToSelected()
 		}
+	}
+	updateLabelStatus() {
+		const label = this.element.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')
+		const host = this.element.shadowRoot?.host
+		const assigned = label?.assignedElements().length ?? 0
+		assigned ? host?.classList.add("has-label") : host?.classList.remove("has-label")
 	}
 	async disconnectedCallback() {
 		if (!this.element.isConnected)
