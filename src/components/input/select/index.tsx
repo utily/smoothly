@@ -327,7 +327,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					<div
 						part="search"
 						class={{ search: true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
-						<smoothly-icon name="search-outline" size="small" />
+						<smoothly-icon part="search-icon search-icon-search" name="search-outline" size="small" />
 						<input
 							// Dropdown first in DOM so delegatesFocus works
 							type="text"
@@ -337,6 +337,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							onInput={e => !this.searchDisabled && (this.filter = (e.target as HTMLInputElement).value)}
 						/>
 						<smoothly-icon
+							part="search-icon search-icon-backspace"
 							name="backspace-outline"
 							size="small"
 							onClick={e => {
@@ -347,6 +348,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						/>
 						{this.mutable && (
 							<smoothly-icon
+								part="search-icon search-icon-add"
 								name="add"
 								size="small"
 								onClick={e => {
@@ -364,11 +366,18 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<div part="trigger" class="trigger" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
-				<div part="icons" class="icons" ref={element => (this.iconsDiv = element)}>
-					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
+				<div part="end" class="end" ref={element => (this.iconsDiv = element)}>
+					<smoothly-icon
+						part="icon-invalid"
+						class="smoothly-invalid"
+						name="alert-circle"
+						size="small"
+						tooltip={this.errorMessage}
+					/>
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
+							part="icon-toggle"
 							ref={element => (this.toggle = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}

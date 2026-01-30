@@ -47,24 +47,24 @@
 	stroke: rgb(var(--smoothly-input-foreground));
 }
 
-:host>div.icons {
+:host>.end {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-:host:hover>div.icons::slotted(smoothly-icon) {
+:host:hover>.end::slotted(smoothly-icon) {
 	filter: opacity(100%);
 }
 
-:host>div.icons>smoothly-icon[name=caret-down-outline],
-:host>div.icons>smoothly-icon[name=caret-forward-outline] {
+:host>.end>smoothly-icon[name=caret-down-outline],
+:host>.end>smoothly-icon[name=caret-forward-outline] {
 	opacity: .7;
 	height: 100%;
 	padding-inline: var(--input-padding-side);
 }
-:host:not([readonly]):not([disabled])>div.icons>smoothly-icon[name=caret-down-outline],
-:host:not([readonly]):not([disabled])>div.icons>smoothly-icon[name=caret-forward-outline] {
+:host:not([readonly]):not([disabled])>.end>smoothly-icon[name=caret-down-outline],
+:host:not([readonly]):not([disabled])>.end>smoothly-icon[name=caret-forward-outline] {
 	cursor: pointer;
 }
 
