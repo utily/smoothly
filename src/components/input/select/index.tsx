@@ -325,6 +325,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					<div class={{ "search-preview": true, visible: this.filter.length > 0 && this.open && !this.searchDisabled }}>
 						<smoothly-icon name="search-outline" size="small" />
 						<input
+							// Dropdown first in DOM so delegatesFocus works
 							type="text"
 							class="smoothly-filter-input"
 							value={this.filter}
