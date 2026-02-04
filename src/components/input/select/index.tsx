@@ -68,6 +68,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Event() smoothlyInputLoad: EventEmitter<(parent: Editable) => void>
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
+	@Event() smoothlySelectOpen: EventEmitter<boolean>
 
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(
@@ -231,6 +232,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				markedItem.marked = false
 			}
 		}
+		this.smoothlySelectOpen.emit(open)
 	}
 	handleShowOptions(event?: Event): void {
 		const wasButtonClicked =

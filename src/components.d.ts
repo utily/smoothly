@@ -1776,6 +1776,7 @@ declare global {
         "smoothlyInputLoad": (parent: Editable) => void;
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyItemSelect": HTMLSmoothlyItemElement;
+        "smoothlySelectOpen": boolean;
     }
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSelectElement, ev: SmoothlyInputSelectCustomEvent<HTMLSmoothlyInputSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2845,6 +2846,7 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputSelectCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyInputSelectCustomEvent<HTMLSmoothlyItemElement>) => void;
+        "onSmoothlySelectOpen"?: (event: SmoothlyInputSelectCustomEvent<boolean>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputSelectCustomEvent<Input.UserInput>) => void;
         "ordered"?: boolean;
         "placeholder"?: string | any;
