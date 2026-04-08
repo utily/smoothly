@@ -149,8 +149,9 @@ export class SmoothlyInputDateRangeText {
 				this.setPart("D", roundedParts?.D)
 			}
 		}
-		if (this.parts.Y || this.parts.M || this.parts.D)
+		if (this.parts.Y || this.parts.M || this.parts.D) {
 			this.smoothlyDateHasPartialDate.emit(this.parts)
+		}
 	}
 	keyDownHandler(e: KeyboardEvent) {
 		const text = this.getInnerText(e.target)

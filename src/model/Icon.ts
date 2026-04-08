@@ -15,11 +15,12 @@ export namespace Icon {
 		return cache[url] ?? (cache[url] = fetch(url))
 	}
 	export function add(url: string, ...name: string[]): void {
-		for (const n of name)
+		for (const n of name) {
 			names[n] = url
+		}
 	}
 
-	export type Name = typeof Name.values[number]
+	export type Name = (typeof Name.values)[number]
 	export namespace Name {
 		export const values = [
 			"accessibility",
@@ -438,7 +439,7 @@ export namespace Icon {
 			"woman",
 		] as const
 	}
-	export type Logo = typeof Logo.values[number]
+	export type Logo = (typeof Logo.values)[number]
 	export namespace Logo {
 		export const values = [
 			"logo-alipay",

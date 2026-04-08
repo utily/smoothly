@@ -29,12 +29,13 @@ export const Button: FunctionalComponent<Button.Properties> = ({ disabled, type,
 }
 function convert(path: string): string {
 	let result: ReturnType<typeof convert>
-	if (path.startsWith(window.location.origin))
+	if (path.startsWith(window.location.origin)) {
 		result = new URL(path).pathname
-	else if (path.match(/^\//))
+	} else if (path.match(/^\//)) {
 		result = new URL(path, window.location.origin).pathname
-	else
+	} else {
 		result = new URL(`${window.location.pathname.replace(/\/+$/, "")}/${path}`, window.location.origin).pathname
+	}
 
 	return result
 }

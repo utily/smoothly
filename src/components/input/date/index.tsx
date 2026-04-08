@@ -68,8 +68,9 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		this.observer.publish()
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -112,13 +113,15 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 	}
 	@Listen("smoothlyInput")
 	smoothlyInputHandler(event: CustomEvent<Record<string, any>>) {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDate) => void>): void {
@@ -132,10 +135,12 @@ export class SmoothlyInputDate implements ComponentWillLoad, Clearable, Input, E
 		const includesTextElement = !!this.dateTextElement && event.composedPath().includes(this.dateTextElement)
 		const includesCalendar = !!this.calendarElement && event.composedPath().includes(this.calendarElement)
 		const includesIconsElement = !!this.iconsElement && event.composedPath().includes(this.iconsElement)
-		if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement)
+		if (!this.readonly && !this.disabled && !includesTextElement && !includesCalendar && !includesIconsElement) {
 			this.dateTextElement?.select()
-		if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement)
+		}
+		if (!this.readonly && !this.disabled && !includesCalendar && !includesIconsElement) {
 			this.open = !this.open || includesTextElement
+		}
 	}
 	onUserChangedValue(event: CustomEvent<isoly.Date | undefined>) {
 		event.stopPropagation()

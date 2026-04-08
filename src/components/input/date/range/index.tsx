@@ -87,8 +87,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	@Listen("click", { target: "window" })
 	onWindowClick(event: Event): void {
@@ -98,10 +99,12 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		const includesStartTextElement = !!this.startTextElement && event.composedPath().includes(this.startTextElement)
 		const includesEndTextElement = !!this.endTextElement && event.composedPath().includes(this.endTextElement)
 		const includesTextElement = includesStartTextElement || includesEndTextElement
-		if (!includesTextElement && !this.readonly && !this.disabled)
+		if (!includesTextElement && !this.readonly && !this.disabled) {
 			this.start && !this.end ? this.endTextElement?.select() : this.startTextElement?.select()
-		if (!this.readonly && !this.disabled)
+		}
+		if (!this.readonly && !this.disabled) {
 			this.open = !this.open || includesTextElement
+		}
 	}
 	async onSmoothlyDateTextChange(event: CustomEvent<isoly.Date | undefined>, startOrEnd: "start" | "end") {
 		event.stopPropagation()
@@ -121,8 +124,9 @@ export class SmoothlyInputDateRange implements Clearable, Input, Editable {
 		}
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {

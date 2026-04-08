@@ -10,10 +10,11 @@ export namespace Adjacent {
 		let result = 0
 		let execArray: RegExpExecArray | null
 		while ((execArray = wordRegex.exec(str)) != null) {
-			if (wordRegex.lastIndex - execArray[0].length < index)
+			if (wordRegex.lastIndex - execArray[0].length < index) {
 				result = wordRegex.lastIndex - execArray[0].length
-			else
+			} else {
 				break
+			}
 		}
 		return result
 	}
@@ -22,8 +23,9 @@ export namespace Adjacent {
 		let result = 0
 		while (wordRegex.exec(str) != null) {
 			result = wordRegex.lastIndex
-			if (wordRegex.lastIndex > index)
+			if (wordRegex.lastIndex > index) {
 				break
+			}
 		}
 		wordRegex.lastIndex <= index && (result = str.length)
 		return result

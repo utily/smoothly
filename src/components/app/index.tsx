@@ -35,16 +35,18 @@ export class SmoothlyApp {
 	updateMobileMode(mobileMode: boolean) {
 		this.mobileMode = mobileMode
 		Object.values(this.rooms).forEach(room => room?.element.setMobileMode(mobileMode))
-		if (!mobileMode)
+		if (!mobileMode) {
 			this.menuOpen = false
+		}
 	}
 
 	async componentDidRender() {
-		if (!this.selected && !window.location.search)
-			(this.home && this.rooms[this.home]
+		if (!this.selected && !window.location.search) {
+			;(this.home && this.rooms[this.home]
 				? this.rooms[this.home]
 				: Object.values(this.rooms).find(room => !room?.element.disabled)
 			)?.element.setSelected(true)
+		}
 	}
 	@Method()
 	async selectRoom(path: string) {
@@ -57,8 +59,9 @@ export class SmoothlyApp {
 		)
 		const content = await this.selected?.element.getContent()
 		requestAnimationFrame(() => {
-			if (this.mainElement && content)
+			if (this.mainElement && content) {
 				this.mainElement.replaceChildren(content)
+			}
 		})
 	}
 	@Listen("popstate", { target: "window" })
@@ -69,8 +72,9 @@ export class SmoothlyApp {
 	@Listen("smoothlyRoomSelect")
 	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
 		this.selected = { element: event.target }
-		if (this.mobileMode)
+		if (this.mobileMode) {
 			this.menuOpen = false
+		}
 		if (!event.detail.history) {
 			const path = this.selected.element.path.toString()
 			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
@@ -88,8 +92,9 @@ export class SmoothlyApp {
 	}
 	@Listen("click", { target: "window" })
 	clickHandler(event: MouseEvent) {
-		if (this.mobileMode && !event.composedPath().some(e => e == this.burgerElement || e == this.navElement))
+		if (this.mobileMode && !event.composedPath().some(e => e == this.burgerElement || e == this.navElement)) {
 			this.menuOpen = false
+		}
 	}
 	render() {
 		return (

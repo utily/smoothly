@@ -65,12 +65,14 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -112,7 +114,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	valueChanged(): void {
-		const decimals = !this.step ? undefined : this.step.toString().split(".")[1]?.length ?? 0
+		const decimals = !this.step ? undefined : (this.step.toString().split(".")[1]?.length ?? 0)
 		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
 		this.isDifferentFromInitial = this.initialValue != this.value
 		this.defined = typeof this.value == "number"
@@ -125,14 +127,15 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.observer.publish()
 	}
 	setValue(value: number | undefined): void {
-		if (value == undefined)
+		if (value == undefined) {
 			this.value = undefined
-		else if (value < this.min)
+		} else if (value < this.min) {
 			this.value = this.min
-		else if (value > this.max)
+		} else if (value > this.max) {
 			this.value = this.max
-		else
+		} else {
 			this.value = value
+		}
 		this.input && (this.input.value = this.type == "text" ? this.value?.toString() : this.value)
 	}
 

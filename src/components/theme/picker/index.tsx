@@ -15,8 +15,9 @@ export class SmoothlyThemePicker {
 					looks="border"
 					onSmoothlyInput={e => {
 						const element = document.querySelector(`#${this.element}`)
-						if (element instanceof HTMLLinkElement && typeof e.detail.theme == "string")
+						if (element instanceof HTMLLinkElement && typeof e.detail.theme == "string") {
 							element.href = e.detail.theme
+						}
 					}}>
 					<label slot="label">Select theme</label>
 					<slot />

@@ -59,8 +59,9 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>): void {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputColor) => void>): void {
@@ -71,8 +72,9 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		!event.composedPath().includes(this.element) && this.open && (this.open = !this.open)
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -98,10 +100,10 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 					r: this.rgb.r === undefined ? undefined : Math.round(this.rgb.r),
 					g: this.rgb.g === undefined ? undefined : Math.round(this.rgb.g),
 					b: this.rgb.b === undefined ? undefined : Math.round(this.rgb.b),
-			  }
+				}
 			: this.value
-			? this.value
-			: undefined
+				? this.value
+				: undefined
 	}
 	@Method()
 	async clear(): Promise<void> {
@@ -166,14 +168,16 @@ export class SmoothlyInputColor implements Input, Clearable, Editable, Component
 		let temporaryColor = this.sliderMode === "rgb" ? this.rgb : this.hsl
 		type ColorType = HSL | RGB
 		if (!(event.detail[color] === undefined)) {
-			for (const key of Object.keys(temporaryColor))
-				if (key === color)
+			for (const key of Object.keys(temporaryColor)) {
+				if (key === color) {
 					temporaryColor = {
 						...temporaryColor,
 						[key]: key === "s" || key === "l" ? +(event.detail[color] ?? 0) * 100 : event.detail[color],
 					}
-				else if (temporaryColor[key as keyof ColorType] === undefined)
+				} else if (temporaryColor[key as keyof ColorType] === undefined) {
 					temporaryColor = { ...temporaryColor, [key]: 0 }
+				}
+			}
 			if (this.sliderMode === "rgb") {
 				this.rgb = { ...temporaryColor } as RGB
 				this.hsl = Color.RGB.toHSL(this.rgb)

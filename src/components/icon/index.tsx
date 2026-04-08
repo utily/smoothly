@@ -31,8 +31,9 @@ export class SmoothlyIcon {
 
 		const promise = (this.latestPromise = Icon.load(this.name))
 		const result = await promise
-		if (promise != this.latestPromise)
+		if (promise != this.latestPromise) {
 			return
+		}
 
 		if (result) {
 			const svgElement = this.sanitizeSvg(result)

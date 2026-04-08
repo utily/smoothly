@@ -25,26 +25,28 @@ export namespace CommaRgb {
 		let result: CommaRgb | undefined
 		const colorWithoutSpace: CommaRgb | undefined =
 			typeof color == "string" ? color.replace(/ /g, "").toLowerCase() : undefined
-		if (!colorWithoutSpace)
+		if (!colorWithoutSpace) {
 			result = undefined
-		else if (CommaRgb.is(colorWithoutSpace))
+		} else if (CommaRgb.is(colorWithoutSpace)) {
 			result = colorWithoutSpace
-		else if (Hex.is(colorWithoutSpace))
+		} else if (Hex.is(colorWithoutSpace)) {
 			result = fromHex(colorWithoutSpace)
-		else if (Rgb.is(colorWithoutSpace))
+		} else if (Rgb.is(colorWithoutSpace)) {
 			result = fromRgb(colorWithoutSpace)
-		else if (ColorName.is(colorWithoutSpace))
+		} else if (ColorName.is(colorWithoutSpace)) {
 			result = fromHex(Names[colorWithoutSpace])
-		else if (Hsl.is(colorWithoutSpace))
+		} else if (Hsl.is(colorWithoutSpace)) {
 			result = fromHsl(colorWithoutSpace)
+		}
 		return result
 	}
 	export function fromHex(hex: Hex): CommaRgb {
 		let result: CommaRgb = "0,0,0"
-		if (hex.length == 7)
+		if (hex.length == 7) {
 			result = `${parseInt(hex.substr(1, 2), 16)},${parseInt(hex.substr(3, 2), 16)},${parseInt(hex.substr(5, 2), 16)}`
-		else if (hex.length == 4)
+		} else if (hex.length == 4) {
 			result = fromHex(`#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`)
+		}
 		return result
 	}
 	export function fromRgb(rgb: Rgb): CommaRgb {
@@ -62,9 +64,9 @@ export namespace CommaRgb {
 			h = HSL[0] / 360
 			s = HSL[1] / 100
 			l = HSL[2] / 100
-			if (s == 0)
+			if (s == 0) {
 				r = g = b = l
-			else {
+			} else {
 				const q = l < 0.5 ? l * (1 + s) : l + s - l * s
 				const p = 2 * l - q
 				r = hue2rgb(p, q, h + 1 / 3)
@@ -77,16 +79,19 @@ export namespace CommaRgb {
 	}
 	function hue2rgb(p: number, q: number, t: number): number {
 		let result = p
-		if (t < 0)
+		if (t < 0) {
 			t += 1
-		if (t > 1)
+		}
+		if (t > 1) {
 			t -= 1
-		if (t < 1 / 6)
+		}
+		if (t < 1 / 6) {
 			result = p + (q - p) * 6 * t
-		else if (t < 1 / 2)
+		} else if (t < 1 / 2) {
 			result = q
-		else if (t < 2 / 3)
+		} else if (t < 2 / 3) {
 			result = p + (q - p) * (2 / 3 - t) * 6
+		}
 		return result
 	}
 }

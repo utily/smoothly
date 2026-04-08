@@ -146,10 +146,11 @@ describe("Listenable", () => {
 			}
 
 			private calculate() {
-				if (this.dependency != undefined && this.raw != undefined)
+				if (this.dependency != undefined && this.raw != undefined) {
 					this.listenable.value = this.dependency + this.raw
-				else if (this.#value != undefined)
+				} else if (this.#value != undefined) {
 					this.listenable.value = undefined
+				}
 			}
 
 			private subscriptions = {

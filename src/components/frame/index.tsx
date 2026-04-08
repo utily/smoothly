@@ -25,26 +25,29 @@ export class SmoothlyFrame {
 		return match ? match[0] : "*"
 	}
 	componentDidLoad() {
-		if (this.contentWindow)
+		if (this.contentWindow) {
 			Message.listen(
 				this.origin ?? this.defaultOrigin,
 				(destination: string, content: any) => {
-					if (destination == this.name)
-						if (Trigger.is(content))
+					if (destination == this.name) {
+						if (Trigger.is(content)) {
 							this.trigger.emit(content)
-						else
+						} else {
 							this.message2.emit({ destination, content })
+						}
+					}
 				},
 				window
 			)
+		}
 	}
 	send(message2: Message<any>): void
 	send(destination: string, content: Trigger | any): void
 	@Method()
 	async send(message2: string | Message<any>, content?: Trigger | any): Promise<void> {
-		if (typeof message2 == "string")
+		if (typeof message2 == "string") {
 			Message.send((this.origin ?? this.defaultOrigin) + "#" + message2, content, this.contentWindow)
-		else if (Message.is(message2) && this.contentWindow)
+		} else if (Message.is(message2) && this.contentWindow) {
 			Message.send(
 				{
 					destination: (this.origin ?? this.defaultOrigin) + "#" + message2.destination,
@@ -52,6 +55,7 @@ export class SmoothlyFrame {
 				},
 				this.contentWindow
 			)
+		}
 	}
 
 	render() {

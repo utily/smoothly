@@ -26,8 +26,9 @@ export class SmoothlyCheckbox implements Clearable {
 	@Watch("checked")
 	@Watch("unavailable")
 	unavailableChanged(): void {
-		if (this.unavailable && this.checked)
+		if (this.unavailable && this.checked) {
 			this.smoothlyInput.emit({ [this.name]: undefined })
+		}
 	}
 
 	@Method()
@@ -57,10 +58,10 @@ export class SmoothlyCheckbox implements Clearable {
 						this.unavailable
 							? "close-outline"
 							: this.intermediate && !this.checked
-							? "remove-outline"
-							: this.checked && !this.intermediate
-							? "checkmark-outline"
-							: "empty"
+								? "remove-outline"
+								: this.checked && !this.intermediate
+									? "checkmark-outline"
+									: "empty"
 					}
 				/>
 				<label htmlFor={this.name}>
