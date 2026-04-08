@@ -38,13 +38,14 @@ export class Calendar {
 	async jumpTo(yearMonth: { Y?: string; M?: string }) {
 		const year = isoly.Date.Year.is(yearMonth.Y)
 			? yearMonth.Y
-			: this.month?.substring(0, 4) ?? isoly.Date.now().substring(0, 4)
+			: (this.month?.substring(0, 4) ?? isoly.Date.now().substring(0, 4))
 		const mon = isoly.Date.Month.is(yearMonth.M)
 			? yearMonth.M
-			: this.month?.substring(5, 7) ?? isoly.Date.now().substring(5, 7)
+			: (this.month?.substring(5, 7) ?? isoly.Date.now().substring(5, 7))
 		const date = `${year}-${mon}-01`
-		if (isoly.Date.is(date))
+		if (isoly.Date.is(date)) {
 			this.month = date
+		}
 	}
 
 	private clickCounter = 0

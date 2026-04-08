@@ -70,8 +70,9 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 		}
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("value")
 	@Watch("min")
@@ -131,10 +132,11 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 			event.stopPropagation()
 			const year = event.detail[`${this.name}-year`]
 			const month = event.detail[`${this.name}-month`]
-			if (month && isoly.Date.is(month))
+			if (month && isoly.Date.is(month)) {
 				this.value = isoly.Date.firstOfMonth(month)
-			else if (year && isoly.Date.is(year))
+			} else if (year && isoly.Date.is(year)) {
 				this.value = isoly.Date.firstOfMonth(year)
+			}
 		}
 	}
 	@Listen("smoothlyInputLooks")
@@ -146,8 +148,9 @@ export class SmoothlyInputMonth implements ComponentWillLoad, Input, Editable {
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: Editable) => void>): Promise<void> {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 
 	render(): VNode | VNode[] {

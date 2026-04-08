@@ -22,8 +22,9 @@ export class SmoothlyInputRadioItem {
 		this.smoothlyRadioItemRegister.emit(parent => {
 			this.name = parent.name
 			parent.listen(async p => {
-				if (Input.is(p))
+				if (Input.is(p)) {
 					this.disabled = p.disabled
+				}
 			})
 		})
 		this.selected && this.inputHandler(false)

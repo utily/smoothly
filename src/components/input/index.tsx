@@ -61,8 +61,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async setValue(value: any): Promise<void> {
-		if (this.inputElement)
+		if (this.inputElement) {
 			this.state = this.stateHandler.setValue(this.inputElement, this.state, value)
+		}
 	}
 	@Method()
 	async setFocus(): Promise<void> {
@@ -70,13 +71,14 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	}
 	@Method()
 	async setSelection(start: number, end: number): Promise<void> {
-		if (this.inputElement)
+		if (this.inputElement) {
 			this.state = this.stateHandler.setSelection(
 				this.inputElement,
 				this.state,
 				start,
 				end < 0 ? this.inputElement.value.length + end + 1 : end
 			)
+		}
 	}
 	@Method()
 	async listen(listener: Editable.Observer.Listener): Promise<void> {
@@ -171,19 +173,22 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 		this.observer.publish()
 	}
 	componentDidLoad() {
-		if (this.inputElement)
+		if (this.inputElement) {
 			this.inputElement.value = this.state.value
+		}
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Listen("input")
 	@Listen("beforeinput")
 	onEvent(event: InputEvent) {
 		this.state = this.stateHandler.onInputEvent(event, this.state)
-		if (event.type == "input" || event.defaultPrevented)
+		if (event.type == "input" || event.defaultPrevented) {
 			this.smoothlyUserInput.emit({ name: this.name, value: this.stateHandler.getValue(this.state) })
+		}
 	}
 	copyText(value?: string) {
 		if (value) {
@@ -216,8 +221,9 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 						pattern={this.state?.pattern && this.state?.pattern.source}
 						onKeyDown={async event => {
 							this.state = this.stateHandler.onKeyDown(event, this.state)
-							if (!this.readonly && !this.disabled)
+							if (!this.readonly && !this.disabled) {
 								this.smoothlyKeydown.emit(Key.create(this.name, event))
+							}
 						}}
 						onFocus={event => !this.readonly && (this.state = this.stateHandler.onFocus(event, this.state))}
 						onBlur={event => {

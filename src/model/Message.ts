@@ -12,16 +12,19 @@ export namespace Message {
 	export function send(message: string | Message<any>, content?: any | Window, context?: Window): void {
 		if (Message.is(message) && context == undefined) {
 			context = content as Window
-			if (!context)
+			if (!context) {
 				context = window
+			}
 			const destination = message.destination.split("#", 2)
 			message = { destination: destination[1], content: message.content }
 			context.postMessage(message, destination[0])
 		} else if (typeof context != "string") {
-			if (!context)
+			if (!context) {
 				context = window
-			if (typeof message == "string")
+			}
+			if (typeof message == "string") {
 				Message.send({ destination: message, content }, context)
+			}
 		}
 	}
 	export function listen(origin: string, handle: (destination: string, content: any) => void, context?: Window): void {
@@ -37,8 +40,9 @@ export namespace Message {
 				Message.is(message) &&
 				(origin == "*" || e.origin == origin) &&
 				(destination == "" || message.destination == destination)
-			)
+			) {
 				handle(message.destination, message.content)
+			}
 		})
 	}
 }

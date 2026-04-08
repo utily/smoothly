@@ -15,8 +15,9 @@ export class Listenable<T extends CanBeListenable> {
 		options?: { lazy?: boolean }
 	): void {
 		this.#listeners[property]?.push(listener) ?? (this.#listeners[property] = [listener])
-		if (!options?.lazy)
+		if (!options?.lazy) {
 			listener(this[property])
+		}
 	}
 	unlisten<K extends keyof ListenableProperties<T>>(property: K, listener: Listener<T[K]>): void {
 		const index = this.#listeners[property]?.indexOf(listener)
@@ -54,22 +55,22 @@ export class Listenable<T extends CanBeListenable> {
 								get() {
 									return backend[name].bind(backend)
 								},
-						  }
+							}
 						: descriptor.writable || descriptor.set
-						? {
-								get() {
-									return backend[name]
+							? {
+									get() {
+										return backend[name]
+									},
+									set(value: any) {
+										backend[name] = value
+										result.#listeners[name]?.forEach(listener => listener(backend[name]))
+									},
+								}
+							: {
+									get() {
+										return backend[name]
+									},
 								},
-								set(value: any) {
-									backend[name] = value
-									result.#listeners[name]?.forEach(listener => listener(backend[name]))
-								},
-						  }
-						: {
-								get() {
-									return backend[name]
-								},
-						  },
 				])
 			)
 		}

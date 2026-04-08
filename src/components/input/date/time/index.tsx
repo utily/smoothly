@@ -63,8 +63,9 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 		this.valueChange(this.value)
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -126,8 +127,9 @@ export class SmoothlyInputDateTime implements ComponentWillLoad, Clearable, Inpu
 	}
 	@Listen("smoothlyInputLooks")
 	smoothlyInputLooksHandler(event: CustomEvent<(looks: Looks) => void>) {
-		if (event.target != this.element)
+		if (event.target != this.element) {
 			event.stopPropagation()
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputDateTime) => void>): void {

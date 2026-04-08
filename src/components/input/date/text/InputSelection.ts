@@ -2,12 +2,14 @@ export namespace InputSelection {
 	export function isAtStart(event: KeyboardEvent): boolean {
 		const el = event.currentTarget as HTMLElement
 		const sel = window.getSelection()
-		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
+		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode)) {
 			return false
+		}
 
 		// Only trigger if there is no selection (caret only)
-		if (!sel.isCollapsed)
+		if (!sel.isCollapsed) {
 			return false
+		}
 
 		const range = sel.getRangeAt(0)
 		const preRange = range.cloneRange()
@@ -20,12 +22,14 @@ export namespace InputSelection {
 	export function isAtEnd(event: KeyboardEvent): boolean {
 		const el = event.currentTarget as HTMLElement
 		const sel = window.getSelection()
-		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode))
+		if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode)) {
 			return false
+		}
 
 		// Only trigger if there is no selection (caret only)
-		if (!sel.isCollapsed)
+		if (!sel.isCollapsed) {
 			return false
+		}
 
 		const range = sel.getRangeAt(0)
 		const postRange = range.cloneRange()
@@ -36,29 +40,33 @@ export namespace InputSelection {
 	}
 
 	export function selectAll(el?: HTMLElement) {
-		if (!el)
+		if (!el) {
 			return
+		}
 		el.focus()
 		const range = document.createRange()
 		range.selectNodeContents(el) // Select all content inside
 
 		const sel = window.getSelection()
-		if (!sel)
+		if (!sel) {
 			return
+		}
 
 		sel.removeAllRanges()
 		sel.addRange(range) // Apply the selection
 	}
 
 	export function setPosition(el: HTMLElement | undefined, index: number) {
-		if (!el)
+		if (!el) {
 			return
+		}
 
 		el.focus()
 
 		const selection = window.getSelection()
-		if (!selection)
+		if (!selection) {
 			return
+		}
 
 		const range = document.createRange()
 		const textNode = el.firstChild || el
@@ -73,8 +81,9 @@ export namespace InputSelection {
 
 	export function isCollapsed(el: HTMLElement): boolean {
 		const sel = window.getSelection()
-		if (!sel || sel.rangeCount === 0)
-			return true // nothing selected at all
+		if (!sel || sel.rangeCount === 0) {
+			return true
+		} // nothing selected at all
 
 		const range = sel.getRangeAt(0)
 

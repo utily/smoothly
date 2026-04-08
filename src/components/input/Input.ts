@@ -57,15 +57,17 @@ export namespace Input {
 	export const is = type.is
 
 	export function formRemove(self: Input, name?: string) {
-		if (self.parent instanceof SmoothlyForm)
+		if (self.parent instanceof SmoothlyForm) {
 			self.parent.removeInput(name ?? self.name)
+		}
 	}
 	export function formAdd(self: Input) {
 		self.smoothlyInputLoad.emit(parent => (self.parent = parent))
 	}
 	export function formRename(self: Input, oldName?: string) {
-		if (oldName)
+		if (oldName) {
 			formRemove(self, oldName)
+		}
 		formAdd(self)
 	}
 

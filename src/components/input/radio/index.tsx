@@ -69,17 +69,18 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 	smoothlyRadioInputHandler(event: CustomEvent<RadioItemSelect>): void {
 		event.stopPropagation()
 		if ((!this.readonly && !this.disabled) || !this.valueReceivedOnLoad) {
-			if (this.clearable && this.active?.value === event.detail.value)
+			if (this.clearable && this.active?.value === event.detail.value) {
 				this.clear()
-			else if (this.active?.value !== event.detail.value) {
+			} else if (this.active?.value !== event.detail.value) {
 				this.active?.select(false)
 				this.active = event.detail
 				this.value = this.active.value
 				this.active.select(true)
 			}
 		}
-		if (event.detail.userInitiated)
+		if (event.detail.userInitiated) {
 			this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+		}
 		!this.valueReceivedOnLoad && (this.valueReceivedOnLoad = !this.valueReceivedOnLoad)
 	}
 	@Method()
@@ -87,8 +88,9 @@ export class SmoothlyInputRadio implements Input, Clearable, Editable, Component
 		this.observer.subscribe(listener)
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {

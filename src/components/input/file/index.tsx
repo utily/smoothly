@@ -65,8 +65,9 @@ export class SmoothlyInputFile implements ComponentWillLoad, Input, Clearable, E
 		this.observer.publish()
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {

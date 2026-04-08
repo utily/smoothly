@@ -53,8 +53,9 @@ export class SmoothlyItem implements Item, ComponentWillLoad, ComponentDidLoad {
 		this.mutationObserver = new MutationObserver(() => this.smoothlyItemDOMChange.emit())
 		this.mutationObserver.observe(this.element, { childList: true, subtree: true, characterData: true })
 
-		if (this.selected && !this.disabled)
+		if (this.selected && !this.disabled) {
 			this.smoothlyItemSelect.emit({ userInitiated: false, item: this.element })
+		}
 	}
 	@Method()
 	async filter(filter: string): Promise<void> {

@@ -1,4 +1,3 @@
-// eslint-disable-next-line prettierx/options
 export type * from "./components.d.ts"
 export {
 	Autocomplete,

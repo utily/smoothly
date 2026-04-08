@@ -15,9 +15,11 @@ export class SmoothlyTableRow {
 	}
 	@Listen("smoothlyTableExpandableCellChange")
 	smoothlyTableExpandableCellChangeHandler(event: SmoothlyTableExpandableCellCustomEvent<boolean>): void {
-		if (event.detail)
-			for (const cell of this.expandableCells)
+		if (event.detail) {
+			for (const cell of this.expandableCells) {
 				event.target != cell && cell.close()
+			}
+		}
 	}
 
 	render(): VNode | VNode[] {

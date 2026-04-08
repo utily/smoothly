@@ -28,7 +28,7 @@ export namespace Data {
 						typeof current == "object" && !Array.isArray(current) && !(current instanceof Blob) ? current : {},
 						tail,
 						value
-				  ),
+					),
 		}
 	}
 	export function deepen(data: Record<string, Value>): Data {
@@ -44,10 +44,10 @@ export namespace Data {
 			? Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {
 					arr[k] = convertArrays(v)
 					return arr
-			  }, [])
+				}, [])
 			: isly.object().is(data) && !(data instanceof Blob || data instanceof File)
-			? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
-			: data
+				? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
+				: data
 	}
 	export function merge(data: Data, changes: Record<string, any>): Data {
 		return Object.entries(changes).reduce((r, [name, value]) => set(r, name.split("."), value), data)
@@ -59,12 +59,14 @@ export namespace Data {
 	}
 	function removeKey(current: any, [head, ...tail]: string[]) {
 		if (tail.length === 0) {
-			if (typeof current === "object" && head in current)
+			if (typeof current === "object" && head in current) {
 				delete current[head]
+			}
 		} else if (typeof current === "object" && head in current) {
 			removeKey(current[head], tail)
-			if (isEmpty(current[head]))
+			if (isEmpty(current[head])) {
 				delete current[head]
+			}
 		}
 	}
 	function isEmpty(current: any): boolean {

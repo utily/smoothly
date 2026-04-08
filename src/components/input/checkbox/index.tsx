@@ -52,8 +52,9 @@ export class SmoothlyInputCheckbox implements Input, Clearable, Editable, Compon
 		this.id = "id-" + Math.random().toString(36).substring(2, 11)
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputCheckbox) => void>): Promise<void> {

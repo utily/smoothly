@@ -13,8 +13,9 @@ export class SmoothlyDialog {
 	@Prop({ reflect: true }) header: string | undefined
 	@Listen("trigger")
 	TriggerListener(event: CustomEvent<Trigger>) {
-		if (Trigger.is(event.detail) && event.detail.name == "close")
+		if (Trigger.is(event.detail) && event.detail.name == "close") {
 			this.open = false
+		}
 	}
 	hostData() {
 		return {

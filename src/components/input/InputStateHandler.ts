@@ -6,7 +6,10 @@ type Formatter = tidily.Formatter & tidily.Converter<any>
 type Handler<E extends Event> = (event: E, unformatted: tidily.State, formatted: tidily.State) => tidily.State
 
 export class InputStateHandler {
-	constructor(private formatter: Formatter, private type: tidily.Type) {}
+	constructor(
+		private formatter: Formatter,
+		private type: tidily.Type
+	) {}
 	static create(type: "price", priceOptions: { currency?: isoly.Currency; toInteger?: boolean }): InputStateHandler
 	static create(type: "integer", integerOptions: { min?: number; max?: number; pad?: number }): InputStateHandler
 	static create(type: tidily.Type, locale?: isoly.Locale): InputStateHandler
@@ -87,7 +90,7 @@ export class InputStateHandler {
 		state.selection.direction = input.selectionDirection ?? state.selection.direction
 		const result =
 			event.type == "beforeinput" || event.type == "input"
-				? this.eventHandlers[event.type][event.inputType]?.(event, this.unformatState(state), state) ?? state
+				? (this.eventHandlers[event.type][event.inputType]?.(event, this.unformatState(state), state) ?? state)
 				: state
 		const formatted = this.partialFormatState(result)
 		if (event.defaultPrevented) {
@@ -105,15 +108,17 @@ export class InputStateHandler {
 			insertFromDrop: (event, state) => this.insert(event, state),
 			deleteContentBackward: (event, state) => {
 				event.preventDefault()
-				if (state.selection.start == state.selection.end)
+				if (state.selection.start == state.selection.end) {
 					this.select(state, state.selection.start - 1, state.selection.end)
+				}
 				this.erase(state)
 				return state
 			},
 			deleteContentForward: (event, state) => {
 				event.preventDefault()
-				if (state.selection.start == state.selection.end)
+				if (state.selection.start == state.selection.end) {
 					this.select(state, state.selection.start, state.selection.end + 1)
+				}
 				this.erase(state)
 				return state
 			},
@@ -155,9 +160,11 @@ export class InputStateHandler {
 
 	private insert(event: InputEvent, unformatted: tidily.State): tidily.State {
 		event.preventDefault()
-		if (typeof event.data == "string")
-			for (const c of event.data)
+		if (typeof event.data == "string") {
+			for (const c of event.data) {
 				this.formatter.allowed(c, unformatted) && this.replace(unformatted, c.replace(/(\r|\n|\t)/g, ""))
+			}
+		}
 		return unformatted
 	}
 	private deleteWord(formattedState: tidily.State, direction: "backward" | "forward"): tidily.State {
@@ -211,8 +218,9 @@ export class InputStateHandler {
 			value: stringValue,
 			selection: { start, end: start, direction: "none" },
 		})
-		if (inputElement)
+		if (inputElement) {
 			inputElement.value = state.value
+		}
 		return state
 	}
 	public setValue(

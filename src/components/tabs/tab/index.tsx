@@ -21,8 +21,9 @@ export class SmoothlyTab {
 
 	@Watch("open")
 	async openHandler() {
-		if (this.open)
+		if (this.open) {
 			this.smoothlyTabOpen.emit(this.name)
+		}
 		this.open
 			? await Promise.all(Object.values(this.inputs).map(input => input.register()))
 			: await Promise.all(Object.values(this.inputs).map(input => input.unregister()))
@@ -44,8 +45,9 @@ export class SmoothlyTab {
 	onInputLoad(event: CustomEvent) {
 		if (Input.Element.is(event.target)) {
 			this.inputs[event.target.name] = event.target
-			if (!this.open)
+			if (!this.open) {
 				event.stopPropagation()
+			}
 		}
 	}
 	render() {

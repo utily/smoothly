@@ -12,8 +12,9 @@ export class SmoothlyTriggerSink {
 	@Prop() filter?: string
 	filtersValue?: string[]
 	get filters(): string[] {
-		if (!this.filtersValue)
+		if (!this.filtersValue) {
 			this.filtersValue = this.filter ? this.filter.split(" ") : []
+		}
 		return this.filtersValue
 	}
 	@Listen("trigger")
