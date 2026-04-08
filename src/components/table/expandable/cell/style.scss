@@ -1,4 +1,4 @@
-@import "../arrow.scss";
+@use "../arrow.scss";
 
 :host {
 	display: contents;
@@ -12,10 +12,10 @@
 	box-sizing: border-box;
 	align-items: center;
 	white-space: nowrap;
-	@include arrow;
+	@include arrow.arrow;
 
 	&:hover {
-		@include arrow-hover;
+		@include arrow.arrow-hover;
 		background-color: rgb(var(--smoothly-table-hover-background));
 		color: rgb(var(--smoothly-table-hover-foreground));
 		stroke: rgb(var(--smoothly-table-hover-foreground));
@@ -24,7 +24,7 @@
 }
 
 :host[open] > div.content {
-	@include arrow-open;
+	@include arrow.arrow-open;
 }
 
 :host > div:first-child {
