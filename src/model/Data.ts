@@ -41,10 +41,10 @@ export namespace Data {
 	}
 	export function convertArrays(data: any): Data {
 		return isArrayRecord(data)
-			? Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {
+			? (Object.entries(data).reduce((arr: Data[], [k, v]: [`${number}`, any]) => {
 					arr[k] = convertArrays(v)
 					return arr
-				}, [])
+				}, []) as any)
 			: isly.object().is(data) && !(data instanceof Blob || data instanceof File)
 				? Object.fromEntries(Object.entries(data).map(([k, v]) => [k, convertArrays(v)]))
 				: data
