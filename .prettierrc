@@ -4,8 +4,7 @@
 	"semi": false,
 	"singleQuote": false,
 	"bracketSpacing": true,
-	"jsxBracketSameLine": true,
+	"bracketSameLine": true,
 	"arrowParens": "avoid",
-	"endOfLine": "lf",
-	"breakBeforeStatement": "always"
-} 
+	"endOfLine": "lf"
+}
