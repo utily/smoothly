@@ -3,7 +3,7 @@ import { Hex as ColorHex } from "./Hex"
 import { HSL as ColorHSL } from "./HSL"
 import { RGB as ColorRGB } from "./RGB"
 
-export type Color = typeof Color.values[number]
+export type Color = (typeof Color.values)[number]
 
 export namespace Color {
 	export import Hex = ColorHex

@@ -21,8 +21,9 @@ export class SmoothlyTableExpandableCell {
 		const clickedOnDetail = this.detailElement && event.composedPath().includes(this.detailElement)
 		if (!clickedOnDetail) {
 			const selection = window.getSelection()?.toString().trim()
-			if ((selection?.length ?? 0) == 0)
+			if ((selection?.length ?? 0) == 0) {
 				this.open = !this.open
+			}
 		}
 	}
 	@Watch("open")

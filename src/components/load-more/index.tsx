@@ -16,8 +16,9 @@ export class LoadMore {
 	@Event() smoothlyLoadMore: EventEmitter<string>
 
 	checkInView() {
-		if (this.inView)
+		if (this.inView) {
 			this.smoothlyLoadMore.emit(this.name)
+		}
 	}
 
 	connectedCallback() {

@@ -25,11 +25,11 @@ export class SmoothlyFormDemoControlled {
 		console.log("Received event. Processing...", event.detail)
 		if (!(typeof event.detail.value.name == "string")) {
 			console.error("Bad input. Resolving false.")
-		} else if (!(typeof event.detail.value.date == "string"))
+		} else if (!(typeof event.detail.value.date == "string")) {
 			console.error("Bad input. Resolving false.")
-		else if (!isoly.Currency.is(event.detail.value.currency))
+		} else if (!isoly.Currency.is(event.detail.value.currency)) {
 			console.error("Bad input. Resolving false.")
-		else {
+		} else {
 			await new Promise(resolve => window.setTimeout(resolve, 1_000))
 			this.name = event.detail.value.name
 			this.date = event.detail.value.date

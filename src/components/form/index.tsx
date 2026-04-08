@@ -130,8 +130,9 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 		event.detail(this)
 		const inputComponent = event.target
 		if (Input.Element.is(inputComponent)) {
-			if (await inputComponent.binary?.())
+			if (await inputComponent.binary?.()) {
 				this.contentType = "form-data"
+			}
 			const inputValue = await inputComponent.getValue() // Needs to await value separately to avoid race condition
 			this.value = Data.merge(this.value, { [inputComponent.name]: inputValue })
 			this.smoothlyFormInput.emit(Data.convertArrays(this.value))
@@ -158,12 +159,12 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 						const method = remove
 							? "DELETE"
 							: !this.type || this.type == "create"
-							? "POST"
-							: this.type == "change"
-							? "PUT"
-							: this.type == "update"
-							? "PATCH"
-							: "GET"
+								? "POST"
+								: this.type == "change"
+									? "PUT"
+									: this.type == "update"
+										? "PATCH"
+										: "GET"
 						const response = await http
 							.fetch(
 								http.Request.create(
@@ -176,7 +177,7 @@ export class SmoothlyForm implements ComponentWillLoad, Clearable, Submittable, 
 													header: { contentType: this.contentType ? "multipart/form-data" : "application/json" },
 													body: this.value,
 												}),
-										  }
+											}
 								)
 							)
 							.catch(() => undefined)

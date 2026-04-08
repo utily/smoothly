@@ -15,10 +15,11 @@ export class Notification {
 	@State() tick = {}
 	@Event() remove: EventEmitter<Notice>
 	private listener: Notice.Listener = notice => {
-		if (notice.state == "closed")
+		if (notice.state == "closed") {
 			this.remove.emit(notice)
-		else
+		} else {
 			this.tick = {}
+		}
 	}
 	private get properties(): [Color, Icon | undefined] {
 		let result: [Color, Icon | undefined]
@@ -53,8 +54,9 @@ export class Notification {
 
 	@Watch("notice")
 	onUpdatedNotice(newValue: Notice, oldValue?: Notice) {
-		if (oldValue)
+		if (oldValue) {
 			oldValue.unlisten(this.listener)
+		}
 		newValue.listen(this.listener)
 	}
 	componentDidLoad() {

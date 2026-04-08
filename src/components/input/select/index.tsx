@@ -100,8 +100,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	async disconnectedCallback() {
-		if (!this.element.isConnected)
+		if (!this.element.isConnected) {
 			await this.unregister()
+		}
 	}
 	@Watch("name")
 	nameChange(_: string | undefined, oldName: string | undefined) {
@@ -120,8 +121,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return !this.multiple && this.selected[0]
 			? this.selected[0].value
 			: this.multiple && this.selected.length > 0
-			? this.selected.map(item => item.value)
-			: undefined
+				? this.selected.map(item => item.value)
+				: undefined
 	}
 	@Method()
 	async getItems(): Promise<HTMLSmoothlyItemElement[]> {
@@ -205,8 +206,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onItemDomChange(e: CustomEvent) {
 		e.stopPropagation()
 		const item = e.target as HTMLSmoothlyItemElement
-		if (item.selected)
+		if (item.selected) {
 			this.displaySelected()
+		}
 	}
 	@Listen("smoothlyItemSelect")
 	async onItemSelect(event: CustomEvent<{ userInitiated: boolean; item: HTMLSmoothlyItemElement }>): Promise<void> {
@@ -220,8 +222,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			!this.showSelected && item.selected && (item.hidden = true)
 		}
 		this.displaySelected()
-		if (event.detail.userInitiated)
+		if (event.detail.userInitiated) {
 			this.smoothlyUserInput.emit({ name: this.name, value: await this.getValue() })
+		}
 	}
 	@Watch("open")
 	onClosed(open: boolean, before: boolean): void {
@@ -253,15 +256,16 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	displaySelected(): void {
 		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
 		this.displaySelectedElement &&
-			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : this.placeholder ?? "")
+			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
 	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
 		if (!this.searchDisabled) {
 			event.stopPropagation()
 			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey)
+			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey) {
 				event.preventDefault()
+			}
 			if (this.open) {
 				switch (event.key) {
 					case "ArrowUp":
@@ -271,18 +275,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						visibleItems && this.move(1)
 						break
 					case "Escape":
-						if (this.filter == "")
+						if (this.filter == "") {
 							this.open = false
-						else
+						} else {
 							this.filter = ""
+						}
 						break
 					case "Backspace":
 						this.filter = event.ctrlKey ? "" : this.filter.slice(0, -1)
 						break
 					case "Enter":
 						const result = this.items.find(item => item.marked)
-						if (result?.value)
+						if (result?.value) {
 							result.selected = !result.selected
+						}
 						if (!this.multiple) {
 							this.open = false
 							this.filter = ""
@@ -292,8 +298,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						this.open = false
 						break
 					default:
-						if (event.key.length == 1)
+						if (event.key.length == 1) {
 							this.filter += event.key
+						}
 						break
 				}
 			} else {
@@ -314,8 +321,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						break
 					default:
 						this.handleShowOptions()
-						if (event.key.length == 1)
+						if (event.key.length == 1) {
 							this.filter += event.key
+						}
 						break
 				}
 			}
@@ -332,9 +340,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private move(direction: -1 | 1): void {
 		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
 		let markedIndex = selectableItems.findIndex(item => item.marked)
-		if (markedIndex == -1)
+		if (markedIndex == -1) {
 			markedIndex = 0
-		else {
+		} else {
 			selectableItems[markedIndex].marked = false
 			markedIndex = (markedIndex + direction + selectableItems.length) % selectableItems.length
 		}

@@ -15,10 +15,11 @@ export class SmoothlyTriggerSource {
 		Message.listen(
 			this.listen,
 			(destination, content) => {
-				if (Trigger.is(content))
+				if (Trigger.is(content)) {
 					this.trigger.emit(content)
-				else
+				} else {
 					this.smoothlyMessage.emit({ destination, content })
+				}
 			},
 			window
 		)

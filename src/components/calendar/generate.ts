@@ -12,8 +12,9 @@ export function month(date: isoly.Date): isoly.Date[][] {
 			d.setUTCDate(day++)
 			r.push(isoly.Date.create(d))
 		}
-		if (row < 5 || isoly.Date.firstOfMonth(r[0]) == isoly.Date.firstOfMonth(date))
+		if (row < 5 || isoly.Date.firstOfMonth(r[0]) == isoly.Date.firstOfMonth(date)) {
 			result.push(r)
+		}
 	}
 	return result
 }

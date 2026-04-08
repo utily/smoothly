@@ -15,13 +15,13 @@ export namespace Hsl {
 			values.length == 3 &&
 			values.every((single: string, index: number) => {
 				let result = false
-				if (index == 0)
+				if (index == 0) {
 					result =
 						!Number.isNaN(single) &&
 						single.match(/[0-9]/g)?.length == single.length &&
 						Number(single) >= 0 &&
 						Number(single) <= 360
-				else {
+				} else {
 					const number: string = single.substr(0, single.length - 1)
 					result =
 						single[single.length - 1] == "%" &&

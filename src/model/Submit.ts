@@ -2,7 +2,7 @@ import { isly } from "isly"
 import { Data } from "./Data"
 
 export interface Submit<D extends Data = Data> {
-	type?: typeof Submit.values[number]
+	type?: (typeof Submit.values)[number]
 	result: (result: boolean) => void
 	value: D
 }

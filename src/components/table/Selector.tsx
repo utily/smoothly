@@ -5,12 +5,15 @@ export class Selector<T> {
 	get selected(): T[] {
 		return (this.#selected ??= Object.values(this.data))
 	}
-	private constructor(private readonly key: keyof T, private data: Readonly<Record<string, T>> = {}) {}
+	private constructor(
+		private readonly key: keyof T,
+		private data: Readonly<Record<string, T>> = {}
+	) {}
 	handle(data: Record<string, T>): Selector<T> {
 		return new Selector(
 			this.key,
 			"check-all" in data
-				? data["check-all"] ?? {}
+				? (data["check-all"] ?? {})
 				: Object.fromEntries(Object.entries({ ...this.data, ...data }).filter(([_, value]) => value != undefined))
 		)
 	}

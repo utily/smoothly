@@ -21,7 +21,7 @@ function reduce(types: string[], value: Record<string, string>) {
 				? {
 						...r,
 						[c]: value[c],
-				  }
+					}
 				: r,
 		{}
 	)
@@ -39,14 +39,14 @@ export namespace Cosmetic {
 					typeof value.dangerColor == "string"
 						? value.dangerColor
 						: typeof value.danger_color == "string"
-						? value.danger_color
-						: undefined,
+							? value.danger_color
+							: undefined,
 				fontFamily:
 					typeof value.fontFamily == "string"
 						? value.fontFamily
 						: typeof value.font_family == "string"
-						? value.font_family
-						: undefined,
+							? value.font_family
+							: undefined,
 				background: typeof value.background == "string" ? value.background : undefined,
 			}
 			Object.keys(result).forEach((key: "text" | "border" | "gap" | "dangerColor" | "fontFamily" | "background") => {

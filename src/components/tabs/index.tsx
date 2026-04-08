@@ -52,8 +52,9 @@ export class SmoothlyTabs {
 	}
 	@Watch("selectedElement")
 	onSelectedChange(value: HTMLSmoothlyTabElement, old: HTMLSmoothlyTabElement) {
-		if (old)
+		if (old) {
 			old.open = false
+		}
 	}
 
 	render() {
