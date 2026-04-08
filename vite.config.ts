@@ -31,7 +31,6 @@ export default defineConfig({
 					"tidily",
 					"gracely",
 					"cloudly-router",
-					"selectively",
 					"langly",
 				],
 			},

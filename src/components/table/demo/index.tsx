@@ -14,7 +14,6 @@ export class SmoothlyTableDemo {
 				<smoothly-table-demo-colspan />
 				<smoothly-table-demo-simple />
 				<smoothly-table-demo-nested-no-cell />
-				<smoothly-table-demo-filtered />
 			</Host>
 		)
 	}

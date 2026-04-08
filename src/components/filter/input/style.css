@@ -1,9 +1,0 @@
-:host {
-	display: contents;
-}
-
-:host>smoothly-input {
-	flex-grow: 1;
-	min-width: 10em;
-	flex-basis: 40%;
-}

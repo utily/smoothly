@@ -12,10 +12,8 @@ import { Editable } from "./components/input/Editable";
 import { isoly } from "isoly";
 import { DateFormat } from "./components/input/date/text/DateFormat";
 import { tidily } from "tidily";
-import { selectively } from "selectively";
-import { Filter } from "./components/filter/Filter";
-import { Looks } from "./components/input/Looks";
 import { isly } from "isly";
+import { Looks } from "./components/input/Looks";
 import { Key } from "./components/input/Key";
 import { Input } from "./components/input/Input";
 import { RGB } from "./model/Color/RGB";
@@ -29,10 +27,8 @@ export { Editable } from "./components/input/Editable";
 export { isoly } from "isoly";
 export { DateFormat } from "./components/input/date/text/DateFormat";
 export { tidily } from "tidily";
-export { selectively } from "selectively";
-export { Filter } from "./components/filter/Filter";
-export { Looks } from "./components/input/Looks";
 export { isly } from "isly";
+export { Looks } from "./components/input/Looks";
 export { Key } from "./components/input/Key";
 export { Input } from "./components/input/Input";
 export { RGB } from "./model/Color/RGB";
@@ -168,33 +164,6 @@ export namespace Components {
     }
     interface SmoothlyDisplayJsonRecordKey {
         "value": any;
-    }
-    interface SmoothlyFilter {
-    }
-    interface SmoothlyFilterField {
-        "clear": () => Promise<void>;
-        "criteria": selectively.Criteria;
-    }
-    interface SmoothlyFilterInput {
-        "label": string;
-        "placeholder": string;
-        "property": string;
-    }
-    interface SmoothlyFilterSelect {
-        "label": string;
-        "looks"?: Looks;
-        "menuHeight"?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined;
-        "multiple": boolean;
-        "property": string;
-        "type": "array" | "string";
-    }
-    interface SmoothlyFilterToggle {
-        "active": boolean;
-        "flip": boolean;
-        "icon": Icon;
-        "not": boolean;
-        "properties": Record<string, string>;
-        "tooltip": string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -654,8 +623,6 @@ export namespace Components {
     }
     interface SmoothlyTableDemoFillerRow {
     }
-    interface SmoothlyTableDemoFiltered {
-    }
     interface SmoothlyTableDemoGroup {
     }
     interface SmoothlyTableDemoNestedNoCell {
@@ -771,26 +738,6 @@ export interface SmoothlyDateTextCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyDisplayDemoCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyDisplayDemoElement;
-}
-export interface SmoothlyFilterCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyFilterElement;
-}
-export interface SmoothlyFilterFieldCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyFilterFieldElement;
-}
-export interface SmoothlyFilterInputCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyFilterInputElement;
-}
-export interface SmoothlyFilterSelectCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyFilterSelectElement;
-}
-export interface SmoothlyFilterToggleCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLSmoothlyFilterToggleElement;
 }
 export interface SmoothlyFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1172,95 +1119,6 @@ declare global {
     var HTMLSmoothlyDisplayJsonRecordKeyElement: {
         prototype: HTMLSmoothlyDisplayJsonRecordKeyElement;
         new (): HTMLSmoothlyDisplayJsonRecordKeyElement;
-    };
-    interface HTMLSmoothlyFilterElementEventMap {
-        "smoothlyFilter": selectively.Criteria;
-    }
-    interface HTMLSmoothlyFilterElement extends Components.SmoothlyFilter, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterElement, ev: SmoothlyFilterCustomEvent<HTMLSmoothlyFilterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterElement, ev: SmoothlyFilterCustomEvent<HTMLSmoothlyFilterElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyFilterElement: {
-        prototype: HTMLSmoothlyFilterElement;
-        new (): HTMLSmoothlyFilterElement;
-    };
-    interface HTMLSmoothlyFilterFieldElementEventMap {
-        "smoothlyFilterField": selectively.Rule;
-    }
-    interface HTMLSmoothlyFilterFieldElement extends Components.SmoothlyFilterField, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterFieldElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterFieldElement, ev: SmoothlyFilterFieldCustomEvent<HTMLSmoothlyFilterFieldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterFieldElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterFieldElement, ev: SmoothlyFilterFieldCustomEvent<HTMLSmoothlyFilterFieldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyFilterFieldElement: {
-        prototype: HTMLSmoothlyFilterFieldElement;
-        new (): HTMLSmoothlyFilterFieldElement;
-    };
-    interface HTMLSmoothlyFilterInputElementEventMap {
-        "smoothlyFilterUpdate": Filter.Update;
-        "smoothlyFilterManipulate": Filter.Manipulate;
-    }
-    interface HTMLSmoothlyFilterInputElement extends Components.SmoothlyFilterInput, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterInputElement, ev: SmoothlyFilterInputCustomEvent<HTMLSmoothlyFilterInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterInputElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterInputElement, ev: SmoothlyFilterInputCustomEvent<HTMLSmoothlyFilterInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyFilterInputElement: {
-        prototype: HTMLSmoothlyFilterInputElement;
-        new (): HTMLSmoothlyFilterInputElement;
-    };
-    interface HTMLSmoothlyFilterSelectElementEventMap {
-        "smoothlyFilterUpdate": Filter.Update;
-        "smoothlyFilterManipulate": Filter.Manipulate;
-        "smoothlyInputLooks": (looks?: Looks) => void;
-    }
-    interface HTMLSmoothlyFilterSelectElement extends Components.SmoothlyFilterSelect, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterSelectElement, ev: SmoothlyFilterSelectCustomEvent<HTMLSmoothlyFilterSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterSelectElement, ev: SmoothlyFilterSelectCustomEvent<HTMLSmoothlyFilterSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyFilterSelectElement: {
-        prototype: HTMLSmoothlyFilterSelectElement;
-        new (): HTMLSmoothlyFilterSelectElement;
-    };
-    interface HTMLSmoothlyFilterToggleElementEventMap {
-        "smoothlyFilterUpdate": Filter.Update;
-        "smoothlyFilterManipulate": Filter.Manipulate;
-    }
-    interface HTMLSmoothlyFilterToggleElement extends Components.SmoothlyFilterToggle, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLSmoothlyFilterToggleElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterToggleElement, ev: SmoothlyFilterToggleCustomEvent<HTMLSmoothlyFilterToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLSmoothlyFilterToggleElementEventMap>(type: K, listener: (this: HTMLSmoothlyFilterToggleElement, ev: SmoothlyFilterToggleCustomEvent<HTMLSmoothlyFilterToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLSmoothlyFilterToggleElement: {
-        prototype: HTMLSmoothlyFilterToggleElement;
-        new (): HTMLSmoothlyFilterToggleElement;
     };
     interface HTMLSmoothlyFormElementEventMap {
         "smoothlyFormDisable": (disabled: boolean) => void;
@@ -1991,12 +1849,6 @@ declare global {
         prototype: HTMLSmoothlyTableDemoFillerRowElement;
         new (): HTMLSmoothlyTableDemoFillerRowElement;
     };
-    interface HTMLSmoothlyTableDemoFilteredElement extends Components.SmoothlyTableDemoFiltered, HTMLStencilElement {
-    }
-    var HTMLSmoothlyTableDemoFilteredElement: {
-        prototype: HTMLSmoothlyTableDemoFilteredElement;
-        new (): HTMLSmoothlyTableDemoFilteredElement;
-    };
     interface HTMLSmoothlyTableDemoGroupElement extends Components.SmoothlyTableDemoGroup, HTMLStencilElement {
     }
     var HTMLSmoothlyTableDemoGroupElement: {
@@ -2244,11 +2096,6 @@ declare global {
         "smoothly-display-json-object": HTMLSmoothlyDisplayJsonObjectElement;
         "smoothly-display-json-primitive": HTMLSmoothlyDisplayJsonPrimitiveElement;
         "smoothly-display-json-record-key": HTMLSmoothlyDisplayJsonRecordKeyElement;
-        "smoothly-filter": HTMLSmoothlyFilterElement;
-        "smoothly-filter-field": HTMLSmoothlyFilterFieldElement;
-        "smoothly-filter-input": HTMLSmoothlyFilterInputElement;
-        "smoothly-filter-select": HTMLSmoothlyFilterSelectElement;
-        "smoothly-filter-toggle": HTMLSmoothlyFilterToggleElement;
         "smoothly-form": HTMLSmoothlyFormElement;
         "smoothly-form-demo": HTMLSmoothlyFormDemoElement;
         "smoothly-form-demo-all": HTMLSmoothlyFormDemoAllElement;
@@ -2307,7 +2154,6 @@ declare global {
         "smoothly-table-demo": HTMLSmoothlyTableDemoElement;
         "smoothly-table-demo-colspan": HTMLSmoothlyTableDemoColspanElement;
         "smoothly-table-demo-filler-row": HTMLSmoothlyTableDemoFillerRowElement;
-        "smoothly-table-demo-filtered": HTMLSmoothlyTableDemoFilteredElement;
         "smoothly-table-demo-group": HTMLSmoothlyTableDemoGroupElement;
         "smoothly-table-demo-nested-no-cell": HTMLSmoothlyTableDemoNestedNoCellElement;
         "smoothly-table-demo-nested-no-cell-inner": HTMLSmoothlyTableDemoNestedNoCellInnerElement;
@@ -2471,41 +2317,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyDisplayJsonRecordKey {
         "value"?: any;
-    }
-    interface SmoothlyFilter {
-        "onSmoothlyFilter"?: (event: SmoothlyFilterCustomEvent<selectively.Criteria>) => void;
-    }
-    interface SmoothlyFilterField {
-        "criteria"?: selectively.Criteria;
-        "onSmoothlyFilterField"?: (event: SmoothlyFilterFieldCustomEvent<selectively.Rule>) => void;
-    }
-    interface SmoothlyFilterInput {
-        "label"?: string;
-        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Manipulate>) => void;
-        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterInputCustomEvent<Filter.Update>) => void;
-        "placeholder"?: string;
-        "property"?: string;
-    }
-    interface SmoothlyFilterSelect {
-        "label"?: string;
-        "looks"?: Looks;
-        "menuHeight"?: `${number}items` | `${number}rem` | `${number}px` | `${number}vh` | undefined;
-        "multiple"?: boolean;
-        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Manipulate>) => void;
-        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterSelectCustomEvent<Filter.Update>) => void;
-        "onSmoothlyInputLooks"?: (event: SmoothlyFilterSelectCustomEvent<(looks?: Looks) => void>) => void;
-        "property"?: string;
-        "type"?: "array" | "string";
-    }
-    interface SmoothlyFilterToggle {
-        "active"?: boolean;
-        "flip"?: boolean;
-        "icon"?: Icon;
-        "not"?: boolean;
-        "onSmoothlyFilterManipulate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Manipulate>) => void;
-        "onSmoothlyFilterUpdate"?: (event: SmoothlyFilterToggleCustomEvent<Filter.Update>) => void;
-        "properties"?: Record<string, string>;
-        "tooltip"?: string;
     }
     interface SmoothlyForm {
         "action"?: string;
@@ -2951,8 +2762,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyTableDemoFillerRow {
     }
-    interface SmoothlyTableDemoFiltered {
-    }
     interface SmoothlyTableDemoGroup {
     }
     interface SmoothlyTableDemoNestedNoCell {
@@ -3067,11 +2876,6 @@ declare namespace LocalJSX {
         "smoothly-display-json-object": SmoothlyDisplayJsonObject;
         "smoothly-display-json-primitive": SmoothlyDisplayJsonPrimitive;
         "smoothly-display-json-record-key": SmoothlyDisplayJsonRecordKey;
-        "smoothly-filter": SmoothlyFilter;
-        "smoothly-filter-field": SmoothlyFilterField;
-        "smoothly-filter-input": SmoothlyFilterInput;
-        "smoothly-filter-select": SmoothlyFilterSelect;
-        "smoothly-filter-toggle": SmoothlyFilterToggle;
         "smoothly-form": SmoothlyForm;
         "smoothly-form-demo": SmoothlyFormDemo;
         "smoothly-form-demo-all": SmoothlyFormDemoAll;
@@ -3130,7 +2934,6 @@ declare namespace LocalJSX {
         "smoothly-table-demo": SmoothlyTableDemo;
         "smoothly-table-demo-colspan": SmoothlyTableDemoColspan;
         "smoothly-table-demo-filler-row": SmoothlyTableDemoFillerRow;
-        "smoothly-table-demo-filtered": SmoothlyTableDemoFiltered;
         "smoothly-table-demo-group": SmoothlyTableDemoGroup;
         "smoothly-table-demo-nested-no-cell": SmoothlyTableDemoNestedNoCell;
         "smoothly-table-demo-nested-no-cell-inner": SmoothlyTableDemoNestedNoCellInner;
@@ -3184,11 +2987,6 @@ declare module "@stencil/core" {
             "smoothly-display-json-object": LocalJSX.SmoothlyDisplayJsonObject & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
             "smoothly-display-json-primitive": LocalJSX.SmoothlyDisplayJsonPrimitive & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
             "smoothly-display-json-record-key": LocalJSX.SmoothlyDisplayJsonRecordKey & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordKeyElement>;
-            "smoothly-filter": LocalJSX.SmoothlyFilter & JSXBase.HTMLAttributes<HTMLSmoothlyFilterElement>;
-            "smoothly-filter-field": LocalJSX.SmoothlyFilterField & JSXBase.HTMLAttributes<HTMLSmoothlyFilterFieldElement>;
-            "smoothly-filter-input": LocalJSX.SmoothlyFilterInput & JSXBase.HTMLAttributes<HTMLSmoothlyFilterInputElement>;
-            "smoothly-filter-select": LocalJSX.SmoothlyFilterSelect & JSXBase.HTMLAttributes<HTMLSmoothlyFilterSelectElement>;
-            "smoothly-filter-toggle": LocalJSX.SmoothlyFilterToggle & JSXBase.HTMLAttributes<HTMLSmoothlyFilterToggleElement>;
             "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
             "smoothly-form-demo": LocalJSX.SmoothlyFormDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoElement>;
             "smoothly-form-demo-all": LocalJSX.SmoothlyFormDemoAll & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoAllElement>;
@@ -3247,7 +3045,6 @@ declare module "@stencil/core" {
             "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
             "smoothly-table-demo-colspan": LocalJSX.SmoothlyTableDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoColspanElement>;
             "smoothly-table-demo-filler-row": LocalJSX.SmoothlyTableDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
-            "smoothly-table-demo-filtered": LocalJSX.SmoothlyTableDemoFiltered & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFilteredElement>;
             "smoothly-table-demo-group": LocalJSX.SmoothlyTableDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
             "smoothly-table-demo-nested-no-cell": LocalJSX.SmoothlyTableDemoNestedNoCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellElement>;
             "smoothly-table-demo-nested-no-cell-inner": LocalJSX.SmoothlyTableDemoNestedNoCellInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellInnerElement>;
