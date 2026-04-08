@@ -40,7 +40,13 @@ export namespace Components {
         "color": Color;
         "home"?: string;
         "label"?: string;
+        /**
+          * @default false
+         */
         "menuOpen": boolean;
+        /**
+          * @default "48rem"
+         */
         "navBreakpoint": `${number}${"px" | "em" | "rem"}`;
         "selectRoom": (path: string) => Promise<void>;
     }
@@ -53,21 +59,39 @@ export namespace Components {
         "getContent": () => Promise<HTMLElement | undefined>;
         "icon"?: Icon;
         "label"?: string;
+        /**
+          * @default ""
+         */
         "path": string | URLPattern;
         "selected"?: boolean;
         "setMobileMode": (mobile: boolean) => Promise<void>;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
     }
     interface SmoothlyBackToTop {
+        /**
+          * @default "1rem"
+         */
         "bottom": string;
+        /**
+          * @default "0.5"
+         */
         "opacity": string;
+        /**
+          * @default "1rem"
+         */
         "right": string;
     }
     interface SmoothlyBurger {
+        /**
+          * @default false
+         */
         "open": boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
@@ -79,7 +103,13 @@ export namespace Components {
     }
     interface SmoothlyButtonConfirm {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default 0.2
+         */
         "doubleClickTime": number;
         "expand"?: "block" | "full";
         "fill"?: Fill;
@@ -102,13 +132,28 @@ export namespace Components {
         "value"?: isoly.Date;
     }
     interface SmoothlyCheckbox {
+        /**
+          * @default false
+         */
         "checked": boolean;
         "clear": () => Promise<void>;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default false
+         */
         "intermediate": boolean;
         "name": string;
+        /**
+          * @default "tiny"
+         */
         "size": "tiny" | "small" | "medium" | "large";
         "toggle": () => Promise<void>;
+        /**
+          * @default false
+         */
         "unavailable": boolean;
         "value": any;
     }
@@ -116,23 +161,38 @@ export namespace Components {
         "color"?: Color;
     }
     interface SmoothlyCountry {
+        /**
+          * @default "alpha2"
+         */
         "text": "alpha2" | "name" | "none";
         "value": isoly.CountryCode.Alpha2;
     }
     interface SmoothlyDateText {
         "deselect": () => Promise<void>;
         "disabled": boolean;
+        /**
+          * @default getLocale()
+         */
         "locale"?: isoly.Locale;
         "readonly": boolean;
         "select": (place?: "start" | "end") => Promise<void>;
         "setValue": (value: isoly.Date | undefined) => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "value"?: isoly.Date;
     }
     interface SmoothlyDialog {
+        /**
+          * @default false
+         */
         "closable": boolean;
         "color": Color | undefined;
         "header": string | undefined;
+        /**
+          * @default true
+         */
         "open": boolean;
     }
     interface SmoothlyDialogDemo {
@@ -173,15 +233,27 @@ export namespace Components {
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name"?: string;
+        /**
+          * @default true
+         */
         "prevent": boolean;
         "processing"?: Promise<boolean>;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "removeInput": (name: string) => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "submit": (remove?: boolean) => Promise<void>;
+        /**
+          * @default this.action ? "create" : undefined
+         */
         "type"?: "update" | "change" | "fetch" | "create";
         "validator"?: isly.Type<any>;
+        /**
+          * @default {}
+         */
         "value": Readonly<Data>;
     }
     interface SmoothlyFormDemo {
@@ -216,8 +288,14 @@ export namespace Components {
     }
     interface SmoothlyIcon {
         "color": Color;
+        /**
+          * @default "solid"
+         */
         "fill": Fill;
         "flip"?: "x" | "y";
+        /**
+          * @default "empty"
+         */
         "name": Icon | "empty";
         "rotate"?: number;
         "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
@@ -231,10 +309,16 @@ export namespace Components {
         "color"?: Color;
         "copyable"?: boolean;
         "currency"?: isoly.Currency;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<any | undefined>;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
@@ -243,8 +327,14 @@ export namespace Components {
         "name": string;
         "pad"?: number;
         "placeholder": string | undefined;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
+        /**
+          * @default false
+         */
         "required": boolean;
         "reset": () => Promise<void>;
         "setCustomInitialValue": (value: any) => Promise<void>;
@@ -252,13 +342,22 @@ export namespace Components {
         "setInitialValue": () => Promise<void>;
         "setSelection": (start: number, end: number) => Promise<void>;
         "setValue": (value: any) => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "toInteger"?: boolean;
+        /**
+          * @default "text"
+         */
         "type": tidily.Type;
         "unregister": () => Promise<void>;
         "value": any;
     }
     interface SmoothlyInputCheckbox {
+        /**
+          * @default false
+         */
         "checked": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -268,6 +367,9 @@ export namespace Components {
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
@@ -279,13 +381,31 @@ export namespace Components {
     }
     interface SmoothlyInputClear {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default true
+         */
         "display": boolean;
         "expand"?: "block" | "full";
+        /**
+          * @default "clear"
+         */
         "fill"?: Fill;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size": "small" | "large" | "icon" | "flexible";
+        /**
+          * @default "Clear"
+         */
         "tooltip": string;
+        /**
+          * @default "input"
+         */
         "type": "form" | "input";
     }
     interface SmoothlyInputColor {
@@ -297,18 +417,33 @@ export namespace Components {
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
+        /**
+          * @default "rgb"
+         */
         "output": "rgb" | "hex";
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
+        /**
+          * @default undefined
+         */
         "value": string | undefined;
     }
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
+        /**
+          * @default false
+         */
         "alwaysShowGuide": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -316,6 +451,9 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.Date | undefined>;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "locale"?: isoly.Locale;
@@ -325,10 +463,16 @@ export namespace Components {
         "name": string;
         "open": boolean;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
         "value"?: isoly.Date;
@@ -336,6 +480,9 @@ export namespace Components {
     interface SmoothlyInputDateDemo {
     }
     interface SmoothlyInputDateRange {
+        /**
+          * @default false
+         */
         "alwaysShowGuide": boolean;
         "clear": () => Promise<void>;
         "color"?: Color;
@@ -344,18 +491,30 @@ export namespace Components {
         "end": isoly.Date | undefined;
         "errorMessage"?: string;
         "getValue": () => Promise<Partial<isoly.DateRange> | undefined>;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "locale"?: isoly.Locale;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
+        /**
+          * @default "dateRange"
+         */
         "name": string;
         "placeholder": string;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "start": isoly.Date | undefined;
         "unregister": () => Promise<void>;
@@ -367,6 +526,9 @@ export namespace Components {
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getValue": () => Promise<isoly.DateTime | undefined>;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
@@ -374,10 +536,16 @@ export namespace Components {
         "min"?: isoly.DateTime;
         "name": string;
         "open": boolean;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
         "value"?: isoly.DateTime;
@@ -391,14 +559,29 @@ export namespace Components {
     interface SmoothlyInputDemoUserInput {
     }
     interface SmoothlyInputEdit {
+        /**
+          * @default "tertiary"
+         */
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default true
+         */
         "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
+        /**
+          * @default "Edit"
+         */
         "tooltip": string;
+        /**
+          * @default "input"
+         */
         "type": "form" | "input";
     }
     interface SmoothlyInputFile {
@@ -414,10 +597,16 @@ export namespace Components {
         "looks"?: Looks;
         "name": string;
         "placeholder": string | undefined;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
         "value"?: File;
@@ -427,20 +616,35 @@ export namespace Components {
         "color"?: Color;
         "edit": (editable: boolean) => Promise<void>;
         "getValue": () => Promise<isoly.Date | undefined>;
+        /**
+          * @default false
+         */
         "inCalendar": boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name": string;
+        /**
+          * @default false
+         */
         "next": boolean;
+        /**
+          * @default false
+         */
         "previous": boolean;
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
+        /**
+          * @default isoly.Date.now()
+         */
         "value"?: isoly.Date;
     }
     interface SmoothlyInputPriceDemo {
@@ -456,23 +660,38 @@ export namespace Components {
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "name": string;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
         "unregister": () => Promise<void>;
+        /**
+          * @default undefined
+         */
         "value": any;
     }
     interface SmoothlyInputRadioItem {
         "looks"?: Looks;
         "name": string;
+        /**
+          * @default false
+         */
         "selected": boolean;
         "value": any;
     }
     interface SmoothlyInputRange {
         "clear": () => Promise<void>;
         "color"?: Color;
+        /**
+          * @default false
+         */
         "defined": boolean;
         "disabled"?: boolean;
         "edit": (editable: boolean) => Promise<void>;
@@ -480,79 +699,181 @@ export namespace Components {
         "label": string;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
+        /**
+          * @default 100
+         */
         "max": number;
+        /**
+          * @default 0
+         */
         "min": number;
+        /**
+          * @default "range"
+         */
         "name": string;
+        /**
+          * @default "left"
+         */
         "outputSide": "right" | "left";
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
         "reset": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
         "step"?: number;
+        /**
+          * @default "text"
+         */
         "type": Extract<tidily.Type, "text" | "percent">;
         "unregister": () => Promise<void>;
+        /**
+          * @default undefined
+         */
         "value": number | undefined;
     }
     interface SmoothlyInputRangeDemo {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default true
+         */
         "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size": "flexible" | "small" | "large" | "icon";
+        /**
+          * @default "Reset"
+         */
         "tooltip": string;
+        /**
+          * @default "input"
+         */
         "type": "form" | "input";
     }
     interface SmoothlyInputSelect {
         "clear": () => Promise<void>;
+        /**
+          * @default true
+         */
         "clearable": boolean;
         "color"?: Color;
+        /**
+          * @default false
+         */
         "defined": boolean;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "edit": (editable: boolean) => Promise<void>;
         "errorMessage"?: string;
         "getItems": () => Promise<HTMLSmoothlyItemElement[]>;
         "getValue": () => Promise<any | any[] | undefined>;
+        /**
+          * @default false
+         */
         "inCalendar": boolean;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        /**
+          * @default false
+         */
         "multiple": boolean;
+        /**
+          * @default false
+         */
         "mutable": boolean;
+        /**
+          * @default "selected"
+         */
         "name": string;
         "ordered"?: boolean;
         "placeholder"?: string | any;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "register": () => Promise<void>;
+        /**
+          * @default false
+         */
         "required": boolean;
         "reset": () => Promise<void>;
+        /**
+          * @default false
+         */
         "searchDisabled": boolean;
         "setInitialValue": () => Promise<void>;
+        /**
+          * @default true
+         */
         "showLabel": boolean;
+        /**
+          * @default true
+         */
         "showSelected"?: boolean;
         "unregister": () => Promise<void>;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "delete": boolean;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default false
+         */
         "display": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        /**
+          * @default "checkmark-outline"
+         */
         "icon": Icon | false;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size": "flexible" | "small" | "large" | "icon";
+        /**
+          * @default this.delete ? "Remove" : "Submit"
+         */
         "tooltip": string;
     }
     interface SmoothlyItem {
+        /**
+          * @default true
+         */
         "deselectable": boolean;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "filter": (filter: string) => Promise<void>;
         "marked": boolean;
+        /**
+          * @default false
+         */
         "selected": boolean;
         "value": any;
     }
@@ -563,43 +884,85 @@ export namespace Components {
     }
     interface SmoothlyLazy {
         "content"?: VNode | FunctionalComponent;
+        /**
+          * @default false
+         */
         "show": boolean;
     }
     interface SmoothlyLoadMore {
+        /**
+          * @default false
+         */
         "multiple": boolean;
+        /**
+          * @default ""
+         */
         "name": string;
+        /**
+          * @default "intersection"
+         */
         "triggerMode": "scroll" | "intersection";
     }
     interface SmoothlyModal {
+        /**
+          * @default "center"
+         */
         "align": "top" | "center";
+        /**
+          * @default false
+         */
         "closable": boolean;
         "closeModal": () => Promise<void>;
+        /**
+          * @default false
+         */
         "open": boolean;
         "openModal": () => Promise<void>;
     }
     interface SmoothlyNotification {
+        /**
+          * @default true
+         */
         "closable": boolean;
         "icon": boolean;
         "notice": Notice;
     }
     interface SmoothlyNotifier {
+        /**
+          * @default false
+         */
         "icon": boolean;
     }
     interface SmoothlySpinner {
         "overlay": boolean;
+        /**
+          * @default "large"
+         */
         "size": "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
+        /**
+          * @default "success"
+         */
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        /**
+          * @default true
+         */
         "prevent": boolean;
         "shape"?: "rounded";
         "size": "flexible" | "small" | "large" | "icon";
         "type": "link" | "button";
     }
     interface SmoothlySummary {
+        /**
+          * @default false
+         */
         "open": boolean;
     }
     interface SmoothlyTab {
@@ -610,11 +973,17 @@ export namespace Components {
         "tooltip": string;
     }
     interface SmoothlyTable {
+        /**
+          * @default 1
+         */
         "columns": number;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
+        /**
+          * @default 1
+         */
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -639,10 +1008,19 @@ export namespace Components {
     }
     interface SmoothlyTableExpandableCell {
         "close": () => Promise<void>;
+        /**
+          * @default false
+         */
         "open": boolean;
+        /**
+          * @default 1
+         */
         "span"?: number;
     }
     interface SmoothlyTableExpandableRow {
+        /**
+          * @default false
+         */
         "open": boolean;
     }
     interface SmoothlyTableFillerRow {
@@ -654,12 +1032,21 @@ export namespace Components {
     interface SmoothlyTableRow {
     }
     interface SmoothlyTableRowGroup {
+        /**
+          * @default false
+         */
         "align": boolean;
+        /**
+          * @default false
+         */
         "open": boolean;
     }
     interface SmoothlyTabs {
         "numberOfTabs": number;
         "removeTab": (tab: HTMLSmoothlyTabElement) => Promise<void>;
+        /**
+          * @default "always"
+         */
         "tabs": "always" | "multiple";
     }
     interface SmoothlyTabsDemo {
@@ -669,6 +1056,9 @@ export namespace Components {
     }
     interface SmoothlyThemeColorVariant {
         "color": Color;
+        /**
+          * @default "color"
+         */
         "variant": "shade" | "tint" | "color";
     }
     interface SmoothlyThemeColors {
@@ -678,23 +1068,50 @@ export namespace Components {
     interface SmoothlyThemeGuide {
     }
     interface SmoothlyThemePicker {
+        /**
+          * @default "smoothly-css"
+         */
         "element": string;
     }
     interface SmoothlyToggleSwitch {
+        /**
+          * @default true
+         */
         "checkmark": boolean;
+        /**
+          * @default "medium"
+         */
         "color": Color;
+        /**
+          * @default false
+         */
         "disabled": boolean;
+        /**
+          * @default "clear"
+         */
         "fill": Fill;
+        /**
+          * @default false
+         */
         "selected": boolean;
+        /**
+          * @default "default"
+         */
         "size": "tiny" | "small" | "default" | "large";
     }
     interface SmoothlyToggleSwitchDemo {
     }
     interface SmoothlyTrigger {
         "color": Color | undefined;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "fill": Fill;
         "name": string;
+        /**
+          * @default "button"
+         */
         "type": "link" | "button";
         "value"?: any;
     }
@@ -2185,7 +2602,13 @@ declare namespace LocalJSX {
         "color"?: Color;
         "home"?: string;
         "label"?: string;
+        /**
+          * @default false
+         */
         "menuOpen"?: boolean;
+        /**
+          * @default "48rem"
+         */
         "navBreakpoint"?: `${number}${"px" | "em" | "rem"}`;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppCustomEvent<string>) => void;
     }
@@ -2200,20 +2623,38 @@ declare namespace LocalJSX {
         "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
         "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) => void;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppRoomCustomEvent<string>) => void;
+        /**
+          * @default ""
+         */
         "path"?: string | URLPattern;
         "selected"?: boolean;
     }
     interface SmoothlyBackToTop {
+        /**
+          * @default "1rem"
+         */
         "bottom"?: string;
+        /**
+          * @default "0.5"
+         */
         "opacity"?: string;
+        /**
+          * @default "1rem"
+         */
         "right"?: string;
     }
     interface SmoothlyBurger {
         "onSmoothlyNavStatus"?: (event: SmoothlyBurgerCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
     }
     interface SmoothlyButton {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
@@ -2225,7 +2666,13 @@ declare namespace LocalJSX {
     }
     interface SmoothlyButtonConfirm {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default 0.2
+         */
         "doubleClickTime"?: number;
         "expand"?: "block" | "full";
         "fill"?: Fill;
@@ -2251,12 +2698,27 @@ declare namespace LocalJSX {
         "value"?: isoly.Date;
     }
     interface SmoothlyCheckbox {
+        /**
+          * @default false
+         */
         "checked"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
         "intermediate"?: boolean;
         "name"?: string;
         "onSmoothlyInput"?: (event: SmoothlyCheckboxCustomEvent<Record<string, any>>) => void;
+        /**
+          * @default "tiny"
+         */
         "size"?: "tiny" | "small" | "medium" | "large";
+        /**
+          * @default false
+         */
         "unavailable"?: boolean;
         "value"?: any;
     }
@@ -2264,11 +2726,17 @@ declare namespace LocalJSX {
         "color"?: Color;
     }
     interface SmoothlyCountry {
+        /**
+          * @default "alpha2"
+         */
         "text"?: "alpha2" | "name" | "none";
         "value"?: isoly.CountryCode.Alpha2;
     }
     interface SmoothlyDateText {
         "disabled"?: boolean;
+        /**
+          * @default getLocale()
+         */
         "locale"?: isoly.Locale;
         "onSmoothlyDateHasPartialDate"?: (event: SmoothlyDateTextCustomEvent<DateFormat.Parts>) => void;
         "onSmoothlyDateTextChange"?: (event: SmoothlyDateTextCustomEvent<isoly.Date | undefined>) => void;
@@ -2278,13 +2746,22 @@ declare namespace LocalJSX {
         "onSmoothlyDateTextNext"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "onSmoothlyDateTextPrevious"?: (event: SmoothlyDateTextCustomEvent<void>) => void;
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "value"?: isoly.Date;
     }
     interface SmoothlyDialog {
+        /**
+          * @default false
+         */
         "closable"?: boolean;
         "color"?: Color | undefined;
         "header"?: string | undefined;
+        /**
+          * @default true
+         */
         "open"?: boolean;
     }
     interface SmoothlyDialogDemo {
@@ -2330,11 +2807,23 @@ declare namespace LocalJSX {
         "onSmoothlyFormInput"?: (event: SmoothlyFormCustomEvent<Data>) => void;
         "onSmoothlyFormReset"?: (event: SmoothlyFormCustomEvent<void>) => void;
         "onSmoothlyFormSubmit"?: (event: SmoothlyFormCustomEvent<Submit>) => void;
+        /**
+          * @default true
+         */
         "prevent"?: boolean;
         "processing"?: Promise<boolean>;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default this.action ? "create" : undefined
+         */
         "type"?: "update" | "change" | "fetch" | "create";
         "validator"?: isly.Type<any>;
+        /**
+          * @default {}
+         */
         "value"?: Readonly<Data>;
     }
     interface SmoothlyFormDemo {
@@ -2372,8 +2861,14 @@ declare namespace LocalJSX {
     }
     interface SmoothlyIcon {
         "color"?: Color;
+        /**
+          * @default "solid"
+         */
         "fill"?: Fill;
         "flip"?: "x" | "y";
+        /**
+          * @default "empty"
+         */
         "name"?: Icon | "empty";
         "rotate"?: number;
         "size"?: "tiny" | "small" | "medium" | "large" | "xlarge";
@@ -2387,8 +2882,14 @@ declare namespace LocalJSX {
         "color"?: Color;
         "copyable"?: boolean;
         "currency"?: isoly.Currency;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "errorMessage"?: string;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: number;
@@ -2404,14 +2905,29 @@ declare namespace LocalJSX {
         "onSmoothlyUserInput"?: (event: SmoothlyInputCustomEvent<Input.UserInput>) => void;
         "pad"?: number;
         "placeholder"?: string | undefined;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default false
+         */
         "required"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "toInteger"?: boolean;
+        /**
+          * @default "text"
+         */
         "type"?: tidily.Type;
         "value"?: any;
     }
     interface SmoothlyInputCheckbox {
+        /**
+          * @default false
+         */
         "checked"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
@@ -2422,6 +2938,9 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputCheckboxCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputCheckboxCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputCheckboxCustomEvent<Input.UserInput>) => void;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
         "value"?: Record<"true" | "false", any>;
     }
@@ -2429,14 +2948,32 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputClear {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default true
+         */
         "display"?: boolean;
         "expand"?: "block" | "full";
+        /**
+          * @default "clear"
+         */
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputClearCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size"?: "small" | "large" | "icon" | "flexible";
+        /**
+          * @default "Clear"
+         */
         "tooltip"?: string;
+        /**
+          * @default "input"
+         */
         "type"?: "form" | "input";
     }
     interface SmoothlyInputColor {
@@ -2449,18 +2986,36 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputColorCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputColorCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputColorCustomEvent<Input.UserInput>) => void;
+        /**
+          * @default "rgb"
+         */
         "output"?: "rgb" | "hex";
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
+        /**
+          * @default undefined
+         */
         "value"?: string | undefined;
     }
     interface SmoothlyInputColorDemo {
     }
     interface SmoothlyInputDate {
+        /**
+          * @default false
+         */
         "alwaysShowGuide"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
         "looks"?: Looks;
@@ -2475,23 +3030,38 @@ declare namespace LocalJSX {
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateCustomEvent<isoly.Date>) => void;
         "open"?: boolean;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "value"?: isoly.Date;
     }
     interface SmoothlyInputDateDemo {
     }
     interface SmoothlyInputDateRange {
+        /**
+          * @default false
+         */
         "alwaysShowGuide"?: boolean;
         "color"?: Color;
         "disabled"?: boolean;
         "end"?: isoly.Date | undefined;
         "errorMessage"?: string;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "locale"?: isoly.Locale;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
+        /**
+          * @default "dateRange"
+         */
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputDateRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputDateRangeCustomEvent<{ [name: string]: Partial<isoly.DateRange> | undefined }>) => void;
@@ -2499,7 +3069,13 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputDateRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputDateRangeCustomEvent<Input.UserInput<Partial<isoly.DateRange> | undefined>>) => void;
         "placeholder"?: string;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "start"?: isoly.Date | undefined;
     }
@@ -2507,6 +3083,9 @@ declare namespace LocalJSX {
         "color"?: Color;
         "disabled"?: boolean;
         "errorMessage"?: string;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "looks"?: Looks;
         "max"?: isoly.DateTime;
@@ -2519,7 +3098,13 @@ declare namespace LocalJSX {
         "onSmoothlyUserInput"?: (event: SmoothlyInputDateTimeCustomEvent<Input.UserInput>) => void;
         "onSmoothlyValueChange"?: (event: SmoothlyInputDateTimeCustomEvent<isoly.DateTime>) => void;
         "open"?: boolean;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "value"?: isoly.DateTime;
     }
@@ -2533,15 +3118,30 @@ declare namespace LocalJSX {
     interface SmoothlyInputDemoUserInput {
     }
     interface SmoothlyInputEdit {
+        /**
+          * @default "tertiary"
+         */
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default true
+         */
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputEditCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
+        /**
+          * @default "Edit"
+         */
         "tooltip"?: string;
+        /**
+          * @default "input"
+         */
         "type"?: "form" | "input";
     }
     interface SmoothlyInputFile {
@@ -2557,26 +3157,47 @@ declare namespace LocalJSX {
         "onSmoothlyInputLooks"?: (event: SmoothlyInputFileCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputFileCustomEvent<Input.UserInput>) => void;
         "placeholder"?: string | undefined;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
         "value"?: File;
     }
     interface SmoothlyInputMonth {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "inCalendar"?: boolean;
         "looks"?: Looks;
         "max"?: isoly.Date;
         "min"?: isoly.Date;
         "name"?: string;
+        /**
+          * @default false
+         */
         "next"?: boolean;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputMonthCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputMonthCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputMonthCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputMonthCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputMonthCustomEvent<Input.UserInput>) => void;
+        /**
+          * @default false
+         */
         "previous"?: boolean;
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
+        /**
+          * @default isoly.Date.now()
+         */
         "value"?: isoly.Date;
     }
     interface SmoothlyInputPriceDemo {
@@ -2593,8 +3214,17 @@ declare namespace LocalJSX {
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRadioCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRadioCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputRadioCustomEvent<Input.UserInput>) => void;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
+        /**
+          * @default undefined
+         */
         "value"?: any;
     }
     interface SmoothlyInputRadioItem {
@@ -2602,55 +3232,121 @@ declare namespace LocalJSX {
         "name"?: string;
         "onSmoothlyRadioItemRegister"?: (event: SmoothlyInputRadioItemCustomEvent<(parent: SmoothlyInputRadio) => void>) => void;
         "onSmoothlyRadioItemSelect"?: (event: SmoothlyInputRadioItemCustomEvent<RadioItemSelect>) => void;
+        /**
+          * @default false
+         */
         "selected"?: boolean;
         "value"?: any;
     }
     interface SmoothlyInputRange {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "defined"?: boolean;
         "disabled"?: boolean;
         "label"?: string;
         "looks"?: Looks;
+        /**
+          * @default 100
+         */
         "max"?: number;
+        /**
+          * @default 0
+         */
         "min"?: number;
+        /**
+          * @default "range"
+         */
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputRangeCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputRangeCustomEvent<Record<string, any>>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputRangeCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyInputLooks"?: (event: SmoothlyInputRangeCustomEvent<(looks?: Looks, color?: Color) => void>) => void;
         "onSmoothlyUserInput"?: (event: SmoothlyInputRangeCustomEvent<Input.UserInput>) => void;
+        /**
+          * @default "left"
+         */
         "outputSide"?: "right" | "left";
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
         "step"?: number;
+        /**
+          * @default "text"
+         */
         "type"?: Extract<tidily.Type, "text" | "percent">;
+        /**
+          * @default undefined
+         */
         "value"?: number | undefined;
     }
     interface SmoothlyInputRangeDemo {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default true
+         */
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputResetCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size"?: "flexible" | "small" | "large" | "icon";
+        /**
+          * @default "Reset"
+         */
         "tooltip"?: string;
+        /**
+          * @default "input"
+         */
         "type"?: "form" | "input";
     }
     interface SmoothlyInputSelect {
+        /**
+          * @default true
+         */
         "clearable"?: boolean;
         "color"?: Color;
+        /**
+          * @default false
+         */
         "defined"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "errorMessage"?: string;
+        /**
+          * @default false
+         */
         "inCalendar"?: boolean;
+        /**
+          * @default false
+         */
         "invalid"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        /**
+          * @default false
+         */
         "multiple"?: boolean;
+        /**
+          * @default false
+         */
         "mutable"?: boolean;
+        /**
+          * @default "selected"
+         */
         "name"?: string;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
@@ -2661,32 +3357,74 @@ declare namespace LocalJSX {
         "onSmoothlyUserInput"?: (event: SmoothlyInputSelectCustomEvent<Input.UserInput>) => void;
         "ordered"?: boolean;
         "placeholder"?: string | any;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
+        /**
+          * @default false
+         */
         "required"?: boolean;
+        /**
+          * @default false
+         */
         "searchDisabled"?: boolean;
+        /**
+          * @default true
+         */
         "showLabel"?: boolean;
+        /**
+          * @default true
+         */
         "showSelected"?: boolean;
     }
     interface SmoothlyInputSubmit {
         "color"?: Color;
+        /**
+          * @default false
+         */
         "delete"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
         "display"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
+        /**
+          * @default "checkmark-outline"
+         */
         "icon"?: Icon | false;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSubmitCustomEvent<(parent: Editable) => void>) => void;
         "shape"?: "rounded";
+        /**
+          * @default "icon"
+         */
         "size"?: "flexible" | "small" | "large" | "icon";
+        /**
+          * @default this.delete ? "Remove" : "Submit"
+         */
         "tooltip"?: string;
     }
     interface SmoothlyItem {
+        /**
+          * @default true
+         */
         "deselectable"?: boolean;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "marked"?: boolean;
         "onSmoothlyInputLoad"?: (event: SmoothlyItemCustomEvent<(parent: Editable) => void>) => void;
         "onSmoothlyItemDOMChange"?: (event: SmoothlyItemCustomEvent<void>) => void;
         "onSmoothlyItemSelect"?: (event: SmoothlyItemCustomEvent<{ userInitiated: boolean; item: HTMLSmoothlyItemElement }>) => void;
+        /**
+          * @default false
+         */
         "selected"?: boolean;
         "value"?: any;
     }
@@ -2697,39 +3435,78 @@ declare namespace LocalJSX {
     }
     interface SmoothlyLazy {
         "content"?: VNode | FunctionalComponent;
+        /**
+          * @default false
+         */
         "show"?: boolean;
     }
     interface SmoothlyLoadMore {
+        /**
+          * @default false
+         */
         "multiple"?: boolean;
+        /**
+          * @default ""
+         */
         "name"?: string;
         "onSmoothlyLoadMore"?: (event: SmoothlyLoadMoreCustomEvent<string>) => void;
+        /**
+          * @default "intersection"
+         */
         "triggerMode"?: "scroll" | "intersection";
     }
     interface SmoothlyModal {
+        /**
+          * @default "center"
+         */
         "align"?: "top" | "center";
+        /**
+          * @default false
+         */
         "closable"?: boolean;
         "onSmoothlyModalChange"?: (event: SmoothlyModalCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
     }
     interface SmoothlyNotification {
+        /**
+          * @default true
+         */
         "closable"?: boolean;
         "icon"?: boolean;
         "notice"?: Notice;
         "onRemove"?: (event: SmoothlyNotificationCustomEvent<Notice>) => void;
     }
     interface SmoothlyNotifier {
+        /**
+          * @default false
+         */
         "icon"?: boolean;
     }
     interface SmoothlySpinner {
         "overlay"?: boolean;
+        /**
+          * @default "large"
+         */
         "size"?: "small" | "icon" | "medium" | "large";
     }
     interface SmoothlySubmit {
+        /**
+          * @default "success"
+         */
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "expand"?: "block" | "full";
         "fill"?: Fill;
         "onSmoothlyInputLoad"?: (event: SmoothlySubmitCustomEvent<(parent: Editable) => void>) => void;
+        /**
+          * @default true
+         */
         "prevent"?: boolean;
         "shape"?: "rounded";
         "size"?: "flexible" | "small" | "large" | "icon";
@@ -2737,6 +3514,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlySummary {
         "onSmoothlySummaryOpen"?: (event: SmoothlySummaryCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
     }
     interface SmoothlyTab {
@@ -2749,11 +3529,17 @@ declare namespace LocalJSX {
         "tooltip"?: string;
     }
     interface SmoothlyTable {
+        /**
+          * @default 1
+         */
         "columns"?: number;
     }
     interface SmoothlyTableBody {
     }
     interface SmoothlyTableCell {
+        /**
+          * @default 1
+         */
         "span"?: number;
     }
     interface SmoothlyTableDemo {
@@ -2779,11 +3565,20 @@ declare namespace LocalJSX {
     interface SmoothlyTableExpandableCell {
         "onSmoothlyTableExpandableCellChange"?: (event: SmoothlyTableExpandableCellCustomEvent<boolean>) => void;
         "onSmoothlyTableExpandableCellRegister"?: (event: SmoothlyTableExpandableCellCustomEvent<void>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
+        /**
+          * @default 1
+         */
         "span"?: number;
     }
     interface SmoothlyTableExpandableRow {
         "onSmoothlyTableExpandableRowChange"?: (event: SmoothlyTableExpandableRowCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
     }
     interface SmoothlyTableFillerRow {
@@ -2795,13 +3590,22 @@ declare namespace LocalJSX {
     interface SmoothlyTableRow {
     }
     interface SmoothlyTableRowGroup {
+        /**
+          * @default false
+         */
         "align"?: boolean;
         "onSmoothlyTableRowGroupChange"?: (event: SmoothlyTableRowGroupCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "open"?: boolean;
     }
     interface SmoothlyTabs {
         "numberOfTabs"?: number;
         "onSmoothlyTabOpen"?: (event: SmoothlyTabsCustomEvent<string>) => void;
+        /**
+          * @default "always"
+         */
         "tabs"?: "always" | "multiple";
     }
     interface SmoothlyTabsDemo {
@@ -2811,6 +3615,9 @@ declare namespace LocalJSX {
     }
     interface SmoothlyThemeColorVariant {
         "color"?: Color;
+        /**
+          * @default "color"
+         */
         "variant"?: "shade" | "tint" | "color";
     }
     interface SmoothlyThemeColors {
@@ -2820,25 +3627,52 @@ declare namespace LocalJSX {
     interface SmoothlyThemeGuide {
     }
     interface SmoothlyThemePicker {
+        /**
+          * @default "smoothly-css"
+         */
         "element"?: string;
     }
     interface SmoothlyToggleSwitch {
+        /**
+          * @default true
+         */
         "checkmark"?: boolean;
+        /**
+          * @default "medium"
+         */
         "color"?: Color;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
+        /**
+          * @default "clear"
+         */
         "fill"?: Fill;
         "onSmoothlyToggleSwitchChange"?: (event: SmoothlyToggleSwitchCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
         "selected"?: boolean;
+        /**
+          * @default "default"
+         */
         "size"?: "tiny" | "small" | "default" | "large";
     }
     interface SmoothlyToggleSwitchDemo {
     }
     interface SmoothlyTrigger {
         "color"?: Color | undefined;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "fill"?: Fill;
         "name"?: string;
         "onTrigger"?: (event: SmoothlyTriggerCustomEvent<Trigger>) => void;
+        /**
+          * @default "button"
+         */
         "type"?: "link" | "button";
         "value"?: any;
     }
@@ -2852,31 +3686,481 @@ declare namespace LocalJSX {
         "onSmoothlyMessage"?: (event: SmoothlyTriggerSourceCustomEvent<Message<any>>) => void;
         "onTrigger"?: (event: SmoothlyTriggerSourceCustomEvent<Trigger>) => void;
     }
+
+    interface SmoothlyAppAttributes {
+        "label": string;
+        "color": Color;
+        "home": string;
+        "menuOpen": boolean;
+        "navBreakpoint": `${number}${"px" | "em" | "rem"}`;
+    }
+    interface SmoothlyAppDemoAttributes {
+        "baseUrl": string;
+    }
+    interface SmoothlyAppRoomAttributes {
+        "label": string;
+        "icon": Icon;
+        "disabled": boolean;
+        "path": string | URLPattern;
+        "selected": boolean;
+    }
+    interface SmoothlyBackToTopAttributes {
+        "opacity": string;
+        "bottom": string;
+        "right": string;
+    }
+    interface SmoothlyBurgerAttributes {
+        "open": boolean;
+    }
+    interface SmoothlyButtonAttributes {
+        "color": Color;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "tooltip": string;
+        "disabled": boolean;
+        "type": Button.Properties["type"];
+        "size": "small" | "large" | "icon" | "flexible";
+        "shape": "rounded";
+        "link": string;
+    }
+    interface SmoothlyButtonConfirmAttributes {
+        "color": Color;
+        "name": string;
+        "doubleClickTime": number;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "shape": "rounded";
+        "size": "small" | "large" | "icon" | "flexible";
+    }
+    interface SmoothlyCalendarAttributes {
+        "month": isoly.Date;
+        "value": isoly.Date;
+        "start": isoly.Date;
+        "end": isoly.Date;
+        "max": isoly.Date;
+        "min": isoly.Date;
+        "doubleInput": boolean;
+    }
+    interface SmoothlyCheckboxAttributes {
+        "size": "tiny" | "small" | "medium" | "large";
+        "checked": boolean;
+        "intermediate": boolean;
+        "unavailable": boolean;
+        "disabled": boolean;
+        "name": string;
+        "value": string;
+    }
+    interface SmoothlyColorAttributes {
+        "color": Color;
+    }
+    interface SmoothlyCountryAttributes {
+        "value": isoly.CountryCode.Alpha2;
+        "text": "alpha2" | "name" | "none";
+    }
+    interface SmoothlyDateTextAttributes {
+        "locale": isoly.Locale;
+        "readonly": boolean;
+        "disabled": boolean;
+        "showLabel": boolean;
+        "value": isoly.Date;
+    }
+    interface SmoothlyDialogAttributes {
+        "color": Color | undefined;
+        "open": boolean;
+        "closable": boolean;
+        "header": string | undefined;
+    }
+    interface SmoothlyDisplayAttributes {
+        "type": tidily.Type | "json";
+        "label": string;
+        "value": string;
+        "collapseDepth": number;
+        "toInteger": boolean;
+        "currency": isoly.Currency;
+        "country": isoly.CountryCode.Alpha2;
+    }
+    interface SmoothlyDisplayJsonAttributes {
+        "value": string;
+        "collapseDepth": number;
+    }
+    interface SmoothlyDisplayJsonObjectAttributes {
+        "collapseDepth": number;
+    }
+    interface SmoothlyDisplayJsonPrimitiveAttributes {
+        "value": string;
+    }
+    interface SmoothlyDisplayJsonRecordKeyAttributes {
+        "value": string;
+    }
+    interface SmoothlyFormAttributes {
+        "color": Color;
+        "action": string;
+        "type": "update" | "change" | "fetch" | "create";
+        "readonly": boolean;
+        "looks": Looks;
+        "name": string;
+        "prevent": boolean;
+    }
+    interface SmoothlyFrameAttributes {
+        "url": string;
+        "name": string;
+        "origin": string | undefined;
+    }
+    interface SmoothlyIconAttributes {
+        "color": Color;
+        "fill": Fill;
+        "name": Icon | "empty";
+        "size": "tiny" | "small" | "medium" | "large" | "xlarge";
+        "rotate": number;
+        "flip": "x" | "y";
+        "tooltip": string;
+    }
+    interface SmoothlyInputAttributes {
+        "color": Color;
+        "looks": Looks;
+        "name": string;
+        "value": string;
+        "type": tidily.Type;
+        "required": boolean;
+        "showLabel": boolean;
+        "autocomplete": Exclude<tidily.Settings["autocomplete"], undefined>;
+        "placeholder": string | undefined;
+        "disabled": boolean;
+        "readonly": boolean;
+        "toInteger": boolean;
+        "currency": isoly.Currency;
+        "min": number;
+        "max": number;
+        "pad": number;
+        "invalid": boolean;
+        "errorMessage": string;
+        "copyable": boolean;
+    }
+    interface SmoothlyInputCheckboxAttributes {
+        "name": string;
+        "readonly": boolean;
+        "disabled": boolean;
+        "checked": boolean;
+        "looks": Looks;
+        "color": Color;
+    }
+    interface SmoothlyInputClearAttributes {
+        "color": Color;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "size": "small" | "large" | "icon" | "flexible";
+        "shape": "rounded";
+        "display": boolean;
+        "type": "form" | "input";
+        "tooltip": string;
+    }
+    interface SmoothlyInputColorAttributes {
+        "value": string | undefined;
+        "looks": Looks;
+        "color": Color;
+        "readonly": boolean;
+        "disabled": boolean;
+        "output": "rgb" | "hex";
+        "name": string;
+        "showLabel": boolean;
+    }
+    interface SmoothlyInputDateAttributes {
+        "locale": isoly.Locale;
+        "color": Color;
+        "looks": Looks;
+        "name": string;
+        "readonly": boolean;
+        "disabled": boolean;
+        "invalid": boolean;
+        "errorMessage": string;
+        "placeholder": string;
+        "alwaysShowGuide": boolean;
+        "value": isoly.Date;
+        "open": boolean;
+        "max": isoly.Date;
+        "min": isoly.Date;
+        "showLabel": boolean;
+    }
+    interface SmoothlyInputDateRangeAttributes {
+        "locale": isoly.Locale;
+        "name": string;
+        "color": Color;
+        "looks": Looks;
+        "readonly": boolean;
+        "disabled": boolean;
+        "showLabel": boolean;
+        "start": isoly.Date | undefined;
+        "end": isoly.Date | undefined;
+        "placeholder": string;
+        "alwaysShowGuide": boolean;
+        "invalid": boolean;
+        "errorMessage": string;
+        "max": isoly.Date;
+        "min": isoly.Date;
+    }
+    interface SmoothlyInputDateTimeAttributes {
+        "color": Color;
+        "looks": Looks;
+        "name": string;
+        "readonly": boolean;
+        "disabled": boolean;
+        "invalid": boolean;
+        "errorMessage": string;
+        "value": isoly.DateTime;
+        "open": boolean;
+        "showLabel": boolean;
+        "min": isoly.DateTime;
+        "max": isoly.DateTime;
+    }
+    interface SmoothlyInputEditAttributes {
+        "color": Color;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "display": boolean;
+        "shape": "rounded";
+        "type": "form" | "input";
+        "size": "flexible" | "small" | "large" | "icon";
+        "tooltip": string;
+    }
+    interface SmoothlyInputFileAttributes {
+        "readonly": boolean;
+        "disabled": boolean;
+        "accept": string;
+        "color": Color;
+        "looks": Looks;
+        "camera": "front" | "back";
+        "name": string;
+        "showLabel": boolean;
+        "placeholder": string | undefined;
+    }
+    interface SmoothlyInputMonthAttributes {
+        "readonly": boolean;
+        "color": Color;
+        "looks": Looks;
+        "name": string;
+        "value": isoly.Date;
+        "max": isoly.Date;
+        "min": isoly.Date;
+        "next": boolean;
+        "previous": boolean;
+        "inCalendar": boolean;
+        "showLabel": boolean;
+    }
+    interface SmoothlyInputRadioAttributes {
+        "value": string;
+        "looks": Looks;
+        "color": Color;
+        "direction": "row" | "column";
+        "clearable": boolean;
+        "readonly": boolean;
+        "disabled": boolean;
+        "name": string;
+        "showLabel": boolean;
+    }
+    interface SmoothlyInputRadioItemAttributes {
+        "value": string;
+        "selected": boolean;
+        "looks": Looks;
+        "name": string;
+    }
+    interface SmoothlyInputRangeAttributes {
+        "value": number | undefined;
+        "looks": Looks;
+        "color": Color;
+        "defined": boolean;
+        "readonly": boolean;
+        "disabled": boolean;
+        "type": Extract<tidily.Type, "text" | "percent">;
+        "min": number;
+        "max": number;
+        "name": string;
+        "step": number;
+        "outputSide": "right" | "left";
+        "label": string;
+    }
+    interface SmoothlyInputResetAttributes {
+        "color": Color;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "size": "flexible" | "small" | "large" | "icon";
+        "shape": "rounded";
+        "display": boolean;
+        "type": "form" | "input";
+        "tooltip": string;
+    }
+    interface SmoothlyInputSelectAttributes {
+        "invalid": boolean;
+        "errorMessage": string;
+        "name": string;
+        "color": Color;
+        "looks": Looks;
+        "showLabel": boolean;
+        "showSelected": boolean;
+        "readonly": boolean;
+        "disabled": boolean;
+        "inCalendar": boolean;
+        "ordered": boolean;
+        "multiple": boolean;
+        "clearable": boolean;
+        "defined": boolean;
+        "placeholder": string;
+        "menuHeight": `${number}${"items" | "rem" | "px" | "vh"}`;
+        "required": boolean;
+        "searchDisabled": boolean;
+        "mutable": boolean;
+    }
+    interface SmoothlyInputSubmitAttributes {
+        "delete": boolean;
+        "color": Color;
+        "icon": string;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "display": boolean;
+        "shape": "rounded";
+        "size": "flexible" | "small" | "large" | "icon";
+        "tooltip": string;
+    }
+    interface SmoothlyItemAttributes {
+        "value": string;
+        "selected": boolean;
+        "marked": boolean;
+        "disabled": boolean;
+        "deselectable": boolean;
+    }
+    interface SmoothlyLabelAttributes {
+        "hue": number;
+        "description": string;
+        "shape": "rectangle" | "rounded";
+    }
+    interface SmoothlyLazyAttributes {
+        "show": boolean;
+    }
+    interface SmoothlyLoadMoreAttributes {
+        "triggerMode": "scroll" | "intersection";
+        "name": string;
+        "multiple": boolean;
+    }
+    interface SmoothlyModalAttributes {
+        "open": boolean;
+        "closable": boolean;
+        "align": "top" | "center";
+    }
+    interface SmoothlyNotificationAttributes {
+        "closable": boolean;
+        "icon": boolean;
+    }
+    interface SmoothlyNotifierAttributes {
+        "icon": boolean;
+    }
+    interface SmoothlySpinnerAttributes {
+        "size": "small" | "icon" | "medium" | "large";
+        "overlay": boolean;
+    }
+    interface SmoothlySubmitAttributes {
+        "color": Color;
+        "expand": "block" | "full";
+        "fill": Fill;
+        "disabled": boolean;
+        "type": "link" | "button";
+        "size": "flexible" | "small" | "large" | "icon";
+        "shape": "rounded";
+        "prevent": boolean;
+    }
+    interface SmoothlySummaryAttributes {
+        "open": boolean;
+    }
+    interface SmoothlyTabAttributes {
+        "label": string;
+        "name": string;
+        "tooltip": string;
+        "open": boolean;
+        "disabled": boolean;
+    }
+    interface SmoothlyTableAttributes {
+        "columns": number;
+    }
+    interface SmoothlyTableCellAttributes {
+        "span": number;
+    }
+    interface SmoothlyTableExpandableCellAttributes {
+        "span": number;
+        "open": boolean;
+    }
+    interface SmoothlyTableExpandableRowAttributes {
+        "open": boolean;
+    }
+    interface SmoothlyTableRowGroupAttributes {
+        "align": boolean;
+        "open": boolean;
+    }
+    interface SmoothlyTabsAttributes {
+        "tabs": "always" | "multiple";
+        "numberOfTabs": number;
+    }
+    interface SmoothlyThemeColorAttributes {
+        "color": Color;
+    }
+    interface SmoothlyThemeColorVariantAttributes {
+        "color": Color;
+        "variant": "shade" | "tint" | "color";
+    }
+    interface SmoothlyThemePickerAttributes {
+        "element": string;
+    }
+    interface SmoothlyToggleSwitchAttributes {
+        "checkmark": boolean;
+        "selected": boolean;
+        "disabled": boolean;
+        "size": "tiny" | "small" | "default" | "large";
+        "color": Color;
+        "fill": Fill;
+    }
+    interface SmoothlyTriggerAttributes {
+        "color": Color | undefined;
+        "fill": Fill;
+        "disabled": boolean;
+        "type": "link" | "button";
+        "name": string;
+        "value": string;
+    }
+    interface SmoothlyTriggerSinkAttributes {
+        "destination": string;
+        "filter": string;
+    }
+    interface SmoothlyTriggerSourceAttributes {
+        "listen": string;
+    }
+
     interface IntrinsicElements {
-        "smoothly-app": SmoothlyApp;
-        "smoothly-app-demo": SmoothlyAppDemo;
-        "smoothly-app-room": SmoothlyAppRoom;
-        "smoothly-back-to-top": SmoothlyBackToTop;
-        "smoothly-burger": SmoothlyBurger;
-        "smoothly-button": SmoothlyButton;
-        "smoothly-button-confirm": SmoothlyButtonConfirm;
+        "smoothly-app": Omit<SmoothlyApp, keyof SmoothlyAppAttributes> & { [K in keyof SmoothlyApp & keyof SmoothlyAppAttributes]?: SmoothlyApp[K] } & { [K in keyof SmoothlyApp & keyof SmoothlyAppAttributes as `attr:${K}`]?: SmoothlyAppAttributes[K] } & { [K in keyof SmoothlyApp & keyof SmoothlyAppAttributes as `prop:${K}`]?: SmoothlyApp[K] };
+        "smoothly-app-demo": Omit<SmoothlyAppDemo, keyof SmoothlyAppDemoAttributes> & { [K in keyof SmoothlyAppDemo & keyof SmoothlyAppDemoAttributes]?: SmoothlyAppDemo[K] } & { [K in keyof SmoothlyAppDemo & keyof SmoothlyAppDemoAttributes as `attr:${K}`]?: SmoothlyAppDemoAttributes[K] } & { [K in keyof SmoothlyAppDemo & keyof SmoothlyAppDemoAttributes as `prop:${K}`]?: SmoothlyAppDemo[K] };
+        "smoothly-app-room": Omit<SmoothlyAppRoom, keyof SmoothlyAppRoomAttributes> & { [K in keyof SmoothlyAppRoom & keyof SmoothlyAppRoomAttributes]?: SmoothlyAppRoom[K] } & { [K in keyof SmoothlyAppRoom & keyof SmoothlyAppRoomAttributes as `attr:${K}`]?: SmoothlyAppRoomAttributes[K] } & { [K in keyof SmoothlyAppRoom & keyof SmoothlyAppRoomAttributes as `prop:${K}`]?: SmoothlyAppRoom[K] };
+        "smoothly-back-to-top": Omit<SmoothlyBackToTop, keyof SmoothlyBackToTopAttributes> & { [K in keyof SmoothlyBackToTop & keyof SmoothlyBackToTopAttributes]?: SmoothlyBackToTop[K] } & { [K in keyof SmoothlyBackToTop & keyof SmoothlyBackToTopAttributes as `attr:${K}`]?: SmoothlyBackToTopAttributes[K] } & { [K in keyof SmoothlyBackToTop & keyof SmoothlyBackToTopAttributes as `prop:${K}`]?: SmoothlyBackToTop[K] };
+        "smoothly-burger": Omit<SmoothlyBurger, keyof SmoothlyBurgerAttributes> & { [K in keyof SmoothlyBurger & keyof SmoothlyBurgerAttributes]?: SmoothlyBurger[K] } & { [K in keyof SmoothlyBurger & keyof SmoothlyBurgerAttributes as `attr:${K}`]?: SmoothlyBurgerAttributes[K] } & { [K in keyof SmoothlyBurger & keyof SmoothlyBurgerAttributes as `prop:${K}`]?: SmoothlyBurger[K] };
+        "smoothly-button": Omit<SmoothlyButton, keyof SmoothlyButtonAttributes> & { [K in keyof SmoothlyButton & keyof SmoothlyButtonAttributes]?: SmoothlyButton[K] } & { [K in keyof SmoothlyButton & keyof SmoothlyButtonAttributes as `attr:${K}`]?: SmoothlyButtonAttributes[K] } & { [K in keyof SmoothlyButton & keyof SmoothlyButtonAttributes as `prop:${K}`]?: SmoothlyButton[K] };
+        "smoothly-button-confirm": Omit<SmoothlyButtonConfirm, keyof SmoothlyButtonConfirmAttributes> & { [K in keyof SmoothlyButtonConfirm & keyof SmoothlyButtonConfirmAttributes]?: SmoothlyButtonConfirm[K] } & { [K in keyof SmoothlyButtonConfirm & keyof SmoothlyButtonConfirmAttributes as `attr:${K}`]?: SmoothlyButtonConfirmAttributes[K] } & { [K in keyof SmoothlyButtonConfirm & keyof SmoothlyButtonConfirmAttributes as `prop:${K}`]?: SmoothlyButtonConfirm[K] };
         "smoothly-button-demo": SmoothlyButtonDemo;
         "smoothly-button-demo-standard": SmoothlyButtonDemoStandard;
-        "smoothly-calendar": SmoothlyCalendar;
-        "smoothly-checkbox": SmoothlyCheckbox;
-        "smoothly-color": SmoothlyColor;
-        "smoothly-country": SmoothlyCountry;
-        "smoothly-date-text": SmoothlyDateText;
-        "smoothly-dialog": SmoothlyDialog;
+        "smoothly-calendar": Omit<SmoothlyCalendar, keyof SmoothlyCalendarAttributes> & { [K in keyof SmoothlyCalendar & keyof SmoothlyCalendarAttributes]?: SmoothlyCalendar[K] } & { [K in keyof SmoothlyCalendar & keyof SmoothlyCalendarAttributes as `attr:${K}`]?: SmoothlyCalendarAttributes[K] } & { [K in keyof SmoothlyCalendar & keyof SmoothlyCalendarAttributes as `prop:${K}`]?: SmoothlyCalendar[K] };
+        "smoothly-checkbox": Omit<SmoothlyCheckbox, keyof SmoothlyCheckboxAttributes> & { [K in keyof SmoothlyCheckbox & keyof SmoothlyCheckboxAttributes]?: SmoothlyCheckbox[K] } & { [K in keyof SmoothlyCheckbox & keyof SmoothlyCheckboxAttributes as `attr:${K}`]?: SmoothlyCheckboxAttributes[K] } & { [K in keyof SmoothlyCheckbox & keyof SmoothlyCheckboxAttributes as `prop:${K}`]?: SmoothlyCheckbox[K] };
+        "smoothly-color": Omit<SmoothlyColor, keyof SmoothlyColorAttributes> & { [K in keyof SmoothlyColor & keyof SmoothlyColorAttributes]?: SmoothlyColor[K] } & { [K in keyof SmoothlyColor & keyof SmoothlyColorAttributes as `attr:${K}`]?: SmoothlyColorAttributes[K] } & { [K in keyof SmoothlyColor & keyof SmoothlyColorAttributes as `prop:${K}`]?: SmoothlyColor[K] };
+        "smoothly-country": Omit<SmoothlyCountry, keyof SmoothlyCountryAttributes> & { [K in keyof SmoothlyCountry & keyof SmoothlyCountryAttributes]?: SmoothlyCountry[K] } & { [K in keyof SmoothlyCountry & keyof SmoothlyCountryAttributes as `attr:${K}`]?: SmoothlyCountryAttributes[K] } & { [K in keyof SmoothlyCountry & keyof SmoothlyCountryAttributes as `prop:${K}`]?: SmoothlyCountry[K] };
+        "smoothly-date-text": Omit<SmoothlyDateText, keyof SmoothlyDateTextAttributes> & { [K in keyof SmoothlyDateText & keyof SmoothlyDateTextAttributes]?: SmoothlyDateText[K] } & { [K in keyof SmoothlyDateText & keyof SmoothlyDateTextAttributes as `attr:${K}`]?: SmoothlyDateTextAttributes[K] } & { [K in keyof SmoothlyDateText & keyof SmoothlyDateTextAttributes as `prop:${K}`]?: SmoothlyDateText[K] };
+        "smoothly-dialog": Omit<SmoothlyDialog, keyof SmoothlyDialogAttributes> & { [K in keyof SmoothlyDialog & keyof SmoothlyDialogAttributes]?: SmoothlyDialog[K] } & { [K in keyof SmoothlyDialog & keyof SmoothlyDialogAttributes as `attr:${K}`]?: SmoothlyDialogAttributes[K] } & { [K in keyof SmoothlyDialog & keyof SmoothlyDialogAttributes as `prop:${K}`]?: SmoothlyDialog[K] };
         "smoothly-dialog-demo": SmoothlyDialogDemo;
-        "smoothly-display": SmoothlyDisplay;
+        "smoothly-display": Omit<SmoothlyDisplay, keyof SmoothlyDisplayAttributes> & { [K in keyof SmoothlyDisplay & keyof SmoothlyDisplayAttributes]?: SmoothlyDisplay[K] } & { [K in keyof SmoothlyDisplay & keyof SmoothlyDisplayAttributes as `attr:${K}`]?: SmoothlyDisplayAttributes[K] } & { [K in keyof SmoothlyDisplay & keyof SmoothlyDisplayAttributes as `prop:${K}`]?: SmoothlyDisplay[K] };
         "smoothly-display-demo": SmoothlyDisplayDemo;
         "smoothly-display-demo-json": SmoothlyDisplayDemoJson;
-        "smoothly-display-json": SmoothlyDisplayJson;
-        "smoothly-display-json-object": SmoothlyDisplayJsonObject;
-        "smoothly-display-json-primitive": SmoothlyDisplayJsonPrimitive;
-        "smoothly-display-json-record-key": SmoothlyDisplayJsonRecordKey;
-        "smoothly-form": SmoothlyForm;
+        "smoothly-display-json": Omit<SmoothlyDisplayJson, keyof SmoothlyDisplayJsonAttributes> & { [K in keyof SmoothlyDisplayJson & keyof SmoothlyDisplayJsonAttributes]?: SmoothlyDisplayJson[K] } & { [K in keyof SmoothlyDisplayJson & keyof SmoothlyDisplayJsonAttributes as `attr:${K}`]?: SmoothlyDisplayJsonAttributes[K] } & { [K in keyof SmoothlyDisplayJson & keyof SmoothlyDisplayJsonAttributes as `prop:${K}`]?: SmoothlyDisplayJson[K] };
+        "smoothly-display-json-object": Omit<SmoothlyDisplayJsonObject, keyof SmoothlyDisplayJsonObjectAttributes> & { [K in keyof SmoothlyDisplayJsonObject & keyof SmoothlyDisplayJsonObjectAttributes]?: SmoothlyDisplayJsonObject[K] } & { [K in keyof SmoothlyDisplayJsonObject & keyof SmoothlyDisplayJsonObjectAttributes as `attr:${K}`]?: SmoothlyDisplayJsonObjectAttributes[K] } & { [K in keyof SmoothlyDisplayJsonObject & keyof SmoothlyDisplayJsonObjectAttributes as `prop:${K}`]?: SmoothlyDisplayJsonObject[K] };
+        "smoothly-display-json-primitive": Omit<SmoothlyDisplayJsonPrimitive, keyof SmoothlyDisplayJsonPrimitiveAttributes> & { [K in keyof SmoothlyDisplayJsonPrimitive & keyof SmoothlyDisplayJsonPrimitiveAttributes]?: SmoothlyDisplayJsonPrimitive[K] } & { [K in keyof SmoothlyDisplayJsonPrimitive & keyof SmoothlyDisplayJsonPrimitiveAttributes as `attr:${K}`]?: SmoothlyDisplayJsonPrimitiveAttributes[K] } & { [K in keyof SmoothlyDisplayJsonPrimitive & keyof SmoothlyDisplayJsonPrimitiveAttributes as `prop:${K}`]?: SmoothlyDisplayJsonPrimitive[K] };
+        "smoothly-display-json-record-key": Omit<SmoothlyDisplayJsonRecordKey, keyof SmoothlyDisplayJsonRecordKeyAttributes> & { [K in keyof SmoothlyDisplayJsonRecordKey & keyof SmoothlyDisplayJsonRecordKeyAttributes]?: SmoothlyDisplayJsonRecordKey[K] } & { [K in keyof SmoothlyDisplayJsonRecordKey & keyof SmoothlyDisplayJsonRecordKeyAttributes as `attr:${K}`]?: SmoothlyDisplayJsonRecordKeyAttributes[K] } & { [K in keyof SmoothlyDisplayJsonRecordKey & keyof SmoothlyDisplayJsonRecordKeyAttributes as `prop:${K}`]?: SmoothlyDisplayJsonRecordKey[K] };
+        "smoothly-form": Omit<SmoothlyForm, keyof SmoothlyFormAttributes> & { [K in keyof SmoothlyForm & keyof SmoothlyFormAttributes]?: SmoothlyForm[K] } & { [K in keyof SmoothlyForm & keyof SmoothlyFormAttributes as `attr:${K}`]?: SmoothlyFormAttributes[K] } & { [K in keyof SmoothlyForm & keyof SmoothlyFormAttributes as `prop:${K}`]?: SmoothlyForm[K] };
         "smoothly-form-demo": SmoothlyFormDemo;
         "smoothly-form-demo-all": SmoothlyFormDemoAll;
         "smoothly-form-demo-card": SmoothlyFormDemoCard;
@@ -2889,48 +4173,48 @@ declare namespace LocalJSX {
         "smoothly-form-demo-schedule": SmoothlyFormDemoSchedule;
         "smoothly-form-demo-transparent": SmoothlyFormDemoTransparent;
         "smoothly-form-demo-typed": SmoothlyFormDemoTyped;
-        "smoothly-frame": SmoothlyFrame;
-        "smoothly-icon": SmoothlyIcon;
+        "smoothly-frame": Omit<SmoothlyFrame, keyof SmoothlyFrameAttributes> & { [K in keyof SmoothlyFrame & keyof SmoothlyFrameAttributes]?: SmoothlyFrame[K] } & { [K in keyof SmoothlyFrame & keyof SmoothlyFrameAttributes as `attr:${K}`]?: SmoothlyFrameAttributes[K] } & { [K in keyof SmoothlyFrame & keyof SmoothlyFrameAttributes as `prop:${K}`]?: SmoothlyFrame[K] };
+        "smoothly-icon": Omit<SmoothlyIcon, keyof SmoothlyIconAttributes> & { [K in keyof SmoothlyIcon & keyof SmoothlyIconAttributes]?: SmoothlyIcon[K] } & { [K in keyof SmoothlyIcon & keyof SmoothlyIconAttributes as `attr:${K}`]?: SmoothlyIconAttributes[K] } & { [K in keyof SmoothlyIcon & keyof SmoothlyIconAttributes as `prop:${K}`]?: SmoothlyIcon[K] };
         "smoothly-icon-demo": SmoothlyIconDemo;
-        "smoothly-input": SmoothlyInput;
-        "smoothly-input-checkbox": SmoothlyInputCheckbox;
+        "smoothly-input": Omit<SmoothlyInput, keyof SmoothlyInputAttributes> & { [K in keyof SmoothlyInput & keyof SmoothlyInputAttributes]?: SmoothlyInput[K] } & { [K in keyof SmoothlyInput & keyof SmoothlyInputAttributes as `attr:${K}`]?: SmoothlyInputAttributes[K] } & { [K in keyof SmoothlyInput & keyof SmoothlyInputAttributes as `prop:${K}`]?: SmoothlyInput[K] };
+        "smoothly-input-checkbox": Omit<SmoothlyInputCheckbox, keyof SmoothlyInputCheckboxAttributes> & { [K in keyof SmoothlyInputCheckbox & keyof SmoothlyInputCheckboxAttributes]?: SmoothlyInputCheckbox[K] } & { [K in keyof SmoothlyInputCheckbox & keyof SmoothlyInputCheckboxAttributes as `attr:${K}`]?: SmoothlyInputCheckboxAttributes[K] } & { [K in keyof SmoothlyInputCheckbox & keyof SmoothlyInputCheckboxAttributes as `prop:${K}`]?: SmoothlyInputCheckbox[K] };
         "smoothly-input-checkbox-demo": SmoothlyInputCheckboxDemo;
-        "smoothly-input-clear": SmoothlyInputClear;
-        "smoothly-input-color": SmoothlyInputColor;
+        "smoothly-input-clear": Omit<SmoothlyInputClear, keyof SmoothlyInputClearAttributes> & { [K in keyof SmoothlyInputClear & keyof SmoothlyInputClearAttributes]?: SmoothlyInputClear[K] } & { [K in keyof SmoothlyInputClear & keyof SmoothlyInputClearAttributes as `attr:${K}`]?: SmoothlyInputClearAttributes[K] } & { [K in keyof SmoothlyInputClear & keyof SmoothlyInputClearAttributes as `prop:${K}`]?: SmoothlyInputClear[K] };
+        "smoothly-input-color": Omit<SmoothlyInputColor, keyof SmoothlyInputColorAttributes> & { [K in keyof SmoothlyInputColor & keyof SmoothlyInputColorAttributes]?: SmoothlyInputColor[K] } & { [K in keyof SmoothlyInputColor & keyof SmoothlyInputColorAttributes as `attr:${K}`]?: SmoothlyInputColorAttributes[K] } & { [K in keyof SmoothlyInputColor & keyof SmoothlyInputColorAttributes as `prop:${K}`]?: SmoothlyInputColor[K] };
         "smoothly-input-color-demo": SmoothlyInputColorDemo;
-        "smoothly-input-date": SmoothlyInputDate;
+        "smoothly-input-date": Omit<SmoothlyInputDate, keyof SmoothlyInputDateAttributes> & { [K in keyof SmoothlyInputDate & keyof SmoothlyInputDateAttributes]?: SmoothlyInputDate[K] } & { [K in keyof SmoothlyInputDate & keyof SmoothlyInputDateAttributes as `attr:${K}`]?: SmoothlyInputDateAttributes[K] } & { [K in keyof SmoothlyInputDate & keyof SmoothlyInputDateAttributes as `prop:${K}`]?: SmoothlyInputDate[K] };
         "smoothly-input-date-demo": SmoothlyInputDateDemo;
-        "smoothly-input-date-range": SmoothlyInputDateRange;
-        "smoothly-input-date-time": SmoothlyInputDateTime;
+        "smoothly-input-date-range": Omit<SmoothlyInputDateRange, keyof SmoothlyInputDateRangeAttributes> & { [K in keyof SmoothlyInputDateRange & keyof SmoothlyInputDateRangeAttributes]?: SmoothlyInputDateRange[K] } & { [K in keyof SmoothlyInputDateRange & keyof SmoothlyInputDateRangeAttributes as `attr:${K}`]?: SmoothlyInputDateRangeAttributes[K] } & { [K in keyof SmoothlyInputDateRange & keyof SmoothlyInputDateRangeAttributes as `prop:${K}`]?: SmoothlyInputDateRange[K] };
+        "smoothly-input-date-time": Omit<SmoothlyInputDateTime, keyof SmoothlyInputDateTimeAttributes> & { [K in keyof SmoothlyInputDateTime & keyof SmoothlyInputDateTimeAttributes]?: SmoothlyInputDateTime[K] } & { [K in keyof SmoothlyInputDateTime & keyof SmoothlyInputDateTimeAttributes as `attr:${K}`]?: SmoothlyInputDateTimeAttributes[K] } & { [K in keyof SmoothlyInputDateTime & keyof SmoothlyInputDateTimeAttributes as `prop:${K}`]?: SmoothlyInputDateTime[K] };
         "smoothly-input-demo": SmoothlyInputDemo;
         "smoothly-input-demo-radio": SmoothlyInputDemoRadio;
         "smoothly-input-demo-standard": SmoothlyInputDemoStandard;
         "smoothly-input-demo-user-input": SmoothlyInputDemoUserInput;
-        "smoothly-input-edit": SmoothlyInputEdit;
-        "smoothly-input-file": SmoothlyInputFile;
-        "smoothly-input-month": SmoothlyInputMonth;
+        "smoothly-input-edit": Omit<SmoothlyInputEdit, keyof SmoothlyInputEditAttributes> & { [K in keyof SmoothlyInputEdit & keyof SmoothlyInputEditAttributes]?: SmoothlyInputEdit[K] } & { [K in keyof SmoothlyInputEdit & keyof SmoothlyInputEditAttributes as `attr:${K}`]?: SmoothlyInputEditAttributes[K] } & { [K in keyof SmoothlyInputEdit & keyof SmoothlyInputEditAttributes as `prop:${K}`]?: SmoothlyInputEdit[K] };
+        "smoothly-input-file": Omit<SmoothlyInputFile, keyof SmoothlyInputFileAttributes> & { [K in keyof SmoothlyInputFile & keyof SmoothlyInputFileAttributes]?: SmoothlyInputFile[K] } & { [K in keyof SmoothlyInputFile & keyof SmoothlyInputFileAttributes as `attr:${K}`]?: SmoothlyInputFileAttributes[K] } & { [K in keyof SmoothlyInputFile & keyof SmoothlyInputFileAttributes as `prop:${K}`]?: SmoothlyInputFile[K] };
+        "smoothly-input-month": Omit<SmoothlyInputMonth, keyof SmoothlyInputMonthAttributes> & { [K in keyof SmoothlyInputMonth & keyof SmoothlyInputMonthAttributes]?: SmoothlyInputMonth[K] } & { [K in keyof SmoothlyInputMonth & keyof SmoothlyInputMonthAttributes as `attr:${K}`]?: SmoothlyInputMonthAttributes[K] } & { [K in keyof SmoothlyInputMonth & keyof SmoothlyInputMonthAttributes as `prop:${K}`]?: SmoothlyInputMonth[K] };
         "smoothly-input-price-demo": SmoothlyInputPriceDemo;
-        "smoothly-input-radio": SmoothlyInputRadio;
-        "smoothly-input-radio-item": SmoothlyInputRadioItem;
-        "smoothly-input-range": SmoothlyInputRange;
+        "smoothly-input-radio": Omit<SmoothlyInputRadio, keyof SmoothlyInputRadioAttributes> & { [K in keyof SmoothlyInputRadio & keyof SmoothlyInputRadioAttributes]?: SmoothlyInputRadio[K] } & { [K in keyof SmoothlyInputRadio & keyof SmoothlyInputRadioAttributes as `attr:${K}`]?: SmoothlyInputRadioAttributes[K] } & { [K in keyof SmoothlyInputRadio & keyof SmoothlyInputRadioAttributes as `prop:${K}`]?: SmoothlyInputRadio[K] };
+        "smoothly-input-radio-item": Omit<SmoothlyInputRadioItem, keyof SmoothlyInputRadioItemAttributes> & { [K in keyof SmoothlyInputRadioItem & keyof SmoothlyInputRadioItemAttributes]?: SmoothlyInputRadioItem[K] } & { [K in keyof SmoothlyInputRadioItem & keyof SmoothlyInputRadioItemAttributes as `attr:${K}`]?: SmoothlyInputRadioItemAttributes[K] } & { [K in keyof SmoothlyInputRadioItem & keyof SmoothlyInputRadioItemAttributes as `prop:${K}`]?: SmoothlyInputRadioItem[K] };
+        "smoothly-input-range": Omit<SmoothlyInputRange, keyof SmoothlyInputRangeAttributes> & { [K in keyof SmoothlyInputRange & keyof SmoothlyInputRangeAttributes]?: SmoothlyInputRange[K] } & { [K in keyof SmoothlyInputRange & keyof SmoothlyInputRangeAttributes as `attr:${K}`]?: SmoothlyInputRangeAttributes[K] } & { [K in keyof SmoothlyInputRange & keyof SmoothlyInputRangeAttributes as `prop:${K}`]?: SmoothlyInputRange[K] };
         "smoothly-input-range-demo": SmoothlyInputRangeDemo;
-        "smoothly-input-reset": SmoothlyInputReset;
-        "smoothly-input-select": SmoothlyInputSelect;
-        "smoothly-input-submit": SmoothlyInputSubmit;
-        "smoothly-item": SmoothlyItem;
-        "smoothly-label": SmoothlyLabel;
-        "smoothly-lazy": SmoothlyLazy;
-        "smoothly-load-more": SmoothlyLoadMore;
-        "smoothly-modal": SmoothlyModal;
-        "smoothly-notification": SmoothlyNotification;
-        "smoothly-notifier": SmoothlyNotifier;
-        "smoothly-spinner": SmoothlySpinner;
-        "smoothly-submit": SmoothlySubmit;
-        "smoothly-summary": SmoothlySummary;
-        "smoothly-tab": SmoothlyTab;
-        "smoothly-table": SmoothlyTable;
+        "smoothly-input-reset": Omit<SmoothlyInputReset, keyof SmoothlyInputResetAttributes> & { [K in keyof SmoothlyInputReset & keyof SmoothlyInputResetAttributes]?: SmoothlyInputReset[K] } & { [K in keyof SmoothlyInputReset & keyof SmoothlyInputResetAttributes as `attr:${K}`]?: SmoothlyInputResetAttributes[K] } & { [K in keyof SmoothlyInputReset & keyof SmoothlyInputResetAttributes as `prop:${K}`]?: SmoothlyInputReset[K] };
+        "smoothly-input-select": Omit<SmoothlyInputSelect, keyof SmoothlyInputSelectAttributes> & { [K in keyof SmoothlyInputSelect & keyof SmoothlyInputSelectAttributes]?: SmoothlyInputSelect[K] } & { [K in keyof SmoothlyInputSelect & keyof SmoothlyInputSelectAttributes as `attr:${K}`]?: SmoothlyInputSelectAttributes[K] } & { [K in keyof SmoothlyInputSelect & keyof SmoothlyInputSelectAttributes as `prop:${K}`]?: SmoothlyInputSelect[K] };
+        "smoothly-input-submit": Omit<SmoothlyInputSubmit, keyof SmoothlyInputSubmitAttributes> & { [K in keyof SmoothlyInputSubmit & keyof SmoothlyInputSubmitAttributes]?: SmoothlyInputSubmit[K] } & { [K in keyof SmoothlyInputSubmit & keyof SmoothlyInputSubmitAttributes as `attr:${K}`]?: SmoothlyInputSubmitAttributes[K] } & { [K in keyof SmoothlyInputSubmit & keyof SmoothlyInputSubmitAttributes as `prop:${K}`]?: SmoothlyInputSubmit[K] };
+        "smoothly-item": Omit<SmoothlyItem, keyof SmoothlyItemAttributes> & { [K in keyof SmoothlyItem & keyof SmoothlyItemAttributes]?: SmoothlyItem[K] } & { [K in keyof SmoothlyItem & keyof SmoothlyItemAttributes as `attr:${K}`]?: SmoothlyItemAttributes[K] } & { [K in keyof SmoothlyItem & keyof SmoothlyItemAttributes as `prop:${K}`]?: SmoothlyItem[K] };
+        "smoothly-label": Omit<SmoothlyLabel, keyof SmoothlyLabelAttributes> & { [K in keyof SmoothlyLabel & keyof SmoothlyLabelAttributes]?: SmoothlyLabel[K] } & { [K in keyof SmoothlyLabel & keyof SmoothlyLabelAttributes as `attr:${K}`]?: SmoothlyLabelAttributes[K] } & { [K in keyof SmoothlyLabel & keyof SmoothlyLabelAttributes as `prop:${K}`]?: SmoothlyLabel[K] };
+        "smoothly-lazy": Omit<SmoothlyLazy, keyof SmoothlyLazyAttributes> & { [K in keyof SmoothlyLazy & keyof SmoothlyLazyAttributes]?: SmoothlyLazy[K] } & { [K in keyof SmoothlyLazy & keyof SmoothlyLazyAttributes as `attr:${K}`]?: SmoothlyLazyAttributes[K] } & { [K in keyof SmoothlyLazy & keyof SmoothlyLazyAttributes as `prop:${K}`]?: SmoothlyLazy[K] };
+        "smoothly-load-more": Omit<SmoothlyLoadMore, keyof SmoothlyLoadMoreAttributes> & { [K in keyof SmoothlyLoadMore & keyof SmoothlyLoadMoreAttributes]?: SmoothlyLoadMore[K] } & { [K in keyof SmoothlyLoadMore & keyof SmoothlyLoadMoreAttributes as `attr:${K}`]?: SmoothlyLoadMoreAttributes[K] } & { [K in keyof SmoothlyLoadMore & keyof SmoothlyLoadMoreAttributes as `prop:${K}`]?: SmoothlyLoadMore[K] };
+        "smoothly-modal": Omit<SmoothlyModal, keyof SmoothlyModalAttributes> & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes]?: SmoothlyModal[K] } & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes as `attr:${K}`]?: SmoothlyModalAttributes[K] } & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes as `prop:${K}`]?: SmoothlyModal[K] };
+        "smoothly-notification": Omit<SmoothlyNotification, keyof SmoothlyNotificationAttributes> & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes]?: SmoothlyNotification[K] } & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes as `attr:${K}`]?: SmoothlyNotificationAttributes[K] } & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes as `prop:${K}`]?: SmoothlyNotification[K] };
+        "smoothly-notifier": Omit<SmoothlyNotifier, keyof SmoothlyNotifierAttributes> & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes]?: SmoothlyNotifier[K] } & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes as `attr:${K}`]?: SmoothlyNotifierAttributes[K] } & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes as `prop:${K}`]?: SmoothlyNotifier[K] };
+        "smoothly-spinner": Omit<SmoothlySpinner, keyof SmoothlySpinnerAttributes> & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes]?: SmoothlySpinner[K] } & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes as `attr:${K}`]?: SmoothlySpinnerAttributes[K] } & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes as `prop:${K}`]?: SmoothlySpinner[K] };
+        "smoothly-submit": Omit<SmoothlySubmit, keyof SmoothlySubmitAttributes> & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes]?: SmoothlySubmit[K] } & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes as `attr:${K}`]?: SmoothlySubmitAttributes[K] } & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes as `prop:${K}`]?: SmoothlySubmit[K] };
+        "smoothly-summary": Omit<SmoothlySummary, keyof SmoothlySummaryAttributes> & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes]?: SmoothlySummary[K] } & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes as `attr:${K}`]?: SmoothlySummaryAttributes[K] } & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes as `prop:${K}`]?: SmoothlySummary[K] };
+        "smoothly-tab": Omit<SmoothlyTab, keyof SmoothlyTabAttributes> & { [K in keyof SmoothlyTab & keyof SmoothlyTabAttributes]?: SmoothlyTab[K] } & { [K in keyof SmoothlyTab & keyof SmoothlyTabAttributes as `attr:${K}`]?: SmoothlyTabAttributes[K] } & { [K in keyof SmoothlyTab & keyof SmoothlyTabAttributes as `prop:${K}`]?: SmoothlyTab[K] };
+        "smoothly-table": Omit<SmoothlyTable, keyof SmoothlyTableAttributes> & { [K in keyof SmoothlyTable & keyof SmoothlyTableAttributes]?: SmoothlyTable[K] } & { [K in keyof SmoothlyTable & keyof SmoothlyTableAttributes as `attr:${K}`]?: SmoothlyTableAttributes[K] } & { [K in keyof SmoothlyTable & keyof SmoothlyTableAttributes as `prop:${K}`]?: SmoothlyTable[K] };
         "smoothly-table-body": SmoothlyTableBody;
-        "smoothly-table-cell": SmoothlyTableCell;
+        "smoothly-table-cell": Omit<SmoothlyTableCell, keyof SmoothlyTableCellAttributes> & { [K in keyof SmoothlyTableCell & keyof SmoothlyTableCellAttributes]?: SmoothlyTableCell[K] } & { [K in keyof SmoothlyTableCell & keyof SmoothlyTableCellAttributes as `attr:${K}`]?: SmoothlyTableCellAttributes[K] } & { [K in keyof SmoothlyTableCell & keyof SmoothlyTableCellAttributes as `prop:${K}`]?: SmoothlyTableCell[K] };
         "smoothly-table-demo": SmoothlyTableDemo;
         "smoothly-table-demo-colspan": SmoothlyTableDemoColspan;
         "smoothly-table-demo-filler-row": SmoothlyTableDemoFillerRow;
@@ -2938,137 +4222,137 @@ declare namespace LocalJSX {
         "smoothly-table-demo-nested-no-cell": SmoothlyTableDemoNestedNoCell;
         "smoothly-table-demo-nested-no-cell-inner": SmoothlyTableDemoNestedNoCellInner;
         "smoothly-table-demo-simple": SmoothlyTableDemoSimple;
-        "smoothly-table-expandable-cell": SmoothlyTableExpandableCell;
-        "smoothly-table-expandable-row": SmoothlyTableExpandableRow;
+        "smoothly-table-expandable-cell": Omit<SmoothlyTableExpandableCell, keyof SmoothlyTableExpandableCellAttributes> & { [K in keyof SmoothlyTableExpandableCell & keyof SmoothlyTableExpandableCellAttributes]?: SmoothlyTableExpandableCell[K] } & { [K in keyof SmoothlyTableExpandableCell & keyof SmoothlyTableExpandableCellAttributes as `attr:${K}`]?: SmoothlyTableExpandableCellAttributes[K] } & { [K in keyof SmoothlyTableExpandableCell & keyof SmoothlyTableExpandableCellAttributes as `prop:${K}`]?: SmoothlyTableExpandableCell[K] };
+        "smoothly-table-expandable-row": Omit<SmoothlyTableExpandableRow, keyof SmoothlyTableExpandableRowAttributes> & { [K in keyof SmoothlyTableExpandableRow & keyof SmoothlyTableExpandableRowAttributes]?: SmoothlyTableExpandableRow[K] } & { [K in keyof SmoothlyTableExpandableRow & keyof SmoothlyTableExpandableRowAttributes as `attr:${K}`]?: SmoothlyTableExpandableRowAttributes[K] } & { [K in keyof SmoothlyTableExpandableRow & keyof SmoothlyTableExpandableRowAttributes as `prop:${K}`]?: SmoothlyTableExpandableRow[K] };
         "smoothly-table-filler-row": SmoothlyTableFillerRow;
         "smoothly-table-foot": SmoothlyTableFoot;
         "smoothly-table-head": SmoothlyTableHead;
         "smoothly-table-row": SmoothlyTableRow;
-        "smoothly-table-row-group": SmoothlyTableRowGroup;
-        "smoothly-tabs": SmoothlyTabs;
+        "smoothly-table-row-group": Omit<SmoothlyTableRowGroup, keyof SmoothlyTableRowGroupAttributes> & { [K in keyof SmoothlyTableRowGroup & keyof SmoothlyTableRowGroupAttributes]?: SmoothlyTableRowGroup[K] } & { [K in keyof SmoothlyTableRowGroup & keyof SmoothlyTableRowGroupAttributes as `attr:${K}`]?: SmoothlyTableRowGroupAttributes[K] } & { [K in keyof SmoothlyTableRowGroup & keyof SmoothlyTableRowGroupAttributes as `prop:${K}`]?: SmoothlyTableRowGroup[K] };
+        "smoothly-tabs": Omit<SmoothlyTabs, keyof SmoothlyTabsAttributes> & { [K in keyof SmoothlyTabs & keyof SmoothlyTabsAttributes]?: SmoothlyTabs[K] } & { [K in keyof SmoothlyTabs & keyof SmoothlyTabsAttributes as `attr:${K}`]?: SmoothlyTabsAttributes[K] } & { [K in keyof SmoothlyTabs & keyof SmoothlyTabsAttributes as `prop:${K}`]?: SmoothlyTabs[K] };
         "smoothly-tabs-demo": SmoothlyTabsDemo;
-        "smoothly-theme-color": SmoothlyThemeColor;
-        "smoothly-theme-color-variant": SmoothlyThemeColorVariant;
+        "smoothly-theme-color": Omit<SmoothlyThemeColor, keyof SmoothlyThemeColorAttributes> & { [K in keyof SmoothlyThemeColor & keyof SmoothlyThemeColorAttributes]?: SmoothlyThemeColor[K] } & { [K in keyof SmoothlyThemeColor & keyof SmoothlyThemeColorAttributes as `attr:${K}`]?: SmoothlyThemeColorAttributes[K] } & { [K in keyof SmoothlyThemeColor & keyof SmoothlyThemeColorAttributes as `prop:${K}`]?: SmoothlyThemeColor[K] };
+        "smoothly-theme-color-variant": Omit<SmoothlyThemeColorVariant, keyof SmoothlyThemeColorVariantAttributes> & { [K in keyof SmoothlyThemeColorVariant & keyof SmoothlyThemeColorVariantAttributes]?: SmoothlyThemeColorVariant[K] } & { [K in keyof SmoothlyThemeColorVariant & keyof SmoothlyThemeColorVariantAttributes as `attr:${K}`]?: SmoothlyThemeColorVariantAttributes[K] } & { [K in keyof SmoothlyThemeColorVariant & keyof SmoothlyThemeColorVariantAttributes as `prop:${K}`]?: SmoothlyThemeColorVariant[K] };
         "smoothly-theme-colors": SmoothlyThemeColors;
         "smoothly-theme-demo": SmoothlyThemeDemo;
         "smoothly-theme-guide": SmoothlyThemeGuide;
-        "smoothly-theme-picker": SmoothlyThemePicker;
-        "smoothly-toggle-switch": SmoothlyToggleSwitch;
+        "smoothly-theme-picker": Omit<SmoothlyThemePicker, keyof SmoothlyThemePickerAttributes> & { [K in keyof SmoothlyThemePicker & keyof SmoothlyThemePickerAttributes]?: SmoothlyThemePicker[K] } & { [K in keyof SmoothlyThemePicker & keyof SmoothlyThemePickerAttributes as `attr:${K}`]?: SmoothlyThemePickerAttributes[K] } & { [K in keyof SmoothlyThemePicker & keyof SmoothlyThemePickerAttributes as `prop:${K}`]?: SmoothlyThemePicker[K] };
+        "smoothly-toggle-switch": Omit<SmoothlyToggleSwitch, keyof SmoothlyToggleSwitchAttributes> & { [K in keyof SmoothlyToggleSwitch & keyof SmoothlyToggleSwitchAttributes]?: SmoothlyToggleSwitch[K] } & { [K in keyof SmoothlyToggleSwitch & keyof SmoothlyToggleSwitchAttributes as `attr:${K}`]?: SmoothlyToggleSwitchAttributes[K] } & { [K in keyof SmoothlyToggleSwitch & keyof SmoothlyToggleSwitchAttributes as `prop:${K}`]?: SmoothlyToggleSwitch[K] };
         "smoothly-toggle-switch-demo": SmoothlyToggleSwitchDemo;
-        "smoothly-trigger": SmoothlyTrigger;
-        "smoothly-trigger-sink": SmoothlyTriggerSink;
-        "smoothly-trigger-source": SmoothlyTriggerSource;
+        "smoothly-trigger": Omit<SmoothlyTrigger, keyof SmoothlyTriggerAttributes> & { [K in keyof SmoothlyTrigger & keyof SmoothlyTriggerAttributes]?: SmoothlyTrigger[K] } & { [K in keyof SmoothlyTrigger & keyof SmoothlyTriggerAttributes as `attr:${K}`]?: SmoothlyTriggerAttributes[K] } & { [K in keyof SmoothlyTrigger & keyof SmoothlyTriggerAttributes as `prop:${K}`]?: SmoothlyTrigger[K] };
+        "smoothly-trigger-sink": Omit<SmoothlyTriggerSink, keyof SmoothlyTriggerSinkAttributes> & { [K in keyof SmoothlyTriggerSink & keyof SmoothlyTriggerSinkAttributes]?: SmoothlyTriggerSink[K] } & { [K in keyof SmoothlyTriggerSink & keyof SmoothlyTriggerSinkAttributes as `attr:${K}`]?: SmoothlyTriggerSinkAttributes[K] } & { [K in keyof SmoothlyTriggerSink & keyof SmoothlyTriggerSinkAttributes as `prop:${K}`]?: SmoothlyTriggerSink[K] };
+        "smoothly-trigger-source": Omit<SmoothlyTriggerSource, keyof SmoothlyTriggerSourceAttributes> & { [K in keyof SmoothlyTriggerSource & keyof SmoothlyTriggerSourceAttributes]?: SmoothlyTriggerSource[K] } & { [K in keyof SmoothlyTriggerSource & keyof SmoothlyTriggerSourceAttributes as `attr:${K}`]?: SmoothlyTriggerSourceAttributes[K] } & { [K in keyof SmoothlyTriggerSource & keyof SmoothlyTriggerSourceAttributes as `prop:${K}`]?: SmoothlyTriggerSource[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "smoothly-app": LocalJSX.SmoothlyApp & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
-            "smoothly-app-demo": LocalJSX.SmoothlyAppDemo & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
-            "smoothly-app-room": LocalJSX.SmoothlyAppRoom & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
-            "smoothly-back-to-top": LocalJSX.SmoothlyBackToTop & JSXBase.HTMLAttributes<HTMLSmoothlyBackToTopElement>;
-            "smoothly-burger": LocalJSX.SmoothlyBurger & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
-            "smoothly-button": LocalJSX.SmoothlyButton & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
-            "smoothly-button-confirm": LocalJSX.SmoothlyButtonConfirm & JSXBase.HTMLAttributes<HTMLSmoothlyButtonConfirmElement>;
-            "smoothly-button-demo": LocalJSX.SmoothlyButtonDemo & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
-            "smoothly-button-demo-standard": LocalJSX.SmoothlyButtonDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoStandardElement>;
-            "smoothly-calendar": LocalJSX.SmoothlyCalendar & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
-            "smoothly-checkbox": LocalJSX.SmoothlyCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
-            "smoothly-color": LocalJSX.SmoothlyColor & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
-            "smoothly-country": LocalJSX.SmoothlyCountry & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
-            "smoothly-date-text": LocalJSX.SmoothlyDateText & JSXBase.HTMLAttributes<HTMLSmoothlyDateTextElement>;
-            "smoothly-dialog": LocalJSX.SmoothlyDialog & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
-            "smoothly-dialog-demo": LocalJSX.SmoothlyDialogDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
-            "smoothly-display": LocalJSX.SmoothlyDisplay & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
-            "smoothly-display-demo": LocalJSX.SmoothlyDisplayDemo & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
-            "smoothly-display-demo-json": LocalJSX.SmoothlyDisplayDemoJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoJsonElement>;
-            "smoothly-display-json": LocalJSX.SmoothlyDisplayJson & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
-            "smoothly-display-json-object": LocalJSX.SmoothlyDisplayJsonObject & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
-            "smoothly-display-json-primitive": LocalJSX.SmoothlyDisplayJsonPrimitive & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
-            "smoothly-display-json-record-key": LocalJSX.SmoothlyDisplayJsonRecordKey & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordKeyElement>;
-            "smoothly-form": LocalJSX.SmoothlyForm & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
-            "smoothly-form-demo": LocalJSX.SmoothlyFormDemo & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoElement>;
-            "smoothly-form-demo-all": LocalJSX.SmoothlyFormDemoAll & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoAllElement>;
-            "smoothly-form-demo-card": LocalJSX.SmoothlyFormDemoCard & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoCardElement>;
-            "smoothly-form-demo-controlled": LocalJSX.SmoothlyFormDemoControlled & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoControlledElement>;
-            "smoothly-form-demo-date": LocalJSX.SmoothlyFormDemoDate & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateElement>;
-            "smoothly-form-demo-date-range": LocalJSX.SmoothlyFormDemoDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateRangeElement>;
-            "smoothly-form-demo-login": LocalJSX.SmoothlyFormDemoLogin & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
-            "smoothly-form-demo-pet": LocalJSX.SmoothlyFormDemoPet & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPetElement>;
-            "smoothly-form-demo-prices": LocalJSX.SmoothlyFormDemoPrices & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
-            "smoothly-form-demo-schedule": LocalJSX.SmoothlyFormDemoSchedule & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoScheduleElement>;
-            "smoothly-form-demo-transparent": LocalJSX.SmoothlyFormDemoTransparent & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
-            "smoothly-form-demo-typed": LocalJSX.SmoothlyFormDemoTyped & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
-            "smoothly-frame": LocalJSX.SmoothlyFrame & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
-            "smoothly-icon": LocalJSX.SmoothlyIcon & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
-            "smoothly-icon-demo": LocalJSX.SmoothlyIconDemo & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
-            "smoothly-input": LocalJSX.SmoothlyInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
-            "smoothly-input-checkbox": LocalJSX.SmoothlyInputCheckbox & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
-            "smoothly-input-checkbox-demo": LocalJSX.SmoothlyInputCheckboxDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxDemoElement>;
-            "smoothly-input-clear": LocalJSX.SmoothlyInputClear & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
-            "smoothly-input-color": LocalJSX.SmoothlyInputColor & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
-            "smoothly-input-color-demo": LocalJSX.SmoothlyInputColorDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
-            "smoothly-input-date": LocalJSX.SmoothlyInputDate & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
-            "smoothly-input-date-demo": LocalJSX.SmoothlyInputDateDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateDemoElement>;
-            "smoothly-input-date-range": LocalJSX.SmoothlyInputDateRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
-            "smoothly-input-date-time": LocalJSX.SmoothlyInputDateTime & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
-            "smoothly-input-demo": LocalJSX.SmoothlyInputDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
-            "smoothly-input-demo-radio": LocalJSX.SmoothlyInputDemoRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoRadioElement>;
-            "smoothly-input-demo-standard": LocalJSX.SmoothlyInputDemoStandard & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
-            "smoothly-input-demo-user-input": LocalJSX.SmoothlyInputDemoUserInput & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoUserInputElement>;
-            "smoothly-input-edit": LocalJSX.SmoothlyInputEdit & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
-            "smoothly-input-file": LocalJSX.SmoothlyInputFile & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
-            "smoothly-input-month": LocalJSX.SmoothlyInputMonth & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
-            "smoothly-input-price-demo": LocalJSX.SmoothlyInputPriceDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputPriceDemoElement>;
-            "smoothly-input-radio": LocalJSX.SmoothlyInputRadio & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
-            "smoothly-input-radio-item": LocalJSX.SmoothlyInputRadioItem & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
-            "smoothly-input-range": LocalJSX.SmoothlyInputRange & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
-            "smoothly-input-range-demo": LocalJSX.SmoothlyInputRangeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeDemoElement>;
-            "smoothly-input-reset": LocalJSX.SmoothlyInputReset & JSXBase.HTMLAttributes<HTMLSmoothlyInputResetElement>;
-            "smoothly-input-select": LocalJSX.SmoothlyInputSelect & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
-            "smoothly-input-submit": LocalJSX.SmoothlyInputSubmit & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
-            "smoothly-item": LocalJSX.SmoothlyItem & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
-            "smoothly-label": LocalJSX.SmoothlyLabel & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
-            "smoothly-lazy": LocalJSX.SmoothlyLazy & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
-            "smoothly-load-more": LocalJSX.SmoothlyLoadMore & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
-            "smoothly-modal": LocalJSX.SmoothlyModal & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
-            "smoothly-notification": LocalJSX.SmoothlyNotification & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
-            "smoothly-notifier": LocalJSX.SmoothlyNotifier & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
-            "smoothly-spinner": LocalJSX.SmoothlySpinner & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
-            "smoothly-submit": LocalJSX.SmoothlySubmit & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
-            "smoothly-summary": LocalJSX.SmoothlySummary & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
-            "smoothly-tab": LocalJSX.SmoothlyTab & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
-            "smoothly-table": LocalJSX.SmoothlyTable & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
-            "smoothly-table-body": LocalJSX.SmoothlyTableBody & JSXBase.HTMLAttributes<HTMLSmoothlyTableBodyElement>;
-            "smoothly-table-cell": LocalJSX.SmoothlyTableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
-            "smoothly-table-demo": LocalJSX.SmoothlyTableDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
-            "smoothly-table-demo-colspan": LocalJSX.SmoothlyTableDemoColspan & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoColspanElement>;
-            "smoothly-table-demo-filler-row": LocalJSX.SmoothlyTableDemoFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
-            "smoothly-table-demo-group": LocalJSX.SmoothlyTableDemoGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
-            "smoothly-table-demo-nested-no-cell": LocalJSX.SmoothlyTableDemoNestedNoCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellElement>;
-            "smoothly-table-demo-nested-no-cell-inner": LocalJSX.SmoothlyTableDemoNestedNoCellInner & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellInnerElement>;
-            "smoothly-table-demo-simple": LocalJSX.SmoothlyTableDemoSimple & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoSimpleElement>;
-            "smoothly-table-expandable-cell": LocalJSX.SmoothlyTableExpandableCell & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
-            "smoothly-table-expandable-row": LocalJSX.SmoothlyTableExpandableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
-            "smoothly-table-filler-row": LocalJSX.SmoothlyTableFillerRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableFillerRowElement>;
-            "smoothly-table-foot": LocalJSX.SmoothlyTableFoot & JSXBase.HTMLAttributes<HTMLSmoothlyTableFootElement>;
-            "smoothly-table-head": LocalJSX.SmoothlyTableHead & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
-            "smoothly-table-row": LocalJSX.SmoothlyTableRow & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
-            "smoothly-table-row-group": LocalJSX.SmoothlyTableRowGroup & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
-            "smoothly-tabs": LocalJSX.SmoothlyTabs & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
-            "smoothly-tabs-demo": LocalJSX.SmoothlyTabsDemo & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
-            "smoothly-theme-color": LocalJSX.SmoothlyThemeColor & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
-            "smoothly-theme-color-variant": LocalJSX.SmoothlyThemeColorVariant & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
-            "smoothly-theme-colors": LocalJSX.SmoothlyThemeColors & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
-            "smoothly-theme-demo": LocalJSX.SmoothlyThemeDemo & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDemoElement>;
-            "smoothly-theme-guide": LocalJSX.SmoothlyThemeGuide & JSXBase.HTMLAttributes<HTMLSmoothlyThemeGuideElement>;
-            "smoothly-theme-picker": LocalJSX.SmoothlyThemePicker & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
-            "smoothly-toggle-switch": LocalJSX.SmoothlyToggleSwitch & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
-            "smoothly-toggle-switch-demo": LocalJSX.SmoothlyToggleSwitchDemo & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchDemoElement>;
-            "smoothly-trigger": LocalJSX.SmoothlyTrigger & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
-            "smoothly-trigger-sink": LocalJSX.SmoothlyTriggerSink & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
-            "smoothly-trigger-source": LocalJSX.SmoothlyTriggerSource & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
+            "smoothly-app": LocalJSX.IntrinsicElements["smoothly-app"] & JSXBase.HTMLAttributes<HTMLSmoothlyAppElement>;
+            "smoothly-app-demo": LocalJSX.IntrinsicElements["smoothly-app-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyAppDemoElement>;
+            "smoothly-app-room": LocalJSX.IntrinsicElements["smoothly-app-room"] & JSXBase.HTMLAttributes<HTMLSmoothlyAppRoomElement>;
+            "smoothly-back-to-top": LocalJSX.IntrinsicElements["smoothly-back-to-top"] & JSXBase.HTMLAttributes<HTMLSmoothlyBackToTopElement>;
+            "smoothly-burger": LocalJSX.IntrinsicElements["smoothly-burger"] & JSXBase.HTMLAttributes<HTMLSmoothlyBurgerElement>;
+            "smoothly-button": LocalJSX.IntrinsicElements["smoothly-button"] & JSXBase.HTMLAttributes<HTMLSmoothlyButtonElement>;
+            "smoothly-button-confirm": LocalJSX.IntrinsicElements["smoothly-button-confirm"] & JSXBase.HTMLAttributes<HTMLSmoothlyButtonConfirmElement>;
+            "smoothly-button-demo": LocalJSX.IntrinsicElements["smoothly-button-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoElement>;
+            "smoothly-button-demo-standard": LocalJSX.IntrinsicElements["smoothly-button-demo-standard"] & JSXBase.HTMLAttributes<HTMLSmoothlyButtonDemoStandardElement>;
+            "smoothly-calendar": LocalJSX.IntrinsicElements["smoothly-calendar"] & JSXBase.HTMLAttributes<HTMLSmoothlyCalendarElement>;
+            "smoothly-checkbox": LocalJSX.IntrinsicElements["smoothly-checkbox"] & JSXBase.HTMLAttributes<HTMLSmoothlyCheckboxElement>;
+            "smoothly-color": LocalJSX.IntrinsicElements["smoothly-color"] & JSXBase.HTMLAttributes<HTMLSmoothlyColorElement>;
+            "smoothly-country": LocalJSX.IntrinsicElements["smoothly-country"] & JSXBase.HTMLAttributes<HTMLSmoothlyCountryElement>;
+            "smoothly-date-text": LocalJSX.IntrinsicElements["smoothly-date-text"] & JSXBase.HTMLAttributes<HTMLSmoothlyDateTextElement>;
+            "smoothly-dialog": LocalJSX.IntrinsicElements["smoothly-dialog"] & JSXBase.HTMLAttributes<HTMLSmoothlyDialogElement>;
+            "smoothly-dialog-demo": LocalJSX.IntrinsicElements["smoothly-dialog-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyDialogDemoElement>;
+            "smoothly-display": LocalJSX.IntrinsicElements["smoothly-display"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayElement>;
+            "smoothly-display-demo": LocalJSX.IntrinsicElements["smoothly-display-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoElement>;
+            "smoothly-display-demo-json": LocalJSX.IntrinsicElements["smoothly-display-demo-json"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayDemoJsonElement>;
+            "smoothly-display-json": LocalJSX.IntrinsicElements["smoothly-display-json"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonElement>;
+            "smoothly-display-json-object": LocalJSX.IntrinsicElements["smoothly-display-json-object"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonObjectElement>;
+            "smoothly-display-json-primitive": LocalJSX.IntrinsicElements["smoothly-display-json-primitive"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonPrimitiveElement>;
+            "smoothly-display-json-record-key": LocalJSX.IntrinsicElements["smoothly-display-json-record-key"] & JSXBase.HTMLAttributes<HTMLSmoothlyDisplayJsonRecordKeyElement>;
+            "smoothly-form": LocalJSX.IntrinsicElements["smoothly-form"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormElement>;
+            "smoothly-form-demo": LocalJSX.IntrinsicElements["smoothly-form-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoElement>;
+            "smoothly-form-demo-all": LocalJSX.IntrinsicElements["smoothly-form-demo-all"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoAllElement>;
+            "smoothly-form-demo-card": LocalJSX.IntrinsicElements["smoothly-form-demo-card"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoCardElement>;
+            "smoothly-form-demo-controlled": LocalJSX.IntrinsicElements["smoothly-form-demo-controlled"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoControlledElement>;
+            "smoothly-form-demo-date": LocalJSX.IntrinsicElements["smoothly-form-demo-date"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateElement>;
+            "smoothly-form-demo-date-range": LocalJSX.IntrinsicElements["smoothly-form-demo-date-range"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoDateRangeElement>;
+            "smoothly-form-demo-login": LocalJSX.IntrinsicElements["smoothly-form-demo-login"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoLoginElement>;
+            "smoothly-form-demo-pet": LocalJSX.IntrinsicElements["smoothly-form-demo-pet"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPetElement>;
+            "smoothly-form-demo-prices": LocalJSX.IntrinsicElements["smoothly-form-demo-prices"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoPricesElement>;
+            "smoothly-form-demo-schedule": LocalJSX.IntrinsicElements["smoothly-form-demo-schedule"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoScheduleElement>;
+            "smoothly-form-demo-transparent": LocalJSX.IntrinsicElements["smoothly-form-demo-transparent"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTransparentElement>;
+            "smoothly-form-demo-typed": LocalJSX.IntrinsicElements["smoothly-form-demo-typed"] & JSXBase.HTMLAttributes<HTMLSmoothlyFormDemoTypedElement>;
+            "smoothly-frame": LocalJSX.IntrinsicElements["smoothly-frame"] & JSXBase.HTMLAttributes<HTMLSmoothlyFrameElement>;
+            "smoothly-icon": LocalJSX.IntrinsicElements["smoothly-icon"] & JSXBase.HTMLAttributes<HTMLSmoothlyIconElement>;
+            "smoothly-icon-demo": LocalJSX.IntrinsicElements["smoothly-icon-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyIconDemoElement>;
+            "smoothly-input": LocalJSX.IntrinsicElements["smoothly-input"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputElement>;
+            "smoothly-input-checkbox": LocalJSX.IntrinsicElements["smoothly-input-checkbox"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxElement>;
+            "smoothly-input-checkbox-demo": LocalJSX.IntrinsicElements["smoothly-input-checkbox-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputCheckboxDemoElement>;
+            "smoothly-input-clear": LocalJSX.IntrinsicElements["smoothly-input-clear"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputClearElement>;
+            "smoothly-input-color": LocalJSX.IntrinsicElements["smoothly-input-color"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorElement>;
+            "smoothly-input-color-demo": LocalJSX.IntrinsicElements["smoothly-input-color-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputColorDemoElement>;
+            "smoothly-input-date": LocalJSX.IntrinsicElements["smoothly-input-date"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateElement>;
+            "smoothly-input-date-demo": LocalJSX.IntrinsicElements["smoothly-input-date-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateDemoElement>;
+            "smoothly-input-date-range": LocalJSX.IntrinsicElements["smoothly-input-date-range"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateRangeElement>;
+            "smoothly-input-date-time": LocalJSX.IntrinsicElements["smoothly-input-date-time"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDateTimeElement>;
+            "smoothly-input-demo": LocalJSX.IntrinsicElements["smoothly-input-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoElement>;
+            "smoothly-input-demo-radio": LocalJSX.IntrinsicElements["smoothly-input-demo-radio"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoRadioElement>;
+            "smoothly-input-demo-standard": LocalJSX.IntrinsicElements["smoothly-input-demo-standard"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoStandardElement>;
+            "smoothly-input-demo-user-input": LocalJSX.IntrinsicElements["smoothly-input-demo-user-input"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputDemoUserInputElement>;
+            "smoothly-input-edit": LocalJSX.IntrinsicElements["smoothly-input-edit"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputEditElement>;
+            "smoothly-input-file": LocalJSX.IntrinsicElements["smoothly-input-file"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputFileElement>;
+            "smoothly-input-month": LocalJSX.IntrinsicElements["smoothly-input-month"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputMonthElement>;
+            "smoothly-input-price-demo": LocalJSX.IntrinsicElements["smoothly-input-price-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputPriceDemoElement>;
+            "smoothly-input-radio": LocalJSX.IntrinsicElements["smoothly-input-radio"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioElement>;
+            "smoothly-input-radio-item": LocalJSX.IntrinsicElements["smoothly-input-radio-item"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputRadioItemElement>;
+            "smoothly-input-range": LocalJSX.IntrinsicElements["smoothly-input-range"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeElement>;
+            "smoothly-input-range-demo": LocalJSX.IntrinsicElements["smoothly-input-range-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputRangeDemoElement>;
+            "smoothly-input-reset": LocalJSX.IntrinsicElements["smoothly-input-reset"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputResetElement>;
+            "smoothly-input-select": LocalJSX.IntrinsicElements["smoothly-input-select"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputSelectElement>;
+            "smoothly-input-submit": LocalJSX.IntrinsicElements["smoothly-input-submit"] & JSXBase.HTMLAttributes<HTMLSmoothlyInputSubmitElement>;
+            "smoothly-item": LocalJSX.IntrinsicElements["smoothly-item"] & JSXBase.HTMLAttributes<HTMLSmoothlyItemElement>;
+            "smoothly-label": LocalJSX.IntrinsicElements["smoothly-label"] & JSXBase.HTMLAttributes<HTMLSmoothlyLabelElement>;
+            "smoothly-lazy": LocalJSX.IntrinsicElements["smoothly-lazy"] & JSXBase.HTMLAttributes<HTMLSmoothlyLazyElement>;
+            "smoothly-load-more": LocalJSX.IntrinsicElements["smoothly-load-more"] & JSXBase.HTMLAttributes<HTMLSmoothlyLoadMoreElement>;
+            "smoothly-modal": LocalJSX.IntrinsicElements["smoothly-modal"] & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
+            "smoothly-notification": LocalJSX.IntrinsicElements["smoothly-notification"] & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
+            "smoothly-notifier": LocalJSX.IntrinsicElements["smoothly-notifier"] & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
+            "smoothly-spinner": LocalJSX.IntrinsicElements["smoothly-spinner"] & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
+            "smoothly-submit": LocalJSX.IntrinsicElements["smoothly-submit"] & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
+            "smoothly-summary": LocalJSX.IntrinsicElements["smoothly-summary"] & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;
+            "smoothly-tab": LocalJSX.IntrinsicElements["smoothly-tab"] & JSXBase.HTMLAttributes<HTMLSmoothlyTabElement>;
+            "smoothly-table": LocalJSX.IntrinsicElements["smoothly-table"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableElement>;
+            "smoothly-table-body": LocalJSX.IntrinsicElements["smoothly-table-body"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableBodyElement>;
+            "smoothly-table-cell": LocalJSX.IntrinsicElements["smoothly-table-cell"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableCellElement>;
+            "smoothly-table-demo": LocalJSX.IntrinsicElements["smoothly-table-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoElement>;
+            "smoothly-table-demo-colspan": LocalJSX.IntrinsicElements["smoothly-table-demo-colspan"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoColspanElement>;
+            "smoothly-table-demo-filler-row": LocalJSX.IntrinsicElements["smoothly-table-demo-filler-row"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoFillerRowElement>;
+            "smoothly-table-demo-group": LocalJSX.IntrinsicElements["smoothly-table-demo-group"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoGroupElement>;
+            "smoothly-table-demo-nested-no-cell": LocalJSX.IntrinsicElements["smoothly-table-demo-nested-no-cell"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellElement>;
+            "smoothly-table-demo-nested-no-cell-inner": LocalJSX.IntrinsicElements["smoothly-table-demo-nested-no-cell-inner"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoNestedNoCellInnerElement>;
+            "smoothly-table-demo-simple": LocalJSX.IntrinsicElements["smoothly-table-demo-simple"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableDemoSimpleElement>;
+            "smoothly-table-expandable-cell": LocalJSX.IntrinsicElements["smoothly-table-expandable-cell"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableCellElement>;
+            "smoothly-table-expandable-row": LocalJSX.IntrinsicElements["smoothly-table-expandable-row"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableExpandableRowElement>;
+            "smoothly-table-filler-row": LocalJSX.IntrinsicElements["smoothly-table-filler-row"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableFillerRowElement>;
+            "smoothly-table-foot": LocalJSX.IntrinsicElements["smoothly-table-foot"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableFootElement>;
+            "smoothly-table-head": LocalJSX.IntrinsicElements["smoothly-table-head"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableHeadElement>;
+            "smoothly-table-row": LocalJSX.IntrinsicElements["smoothly-table-row"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowElement>;
+            "smoothly-table-row-group": LocalJSX.IntrinsicElements["smoothly-table-row-group"] & JSXBase.HTMLAttributes<HTMLSmoothlyTableRowGroupElement>;
+            "smoothly-tabs": LocalJSX.IntrinsicElements["smoothly-tabs"] & JSXBase.HTMLAttributes<HTMLSmoothlyTabsElement>;
+            "smoothly-tabs-demo": LocalJSX.IntrinsicElements["smoothly-tabs-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyTabsDemoElement>;
+            "smoothly-theme-color": LocalJSX.IntrinsicElements["smoothly-theme-color"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorElement>;
+            "smoothly-theme-color-variant": LocalJSX.IntrinsicElements["smoothly-theme-color-variant"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorVariantElement>;
+            "smoothly-theme-colors": LocalJSX.IntrinsicElements["smoothly-theme-colors"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemeColorsElement>;
+            "smoothly-theme-demo": LocalJSX.IntrinsicElements["smoothly-theme-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemeDemoElement>;
+            "smoothly-theme-guide": LocalJSX.IntrinsicElements["smoothly-theme-guide"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemeGuideElement>;
+            "smoothly-theme-picker": LocalJSX.IntrinsicElements["smoothly-theme-picker"] & JSXBase.HTMLAttributes<HTMLSmoothlyThemePickerElement>;
+            "smoothly-toggle-switch": LocalJSX.IntrinsicElements["smoothly-toggle-switch"] & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchElement>;
+            "smoothly-toggle-switch-demo": LocalJSX.IntrinsicElements["smoothly-toggle-switch-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyToggleSwitchDemoElement>;
+            "smoothly-trigger": LocalJSX.IntrinsicElements["smoothly-trigger"] & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerElement>;
+            "smoothly-trigger-sink": LocalJSX.IntrinsicElements["smoothly-trigger-sink"] & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSinkElement>;
+            "smoothly-trigger-source": LocalJSX.IntrinsicElements["smoothly-trigger-source"] & JSXBase.HTMLAttributes<HTMLSmoothlyTriggerSourceElement>;
         }
     }
 }
