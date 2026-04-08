@@ -3,20 +3,27 @@
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
 		"@typescript-eslint",
-		"prettierx",
+		"prettier",
 		"simple-import-sort"
 	],
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:prettierx/default"
+		"plugin:prettier/recommended"
 	],
 	"rules": {
-		"prettierx/options": [
-			1,
+		"curly": [
+			"error",
+			"all"
+		],
+		"prettier/prettier": [
+			"warn",
 			{
-				"singleQuote": false
+				"semi": false,
+				"singleQuote": false,
+				"tabWidth": 2,
+				"trailingComma": "es5"
 			}
 		],
 		"@typescript-eslint/no-explicit-any": "off",
@@ -67,9 +74,5 @@
 			}
 		]
 	},
-	"settings": {
-		"prettierx": {
-			"usePrettierrc": true
-		}
-	}
+	"settings": {}
 }
