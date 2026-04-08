@@ -1,4 +1,4 @@
-@import "../arrow.scss";
+@use "../arrow.scss";
 
 :host {
 	grid-column: 1 / -1;
@@ -47,15 +47,15 @@
 }
 
 :host > .smoothly-table-cell:first-of-type {
-	@include arrow;
+	@include arrow.arrow;
 }
 
 :host:has(>.smoothly-table-cell:hover) > .smoothly-table-cell:first-of-type {
-	@include arrow-hover;
+	@include arrow.arrow-hover;
 }
 
 :host[open] > .smoothly-table-cell:first-of-type {
-	@include arrow-open;
+	@include arrow.arrow-open;
 }
 
 :host[open] > div.smoothly-table-detail {

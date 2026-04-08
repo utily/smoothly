@@ -1,4 +1,4 @@
-@import "../expandable/arrow.scss";
+@use "../expandable/arrow.scss";
 
 :host {
 	grid-column: 1 / -1;
@@ -16,17 +16,17 @@
 	min-height: var(--smoothly-table-cell-min-height, 2.75rem);
 	background-color: rgb(var(--smoothly-default-tint));
 	border-bottom: 1px solid rgb(var(--smoothly-default-shade));
-	@include arrow;
+	@include arrow.arrow;
 }
 
 :host > div:first-child:hover {
-	@include arrow-hover;
+	@include arrow.arrow-hover;
 	color: rgb(var(--smoothly-table-hover-foreground));
 	background-color: rgb(var(--smoothly-table-hover-background));
 }
 
 :host[open] > div:first-child {
-	@include arrow-open;
+	@include arrow.arrow-open;
 }
 
 :host > div:last-child {
