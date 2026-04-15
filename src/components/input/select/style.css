@@ -176,3 +176,12 @@
 :host>div.options.hidden {
 	display: none;
 }
+
+
+/* ---- */
+:host .search-inputer {
+	outline: 2px solid pink;
+}
+:host .search-inputer:focus {
+	outline: 2px solid red;
+}

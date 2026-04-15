@@ -32,6 +32,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
 	private displaySelectedElement?: HTMLElement
+	private inputerElement?: HTMLSpanElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
 	private optionsDiv?: HTMLDivElement
@@ -238,6 +239,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlySelectOpen.emit(open)
 	}
 	handleShowOptions(event?: Event): void {
+		this.inputerElement?.focus()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
 		const clickedItem = event
@@ -258,8 +260,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displaySelectedElement &&
 			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
-	@Listen("keydown")
-	onKeyDown(event: KeyboardEvent) {
+	// @Listen("keydown")
+	/* onKeyDown(event: KeyboardEvent) {
 		if (!this.searchDisabled) {
 			event.stopPropagation()
 			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
@@ -298,7 +300,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						this.open = false
 						break
 					default:
-						if (event.key.length == 1) {
+						if (event.key == "v" && (event.ctrlKey || event.metaKey)) {
+							// event.preventDefault()
+							// navigator.clipboard.readText().then(text => {
+							// 	console.log("text:", text)
+							// 	this.filter += text
+							// })
+						} else if (event.key.length == 1) {
 							this.filter += event.key
 						}
 						break
@@ -328,7 +336,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				}
 			}
 		}
-	}
+	} */
 	private scrollToSelected() {
 		const selectedItem = this.items.find(item => item.selected)
 		if (selectedItem) {
@@ -366,9 +374,28 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				tabIndex={this.disabled ? undefined : 0}
+				// tabIndex={this.disabled ? undefined : 0}
+				// contenteditable={this.disabled ? undefined : true}
+				onPaste={(e: ClipboardEvent) => console.log(e.clipboardData?.getData("text"))}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
+				<span
+					ref={el => (this.inputerElement ??= el)}
+					class="search-inputer"
+					tabIndex={this.disabled ? undefined : 0}
+					contenteditable={this.disabled ? undefined : true}
+					onInput={e => console.log("span input", (e.target as HTMLSpanElement).innerText)}
+					onPaste={(e: ClipboardEvent) => {
+						e.preventDefault()
+						const text = e.clipboardData?.getData("text") ?? ""
+						console.log("span paste", text)
+						const selection = window.getSelection()
+						if (selection?.rangeCount) {
+							selection.deleteFromDocument()
+							selection.getRangeAt(0).insertNode(document.createTextNode(text))
+							selection.collapseToEnd()
+						}
+					}}></span>
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
@@ -388,7 +415,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					{this.filter.length > 0 && (
 						<div class="search-preview">
 							<smoothly-icon name="search-outline" size="small" />
-							{this.filter}
+							<span class="search-filter">{this.filter}</span>
 							<smoothly-icon
 								name="backspace-outline"
 								size="small"
