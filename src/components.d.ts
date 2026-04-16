@@ -381,10 +381,7 @@ export namespace Components {
     }
     interface SmoothlyInputClear {
         "color"?: Color;
-        /**
-          * @default false
-         */
-        "disabled": boolean;
+        "disabled"?: boolean;
         /**
           * @default true
          */
@@ -737,10 +734,7 @@ export namespace Components {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
-        /**
-          * @default false
-         */
-        "disabled": boolean;
+        "disabled"?: boolean;
         /**
           * @default true
          */
@@ -2948,9 +2942,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputClear {
         "color"?: Color;
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
         /**
           * @default true
@@ -3286,9 +3277,6 @@ declare namespace LocalJSX {
     }
     interface SmoothlyInputReset {
         "color"?: Color;
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
         /**
           * @default true

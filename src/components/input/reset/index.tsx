@@ -14,7 +14,7 @@ export class SmoothlyInputReset {
 	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill
-	@Prop({ reflect: true, mutable: true }) disabled = false
+	@Prop({ reflect: true, mutable: true }) disabled?: boolean
 	@Prop({ reflect: true }) size: "flexible" | "small" | "large" | "icon" = "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
@@ -27,7 +27,6 @@ export class SmoothlyInputReset {
 		this.smoothlyInputLoad.emit(parent => {
 			if (Editable.Element.type.is(parent)) {
 				this.parent = parent
-				this.readonlyAtLoad = parent.readonly
 				parent.listen(async p => {
 					if (Input.is(p)) {
 						const defined = typeof p.defined == "boolean" ? p.defined : Boolean(await p.getValue())
@@ -35,9 +34,16 @@ export class SmoothlyInputReset {
 					}
 					if (p instanceof SmoothlyForm) {
 						this.display = !p.readonly
-						this.disabled = !this.readonlyAtLoad && !p.isDifferentFromInitial
 					}
 				})
+				if (typeof this.disabled !== "boolean") {
+					this.readonlyAtLoad = parent.readonly
+					parent.listen(async p => {
+						if (p instanceof SmoothlyForm) {
+							this.disabled = !this.readonlyAtLoad && !p.isDifferentFromInitial
+						}
+					})
+				}
 			}
 		})
 	}
