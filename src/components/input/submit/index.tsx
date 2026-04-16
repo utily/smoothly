@@ -28,12 +28,18 @@ export class SmoothlyInputSubmit implements ComponentWillLoad {
 				this.parent = parent
 				parent.listen(async p => {
 					this.display = !p.readonly
-					this.disabled =
-						!this.delete &&
-						(p.readonly ||
-							("validator" in p && p.validator instanceof isly.Type && !p.validator?.is(Data.convertArrays(p.value))) ||
-							!p.isDifferentFromInitial)
 				})
+				if (typeof this.disabled !== "boolean") {
+					parent.listen(async p => {
+						this.disabled =
+							!this.delete &&
+							(p.readonly ||
+								("validator" in p &&
+									p.validator instanceof isly.Type &&
+									!p.validator?.is(Data.convertArrays(p.value))) ||
+								!p.isDifferentFromInitial)
+					})
+				}
 			}
 		})
 	}

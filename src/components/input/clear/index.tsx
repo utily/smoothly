@@ -15,7 +15,7 @@ export class SmoothlyInputClear {
 	@Prop() color?: Color
 	@Prop({ reflect: true }) expand?: "block" | "full"
 	@Prop({ reflect: true }) fill?: Fill = "clear"
-	@Prop({ reflect: true, mutable: true }) disabled = false
+	@Prop({ reflect: true, mutable: true }) disabled?: boolean
 	@Prop({ reflect: true }) size: "small" | "large" | "icon" | "flexible" = "icon"
 	@Prop({ reflect: true }) shape?: "rounded"
 	@Prop({ reflect: true, mutable: true }) display = true
@@ -35,10 +35,16 @@ export class SmoothlyInputClear {
 							this.display = defined && !p.readonly && !p.disabled
 						}
 						if (p instanceof SmoothlyForm) {
-							this.disabled = p.readonly || Object.values(p.value).filter(val => val).length < 1
 							this.display = !p.readonly
 						}
 					})
+					if (typeof this.disabled !== "boolean") {
+						parent.listen(async p => {
+							if (p instanceof SmoothlyForm) {
+								this.disabled = p.readonly || Object.values(p.value).filter(val => val).length < 1
+							}
+						})
+					}
 				}
 			}
 		})
