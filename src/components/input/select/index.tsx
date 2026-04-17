@@ -344,7 +344,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
 		const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-
 		if (event.key == "ArrowUp" || event.key == "ArrowDown") {
 			event.preventDefault()
 			visibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
@@ -368,7 +367,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			}
 			if (!this.multiple) {
 				this.open = false
-				this.filter = ""
+				this.resetFilter()
 			}
 		}
 	}
