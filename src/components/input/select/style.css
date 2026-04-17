@@ -125,13 +125,13 @@
 }
 :host>.dropdown>.search>.search-input {
 	width: 100%;
-
+	background-color: transparent;
 }
 :host>.dropdown>.search>smoothly-icon[name="search-outline"],
 :host>.dropdown>.search>smoothly-icon[name="backspace-outline"] {
 	color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));	
+	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
 
 
