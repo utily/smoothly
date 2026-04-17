@@ -278,9 +278,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (event.key == "ArrowUp" || event.key == "ArrowDown") {
 			event.preventDefault()
 			visibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
-			if (!this.open) {
-				this.open = true
-			}
+			this.open = true
 		} else if (this.open && event.key == "Escape") {
 			event.preventDefault()
 			if (this.filter == "") {
