@@ -1,4 +1,4 @@
-export namespace options {
+export namespace menu {
 	export function next(
 		items: HTMLSmoothlyItemElement[],
 		direction: -1 | 1

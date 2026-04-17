@@ -20,7 +20,7 @@ import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
 import { layout } from "./layout"
-import { options } from "./options"
+import { menu } from "./menu"
 import { scroll } from "./scroll"
 
 @Component({
@@ -100,9 +100,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	private scrollToSelected() {
-		const selectedItem = options.findFirstSelected(this.items)
+		const selectedItem = menu.findFirstSelected(this.items)
 		if (selectedItem) {
-			options.markOnly(this.items, selectedItem)
+			menu.markOnly(this.items, selectedItem)
 			scroll.centerInView(this.dropdownElement, selectedItem, "instant")
 		}
 	}
@@ -241,7 +241,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onClosed(open: boolean, before: boolean): void {
 		this.lastOpen = before
 		if (!open) {
-			const markedItem = options.findFirstMarked(this.items)
+			const markedItem = menu.findFirstMarked(this.items)
 			if (markedItem) {
 				markedItem.marked = false
 			}
@@ -296,7 +296,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			event.preventDefault()
 			this.open = true
 		} else if (this.open && event.key == "Enter") {
-			const result = options.findFirstMarked(this.items)
+			const result = menu.findFirstMarked(this.items)
 			if (result?.value) {
 				result.selected = !result.selected
 			}
@@ -309,7 +309,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 	private move(direction: -1 | 1): void {
-		const { current, next } = options.next(this.items, direction)
+		const { current, next } = menu.next(this.items, direction)
 		current && (current.marked = false)
 		next.marked = true
 		scroll.centerInView(this.dropdownElement, next, "smooth")
@@ -384,7 +384,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						)}
 					</div>
 					<div
-						class="options"
+						class="menu"
 						hidden={!this.open}
 						onClick={e => {
 							e.stopPropagation()
