@@ -106,8 +106,24 @@
 :host>.dropdown>.search {
 	display: flex;
 	position: sticky;
+	align-items: center;
 	top: 0;
+	gap: 1rem;
+	background-color: rgb(var(--smoothly-input-background));
+	color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
+	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
+	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
+:host>.dropdown>.search>.search-input {
+	width: 100%;
+
+}
+:host>.dropdown>.search>smoothly-icon[name="backspace-outline"] {
+	margin-left: auto;
+	margin-right: 0;
+	padding: .7rem .7rem .7rem .25rem;
+}
+
 
 /* --- old options styles --- */
 
@@ -142,21 +158,7 @@
 /* :host[multiple]>div.options>smoothly-item:hover::after { */
 	/* color: rgb(var(--smoothly-item-hover-foreground)); */
 /* } */
-/* :host>div.options::slotted(smoothly-item), */
-/* :host>div.options::slotted(div.search-preview) { */
-	/* padding: .7rem .7rem .7rem .25rem; */
-/* } */
 
-/* :host>div.options::slotted(div.search-preview) { */
-	/* display: flex; */
-	/* position: sticky; */
-	/* top: 0; */
-	/* gap: 1rem; */
-	/* background-color: rgb(var(--smoothly-input-background)); */
-	/* color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
-	/* fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
-	/* stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
-/* } */
 /* :host>div.options::slotted(div.search-preview)::before { */
 	/* Hack to not make the search-preview have opacity without showing what is underneath */
 	/* content: ""; */
@@ -170,11 +172,6 @@
 	/* color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
 	/* fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
 	/* stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
-/* } */
-
-/* :host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] { */
-	/* margin-left: auto; */
-	/* margin-right: 0; */
 /* } */
 
 /* :host>div.options.hidden { */
