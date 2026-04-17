@@ -265,11 +265,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.open = true
 		} else if (this.open && event.key == "Escape") {
 			event.preventDefault()
-			if (this.filter == "") {
-				this.closeMenu()
-			} else {
-				this.resetFilter()
-			}
+			this.filter ? this.resetFilter() : this.closeMenu()
 		} else if (!this.open && (event.key == "Enter" || event.key == " ")) {
 			event.preventDefault()
 			this.openMenu()
