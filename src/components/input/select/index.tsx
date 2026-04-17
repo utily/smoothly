@@ -140,7 +140,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selected = [...this.initialValue]
 		this.displaySelected()
 		this.isDifferentFromInitial = false
-		this.open && this.handleShowOptions()
+		this.open = false
 	}
 
 	@Method()
@@ -201,8 +201,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displaySelected()
 	}
 	@Listen("click", { target: "window" })
-	onWindowClick(event: Event): void {
-		!event.composedPath().includes(this.element) && this.open && this.handleShowOptions()
+	onWindowClick(event: MouseEvent): void {
+		if (this.open && !event.composedPath().includes(this.element)) {
+			this.open = false
+		}
 	}
 	@Listen("smoothlyItemDOMChange")
 	onItemDomChange(e: CustomEvent) {
@@ -239,20 +241,23 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 		this.smoothlySelectOpen.emit(open)
 	}
-	handleShowOptions(event?: Event): void {
+	onClick(event: MouseEvent): void {
 		this.searchElement?.focus()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsElement) &&
 			!event.composedPath().some(e => e == this.toggleElement)
-		const clickedItem = event
+		const itemClicked = event
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		!this.readonly &&
+		if (
+			!this.readonly &&
 			!this.disabled &&
-			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
-			!wasButtonClicked &&
-			(this.open = !this.open)
-		this.filter = ""
+			!(itemClicked && this.items.includes(itemClicked) && this.multiple) &&
+			!wasButtonClicked
+		) {
+			this.open = !this.open
+		}
+		this.resetFilter()
 	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
@@ -261,6 +266,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
 		this.displayElement &&
 			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
+	}
+	resetFilter() {
+		this.searchElement && (this.searchElement.value = "")
+		this.filter = ""
 	}
 	oldOnKeyDown(event: KeyboardEvent) {
 		if (!this.searchDisabled) {
@@ -301,13 +310,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						this.open = false
 						break
 					default:
-						if (event.key == "v" && (event.ctrlKey || event.metaKey)) {
-							// event.preventDefault()
-							// navigator.clipboard.readText().then(text => {
-							// 	console.log("text:", text)
-							// 	this.filter += text
-							// })
-						} else if (event.key.length == 1) {
+						if (event.key.length == 1) {
 							this.filter += event.key
 						}
 						break
@@ -316,20 +319,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				switch (event.key) {
 					case "Enter":
 					case " ":
-						this.handleShowOptions()
+						// this.onClick()
 						break
 					case "ArrowDown":
-						this.handleShowOptions()
+						// this.onClick()
 						this.move(1)
 						break
 					case "ArrowUp":
-						this.handleShowOptions()
+						// this.onClick()
 						this.move(-1)
 						break
 					case "Tab":
 						break
 					default:
-						this.handleShowOptions()
+						// this.onClick()
 						if (event.key.length == 1) {
 							this.filter += event.key
 						}
@@ -341,13 +344,31 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
 		const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-		if (this.open) {
-			if (event.key == "ArrowUp") {
-				event.preventDefault()
-				visibleItems && this.move(-1)
-			} else if (event.key == "ArrowDown") {
-				event.preventDefault()
-				visibleItems && this.move(1)
+
+		if (event.key == "ArrowUp" || event.key == "ArrowDown") {
+			event.preventDefault()
+			visibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
+			if (!this.open) {
+				this.open = true
+			}
+		} else if (this.open && event.key == "Escape") {
+			event.preventDefault()
+			if (this.filter == "") {
+				this.open = false
+			} else {
+				this.resetFilter()
+			}
+		} else if (!this.open && (event.key == "Enter" || event.key == " ")) {
+			event.preventDefault()
+			this.open = true
+		} else if (this.open && event.key == "Enter") {
+			const result = this.items.find(item => item.marked)
+			if (result?.value) {
+				result.selected = !result.selected
+			}
+			if (!this.multiple) {
+				this.open = false
+				this.filter = ""
 			}
 		}
 	}
@@ -388,11 +409,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				// tabIndex={this.disabled ? undefined : 0}
-				// contenteditable={this.disabled ? undefined : true}
-				onPaste={(e: ClipboardEvent) => console.log(e.clipboardData?.getData("text"))}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
-				onClick={(event: Event) => this.handleShowOptions(event)}>
+				onClick={(event: MouseEvent) => this.onClick(event)}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
@@ -417,13 +435,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							disabled={this.searchDisabled}
 							onKeyDown={e => this.onKeyDown(e)}
 							onInput={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
+							onPaste={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
 						/>
 						<smoothly-icon
 							name="backspace-outline"
 							size="small"
 							onClick={e => {
 								e.stopPropagation()
-								this.filter = ""
+								this.resetFilter()
 								this.searchElement?.focus()
 							}}
 						/>
