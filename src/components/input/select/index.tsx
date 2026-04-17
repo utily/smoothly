@@ -391,8 +391,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							!this.multiple && ((this.open = false), this.resetFilter())
 						}}>
 						<slot />
+						{this.addedItems}
 					</div>
-					{this.addedItems}
 				</div>
 			</Host>
 		)
