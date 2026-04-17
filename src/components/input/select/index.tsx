@@ -412,7 +412,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				class={{ "has-value": this.selected.length !== 0, open: this.open }}
+				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
 				onClick={(e: MouseEvent) => (e.stopPropagation(), this.toggle())}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
