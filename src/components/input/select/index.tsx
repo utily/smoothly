@@ -256,18 +256,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displayElement &&
 			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
-	resetFilter() {
-		this.searchElement && (this.searchElement.value = "")
-		this.filter = ""
-	}
-	setFilter(filter: string) {
-		if (filter) {
-			this.filter = filter
-			this.open = true
-		} else {
-			this.resetFilter()
-		}
-	}
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
 		const visibleItems = this.items.some(item => !item.getAttribute("hidden"))
@@ -311,13 +299,29 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			</smoothly-item>
 		)
 	}
-	toggle() {
-		if (!this.readonly && !this.disabled) {
-			this.open = !this.open
+	private resetFilter() {
+		this.searchElement && (this.searchElement.value = "")
+		this.filter = ""
+	}
+	private setFilter(filter: string) {
+		if (filter) {
+			this.filter = filter
+			this.openMenu()
+		} else {
 			this.resetFilter()
-			if (this.open) {
-				this.searchElement?.focus()
-			}
+		}
+	}
+	private openMenu() {
+		this.open = true
+		this.searchElement?.focus()
+	}
+	private closeMenu() {
+		this.open = false
+		this.resetFilter()
+	}
+	private toggleMenu() {
+		if (!this.readonly && !this.disabled) {
+			this.open ? this.closeMenu() : this.openMenu()
 		}
 	}
 
@@ -325,7 +329,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return (
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
-				onClick={(e: MouseEvent) => (e.stopPropagation(), this.toggle())}>
+				onClick={(e: MouseEvent) => (e.stopPropagation(), this.toggleMenu())}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
@@ -334,7 +338,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
-							onClick={e => (e.stopPropagation(), this.toggle())}
+							onClick={e => (e.stopPropagation(), this.toggleMenu())}
 							ref={element => (this.toggleElement = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
@@ -378,7 +382,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						hidden={!this.open}
 						onClick={e => {
 							e.stopPropagation()
-							!this.multiple && ((this.open = false), this.resetFilter())
+							!this.multiple && this.closeMenu()
 						}}>
 						<slot />
 						{this.addedItems}
