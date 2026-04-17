@@ -248,16 +248,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 		this.smoothlySelectOpen.emit(open)
 	}
-	onClick(event: MouseEvent): void {
-		this.searchElement?.focus()
-		const itemClicked = event
-			?.composedPath()
-			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		if (!itemClicked || !this.multiple) {
-			this.open = !this.open
-		}
-		this.resetFilter()
-	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
