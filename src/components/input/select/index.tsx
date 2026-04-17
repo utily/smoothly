@@ -19,7 +19,8 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
-import { MenuHeight, options } from "./options"
+import { layout } from "./layout"
+import { options } from "./options"
 import { scroll } from "./scroll"
 
 @Component({
@@ -56,7 +57,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() clearable = true
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
-	@Prop() menuHeight?: MenuHeight
+	@Prop() menuHeight?: layout.MenuHeight
 	@Prop() required = false
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
@@ -87,11 +88,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.onSelectedChange()
 	}
 	componentDidRender(): void | Promise<void> {
-		this.itemHeight ??= options.firstItemHeight(this.items)
+		this.itemHeight ??= layout.firstItemHeight(this.items)
 		if (this.menuHeight && this.itemHeight) {
-			options.applyMenuHeight(this.element, this.itemHeight, this.menuHeight)
+			layout.applyMenuHeight(this.element, this.itemHeight, this.menuHeight)
 		}
-		options.applyElementHeight(this.element)
+		layout.applyElementHeight(this.element)
 
 		const justOpened = this.open && !this.lastOpen
 		if (justOpened && this.ordered) {
