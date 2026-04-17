@@ -241,20 +241,17 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 		this.smoothlySelectOpen.emit(open)
 	}
+	private isInsideClick(event: MouseEvent, element?: HTMLElement): boolean {
+		return element ? event.composedPath().includes(element) : false
+	}
 	onClick(event: MouseEvent): void {
 		this.searchElement?.focus()
-		const wasButtonClicked =
-			event?.composedPath().some(e => e == this.iconsElement) &&
-			!event.composedPath().some(e => e == this.toggleElement)
+		const wasIconsClicked =
+			this.isInsideClick(event, this.iconsElement) && !this.isInsideClick(event, this.toggleElement)
 		const itemClicked = event
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		if (
-			!this.readonly &&
-			!this.disabled &&
-			!(itemClicked && this.items.includes(itemClicked) && this.multiple) &&
-			!wasButtonClicked
-		) {
+		if ((!itemClicked || !this.multiple) && !wasIconsClicked) {
 			this.open = !this.open
 		}
 		this.resetFilter()
@@ -369,6 +366,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				this.open = false
 				this.resetFilter()
 			}
+		} else if (this.open && event.key == "Tab") {
+			this.open = false
 		}
 	}
 	private scrollToSelected() {
@@ -409,7 +408,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return (
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
-				onClick={(event: MouseEvent) => this.onClick(event)}>
+				onClick={(event: MouseEvent) => !this.readonly && !this.disabled && this.onClick(event)}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
@@ -435,7 +434,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							onKeyDown={e => this.onKeyDown(e)}
 							onInput={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
 							onPaste={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
-							onBlur={() => ((this.open = false), this.resetFilter())}
 						/>
 						<smoothly-icon
 							name="backspace-outline"
