@@ -266,20 +266,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		} else if (this.open && event.key == "Escape") {
 			event.preventDefault()
 			if (this.filter == "") {
-				this.open = false
+				this.closeMenu()
 			} else {
 				this.resetFilter()
 			}
 		} else if (!this.open && (event.key == "Enter" || event.key == " ")) {
 			event.preventDefault()
-			this.open = true
+			this.openMenu()
 		} else if (this.open && event.key == "Enter") {
 			const result = menu.findFirstMarked(this.items)
 			if (result?.value) {
 				result.selected = !result.selected
 			}
 			if (!this.multiple) {
-				this.open = false
+				this.closeMenu()
 				this.resetFilter()
 			}
 		} else if (this.open && event.key == "Tab") {
@@ -311,9 +311,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.resetFilter()
 		}
 	}
-	private openMenu() {
+	private openMenu({ focus }: { focus?: boolean } = {}) {
 		this.open = true
-		this.searchElement?.focus()
+		focus && queueMicrotask(() => this.searchElement?.focus())
 	}
 	private closeMenu() {
 		this.open = false
@@ -321,7 +321,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	private toggleMenu() {
 		if (!this.readonly && !this.disabled) {
-			this.open ? this.closeMenu() : this.openMenu()
+			this.open ? this.closeMenu() : this.openMenu({ focus: true })
 		}
 	}
 
