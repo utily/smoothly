@@ -264,74 +264,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.searchElement && (this.searchElement.value = "")
 		this.filter = ""
 	}
-	oldOnKeyDown(event: KeyboardEvent) {
-		if (!this.searchDisabled) {
-			event.stopPropagation()
-			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey) {
-				event.preventDefault()
-			}
-			if (this.open) {
-				switch (event.key) {
-					case "ArrowUp":
-						visibleItems && this.move(-1)
-						break
-					case "ArrowDown":
-						visibleItems && this.move(1)
-						break
-					case "Escape":
-						if (this.filter == "") {
-							this.open = false
-						} else {
-							this.filter = ""
-						}
-						break
-					case "Backspace":
-						this.filter = event.ctrlKey ? "" : this.filter.slice(0, -1)
-						break
-					case "Enter":
-						const result = this.items.find(item => item.marked)
-						if (result?.value) {
-							result.selected = !result.selected
-						}
-						if (!this.multiple) {
-							this.open = false
-							this.filter = ""
-						}
-						break
-					case "Tab":
-						this.open = false
-						break
-					default:
-						if (event.key.length == 1) {
-							this.filter += event.key
-						}
-						break
-				}
-			} else {
-				switch (event.key) {
-					case "Enter":
-					case " ":
-						// this.onClick()
-						break
-					case "ArrowDown":
-						// this.onClick()
-						this.move(1)
-						break
-					case "ArrowUp":
-						// this.onClick()
-						this.move(-1)
-						break
-					case "Tab":
-						break
-					default:
-						// this.onClick()
-						if (event.key.length == 1) {
-							this.filter += event.key
-						}
-						break
-				}
-			}
+	setFilter(filter: string) {
+		if (filter) {
+			this.filter = filter
+			this.open = true
+		} else {
+			this.resetFilter()
 		}
 	}
 	onKeyDown(event: KeyboardEvent) {
@@ -438,8 +376,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							ref={el => (this.searchElement = el)}
 							disabled={this.searchDisabled}
 							onKeyDown={e => this.onKeyDown(e)}
-							onInput={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
-							onPaste={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
+							onInput={e => (e.stopPropagation(), this.setFilter(this.searchElement?.value ?? ""))}
+							onPaste={e => (e.stopPropagation(), this.setFilter(this.searchElement?.value ?? ""))}
 						/>
 						<smoothly-icon
 							name="backspace-outline"

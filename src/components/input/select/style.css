@@ -95,7 +95,9 @@
 	border-radius: 0 0 var(--smoothly-input-border-radius) var(--smoothly-input-border-radius);
 	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
 	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
-	outline: 2px solid red;
+}
+:host:not(.open)>.dropdown {
+	border: 0;
 }
 :host[looks="grid"]>.dropdown,
 :host[looks=border]>.dropdown,
@@ -115,6 +117,14 @@
 	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
+:host:not(.has-filter)>.dropdown>.search {
+	/* hide search */
+	/* search cant be display: none, since it is the focus element */
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
 :host>.dropdown>.search::before {
 	/* search have opacity without showing what is underneath */
 	content: "";
@@ -126,6 +136,8 @@
 :host>.dropdown>.search>.search-input {
 	width: 100%;
 	background-color: transparent;
+	border: none;
+	outline: none;
 }
 :host>.dropdown>.search>smoothly-icon[name="search-outline"],
 :host>.dropdown>.search>smoothly-icon[name="backspace-outline"] {
