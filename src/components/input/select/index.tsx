@@ -37,7 +37,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private displayElement?: HTMLElement
 	private iconsElement?: HTMLElement
 	private toggleElement?: HTMLElement
-	private dropdownElement?: HTMLDivElement
+	private dropdownElement?: HTMLElement
 	private searchElement?: HTMLInputElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
