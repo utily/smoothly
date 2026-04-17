@@ -240,7 +240,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onClosed(open: boolean, before: boolean): void {
 		this.lastOpen = before
 		if (!open) {
-			const markedItem = this.items.find(item => item.marked)
+			const markedItem = options.findFirstMarked(this.items)
 			if (markedItem) {
 				markedItem.marked = false
 			}
@@ -295,7 +295,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			event.preventDefault()
 			this.open = true
 		} else if (this.open && event.key == "Enter") {
-			const result = this.items.find(item => item.marked)
+			const result = options.findFirstMarked(this.items)
 			if (result?.value) {
 				result.selected = !result.selected
 			}
