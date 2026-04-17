@@ -31,11 +31,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
-	private displaySelectedElement?: HTMLElement
-	private searchElement?: HTMLSpanElement
-	private iconsDiv?: HTMLElement
-	private toggle?: HTMLElement
+	private displayElement?: HTMLElement
+	private iconsElement?: HTMLElement
+	private toggleElement?: HTMLElement
 	private dropdownElement?: HTMLDivElement
+	private searchElement?: HTMLInputElement
 	private optionsElement?: HTMLDivElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
@@ -149,8 +149,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (this.clearable) {
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
-			if (this.displaySelectedElement) {
-				this.displaySelectedElement.innerHTML = this.placeholder ?? ""
+			if (this.displayElement) {
+				this.displayElement.innerHTML = this.placeholder ?? ""
 			}
 		}
 	}
@@ -189,7 +189,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (
 			event.target &&
 			(("name" in event.target && event.target.name !== this.name) ||
-				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
+				(event.composedPath().some(e => e == this.iconsElement) &&
+					!event.composedPath().some(e => e == this.toggleElement)))
 		) {
 			event.stopPropagation()
 		} else if (Item.Element.is(event.target)) {
@@ -242,7 +243,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	handleShowOptions(event?: Event): void {
 		this.searchElement?.focus()
 		const wasButtonClicked =
-			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
+			event?.composedPath().some(e => e == this.iconsElement) &&
+			!event.composedPath().some(e => e == this.toggleElement)
 		const clickedItem = event
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
@@ -258,8 +260,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	displaySelected(): void {
 		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
-		this.displaySelectedElement &&
-			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
+		this.displayElement &&
+			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
 	// @Listen("keydown")
 	/* onKeyDown(event: KeyboardEvent) {
@@ -380,15 +382,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				onPaste={(e: ClipboardEvent) => console.log(e.clipboardData?.getData("text"))}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
+				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons" ref={element => (this.iconsDiv = element)}>
+				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
-							ref={element => (this.toggle = element)}
+							ref={element => (this.toggleElement = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
 						/>
@@ -398,7 +400,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				<div class="dropdown" ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
 					<div class="search">
 						<smoothly-icon name="search-outline" size="small" />
-						<input class="search-input" ref={el => (this.searchElement = el)} />
+						<input
+							class="search-input"
+							ref={el => (this.searchElement = el)}
+							onInput={() => (this.filter = this.searchElement?.value ?? "")}
+						/>
 						<smoothly-icon
 							name="backspace-outline"
 							size="small"
