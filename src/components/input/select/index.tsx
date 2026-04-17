@@ -19,6 +19,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { MenuHeight, options } from "./options"
 import { scroll } from "./scroll"
 
 @Component({
@@ -55,7 +56,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() clearable = true
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
-	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
+	@Prop() menuHeight?: MenuHeight
 	@Prop() required = false
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
@@ -86,19 +87,22 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.onSelectedChange()
 	}
 	componentDidRender(): void | Promise<void> {
-		this.itemHeight === undefined && (this.itemHeight = this.items.find(item => item.clientHeight > 0)?.clientHeight)
+		this.itemHeight ??= options.firstItemHeight(this.items)
 		if (this.menuHeight && this.itemHeight) {
-			this.element?.style.setProperty(
-				"--menu-height",
-				!this.menuHeight.endsWith("items") || this.items.length == 0
-					? this.menuHeight
-					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
-			)
+			options.applyMenuHeight(this.element, this.itemHeight, this.menuHeight)
 		}
-		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
+		options.applyElementHeight(this.element)
 
-		if (this.ordered && !this.multiple && this.open && !this.lastOpen) {
-			scroll.centerInView(this.dropdownElement, this.selected[0], "smooth")
+		const justOpened = this.open && !this.lastOpen
+		if (justOpened && this.ordered) {
+			this.scrollToSelected()
+		}
+	}
+	private scrollToSelected() {
+		const selectedItem = options.findFirstSelected(this.items)
+		if (selectedItem) {
+			options.markOnly(this.items, selectedItem)
+			scroll.centerInView(this.dropdownElement, selectedItem, "instant")
 		}
 	}
 	async disconnectedCallback() {
@@ -303,25 +307,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.open = false
 		}
 	}
-	private scrollToSelected() {
-		const selectedItem = this.items.find(item => item.selected)
-		if (selectedItem) {
-			this.items.map(item => (item.marked = false))
-			selectedItem.marked = true
-			scroll.centerInView(this.dropdownElement, selectedItem, "instant")
-		}
-	}
 	private move(direction: -1 | 1): void {
-		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
-		let markedIndex = selectableItems.findIndex(item => item.marked)
-		if (markedIndex == -1) {
-			markedIndex = 0
-		} else {
-			selectableItems[markedIndex].marked = false
-			markedIndex = (markedIndex + direction + selectableItems.length) % selectableItems.length
-		}
-		selectableItems[markedIndex].marked = true
-		scroll.centerInView(this.dropdownElement, selectableItems[markedIndex], "smooth")
+		const { current, next } = options.next(this.items, direction)
+		current && (current.marked = false)
+		next.marked = true
+		scroll.centerInView(this.dropdownElement, next, "smooth")
 	}
 	private addItem() {
 		this.addedItems = this.addedItems.concat(
