@@ -263,8 +263,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displayElement &&
 			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
-	// @Listen("keydown")
-	/* onKeyDown(event: KeyboardEvent) {
+	oldOnKeyDown(event: KeyboardEvent) {
 		if (!this.searchDisabled) {
 			event.stopPropagation()
 			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
@@ -339,7 +338,20 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				}
 			}
 		}
-	} */
+	}
+	onKeyDown(event: KeyboardEvent) {
+		event.stopPropagation()
+		const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
+		if (this.open) {
+			if (event.key == "ArrowUp") {
+				event.preventDefault()
+				visibleItems && this.move(-1)
+			} else if (event.key == "ArrowDown") {
+				event.preventDefault()
+				visibleItems && this.move(1)
+			}
+		}
+	}
 	private scrollToSelected() {
 		const selectedItem = this.items.find(item => item.selected)
 		if (selectedItem) {
@@ -361,8 +373,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.scrollTo(selectableItems[markedIndex], "smooth")
 	}
 	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
-		this.optionsElement?.scrollTo({
-			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsElement?.clientHeight ?? 0) / 2,
+		this.dropdownElement?.scrollTo({
+			top: item.offsetTop + item.offsetHeight / 2 - (this.dropdownElement?.clientHeight ?? 0) / 2,
 			behavior,
 		})
 	}
@@ -403,7 +415,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						<input
 							class="search-input"
 							ref={el => (this.searchElement = el)}
-							onInput={() => (this.filter = this.searchElement?.value ?? "")}
+							disabled={this.searchDisabled}
+							onKeyDown={e => this.onKeyDown(e)}
+							onInput={e => (e.stopPropagation(), (this.filter = this.searchElement?.value ?? ""))}
 						/>
 						<smoothly-icon
 							name="backspace-outline"
