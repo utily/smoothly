@@ -19,6 +19,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { scroll } from "./scroll"
 
 @Component({
 	tag: "smoothly-input-select",
@@ -97,7 +98,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
 
 		if (this.ordered && !this.multiple && this.open && !this.lastOpen) {
-			this.scrollToSelected()
+			scroll.centerInView(this.dropdownElement, this.selected[0], "smooth")
 		}
 	}
 	async disconnectedCallback() {
@@ -307,7 +308,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (selectedItem) {
 			this.items.map(item => (item.marked = false))
 			selectedItem.marked = true
-			this.scrollTo(selectedItem, "instant")
+			scroll.centerInView(this.dropdownElement, selectedItem, "instant")
 		}
 	}
 	private move(direction: -1 | 1): void {
@@ -320,13 +321,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			markedIndex = (markedIndex + direction + selectableItems.length) % selectableItems.length
 		}
 		selectableItems[markedIndex].marked = true
-		this.scrollTo(selectableItems[markedIndex], "smooth")
-	}
-	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
-		this.dropdownElement?.scrollTo({
-			top: item.offsetTop + item.offsetHeight / 2 - (this.dropdownElement?.clientHeight ?? 0) / 2,
-			behavior,
-		})
+		scroll.centerInView(this.dropdownElement, selectableItems[markedIndex], "smooth")
 	}
 	private addItem() {
 		this.addedItems = this.addedItems.concat(
