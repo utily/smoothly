@@ -258,10 +258,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
-		const visibleItems = this.items.some(item => !item.getAttribute("hidden"))
+		const hasVisibleItems = menu.hasVisibleItems(this.items)
 		if (event.key == "ArrowUp" || event.key == "ArrowDown") {
 			event.preventDefault()
-			visibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
+			hasVisibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
 			this.open = true
 		} else if (this.open && event.key == "Escape") {
 			event.preventDefault()

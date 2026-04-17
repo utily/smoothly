@@ -13,6 +13,9 @@ export namespace menu {
 		}
 		return { current: selectable[currentIndex], next: selectable[index] }
 	}
+	export function hasVisibleItems(items: HTMLSmoothlyItemElement[]): boolean {
+		return items.some(item => !item.getAttribute("hidden"))
+	}
 	export function markOnly(items: HTMLSmoothlyItemElement[], item: HTMLSmoothlyItemElement): void {
 		items.map(i => (i.marked = i === item))
 	}
