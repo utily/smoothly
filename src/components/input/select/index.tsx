@@ -32,10 +32,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
 	private displaySelectedElement?: HTMLElement
-	private inputerElement?: HTMLSpanElement
+	private searchElement?: HTMLSpanElement
 	private iconsDiv?: HTMLElement
 	private toggle?: HTMLElement
-	private optionsDiv?: HTMLDivElement
+	private dropdownElement?: HTMLDivElement
+	private optionsElement?: HTMLDivElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -239,7 +240,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.smoothlySelectOpen.emit(open)
 	}
 	handleShowOptions(event?: Event): void {
-		this.inputerElement?.focus()
+		this.searchElement?.focus()
 		const wasButtonClicked =
 			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
 		const clickedItem = event
@@ -358,8 +359,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.scrollTo(selectableItems[markedIndex], "smooth")
 	}
 	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
-		this.optionsDiv?.scrollTo({
-			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsDiv?.clientHeight ?? 0) / 2,
+		this.optionsElement?.scrollTo({
+			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsElement?.clientHeight ?? 0) / 2,
 			behavior,
 		})
 	}
@@ -379,23 +380,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				onPaste={(e: ClipboardEvent) => console.log(e.clipboardData?.getData("text"))}
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
 				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<span
-					ref={el => (this.inputerElement ??= el)}
-					class="search-inputer"
-					tabIndex={this.disabled ? undefined : 0}
-					contenteditable={this.disabled ? undefined : true}
-					onInput={e => console.log("span input", (e.target as HTMLSpanElement).innerText)}
-					onPaste={(e: ClipboardEvent) => {
-						e.preventDefault()
-						const text = e.clipboardData?.getData("text") ?? ""
-						console.log("span paste", text)
-						const selection = window.getSelection()
-						if (selection?.rangeCount) {
-							selection.deleteFromDocument()
-							selection.getRangeAt(0).insertNode(document.createTextNode(text))
-							selection.collapseToEnd()
-						}
-					}}></span>
 				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
 					{this.placeholder}
 				</div>
@@ -411,33 +395,33 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 					)}
 				</div>
 				<slot name="label" />
-				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
-					{this.filter.length > 0 && (
-						<div class="search-preview">
-							<smoothly-icon name="search-outline" size="small" />
-							<span class="search-filter">{this.filter}</span>
+				<div class={{ hidden: !this.open, dropdown: true }} ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
+					<div class="search">
+						<smoothly-icon name="search-outline" size="small" />
+						<input class="search-input" ref={el => (this.searchElement = el)} />
+						<smoothly-icon
+							name="backspace-outline"
+							size="small"
+							onClick={e => {
+								e.stopPropagation()
+								this.filter = ""
+								this.searchElement?.focus()
+							}}
+						/>
+						{this.mutable && (
 							<smoothly-icon
-								name="backspace-outline"
+								name="add"
 								size="small"
 								onClick={e => {
 									e.stopPropagation()
-									this.filter = ""
-									this.element.focus()
+									this.addItem()
 								}}
 							/>
-							{this.mutable && (
-								<smoothly-icon
-									name="add"
-									size="small"
-									onClick={e => {
-										e.stopPropagation()
-										this.addItem()
-									}}
-								/>
-							)}
-						</div>
-					)}
-					<slot />
+						)}
+					</div>
+					<div class="options" hidden={!this.open} ref={(el: HTMLDivElement) => (this.optionsElement = el)}>
+						<slot />
+					</div>
 					{this.addedItems}
 				</div>
 			</Host>

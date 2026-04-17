@@ -16,12 +16,8 @@
 	border-radius: var(--smoothly-input-border-radius) var(--smoothly-input-border-radius) 0 0;
 }
 
-:host.icon {
-	width: fit-content;
-	flex-direction: column;
-}
 
-:host>div.select-display {
+:host>.select-display {
 	box-sizing: border-box;
 	display: flex;
 	padding: var(--input-value-padding-top) .8rem var(--input-value-padding-bottom) 0;
@@ -31,17 +27,17 @@
 	gap: 1rem;
 	text-overflow: ellipsis;
 }
-:host:not([readonly]):not([disabled])>div.select-display {
+:host:not([readonly]):not([disabled])>.select-display {
 	cursor: pointer;
 }
 
-:host:not(:has([slot=label]))>div.select-display,
-:host:not([show-label])>div.select-display  {
+:host:not(:has([slot=label]))>.select-display,
+:host:not([show-label])>.select-display  {
 	padding: .6rem .8rem .6rem 0;
 	align-items: center;
 }
 
-:host>div.select-display smoothly-icon {
+:host>.select-display smoothly-icon {
 	color: rgb(var(--smoothly-input-foreground));
 	fill: rgb(var(--smoothly-input-foreground));
 	stroke: rgb(var(--smoothly-input-foreground));
@@ -77,111 +73,99 @@
 	display: none
 }
 
-:host .label {
-	left: .5rem;
-}
 
-:host.has-value:has([slot=label]:not(:empty))>div.select-display,
-:host:not(.has-value)[placeholder]>div.select-display {
+:host.has-value:has([slot=label]:not(:empty))>.select-display,
+:host:not(.has-value)[placeholder]>.select-display {
 	overflow: hidden;
 	width: 100%;
 }
 
-:host>.options {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: var(--element-height);
-	z-index: 20;
-	max-height: var(--menu-height, unset);
-	overflow-x: hidden;
-	overflow-y: auto;
-	background-color: rgb(var(--smoothly-input-background));
-	left: 0;
-	right: 0;
-	border-radius: 0 0 var(--smoothly-input-border-radius) var(--smoothly-input-border-radius);
-	min-width: fit-content;
-	border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px;
-	border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px;
-}
-:host[looks="grid"]>div.options,
-:host[looks=border]>div.options,
-:host[looks="transparent"]>div.options {
-	left: -1px;
-	right: -1px;
-}
-:host[multiple]>div.options>smoothly-item::before {
-	content: "";
-	display: inline-block;
-	width: 1rem;
-	height: 1rem;
-	margin-right: 0.5rem;
-	border: 1px solid rgb(var(--smoothly-input-foreground));
-	border-radius: 0.15rem;
-	vertical-align: middle;
-}
-:host[multiple]>div.options>smoothly-item[selected]::after {
-	content: "✔";
-	position: absolute;
-	left: 0.65rem; 
-	color: rgb(var(--smoothly-item-selected-foreground))
-}
-:host[multiple]>div.options>smoothly-item[selected]::before {
-	border: 1px solid rgb(var(--smoothly-item-selected-foreground));
-}
-:host[multiple]>div.options>smoothly-item[selected]::after {
-	color: rgb(var(--smoothly-item-selected-foreground));
-}
-:host[multiple]>div.options>smoothly-item:hover::before {
-	border: 1px solid rgb(var(--smoothly-item-hover-foreground));
-}
-:host[multiple]>div.options>smoothly-item:hover::after {
-	color: rgb(var(--smoothly-item-hover-foreground));
-}
-:host>div.options::slotted(smoothly-item),
-:host>div.options::slotted(div.search-preview) {
-	padding: .7rem .7rem .7rem .25rem;
-}
+/* :host>.options { */
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* position: absolute; */
+	/* top: var(--element-height); */
+	/* z-index: 20; */
+	/* max-height: var(--menu-height, unset); */
+	/* overflow-x: hidden; */
+	/* overflow-y: auto; */
+	/* background-color: rgb(var(--smoothly-input-background)); */
+	/* left: 0; */
+	/* right: 0; */
+	/* border-radius: 0 0 var(--smoothly-input-border-radius) var(--smoothly-input-border-radius); */
+	/* min-width: fit-content; */
+	/* border: rgb(var(--smoothly-input-border, var(--smoothly-color-contrast))) solid 1px; */
+	/* border-top: rgba(var(--smoothly-input-border, var(--smoothly-color-contrast)), .4) solid 1px; */
+/* } */
+/* :host[looks="grid"]>div.options, */
+/* :host[looks=border]>div.options, */
+/* :host[looks="transparent"]>div.options { */
+	/* left: -1px; */
+	/* right: -1px; */
+/* } */
+/* :host[multiple]>div.options>smoothly-item::before { */
+	/* content: ""; */
+	/* display: inline-block; */
+	/* width: 1rem; */
+	/* height: 1rem; */
+	/* margin-right: 0.5rem; */
+	/* border: 1px solid rgb(var(--smoothly-input-foreground)); */
+	/* border-radius: 0.15rem; */
+	/* vertical-align: middle; */
+/* } */
+/* :host[multiple]>div.options>smoothly-item[selected]::after { */
+	/* content: "✔"; */
+	/* position: absolute; */
+	/* left: 0.65rem;  */
+	/* color: rgb(var(--smoothly-item-selected-foreground)) */
+/* } */
+/* :host[multiple]>div.options>smoothly-item[selected]::before { */
+	/* border: 1px solid rgb(var(--smoothly-item-selected-foreground)); */
+/* } */
+/* :host[multiple]>div.options>smoothly-item[selected]::after { */
+	/* color: rgb(var(--smoothly-item-selected-foreground)); */
+/* } */
+/* :host[multiple]>div.options>smoothly-item:hover::before { */
+	/* border: 1px solid rgb(var(--smoothly-item-hover-foreground)); */
+/* } */
+/* :host[multiple]>div.options>smoothly-item:hover::after { */
+	/* color: rgb(var(--smoothly-item-hover-foreground)); */
+/* } */
+/* :host>div.options::slotted(smoothly-item), */
+/* :host>div.options::slotted(div.search-preview) { */
+	/* padding: .7rem .7rem .7rem .25rem; */
+/* } */
 
-:host>div.options::slotted(div.search-preview) {
-	display: flex;
-	position: sticky;
-	top: 0;
-	gap: 1rem;
-	background-color: rgb(var(--smoothly-input-background));
-	color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-}
-:host>div.options::slotted(div.search-preview)::before {
+/* :host>div.options::slotted(div.search-preview) { */
+	/* display: flex; */
+	/* position: sticky; */
+	/* top: 0; */
+	/* gap: 1rem; */
+	/* background-color: rgb(var(--smoothly-input-background)); */
+	/* color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+	/* fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+	/* stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+/* } */
+/* :host>div.options::slotted(div.search-preview)::before { */
 	/* Hack to not make the search-preview have opacity without showing what is underneath */
-	content: "";
-	position: absolute;
-	inset: 0;
-	background-color: rgba(var(--smoothly-primary-tint), 0.5);
-	z-index: -1;
-}
-:host>div.options>div.search-preview>smoothly-icon[name="search-outline"],
-:host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] {
-	color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
-}
+	/* content: ""; */
+	/* position: absolute; */
+	/* inset: 0; */
+	/* background-color: rgba(var(--smoothly-primary-tint), 0.5); */
+	/* z-index: -1; */
+/* } */
+/* :host>div.options>div.search-preview>smoothly-icon[name="search-outline"], */
+/* :host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] { */
+	/* color: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+	/* fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+	/* stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast))); */
+/* } */
 
-:host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] {
-	margin-left: auto;
-	margin-right: 0;
-}
+/* :host>div.options>div.search-preview>smoothly-icon[name="backspace-outline"] { */
+	/* margin-left: auto; */
+	/* margin-right: 0; */
+/* } */
 
-:host>div.options.hidden {
-	display: none;
-}
-
-
-/* ---- */
-:host .search-inputer {
-	outline: 2px solid pink;
-}
-:host .search-inputer:focus {
-	outline: 2px solid red;
-}
+/* :host>div.options.hidden { */
+	/* display: none; */
+/* } */
