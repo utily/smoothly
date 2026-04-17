@@ -258,28 +258,44 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
-		const hasVisibleItems = menu.hasVisibleItems(this.items)
-		if (event.key == "ArrowUp" || event.key == "ArrowDown") {
+		const key = event.key
+		if (key == "ArrowUp" || key == "ArrowDown") {
 			event.preventDefault()
-			hasVisibleItems && this.move(event.key == "ArrowUp" ? -1 : 1)
+			this.handlerNavigate(key)
+		} else if (key == "Escape") {
+			event.preventDefault()
+			this.handleEscape()
+		} else if (key == "Enter") {
+			event.preventDefault()
+			this.handleEnter()
+		} else if (key == " ") {
+			event.preventDefault()
 			this.openMenu()
-		} else if (this.open && event.key == "Escape") {
-			event.preventDefault()
-			this.filter ? this.resetFilter() : this.closeMenu()
-		} else if (!this.open && (event.key == "Enter" || event.key == " ")) {
-			event.preventDefault()
-			this.openMenu()
-		} else if (this.open && event.key == "Enter") {
-			const result = menu.findFirstMarked(this.items)
-			if (result?.value) {
-				result.selected = !result.selected
-			}
-			if (!this.multiple) {
-				this.closeMenu()
-				this.resetFilter()
-			}
-		} else if (this.open && event.key == "Tab") {
-			this.open = false
+		} else if (this.open && key == "Tab") {
+			this.closeMenu()
+		}
+	}
+	private handlerNavigate(key: "ArrowUp" | "ArrowDown") {
+		if (menu.hasVisibleItems(this.items)) {
+			this.move(key == "ArrowUp" ? -1 : 1)
+		}
+		this.openMenu()
+	}
+	private handleEscape() {
+		if (this.filter) {
+			this.resetFilter()
+		} else {
+			this.closeMenu()
+		}
+	}
+	private handleEnter() {
+		const item = menu.findFirstMarked(this.items)
+		if (item?.value) {
+			item.selected = !item.selected
+		}
+		if (!this.multiple) {
+			this.closeMenu()
+			this.resetFilter()
 		}
 	}
 	private move(direction: -1 | 1): void {
