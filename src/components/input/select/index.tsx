@@ -204,6 +204,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onWindowClick(event: MouseEvent): void {
 		if (this.open && !event.composedPath().includes(this.element)) {
 			this.open = false
+			this.resetFilter()
 		}
 	}
 	@Listen("smoothlyItemDOMChange")
@@ -241,17 +242,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 		this.smoothlySelectOpen.emit(open)
 	}
-	private isInsideClick(event: MouseEvent, element?: HTMLElement): boolean {
-		return element ? event.composedPath().includes(element) : false
-	}
 	onClick(event: MouseEvent): void {
 		this.searchElement?.focus()
-		const wasIconsClicked =
-			this.isInsideClick(event, this.iconsElement) && !this.isInsideClick(event, this.toggleElement)
 		const itemClicked = event
 			?.composedPath()
 			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		if ((!itemClicked || !this.multiple) && !wasIconsClicked) {
+		if (!itemClicked || !this.multiple) {
 			this.open = !this.open
 		}
 		this.resetFilter()
@@ -403,20 +399,30 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			</smoothly-item>
 		)
 	}
+	toggle() {
+		if (!this.readonly && !this.disabled) {
+			this.open = !this.open
+			this.resetFilter()
+			if (this.open) {
+				this.searchElement?.focus()
+			}
+		}
+	}
 
 	render(): VNode | VNode[] {
 		return (
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open }}
-				onClick={(event: MouseEvent) => !this.readonly && !this.disabled && this.onClick(event)}>
+				onClick={(e: MouseEvent) => (e.stopPropagation(), this.toggle())}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons" ref={element => (this.iconsElement = element)}>
+				<div class="icons" ref={element => (this.iconsElement = element)} onClick={e => e.stopPropagation()}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
+							onClick={e => (e.stopPropagation(), this.toggle())}
 							ref={element => (this.toggleElement = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
@@ -455,7 +461,13 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							/>
 						)}
 					</div>
-					<div class="options" hidden={!this.open}>
+					<div
+						class="options"
+						hidden={!this.open}
+						onClick={e => {
+							e.stopPropagation()
+							!this.multiple && ((this.open = false), this.resetFilter())
+						}}>
 						<slot />
 					</div>
 					{this.addedItems}
