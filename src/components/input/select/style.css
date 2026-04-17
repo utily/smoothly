@@ -115,6 +115,14 @@
 	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
+:host>.dropdown>.search::before {
+	/* search have opacity without showing what is underneath */
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: rgba(var(--smoothly-primary-tint), 0.5);
+	z-index: -1;
+}
 :host>.dropdown>.search>.search-input {
 	width: 100%;
 
@@ -159,15 +167,6 @@
 /* } */
 /* :host[multiple]>div.options>smoothly-item:hover::after { */
 	/* color: rgb(var(--smoothly-item-hover-foreground)); */
-/* } */
-
-/* :host>div.options::slotted(div.search-preview)::before { */
-	/* Hack to not make the search-preview have opacity without showing what is underneath */
-	/* content: ""; */
-	/* position: absolute; */
-	/* inset: 0; */
-	/* background-color: rgba(var(--smoothly-primary-tint), 0.5); */
-	/* z-index: -1; */
 /* } */
 
 /* :host>div.options.hidden { */
