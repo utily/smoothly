@@ -36,7 +36,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private toggleElement?: HTMLElement
 	private dropdownElement?: HTMLDivElement
 	private searchElement?: HTMLInputElement
-	private optionsElement?: HTMLDivElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -439,7 +438,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 							/>
 						)}
 					</div>
-					<div class="options" hidden={!this.open} ref={(el: HTMLDivElement) => (this.optionsElement = el)}>
+					<div class="options" hidden={!this.open}>
 						<slot />
 					</div>
 					{this.addedItems}
