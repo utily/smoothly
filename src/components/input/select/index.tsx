@@ -209,8 +209,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Listen("click", { target: "window" })
 	onWindowClick(event: MouseEvent): void {
 		if (this.open && !event.composedPath().includes(this.element)) {
-			this.open = false
-			this.resetFilter()
+			this.closeMenu()
 		}
 	}
 	@Listen("smoothlyItemDOMChange")
@@ -336,8 +335,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.open ? this.closeMenu() : this.openMenu({ focus: true })
 		}
 	}
-
-	onClick(e: MouseEvent) {
+	private onClick(e: MouseEvent) {
 		const wasIconsClicked =
 			e.composedPath().includes(this.iconsElement!) && !e.composedPath().includes(this.toggleElement!)
 		const wasSearchClicked = e.composedPath().includes(this.searchElement!)
@@ -348,7 +346,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			this.toggleMenu()
 		}
 	}
-
 	render(): VNode | VNode[] {
 		return (
 			<Host
