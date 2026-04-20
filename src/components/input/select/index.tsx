@@ -148,7 +148,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.isDifferentFromInitial = false
 		this.open = false
 	}
-
 	@Method()
 	async clear(): Promise<void> {
 		if (this.clearable) {
