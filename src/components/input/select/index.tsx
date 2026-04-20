@@ -337,20 +337,31 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		}
 	}
 
+	onClick(e: MouseEvent) {
+		const wasIconsClicked =
+			e.composedPath().includes(this.iconsElement!) && !e.composedPath().includes(this.toggleElement!)
+		const wasSearchClicked = e.composedPath().includes(this.searchElement!)
+		const wasItemClicked = e
+			.composedPath()
+			.find(element => element instanceof HTMLElement && element.tagName === "SMOOTHLY-ITEM")
+		if (!wasIconsClicked && !wasSearchClicked && !(wasItemClicked && this.multiple)) {
+			this.toggleMenu()
+		}
+	}
+
 	render(): VNode | VNode[] {
 		return (
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
-				onClick={(e: MouseEvent) => this.toggleMenu()}>
+				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons" ref={element => (this.iconsElement = element)} onClick={e => e.stopPropagation()}>
+				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
-							onClick={e => (e.stopPropagation(), this.toggleMenu())}
 							ref={element => (this.toggleElement = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
@@ -372,30 +383,14 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						<smoothly-icon
 							name="backspace-outline"
 							size="small"
-							onClick={e => {
-								e.stopPropagation()
+							onClick={() => {
 								this.resetFilter()
 								this.searchElement?.focus()
 							}}
 						/>
-						{this.mutable && (
-							<smoothly-icon
-								name="add"
-								size="small"
-								onClick={e => {
-									e.stopPropagation()
-									this.addItem()
-								}}
-							/>
-						)}
+						{this.mutable && <smoothly-icon name="add" size="small" onClick={() => this.addItem()} />}
 					</div>
-					<div
-						class="menu"
-						hidden={!this.open}
-						onClick={e => {
-							e.stopPropagation()
-							!this.multiple && this.closeMenu()
-						}}>
+					<div class="menu" hidden={!this.open}>
 						<slot />
 						{this.addedItems}
 					</div>
