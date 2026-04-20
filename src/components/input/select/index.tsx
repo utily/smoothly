@@ -146,7 +146,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selected = [...this.initialValue]
 		this.displaySelected()
 		this.isDifferentFromInitial = false
-		this.open = false
+		this.closeMenu()
 	}
 	@Method()
 	async clear(): Promise<void> {
