@@ -19,6 +19,7 @@ import { Input } from "./components/input/Input";
 import { RGB } from "./model/Color/RGB";
 import { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
+import { layout } from "./components/input/select/layout";
 import { SmoothlyTabs } from "./components/tabs";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
 export { FunctionalComponent, VNode } from "@stencil/core";
@@ -34,6 +35,7 @@ export { Input } from "./components/input/Input";
 export { RGB } from "./model/Color/RGB";
 export { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
+export { layout } from "./components/input/select/layout";
 export { SmoothlyTabs } from "./components/tabs";
 export namespace Components {
     interface SmoothlyApp {
@@ -784,7 +786,7 @@ export namespace Components {
         "invalid"?: boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
-        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "menuHeight"?: layout.MenuHeight;
         /**
           * @default false
          */
@@ -3323,7 +3325,7 @@ declare namespace LocalJSX {
          */
         "invalid"?: boolean;
         "looks"?: Looks;
-        "menuHeight"?: `${number}${"items" | "rem" | "px" | "vh"}`;
+        "menuHeight"?: layout.MenuHeight;
         /**
           * @default false
          */
@@ -3996,7 +3998,7 @@ declare namespace LocalJSX {
         "clearable": boolean;
         "defined": boolean;
         "placeholder": string;
-        "menuHeight": `${number}${"items" | "rem" | "px" | "vh"}`;
+        "menuHeight": layout.MenuHeight;
         "required": boolean;
         "searchDisabled": boolean;
         "mutable": boolean;

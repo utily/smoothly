@@ -19,6 +19,9 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { layout } from "./layout"
+import { menu } from "./menu"
+import { scroll } from "./scroll"
 
 @Component({
 	tag: "smoothly-input-select",
@@ -31,10 +34,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
-	private displaySelectedElement?: HTMLElement
-	private iconsDiv?: HTMLElement
-	private toggle?: HTMLElement
-	private optionsDiv?: HTMLDivElement
+	private displayElement?: HTMLElement
+	private iconsElement?: HTMLElement
+	private toggleElement?: HTMLElement
+	private dropdownElement?: HTMLElement
+	private searchElement?: HTMLInputElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
 	@Element() element: HTMLSmoothlyInputSelectElement
@@ -53,7 +57,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() clearable = true
 	@Prop({ mutable: true }) defined = false
 	@Prop({ reflect: true }) placeholder?: string | any
-	@Prop() menuHeight?: `${number}${"items" | "rem" | "px" | "vh"}`
+	@Prop() menuHeight?: layout.MenuHeight
 	@Prop() required = false
 	@Prop() searchDisabled = false
 	@Prop() mutable = false
@@ -84,19 +88,22 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.onSelectedChange()
 	}
 	componentDidRender(): void | Promise<void> {
-		this.itemHeight === undefined && (this.itemHeight = this.items.find(item => item.clientHeight > 0)?.clientHeight)
+		this.itemHeight ??= layout.firstItemHeight(this.items)
 		if (this.menuHeight && this.itemHeight) {
-			this.element?.style.setProperty(
-				"--menu-height",
-				!this.menuHeight.endsWith("items") || this.items.length == 0
-					? this.menuHeight
-					: `${this.itemHeight * +(this.menuHeight.match(/^(\d+(\.\d+)?|\.\d+)/g)?.[0] ?? "10")}px`
-			)
+			layout.applyMenuHeight(this.element, this.itemHeight, this.menuHeight)
 		}
-		this.element?.style.setProperty("--element-height", `${this.element.clientHeight}px`)
+		layout.applyElementHeight(this.element)
 
-		if (this.ordered && !this.multiple && this.open && !this.lastOpen) {
+		const justOpened = this.open && !this.lastOpen
+		if (justOpened && this.ordered) {
 			this.scrollToSelected()
+		}
+	}
+	private scrollToSelected() {
+		const selectedItem = menu.findFirstSelected(this.items)
+		if (selectedItem) {
+			menu.markOnly(this.items, selectedItem)
+			scroll.centerInView(this.dropdownElement, selectedItem, "instant")
 		}
 	}
 	async disconnectedCallback() {
@@ -139,16 +146,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.selected = [...this.initialValue]
 		this.displaySelected()
 		this.isDifferentFromInitial = false
-		this.open && this.handleShowOptions()
+		this.closeMenu()
 	}
-
 	@Method()
 	async clear(): Promise<void> {
 		if (this.clearable) {
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
-			if (this.displaySelectedElement) {
-				this.displaySelectedElement.innerHTML = this.placeholder ?? ""
+			if (this.displayElement) {
+				this.displayElement.innerHTML = this.placeholder ?? ""
 			}
 		}
 	}
@@ -184,11 +190,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
-		if (
-			event.target &&
-			(("name" in event.target && event.target.name !== this.name) ||
-				(event.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)))
-		) {
+		const fromSelf = event.target && "name" in event.target && event.target.name !== this.name
+		const fromEndSlot = event.composedPath().some(e => e == this.iconsElement)
+		if (fromSelf || fromEndSlot) {
 			event.stopPropagation()
 		} else if (Item.Element.is(event.target)) {
 			event.stopPropagation()
@@ -199,8 +203,10 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		this.displaySelected()
 	}
 	@Listen("click", { target: "window" })
-	onWindowClick(event: Event): void {
-		!event.composedPath().includes(this.element) && this.open && this.handleShowOptions()
+	onWindowClick(event: MouseEvent): void {
+		if (this.open && !event.composedPath().includes(this.element)) {
+			this.closeMenu()
+		}
 	}
 	@Listen("smoothlyItemDOMChange")
 	onItemDomChange(e: CustomEvent) {
@@ -230,130 +236,68 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	onClosed(open: boolean, before: boolean): void {
 		this.lastOpen = before
 		if (!open) {
-			const markedItem = this.items.find(item => item.marked)
+			const markedItem = menu.findFirstMarked(this.items)
 			if (markedItem) {
 				markedItem.marked = false
 			}
 		}
 		this.smoothlySelectOpen.emit(open)
 	}
-	handleShowOptions(event?: Event): void {
-		const wasButtonClicked =
-			event?.composedPath().some(e => e == this.iconsDiv) && !event.composedPath().some(e => e == this.toggle)
-		const clickedItem = event
-			?.composedPath()
-			.find((el): el is HTMLSmoothlyItemElement => "tagName" in el && el.tagName == "SMOOTHLY-ITEM")
-		!this.readonly &&
-			!this.disabled &&
-			!(clickedItem && this.items.includes(clickedItem) && this.multiple) &&
-			!wasButtonClicked &&
-			(this.open = !this.open)
-		this.filter = ""
-	}
 	areValuesEqual(selected: HTMLSmoothlyItemElement[], initialValue: HTMLSmoothlyItemElement[]): boolean {
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
 	displaySelected(): void {
 		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
-		this.displaySelectedElement &&
-			(this.displaySelectedElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
+		this.displayElement &&
+			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
 	}
-	@Listen("keydown")
 	onKeyDown(event: KeyboardEvent) {
-		if (!this.searchDisabled) {
-			event.stopPropagation()
-			const visibleItems = this.items.some(item => item.getAttribute("hidden") === null)
-			if (event.key != "Tab" && !event.ctrlKey && !event.metaKey) {
-				event.preventDefault()
-			}
-			if (this.open) {
-				switch (event.key) {
-					case "ArrowUp":
-						visibleItems && this.move(-1)
-						break
-					case "ArrowDown":
-						visibleItems && this.move(1)
-						break
-					case "Escape":
-						if (this.filter == "") {
-							this.open = false
-						} else {
-							this.filter = ""
-						}
-						break
-					case "Backspace":
-						this.filter = event.ctrlKey ? "" : this.filter.slice(0, -1)
-						break
-					case "Enter":
-						const result = this.items.find(item => item.marked)
-						if (result?.value) {
-							result.selected = !result.selected
-						}
-						if (!this.multiple) {
-							this.open = false
-							this.filter = ""
-						}
-						break
-					case "Tab":
-						this.open = false
-						break
-					default:
-						if (event.key.length == 1) {
-							this.filter += event.key
-						}
-						break
-				}
-			} else {
-				switch (event.key) {
-					case "Enter":
-					case " ":
-						this.handleShowOptions()
-						break
-					case "ArrowDown":
-						this.handleShowOptions()
-						this.move(1)
-						break
-					case "ArrowUp":
-						this.handleShowOptions()
-						this.move(-1)
-						break
-					case "Tab":
-						break
-					default:
-						this.handleShowOptions()
-						if (event.key.length == 1) {
-							this.filter += event.key
-						}
-						break
-				}
-			}
+		event.stopPropagation()
+		const key = event.key
+		if (key == "ArrowUp" || key == "ArrowDown") {
+			event.preventDefault()
+			this.handlerNavigate(key)
+		} else if (key == "Escape") {
+			event.preventDefault()
+			this.handleEscape()
+		} else if (key == "Enter") {
+			event.preventDefault()
+			this.handleEnter()
+		} else if (key == " ") {
+			event.preventDefault()
+			this.openMenu()
+		} else if (this.open && key == "Tab") {
+			this.closeMenu()
 		}
 	}
-	private scrollToSelected() {
-		const selectedItem = this.items.find(item => item.selected)
-		if (selectedItem) {
-			this.items.map(item => (item.marked = false))
-			selectedItem.marked = true
-			this.scrollTo(selectedItem, "instant")
+	private handlerNavigate(key: "ArrowUp" | "ArrowDown") {
+		if (menu.hasVisibleItems(this.items)) {
+			this.move(key == "ArrowUp" ? -1 : 1)
+		}
+		this.openMenu()
+	}
+	private handleEscape() {
+		if (this.filter) {
+			this.resetFilter()
+		} else {
+			this.closeMenu()
+		}
+	}
+	private handleEnter() {
+		const item = menu.findFirstMarked(this.items)
+		if (item?.value) {
+			item.selected = !item.selected
+		}
+		if (!this.multiple) {
+			this.closeMenu()
+			this.resetFilter()
 		}
 	}
 	private move(direction: -1 | 1): void {
-		const selectableItems = this.items.filter(item => !item.hidden && !item.disabled)
-		let markedIndex = selectableItems.findIndex(item => item.marked)
-		if (markedIndex == -1) {
-			markedIndex = 0
-		} else {
-			selectableItems[markedIndex].marked = false
-			markedIndex = (markedIndex + direction + selectableItems.length) % selectableItems.length
-		}
-		selectableItems[markedIndex].marked = true
-		this.scrollTo(selectableItems[markedIndex], "smooth")
-	}
-	private scrollTo(item: HTMLSmoothlyItemElement, behavior?: "instant" | "smooth") {
-		this.optionsDiv?.scrollTo({
-			top: item.offsetTop + item.offsetHeight / 2 - (this.optionsDiv?.clientHeight ?? 0) / 2,
-			behavior,
-		})
+		const { current, next } = menu.next(this.items, direction)
+		current && (current.marked = false)
+		next.marked = true
+		scroll.centerInView(this.dropdownElement, next, "smooth")
 	}
 	private addItem() {
 		this.addedItems = this.addedItems.concat(
@@ -362,56 +306,87 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			</smoothly-item>
 		)
 	}
-
+	private resetFilter() {
+		this.searchElement && (this.searchElement.value = "")
+		this.filter = ""
+	}
+	private setFilter(filter: string) {
+		if (filter) {
+			this.filter = filter
+			this.openMenu()
+		} else {
+			this.resetFilter()
+		}
+	}
+	private openMenu({ focus }: { focus?: boolean } = {}) {
+		this.open = true
+		focus && queueMicrotask(() => this.searchElement?.focus())
+	}
+	private closeMenu() {
+		this.open = false
+		this.resetFilter()
+	}
+	private toggleMenu() {
+		if (!this.readonly && !this.disabled) {
+			this.open ? this.closeMenu() : this.openMenu({ focus: true })
+		}
+	}
+	private onClick(e: MouseEvent) {
+		const wasIconsClicked =
+			e.composedPath().includes(this.iconsElement!) && !e.composedPath().includes(this.toggleElement!)
+		const wasSearchClicked = e.composedPath().includes(this.searchElement!)
+		const wasItemClicked = e
+			.composedPath()
+			.find(element => element instanceof HTMLElement && element.tagName === "SMOOTHLY-ITEM")
+		if (!wasIconsClicked && !wasSearchClicked && !(wasItemClicked && this.multiple)) {
+			this.toggleMenu()
+		}
+	}
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				tabIndex={this.disabled ? undefined : 0}
-				class={{ "has-value": this.selected.length !== 0, open: this.open }}
-				onClick={(event: Event) => this.handleShowOptions(event)}>
-				<div class="select-display" ref={element => (this.displaySelectedElement = element)}>
+				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
+				onClick={(e: MouseEvent) => this.onClick(e)}>
+				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>
-				<div class="icons" ref={element => (this.iconsDiv = element)}>
+				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
 					<slot name="end" />
 					{this.looks == "border" && !this.readonly && (
 						<smoothly-icon
-							ref={element => (this.toggle = element)}
+							ref={element => (this.toggleElement = element)}
 							size="tiny"
 							name={this.open ? "caret-down-outline" : "caret-forward-outline"}
 						/>
 					)}
 				</div>
 				<slot name="label" />
-				<div class={{ hidden: !this.open, options: true }} ref={(el: HTMLDivElement) => (this.optionsDiv = el)}>
-					{this.filter.length > 0 && (
-						<div class="search-preview">
-							<smoothly-icon name="search-outline" size="small" />
-							{this.filter}
-							<smoothly-icon
-								name="backspace-outline"
-								size="small"
-								onClick={e => {
-									e.stopPropagation()
-									this.filter = ""
-									this.element.focus()
-								}}
-							/>
-							{this.mutable && (
-								<smoothly-icon
-									name="add"
-									size="small"
-									onClick={e => {
-										e.stopPropagation()
-										this.addItem()
-									}}
-								/>
-							)}
-						</div>
-					)}
-					<slot />
-					{this.addedItems}
+				<div class="dropdown" ref={(el: HTMLDivElement) => (this.dropdownElement = el)}>
+					<div class="search">
+						<smoothly-icon name="search-outline" size="small" />
+						<input
+							class="search-input"
+							ref={el => (this.searchElement = el)}
+							disabled={this.searchDisabled}
+							onKeyDown={e => this.onKeyDown(e)}
+							onInput={e => (e.stopPropagation(), this.setFilter(this.searchElement?.value ?? ""))}
+							onPaste={e => (e.stopPropagation(), this.setFilter(this.searchElement?.value ?? ""))}
+						/>
+						<smoothly-icon
+							name="backspace-outline"
+							size="small"
+							onClick={() => {
+								this.resetFilter()
+								this.searchElement?.focus()
+							}}
+						/>
+						{this.mutable && <smoothly-icon name="add" size="small" onClick={() => this.addItem()} />}
+					</div>
+					<div class="menu" hidden={!this.open}>
+						<slot />
+						{this.addedItems}
+					</div>
 				</div>
 			</Host>
 		)
