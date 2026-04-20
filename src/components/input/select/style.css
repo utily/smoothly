@@ -147,40 +147,40 @@
 }
 
 
-/* --- old options styles - now called menu --- */
+/* --- multiple options --- */
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item) {
+	position: relative;
+}
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item::before) {
+	content: "";
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	margin-right: 0.5rem;
+	border: 1px solid rgb(var(--smoothly-input-foreground));
+	border-radius: 0.15rem;
+	vertical-align: middle;
+}
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item[selected]::before) {
+	border-color: rgb(var(--smoothly-item-selected-foreground));
+}
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item:hover::before) {
+	border: 1px solid rgb(var(--smoothly-item-hover-foreground));
+}
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item[selected]::after) {
+	content: "✔";
+	position: absolute;
+	left: 0.65rem; 
+	color: rgb(var(--smoothly-item-selected-foreground));
+}
+:host([multiple])::slotted(.dropdown>.menu>smoothly-item:hover::after) {
+	color: rgb(var(--smoothly-item-hover-foreground));
+}
+:host>.dropdown {
+	min-width: fit-content;
+}
+:host>.dropdown>.menu[hidden] {
+	display: none;
+}
 
-/* :host>.options { */
-	/* min-width: fit-content; */
-/* } */
-/* :host[multiple]>div.options>smoothly-item::before { */
-	/* content: ""; */
-	/* display: inline-block; */
-	/* width: 1rem; */
-	/* height: 1rem; */
-	/* margin-right: 0.5rem; */
-	/* border: 1px solid rgb(var(--smoothly-input-foreground)); */
-	/* border-radius: 0.15rem; */
-	/* vertical-align: middle; */
-/* } */
-/* :host[multiple]>div.options>smoothly-item[selected]::after { */
-	/* content: "✔"; */
-	/* position: absolute; */
-	/* left: 0.65rem;  */
-	/* color: rgb(var(--smoothly-item-selected-foreground)) */
-/* } */
-/* :host[multiple]>div.options>smoothly-item[selected]::before { */
-	/* border: 1px solid rgb(var(--smoothly-item-selected-foreground)); */
-/* } */
-/* :host[multiple]>div.options>smoothly-item[selected]::after { */
-	/* color: rgb(var(--smoothly-item-selected-foreground)); */
-/* } */
-/* :host[multiple]>div.options>smoothly-item:hover::before { */
-	/* border: 1px solid rgb(var(--smoothly-item-hover-foreground)); */
-/* } */
-/* :host[multiple]>div.options>smoothly-item:hover::after { */
-	/* color: rgb(var(--smoothly-item-hover-foreground)); */
-/* } */
 
-/* :host>div.options.hidden { */
-	/* display: none; */
-/* } */

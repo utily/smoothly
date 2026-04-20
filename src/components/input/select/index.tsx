@@ -341,7 +341,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return (
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
-				onClick={(e: MouseEvent) => (e.stopPropagation(), this.toggleMenu())}>
+				onClick={(e: MouseEvent) => this.toggleMenu()}>
 				<div class="select-display" ref={element => (this.displayElement = element)}>
 					{this.placeholder}
 				</div>

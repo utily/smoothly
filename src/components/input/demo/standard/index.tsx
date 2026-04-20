@@ -104,7 +104,8 @@ export class SmoothlyInputDemoStandard {
 						name="month"
 						color={this.options.color}
 						looks={this.options.looks}
-						menuHeight="6items"
+						multiple
+						menuHeight="6.7items"
 						readonly={this.options.readonly}
 						disabled={this.options.disabled}
 						invalid={this.options.invalid}
