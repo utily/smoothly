@@ -191,12 +191,9 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	}
 	@Listen("smoothlyInputLoad")
 	async smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputSelect) => void>): Promise<void> {
-		if (
-			event.target &&
-			(("name" in event.target && event.target.name !== this.name) ||
-				(event.composedPath().some(e => e == this.iconsElement) &&
-					!event.composedPath().some(e => e == this.toggleElement)))
-		) {
+		const fromSelf = event.target && "name" in event.target && event.target.name !== this.name
+		const fromEndSlot = event.composedPath().some(e => e == this.iconsElement)
+		if (fromSelf || fromEndSlot) {
 			event.stopPropagation()
 		} else if (Item.Element.is(event.target)) {
 			event.stopPropagation()
