@@ -12,6 +12,7 @@ export class SmoothlyIconDemo {
 	@State() props: {
 		color?: Color
 		customColor?: string
+		customBackground?: string
 		fill?: Fill
 		flip?: "x" | "y"
 		size?: "tiny" | "small" | "medium" | "large" | "xlarge"
@@ -23,7 +24,7 @@ export class SmoothlyIconDemo {
 		return (
 			<Host>
 				<h2>Filter and Variants</h2>
-				<smoothly-form onSmoothlyFormInput={e => (this.display = e.detail)}>
+				<smoothly-form looks="grid" onSmoothlyFormInput={e => (this.display = e.detail)}>
 					<smoothly-input name="filter">Filter</smoothly-input>
 					<smoothly-input-select name="variant">
 						<span slot="label">Variant</span>
@@ -34,6 +35,7 @@ export class SmoothlyIconDemo {
 				</smoothly-form>
 				<h2>Props</h2>
 				<smoothly-form
+					looks="grid"
 					onSmoothlyFormInput={e => {
 						this.props = e.detail
 						console.log("props", this.props)
@@ -64,6 +66,26 @@ export class SmoothlyIconDemo {
 					</smoothly-input-select>
 					<smoothly-input-select name="customColor" menuHeight="12items" ordered>
 						<span slot={"label"}>Custom Color</span>
+						{Color.values.flatMap(c => (
+							<Fragment>
+								{["tint", "color", "shade", "contrast"].map(v => (
+									<smoothly-item value={`--smoothly-${c}-${v}`}>
+										<span
+											style={{
+												background: `rgb(var(--smoothly-${c}-${v}))`,
+												"margin-right": "0.5rem",
+												width: "2.5rem",
+												height: "2.5rem",
+											}}
+										/>
+										<span>{`rgb(var(--smoothly-${c}-${v}))`}</span>
+									</smoothly-item>
+								))}
+							</Fragment>
+						))}
+					</smoothly-input-select>
+					<smoothly-input-select name="customBackground" menuHeight="12items" ordered>
+						<span slot={"label"}>Custom Background</span>
 						{Color.values.flatMap(c => (
 							<Fragment>
 								{["tint", "color", "shade", "contrast"].map(v => (
@@ -118,6 +140,7 @@ export class SmoothlyIconDemo {
 							style={{
 								fill: this.props["customColor"] ? `rgb(var(${this.props["customColor"]}))` : "",
 								color: this.props["customColor"] ? `rgb(var(${this.props["customColor"]}))` : "",
+								background: this.props["customBackground"] ? `rgb(var(${this.props["customBackground"]}))` : "",
 							}}
 							fill={this.props.fill}
 							flip={this.props.flip}
