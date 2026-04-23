@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, State } from "@stencil/core"
 import { Color, Fill, Icon, Notice } from "../../../model"
 @Component({
 	tag: "smoothly-icon-demo",
@@ -11,6 +11,8 @@ export class SmoothlyIconDemo {
 	@State() display: { filter?: string; variant?: "outline" | "sharp" } = {}
 	@State() props: {
 		color?: Color
+		customColor?: string
+		customBackground?: string
 		fill?: Fill
 		flip?: "x" | "y"
 		size?: "tiny" | "small" | "medium" | "large" | "xlarge"
@@ -22,7 +24,7 @@ export class SmoothlyIconDemo {
 		return (
 			<Host>
 				<h2>Filter and Variants</h2>
-				<smoothly-form onSmoothlyFormInput={e => (this.display = e.detail)}>
+				<smoothly-form looks="grid" onSmoothlyFormInput={e => (this.display = e.detail)}>
 					<smoothly-input name="filter">Filter</smoothly-input>
 					<smoothly-input-select name="variant">
 						<span slot="label">Variant</span>
@@ -32,12 +34,25 @@ export class SmoothlyIconDemo {
 					</smoothly-input-select>
 				</smoothly-form>
 				<h2>Props</h2>
-				<smoothly-form onSmoothlyFormInput={e => (this.props = e.detail)}>
+				<smoothly-form
+					looks="grid"
+					onSmoothlyFormInput={e => {
+						this.props = e.detail
+						console.log("props", this.props)
+					}}>
 					<smoothly-input-select name={"color"}>
 						<span slot={"label"}>Color</span>
 						{Color.values.map(color => (
-							<smoothly-item value={color} color={color}>
-								{color}
+							<smoothly-item value={color}>
+								<span
+									style={{
+										background: `rgb(var(--smoothly-${color}-color))`,
+										"margin-right": "0.5rem",
+										width: "2.5rem",
+										height: "2.5rem",
+									}}
+								/>
+								<span>{color}</span>
 							</smoothly-item>
 						))}
 						<smoothly-input-clear slot={"end"} />
@@ -48,6 +63,46 @@ export class SmoothlyIconDemo {
 							<smoothly-item value={fill}>{fill}</smoothly-item>
 						))}
 						<smoothly-input-clear slot={"end"} />
+					</smoothly-input-select>
+					<smoothly-input-select name="customColor" menuHeight="12items" ordered>
+						<span slot={"label"}>Custom Color</span>
+						{Color.values.flatMap(c => (
+							<Fragment>
+								{["tint", "color", "shade", "contrast"].map(v => (
+									<smoothly-item value={`--smoothly-${c}-${v}`}>
+										<span
+											style={{
+												background: `rgb(var(--smoothly-${c}-${v}))`,
+												"margin-right": "0.5rem",
+												width: "2.5rem",
+												height: "2.5rem",
+											}}
+										/>
+										<span>{`rgb(var(--smoothly-${c}-${v}))`}</span>
+									</smoothly-item>
+								))}
+							</Fragment>
+						))}
+					</smoothly-input-select>
+					<smoothly-input-select name="customBackground" menuHeight="12items" ordered>
+						<span slot={"label"}>Custom Background</span>
+						{Color.values.flatMap(c => (
+							<Fragment>
+								{["tint", "color", "shade", "contrast"].map(v => (
+									<smoothly-item value={`--smoothly-${c}-${v}`}>
+										<span
+											style={{
+												background: `rgb(var(--smoothly-${c}-${v}))`,
+												"margin-right": "0.5rem",
+												width: "2.5rem",
+												height: "2.5rem",
+											}}
+										/>
+										<span>{`rgb(var(--smoothly-${c}-${v}))`}</span>
+									</smoothly-item>
+								))}
+							</Fragment>
+						))}
 					</smoothly-input-select>
 					<smoothly-input-select name="flip">
 						<span slot={"label"}>Flip</span>
@@ -82,6 +137,11 @@ export class SmoothlyIconDemo {
 							tooltip={name}
 							data-name={name}
 							color={this.props.color}
+							style={{
+								fill: this.props["customColor"] ? `rgb(var(${this.props["customColor"]}))` : "",
+								color: this.props["customColor"] ? `rgb(var(${this.props["customColor"]}))` : "",
+								background: this.props["customBackground"] ? `rgb(var(${this.props["customBackground"]}))` : "",
+							}}
 							fill={this.props.fill}
 							flip={this.props.flip}
 							size={this.props.size}
