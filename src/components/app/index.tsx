@@ -70,13 +70,13 @@ export class SmoothlyApp {
 		this.smoothlyUrlChange.emit(window.location.href)
 	}
 	@Listen("smoothlyRoomSelect")
-	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) {
+	roomSelectedHandler(event: SmoothlyAppRoomCustomEvent<{ history: boolean; path: string; query?: string }>) {
 		this.selected = { element: event.target }
 		if (this.mobileMode) {
 			this.menuOpen = false
 		}
 		if (!event.detail.history) {
-			const path = this.selected.element.path.toString()
+			const path = event.detail.path
 			const location = new URL(window.location.pathname == path ? window.location.href : window.location.origin)
 			location.pathname = path
 			location.search = event.detail.query ? `?${event.detail.query}` : ""
