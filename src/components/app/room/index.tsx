@@ -24,11 +24,12 @@ export class SmoothlyAppRoom {
 	@Prop({ reflect: true }) label?: string
 	@Prop({ reflect: true }) icon?: Icon
 	@Prop({ reflect: true }) disabled: boolean
-	@Prop() path: string | URLPattern = ""
+	@Prop() path: string | URLPattern | (string | URLPattern)[] = ""
+	@State() paths: URLPattern[]
 	@Prop({ reflect: true, mutable: true }) selected?: boolean
 	@Prop() content?: VNode | FunctionalComponent
 	@State() mobileMode = false
-	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; query?: string }>
+	@Event() smoothlyRoomSelect: EventEmitter<{ history: boolean; path: string; query?: string }>
 	@Event() smoothlyRoomLoad: EventEmitter<{ selected: boolean }>
 	@Event() smoothlyUrlChange: EventEmitter<string>
 	private contentElement?: HTMLElement
@@ -36,11 +37,11 @@ export class SmoothlyAppRoom {
 		this.selected && this.smoothlyUrlChange.emit(window.location.href)
 	}
 	componentWillLoad() {
-		this.selected = (typeof this.path == "string" ? new URLPattern({ pathname: this.path }) : this.path).test(
-			window.location
-		)
+		const stringOrPatternPaths = Array.isArray(this.path) ? this.path : [this.path]
+		this.paths = stringOrPatternPaths.map(path => (typeof path == "string" ? new URLPattern({ pathname: path }) : path))
+		this.selected = this.paths.some(pattern => pattern.test(window.location.href))
 		this.smoothlyRoomLoad.emit({ selected: this.selected })
-		this.selected && window.history.replaceState({ smoothlyPath: this.path }, "", window.location.href)
+		this.selected && window.history.replaceState({ smoothlyPath: this.paths[0].pathname }, "", window.location.href)
 	}
 	@Method()
 	async setMobileMode(mobile: boolean) {
@@ -54,7 +55,7 @@ export class SmoothlyAppRoom {
 	async setSelected(selected: boolean, options?: { history?: boolean }): Promise<void> {
 		this.selected = selected
 		if (selected) {
-			this.smoothlyRoomSelect.emit({ history: !!options?.history, query: this.query })
+			this.smoothlyRoomSelect.emit({ history: !!options?.history, path: this.paths[0].pathname, query: this.query })
 		}
 	}
 	@Listen("smoothlyUrlUpdate", { target: "window" })
@@ -81,7 +82,7 @@ export class SmoothlyAppRoom {
 		return (
 			<Host class={{ "smoothly-mobile-mode": this.mobileMode }}>
 				<li>
-					<a href={typeof this.path == "string" ? this.path : this.path.pathname} onClick={e => this.clickHandler(e)}>
+					<a href={this.paths[0]?.pathname} onClick={e => this.clickHandler(e)}>
 						{this.icon && <smoothly-icon name={this.icon} />}
 						{this.label && <span class="label">{this.label}</span>}
 					</a>

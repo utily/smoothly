@@ -64,7 +64,7 @@ export namespace Components {
         /**
           * @default ""
          */
-        "path": string | URLPattern;
+        "path": string | URLPattern | (string | URLPattern)[];
         "selected"?: boolean;
         "setMobileMode": (mobile: boolean) => Promise<void>;
         "setSelected": (selected: boolean, options?: { history?: boolean; }) => Promise<void>;
@@ -1321,7 +1321,7 @@ declare global {
         new (): HTMLSmoothlyAppDemoElement;
     };
     interface HTMLSmoothlyAppRoomElementEventMap {
-        "smoothlyRoomSelect": { history: boolean; query?: string };
+        "smoothlyRoomSelect": { history: boolean; path: string; query?: string };
         "smoothlyRoomLoad": { selected: boolean };
         "smoothlyUrlChange": string;
     }
@@ -2617,12 +2617,12 @@ declare namespace LocalJSX {
         "icon"?: Icon;
         "label"?: string;
         "onSmoothlyRoomLoad"?: (event: SmoothlyAppRoomCustomEvent<{ selected: boolean }>) => void;
-        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; query?: string }>) => void;
+        "onSmoothlyRoomSelect"?: (event: SmoothlyAppRoomCustomEvent<{ history: boolean; path: string; query?: string }>) => void;
         "onSmoothlyUrlChange"?: (event: SmoothlyAppRoomCustomEvent<string>) => void;
         /**
           * @default ""
          */
-        "path"?: string | URLPattern;
+        "path"?: string | URLPattern | (string | URLPattern)[];
         "selected"?: boolean;
     }
     interface SmoothlyBackToTop {
@@ -3691,7 +3691,7 @@ declare namespace LocalJSX {
         "label": string;
         "icon": Icon;
         "disabled": boolean;
-        "path": string | URLPattern;
+        "path": string | URLPattern | (string | URLPattern)[];
         "selected": boolean;
     }
     interface SmoothlyBackToTopAttributes {
