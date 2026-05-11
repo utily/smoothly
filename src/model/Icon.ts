@@ -7,8 +7,17 @@ export namespace Icon {
 	}
 	const cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	async function fetch(url: string): Promise<string | undefined> {
-		const response = await globalThis.fetch(url)
-		return response.ok ? response.text() : undefined
+		try {
+			const response = await globalThis.fetch(url)
+			if (!response.ok) {
+				console.warn(`Icon failed to load: ${url} (Status: ${response.status})`)
+				return undefined
+			}
+			return await response.text()
+		} catch (error) {
+			console.error(`Network error while fetching icon: ${url}`, error)
+			return undefined
+		}
 	}
 	export async function load(name: string): Promise<string | undefined> {
 		const url = (names[name] ?? names["*"]).replace("${name}", name)
