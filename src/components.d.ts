@@ -929,6 +929,8 @@ export namespace Components {
          */
         "icon": boolean;
     }
+    interface SmoothlyNotifierDemo {
+    }
     interface SmoothlySpinner {
         "overlay": boolean;
         /**
@@ -1255,6 +1257,10 @@ export interface SmoothlyModalCustomEvent<T> extends CustomEvent<T> {
 export interface SmoothlyNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSmoothlyNotificationElement;
+}
+export interface SmoothlyNotifierDemoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSmoothlyNotifierDemoElement;
 }
 export interface SmoothlySubmitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2168,6 +2174,23 @@ declare global {
         prototype: HTMLSmoothlyNotifierElement;
         new (): HTMLSmoothlyNotifierElement;
     };
+    interface HTMLSmoothlyNotifierDemoElementEventMap {
+        "notice": Notice;
+    }
+    interface HTMLSmoothlyNotifierDemoElement extends Components.SmoothlyNotifierDemo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSmoothlyNotifierDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyNotifierDemoElement, ev: SmoothlyNotifierDemoCustomEvent<HTMLSmoothlyNotifierDemoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSmoothlyNotifierDemoElementEventMap>(type: K, listener: (this: HTMLSmoothlyNotifierDemoElement, ev: SmoothlyNotifierDemoCustomEvent<HTMLSmoothlyNotifierDemoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSmoothlyNotifierDemoElement: {
+        prototype: HTMLSmoothlyNotifierDemoElement;
+        new (): HTMLSmoothlyNotifierDemoElement;
+    };
     interface HTMLSmoothlySpinnerElement extends Components.SmoothlySpinner, HTMLStencilElement {
     }
     var HTMLSmoothlySpinnerElement: {
@@ -2557,6 +2580,7 @@ declare global {
         "smoothly-modal": HTMLSmoothlyModalElement;
         "smoothly-notification": HTMLSmoothlyNotificationElement;
         "smoothly-notifier": HTMLSmoothlyNotifierElement;
+        "smoothly-notifier-demo": HTMLSmoothlyNotifierDemoElement;
         "smoothly-spinner": HTMLSmoothlySpinnerElement;
         "smoothly-submit": HTMLSmoothlySubmitElement;
         "smoothly-summary": HTMLSmoothlySummaryElement;
@@ -3475,6 +3499,9 @@ declare namespace LocalJSX {
          */
         "icon"?: boolean;
     }
+    interface SmoothlyNotifierDemo {
+        "onNotice"?: (event: SmoothlyNotifierDemoCustomEvent<Notice>) => void;
+    }
     interface SmoothlySpinner {
         "overlay"?: boolean;
         /**
@@ -4198,6 +4225,7 @@ declare namespace LocalJSX {
         "smoothly-modal": Omit<SmoothlyModal, keyof SmoothlyModalAttributes> & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes]?: SmoothlyModal[K] } & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes as `attr:${K}`]?: SmoothlyModalAttributes[K] } & { [K in keyof SmoothlyModal & keyof SmoothlyModalAttributes as `prop:${K}`]?: SmoothlyModal[K] };
         "smoothly-notification": Omit<SmoothlyNotification, keyof SmoothlyNotificationAttributes> & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes]?: SmoothlyNotification[K] } & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes as `attr:${K}`]?: SmoothlyNotificationAttributes[K] } & { [K in keyof SmoothlyNotification & keyof SmoothlyNotificationAttributes as `prop:${K}`]?: SmoothlyNotification[K] };
         "smoothly-notifier": Omit<SmoothlyNotifier, keyof SmoothlyNotifierAttributes> & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes]?: SmoothlyNotifier[K] } & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes as `attr:${K}`]?: SmoothlyNotifierAttributes[K] } & { [K in keyof SmoothlyNotifier & keyof SmoothlyNotifierAttributes as `prop:${K}`]?: SmoothlyNotifier[K] };
+        "smoothly-notifier-demo": SmoothlyNotifierDemo;
         "smoothly-spinner": Omit<SmoothlySpinner, keyof SmoothlySpinnerAttributes> & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes]?: SmoothlySpinner[K] } & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes as `attr:${K}`]?: SmoothlySpinnerAttributes[K] } & { [K in keyof SmoothlySpinner & keyof SmoothlySpinnerAttributes as `prop:${K}`]?: SmoothlySpinner[K] };
         "smoothly-submit": Omit<SmoothlySubmit, keyof SmoothlySubmitAttributes> & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes]?: SmoothlySubmit[K] } & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes as `attr:${K}`]?: SmoothlySubmitAttributes[K] } & { [K in keyof SmoothlySubmit & keyof SmoothlySubmitAttributes as `prop:${K}`]?: SmoothlySubmit[K] };
         "smoothly-summary": Omit<SmoothlySummary, keyof SmoothlySummaryAttributes> & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes]?: SmoothlySummary[K] } & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes as `attr:${K}`]?: SmoothlySummaryAttributes[K] } & { [K in keyof SmoothlySummary & keyof SmoothlySummaryAttributes as `prop:${K}`]?: SmoothlySummary[K] };
@@ -4309,6 +4337,7 @@ declare module "@stencil/core" {
             "smoothly-modal": LocalJSX.IntrinsicElements["smoothly-modal"] & JSXBase.HTMLAttributes<HTMLSmoothlyModalElement>;
             "smoothly-notification": LocalJSX.IntrinsicElements["smoothly-notification"] & JSXBase.HTMLAttributes<HTMLSmoothlyNotificationElement>;
             "smoothly-notifier": LocalJSX.IntrinsicElements["smoothly-notifier"] & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierElement>;
+            "smoothly-notifier-demo": LocalJSX.IntrinsicElements["smoothly-notifier-demo"] & JSXBase.HTMLAttributes<HTMLSmoothlyNotifierDemoElement>;
             "smoothly-spinner": LocalJSX.IntrinsicElements["smoothly-spinner"] & JSXBase.HTMLAttributes<HTMLSmoothlySpinnerElement>;
             "smoothly-submit": LocalJSX.IntrinsicElements["smoothly-submit"] & JSXBase.HTMLAttributes<HTMLSmoothlySubmitElement>;
             "smoothly-summary": LocalJSX.IntrinsicElements["smoothly-summary"] & JSXBase.HTMLAttributes<HTMLSmoothlySummaryElement>;

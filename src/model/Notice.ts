@@ -20,7 +20,7 @@ export class Notice {
 			this.emit()
 		}
 	}
-	private constructor(private stateValue: Notice.State, private messageValue: string, private task?: Notice.Task) {
+	private constructor(private stateValue: Notice.State, private messageValue: string, private task?: Notice.Task, private lifetime = 15000) {
 		switch (stateValue) {
 			case "delayed":
 				this.timer = window.setTimeout(() => this.execute(), 5000)
@@ -59,7 +59,7 @@ export class Notice {
 			this.state = "failed"
 	}
 	private startCloseTimer() {
-		this.timer = window.setTimeout(() => this.close(), 15000)
+		this.timer = window.setTimeout(() => this.close(), this.lifetime)
 	}
 
 	close() {
@@ -73,20 +73,20 @@ export class Notice {
 		}
 	}
 
-	static delay(message: string, task: Notice.Task): Notice {
-		return new Notice("delayed", message, task)
+	static delay(message: string, task: Notice.Task, lifetime?: number): Notice {
+		return new Notice("delayed", message, task, lifetime)
 	}
-	static execute(message: string, task: Notice.Task): Notice {
-		return new Notice("executing", message, task)
+	static execute(message: string, task: Notice.Task, lifetime?: number): Notice {
+		return new Notice("executing", message, task, lifetime)
 	}
-	static succeeded(message: string): Notice {
-		return new Notice("success", message)
+	static succeeded(message: string, lifetime?: number): Notice {
+		return new Notice("success", message, undefined, lifetime)
 	}
-	static failed(message: string): Notice {
-		return new Notice("failed", message)
+	static failed(message: string, lifetime?: number): Notice {
+		return new Notice("failed", message, undefined, lifetime)
 	}
-	static warn(message: string): Notice {
-		return new Notice("warning", message)
+	static warn(message: string, lifetime?: number): Notice {
+		return new Notice("warning", message, undefined, lifetime)
 	}
 }
 export namespace Notice {
