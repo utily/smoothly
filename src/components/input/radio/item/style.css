@@ -28,7 +28,6 @@ smoothly-input-radio:not([disabled]):not([readonly]) :host>smoothly-icon[name=ch
 	width: 1.5em;
 	height: 1.5em;
 	position: absolute;
-	transform: translateX(50%);
 }
 :host>label {
 	padding: 0 .3em;
