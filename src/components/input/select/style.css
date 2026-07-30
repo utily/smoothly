@@ -16,17 +16,22 @@
 	border-radius: var(--smoothly-input-border-radius) var(--smoothly-input-border-radius) 0 0;
 }
 
-
 :host>.select-display {
 	box-sizing: border-box;
 	display: flex;
 	padding: var(--input-value-padding-top) .8rem var(--input-value-padding-bottom) 0;
-	overflow: hidden;
 	width: 100%;
 	white-space: nowrap;
 	gap: 1rem;
-	text-overflow: ellipsis;
+
 }
+
+:host>.select-display>div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	
+}
+
 :host:not([readonly]):not([disabled])>.select-display {
 	cursor: pointer;
 }
