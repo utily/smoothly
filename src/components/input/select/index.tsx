@@ -34,7 +34,6 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private initialValue: HTMLSmoothlyItemElement[] = []
 	private initialValueHandled = false
 	private observer = Editable.Observer.create(this)
-	private displayElement?: HTMLElement
 	private iconsElement?: HTMLElement
 	private toggleElement?: HTMLElement
 	private dropdownElement?: HTMLElement
@@ -66,6 +65,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@State() selected: HTMLSmoothlyItemElement[] = []
 	@State() filter = ""
 	@State() addedItems: HTMLSmoothlyItemElement[] = []
+	@State() private display: string[] = []
 	@Event() smoothlyInput: EventEmitter<Data>
 	@Event() smoothlyUserInput: EventEmitter<Input.UserInput>
 	@Event() smoothlyInputLooks: EventEmitter<(looks?: Looks, color?: Color) => void>
@@ -153,9 +153,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		if (this.clearable) {
 			this.selected.forEach(item => (item.selected = item.hidden = false))
 			this.selected = []
-			if (this.displayElement) {
-				this.displayElement.innerHTML = this.placeholder ?? ""
-			}
+			this.displaySelected()
 		}
 	}
 	@Method()
@@ -247,9 +245,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
 	displaySelected(): void {
-		const displayString: string = this.selected.map(option => `<div>${option.innerHTML}</div>`).join("")
-		this.displayElement &&
-			(this.displayElement.innerHTML = this.selected.length > 0 ? displayString : (this.placeholder ?? ""))
+		this.display = this.selected.map(option => option.innerHTML)
 	}
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
@@ -347,8 +343,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 			<Host
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
 				onClick={(e: MouseEvent) => this.onClick(e)}>
-				<div class="select-display" ref={element => (this.displayElement = element)}>
-					{this.placeholder}
+				<div class="select-display">
+					{this.display.length > 0 ? this.display.map(html => <div innerHTML={html}></div>) : this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
