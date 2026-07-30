@@ -344,7 +344,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
 				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<div class="select-display">
-					{this.display.length > 0 ? this.display.map(html => <div innerHTML={html}></div>) : this.placeholder}
+					{this.display.length > 0 ? <div innerHTML={this.display.join(", ")}></div> : this.placeholder}
 				</div>
 				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
