@@ -19,6 +19,7 @@ import { Clearable } from "../Clearable"
 import { Editable } from "../Editable"
 import { Input } from "../Input"
 import { Looks } from "../Looks"
+import { Range } from "./Range"
 
 @Component({
 	tag: "smoothly-input-range",
@@ -30,9 +31,12 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	isDifferentFromInitial = false
 	private observer = Editable.Observer.create(this)
 	private input?: HTMLSmoothlyInputElement
-	private initialValue: number | undefined = undefined
+	private startInput?: HTMLSmoothlyInputElement
+	private endInput?: HTMLSmoothlyInputElement
+	private initialValue: Range.Value | undefined = undefined
 	@Element() element: HTMLSmoothlyInputRangeElement
-	@Prop({ mutable: true }) value: number | undefined = undefined
+	@Prop({ mutable: true }) value: Range.Value | undefined = undefined
+	@Prop() dual = false
 	@Prop({ reflect: true, mutable: true }) looks?: Looks
 	@Prop({ reflect: true, mutable: true }) color?: Color
 	@Prop({ mutable: true }) defined = false
@@ -87,7 +91,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		Input.formRemove(this)
 	}
 	@Method()
-	async getValue(): Promise<number | undefined> {
+	async getValue(): Promise<Range.Value | undefined> {
 		return this.value
 	}
 	@Method()
@@ -114,10 +118,13 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	valueChanged(): void {
-		const decimals = !this.step ? undefined : (this.step.toString().split(".")[1]?.length ?? 0)
-		this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : +this.value.toFixed(decimals)
-		this.isDifferentFromInitial = this.initialValue != this.value
-		this.defined = typeof this.value == "number"
+		if (Range.is(this.value)) {
+			this.value = { start: Range.round(this.value.start, this.step), end: Range.round(this.value.end, this.step) }
+		} else {
+			this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : Range.round(this.value, this.step)
+		}
+		this.isDifferentFromInitial = !Range.equals(this.initialValue, this.value)
+		this.defined = Range.defined(this.value)
 		this.observer.publish()
 		this.smoothlyInput.emit({ [this.name]: this.value })
 	}
@@ -138,6 +145,16 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		}
 		this.input && (this.input.value = this.type == "text" ? this.value?.toString() : this.value)
 	}
+	setRange(part: "start" | "end", value: number | undefined): void {
+		if (value == undefined) {
+			return
+		}
+		const current = Range.is(this.value) ? this.value : { start: this.min, end: this.max }
+		this.value = Range.setPart(current, part, value, this.min, this.max)
+		const field = part == "start" ? this.startInput : this.endInput
+		const bound = Range.is(this.value) ? this.value[part] : undefined
+		field && (field.value = this.type == "text" ? bound?.toString() : bound)
+	}
 
 	render(): VNode | VNode[] {
 		return (
@@ -145,52 +162,113 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				class={{
 					"output-side-right": this.outputSide === "right",
 					"show-label": this.outputSide === "left" && !!this.label,
+					dual: this.dual,
 				}}>
 				<slot name="start" />
 				<div>
 					<label htmlFor={this.name}>{this.label}</label>
-					<smoothly-input
-						ref={e => (this.input = e)}
-						looks={undefined}
-						color={this.color}
-						name={this.name}
-						showLabel={this.outputSide === "left" && !!this.label}
-						type={this.type}
-						onSmoothlyInputLoad={async e => (
-							e.stopPropagation(),
-							this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
-						)}
-						onSmoothlyBlur={e => e.stopPropagation()}
-						onSmoothlyInput={async e => {
-							e.stopPropagation()
-							this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
-						}}
-						value={this.type == "percent" ? this.value : this.value?.toString()}
-						placeholder={this.outputSide === "right" ? "-" : undefined}
-						readonly={this.readonly}
-						disabled={this.disabled}>
-						{this.label}
-					</smoothly-input>
-					<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />
-					<input
-						name={this.name}
-						part="range"
-						type="range"
-						min={this.min}
-						max={this.max}
-						step={this.step ?? "any"}
-						disabled={this.readonly || this.disabled}
-						onInput={event => {
-							event.stopPropagation()
-							this.setValue((event.target as HTMLInputElement).valueAsNumber)
-							this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-						}}
-						value={this.value ?? this.min}
-					/>
-					<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()} />
+					{this.dual ? this.renderDual() : this.renderSingle()}
 				</div>
 				<slot name="end" />
 			</Host>
+		)
+	}
+	private renderSingle(): VNode[] {
+		return [
+			<smoothly-input
+				ref={e => (this.input = e)}
+				looks={undefined}
+				color={this.color}
+				name={this.name}
+				showLabel={this.outputSide === "left" && !!this.label}
+				type={this.type}
+				onSmoothlyInputLoad={async e => (
+					e.stopPropagation(),
+					this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
+				)}
+				onSmoothlyBlur={e => e.stopPropagation()}
+				onSmoothlyInput={async e => {
+					e.stopPropagation()
+					this.setValue(Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
+				}}
+				value={this.type == "percent" ? (this.value as number) : (this.value as number)?.toString()}
+				placeholder={this.outputSide === "right" ? "-" : undefined}
+				readonly={this.readonly}
+				disabled={this.disabled}>
+				{this.label}
+			</smoothly-input>,
+			<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />,
+			<input
+				name={this.name}
+				part="range"
+				type="range"
+				min={this.min}
+				max={this.max}
+				step={this.step ?? "any"}
+				disabled={this.readonly || this.disabled}
+				onInput={event => {
+					event.stopPropagation()
+					this.setValue((event.target as HTMLInputElement).valueAsNumber)
+					this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+				}}
+				value={(this.value as number) ?? this.min}
+			/>,
+			<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()} />,
+		]
+	}
+	private renderDual(): VNode[] {
+		const range = Range.is(this.value) ? this.value : { start: this.min, end: this.max }
+		const left = Range.percent(range.start, this.min, this.max)
+		const right = 100 - Range.percent(range.end, this.min, this.max)
+		return [
+			this.renderField("start", range.start),
+			<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />,
+			<div class="track" part="track">
+				<div class="fill" part="fill" style={{ left: `${left}%`, right: `${right}%` }} />
+				{this.renderRangeInput("start", range.start)}
+				{this.renderRangeInput("end", range.end)}
+			</div>,
+			<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()} />,
+			this.renderField("end", range.end),
+		]
+	}
+	private renderField(part: "start" | "end", value: number): VNode {
+		return (
+			<smoothly-input
+				ref={e => (part == "start" ? (this.startInput = e) : (this.endInput = e))}
+				looks={undefined}
+				color={this.color}
+				name={`${this.name}-${part}`}
+				type={this.type}
+				onSmoothlyBlur={e => e.stopPropagation()}
+				onSmoothlyInput={async e => {
+					e.stopPropagation()
+					this.setRange(part, Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
+					this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+				}}
+				value={this.type == "percent" ? value : value?.toString()}
+				readonly={this.readonly}
+				disabled={this.disabled}
+			/>
+		)
+	}
+	private renderRangeInput(part: "start" | "end", value: number): VNode {
+		return (
+			<input
+				part={part == "start" ? "range range-start" : "range range-end"}
+				class={part}
+				type="range"
+				min={this.min}
+				max={this.max}
+				step={this.step ?? "any"}
+				disabled={this.readonly || this.disabled}
+				onInput={event => {
+					event.stopPropagation()
+					this.setRange(part, (event.target as HTMLInputElement).valueAsNumber)
+					this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+				}}
+				value={value ?? (part == "start" ? this.min : this.max)}
+			/>
 		)
 	}
 }
