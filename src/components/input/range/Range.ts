@@ -3,7 +3,7 @@ export type Range = { start: number; end: number }
 export namespace Range {
 	export type Value = number | Range
 	export function is(value: Value | undefined): value is Range {
-		return typeof value == "object" && value != undefined
+		return typeof value == "object" && value != undefined && "start" in value && "end" in value
 	}
 	export function clamp(value: number, min: number, max: number): number {
 		return value < min ? min : value > max ? max : value
@@ -19,7 +19,7 @@ export namespace Range {
 			: { start: current.start, end: Math.max(clamped, current.start) }
 	}
 	export function equals(a: Value | undefined, b: Value | undefined): boolean {
-		return is(a) && is(b) ? a.start == b.start && a.end == b.end : a === b
+		return is(a) && is(b) ? a.start === b.start && a.end === b.end : a === b
 	}
 	export function defined(value: Value | undefined): boolean {
 		return is(value) ? typeof value.start == "number" && typeof value.end == "number" : typeof value == "number"
