@@ -40,6 +40,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	private searchElement?: HTMLInputElement
 	private items: HTMLSmoothlyItemElement[] = []
 	private itemHeight: number | undefined
+	private readonly displaySeparator = '<span style="display:inline-block;width:0.8rem"></span>'
 	@Element() element: HTMLSmoothlyInputSelectElement
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
@@ -245,7 +246,15 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		return selected.length === initialValue.length && initialValue.every(value => selected.includes(value))
 	}
 	displaySelected(): void {
-		this.display = this.selected.map(option => option.innerHTML)
+		this.display = this.selected.map(option => {
+			const clone = option.cloneNode(true) as HTMLElement
+			clone.querySelectorAll("smoothly-icon").forEach(icon => {
+				const style = (icon as HTMLElement).style
+				style.display = "inline-flex"
+				style.verticalAlign = "middle"
+			})
+			return clone.innerHTML
+		})
 	}
 	onKeyDown(event: KeyboardEvent) {
 		event.stopPropagation()
@@ -344,7 +353,11 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
 				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<div class="select-display">
-					{this.display.length > 0 ? <div innerHTML={this.display.join(", ")}></div> : this.placeholder}
+					{this.display.length > 0 ? (
+						<div class="value" innerHTML={this.display.join(this.displaySeparator)}></div>
+					) : (
+						this.placeholder
+					)}
 				</div>
 				<div class="icons" ref={element => (this.iconsElement = element)}>
 					<smoothly-icon class="smoothly-invalid" name="alert-circle" size="small" tooltip={this.errorMessage} />
