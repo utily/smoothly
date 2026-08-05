@@ -143,7 +143,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		} else {
 			this.value = value
 		}
-		this.input && (this.input.value = this.type == "text" ? this.value?.toString() : this.value)
+		this.input && (this.input.value = this.type == "text" ? (this.value as number)?.toString() : (this.value as number))
 	}
 	setRange(part: "start" | "end", value: number | undefined): void {
 		if (value == undefined) {
