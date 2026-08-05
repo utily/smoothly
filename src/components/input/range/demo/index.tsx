@@ -19,6 +19,10 @@ export class SmoothlyInputRangeDemo {
 					<smoothly-icon name="checkmark-circle" slot="start" />
 					<smoothly-input-clear size="icon" slot="end" />
 				</smoothly-input-range>
+				<h3>Dual (start / end)</h3>
+				<smoothly-input-range dual min={0} max={100} step={1} name="dualRange" label="Range" />
+				<h3>Dual percent</h3>
+				<smoothly-input-range dual type="percent" min={0} max={1} step={0.01} label="Percent range" />
 			</Host>
 		)
 	}
