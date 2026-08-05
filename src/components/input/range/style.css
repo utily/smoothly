@@ -191,3 +191,43 @@ input::-webkit-inner-spin-button {
 :host(.dual) .track > input[type=range]::-moz-range-thumb {
 	pointer-events: auto;
 }
+
+/*--------------------DUAL MODE THUMBS------------------ */
+/* Single-mode thumb rules only match the direct-child :host>div>input, not the nested dual inputs, so replicate them here. */
+:host(.dual) .track > input[type=range] {
+	-webkit-appearance: none;
+}
+:host(.dual) .track > input[type=range]::-webkit-slider-runnable-track {
+	height: .3rem;
+}
+:host(.dual) .track > input[type=range]::-moz-range-track {
+	height: .3rem;
+}
+:host(.dual) .track > input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 0.8em;
+	width: 0.8em;
+	margin-top: -.25em;
+	border-radius: 100%;
+	border: none;
+	background-color: rgb(var(--smoothly-input-foreground));
+}
+:host(.dual):not([disabled]):not([readonly]) .track > input[type=range]::-webkit-slider-thumb {
+	background-color: rgb(var(--smoothly-primary-color));
+	cursor: pointer;
+}
+:host(.dual) .track > input[type=range]::-moz-range-thumb {
+	height: 0.8em;
+	width: 0.8em;
+	border-radius: 100%;
+	border: none;
+	background-color: rgb(var(--smoothly-input-foreground));
+}
+:host(.dual):not([disabled]):not([readonly]) .track > input[type=range]::-moz-range-thumb {
+	background-color: rgb(var(--smoothly-primary-color));
+	cursor: pointer;
+}
+:host(.dual)[disabled] .track > input[type=range]::-webkit-slider-thumb,
+:host(.dual)[disabled] .track > input[type=range]::-moz-range-thumb {
+	cursor: not-allowed;
+}
