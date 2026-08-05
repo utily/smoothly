@@ -145,6 +145,12 @@ input::-webkit-inner-spin-button {
 }
 
 /*--------------------DUAL MODE------------------ */
+/* Dual mode has TWO number fields (From + To); keep them compact so the flexible
+   track fills the row instead of being squeezed by the single-mode width: 12em. */
+:host(.dual)>div>smoothly-input {
+	width: 5em;
+	flex: 0 0 auto;
+}
 :host(.dual) .track {
 	position: relative;
 	flex: 1;

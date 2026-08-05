@@ -57,11 +57,15 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit((looks, color) => ((this.looks = this.looks ?? looks), (this.color = color)))
-		this.smoothlyInput.emit({ [this.name]: this.value })
 		this.smoothlyInputLoad.emit(parent => (this.parent = parent))
 		!this.readonly && this.smoothlyFormDisable.emit(readonly => (this.readonly = readonly))
-		this.value && (this.initialValue = this.value)
-		this.valueChanged()
+		if (this.dual && !Range.is(this.value)) {
+			this.initialValue = { start: this.min, end: this.max }
+			this.value = this.initialValue
+		} else {
+			this.value && (this.initialValue = this.value)
+			this.valueChanged()
+		}
 	}
 	@Listen("smoothlyInputLoad")
 	smoothlyInputLoadHandler(event: CustomEvent<(parent: SmoothlyInputRange) => void>) {
@@ -118,10 +122,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 	}
 	@Watch("value")
 	valueChanged(): void {
-		if (Range.is(this.value)) {
-			this.value = { start: Range.round(this.value.start, this.step), end: Range.round(this.value.end, this.step) }
-		} else {
-			this.value = Number.isNaN(this.value) || this.value == undefined ? undefined : Range.round(this.value, this.step)
+		const normalized = Range.normalize(this.value, this.step)
+		if (!Range.equals(normalized, this.value)) {
+			this.value = normalized
+			return
 		}
 		this.isDifferentFromInitial = !Range.equals(this.initialValue, this.value)
 		this.defined = Range.defined(this.value)
@@ -134,7 +138,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.observer.publish()
 	}
 	setValue(value: number | undefined): void {
-		if (value == undefined) {
+		if (value == undefined || Number.isNaN(value)) {
 			this.value = undefined
 		} else if (value < this.min) {
 			this.value = this.min
@@ -146,33 +150,25 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		this.input && (this.input.value = this.type == "text" ? (this.value as number)?.toString() : (this.value as number))
 	}
 	setRange(part: "start" | "end", value: number | undefined): void {
-		if (value == undefined) {
+		const current = Range.is(this.value) ? this.value : { start: this.min, end: this.max }
+		const resolved = value == undefined || Number.isNaN(value) ? (part == "start" ? this.min : this.max) : value
+		const next = Range.setPart(current, part, resolved, this.min, this.max)
+		if (Range.equals(next, this.value)) {
 			return
 		}
-		const current = Range.is(this.value) ? this.value : { start: this.min, end: this.max }
-		this.value = Range.setPart(current, part, value, this.min, this.max)
+		this.value = next
 		const field = part == "start" ? this.startInput : this.endInput
+		const bound = next[part]
+		field && (field.value = this.type == "text" ? bound.toString() : bound)
+		this.smoothlyUserInput.emit({ name: this.name, value: this.value })
+	}
+	private async commitField(part: "start" | "end"): Promise<void> {
+		const field = part == "start" ? this.startInput : this.endInput
+		this.setRange(part, field ? Number(await field.getValue()) : undefined)
 		const bound = Range.is(this.value) ? this.value[part] : undefined
-		field && (field.value = this.type == "text" ? bound?.toString() : bound)
+		field?.setValue(this.type == "text" ? bound?.toString() : bound)
 	}
 
-	render(): VNode | VNode[] {
-		return (
-			<Host
-				class={{
-					"output-side-right": this.outputSide === "right",
-					"show-label": this.outputSide === "left" && !!this.label,
-					dual: this.dual,
-				}}>
-				<slot name="start" />
-				<div>
-					<label htmlFor={this.name}>{this.label}</label>
-					{this.dual ? this.renderDual() : this.renderSingle()}
-				</div>
-				<slot name="end" />
-			</Host>
-		)
-	}
 	private renderSingle(): VNode[] {
 		return [
 			<smoothly-input
@@ -222,13 +218,11 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		const right = 100 - Range.percent(range.end, this.min, this.max)
 		return [
 			this.renderField("start", range.start),
-			<smoothly-display label={(this.type == "percent" ? this.min * 100 : this.min).toString()} />,
 			<div class="track" part="track">
 				<div class="fill" part="fill" style={{ left: `${left}%`, right: `${right}%` }} />
 				{this.renderRangeInput("start", range.start)}
 				{this.renderRangeInput("end", range.end)}
 			</div>,
-			<smoothly-display label={(this.type == "percent" ? this.max * 100 : this.max).toString()} />,
 			this.renderField("end", range.end),
 		]
 	}
@@ -239,17 +233,17 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				looks={undefined}
 				color={this.color}
 				name={`${this.name}-${part}`}
+				showLabel={true}
 				type={this.type}
-				onSmoothlyBlur={e => e.stopPropagation()}
-				onSmoothlyInput={async e => {
-					e.stopPropagation()
-					this.setRange(part, Input.Element.is(e.target) ? Number(await e.target.getValue()) : undefined)
-					this.smoothlyUserInput.emit({ name: this.name, value: this.value })
-				}}
+				onSmoothlyBlur={e => (e.stopPropagation(), this.commitField(part))}
+				onSmoothlyKeydown={e => void (e.detail.key == "Enter" && this.commitField(part))}
+				onSmoothlyInput={e => e.stopPropagation()}
+				onSmoothlyUserInput={e => e.stopPropagation()}
 				value={this.type == "percent" ? value : value?.toString()}
 				readonly={this.readonly}
-				disabled={this.disabled}
-			/>
+				disabled={this.disabled}>
+				{part == "start" ? "From" : "To"}
+			</smoothly-input>
 		)
 	}
 	private renderRangeInput(part: "start" | "end", value: number): VNode {
@@ -265,10 +259,26 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				onInput={event => {
 					event.stopPropagation()
 					this.setRange(part, (event.target as HTMLInputElement).valueAsNumber)
-					this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 				}}
 				value={value ?? (part == "start" ? this.min : this.max)}
 			/>
+		)
+	}
+	render(): VNode | VNode[] {
+		return (
+			<Host
+				class={{
+					"output-side-right": this.outputSide === "right",
+					"show-label": this.outputSide === "left" && !!this.label,
+					dual: this.dual,
+				}}>
+				<slot name="start" />
+				<div>
+					<label htmlFor={this.name}>{this.label}</label>
+					{this.dual ? this.renderDual() : this.renderSingle()}
+				</div>
+				<slot name="end" />
+			</Host>
 		)
 	}
 }

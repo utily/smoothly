@@ -18,6 +18,13 @@ export namespace Range {
 			? { start: Math.min(clamped, current.end), end: current.end }
 			: { start: current.start, end: Math.max(clamped, current.start) }
 	}
+	export function normalize(value: Value | undefined, step: number | undefined): Value | undefined {
+		return is(value)
+			? { start: round(value.start, step), end: round(value.end, step) }
+			: value == undefined || Number.isNaN(value)
+				? undefined
+				: round(value, step)
+	}
 	export function equals(a: Value | undefined, b: Value | undefined): boolean {
 		return is(a) && is(b) ? a.start === b.start && a.end === b.end : a === b
 	}
