@@ -341,6 +341,7 @@ export namespace Components {
          */
         "required": boolean;
         "reset": () => Promise<void>;
+        "right"?: boolean;
         "setCustomInitialValue": (value: any) => Promise<void>;
         "setFocus": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -2939,6 +2940,7 @@ declare namespace LocalJSX {
           * @default false
          */
         "required"?: boolean;
+        "right"?: boolean;
         /**
           * @default true
          */
@@ -3863,6 +3865,7 @@ declare namespace LocalJSX {
         "invalid": boolean;
         "errorMessage": string;
         "copyable": boolean;
+        "right": boolean;
     }
     interface SmoothlyInputCheckboxAttributes {
         "name": string;

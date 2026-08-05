@@ -1,10 +1,14 @@
-import { Component, h, Host, VNode } from "@stencil/core"
+import { Component, h, Host, Listen, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-form-demo-all",
 	scoped: true,
 })
 export class SmoothlyFormDemoAll {
+	@Listen("smoothlyFormInput")
+	smoothlyFormSubmitHandler(event: CustomEvent<Record<string, any>>) {
+		console.log("smoothlyFormInput emitted:", event.detail)
+	}
 	render(): VNode | VNode[] {
 		return (
 			<Host>
@@ -71,6 +75,7 @@ export class SmoothlyFormDemoAll {
 					<smoothly-input-range name="pets.1.age" max={100} step={1} label="Second Pet's Age" />
 					<smoothly-input name="pets.2.name">Third Pet's Name</smoothly-input>
 					<smoothly-input-range name="pets.2.age" max={100} step={1} label="Third Pet's Age" />
+					<smoothly-input-range dual name="dualRange" min={0} max={100} step={1} label="Dual Range" />
 					<smoothly-input-file name={"profile"} placeholder={"Click or drag your profile picture here..."}>
 						<span slot={"label"}>Profile</span>
 						<smoothly-icon slot={"button"} name={"person-circle-outline"} size={"tiny"} fill={"default"} />

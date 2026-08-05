@@ -230,7 +230,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		return (
 			<smoothly-input
 				ref={e => (part == "start" ? (this.startInput = e) : (this.endInput = e))}
-				looks={undefined}
+				class={part}
 				color={this.color}
 				name={`${this.name}-${part}`}
 				showLabel={true}
@@ -241,7 +241,8 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				onSmoothlyUserInput={e => e.stopPropagation()}
 				value={this.type == "percent" ? value : value?.toString()}
 				readonly={this.readonly}
-				disabled={this.disabled}>
+				disabled={this.disabled}
+				right={part == "start"}>
 				{part == "start" ? "From" : "To"}
 			</smoothly-input>
 		)
@@ -250,15 +251,17 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		return (
 			<input
 				part={part == "start" ? "range range-start" : "range range-end"}
-				class={part}
 				type="range"
 				min={this.min}
 				max={this.max}
 				step={this.step ?? "any"}
 				disabled={this.readonly || this.disabled}
 				onInput={event => {
+					const input = event.target as HTMLInputElement
 					event.stopPropagation()
-					this.setRange(part, (event.target as HTMLInputElement).valueAsNumber)
+					this.setRange(part, input.valueAsNumber)
+					const bound = Range.is(this.value) ? this.value[part] : undefined
+					bound != undefined && (input.value = String(bound))
 				}}
 				value={value ?? (part == "start" ? this.min : this.max)}
 			/>

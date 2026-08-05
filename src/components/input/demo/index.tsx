@@ -9,14 +9,13 @@ import { isoly } from "isoly"
 export class SmoothlyInputDemo {
 	@State() duration: isoly.TimeSpan = { hours: 8 }
 	@State() alphanumeric: string = "!@##"
-	// private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9] // used only by the demos temporarily commented out below
+	private numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 	@Event() smoothlyUrlUpdate: EventEmitter<{ path: string; query?: string }>
 
 	render() {
 		return (
 			<Host>
-				<div class="inputs">
-					{/* <smoothly-input-demo-standard />
+				<smoothly-input-demo-standard />
 				<smoothly-input-date-demo />
 				<smoothly-input-demo-user-input />
 				<smoothly-input-demo-radio />
@@ -256,11 +255,11 @@ export class SmoothlyInputDemo {
 						<smoothly-input-radio-item value={"fourth"}>Label 4</smoothly-input-radio-item>
 						<smoothly-input-radio-item value={"fifth"}>Label 5</smoothly-input-radio-item>
 						<smoothly-input-radio-item value={"sixth"}>Label 6</smoothly-input-radio-item>
-					</smoothly-input-radio> */}
+					</smoothly-input-radio>
 					<smoothly-input-range-demo />
-					{/* <smoothly-input-color-demo />
+					<smoothly-input-color-demo />
 					<smoothly-input-price-demo />
-					<smoothly-back-to-top /> */}
+					<smoothly-back-to-top />
 				</div>
 			</Host>
 		)

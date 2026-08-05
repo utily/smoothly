@@ -33,7 +33,7 @@
 :host>div.rgb-sliders {
 	background-color: rgb(var(--smoothly-input-background));
 	position: absolute;
-	padding: 1em 1em 1em 0;
+	padding: 1rem 0 1rem 2.5rem;
 	top: calc(var(--element-height) + .8em);
 	left: 0;
 	box-sizing: border-box;

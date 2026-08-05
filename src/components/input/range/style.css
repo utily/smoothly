@@ -36,7 +36,7 @@
 	margin-left: var(--input-padding-side);
 	border: none;
 	box-sizing: border-box;
-	width: 5em;
+	width: 6rem;
 	order: 3;
 	margin: 0;
 }
@@ -145,10 +145,8 @@ input::-webkit-inner-spin-button {
 }
 
 /*--------------------DUAL MODE------------------ */
-/* Dual mode has TWO number fields (From + To); keep them compact so the flexible
-   track fills the row instead of being squeezed by the single-mode width: 12em. */
 :host(.dual)>div>smoothly-input {
-	width: 5em;
+	width: 6rem;
 	flex: 0 0 auto;
 }
 :host(.dual) .track {
@@ -174,6 +172,11 @@ input::-webkit-inner-spin-button {
 	border-radius: 20px;
 	background-color: rgb(var(--smoothly-primary-color));
 	pointer-events: none;
+}
+/* Match the single range: the active fill drops to the foreground color when readonly/disabled. */
+:host(.dual[readonly]) .fill,
+:host(.dual[disabled]) .fill {
+	background-color: rgb(var(--smoothly-input-foreground));
 }
 /* Both range inputs occupy the same box; only their thumbs receive pointer events */
 :host(.dual) .track > input[type=range] {
