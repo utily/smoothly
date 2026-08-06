@@ -22,14 +22,7 @@ export class SmoothlyInputRangeDemo {
 				<h3>Dual (start / end)</h3>
 				<smoothly-input-range dual min={90.86} max={10000000} step={1} name="dualRange" label="Range" />
 				<h3>Dual percent</h3>
-				<smoothly-input-range
-					dual
-					name="dualRangePercent"
-					type="percent"
-					min={0}
-					max={1}
-					step={0.01}
-					label="Percent range">
+				<smoothly-input-range dual name="dualRangePercent" type="percent" min={0} max={1} step={0.01}>
 					<smoothly-input-clear size="icon" slot="end" />
 				</smoothly-input-range>
 			</Host>

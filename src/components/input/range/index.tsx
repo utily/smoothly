@@ -253,7 +253,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				readonly={this.readonly}
 				disabled={this.disabled}
 				right={part == "start"}>
-				{part == "start" ? "From" : "To"}
+				{`${this.label ? this.label : ""} ${part == "start" ? "from" : "to"}`}
 			</smoothly-input>
 		)
 	}
@@ -290,7 +290,7 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 			<Host
 				class={{
 					"output-side-right": this.outputSide === "right",
-					"show-label": this.outputSide === "left" && !!this.label,
+					"show-label": this.dual || (this.outputSide === "left" && !!this.label),
 					dual: this.dual,
 				}}>
 				<slot name="start" />
