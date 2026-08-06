@@ -1,14 +1,10 @@
-import { Component, h, Host, Listen, VNode } from "@stencil/core"
+import { Component, h, Host, VNode } from "@stencil/core"
 
 @Component({
 	tag: "smoothly-form-demo-all",
 	scoped: true,
 })
 export class SmoothlyFormDemoAll {
-	@Listen("smoothlyFormInput")
-	smoothlyFormSubmitHandler(event: CustomEvent<Record<string, any>>) {
-		console.log("smoothlyFormInput emitted:", event.detail)
-	}
 	render(): VNode | VNode[] {
 		return (
 			<Host>

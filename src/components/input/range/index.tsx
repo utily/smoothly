@@ -163,7 +163,6 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 		const field = part == "start" ? this.startInput : this.endInput
 		const bound = next[part]
 		field && (field.value = this.type == "text" ? bound.toString() : bound)
-		// While dragging a thumb we hold emits until release (onChange); field commits emit right away.
 		!this.sliding && this.smoothlyUserInput.emit({ name: this.name, value: this.value })
 	}
 	private async commitField(part: "start" | "end"): Promise<void> {
@@ -208,12 +207,10 @@ export class SmoothlyInputRange implements Input, Clearable, Editable, Component
 				disabled={this.readonly || this.disabled}
 				onInput={event => {
 					event.stopPropagation()
-					// Drag updates value + display live, but holds emits until the thumb is released.
 					this.sliding = true
 					this.setValue((event.target as HTMLInputElement).valueAsNumber)
 				}}
 				onChange={event => {
-					// Thumb released: now emit the settled value once.
 					event.stopPropagation()
 					this.sliding = false
 					this.observer.publish()
