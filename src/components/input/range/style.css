@@ -147,6 +147,7 @@ input::-webkit-inner-spin-button {
 /*--------------------DUAL MODE------------------ */
 :host(.dual)>div>smoothly-input {
 	width: 7rem;
+	flex: 0 0 auto;
 }
 :host(.dual) .track {
 	position: relative;
