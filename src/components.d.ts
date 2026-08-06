@@ -19,6 +19,7 @@ import { Input } from "./components/input/Input";
 import { RGB } from "./model/Color/RGB";
 import { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 import { SmoothlyInputRadio } from "./components/input/radio/index";
+import { Range } from "./components/input/range/Range";
 import { layout } from "./components/input/select/layout";
 import { SmoothlyTabs } from "./components/tabs";
 export { Color, Data, Fill, Icon, Message, Notice, Submit, Trigger } from "./model";
@@ -35,6 +36,7 @@ export { Input } from "./components/input/Input";
 export { RGB } from "./model/Color/RGB";
 export { RadioItemSelect } from "./components/input/radio/RadioItemSelect";
 export { SmoothlyInputRadio } from "./components/input/radio/index";
+export { Range } from "./components/input/range/Range";
 export { layout } from "./components/input/select/layout";
 export { SmoothlyTabs } from "./components/tabs";
 export namespace Components {
@@ -339,6 +341,7 @@ export namespace Components {
          */
         "required": boolean;
         "reset": () => Promise<void>;
+        "right"?: boolean;
         "setCustomInitialValue": (value: any) => Promise<void>;
         "setFocus": () => Promise<void>;
         "setInitialValue": () => Promise<void>;
@@ -693,8 +696,12 @@ export namespace Components {
          */
         "defined": boolean;
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "dual": boolean;
         "edit": (editable: boolean) => Promise<void>;
-        "getValue": () => Promise<number | undefined>;
+        "getValue": () => Promise<Range.Value | undefined>;
         "label": string;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
@@ -730,7 +737,7 @@ export namespace Components {
         /**
           * @default undefined
          */
-        "value": number | undefined;
+        "value": Range.Value | undefined;
     }
     interface SmoothlyInputRangeDemo {
     }
@@ -2933,6 +2940,7 @@ declare namespace LocalJSX {
           * @default false
          */
         "required"?: boolean;
+        "right"?: boolean;
         /**
           * @default true
          */
@@ -3262,6 +3270,10 @@ declare namespace LocalJSX {
          */
         "defined"?: boolean;
         "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "dual"?: boolean;
         "label"?: string;
         "looks"?: Looks;
         /**
@@ -3297,7 +3309,7 @@ declare namespace LocalJSX {
         /**
           * @default undefined
          */
-        "value"?: number | undefined;
+        "value"?: Range.Value | undefined;
     }
     interface SmoothlyInputRangeDemo {
     }
@@ -3853,6 +3865,7 @@ declare namespace LocalJSX {
         "invalid": boolean;
         "errorMessage": string;
         "copyable": boolean;
+        "right": boolean;
     }
     interface SmoothlyInputCheckboxAttributes {
         "name": string;
@@ -3984,7 +3997,8 @@ declare namespace LocalJSX {
         "name": string;
     }
     interface SmoothlyInputRangeAttributes {
-        "value": number | undefined;
+        "value": Range.Value | undefined;
+        "dual": boolean;
         "looks": Looks;
         "color": Color;
         "defined": boolean;

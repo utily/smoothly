@@ -87,6 +87,9 @@
 	transform-origin: top left;
 	transition: transform 100ms ease;
 }
+:host[right] .label {
+	transform-origin: top right;
+}
 
 :host.floating-label ::slotted([slot=label]),
 :host.has-value ::slotted([slot=label]),

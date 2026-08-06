@@ -37,6 +37,7 @@ export class SmoothlyInput implements Clearable, Input, Editable {
 	@Prop({ reflect: true }) invalid?: boolean = false
 	@Prop({ reflect: true }) errorMessage?: string
 	@Prop({ reflect: true }) copyable?: boolean
+	@Prop({ reflect: true }) right?: boolean
 	@State() initialValue?: any
 	@State() state: Readonly<tidily.State> & Readonly<tidily.Settings>
 	@State() copied = false
