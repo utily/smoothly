@@ -164,7 +164,7 @@ export class SmoothlyInputDemo {
 							searchPlaceholder="Not here? Type to search.">
 							<label slot="label">Persistent Search select</label>
 							{this.numbers.map(number => (
-								<smoothly-item value="number">{number}</smoothly-item>
+								<smoothly-item value={number}>{number}</smoothly-item>
 							))}
 						</smoothly-input-select>
 					</div>
