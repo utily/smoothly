@@ -160,7 +160,8 @@ export class SmoothlyInputDemo {
 						<smoothly-input-select
 							name="persistent-search"
 							isSearchPersistent
-							searchPlaceholder="Not here? Start typing.">
+							menuHeight="7.5items"
+							searchPlaceholder="Not here? Type to search.">
 							<label slot="label">Persistent Search select</label>
 							{this.numbers.map(number => (
 								<smoothly-item value="number">{number}</smoothly-item>

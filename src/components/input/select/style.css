@@ -123,6 +123,9 @@
 	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
+:host.has-filter-persistent>.dropdown>.search{
+	z-index: 1;
+}
 :host:not(.has-filter):not(.has-filter-persistent)>.dropdown>.search {
 	/* hide search */
 	/* search cant be display: none, since it is the focus element */
