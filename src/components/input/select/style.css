@@ -123,7 +123,7 @@
 	fill: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 	stroke: rgb(var(--smoothly-input-foreground, var(--smoothly-color-contrast)));
 }
-:host:not(.has-filter)>.dropdown>.search {
+:host:not(.has-filter):not(.has-filter-persistent)>.dropdown>.search {
 	/* hide search */
 	/* search cant be display: none, since it is the focus element */
 	height: 0;

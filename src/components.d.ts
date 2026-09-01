@@ -791,6 +791,10 @@ export namespace Components {
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * @default false
+         */
+        "isSearchPersistent": boolean;
         "listen": (listener: Editable.Observer.Listener) => Promise<void>;
         "looks"?: Looks;
         "menuHeight"?: layout.MenuHeight;
@@ -822,6 +826,7 @@ export namespace Components {
           * @default false
          */
         "searchDisabled": boolean;
+        "searchPlaceholder"?: string;
         "setInitialValue": () => Promise<void>;
         /**
           * @default true
@@ -2061,6 +2066,7 @@ declare global {
         "smoothlyFormDisable": (disabled: boolean) => void;
         "smoothlyItemSelect": HTMLSmoothlyItemElement;
         "smoothlySelectOpen": boolean;
+        "smoothlyFilterChange": string;
     }
     interface HTMLSmoothlyInputSelectElement extends Components.SmoothlyInputSelect, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSmoothlyInputSelectElementEventMap>(type: K, listener: (this: HTMLSmoothlyInputSelectElement, ev: SmoothlyInputSelectCustomEvent<HTMLSmoothlyInputSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3360,6 +3366,10 @@ declare namespace LocalJSX {
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * @default false
+         */
+        "isSearchPersistent"?: boolean;
         "looks"?: Looks;
         "menuHeight"?: layout.MenuHeight;
         /**
@@ -3374,6 +3384,7 @@ declare namespace LocalJSX {
           * @default "selected"
          */
         "name"?: string;
+        "onSmoothlyFilterChange"?: (event: SmoothlyInputSelectCustomEvent<string>) => void;
         "onSmoothlyFormDisable"?: (event: SmoothlyInputSelectCustomEvent<(disabled: boolean) => void>) => void;
         "onSmoothlyInput"?: (event: SmoothlyInputSelectCustomEvent<Data>) => void;
         "onSmoothlyInputLoad"?: (event: SmoothlyInputSelectCustomEvent<(parent: Editable) => void>) => void;
@@ -3395,6 +3406,7 @@ declare namespace LocalJSX {
           * @default false
          */
         "searchDisabled"?: boolean;
+        "searchPlaceholder"?: string;
         /**
           * @default true
          */
@@ -4042,6 +4054,8 @@ declare namespace LocalJSX {
         "menuHeight": layout.MenuHeight;
         "required": boolean;
         "searchDisabled": boolean;
+        "isSearchPersistent": boolean;
+        "searchPlaceholder": string;
         "mutable": boolean;
     }
     interface SmoothlyInputSubmitAttributes {
