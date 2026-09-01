@@ -272,7 +272,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		} else if (key == "Enter") {
 			event.preventDefault()
 			this.handleEnter()
-		} else if (key == " ") {
+		} else if (key == " " && !this.open) {
 			event.preventDefault()
 			this.openMenu()
 		} else if (this.open && key == "Tab") {
