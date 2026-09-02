@@ -60,6 +60,8 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Prop() menuHeight?: layout.MenuHeight
 	@Prop() required = false
 	@Prop() searchDisabled = false
+	@Prop() isSearchPersistent = false
+	@Prop() searchPlaceholder?: string
 	@Prop() mutable = false
 	private lastOpen = false
 	@State() open = false
@@ -74,6 +76,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Event() smoothlyFormDisable: EventEmitter<(disabled: boolean) => void>
 	@Event() smoothlyItemSelect: EventEmitter<HTMLSmoothlyItemElement>
 	@Event() smoothlySelectOpen: EventEmitter<boolean>
+	@Event() smoothlyFilterChange: EventEmitter<string>
 
 	componentWillLoad(): void | Promise<void> {
 		this.smoothlyInputLooks.emit(
@@ -180,6 +183,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	@Watch("filter")
 	async onFilterChange(value: string): Promise<void> {
 		value = value.toLowerCase()
+		this.smoothlyFilterChange.emit(this.filter)
 		await Promise.all(this.items.map(item => item.filter(value)))
 	}
 	@Watch("disabled")
@@ -268,7 +272,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		} else if (key == "Enter") {
 			event.preventDefault()
 			this.handleEnter()
-		} else if (key == " ") {
+		} else if (key == " " && !this.open) {
 			event.preventDefault()
 			this.openMenu()
 		} else if (this.open && key == "Tab") {
@@ -350,7 +354,12 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 	render(): VNode | VNode[] {
 		return (
 			<Host
-				class={{ "has-value": this.selected.length !== 0, open: this.open, "has-filter": this.filter !== "" }}
+				class={{
+					"has-value": this.selected.length !== 0,
+					open: this.open,
+					"has-filter": this.filter !== "",
+					"has-filter-persistent": this.open && this.isSearchPersistent,
+				}}
 				onClick={(e: MouseEvent) => this.onClick(e)}>
 				<div class="select-display">
 					{this.display.length > 0 ? (
@@ -376,6 +385,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 						<smoothly-icon name="search-outline" size="small" />
 						<input
 							class="search-input"
+							placeholder={this.searchPlaceholder}
 							ref={el => (this.searchElement = el)}
 							disabled={this.searchDisabled}
 							onKeyDown={e => this.onKeyDown(e)}

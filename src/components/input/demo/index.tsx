@@ -133,6 +133,7 @@ export class SmoothlyInputDemo {
 							<smoothly-item value="11">November</smoothly-item>
 							<smoothly-item value="12">December</smoothly-item>
 						</smoothly-input-select>
+
 						<div class="select-div-row">
 							<smoothly-input-select name="select-icon" clearable={false} showSelected={false}>
 								<smoothly-item value="folder" selected>
@@ -156,6 +157,16 @@ export class SmoothlyInputDemo {
 								Name
 							</smoothly-input>
 						</div>
+						<smoothly-input-select
+							name="persistent-search"
+							isSearchPersistent
+							menuHeight="7.5items"
+							searchPlaceholder="Not here? Type to search.">
+							<label slot="label">Persistent Search select</label>
+							{this.numbers.map(number => (
+								<smoothly-item value={number}>{number}</smoothly-item>
+							))}
+						</smoothly-input-select>
 					</div>
 					<h2>Duration</h2>
 					<smoothly-input
