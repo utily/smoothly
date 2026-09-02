@@ -1,4 +1,10 @@
 export namespace menu {
+	export function insert(items: HTMLSmoothlyItemElement[], item: HTMLSmoothlyItemElement): HTMLSmoothlyItemElement[] {
+		const index = items.findIndex(
+			existing => (item.compareDocumentPosition(existing) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0
+		)
+		return index == -1 ? [...items, item] : [...items.slice(0, index), item, ...items.slice(index)]
+	}
 	export function next(
 		items: HTMLSmoothlyItemElement[],
 		direction: -1 | 1

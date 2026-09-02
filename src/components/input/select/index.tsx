@@ -200,7 +200,7 @@ export class SmoothlyInputSelect implements Input, Editable, Clearable, Componen
 		} else if (Item.Element.is(event.target)) {
 			event.stopPropagation()
 			event.target.deselectable = !this.required
-			this.items.push(event.target as HTMLSmoothlyItemElement)
+			this.items = menu.insert(this.items, event.target as HTMLSmoothlyItemElement)
 		}
 		Input.registerSubAction(this, event)
 		this.displaySelected()
