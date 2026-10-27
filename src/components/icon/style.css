@@ -45,7 +45,7 @@
 	width: var(--smoothly-icon-size, 1.8rem);
 	height: var(--smoothly-icon-size, 1.8rem);
 }
-:host::slotted(svg) {
+:host > svg {
 	/* this is needed for svg to work on safari */
 	width: 100%;
 }
