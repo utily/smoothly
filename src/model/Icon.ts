@@ -29,6 +29,46 @@ export namespace Icon {
 		}
 	}
 
+	export interface Reference {
+		id: string
+		viewBox: string
+	}
+	const symbols: { [url: string]: Promise<Reference | undefined> | undefined } = {}
+	let sprite: SVGSVGElement | undefined
+	/**
+	 * Adds the icon to a single hidden sprite in the document (once per icon) for icons to reference with <use>,
+	 * instead of each icon carrying its own copy of the svg.
+	 * Note: <use> can't reach the sprite from inside a shadow root.
+	 */
+	export async function symbol(name: string): Promise<Reference | undefined> {
+		const url = (names[name] ?? names["*"]).replace("${name}", name)
+		return symbols[url] ?? (symbols[url] = load(name).then(svg => (svg ? addSymbol(svg) : undefined)))
+	}
+	function addSymbol(svg: string): Reference | undefined {
+		const parsed = new DOMParser().parseFromString(svg, "image/svg+xml").querySelector("svg")
+		if (!parsed) {
+			return undefined
+		}
+		const namespace = "http://www.w3.org/2000/svg"
+		if (!sprite) {
+			sprite = document.createElementNS(namespace, "svg")
+			sprite.setAttribute("data-smoothly-icons", "")
+			sprite.setAttribute("aria-hidden", "true")
+			sprite.setAttribute("style", "position: absolute; width: 0; height: 0; overflow: hidden")
+			document.body.append(sprite)
+		}
+		const result = {
+			id: `smoothly-icon-${sprite.childElementCount}`,
+			viewBox: parsed.getAttribute("viewBox") ?? "0 0 512 512",
+		}
+		const symbol = document.createElementNS(namespace, "symbol")
+		symbol.id = result.id
+		symbol.setAttribute("viewBox", result.viewBox)
+		symbol.append(...Array.from(parsed.childNodes))
+		sprite.append(symbol)
+		return result
+	}
+
 	export type Name = (typeof Name.values)[number]
 	export namespace Name {
 		export const values = [

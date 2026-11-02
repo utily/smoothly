@@ -16,7 +16,8 @@ export class SmoothlyIcon {
 	@Prop({ reflect: true }) rotate?: number
 	@Prop({ reflect: true }) flip?: "x" | "y"
 	@Prop() tooltip?: string
-	@State() latestPromise: Promise<string | undefined>
+	@State() latestPromise: Promise<Icon.Reference | undefined>
+	@State() symbol?: Icon.Reference
 
 	async componentWillLoad() {
 		await this.nameChanged()
@@ -25,43 +26,37 @@ export class SmoothlyIcon {
 	@Watch("name")
 	async nameChanged() {
 		if (this.name == "empty") {
-			this.updateSvg()
+			this.symbol = undefined
 			return
 		}
 
-		const promise = (this.latestPromise = Icon.load(this.name))
+		const promise = (this.latestPromise = Icon.symbol(this.name))
 		const result = await promise
 		if (promise != this.latestPromise) {
 			return
 		}
 
 		if (result) {
-			const svgElement = this.sanitizeSvg(result)
-			this.updateSvg(svgElement)
+			this.symbol = result
 		}
-	}
-
-	private sanitizeSvg(svg: string): SVGElement | undefined {
-		const parser = new DOMParser()
-		const document = parser.parseFromString(svg, "image/svg+xml")
-		const svgElement = document.querySelector("svg")
-
-		if (svgElement) {
-			svgElement.setAttribute("role", "img")
-			svgElement.removeAttribute("width")
-			svgElement.removeAttribute("height")
-		}
-		return svgElement ?? undefined
-	}
-	updateSvg(svg?: SVGElement) {
-		svg
-			? this.element.replaceChildren(svg)
-			: (this.element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-					<title>Empty</title>
-				</svg>`)
 	}
 
 	render() {
-		return <Host title={this.tooltip} style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }} />
+		// Each icon references its symbol in the shared sprite instead of carrying its own copy of the svg
+		return (
+			<Host title={this.tooltip} style={{ ["--rotation"]: `${this.rotate ?? 0}deg` }}>
+				{this.name == "empty" ? (
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<title>Empty</title>
+					</svg>
+				) : (
+					this.symbol && (
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox={this.symbol.viewBox} role="img">
+							<use href={`#${this.symbol.id}`} />
+						</svg>
+					)
+				)}
+			</Host>
+		)
 	}
 }
