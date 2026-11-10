@@ -5,6 +5,17 @@ export namespace Icon {
 	const names: Record<string, string | undefined> & { "*": string } = {
 		"*": "https://ionicons.pages.dev/svg/${name}.svg",
 	}
+	// newer ionicons that the default source does not serve
+	add(
+		"https://cdn.jsdelivr.net/npm/ionicons@8.1.0/dist/svg/${name}.svg",
+		...["arrow-down-left-box", "arrow-down-right-box", "arrow-up-left-box", "arrow-up-right-box", "binoculars"].flatMap(
+			name => [name, `${name}-outline`, `${name}-sharp`]
+		),
+		"logo-appflow",
+		"logo-threads",
+		"logo-trapeze",
+		"logo-x"
+	)
 	const cache: { [url: string]: Promise<string | undefined> | undefined } = {}
 	async function fetch(url: string): Promise<string | undefined> {
 		try {
@@ -88,6 +99,8 @@ export namespace Icon {
 			"arrow-back-circle",
 			"arrow-back",
 			"arrow-down-circle",
+			"arrow-down-left-box",
+			"arrow-down-right-box",
 			"arrow-down",
 			"arrow-forward-circle",
 			"arrow-forward",
@@ -96,6 +109,8 @@ export namespace Icon {
 			"arrow-undo-circle",
 			"arrow-undo",
 			"arrow-up-circle",
+			"arrow-up-left-box",
+			"arrow-up-right-box",
 			"arrow-up",
 			"at-circle",
 			"at",
@@ -105,6 +120,7 @@ export namespace Icon {
 			"bag-add",
 			"bag-check",
 			"bag-handle",
+			"bag-remove",
 			"balloon",
 			"ban",
 			"bandage",
@@ -122,6 +138,7 @@ export namespace Icon {
 			"bed",
 			"beer",
 			"bicycle",
+			"binoculars",
 			"bluetooth",
 			"boat",
 			"body",
@@ -232,6 +249,7 @@ export namespace Icon {
 			"enter",
 			"exit",
 			"expand",
+			"extension-puzzle",
 			"eyedrop",
 			"eye-off",
 			"eye",
@@ -496,6 +514,7 @@ export namespace Icon {
 			"logo-amplify",
 			"logo-android",
 			"logo-angular",
+			"logo-appflow",
 			"logo-apple-appstore",
 			"logo-apple",
 			"logo-apple-ar",
@@ -518,6 +537,7 @@ export namespace Icon {
 			"logo-electron",
 			"logo-euro",
 			"logo-facebook",
+			"logo-figma",
 			"logo-firebase",
 			"logo-firefox",
 			"logo-flickr",
@@ -559,13 +579,16 @@ export namespace Icon {
 			"logo-steam",
 			"logo-stencil",
 			"logo-tableau",
+			"logo-threads",
 			"logo-tiktok",
+			"logo-trapeze",
 			"logo-tumblr",
 			"logo-tux",
 			"logo-twitch",
 			"logo-twitter",
 			"logo-usd",
 			"logo-web-component",
+			"logo-wechat",
 			"logo-venmo",
 			"logo-whatsapp",
 			"logo-vercel",
@@ -573,6 +596,7 @@ export namespace Icon {
 			"logo-windows",
 			"logo-vk",
 			"logo-wordpress",
+			"logo-x",
 			"logo-vue",
 			"logo-xbox",
 			"logo-xing",
